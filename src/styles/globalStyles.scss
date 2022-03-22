@@ -1,0 +1,44 @@
+@import "./variables.scss";
+@import "./mixin.scss";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.headline-ad {
+  font-family: $fs-joey;
+  @include font-size(90, 0, -1.5);
+  font-weight: 700;
+}
+
+.h1-headline {
+  font-family: $fs-joey;
+  @include font-size(60, 0, -0.5);
+  font-weight: 700;
+}
+
+.h2-headline {
+  font-family: $fs-joey;
+  @include font-size(48, 0, 0);
+  font-weight: 700;
+}
+
+.h3-headline {
+  font-family: $barlow;
+  @include font-size(36, 0, 0.25);
+  font-weight: 700;
+}
+
+.h4-headline {
+  font-family: $barlow;
+  @include font-size(28, 0, 0);
+  font-weight: 600;
+}
+
+.h5-headline {
+  font-family: $barlow;
+  @include font-size(22, 0, 0);
+  font-weight: 600;
+}
+

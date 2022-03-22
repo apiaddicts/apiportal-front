@@ -1,6 +1,6 @@
 
 const initialState = {
-    name: 'rafa',
+    name: 'Headline Ad',
 }
 
 export const demoReducer = (state = initialState, action) => {

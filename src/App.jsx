@@ -1,6 +1,6 @@
 
 
-import { Home } from './Pages/Home';
+import { Home } from './pages/Home';
 import { Provider } from 'react-redux'
 import { store } from './redux/store';
 
