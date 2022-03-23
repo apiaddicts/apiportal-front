@@ -2,6 +2,6 @@ import React from 'react'
 
 export const Pagina1 = () => {
   return (
-    <div>Pagina1</div>
+    <h1>Pagina1</h1>
   )
 }

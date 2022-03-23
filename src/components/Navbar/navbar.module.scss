@@ -53,8 +53,8 @@
       flex-direction: column;
       justify-content: center;
       text-align: center;
-      background: rgba($primary, 0.9);
-      backdrop-filter: blur(2px);
+      background: rgba($secundary, 0.9);
+      backdrop-filter: blur(1px);
       transform: translate(0);
       transition: 0.3s ease transform;
 
@@ -109,10 +109,8 @@
       button {
         cursor: pointer;
         outline: none;
-        padding: 0.75rem 1.25rem;
         font-size: 1rem;
         font-family: inherit;
-        background: $primary;
         border: 1px solid transparent;
         transition: 0.3s ease all;
 
@@ -130,12 +128,33 @@
         transform: translate(100%);
       }
     }
+    &__divider {
+        border-left: 1px solid #ECF0F1;
+        height: 40%;
+        margin: 26px 0px 0px 15px;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+    &__search {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        position: relative;
+        color: $primary;
+        padding: 20px;
+        font-size: 20px;
+        &:hover{
+          color: $secundary;  
+        }
+    }
     &__toggle {
       cursor: pointer;
       display: flex;
       align-items: center;
       transition: 0.3s ease all;
       position: relative;
+      font-size: 20px;
 
       &:hover {
         color: $primary;
