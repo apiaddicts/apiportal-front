@@ -2,28 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&display=swap");
 @import url(//db.onlinewebfonts.com/c/4c418fddb193fdc55a68a0040c1414cf?family=FS+Joey);
 
-// @function map-deep-get($map, $keys...) {
-
-//   @each $key in $keys {
-//     $map: map-get($map, $key);
-//   }
-
-//   @return $map;
-// }
-
-// @function map-deep-merge($parent-map, $child-map) {
-// 	$result: $parent-map;
-// 	@each $key, $value in $child-map {
-// 		@if (not map-has-key($result, $key)) or (type-of(map-get($result, $key)) != type-of($value)) or (not (type-of(map-get($result, $key)) == map and type-of($value) == map)) {
-// 			$result: map-merge($result, ($key: $value));
-// 		}
-// 		@else {
-// 			$result: map-merge($result, ($key: non-destructive-map-merge(map-get($result, $key), $value)));
-// 		}
-// 	}
-// 	@return $result;
-// }
-
 /* ------------------------------ 
     FONTS 
 ------------------------------ */
@@ -174,10 +152,10 @@ $heading: map-deep-merge(
   $heading
 );
 
-$typography: () !default;
-@each $type, $values in $heading {
-  $typography: map-deep-merge(
-    $typography,
-    (#{$type}: map-values($values))
-  );
-}
+// $typography: () !default;
+// @each $type, $values in $heading {
+//   $typography: map-deep-merge(
+//     $typography,
+//     (#{$type}: map-values($values))
+//   );
+// }

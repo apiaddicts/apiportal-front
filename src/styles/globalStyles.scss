@@ -6,6 +6,15 @@
   margin: 0;
 }
 
+body {
+  width: 100%;
+  font-family: $barlow;
+}
+
+#root {
+  height: 100%;
+}
+
 .display-4 {
   font-size: map-deep-get($heading, "h1", "size") !important;
   font-weight: map-deep-get($heading, "h1", "weight");
@@ -118,6 +127,29 @@
   font-family: map-deep-get($heading, "overline", "font-family") !important;
 }
 
+.font-weight-thin {
+  font-weight: map-deep-get($font-weights, "thin") !important;
+}
+
+.font-weight-light {
+  font-weight: map-deep-get($font-weights, "light") !important;
+}
+
+.font-weight-regular {
+  font-weight: map-deep-get($font-weights, "regular") !important;
+}
+
+.font-weight-medium {
+  font-weight: map-deep-get($font-weights, "medium") !important;
+}
+
+.font-weight-bold {
+  font-weight: map-deep-get($font-weights, "bold") !important;
+}
+
+.font-weight-black {
+  font-weight: map-deep-get($font-weights, "black") !important;
+}
 .card {
   box-shadow: 3px -5px 40px rgba(0, 51, 160, 0.1);
   padding: 16px;
