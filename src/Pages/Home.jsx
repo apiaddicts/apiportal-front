@@ -1,9 +1,10 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import Navbar from '../components/Navbar/Navbar'
+import React from 'react';
+// import { useSelector } from 'react-redux';
+import CardChip from '../components/Card/CardChip';
+import Navbar from '../components/Navbar/Navbar';
 
-export const Home = () => {
-  const { name } = useSelector(state => state.demo)
+function Home() {
+  // const { name } = useSelector((state) => state.demo);
   return (
     <>
       <Navbar></Navbar>
@@ -16,6 +17,7 @@ export const Home = () => {
       <p className="title">H1 Headline</p>
       <p className="title">H1 Headline</p> */}
     </>
-    
-  )
-}
+  );
+} 
+
+export default Home;
