@@ -33,7 +33,7 @@ function Home() {
       <p className='title'>H1 Headline</p>
       <p className='title'>H1 Headline</p>
       <div>
-        <CardChip title='XD' />
+        <CardChip title='GET' />
       </div>
     </>
   );

@@ -5,7 +5,15 @@ import Base from './Base';
 function CardChip({ title }) {
   return (
     <Base>
-      <ChipGreen title={title} />
+      <div>
+        <ChipGreen title={title} />
+        <h1>lorems</h1>
+      </div>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        Nam molestiae, corporis eaque deleniti eligendi aut modi illo perspiciatis.
+        Impedit suscipit totam quo ea odit officiis culpa voluptatum sed fugiat quibusdam?
+      </p>
     </Base>
   );
 }

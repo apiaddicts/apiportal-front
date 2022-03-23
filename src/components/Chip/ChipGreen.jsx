@@ -3,7 +3,9 @@ import React from 'react';
 function ChipGreen({ title }) {
   return (
     <div className='chip'>
-      {title}
+      <span>
+        {title}
+      </span>
     </div>
   );
 }
