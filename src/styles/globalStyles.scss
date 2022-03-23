@@ -1,44 +1,119 @@
 @import "./variables.scss";
-@import "./mixin.scss";
+@import "./tools/tools.scss";
 
 * {
   box-sizing: border-box;
   margin: 0;
 }
 
-.headline-ad {
-  font-family: $fs-joey;
-  @include font-size(90, 0, -1.5);
-  font-weight: 700;
+.display-4 {
+  font-size: map-deep-get($heading, "h1", "size") !important;
+  font-weight: map-deep-get($heading, "h1", "weight");
+  line-height: map-deep-get($heading, "h1", "line-height");
+  letter-spacing: map-deep-get($heading, "h1", "letter-spacing") !important;
+  font-family: map-deep-get($heading, "h1", "font-family") !important;
 }
 
-.h1-headline {
-  font-family: $fs-joey;
-  @include font-size(60, 0, -0.5);
-  font-weight: 700;
+.display-3 {
+  font-size: map-deep-get($heading, "h2", "size") !important;
+  font-weight: map-deep-get($heading, "h2", "weight");
+  line-height: map-deep-get($heading, "h2", "line-height");
+  letter-spacing: map-deep-get($heading, "h2", "letter-spacing") !important;
+  font-family: map-deep-get($heading, "h2", "font-family") !important;
+}
+.display-2 {
+  font-size: map-deep-get($heading, "h3", "size") !important;
+  font-weight: map-deep-get($heading, "h3", "weight");
+  line-height: map-deep-get($heading, "h3", "line-height");
+  letter-spacing: map-deep-get($heading, "h3", "letter-spacing") !important;
+  font-family: map-deep-get($heading, "h3", "font-family") !important;
 }
 
-.h2-headline {
-  font-family: $fs-joey;
-  @include font-size(48, 0, 0);
-  font-weight: 700;
+.display-1 {
+  font-size: map-deep-get($heading, "h4", "size") !important;
+  font-weight: map-deep-get($heading, "h4", "weight");
+  line-height: map-deep-get($heading, "h4", "line-height");
+  letter-spacing: map-deep-get($heading, "h4", "letter-spacing") !important;
+  font-family: map-deep-get($heading, "h4", "font-family") !important;
 }
 
-.h3-headline {
-  font-family: $barlow;
-  @include font-size(36, 0, 0.25);
-  font-weight: 700;
+.headline {
+  font-size: map-deep-get($heading, "h5", "size") !important;
+  font-weight: map-deep-get($heading, "h5", "weight");
+  line-height: map-deep-get($heading, "h5", "line-height");
+  letter-spacing: map-deep-get($heading, "h5", "letter-spacing") !important;
+  font-family: map-deep-get($heading, "h5", "font-family") !important;
 }
 
-.h4-headline {
-  font-family: $barlow;
-  @include font-size(28, 0, 0);
-  font-weight: 600;
+.title {
+  font-size: map-deep-get($heading, "h5", "size") !important;
+  font-weight: map-deep-get($heading, "h5", "weight");
+  line-height: map-deep-get($heading, "h5", "line-height");
+  letter-spacing: map-deep-get($heading, "h5", "letter-spacing") !important;
+  font-family: map-deep-get($heading, "h5", "font-family") !important;
 }
 
-.h5-headline {
-  font-family: $barlow;
-  @include font-size(22, 0, 0);
-  font-weight: 600;
+.subtitle-2 {
+  font-size: map-deep-get($heading, "subtitle-2", "size") !important;
+  font-weight: map-deep-get($heading, "subtitle-2", "weight");
+  letter-spacing: map-deep-get(
+    $heading,
+    "subtitle-2",
+    "letter-spacing"
+  ) !important;
+  line-height: map-deep-get($heading, "subtitle-2", "line-height");
+  font-family: map-deep-get($heading, "subtitle-2", "font-family") !important;
 }
 
+.subtitle-1 {
+  font-size: map-deep-get($heading, "subtitle-1", "size") !important;
+  font-weight: map-deep-get($heading, "subtitle-1", "weight");
+  letter-spacing: map-deep-get(
+    $heading,
+    "subtitle-1",
+    "letter-spacing"
+  ) !important;
+  line-height: map-deep-get($heading, "subtitle-1", "line-height");
+  font-family: map-deep-get($heading, "subtitle-1", "font-family") !important;
+}
+
+.body-2 {
+  font-size: map-deep-get($heading, "body-2", "size") !important;
+  font-weight: map-deep-get($heading, "body-2", "weight");
+  letter-spacing: map-deep-get($heading, "body-2", "letter-spacing") !important;
+  line-height: map-deep-get($heading, "body-2", "line-height");
+  font-family: map-deep-get($heading, "body-2", "font-family") !important;
+}
+
+.body-1 {
+  font-size: map-deep-get($heading, "body-1", "size") !important;
+  font-weight: map-deep-get($heading, "body-1", "weight");
+  letter-spacing: map-deep-get($heading, "body-1", "letter-spacing") !important;
+  line-height: map-deep-get($heading, "body-1", "line-height");
+  font-family: map-deep-get($heading, "body-1", "font-family") !important;
+}
+
+.caption {
+  font-size: map-deep-get($heading, "caption", "size") !important;
+  font-weight: map-deep-get($heading, "caption", "weight");
+  letter-spacing: map-deep-get(
+    $heading,
+    "caption",
+    "letter-spacing"
+  ) !important;
+  line-height: map-deep-get($heading, "caption", "line-height");
+  font-family: map-deep-get($heading, "caption", "font-family") !important;
+}
+
+.overline {
+  font-size: map-deep-get($heading, "overline", "size") !important;
+  font-weight: map-deep-get($heading, "overline", "weight");
+  letter-spacing: map-deep-get(
+    $heading,
+    "overline",
+    "letter-spacing"
+  ) !important;
+  line-height: map-deep-get($heading, "overline", "line-height");
+  text-transform: uppercase;
+  font-family: map-deep-get($heading, "overline", "font-family") !important;
+}

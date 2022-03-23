@@ -6,12 +6,13 @@ export const Home = () => {
   return (
     <>
     <br /><br /><br />
-      <p className="headline-ad">Headline Ad</p><br /><br /><br /><br />
-      <p className="h1-headline">H1 Headline</p><br /><br /><br />
-      <p className="h2-headline">H1 Headline</p><br /><br /><br />
-      <p className="h3-headline">H1 Headline</p><br /><br /><br />
-      <p className="h4-headline">H1 Headline</p><br /><br /><br />
-      <p className="h4-headline">H1 Headline</p>
+      <p className="display-4">Headline Ad</p><br /><br /><br /><br />
+      <p className="display-3">H1 Headline</p><br /><br /><br />
+      <p className="display-2">H1 Headline</p><br /><br /><br />
+      <p className="display-1">H1 Headline</p><br /><br /><br />
+      <p className="headline">H1 Headline</p><br /><br /><br />
+      <p className="title">H1 Headline</p>
+      <p className="title">H1 Headline</p>
     </>
     
   )
