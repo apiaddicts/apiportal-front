@@ -1,18 +1,40 @@
-import React, { useState } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useState } from 'react';
+// import PropTypes from 'prop-types';
 
-import { BiMenuAltRight, BiSearch } from "react-icons/bi";
-import { AiOutlineClose } from "react-icons/ai";
+import { BiMenuAltRight, BiSearch } from 'react-icons/bi';
+import { AiOutlineClose } from 'react-icons/ai';
 
-import classes from "./navbar.module.scss";
-import SuraLogo from "../../static/img/sura_logo.svg";
+import classes from './navbar.module.scss';
+import SuraLogo from '../../static/img/sura_logo.svg';
 
-const Navbar = (props) => {
+function Navbar(props) {
   const [menuOpen, setMenuOpen] = useState(true);
-  
+  const [size, setSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (size.width > 768 && menuOpen) {
+      setMenuOpen(false);
+    }
+  }, [size.width, menuOpen]);
+
   const menuToggleHandler = () => {
-    setMenuOpen(p => !p)
-  }
+    setMenuOpen((p) => !p);
+  };
 
   return (
     <header className={classes.header}>
@@ -20,7 +42,7 @@ const Navbar = (props) => {
         <a className={classes.header__content__logo}>
           <img
             src={SuraLogo}
-            alt=""
+            alt=''
             className={classes.header__content__logo__img}
           />
           <p className={classes.header__content__logo__text}>
@@ -31,40 +53,40 @@ const Navbar = (props) => {
           </p>
         </a>
 
-        <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ""}`}>
+        <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
           <ul>
             <li>
-              <a href="">APIs</a>
+              <a href=''>APIs</a>
             </li>
             <li>
-              <a href="">DOCUMENTACIÓN</a>
+              <a href=''>DOCUMENTACIÓN</a>
             </li>
             <li>
-              <a href="">BLOG</a>
+              <a href=''>BLOG</a>
             </li>
             <li>
-              <a href="">FAQs</a>
+              <a href=''>FAQs</a>
             </li>
             <li>
-              <a href="">CONTACTO</a>
+              <a href=''>CONTACTO</a>
             </li>
           </ul>
-          <button>Iniciar sesion</button>
-          <button>Registrarse</button>
+          <button type='button'>Iniciar sesion</button>
+          <button type='button'>Registrarse</button>
 
-          <div className={classes.header__content__divider}></div>
+          <div className={classes.header__content__divider} />
 
           <div className={classes.header__content__search}>
             <BiSearch />
           </div>
         </nav>
         <div className={classes.header__content__toggle}>
-          {!menuOpen ? <BiMenuAltRight onClick={menuToggleHandler}/> : <AiOutlineClose onClick={menuToggleHandler}/>}
+          {!menuOpen ? <BiMenuAltRight onClick={menuToggleHandler} /> : <AiOutlineClose onClick={menuToggleHandler} />}
         </div>
       </div>
     </header>
   );
-};
+}
 
 Navbar.propTypes = {};
 
