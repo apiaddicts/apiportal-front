@@ -1,22 +1,16 @@
 import React from 'react';
-import { Routes, Route, BrowserRouter, Link } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 
 import Home from '../pages/Home';
-import { Pagina1 } from '../pages/Pagina1';
-import { Pagina2 } from '../pages/Pagina2';
+import Pagina1 from '../pages/Pagina1';
+import Pagina2 from '../pages/Pagina2';
 
 function AppRouter() {
-  const routes = [
-    {to:'/', name: "Home"},
-    {to:'/about', name: "APIs"},
-    {to:'#', name: "DOCUMENTACIÓN"},
-    {to:'#', name: "BLOG"},
-    {to:'#', name: "CONTACTO"},
-  ]
+
   return (
     <BrowserRouter>
-      <Navbar ></Navbar>
+      <Navbar />
       {/* <nav>
         <ul>
           <li>

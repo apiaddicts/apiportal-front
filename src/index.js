@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-import './styles/globalStyles.scss'
+import './styles/globalStyles.scss';
 
 ReactDOM.render(
-    <App />,
-  document.getElementById('root')
+  <App />,
+  document.getElementById('root'),
 );
