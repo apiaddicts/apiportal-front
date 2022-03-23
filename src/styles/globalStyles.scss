@@ -117,3 +117,20 @@
   text-transform: uppercase;
   font-family: map-deep-get($heading, "overline", "font-family") !important;
 }
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  background-color: $secundary_white;
+  border-radius: 20px;
+}
+
+.chip {
+  display: inline-block;
+  padding: 0 25px;
+  height: 50px;
+  font-size: 16px;
+  line-height: 50px;
+  border-radius: 25px;
+  background-color: $success;
+}
