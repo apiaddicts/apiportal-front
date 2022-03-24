@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
-
-import { BiMenuAltRight, BiSearch } from 'react-icons/bi';
-import { AiOutlineClose } from 'react-icons/ai';
+import { MdSearch, MdClose, MdMenu } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 import classes from './navbar.module.scss';
 import SuraLogo from '../../static/img/sura_logo.svg';
+import Button from '../Buttons/Button';
 
 function Navbar(props) {
-  const [menuOpen, setMenuOpen] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
   const [size, setSize] = useState({
     width: undefined,
     height: undefined,
@@ -56,7 +56,7 @@ function Navbar(props) {
         <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
           <ul>
             <li>
-              <a href=''>APIs</a>
+              <Link to='/apis'>APIs</Link>
             </li>
             <li>
               <a href=''>DOCUMENTACIÓN</a>
@@ -70,18 +70,26 @@ function Navbar(props) {
             <li>
               <a href=''>CONTACTO</a>
             </li>
+            <li>
+              <Button type='ghost'>
+                Iniciar sesión
+              </Button>
+            </li>
+            <li>
+              <Button type='secundary'>
+                registrate
+              </Button>
+            </li>
           </ul>
-          <button type='button'>Iniciar sesion</button>
-          <button type='button'>Registrarse</button>
 
           <div className={classes.header__content__divider} />
 
           <div className={classes.header__content__search}>
-            <BiSearch />
+            <MdSearch />
           </div>
         </nav>
         <div className={classes.header__content__toggle}>
-          {!menuOpen ? <BiMenuAltRight onClick={menuToggleHandler} /> : <AiOutlineClose onClick={menuToggleHandler} />}
+          {!menuOpen ? <MdMenu onClick={menuToggleHandler} /> : <MdClose onClick={menuToggleHandler} />}
         </div>
       </div>
     </header>

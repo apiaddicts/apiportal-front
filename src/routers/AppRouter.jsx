@@ -5,6 +5,7 @@ import Navbar from '../components/Navbar/Navbar';
 import Home from '../pages/Home';
 import Pagina1 from '../pages/Pagina1';
 import Pagina2 from '../pages/Pagina2';
+import Apis from '../pages/Apis';
 
 function AppRouter() {
 
@@ -28,6 +29,7 @@ function AppRouter() {
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<Pagina1 />} />
         <Route path='/users' element={<Pagina2 />} />
+        <Route path='/apis' exact element={<Apis />} />
       </Routes>
     </BrowserRouter>
   );

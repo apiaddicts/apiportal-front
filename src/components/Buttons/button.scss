@@ -24,19 +24,20 @@
 }
 
 .btn {
- text-decoration:none;
- padding: 15px 15.2%;
- border-radius:40px;
+ text-decoration: none;
+ border-radius: 40px;
  font-family: $barlow;
  font-style: normal;
  font-weight: 700;
  font-size: 16px;
  line-height: 19px;
  text-align: center;
- letter-spacing: 1.33333px;
- text-transform: uppercase;
- width: 100%;
- height: 48px;
+ padding: 18px 32px;
+ text-transform: uppercase !important;
+ height: 40px;
+ display: flex;
+ justify-content: center;
+ align-items: center;
 }
 
 .btn-none {
@@ -44,26 +45,26 @@
 }
  
 .btn-secundary {
-   @include button-bg($secundary);
-   @include letter($secundary_white);
+   @include button-bg($secondary);
+   @include letter($secondary_white);
    @include border(#00AEC7)
 
 }
 
 .btn-primary {
    @include button-bg($primary);
-   @include letter($secundary_white);
+   @include letter($secondary_white);
    @include border(#0033A0)
 }
  
 .btn-secundary-white{
-    @include button-bg($secundary_white);
+    @include button-bg($secondary_white);
     @include letter(#0033A0);
-    @include border($secundary_white)
+    @include border($secondary_white)
  }
  
 .btn-ghost {
-    @include button-bg($secundary_white);
+    @include button-bg($secondary_white);
     @include letter(#0033A0);
     @include border(#00AEC7)
  }
