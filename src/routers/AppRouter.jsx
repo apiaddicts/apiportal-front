@@ -2,8 +2,8 @@ import React from 'react';
 import { Routes, Route, BrowserRouter, Link } from 'react-router-dom';
 
 import Home from '../pages/Home';
-import { Pagina1 } from '../pages/Pagina1';
-import { Pagina2 } from '../pages/Pagina2';
+import Pagina1 from '../pages/Pagina1';
+import Pagina2 from '../pages/Pagina2';
 
 function AppRouter() {
   return (

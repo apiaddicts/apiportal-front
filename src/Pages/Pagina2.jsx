@@ -1,7 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-export const Pagina2 = () => {
+function Pagina2() {
   return (
     <div>Pagina2</div>
-  )
-}
+  );
+};
+
+export default Pagina2;
