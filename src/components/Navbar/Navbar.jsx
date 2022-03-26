@@ -1,28 +1,62 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 // import PropTypes from 'prop-types';
-
-import { BiMenuAltRight } from 'react-icons/bi';
-// import { AiOutlineClose } from 'react-icons/ai';
+import { MdSearch, MdClose, MdMenu } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 
 import classes from './navbar.module.scss';
 import SuraLogo from '../../static/img/sura_logo.svg';
+import Button from '../Buttons/Button';
 
 function Navbar(props) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [size, setSize] = useState({
+    width: undefined,
+    height: undefined,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
+    };
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
+    if (size.width > 768 && menuOpen) {
+      setMenuOpen(false);
+    }
+  }, [size.width, menuOpen]);
+
+  const menuToggleHandler = () => {
+    setMenuOpen((p) => !p);
+  };
+
   return (
     <header className={classes.header}>
       <div className={classes.header__content}>
         <a className={classes.header__content__logo}>
-          <img src={SuraLogo} alt='' className={classes.header__content__logo__img} />
+          <img
+            src={SuraLogo}
+            alt=''
+            className={classes.header__content__logo__img}
+          />
           <p className={classes.header__content__logo__text}>
             / API
-            <span className={classes.header__content__logo__variant}>_MARKET</span>
+            <span className={classes.header__content__logo__variant}>
+              _MARKET
+            </span>
           </p>
         </a>
 
-        <nav className={classes.header__content__nav}>
+        <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
           <ul>
             <li>
-              <a href=''>APIs</a>
+              <Link to='/apis'>APIs</Link>
             </li>
             <li>
               <a href=''>DOCUMENTACIÓN</a>
@@ -36,12 +70,26 @@ function Navbar(props) {
             <li>
               <a href=''>CONTACTO</a>
             </li>
+            <li>
+              <Button type='ghost'>
+                Iniciar sesión
+              </Button>
+            </li>
+            <li>
+              <Button type='secundary'>
+                registrate
+              </Button>
+            </li>
           </ul>
-          <button type='button'>Iniciar sesion</button>
-          <button type='button'>Registrarse</button>
+
+          <div className={classes.header__content__divider} />
+
+          <div className={classes.header__content__search}>
+            <MdSearch />
+          </div>
         </nav>
         <div className={classes.header__content__toggle}>
-          <BiMenuAltRight />
+          {!menuOpen ? <MdMenu onClick={menuToggleHandler} /> : <MdClose onClick={menuToggleHandler} />}
         </div>
       </div>
     </header>

@@ -3,7 +3,8 @@ import React from 'react';
 // import { MdAccessibilityNew } from 'react-icons/md';
 import * as MaterialDesign from 'react-icons/md';
 import CardBasic from '../components/Card/CardBasic';
-import Navbar from '../components/Navbar/Navbar';
+// import Navbar from '../components/Navbar/Navbar';
+// import CardChip from '../components/Card/CardChip';
 import Button from '../components/Buttons/Button';
 import Item from '../components/Item/Item';
 
@@ -20,18 +21,6 @@ function Home() {
 
   return (
     <>
-      <Navbar />
-      {/* <span>Headings</span>
-      <p className="display-4">Headline Ad</p>
-      <p className="display-3">H1 Headline</p>
-      <p className="display-2">H1 Headline</p>
-      <p className="display-1">H1 Headline</p>
-      <p className="headline">H1 Headline</p>
-      <p className="title">H1 Headline</p>
-    <p className="title">H1 Headline</p>
-      <p className='title'>H1 Headline</p>
-    */}
-
       <Button type='primary'>
         Ejemplo1
       </Button>

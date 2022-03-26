@@ -1,14 +1,18 @@
 import React from 'react';
-import { Routes, Route, BrowserRouter, Link } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import Navbar from '../components/Navbar/Navbar';
 
 import Home from '../pages/Home';
 import Pagina1 from '../pages/Pagina1';
 import Pagina2 from '../pages/Pagina2';
+import Apis from '../pages/Apis';
 
 function AppRouter() {
+
   return (
     <BrowserRouter>
-      <nav>
+      <Navbar />
+      {/* <nav>
         <ul>
           <li>
             <Link to='/'>Home</Link>
@@ -20,11 +24,12 @@ function AppRouter() {
             <Link to='/users'>Users</Link>
           </li>
         </ul>
-      </nav>
+      </nav> */}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<Pagina1 />} />
         <Route path='/users' element={<Pagina2 />} />
+        <Route path='/apis' exact element={<Apis />} />
       </Routes>
     </BrowserRouter>
   );
