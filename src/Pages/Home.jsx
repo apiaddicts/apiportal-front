@@ -7,6 +7,7 @@ import Slider from '../components/Slider/Slider';
 import CardBasic from '../components/Card/CardBasic';
 import Button from '../components/Buttons/Button';
 import Item from '../components/Item/Item';
+import Tabs from '../components/Tabs/Tabs';
 
 function Home() {
 
@@ -95,6 +96,22 @@ function Home() {
         <CardBasic chipTitle='GET' />
         <CardBasic />
       </div>
+      <br />
+      <Tabs>
+        <div label='Gator'>
+          See ya later,
+          <em>Alligator</em>
+          !
+        </div>
+        <div label='card'>
+          <CardBasic chipTitle='GET' />
+        </div>
+        <div label='Button'>
+          <Button type='ghost'>
+            Ejemplo4
+          </Button>
+        </div>
+      </Tabs>
     </div>
 
   );
