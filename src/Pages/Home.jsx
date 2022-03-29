@@ -1,14 +1,14 @@
 import React from 'react';
+import * as MaterialDesign from 'react-icons/md';
 import BannerStatic from '../components/Banner/BannerStatic';
 import BannerCentered from '../components/Banner/BannerCentered';
 import BannerVertical from '../components/Banner/BannerVertical';
 import Slider from '../components/Slider/Slider';
-// import { useSelector } from 'react-redux';
-// import CardChip from '../components/Card/CardChip';
-// import Button from '../components/Buttons/Button';
+import CardBasic from '../components/Card/CardBasic';
+import Button from '../components/Buttons/Button';
+import Item from '../components/Item/Item';
 
 function Home() {
-  // const { name } = useSelector((state) => state.demo);
 
   const buttons = [
     { label: 'Probar Api', class: 'primary' },
@@ -27,6 +27,15 @@ function Home() {
     { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 3', subtitle: 'consequatur consequatur consequatur' },
     { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 4', subtitle: 'eligendi numquam rerum' },
   ];
+
+  function iconData(name) {
+    const md_icon = React.createElement(MaterialDesign[name]);
+    if (md_icon.type === undefined) {
+      return React.createElement(MaterialDesign['MdApi']);
+    }
+    return md_icon;
+  }
+
   return (
     <div>
       <BannerStatic
@@ -48,7 +57,46 @@ function Home() {
         img='https://picsum.photos/1920/1080'
       />
       <Slider slides={slides} />
+
+      <Item
+        icon={iconData('MdHome')}
+        title='Lorems'
+        type='title'
+        description='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat minima blanditiis dolorem assumenda temporibus inventore, unde optio quis earum quos ex, illo pariatur quasi aut officiis fuga ipsum adipisci eius?'
+      />
+      <Item
+        icon={iconData('fulanito')}
+        title='Lorems'
+        type='title'
+        description='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat minima blanditiis dolorem assumenda temporibus inventore, unde optio quis earum quos ex, illo pariatur quasi aut officiis fuga ipsum adipisci eius?'
+      />
+
+      <Button type='primary'>
+        Ejemplo1
+      </Button>
+      <Button type='secundary'>
+        Ejemplo2
+      </Button>
+      <Button type='secundary-white'>
+        Ejemplo3
+      </Button>
+      <Button type='ghost'>
+        Ejemplo4
+      </Button>
+
+      <div style={{
+        marginTop: '15px',
+        display: 'grid',
+        gridTemplateColumns: '1fr 1fr 1fr',
+        gap: '2rem',
+      }}
+      >
+        <CardBasic chipTitle='GET' />
+        <CardBasic chipTitle='GET' />
+        <CardBasic />
+      </div>
     </div>
+
   );
 }
 

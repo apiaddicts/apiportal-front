@@ -1,0 +1,74 @@
+@import '../../styles/variables.scss';
+
+.item_title {
+    margin-left: 6.5%;
+    .number {
+        font-family: $fs-joey;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 36px;
+        line-height: 50px;
+        letter-spacing: 0.25px;
+        color: $secondary_yellow;
+    }
+    .title {
+        font-family: $fs-joey;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 36px;
+        line-height: 50px;
+        letter-spacing: 0.25px;
+        color: red;
+    }
+}
+
+.item_contenedor {
+    display: flex;
+    flex-flow: row nowrap;
+}
+
+.item_circle {
+    width: 18%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 40px;
+        background: rgba(183, 176, 156, 0.1);
+        display: flex;
+        justify-content:center;
+        align-items: center;
+        margin-left: 5%;
+
+        .icon {
+            font-size: 25px;
+            color: $primary;
+        }
+    }
+}
+
+.item_description {
+    width: 85%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    display: flex;
+    align-items: center;
+    flex-flow: row wrap;
+    h1 {
+        font-family: $barlow;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 26px;
+        letter-spacing: 0.157143px;
+    }
+    p {
+        font-family: $barlow;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+    }
+}

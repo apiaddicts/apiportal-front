@@ -1,0 +1,75 @@
+@import '../../styles/variables.scss';
+.card_img {
+    width: 100%;
+    border-radius: 10px 10px 0px 0px;
+    z-index: 5;
+}
+
+.card_container {
+    padding: 16px 20px;
+
+    .card_chip_title {
+        display: flex;
+        margin-bottom: 6.03px;
+    
+        .chip_title {
+            margin-left: 5.7%;
+            font-family: $barlow;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 26px;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.157143px;
+            color: $dark;
+        }
+    
+        .title {
+            font-family: $barlow;
+            font-style: normal;
+            font-weight: 600;
+            font-size: 22px;
+            line-height: 26px;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.157143px;
+            color: $dark;
+        }
+    
+    }
+    
+    p {
+            font-family: $barlow;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+            color: $gray_darken;
+            margin-bottom: 7.2px;
+        }
+    
+    .card_chip_info {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+    
+        span {
+            font-family: $barlow;
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 19px;
+            letter-spacing: 1.33333px;
+            text-transform: uppercase;
+            color: $secondary;
+        }
+    
+        .svg {
+            color: $primary;
+            font-size: 25px;
+        }
+    }
+}
+
+
