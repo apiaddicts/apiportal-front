@@ -35,7 +35,6 @@ function Home() {
     }
     return md_icon;
   }
-
   return (
     <div>
       <BannerStatic
@@ -59,6 +58,8 @@ function Home() {
       <Slider slides={slides} />
 
       <Item
+        // icon={<mdIcon />}
+        // icon={iconData('MdApi')}
         icon={iconData('MdHome')}
         title='Lorems'
         type='title'
