@@ -6,6 +6,7 @@ import Home from '../pages/Home';
 import Pagina1 from '../pages/Pagina1';
 import Pagina2 from '../pages/Pagina2';
 import Apis from '../pages/Apis';
+import Components from '../pages/Components';
 
 function AppRouter() {
 
@@ -30,6 +31,7 @@ function AppRouter() {
         <Route path='/about' element={<Pagina1 />} />
         <Route path='/users' element={<Pagina2 />} />
         <Route path='/apis' exact element={<Apis />} />
+        <Route path='/componentes' exact element={<Components />} />
       </Routes>
     </BrowserRouter>
   );
