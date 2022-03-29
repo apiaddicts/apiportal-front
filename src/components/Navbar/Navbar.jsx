@@ -70,7 +70,7 @@ function Navbar(props) {
             <li>
               <a href=''>CONTACTO</a>
             </li>
-            <li>
+            <li className='pr-2'>
               <Button type='ghost'>
                 Iniciar sesión
               </Button>

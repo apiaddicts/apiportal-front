@@ -33,6 +33,7 @@ $font-weights: map-deep-merge(
     'light': 300,
     'regular': 400,
     'medium': 500,
+    'semi-bold': 600,
     'bold': 700,
     'black': 900
   ),
@@ -153,10 +154,3 @@ $heading: map-deep-merge(
   $heading
 );
 
-// $typography: () !default;
-// @each $type, $values in $heading {
-//   $typography: map-deep-merge(
-//     $typography,
-//     (#{$type}: map-values($values))
-//   );
-// }

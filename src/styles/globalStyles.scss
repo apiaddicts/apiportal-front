@@ -15,7 +15,426 @@ body {
   height: 100%;
 }
 
-.display-4 {
+/* ------------------------------ 
+    PADDINGS 
+------------------------------ */
+.p-0 {
+  padding: 0px;
+}
+.p-1 {
+  padding: 0.25rem;
+}
+.p-2 {
+  padding: 0.5rem;
+}
+.p-3 {
+  padding: 0.75rem;
+}
+.p-4 {
+  padding: 1rem;
+}
+.p-5 {
+  padding: 1.25rem;
+}
+.p-6 {
+  padding: 1.5rem;
+}
+.p-7 {
+  padding: 1.75rem;
+}
+.p-8 {
+  padding: 2rem;
+}
+.p-9 {
+  padding: 2.25rem;
+}
+.p-10 {
+  padding: 2.5rem;
+}
+.px-0 {
+  padding: 0 0px 0 0px;
+}
+.px-1 {
+  padding: 0 0.25rem 0 0.25rem;
+}
+.px-2 {
+  padding: 0 0.5rem 0 0.5rem;
+}
+.px-3 {
+  padding: 0 0.75rem 0 0.75rem;
+}
+.px-4 {
+  padding: 0 1rem 0 1rem;
+}
+.px-5 {
+  padding: 0 1.25rem 0 1.25rem;
+}
+.px-6 {
+  padding: 0 1.5rem 0 1.5rem;
+}
+.px-7 {
+  padding: 0 1.75rem 0 1.75rem;
+}
+.px-8 {
+  padding: 0 2rem 0 2rem;
+}
+.px-9 {
+  padding: 0 2.25rem 0 2.25rem;
+}
+.px-10 {
+  padding: 0 2.5rem 0 2.5rem;
+}
+.pr-0 {
+  padding-right: 0px;
+}
+.pr-1 {
+  padding-right: 0.25rem;
+}
+.pr-2 {
+  padding-right: 0.5rem;
+}
+.pr-3 {
+  padding-right: 0.75rem;
+}
+.pr-4 {
+  padding-right: 1rem;
+}
+.pr-5 {
+  padding-right: 1.25rem;
+}
+.pr-6 {
+  padding-right: 1.5rem;
+}
+.pr-7 {
+  padding-right: 1.75rem;
+}
+.pr-8 {
+  padding-right: 2rem;
+}
+.pr-9 {
+  padding-right: 2.25rem;
+}
+.pr-10 {
+  padding-right: 2.5rem;
+}
+.pl-0 {
+  padding-left: 0px;
+}
+.pl-1 {
+  padding-left: 0.25rem;
+}
+.pl-2 {
+  padding-left: 0.5rem;
+}
+.pl-3 {
+  padding-left: 0.75rem;
+}
+.pl-4 {
+  padding-left: 1rem;
+}
+.pl-5 {
+  padding-left: 1.25rem;
+}
+.pl-6 {
+  padding-left: 1.5rem;
+}
+.pl-7 {
+  padding-left: 1.75rem;
+}
+.pl-8 {
+  padding-left: 2rem;
+}
+.pl-9 {
+  padding-left: 2.25rem;
+}
+.pl-10 {
+  padding-left: 2.5rem;
+}
+.pt-0 {
+  padding-top: 0px;
+}
+.pt-1 {
+  padding-top: 0.25rem;
+}
+.pt-2 {
+  padding-top: 0.5rem;
+}
+.pt-3 {
+  padding-top: 0.75rem;
+}
+.pt-4 {
+  padding-top: 1rem;
+}
+.pt-5 {
+  padding-top: 1.25rem;
+}
+.pt-6 {
+  padding-top: 1.5rem;
+}
+.pt-7 {
+  padding-top: 1.75rem;
+}
+.pt-8 {
+  padding-top: 2rem;
+}
+.pt-9 {
+  padding-top: 2.25rem;
+}
+.pt-10 {
+  padding-top: 2.5rem;
+}
+.pb-0 {
+  padding-bottom: 0px;
+}
+.pb-1 {
+  padding-bottom: 0.25rem;
+}
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+.pb-3 {
+  padding-bottom: 0.75rem;
+}
+.pb-4 {
+  padding-bottom: 1rem;
+}
+.pb-5 {
+  padding-bottom: 1.25rem;
+}
+.pb-6 {
+  padding-bottom: 1.5rem;
+}
+.pb-7 {
+  padding-bottom: 1.75rem;
+}
+.pb-8 {
+  padding-bottom: 2rem;
+}
+.pb-9 {
+  padding-bottom: 2.25rem;
+}
+.pb-10 {
+  padding-bottom: 2.5rem;
+}
+
+/* ------------------------------ 
+    MARGINS 
+------------------------------ */
+.m-0 {
+  margin: 0px;
+}
+.m-1 {
+  margin: 0.25rem;
+}
+.m-2 {
+  margin: 0.5rem;
+}
+.m-3 {
+  margin: 0.75rem;
+}
+.m-4 {
+  margin: 1rem;
+}
+.m-5 {
+  margin: 1.25rem;
+}
+.m-6 {
+  margin: 1.5rem;
+}
+.m-7 {
+  margin: 1.75rem;
+}
+.m-8 {
+  margin: 2rem;
+}
+.m-9 {
+  margin: 2.25rem;
+}
+.m-10 {
+  margin: 2.5rem;
+}
+.mx-0 {
+  margin: 0 0px 0 0px;
+}
+.mx-1 {
+  margin: 0 0.25rem 0 0.25rem;
+}
+.mx-2 {
+  margin: 0 0.5rem 0 0.5rem;
+}
+.mx-3 {
+  margin: 0 0.75rem 0 0.75rem;
+}
+.mx-4 {
+  margin: 0 1rem 0 1rem;
+}
+.mx-5 {
+  margin: 0 1.25rem 0 1.25rem;
+}
+.mx-6 {
+  margin: 0 1.5rem 0 1.5rem;
+}
+.mx-7 {
+  margin: 0 1.75rem 0 1.75rem;
+}
+.mx-8 {
+  margin: 0 2rem 0 2rem;
+}
+.mx-9 {
+  margin: 0 2.25rem 0 2.25rem;
+}
+.mx-10 {
+  margin: 0 2.5rem 0 2.5rem;
+}
+.mr-0 {
+  margin-right: 0px;
+}
+.mr-1 {
+  margin-right: 0.25rem;
+}
+.mr-2 {
+  margin-right: 0.5rem;
+}
+.mr-3 {
+  margin-right: 0.75rem;
+}
+.mr-4 {
+  margin-right: 1rem;
+}
+.mr-5 {
+  margin-right: 1.25rem;
+}
+.mr-6 {
+  margin-right: 1.5rem;
+}
+.mr-7 {
+  margin-right: 1.75rem;
+}
+.mr-8 {
+  margin-right: 2rem;
+}
+.mr-9 {
+  margin-right: 2.25rem;
+}
+.mr-10 {
+  margin-right: 2.5rem;
+}
+.ml-0 {
+  margin-left: 0px;
+}
+.ml-1 {
+  margin-left: 0.25rem;
+}
+.ml-2 {
+  margin-left: 0.5rem;
+}
+.ml-3 {
+  margin-left: 0.75rem;
+}
+.ml-4 {
+  margin-left: 1rem;
+}
+.ml-5 {
+  margin-left: 1.25rem;
+}
+.ml-6 {
+  margin-left: 1.5rem;
+}
+.ml-7 {
+  margin-left: 1.75rem;
+}
+.ml-8 {
+  margin-left: 2rem;
+}
+.ml-9 {
+  margin-left: 2.25rem;
+}
+.ml-10 {
+  margin-left: 2.5rem;
+}
+.mt-0 {
+  margin-top: 0px;
+}
+.mt-1 {
+  margin-top: 0.25rem;
+}
+.mt-2 {
+  margin-top: 0.5rem;
+}
+.mt-3 {
+  margin-top: 0.75rem;
+}
+.mt-4 {
+  margin-top: 1rem;
+}
+.mt-5 {
+  margin-top: 1.25rem;
+}
+.mt-6 {
+  margin-top: 1.5rem;
+}
+.mt-7 {
+  margin-top: 1.75rem;
+}
+.mt-8 {
+  margin-top: 2rem;
+}
+.mt-9 {
+  margin-top: 2.25rem;
+}
+.mt-10 {
+  margin-top: 2.5rem;
+}
+.mb-0 {
+  margin-bottom: 0px;
+}
+.mb-1 {
+  margin-bottom: 0.25rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
+.mb-3 {
+  margin-bottom: 0.75rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.mb-5 {
+  margin-bottom: 1.25rem;
+}
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+.mb-7 {
+  margin-bottom: 1.75rem;
+}
+.mb-8 {
+  margin-bottom: 2rem;
+}
+.mb-9 {
+  margin-bottom: 2.25rem;
+}
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
+/* ------------------------------ 
+    HEADINGS 
+------------------------------ */
+.headline {
+  font-size: map-deep-get($heading, "headline-ad", "size") !important;
+  font-weight: map-deep-get($heading, "headline-ad", "weight");
+  line-height: map-deep-get($heading, "headline-ad", "line-height");
+  letter-spacing: map-deep-get(
+    $heading,
+    "headline-ad",
+    "letter-spacing"
+  ) !important;
+  font-family: map-deep-get($heading, "headline-ad", "font-family") !important;
+}
+
+.h1 {
   font-size: map-deep-get($heading, "h1", "size") !important;
   font-weight: map-deep-get($heading, "h1", "weight");
   line-height: map-deep-get($heading, "h1", "line-height");
@@ -23,14 +442,14 @@ body {
   font-family: map-deep-get($heading, "h1", "font-family") !important;
 }
 
-.display-3 {
+.h2 {
   font-size: map-deep-get($heading, "h2", "size") !important;
   font-weight: map-deep-get($heading, "h2", "weight");
   line-height: map-deep-get($heading, "h2", "line-height");
   letter-spacing: map-deep-get($heading, "h2", "letter-spacing") !important;
   font-family: map-deep-get($heading, "h2", "font-family") !important;
 }
-.display-2 {
+.h3 {
   font-size: map-deep-get($heading, "h3", "size") !important;
   font-weight: map-deep-get($heading, "h3", "weight");
   line-height: map-deep-get($heading, "h3", "line-height");
@@ -38,7 +457,7 @@ body {
   font-family: map-deep-get($heading, "h3", "font-family") !important;
 }
 
-.display-1 {
+.h4 {
   font-size: map-deep-get($heading, "h4", "size") !important;
   font-weight: map-deep-get($heading, "h4", "weight");
   line-height: map-deep-get($heading, "h4", "line-height");
@@ -54,12 +473,16 @@ body {
   font-family: map-deep-get($heading, "h5", "font-family") !important;
 }
 
-.title {
-  font-size: map-deep-get($heading, "h5", "size") !important;
-  font-weight: map-deep-get($heading, "h5", "weight");
-  line-height: map-deep-get($heading, "h5", "line-height");
-  letter-spacing: map-deep-get($heading, "h5", "letter-spacing") !important;
-  font-family: map-deep-get($heading, "h5", "font-family") !important;
+.subtitle-1 {
+  font-size: map-deep-get($heading, "subtitle-1", "size") !important;
+  font-weight: map-deep-get($heading, "subtitle-1", "weight");
+  line-height: map-deep-get($heading, "subtitle-1", "line-height");
+  letter-spacing: map-deep-get(
+    $heading,
+    "subtitle-1",
+    "letter-spacing"
+  ) !important;
+  font-family: map-deep-get($heading, "subtitle-1", "font-family") !important;
 }
 
 .subtitle-2 {
@@ -74,16 +497,12 @@ body {
   font-family: map-deep-get($heading, "subtitle-2", "font-family") !important;
 }
 
-.subtitle-1 {
-  font-size: map-deep-get($heading, "subtitle-1", "size") !important;
-  font-weight: map-deep-get($heading, "subtitle-1", "weight");
-  letter-spacing: map-deep-get(
-    $heading,
-    "subtitle-1",
-    "letter-spacing"
-  ) !important;
-  line-height: map-deep-get($heading, "subtitle-1", "line-height");
-  font-family: map-deep-get($heading, "subtitle-1", "font-family") !important;
+.body-1 {
+  font-size: map-deep-get($heading, "body-1", "size") !important;
+  font-weight: map-deep-get($heading, "body-1", "weight");
+  letter-spacing: map-deep-get($heading, "body-1", "letter-spacing") !important;
+  line-height: map-deep-get($heading, "body-1", "line-height");
+  font-family: map-deep-get($heading, "body-1", "font-family") !important;
 }
 
 .body-2 {
@@ -94,12 +513,12 @@ body {
   font-family: map-deep-get($heading, "body-2", "font-family") !important;
 }
 
-.body-1 {
-  font-size: map-deep-get($heading, "body-1", "size") !important;
-  font-weight: map-deep-get($heading, "body-1", "weight");
-  letter-spacing: map-deep-get($heading, "body-1", "letter-spacing") !important;
-  line-height: map-deep-get($heading, "body-1", "line-height");
-  font-family: map-deep-get($heading, "body-1", "font-family") !important;
+.button {
+  font-size: map-deep-get($heading, "button", "size") !important;
+  font-weight: map-deep-get($heading, "button", "weight");
+  letter-spacing: map-deep-get($heading, "button", "letter-spacing") !important;
+  line-height: map-deep-get($heading, "button", "line-height");
+  font-family: map-deep-get($heading, "button", "font-family") !important;
 }
 
 .caption {
@@ -143,6 +562,10 @@ body {
   font-weight: map-deep-get($font-weights, "medium") !important;
 }
 
+.font-weight-semi-bold {
+  font-weight: map-deep-get($font-weights, "semi-bold") !important;
+}
+
 .font-weight-bold {
   font-weight: map-deep-get($font-weights, "bold") !important;
 }
@@ -150,6 +573,7 @@ body {
 .font-weight-black {
   font-weight: map-deep-get($font-weights, "black") !important;
 }
+
 .card {
   box-shadow: 3px -5px 40px rgba(0, 51, 160, 0.1);
   padding: 16px;
@@ -167,13 +591,36 @@ body {
   background-color: $success;
   color: $secondary_white;
   text-align: center;
-  
+
   span {
     font-family: $barlow;
     font-style: normal;
-    font-weight: 400; 
+    font-weight: 400;
     font-size: 13px;
     line-height: 16px;
     letter-spacing: 0.4px;
   }
+}
+
+.text {
+  color: $gray;
+  &__primary {
+    color: $primary;
+  }
+  &__secondary {
+    color: $secondary !important;
+  }
+  &__secondary__yellow {
+    color: $secondary_yellow;
+  }
+  &__secondary__white {
+    color: $secondary_white;
+  }
+}
+
+.button__group {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  flex-direction: row;
 }

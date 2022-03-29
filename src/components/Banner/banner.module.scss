@@ -1,0 +1,72 @@
+@import "./../../styles/variables.scss";
+@import "./../../styles/mixins/mixin.scss";
+
+.divider {
+    border-bottom: 4px solid $secondary_yellow;
+    width: 56px;
+}
+.banner{
+    &__container {
+    height: 100%;
+    width: 100%;
+    background: $primary;
+    }
+    &__content{
+        width: 90%;
+        height: 300px;
+        padding-left: 15px;
+        padding-right: 15px;
+        margin-left: auto;
+        margin-right: auto;
+        display: flex;
+        align-items: start;
+        flex-direction: column;
+        justify-content: center;        
+    }
+    &__centered{
+        height: 300px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    &__vertical{
+        height: 100vh;
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 1rem;
+        align-items: center;
+        justify-items: center;
+        &__content{
+            height: 100%;
+            display: grid;
+            align-content: center;
+            justify-content: center;
+        }    
+        
+    }
+    &__list{
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        &__avatar{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: $secondary;
+            padding: 6px;
+            margin: 20px;
+            border-radius: 50%;
+        }
+    }
+}
+.heroOverlay {
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+
+
+
+
