@@ -624,3 +624,8 @@ body {
   align-content: center;
   flex-direction: row;
 }
+
+.divider {
+  border-bottom: 4px solid $secondary_yellow;
+  width: 56px;
+}

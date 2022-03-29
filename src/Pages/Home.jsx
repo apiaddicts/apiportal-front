@@ -22,10 +22,32 @@ function Home() {
   ];
 
   const slides = [
-    { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 1', subtitle: 'ullam sint fugiat' },
-    { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 2', subtitle: 'similique expedita harum' },
-    { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 3', subtitle: 'consequatur consequatur consequatur' },
-    { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 4', subtitle: 'eligendi numquam rerum' },
+    {
+      imgSrc: 'https://picsum.photos/1920/600',
+      title: 'Slide 1',
+      sutitle: 'ullam sint fugiat',
+      actionButtons: [
+        {
+          label: 'Empezar ahora',
+          type: 'primary',
+        },
+        {
+          label: 'Ver APIS',
+          type: 'ghost',
+        },
+      ],
+    },
+    {
+      imgSrc: 'https://picsum.photos/1920/600',
+      title: 'Slide 2',
+      subtitle: 'similique expedita harum',
+      actionButtons: [
+        {
+          label: 'lorem3',
+          type: 'impsu3',
+        },
+      ],
+    },
   ];
 
   function iconData(name) {
