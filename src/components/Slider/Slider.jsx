@@ -56,10 +56,10 @@ function Slider({ slides }) {
       <div className={classes.container__slider} ref={slider}>
         {slides.map((x) => (
           <div className={classes.container__slider__slide}>
-            <img src={x.imgSrc} alt='banner Slider' />
+            <img src={x.icon[0].url} alt='banner Slider' />
             <div className={classes.container__slider__slide__text}>
               <h1>{x.title}</h1>
-              <h2>{x.subtitle}</h2>
+              <h2>{x.description}</h2>
             </div>
           </div>
         ))}

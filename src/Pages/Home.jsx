@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import * as MaterialDesign from 'react-icons/md';
+import { useDispatch, useSelector } from 'react-redux';
 import BannerStatic from '../components/Banner/BannerStatic';
 import BannerCentered from '../components/Banner/BannerCentered';
 import BannerVertical from '../components/Banner/BannerVertical';
@@ -7,8 +8,15 @@ import Slider from '../components/Slider/Slider';
 import CardBasic from '../components/Card/CardBasic';
 import Button from '../components/Buttons/Button';
 import Item from '../components/Item/Item';
+import { getHome } from '../redux/actions/homeAction';
 
 function Home() {
+
+  const dispatch = useDispatch();
+  const { data } = useSelector((state) => state.demo);
+  useEffect(() => {
+    dispatch(getHome());
+  }, []);
 
   const buttons = [
     { label: 'Probar Api', class: 'primary' },
@@ -21,12 +29,12 @@ function Home() {
     { iconName: 'MdDesktopMac', label: 'Recursos y documentación para developers' },
   ];
 
-  const slides = [
-    { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 1', subtitle: 'ullam sint fugiat' },
-    { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 2', subtitle: 'similique expedita harum' },
-    { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 3', subtitle: 'consequatur consequatur consequatur' },
-    { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 4', subtitle: 'eligendi numquam rerum' },
-  ];
+  // const slides = [
+  //   { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 1', subtitle: 'ullam sint fugiat' },
+  //   { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 2', subtitle: 'similique expedita harum' },
+  //   { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 3', subtitle: 'consequatur consequatur consequatur' },
+  //   { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 4', subtitle: 'eligendi numquam rerum' },
+  // ];
 
   function iconData(name) {
     const md_icon = React.createElement(MaterialDesign[name]);
@@ -56,7 +64,7 @@ function Home() {
         list={listItems}
         img='https://picsum.photos/1920/1080'
       />
-      <Slider slides={slides} />
+      <Slider slides={data} />
 
       <Item
         icon={iconData('MdHome')}
