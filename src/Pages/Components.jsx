@@ -22,10 +22,20 @@ function Components() {
   ];
 
   const slides = [
-    { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 1', subtitle: 'ullam sint fugiat' },
-    { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 2', subtitle: 'similique expedita harum' },
-    { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 3', subtitle: 'consequatur consequatur consequatur' },
-    { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 4', subtitle: 'eligendi numquam rerum' },
+    {
+      imgSrc: 'https://picsum.photos/1920/630',
+      title: '¡Toda la potencia de una aseguradora en APIs!',
+      actionButtons: [
+        {
+          label: 'Empezar ahora',
+          type: 'primary',
+        },
+        {
+          label: 'Ver APIS',
+          type: 'ghost',
+        },
+      ],
+    },
   ];
 
   function iconData(name) {

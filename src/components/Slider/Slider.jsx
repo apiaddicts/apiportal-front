@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import Button from '../Buttons/Button';
 import classes from './slider.module.scss';
 
 function Slider({ slides }) {
@@ -58,8 +59,17 @@ function Slider({ slides }) {
           <div className={classes.container__slider__slide}>
             <img src={x.imgSrc} alt='banner Slider' />
             <div className={classes.container__slider__slide__text}>
-              <h1>{x.title}</h1>
-              <h2>{x.subtitle}</h2>
+              <div className='divider mb-4' />
+              <h1 className='h1 text__secondary__white w-50'>{x.title}</h1>
+              <div className='button__group mt-5'>
+                {x.actionButtons.map((i) => (
+                  <div className='pr-2'>
+                    <Button type={i.type}>
+                      {i.label}
+                    </Button>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         ))}

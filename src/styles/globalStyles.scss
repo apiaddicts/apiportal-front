@@ -465,6 +465,14 @@ body {
   font-family: map-deep-get($heading, "h4", "font-family") !important;
 }
 
+.h5 {
+  font-size: map-deep-get($heading, "h5", "size") !important;
+  font-weight: map-deep-get($heading, "h5", "weight");
+  line-height: map-deep-get($heading, "h5", "line-height");
+  letter-spacing: map-deep-get($heading, "h5", "letter-spacing") !important;
+  font-family: map-deep-get($heading, "h5", "font-family") !important;
+}
+
 .headline {
   font-size: map-deep-get($heading, "h5", "size") !important;
   font-weight: map-deep-get($heading, "h5", "weight");
@@ -519,6 +527,7 @@ body {
   letter-spacing: map-deep-get($heading, "button", "letter-spacing") !important;
   line-height: map-deep-get($heading, "button", "line-height");
   font-family: map-deep-get($heading, "button", "font-family") !important;
+  text-transform: uppercase;
 }
 
 .caption {
@@ -618,9 +627,37 @@ body {
   }
 }
 
+.w-50 {
+  max-width: 50% !important;
+}
+.h-screen {
+  height: 100vh !important;
+}
+
 .button__group {
   display: flex;
   justify-content: space-between;
   align-content: center;
   flex-direction: row;
+}
+
+.divider {
+  border-bottom: 4px solid $secondary_yellow;
+  width: 56px;
+}
+
+.container {
+  max-width: 90%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.section {
+  padding-top: 200px;
+}
+
+.text-left {
+  text-align: left !important;
 }

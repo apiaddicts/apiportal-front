@@ -43,8 +43,11 @@
         margin-left: 5%;
 
         .icon {
-            font-size: 25px;
+            font-size: 40px;
             color: $primary;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 }
