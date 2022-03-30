@@ -7,6 +7,7 @@ import Slider from '../components/Slider/Slider';
 import CardBasic from '../components/Card/CardBasic';
 import Button from '../components/Buttons/Button';
 import Item from '../components/Item/Item';
+import CardSlider from '../components/Card/CardSlider';
 
 function Home() {
 
@@ -26,6 +27,13 @@ function Home() {
     { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 2', subtitle: 'similique expedita harum' },
     { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 3', subtitle: 'consequatur consequatur consequatur' },
     { imgSrc: 'https://picsum.photos/1920/300', title: 'Slide 4', subtitle: 'eligendi numquam rerum' },
+  ];
+
+  const sliderCard = [
+    { title: 'Slide 1', description: 'lorems data related 1' },
+    { title: 'Slide 2', description: 'lorems data related 2' },
+    { title: 'Slide 3', description: 'lorems data related 3' },
+    { title: 'Slide 3.1', description: 'lorems data related 4' },
   ];
 
   function iconData(name) {
@@ -95,6 +103,9 @@ function Home() {
         <CardBasic chipTitle='GET' />
         <CardBasic />
       </div>
+      <br />
+      <br />
+      <CardSlider lists={sliderCard} />
     </div>
 
   );
