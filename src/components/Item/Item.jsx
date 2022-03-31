@@ -1,5 +1,5 @@
 import React from 'react';
-
+import Icon from '../MdIcon/Icon';
 import './item.scss';
 
 function Item({ icon, title, description, type = 'basic', number, iconos }) {
@@ -17,7 +17,7 @@ function Item({ icon, title, description, type = 'basic', number, iconos }) {
         <div className='item_circle'>
           <div className='circle'>
             <span className='icon'>
-              {icon}
+              <Icon id={icon} />
             </span>
           </div>
         </div>
