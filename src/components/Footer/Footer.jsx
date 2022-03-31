@@ -6,6 +6,7 @@ function Footer({ props }) {
   return (
     <Base img={img}>
       <h1>FOOTER</h1>
+      <h1>FOOTER</h1>
     </Base>
   );
 }
