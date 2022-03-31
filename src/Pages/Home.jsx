@@ -5,6 +5,8 @@ import classes from '../styles/pages/home.module.scss';
 import Icon from '../components/MdIcon/Icon';
 import CardBasic from '../components/Card/CardBasic';
 import BannerCentered from '../components/Banner/BannerCentered';
+import Tabs from '../components/Tabs/Tabs';
+import Button from '../components/Buttons/Button';
 
 function Home() {
 
@@ -60,6 +62,11 @@ function Home() {
     { chipTitle: 'GET' },
   ];
 
+  const buttons = [
+    { class: 'primary', label: 'empezar ahora' },
+    { class: 'ghost', label: 'ver apis' },
+  ];
+
   return (
     <div>
       <section>
@@ -83,27 +90,33 @@ function Home() {
 
       <section className={`h-screen ${classes.section__works}`}>
         <div className={`container ${classes.section__works__content}`}>
-          <h1 className='h3 text__secondary__white'>¿Cómo funciona?</h1>
-          {/* TODO: Reemplazar por componente */}
-          <div className={classes.section__works__content__tabs}>
-            <div className={`h5 text__secondary__white ${classes.section__works__content__tab}`}>
-              <div className={classes.section__works__content__tab__content}>
-                <Icon id='MdOutlineSettings' />
-                <span>Administrador</span>
+          <h1 className='h3 text__secondary__white mb-5'>¿Cómo funciona?</h1>
+          <Tabs>
+            <div label='Administrador'>
+              <div className={classes.section__works__items}>
+                {itemsWorks.map((item) => (
+                  <div className={`mb-6 ${classes.section__works__items__item}`}>
+                    <Item title={item.title} description={item.description} icon={item.icon} type='title' />
+                  </div>
+                ))}
               </div>
             </div>
-            <div className={`h5 text__secondary__white ${classes.section__works__content__tab}`}>
-              <div className={classes.section__works__content__tab__content}>
-                <Icon id='MdOutlineDesktopWindows' />
-                <span>Desarrollador</span>
+            <div label='Desarrollador'>
+              <div className={classes.section__works__items}>
+                {itemsWorks.map((item) => (
+                  <div className={`mb-6 ${classes.section__works__items__item}`}>
+                    <Item title={item.title} description={item.description} icon={item.icon} type='title' />
+                  </div>
+                ))}
               </div>
             </div>
-          </div>
-          {/* ------------------------------- */}
-          <div className={classes.section__works__items}>
-            {itemsWorks.map((item) => (
-              <div className={`mb-6 ${classes.section__works__items__item}`}>
-                <Item title={item.title} description={item.description} icon={item.icon} type='title' />
+          </Tabs>
+          <div className='button__group mt-10'>
+            {buttons.map((button) => (
+              <div className='pr-2'>
+                <Button type={button.class}>
+                  {button.label}
+                </Button>
               </div>
             ))}
           </div>
@@ -156,7 +169,7 @@ function Home() {
           title='Integra tus sistemas con las APIs de SURA'
           subtitle='Quisque rutrum. Sed augue ipsum.'
           img='https://picsum.photos/1920/300'
-          buttonType='secundary'
+          buttonType='primary'
           buttonLabel='empezar ahora'
         />
       </section>

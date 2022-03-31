@@ -7,6 +7,7 @@ import Slider from '../components/Slider/Slider';
 import CardBasic from '../components/Card/CardBasic';
 import Button from '../components/Buttons/Button';
 import Item from '../components/Item/Item';
+import Tabs from '../components/Tabs/Tabs';
 
 function Components() {
 
@@ -58,7 +59,7 @@ function Components() {
         title='Integra tus sistemas con las APIs de SURA'
         subtitle='Lorem ipsum dolor sit amet.'
         img='https://picsum.photos/1920/300'
-        buttonType='secundary'
+        buttonType='primary'
         buttonLabel='empezar ahora'
       />
       <BannerVertical
@@ -105,6 +106,22 @@ function Components() {
         <CardBasic chipTitle='GET' />
         <CardBasic />
       </div>
+
+      <Tabs>
+        <div label='Gator'>
+          See ya later,
+          <em>Alligator</em>
+          !
+        </div>
+        <div label='Cards'>
+          <CardBasic chipTitle='GET' />
+        </div>
+        <div label='Button'>
+          <Button type='ghost'>
+            Ejemplo4
+          </Button>
+        </div>
+      </Tabs>
     </div>
 
   );
