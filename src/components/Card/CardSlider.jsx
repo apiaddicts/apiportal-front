@@ -59,10 +59,23 @@ function CardSlider({ lists }) {
         {lists.map((item, i) => (
           <div key={i} className='card_slider_container_slider_slide'>
             <Base>
-              <h1>{item.title}</h1>
-              <h1>{item.title}</h1>
-              <h1>{item.title}</h1>
-              <h1>{item.title}</h1>
+              <div className='card_slider_container_text'>
+                <div>
+                  <h1>{item.title}</h1>
+                  <p>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ab voluptatum nisi alias veniam nesciunt facere non culpa itaque architecto ipsam iusto, repellat est sit? Esse et id vero ut!
+                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima repudiandae dolorum, explicabo delectus dolor, deserunt molestias placeat, itaque est esse laborum modi et aliquid. Consectetur dolores nostrum quo eius beatae.
+                  </p>
+                </div>
+                <div>
+                  <MdChevronLeft />
+                  <div />
+                  <div>
+                    <h5>Tallah Cotton</h5>
+                    <span>loms</span>
+                  </div>
+                </div>
+              </div>
             </Base>
 
           </div>
