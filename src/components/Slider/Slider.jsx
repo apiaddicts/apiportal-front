@@ -55,8 +55,8 @@ function Slider({ slides }) {
   return (
     <div className={classes.container}>
       <div className={classes.container__slider} ref={slider}>
-        {slides.map((x) => (
-          <div className={classes.container__slider__slide}>
+        {slides.map((x, i) => (
+          <div key={i} className={classes.container__slider__slide}>
             <img src={x.imgSrc} alt='banner Slider' />
             <div className={classes.container__slider__slide__text}>
               <div className='divider mb-4' />

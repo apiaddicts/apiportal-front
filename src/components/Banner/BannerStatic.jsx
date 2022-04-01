@@ -11,8 +11,8 @@ function BannerStatic({ title, subtitle, img, isSearch, buttons }) {
         <h1 className='h1 text__secondary__white'>{ title }</h1>
         <p className='subtitle-1 text__secondary__white'>{subtitle}</p>
         <div className='button__group mt-5'>
-          {buttons.map((button) => (
-            <div className='pr-2'>
+          {buttons.map((button, i) => (
+            <div key={i} className='pr-2'>
               <Button type={button.class}>
                 {button.label}
               </Button>
