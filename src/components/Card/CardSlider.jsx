@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import * as MaterialDesign from 'react-icons/md';
 
 import Base from './Base';
 
@@ -53,6 +54,15 @@ function CardSlider({ lists }) {
     }
 
   };
+
+  const icon = (iconName) => {
+    const mdIcon = React.createElement(MaterialDesign[iconName]);
+    if (mdIcon.type === undefined) {
+      return React.createElement(MaterialDesign['MdApi']);
+    }
+    return mdIcon;
+  };
+
   return (
     <div className='card_slider_container'>
       <div className='card_slider_container_slider' ref={slider}>
@@ -63,16 +73,17 @@ function CardSlider({ lists }) {
                 <div>
                   <h1>{item.title}</h1>
                   <p>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ab voluptatum nisi alias veniam nesciunt facere non culpa itaque architecto ipsam iusto, repellat est sit? Esse et id vero ut!
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit. Minima repudiandae dolorum, explicabo delectus dolor, deserunt molestias placeat, itaque est esse laborum modi et aliquid. Consectetur dolores nostrum quo eius beatae.
+                    {item.description}
                   </p>
                 </div>
-                <div>
-                  <MdChevronLeft />
-                  <div />
-                  <div>
-                    <h5>Tallah Cotton</h5>
-                    <span>loms</span>
+                <div className='card_slider_container_footer'>
+                  <span className='card_slider_container_footer_icon'>
+                    {icon(item.icon)}
+                  </span>
+                  <div className='card_slider_container_footer_bar' />
+                  <div className='card_slider_container_footer_text'>
+                    <h5>{item.titleFooter}</h5>
+                    <span>{item.descriptionFooter}</span>
                   </div>
                 </div>
               </div>
