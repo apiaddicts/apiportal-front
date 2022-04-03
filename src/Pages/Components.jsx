@@ -8,6 +8,7 @@ import CardBasic from '../components/Card/CardBasic';
 import Button from '../components/Buttons/Button';
 import Item from '../components/Item/Item';
 import Tabs from '../components/Tabs/Tabs';
+import CardSlider from '../components/Card/CardSlider';
 
 function Components() {
 
@@ -36,6 +37,30 @@ function Components() {
           type: 'ghost',
         },
       ],
+    },
+  ];
+
+  const cardSlides = [
+    {
+      title: 'Ejemplo 1',
+      description: ' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ab voluptatum nisi alias veniam nesciunt facere non culpa itaque architecto ipsam iusto, repellat est sit? Esse et id vero ut! Lorem ipsum dolor, sit amet consectetur adipisicing elit.Minima repudiandae dolorum, explicabo delectus dolor, deserunt molestias placeat, itaque est esse laborum modi et aliquid.Consectetur dolores nostrum quo eius beatae.',
+      icon: 'Md3DRotation',
+      titleFooter: 'Tallah Cotton',
+      descriptionFooter: 'Cargo',
+    },
+    {
+      title: 'Ejemplo 2',
+      description: ' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ab voluptatum nisi alias veniam nesciunt facere non culpa itaque architecto ipsam iusto, repellat est sit? Esse et id vero ut! Lorem ipsum dolor, sit amet consectetur adipisicing elit.Minima repudiandae dolorum, explicabo delectus dolor, deserunt molestias placeat, itaque est esse laborum modi et aliquid.Consectetur dolores nostrum quo eius beatae.',
+      icon: 'MdAspectRatio',
+      titleFooter: 'Tallah Cotton',
+      descriptionFooter: 'Ejemplo',
+    },
+    {
+      title: 'Ejemplo 3',
+      description: ' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ab voluptatum nisi alias veniam nesciunt facere non culpa itaque architecto ipsam iusto, repellat est sit? Esse et id vero ut! Lorem ipsum dolor, sit amet consectetur adipisicing elit.Minima repudiandae dolorum, explicabo delectus dolor, deserunt molestias placeat, itaque est esse laborum modi et aliquid.Consectetur dolores nostrum quo eius beatae.',
+      icon: 'MdContactless',
+      titleFooter: 'Tallah Cotton',
+      descriptionFooter: 'Desarrollo',
     },
   ];
 
@@ -122,6 +147,8 @@ function Components() {
           </Button>
         </div>
       </Tabs>
+      <br />
+      <CardSlider lists={cardSlides} />
     </div>
 
   );

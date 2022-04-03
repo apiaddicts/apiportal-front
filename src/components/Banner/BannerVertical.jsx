@@ -19,8 +19,8 @@ function BannerVertical({ img, title, list }) {
             <div className={`${classes.divider} mb-4`} />
             <h1 className='h1 text__secondary__white'>{title}</h1>
             {
-              list.map((x) => (
-                <div className={classes.banner__list}>
+              list.map((x, i) => (
+                <div key={i} className={classes.banner__list}>
                   <span className={`h4 text__secondary__white ${classes.banner__list__avatar}`}>{icon(x.iconName)}</span>
                   <p className='h4 text__secondary__white'>{x.label}</p>
                 </div>
