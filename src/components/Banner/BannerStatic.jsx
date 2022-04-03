@@ -7,11 +7,11 @@ function BannerStatic({ title, subtitle, img, isSearch, buttons }) {
   return (
     <Base img={img}>
       <div className={classes.banner__content}>
-        <div className={`${classes.divider} mb-4`} />
         <h1 className='h1 text__secondary__white'>{ title }</h1>
         <p className='subtitle-1 text__secondary__white'>{subtitle}</p>
+        <div className={`${classes.divider} mb-4 mt-3`} />
         <div className='button__group mt-5'>
-          {buttons.map((button) => (
+          {!buttons ? '' : buttons.map((button) => (
             <div className='pr-2'>
               <Button type={button.class}>
                 {button.label}

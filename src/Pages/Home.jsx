@@ -7,6 +7,7 @@ import CardBasic from '../components/Card/CardBasic';
 import BannerCentered from '../components/Banner/BannerCentered';
 import Tabs from '../components/Tabs/Tabs';
 import Button from '../components/Buttons/Button';
+import Carousel from '../components/Carousel/Carousel';
 
 function Home() {
 
@@ -182,6 +183,7 @@ function Home() {
           <div className={classes.section__news__subtitle}>
             <p className='body-1'>Conoce todas las novedades sobre tecnología, APIs y transformación digital</p>
           </div>
+          <Carousel />
         </div>
       </section>
     </div>
