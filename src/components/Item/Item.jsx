@@ -8,7 +8,7 @@ function Item({ icon, title, description, type = 'basic', number, iconos }) {
     <div>
       {type === 'title' ? (
         <div className='item_title'>
-          <span className='number'>1.</span>
+          <span className='number'>{`${number}. `}</span>
           {' '}
           <span className='title'>{title}</span>
         </div>

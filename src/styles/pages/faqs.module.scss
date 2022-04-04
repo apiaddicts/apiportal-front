@@ -1,0 +1,13 @@
+@import "./../variables.scss";
+
+.faq {
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    align-items: center;
+    justify-items: center;
+    &__qa {
+      width: 100%;
+    }
+  }
+}

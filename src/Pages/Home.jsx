@@ -49,12 +49,18 @@ function Home() {
   ];
 
   const itemsWorks = [
-    { icon: 'MdPersonOutline', title: 'Regístrate', description: 'Crea una cuenta para tu organización y accede al catálogo complementos de APIs de SURA' },
-    { icon: 'MdOutlineDescription', title: 'Personaliza', description: 'Selecciona las APIs que mejor se ajustan a tus necesidades y descubre todo lo que puedes conseguir con ellas.' },
-    { icon: 'MdOutlineDescription', title: 'Desarrolla', description: 'En breve tendrás integradas las APIs en tu plataforma para comenzar a vender y gestionar los productos.' },
-    { icon: 'MdPersonOutline', title: 'perferendis', description: 'Sed tempore nisi veritatis asperiores pariatur est veritatis dicta.Sed tempore nisi veritatis asperiores pariatur est veritatis dicta.' },
-    { icon: 'MdOutlineDescription', title: 'perferendis', description: 'Doloribus voluptate voluptate.Doloribus voluptate voluptate.Doloribus voluptate voluptate.Doloribus voluptate voluptate.' },
-    { icon: 'MdOutlineDescription', title: 'perferendis', description: 'Et et nihil dicta placeat.Et et nihil dicta placeat.Et et nihil dicta placeat.Et et nihil dicta placeat.Et et nihil dicta placeat.' },
+    { number: 1, icon: 'MdPersonOutline', title: 'Regístrate', description: 'Crea una cuenta para tu organización y accede al catálogo complementos de APIs de SURA' },
+    { number: 2, icon: 'MdOutlineDescription', title: 'Personaliza', description: 'Selecciona las APIs que mejor se ajustan a tus necesidades y descubre todo lo que puedes conseguir con ellas.' },
+    { number: 3, icon: 'MdOutlineDescription', title: 'Desarrolla', description: 'En breve tendrás integradas las APIs en tu plataforma para comenzar a vender y gestionar los productos.' },
+    { number: 4, icon: 'MdPersonOutline', title: 'perferendis', description: 'Sed tempore nisi veritatis asperiores pariatur est veritatis dicta.Sed tempore nisi veritatis asperiores pariatur est veritatis dicta.' },
+    { number: 5, icon: 'MdOutlineDescription', title: 'perferendis', description: 'Doloribus voluptate voluptate.Doloribus voluptate voluptate.Doloribus voluptate voluptate.Doloribus voluptate voluptate.' },
+    { number: 6, icon: 'MdOutlineDescription', title: 'perferendis', description: 'Et et nihil dicta placeat.Et et nihil dicta placeat.Et et nihil dicta placeat.Et et nihil dicta placeat.Et et nihil dicta placeat.' },
+  ];
+
+  const itemsWorksAdmin = [
+    { number: 1, icon: 'MdPersonOutline', title: 'Regístrate', description: 'Crea una cuenta para tu organización y accede al catálogo complementos de APIs de SURA' },
+    { number: 2, icon: 'MdOutlineDescription', title: 'Personaliza', description: 'Selecciona las APIs que mejor se ajustan a tus necesidades y descubre todo lo que puedes conseguir con ellas.' },
+    { number: 3, icon: 'MdOutlineDescription', title: 'Desarrolla', description: 'En breve tendrás integradas las APIs en tu plataforma para comenzar a vender y gestionar los productos.' },
   ];
 
   const cardsApis = [
@@ -95,9 +101,9 @@ function Home() {
           <Tabs>
             <div label='Administrador'>
               <div className={classes.section__works__items}>
-                {itemsWorks.map((item) => (
+                {itemsWorksAdmin.map((item) => (
                   <div className={`mb-6 ${classes.section__works__items__item}`}>
-                    <Item title={item.title} description={item.description} icon={item.icon} type='title' />
+                    <Item number={item.number} title={item.title} description={item.description} icon={item.icon} type='title' />
                   </div>
                 ))}
               </div>
@@ -106,7 +112,7 @@ function Home() {
               <div className={classes.section__works__items}>
                 {itemsWorks.map((item) => (
                   <div className={`mb-6 ${classes.section__works__items__item}`}>
-                    <Item title={item.title} description={item.description} icon={item.icon} type='title' />
+                    <Item number={item.number} title={item.title} description={item.description} icon={item.icon} type='title' />
                   </div>
                 ))}
               </div>
@@ -161,6 +167,19 @@ function Home() {
           </div>
           <div className={classes.section__experiences__subtitle}>
             <p className='body-1'>Podemos adaptar nuestras APIs a tu sector y organicación. A continuación te mostramos algunos de nuestros casos de uso actuales.</p>
+          </div>
+          <div className={classes.section__experiences__tabs}>
+            <Tabs>
+              <div label='Lorem'>
+                <h1>Lorem, ipsum.</h1>
+              </div>
+              <div label='Lorem, ipsum..'>
+                <h1>Lorem, ipsum.</h1>
+              </div>
+              <div label='Lorem, fart '>
+                <h1>Lorem, ipsum.</h1>
+              </div>
+            </Tabs>
           </div>
         </div>
       </section>
