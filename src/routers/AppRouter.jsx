@@ -6,31 +6,24 @@ import Home from '../Pages/Home';
 import Pagina1 from '../Pages/Pagina1';
 import Pagina2 from '../Pages/Pagina2';
 import Apis from '../Pages/Apis';
+import Components from '../Pages/Components';
+import Footer from '../components/Footer/Footer';
+import Faqs from '../Pages/Faqs';
 
 function AppRouter() {
 
   return (
     <BrowserRouter>
       <Navbar />
-      {/* <nav>
-        <ul>
-          <li>
-            <Link to='/'>Home</Link>
-          </li>
-          <li>
-            <Link to='/about'>About</Link>
-          </li>
-          <li>
-            <Link to='/users'>Users</Link>
-          </li>
-        </ul>
-      </nav> */}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<Pagina1 />} />
         <Route path='/users' element={<Pagina2 />} />
         <Route path='/apis' exact element={<Apis />} />
+        <Route path='/faqs' exact element={<Faqs />} />
+        <Route path='/componentes' exact element={<Components />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 };

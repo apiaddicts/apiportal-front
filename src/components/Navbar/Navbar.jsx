@@ -65,13 +65,13 @@ function Navbar(props) {
               <a href=''>BLOG</a>
             </li>
             <li>
-              <a href=''>FAQs</a>
+              <a href='/faqs'>FAQs</a>
             </li>
             <li>
               <a href=''>CONTACTO</a>
             </li>
             <li className='pr-2'>
-              <Button type='ghost'>
+              <Button type='ghost-variant'>
                 Iniciar sesión
               </Button>
             </li>

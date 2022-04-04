@@ -8,7 +8,7 @@ function BannerCentered({ title, subtitle, buttonLabel, img, buttonType }) {
     <Base img={img}>
       <div className={classes.banner__centered}>
         <h1 className='h2 mb-3 text__secondary'>{title}</h1>
-        <p className='h4 mb-5 text__secondary__white font-weight-semi-bold'>{subtitle}</p>
+        <p className='h5 mb-5 text__secondary__white font-weight-semi-bold'>{subtitle}</p>
         <Button type={buttonType}>
           {buttonLabel}
         </Button>
