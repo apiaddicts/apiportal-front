@@ -38,3 +38,43 @@
   background: $primary;
   color: $secondary_white;
 }
+
+.filter {
+  width: 100%;
+  margin: 30px 0;
+  &__title{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1.33px;
+    font-family: $barlow;
+    text-transform: uppercase;
+    color: $gray_darken;
+  }
+  &__body{
+    font-size: 16px;
+    font-family: $barlow;
+    font-weight: 400;
+    &__list {
+      list-style: none;
+      padding: 0;
+      &__item {
+        margin: 15px 0;
+        cursor: pointer;
+      }
+    } 
+  }
+}
+
+.item__active{
+  margin: 15px 0;
+  padding-left: 10px;
+  font-weight: 700;
+  border-left: 2px solid $secondary;
+  color: $primary;          
+}
+
+
