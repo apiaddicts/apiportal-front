@@ -3,7 +3,7 @@ services:
   - docker:dind
 
 stages:
-  - build
+  # - build
   - docker-build
   - deploy
 
@@ -63,24 +63,23 @@ docker:deploy:
   <<: *ssh-deploy
   environment:
     name: $CI_COMMIT_REF_NAME
+# .template:build: &build
+#   stage: build
+#   image: node:alpine
+#   script:
+#     # - export NODE_OPTIONS=--openssl-legacy-provider
+#     - export NODE_ENV=production
+#     - npm install
+#     - npm run build
+#   artifacts:
+#     paths:
+#       - build
+#       - .next
 
-.template:build: &build
-  stage: build
-  image: node:alpine
-  script:
-    # - export NODE_OPTIONS=--openssl-legacy-provider
-    - export NODE_ENV=production
-    - npm install
-    - npm run build
-  artifacts:
-    paths:
-      - build
-      - .next
-
-build:pre:
-  <<: *build
-  environment:
-    name: pre
-  only:
-    refs:
-      - pre
+# build:pre:
+#   <<: *build
+#   environment:
+#     name: pre
+#   only:
+#     refs:
+#       - pre
