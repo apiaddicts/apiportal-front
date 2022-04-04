@@ -70,8 +70,8 @@ docker:deploy:
   script:
     # - export NODE_OPTIONS=--openssl-legacy-provider
     - export NODE_ENV=production
-    - yarn install
-    - yarn build
+    - npm run install
+    - npm run build
   artifacts:
     paths:
       - build

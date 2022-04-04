@@ -6,7 +6,7 @@ WORKDIR /usr/src/app
 COPY package*.json /usr/src/app/
 
 # USER node
-RUN yarn install
+RUN npm run install
 EXPOSE 3000
 
-CMD [ "yarn", "start" ]
+CMD [ "npm", "run", "start" ]
