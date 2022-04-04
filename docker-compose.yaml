@@ -1,0 +1,6 @@
+version: '3'
+services:
+  nextjs:
+    image: registry.gitlab.com/cloudappi/sura/dev-portal-sura-frontend:_VERSION
+    ports:
+      - $PORT:3000
