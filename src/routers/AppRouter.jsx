@@ -2,13 +2,13 @@ import React from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 
-import Home from '../pages/Home';
-import Pagina1 from '../pages/Pagina1';
-import Pagina2 from '../pages/Pagina2';
-import Apis from '../pages/Apis';
-import Components from '../pages/Components';
+import Home from '../Pages/Home';
+import Pagina1 from '../Pages/Pagina1';
+import Pagina2 from '../Pages/Pagina2';
+import Apis from '../Pages/Apis';
+import Components from '../Pages/Components';
 import Footer from '../components/Footer/Footer';
-import Faqs from '../pages/Faqs';
+import Faqs from '../Pages/Faqs';
 
 function AppRouter() {
 
