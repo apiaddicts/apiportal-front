@@ -286,6 +286,49 @@ body {
 .mx-10 {
   margin: 0 2.5rem 0 2.5rem;
 }
+.my-0 {
+  margin: 0px 0 0px 0;
+}
+
+.my-1 {
+  margin: 0.25rem 0 0.25rem 0;
+}
+
+.my-2 {
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.my-3 {
+  margin: 0.75rem 0 0.75rem 0;
+}
+
+.my-4 {
+  margin: 1rem 0 1rem 0;
+}
+
+.my-5 {
+  margin: 1.25rem 0 1.25rem 0;
+}
+
+.my-6 {
+  margin: 1.5rem 0 1.5rem 0;
+}
+
+.my-7 {
+  margin: 1.75rem 0 1.75rem 0;
+}
+
+.my-8 {
+  margin: 2rem 0 2rem 0;
+}
+
+.my-9 {
+  margin: 2.25rem 0 2.25rem 0;
+}
+
+.my-10 {
+  margin: 2.5rem 0 2.5rem 0;
+}
 .mr-0 {
   margin-right: 0px;
 }
@@ -430,22 +473,22 @@ body {
     $heading,
     "headline-ad",
     "letter-spacing"
-  ) !important;
-  font-family: map-deep-get($heading, "headline-ad", "font-family") !important;
-}
-
-.h1 {
-  font-size: map-deep-get($heading, "h1", "size") !important;
-  font-weight: map-deep-get($heading, "h1", "weight");
-  line-height: map-deep-get($heading, "h1", "line-height");
-  letter-spacing: map-deep-get($heading, "h1", "letter-spacing") !important;
-  font-family: map-deep-get($heading, "h1", "font-family") !important;
-}
-
-.h2 {
-  font-size: map-deep-get($heading, "h2", "size") !important;
-  font-weight: map-deep-get($heading, "h2", "weight");
-  line-height: map-deep-get($heading, "h2", "line-height");
+    ) !important;
+    font-family: map-deep-get($heading, "headline-ad", "font-family") !important;
+    }
+    
+    .h1 {
+      font-size: map-deep-get($heading, "h1", "size") !important;
+      font-weight: map-deep-get($heading, "h1", "weight");
+      line-height: map-deep-get($heading, "h1", "line-height");
+      letter-spacing: map-deep-get($heading, "h1", "letter-spacing") !important;
+      font-family: map-deep-get($heading, "h1", "font-family") !important;
+    }
+    
+    .h2 {
+      font-size: map-deep-get($heading, "h2", "size") !important;
+      font-weight: map-deep-get($heading, "h2", "weight");
+      line-height: map-deep-get($heading, "h2", "line-height");
   letter-spacing: map-deep-get($heading, "h2", "letter-spacing") !important;
   font-family: map-deep-get($heading, "h2", "font-family") !important;
 }
@@ -644,10 +687,16 @@ body {
 .w-50 {
   max-width: 50% !important;
 }
+.w-full {
+  width: 100% !important;
+}
 .h-screen {
   height: 100vh !important;
 }
 
+.w-screen {
+  width: 100vw !important;
+}
 .button__group {
   display: flex;
   justify-content: space-between;

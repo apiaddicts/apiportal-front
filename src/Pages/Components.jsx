@@ -9,6 +9,8 @@ import Button from '../components/Buttons/Button';
 import Item from '../components/Item/Item';
 import Tabs from '../components/Tabs/Tabs';
 import CardSlider from '../components/Card/CardSlider';
+import Modal from '../components/Modal';
+import Form from '../components/Form';
 
 function Components() {
 
@@ -74,6 +76,9 @@ function Components() {
 
   return (
     <div>
+      <Modal>
+        <Form />
+      </Modal>
       <BannerStatic
         title='Biblioteca de APIs'
         img='https://picsum.photos/1920/300'
