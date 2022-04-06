@@ -1,0 +1,90 @@
+.nav-blog {
+	position: relative;
+	margin: 7px auto 0;
+	width: 690px;
+	height: 50px;
+	font-size: 0;
+}
+
+.active-nav {
+	position: absolute;
+	height: 100%;
+	height: 5px;
+	bottom: 0;
+	z-index: 0;
+	background: #0033A0;
+	color: #0033A0 !important;
+	border-radius: 8px;
+	transition: all .5s ease 0s;
+}
+
+.nav-blog p {
+	font-size: 15px;
+	cursor: pointer;
+	text-transform: uppercase;
+	color: black;
+	text-decoration: none;
+	line-height: 50px;
+	position: relative;
+	z-index: 1;
+	display: inline-block;
+	text-align: center;
+	font-weight: 40000;
+}
+
+.nav-blog .animation {
+	position: absolute;
+	height: 100%;
+	height: 5px;
+	bottom: 0;
+	z-index: 0;
+	background: #0033A0;
+	border-radius: 8px;
+	transition: all .5s ease 0s;
+}
+
+.nav-blog p:nth-child(1) {
+	width: 100px;
+}
+
+.nav-blog .start-home,
+p:nth-child(1):hover~.animation {
+	width: 100px;
+	left: 0;
+}
+
+.nav-blog p:nth-child(2) {
+	width: 110px;
+}
+
+.nav-blog p:nth-child(2):hover~.animation {
+	width: 110px;
+	left: 100px;
+}
+
+.nav-blog p:nth-child(3) {
+	width: 190px;
+}
+
+.nav-blog p:nth-child(3):hover~.animation {
+	width: 150px;
+	left: 233px;
+}
+
+.nav-blog p:nth-child(4) {
+	width: 80px;
+}
+
+.nav-blog p:nth-child(4):hover~.animation {
+	width: 80px;
+	left: 400px;
+}
+
+.nav-blog p:nth-child(5) {
+	width: 110px;
+}
+
+.nav-blog p:nth-child(5):hover~.animation {
+	width: 110px;
+	left: 480px;
+}

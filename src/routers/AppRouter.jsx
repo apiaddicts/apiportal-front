@@ -9,6 +9,7 @@ import Apis from '../Pages/Apis';
 import Components from '../Pages/Components';
 import Footer from '../components/Footer/Footer';
 import Faqs from '../Pages/Faqs';
+import Blog from '../Pages/Blog';
 
 function AppRouter() {
 
@@ -21,6 +22,7 @@ function AppRouter() {
         <Route path='/users' element={<Pagina2 />} />
         <Route path='/apis' exact element={<Apis />} />
         <Route path='/faqs' exact element={<Faqs />} />
+        <Route path='/blog' exact element={<Blog />} />
         <Route path='/componentes' exact element={<Components />} />
       </Routes>
       <Footer />

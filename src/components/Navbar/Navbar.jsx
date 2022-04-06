@@ -62,7 +62,7 @@ function Navbar(props) {
               <a href=''>DOCUMENTACIÓN</a>
             </li>
             <li>
-              <a href=''>BLOG</a>
+              <Link to='/bLog'>BLOGS</Link>
             </li>
             <li>
               <a href='/faqs'>FAQs</a>
