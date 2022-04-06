@@ -57,13 +57,13 @@ function Slider({ slides }) {
       <div className={classes.container__slider} ref={slider}>
         {slides.map((x, i) => (
           <div key={i} className={classes.container__slider__slide}>
-            <img src={x.imgSrc} alt='banner Slider' />
+            <img src={x.banner[0].url} alt='banner Slider' />
             <div className={classes.container__slider__slide__text}>
               <div className='divider mb-4' />
               <h1 className='h1 text__secondary__white w-50'>{x.title}</h1>
               <div className='button__group mt-5'>
-                {x.actionButtons.map((i) => (
-                  <div className='pr-2'>
+                {x.actionButtons.map((i, index) => (
+                  <div key={index + i} className='pr-2'>
                     <Button type={i.type}>
                       {i.label}
                     </Button>
