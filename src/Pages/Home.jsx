@@ -5,6 +5,7 @@ import Item from '../components/Item/Item';
 import classes from '../styles/pages/home.module.scss';
 import Icon from '../components/MdIcon/Icon';
 import CardBasic from '../components/Card/CardBasic';
+import CardSlider from '../components/Card/CardSlider';
 import BannerCentered from '../components/Banner/BannerCentered';
 import Tabs from '../components/Tabs/Tabs';
 import Button from '../components/Buttons/Button';
@@ -52,6 +53,29 @@ function Home() {
     { class: 'ghost', label: 'ver apis' },
   ];
 
+  const cardSlides = [
+    {
+      title: 'Ejemplo 1',
+      description: ' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ab voluptatum nisi alias veniam nesciunt facere non culpa itaque architecto ipsam iusto, repellat est sit? Esse et id vero ut! Lorem ipsum dolor, sit amet consectetur adipisicing elit.Minima repudiandae dolorum, explicabo delectus dolor, deserunt molestias placeat, itaque est esse laborum modi et aliquid.Consectetur dolores nostrum quo eius beatae.',
+      icon: 'Md3DRotation',
+      titleFooter: 'Tallah Cotton',
+      descriptionFooter: 'Cargo',
+    },
+    {
+      title: 'Ejemplo 2',
+      description: ' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ab voluptatum nisi alias veniam nesciunt facere non culpa itaque architecto ipsam iusto, repellat est sit? Esse et id vero ut! Lorem ipsum dolor, sit amet consectetur adipisicing elit.Minima repudiandae dolorum, explicabo delectus dolor, deserunt molestias placeat, itaque est esse laborum modi et aliquid.Consectetur dolores nostrum quo eius beatae.',
+      icon: 'MdAspectRatio',
+      titleFooter: 'Tallah Cotton',
+      descriptionFooter: 'Ejemplo',
+    },
+    {
+      title: 'Ejemplo 3',
+      description: ' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ab voluptatum nisi alias veniam nesciunt facere non culpa itaque architecto ipsam iusto, repellat est sit? Esse et id vero ut! Lorem ipsum dolor, sit amet consectetur adipisicing elit.Minima repudiandae dolorum, explicabo delectus dolor, deserunt molestias placeat, itaque est esse laborum modi et aliquid.Consectetur dolores nostrum quo eius beatae.',
+      icon: 'MdContactless',
+      titleFooter: 'Tallah Cotton',
+      descriptionFooter: 'Desarrollo',
+    },
+  ];
   return (
     <div>
       {Object.keys(data).length > 0 ? (
@@ -59,7 +83,7 @@ function Home() {
           <section>
             <Slider slides={data.contentSections[0].slider} />
           </section>
-          <section className={`container h-screen ${classes.content}`}>
+          <section className={`container ${classes.content}`}>
             <div className={classes.section__content}>
               <div className={classes.section__content__title}>
                 <h1 className='h2 text__primary font-weight-bold mb-10 ml-5'>Benificios principales</h1>
@@ -75,7 +99,7 @@ function Home() {
             </div>
           </section>
 
-          <section className={`h-screen ${classes.section__works}`}>
+          <section className={`${classes.section__works}`}>
             <div className={`container ${classes.section__works__content}`}>
               <h1 className='h3 text__secondary__white mb-5'>¿Cómo funciona?</h1>
               <Tabs>
@@ -83,7 +107,7 @@ function Home() {
                   <div className={classes.section__works__items}>
                     {itemsWorksAdmin.map((item, i) => (
                       <div key={i} className={`mb-6 ${classes.section__works__items__item}`}>
-                        <Item number={item.number} title={item.title} description={item.description} icon={item.icon} type='title' />
+                        <Item number={item.number} title={item.title} description={item.description} icon={item.icon} type='title' textColor='#fff'/>
                       </div>
                     ))}
                   </div>
@@ -92,7 +116,7 @@ function Home() {
                   <div className={classes.section__works__items}>
                     {itemsWorks.map((item, i) => (
                       <div key={i} className={`mb-6 ${classes.section__works__items__item}`}>
-                        <Item number={item.number} title={item.title} description={item.description} icon={item.icon} type='title' />
+                        <Item number={item.number} title={item.title} description={item.description} icon={item.icon} type='title' textColor='#fff'/>
                       </div>
                     ))}
                   </div>
@@ -143,7 +167,7 @@ function Home() {
           <section className={classes.section__experiences}>
             <div className='container pt-10 mt-10 pb-10 mb-10'>
               <div className={classes.section__experiences__title}>
-                <h1 className='h2 text__primary'>Nuestras experiencias</h1>
+                <h1 className='h2 text__primary mb-2'>Nuestras experiencias</h1>
               </div>
               <div className={classes.section__experiences__subtitle}>
                 <p className='body-1'>Podemos adaptar nuestras APIs a tu sector y organicación. A continuación te mostramos algunos de nuestros casos de uso actuales.</p>
@@ -151,13 +175,40 @@ function Home() {
               <div className={classes.section__experiences__tabs}>
                 <Tabs>
                   <div label='Lorem'>
-                    <h1>Lorem, ipsum.</h1>
+                    <div className={classes.section__experiences__content}>
+                      <div className={classes.section__experiences__content__img}>
+                        <div className={classes.section__experiences__content__img__overlay}>
+                          <img src='https://picsum.photos/500/350' alt='' />
+                        </div>
+                      </div>
+                      <div className={classes.section__experiences__content__card}>
+                        <CardSlider lists={cardSlides} />
+                      </div>
+                    </div>
                   </div>
                   <div label='Lorem, ipsum..'>
-                    <h1>Lorem, ipsum.</h1>
+                    <div className={classes.section__experiences__content}>
+                      <div className={classes.section__experiences__content__img}>
+                        <div className={classes.section__experiences__content__img__overlay}>
+                          <img src='https://picsum.photos/500/350' alt='' />
+                        </div>
+                      </div>
+                      <div className={classes.section__experiences__content__card}>
+                        <CardSlider lists={cardSlides} />
+                      </div>
+                    </div>
                   </div>
                   <div label='Lorem, fart '>
-                    <h1>Lorem, ipsum.</h1>
+                    <div className={classes.section__experiences__content}>
+                      <div className={classes.section__experiences__content__img}>
+                        <div className={classes.section__experiences__content__img__overlay}>
+                          <img src='https://picsum.photos/500/350' alt='' />
+                        </div>
+                      </div>
+                      <div className={classes.section__experiences__content__card}>
+                        <CardSlider lists={cardSlides} />
+                      </div>
+                    </div>
                   </div>
                 </Tabs>
               </div>
@@ -192,141 +243,6 @@ function Home() {
       )}
     </div>
   );
-  // return (
-
-  //   <div>
-  //     <section>
-  //       <Slider slides={slides} />
-  //     </section>
-  //     <section className={`container h-screen ${classes.content}`}>
-  //       <div className={classes.section__content}>
-  //         <div className={classes.section__content__title}>
-  //           <h1 className='h2 text__primary font-weight-bold mb-10 ml-5'>Benificios principales</h1>
-  //         </div>
-  //         <div className={classes.section__content__img}>
-  //           <img src='https://picsum.photos/500/300' alt='Benefits' className='ml-10' />
-  //         </div>
-  //         <div className={classes.section__content__items}>
-  //           {items.map((item, i) => (
-  //             <Item key={i} title={item.title} description={item.description} icon={item.icon} />
-  //           ))}
-  //         </div>
-  //       </div>
-  //     </section>
-
-  //     <section className={`h-screen ${classes.section__works}`}>
-  //       <div className={`container ${classes.section__works__content}`}>
-  //         <h1 className='h3 text__secondary__white mb-5'>¿Cómo funciona?</h1>
-  //         <Tabs>
-  //           <div label='Administrador'>
-  //             <div className={classes.section__works__items}>
-  //               {itemsWorksAdmin.map((item, i) => (
-  //                 <div key={i} className={`mb-6 ${classes.section__works__items__item}`}>
-  //                   <Item number={item.number} title={item.title} description={item.description} icon={item.icon} type='title' />
-  //                 </div>
-  //               ))}
-  //             </div>
-  //           </div>
-  //           <div label='Desarrollador'>
-  //             <div className={classes.section__works__items}>
-  //               {itemsWorks.map((item, i) => (
-  //                 <div key={i} className={`mb-6 ${classes.section__works__items__item}`}>
-  //                   <Item number={item.number} title={item.title} description={item.description} icon={item.icon} type='title' />
-  //                 </div>
-  //               ))}
-  //             </div>
-  //           </div>
-  //         </Tabs>
-  //         <div className='button__group mt-10'>
-  //           {buttons.map((button, i) => (
-  //             <div key={i} className='pr-2'>
-  //               <Button type={button.class}>
-  //                 {button.label}
-  //               </Button>
-  //             </div>
-  //           ))}
-  //         </div>
-  //       </div>
-  //     </section>
-
-  //     <section className='container pt-10 mt-10 mb-10 pb-10'>
-  //       <div className={classes.section__discover}>
-  //         <div className={classes.section__discover__title}>
-  //           <h1 className='h2 text__primary font-weight-bold mb-2 ml-1'>Descubre nuestras APIs</h1>
-  //         </div>
-  //         <div className={classes.section__discover__subtitle}>
-  //           <p className='subtitle-1 ml-1 mb-10'>
-  //             Encuentra las mejores APIs para tu negocio.
-  //             Nuestras APIs son fáciles de personalizar e integrar, para comenzar a vender y gestionar los productos.
-  //           </p>
-  //         </div>
-  //         <div className={classes.section__discover__apicards}>
-  //           {
-  //             cardsApis.map((card, i) => (
-  //               <div key={i} className={classes.section__discover__apicards__card}>
-  //                 <CardBasic chipTitle={card.chipTitle} />
-  //               </div>
-  //             ))
-  //           }
-  //         </div>
-  //         <div className={`mt-10 ${classes.section__discover__showmore}`}>
-  //           <a href='' className={`button text__primary ${classes.section__discover__showmore__button}`}>
-  //             <span className='mr-1'>ver todas</span>
-  //             <Icon id='MdOutlineEast' />
-  //           </a>
-  //         </div>
-
-  //       </div>
-  //     </section>
-
-  //     <section className={classes.section__experiences}>
-  //       <div className='container pt-10 mt-10 pb-10 mb-10'>
-  //         <div className={classes.section__experiences__title}>
-  //           <h1 className='h2 text__primary'>Nuestras experiencias</h1>
-  //         </div>
-  //         <div className={classes.section__experiences__subtitle}>
-  //           <p className='body-1'>Podemos adaptar nuestras APIs a tu sector y organicación. A continuación te mostramos algunos de nuestros casos de uso actuales.</p>
-  //         </div>
-  //         <div className={classes.section__experiences__tabs}>
-  //           <Tabs>
-  //             <div label='Lorem'>
-  //               <h1>Lorem, ipsum.</h1>
-  //             </div>
-  //             <div label='Lorem, ipsum..'>
-  //               <h1>Lorem, ipsum.</h1>
-  //             </div>
-  //             <div label='Lorem, fart '>
-  //               <h1>Lorem, ipsum.</h1>
-  //             </div>
-  //           </Tabs>
-  //         </div>
-  //       </div>
-  //     </section>
-
-  //     <section id='Banner'>
-  //       <BannerCentered
-  //         title='Integra tus sistemas con las APIs de SURA'
-  //         subtitle='Quisque rutrum. Sed augue ipsum.'
-  //         img='https://picsum.photos/1920/300'
-  //         buttonType='primary'
-  //         buttonLabel='empezar ahora'
-  //       />
-  //     </section>
-
-  //     <section className={classes.section__news}>
-  //       <div className='container pt-10 mt-10 mb-10 pb-10'>
-  //         <div className={classes.section__news__title}>
-  //           <h1 className='h2 text__primary'>Novedades</h1>
-  //         </div>
-  //         <div className={classes.section__news__subtitle}>
-  //           <p className='body-1'>Conoce todas las novedades sobre tecnología, APIs y transformación digital</p>
-  //         </div>
-  //         <Carousel />
-  //       </div>
-  //     </section>
-  //   </div>
-
-  // );
-}
 
 export default Home;
+
