@@ -37,28 +37,54 @@ function Navbar(props) {
   };
 
   return (
-    <header className={classes.header}>
-      <div className={classes.header__content}>
-        <a className={classes.header__content__logo}>
-          <img
-            src={SuraLogo}
-            alt=''
-            className={classes.header__content__logo__img}
-          />
-          <p className={classes.header__content__logo__text}>
-            / API
-            <span className={classes.header__content__logo__variant}>
-              _MARKET
-            </span>
-          </p>
-        </a>
+    <>
+      <header className={classes.header}>
+        <div className={classes.header__content}>
+          <a href='/' className={classes.header__content__logo}>
+            <img
+              src={SuraLogo}
+              alt=''
+              className={classes.header__content__logo__img}
+            />
+          </a>
+          <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
+            <ul>
+              <li className='pr-2'>
+                <Button type='ghost-variant'>
+                  Iniciar sesión
+                </Button>
+              </li>
+              <li>
+                <Button type='secundary'>
+                  registrate
+                </Button>
+              </li>
+            </ul>
 
-        <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
+            <div className={classes.header__content__divider} />
+
+            <div className={classes.header__content__search}>
+              <MdSearch />
+            </div>
+          </nav>
+          <div className={classes.header__content__toggle}>
+            {!menuOpen ? <MdMenu onClick={menuToggleHandler} /> : <MdClose onClick={menuToggleHandler} />}
+          </div>
+        </div>
+      </header>
+      <div className={classes.buttom__nav}>
+        <div className={classes.buttom__nav__logo}>
+          SEGUROS
+        </div>
+        <div className={classes.buttom__nav__options}>
           <ul>
             <li>
               <Link to='/apis'>APIs</Link>
             </li>
+            <li>Documentación</li>
+            <li>BLOG</li>
             <li>
+<<<<<<< HEAD
               <a href=''>DOCUMENTACIÓN</a>
             </li>
             <li>
@@ -79,20 +105,15 @@ function Navbar(props) {
               <Button type='secundary'>
                 registrate
               </Button>
+=======
+              <Link to='/faqs'>FAQs</Link>
+>>>>>>> ab026281406a21ddc6d7d023ba44fc041f1aaa39
             </li>
           </ul>
-
-          <div className={classes.header__content__divider} />
-
-          <div className={classes.header__content__search}>
-            <MdSearch />
-          </div>
-        </nav>
-        <div className={classes.header__content__toggle}>
-          {!menuOpen ? <MdMenu onClick={menuToggleHandler} /> : <MdClose onClick={menuToggleHandler} />}
         </div>
       </div>
-    </header>
+
+    </>
   );
 }
 
