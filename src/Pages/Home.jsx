@@ -107,7 +107,7 @@ function Home() {
                   <div className={classes.section__works__items}>
                     {itemsWorksAdmin.map((item, i) => (
                       <div key={i} className={`mb-6 ${classes.section__works__items__item}`}>
-                        <Item number={item.number} title={item.title} description={item.description} icon={item.icon} type='title' textColor='#fff'/>
+                        <Item number={item.number} title={item.title} description={item.description} icon={item.icon} type='title' textColor='#fff' />
                       </div>
                     ))}
                   </div>
@@ -116,7 +116,7 @@ function Home() {
                   <div className={classes.section__works__items}>
                     {itemsWorks.map((item, i) => (
                       <div key={i} className={`mb-6 ${classes.section__works__items__item}`}>
-                        <Item number={item.number} title={item.title} description={item.description} icon={item.icon} type='title' textColor='#fff'/>
+                        <Item number={item.number} title={item.title} description={item.description} icon={item.icon} type='title' textColor='#fff' />
                       </div>
                     ))}
                   </div>
@@ -243,6 +243,7 @@ function Home() {
       )}
     </div>
   );
+}
 
 export default Home;
 
