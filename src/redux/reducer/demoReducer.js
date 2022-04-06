@@ -2,7 +2,7 @@ import homeConstants from '../constants/homeConstants';
 
 const initialState = {
   name: 'Headline Ad',
-  data: [],
+  data: {},
   error: {},
   loading: false,
 };

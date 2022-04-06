@@ -6,7 +6,7 @@ function getHome() {
     headers: { 'Content-Type': 'application/json' },
   };
 
-  return fetch('https://pre-strapi-climatetrade.cloudappi.net/success-stories', requestOptions)
+  return fetch('http://localhost:1340/pages/82', requestOptions)
     .then(handleResponse)
     .then((home) => {
       return home;

@@ -13,8 +13,8 @@ function Carousel(props) {
     <div>
 
       <div className={classes.slider__container}>
-        {imgs.map((src) => (
-          <div className={classes.slider__content__card}>
+        {imgs.map((src, i) => (
+          <div key={i} className={classes.slider__content__card}>
             <CardBasic img={src.img} />
           </div>
         ))}
