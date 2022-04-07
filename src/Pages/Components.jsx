@@ -172,7 +172,6 @@ function Components() {
       <div className='content-demo'>
         <ItemAvatar title='Tu Salud - Lectura de 12 min.' paragraph='Quisque rutrum. Sed auge ipsum, egestas nec, vesti bulum.' img='https://picsum.photos/id/1005/150/150' />
       </div>
-      
       <div style={{
         width: '80%',
         margin: 'auto',
