@@ -9,12 +9,22 @@ import Button from '../components/Buttons/Button';
 import Item from '../components/Item/Item';
 import Tabs from '../components/Tabs/Tabs';
 import CardSlider from '../components/Card/CardSlider';
+import Chip from '../components/Chip/Chip';
+import Input from '../components/Input';
 
 function Components() {
 
   const buttons = [
     { label: 'Probar Api', class: 'primary' },
     { label: 'Documentación', class: 'secundary' },
+  ];
+
+  const metodosHTTP = [
+    { label: 'POST' },
+    { label: 'PUSH' },
+    { label: 'GET' },
+    { label: 'DEL' },
+    { label: 'PUT' },
   ];
 
   const listItems = [
@@ -157,6 +167,34 @@ function Components() {
       </Tabs>
       <br />
       <CardSlider lists={cardSlides} />
+      <div style={{
+        width: '80%',
+        margin: 'auto',
+        padding: '50px',
+
+      }}
+      >
+        <p className='h1'>
+          Chips con Métodos de petición HTTP
+        </p>
+        {metodosHTTP.map((metodo) => (
+          <Chip title={metodo.label} className={metodo.label.toLowerCase()} key={metodo.name} />
+        ))}
+        <p className='h1'>
+          Chips perzonalizado
+        </p>
+
+        <Chip title='Desarrolladores' className='gray' />
+
+        <p className='h1'>
+          Inputs reutilizables
+        </p>
+        <Input type='text' placeholder='Nombre' />
+
+        <Input type='email' placeholder='Email' />
+
+        <Input type='password' placeholder='Password' />
+      </div>
     </div>
 
   );

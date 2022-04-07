@@ -84,7 +84,26 @@ function Navbar(props) {
             <li>Documentación</li>
             <li>BLOG</li>
             <li>
-              <Link to='/faqs'>FAQs</Link>
+              <a href=''>DOCUMENTACIÓN</a>
+            </li>
+            <li>
+              <Link to='/blog'>BLOGS</Link>
+            </li>
+            <li>
+              <a href='/faqs'>FAQs</a>
+            </li>
+            <li>
+              <a href=''>CONTACTO</a>
+            </li>
+            <li className='pr-2'>
+              <Button type='ghost-variant'>
+                Iniciar sesión
+              </Button>
+            </li>
+            <li>
+              <Button type='secundary'>
+                registrate
+              </Button>
             </li>
           </ul>
         </div>
