@@ -2,6 +2,7 @@ import React from 'react';
 import Base from './Base';
 import classes from './banner.module.scss';
 import Button from '../Buttons/Button';
+import SearchInput from '../Input/SearchInput';
 
 function BannerStatic({ title, subtitle, img, isSearch, buttons }) {
   return (
@@ -18,6 +19,11 @@ function BannerStatic({ title, subtitle, img, isSearch, buttons }) {
               </Button>
             </div>
           ))}
+        </div>
+        <div>
+          {isSearch && (
+            <SearchInput />
+          )}
         </div>
       </div>
     </Base>
