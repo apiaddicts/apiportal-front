@@ -77,22 +77,67 @@ function Home() {
     },
   ];
 
-  const filterSlider = data && data.contentSections ? data.contentSections.filter((item) => item.__component === 'sura.carousel') : [];
-  const slides = filterSlider.length > 0 ? filterSlider[0].slider.map((i) => {
+  const slidesDemo = [
+    {
+      imgSrc: 'https://picsum.photos/1925/630',
+      title: '¡Toda la potencia de una aseguradora en APIs!',
+      actionButtons: [
+        {
+          label: 'Empezar ahora',
+          type: 'primary',
+        },
+        {
+          label: 'Ver APIS',
+          type: 'ghost',
+        },
+      ],
+    },
+    {
+      imgSrc: 'https://picsum.photos/1920/630',
+      title: '¡SURA la mejor financiera que existe!',
+      actionButtons: [
+        {
+          label: 'Empezar ahora',
+          type: 'primary',
+        },
+        {
+          label: 'Ver APIS',
+          type: 'ghost',
+        },
+      ],
+    },
+    {
+      imgSrc: 'https://picsum.photos/1923/630',
+      title: '¡El mejor lugar de apis APIs!',
+      actionButtons: [
+        {
+          label: 'Empezar ahora',
+          type: 'primary',
+        },
+        {
+          label: 'Ver APIS',
+          type: 'ghost',
+        },
+      ],
+    },
+  ];
 
-    const response = {
-      imgSrc: i.banner ? i.banner[0].url : 'https://picsum.photos/1920/630',
-      title: i.title,
-      actionButtons: i.actionButtons,
-    };
-    return response;
-  }) : [];
+  // const filterSlider = data && data.contentSections ? data.contentSections.filter((item) => item.__component === 'sura.carousel') : [];
+  // const slides = filterSlider.length > 0 ? filterSlider[0].slider.map((i) => {
+
+  //   const response = {
+  //     imgSrc: i.banner ? i.banner[0].url : 'https://picsum.photos/1920/630',
+  //     title: i.title,
+  //     actionButtons: i.actionButtons,
+  //   };
+  //   return response;
+  // }) : [];
   return (
     <div>
       {Object.keys(data).length > 0 ? (
         <div>
           <section>
-            <Slider slides={slides} />
+            <Slider slides={slidesDemo} />
           </section>
           <section className={`container ${classes.content}`}>
             <div className={classes.section__content}>

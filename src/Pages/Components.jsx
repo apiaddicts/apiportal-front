@@ -14,6 +14,7 @@ import Chip from '../components/Chip/Chip';
 import Input from '../components/Input';
 import CardInformation from '../components/Card/CardInformation';
 import jsonData from '../data-fake.json';
+import AccordionFilter from '../components/Accordion/AccordionFilter';
 
 function Components() {
   // eslint-disable-next-line no-unused-vars
@@ -83,6 +84,21 @@ function Components() {
       icon: 'MdContactless',
       titleFooter: 'Tallah Cotton',
       descriptionFooter: 'Desarrollo',
+    },
+  ];
+
+  const items = [
+    {
+      title: 'Titulo 1',
+      questions: ['Titulo1.1', 'Titulo1.2', 'Titulo1.3'],
+    },
+    {
+      title: 'Titulo 2',
+      questions: ['Titulo2.1', 'Titulo2.2', 'Titulo2.3', 'Titulo2.4', 'Titulo2.5'],
+    },
+    {
+      title: 'Titulo 3',
+      questions: ['Titulo3.1', 'Titulo3.2'],
     },
   ];
 
@@ -233,6 +249,14 @@ function Components() {
           ))}
 
         </div>
+        <p className='h1'>
+          Componente Accordion de items
+        </p>
+        <AccordionFilter items={items} />
+
+        <p className='h1'>
+          Componente Accordion
+        </p>
       </div>
     </div>
 
