@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import Slider from '../components/Slider/Slider';
 import Item from '../components/Item/Item';
 import classes from '../styles/pages/home.module.scss';
 import Icon from '../components/MdIcon/Icon';
@@ -10,6 +9,7 @@ import BannerCentered from '../components/Banner/BannerCentered';
 import Tabs from '../components/Tabs/Tabs';
 import Button from '../components/Buttons/Button';
 import Carousel from '../components/Carousel/Carousel';
+import Slider from '../components/Slider/Slider';
 import { getHome } from '../redux/actions/homeAction';
 
 function Home() {
@@ -76,12 +76,23 @@ function Home() {
       descriptionFooter: 'Desarrollo',
     },
   ];
+
+  const filterSlider = data && data.contentSections ? data.contentSections.filter((item) => item.__component === 'sura.carousel') : [];
+  const slides = filterSlider.length > 0 ? filterSlider[0].slider.map((i) => {
+
+    const response = {
+      imgSrc: i.banner ? i.banner[0].url : 'https://picsum.photos/1920/630',
+      title: i.title,
+      actionButtons: i.actionButtons,
+    };
+    return response;
+  }) : [];
   return (
     <div>
       {Object.keys(data).length > 0 ? (
         <div>
           <section>
-            <Slider slides={data.contentSections[0].slider} />
+            <Slider slides={slides} />
           </section>
           <section className={`container ${classes.content}`}>
             <div className={classes.section__content}>
@@ -102,7 +113,7 @@ function Home() {
           <section className={`${classes.section__works}`}>
             <div className={`container ${classes.section__works__content}`}>
               <h1 className='h3 text__secondary__white mb-5'>¿Cómo funciona?</h1>
-              <Tabs>
+              <Tabs direction='center'>
                 <div label='Administrador'>
                   <div className={classes.section__works__items}>
                     {itemsWorksAdmin.map((item, i) => (
@@ -173,7 +184,7 @@ function Home() {
                 <p className='body-1'>Podemos adaptar nuestras APIs a tu sector y organicación. A continuación te mostramos algunos de nuestros casos de uso actuales.</p>
               </div>
               <div className={classes.section__experiences__tabs}>
-                <Tabs>
+                <Tabs line={true}>
                   <div label='Lorem'>
                     <div className={classes.section__experiences__content}>
                       <div className={classes.section__experiences__content__img}>

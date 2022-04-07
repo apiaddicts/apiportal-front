@@ -98,12 +98,14 @@ function Components() {
         icon={iconData('MdHome')}
         title='Lorems'
         type='title'
+        number='0. Lorems'
         description='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat minima blanditiis dolorem assumenda temporibus inventore, unde optio quis earum quos ex, illo pariatur quasi aut officiis fuga ipsum adipisci eius?'
       />
       <Item
         icon={iconData('fulanito')}
         title='Lorems'
         type='title'
+        number='1. Lorems'
         description='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat minima blanditiis dolorem assumenda temporibus inventore, unde optio quis earum quos ex, illo pariatur quasi aut officiis fuga ipsum adipisci eius?'
       />
 

@@ -23,7 +23,7 @@ function AccordionFilter({ items }) {
     <div>
       {
         items.map((item, index) => (
-          <div className={classes.filter}>
+          <div key={index} className={classes.filter}>
             <div className={classes.filter__title} onClick={() => { toggle(index); }} key={index} role='button' tabIndex='0'>
               <div className={classes.filter__title__text}>
                 <p>{item.title}</p>
