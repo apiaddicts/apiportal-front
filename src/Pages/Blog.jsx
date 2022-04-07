@@ -1,7 +1,6 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import BannerStatic from '../components/Banner/BannerStatic';
-import Button from '../components/Buttons/Button';
-import Base from '../components/Card/Base';
 import Input from '../components/Input';
 import imgBg from '../static/img/bg-01.png';
 import stylesBlog from '../styles/pages/blog.module.scss';
@@ -10,15 +9,26 @@ import Carousel from '../components/Carousel/Carousel';
 import classes from '../styles/pages/home.module.scss';
 import Contact from '../components/Contact';
 import Tabs from '../components/Tabs/Tabs';
-import Chip from '../components/Chip/Chip';
+import CardInformation from '../components/Card/CardInformation';
+import Base from '../components/Card/Base';
 
 const buttons = [
   { class: 'gray', label: 'APIS' },
   { class: 'gray', label: 'Desarroladores' },
+  { class: 'gray', label: 'Desarroladores' },
+  { class: 'gray', label: 'Desarroladores' },
+];
+const buttonsTags = [
+  { class: 'gray', label: 'APIS' },
+  { class: 'gray', label: 'Desarroladores' },
+  { class: 'gray', label: 'Desarroladores' },
+  { class: 'gray', label: 'Desarroladores' },
+  { class: 'gray', label: 'Desarroladores' },
 ];
 
 function Blog() {
-
+// eslint-disable-next-line no-unused-vars
+  const [resultsDa, setResultsDa] = useState(jsonData);
   return (
     <>
       <section>
@@ -78,23 +88,7 @@ function Blog() {
                   </div>
                 </div>
                 <div className={stylesBlog.section__experiences__content__card}>
-                  <div className={stylesBlog.section__experiences__content__items}>
-                    <p className='h5 text__primary w-full'>Conoce nuestras APIs de auto flexible</p>
-                    <div style={{
-                      display: 'flex',
-                    }}
-                    >
-                      {buttons.map((button) => (
-                        <div className='py-2 mr-2'>
-                          <Chip title={button.label} className={button.class} />
-                        </div>
-                      ))}
-                    </div>
-                    <p>
-                      Quisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.
-                      Suspendisse potenti. Integer tincidunt. Aenean commodo ligula eget dolor. Nulla consequat massa quis enim.
-                    </p>
-                  </div>
+                  <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
                 </div>
               </div>
             </div>
@@ -107,13 +101,28 @@ function Blog() {
           </Tabs>
         </div>
       </div>
-      <div style={{
-        width: '80%',
-        margin: 'auto',
-        display: 'flex',
-      }}
-      >
-        <ResultCard />
+      <div className={stylesBlog.section__result__content}>
+        <div className={stylesBlog.section__result__content__result}>
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(2, 1fr)',
+            gridGap: '1rem',
+          }}
+          >
+            {resultsDa.length === 0 ? (
+              <p>Sin Resltados</p>
+            ) : (
+              resultsDa.map((result) => (
+                <CardInformation
+                  img={result.image}
+                  description={result.description}
+                  title={result['titl:e']}
+                  buttons={buttonsTags}
+                />
+              ))
+            )}
+          </div>
+        </div>
         <Novedades />
       </div>
       <section className={classes.section__news}>
@@ -132,74 +141,6 @@ function Blog() {
   );
 }
 export default Blog;
-
-function ResultCard() {
-  // eslint-disable-next-line no-unused-vars
-  const [resultsDa, setResultsDa] = useState(jsonData);
-
-  return (
-    resultsDa.length === 0 ?
-      <p>No hay resultados</p> :
-      (
-        <div style={{
-          width: '60%',
-          padding: '2rem 0',
-        }}
-        >
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gridGap: '1rem',
-          }}
-          >
-            {resultsDa.map((result, index) => (
-              <div style={{
-                width: '100%',
-              }}
-              >
-                <Base style={{
-                  padding: '30px',
-                }}
-                >
-                  <div
-                    style={{
-                      width: '100%',
-                      position: 'relative',
-                      backgroundImage: `url(${result.image})`,
-                      backgroundSize: 'cover',
-                      backgroundPosition: 'center',
-                      backgroundRepeat: 'no-repeat',
-                      height: '200px',
-                      overflow: 'hidden',
-                    }}
-                  />
-                  <div style={{
-                    padding: '25px',
-                  }}
-                  >
-                    <p className='h5 text__primary'>{result.title}</p>
-                    <div style={{
-                      display: 'flex',
-                    }}
-                    >
-                      {buttons.map((button) => (
-                        <div className='py-2 mr-2'>
-                          <Button type={button.class}>
-                            {button.label}
-                          </Button>
-                        </div>
-                      ))}
-                    </div>
-                    <p>{result.description}</p>
-                  </div>
-                </Base>
-              </div>
-            ))}
-          </div>
-        </div>
-
-      ));
-}
 
 function Novedades() {
   // eslint-disable-next-line no-unused-vars
