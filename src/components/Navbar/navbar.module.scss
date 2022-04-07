@@ -4,7 +4,7 @@
 .header {
   background: $secondary_white;
   width: 100%;
-  height: 100px;
+  height: 100%;
   padding: 0 1.5rem;
   transition: 0.3s ease all;
   @include breakpoint(md) {
@@ -30,10 +30,10 @@
       justify-content: space-around;
       font-size: 18px;
       font-weight: map-deep-get($font-weights, "medium") !important;
-      &__img{
-          padding-right: 20px;
+      &__img {
+        padding-right: 20px;
       }
-      &__text {              
+      &__text {
         color: $primary;
       }
       &__variant {
@@ -111,24 +111,24 @@
       }
     }
     &__divider {
-        border-left: 1px solid #ECF0F1;
-        height: 40%;
-        margin: 26px 0px 0px 15px;
-        display: flex;
-        align-items: center;
-        position: relative;
+      border-left: 1px solid #ecf0f1;
+      height: 40%;
+      margin: 26px 0px 0px 15px;
+      display: flex;
+      align-items: center;
+      position: relative;
     }
     &__search {
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        position: relative;
-        color: $primary;
-        padding: 20px;
-        font-size: 25px;
-        &:hover{
-          color: $secondary;  
-        }
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      position: relative;
+      color: $primary;
+      padding: 20px;
+      font-size: 25px;
+      &:hover {
+        color: $secondary;
+      }
     }
     &__toggle {
       cursor: pointer;
@@ -144,6 +144,99 @@
 
       @include breakpoint(md) {
         display: none;
+      }
+    }
+  }
+}
+.buttom {
+  overflow: hidden;
+  color: $primary;
+  margin: 0 auto;
+  max-width: 1920px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 100;
+  &__nav {
+    background: $primary;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $secondary_white;
+    height: 42px;
+    padding: 0 1.5rem;
+    transition: 0.3s ease all;
+    @include breakpoint(md) {
+      padding: 0 3rem;
+    }
+    &__logo {
+      font-weight: 600;
+      size: 20px;
+      font-family: $barlow;
+    }
+    &__options {
+      top: 0;
+      right: 100%;
+      bottom: 0;
+      width: 100%;
+      height: 100vh;
+      position: fixed;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      background: rgba($secondary, 0.9);
+      backdrop-filter: blur(1px);
+      transform: translate(0);
+      transition: 0.3s ease transform;
+
+      @include breakpoint(md) {
+        transform: none;
+        flex-direction: row;
+        background: transparent;
+        width: auto;
+        height: 100%;
+        position: static;
+      }
+      ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        @include breakpoint(md) {
+          flex-direction: row;
+          align-items: center;
+          margin-bottom: 0;
+        }
+
+        li {
+          padding: 20px;
+          @include breakpoint(md) {
+            padding: 1px;
+          }
+          &:not(:last-child) {
+            @include breakpoint(md) {
+              margin-bottom: 0;
+            }
+          }
+          a {
+            text-decoration: none;
+            color: inherit;
+            padding: 0.75rem 1.25rem;
+            border-radius: 10%;
+            font-weight: map-deep-get($font-weights, "medium") !important;
+
+            &:hover {
+              color: $secondary;
+              font-weight: map-deep-get($font-weights, "bold") !important;
+            }
+            &:active {
+              color: $secondary;
+              font-weight: map-deep-get($font-weights, "bold") !important;
+            }
+          }
+        }
       }
     }
   }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as MaterialDesign from 'react-icons/md';
 import BannerStatic from '../components/Banner/BannerStatic';
 import BannerCentered from '../components/Banner/BannerCentered';
@@ -9,12 +9,35 @@ import Button from '../components/Buttons/Button';
 import Item from '../components/Item/Item';
 import Tabs from '../components/Tabs/Tabs';
 import CardSlider from '../components/Card/CardSlider';
+import ItemAvatar from '../components/Item/ItemAvatar';
+import Chip from '../components/Chip/Chip';
+import Input from '../components/Input';
+import CardInformation from '../components/Card/CardInformation';
+import jsonData from '../data-fake.json';
+import AccordionFilter from '../components/Accordion/AccordionFilter';
 
 function Components() {
+  // eslint-disable-next-line no-unused-vars
+  const [resultsDa, setResultsDa] = useState(jsonData);
+
+  const buttonsTags = [
+    { class: 'gray', label: 'APIS' },
+    { class: 'gray', label: 'Desarroladores' },
+    { class: 'gray', label: 'Desarroladores' },
+    { class: 'gray', label: 'Desarroladores' },
+  ];
 
   const buttons = [
     { label: 'Probar Api', class: 'primary' },
     { label: 'Documentación', class: 'secundary' },
+  ];
+
+  const metodosHTTP = [
+    { label: 'POST' },
+    { label: 'PUSH' },
+    { label: 'GET' },
+    { label: 'DEL' },
+    { label: 'PUT' },
   ];
 
   const listItems = [
@@ -64,6 +87,21 @@ function Components() {
     },
   ];
 
+  const items = [
+    {
+      title: 'Titulo 1',
+      questions: ['Titulo1.1', 'Titulo1.2', 'Titulo1.3'],
+    },
+    {
+      title: 'Titulo 2',
+      questions: ['Titulo2.1', 'Titulo2.2', 'Titulo2.3', 'Titulo2.4', 'Titulo2.5'],
+    },
+    {
+      title: 'Titulo 3',
+      questions: ['Titulo3.1', 'Titulo3.2'],
+    },
+  ];
+
   function iconData(name) {
     const md_icon = React.createElement(MaterialDesign[name]);
     if (md_icon.type === undefined) {
@@ -79,6 +117,12 @@ function Components() {
         img='https://picsum.photos/1920/300'
         subtitle='Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi dolores dolor perspiciatis tempora omnis, a repudiandae nobis dignissimos quod maxime id iure dolore, accusantium quis assumenda minima magnam nihil aut.'
         buttons={buttons}
+      />
+      <BannerStatic
+        title='sed omnis maxime'
+        img='https://picsum.photos/1920/300'
+        subtitle='Sapiente sit consequatur perspiciatis inventore. Quidem eveniet voluptas.'
+        isSearch={true}
       />
       <BannerCentered
         title='Integra tus sistemas con las APIs de SURA'
@@ -98,12 +142,14 @@ function Components() {
         icon={iconData('MdHome')}
         title='Lorems'
         type='title'
+        number='0. Lorems'
         description='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat minima blanditiis dolorem assumenda temporibus inventore, unde optio quis earum quos ex, illo pariatur quasi aut officiis fuga ipsum adipisci eius?'
       />
       <Item
         icon={iconData('fulanito')}
         title='Lorems'
         type='title'
+        number='1. Lorems'
         description='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat minima blanditiis dolorem assumenda temporibus inventore, unde optio quis earum quos ex, illo pariatur quasi aut officiis fuga ipsum adipisci eius?'
       />
 
@@ -149,6 +195,69 @@ function Components() {
       </Tabs>
       <br />
       <CardSlider lists={cardSlides} />
+
+      <div className='content-demo'>
+        <ItemAvatar title='Tu Salud - Lectura de 12 min.' paragraph='Quisque rutrum. Sed auge ipsum, egestas nec, vesti bulum.' img='https://picsum.photos/id/1005/150/150' />
+      </div>
+      <div style={{
+        width: '80%',
+        margin: 'auto',
+        padding: '50px',
+
+      }}
+      >
+        <p className='h1'>
+          Chips con Métodos de petición HTTP
+        </p>
+        {metodosHTTP.map((metodo) => (
+          <Chip title={metodo.label} className={metodo.label.toLowerCase()} key={metodo.name} />
+        ))}
+        <p className='h1'>
+          Chips perzonalizado
+        </p>
+
+        <Chip title='Desarrolladores' className='gray' />
+
+        <p className='h1'>
+          Inputs reutilizables
+        </p>
+        <Input type='text' placeholder='Nombre' />
+
+        <Input type='email' placeholder='Email' />
+
+        <Input type='password' placeholder='Password' />
+
+        <p className='h1'>
+          Componente Card information
+        </p>
+
+        <div style={{
+          width: '40%',
+          display: 'flex',
+          flexWrap: 'wrap',
+          margin: 'auto',
+        }}
+        >
+          {jsonData.map((result) => (
+            <CardInformation
+              img={result.image}
+              description={result.description}
+              title={result['titl:e']}
+              buttons={buttonsTags}
+            />
+
+          ))}
+
+        </div>
+        <p className='h1'>
+          Componente Accordion de items
+        </p>
+        <AccordionFilter items={items} />
+
+        <p className='h1'>
+          Componente Accordion
+        </p>
+      </div>
     </div>
 
   );

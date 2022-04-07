@@ -1,21 +1,20 @@
-import homeConstants from '../constants/homeConstants';
+import faqConstants from '../constants/faqConstants';
 
 const initialState = {
-  name: 'Headline Ad',
-  data: {},
+  dataFaq: {},
   error: {},
   loading: false,
 };
 
 // eslint-disable-next-line default-param-last
-export default function demoReducer(state = initialState, action) {
+export default function faqReducer(state = initialState, action) {
   switch (action.type) {
-    case homeConstants.GET_ALL_HOME_SUCCESS:
+    case faqConstants.GET_ALL_FAQ_SUCCESS:
       return {
         ...state,
-        data: action.payload,
+        dataFaq: action.payload,
       };
-    case homeConstants.GET_ALL_HOME_FAILURE:
+    case faqConstants.GET_ALL_FAQ_FAILURE:
       return {
         ...state,
         error: action.payload,
@@ -23,4 +22,4 @@ export default function demoReducer(state = initialState, action) {
     default:
       return state;
   }
-};
+}

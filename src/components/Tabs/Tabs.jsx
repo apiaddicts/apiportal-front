@@ -3,7 +3,7 @@ import Tab from './Tab';
 
 import './tabs.scss';
 
-function Tabs({ children }) {
+function Tabs({ children, line = false, direction = 'left' }) {
 
   const [activeTab, setActiveTab] = useState(children[0].props.label);
 
@@ -13,7 +13,7 @@ function Tabs({ children }) {
 
   return (
     <div className='tabs'>
-      <ol className='tab-list'>
+      <ol className={`${line ? 'tab-list' : 'tab-list_no_line'} ${direction === 'center' ? 'tab-list-center' : direction === 'right' ? 'tab-list-right' : 'tab-list-left'}  `}>
         {children.map((child) => {
           const { label } = child.props;
 
