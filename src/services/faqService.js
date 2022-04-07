@@ -1,21 +1,21 @@
 import handleResponse from './handleResponse';
 import config from './config';
 
-function getHome() {
+function getFaq() {
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
 
-  return fetch(`${config.apiUrl}/pages/82`, requestOptions)
+  return fetch(`${config.apiUrl}/pages/83`, requestOptions)
     .then(handleResponse)
-    .then((home) => {
-      return home;
+    .then((faq) => {
+      return faq;
     });
 }
 
-const homeService = {
-  getHome,
+const faqService = {
+  getFaq,
 };
 
-export default homeService;
+export default faqService;

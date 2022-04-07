@@ -89,6 +89,12 @@ function Components() {
         subtitle='Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi dolores dolor perspiciatis tempora omnis, a repudiandae nobis dignissimos quod maxime id iure dolore, accusantium quis assumenda minima magnam nihil aut.'
         buttons={buttons}
       />
+      <BannerStatic
+        title='sed omnis maxime'
+        img='https://picsum.photos/1920/300'
+        subtitle='Sapiente sit consequatur perspiciatis inventore. Quidem eveniet voluptas.'
+        isSearch={true}
+      />
       <BannerCentered
         title='Integra tus sistemas con las APIs de SURA'
         subtitle='Lorem ipsum dolor sit amet.'
@@ -107,12 +113,14 @@ function Components() {
         icon={iconData('MdHome')}
         title='Lorems'
         type='title'
+        number='0. Lorems'
         description='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat minima blanditiis dolorem assumenda temporibus inventore, unde optio quis earum quos ex, illo pariatur quasi aut officiis fuga ipsum adipisci eius?'
       />
       <Item
         icon={iconData('fulanito')}
         title='Lorems'
         type='title'
+        number='1. Lorems'
         description='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat minima blanditiis dolorem assumenda temporibus inventore, unde optio quis earum quos ex, illo pariatur quasi aut officiis fuga ipsum adipisci eius?'
       />
 

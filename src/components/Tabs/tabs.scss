@@ -3,6 +3,21 @@
 .tab-list {
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   padding-left: 0;
+  display: flex;
+}
+
+.tab-list_no_line {
+  border-bottom: 0px solid rgba(0, 0, 0, 0.15);
+  padding-left: 0;
+  display: flex;
+}
+
+.tab-list-center {
+ justify-content: center;
+}
+
+.tab-list-right {
+ justify-content: right;
 }
 
 .tab-list-item {
