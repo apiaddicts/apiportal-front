@@ -12,7 +12,7 @@ export const getHome = () => (dispatch) => {
     },
     (error) => {
       dispatch({
-        type: userConstants.USER_SEND_RESET_PASSWORD_FAILURE,
+        type: userConstants.GET_ALL_HOME_FAILURE,
         payload: error,
       });
     },
