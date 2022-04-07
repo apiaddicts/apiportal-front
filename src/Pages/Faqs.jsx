@@ -19,14 +19,28 @@ function Faqs(props) {
     }
   }, []);
 
-  const filterData = dataFaq && dataFaq.contentSections ? dataFaq.contentSections.filter((item) => item.__component === 'sura.list-buttons') : [];
-  const items = filterData.length > 0 ? filterData.map((i) => {
-    const data = {};
-    data.title = i.Name;
-    data.questions = i.list.length > 0 ? i.list.map((d) => (d.name)) : [];;
+  // const filterData = dataFaq && dataFaq.contentSections ? dataFaq.contentSections.filter((item) => item.__component === 'sura.list-buttons') : [];
+  // const items = filterData.length > 0 ? filterData.map((i) => {
+  //   const data = {};
+  //   data.title = i.Name;
+  //   data.questions = i.list.length > 0 ? i.list.map((d) => (d.name)) : [];;
 
-    return data;
-  }) : [];
+  //   return data;
+  // }) : [];
+  const items = [
+    {
+      title: 'Titulo 1',
+      questions: ['Titulo1.1', 'Titulo1.2', 'Titulo1.3'],
+    },
+    {
+      title: 'Titulo 2',
+      questions: ['Titulo2.1', 'Titulo2.2', 'Titulo2.3', 'Titulo2.4', 'Titulo2.5'],
+    },
+    {
+      title: 'Titulo 3',
+      questions: ['Titulo3.1', 'Titulo3.2'],
+    },
+  ];
 
   const filterFaqs = dataFaq && dataFaq.contentSections ? dataFaq.contentSections.filter((item) => item.__component === 'elements.entry') : [];
   const faqs = filterFaqs.length > 0 ? filterFaqs.map((i) => {
