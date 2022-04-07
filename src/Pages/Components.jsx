@@ -9,6 +9,7 @@ import Button from '../components/Buttons/Button';
 import Item from '../components/Item/Item';
 import Tabs from '../components/Tabs/Tabs';
 import CardSlider from '../components/Card/CardSlider';
+import ItemAvatar from '../components/Item/ItemAvatar';
 
 function Components() {
 
@@ -157,6 +158,10 @@ function Components() {
       </Tabs>
       <br />
       <CardSlider lists={cardSlides} />
+
+      <div className='content-demo'>
+        <ItemAvatar title='Tu Salud - Lectura de 12 min.' paragraph='Quisque rutrum. Sed auge ipsum, egestas nec, vesti bulum.' img='https://picsum.photos/id/1005/150/150' />
+      </div>
     </div>
 
   );
