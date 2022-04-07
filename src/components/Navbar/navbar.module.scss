@@ -212,6 +212,9 @@
 
         li {
           padding: 20px;
+          @include breakpoint(md) {
+            padding: 1px;
+          }
           &:not(:last-child) {
             @include breakpoint(md) {
               margin-bottom: 0;
