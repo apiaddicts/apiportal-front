@@ -10,6 +10,7 @@ import Item from '../components/Item/Item';
 import Tabs from '../components/Tabs/Tabs';
 import CardSlider from '../components/Card/CardSlider';
 import Chip from '../components/Chip/Chip';
+import Input from '../components/Input';
 
 function Components() {
 
@@ -184,6 +185,15 @@ function Components() {
         </p>
 
         <Chip title='Desarrolladores' className='gray' />
+
+        <p className='h1'>
+          Inputs reutilizables
+        </p>
+        <Input type='text' placeholder='Nombre' />
+
+        <Input type='email' placeholder='Email' />
+
+        <Input type='password' placeholder='Password' />
       </div>
     </div>
 
