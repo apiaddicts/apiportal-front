@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as MaterialDesign from 'react-icons/md';
 import BannerStatic from '../components/Banner/BannerStatic';
 import BannerCentered from '../components/Banner/BannerCentered';
@@ -12,8 +12,19 @@ import CardSlider from '../components/Card/CardSlider';
 import ItemAvatar from '../components/Item/ItemAvatar';
 import Chip from '../components/Chip/Chip';
 import Input from '../components/Input';
+import CardInformation from '../components/Card/CardInformation';
+import jsonData from '../data-fake.json';
 
 function Components() {
+  // eslint-disable-next-line no-unused-vars
+  const [resultsDa, setResultsDa] = useState(jsonData);
+
+  const buttonsTags = [
+    { class: 'gray', label: 'APIS' },
+    { class: 'gray', label: 'Desarroladores' },
+    { class: 'gray', label: 'Desarroladores' },
+    { class: 'gray', label: 'Desarroladores' },
+  ];
 
   const buttons = [
     { label: 'Probar Api', class: 'primary' },
@@ -199,6 +210,29 @@ function Components() {
         <Input type='email' placeholder='Email' />
 
         <Input type='password' placeholder='Password' />
+
+        <p className='h1'>
+          Componente Card information
+        </p>
+
+        <div style={{
+          width: '40%',
+          display: 'flex',
+          flexWrap: 'wrap',
+          margin: 'auto',
+        }}
+        >
+          {jsonData.map((result) => (
+            <CardInformation
+              img={result.image}
+              description={result.description}
+              title={result['titl:e']}
+              buttons={buttonsTags}
+            />
+
+          ))}
+
+        </div>
       </div>
     </div>
 

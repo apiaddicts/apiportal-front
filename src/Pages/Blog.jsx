@@ -15,6 +15,15 @@ import Base from '../components/Card/Base';
 const buttons = [
   { class: 'gray', label: 'APIS' },
   { class: 'gray', label: 'Desarroladores' },
+  { class: 'gray', label: 'Desarroladores' },
+  { class: 'gray', label: 'Desarroladores' },
+];
+const buttonsTags = [
+  { class: 'gray', label: 'APIS' },
+  { class: 'gray', label: 'Desarroladores' },
+  { class: 'gray', label: 'Desarroladores' },
+  { class: 'gray', label: 'Desarroladores' },
+  { class: 'gray', label: 'Desarroladores' },
 ];
 
 function Blog() {
@@ -79,7 +88,7 @@ function Blog() {
                   </div>
                 </div>
                 <div className={stylesBlog.section__experiences__content__card}>
-                  <CardInformation reading='Lectura de 10 mints' />
+                  <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
                 </div>
               </div>
             </div>
@@ -104,14 +113,12 @@ function Blog() {
               <p>Sin Resltados</p>
             ) : (
               resultsDa.map((result) => (
-                <Base>
-                  <CardInformation
-                    img={result.image}
-                    description={result.description}
-                    class={stylesBlog.section__experiences__content__items}
-                    title={result['titl:e']}
-                  />
-                </Base>
+                <CardInformation
+                  img={result.image}
+                  description={result.description}
+                  title={result['titl:e']}
+                  buttons={buttonsTags}
+                />
               ))
             )}
           </div>
