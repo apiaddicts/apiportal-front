@@ -84,11 +84,10 @@ function Navbar(props) {
             <li>Documentación</li>
             <li>BLOG</li>
             <li>
-<<<<<<< HEAD
               <a href=''>DOCUMENTACIÓN</a>
             </li>
             <li>
-              <Link to='/bLog'>BLOGS</Link>
+              <Link to='/blog'>BLOGS</Link>
             </li>
             <li>
               <a href='/faqs'>FAQs</a>
@@ -105,9 +104,6 @@ function Navbar(props) {
               <Button type='secundary'>
                 registrate
               </Button>
-=======
-              <Link to='/faqs'>FAQs</Link>
->>>>>>> ab026281406a21ddc6d7d023ba44fc041f1aaa39
             </li>
           </ul>
         </div>

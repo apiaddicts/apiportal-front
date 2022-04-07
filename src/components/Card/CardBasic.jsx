@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { MdArrowRightAlt } from 'react-icons/md';
-import ChipGreen from '../Chip/ChipGreen';
+import Chip from '../Chip/Chip';
 import Base from './Base';
 
 import './cards.scss';
@@ -18,7 +18,7 @@ function CardBasic({ chipTitle, title, img, description, info }) {
         <div className='card_chip_title'>
           {chipTitle ? (
             <>
-              <ChipGreen title={chipTitle} />
+              <Chip title={chipTitle} className={chipTitle.toLowerCase()} />
               <h1 className='chip_title'>lorems</h1>
             </>
           ) : (
