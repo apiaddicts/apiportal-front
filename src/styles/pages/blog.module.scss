@@ -48,3 +48,19 @@
         }
     }
 }
+.section__result__content {
+    width: 80%;
+    margin: auto;
+    display: flex;
+
+    &__result {
+        width: 60%;
+        padding: 2rem 0;
+    }
+
+    &__grid__container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 1rem;
+    }
+}
