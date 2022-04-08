@@ -158,7 +158,7 @@ function Home() {
           <section className={`${classes.section__works}`}>
             <div className={`container ${classes.section__works__content}`}>
               <h1 className='h3 text__secondary__white mb-5'>¿Cómo funciona?</h1>
-              <Tabs direction='center'>
+              <Tabs direction='center' colorTab='white' activeColor='yellow'>
                 <div label='Administrador'>
                   <div className={classes.section__works__items}>
                     {itemsWorksAdmin.map((item, i) => (

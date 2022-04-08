@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './contact.module.scss';
 import Icon from '../MdIcon/Icon';
 import Input from '../Input';
+import Button from '../Buttons/Button';
 
 function Contact() {
   return (
@@ -13,8 +14,10 @@ function Contact() {
     >
       <div className={classes.contact__container}>
         <div className={classes.contact__header}>
-          <Icon id='MdMailOutline' />
-          <p className='h1 '>Sigamos conectados</p>
+          <div className={classes.contact__header__icon}>
+            <Icon id='MdMailOutline' />
+          </div>
+          <p className={classes.contact__header__title}>Sigamos conectados</p>
         </div>
         <div className={classes.contact__description}>
           <p className=''>¡Entérate de lo último!  Escoge una o varias capacidades y sé el primero en enterarte.</p>
@@ -27,16 +30,10 @@ function Contact() {
             <div className={classes.contact__form__input}>
               <Input type='text' placeholder='Correo' />
             </div>
-            <div className={classes.contact__form__input}>
-              <Input
-                style={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}
-                type='submit'
-                value='SUSCRÍBETE'
-              />
+            <div className={classes.contact__form__button}>
+              <Button type='secundary'>
+                SUSCRÍBETE
+              </Button>
             </div>
           </form>
         </div>
