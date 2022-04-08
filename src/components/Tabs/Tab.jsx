@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Tab({ activeTab, label, onClick }) {
+function Tab({ activeTab, label, onClick, activeColor, colorTab }) {
   const onClickTab = () => {
     onClick(label);
   };
 
-  let classNameTab = 'tab-list-item';
+  let classNameTab = colorTab === 'primary' ? 'tab-list-item-primary' : 'tab-list-item-secundary';
 
   if (activeTab === label) {
-    classNameTab += ' tab-list-active';
+    classNameTab += activeColor === 'primary' ? ' tab-list-active-primary' : ' tab-list-active-secundary';
   }
   return (
     <li className={classNameTab} onClick={onClickTab}>
@@ -22,6 +22,8 @@ Tab.propTypes = {
   activeTab: PropTypes.string.isRequired,
   label: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
+  activeColor: PropTypes.string.isRequired,
+  colorTab: PropTypes.string.isRequired,
 };
 
 export default Tab;

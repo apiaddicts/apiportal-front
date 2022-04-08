@@ -3,7 +3,7 @@ import Tab from './Tab';
 
 import './tabs.scss';
 
-function Tabs({ children, line = false, direction = 'left' }) {
+function Tabs({ children, line = false, direction = 'left', activeColor = 'primary', colorTab = 'primary' }) {
 
   const [activeTab, setActiveTab] = useState(children[0].props.label);
 
@@ -23,6 +23,8 @@ function Tabs({ children, line = false, direction = 'left' }) {
               key={label}
               label={label}
               onClick={onClickTabItem}
+              activeColor={activeColor}
+              colorTab={colorTab}
             />
           );
         })}
