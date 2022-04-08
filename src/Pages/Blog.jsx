@@ -1,8 +1,5 @@
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import BannerStatic from '../components/Banner/BannerStatic';
-import Input from '../components/Input';
-import imgBg from '../static/img/bg-01.png';
 import stylesBlog from '../styles/pages/blog.module.scss';
 import jsonData from '../data-fake.json';
 import Carousel from '../components/Carousel/Carousel';
@@ -10,19 +7,15 @@ import classes from '../styles/pages/home.module.scss';
 import Contact from '../components/Contact';
 import Tabs from '../components/Tabs/Tabs';
 import CardInformation from '../components/Card/CardInformation';
-import Base from '../components/Card/Base';
 
 const buttons = [
   { class: 'gray', label: 'APIS' },
-  { class: 'gray', label: 'Desarroladores' },
-  { class: 'gray', label: 'Desarroladores' },
+  { class: 'gray', label: 'Empresas' },
   { class: 'gray', label: 'Desarroladores' },
 ];
 const buttonsTags = [
   { class: 'gray', label: 'APIS' },
-  { class: 'gray', label: 'Desarroladores' },
-  { class: 'gray', label: 'Desarroladores' },
-  { class: 'gray', label: 'Desarroladores' },
+  { class: 'gray', label: 'Empresas' },
   { class: 'gray', label: 'Desarroladores' },
 ];
 
@@ -36,8 +29,8 @@ function Blog() {
       </section>
       <section className='container'>
         <div className={classes.section__experiences__tabs}>
-          <Tabs line={true}>
-            <div label='Lorem'>
+          <Tabs line={true} direction='center'>
+            <div label='Todos'>
               <div className={stylesBlog.section__experiences__content}>
                 <div className={stylesBlog.section__experiences__content__img}>
                   <div className={stylesBlog.section__experiences__content__img__overlay}>
@@ -49,16 +42,16 @@ function Blog() {
                 </div>
               </div>
             </div>
-            <div label='Desarrolladores'>
+            <div label='Novedades'>
               <h1>Hola mundo</h1>
+            </div>
+            <div label='Desarrolladores'>
+              <h2>si</h2>
             </div>
             <div label='APIs'>
               <h2>si</h2>
             </div>
             <div label='Empresas'>
-              <h2>si</h2>
-            </div>
-            <div label='voluptas nulla dolorum'>
               <h2>si</h2>
             </div>
           </Tabs>
@@ -89,12 +82,12 @@ function Blog() {
         <Novedades />
       </div>
       <section className={classes.section__news}>
-        <div className='container pt-10 mt-10 mb-10 pb-10'>
+        <div className='container my-10'>
           <div className={classes.section__news__title}>
-            <h1 className='h2 text__primary'>Novedades</h1>
+            <h1 className='h2 text__primary'>También te puede interesar</h1>
           </div>
           <div className={classes.section__news__subtitle}>
-            <p className='body-1'>Conoce todas las novedades sobre tecnología, APIs y transformación digital</p>
+            <p className='body-1 my-9'>Conoce todas las novedades sobre tecnología, APIs y transformación digital</p>
           </div>
           <Carousel />
         </div>
@@ -110,20 +103,22 @@ function Novedades() {
   return (
     <div style={{
       width: '40%',
-      padding: '02rem',
+      padding: '0 2rem',
     }}
     >
       <div style={{
         width: '100%',
       }}
       >
-        <p className='subtitle-2 text-uppercase font-weight-bold text__gray__gray_darken mb-2'>Lo más reciente</p>
+        <p className='subtitle-2 mb-6 text-uppercase font-weight-bold text__gray__gray_darken mb-2'>Lo más reciente</p>
       </div>
       {
         resultsDa.length === 0 ?
           <p>No hay resultados</p> :
           resultsDa.map((result, index) => (
             <div style={{
+              paddingTop: '20px',
+              paddingBottom: '20px',
               display: 'flex',
               width: '100%',
               justifyContent: 'center',
@@ -152,8 +147,8 @@ function Novedades() {
                 padding: '0 1rem',
               }}
               >
-                <p className='text__primary'>{result['titl:e']}</p>
-                <p>{result.description}</p>
+                <p className='text__primary pb-2'>Tu Salud - Lectura de 12 min.</p>
+                <p className={`${stylesBlog.section__result__content__result__description} text__gray__gray_darken`}>{result.description}</p>
               </div>
             </div>
           ))

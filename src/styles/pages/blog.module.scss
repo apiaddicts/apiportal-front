@@ -28,7 +28,6 @@
             position: absolute;
             border-radius: 20px;
             // padding: 20px;
-            height: 280px;
             top: 42px;
             left: 339px;
             display: flex;
@@ -50,15 +49,22 @@
     width: 80%;
     margin: auto;
     display: flex;
+    margin-top: 120px;
 
     &__result {
         width: 60%;
         padding: 2rem 0;
+        margin-top: 30px;
     }
 
     &__grid__container {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 1rem;
+    }
+    &__result__description {
+        line-height: 25px;
+        font-weight: 100;
+        font-family: $barlow;
     }
 }

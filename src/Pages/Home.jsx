@@ -230,7 +230,7 @@ function Home() {
               </div>
               <div className={classes.section__experiences__tabs}>
                 <Tabs line={true}>
-                  <div label='Lorem'>
+                  <div label='Lorem ipsum'>
                     <div className={classes.section__experiences__content}>
                       <div className={classes.section__experiences__content__img}>
                         <div className={classes.section__experiences__content__img__overlay}>
@@ -266,6 +266,18 @@ function Home() {
                       </div>
                     </div>
                   </div>
+                  <div label='Lorem, farts '>
+                    <div className={classes.section__experiences__content}>
+                      <div className={classes.section__experiences__content__img}>
+                        <div className={classes.section__experiences__content__img__overlay}>
+                          <img src='https://picsum.photos/500/350' alt='' />
+                        </div>
+                      </div>
+                      <div className={classes.section__experiences__content__card}>
+                        <CardSlider lists={cardSlides} />
+                      </div>
+                    </div>
+                  </div>
                 </Tabs>
               </div>
             </div>
@@ -287,7 +299,7 @@ function Home() {
                 <h1 className='h2 text__primary'>Novedades</h1>
               </div>
               <div className={classes.section__news__subtitle}>
-                <p className='body-1'>Conoce todas las novedades sobre tecnología, APIs y transformación digital</p>
+                <p className='body-1 my-10'>Conoce todas las novedades sobre tecnología, APIs y transformación digital</p>
               </div>
               <Carousel />
             </div>
