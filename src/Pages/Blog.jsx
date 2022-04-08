@@ -30,54 +30,11 @@ function Blog() {
 // eslint-disable-next-line no-unused-vars
   const [resultsDa, setResultsDa] = useState(jsonData);
   return (
-    <>
+    <div>
       <section>
-        <BannerStatic
-          title='Descrubre las novedades de SURA'
-          img={imgBg}
-        />
-        <div style={{
-          width: '100%',
-          height: '100%',
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        }}
-        >
-          <div style={{
-            display: 'flex',
-            width: '50%',
-            transform: 'translate(50%, -50%)',
-            position: 'absolute',
-            top: '50%',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-          >
-            <div style={{
-              width: '25px',
-              position: 'absolute',
-              right: '15px',
-            }}
-            >
-              <svg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor' strokeWidth={2}>
-                <path strokeLinecap='round' strokeLinejoin='round' d='M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z' />
-              </svg>
-            </div>
-            <div style={{
-              width: '100%',
-            }}
-            >
-              <Input type='text' placeholder='Buscar...' />
-            </div>
-          </div>
-        </div>
+        <BannerStatic title='Descubre las novedades de SURA' img='https://picsum.photos/1920/300' isSearch={true} />
       </section>
-
-      {/* Nav Categories */}
-      <div style={{
-        width: '80%',
-        margin: '0 auto',
-      }}
-      >
+      <section className='container'>
         <div className={classes.section__experiences__tabs}>
           <Tabs>
             <div label='Lorem'>
@@ -92,15 +49,21 @@ function Blog() {
                 </div>
               </div>
             </div>
-            <div label='Lorem, ipsum..'>
-              <h1>Lorem, ipsum.</h1>
+            <div label='Desarrolladores'>
+              <h1>Hola mundo</h1>
             </div>
-            <div label='Lorem, fart '>
-              <h1>Lorem, ipsum.</h1>
+            <div label='APIs'>
+              <h2>si</h2>
+            </div>
+            <div label='Empresas'>
+              <h2>si</h2>
+            </div>
+            <div label='voluptas nulla dolorum'>
+              <h2>si</h2>
             </div>
           </Tabs>
         </div>
-      </div>
+      </section>
       <div className={stylesBlog.section__result__content}>
         <div className={stylesBlog.section__result__content__result}>
           <div style={{
@@ -137,10 +100,9 @@ function Blog() {
         </div>
       </section>
       <Contact />
-    </>
+    </div>
   );
 }
-export default Blog;
 
 function Novedades() {
   // eslint-disable-next-line no-unused-vars
@@ -155,7 +117,7 @@ function Novedades() {
         width: '100%',
       }}
       >
-        <p className='h5 text__primary'>Lo más reciente</p>
+        <p className='subtitle-2 text-uppercase font-weight-bold text__gray__gray_darken mb-2'>Lo más reciente</p>
       </div>
       {
         resultsDa.length === 0 ?
@@ -199,3 +161,5 @@ function Novedades() {
     </div>
   );
 }
+
+export default Blog;
