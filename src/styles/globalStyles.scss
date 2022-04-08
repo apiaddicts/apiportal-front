@@ -250,6 +250,35 @@ body {
   padding-top: 0.50rem;
   padding-bottom: 0.50rem
 }
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem
+}
+
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem
+}
+
+.py-6 {
+  padding-top: 1.50rem;
+  padding-bottom: 1.50rem
+}
+
+.py-7 {
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem
+}
 
 /* ------------------------------ 
     MARGINS 
@@ -660,6 +689,9 @@ body {
   font-weight: map-deep-get($font-weights, "black") !important;
 }
 
+.line-height-1 {
+  line-height: 1.5 !important;
+}
 .card {
   box-shadow: 3px -5px 40px rgba(0, 51, 160, 0.1);  
   background-color: $secondary_white;
@@ -667,6 +699,7 @@ body {
   height: 100%;
   width: 100%;
   overflow: hidden;
+  color: #53565A;
 }
 .chip {
   display: inline-block;
