@@ -1,0 +1,20 @@
+import homeConstants from '../constants/homeConstants';
+import homeService from '../../services/homeService';
+
+// eslint-disable-next-line import/prefer-default-export
+export const getHome = () => (dispatch) => {
+  homeService.getHome().then(
+    (response) => {
+      dispatch({
+        type: homeConstants.GET_ALL_HOME_SUCCESS,
+        payload: response,
+      });
+    },
+    (error) => {
+      dispatch({
+        type: userConstants.GET_ALL_HOME_FAILURE,
+        payload: error,
+      });
+    },
+  );
+};

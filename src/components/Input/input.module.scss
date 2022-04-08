@@ -1,0 +1,40 @@
+@import "./../../styles/variables.scss";
+
+.input {
+  width: 100%;
+  height: 70%;
+  border: none;
+  border-radius: 40px;
+  outline: none;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #000;
+  transition: all 0.3s ease-in-out;
+  -webkit-box-shadow: 0px 0px 20px 6px rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 0px 20px 6px rgba(0, 0, 0, 0.16);
+
+  &:focus {
+    border-color: aqua;
+  }
+}
+
+.input {
+  &__wrapper {
+    position: relative;
+    width: 630px;
+  }
+  &__search {
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 11px 11px 11px 35px;
+    width: 100%;
+  }
+  &__icon {
+    position: absolute;
+    font-size: 24px;
+    left: 9px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $gray_darken;
+  }
+}

@@ -1,0 +1,40 @@
+@import '../../styles/variables.scss';
+
+.tab-list {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  padding-left: 0;
+  display: flex;
+}
+
+.tab-list_no_line {
+  border-bottom: 0px solid rgba(0, 0, 0, 0.15);
+  padding-left: 0;
+  display: flex;
+}
+
+.tab-list-center {
+ justify-content: center;
+}
+
+.tab-list-right {
+ justify-content: right;
+}
+
+.tab-list-item {
+  display: inline-block;
+  list-style: none;
+  margin-bottom: -1px;
+  padding: 0.5rem 0.75rem;
+  font-family: $barlow;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+  color: #53565A;
+  cursor: pointer;
+}
+
+.tab-list-active {
+  // background-color: $secondary_white;
+  border-bottom: 5px solid $primary;
+}
