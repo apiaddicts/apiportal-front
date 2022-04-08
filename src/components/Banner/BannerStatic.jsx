@@ -20,7 +20,7 @@ function BannerStatic({ title, subtitle, img, isSearch, buttons }) {
             </div>
           ))}
         </div>
-        <div>
+        <div className={classes.input__search}>
           {isSearch && (
             <SearchInput />
           )}

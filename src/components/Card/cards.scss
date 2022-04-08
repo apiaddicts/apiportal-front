@@ -169,3 +169,31 @@
     }
 }
 
+.card__information {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-header {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.card-header img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.card__information__tags {
+    display: flex;
+}
+
+.tags-flex-wrap {
+    flex-wrap: wrap;
+}
+
+.tags-reponsive {
+    padding: 3px 7px !important;
+}
