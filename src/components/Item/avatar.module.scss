@@ -1,0 +1,39 @@
+@import "./../../styles/variables.scss";
+
+.item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 2rem;
+  border-color: #CCD6EC;
+  border-style: solid;
+  border-width: 1px 0px;
+  padding: 20px 0;
+  margin: 20px;
+  
+  &__avatar {
+    &__img {
+      vertical-align: middle;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+    }
+  }
+  &__content {
+    &__title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      font-family: $barlow;
+      margin-bottom: 8px;
+      color: $primary;
+    }
+    &__paragraph {
+      font-size: 16px;
+      font-weight: 400;
+      font-family: $barlow;
+      letter-spacing: 0.2px;
+      color: $gray-darken;
+      width: 100%;
+    }
+  }
+}

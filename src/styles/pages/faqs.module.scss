@@ -1,0 +1,17 @@
+@import "./../variables.scss";
+
+.faq {
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 4rem;
+    align-items: baseline;
+    justify-items: center;
+    &__qa {
+      width: 100%;
+    }
+    &__filter{
+      width: 100%;
+    }
+  }
+}

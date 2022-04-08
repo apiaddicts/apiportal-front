@@ -216,6 +216,69 @@ body {
 .pb-10 {
   padding-bottom: 2.5rem;
 }
+.px-0 {
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
+
+.px-2 {
+  padding-left: 0.50rem;
+  padding-right: 0.50rem;
+}
+
+.px-3 {
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.py-0 {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem
+}
+
+.py-2 {
+  padding-top: 0.50rem;
+  padding-bottom: 0.50rem
+}
+.py-3 {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem
+}
+
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem
+}
+
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem
+}
+
+.py-6 {
+  padding-top: 1.50rem;
+  padding-bottom: 1.50rem
+}
+
+.py-7 {
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem
+}
 
 /* ------------------------------ 
     MARGINS 
@@ -285,6 +348,49 @@ body {
 }
 .mx-10 {
   margin: 0 2.5rem 0 2.5rem;
+}
+.my-0 {
+  margin: 0px 0 0px 0;
+}
+
+.my-1 {
+  margin: 0.25rem 0 0.25rem 0;
+}
+
+.my-2 {
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.my-3 {
+  margin: 0.75rem 0 0.75rem 0;
+}
+
+.my-4 {
+  margin: 1rem 0 1rem 0;
+}
+
+.my-5 {
+  margin: 1.25rem 0 1.25rem 0;
+}
+
+.my-6 {
+  margin: 1.5rem 0 1.5rem 0;
+}
+
+.my-7 {
+  margin: 1.75rem 0 1.75rem 0;
+}
+
+.my-8 {
+  margin: 2rem 0 2rem 0;
+}
+
+.my-9 {
+  margin: 2.25rem 0 2.25rem 0;
+}
+
+.my-10 {
+  margin: 2.5rem 0 2.5rem 0;
 }
 .mr-0 {
   margin-right: 0px;
@@ -430,22 +536,22 @@ body {
     $heading,
     "headline-ad",
     "letter-spacing"
-  ) !important;
-  font-family: map-deep-get($heading, "headline-ad", "font-family") !important;
-}
-
-.h1 {
-  font-size: map-deep-get($heading, "h1", "size") !important;
-  font-weight: map-deep-get($heading, "h1", "weight");
-  line-height: map-deep-get($heading, "h1", "line-height");
-  letter-spacing: map-deep-get($heading, "h1", "letter-spacing") !important;
-  font-family: map-deep-get($heading, "h1", "font-family") !important;
-}
-
-.h2 {
-  font-size: map-deep-get($heading, "h2", "size") !important;
-  font-weight: map-deep-get($heading, "h2", "weight");
-  line-height: map-deep-get($heading, "h2", "line-height");
+    ) !important;
+    font-family: map-deep-get($heading, "headline-ad", "font-family") !important;
+    }
+    
+    .h1 {
+      font-size: map-deep-get($heading, "h1", "size") !important;
+      font-weight: map-deep-get($heading, "h1", "weight");
+      line-height: map-deep-get($heading, "h1", "line-height");
+      letter-spacing: map-deep-get($heading, "h1", "letter-spacing") !important;
+      font-family: map-deep-get($heading, "h1", "font-family") !important;
+    }
+    
+    .h2 {
+      font-size: map-deep-get($heading, "h2", "size") !important;
+      font-weight: map-deep-get($heading, "h2", "weight");
+      line-height: map-deep-get($heading, "h2", "line-height");
   letter-spacing: map-deep-get($heading, "h2", "letter-spacing") !important;
   font-family: map-deep-get($heading, "h2", "font-family") !important;
 }
@@ -463,6 +569,14 @@ body {
   line-height: map-deep-get($heading, "h4", "line-height");
   letter-spacing: map-deep-get($heading, "h4", "letter-spacing") !important;
   font-family: map-deep-get($heading, "h4", "font-family") !important;
+}
+
+.h5 {
+  font-size: map-deep-get($heading, "h5", "size") !important;
+  font-weight: map-deep-get($heading, "h5", "weight");
+  line-height: map-deep-get($heading, "h5", "line-height");
+  letter-spacing: map-deep-get($heading, "h5", "letter-spacing") !important;
+  font-family: map-deep-get($heading, "h5", "font-family") !important;
 }
 
 .headline {
@@ -519,6 +633,7 @@ body {
   letter-spacing: map-deep-get($heading, "button", "letter-spacing") !important;
   line-height: map-deep-get($heading, "button", "line-height");
   font-family: map-deep-get($heading, "button", "font-family") !important;
+  text-transform: uppercase;
 }
 
 .caption {
@@ -574,22 +689,21 @@ body {
   font-weight: map-deep-get($font-weights, "black") !important;
 }
 
+.line-height-1 {
+  line-height: 1.5 !important;
+}
 .card {
-  box-shadow: 3px -5px 40px rgba(0, 51, 160, 0.1);
-  padding: 16px;
+  box-shadow: 3px -5px 40px rgba(0, 51, 160, 0.1);  
   background-color: $secondary_white;
   border-radius: 20px;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  color: #53565A;
 }
-
 .chip {
   display: inline-block;
-  padding: 5px 13px;
-  height: 29px;
   opacity: 80%;
-  width: 50.39px;
-  border-radius: 5px;
-  background-color: $success;
-  color: $secondary_white;
   text-align: center;
 
   span {
@@ -602,6 +716,57 @@ body {
   }
 }
 
+.verde {
+  padding: 8px 13px;
+  border-radius: 5px;
+  background-color: $success;
+  color: $secondary_white;
+}
+
+.get {
+  padding: 8px 13px;
+  border-radius: 5px;
+  background-color: $success;
+  color: $secondary_white;
+}
+
+.post {
+  padding: 8px 13px;
+  border-radius: 5px;
+  background-color: $primary;
+  color: $secondary_white;
+}
+
+.push {
+  padding: 8px 13px;
+  border-radius: 5px;
+  background-color: $warning;
+  color: $secondary_white;
+}
+
+.put {
+  padding: 8px 13px;
+  border-radius: 5px;
+  background-color: $primary;
+  color: $secondary_white;
+}
+
+.del {
+  padding: 8px 13px;
+  border-radius: 5px;
+  background-color: $error;
+  color: $secondary_white;
+}
+
+
+.gray {
+  background-color: $gray_lighten-1;
+  color: $primary;
+  border-radius: 50px;
+  font-weight: 200;
+  padding: 10px 15px;
+  font-size: 14px;
+}
 .text {
   color: $gray;
   &__primary {
@@ -616,11 +781,82 @@ body {
   &__secondary__white {
     color: $secondary_white;
   }
+  &__gray {
+    color: $gray;
+  }
+  &__gray__gray_lighten-1 {
+    color: $gray_lighten-1;
+  }  
+  &__gray__gray_lighten-2 {
+    color: $gray_lighten-2;
+  }  
+  &__gray__gray_lighten-3 {
+    color: $gray_lighten-3;
+  }
+  &__gray__gray_darken {
+    color: $gray_darken;
+  }
 }
 
+.w-5 {
+  max-width: 5% !important;
+}
+.w-10 {
+  max-width: 10% !important;
+}
+.w-20 {
+  max-width: 20% !important;
+}
+.w-50 {
+  max-width: 50% !important;
+}
+.w-full {
+  width: 100% !important;
+}
+.h-screen {
+  height: 100vh !important;
+}
+
+.w-screen {
+  width: 100vw !important;
+}
 .button__group {
   display: flex;
   justify-content: space-between;
   align-content: center;
   flex-direction: row;
+}
+
+.divider {
+  border-bottom: 4px solid $secondary_yellow;
+  width: 56px;
+}
+
+.container {
+  max-width: 90%;
+  height: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.section {
+  padding-top: 200px;
+}
+
+.text-left {
+  text-align: left !important;
+}
+.text-right {
+  text-align: right !important;
+}
+
+.text-uppercase {
+  text-transform: uppercase !important;
+}
+
+.content-demo {
+  margin: auto;
+  width: 500px;
+  
 }

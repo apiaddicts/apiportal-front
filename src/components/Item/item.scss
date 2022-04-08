@@ -18,7 +18,7 @@
         font-size: 36px;
         line-height: 50px;
         letter-spacing: 0.25px;
-        color: red;
+        color: $secondary_white;
     }
 }
 
@@ -43,8 +43,11 @@
         margin-left: 5%;
 
         .icon {
-            font-size: 25px;
+            font-size: 56px;
             color: $primary;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     }
 }

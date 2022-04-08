@@ -52,9 +52,8 @@
 }
 
 .btn-primary {
-   @include button-bg($primary);
-   @include letter($secondary_white);
-   @include border(#0033A0)
+   @include button-bg($secondary_yellow);
+   @include letter($primary);
 }
  
 .btn-secundary-white{
@@ -64,7 +63,13 @@
  }
  
 .btn-ghost {
-    @include button-bg($secondary_white);
-    @include letter(#0033A0);
-    @include border(#00AEC7)
+    @include button-bg(transparent);
+    @include letter($secondary_white);
+    @include border($secondary_white)
  }
+
+.btn-ghost-variant {
+   @include button-bg(transparent);
+   @include letter($primary);
+   @include border($secondary)
+}
