@@ -29,7 +29,7 @@ function Blog() {
       </section>
       <section className='container'>
         <div className={classes.section__experiences__tabs}>
-          <Tabs line={true} direction='center'>
+          <Tabs line={true}>
             <div label='Todos'>
               <div className={stylesBlog.section__experiences__content}>
                 <div className={stylesBlog.section__experiences__content__img}>

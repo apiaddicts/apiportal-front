@@ -15,6 +15,7 @@ import { getHome } from '../redux/actions/homeAction';
 function Home() {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.demo);
+
   useEffect(() => {
     if (data && Object.keys(data).length === 0) {
       dispatch(getHome());
@@ -37,7 +38,7 @@ function Home() {
   ];
 
   const itemsWorksAdmin = [
-    { number: 1, icon: 'MdPersonOutline', title: 'Regístrate', description: 'Crea una cuenta para tu organización y accede al catálogo complementos de APIs de SURA' },
+    { number: 1, icon: 'MdOutlinePersonOutline', title: 'Regístrate', description: 'Crea una cuenta para tu organización y accede al catálogo complementos de APIs de SURA' },
     { number: 2, icon: 'MdOutlineDescription', title: 'Personaliza', description: 'Selecciona las APIs que mejor se ajustan a tus necesidades y descubre todo lo que puedes conseguir con ellas.' },
     { number: 3, icon: 'MdOutlineDescription', title: 'Desarrolla', description: 'En breve tendrás integradas las APIs en tu plataforma para comenzar a vender y gestionar los productos.' },
   ];
@@ -149,7 +150,15 @@ function Home() {
               </div>
               <div className={classes.section__content__items}>
                 {items.map((item, i) => (
-                  <Item key={i} title={item.title} description={item.description} icon={item.icon} />
+                  <Item
+                    key={i}
+                    title={item.title}
+                    description={item.description}
+                    icon={item.icon}
+                    iconColor='#0033A0'
+                    background='#ECF0F1
+                  '
+                  />
                 ))}
               </div>
             </div>
@@ -163,7 +172,14 @@ function Home() {
                   <div className={classes.section__works__items}>
                     {itemsWorksAdmin.map((item, i) => (
                       <div key={i} className={`mb-6 ${classes.section__works__items__item}`}>
-                        <Item number={item.number} title={item.title} description={item.description} icon={item.icon} type='title' textColor='#fff' />
+                        <Item
+                          number={item.number}
+                          title={item.title}
+                          description={item.description}
+                          icon={item.icon}
+                          type='title'
+                          textColor='#d4d9db'
+                        />
                       </div>
                     ))}
                   </div>
@@ -172,7 +188,14 @@ function Home() {
                   <div className={classes.section__works__items}>
                     {itemsWorks.map((item, i) => (
                       <div key={i} className={`mb-6 ${classes.section__works__items__item}`}>
-                        <Item number={item.number} title={item.title} description={item.description} icon={item.icon} type='title' textColor='#fff' />
+                        <Item
+                          number={item.number}
+                          title={item.title}
+                          description={item.description}
+                          icon={item.icon}
+                          type='title'
+                          textColor='#d4d9db'
+                        />
                       </div>
                     ))}
                   </div>

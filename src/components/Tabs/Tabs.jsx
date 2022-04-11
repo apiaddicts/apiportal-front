@@ -13,7 +13,7 @@ function Tabs({ children, line = false, direction = 'left', activeColor = 'prima
 
   return (
     <div className='tabs'>
-      <ol className={`${activeTab ? 'py-5' : null} ${line ? 'tab-list' : 'tab-list_no_line'} ${direction === 'center' ? 'tab-list-center' : direction === 'right' ? 'tab-list-right' : 'tab-list-left'}  `}>
+      <ol className={`${activeTab ? 'p5' : null} ${line ? 'tab-list' : 'tab-list_no_line'} ${direction === 'center' ? 'tab-list-center' : direction === 'right' ? 'tab-list-right' : 'tab-list-left'}  `}>
         {children.map((child) => {
           const { label } = child.props;
 
