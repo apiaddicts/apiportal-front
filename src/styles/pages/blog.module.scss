@@ -46,7 +46,7 @@
     }
 }
 .section__result__content {
-    width: 80%;
+    width: 90%;
     margin: auto;
     display: flex;
     margin-top: 120px;
@@ -66,5 +66,14 @@
         line-height: 25px;
         font-weight: 100;
         font-family: $barlow;
+    }
+    &__pagination {
+        border-top: 1px solid $gray_lighten-1;
+        padding-top: 30px;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 30px;
     }
 }

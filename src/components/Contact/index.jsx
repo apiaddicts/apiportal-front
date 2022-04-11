@@ -20,7 +20,10 @@ function Contact() {
           <p className={classes.contact__header__title}>Sigamos conectados</p>
         </div>
         <div className={classes.contact__description}>
-          <p className=''>¡Entérate de lo último!  Escoge una o varias capacidades y sé el primero en enterarte.</p>
+          <p className=''>¡Entérate de lo último!</p>
+        </div>
+        <div className={classes.contact__description}>
+          <p className=''> Escoge una o varias capacidades y sé el primero en enterarte.</p>
         </div>
         <div className={classes.contact__container__form}>
           <form className={classes.contact__form}>

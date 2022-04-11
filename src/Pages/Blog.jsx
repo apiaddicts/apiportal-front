@@ -78,6 +78,11 @@ function Blog() {
               ))
             )}
           </div>
+          <div className={stylesBlog.section__result__content__pagination}>
+            <p>Anterior</p>
+            <p>01 02 ...10</p>
+            <p>Siguiente</p>
+          </div>
         </div>
         <Novedades />
       </div>
@@ -92,7 +97,6 @@ function Blog() {
           <Carousel />
         </div>
       </section>
-      <Contact />
     </div>
   );
 }
@@ -153,6 +157,8 @@ function Novedades() {
             </div>
           ))
       }
+
+      <Contact />
     </div>
   );
 }
