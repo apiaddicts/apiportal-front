@@ -18,22 +18,22 @@ function CardBasic({ chipTitle, title, img, description, info }) {
         <div className='card_chip_title'>
           {chipTitle ? (
             <>
-              <Chip title={chipTitle} className={chipTitle.toLowerCase()} />
+              <Chip title={chipTitle} className={`${chipTitle.toLowerCase()} chip_tag_rounded`} />
               <h1 className='chip_title'>lorems</h1>
             </>
           ) : (
-            <h1 className='title'>lorems</h1>
+            <h1 className='h3 font-weight-thin px-8 py-5 text__primary'>lorems</h1>
           )}
         </div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Nam molestiae, corporis eaque deleniti eligendi aut modi illo perspiciatis.
-          Impedit suscipit totam quo ea odit officiis culpa voluptatum sed fugiat quibusdam?
-        </p>
-        <div className='card_chip_info'>
-          <span>MÁS INFORMACIÓN</span>
-          {' '}
-          <MdArrowRightAlt className='svg' />
+        <div className='card_chip_desciption'>
+          <p className='text-left'>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat minima blanditiis dolorem assumenda temporibus inventore.
+          </p>
+          <div className='card_chip_info'>
+            <span>MÁS INFORMACIÓN</span>
+            {' '}
+            <MdArrowRightAlt className='svg' />
+          </div>
         </div>
       </section>
     </Base>

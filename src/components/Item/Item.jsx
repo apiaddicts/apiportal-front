@@ -2,28 +2,31 @@ import React from 'react';
 import Icon from '../MdIcon/Icon';
 import './item.scss';
 
-function Item({ icon, title, description, type = 'basic', number, textColor = '#000' }) {
+function Item({ icon, title, description, type = 'basic', number, textColor = '#000', iconColor = '#fff', background = '#00acc742' }) {
   const color = (color) => ({
     color: `${color}`,
   });
+  const backgroundColor = (color) => ({
+    backgroundColor: `${color}`,
+  });
   return (
-    <div>
-      {type === 'title' ? (
-        <div className='item_title'>
-          <span className='number'>{`${number}. `}</span>
-          {' '}
-          <span className='title'>{title}</span>
-        </div>
-      ) : (null)}
+    <div className='main_item_contain'>
       <section className='item_contenedor'>
         <div className='item_circle'>
-          <div className='circle'>
-            <span className='icon' style={color(textColor)}>
+          <div style={backgroundColor(background)} className='circle'>
+            <span className='icon' style={color(iconColor)}>
               <Icon id={icon} />
             </span>
           </div>
         </div>
         <div className='item_description'>
+          {type === 'title' ? (
+            <div className='item_title'>
+              <span className='number'>{`${number}. `}</span>
+              {' '}
+              <span className='title'>{title}</span>
+            </div>
+          ) : (null)}
           {type !== 'title' ? (
             <h1>{title}</h1>
           ) : (null)}

@@ -6,7 +6,6 @@
 }
 
 .card_container {
-    padding: 16px 20px;
 
     .card_chip_title {
         display: flex;
@@ -48,6 +47,11 @@
             color: $gray_darken;
             margin-bottom: 7.2px;
         }
+    .card_chip_desciption {
+        width: 100%;
+        padding: 8px 40px 35px 40px;
+        color: #53565A;
+    }
     
     .card_chip_info {
         display: flex;

@@ -29,7 +29,7 @@ function Blog() {
       </section>
       <section className='container'>
         <div className={classes.section__experiences__tabs}>
-          <Tabs line={true} direction='center'>
+          <Tabs line={true}>
             <div label='Todos'>
               <div className={stylesBlog.section__experiences__content}>
                 <div className={stylesBlog.section__experiences__content__img}>
@@ -68,8 +68,9 @@ function Blog() {
             {resultsDa.length === 0 ? (
               <p>Sin Resltados</p>
             ) : (
-              resultsDa.map((result) => (
+              resultsDa.map((result, index) => (
                 <CardInformation
+                  key={index}
                   img={result.image}
                   description={result.description}
                   title={result['titl:e']}
@@ -77,6 +78,11 @@ function Blog() {
                 />
               ))
             )}
+          </div>
+          <div className={stylesBlog.section__result__content__pagination}>
+            <p>Anterior</p>
+            <p>01 02 ...10</p>
+            <p>Siguiente</p>
           </div>
         </div>
         <Novedades />
@@ -86,13 +92,12 @@ function Blog() {
           <div className={classes.section__news__title}>
             <h1 className='h2 text__primary'>También te puede interesar</h1>
           </div>
-          <div className={classes.section__news__subtitle}>
+          <div className='mb-10'>
             <p className='body-1 my-9'>Conoce todas las novedades sobre tecnología, APIs y transformación digital</p>
           </div>
           <Carousel />
         </div>
       </section>
-      <Contact />
     </div>
   );
 }
@@ -116,15 +121,17 @@ function Novedades() {
         resultsDa.length === 0 ?
           <p>No hay resultados</p> :
           resultsDa.map((result, index) => (
-            <div style={{
-              paddingTop: '20px',
-              paddingBottom: '20px',
-              display: 'flex',
-              width: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderTop: '1px solid #ccc',
-            }}
+            <div
+              key={index}
+              style={{
+                paddingTop: '20px',
+                paddingBottom: '20px',
+                display: 'flex',
+                width: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderTop: '1px solid #ccc',
+              }}
             >
               <div style={{
                 width: '100px',
@@ -153,6 +160,8 @@ function Novedades() {
             </div>
           ))
       }
+
+      <Contact />
     </div>
   );
 }

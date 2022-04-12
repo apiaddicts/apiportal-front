@@ -12,7 +12,7 @@ function Tab({ activeTab, label, onClick, activeColor, colorTab }) {
     classNameTab += activeColor === 'primary' ? ' tab-list-active-primary' : ' tab-list-active-secundary';
   }
   return (
-    <li className={`${classNameTab} py-3`} onClick={onClickTab}>
+    <li className={`${classNameTab}`} onClick={onClickTab}>
       {label}
     </li>
   );
