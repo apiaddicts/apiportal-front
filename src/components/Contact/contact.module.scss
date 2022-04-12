@@ -10,6 +10,7 @@
     justify-content: center;
     align-items: center;
     background-color: $gray_lighten-1;
+    height: 560px;
 
     &__container {
         width: 90%;
@@ -31,7 +32,7 @@
         width: 100%;
 
         &__icon {
-            font-size: 80px;
+            font-size: 60px;
             color: $secondary;
         }
 
@@ -40,7 +41,7 @@
             font-family: 'FS Joey';
             font-style: normal;
             font-weight: 700;
-            font-size: 46px;
+            font-size: 36px;
             text-align: center;
             line-height: 48px;
             color: $primary;
@@ -55,11 +56,10 @@
         margin-bottom: 2rem;
         text-align: center;
         width: 100%;
-        padding: 0px 3%;
         font-family: $barlow;
         font-style: normal;
         font-weight: 400;
-        font-size: 22px;
+        font-size: 18px;
         line-height: 26px;
         letter-spacing: 0.157143px;
         color: $primary;
