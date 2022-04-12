@@ -6,13 +6,7 @@ import Button from '../Buttons/Button';
 
 function Contact() {
   return (
-    <div
-      style={{
-        width: '100%',
-        height: '610px',
-      }}
-      className={classes.contact}
-    >
+    <div className={classes.contact}>
       <div className={classes.contact__container}>
         <div className={classes.contact__header}>
           <div className={classes.contact__header__icon}>
