@@ -16,6 +16,7 @@ import CardInformation from '../components/Card/CardInformation';
 import jsonData from '../data-fake.json';
 import AccordionFilter from '../components/Accordion/AccordionFilter';
 import IconM from '../components/GoogleIcon';
+import iconNames from '../static/icons-sura';
 
 function Components() {
   // eslint-disable-next-line no-unused-vars
@@ -32,6 +33,8 @@ function Components() {
     { label: 'Probar Api', class: 'primary' },
     { label: 'Documentación', class: 'secundary' },
   ];
+
+  console.log(iconNames('person'));
 
   const metodosHTTP = [
     { label: 'POST' },
