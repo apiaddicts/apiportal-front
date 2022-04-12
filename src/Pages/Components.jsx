@@ -15,6 +15,7 @@ import Input from '../components/Input';
 import CardInformation from '../components/Card/CardInformation';
 import jsonData from '../data-fake.json';
 import AccordionFilter from '../components/Accordion/AccordionFilter';
+import IconM from '../components/GoogleIcon';
 
 function Components() {
   // eslint-disable-next-line no-unused-vars
@@ -257,6 +258,9 @@ function Components() {
         <p className='h1'>
           Componente Accordion
         </p>
+      </div>
+      <div>
+        <IconM iconoName='person_outline' iconColor='#000' />
       </div>
     </div>
 

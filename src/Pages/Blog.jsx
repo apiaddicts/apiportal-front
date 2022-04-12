@@ -29,7 +29,7 @@ function Blog() {
       </section>
       <section className='container'>
         <div className={classes.section__experiences__tabs}>
-          <Tabs line={true} direction='center'>
+          <Tabs line={true}>
             <div label='Todos'>
               <div className={stylesBlog.section__experiences__content}>
                 <div className={stylesBlog.section__experiences__content__img}>
@@ -78,6 +78,11 @@ function Blog() {
               ))
             )}
           </div>
+          <div className={stylesBlog.section__result__content__pagination}>
+            <p>Anterior</p>
+            <p>01 02 ...10</p>
+            <p>Siguiente</p>
+          </div>
         </div>
         <Novedades />
       </div>
@@ -86,13 +91,12 @@ function Blog() {
           <div className={classes.section__news__title}>
             <h1 className='h2 text__primary'>También te puede interesar</h1>
           </div>
-          <div className={classes.section__news__subtitle}>
+          <div className='mb-10'>
             <p className='body-1 my-9'>Conoce todas las novedades sobre tecnología, APIs y transformación digital</p>
           </div>
           <Carousel />
         </div>
       </section>
-      <Contact />
     </div>
   );
 }
@@ -153,6 +157,8 @@ function Novedades() {
             </div>
           ))
       }
+
+      <Contact />
     </div>
   );
 }

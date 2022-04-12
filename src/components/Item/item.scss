@@ -1,7 +1,12 @@
 @import '../../styles/variables.scss';
 
+.main_item_contain {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 .item_title {
-    margin-left: 6.5%;
+    margin-bottom: 10px;
     .number {
         font-family: $fs-joey;
         font-style: normal;
@@ -15,7 +20,7 @@
         font-family: $fs-joey;
         font-style: normal;
         font-weight: 700;
-        font-size: 36px;
+        font-size: 30px;
         line-height: 50px;
         letter-spacing: 0.25px;
         color: $secondary_white;
@@ -28,15 +33,15 @@
 }
 
 .item_circle {
-    width: 18%;
+    width: 22%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     .circle {
         width: 80px;
         height: 80px;
-        border-radius: 40px;
-        background: rgba(183, 176, 156, 0.1);
+        border-radius: 100%;
+        background: #00acc742;
         display: flex;
         justify-content:center;
         align-items: center;
@@ -54,7 +59,7 @@
 
 .item_description {
     width: 85%;
-    padding-left: 2.5%;
+    padding-left: 2rem;
     padding-right: 2.5%;
     display: flex;
     align-items: center;

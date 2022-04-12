@@ -696,8 +696,8 @@ body {
   box-shadow: 3px -5px 40px rgba(0, 51, 160, 0.1);  
   background-color: $secondary_white;
   border-radius: 20px;
-  height: 100%;
   width: 100%;
+  height: 100%;
   overflow: hidden;
   color: #53565A;
 }
@@ -705,6 +705,8 @@ body {
   display: inline-block;
   opacity: 80%;
   text-align: center;
+  padding: 8px 16px;
+  border-radius: 8px;
 
   span {
     font-family: $barlow;
@@ -716,6 +718,19 @@ body {
   }
 }
 
+.chip_tag_rounded {
+  width: 90px;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  font-size: 40px;
+  justify-content: center;
+  border-radius: 20px 0px;
+}
+
+.chip_tag_rounded span {
+  font-size: 20px;
+}
 .verde {
   padding: 8px 13px;
   border-radius: 5px;
@@ -724,36 +739,26 @@ body {
 }
 
 .get {
-  padding: 8px 13px;
-  border-radius: 5px;
-  background-color: $success;
+  background-color: #97D700;
   color: $secondary_white;
 }
 
 .post {
-  padding: 8px 13px;
-  border-radius: 5px;
   background-color: $primary;
   color: $secondary_white;
 }
 
 .push {
-  padding: 8px 13px;
-  border-radius: 5px;
   background-color: $warning;
   color: $secondary_white;
 }
 
 .put {
-  padding: 8px 13px;
-  border-radius: 5px;
   background-color: $primary;
   color: $secondary_white;
 }
 
 .del {
-  padding: 8px 13px;
-  border-radius: 5px;
   background-color: $error;
   color: $secondary_white;
 }
@@ -795,6 +800,9 @@ body {
   }
   &__gray__gray_darken {
     color: $gray_darken;
+  }
+  &__size-1 {
+    font-size: 154px;
   }
 }
 

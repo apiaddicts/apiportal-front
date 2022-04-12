@@ -4,6 +4,8 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.15);
   padding-left: 0;
   display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
 }
 
 .tab-list_no_line {
@@ -24,14 +26,13 @@
   display: inline-block;
   list-style: none;
   margin-bottom: -1px;
-  padding: 0.5rem 0.75rem;
+  padding: 0.5rem 2rem 1.75rem 2rem;
   font-family: $barlow;
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
   text-align: center;
   color: #53565A;
-  margin-left: 49px;
   cursor: pointer;
 }
 
@@ -46,7 +47,6 @@
   font-size: 18px;
   text-align: center;
   color: $secondary_white;
-  margin-left: 49px;
   cursor: pointer;
 }
 
@@ -55,5 +55,5 @@
 }
 
 .tab-list-active-secundary {
-  border-bottom: 5px solid $secondary_yellow;
+  border-bottom: 1px solid $secondary_yellow;
 }

@@ -4,12 +4,25 @@
   &__container {
     display: flex;
     justify-content: space-between;
-    align-items: center;
   }
   &__content {
     &__card {
-      margin: 15px;
-    }
+      padding: 0 15px;
+      max-width: 377px;
+      transition: all 0.2s ease;
+      }
+      &__card:hover {
+        transform: scale(1.1);
+      }
+      
+      // margin 2 children
+      &__card:nth-child(2) {
+        transform: translateY(-18px);
+      }
+      
+      &__card:nth-child(2):hover {
+        transform: translateY(-18px) scale(1.1);
+      }
   }
 }
 .controls {
