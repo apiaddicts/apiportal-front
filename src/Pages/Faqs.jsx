@@ -67,8 +67,8 @@ function Faqs(props) {
 
               <div className={classes.faq__content__qa}>
                 <h1 className='h3 text__primary mb-5'>¿Cómo funciona?</h1>
-                {faqs.map((faq) => (
-                  <Accordion title={faq.title} body={faq.body} />
+                {faqs.map((faq, index) => (
+                  <Accordion key={index} title={faq.title} body={faq.body} />
                 ))}
               </div>
 

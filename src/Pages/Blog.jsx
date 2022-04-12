@@ -68,8 +68,9 @@ function Blog() {
             {resultsDa.length === 0 ? (
               <p>Sin Resltados</p>
             ) : (
-              resultsDa.map((result) => (
+              resultsDa.map((result, index) => (
                 <CardInformation
+                  key={index}
                   img={result.image}
                   description={result.description}
                   title={result['titl:e']}
@@ -120,15 +121,17 @@ function Novedades() {
         resultsDa.length === 0 ?
           <p>No hay resultados</p> :
           resultsDa.map((result, index) => (
-            <div style={{
-              paddingTop: '20px',
-              paddingBottom: '20px',
-              display: 'flex',
-              width: '100%',
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderTop: '1px solid #ccc',
-            }}
+            <div
+              key={index}
+              style={{
+                paddingTop: '20px',
+                paddingBottom: '20px',
+                display: 'flex',
+                width: '100%',
+                justifyContent: 'center',
+                alignItems: 'center',
+                borderTop: '1px solid #ccc',
+              }}
             >
               <div style={{
                 width: '100px',

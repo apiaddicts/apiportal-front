@@ -16,8 +16,8 @@ function CardInformation({ img, buttons, title, description, reading }) {
         <p className={`h5 text__primary w-full ${reading ? 'px-8' : null}`}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
         <div className='card__information'>
           <div className={`card__information__tags ${buttons.length >= 3 ? 'tags-flex-wrap' : null} ${reading ? 'px-8' : null}`}>
-            {buttons.map((button) => (
-              <div className='py-5 mr-2'>
+            {buttons.map((button, index) => (
+              <div key={index} className='py-5 mr-2'>
                 <Chip title={button.label} className={`${button.class} ${buttons.length >= 3 ? 'tags-reponsive' : null} `} />
               </div>
             ))}
