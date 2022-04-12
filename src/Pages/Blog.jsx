@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import BannerStatic from '../components/Banner/BannerStatic';
 import stylesBlog from '../styles/pages/blog.module.scss';
 import jsonData from '../data-fake.json';
 import Carousel from '../components/Carousel/Carousel';
 import classes from '../styles/pages/home.module.scss';
-import Contact from '../components/Contact';
 import Tabs from '../components/Tabs/Tabs';
 import CardInformation from '../components/Card/CardInformation';
+import Novedades from '../components/Novedades';
+import useSearch from '../hooks/useSearch';
 
 const buttons = [
   { class: 'gray', label: 'APIS' },
@@ -20,73 +21,124 @@ const buttonsTags = [
 ];
 
 function Blog() {
-// eslint-disable-next-line no-unused-vars
-  const [resultsDa, setResultsDa] = useState(jsonData);
+  const [resultsSearch, setResultsSearch] = useState([]);
+  const { value, setValue, formik } = useSearch({
+    initialState: {
+      search: '',
+    },
+  });
+
+  const results = jsonData.filter((item) => {
+    return formik.values.search === '' ? null : item.description.toLowerCase().includes(value.toLowerCase());
+  });
+
+  useEffect(() => {
+    setValue(formik.values.search);
+
+    console.log(results.length === 0 ? 'Sin resultados' : results);
+    setResultsSearch(results);
+  }, [formik.values.search]);
+
   return (
     <div>
       <section>
-        <BannerStatic title='Descubre las novedades de SURA' img='https://picsum.photos/1920/300' isSearch={true} />
+        <BannerStatic
+          title='Descubre las novedades de SURA'
+          img='https://picsum.photos/1920/300'
+          isSearch
+          onChange={formik.handleChange}
+          value={formik.values.search}
+        />
       </section>
-      <section className='container'>
-        <div className={classes.section__experiences__tabs}>
-          <Tabs line={true}>
-            <div label='Todos'>
-              <div className={stylesBlog.section__experiences__content}>
-                <div className={stylesBlog.section__experiences__content__img}>
-                  <div className={stylesBlog.section__experiences__content__img__overlay}>
-                    <img src='https://picsum.photos/500/350' alt='' />
+      {
+        resultsSearch.length === 0 && formik.values.search === '' ? (
+          <section className='container'>
+            <div className={classes.section__experiences__tabs}>
+              <Tabs line={true}>
+                <div label='Todos'>
+                  <div className={stylesBlog.section__experiences__content}>
+                    <div className={stylesBlog.section__experiences__content__img}>
+                      <div className={stylesBlog.section__experiences__content__img__overlay}>
+                        <img src='https://picsum.photos/500/350' alt='' />
+                      </div>
+                    </div>
+                    <div className={stylesBlog.section__experiences__content__card}>
+                      <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
+                    </div>
+                  </div>
+                  <div className={stylesBlog.section__result__content}>
+                    <div className={stylesBlog.section__result__content__result}>
+                      <div style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(2, 1fr)',
+                        gridGap: '1rem',
+                      }}
+                      >
+                        {jsonData.length === 0 ? (
+                          <p>Sin Resltados</p>
+                        ) : (
+                          jsonData.map((result, index) => (
+                            <CardInformation
+                              key={index}
+                              img={result.image}
+                              description={result.description}
+                              title={result['titl:e']}
+                              buttons={buttonsTags}
+                            />
+                          ))
+                        )}
+                      </div>
+                      <div className={stylesBlog.section__result__content__pagination}>
+                        <p>Anterior</p>
+                        <p>01 02 ...10</p>
+                        <p>Siguiente</p>
+                      </div>
+                    </div>
+                    <Novedades />
                   </div>
                 </div>
-                <div className={stylesBlog.section__experiences__content__card}>
-                  <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
+                <div label='Novedades'>
+                  <h1>Todo sobre Novedades</h1>
                 </div>
-              </div>
+                <div label='Desarrolladores'>
+                  <h2>Todo sobre Desarrolladores</h2>
+                </div>
+                <div label='APIs'>
+                  <h2>Todo sobre APIs</h2>
+                </div>
+                <div label='Empresas'>
+                  <h2>Todo sobre Empresas</h2>
+                </div>
+              </Tabs>
             </div>
-            <div label='Novedades'>
-              <h1>Hola mundo</h1>
+          </section>
+        ) : (
+          <section className='container py-10'>
+            <div style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(3, 1fr)',
+              gridGap: '1rem',
+            }}
+            >
+              {resultsSearch.length === 0 ? (
+                <p>Sin Resltados</p>
+              ) : (
+                resultsSearch.map((result, index) => (
+                  <CardInformation
+                    key={index}
+                    img={result.image}
+                    description={result.description}
+                    title={result['titl:e']}
+                    buttons={buttonsTags}
+                  />
+                ))
+              )}
             </div>
-            <div label='Desarrolladores'>
-              <h2>si</h2>
-            </div>
-            <div label='APIs'>
-              <h2>si</h2>
-            </div>
-            <div label='Empresas'>
-              <h2>si</h2>
-            </div>
-          </Tabs>
-        </div>
-      </section>
-      <div className={stylesBlog.section__result__content}>
-        <div className={stylesBlog.section__result__content__result}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gridGap: '1rem',
-          }}
-          >
-            {resultsDa.length === 0 ? (
-              <p>Sin Resltados</p>
-            ) : (
-              resultsDa.map((result, index) => (
-                <CardInformation
-                  key={index}
-                  img={result.image}
-                  description={result.description}
-                  title={result['titl:e']}
-                  buttons={buttonsTags}
-                />
-              ))
-            )}
-          </div>
-          <div className={stylesBlog.section__result__content__pagination}>
-            <p>Anterior</p>
-            <p>01 02 ...10</p>
-            <p>Siguiente</p>
-          </div>
-        </div>
-        <Novedades />
-      </div>
+          </section>
+        )
+
+      }
+
       <section className={classes.section__news}>
         <div className='container my-10'>
           <div className={classes.section__news__title}>
@@ -98,70 +150,6 @@ function Blog() {
           <Carousel />
         </div>
       </section>
-    </div>
-  );
-}
-
-function Novedades() {
-  // eslint-disable-next-line no-unused-vars
-  const [resultsDa, setResultsDa] = useState(jsonData);
-  return (
-    <div style={{
-      width: '40%',
-      padding: '0 2rem',
-    }}
-    >
-      <div style={{
-        width: '100%',
-      }}
-      >
-        <p className='subtitle-2 mb-6 text-uppercase font-weight-bold text__gray__gray_darken mb-2'>Lo más reciente</p>
-      </div>
-      {
-        resultsDa.length === 0 ?
-          <p>No hay resultados</p> :
-          resultsDa.map((result, index) => (
-            <div
-              key={index}
-              style={{
-                paddingTop: '20px',
-                paddingBottom: '20px',
-                display: 'flex',
-                width: '100%',
-                justifyContent: 'center',
-                alignItems: 'center',
-                borderTop: '1px solid #ccc',
-              }}
-            >
-              <div style={{
-                width: '100px',
-                borderRadius: '100%',
-                padding: '10px',
-              }}
-              >
-                <img
-                  style={{
-                    width: '70px',
-                    height: '70px',
-                    borderRadius: '100%',
-                  }}
-                  src={result.image}
-                  alt=''
-                />
-              </div>
-              <div style={{
-                width: '100%',
-                padding: '0 1rem',
-              }}
-              >
-                <p className='text__primary pb-2'>Tu Salud - Lectura de 12 min.</p>
-                <p className={`${stylesBlog.section__result__content__result__description} text__gray__gray_darken`}>{result.description}</p>
-              </div>
-            </div>
-          ))
-      }
-
-      <Contact />
     </div>
   );
 }
