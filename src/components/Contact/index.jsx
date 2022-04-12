@@ -9,6 +9,7 @@ function Contact() {
     <div
       style={{
         width: '100%',
+        height: '610px',
       }}
       className={classes.contact}
     >

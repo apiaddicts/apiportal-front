@@ -321,7 +321,7 @@ function Home() {
               <div className={classes.section__news__title}>
                 <h1 className='h2 text__primary'>Novedades</h1>
               </div>
-              <div className={classes.section__news__subtitle}>
+              <div className={`${classes.section__news} mb-10`}>
                 <p className='body-1 my-10'>Conoce todas las novedades sobre tecnología, APIs y transformación digital</p>
               </div>
               <Carousel />
