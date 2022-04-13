@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as MaterialDesign from 'react-icons/md';
 import BannerStatic from '../components/Banner/BannerStatic';
 import BannerCentered from '../components/Banner/BannerCentered';
@@ -16,11 +16,9 @@ import CardInformation from '../components/Card/CardInformation';
 import jsonData from '../data-fake.json';
 import AccordionFilter from '../components/Accordion/AccordionFilter';
 import IconM from '../components/GoogleIcon';
-import iconNames from '../static/icons-sura';
+import icons from '../static/icons-sura';
 
 function Components() {
-  // eslint-disable-next-line no-unused-vars
-  const [resultsDa, setResultsDa] = useState(jsonData);
 
   const buttonsTags = [
     { class: 'gray', label: 'APIS' },
@@ -33,8 +31,6 @@ function Components() {
     { label: 'Probar Api', class: 'primary' },
     { label: 'Documentación', class: 'secundary' },
   ];
-
-  console.log(iconNames('person'));
 
   const metodosHTTP = [
     { label: 'POST' },
@@ -264,6 +260,9 @@ function Components() {
       </div>
       <div>
         <IconM iconoName='person_outline' iconColor='#000' />
+      </div>
+      <div>
+        {icons('person')}
       </div>
     </div>
 

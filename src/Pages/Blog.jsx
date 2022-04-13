@@ -99,15 +99,55 @@ function Blog() {
                 </div>
                 <div label='Novedades'>
                   <h1>Todo sobre Novedades</h1>
+                  <div className={stylesBlog.section__experiences__content}>
+                    <div className={stylesBlog.section__experiences__content__img}>
+                      <div className={stylesBlog.section__experiences__content__img__overlay}>
+                        <img src='https://picsum.photos/500/350' alt='' />
+                      </div>
+                    </div>
+                    <div className={stylesBlog.section__experiences__content__card}>
+                      <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
+                    </div>
+                  </div>
                 </div>
                 <div label='Desarrolladores'>
                   <h2>Todo sobre Desarrolladores</h2>
+                  <div className={stylesBlog.section__experiences__content}>
+                    <div className={stylesBlog.section__experiences__content__img}>
+                      <div className={stylesBlog.section__experiences__content__img__overlay}>
+                        <img src='https://picsum.photos/500/350' alt='' />
+                      </div>
+                    </div>
+                    <div className={stylesBlog.section__experiences__content__card}>
+                      <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
+                    </div>
+                  </div>
                 </div>
                 <div label='APIs'>
                   <h2>Todo sobre APIs</h2>
+                  <div className={stylesBlog.section__experiences__content}>
+                    <div className={stylesBlog.section__experiences__content__img}>
+                      <div className={stylesBlog.section__experiences__content__img__overlay}>
+                        <img src='https://picsum.photos/500/350' alt='' />
+                      </div>
+                    </div>
+                    <div className={stylesBlog.section__experiences__content__card}>
+                      <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
+                    </div>
+                  </div>
                 </div>
                 <div label='Empresas'>
                   <h2>Todo sobre Empresas</h2>
+                  <div className={stylesBlog.section__experiences__content}>
+                    <div className={stylesBlog.section__experiences__content__img}>
+                      <div className={stylesBlog.section__experiences__content__img__overlay}>
+                        <img src='https://picsum.photos/500/350' alt='' />
+                      </div>
+                    </div>
+                    <div className={stylesBlog.section__experiences__content__card}>
+                      <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
+                    </div>
+                  </div>
                 </div>
               </Tabs>
             </div>
@@ -144,7 +184,7 @@ function Blog() {
           <div className={classes.section__news__title}>
             <h1 className='h2 text__primary'>También te puede interesar</h1>
           </div>
-          <div className='mb-10'>
+          <div className='mb-15'>
             <p className='body-1 my-9'>Conoce todas las novedades sobre tecnología, APIs y transformación digital</p>
           </div>
           <Carousel />

@@ -1,8 +1,9 @@
 import React from 'react';
 import classes from './contact.module.scss';
-import Icon from '../MdIcon/Icon';
+// import Icon from '../MdIcon/Icon';
 import Input from '../Input';
 import Button from '../Buttons/Button';
+import icons from '../../static/icons-sura';
 
 function Contact() {
   return (
@@ -10,7 +11,7 @@ function Contact() {
       <div className={classes.contact__container}>
         <div className={classes.contact__header}>
           <div className={classes.contact__header__icon}>
-            <Icon id='MdMailOutline' />
+            {icons('email')}
           </div>
           <p className={classes.contact__header__title}>Sigamos conectados</p>
         </div>
