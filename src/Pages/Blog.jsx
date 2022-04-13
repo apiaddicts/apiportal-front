@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import BannerStatic from '../components/Banner/BannerStatic';
 import stylesBlog from '../styles/pages/blog.module.scss';
 import jsonData from '../data-fake.json';
@@ -27,7 +28,7 @@ function Blog() {
       search: '',
     },
   });
-
+  const id = Date.now();
   const results = jsonData.filter((item) => {
     return formik.values.search === '' ? null : item.description.toLowerCase().includes(value.toLowerCase());
   });
@@ -78,13 +79,14 @@ function Blog() {
                           <p>Sin Resltados</p>
                         ) : (
                           jsonData.map((result, index) => (
-                            <CardInformation
-                              key={index}
-                              img={result.image}
-                              description={result.description}
-                              title={result['titl:e']}
-                              buttons={buttonsTags}
-                            />
+                            <Link to={`/blog/${id}`} key={index}>
+                              <CardInformation
+                                img={result.image}
+                                description={result.description}
+                                title={result['titl:e']}
+                                buttons={buttonsTags}
+                              />
+                            </Link>
                           ))
                         )}
                       </div>
@@ -164,13 +166,14 @@ function Blog() {
                 <p>Sin Resltados</p>
               ) : (
                 resultsSearch.map((result, index) => (
-                  <CardInformation
-                    key={index}
-                    img={result.image}
-                    description={result.description}
-                    title={result['titl:e']}
-                    buttons={buttonsTags}
-                  />
+                  <Link to={`/blog/${id}`} key={index}>
+                    <CardInformation
+                      img={result.image}
+                      description={result.description}
+                      title={result['titl:e']}
+                      buttons={buttonsTags}
+                    />
+                  </Link>
                 ))
               )}
             </div>
