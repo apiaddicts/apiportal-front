@@ -23,24 +23,24 @@ function Home() {
   }, []);
 
   const items = [
-    { icon: 'MdWebAsset', title: 'Integración ágil y dinámica', description: 'Reduce los tiempos de integración y empieza a vender y gestionar de forma rápida y fácil.' },
-    { icon: 'MdOutlineInbox', title: 'Amplio catálogo de soluciones y APIs', description: 'Podrás gestionar todo tipo de operaciones de negocio a través de tu cuenta y apps.' },
-    { icon: 'MdOutlineDescription', title: 'Recursos y documentación developers', description: 'Ten siempre disponible toda la documetación de tus APIs y apóyate en las guías elaboradas para ti.' },
+    { icon: 'successWindow', title: 'Integración ágil y dinámica', description: 'Reduce los tiempos de integración y empieza a vender y gestionar de forma rápida y fácil.' },
+    { icon: 'archivist', title: 'Amplio catálogo de soluciones y APIs', description: 'Podrás gestionar todo tipo de operaciones de negocio a través de tu cuenta y apps.' },
+    { icon: 'note1', title: 'Recursos y documentación developers', description: 'Ten siempre disponible toda la documetación de tus APIs y apóyate en las guías elaboradas para ti.' },
   ];
 
   const itemsWorks = [
-    { number: 1, icon: 'MdPersonOutline', title: 'Regístrate', description: 'Crea una cuenta para tu organización y accede al catálogo complementos de APIs de SURA' },
-    { number: 2, icon: 'MdOutlineDescription', title: 'Personaliza', description: 'Selecciona las APIs que mejor se ajustan a tus necesidades y descubre todo lo que puedes conseguir con ellas.' },
-    { number: 3, icon: 'MdOutlineDescription', title: 'Desarrolla', description: 'En breve tendrás integradas las APIs en tu plataforma para comenzar a vender y gestionar los productos.' },
-    { number: 4, icon: 'MdPersonOutline', title: 'perferendis', description: 'Sed tempore nisi veritatis asperiores pariatur est veritatis dicta.Sed tempore nisi veritatis asperiores pariatur est veritatis dicta.' },
-    { number: 5, icon: 'MdOutlineDescription', title: 'perferendis', description: 'Doloribus voluptate voluptate.Doloribus voluptate voluptate.Doloribus voluptate voluptate.Doloribus voluptate voluptate.' },
-    { number: 6, icon: 'MdOutlineDescription', title: 'perferendis', description: 'Et et nihil dicta placeat.Et et nihil dicta placeat.Et et nihil dicta placeat.Et et nihil dicta placeat.Et et nihil dicta placeat.' },
+    { number: 1, icon: 'person', title: 'Regístrate', description: 'Crea una cuenta para tu organización y accede al catálogo complementos de APIs de SURA' },
+    { number: 2, icon: 'note', title: 'Personaliza', description: 'Selecciona las APIs que mejor se ajustan a tus necesidades y descubre todo lo que puedes conseguir con ellas.' },
+    { number: 3, icon: 'computer', title: 'Desarrolla', description: 'En breve tendrás integradas las APIs en tu plataforma para comenzar a vender y gestionar los productos.' },
+    { number: 4, icon: 'person', title: 'perferendis', description: 'Sed tempore nisi veritatis asperiores pariatur est veritatis dicta.Sed tempore nisi veritatis asperiores pariatur est veritatis dicta.' },
+    { number: 5, icon: 'note', title: 'perferendis', description: 'Doloribus voluptate voluptate.Doloribus voluptate voluptate.Doloribus voluptate voluptate.Doloribus voluptate voluptate.' },
+    { number: 6, icon: 'computer', title: 'perferendis', description: 'Et et nihil dicta placeat.Et et nihil dicta placeat.Et et nihil dicta placeat.Et et nihil dicta placeat.Et et nihil dicta placeat.' },
   ];
 
   const itemsWorksAdmin = [
-    { number: 1, icon: 'MdOutlinePersonOutline', title: 'Regístrate', description: 'Crea una cuenta para tu organización y accede al catálogo complementos de APIs de SURA' },
-    { number: 2, icon: 'MdOutlineDescription', title: 'Personaliza', description: 'Selecciona las APIs que mejor se ajustan a tus necesidades y descubre todo lo que puedes conseguir con ellas.' },
-    { number: 3, icon: 'MdOutlineDescription', title: 'Desarrolla', description: 'En breve tendrás integradas las APIs en tu plataforma para comenzar a vender y gestionar los productos.' },
+    { number: 1, icon: 'person', title: 'Regístrate', description: 'Crea una cuenta para tu organización y accede al catálogo complementos de APIs de SURA' },
+    { number: 2, icon: 'note', title: 'Personaliza', description: 'Selecciona las APIs que mejor se ajustan a tus necesidades y descubre todo lo que puedes conseguir con ellas.' },
+    { number: 3, icon: 'computer', title: 'Desarrolla', description: 'En breve tendrás integradas las APIs en tu plataforma para comenzar a vender y gestionar los productos.' },
   ];
 
   const cardsApis = [

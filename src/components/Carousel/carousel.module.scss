@@ -7,7 +7,7 @@
   }
   &__content {
     &__card {
-      padding: 0 15px;
+      padding: 0 12px;
       max-width: 377px;
       transition: all 0.2s ease;
       }
@@ -17,7 +17,7 @@
       
       // margin 2 children
       &__card:nth-child(2) {
-        transform: translateY(-18px);
+        transform: translateY(-40px);
       }
       
       &__card:nth-child(2):hover {

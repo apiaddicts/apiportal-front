@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from '../MdIcon/Icon';
+import icons from '../../static/icons-sura';
 import './item.scss';
 
 function Item({ icon, title, description, type = 'basic', number, textColor = '#000', iconColor = '#fff', background = '#00acc742' }) {
@@ -15,7 +15,7 @@ function Item({ icon, title, description, type = 'basic', number, textColor = '#
         <div className='item_circle'>
           <div style={backgroundColor(background)} className='circle'>
             <span className='icon' style={color(iconColor)}>
-              <Icon id={icon} />
+              {icons(icon)}
             </span>
           </div>
         </div>
