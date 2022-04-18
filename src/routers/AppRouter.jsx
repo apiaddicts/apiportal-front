@@ -10,6 +10,7 @@ import Components from '../Pages/Components';
 import Footer from '../components/Footer/Footer';
 import Faqs from '../Pages/Faqs';
 import Blog from '../Pages/Blog';
+import BlogDetails from '../Pages/BlogDetails';
 
 function AppRouter() {
 
@@ -24,6 +25,7 @@ function AppRouter() {
         <Route path='/faqs' exact element={<Faqs />} />
         <Route path='/blog' exact element={<Blog />} />
         <Route path='/componentes' exact element={<Components />} />
+        <Route path='/blog/:id' exact element={<BlogDetails />} />
       </Routes>
       <Footer />
     </BrowserRouter>

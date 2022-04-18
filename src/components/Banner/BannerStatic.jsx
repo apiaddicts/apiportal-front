@@ -4,7 +4,8 @@ import classes from './banner.module.scss';
 import Button from '../Buttons/Button';
 import SearchInput from '../Input/SearchInput';
 
-function BannerStatic({ title, subtitle, img, isSearch, buttons }) {
+function BannerStatic({ title, subtitle, img, isSearch, buttons, ...props }) {
+
   return (
     <Base img={img}>
       <div className={classes.banner__content}>
@@ -22,7 +23,12 @@ function BannerStatic({ title, subtitle, img, isSearch, buttons }) {
         </div>
         <div className={classes.input__search}>
           {isSearch && (
-            <SearchInput />
+            <SearchInput
+              name='search'
+              type='text'
+              placeholder='Buscar'
+              {...props}
+            />
           )}
         </div>
       </div>
