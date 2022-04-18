@@ -15,6 +15,9 @@ body {
   height: 100%;
 }
 
+a {
+  text-decoration: none;
+}
 /* ------------------------------ 
     PADDINGS 
 ------------------------------ */
@@ -279,6 +282,15 @@ body {
   padding-top: 2rem;
   padding-bottom: 2rem
 }
+.py-9 {
+  padding-top: 2.25rem;
+  padding-bottom: 2.25rem
+}
+
+.py-10 {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem
+}
 
 /* ------------------------------ 
     MARGINS 
@@ -523,6 +535,9 @@ body {
 }
 .mb-10 {
   margin-bottom: 2.5rem;
+}
+.mb-15 {
+  margin-bottom: 5.5rem;
 }
 
 /* ------------------------------ 
