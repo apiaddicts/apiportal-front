@@ -10,6 +10,8 @@ import Tabs from '../components/Tabs/Tabs';
 import Button from '../components/Buttons/Button';
 import Carousel from '../components/Carousel/Carousel';
 import Slider from '../components/Slider/Slider';
+import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
+
 import { getHome } from '../redux/actions/homeAction';
 
 function Home() {
@@ -330,7 +332,7 @@ function Home() {
         </div>
 
       ) : (
-        <h2>Cargando....</h2>
+        <SkeletonComponent />
       )}
     </div>
   );
