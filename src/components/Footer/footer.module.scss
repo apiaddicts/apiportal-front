@@ -51,9 +51,14 @@
       grid-template-areas: "logo" "email" "policies";
       gap: 1rem;
       padding-top: 3rem;
+      align-content: center;
+      .logo {
+        margin-left: auto;
+        margin-right: auto;
+      }
       .email,
       .policies {
-        text-align: left !important;
+        text-align: center !important;
       }      
     }
 
@@ -79,6 +84,12 @@
       grid-template-areas: "icons" "copyright";
       gap: 1rem;
       padding-top: 1rem;
+      &__copyright{
+        text-align: center;
+      }
+      &__icons {
+        justify-content: space-around;
+      }
     }
   }
 }
@@ -120,5 +131,6 @@
     color: $secondary_white;
     height: 72px;
     width: 72px;
+    cursor: pointer;
   }
 }

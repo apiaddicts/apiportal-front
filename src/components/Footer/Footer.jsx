@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaFacebookF, FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa';
 import Base from './Base';
 import classes from './footer.module.scss';
@@ -10,6 +10,8 @@ function Footer({ props }) {
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
 
+  const [contactForm, setContactForm] = useState(false);
+
   return (
     <div>
       <Base img={img}>
@@ -19,11 +21,14 @@ function Footer({ props }) {
           <p className='h5 text__secondary__white mb-10'>Contáctanos por medio de este formulario</p>
         </div>
         <div className={classes.button__fab}>
-          <button type='submit'>
-            <Icon id='MdMailOutline' />
+          <button type='submit' onClick={() => { setContactForm(!contactForm); }}>
+            {contactForm ? <Icon id='MdMailOutline' /> : <Icon id='MdClose' />}
           </button>
         </div>
       </Base>
+      <div>
+        <h1>Hola mundo</h1>
+      </div>
       <div className={`container ${classes.footer__end}`}>
         <div className={classes.logo}>
           <img src={SuraLogo} alt='' />
