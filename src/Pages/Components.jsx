@@ -197,7 +197,7 @@ function Components() {
       <CardSlider lists={cardSlides} />
 
       <div className='content-demo'>
-        <ItemAvatar title='Tu Salud - Lectura de 12 min.' paragraph='Quisque rutrum. Sed auge ipsum, egestas nec, vesti bulum.' img='https://picsum.photos/id/1005/150/150' />
+        <ItemAvatar border title='Tu Salud - Lectura de 12 min.' paragraph='Quisque rutrum. Sed auge ipsum, egestas nec, vesti bulum.' img='https://picsum.photos/id/1005/150/150' />
       </div>
       <div style={{
         width: '80%',
