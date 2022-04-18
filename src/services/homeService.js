@@ -7,7 +7,7 @@ function getHome() {
     headers: { 'Content-Type': 'application/json' },
   };
 
-  return fetch(`${config.apiUrl}/pages/82`, requestOptions)
+  return fetch(`${config.apiUrl}/pages/85`, requestOptions)
     .then(handleResponse)
     .then((home) => {
       return home;
