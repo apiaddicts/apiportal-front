@@ -59,9 +59,8 @@
       .email,
       .policies {
         text-align: center !important;
-      }      
+      }
     }
-
   }
   &__social {
     display: grid;
@@ -69,7 +68,7 @@
     grid-template-areas: "copyright icons";
     align-items: center;
     padding: 30px 5px;
-    &__copyright{
+    &__copyright {
       grid-area: copyright;
     }
     &__icons {
@@ -84,12 +83,22 @@
       grid-template-areas: "icons" "copyright";
       gap: 1rem;
       padding-top: 1rem;
-      &__copyright{
+      &__copyright {
         text-align: center;
       }
       &__icons {
         justify-content: space-around;
       }
+    }
+  }
+  &__section {
+    background: #ECF0F1;
+    &__contact {
+      padding-top: 100px;
+      padding-bottom: 73px;
+    }
+    input[type="checkbox"] {
+      width: 20px;
     }
   }
 }
@@ -132,5 +141,9 @@
     height: 72px;
     width: 72px;
     cursor: pointer;
+    &:hover {
+      transform: scale(1.1);
+      transition: 0.3s ease all;
+    }
   }
 }

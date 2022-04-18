@@ -264,6 +264,74 @@ function Components() {
       <div>
         {icons('person')}
       </div>
+
+      <div className='container'>
+        <h1 className='text-center'>GRID SYSTEM</h1>
+        <div className='row'>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-2 test'>Col 2 of 12</p>
+          <p className='flex-sm-2 test'>Col 2 of 12</p>
+          <p className='flex-sm-2 test'>Col 2 of 12</p>
+          <p className='flex-sm-2 test'>Col 2 of 12</p>
+          <p className='flex-sm-2 test'>Col 2 of 12</p>
+          <p className='flex-sm-2 test'>Col 2 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-3 test'>Col 3 of 12</p>
+          <p className='flex-sm-3 test'>Col 3 of 12</p>
+          <p className='flex-sm-3 test'>Col 3 of 12</p>
+          <p className='flex-sm-3 test'>Col 3 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-4 test'>Col 4 of 12</p>
+          <p className='flex-sm-4 test'>Col 4 of 12</p>
+          <p className='flex-sm-4 test'>Col 4 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-5 test'>Col 5 of 12</p>
+          <p className='flex-sm-7 test'>Col 7 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-6 test'>Col 6 of 12</p>
+          <p className='flex-sm-6 test'>Col 6 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-7 test'>Col 7 of 12</p>
+          <p className='flex-sm-5 test'>Col 5 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-8 test'>Col 8 of 12</p>
+          <p className='flex-sm-4 test'>Col 4 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-9 test'>Col 9 of 12</p>
+          <p className='flex-sm-3 test'>Col 3 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-10 test'>Col 10 of 12</p>
+          <p className='flex-sm-2 test'>Col 2 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-11 test'>Col 11 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-12 test'>Col 12 of 12</p>
+        </div>
+      </div>
     </div>
 
   );

@@ -1,9 +1,12 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { FaFacebookF, FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa';
 import Base from './Base';
 import classes from './footer.module.scss';
 import Icon from '../MdIcon/Icon';
 import SuraLogo from '../../static/img/sura_logo.svg';
+import Input from '../Input';
+import Button from '../Buttons/Button';
 
 function Footer({ props }) {
   const img = 'https://picsum.photos/1920/300';
@@ -26,9 +29,56 @@ function Footer({ props }) {
           </button>
         </div>
       </Base>
-      <div>
-        <h1>Hola mundo</h1>
-      </div>
+
+      {!contactForm && (
+        <div className={classes.footer__section}>
+          <div className={`container ${classes.footer__section__contact}`}>
+            <div className='row mb-5'>
+              <div className='flex-md-6 flex-sm-12'>
+                <Input type='text' placeholder='Nombre' />
+              </div>
+              <div className='flex-md-6 flex-sm-12'>
+                <Input type='text' placeholder='Apellidos' />
+              </div>
+            </div>
+            <div className='row mb-5'>
+              <div className='flex-md-6 flex-sm-12'>
+                <Input type='text' placeholder='Correo electrónico' />
+              </div>
+              <div className='flex-md-6 flex-sm-12'>
+                <Input type='text' placeholder='Celular' />
+              </div>
+            </div>
+            <div className='row mb-5'>
+              <div className='flex-md-6 flex-sm-12'>
+                <Input type='text' placeholder='Temas' />
+              </div>
+              <div className='flex-md-6 flex-sm-12'>
+                <Input type='text' placeholder='Asunto' />
+              </div>
+            </div>
+            <div className='row mb-5'>
+              <div className='flex-md-12 flex-sm-12'>
+                <Input type='text' placeholder='Mensaje' />
+              </div>
+            </div>
+            <div className='row mb-5'>
+              <div className='flex-md-12 flex-sm-12'>
+                <input type='checkbox' id='checkbox' />
+                <label>Acepto recibir correos de acuerdo con los siguientes términos y condiciones.</label>
+              </div>
+            </div>
+            <div className='row mb-5 mt-10 justify-center'>
+              <div className='flex-md-3 flex-sm-12'>
+                <Button type='secundary'>
+                  ¡Estoy interesado!
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      )}
       <div className={`container ${classes.footer__end}`}>
         <div className={classes.logo}>
           <img src={SuraLogo} alt='' />

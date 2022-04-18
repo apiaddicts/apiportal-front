@@ -109,3 +109,8 @@
   }
   align-content: $value;
 }
+
+@mixin grid($number) {
+  flex: 0 0 percentage((100 / $number) / 100);
+  max-width: percentage((100 / $number) / 100);
+}
