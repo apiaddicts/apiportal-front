@@ -25,14 +25,14 @@ function Footer({ props }) {
         </div>
       </Base>
       <div className={`container ${classes.footer__end}`}>
-        <div>
+        <div className={classes.logo}>
           <img src={SuraLogo} alt='' />
         </div>
-        <div className='text-right'>
+        <div className={classes.email}>
           <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3'>Correo electronico</h1>
           <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>mxEmpresasSura@segurossura.com.mex</p>
         </div>
-        <div className='text-right'>
+        <div className={classes.policies}>
           <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3'>Política de</h1>
           <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>Privacidad de datos</p>
         </div>

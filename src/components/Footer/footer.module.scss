@@ -1,4 +1,5 @@
 @import "./../../styles/variables.scss";
+@import "./../../styles/mixins/mixin.scss";
 
 .footer {
   &__container {
@@ -10,27 +11,75 @@
     position: relative;
   }
   &__end {
+    .logo {
+      grid-area: logo;
+    }
+    .email {
+      grid-area: email;
+    }
+    .policies {
+      grid-area: policies;
+    }
+
+    .email,
+    .policies {
+      text-align: right;
+    }
+
     display: grid;
-    grid-template-columns: 3fr 1fr 190px;
+    grid-template-areas: "logo" "email" "policies";
     align-items: center;
     gap: 4rem;
-    border-bottom: 1px solid #E6E7EE;
-    padding-top: 25px;
+    border-bottom: 1px solid #e6e7ee;
+    padding-top: 3rem;
     padding-bottom: 16px;
     padding-left: 0;
     padding-right: 0;
+
+    @include breakpoint(lg) {
+      grid-template-columns: 3fr 1fr 190px;
+      grid-template-areas: "logo email policies";
+    }
+
+    @include breakpoint(md) {
+      grid-template-columns: 3fr 1fr 1fr;
+      grid-template-areas: "logo email policies";
+    }
+
+    @include breakpoint(xs) {
+      grid-template-columns: 1fr;
+      grid-template-areas: "logo" "email" "policies";
+      gap: 1rem;
+      padding-top: 3rem;
+      .email,
+      .policies {
+        text-align: left !important;
+      }      
+    }
+
   }
   &__social {
     display: grid;
-    grid-template-columns: 10fr 1fr; 
+    grid-template-columns: 10fr 1fr;
+    grid-template-areas: "copyright icons";
     align-items: center;
     padding: 30px 5px;
-    &__icons{
-        color: $gray_lighten-3;
-        font-size: 25px;
-        display: flex;
-        justify-content: space-between;
-    }   
+    &__copyright{
+      grid-area: copyright;
+    }
+    &__icons {
+      grid-area: icons;
+      color: $gray_lighten-3;
+      font-size: 25px;
+      display: flex;
+      justify-content: space-between;
+    }
+    @include breakpoint(xs) {
+      grid-template-columns: 1fr;
+      grid-template-areas: "icons" "copyright";
+      gap: 1rem;
+      padding-top: 1rem;
+    }
   }
 }
 
@@ -39,6 +88,9 @@
     height: 100%;
     width: 100%;
     background: $primary;
+    @include breakpoint(xs) {
+      text-align: center;
+    }
   }
 }
 .heroOverlay {
@@ -53,8 +105,12 @@
 
 .button__fab {
   position: absolute;
-  top: 85.8%;
-  left: 48%;
+  width: 72px;
+  margin-left: auto;
+  margin-right: auto;
+  right: 0;
+  left: 0;
+  transform: translateY(-50%);
   button {
     background: #b7b09c;
     border: none;
