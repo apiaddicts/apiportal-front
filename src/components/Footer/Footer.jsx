@@ -25,12 +25,12 @@ function Footer({ props }) {
         </div>
         <div className={classes.button__fab}>
           <button type='submit' onClick={() => { setContactForm(!contactForm); }}>
-            {contactForm ? <Icon id='MdMailOutline' /> : <Icon id='MdClose' />}
+            {contactForm ? <Icon id='MdClose' /> : <Icon id='MdMailOutline' />}
           </button>
         </div>
       </Base>
 
-      {!contactForm && (
+      {contactForm && (
         <div className={classes.footer__section}>
           <div className={`container ${classes.footer__section__contact}`}>
             <div className='row mb-5'>
