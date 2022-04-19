@@ -1,3 +1,4 @@
+@import "./../../styles/variables.scss";
 .blog__details {
     width: 100%;
     display: flex;
@@ -25,8 +26,18 @@
 
         @media (max-width: 768px) {
             margin-bottom: 0;
+            border-bottom: 1px solid #0033a07e;
+            padding: 0 0 20px 0;
         }
 
+        &__icons {
+            display: flex;
+            width: 100%;
+        
+            @media (min-width: 768px) {
+                display: none;
+            }
+        }
         &__content {
             width: 100%;
             display: flex;
@@ -39,12 +50,15 @@
             }
         }
 
+        &__subtitle {
+            color: #333333b3;
+        }
         &__title {
             display: flex;
             font-size: 20px;
             font-weight: 700;
             color: rgb(1, 90, 199);
-            width: 30%;
+            width: 40%;
 
             p {
                 margin-left: 15px;
@@ -66,6 +80,9 @@
             justify-content: center;
             align-items: center;
 
+            span {
+                margin: 0 5px;
+            }
             @media (max-width: 768px) {
                 width: 100%;
                 margin-top: 15px;
@@ -126,7 +143,7 @@
 
         &__text {
             width: 100%;
-            color: #333;
+            color: #333333b3;
             margin-bottom: 10px;
             line-height: 30px;
         }
@@ -165,8 +182,15 @@
             margin-bottom: 0;
         }
 
+        ul li {
+            @media (max-width: 768px) {
+                padding-top: 4px;
+                padding-bottom: 4px
+            }
+        }
         &__items {
             margin-bottom: 20px;
+            color: #333333b3;
 
             @media (max-width: 768px) {
                 width: 100%;
@@ -175,6 +199,53 @@
                 align-items: center;
                 margin-bottom: 0;
             }
+        }
+    }
+    &__social__content {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    
+        @media (max-width: 768px) {
+            padding: 50px 0;
+            justify-content: flex-start;
+        }
+    
+        p {
+            @media (max-width: 768px) {
+                display: none;
+            }
+        }
+    }
+    
+    
+    
+    &__social {
+        display: grid;
+        grid-template-columns: 10fr 1fr;
+        align-items: center;
+        padding: 30px 5px;
+    
+        &__icons {
+            color: $gray_lighten-3;
+            font-size: 25px;
+            display: flex;
+            justify-content: space-between;
+        }
+    
+        &__icon__content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #0033a082;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 17px;
+            color: #0033A0;
+            margin: 0 10px;
+            cursor: pointer;
         }
     }
 }
