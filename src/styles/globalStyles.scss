@@ -845,9 +845,12 @@ a {
 }
 .button__group {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-content: center;
   flex-direction: row;
+  @include breakpoint(xs) {
+    flex-direction: column;
+  }
 }
 
 .divider {

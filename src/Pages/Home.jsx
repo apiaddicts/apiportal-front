@@ -11,7 +11,7 @@ import Button from '../components/Buttons/Button';
 import Carousel from '../components/Carousel/Carousel';
 import Slider from '../components/Slider/Slider';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
-
+import textureCircles from '../static/img/texture_circles.svg';
 import { getHome } from '../redux/actions/homeAction';
 
 function Home() {
@@ -96,15 +96,21 @@ function Home() {
           <section>
             <Slider slides={slides} />
           </section>
-          <section className={`container ${classes.content}`}>
-            <div className={classes.section__content}>
-              <div className={classes.section__content__title}>
-                <h1 className='h2 text__primary font-weight-bold mb-10 ml-5'>{titleSection}</h1>
+
+          <section className={`container ${classes.section__content}`}>
+            <div className={classes.section__content__texture}>
+              <img src={textureCircles} alt='Texture' />
+            </div>
+            <div className='row'>
+              <div className={`flex-md-12 ${classes.section__content__title}`}>
+                <h1 className='h2 text__primary font-weight-bold mb-10 ml-5'>
+                  {titleSection || 'Benificios principales'}
+                </h1>
               </div>
-              <div className={classes.section__content__img}>
-                <img src={backgroundSection} alt={`Benefits_${titleSection}`} className='ml-10' />
+              <div className={`flex-md-6 flex-sm-12 ${classes.section__content__img}`}>
+                <img src={backgroundSection || 'https://picsum.photos/500/300'} alt='Benefits' className='ml-4' />
               </div>
-              <div className={classes.section__content__items}>
+              <div className={`flex-lg-6 flex-sm-12 ${classes.section__content__items}`}>
                 {itemsSection.map((item, i) => (
                   <Item
                     key={i}
@@ -121,10 +127,14 @@ function Home() {
           </section>
 
           <section className={`${classes.section__works}`}>
-            <div className={`container ${classes.section__works__content}`}>
-              <h1 className='h3 text__secondary__white mb-5'>
-                {filterWorks[0].title ? filterWorks[0].title : '¿Cómo funciona?'}
-              </h1>
+            <div className='container'>
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <h1 className={`h3 text-center text__secondary__white mb-5 ${classes.section__works__title}`}>
+                    {filterWorks[0].title ? filterWorks[0].title : '¿Cómo funciona?'}
+                  </h1>
+                </div>
+              </div>
               <Tabs direction='center' colorTab='white' activeColor='yellow'>
                 {
                   filterDiscoverTab.map((item, i) => (
@@ -150,7 +160,7 @@ function Home() {
               <div className='button__group mt-10'>
                 {filterButtonSection && filterButtonSection.length > 0 ? (
                   filterButtonSection[0].header.map((button, i) => (
-                    <div key={i} className='pr-2'>
+                    <div key={i} className='pr-2 mb-4'>
                       <Button type={button.keyword}>
                         {button.title}
                       </Button>
@@ -161,37 +171,41 @@ function Home() {
             </div>
           </section>
 
-          <section className='container pt-10 mt-10 mb-10 pb-10'>
-            <div className={classes.section__discover}>
-              <div className={classes.section__discover__title}>
+          <section className={`container ${classes.section__discover}`}>
+            <div className='row'>
+              <div className='flex-md-12 flex-sm-12'>
                 <h1 className='h2 text__primary font-weight-bold mb-2 ml-1'>
                   {filterDiscoverTitle || 'Descubre nuestras APIs'}
-
                 </h1>
               </div>
-              <div className={classes.section__discover__subtitle}>
+            </div>
+            <div className='row'>
+              <div className='flex-md-12 flex-sm-12'>
                 <p className='subtitle-1 ml-1 mb-10'>
                   {filterDiscoverSubtitle || ''}
                 </p>
               </div>
-              <div className={classes.section__discover__apicards}>
-                {
-                  filterDiscover && filterDiscover[0].useCaseList && filterDiscover[0].useCaseList.length > 0 ? (
-                    filterDiscover[0].useCaseList.map((card, i) => (
-                      <div key={i} className={classes.section__discover__apicards__card}>
-                        <CardBasic chipTitle={card.statusText} title={card.title} description={card.description} info={card.linkText} />
-                      </div>
-                    ))
-                  ) : (null)
-                }
+            </div>
+            <div className='row'>
+              {
+                filterDiscover && filterDiscover[0].useCaseList && filterDiscover[0].useCaseList.length > 0 ? (
+                  filterDiscover[0].useCaseList.map((card, i) => (
+                    <div key={i} className={classes.section__discover__apicards__card}>
+                      <CardBasic chipTitle={card.statusText} title={card.title} description={card.description} info={card.linkText} />
+                    </div>
+                  ))
+                ) : (null)
+              }
+            </div>
+            <div className='row'>
+              <div className='flex-md-12'>
+                <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
+                  <a href='' className={`button text__primary ${classes.section__discover__showmore__button}`}>
+                    <span className='mr-1'>ver todas</span>
+                    <Icon id='MdOutlineEast' />
+                  </a>
+                </div>
               </div>
-              <div className={`mt-10 ${classes.section__discover__showmore}`}>
-                <a href='' className={`button text__primary ${classes.section__discover__showmore__button}`}>
-                  <span className='mr-1'>ver todas</span>
-                  <Icon id='MdOutlineEast' />
-                </a>
-              </div>
-
             </div>
           </section>
 

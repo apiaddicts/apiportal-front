@@ -11,7 +11,6 @@ function Carousel(props) {
   ];
   return (
     <>
-
       <div className={classes.slider__container}>
         {imgs.map((src, i) => (
           <div key={i} className={classes.slider__content__card}>
