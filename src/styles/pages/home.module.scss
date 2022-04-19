@@ -21,6 +21,8 @@
   grid-template-columns: repeat(2, 1fr);
   align-items: center;
   justify-content: center;
+  margin-top: 50px;
+  margin-bottom: 50px;
 
   &__title {
     grid-column: 1/3;
