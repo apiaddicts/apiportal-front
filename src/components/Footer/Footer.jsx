@@ -1,14 +1,19 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import React, { useState } from 'react';
 import { FaFacebookF, FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa';
 import Base from './Base';
 import classes from './footer.module.scss';
 import Icon from '../MdIcon/Icon';
 import SuraLogo from '../../static/img/sura_logo.svg';
+import Input from '../Input';
+import Button from '../Buttons/Button';
 
 function Footer({ props }) {
   const img = 'https://picsum.photos/1920/300';
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
+
+  const [contactForm, setContactForm] = useState(false);
 
   return (
     <div>
@@ -19,20 +24,70 @@ function Footer({ props }) {
           <p className='h5 text__secondary__white mb-10'>Contáctanos por medio de este formulario</p>
         </div>
         <div className={classes.button__fab}>
-          <button type='submit'>
-            <Icon id='MdMailOutline' />
+          <button type='submit' onClick={() => { setContactForm(!contactForm); }}>
+            {contactForm ? <Icon id='MdMailOutline' /> : <Icon id='MdClose' />}
           </button>
         </div>
       </Base>
+
+      {!contactForm && (
+        <div className={classes.footer__section}>
+          <div className={`container ${classes.footer__section__contact}`}>
+            <div className='row mb-5'>
+              <div className='flex-md-6 flex-sm-12'>
+                <Input type='text' placeholder='Nombre' />
+              </div>
+              <div className='flex-md-6 flex-sm-12'>
+                <Input type='text' placeholder='Apellidos' />
+              </div>
+            </div>
+            <div className='row mb-5'>
+              <div className='flex-md-6 flex-sm-12'>
+                <Input type='text' placeholder='Correo electrónico' />
+              </div>
+              <div className='flex-md-6 flex-sm-12'>
+                <Input type='text' placeholder='Celular' />
+              </div>
+            </div>
+            <div className='row mb-5'>
+              <div className='flex-md-6 flex-sm-12'>
+                <Input type='text' placeholder='Temas' />
+              </div>
+              <div className='flex-md-6 flex-sm-12'>
+                <Input type='text' placeholder='Asunto' />
+              </div>
+            </div>
+            <div className='row mb-5'>
+              <div className='flex-md-12 flex-sm-12'>
+                <Input type='text' placeholder='Mensaje' />
+              </div>
+            </div>
+            <div className='row mb-5'>
+              <div className='flex-md-12 flex-sm-12'>
+                <input type='checkbox' id='checkbox' />
+                <label>Acepto recibir correos de acuerdo con los siguientes términos y condiciones.</label>
+              </div>
+            </div>
+            <div className='row mb-5 mt-10 justify-center'>
+              <div className='flex-md-3 flex-sm-12'>
+                <Button type='secundary'>
+                  ¡Estoy interesado!
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      )}
       <div className={`container ${classes.footer__end}`}>
-        <div>
+        <div className={classes.logo}>
           <img src={SuraLogo} alt='' />
         </div>
-        <div className='text-right'>
+        <div className={classes.email}>
           <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3'>Correo electronico</h1>
           <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>mxEmpresasSura@segurossura.com.mex</p>
         </div>
-        <div className='text-right'>
+        <div className={classes.policies}>
           <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3'>Política de</h1>
           <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>Privacidad de datos</p>
         </div>

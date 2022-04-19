@@ -855,6 +855,7 @@ a {
   width: 56px;
 }
 
+/*
 .container {
   max-width: 90%;
   height: 100%;
@@ -863,6 +864,9 @@ a {
   padding-left: 15px;
   padding-right: 15px;
 }
+*/
+
+
 .section {
   padding-top: 200px;
 }
@@ -873,13 +877,19 @@ a {
 .text-right {
   text-align: right !important;
 }
+.text-center {
+  text-align: center !important;
+}
 
 .text-uppercase {
   text-transform: uppercase !important;
 }
 
+.justify-center {
+  justify-content: center;
+}
+
 .content-demo {
   margin: auto;
   width: 500px;
-  
 }
