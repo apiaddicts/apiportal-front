@@ -190,7 +190,7 @@ function Home() {
               {
                 filterDiscover && filterDiscover[0].useCaseList && filterDiscover[0].useCaseList.length > 0 ? (
                   filterDiscover[0].useCaseList.map((card, i) => (
-                    <div key={i} className={classes.section__discover__apicards__card}>
+                    <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
                       <CardBasic chipTitle={card.statusText} title={card.title} description={card.description} info={card.linkText} />
                     </div>
                   ))
