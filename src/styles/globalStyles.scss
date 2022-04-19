@@ -848,6 +848,9 @@ a {
   justify-content: space-between;
   align-content: center;
   flex-direction: row;
+  @include breakpoint(xs) {
+    flex-direction: column;
+  }
 }
 
 .divider {

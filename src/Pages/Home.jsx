@@ -11,7 +11,7 @@ import Button from '../components/Buttons/Button';
 import Carousel from '../components/Carousel/Carousel';
 import Slider from '../components/Slider/Slider';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
-
+import textureCircles from '../static/img/texture_circles.svg';
 import { getHome } from '../redux/actions/homeAction';
 
 function Home() {
@@ -142,15 +142,20 @@ function Home() {
           <section>
             <Slider slides={slidesDemo} />
           </section>
-          <section className={`container ${classes.content}`}>
-            <div className={classes.section__content}>
-              <div className={classes.section__content__title}>
+
+          <section className={`container ${classes.section__content}`}>
+            <div className={classes.section__content__texture}>
+              <img src={textureCircles} alt='Texture' />
+            </div>
+
+            <div className='row'>
+              <div className={`flex-md-12 ${classes.section__content__title}`}>
                 <h1 className='h2 text__primary font-weight-bold mb-10 ml-5'>Benificios principales</h1>
               </div>
-              <div className={classes.section__content__img}>
-                <img src='https://picsum.photos/500/300' alt='Benefits' className='ml-10' />
+              <div className={`flex-md-6 flex-sm-12 ${classes.section__content__img}`}>
+                <img src='https://picsum.photos/500/300' alt='Benefits' className='ml-4' />
               </div>
-              <div className={classes.section__content__items}>
+              <div className={`flex-md-6 flex-sm-12 ${classes.section__content__items}`}>
                 {items.map((item, i) => (
                   <Item
                     key={i}
