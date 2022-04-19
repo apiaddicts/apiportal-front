@@ -49,6 +49,12 @@
 
     @include breakpoint(xs) {
       display: none;
+    }    
+    @include breakpoint(md) {
+      display: none;
+    }
+    @include breakpoint(lg) {
+      display: block;
     }
 
     img {
@@ -69,14 +75,24 @@
   background: url("../../static/img/texture_points.svg"), $primary;
   background-repeat: no-repeat;
   background-size: cover;
+  padding-top: 74px !important;
+  padding-bottom: 84px !important;
+  @include breakpoint(xs){
+    padding-top: 49px !important;
+    padding-bottom: 59px !important;
+  }
+  &__title{
+    @include breakpoint(xs) {
+      text-align: left !important;
+      font-size: 26px !important;
+    }
+  }
   &__content {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     height: 100%;
-    padding-top: 74px;
-    padding-bottom: 84px;
     &__tabs {
       display: flex;
       justify-content: center;
@@ -111,17 +127,24 @@
 }
 
 .section__discover {
-  display: grid;
+  padding-top: 95px !important;
+  padding-bottom: 77px !important;
 
-  &__apicards {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 2rem;
+  @include breakpoint(xs){
+    padding-top: 54px !important;
+    padding-bottom: 51px !important;
   }
+
   &__showmore {
     &__button {
       display: flex;
       justify-content: end;
+      @include breakpoint(sm) {
+        justify-content: center !important;
+      }
+      @include breakpoint(lg) {
+        justify-content: end !important;
+      }
     }
     a {
       text-decoration: none;

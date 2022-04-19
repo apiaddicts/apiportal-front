@@ -6,9 +6,10 @@ import Base from './Base';
 
 import './cards.scss';
 
-function CardBasic({ chipTitle, title, img, description, info }) {
+function CardBasic({ chipTitle, title, img, description, info, maxWidth }) {
+
   return (
-    <Base>
+    <Base maxWidth={maxWidth}>
       {img ? (
         <picture>
           <img className='card_img' src={img} alt={img} />
