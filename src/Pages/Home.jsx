@@ -191,7 +191,7 @@ function Home() {
           </section>
 
           <section className={classes.section__experiences}>
-            <div className='container pt-10 mt-10 pb-10 mb-10'>
+            <div className='container'>
               <div className={classes.section__experiences__title}>
                 <h1 className='h2 text__primary mb-2'>
                   {filterWorks[1].title ? filterWorks[1].title : 'Nuestras experiencias'}
@@ -202,27 +202,33 @@ function Home() {
                   {filterWorks[1].subtitle ? filterWorks[1].subtitle : ''}
                 </p>
               </div>
-              <div className={classes.section__experiences__tabs}>
-                <Tabs line={true}>
-                  {
-                    filterTabCard && filterTabCard.length > 0 ? (
-                      filterTabCard.map((tab, i) => (
-                        <div key={i} label={tab.name}>
-                          <div className={classes.section__experiences__content}>
-                            <div className={classes.section__experiences__content__img}>
-                              <div className={classes.section__experiences__content__img__overlay}>
-                                <img src={tab.img.length > 0 ? tab.img[0].url : 'https://picsum.photos/500/350'} alt='' />
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <Tabs line={true}>
+                    {
+                      filterTabCard && filterTabCard.length > 0 ? (
+                        filterTabCard.map((tab, i) => (
+                          <div key={i} label={tab.name}>
+                            <div className='row'>
+                              <div className='flex-md-12 flex-sm-12'>
+                                <div className={classes.section__experiences__content}>
+                                  <div className={classes.section__experiences__content__img}>
+                                    <div className={classes.section__experiences__content__img__overlay}>
+                                      <img src={tab.img.length > 0 ? tab.img[0].url : 'https://picsum.photos/500/350'} alt='' />
+                                    </div>
+                                  </div>
+                                  <div className={classes.section__experiences__content__card}>
+                                    <CardSlider lists={tab.cards.length > 0 ? tab.cards : []} />
+                                  </div>
+                                </div>
                               </div>
                             </div>
-                            <div className={classes.section__experiences__content__card}>
-                              <CardSlider lists={tab.cards.length > 0 ? tab.cards : []} />
-                            </div>
                           </div>
-                        </div>
-                      ))
-                    ) : (null)
-                  }
-                </Tabs>
+                        ))
+                      ) : (null)
+                    }
+                  </Tabs>
+                </div>
               </div>
             </div>
           </section>
