@@ -11,11 +11,10 @@ function Carousel(props) {
   ];
   return (
     <>
-
       <div className={classes.slider__container}>
         {imgs.map((src, i) => (
           <div key={i} className={classes.slider__content__card}>
-            <CardBasic img={src.img} />
+            <CardBasic info='MÁS INFORMACIÓN' img={src.img} title={`title ${i}`} description=' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ab voluptatum nisi alias veniam nesciunt facere non culpa itaque architecto ipsam iusto, repellat est sit? Esse et id vero ut! Lorem ipsum dolor, sit amet ' />
           </div>
         ))}
       </div>

@@ -11,7 +11,7 @@ import Button from '../components/Buttons/Button';
 import Carousel from '../components/Carousel/Carousel';
 import Slider from '../components/Slider/Slider';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
-
+import textureCircles from '../static/img/texture_circles.svg';
 import { getHome } from '../redux/actions/homeAction';
 
 function Home() {
@@ -23,38 +23,6 @@ function Home() {
       dispatch(getHome());
     }
   }, []);
-
-  const items = [
-    { icon: 'successWindow', title: 'Integración ágil y dinámica', description: 'Reduce los tiempos de integración y empieza a vender y gestionar de forma rápida y fácil.' },
-    { icon: 'archivist', title: 'Amplio catálogo de soluciones y APIs', description: 'Podrás gestionar todo tipo de operaciones de negocio a través de tu cuenta y apps.' },
-    { icon: 'note1', title: 'Recursos y documentación developers', description: 'Ten siempre disponible toda la documetación de tus APIs y apóyate en las guías elaboradas para ti.' },
-  ];
-
-  const itemsWorks = [
-    { number: 1, icon: 'person', title: 'Regístrate', description: 'Crea una cuenta para tu organización y accede al catálogo complementos de APIs de SURA' },
-    { number: 2, icon: 'note', title: 'Personaliza', description: 'Selecciona las APIs que mejor se ajustan a tus necesidades y descubre todo lo que puedes conseguir con ellas.' },
-    { number: 3, icon: 'computer', title: 'Desarrolla', description: 'En breve tendrás integradas las APIs en tu plataforma para comenzar a vender y gestionar los productos.' },
-    { number: 4, icon: 'person', title: 'perferendis', description: 'Sed tempore nisi veritatis asperiores pariatur est veritatis dicta.Sed tempore nisi veritatis asperiores pariatur est veritatis dicta.' },
-    { number: 5, icon: 'note', title: 'perferendis', description: 'Doloribus voluptate voluptate.Doloribus voluptate voluptate.Doloribus voluptate voluptate.Doloribus voluptate voluptate.' },
-    { number: 6, icon: 'computer', title: 'perferendis', description: 'Et et nihil dicta placeat.Et et nihil dicta placeat.Et et nihil dicta placeat.Et et nihil dicta placeat.Et et nihil dicta placeat.' },
-  ];
-
-  const itemsWorksAdmin = [
-    { number: 1, icon: 'person', title: 'Regístrate', description: 'Crea una cuenta para tu organización y accede al catálogo complementos de APIs de SURA' },
-    { number: 2, icon: 'note', title: 'Personaliza', description: 'Selecciona las APIs que mejor se ajustan a tus necesidades y descubre todo lo que puedes conseguir con ellas.' },
-    { number: 3, icon: 'computer', title: 'Desarrolla', description: 'En breve tendrás integradas las APIs en tu plataforma para comenzar a vender y gestionar los productos.' },
-  ];
-
-  const cardsApis = [
-    { chipTitle: 'GET' },
-    { chipTitle: 'POST' },
-    { chipTitle: 'GET' },
-  ];
-
-  const buttons = [
-    { class: 'primary', label: 'empezar ahora' },
-    { class: 'ghost', label: 'ver apis' },
-  ];
 
   const cardSlides = [
     {
@@ -80,78 +48,70 @@ function Home() {
     },
   ];
 
-  const slidesDemo = [
-    {
-      imgSrc: 'https://picsum.photos/1925/630',
-      title: '¡Toda la potencia de una aseguradora en APIs!',
-      actionButtons: [
-        {
-          label: 'Empezar ahora',
-          type: 'primary',
-        },
-        {
-          label: 'Ver APIS',
-          type: 'ghost',
-        },
-      ],
-    },
-    {
-      imgSrc: 'https://picsum.photos/1920/630',
-      title: '¡SURA la mejor financiera que existe!',
-      actionButtons: [
-        {
-          label: 'Empezar ahora',
-          type: 'primary',
-        },
-        {
-          label: 'Ver APIS',
-          type: 'ghost',
-        },
-      ],
-    },
-    {
-      imgSrc: 'https://picsum.photos/1923/630',
-      title: '¡El mejor lugar de apis APIs!',
-      actionButtons: [
-        {
-          label: 'Empezar ahora',
-          type: 'primary',
-        },
-        {
-          label: 'Ver APIS',
-          type: 'ghost',
-        },
-      ],
-    },
-  ];
+  // Load Slider
+  const filterSlider = data && data.contentSections ? data.contentSections.filter((item) => item.__component === 'sura.carousel') : [];
+  const slides = filterSlider.length > 0 ? filterSlider[0].sliderCarousel.map((i) => {
+    const response = {
+      imgSrc: i.imgSrc && i.imgSrc.length > 0 ? i.imgSrc[0].url : 'https://picsum.photos/1920/630',
+      title: i.title,
+      actionButtons: i.actionButtons ? i.actionButtons : null,
+    };
+    return response;
+  }) : [];
+  // Load section
+  const filterSection = data && data.contentSections ? data.contentSections.filter((item) => item.__component === 'home.work-section') : [];
+  const titleSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].title ? filterSection[0].title : '';
+  const backgroundSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].background ? filterSection[0].background.url : '';
+  const itemsSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].Steps ? filterSection[0].Steps.map((i) => {
+    const response = {
+      icon: i.number,
+      title: i.title,
+      description: i.subtitle,
+    };
+    return response;
+  }) : [];
 
-  // const filterSlider = data && data.contentSections ? data.contentSections.filter((item) => item.__component === 'sura.carousel') : [];
-  // const slides = filterSlider.length > 0 ? filterSlider[0].slider.map((i) => {
+  // Load title works and experiences
+  const filterWorks = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sections.title-section') : [];
 
-  //   const response = {
-  //     imgSrc: i.banner ? i.banner[0].url : 'https://picsum.photos/1920/630',
-  //     title: i.title,
-  //     actionButtons: i.actionButtons,
-  //   };
-  //   return response;
-  // }) : [];
+  // Load discover section
+  const filterDiscoverTab = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'home.discover-section') : [];
+
+  // Load buttons sections
+  const filterButtonSection = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sections.button-hero') : [];
+
+  // Load discover section
+  const filterDiscover = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sections.section-use-case') : [];
+  const filterDiscoverTitle = filterDiscover.length > 0 && filterDiscover.length === 1 && filterDiscover[0].title ? filterDiscover[0].title : '';
+  const filterDiscoverSubtitle = filterDiscover.length > 0 && filterDiscover.length === 1 && filterDiscover[0].subtitle ? filterDiscover[0].subtitle : '';
+
+  const filterTabCard = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sura.tab-card') : [];
+  // console.log(data.contentSections);
+  console.log(filterTabCard);
+  // console.log(filterDiscoverSubtitle);
   return (
     <div>
       {Object.keys(data).length > 0 ? (
         <div>
           <section>
-            <Slider slides={slidesDemo} />
+            <Slider slides={slides} />
           </section>
-          <section className={`container ${classes.content}`}>
-            <div className={classes.section__content}>
-              <div className={classes.section__content__title}>
-                <h1 className='h2 text__primary font-weight-bold mb-10 ml-5'>Benificios principales</h1>
+
+          <section className={`container ${classes.section__content}`}>
+            <div className={classes.section__content__texture}>
+              <img src={textureCircles} alt='Texture' />
+            </div>
+            <div className='row'>
+              <div className={`flex-md-12 ${classes.section__content__title}`}>
+                <h1 className='h2 text__primary font-weight-bold mb-10 ml-5'>
+                  {titleSection || 'Benificios principales'}
+                </h1>
               </div>
-              <div className={classes.section__content__img}>
-                <img src='https://picsum.photos/500/300' alt='Benefits' className='ml-10' />
+              <div className={`flex-md-6 flex-sm-12 ${classes.section__content__img}`}>
+                <img src={backgroundSection || 'https://picsum.photos/500/300'} alt='Benefits' className='ml-4' />
               </div>
-              <div className={classes.section__content__items}>
-                {items.map((item, i) => (
+              <div className={`flex-lg-6 flex-sm-12 ${classes.section__content__items}`}>
+                {itemsSection.map((item, i) => (
                   <Item
                     key={i}
                     title={item.title}
@@ -167,91 +127,99 @@ function Home() {
           </section>
 
           <section className={`${classes.section__works}`}>
-            <div className={`container ${classes.section__works__content}`}>
-              <h1 className='h3 text__secondary__white mb-5'>¿Cómo funciona?</h1>
+            <div className='container'>
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <h1 className={`h3 text-center text__secondary__white mb-5 ${classes.section__works__title}`}>
+                    {filterWorks[0].title ? filterWorks[0].title : '¿Cómo funciona?'}
+                  </h1>
+                </div>
+              </div>
               <Tabs direction='center' colorTab='white' activeColor='yellow'>
-                <div label='Administrador'>
-                  <div className={classes.section__works__items}>
-                    {itemsWorksAdmin.map((item, i) => (
-                      <div key={i} className={`mb-6 ${classes.section__works__items__item}`}>
-                        <Item
-                          number={item.number}
-                          title={item.title}
-                          description={item.description}
-                          icon={item.icon}
-                          type='title'
-                          textColor='#d4d9db'
-                        />
+                {
+                  filterDiscoverTab.map((item, i) => (
+                    <div label={item.title} key={i}>
+                      <div className={classes.section__works__items}>
+                        {item.Products.map((data, x) => (
+                          <div key={x} className={`mb-6 ${classes.section__works__items__item}`}>
+                            <Item
+                              number={data.id}
+                              title={data.title}
+                              description={data.subtitle}
+                              icon={data.icon}
+                              type='title'
+                              textColor='#d4d9db'
+                            />
+                          </div>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                </div>
-                <div label='Desarrollador'>
-                  <div className={classes.section__works__items}>
-                    {itemsWorks.map((item, i) => (
-                      <div key={i} className={`mb-6 ${classes.section__works__items__item}`}>
-                        <Item
-                          number={item.number}
-                          title={item.title}
-                          description={item.description}
-                          icon={item.icon}
-                          type='title'
-                          textColor='#d4d9db'
-                        />
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                    </div>
+                  ))
+                }
               </Tabs>
               <div className='button__group mt-10'>
-                {buttons.map((button, i) => (
-                  <div key={i} className='pr-2'>
-                    <Button type={button.class}>
-                      {button.label}
-                    </Button>
-                  </div>
-                ))}
+                {filterButtonSection && filterButtonSection.length > 0 ? (
+                  filterButtonSection[0].header.map((button, i) => (
+                    <div key={i} className='pr-2 mb-4'>
+                      <Button type={button.keyword}>
+                        {button.title}
+                      </Button>
+                    </div>
+                  ))
+                ) : (null)}
               </div>
             </div>
           </section>
 
-          <section className='container pt-10 mt-10 mb-10 pb-10'>
-            <div className={classes.section__discover}>
-              <div className={classes.section__discover__title}>
-                <h1 className='h2 text__primary font-weight-bold mb-2 ml-1'>Descubre nuestras APIs</h1>
+          <section className={`container ${classes.section__discover}`}>
+            <div className='row'>
+              <div className='flex-md-12 flex-sm-12'>
+                <h1 className='h2 text__primary font-weight-bold mb-2 ml-1'>
+                  {filterDiscoverTitle || 'Descubre nuestras APIs'}
+                </h1>
               </div>
-              <div className={classes.section__discover__subtitle}>
+            </div>
+            <div className='row'>
+              <div className='flex-md-12 flex-sm-12'>
                 <p className='subtitle-1 ml-1 mb-10'>
-                  Encuentra las mejores APIs para tu negocio.
-                  Nuestras APIs son fáciles de personalizar e integrar, para comenzar a vender y gestionar los productos.
+                  {filterDiscoverSubtitle || ''}
                 </p>
               </div>
-              <div className={classes.section__discover__apicards}>
-                {
-                  cardsApis.map((card, i) => (
-                    <div key={i} className={classes.section__discover__apicards__card}>
-                      <CardBasic chipTitle={card.chipTitle} />
+            </div>
+            <div className='row'>
+              {
+                filterDiscover && filterDiscover[0].useCaseList && filterDiscover[0].useCaseList.length > 0 ? (
+                  filterDiscover[0].useCaseList.map((card, i) => (
+                    <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
+                      <CardBasic chipTitle={card.statusText} title={card.title} description={card.description} info={card.linkText} />
                     </div>
                   ))
-                }
+                ) : (null)
+              }
+            </div>
+            <div className='row'>
+              <div className='flex-md-12'>
+                <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
+                  <a href='' className={`button text__primary ${classes.section__discover__showmore__button}`}>
+                    <span className='mr-1'>ver todas</span>
+                    <Icon id='MdOutlineEast' />
+                  </a>
+                </div>
               </div>
-              <div className={`mt-10 ${classes.section__discover__showmore}`}>
-                <a href='' className={`button text__primary ${classes.section__discover__showmore__button}`}>
-                  <span className='mr-1'>ver todas</span>
-                  <Icon id='MdOutlineEast' />
-                </a>
-              </div>
-
             </div>
           </section>
 
           <section className={classes.section__experiences}>
             <div className='container pt-10 mt-10 pb-10 mb-10'>
               <div className={classes.section__experiences__title}>
-                <h1 className='h2 text__primary mb-2'>Nuestras experiencias</h1>
+                <h1 className='h2 text__primary mb-2'>
+                  {filterWorks[1].title ? filterWorks[1].title : 'Nuestras experiencias'}
+                </h1>
               </div>
               <div className={classes.section__experiences__subtitle}>
-                <p className='body-1'>Podemos adaptar nuestras APIs a tu sector y organicación. A continuación te mostramos algunos de nuestros casos de uso actuales.</p>
+                <p className='body-1'>
+                  {filterWorks[1].subtitle ? filterWorks[1].subtitle : ''}
+                </p>
               </div>
               <div className={classes.section__experiences__tabs}>
                 <Tabs line={true}>

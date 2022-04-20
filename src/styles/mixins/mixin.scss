@@ -1,10 +1,28 @@
 @mixin breakpoint($point) {
-  @if $point == md {
-    // 768px
-    @media (min-width: 48em) {
+  @if $point == lg {
+    // 992px
+    @media (min-width: 992px) {
       @content;
     }
   }
+  @if $point == md {
+    // 768px
+    @media (min-width: 768px) {
+      @content;
+    }
+  }
+  @if $point == sm {
+    // 600px
+    @media (min-width: 600px) {
+      @content;
+    }
+  }    
+  @if $point == xs {
+    // 600px and down
+    @media (max-width: 600px) {
+      @content;
+    }
+  }  
 }
 
 /* ------------------------------ 
@@ -90,4 +108,9 @@
     -ms-flex-line-pack: $value;
   }
   align-content: $value;
+}
+
+@mixin grid($number) {
+  flex: 0 0 percentage((100 / $number) / 100);
+  max-width: percentage((100 / $number) / 100);
 }
