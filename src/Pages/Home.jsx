@@ -24,30 +24,6 @@ function Home() {
     }
   }, []);
 
-  const cardSlides = [
-    {
-      title: 'Ejemplo 1',
-      description: ' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ab voluptatum nisi alias veniam nesciunt facere non culpa itaque architecto ipsam iusto, repellat est sit? Esse et id vero ut! Lorem ipsum dolor, sit amet consectetur adipisicing elit.Minima repudiandae dolorum, explicabo delectus dolor, deserunt molestias placeat, itaque est esse laborum modi et aliquid.Consectetur dolores nostrum quo eius beatae.',
-      icon: 'Md3DRotation',
-      titleFooter: 'Tallah Cotton',
-      descriptionFooter: 'Cargo',
-    },
-    {
-      title: 'Ejemplo 2',
-      description: ' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ab voluptatum nisi alias veniam nesciunt facere non culpa itaque architecto ipsam iusto, repellat est sit? Esse et id vero ut! Lorem ipsum dolor, sit amet consectetur adipisicing elit.Minima repudiandae dolorum, explicabo delectus dolor, deserunt molestias placeat, itaque est esse laborum modi et aliquid.Consectetur dolores nostrum quo eius beatae.',
-      icon: 'MdAspectRatio',
-      titleFooter: 'Tallah Cotton',
-      descriptionFooter: 'Ejemplo',
-    },
-    {
-      title: 'Ejemplo 3',
-      description: ' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ab voluptatum nisi alias veniam nesciunt facere non culpa itaque architecto ipsam iusto, repellat est sit? Esse et id vero ut! Lorem ipsum dolor, sit amet consectetur adipisicing elit.Minima repudiandae dolorum, explicabo delectus dolor, deserunt molestias placeat, itaque est esse laborum modi et aliquid.Consectetur dolores nostrum quo eius beatae.',
-      icon: 'MdContactless',
-      titleFooter: 'Tallah Cotton',
-      descriptionFooter: 'Desarrollo',
-    },
-  ];
-
   // Load Slider
   const filterSlider = data && data.contentSections ? data.contentSections.filter((item) => item.__component === 'sura.carousel') : [];
   const slides = filterSlider.length > 0 ? filterSlider[0].sliderCarousel.map((i) => {
@@ -85,10 +61,15 @@ function Home() {
   const filterDiscoverTitle = filterDiscover.length > 0 && filterDiscover.length === 1 && filterDiscover[0].title ? filterDiscover[0].title : '';
   const filterDiscoverSubtitle = filterDiscover.length > 0 && filterDiscover.length === 1 && filterDiscover[0].subtitle ? filterDiscover[0].subtitle : '';
 
+  // Load tab cards
   const filterTabCard = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sura.tab-card') : [];
-  // console.log(data.contentSections);
-  console.log(filterTabCard);
-  // console.log(filterDiscoverSubtitle);
+
+  const filterHomeBanner = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
+  const filterHomeBannerTitle = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].title ? filterHomeBanner[0].title : '';
+  const filterHomeBannerSubtitle = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].subtitle ? filterHomeBanner[0].subtitle : '';
+  const filterHomeBannerImage = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].background ? filterHomeBanner[0].background.url : '';
+  const filterHomeBannerNameButtom = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].buttons ? filterHomeBanner[0].buttons[0].name : '';
+
   return (
     <div>
       {Object.keys(data).length > 0 ? (
@@ -224,89 +205,55 @@ function Home() {
               <div className='row'>
                 <div className='flex-md-12 flex-sm-12'>
                   <Tabs line={true}>
-
-                    <div label='Lorem ipsum'>
-
-                      <div className='row'>
-                        <div className='flex-md-12 flex-sm-12'>
-                          <div className={classes.section__experiences__content}>
-                            <div className={classes.section__experiences__content__img}>
-                              <div className={classes.section__experiences__content__img__overlay}>
-                                <img src='https://picsum.photos/500/350' alt='' />
+                    {
+                      filterTabCard && filterTabCard.length > 0 ? (
+                        filterTabCard.map((tab, i) => (
+                          <div key={i} label={tab.name}>
+                            <div className='row'>
+                              <div className='flex-md-12 flex-sm-12'>
+                                <div className={classes.section__experiences__content}>
+                                  <div className={classes.section__experiences__content__img}>
+                                    <div className={classes.section__experiences__content__img__overlay}>
+                                      <img src={tab.img.length > 0 ? tab.img[0].url : 'https://picsum.photos/500/350'} alt='' />
+                                    </div>
+                                  </div>
+                                  <div className={classes.section__experiences__content__card}>
+                                    <CardSlider lists={tab.cards.length > 0 ? tab.cards : []} />
+                                  </div>
+                                </div>
                               </div>
                             </div>
-                            <div className={classes.section__experiences__content__card}>
-                              <CardSlider lists={cardSlides} />
-                            </div>
                           </div>
-                        </div>
-                      </div>
-
-                    </div>
-
-                    <div label='Lorem, ipsum..'>
-                      <div className={classes.section__experiences__content}>
-                        <div className={classes.section__experiences__content__img}>
-                          <div className={classes.section__experiences__content__img__overlay}>
-                            <img src='https://picsum.photos/500/350' alt='' />
-                          </div>
-                        </div>
-                        <div className={classes.section__experiences__content__card}>
-                          <CardSlider lists={cardSlides} />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div label='Lorem, fart '>
-                      <div className={classes.section__experiences__content}>
-                        <div className={classes.section__experiences__content__img}>
-                          <div className={classes.section__experiences__content__img__overlay}>
-                            <img src='https://picsum.photos/500/350' alt='' />
-                          </div>
-                        </div>
-                        <div className={classes.section__experiences__content__card}>
-                          <CardSlider lists={cardSlides} />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div label='Lorem, farts '>
-                      <div className={classes.section__experiences__content}>
-                        <div className={classes.section__experiences__content__img}>
-                          <div className={classes.section__experiences__content__img__overlay}>
-                            <img src='https://picsum.photos/500/350' alt='' />
-                          </div>
-                        </div>
-                        <div className={classes.section__experiences__content__card}>
-                          <CardSlider lists={cardSlides} />
-                        </div>
-                      </div>
-                    </div>
-
+                        ))
+                      ) : (null)
+                    }
                   </Tabs>
                 </div>
-
               </div>
             </div>
           </section>
 
           <section id='Banner'>
             <BannerCentered
-              title='Integra tus sistemas con las APIs de SURA'
-              subtitle='Quisque rutrum. Sed augue ipsum.'
-              img='https://picsum.photos/1920/300'
+              title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : 'Integras tus sistemas con las APIs de SURA'}
+              subtitle={filterHomeBannerSubtitle !== '' ? filterHomeBannerSubtitle : 'Quisque rutrum. Sed augue ipsum.'}
+              img={filterHomeBannerImage !== '' ? filterHomeBannerImage : 'https://picsum.photos/1920/300'}
               buttonType='primary'
-              buttonLabel='empezar ahora'
+              buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : 'empezar ahora'}
             />
           </section>
 
           <section className={classes.section__news}>
             <div className='container pt-10 mt-10 mb-10 pb-10'>
               <div className={classes.section__news__title}>
-                <h1 className='h2 text__primary'>Novedades</h1>
+                <h1 className='h2 text__primary'>
+                  {filterWorks[2].title ? filterWorks[2].title : 'Novedades'}
+                </h1>
               </div>
               <div className={`${classes.section__news} mb-10`}>
-                <p className='body-1 my-10'>Conoce todas las novedades sobre tecnología, APIs y transformación digital</p>
+                <p className='body-1 my-10'>
+                  {filterWorks[2].subtitle ? filterWorks[2].subtitle : ''}
+                </p>
               </div>
               <Carousel />
             </div>
