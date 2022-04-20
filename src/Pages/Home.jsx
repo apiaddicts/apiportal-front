@@ -259,64 +259,82 @@ function Home() {
           </section>
 
           <section className={classes.section__experiences}>
-            <div className='container pt-10 mt-10 pb-10 mb-10'>
-              <div className={classes.section__experiences__title}>
-                <h1 className='h2 text__primary mb-2'>Nuestras experiencias</h1>
+            <div className='container'>
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <h1 className='h2 text__primary mb-2'>Nuestras experiencias</h1>
+                </div>
               </div>
-              <div className={classes.section__experiences__subtitle}>
-                <p className='body-1'>Podemos adaptar nuestras APIs a tu sector y organicación. A continuación te mostramos algunos de nuestros casos de uso actuales.</p>
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <p className='body-1 d-sm-only'>Podemos adaptar nuestras APIs a tu sector y organicación. A continuación te mostramos algunos de nuestros casos de uso actuales.</p>
+                </div>
               </div>
-              <div className={classes.section__experiences__tabs}>
-                <Tabs line={true}>
-                  <div label='Lorem ipsum'>
-                    <div className={classes.section__experiences__content}>
-                      <div className={classes.section__experiences__content__img}>
-                        <div className={classes.section__experiences__content__img__overlay}>
-                          <img src='https://picsum.photos/500/350' alt='' />
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <Tabs line={true}>
+
+                    <div label='Lorem ipsum'>
+
+                      <div className='row'>
+                        <div className='flex-md-12 flex-sm-12'>
+                          <div className={classes.section__experiences__content}>
+                            <div className={classes.section__experiences__content__img}>
+                              <div className={classes.section__experiences__content__img__overlay}>
+                                <img src='https://picsum.photos/500/350' alt='' />
+                              </div>
+                            </div>
+                            <div className={classes.section__experiences__content__card}>
+                              <CardSlider lists={cardSlides} />
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div className={classes.section__experiences__content__card}>
-                        <CardSlider lists={cardSlides} />
-                      </div>
+
                     </div>
-                  </div>
-                  <div label='Lorem, ipsum..'>
-                    <div className={classes.section__experiences__content}>
-                      <div className={classes.section__experiences__content__img}>
-                        <div className={classes.section__experiences__content__img__overlay}>
-                          <img src='https://picsum.photos/500/350' alt='' />
+
+                    <div label='Lorem, ipsum..'>
+                      <div className={classes.section__experiences__content}>
+                        <div className={classes.section__experiences__content__img}>
+                          <div className={classes.section__experiences__content__img__overlay}>
+                            <img src='https://picsum.photos/500/350' alt='' />
+                          </div>
+                        </div>
+                        <div className={classes.section__experiences__content__card}>
+                          <CardSlider lists={cardSlides} />
                         </div>
                       </div>
-                      <div className={classes.section__experiences__content__card}>
-                        <CardSlider lists={cardSlides} />
-                      </div>
                     </div>
-                  </div>
-                  <div label='Lorem, fart '>
-                    <div className={classes.section__experiences__content}>
-                      <div className={classes.section__experiences__content__img}>
-                        <div className={classes.section__experiences__content__img__overlay}>
-                          <img src='https://picsum.photos/500/350' alt='' />
+
+                    <div label='Lorem, fart '>
+                      <div className={classes.section__experiences__content}>
+                        <div className={classes.section__experiences__content__img}>
+                          <div className={classes.section__experiences__content__img__overlay}>
+                            <img src='https://picsum.photos/500/350' alt='' />
+                          </div>
+                        </div>
+                        <div className={classes.section__experiences__content__card}>
+                          <CardSlider lists={cardSlides} />
                         </div>
                       </div>
-                      <div className={classes.section__experiences__content__card}>
-                        <CardSlider lists={cardSlides} />
-                      </div>
                     </div>
-                  </div>
-                  <div label='Lorem, farts '>
-                    <div className={classes.section__experiences__content}>
-                      <div className={classes.section__experiences__content__img}>
-                        <div className={classes.section__experiences__content__img__overlay}>
-                          <img src='https://picsum.photos/500/350' alt='' />
+
+                    <div label='Lorem, farts '>
+                      <div className={classes.section__experiences__content}>
+                        <div className={classes.section__experiences__content__img}>
+                          <div className={classes.section__experiences__content__img__overlay}>
+                            <img src='https://picsum.photos/500/350' alt='' />
+                          </div>
+                        </div>
+                        <div className={classes.section__experiences__content__card}>
+                          <CardSlider lists={cardSlides} />
                         </div>
                       </div>
-                      <div className={classes.section__experiences__content__card}>
-                        <CardSlider lists={cardSlides} />
-                      </div>
                     </div>
-                  </div>
-                </Tabs>
+
+                  </Tabs>
+                </div>
+
               </div>
             </div>
           </section>
