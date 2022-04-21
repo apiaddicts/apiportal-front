@@ -10,7 +10,7 @@ function Button({ children, styles, type, onClick, ...rest }) {
           styles === 'ghost' ? 'btn btn-ghost' :
             styles === 'ghost-variant' ? 'btn btn-ghost-variant' : 'btn-none'}
       onClick={onClick}
-      type={type || 'button'}
+      {...rest}
     >
       {children}
     </button>
