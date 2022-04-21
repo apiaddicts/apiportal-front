@@ -7,7 +7,7 @@ import classes from './navbar.module.scss';
 import SuraLogo from '../../static/img/sura_logo.svg';
 import Button from '../Buttons/Button';
 
-function Navbar(props) {
+function Navbar({ setIsOpen }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [size, setSize] = useState({
     width: undefined,
@@ -50,12 +50,12 @@ function Navbar(props) {
           <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
             <ul>
               <li className='pr-2'>
-                <Button type='ghost-variant'>
+                <Button type='button' styles='ghost-variant' onClick={() => { setIsOpen(true); }}>
                   Iniciar sesión
                 </Button>
               </li>
               <li>
-                <Button type='secundary'>
+                <Button type='button' styles='secundary'>
                   registrate
                 </Button>
               </li>
