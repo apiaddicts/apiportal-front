@@ -62,13 +62,17 @@ function Slider({ slides }) {
               <div className='divider mb-4' />
               <h1 className='h1 text__secondary__white w-50'>{x.title}</h1>
               <div className='button__group mt-5'>
-                {x.actionButtons.map((i, index) => (
-                  <div key={index + i} className='pr-2'>
-                    <Button type={i.type}>
-                      {i.label}
-                    </Button>
-                  </div>
-                ))}
+                {
+                  x.actionButtons !== null ? (
+                    x.actionButtons.map((i, index) => (
+                      <div key={index + i} className='pr-2'>
+                        <Button type={i.type}>
+                          {i.label}
+                        </Button>
+                      </div>
+                    ))
+                  ) : (null)
+                }
               </div>
             </div>
           </div>
