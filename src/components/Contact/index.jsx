@@ -36,7 +36,7 @@ function Contact() {
               <Input type='text' placeholder='Correo' />
             </div>
             <div className={classes.contact__form__button}>
-              <Button type='secundary'>
+              <Button styles='secundary'>
                 SUSCRÍBETE
               </Button>
             </div>

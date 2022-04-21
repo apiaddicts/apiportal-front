@@ -66,7 +66,7 @@ function Slider({ slides }) {
                   x.actionButtons !== null ? (
                     x.actionButtons.map((i, index) => (
                       <div key={index + i} className='pr-2'>
-                        <Button type={i.type}>
+                        <Button styles={i.type}>
                           {i.label}
                         </Button>
                       </div>

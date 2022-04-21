@@ -15,7 +15,7 @@ function BannerStatic({ title, subtitle, img, isSearch, buttons, ...props }) {
         <div className='button__group mt-5'>
           {!buttons ? '' : buttons.map((button, index) => (
             <div key={index} className='pr-2'>
-              <Button type={button.class}>
+              <Button styles={button.class}>
                 {button.label}
               </Button>
             </div>

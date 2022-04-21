@@ -153,16 +153,16 @@ function Components() {
         description='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat minima blanditiis dolorem assumenda temporibus inventore, unde optio quis earum quos ex, illo pariatur quasi aut officiis fuga ipsum adipisci eius?'
       />
 
-      <Button type='primary'>
+      <Button styles='primary'>
         Ejemplo1
       </Button>
-      <Button type='secundary'>
+      <Button styles='secundary'>
         Ejemplo2
       </Button>
-      <Button type='secundary-white'>
+      <Button styles='secundary-white'>
         Ejemplo3
       </Button>
-      <Button type='ghost'>
+      <Button styles='ghost'>
         Ejemplo4
       </Button>
 
@@ -188,7 +188,7 @@ function Components() {
           <CardBasic chipTitle='GET' />
         </div>
         <div label='Button'>
-          <Button type='ghost'>
+          <Button styles='ghost'>
             Ejemplo4
           </Button>
         </div>

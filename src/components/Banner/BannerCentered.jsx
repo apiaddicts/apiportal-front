@@ -21,7 +21,7 @@ function BannerCentered({ title, subtitle, buttonLabel, img, buttonType }) {
 
         <div className='row justify-center text-center'>
           <div className='flex-lg-3 flex-md-5 flex-sm-12'>
-            <Button type={buttonType}>
+            <Button styles={buttonType}>
               {buttonLabel}
             </Button>
           </div>

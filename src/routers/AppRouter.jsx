@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
 import Navbar from '../components/Navbar/Navbar';
 
@@ -11,12 +11,17 @@ import Footer from '../components/Footer/Footer';
 import Faqs from '../Pages/Faqs';
 import Blog from '../Pages/Blog';
 import BlogDetails from '../Pages/BlogDetails';
+import Login from '../Pages/Login';
 
 function AppRouter() {
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar setIsOpen={setIsOpen} />
+      {isOpen && (
+        <Login setIsOpen={setIsOpen} />
+      )}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<Pagina1 />} />
