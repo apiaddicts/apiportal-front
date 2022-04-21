@@ -142,7 +142,7 @@ function Home() {
                 {filterButtonSection && filterButtonSection.length > 0 ? (
                   filterButtonSection[0].header.map((button, i) => (
                     <div key={i} className='pr-2 mb-4'>
-                      <Button type={button.keyword}>
+                      <Button styles={button.keyword}>
                         {button.title}
                       </Button>
                     </div>
