@@ -9,6 +9,7 @@ import Tabs from '../components/Tabs/Tabs';
 import CardInformation from '../components/Card/CardInformation';
 import Novedades from '../components/Novedades';
 import useSearch from '../hooks/useSearch';
+import Icon from '../components/MdIcon/Icon';
 
 const buttons = [
   { class: 'gray', label: 'APIS' },
@@ -91,9 +92,20 @@ function Blog() {
                         )}
                       </div>
                       <div className={stylesBlog.section__result__content__pagination}>
-                        <p>Anterior</p>
-                        <p>01 02 ...10</p>
-                        <p>Siguiente</p>
+                        <div className={stylesBlog.section__result__content__pagination__buttons__before}>
+                          <Icon id='MdNavigateBefore' />
+                          <p>Anterior</p>
+                        </div>
+                        <div className={stylesBlog.section__result__content__pagination__number}>
+                          <p>01</p>
+                          <p>02</p>
+                          <p>...</p>
+                          <p>10</p>
+                        </div>
+                        <div className={stylesBlog.section__result__content__pagination__buttons__next}>
+                          <p>Siguente</p>
+                          <Icon id='MdNavigateNext' />
+                        </div>
                       </div>
                     </div>
                     <Novedades />

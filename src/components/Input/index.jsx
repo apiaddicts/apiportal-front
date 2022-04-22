@@ -17,7 +17,7 @@ function Input({ field, formik }) {
       />
       {touched[field.id] && !!errors[field.id] ? (
         <p>{errors[field.id]}</p>
-      ) : <p>Required</p>}
+      ) : null}
     </div>
   );
 }

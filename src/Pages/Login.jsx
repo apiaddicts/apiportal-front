@@ -49,7 +49,7 @@ function Login({ setIsOpen }) {
             fieldsLogin={fieldsLogin}
           />
         )}
-        {showResetForm && <ResetPassword />}
+        {showResetForm && <ResetPassword handleSubmit={handleSubmit} />}
       </div>
 
     </Modal>

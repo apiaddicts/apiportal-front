@@ -55,7 +55,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
                 </Button>
               </li>
               <li>
-                <Button type='button' styles='secundary' onClick={() => { setOpenForm(true); }}>
+                <Button type='button' styles='secundary' onClick={() => { console.log(true); }}>
                   registrate
                 </Button>
               </li>
