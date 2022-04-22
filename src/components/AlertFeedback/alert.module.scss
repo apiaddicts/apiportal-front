@@ -1,0 +1,101 @@
+@import "./../../styles/variables.scss";
+
+.alert {
+    position: relative;
+    border-radius: 5px;
+    transition: all 0.2s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    overflow: hidden;
+
+    &__close__button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        padding: 10px;
+        cursor: pointer;
+        background: none;
+        border: none;
+    }
+
+    &__error {
+        border-radius: 5px;
+        padding: 20px;
+        width: 100%;
+        background: #f037372e;
+        border: 1px solid #f037372e;
+
+        &__wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        &__icon {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            font-size: 30px;
+            color: #f03737;
+            margin-right: 20px;
+            margin-top: 2px;
+        }
+
+        &__title {
+            font-family: $barlow;
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        &__message {
+            font-family: $barlow;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+        }
+    }
+
+    &__success {
+        border-radius: 5px;
+        padding: 20px;
+        width: 100%;
+        background: #3bc13b26;
+        border: 1px solid #3bc13b75;
+
+        &__wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+        }
+
+        &__icon {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            font-size: 30px;
+            color: #97D700;
+            margin-right: 20px;
+            margin-top: 2px;
+        }
+
+        &__title {
+            font-family: $barlow;
+            font-style: normal;
+            font-weight: 500;
+        }
+
+        &__message {
+            font-family: $barlow;
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 24px;
+        }
+    }
+}
