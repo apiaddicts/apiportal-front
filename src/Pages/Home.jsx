@@ -124,7 +124,7 @@ function Home() {
                         {item.Products.map((data, x) => (
                           <div key={x} className={`mb-6 ${classes.section__works__items__item}`}>
                             <Item
-                              number={data.id}
+                              number={data.num}
                               title={data.title}
                               description={data.subtitle}
                               icon={data.icon}
