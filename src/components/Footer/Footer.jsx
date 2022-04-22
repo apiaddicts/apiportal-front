@@ -5,8 +5,8 @@ import Base from './Base';
 import classes from './footer.module.scss';
 import Icon from '../MdIcon/Icon';
 import SuraLogo from '../../static/img/sura_logo.svg';
-import Input from '../Input';
 import Button from '../Buttons/Button';
+import SearchInput from '../Input/SearchInput';
 
 function Footer({ props }) {
   const img = 'https://picsum.photos/1920/300';
@@ -35,31 +35,66 @@ function Footer({ props }) {
           <div className={`container ${classes.footer__section__contact}`}>
             <div className='row mb-5'>
               <div className='flex-md-6 flex-sm-12'>
-                <Input type='text' placeholder='Nombre' />
+                <SearchInput
+                  type='text'
+                  placeholder='Name'
+                  borderRadius='18px'
+                  {...props}
+                />
               </div>
               <div className='flex-md-6 flex-sm-12'>
-                <Input type='text' placeholder='Apellidos' />
+                <SearchInput
+                  type='text'
+                  placeholder='Apellido'
+                  borderRadius='18px'
+                  {...props}
+                />
               </div>
             </div>
             <div className='row mb-5'>
               <div className='flex-md-6 flex-sm-12'>
-                <Input type='text' placeholder='Correo electrónico' />
+                <SearchInput
+                  type='text'
+                  placeholder='Correo electrónico'
+                  borderRadius='18px'
+                  {...props}
+                />
               </div>
               <div className='flex-md-6 flex-sm-12'>
-                <Input type='text' placeholder='Celular' />
+                <SearchInput
+                  type='text'
+                  placeholder='Celular'
+                  borderRadius='18px'
+                  {...props}
+                />
               </div>
             </div>
             <div className='row mb-5'>
               <div className='flex-md-6 flex-sm-12'>
-                <Input type='text' placeholder='Temas' />
+                <SearchInput
+                  type='text'
+                  placeholder='Temas'
+                  borderRadius='18px'
+                  {...props}
+                />
               </div>
               <div className='flex-md-6 flex-sm-12'>
-                <Input type='text' placeholder='Asunto' />
+                <SearchInput
+                  type='text'
+                  placeholder='Asunto'
+                  borderRadius='18px'
+                  {...props}
+                />
               </div>
             </div>
             <div className='row mb-5'>
               <div className='flex-md-12 flex-sm-12'>
-                <Input type='text' placeholder='Mensaje' />
+                <SearchInput
+                  type='text'
+                  placeholder='Mensaje'
+                  borderRadius='18px'
+                  {...props}
+                />
               </div>
             </div>
             <div className='row mb-5'>

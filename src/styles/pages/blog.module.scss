@@ -75,5 +75,67 @@
         justify-content: space-between;
         align-items: center;
         margin-top: 30px;
+        color: $primary;
+        
+        &__buttons__before {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        
+            &:first-child {
+                color: $secondary;
+                font-size: 30px;
+            }
+            p {
+                color: $primary;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 32px;
+                margin-bottom: 2px;
+            }
+        }
+        
+        &__number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 100;
+            font-family: $barlow;
+        
+            p {
+                margin-left: 10px;
+        
+                &:first-child {
+                    color: $secondary;
+                }
+            }
+        }
+        
+        &__buttons__next {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        
+            &:last-child {
+                color: $secondary;
+                font-size: 30px;
+                font-style: normal;
+                font-weight: 400;
+            }
+        
+            p {
+                color: $primary;
+                font-style: normal;
+                font-weight: 400;
+                font-size: 18px;
+                line-height: 32px;
+                margin-bottom: 2px;
+            }
+        }
     }
 }

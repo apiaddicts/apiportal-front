@@ -7,7 +7,7 @@ import classes from './navbar.module.scss';
 import SuraLogo from '../../static/img/sura_logo.svg';
 import Button from '../Buttons/Button';
 
-function Navbar({ setIsOpen }) {
+function Navbar({ setIsOpen, setOpenForm }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [size, setSize] = useState({
     width: undefined,
@@ -55,7 +55,7 @@ function Navbar({ setIsOpen }) {
                 </Button>
               </li>
               <li>
-                <Button type='button' styles='secundary'>
+                <Button type='button' styles='secundary' onClick={() => { console.log(true); }}>
                   registrate
                 </Button>
               </li>

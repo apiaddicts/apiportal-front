@@ -3,7 +3,7 @@ import React from 'react';
 
 import './button.scss';
 
-function Button({ children, styles, ...rest }) {
+function Button({ children, styles, opacity, ...rest }) {
   return (
     <button
       className={
@@ -14,6 +14,7 @@ function Button({ children, styles, ...rest }) {
                 styles === 'ghost-variant' ?
                   'btn btn-ghost-variant' : 'btn-none'
       }
+      style={{ opacity }}
       {...rest}
     >
       {children}

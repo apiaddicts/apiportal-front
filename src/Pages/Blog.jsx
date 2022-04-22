@@ -14,6 +14,7 @@ import Novedades from '../components/Novedades';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
 
 import useSearch from '../hooks/useSearch';
+import Icon from '../components/MdIcon/Icon';
 import { getBlogs } from '../redux/actions/blogAction';
 
 const buttons = [
@@ -106,9 +107,20 @@ function Blog() {
                             )}
                           </div>
                           <div className={stylesBlog.section__result__content__pagination}>
-                            <p>Anterior</p>
-                            <p>01 02 ...10</p>
-                            <p>Siguiente</p>
+                            <div className={stylesBlog.section__result__content__pagination__buttons__before}>
+                              <Icon id='MdNavigateBefore' />
+                              <p>Anterior</p>
+                            </div>
+                            <div className={stylesBlog.section__result__content__pagination__number}>
+                              <p>01</p>
+                              <p>02</p>
+                              <p>...</p>
+                              <p>10</p>
+                            </div>
+                            <div className={stylesBlog.section__result__content__pagination__buttons__next}>
+                              <p>Siguente</p>
+                              <Icon id='MdNavigateNext' />
+                            </div>
                           </div>
                         </div>
                         <Novedades />
