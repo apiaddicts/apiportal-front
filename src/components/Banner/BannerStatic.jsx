@@ -27,6 +27,7 @@ function BannerStatic({ title, subtitle, img, isSearch, buttons, ...props }) {
               name='search'
               type='text'
               placeholder='Buscar'
+              icon
               {...props}
             />
           )}

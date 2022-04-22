@@ -12,15 +12,20 @@ import Faqs from '../Pages/Faqs';
 import Blog from '../Pages/Blog';
 import BlogDetails from '../Pages/BlogDetails';
 import Login from '../Pages/Login';
+import Register from '../Pages/Register';
 
 function AppRouter() {
   const [isOpen, setIsOpen] = useState(false);
+  const [openForm, setOpenForm] = useState(false);
 
   return (
     <BrowserRouter>
-      <Navbar setIsOpen={setIsOpen} />
+      <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} />
       {isOpen && (
         <Login setIsOpen={setIsOpen} />
+      )}
+      {openForm && (
+        <Register setOpenForm={setOpenForm} />
       )}
       <Routes>
         <Route path='/' element={<Home />} />

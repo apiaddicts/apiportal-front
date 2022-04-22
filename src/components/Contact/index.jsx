@@ -5,11 +5,19 @@ import classes from './contact.module.scss';
 import Input from '../Input';
 import Button from '../Buttons/Button';
 import icons from '../../static/icons-sura';
+import { fieldsContact } from '../Forms/fields';
+import useLoginConfig from '../../hooks/useLogin';
 
 function Contact() {
   const location = useLocation();
   const { pathname } = location;
-  console.log(pathname !== '/blog');
+
+  const handleSubmit = async (values) => {
+    console.log(values);
+  };
+
+  const formConfig = useLoginConfig(fieldsContact, handleSubmit);
+
   return (
     <div className={classes.contact}>
       <div className={pathname !== '/blog' ? classes.contact__container__alternative : classes.contact__container}>
@@ -29,12 +37,9 @@ function Contact() {
         </div>
         <div className={pathname !== '/blog' ? classes.contact__container__alternative__form : classes.contact__container__form}>
           <form className={pathname !== '/blog' ? classes.contact__alternative__form : classes.contact__form}>
-            <div className={classes.contact__form__input}>
-              <Input type='text' placeholder='Nombre' />
-            </div>
-            <div className={classes.contact__form__input}>
-              <Input type='text' placeholder='Correo' />
-            </div>
+            {fieldsContact.map((field) => (
+              <Input key={field.id} field={field} formik={formConfig} />
+            ))}
             <div className={classes.contact__form__button}>
               <Button styles='secundary'>
                 SUSCRÍBETE
