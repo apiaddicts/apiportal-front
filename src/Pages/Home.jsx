@@ -13,6 +13,7 @@ import Slider from '../components/Slider/Slider';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
 import textureCircles from '../static/img/texture_circles.svg';
 import { getHome } from '../redux/actions/homeAction';
+// import Slick from '../components/SlickSlider/Slick';
 
 function Home() {
   const dispatch = useDispatch();
@@ -139,9 +140,9 @@ function Home() {
                 {
                   filterDiscoverTab.map((item, i) => (
                     <div label={item.title} key={i}>
-                      <div className={classes.section__works__items}>
+                      <div className='row'>
                         {item.Products.map((data, x) => (
-                          <div key={x} className={`mb-6 ${classes.section__works__items__item}`}>
+                          <div key={x} className='flex-lg-4 flex-md-12 flex-sm-12 py-6'>
                             <Item
                               number={data.id}
                               title={data.title}
@@ -216,7 +217,7 @@ function Home() {
                   {filterWorks[1].title ? filterWorks[1].title : 'Nuestras experiencias'}
                 </h1>
               </div>
-              <div className={classes.section__experiences__subtitle}>
+              <div className={`d-xs-none ${classes.section__experiences__subtitle}`}>
                 <p className='body-1'>
                   {filterWorks[1].subtitle ? filterWorks[1].subtitle : ''}
                 </p>
@@ -301,14 +302,23 @@ function Home() {
           </section>
 
           <section className={classes.section__news}>
-            <div className='container pt-10 mt-10 mb-10 pb-10'>
-              <div className={classes.section__news__title}>
-                <h1 className='h2 text__primary'>Novedades</h1>
+            <div className='container'>
+              <div className='row'>
+                <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
+                  <h1 className='h2 text__primary'>Novedades</h1>
+                </div>
+
+                <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
+                  <p className='body-1'>Conoce todas las novedades sobre tecnología, APIs y transformación digital</p>
+                </div>
+
+                <div className='d-xs-none'>
+                  <Carousel />
+                </div>
+                <div className='container d-xs-only'>
+                  <CardSlider lists={cardSlides} flag={false} />
+                </div>
               </div>
-              <div className={`${classes.section__news} mb-10`}>
-                <p className='body-1 my-10'>Conoce todas las novedades sobre tecnología, APIs y transformación digital</p>
-              </div>
-              <Carousel />
             </div>
           </section>
         </div>
