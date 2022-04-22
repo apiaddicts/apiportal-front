@@ -4,6 +4,9 @@ ENV NODE_ENV production
 ENV DISABLE_ESLINT_PLUGIN true
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
+RUN apk update \
+    && apk --no-cache --update add build-base 
+
 RUN apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
 RUN python3 -m ensurepip
 RUN pip3 install --no-cache --upgrade pip setuptools
