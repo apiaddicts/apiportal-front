@@ -561,6 +561,9 @@ a {
   line-height: map-deep-get($heading, "h1", "line-height");
   letter-spacing: map-deep-get($heading, "h1", "letter-spacing") !important;
   font-family: map-deep-get($heading, "h1", "font-family") !important;
+  @include breakpoint(xs) {
+    font-size: 36px !important;
+  }
 }
 
 .h2 {

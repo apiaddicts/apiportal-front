@@ -5,6 +5,8 @@ import Icon from '../components/MdIcon/Icon';
 import classes from '../styles/pages/login.module.scss';
 import AlertFeedbock from '../components/AlertFeedback';
 import ResetPassword from '../components/Forms/ResetPassword';
+import { fieldsLogin } from '../components/Forms/fields';
+import useLoginConfig from '../hooks/useLogin';
 
 function Login({ setIsOpen }) {
   const [showAlert, setShowAlert] = useState(false);
@@ -22,6 +24,7 @@ function Login({ setIsOpen }) {
     );
   };
 
+  const formConfig = useLoginConfig(fieldsLogin, handleSubmit);
   return (
     <Modal>
       <button
@@ -36,8 +39,17 @@ function Login({ setIsOpen }) {
       <div className={classes.login__wrapper}>
         <h1 className={classes.login__title}>{showForm ? 'Iniciar sesión' : 'Recuperar contraseña'}</h1>
         {showAlert && <AlertFeedbock setShowAlert={setShowAlert} success />}
-        {showForm && <Form handleSubmit={handleSubmit} classes={classes} setShowForm={setShowForm} setShowResetForm={setShowResetForm} />}
-        {showResetForm && <ResetPassword />}
+        {showForm && (
+          <Form
+            handleSubmit={handleSubmit}
+            classes={classes}
+            setShowForm={setShowForm}
+            setShowResetForm={setShowResetForm}
+            formik={formConfig}
+            fieldsLogin={fieldsLogin}
+          />
+        )}
+        {showResetForm && <ResetPassword handleSubmit={handleSubmit} />}
       </div>
 
     </Modal>

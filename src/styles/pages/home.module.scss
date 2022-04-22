@@ -184,6 +184,7 @@
         }
         @include breakpoint(lg) {
           display: block;
+          width: 50%;
         }
 
       }
@@ -210,19 +211,41 @@
         position: relative;
         top: 0;
         left: 0;
+        max-width: 700px;
+      }
+      @include breakpoint(md) {
+        position: relative;
+        top: 0%;
+        left: 0%;
+        max-width: 700px;
       }
       @include breakpoint(lg) {
         position: absolute;
         top: 10%;
         left: 36%;
+        max-width: 65%;
       }
+
     }
   }
 }
 
 .section__news {
-  display: grid;
   text-align: center;
+  padding-top: 94px;
+  padding-bottom: 88px;
+  &__title{
+    padding-bottom: 32px;
+  }
+  &__subtitle {
+    padding-bottom: 80px;
+  }
+
+  @include breakpoint(xs) {
+    text-align: left;
+    padding-top: 46px;
+    padding-bottom: 67px;
+  }
 
   @media (max-width: 768px) {
     display: block;

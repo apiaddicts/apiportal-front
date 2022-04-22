@@ -191,7 +191,7 @@ $width-container-xl: 130rem;
     max-width: $width-container-lg;
   }
   @include breakpoint(xl) {
-    max-width: $width-container-xl;
+    max-width: $width-container-xl !important;
   }
 }
 
