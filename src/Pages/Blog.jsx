@@ -70,115 +70,117 @@ function Blog() {
           {
             resultsSearch.length === 0 && formik.values.search === '' ? (
               <section className='container'>
-                <div className={classes.section__experiences__tabs}>
-                  <Tabs line={true}>
-                    <div label='Todos'>
-                      <div className={stylesBlog.section__experiences__content}>
-                        <div className={stylesBlog.section__experiences__content__img}>
-                          <div className={stylesBlog.section__experiences__content__img__overlay}>
-                            <img src='https://picsum.photos/500/350' alt='' />
-                          </div>
-                        </div>
-                        <div className={stylesBlog.section__experiences__content__card}>
-                          <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
-                        </div>
-                      </div>
-                      <div className={stylesBlog.section__result__content}>
-                        <div className={stylesBlog.section__result__content__result}>
-                          <div style={{
-                            display: 'grid',
-                            gridTemplateColumns: 'repeat(2, 1fr)',
-                            gridGap: '1rem',
-                          }}
-                          >
-                            {blogs.length === 0 ? (
-                              <p>Sin Resultados</p>
-                            ) : (
-                              blogs.map((result, index) => (
-                                <Link to={`/blog/${result.id}`} key={index}>
-                                  <CardInformation
-                                    img={result.image ? result.image[0].url : ''}
-                                    description={result.description}
-                                    title={result.title}
-                                    buttons={result.tags && result.tags.length > 0 ? result.tags : []}
-                                  />
-                                </Link>
-                              ))
-                            )}
-                          </div>
-                          <div className={stylesBlog.section__result__content__pagination}>
-                            <div className={stylesBlog.section__result__content__pagination__buttons__before}>
-                              <Icon id='MdNavigateBefore' />
-                              <p>Anterior</p>
-                            </div>
-                            <div className={stylesBlog.section__result__content__pagination__number}>
-                              <p>01</p>
-                              <p>02</p>
-                              <p>...</p>
-                              <p>10</p>
-                            </div>
-                            <div className={stylesBlog.section__result__content__pagination__buttons__next}>
-                              <p>Siguente</p>
-                              <Icon id='MdNavigateNext' />
+                <div className='row'>
+                  <div className='flex-md-12 flex-sm-12'>
+                    <Tabs line={true}>
+                      <div label='Todos'>
+                        <div className={stylesBlog.section__experiences__content}>
+                          <div className={stylesBlog.section__experiences__content__img}>
+                            <div className={stylesBlog.section__experiences__content__img__overlay}>
+                              <img src='https://picsum.photos/500/350' alt='' />
                             </div>
                           </div>
-                        </div>
-                        <Novedades />
-                      </div>
-                    </div>
-                    <div label='Novedades'>
-                      <h1>Todo sobre Novedades</h1>
-                      <div className={stylesBlog.section__experiences__content}>
-                        <div className={stylesBlog.section__experiences__content__img}>
-                          <div className={stylesBlog.section__experiences__content__img__overlay}>
-                            <img src='https://picsum.photos/500/350' alt='' />
+                          <div className={stylesBlog.section__experiences__content__card}>
+                            <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
                           </div>
                         </div>
-                        <div className={stylesBlog.section__experiences__content__card}>
-                          <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
+                        <div className={stylesBlog.section__result__content}>
+                          <div className={stylesBlog.section__result__content__result}>
+                            <div style={{
+                              display: 'grid',
+                              gridTemplateColumns: 'repeat(2, 1fr)',
+                              gridGap: '1rem',
+                            }}
+                            >
+                              {blogs.length === 0 ? (
+                                <p>Sin Resultados</p>
+                              ) : (
+                                blogs.map((result, index) => (
+                                  <Link to={`/blog/${result.id}`} key={index}>
+                                    <CardInformation
+                                      img={result.image ? result.image[0].url : ''}
+                                      description={result.description}
+                                      title={result.title}
+                                      buttons={result.tags && result.tags.length > 0 ? result.tags : []}
+                                    />
+                                  </Link>
+                                ))
+                              )}
+                            </div>
+                            <div className={stylesBlog.section__result__content__pagination}>
+                              <div className={stylesBlog.section__result__content__pagination__buttons__before}>
+                                <Icon id='MdNavigateBefore' />
+                                <p>Anterior</p>
+                              </div>
+                              <div className={stylesBlog.section__result__content__pagination__number}>
+                                <p>01</p>
+                                <p>02</p>
+                                <p>...</p>
+                                <p>10</p>
+                              </div>
+                              <div className={stylesBlog.section__result__content__pagination__buttons__next}>
+                                <p>Siguente</p>
+                                <Icon id='MdNavigateNext' />
+                              </div>
+                            </div>
+                          </div>
+                          <Novedades />
                         </div>
                       </div>
-                    </div>
-                    <div label='Desarrolladores'>
-                      <h2>Todo sobre Desarrolladores</h2>
-                      <div className={stylesBlog.section__experiences__content}>
-                        <div className={stylesBlog.section__experiences__content__img}>
-                          <div className={stylesBlog.section__experiences__content__img__overlay}>
-                            <img src='https://picsum.photos/500/350' alt='' />
+                      <div label='Novedades'>
+                        <h1>Todo sobre Novedades</h1>
+                        <div className={stylesBlog.section__experiences__content}>
+                          <div className={stylesBlog.section__experiences__content__img}>
+                            <div className={stylesBlog.section__experiences__content__img__overlay}>
+                              <img src='https://picsum.photos/500/350' alt='' />
+                            </div>
+                          </div>
+                          <div className={stylesBlog.section__experiences__content__card}>
+                            <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
                           </div>
                         </div>
-                        <div className={stylesBlog.section__experiences__content__card}>
-                          <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
-                        </div>
                       </div>
-                    </div>
-                    <div label='APIs'>
-                      <h2>Todo sobre APIs</h2>
-                      <div className={stylesBlog.section__experiences__content}>
-                        <div className={stylesBlog.section__experiences__content__img}>
-                          <div className={stylesBlog.section__experiences__content__img__overlay}>
-                            <img src='https://picsum.photos/500/350' alt='' />
+                      <div label='Desarrolladores'>
+                        <h2>Todo sobre Desarrolladores</h2>
+                        <div className={stylesBlog.section__experiences__content}>
+                          <div className={stylesBlog.section__experiences__content__img}>
+                            <div className={stylesBlog.section__experiences__content__img__overlay}>
+                              <img src='https://picsum.photos/500/350' alt='' />
+                            </div>
+                          </div>
+                          <div className={stylesBlog.section__experiences__content__card}>
+                            <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
                           </div>
                         </div>
-                        <div className={stylesBlog.section__experiences__content__card}>
-                          <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
-                        </div>
                       </div>
-                    </div>
-                    <div label='Empresas'>
-                      <h2>Todo sobre Empresas</h2>
-                      <div className={stylesBlog.section__experiences__content}>
-                        <div className={stylesBlog.section__experiences__content__img}>
-                          <div className={stylesBlog.section__experiences__content__img__overlay}>
-                            <img src='https://picsum.photos/500/350' alt='' />
+                      <div label='APIs'>
+                        <h2>Todo sobre APIs</h2>
+                        <div className={stylesBlog.section__experiences__content}>
+                          <div className={stylesBlog.section__experiences__content__img}>
+                            <div className={stylesBlog.section__experiences__content__img__overlay}>
+                              <img src='https://picsum.photos/500/350' alt='' />
+                            </div>
+                          </div>
+                          <div className={stylesBlog.section__experiences__content__card}>
+                            <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
                           </div>
                         </div>
-                        <div className={stylesBlog.section__experiences__content__card}>
-                          <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
+                      </div>
+                      <div label='Empresas'>
+                        <h2>Todo sobre Empresas</h2>
+                        <div className={stylesBlog.section__experiences__content}>
+                          <div className={stylesBlog.section__experiences__content__img}>
+                            <div className={stylesBlog.section__experiences__content__img__overlay}>
+                              <img src='https://picsum.photos/500/350' alt='' />
+                            </div>
+                          </div>
+                          <div className={stylesBlog.section__experiences__content__card}>
+                            <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Tabs>
+                    </Tabs>
+                  </div>
                 </div>
               </section>
             ) : (
