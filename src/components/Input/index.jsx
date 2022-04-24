@@ -1,11 +1,14 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useState } from 'react';
+import Icon from '../MdIcon/Icon';
 import classes from './input.module.scss';
 
 function Input({ field, formik }) {
+  const [type, setType] = useState(false);
   const { values, errors, touched, handleChange, handleBlur } = formik;
 
   return (
-    <div className={classes.wrapper__input}>
+    <div className={`${classes.wrapper__input} mt-3`}>
       {field.label && (
         <p>
           {field.label}
@@ -16,15 +19,23 @@ function Input({ field, formik }) {
       <input
         className={touched[field.id] && !!errors[field.id] ? classes.input__error : classes.input}
         id={field.id}
-        type={field.type}
+        type={touched[field.id] && type ? 'text' : field.type}
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder={field.placeholder}
         value={values[field.id]}
       />
+      <div
+        onClick={() => {
+          setType(!type);
+        }}
+        className={touched[field.id] && !!errors[field.id] ? classes.input__icon__right__error : classes.input__icon__right}
+      >
+        {field.icon && <Icon id={field.iconName} />}
+      </div>
       {touched[field.id] && !!errors[field.id] ? (
-        <p className={`${classes.wrapper__input__required} mt-2`}>{errors[field.id]}</p>
-      ) : (field.label && <p className={`${classes.wrapper__input__required} mt-2`}>Required *</p>)}
+        <p className={`${classes.wrapper__input__required}`}>{errors[field.id]}</p>
+      ) : (field.label && <p className={`${classes.wrapper__input__required}`}>Required *</p>)}
     </div>
   );
 }

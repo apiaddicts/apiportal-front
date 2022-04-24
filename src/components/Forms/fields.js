@@ -89,6 +89,8 @@ export const fieldsLogin = [
     validate: 'password',
     required: true,
     type: 'password',
+    icon: true,
+    iconName: 'MdOutlineRemoveRedEye',
   },
 ];
 export const fieldsContact = [

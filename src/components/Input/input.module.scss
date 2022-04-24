@@ -1,6 +1,7 @@
 @import "./../../styles/variables.scss";
 
 .wrapper__input {
+  position: relative;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -61,6 +62,25 @@
     top: 50%;
     transform: translateY(-50%);
     color: $gray_darken;
+  }
+
+  &__icon__right{
+    position: absolute;
+    font-size: 24px;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $gray_darken;
+    cursor: pointer;
+  }
+  &__icon__right__error{
+    position: absolute;
+    font-size: 24px;
+    right: 20px;
+    top: 39%;
+    transform: translateY(-50%);
+    color: $gray_darken;
+    cursor: pointer;
   }
 }
 
