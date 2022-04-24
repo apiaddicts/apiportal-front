@@ -5,7 +5,14 @@ function Input({ field, formik }) {
   const { values, errors, touched, handleChange, handleBlur } = formik;
 
   return (
-    <div>
+    <div className={classes.wrapper__input}>
+      {field.label && (
+        <p>
+          {field.label}
+          {' '}
+          *
+        </p>
+      )}
       <input
         className={touched[field.id] && !!errors[field.id] ? classes.input__error : classes.input}
         id={field.id}
@@ -16,8 +23,8 @@ function Input({ field, formik }) {
         value={values[field.id]}
       />
       {touched[field.id] && !!errors[field.id] ? (
-        <p>{errors[field.id]}</p>
-      ) : null}
+        <p className={`${classes.wrapper__input__required} mt-2`}>{errors[field.id]}</p>
+      ) : (field.label && <p className={`${classes.wrapper__input__required} mt-2`}>Required *</p>)}
     </div>
   );
 }

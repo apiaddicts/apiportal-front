@@ -6,12 +6,19 @@ import classes from './footer.module.scss';
 import Icon from '../MdIcon/Icon';
 import SuraLogo from '../../static/img/sura_logo.svg';
 import Button from '../Buttons/Button';
-import SearchInput from '../Input/SearchInput';
+import Input from '../Input';
+import { fieldsContactExtend } from '../Forms/fields';
+import useFormConfig from '../../hooks/useForm';
 
 function Footer({ props }) {
   const img = 'https://picsum.photos/1920/300';
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
+  const handleSubmit = async (values) => {
+    console.log(values);
+  };
+
+  const formConfig = useFormConfig(fieldsContactExtend, handleSubmit);
 
   const [contactForm, setContactForm] = useState(false);
 
@@ -33,68 +40,17 @@ function Footer({ props }) {
       {contactForm && (
         <div className={classes.footer__section}>
           <div className={`container ${classes.footer__section__contact}`}>
-            <div className='row mb-5'>
-              <div className='flex-md-6 flex-sm-12'>
-                <SearchInput
-                  type='text'
-                  placeholder='Name'
-                  borderRadius='18px'
-                  {...props}
-                />
-              </div>
-              <div className='flex-md-6 flex-sm-12'>
-                <SearchInput
-                  type='text'
-                  placeholder='Apellido'
-                  borderRadius='18px'
-                  {...props}
-                />
-              </div>
-            </div>
-            <div className='row mb-5'>
-              <div className='flex-md-6 flex-sm-12'>
-                <SearchInput
-                  type='text'
-                  placeholder='Correo electrónico'
-                  borderRadius='18px'
-                  {...props}
-                />
-              </div>
-              <div className='flex-md-6 flex-sm-12'>
-                <SearchInput
-                  type='text'
-                  placeholder='Celular'
-                  borderRadius='18px'
-                  {...props}
-                />
-              </div>
-            </div>
-            <div className='row mb-5'>
-              <div className='flex-md-6 flex-sm-12'>
-                <SearchInput
-                  type='text'
-                  placeholder='Temas'
-                  borderRadius='18px'
-                  {...props}
-                />
-              </div>
-              <div className='flex-md-6 flex-sm-12'>
-                <SearchInput
-                  type='text'
-                  placeholder='Asunto'
-                  borderRadius='18px'
-                  {...props}
-                />
-              </div>
-            </div>
-            <div className='row mb-5'>
-              <div className='flex-md-12 flex-sm-12'>
-                <SearchInput
-                  type='text'
-                  placeholder='Mensaje'
-                  borderRadius='18px'
-                  {...props}
-                />
+            <div className='mb-5'>
+              <div className='grid-col-2'>
+                {fieldsContactExtend.map((field) => (
+                  field.label !== 'Mensaje' ? (
+                    <Input key={field.id} field={field} formik={formConfig} />
+                  ) : (
+                    <div className='grid-col-1' key={field.id}>
+                      <Input key={field.id} field={field} formik={formConfig} />
+                    </div>
+                  )
+                ))}
               </div>
             </div>
             <div className='row mb-5'>

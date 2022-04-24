@@ -71,7 +71,7 @@ function Blog() {
             resultsSearch.length === 0 && formik.values.search === '' ? (
               <section className='container'>
                 <div className='row'>
-                  <div className='flex-md-12 flex-sm-12'>
+                  <div className='flex-md-12 flex-sm-12 mt-9'>
                     <Tabs line={true}>
                       <div label='Todos'>
                         <div className={stylesBlog.section__experiences__content}>

@@ -21,7 +21,7 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin }) {
             setShowResetForm(true);
             setShowForm(false);
           }}
-          className={classes.login__text}
+          className={classes.login__links}
         >
           ¿Olvidaste tu contraseña?
         </p>

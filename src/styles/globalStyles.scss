@@ -967,3 +967,22 @@ a {
   margin: auto;
   width: 500px;
 }
+
+.grid-col-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+
+  @media (min-width: 600px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+  // @include breakpoint(xm) {
+  //   grid-template-columns: repeat(3, 1fr);
+  // }
+}
+.grid-col-1 {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+}
