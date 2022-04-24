@@ -8,6 +8,11 @@
   align-items: center;
   justify-content: flex-start;
 
+  // last child of wrapper width 100%
+  &:last-child {
+    width: 100%!important;
+  }
+
   &__required {
     color: $gray_lighten-2 !important;
     font-size: 12px !important;
@@ -22,6 +27,11 @@
     font-weight: 400;
     font-size: 12px;
     line-height: 14px;
+  }
+
+  @media (max-width: 767px) {
+    width: 90%!important;
+    margin: auto;
   }
 
 }

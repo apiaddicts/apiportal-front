@@ -41,15 +41,9 @@ function Footer({ props }) {
         <div className={classes.footer__section}>
           <div className={`container ${classes.footer__section__contact}`}>
             <div className='mb-5'>
-              <div className='grid-col-2'>
+              <div className='row'>
                 {fieldsContactExtend.map((field) => (
-                  field.label !== 'Mensaje' ? (
-                    <Input key={field.id} field={field} formik={formConfig} />
-                  ) : (
-                    <div className='grid-col-1' key={field.id}>
-                      <Input key={field.id} field={field} formik={formConfig} />
-                    </div>
-                  )
+                  <Input footer key={field.id} field={field} formik={formConfig} />
                 ))}
               </div>
             </div>
@@ -61,7 +55,7 @@ function Footer({ props }) {
             </div>
             <div className='row mb-5 mt-10 justify-center'>
               <div className='flex-md-3 flex-sm-12'>
-                <Button type='secundary'>
+                <Button styles='secundary' type='submit'>
                   ¡Estoy interesado!
                 </Button>
               </div>

@@ -3,12 +3,12 @@ import React, { useState } from 'react';
 import Icon from '../MdIcon/Icon';
 import classes from './input.module.scss';
 
-function Input({ field, formik }) {
+function Input({ field, formik, footer }) {
   const [type, setType] = useState(false);
   const { values, errors, touched, handleChange, handleBlur } = formik;
 
   return (
-    <div className={`${classes.wrapper__input} mt-3`}>
+    <div style={footer ? { width: '50%', padding: '0 9px' } : { width: '100%' }} className={`${classes.wrapper__input} mt-3`}>
       {field.label && (
         <p>
           {field.label}
