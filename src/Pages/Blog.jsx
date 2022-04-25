@@ -11,6 +11,7 @@ import Carousel from '../components/Carousel/Carousel';
 import Tabs from '../components/Tabs/Tabs';
 import CardInformation from '../components/Card/CardInformation';
 import Novedades from '../components/Novedades';
+import Contact from '../components/Contact';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
 
 import useSearch from '../hooks/useSearch';
@@ -96,31 +97,42 @@ function Blog() {
                             <CardInformation buttons={buttons} reading='Lectura de 10 mints' />
                           </div>
                         </div>
-                        <div className={stylesBlog.section__result__content}>
-                          <div className={stylesBlog.section__result__content__result}>
-                            <div style={{
-                              display: 'grid',
-                              gridTemplateColumns: 'repeat(2, 1fr)',
-                              gridGap: '1rem',
-                            }}
-                            >
-                              {blogs.length === 0 ? (
-                                <p>Sin Resultados</p>
+
+                        <div className={stylesBlog.apis__library}>
+                          <div id='Cards' className={stylesBlog.apis__library__cards}>
+                            {
+                              blogs.length === 0 ? (
+                                <span>Sin resultados disponibles</span>
                               ) : (
-                                blogs.map((result, index) => (
-                                  <Link to={`/blog/${result.id}`} key={index}>
+                                blogs.map((results, index) => (
+                                  <Link to={`/blog/${results.id}`} key={index}>
                                     <CardInformation
-                                      img={result.image ? result.image[0].url : ''}
-                                      description={result.description}
-                                      title={result.title}
-                                      buttons={result.tags && result.tags.length > 0 ? result.tags : []}
+                                      img={results.image ? results.image[0].url : ''}
+                                      description={results.description}
+                                      title={results.title}
+                                      buttons={results.tags && results.tags.length > 0 ? results.tags : []}
                                     />
                                   </Link>
                                 ))
-                              )}
+                              )
+                            }
+                          </div>
+                          <div id='Suggestions' className={`d-xs-none ${stylesBlog.apis__library__suggestions}`}>
+                            <div className={stylesBlog.apis__library__suggestions__content}>
+                              <h1>Lo más reciente</h1>
+                              <Novedades />
                             </div>
+                          </div>
+                          <div id='Contact' className={stylesBlog.apis__library__contact}>
+                            <Contact />
+                          </div>
+                          <div id='Footer' className={stylesBlog.apis__library__footer}>
                             <div className={stylesBlog.section__result__content__pagination}>
-                              <div className={stylesBlog.section__result__content__pagination__buttons__before}>
+                              <div
+                                className={
+                                  stylesBlog.section__result__content__pagination__buttons__before
+                                }
+                              >
                                 <Icon id='MdNavigateBefore' />
                                 <p>Anterior</p>
                               </div>
@@ -130,14 +142,18 @@ function Blog() {
                                 <p>...</p>
                                 <p>10</p>
                               </div>
-                              <div className={stylesBlog.section__result__content__pagination__buttons__next}>
+                              <div
+                                className={
+                                  stylesBlog.section__result__content__pagination__buttons__next
+                                }
+                              >
                                 <p>Siguente</p>
                                 <Icon id='MdNavigateNext' />
                               </div>
                             </div>
                           </div>
-                          <Novedades />
                         </div>
+
                       </div>
                       <div label='Novedades'>
                         <div className={stylesBlog.section__experiences__content}>

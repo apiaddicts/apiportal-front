@@ -17,9 +17,9 @@
     position: relative;
     margin-top: 40px;
     height: 100%;
-
+    padding-bottom: 100px;
     @include breakpoint(xs) {
-        height: 0%;
+      height: 0%;
     }
 
     &__img {
@@ -41,42 +41,41 @@
     }
 
     &__card {
-        position: absolute;
-        border-radius: 20px;
-        box-shadow: 0px 3px 12px -2px rgba(0, 0, 0, 0.1);
-        background: $secondary_white;
+      position: absolute;
+      border-radius: 20px;
+      box-shadow: 0px 3px 12px -2px rgba(0, 0, 0, 0.1);
+      background: $secondary_white;
+      top: 0;
+      left: 439px;
+      max-height: 390px;
+      max-width: 738px;
+      display: flex;
+      align-items: center;
+      @include breakpoint(xs) {
+        position: relative;
         top: 0;
-        left: 439px;
-        max-height: 390px;
-        max-width: 738px;
-        display: flex;
-        align-items: center;
-        @include breakpoint(xs) {
-          position: relative;
-          top: 0;
-          left: 0;
-          max-height: 500px;
-        }
-        @include breakpoint(sm) {
-          position: relative;
-          top: 0;
-          left: 0;
-          max-width: 700px;
-        }
-        @include breakpoint(md) {
-          position: relative;
-          top: 0%;
-          left: 0%;
-          max-width: 700px;
-        }
-        @include breakpoint(lg) {
-          position: absolute;
-          top: 10%;
-          left: 36%;
-          max-width: 65%;
-        }
-  
+        left: 0;
+        max-height: 500px;
       }
+      @include breakpoint(sm) {
+        position: relative;
+        top: 0;
+        left: 0;
+        max-width: 700px;
+      }
+      @include breakpoint(md) {
+        position: relative;
+        top: 0%;
+        left: 0%;
+        max-width: 700px;
+      }
+      @include breakpoint(lg) {
+        position: absolute;
+        top: 10%;
+        left: 36%;
+        max-width: 65%;
+      }
+    }
 
     &__items {
       display: flex;
@@ -94,7 +93,7 @@
   margin-top: 120px;
 
   @include breakpoint(xs) {
-      margin-top: 10px;
+    margin-top: 10px;
   }
 
   &__result {
@@ -183,5 +182,78 @@
         margin-bottom: 2px;
       }
     }
+  }
+}
+
+.apis {
+  &__library {
+    &__cards {
+      grid-area: cards;
+      display: grid;
+      grid-template-columns: repeat(2, 2fr);
+      gap: 1rem;
+      @include breakpoint(xs) {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }      
+      @include breakpoint(sm) {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }      
+      @include breakpoint(lg) {
+        grid-template-columns: repeat(2, 2fr);
+        gap: 1rem;
+      }
+    }
+    &__suggestions {
+      grid-area: suggestions;
+      &__content {
+        h1 {
+          padding-left: 20px;
+        }
+      }
+    }
+    &__contact {
+      grid-area: contact;
+    }
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: "cards suggestions"
+                         "cards contact"
+                         "cards contact"
+                         "cards contact"
+                         "footer footer";
+    gap: 3rem;
+
+    @include breakpoint(xs) {
+      grid-template-columns: 1fr;
+      grid-template-areas: "cards" 
+                           "contact"
+                           "suggestions" 
+                           "footer";
+    }
+
+    @include breakpoint(sm) {
+      grid-template-columns: 1fr;
+      grid-template-areas: "cards" 
+                           "contact"
+                           "suggestions" 
+                           "footer";
+    }
+
+    @include breakpoint(lg) {
+      grid-template-columns: 2fr 1fr;
+      grid-template-areas: "cards suggestions"
+                           "cards contact"
+                           "cards contact"
+                           "cards contact"
+                           "footer footer";
+      gap: 3rem;
+    }
+
+    
+
+
+
   }
 }

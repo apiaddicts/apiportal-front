@@ -81,6 +81,7 @@
         width: 100%;
         display: flex;
         align-items: center;
+        justify-content: center;
         flex-direction: column;
         // justify-content: space-between;
         &__input {
@@ -90,7 +91,6 @@
             }
             
             &__button {
-                width: 55%;
                 margin-right: 5%;
                 padding: 15px 0px;
                 // margin-top: 12px;
