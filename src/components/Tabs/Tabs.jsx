@@ -3,12 +3,13 @@ import Tab from './Tab';
 
 import './tabs.scss';
 
-function Tabs({ children, line = false, direction = 'left', activeColor = 'primary', colorTab = 'primary' }) {
+function Tabs({ children, line = false, direction = 'left', activeColor = 'primary', colorTab = 'primary', deTbas }) {
 
   const [activeTab, setActiveTab] = useState(children[0].props.label);
 
   const onClickTabItem = (tab) => {
     setActiveTab(tab);
+    deTbas(tab);
   };
 
   return (
