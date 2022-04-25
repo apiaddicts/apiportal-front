@@ -11,6 +11,10 @@
     width: 100%;
     overflow: hidden;
 
+    @media (max-width: 600px) {
+        width: 90%;
+        margin: auto;
+    }
     &__close__button {
         position: absolute;
         top: 0;
