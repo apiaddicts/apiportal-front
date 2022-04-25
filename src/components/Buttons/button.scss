@@ -1,75 +1,77 @@
-@import '../../styles/variables.scss';
+@import "../../styles/variables.scss";
 
 @mixin button-bg($bg) {
   background: $bg;
   &:hover {
-    background:darken($bg,8%);
+    background: darken($bg, 8%);
     transition: all 0.3s ease;
   }
   &:active {
-    background:darken($bg,25%);
-  } 
+    background: darken($bg, 25%);
+  }
 }
 
 @mixin letter($color) {
-   color: $color;
-   &:hover {
-      color: darken($color, 5%);
-      transition: all 0.3s ease;
-   }
+  color: $color;
+  &:hover {
+    color: darken($color, 5%);
+    transition: all 0.3s ease;
+  }
 }
 
 @mixin border($color) {
-   border: 2px solid $color;
+  border: 2px solid $color;
 }
 
 .btn {
-cursor: pointer;
- text-decoration: none;
- border-radius: 40px;
- font-family: $barlow;
- font-style: normal;
- font-weight: 700;
- font-size: 16px;
- line-height: 19px;
- text-align: center;
-padding: 13px 32px;
-text-transform: uppercase !important;
- display: flex;
- justify-content: center;
- align-items: center;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 40px;
+  font-family: $barlow;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+  padding: 13px 32px;
+  text-transform: uppercase !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 210px;
+  min-width: 100%;
+  border: 1px solid #E3E829;
 }
 
 .btn-none {
-   display: none;
+  display: none;
 }
- 
-.btn-secundary {
-   @include button-bg($secondary);
-   @include letter($secondary_white);
-   @include border(#00AEC7)
 
+.btn-secundary {
+  @include button-bg($secondary);
+  @include letter($secondary_white);
+  @include border(#00aec7);
 }
 
 .btn-primary {
-   @include button-bg($secondary_yellow);
-   @include letter($primary);
+  @include button-bg($secondary_yellow);
+  @include letter($primary);
 }
- 
-.btn-secundary-white{
-    @include button-bg($secondary_white);
-    @include letter(#0033A0);
-    @include border($secondary_white)
- }
- 
+
+.btn-secundary-white {
+  @include button-bg($secondary_white);
+  @include letter(#0033a0);
+  @include border($secondary_white);
+}
+
 .btn-ghost {
-    @include button-bg(transparent);
-    @include letter($secondary_white);
-    @include border($secondary_white)
- }
+  @include button-bg(transparent);
+  @include letter($secondary_white);
+  @include border($secondary_white);
+}
 
 .btn-ghost-variant {
-   @include button-bg(transparent);
-   @include letter($primary);
-   @include border($secondary)
+  @include button-bg(transparent);
+  @include letter($primary);
+  @include border($secondary);
 }

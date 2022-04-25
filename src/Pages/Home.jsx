@@ -255,12 +255,16 @@ function Home() {
                   <p className='body-1'>{filterWorks[2].subtitle ? filterWorks[2].subtitle : ''}</p>
                 </div>
 
-                <div className='d-xs-none'>
+                <div className='d-xs-none container'>
                   <Carousel />
                 </div>
                 <div className='container d-xs-only'>
                   <CardSlider lists={slides} flag={false} />
                 </div>
+                {/* <div className='container'>
+                  <Slick />
+                </div> */}
+
               </div>
             </div>
           </section>
