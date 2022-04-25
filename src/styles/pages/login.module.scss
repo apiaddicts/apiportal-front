@@ -51,18 +51,39 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        flex-direction: row;
         padding: 1rem;
+        margin-bottom: 10px;
+        
+        @media (max-width: 768px) {
+            flex-direction: column;
+        
+            p {
+                text-align: center;
+                padding: 0 !important;
+                margin-bottom: 8px;
+                margin-top: 8px;
+            }
+        }
 
     }
-
-    &__links {}
+    
+    &__links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color: $primary;
+    }
 
     &__button {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 100%;
+        button {
+            @media (max-width: 600px) {
+                width: 100%;
+            }
+        }
     }
 
 }

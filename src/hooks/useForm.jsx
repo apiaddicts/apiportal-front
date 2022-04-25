@@ -9,7 +9,7 @@ const validationSchema = Yup.object().shape({
   last_name: string().required('El apellido es obligatorio'),
   phone: string()
     .matches(new RegExp(/(^[0-9]+$)/), 'Must contain only numbers')
-    .min(10, 'Must be at least 10 characters long').required('El nuúmero es obligatorio'),
+    .min(10, 'Must be at least 10 characters long').required('El número es obligatorio'),
   company: string().required('El nombre de la empresa es obligatorio'),
   industry: string().required('El sector es obligatorio'),
   email: string().email('Please provide a valid email').required('El email es obligatorio'),

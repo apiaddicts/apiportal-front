@@ -14,16 +14,22 @@ function CreateAccount() {
 
   return (
     <form
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(2, 1fr)',
-        gridGap: '1rem',
-      }}
+      className='create-account'
       onSubmit={formConfig.handleSubmit}
     >
       {fieldsRegister.map((field) => (
         <Input key={field.id} field={field} formik={formConfig} />
       ))}
+      {/* checkbox */}
+      <div className='create-account__checkbox'>
+        <input type='checkbox' id='checkbox' />
+        <span>
+          Acepto recibir correos de acuerdo con los siguientes
+          {' '}
+          <span className='text-bold'>términos y condiciones</span>
+          .
+        </span>
+      </div>
       <Button
         styles='secundary'
         type='submit'

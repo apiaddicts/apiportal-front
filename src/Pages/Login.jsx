@@ -9,7 +9,7 @@ import { fieldsLogin } from '../components/Forms/fields';
 import useLoginConfig from '../hooks/useLogin';
 
 function Login({ setIsOpen }) {
-  const [showAlert, setShowAlert] = useState(false);
+  const [showAlert, setShowAlert] = useState(true);
   const [showForm, setShowForm] = useState(true);
   const [showResetForm, setShowResetForm] = useState(false);
 
