@@ -8,14 +8,12 @@
 .item {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 2rem;
-  padding: 20px 0;
+  gap: 1rem;
+  padding-top: 20px;
   margin: 20px;
   
   &__border {
-    border-color: #CCD6EC;
-    border-style: solid;
-    border-width: 1px 0px;
+    border-top: 1px solid #CCD6EC;
 }
   
   &__avatar {
@@ -34,6 +32,7 @@
       font-family: $barlow;
       margin-bottom: 8px;
       color: $primary;
+      text-transform: uppercase;
     }
     &__paragraph {
       font-size: 16px;
