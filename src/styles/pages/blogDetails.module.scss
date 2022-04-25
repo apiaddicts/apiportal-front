@@ -107,7 +107,8 @@
 
         @media (max-width: 768px) {
             width: 100%;
-            padding: 15px 0;
+            padding: 10px 20px;
+            text-align: justify;
         }
 
         &__footer {
@@ -164,6 +165,7 @@
         @media (max-width: 768px) {
             width: 100%;
             height: auto;
+            padding: 10px 20px;
         }
     }
 

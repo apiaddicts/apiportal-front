@@ -11,7 +11,7 @@ import Tabs from '../components/Tabs/Tabs';
 import CardSlider from '../components/Card/CardSlider';
 import ItemAvatar from '../components/Item/ItemAvatar';
 import Chip from '../components/Chip/Chip';
-import Input from '../components/Input';
+// import Input from '../components/Input';
 import CardInformation from '../components/Card/CardInformation';
 import jsonData from '../data-fake.json';
 import AccordionFilter from '../components/Accordion/AccordionFilter';
@@ -217,15 +217,6 @@ function Components() {
         </p>
 
         <Chip title='Desarrolladores' className='gray' />
-
-        <p className='h1'>
-          Inputs reutilizables
-        </p>
-        <Input type='text' placeholder='Nombre' />
-
-        <Input type='email' placeholder='Email' />
-
-        <Input type='password' placeholder='Password' />
 
         <p className='h1'>
           Componente Card information

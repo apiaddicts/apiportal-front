@@ -20,38 +20,39 @@ function BlogDetails() {
     if (params.id && Object.keys(blog).length === 0) {
       dispatch(getBlog(params.id));
     }
-
     return () => {
       dispatch(resetGetBlog());
     };
   }, []);
 
-  console.log(blog.title);
-  console.log(blog);
-
   return (
-    <>
-      <BannerStatic
-        title={blog.title ? blog.title : 'Descubre las novedades de SURA'}
-        img={blog.image ? blog.image[0].url : 'https://picsum.photos/1920/300'}
-      />
-      <section className='container mt-10 py-5'>
-        <BlogDetailsInfo styles={styles} />
-        <FooterAuthor />
-        <section className={classes.section__news}>
-          <div className='container my-10'>
-            <div className={classes.section__news__title}>
-              <h1 className='h2 text__primary'>También te puede interesar</h1>
-            </div>
-            <div className='mb-15'>
-              <p className='body-1 my-9'>Conoce todas las novedades sobre tecnología, APIs y transformación digital</p>
-            </div>
-            <Carousel />
-          </div>
-        </section>
-      </section>
-      <Contact />
-    </>
+    <div>
+      {Object.keys(blog).length > 0 ? (
+        <>
+          <BannerStatic
+            title={blog.title ? blog.title : 'Descubre las novedades de SURA'}
+            img={blog.image ? blog.image[0].url : 'https://picsum.photos/1920/300'}
+          />
+          <section className='container mt-10 py-5'>
+            <BlogDetailsInfo styles={styles} data={blog} />
+            <FooterAuthor data={blog} />
+            <section className={classes.section__news}>
+              <div className='container my-10'>
+                <div className={classes.section__news__title}>
+                  <h1 className='h2 text__primary'>También te puede interesar</h1>
+                </div>
+                <div className='mb-15'>
+                  <p className='body-1 my-9'>Conoce todas las novedades sobre tecnología, APIs y transformación digital</p>
+                </div>
+                <Carousel />
+              </div>
+            </section>
+          </section>
+          <Contact />
+        </>
+      ) : (null)}
+
+    </div>
   );
 };
 
