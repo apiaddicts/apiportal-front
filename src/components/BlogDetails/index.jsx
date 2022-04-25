@@ -74,51 +74,52 @@ function BlogDetailsInfo({ styles, data }) {
             <p className={styles.blog__details__title__text}>
               {question.description ? question.description : ''}
             </p>
-            {/* <div className={styles.blog__details__list__content}>
-              <ul>
-                <li className={styles.blog__details__list__content__items}>
-                  <p className={styles.blog__details__list__item__title}>
-                    <span className={styles.blog__details__list__item__title__text}>
-                      Lorem ipsum dolor sit amet.
-                    </span>
-                  </p>
-                </li>
-                <li className={styles.blog__details__list__content__items}>
-                  <p className={styles.blog__details__list__item__title}>
-                    <span className={styles.blog__details__list__item__title__text}>
-                      Lorem ipsum dolor sit amet.
-                    </span>
-                  </p>
-                </li>
-                <li className={styles.blog__details__list__content__items}>
-                  <p className={styles.blog__details__list__item__title}>
-                    <span className={styles.blog__details__list__item__title__text}>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </span>
-                  </p>
-                </li>
-              </ul>
-              <div className={styles.blog__details__social__content}>
-                <p>COMPARTIR:</p>
-                <div className={styles.blog__details__social__icons}>
-                  <div className={styles.blog__details__social__icon__content}>
-                    <FaFacebookF />
-                  </div>
-                  <div className={styles.blog__details__social__icon__content}>
-                    <FaTwitter />
-                  </div>
-                  <div className={styles.blog__details__social__icon__content}>
-                    <FaLinkedinIn />
-                  </div>
-                  <div className={styles.blog__details__social__icon__content}>
-                    <FaTelegramPlane />
-                  </div>
-                </div>
-              </div>
-            </div> */}
           </div>
         )
       )) : (null)}
+
+      <div className={styles.blog__details__list__content}>
+        {/* <ul>
+          <li className={styles.blog__details__list__content__items}>
+            <p className={styles.blog__details__list__item__title}>
+              <span className={styles.blog__details__list__item__title__text}>
+                Lorem ipsum dolor sit amet.
+              </span>
+            </p>
+          </li>
+          <li className={styles.blog__details__list__content__items}>
+            <p className={styles.blog__details__list__item__title}>
+              <span className={styles.blog__details__list__item__title__text}>
+                Lorem ipsum dolor sit amet.
+              </span>
+            </p>
+          </li>
+          <li className={styles.blog__details__list__content__items}>
+            <p className={styles.blog__details__list__item__title}>
+              <span className={styles.blog__details__list__item__title__text}>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              </span>
+            </p>
+          </li>
+        </ul> */}
+        <div className={styles.blog__details__social__content}>
+          <p>COMPARTIR:</p>
+          <div className={styles.blog__details__social__icons}>
+            <div className={styles.blog__details__social__icon__content}>
+              <FaFacebookF />
+            </div>
+            <div className={styles.blog__details__social__icon__content}>
+              <FaTwitter />
+            </div>
+            <div className={styles.blog__details__social__icon__content}>
+              <FaLinkedinIn />
+            </div>
+            <div className={styles.blog__details__social__icon__content}>
+              <FaTelegramPlane />
+            </div>
+          </div>
+        </div>
+      </div>
 
     </>
   );
