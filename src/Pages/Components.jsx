@@ -11,12 +11,13 @@ import Tabs from '../components/Tabs/Tabs';
 import CardSlider from '../components/Card/CardSlider';
 import ItemAvatar from '../components/Item/ItemAvatar';
 import Chip from '../components/Chip/Chip';
-import Input from '../components/Input';
+// import Input from '../components/Input';
 import CardInformation from '../components/Card/CardInformation';
 import jsonData from '../data-fake.json';
 import AccordionFilter from '../components/Accordion/AccordionFilter';
 import IconM from '../components/GoogleIcon';
 import icons from '../static/icons-sura';
+import InputSelect from '../components/Input/InputSelect';
 
 function Components() {
 
@@ -153,16 +154,16 @@ function Components() {
         description='Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat minima blanditiis dolorem assumenda temporibus inventore, unde optio quis earum quos ex, illo pariatur quasi aut officiis fuga ipsum adipisci eius?'
       />
 
-      <Button type='primary'>
+      <Button styles='primary'>
         Ejemplo1
       </Button>
-      <Button type='secundary'>
+      <Button styles='secundary'>
         Ejemplo2
       </Button>
-      <Button type='secundary-white'>
+      <Button styles='secundary-white'>
         Ejemplo3
       </Button>
-      <Button type='ghost'>
+      <Button styles='ghost'>
         Ejemplo4
       </Button>
 
@@ -188,7 +189,7 @@ function Components() {
           <CardBasic chipTitle='GET' />
         </div>
         <div label='Button'>
-          <Button type='ghost'>
+          <Button styles='ghost'>
             Ejemplo4
           </Button>
         </div>
@@ -197,7 +198,8 @@ function Components() {
       <CardSlider lists={cardSlides} />
 
       <div className='content-demo'>
-        <ItemAvatar title='Tu Salud - Lectura de 12 min.' paragraph='Quisque rutrum. Sed auge ipsum, egestas nec, vesti bulum.' img='https://picsum.photos/id/1005/150/150' />
+        <ItemAvatar border title='Tu Salud - Lectura de 12 min.' paragraph='Quisque rutrum. Sed auge ipsum, egestas nec, vesti bulum.' img='https://picsum.photos/id/1005/150/150' />
+        <InputSelect />
       </div>
       <div style={{
         width: '80%',
@@ -217,15 +219,6 @@ function Components() {
         </p>
 
         <Chip title='Desarrolladores' className='gray' />
-
-        <p className='h1'>
-          Inputs reutilizables
-        </p>
-        <Input type='text' placeholder='Nombre' />
-
-        <Input type='email' placeholder='Email' />
-
-        <Input type='password' placeholder='Password' />
 
         <p className='h1'>
           Componente Card information
@@ -263,6 +256,74 @@ function Components() {
       </div>
       <div>
         {icons('person')}
+      </div>
+
+      <div className='container'>
+        <h1 className='text-center'>GRID SYSTEM</h1>
+        <div className='row'>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-2 test'>Col 2 of 12</p>
+          <p className='flex-sm-2 test'>Col 2 of 12</p>
+          <p className='flex-sm-2 test'>Col 2 of 12</p>
+          <p className='flex-sm-2 test'>Col 2 of 12</p>
+          <p className='flex-sm-2 test'>Col 2 of 12</p>
+          <p className='flex-sm-2 test'>Col 2 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-3 test'>Col 3 of 12</p>
+          <p className='flex-sm-3 test'>Col 3 of 12</p>
+          <p className='flex-sm-3 test'>Col 3 of 12</p>
+          <p className='flex-sm-3 test'>Col 3 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-4 test'>Col 4 of 12</p>
+          <p className='flex-sm-4 test'>Col 4 of 12</p>
+          <p className='flex-sm-4 test'>Col 4 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-5 test'>Col 5 of 12</p>
+          <p className='flex-sm-7 test'>Col 7 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-6 test'>Col 6 of 12</p>
+          <p className='flex-sm-6 test'>Col 6 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-7 test'>Col 7 of 12</p>
+          <p className='flex-sm-5 test'>Col 5 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-8 test'>Col 8 of 12</p>
+          <p className='flex-sm-4 test'>Col 4 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-9 test'>Col 9 of 12</p>
+          <p className='flex-sm-3 test'>Col 3 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-10 test'>Col 10 of 12</p>
+          <p className='flex-sm-2 test'>Col 2 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-11 test'>Col 11 of 12</p>
+          <p className='flex-sm-1 test'>Col 1 of 12</p>
+        </div>
+        <div className='row'>
+          <p className='flex-sm-12 test'>Col 12 of 12</p>
+        </div>
       </div>
     </div>
 

@@ -25,7 +25,7 @@
 
     &__header {
         display: flex;
-        flex-direction: column;
+        flex-wrap: wrap;
         justify-content: center;
         align-items: center;
         width: 100%;
@@ -81,6 +81,7 @@
         width: 100%;
         display: flex;
         align-items: center;
+        justify-content: center;
         flex-direction: column;
         // justify-content: space-between;
         &__input {
@@ -90,10 +91,100 @@
             }
             
             &__button {
-                width: 55%;
                 margin-right: 5%;
                 padding: 15px 0px;
-                margin-top: 12px;
+                // margin-top: 12px;
+                }
+                }
+                
+                // Container Alternative
+                
+                &__container__alternative {
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    align-items: center;
+                }
+                
+                &__alternative__header {
+                    width: 80%;
+                    flex-wrap: wrap;
+                    margin: auto;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                
+                    @media (max-width: 768px) {
+                        justify-content: center;
+                        align-items: center;
+                    }
+                
+                    p {
+                        margin-left: 20px;
+                    }
+                }
+                
+                &__alternative__title {
+                    font-family: 'FS Joey';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 36px;
+                    line-height: 48px;
+                    color: $primary;
+                
+                    @media (max-width: 768px) {
+                        text-align: center;
+                        margin-left: 0px!important;
+                    }
+                }
+                
+                &__header__title__alternative {
+                    width: 80%;
+                    margin: auto;
+                    flex-wrap: wrap;
+                    display: flex;
+                    padding: 20px 0;
+                
+                    @media (max-width: 768px) {
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+                
+                &__alternative__description {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: flex-start;
+                    margin-bottom: 1rem;
+                    font-family: $barlow;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 26px;
+                    letter-spacing: 0.157143px;
+                    color: $primary;
+                }
+                
+                &__container__alternative__form {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    align-items: center;
+                    width: 80%;
+                    margin: auto;
+                
+                }
+                
+                &__alternative__form {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                
+                    @media (max-width: 768px) {
+                        flex-direction: column;
         }
     }
 }

@@ -1,4 +1,5 @@
 @import '../../styles/variables.scss';
+@import "./../../styles/mixins/mixin.scss";
 
 .main_item_contain {
     display: flex;
@@ -53,6 +54,9 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            @include breakpoint(xs){
+                font-size: 12px !important;
+            }
         }
     }
 }
@@ -71,6 +75,9 @@
         font-size: 22px;
         line-height: 26px;
         letter-spacing: 0.157143px;
+        @include breakpoint(xs) {
+            font-size: 16px;
+        }
     }
     p {
         font-family: $barlow;

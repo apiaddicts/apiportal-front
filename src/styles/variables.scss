@@ -1,4 +1,5 @@
 @import "./tools/tools.scss";
+@import "./mixins/mixin.scss";
 @import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&display=swap");
 // @import url(//db.onlinewebfonts.com/c/4c418fddb193fdc55a68a0040c1414cf?family=FS+Joey);
 
@@ -7,8 +8,8 @@
 ------------------------------ */
 
 @font-face {
-  font-family: 'FS Joey';
-  src: url('../static/fonts/FS\ Joey\ Regular.ttf');
+  font-family: "FS Joey";
+  src: url("../static/fonts/FS\ Joey\ Regular.ttf");
   font-weight: normal;
   font-style: normal;
 }
@@ -26,12 +27,12 @@ $secondary_yellow: #e3e829;
 $gray: #768692;
 $gray_lighten-1: #ecf0f1;
 $gray_lighten-2: #8189a9;
-$gray_lighten-3: #8B92B1;
+$gray_lighten-3: #8b92b1;
 $gray_darken: #53565a;
-$success: #389E0D;
+$success: #389e0d;
 $dark: #000;
-$error: #F54B5E;
-$warning: #F1B434;
+$error: #f54b5e;
+$warning: #f1b434;
 
 /* ------------------------------ 
     WEIGHTS 
@@ -39,13 +40,13 @@ $warning: #F1B434;
 $font-weights: () !default;
 $font-weights: map-deep-merge(
   (
-    'thin': 100,
-    'light': 300,
-    'regular': 400,
-    'medium': 500,
-    'semi-bold': 600,
-    'bold': 700,
-    'black': 900
+    "thin": 100,
+    "light": 300,
+    "regular": 400,
+    "medium": 500,
+    "semi-bold": 600,
+    "bold": 700,
+    "black": 900,
   ),
   $font-weights
 );
@@ -164,3 +165,423 @@ $heading: map-deep-merge(
   $heading
 );
 
+/* ------------------------------ 
+    GRID LAYOUT 
+------------------------------ */
+$gutter-padding-horizontal: 1.5rem;
+$gutter-margin-vertical: 2rem;
+
+$sm: 0em;
+$md: 34.5625em; // 553px / 16px
+$lg: 56.3125em; // 901px / 16px
+$xl: 87.5625em; // 1401px / 16px
+
+$width-container-sm: 90%;
+$width-container-md: 85%;
+$width-container-lg: 123.3rem;
+$width-container-xl: 130rem;
+
+.container {
+  width: $width-container-sm;
+  margin: 0 auto;
+  @include breakpoint(md) {
+    width: $width-container-md;
+  }
+  @include breakpoint(lg) {
+    max-width: $width-container-lg;
+  }
+  @include breakpoint(xl) {
+    max-width: $width-container-xl !important;
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -$gutter-padding-horizontal;
+  margin-right: -$gutter-padding-horizontal;
+
+  [class*="flex-sm"] {
+    width: 100%;
+    max-width: 100%;
+    padding-right: $gutter-padding-horizontal;
+    padding-left: $gutter-padding-horizontal;
+    min-width: 0.1rem;
+    margin-bottom: $gutter-margin-vertical;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  .test {
+    background-color: #f1b434;
+    text-align: center;
+    border: 1px solid #000;
+  }
+
+  .flex-sm-1,
+  .flex-sm-2,
+  .flex-sm-3,
+  .flex-sm-4,
+  .flex-sm-5,
+  .flex-sm-6,
+  .flex-sm-7,
+  .flex-sm-8,
+  .flex-sm-9,
+  .flex-sm-10,
+  .flex-sm-11,
+  .flex-sm-12 {
+    @include breakpoint(sm) {
+      margin-bottom: 0;
+    }
+  }
+
+  .flex-sm-1 {
+    @include breakpoint(sm) {
+      @include grid(12);
+    }
+  }
+  .flex-sm-2 {
+    @include breakpoint(sm) {
+      @include grid(6);
+    }
+  }
+  .flex-sm-3 {
+    @include breakpoint(sm) {
+      @include grid(4);
+    }
+  }
+  .flex-sm-4 {
+    @include breakpoint(sm) {
+      @include grid(3);
+    }
+  }
+  .flex-sm-5 {
+    @include breakpoint(sm) {
+      flex: 0 0 percentage(5 / 12);
+      max-width: percentage(5 / 12);
+    }
+  }
+  .flex-sm-6 {
+    @include breakpoint(sm) {
+      @include grid(2);
+    }
+  }
+  .flex-sm-7 {
+    @include breakpoint(sm) {
+      flex: 0 0 percentage(7 / 12);
+      max-width: percentage(7 / 12);
+    }
+  }
+  .flex-sm-8 {
+    @include breakpoint(sm) {
+      flex: 0 0 percentage(8 / 12);
+      max-width: percentage(8 / 12);
+    }
+  }
+  .flex-sm-9 {
+    @include breakpoint(sm) {
+      flex: 0 0 percentage(9 / 12);
+      max-width: percentage(9 / 12);
+    }
+  }
+  .flex-sm-10 {
+    @include breakpoint(sm) {
+      flex: 0 0 percentage(10 / 12);
+      max-width: percentage(10 / 12);
+    }
+  }
+  .flex-sm-11 {
+    @include breakpoint(sm) {
+      flex: 0 0 percentage(11 / 12);
+      max-width: percentage(11 / 12);
+    }
+  }
+  .flex-sm-12 {
+    @include breakpoint(sm) {
+      @include grid(1);
+    }
+  }
+
+  .flex-md-1,
+  .flex-md-2,
+  .flex-md-3,
+  .flex-md-4,
+  .flex-md-5,
+  .flex-md-6,
+  .flex-md-7,
+  .flex-md-8,
+  .flex-md-9,
+  .flex-md-10,
+  .flex-md-11,
+  .flex-md-12 {
+    @include breakpoint(md) {
+      margin-bottom: 0;
+    }
+  }
+
+  .flex-md-1 {
+    @include breakpoint(md) {
+      @include grid(12);
+    }
+  }
+
+  .flex-md-2 {
+    @include breakpoint(md) {
+      @include grid(6);
+    }
+  }
+
+  .flex-md-3 {
+    @include breakpoint(md) {
+      @include grid(4);
+    }
+  }
+
+  .flex-md-4 {
+    @include breakpoint(md) {
+      @include grid(3);
+    }
+  }
+
+  .flex-md-5 {
+    @include breakpoint(md) {
+      flex: 0 0 percentage((5 / 12));
+      max-width: percentage((5 / 12));
+    }
+  }
+
+  .flex-md-6 {
+    @include breakpoint(md) {
+      @include grid(2);
+    }
+  }
+
+  .flex-md-7 {
+    @include breakpoint(md) {
+      flex: 0 0 percentage((7 / 12));
+      max-width: percentage((7 / 12));
+    }
+  }
+
+  .flex-md-8 {
+    @include breakpoint(md) {
+      flex: 0 0 percentage((8 / 12));
+      max-width: percentage((8 / 12));
+    }
+  }
+
+  .flex-md-9 {
+    @include breakpoint(md) {
+      flex: 0 0 percentage((9 / 12));
+      max-width: percentage((9 / 12));
+    }
+  }
+
+  .flex-md-10 {
+    @include breakpoint(md) {
+      flex: 0 0 percentage((10 / 12));
+      max-width: percentage((10 / 12));
+    }
+  }
+
+  .flex-md-11 {
+    @include breakpoint(md) {
+      flex: 0 0 percentage((11 / 12));
+      max-width: percentage((11 / 12));
+    }
+  }
+
+  .flex-md-12 {
+    @include breakpoint(md) {
+      @include grid(1);
+    }
+  }
+  .flex-lg-1,
+  .flex-lg-2,
+  .flex-lg-3,
+  .flex-lg-4,
+  .flex-lg-5,
+  .flex-lg-6,
+  .flex-lg-7,
+  .flex-lg-8,
+  .flex-lg-9,
+  .flex-lg-10,
+  .flex-lg-11,
+  .flex-lg-12 {
+    @include breakpoint(lg) {
+      margin-bottom: 0;
+    }
+  }
+
+  .flex-lg-1 {
+    @include breakpoint(lg) {
+      @include grid(12);
+    }
+  }
+
+  .flex-lg-2 {
+    @include breakpoint(lg) {
+      @include grid(6);
+    }
+  }
+
+  .flex-lg-3 {
+    @include breakpoint(lg) {
+      @include grid(4);
+    }
+  }
+
+  .flex-lg-4 {
+    @include breakpoint(lg) {
+      @include grid(3);
+    }
+  }
+
+  .flex-lg-5 {
+    @include breakpoint(lg) {
+      flex: 0 0 percentage((5 / 12));
+      max-width: percentage((5 / 12));
+    }
+  }
+
+  .flex-lg-6 {
+    @include breakpoint(lg) {
+      @include grid(2);
+    }
+  }
+
+  .flex-lg-7 {
+    @include breakpoint(lg) {
+      flex: 0 0 percentage((7 / 12));
+      max-width: percentage((7 / 12));
+    }
+  }
+
+  .flex-lg-8 {
+    @include breakpoint(lg) {
+      flex: 0 0 percentage((8 / 12));
+      max-width: percentage((8 / 12));
+    }
+  }
+
+  .flex-lg-9 {
+    @include breakpoint(lg) {
+      flex: 0 0 percentage((9 / 12));
+      max-width: percentage((9 / 12));
+    }
+  }
+
+  .flex-lg-10 {
+    @include breakpoint(lg) {
+      flex: 0 0 percentage((10 / 12));
+      max-width: percentage((10 / 12));
+    }
+  }
+
+  .flex-lg-11 {
+    @include breakpoint(lg) {
+      flex: 0 0 percentage((11 / 12));
+      max-width: percentage((11 / 12));
+    }
+  }
+
+  .flex-lg-12 {
+    @include breakpoint(lg) {
+      @include grid(1);
+    }
+  }
+  .flex-xl-1,
+  .flex-xl-2,
+  .flex-xl-3,
+  .flex-xl-4,
+  .flex-xl-5,
+  .flex-xl-6,
+  .flex-xl-7,
+  .flex-xl-8,
+  .flex-xl-9,
+  .flex-xl-10,
+  .flex-xl-11,
+  .flex-xl-12 {
+    @include breakpoint(xl) {
+      margin-bottom: 0;
+    }
+  }
+
+  .flex-xl-1 {
+    @include breakpoint(xl) {
+      @include grid(12);
+    }
+  }
+
+  .flex-xl-2 {
+    @include breakpoint(xl) {
+      @include grid(6);
+    }
+  }
+
+  .flex-xl-3 {
+    @include breakpoint(xl) {
+      @include grid(4);
+    }
+  }
+
+  .flex-xl-4 {
+    @include breakpoint(xl) {
+      @include grid(3);
+    }
+  }
+
+  .flex-xl-5 {
+    @include breakpoint(xl) {
+      flex: 0 0 percentage((5 / 12));
+      max-width: percentage((5 / 12));
+    }
+  }
+
+  .flex-xl-6 {
+    @include breakpoint(xl) {
+      @include grid(2);
+    }
+  }
+
+  .flex-xl-7 {
+    @include breakpoint(xl) {
+      flex: 0 0 percentage((7 / 12));
+      max-width: percentage((7 / 12));
+    }
+  }
+
+  .flex-xl-8 {
+    @include breakpoint(xl) {
+      flex: 0 0 percentage((8 / 12));
+      max-width: percentage((8 / 12));
+    }
+  }
+
+  .flex-xl-9 {
+    @include breakpoint(xl) {
+      flex: 0 0 percentage((9 / 12));
+      max-width: percentage((9 / 12));
+    }
+  }
+
+  .flex-xl-10 {
+    @include breakpoint(xl) {
+      flex: 0 0 percentage((10 / 12));
+      max-width: percentage((10 / 12));
+    }
+  }
+
+  .flex-xl-11 {
+    @include breakpoint(xl) {
+      flex: 0 0 percentage((11 / 12));
+      max-width: percentage((11 / 12));
+    }
+  }
+
+  .flex-xl-12 {
+    @include breakpoint(xl) {
+      @include grid(1);
+    }
+  }
+}

@@ -4,6 +4,12 @@
 .divider {
     border-bottom: 4px solid $secondary_yellow;
     width: 56px;
+    margin-top: 8px;
+    margin-bottom: 34px;
+    @include breakpoint(xs){
+        margin-top: 0;
+        margin-bottom: 0;
+    }
 }
 .banner{
     &__container {
@@ -12,23 +18,18 @@
     background: $primary;
     }
     &__content{
-        width: 90%;
-        height: 300px;
-        padding-left: 15px;
-        padding-right: 15px;
-        margin-left: auto;
-        margin-right: auto;
-        display: flex;
-        align-items: start;
-        flex-direction: column;
-        justify-content: center;        
+        padding-top: 101px;      
+        padding-bottom: 85px;
+        @include breakpoint(xs){
+            padding-top: 39px;
+            padding-bottom: 45px;
+        }
     }
     &__centered{
-        height: 300px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
+        padding: 81px 0;
+        @include breakpoint(xs) {
+            padding: 54px 0 !important;
+        }
     }
     &__vertical{
         height: 100vh;
