@@ -119,7 +119,7 @@ function Blog() {
                           </div>
                           <div id='Suggestions' className={`d-xs-none ${stylesBlog.apis__library__suggestions}`}>
                             <div className={stylesBlog.apis__library__suggestions__content}>
-                              <h1>Lo más reciente</h1>
+                              <h1 className={stylesBlog.apis__library__suggestions__content__title}>Lo más reciente</h1>
                               <Novedades />
                             </div>
                           </div>

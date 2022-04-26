@@ -139,7 +139,7 @@ function Home() {
                   ))
                 }
               </Tabs>
-              <div className='button__group mt-10'>
+              <div className='button__group mt-10 justify-center'>
                 {filterButtonSection && filterButtonSection.length > 0 ? (
                   filterButtonSection[0].header.map((button, i) => (
                     <div key={i} className='pr-2 mb-4'>

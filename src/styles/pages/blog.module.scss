@@ -208,7 +208,7 @@
     &__suggestions {
       grid-area: suggestions;
       &__content {
-        h1 {
+        &__title {
           padding-left: 20px;
         }
       }
