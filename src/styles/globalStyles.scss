@@ -853,7 +853,7 @@ a {
 }
 .button__group {
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   align-content: center;
   flex-direction: row;
   @include breakpoint(xs) {
@@ -886,6 +886,13 @@ a {
 
 .justify-center {
   justify-content: center;
+}
+.justify-start {
+  justify-content: start;
+}
+
+.align-center {
+  align-items: center;
 }
 
 .d-none {
