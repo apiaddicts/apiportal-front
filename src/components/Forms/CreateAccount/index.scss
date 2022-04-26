@@ -1,0 +1,62 @@
+@import "./../../../styles/variables.scss";
+
+.create-account {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    div {
+        width: 50%;
+        padding: 0 10px;
+    }
+
+    button {
+        width: 50%;
+        margin: 10px auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .create-account {
+        grid-template-columns: repeat(1, 1fr);
+        width: 100%;
+        height: 70vh;
+        overflow: auto;
+
+        div {
+            width: 100%;
+            padding: 0 10px;
+            margin: 8px 0;
+        }
+    }
+}
+
+.create-account__checkbox {
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    margin: 20px 0;
+    color: $primary;
+
+    input {
+        margin-right: 10px;
+
+        @media (max-width: 715px) {
+            margin-right: 9px;
+            margin-bottom: 16px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        text-align: center;
+    }
+}
+
+.text-bold {
+    font-weight: bold;
+    text-decoration-line: underline;
+
+}
