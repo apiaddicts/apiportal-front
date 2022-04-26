@@ -12,6 +12,12 @@
   &:last-child {
     width: 100%!important;
   }
+  @media (max-width: 600px) {
+    &:last-child {
+      width: 90% !important;
+      margin: auto;
+    }
+  }
 
   &__required {
     color: $gray_lighten-2 !important;
@@ -108,5 +114,43 @@
 
   &:focus {
     border: none;
+  }
+}
+
+.form-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0px 2px 20px #ECF0F1;
+  border-radius: 40px;
+  border: 1px solid #ECF0F1;
+  width: 270px;
+  height: 40px;
+  padding: 0 15px;
+
+  label {
+    font-family: $barlow;
+    color: $primary;
+    margin-bottom: 0;
+    margin-right: 8px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+  }
+
+  .form-control-select {
+    border: none;
+    outline: none;
+    font-size: 12px;
+    border-left: 1px solid #ECF0F1;
+    color: #000;
+    margin: 8px 0;
+    transition: all 0.3s ease-in-out;
+    height: 30px;
+
+    &:focus {
+      border-color: aqua;
+    }
   }
 }

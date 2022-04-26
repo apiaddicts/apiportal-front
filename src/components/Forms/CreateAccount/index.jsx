@@ -18,7 +18,7 @@ function CreateAccount() {
       onSubmit={formConfig.handleSubmit}
     >
       {fieldsRegister.map((field) => (
-        <Input key={field.id} field={field} formik={formConfig} />
+        <Input footer key={field.id} field={field} formik={formConfig} />
       ))}
       {/* checkbox */}
       <div className='create-account__checkbox'>

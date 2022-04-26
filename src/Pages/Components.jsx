@@ -17,6 +17,7 @@ import jsonData from '../data-fake.json';
 import AccordionFilter from '../components/Accordion/AccordionFilter';
 import IconM from '../components/GoogleIcon';
 import icons from '../static/icons-sura';
+import InputSelect from '../components/Input/InputSelect';
 
 function Components() {
 
@@ -198,6 +199,7 @@ function Components() {
 
       <div className='content-demo'>
         <ItemAvatar border title='Tu Salud - Lectura de 12 min.' paragraph='Quisque rutrum. Sed auge ipsum, egestas nec, vesti bulum.' img='https://picsum.photos/id/1005/150/150' />
+        <InputSelect />
       </div>
       <div style={{
         width: '80%',
