@@ -16,13 +16,8 @@ import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent
 
 import useSearch from '../hooks/useSearch';
 import Icon from '../components/MdIcon/Icon';
-import { getBlogs } from '../redux/actions/blogAction';
+import { getBlogData, getBlogs } from '../redux/actions/blogAction';
 
-const buttons = [
-  { class: 'gray', label: 'APIS' },
-  { class: 'gray', label: 'Empresas' },
-  { class: 'gray', label: 'Desarroladores' },
-];
 const buttonsTags = [
   { class: 'gray', label: 'APIS' },
   { class: 'gray', label: 'Empresas' },
@@ -30,32 +25,24 @@ const buttonsTags = [
 ];
 
 function Blog() {
+  const { blogs, data } = useSelector((state) => state.blog);
   const [resultsSearch, setResultsSearch] = useState([]);
   // eslint-disable-next-line no-unused-vars
   const [label, setLabel] = useState('');
-  const [resultsData, setResultsData] = useState([]);
+  const [resultsData, setResultsData] = useState(blogs);
   const dispatch = useDispatch();
   const { value, setValue, formik } = useSearch({
     initialState: {
       search: '',
     },
   });
-  const { blogs } = useSelector((state) => state.blog);
   const id = Date.now();
   const results = jsonData.filter((item) => {
     return formik.values.search === '' ? null : item.description.toLowerCase().includes(value.toLowerCase());
   });
 
-  const deTbas = (tab) => {
-    const results = blogs.filter((item) => {
-      return item.tags.map((tag) => tag.label.toLowerCase()).includes(tab.toLowerCase());
-    });
-    setResultsData(results);
-  };
-
   useEffect(() => {
     setValue(formik.values.search);
-    // console.log(results.length === 0 ? 'Sin resultados' : results);
     setResultsSearch(results);
   }, [formik.values.search]);
 
@@ -63,19 +50,49 @@ function Blog() {
     if (blogs && blogs.length === 0) {
       dispatch(getBlogs());
     }
+
+    if (data && Object.keys(data).length === 0) {
+      dispatch(getBlogData());
+    }
   });
+
+  // load slider
+  const BannerFilter = Object.keys(data).length > 0 && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
+  const bannerTitle = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0].title ? BannerFilter[0].title : '';
+  const bannerImage = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0].background ? BannerFilter[0].background.url : '';
+  const bannerSearch = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0].search ? BannerFilter[0].search : '';
+
+  const TabsFilter = Object.keys(data).length > 0 && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sura.tab-card') : [];
+
+  const deTbas = (tab) => {
+    const label = TabsFilter.find((label) => label.name.toLowerCase().includes(tab.toLowerCase()));
+    if (label.tab.toLowerCase().includes('zero')) {
+      setResultsData(blogs);
+    } else {
+      const results = blogs.filter((item) => {
+        return item.tags.map((tag) => tag.tab.toLowerCase()).includes(label.tab.toLowerCase());
+      });
+      setResultsData(results);
+    }
+
+  };
+
   return (
     <div>
-      {blogs.length > 0 ? (
+      {blogs.length > 0 && Object.keys(data).length > 0 ? (
         <div>
           <section>
-            <BannerStatic
-              title='Descubre las novedades de SURA'
-              img='https://picsum.photos/1920/300'
-              isSearch
-              onChange={formik.handleChange}
-              value={formik.values.search}
-            />
+            {
+              bannerSearch !== '' ? (
+                <BannerStatic
+                  title={bannerTitle !== '' ? bannerTitle : 'Descubre las novedades de SURA'}
+                  img={bannerImage !== '' ? bannerImage : 'https://picsum.photos/1920/300'}
+                  isSearch
+                  onChange={formik.handleChange}
+                  value={formik.values.search}
+                />
+              ) : (null)
+            }
           </section>
           {
             resultsSearch.length === 0 && formik.values.search === '' ? (
@@ -86,7 +103,85 @@ function Blog() {
                       line={true}
                       deTbas={deTbas}
                     >
-                      <div label='Todos'>
+                      {TabsFilter.length > 0 ? (
+                        TabsFilter.map((tab, i) => (
+                          <div label={tab.name} key={i}>
+                            <div className={`d-xs-none ${stylesBlog.section__experiences__content}`}>
+                              <div className={stylesBlog.section__experiences__content__img}>
+                                <div className={stylesBlog.section__experiences__content__img__overlay}>
+                                  <img src={tab.img && tab.img.length > 0 ? tab.img[0].url : 'https://picsum.photos/500/350'} alt='' />
+                                </div>
+                              </div>
+                              <div className={stylesBlog.section__experiences__content__card}>
+                                <CardInformation
+                                  title={tab.cards && tab.cards[0].title}
+                                  buttons={tab.cards && tab.cards[0].steps}
+                                  description={tab.cards && tab.cards[0].description}
+                                  reading={tab.cards && tab.cards[0].timeRead}
+                                />
+                              </div>
+                            </div>
+
+                            <div className={stylesBlog.apis__library}>
+                              <div id='Cards' className={stylesBlog.apis__library__cards}>
+                                {
+                                  resultsData.length === 0 ? (
+                                    <span>Sin resultados disponibles</span>
+                                  ) : (
+                                    resultsData.map((results, index) => (
+                                      <Link to={`/blog/${results.id}`} key={index}>
+                                        <CardInformation
+                                          img={results.image ? results.image[0].url : ''}
+                                          description={results.description}
+                                          title={results.title}
+                                          buttons={results.tags && results.tags.length > 0 ? results.tags : []}
+                                        />
+                                      </Link>
+                                    ))
+                                  )
+                                }
+                              </div>
+                              <div id='Suggestions' className={`d-xs-none ${stylesBlog.apis__library__suggestions}`}>
+                                <div className={stylesBlog.apis__library__suggestions__content}>
+                                  <h1 className={stylesBlog.apis__library__suggestions__content__title}>Lo más reciente</h1>
+                                  <Novedades />
+                                </div>
+                              </div>
+                              <div id='Contact' className={stylesBlog.apis__library__contact}>
+                                <Contact />
+                              </div>
+                              <div id='Footer' className={stylesBlog.apis__library__footer}>
+                                <div className={stylesBlog.section__result__content__pagination}>
+                                  <div
+                                    className={
+                                      stylesBlog.section__result__content__pagination__buttons__before
+                                    }
+                                  >
+                                    <Icon id='MdNavigateBefore' />
+                                    <p>Anterior</p>
+                                  </div>
+                                  <div className={stylesBlog.section__result__content__pagination__number}>
+                                    <p>01</p>
+                                    <p>02</p>
+                                    <p>...</p>
+                                    <p>10</p>
+                                  </div>
+                                  <div
+                                    className={
+                                      stylesBlog.section__result__content__pagination__buttons__next
+                                    }
+                                  >
+                                    <p>Siguente</p>
+                                    <Icon id='MdNavigateNext' />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                          </div>
+                        ))
+                      ) : (null)}
+                      {/* <div label='Todos'>
                         <div className={`d-xs-none ${stylesBlog.section__experiences__content}`}>
                           <div className={stylesBlog.section__experiences__content__img}>
                             <div className={stylesBlog.section__experiences__content__img__overlay}>
@@ -154,8 +249,8 @@ function Blog() {
                           </div>
                         </div>
 
-                      </div>
-                      <div label='Novedades'>
+                      </div> */}
+                      {/* <div label='Novedades'>
                         <div className={stylesBlog.section__experiences__content}>
                           <div className={stylesBlog.section__experiences__content__img}>
                             <div className={stylesBlog.section__experiences__content__img__overlay}>
@@ -260,8 +355,8 @@ function Blog() {
                             </div>
                           </div>
                         </div>
-                      </div>
-                      <div label='APIs'>
+                      </div> */}
+                      {/* <div label='APIs'>
                         <div className={stylesBlog.section__experiences__content}>
                           <div className={stylesBlog.section__experiences__content__img}>
                             <div className={stylesBlog.section__experiences__content__img__overlay}>
@@ -366,7 +461,7 @@ function Blog() {
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> */}
                     </Tabs>
                   </div>
                 </div>

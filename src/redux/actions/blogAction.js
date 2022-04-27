@@ -12,7 +12,7 @@ export const getBlogs = () => (dispatch) => {
     },
     (error) => {
       dispatch({
-        type: faqConstants.GET_ALL_BLOG_FAILURE,
+        type: blogConstants.GET_ALL_BLOG_FAILURE,
         payload: error,
       });
     },
@@ -22,7 +22,6 @@ export const getBlogs = () => (dispatch) => {
 export const getBlog = (id) => (dispatch) => {
   blogService.getBlog(id).then(
     (response) => {
-      console.log(response);
       dispatch({
         type: blogConstants.GET_BLOG_SUCCESS,
         payload: response,
@@ -30,7 +29,24 @@ export const getBlog = (id) => (dispatch) => {
     },
     (error) => {
       dispatch({
-        type: faqConstants.GET_BLOG_FAILURE,
+        type: blogConstants.GET_BLOG_FAILURE,
+        payload: error,
+      });
+    },
+  );
+};
+
+export const getBlogData = () => (dispatch) => {
+  blogService.getPageBlog().then(
+    (response) => {
+      dispatch({
+        type: blogConstants.GET_BLOG_DATA_ALL_SUCCESS,
+        payload: response,
+      });
+    },
+    (error) => {
+      dispatch({
+        type: blogConstants.GET_BLOG_DATA_ALL_FAILURE,
         payload: error,
       });
     },
