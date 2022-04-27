@@ -61,6 +61,44 @@
         }
     }
 }
+.banner_img {
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    height: 300px;
+
+    &__backTo {
+        width: 100%;
+        padding-left: 15%;
+        padding-top: 3%;
+    }
+
+    &__title {
+        width: 100%;
+        padding-left: 16%;
+    }
+
+    &__img {
+        position: absolute;
+        height: 341px;
+        width: 593px;
+        z-index: 2;
+        top: 20%;
+        right: 10%;
+        border-radius: 0 0 50px 0;
+    }
+
+    &__footer {
+        width: 100%;
+        height: 60px;
+        background: url("../../static/img/1595328.png");
+        // background: radial-gradient(farthest-side,transparent 20%,transparent 90% ,purple 93%, purple 96%,transparent) left center/30px 30px;
+        background-repeat: space;
+        margin-top: 5%;
+    }
+}
 .heroOverlay {
     height: 100%;
     width: 100%;

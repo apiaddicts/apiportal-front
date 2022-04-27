@@ -13,6 +13,7 @@ import Blog from '../Pages/Blog';
 import BlogDetails from '../Pages/BlogDetails';
 import Login from '../Pages/Login';
 import Register from '../Pages/Register';
+import ApiDetails from '../Pages/ApiDetails';
 
 function AppRouter() {
   const [isOpen, setIsOpen] = useState(false);
@@ -36,6 +37,7 @@ function AppRouter() {
         <Route path='/blog' exact element={<Blog />} />
         <Route path='/componentes' exact element={<Components />} />
         <Route path='/blog/:id' exact element={<BlogDetails />} />
+        <Route path='/api/:id' exact element={<ApiDetails />} />
       </Routes>
       <Footer />
     </BrowserRouter>
