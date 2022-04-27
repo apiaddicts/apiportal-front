@@ -14,7 +14,6 @@ import BlogDetails from '../Pages/BlogDetails';
 import Login from '../Pages/Login';
 import Register from '../Pages/Register';
 import ApiDetails from '../Pages/ApiDetails';
-import ApiDocumentation from '../Pages/Redoc';
 
 function AppRouter() {
   const [isOpen, setIsOpen] = useState(false);
