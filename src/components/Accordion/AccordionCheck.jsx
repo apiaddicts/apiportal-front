@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Icon from '../MdIcon/Icon';
 import classes from './accordion.module.scss';
 
-function AccordionFilter({ items }) {
+function AccordionCheck({ items }) {
   const [active, setActive] = useState(false);
   const [clicked, setClicked] = useState(false);
   const toggle = (index) => {
@@ -48,4 +48,4 @@ function AccordionFilter({ items }) {
   );
 }
 
-export default AccordionFilter;
+export default AccordionCheck;
