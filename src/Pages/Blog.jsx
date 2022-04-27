@@ -50,11 +50,12 @@ function Blog() {
     if (blogs && blogs.length === 0) {
       dispatch(getBlogs());
     }
+    setResultsData(blogs);
 
     if (data && Object.keys(data).length === 0) {
       dispatch(getBlogData());
     }
-  });
+  }, [dispatch, blogs, data]);
 
   // load slider
   const BannerFilter = Object.keys(data).length > 0 && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
