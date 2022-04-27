@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import classes from './banner.module.scss';
 
 function BannerImage() {
   //   const urlImg = 'https://picsum.photos/500/200';
+
   return (
     <div
       className={classes.banner_img}
@@ -10,7 +12,7 @@ function BannerImage() {
       <div
         className={classes.banner_img__backTo}
       >
-        <a href='#'> Volver</a>
+        <Link to={-1}> Volver</Link>
       </div>
       <div
         className={classes.banner_img__title}
