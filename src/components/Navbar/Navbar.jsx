@@ -7,7 +7,7 @@ import SuraLogo from '../../static/img/sura_logo.svg';
 import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
 
-function Navbar({ setIsOpen, setOpenForm }) {
+function Navbar({ setIsOpen, setOpenForm, privateSession }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [size, setSize] = useState({
     width: undefined,
@@ -47,26 +47,39 @@ function Navbar({ setIsOpen, setOpenForm }) {
     <>
       <header className={classes.header}>
         <div className={classes.header__content}>
-          <a href='/' className={classes.header__content__logo}>
-            <img
-              src={SuraLogo}
-              alt=''
-              className={classes.header__content__logo__img}
-            />
-          </a>
+          <Link to='/'>
+            <a className={classes.header__content__logo}>
+              <img
+                src={SuraLogo}
+                alt=''
+                className={classes.header__content__logo__img}
+              />
+            </a>
+          </Link>
           <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
-            <ul className='d-xs-none'>
-              <li className='pr-2'>
-                <Button type='button' styles='ghost-variant' onClick={() => { setIsOpen(true); }}>
-                  Iniciar sesión
-                </Button>
-              </li>
-              <li>
-                <Button type='button' styles='secundary' onClick={() => { setOpenForm(true); }}>
-                  registrate
-                </Button>
-              </li>
-            </ul>
+            {!privateSession && (
+              <ul className='d-xs-none'>
+                <li className='pr-2'>
+                  <Button type='button' styles='ghost-variant' onClick={() => { setIsOpen(true); }}>
+                    Iniciar sesión
+                  </Button>
+                </li>
+                <li>
+                  <Button type='button' styles='secundary' onClick={() => { setOpenForm(true); }}>
+                    registrate
+                  </Button>
+                </li>
+              </ul>
+            )}
+            {privateSession && (
+              <ul className='d-xs-none w-full'>
+                <li>
+                  <Button type='button' styles='ghost-variant'>
+                    Antonio
+                  </Button>
+                </li>
+              </ul>
+            )}
 
             <div className={`d-xs-only ${classes.navbar__xs}`}>
 

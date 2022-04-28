@@ -13,7 +13,7 @@ import textureCircles from '../static/img/texture_circles.svg';
 import codeSnipet from '../static/img/code-snippet.png';
 import BannerImage from '../components/Banner/BannerImage';
 
-function ApiDetails() {
+function ApiDetails({ setIsOpen }) {
 
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.demo);
@@ -24,17 +24,56 @@ function ApiDetails() {
     }
   }, []);
 
-  const filterSection = data && data.contentSections ? data.contentSections.filter((item) => item.__component === 'home.work-section') : [];
+  // const filterSection = data && data.contentSections ? data.contentSections.filter((item) => item.__component === 'home.work-section') : [];
   // const backgroundSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].background ? filterSection[0].background.url : '';
 
-  const itemsSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].Steps ? filterSection[0].Steps.map((i) => {
-    const response = {
-      icon: i.number,
-      title: i.title,
-      description: i.subtitle,
-    };
-    return response;
-  }) : [];
+  // const itemsSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].Steps ? filterSection[0].Steps.map((i) => {
+  //   const response = {
+  //     icon: i.number,
+  //     title: i.title,
+  //     description: i.subtitle,
+  //   };
+  //   return response;
+  // }) : [];
+
+  const Steps = [
+    {
+      'id': 101,
+      'title': 'Integración ágil y dinámica',
+      'subtitle': 'Reduce los tiempos de integración y empieza a vender y gestionar de forma rápida y fácil.\n',
+      'number': 'successWindow',
+    },
+    {
+      'id': 102,
+      'title': 'Amplio catálogo de soluciones y APIs',
+      'subtitle': 'Podrás gestionar todo tipo de operaciones de negocio a través de tu cuenta y apps.',
+      'number': 'archivist',
+    },
+    {
+      'id': 103,
+      'title': 'Recursos y documentación developers',
+      'subtitle': 'Ten siempre disponible toda la documentación de tus APIs y apóyate en las guías elaboradas para ti.\n',
+      'number': 'note1',
+    },
+    {
+      'id': 101,
+      'title': 'Integración ágil y dinámica',
+      'subtitle': 'Reduce los tiempos de integración y empieza a vender y gestionar de forma rápida y fácil.\n',
+      'number': 'successWindow',
+    },
+    {
+      'id': 102,
+      'title': 'Amplio catálogo de soluciones y APIs',
+      'subtitle': 'Podrás gestionar todo tipo de operaciones de negocio a través de tu cuenta y apps.',
+      'number': 'archivist',
+    },
+    {
+      'id': 103,
+      'title': 'Recursos y documentación developers',
+      'subtitle': 'Ten siempre disponible toda la documentación de tus APIs y apóyate en las guías elaboradas para ti.\n',
+      'number': 'note1',
+    },
+  ];
 
   // Load discover section
   const filterDiscoverTab = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'home.discover-section') : [];
@@ -43,32 +82,48 @@ function ApiDetails() {
   const filterButtonSection = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sections.button-hero') : [];
 
   const filterDiscover = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sections.section-use-case') : [];
+
+  const buttonsLbls = [
+    {
+      label: 'Probar API',
+      class: 'primary',
+    },
+    {
+      label: 'Documentación',
+      class: 'ghost-variant',
+    },
+  ];
   return (
     <div>
       {Object.keys(data).length > 0 ? (
         <>
           <section>
-            <BannerImage />
+            <BannerImage
+              buttons={buttonsLbls}
+              setIsOpen={setIsOpen}
+            />
           </section>
-          <section className={`container ${classes.section__content}`}>
+          <section className={`container ${classes.section__content} pb-9`}>
             <div className={classes.section__content__texture}>
               <img src={textureCircles} alt='Texture' />
             </div>
+          </section>
+          <section className='container mb-18'>
             <div className='row'>
               <div className={`flex-md-12 ${classes.section__content__title}`}>
                 <h1 className='h2 text__primary font-weight-bold mb-10 ml-5'>
                   Benificios principales
                 </h1>
               </div>
-              <div className={`flex-md-6 flex-sm-12 ${classes.section__content__img}`}>
+              <div className={`flex-md-4 flex-sm-12 ${classes.section__content__img} mt-9`}>
                 <img src={codeSnipet} alt='Benefits' className='w-full' />
               </div>
-              <div className={`flex-lg-6 flex-sm-12 ${classes.section__content__items}`}>
-                {itemsSection.map((item, i) => (
+              <div className={`flex-lg-4 flex-sm-12 ${classes.section__content__items}`}>
+                {Steps.map((item, i) => (
                   <Item
                     key={i}
                     title={item.title}
-                    icon={item.icon}
+                    icon={item.number}
                   />
                 ))}
               </div>
