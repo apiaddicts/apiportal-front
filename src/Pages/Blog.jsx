@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import stylesBlog from '../styles/pages/blog.module.scss';
 import classes from '../styles/pages/home.module.scss';
-import jsonData from '../data-fake.json';
+// import jsonData from '../data-fake.json';
 
 import BannerStatic from '../components/Banner/BannerStatic';
 import Carousel from '../components/Carousel/Carousel';
@@ -18,32 +18,28 @@ import useSearch from '../hooks/useSearch';
 import Icon from '../components/MdIcon/Icon';
 import { getBlogData, getBlogs } from '../redux/actions/blogAction';
 
-const buttonsTags = [
-  { class: 'gray', label: 'APIS' },
-  { class: 'gray', label: 'Empresas' },
-  { class: 'gray', label: 'Desarroladores' },
-];
-
 function Blog() {
   const { blogs, data } = useSelector((state) => state.blog);
-  const [resultsSearch, setResultsSearch] = useState([]);
   // eslint-disable-next-line no-unused-vars
-  const [label, setLabel] = useState('');
+  const [resultsSearch, setResultsSearch] = useState([]);
   const [resultsData, setResultsData] = useState(blogs);
+
   const dispatch = useDispatch();
+
   const { value, setValue, formik } = useSearch({
     initialState: {
       search: '',
     },
   });
-  const id = Date.now();
-  const results = jsonData.filter((item) => {
+
+  const results = blogs.filter((item) => {
     return formik.values.search === '' ? null : item.description.toLowerCase().includes(value.toLowerCase());
   });
 
   useEffect(() => {
     setValue(formik.values.search);
     setResultsSearch(results);
+    console.log(results);
   }, [formik.values.search]);
 
   useEffect(() => {
@@ -478,13 +474,13 @@ function Blog() {
                   {resultsSearch.length === 0 ? (
                     <p>Sin Resltados</p>
                   ) : (
-                    resultsSearch.map((result, index) => (
-                      <Link to={`/blog/${id}`} key={index}>
+                    resultsSearch.map((results, index) => (
+                      <Link to={`/blog/${results.id}`} key={index}>
                         <CardInformation
-                          img={result.image}
-                          description={result.description}
-                          title={result['titl:e']}
-                          buttons={buttonsTags}
+                          img={results.image ? results.image[0].url : ''}
+                          description={results.description}
+                          title={results.title}
+                          buttons={results.tags && results.tags.length > 0 ? results.tags : []}
                         />
                       </Link>
                     ))
