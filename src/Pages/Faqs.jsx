@@ -27,28 +27,22 @@ function Faqs(props) {
 
   //   return data;
   // }) : [];
-  const items = [
-    {
-      title: 'Titulo 1',
-      questions: ['Titulo1.1', 'Titulo1.2', 'Titulo1.3'],
-    },
-    {
-      title: 'Titulo 2',
-      questions: ['Titulo2.1', 'Titulo2.2', 'Titulo2.3', 'Titulo2.4', 'Titulo2.5'],
-    },
-    {
-      title: 'Titulo 3',
-      questions: ['Titulo3.1', 'Titulo3.2'],
-    },
-  ];
 
-  const filterFaqs = dataFaq && dataFaq.contentSections ? dataFaq.contentSections.filter((item) => item.__component === 'elements.entry') : [];
-  const faqs = filterFaqs.length > 0 ? filterFaqs.map((i) => {
-    const data = {};
-    data.title = i.title;
-    data.body = i.content;
+  const filterFaqs = dataFaq && dataFaq.contentSections ? dataFaq.contentSections.filter((item) => item.__component === 'sura.list-filter') : [];
 
-    return data;
+  const faqs = filterFaqs.length > 0 ? filterFaqs.map((i, index) => {
+    return {
+      question: i.Title,
+      data: i.items,
+    };
+  }) : [];
+
+  const fFaqs = filterFaqs.length > 0 ? filterFaqs.map((i, index) => {
+    const arrQa = i.items.map(({ title }) => title);
+    return {
+      title: i.Title,
+      questions: arrQa,
+    };
   }) : [];
 
   return (
@@ -59,19 +53,24 @@ function Faqs(props) {
             title={dataFaq.contentSections[0].title}
             img={dataFaq.contentSections[0].background.url}
           />
+
           <section className='container mt-10 mb-10 pb-10 pt-10'>
             <div className={classes.faq__content}>
               <div className={classes.faq__content__filter}>
-                <AccordionFilter items={items} />
+                <AccordionFilter items={fFaqs} />
               </div>
-
               <div className={classes.faq__content__qa}>
-                <h1 className='h3 text__primary mb-5'>¿Cómo funciona?</h1>
-                {faqs.map((faq, index) => (
-                  <Accordion key={index} title={faq.title} body={faq.body} />
-                ))}
+                { faqs.length > 0 ? (
+                  faqs.map((item, i) => (
+                    <div key={i}>
+                      <h1 className='h3 text__primary mb-5'>{item.question}</h1>
+                      {item.data.map((faq, index) => (
+                        <Accordion key={index} title={faq.title} />
+                      ))}
+                    </div>
+                  ))
+                ) : null}
               </div>
-
             </div>
           </section>
         </div>

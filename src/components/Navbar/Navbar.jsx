@@ -54,7 +54,9 @@ function Navbar({ setIsOpen, setOpenForm }) {
               className={classes.header__content__logo__img}
             />
           </a>
+
           <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
+
             <ul className='d-xs-none'>
               <li className='pr-2'>
                 <Button type='button' styles='ghost-variant' onClick={() => { setIsOpen(true); }}>
@@ -79,7 +81,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
                 </div>
               </div>
               <div className={classes.navbar__xs__section}>
-                SEGUROS
+                <Link to='/' className={classes.navbar__xs__section__logo}>SEGUROS</Link>
               </div>
 
               <ul>
@@ -136,15 +138,16 @@ function Navbar({ setIsOpen, setOpenForm }) {
               <MdSearch />
             </div>
           </nav>
+
           <div className={classes.header__content__toggle}>
             {!menuOpen ? <MdMenu onClick={menuToggleHandler} /> : <div />}
           </div>
         </div>
       </header>
       <div className={classes.buttom__nav}>
-        <div className={classes.buttom__nav__logo}>
+        <Link to='/' className={classes.buttom__nav__logo}>
           SEGUROS
-        </div>
+        </Link>
         <div className={classes.buttom__nav__options}>
           <ul>
             <li>

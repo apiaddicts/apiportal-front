@@ -17,7 +17,7 @@ function Accordion({ title, body }) {
       {
         flag && (
           <div className={`body-1 text__gray__gray_darken ${classes.accordion__body}`}>
-            <p>{body}</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum enim consequatur officia corrupti earum at molestiae impedit. Quis harum adipisci quas facilis perspiciatis sed amet quidem voluptates placeat enim nihil vitae, rem totam saepe omnis animi facere assumenda repellat iste repellendus porro earum deleniti? Delectus dicta quae nesciunt illo incidunt?</p>
           </div>
         )
       }
