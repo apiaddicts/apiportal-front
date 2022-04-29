@@ -1,27 +1,58 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AccordionCheck from '../components/Accordion/AccordionCheck';
+
+// import AccordionCheck from '../components/Accordion/AccordionCheck';
+
 import BannerImage from '../components/Banner/BannerImage';
 import SearchInput from '../components/Input/SearchInput';
 import InputSelect from '../components/Input/InputSelect';
 
 import classes from '../styles/pages/api.module.scss';
 import Base from '../components/Card/Base';
+import CheckboxWrapper from '../components/common/Check';
+import CustomizedAccordions from '../components/common/AccordionMUI';
 
 function Apis() {
 
   const items = [
     {
-      title: 'Titulo 1',
-      questions: ['Titulo1.1', 'Titulo1.2', 'Titulo1.3'],
+      title: 'ESTADO',
+      options: [
+        {
+          label: 'Publicado',
+          name: 'publicado',
+        },
+        {
+          label: 'Deprecated',
+          name: 'deprecated',
+        },
+      ],
     },
     {
-      title: 'Titulo 2',
-      questions: ['Titulo2.1', 'Titulo2.2', 'Titulo2.3', 'Titulo2.4', 'Titulo2.5'],
+      title: 'SOLUTION',
+      options: [
+        {
+          label: 'Publicado',
+          name: 'publicado',
+        },
+        {
+          label: 'Deprecated',
+          name: 'deprecated',
+        },
+      ],
     },
     {
-      title: 'Titulo 3',
-      questions: ['Titulo3.1', 'Titulo3.2'],
+      title: 'TAGS',
+      options: [
+        {
+          label: 'Publicado',
+          name: 'publicado',
+        },
+        {
+          label: 'Deprecated',
+          name: 'deprecated',
+        },
+      ],
     },
   ];
   return (
@@ -29,9 +60,17 @@ function Apis() {
       <BannerImage />
       <section className={classes.container}>
         <article className={classes.container__left}>
-          <AccordionCheck items={items} />
-          <AccordionCheck items={items} />
-          <AccordionCheck items={items} />
+          {
+            items.map((item, index) => (
+              <CustomizedAccordions key={index} title={item.title}>
+                {
+                  item.options.map((option, index) => (
+                    <CheckboxWrapper name={option.name} label={option.label} key={index} />
+                  ))
+                }
+              </CustomizedAccordions>
+            ))
+          }
         </article>
         <section className={classes.container__right}>
           <div className='w-full'>
