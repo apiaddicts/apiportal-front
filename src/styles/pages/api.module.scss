@@ -15,6 +15,24 @@
     }
 }
 
+.container__checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__counter {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    background-color: #e3e8e9;
+    color: #000;
+    margin: 0.5rem 0;
+    text-align: center;
+  }
+}
 // .box {
 // //   position: absolute;
 // //   top: 50%;
