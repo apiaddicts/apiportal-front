@@ -1,0 +1,71 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins/mixin.scss";
+
+.slide {
+  transform: translateY(5%) scale(0.9);
+  transition: transform 300ms;
+  @include breakpoint(xs) {
+    transform: none;
+  }
+  @include breakpoint(sm) {
+    transform: none;
+  }
+  @include breakpoint(lg) {
+    transform: translateY(5%) scale(0.9);
+    transition: transform 300ms;
+  }
+}
+
+.slideWrapper {
+  padding: 10px 40px;
+}
+
+.prevArrow {
+  position: absolute;
+  top: 100%;
+  left: 39%;
+  z-index: 100;
+  cursor: pointer;
+  font-size: 2rem;
+  color: $gray_lighten-3;
+  @include breakpoint(xs) {
+    left: 1%;
+  }
+  @include breakpoint(sm) {
+    left: 1%;
+  }
+  @include breakpoint(lg) {
+    left: 39%;
+  }
+}
+
+.nextArrow {
+  position: absolute;
+  top: 100%;
+  right: 39%;
+  z-index: 100;
+  cursor: pointer;
+  font-size: 2rem;
+  color: $gray_lighten-3;
+  @include breakpoint(xs) {
+    right: 1%;
+  }
+  @include breakpoint(sm) {
+    right: 0%;
+  }  
+  @include breakpoint(lg) {
+    right: 39%;
+  }
+}
+
+.slick-dots {
+  position: absolute;
+}
+
+.slick-dots li button:before {
+  font-size: 9px;
+}
+.slick-dots li.slick-active button:before {
+  color: $secondary;
+  mix-blend-mode: normal;
+}

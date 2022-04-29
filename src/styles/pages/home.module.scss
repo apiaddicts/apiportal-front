@@ -136,9 +136,18 @@
   }
 
   &__showmore {
+    width: 100%;
     &__button {
       display: flex;
       justify-content: end;
+      @include breakpoint(xs) {
+        justify-content: center;
+        color: $secondary;
+        text-transform: uppercase;
+        font-size: 1rem;
+        letter-spacing: 1.33px;
+        font-weight: 700;
+      }
       @include breakpoint(sm) {
         justify-content: center !important;
       }
@@ -234,6 +243,18 @@
   text-align: center;
   padding-top: 94px;
   padding-bottom: 88px;
+
+  &__showmore {
+    margin-top: 45px !important;
+    a {
+      text-decoration: none;
+      color: $secondary;
+      text-transform: uppercase;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 1.33px;
+    }
+  }
   &__title{
     padding-bottom: 32px;
   }

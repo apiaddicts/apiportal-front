@@ -47,39 +47,28 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
     <>
       <header className={classes.header}>
         <div className={classes.header__content}>
-          <Link to='/'>
-            <a className={classes.header__content__logo}>
-              <img
-                src={SuraLogo}
-                alt=''
-                className={classes.header__content__logo__img}
-              />
-            </a>
-          </Link>
+          <a href='/' className={classes.header__content__logo}>
+            <img
+              src={SuraLogo}
+              alt=''
+              className={classes.header__content__logo__img}
+            />
+          </a>
+
           <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
-            {!privateSession && (
-              <ul className='d-xs-none'>
-                <li className='pr-2'>
-                  <Button type='button' styles='ghost-variant' onClick={() => { setIsOpen(true); }}>
-                    Iniciar sesión
-                  </Button>
-                </li>
-                <li>
-                  <Button type='button' styles='secundary' onClick={() => { setOpenForm(true); }}>
-                    registrate
-                  </Button>
-                </li>
-              </ul>
-            )}
-            {privateSession && (
-              <ul className='d-xs-none w-full'>
-                <li>
-                  <Button type='button' styles='ghost-variant'>
-                    Antonio
-                  </Button>
-                </li>
-              </ul>
-            )}
+
+            <ul className='d-xs-none'>
+              <li className='pr-2'>
+                <Button type='button' styles='ghost-variant' onClick={() => { setIsOpen(true); }}>
+                  Iniciar sesión
+                </Button>
+              </li>
+              <li>
+                <Button type='button' styles='secundary' onClick={() => { setOpenForm(true); }}>
+                  registrate
+                </Button>
+              </li>
+            </ul>
 
             <div className={`d-xs-only ${classes.navbar__xs}`}>
 
@@ -92,7 +81,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
                 </div>
               </div>
               <div className={classes.navbar__xs__section}>
-                SEGUROS
+                <Link to='/' className={classes.navbar__xs__section__logo}>SEGUROS</Link>
               </div>
 
               <ul>
@@ -149,15 +138,16 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
               <MdSearch />
             </div>
           </nav>
+
           <div className={classes.header__content__toggle}>
             {!menuOpen ? <MdMenu onClick={menuToggleHandler} /> : <div />}
           </div>
         </div>
       </header>
       <div className={classes.buttom__nav}>
-        <div className={classes.buttom__nav__logo}>
+        <Link to='/' className={classes.buttom__nav__logo}>
           SEGUROS
-        </div>
+        </Link>
         <div className={classes.buttom__nav__options}>
           <ul>
             <li>

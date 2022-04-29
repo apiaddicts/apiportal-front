@@ -15,6 +15,7 @@
     justify-content: space-between;
     padding: 23px 30px;
     position: relative;
+    cursor: pointer;
     &__title {
       font-size: 22px;
       font-weight: 500;
@@ -53,6 +54,7 @@
     font-family: $barlow;
     text-transform: uppercase;
     color: $gray_darken;
+    cursor: pointer;
   }
   &__body{
     font-size: 16px;

@@ -4,10 +4,10 @@ import Chip from '../Chip/Chip';
 import Base from './Base';
 import './cards.scss';
 
-function CardInformation({ img, buttons, title, description, reading, info, header }) {
+function CardInformation({ img, buttons, title, description, reading, info, header, maxWidth }) {
 
   return (
-    <Base>
+    <Base maxWidth={maxWidth}>
       {img && (
         <div className='card-header'>
           <img src={img} alt='' />
