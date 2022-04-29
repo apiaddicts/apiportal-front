@@ -7,7 +7,7 @@ import SuraLogo from '../../static/img/sura_logo.svg';
 import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
 
-function Navbar({ setIsOpen, setOpenForm }) {
+function Navbar({ setIsOpen, setOpenForm, privateSession }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [size, setSize] = useState({
     width: undefined,

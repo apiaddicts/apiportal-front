@@ -8,7 +8,7 @@ import ResetPassword from '../components/Forms/ResetPassword';
 import { fieldsLogin } from '../components/Forms/fields';
 import useLoginConfig from '../hooks/useLogin';
 
-function Login({ setIsOpen }) {
+function Login({ setIsOpen, setPrivateSession }) {
   const [showAlert, setShowAlert] = useState(true);
   const [showForm, setShowForm] = useState(true);
   const [showResetForm, setShowResetForm] = useState(false);
@@ -19,6 +19,9 @@ function Login({ setIsOpen }) {
   // };
 
   const handleSubmit = (dataForm) => {
+    setPrivateSession(true);
+    localStorage.setItem('session', true);
+    setIsOpen(false);
     alert(
       JSON.stringify(dataForm, null, 2),
     );
