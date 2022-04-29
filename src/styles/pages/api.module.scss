@@ -19,7 +19,7 @@
         
         @include breakpoint(lg) {
           display: block;
-          width: 30%;
+          width: 20%;
         }
         }
         &__right {
@@ -38,8 +38,8 @@
         }
         
         @include breakpoint(lg) {
-          width: 70%;
-          padding: 2% 2%;
+          width: 80%;
+          padding: 2% 3.2%;
         }
     }
 }

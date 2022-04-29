@@ -117,6 +117,11 @@
   }
 }
 
+.form-wrapper-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
 .form-group {
   position: relative;
   display: flex;
@@ -130,6 +135,17 @@
   padding: 0 15px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
+  @include breakpoint(xs) {
+    width: 100%;
+  }
+  
+  @include breakpoint(md) {
+    width: 100%;
+  }
+  
+  @include breakpoint(lg) {
+    width: 100%;
+  }
   
   p {
     color: #696974;
@@ -137,6 +153,7 @@
   
   span {
     font-weight: bold;
+    font-size: 13px;
   }
   &:hover {
     border: 0.5px solid rgba(0, 0, 0, 0.617);

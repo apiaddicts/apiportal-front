@@ -149,7 +149,7 @@ function Apis() {
         <section className={classes.container__right}>
           <div className='w-full'>
             <div className='row'>
-              <div className='flex-sm-12 flex-md-7 mt-8'>
+              <div className='flex-sm-12 flex-md-8 mt-8'>
                 <SearchInput
                   icon
                   name='search'
@@ -158,7 +158,7 @@ function Apis() {
                   borderRadius='20px'
                 />
               </div>
-              <div className='flex-sm-12 flex-md-5 mt-8'>
+              <div className='flex-sm-12 flex-md-4 mt-8'>
                 <InputSelect />
               </div>
             </div>
