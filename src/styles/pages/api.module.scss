@@ -1,3 +1,4 @@
+@import "./../variables.scss";
 .container {
     width: 100%;
     margin-top: 150px;
@@ -8,10 +9,38 @@
 
     &__left {
         width: 20%;
-    }
-    &__right {
+        
+        @include breakpoint(xs) {
+          display: none;
+        }
+        @include breakpoint(md) {
+          display: none;
+        }
+        
+        @include breakpoint(lg) {
+          display: block;
+          width: 20%;
+        }
+        }
+        &__right {
         width: 80%;
-        padding: 2% 8%;
+        padding: 2% 2%;
+        @include breakpoint(xs) {
+          width: 100%;
+          padding: 0;
+          margin-bottom: 20px;
+        }
+        
+        @include breakpoint(md) {
+          width: 100%;
+          padding: 0;
+          margin-bottom: 20px;
+        }
+        
+        @include breakpoint(lg) {
+          width: 80%;
+          padding: 2% 3.2%;
+        }
     }
 }
 

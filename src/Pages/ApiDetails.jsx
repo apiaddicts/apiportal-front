@@ -115,17 +115,23 @@ function ApiDetails({ setIsOpen }) {
                   Benificios principales
                 </h1>
               </div>
-              <div className={`flex-md-4 flex-sm-12 ${classes.section__content__img} mt-9`}>
-                <img src={codeSnipet} alt='Benefits' className='w-full' />
-              </div>
-              <div className={`flex-lg-4 flex-sm-12 ${classes.section__content__items}`}>
-                {Steps.map((item, i) => (
-                  <Item
-                    key={i}
-                    title={item.title}
-                    icon={item.number}
-                  />
-                ))}
+              <div className='row'>
+                <div className={`flex-sm-12 flex-md-6 flex-lg-4 ${classes.section__content__img}`}>
+                  <img src={codeSnipet} alt='Benefits' className='w-full' />
+                </div>
+                <div className={`flex-sm-12 flex-md-10 flex-lg-8 ${classes.section__content__items} container`}>
+                  <div className='row w-full'>
+                    {Steps.map((item, i) => (
+                      <div className='flex-sm-12 flex-md-10 flex-lg-4 mt-3'>
+                        <Item
+                          key={i}
+                          title={item.title}
+                          icon={item.number}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </section>
