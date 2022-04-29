@@ -89,6 +89,27 @@
         top: 20%;
         right: 10%;
         border-radius: 0 0 50px 0;
+        @include breakpoint(xs) {
+            height: 141px;
+            width: 293px;
+            top: 80%;
+            right: 15%;
+        }
+        
+        @include breakpoint(md) {
+            height: 141px;
+            width: 293px;
+            top: 80%;
+            right: 15%;
+        }
+        
+        @include breakpoint(lg) {
+            height: 241px;
+            width: 493px;
+            z-index: 2;
+            top: 50%;
+            right: 10%;
+        }
     }
 
     &__footer {

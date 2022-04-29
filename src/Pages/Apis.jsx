@@ -122,7 +122,7 @@ function Apis() {
             <Typography>
               VERSIÓN
             </Typography>
-            <ButtonGroupMUI disabledElevation>
+            <ButtonGroupMUI>
               {versions.map((item, index) => (
                 <ButtonCutom activeTab={activeTab} key={index} label={item.label} onClickItem={onClickItem} />
               ))}

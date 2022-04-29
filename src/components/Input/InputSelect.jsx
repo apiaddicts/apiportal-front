@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import classes from './input.module.scss';
 
 function InputSelect() {
@@ -8,14 +9,16 @@ function InputSelect() {
 
   return (
     <div className={classes['form-group']}>
-      <div onClick={
-        () => { setShowFilteer(!showFilteer); }
-      }
+      <div
+        className='w-full'
+        onClick={
+          () => { setShowFilteer(!showFilteer); }
+        }
       >
         <p>
           Ordenar por:
           {' '}
-          {filter}
+          <span>{filter}</span>
         </p>
       </div>
       {showFilteer && (
@@ -44,6 +47,14 @@ function InputSelect() {
           </p>
         </div>
       )}
+      <div
+        className={classes['filter-icon']}
+        onClick={
+          () => { setShowFilteer(!showFilteer); }
+        }
+      >
+        <ExpandMoreIcon sx={{ fontSize: '1.5rem' }} />
+      </div>
     </div>
 
   );

@@ -131,6 +131,13 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   
+  p {
+    color: #696974;
+  }
+  
+  span {
+    font-weight: bold;
+  }
   &:hover {
     border: 0.5px solid rgba(0, 0, 0, 0.617);
     transition: all 0.3s ease-in-out;
@@ -147,9 +154,8 @@
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   font-size: 0.9rem;
-  color: #000;
+  color: #696974;
   font-family: $barlow;
-  font-weight: 400;
 
   &:hover {
     background-color: #dddddd;
@@ -171,4 +177,15 @@
   overflow-y: scroll;
   overflow-x: hidden;
   max-height: 200px;
+  }
+  
+  .filter-icon {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-left: 1rem;
+    color: $gray_darken;
+    cursor: pointer;
+    border-left: 1px solid #ddd;
 }
