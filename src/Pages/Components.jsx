@@ -18,6 +18,7 @@ import AccordionFilter from '../components/Accordion/AccordionFilter';
 import IconM from '../components/GoogleIcon';
 import icons from '../static/icons-sura';
 import InputSelect from '../components/Input/InputSelect';
+import CustomizedButtons from '../components/common/ButtonMUI';
 
 function Components() {
 
@@ -258,6 +259,9 @@ function Components() {
         {icons('person')}
       </div>
 
+      <div className='container'>
+        <CustomizedButtons />
+      </div>
       <div className='container'>
         <h1 className='text-center'>GRID SYSTEM</h1>
         <div className='row'>

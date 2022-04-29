@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // import AccordionCheck from '../components/Accordion/AccordionCheck';
 
+import { Typography } from '@mui/material';
 import BannerImage from '../components/Banner/BannerImage';
 import SearchInput from '../components/Input/SearchInput';
 import InputSelect from '../components/Input/InputSelect';
@@ -11,8 +12,26 @@ import classes from '../styles/pages/api.module.scss';
 import CheckboxWrapper from '../components/common/Check';
 import CustomizedAccordions from '../components/common/AccordionMUI';
 import CardInformation from '../components/Card/CardInformation';
+import ButtonCutom from '../components/common/ButtonMUI';
+import ButtonGroupMUI from '../components/common/ButtonGroup';
 
+const versions = [
+  {
+    label: 'v1.0',
+  },
+  {
+    label: 'v1.5',
+  },
+  {
+    label: 'v2.0',
+  },
+];
 function Apis() {
+  const [activeTab, setActiveTab] = useState(versions[0].label);
+
+  const onClickItem = (label) => {
+    setActiveTab(label);
+  };
 
   const btns = [
     {
@@ -29,7 +48,7 @@ function Apis() {
     },
   ];
 
-  const items = [
+  const state = [
     {
       title: 'ESTADO',
       options: [
@@ -43,6 +62,9 @@ function Apis() {
         },
       ],
     },
+  ];
+
+  const items = [
     {
       title: 'SOLUTION',
       options: [
@@ -80,6 +102,33 @@ function Apis() {
       <section className={classes.container}>
         <article className={classes.container__left}>
           {
+            state.map((item, index) => (
+              <CustomizedAccordions key={index} title={item.title}>
+                {
+                  item.options.map((option, index) => (
+                    <div
+                      className={classes.container__checkbox}
+                      key={index}
+                    >
+                      <CheckboxWrapper name={option.name} label={option.label} />
+                      {option.count && (<p className={classes.container__checkbox__counter}>{option.count}</p>)}
+                    </div>
+                  ))
+                }
+              </CustomizedAccordions>
+            ))
+          }
+          <div className='container py-3'>
+            <Typography>
+              VERSIÓN
+            </Typography>
+            <ButtonGroupMUI disabledElevation>
+              {versions.map((item, index) => (
+                <ButtonCutom activeTab={activeTab} key={index} label={item.label} onClickItem={onClickItem} />
+              ))}
+            </ButtonGroupMUI>
+          </div>
+          {
             items.map((item, index) => (
               <CustomizedAccordions key={index} title={item.title}>
                 {
@@ -97,23 +146,22 @@ function Apis() {
             ))
           }
         </article>
-        <section className='w-full'>
-          <div style={{
-            width: '40%',
-          }}
-          >
-            <SearchInput
-              icon
-              name='search'
-              type='text'
-              placeholder='Buscar APIs...'
-            />
-          </div>
-          <div style={{
-            width: '40%',
-          }}
-          >
-            <InputSelect />
+        <section className={classes.container__right}>
+          <div className='w-full'>
+            <div className='row'>
+              <div className='flex-sm-12 flex-md-7 mt-8'>
+                <SearchInput
+                  icon
+                  name='search'
+                  type='text'
+                  placeholder='Buscar APIs...'
+                  borderRadius='20px'
+                />
+              </div>
+              <div className='flex-sm-12 flex-md-5 mt-8'>
+                <InputSelect />
+              </div>
+            </div>
           </div>
           <div className='flex-sm-12 flex-md-6'>
             <div className='row'>
