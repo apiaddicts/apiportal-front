@@ -8,11 +8,26 @@ import SearchInput from '../components/Input/SearchInput';
 import InputSelect from '../components/Input/InputSelect';
 
 import classes from '../styles/pages/api.module.scss';
-import Base from '../components/Card/Base';
 import CheckboxWrapper from '../components/common/Check';
 import CustomizedAccordions from '../components/common/AccordionMUI';
+import CardInformation from '../components/Card/CardInformation';
 
 function Apis() {
+
+  const btns = [
+    {
+      label: 'BANCA',
+      class: 'gray',
+    },
+    {
+      label: 'vida',
+      class: 'gray',
+    },
+    {
+      label: 'SINIESTRO VEHICULAR',
+      class: 'gray',
+    },
+  ];
 
   const items = [
     {
@@ -34,10 +49,12 @@ function Apis() {
         {
           label: 'Publicado',
           name: 'publicado',
+          count: '1',
         },
         {
           label: 'Deprecated',
           name: 'deprecated',
+          count: '4',
         },
       ],
     },
@@ -47,10 +64,12 @@ function Apis() {
         {
           label: 'Publicado',
           name: 'publicado',
+          count: '12',
         },
         {
           label: 'Deprecated',
           name: 'deprecated',
+          count: '4',
         },
       ],
     },
@@ -65,45 +84,52 @@ function Apis() {
               <CustomizedAccordions key={index} title={item.title}>
                 {
                   item.options.map((option, index) => (
-                    <CheckboxWrapper name={option.name} label={option.label} key={index} />
+                    <div
+                      className={classes.container__checkbox}
+                      key={index}
+                    >
+                      <CheckboxWrapper name={option.name} label={option.label} />
+                      {option.count && (<p className={classes.container__checkbox__counter}>{option.count}</p>)}
+                    </div>
                   ))
                 }
               </CustomizedAccordions>
             ))
           }
         </article>
-        <section className={classes.container__right}>
-          <div className='w-full'>
+        <section className='w-full'>
+          <div style={{
+            width: '40%',
+          }}
+          >
             <SearchInput
+              icon
               name='search'
               type='text'
               placeholder='Buscar APIs...'
             />
           </div>
-          <div className='w-full'>
-            <div className={classes.box}>
-              <select className='w-full'>
-                <option>Option 1</option>
-                <option>Option 2</option>
-                <option>Option 3</option>
-                <option>Option 4</option>
-                <option>Option 5</option>
-              </select>
-            </div>
+          <div style={{
+            width: '40%',
+          }}
+          >
             <InputSelect />
-            <div
-              style={{
-                width: '200px',
-              }}
-              className='mt-9'
-            >
-              <Base>
-                <div className='p-9'>
+          </div>
+          <div className='flex-sm-12 flex-md-6'>
+            <div className='row'>
+              {items.map((item, index) => (
+                <div className='flex-sm-12 flex-md-6 mt-8'>
                   <Link to='/api/1'>
-                    <span>API</span>
+                    <CardInformation
+                      title='title'
+                      header
+                      buttons={btns}
+                      info='Documentación'
+                      description='Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text.'
+                    />
                   </Link>
                 </div>
-              </Base>
+              ))}
             </div>
           </div>
         </section>

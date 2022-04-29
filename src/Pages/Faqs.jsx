@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFaq } from '../redux/actions/faqAction';
 
@@ -9,7 +9,7 @@ import BannerStatic from '../components/Banner/BannerStatic';
 import classes from '../styles/pages/faqs.module.scss';
 
 function Faqs(props) {
-
+  const [active, setActive] = useState(false);
   const dispatch = useDispatch();
   const { dataFaq } = useSelector((state) => state.faq);
 
@@ -65,7 +65,7 @@ function Faqs(props) {
                     <div key={i}>
                       <h1 className='h3 text__primary mb-5'>{item.question}</h1>
                       {item.data.map((faq, index) => (
-                        <Accordion key={index} title={faq.title} />
+                        <Accordion key={index} title={faq.title} active={active} setActive={setActive} />
                       ))}
                     </div>
                   ))
