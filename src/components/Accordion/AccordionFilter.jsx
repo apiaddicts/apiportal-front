@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import Icon from '../MdIcon/Icon';
 import classes from './accordion.module.scss';
 
-function AccordionFilter({ items }) {
-  const [active, setActive] = useState(false);
+function AccordionFilter({ items, active, setActive }) {
+  // const [active, setActive] = useState(false);
   const [clicked, setClicked] = useState(false);
   const toggle = (index) => {
     if (clicked === index) {

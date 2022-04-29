@@ -1,27 +1,99 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import AccordionCheck from '../components/Accordion/AccordionCheck';
+
+// import AccordionCheck from '../components/Accordion/AccordionCheck';
+
+import { Typography } from '@mui/material';
 import BannerImage from '../components/Banner/BannerImage';
 import SearchInput from '../components/Input/SearchInput';
 import InputSelect from '../components/Input/InputSelect';
 
 import classes from '../styles/pages/api.module.scss';
-import Base from '../components/Card/Base';
+import CheckboxWrapper from '../components/common/Check';
+import CustomizedAccordions from '../components/common/AccordionMUI';
+import CardInformation from '../components/Card/CardInformation';
+import ButtonCutom from '../components/common/ButtonMUI';
+import ButtonGroupMUI from '../components/common/ButtonGroup';
 
+const versions = [
+  {
+    label: 'v1.0',
+  },
+  {
+    label: 'v1.5',
+  },
+  {
+    label: 'v2.0',
+  },
+];
 function Apis() {
+  const [activeTab, setActiveTab] = useState(versions[0].label);
+
+  const onClickItem = (label) => {
+    setActiveTab(label);
+  };
+
+  const btns = [
+    {
+      label: 'BANCA',
+      class: 'gray',
+    },
+    {
+      label: 'vida',
+      class: 'gray',
+    },
+    {
+      label: 'SINIESTRO VEHICULAR',
+      class: 'gray',
+    },
+  ];
+
+  const state = [
+    {
+      title: 'ESTADO',
+      options: [
+        {
+          label: 'Publicado',
+          name: 'publicado',
+        },
+        {
+          label: 'Deprecated',
+          name: 'deprecated',
+        },
+      ],
+    },
+  ];
 
   const items = [
     {
-      title: 'Titulo 1',
-      questions: ['Titulo1.1', 'Titulo1.2', 'Titulo1.3'],
+      title: 'SOLUTION',
+      options: [
+        {
+          label: 'Publicado',
+          name: 'publicado',
+          count: '1',
+        },
+        {
+          label: 'Deprecated',
+          name: 'deprecated',
+          count: '4',
+        },
+      ],
     },
     {
-      title: 'Titulo 2',
-      questions: ['Titulo2.1', 'Titulo2.2', 'Titulo2.3', 'Titulo2.4', 'Titulo2.5'],
-    },
-    {
-      title: 'Titulo 3',
-      questions: ['Titulo3.1', 'Titulo3.2'],
+      title: 'TAGS',
+      options: [
+        {
+          label: 'Publicado',
+          name: 'publicado',
+          count: '12',
+        },
+        {
+          label: 'Deprecated',
+          name: 'deprecated',
+          count: '4',
+        },
+      ],
     },
   ];
   return (
@@ -29,42 +101,83 @@ function Apis() {
       <BannerImage />
       <section className={classes.container}>
         <article className={classes.container__left}>
-          <AccordionCheck items={items} />
-          <AccordionCheck items={items} />
-          <AccordionCheck items={items} />
+          {
+            state.map((item, index) => (
+              <CustomizedAccordions key={index} title={item.title}>
+                {
+                  item.options.map((option, index) => (
+                    <div
+                      className={classes.container__checkbox}
+                      key={index}
+                    >
+                      <CheckboxWrapper name={option.name} label={option.label} />
+                      {option.count && (<p className={classes.container__checkbox__counter}>{option.count}</p>)}
+                    </div>
+                  ))
+                }
+              </CustomizedAccordions>
+            ))
+          }
+          <div className='container py-3'>
+            <Typography>
+              VERSIÓN
+            </Typography>
+            <ButtonGroupMUI>
+              {versions.map((item, index) => (
+                <ButtonCutom activeTab={activeTab} key={index} label={item.label} onClickItem={onClickItem} />
+              ))}
+            </ButtonGroupMUI>
+          </div>
+          {
+            items.map((item, index) => (
+              <CustomizedAccordions key={index} title={item.title}>
+                {
+                  item.options.map((option, index) => (
+                    <div
+                      className={classes.container__checkbox}
+                      key={index}
+                    >
+                      <CheckboxWrapper name={option.name} label={option.label} />
+                      {option.count && (<p className={classes.container__checkbox__counter}>{option.count}</p>)}
+                    </div>
+                  ))
+                }
+              </CustomizedAccordions>
+            ))
+          }
         </article>
         <section className={classes.container__right}>
           <div className='w-full'>
-            <SearchInput
-              name='search'
-              type='text'
-              placeholder='Buscar APIs...'
-            />
-          </div>
-          <div className='w-full'>
-            <div className={classes.box}>
-              <select className='w-full'>
-                <option>Option 1</option>
-                <option>Option 2</option>
-                <option>Option 3</option>
-                <option>Option 4</option>
-                <option>Option 5</option>
-              </select>
+            <div className='row'>
+              <div className='flex-sm-12 flex-md-8 mt-8'>
+                <SearchInput
+                  icon
+                  name='search'
+                  type='text'
+                  placeholder='Buscar APIs...'
+                  borderRadius='20px'
+                />
+              </div>
+              <div className='flex-sm-12 flex-md-4 mt-8'>
+                <InputSelect />
+              </div>
             </div>
-            <InputSelect />
-            <div
-              style={{
-                width: '200px',
-              }}
-              className='mt-9'
-            >
-              <Base>
-                <div className='p-9'>
+          </div>
+          <div className='flex-sm-12 flex-md-6'>
+            <div className='row'>
+              {items.map((item, index) => (
+                <div className='flex-sm-12 flex-md-6 mt-8'>
                   <Link to='/api/1'>
-                    <span>API</span>
+                    <CardInformation
+                      title='title'
+                      header
+                      buttons={btns}
+                      info='Documentación'
+                      description='Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text.'
+                    />
                   </Link>
                 </div>
-              </Base>
+              ))}
             </div>
           </div>
         </section>

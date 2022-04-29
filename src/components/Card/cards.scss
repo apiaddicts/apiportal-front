@@ -53,26 +53,26 @@
         color: #53565A;
     }
     
-    .card_chip_info {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-    
-        span {
-            font-family: $barlow;
-            font-style: normal;
-            font-weight: 700;
-            font-size: 16px;
-            line-height: 19px;
-            letter-spacing: 1.33333px;
-            text-transform: uppercase;
-            color: $secondary;
-        }
-    
-        .svg {
-            color: $primary;
-            font-size: 25px;
-        }
+}
+.card_chip_info {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    span {
+        font-family: $barlow;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 16px;
+        line-height: 19px;
+        letter-spacing: 1.33333px;
+        text-transform: uppercase;
+        color: $secondary;
+    }
+
+    .svg {
+        color: $primary;
+        font-size: 25px;
     }
 }
 
@@ -200,4 +200,18 @@
 
 .tags-reponsive {
     padding: 3px 7px !important;
+}
+.header-api {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header__status__success {
+    display: flex;
+    font-size: 12px;
+    line-height: 16px;
+    align-items: center;
+    justify-content: space-between;
+    color: #97D700;
 }

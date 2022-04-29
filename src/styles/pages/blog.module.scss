@@ -26,6 +26,9 @@
       position: relative;
 
       img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
         border-radius: 20px;
         @include breakpoint(xs) {
           display: none;
@@ -35,7 +38,23 @@
         }
         @include breakpoint(lg) {
           display: block;
-          width: 50%;
+        }
+        }
+        
+        &__overlay {
+        width: 50%;
+        height: 390px;
+        
+        @include breakpoint(xs) {
+          display: none;
+        }
+        
+        @include breakpoint(sm) {
+          display: none;
+        }
+        
+        @include breakpoint(lg) {
+          display: block;
         }
       }
     }
@@ -187,6 +206,7 @@
 
 .apis {
   &__library {
+    margin-top: 40px;
     &__cards {
       grid-area: cards;
       display: grid;
@@ -195,14 +215,19 @@
       @include breakpoint(xs) {
         grid-template-columns: 1fr;
         gap: 1rem;
+        max-height: 100% !important;
       }      
       @include breakpoint(sm) {
         grid-template-columns: 1fr;
         gap: 1rem;
+        max-height: 100% !important;
       }      
       @include breakpoint(lg) {
         grid-template-columns: repeat(2, 2fr);
         gap: 1rem;
+      }
+      a {
+        max-height: 500px;
       }
     }
     &__suggestions {

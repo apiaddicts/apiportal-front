@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Icon from '../MdIcon/Icon';
 import classes from './accordion.module.scss';
 
-function Accordion({ title, body }) {
-  const [flag, setFlag] = useState(false);
+function Accordion({ title, body, active, setActive }) {
+  // const [flag, setFlag] = useState(false);
   return (
     <div className={classes.accordion}>
-      <div className={flag ? `${classes.accordion__head} ${classes.active}` : `${classes.accordion__head}`} onClick={() => { setFlag(!flag); }} role='button' tabIndex='0'>
+      <div className={active ? `${classes.accordion__head} ${classes.active}` : `${classes.accordion__head}`} onClick={() => { setActive(!active); }} role='button' tabIndex='0'>
         <div className={classes.accordion__head__title}>
           <p>{title}</p>
         </div>
         <div className={classes.accordion__head__title__actionbutton}>
-          {flag ? <Icon id='MdExpandLess' /> : <Icon id='MdExpandMore' />}
+          {active ? <Icon id='MdExpandLess' /> : <Icon id='MdExpandMore' />}
         </div>
       </div>
       {
-        flag && (
+        active && (
           <div className={`body-1 text__gray__gray_darken ${classes.accordion__body}`}>
-            <p>{body}</p>
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum enim consequatur officia corrupti earum at molestiae impedit. Quis harum adipisci quas facilis perspiciatis sed amet quidem voluptates placeat enim nihil vitae, rem totam saepe omnis animi facere assumenda repellat iste repellendus porro earum deleniti? Delectus dicta quae nesciunt illo incidunt?</p>
           </div>
         )
       }
