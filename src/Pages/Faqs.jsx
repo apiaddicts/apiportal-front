@@ -9,7 +9,10 @@ import BannerStatic from '../components/Banner/BannerStatic';
 import classes from '../styles/pages/faqs.module.scss';
 
 function Faqs(props) {
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState({
+    filter: false,
+    item: null,
+  });
   const dispatch = useDispatch();
   const { dataFaq } = useSelector((state) => state.faq);
 
@@ -57,7 +60,7 @@ function Faqs(props) {
           <section className='container mt-10 mb-10 pb-10 pt-10'>
             <div className={classes.faq__content}>
               <div className={classes.faq__content__filter}>
-                <AccordionFilter items={fFaqs} />
+                <AccordionFilter items={fFaqs} active={active} setActive={setActive} />
               </div>
               <div className={classes.faq__content__qa}>
                 { faqs.length > 0 ? (
