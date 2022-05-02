@@ -51,3 +51,6 @@ const Input = styled(TextField)({
 });
 
 export default Input;
+
+export const InputSelect = styled(Input)({
+});
