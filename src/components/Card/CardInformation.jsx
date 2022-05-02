@@ -4,7 +4,7 @@ import Chip from '../Chip/Chip';
 import Base from './Base';
 import './cards.scss';
 
-function CardInformation({ img, buttons, title, description, reading, info, header, maxWidth }) {
+function CardInformation({ img, buttons, title, description, reading, info, headerInfo, maxWidth }) {
 
   return (
     <Base maxWidth={maxWidth}>
@@ -13,13 +13,13 @@ function CardInformation({ img, buttons, title, description, reading, info, head
           <img src={img} alt='' />
         </div>
       )}
-      {header && (
+      {headerInfo && (
         <div className='header-api px-8 pt-5'>
-          <div className='header__status__success'>
+          <div className={` ${headerInfo.status.toLowerCase() === 'publicado' ? 'header__status__success' : ' header__status__deprecade'}`}>
             <p>●</p>
-            <p className='ml-3 font-weight-thin'>Publicado</p>
+            <p className='ml-3 font-weight-thin'>{headerInfo.status}</p>
           </div>
-          <Chip title='V.1.0' className='version' />
+          <Chip title={headerInfo.version} className='version' />
         </div>
       )}
       <div className={`p-8 ${reading ? 'py-10' : null}`}>

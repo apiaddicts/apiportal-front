@@ -64,6 +64,11 @@ function Apis() {
     },
   ];
 
+  const headerInfo =
+    {
+      status: 'Publicado',
+      version: 'v1.0',
+    };
   const items = [
     {
       title: 'SOLUTION',
@@ -170,7 +175,7 @@ function Apis() {
                   <Link to='/api/1'>
                     <CardInformation
                       title='title'
-                      header
+                      headerInfo={headerInfo}
                       buttons={btns}
                       info='Documentación'
                       description='Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text.'

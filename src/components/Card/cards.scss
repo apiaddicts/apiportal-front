@@ -209,9 +209,18 @@
 
 .header__status__success {
     display: flex;
-    font-size: 12px;
+    font-size: 15px;
     line-height: 16px;
     align-items: center;
     justify-content: space-between;
     color: #97D700;
+    }
+    
+    .header__status__deprecade {
+        display: flex;
+    font-size: 12px;
+    line-height: 16px;
+    align-items: center;
+    justify-content: space-between;
+    color: #F1B434;
 }
