@@ -1,0 +1,18 @@
+.admin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__nav {
+        width: 20%;
+    }
+
+    &__form {
+        width: 80%;
+        padding: 1rem 0;
+    }
+
+    &__form__container {
+        padding: 0 3rem;
+    }
+}
