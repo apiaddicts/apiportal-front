@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Typography } from '@mui/material';
+import fake from '../fake';
 
 // import AccordionCheck from '../components/Accordion/AccordionCheck';
 
-import { Typography } from '@mui/material';
 import BannerImage from '../components/Banner/BannerImage';
 import SearchInput from '../components/Input/SearchInput';
 import InputSelect from '../components/Input/InputSelect';
@@ -33,21 +34,6 @@ function Apis() {
     setActiveTab(label);
   };
 
-  const btns = [
-    {
-      label: 'BANCA',
-      class: 'gray',
-    },
-    {
-      label: 'vida',
-      class: 'gray',
-    },
-    {
-      label: 'SINIESTRO VEHICULAR',
-      class: 'gray',
-    },
-  ];
-
   const state = [
     {
       title: 'ESTADO',
@@ -64,11 +50,6 @@ function Apis() {
     },
   ];
 
-  const headerInfo =
-    {
-      status: 'Publicado',
-      version: 'v1.0',
-    };
   const items = [
     {
       title: 'SOLUTION',
@@ -170,15 +151,17 @@ function Apis() {
           </div>
           <div className='flex-sm-12 flex-md-6'>
             <div className='row'>
-              {items.map((item, index) => (
-                <div className='flex-sm-12 flex-md-6 mt-8'>
+              {fake.map((item, index) => (
+                <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
                   <Link to='/api/1'>
                     <CardInformation
-                      title='title'
-                      headerInfo={headerInfo}
-                      buttons={btns}
+                      title={item.title}
+                      status={item.status}
+                      version={item.version}
+                      buttons={item.btns}
+                      colorStatus={item.color_status}
                       info='Documentación'
-                      description='Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text.'
+                      description={item.description}
                     />
                   </Link>
                 </div>
