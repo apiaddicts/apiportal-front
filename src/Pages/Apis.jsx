@@ -175,7 +175,7 @@ function Apis() {
                           title={item.title}
                           status={item.status}
                           version={item.version}
-                          buttons={item.btns}
+                          buttons={item.tags}
                           colorStatus={item.color_status}
                           info='Documentación'
                           description={item.description}
