@@ -104,6 +104,8 @@ function Apis() {
 
   // const uniqueData = unique(resultsData);
 
+  // Repetidos echos por kike
+
   const state = [
     {
       title: 'ESTADO',
@@ -189,7 +191,6 @@ function Apis() {
       dispatch(getLibraries());
     }
   }, [libraries, formik.values.search]);
-
   return (
     <div>
       {libraries && libraries.length > 0 ? (
@@ -290,7 +291,7 @@ function Apis() {
                   {filterStatus.active ? (
                     results.map((item, index) => (
                       <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
-                        <Link to='/api/1'>
+                        <Link to={`/api/${item.id}`}>
                           <CardInformation
                             title={item.title}
                             status={item.status}
@@ -307,7 +308,7 @@ function Apis() {
                     !filter.active ? (
                       resultsData.map((item, index) => (
                         <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
-                          <Link to='/api/1'>
+                          <Link to={`/api/${item.id}`}>
                             <CardInformation
                               title={item.title}
                               status={item.status}
@@ -323,7 +324,7 @@ function Apis() {
                     ) :
                       filterResults.map((item, index) => (
                         <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
-                          <Link to='/api/1'>
+                          <Link to={`/api/${item.id}`}>
                             <CardInformation
                               title={item.title}
                               status={item.status}
