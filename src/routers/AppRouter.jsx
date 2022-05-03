@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Box } from '@mui/material';
 import Navbar from '../components/Navbar/Navbar';
 
 import Home from '../Pages/Home';
@@ -15,15 +16,18 @@ import Login from '../Pages/Login';
 import Register from '../Pages/Register';
 import ApiDetails from '../Pages/ApiDetails';
 import ApiDocumentation from '../Pages/ApiDocumentation';
+import Apps from '../Pages/Apps';
+import AddApp from '../Pages/AddApp';
+import ApiLibrary from '../Pages/ApiLibrary';
+import SidebarDrawer from '../components/SidebarDrawer/SidebarDrawer';
 
 function AppRouter() {
   const [isOpen, setIsOpen] = useState(false);
   const [openForm, setOpenForm] = useState(false);
-  const [privateSession, setPrivateSession] = useState(false);
+  const [privateSession, setPrivateSession] = useState(true);
 
   return (
     <BrowserRouter>
-      <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} privateSession={privateSession} />
       {isOpen && (
         <Login setIsOpen={setIsOpen} setPrivateSession={setPrivateSession} />
       )}
@@ -32,6 +36,7 @@ function AppRouter() {
       )}
       {!privateSession && (
         <>
+          <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} privateSession={privateSession} />
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/about' element={<Pagina1 />} />
@@ -47,12 +52,18 @@ function AppRouter() {
         </>
       )}
       {privateSession && (
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/apis' exact element={<Apis />} />
-          <Route path='/api/:id' exact element={<ApiDetails />} />
-          <Route path='/documentation/api' exact element={<ApiDocumentation />} />
-        </Routes>
+        <Box sx={{ display: 'flex' }}>
+          <SidebarDrawer />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/apis' exact element={<Apis />} />
+            <Route path='/api/:id' exact element={<ApiDetails />} />
+            <Route path='/documentation/api' exact element={<ApiDocumentation />} />
+            <Route path='/apps' exact element={<Apps />} />
+            <Route path='/apps/nuevaApp' exact element={<AddApp />} />
+            <Route path='/ApiLibrary' exact element={<ApiLibrary />} />
+          </Routes>
+        </Box>
       )}
     </BrowserRouter>
   );
