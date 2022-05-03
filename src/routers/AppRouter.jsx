@@ -15,6 +15,7 @@ import Login from '../Pages/Login';
 import Register from '../Pages/Register';
 import ApiDetails from '../Pages/ApiDetails';
 import ApiDocumentation from '../Pages/ApiDocumentation';
+import Admin from '../PrivatePages/ProfileAdmin';
 
 function AppRouter() {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,6 +43,7 @@ function AppRouter() {
             <Route path='/componentes' exact element={<Components />} />
             <Route path='/blog/:id' exact element={<BlogDetails />} />
             <Route path='/api/:id' exact element={<ApiDetails setIsOpen={setIsOpen} />} />
+            <Route path='/admin' exact element={<Admin />} />
           </Routes>
           <Footer />
         </>

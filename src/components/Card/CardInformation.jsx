@@ -4,7 +4,7 @@ import Chip from '../Chip/Chip';
 import Base from './Base';
 import './cards.scss';
 
-function CardInformation({ img, buttons, title, description, reading, info, header, maxWidth }) {
+function CardInformation({ img, buttons, title, description, reading, info, maxWidth, version, status, colorStatus }) {
 
   return (
     <Base maxWidth={maxWidth}>
@@ -13,13 +13,13 @@ function CardInformation({ img, buttons, title, description, reading, info, head
           <img src={img} alt='' />
         </div>
       )}
-      {header && (
+      {version && status && (
         <div className='header-api px-8 pt-5'>
-          <div className='header__status__success'>
+          <div className={colorStatus}>
             <p>●</p>
-            <p className='ml-3 font-weight-thin'>Publicado</p>
+            <p className='ml-3 font-weight-thin'>{status}</p>
           </div>
-          <Chip title='V.1.0' className='version' />
+          <Chip title={version} className='version' />
         </div>
       )}
       <div className={`p-8 ${reading ? 'py-10' : null}`}>
