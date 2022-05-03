@@ -17,10 +17,10 @@ import Register from '../Pages/Register';
 import ApiDetails from '../Pages/ApiDetails';
 import ApiDocumentation from '../Pages/ApiDocumentation';
 import Apps from '../Pages/Apps';
-import AddApp from '../Pages/AddApp';
 import ApiLibrary from '../Pages/ApiLibrary';
 import SidebarDrawer from '../components/SidebarDrawer/SidebarDrawer';
 import Admin from '../PrivatePages/ProfileAdmin';
+import AddApp from '../PrivatePages/AddApp';
 
 function AppRouter() {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,7 +53,7 @@ function AppRouter() {
         </>
       )}
       {privateSession && (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex', backgroundColor: '#fbfbfb' }}>
           <SidebarDrawer />
           <Routes>
             <Route path='/' element={<Admin />} />
