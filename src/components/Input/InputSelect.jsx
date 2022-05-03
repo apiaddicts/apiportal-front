@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import classes from './input.module.scss';
 
-function InputSelect() {
+function InputSelect({ label, children, ...props }) {
   const [showFilteer, setShowFilteer] = useState(false);
   const [filter, setFilter] = useState('Nombre (A-Z)');
 

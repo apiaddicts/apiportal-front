@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Typography } from '@mui/material';
 
 // import AccordionCheck from '../components/Accordion/AccordionCheck';
 
-import { Typography } from '@mui/material';
 import BannerImage from '../components/Banner/BannerImage';
 import SearchInput from '../components/Input/SearchInput';
 import InputSelect from '../components/Input/InputSelect';
@@ -14,6 +15,8 @@ import CustomizedAccordions from '../components/common/AccordionMUI';
 import CardInformation from '../components/Card/CardInformation';
 import ButtonCutom from '../components/common/ButtonMUI';
 import ButtonGroupMUI from '../components/common/ButtonGroup';
+
+import { getLibraries } from '../redux/actions/libraryAction';
 
 const versions = [
   {
@@ -29,24 +32,13 @@ const versions = [
 function Apis() {
   const [activeTab, setActiveTab] = useState(versions[0].label);
 
+  const { libraries } = useSelector((state) => state.library);
+
+  const dispatch = useDispatch();
+
   const onClickItem = (label) => {
     setActiveTab(label);
   };
-
-  const btns = [
-    {
-      label: 'BANCA',
-      class: 'gray',
-    },
-    {
-      label: 'vida',
-      class: 'gray',
-    },
-    {
-      label: 'SINIESTRO VEHICULAR',
-      class: 'gray',
-    },
-  ];
 
   const state = [
     {
@@ -96,93 +88,109 @@ function Apis() {
       ],
     },
   ];
+
+  useEffect(() => {
+    if (libraries && libraries.length === 0) {
+      dispatch(getLibraries());
+    }
+  }, [libraries]);
+
+  console.log(libraries);
+  console.log(libraries.length);
   return (
-    <>
-      <BannerImage />
-      <section className={classes.container}>
-        <article className={classes.container__left}>
-          {
-            state.map((item, index) => (
-              <CustomizedAccordions key={index} title={item.title}>
-                {
-                  item.options.map((option, index) => (
-                    <div
-                      className={classes.container__checkbox}
-                      key={index}
-                    >
-                      <CheckboxWrapper name={option.name} label={option.label} />
-                      {option.count && (<p className={classes.container__checkbox__counter}>{option.count}</p>)}
-                    </div>
-                  ))
-                }
-              </CustomizedAccordions>
-            ))
-          }
-          <div className='container py-3'>
-            <Typography>
-              VERSIÓN
-            </Typography>
-            <ButtonGroupMUI>
-              {versions.map((item, index) => (
-                <ButtonCutom activeTab={activeTab} key={index} label={item.label} onClickItem={onClickItem} />
-              ))}
-            </ButtonGroupMUI>
-          </div>
-          {
-            items.map((item, index) => (
-              <CustomizedAccordions key={index} title={item.title}>
-                {
-                  item.options.map((option, index) => (
-                    <div
-                      className={classes.container__checkbox}
-                      key={index}
-                    >
-                      <CheckboxWrapper name={option.name} label={option.label} />
-                      {option.count && (<p className={classes.container__checkbox__counter}>{option.count}</p>)}
-                    </div>
-                  ))
-                }
-              </CustomizedAccordions>
-            ))
-          }
-        </article>
-        <section className={classes.container__right}>
-          <div className='w-full'>
-            <div className='row'>
-              <div className='flex-sm-12 flex-md-8 mt-8'>
-                <SearchInput
-                  icon
-                  name='search'
-                  type='text'
-                  placeholder='Buscar APIs...'
-                  borderRadius='20px'
-                />
+    <div>
+      {libraries && libraries.length > 0 ? (
+        <>
+          <BannerImage />
+          <section className={classes.container}>
+            <article className={classes.container__left}>
+              {
+                state.map((item, index) => (
+                  <CustomizedAccordions key={index} title={item.title}>
+                    {
+                      item.options.map((option, index) => (
+                        <div
+                          className={classes.container__checkbox}
+                          key={index}
+                        >
+                          <CheckboxWrapper name={option.name} label={option.label} />
+                          {option.count && (<p className={classes.container__checkbox__counter}>{option.count}</p>)}
+                        </div>
+                      ))
+                    }
+                  </CustomizedAccordions>
+                ))
+              }
+              <div className='container py-3'>
+                <Typography>
+                  VERSIÓN
+                </Typography>
+                <ButtonGroupMUI>
+                  {versions.map((item, index) => (
+                    <ButtonCutom activeTab={activeTab} key={index} label={item.label} onClickItem={onClickItem} />
+                  ))}
+                </ButtonGroupMUI>
               </div>
-              <div className='flex-sm-12 flex-md-4 mt-8'>
-                <InputSelect />
-              </div>
-            </div>
-          </div>
-          <div className='flex-sm-12 flex-md-6'>
-            <div className='row'>
-              {items.map((item, index) => (
-                <div className='flex-sm-12 flex-md-6 mt-8'>
-                  <Link to='/api/1'>
-                    <CardInformation
-                      title='title'
-                      header
-                      buttons={btns}
-                      info='Documentación'
-                      description='Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text.'
+              {
+                items.map((item, index) => (
+                  <CustomizedAccordions key={index} title={item.title}>
+                    {
+                      item.options.map((option, index) => (
+                        <div
+                          className={classes.container__checkbox}
+                          key={index}
+                        >
+                          <CheckboxWrapper name={option.name} label={option.label} />
+                          {option.count && (<p className={classes.container__checkbox__counter}>{option.count}</p>)}
+                        </div>
+                      ))
+                    }
+                  </CustomizedAccordions>
+                ))
+              }
+            </article>
+            <section className={classes.container__right}>
+              <div className='w-full'>
+                <div className='row'>
+                  <div className='flex-sm-12 flex-md-8 mt-8'>
+                    <SearchInput
+                      icon
+                      name='search'
+                      type='text'
+                      placeholder='Buscar APIs...'
+                      borderRadius='20px'
                     />
-                  </Link>
+                  </div>
+                  <div className='flex-sm-12 flex-md-4 mt-8'>
+                    <InputSelect />
+                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      </section>
-    </>
+              </div>
+              <div className='flex-sm-12 flex-md-6'>
+                <div className='row'>
+                  {libraries.map((item, index) => (
+                    <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
+                      <Link to='/api/1'>
+                        <CardInformation
+                          title={item.title}
+                          status={item.status}
+                          version={item.version}
+                          buttons={item.tags}
+                          colorStatus={item.color_status}
+                          info='Documentación'
+                          description={item.description}
+                        />
+                      </Link>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          </section>
+        </>
+      ) : (null)}
+
+    </div>
   );
 };
 
