@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import classes from './input.module.scss';
 
-function InputSelect({ label, children, ...props }) {
+function InputSelect({ label, children, setFilterLetter }) {
   const [showFilteer, setShowFilteer] = useState(false);
   const [filter, setFilter] = useState('Nombre (A-Z)');
 
@@ -29,6 +29,7 @@ function InputSelect({ label, children, ...props }) {
                 () => {
                   setFilter('Nombre (A-Z)');
                   setShowFilteer(false);
+                  setFilterLetter(true);
                 }
               }
               className={classes['filter-option']}
@@ -40,6 +41,7 @@ function InputSelect({ label, children, ...props }) {
                 () => {
                   setFilter('Nombre (Z-A)');
                   setShowFilteer(false);
+                  setFilterLetter(false);
                 }
               }
               className={classes['filter-option']}

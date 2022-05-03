@@ -48,7 +48,6 @@ function AppRouter() {
             <Route path='/componentes' exact element={<Components />} />
             <Route path='/blog/:id' exact element={<BlogDetails />} />
             <Route path='/api/:id' exact element={<ApiDetails setIsOpen={setIsOpen} />} />
-            <Route path='/admin' exact element={<Admin />} />
           </Routes>
           <Footer />
         </>
@@ -57,7 +56,7 @@ function AppRouter() {
         <Box sx={{ display: 'flex' }}>
           <SidebarDrawer />
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/' element={<Admin />} />
             <Route path='/apis' exact element={<Apis />} />
             <Route path='/api/:id' exact element={<ApiDetails />} />
             <Route path='/documentation/api' exact element={<ApiDocumentation />} />
