@@ -207,7 +207,7 @@
     justify-content: space-between;
 }
 
-.header__status__success {
+.green {
     display: flex;
     font-size: 15px;
     line-height: 16px;
@@ -216,11 +216,19 @@
     color: #97D700;
     }
     
-    .header__status__deprecade {
+    .warning {
         display: flex;
-    font-size: 12px;
+    font-size: 15px;
     line-height: 16px;
     align-items: center;
     justify-content: space-between;
     color: #F1B434;
+}
+    .red {
+        display: flex;
+    font-size: 15px;
+    line-height: 16px;
+    align-items: center;
+    justify-content: space-between;
+    color: #e91818;
 }

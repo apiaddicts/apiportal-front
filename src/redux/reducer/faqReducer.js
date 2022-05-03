@@ -13,10 +13,12 @@ export default function faqReducer(state = initialState, action) {
       return {
         ...state,
         dataFaq: action.payload,
+        error: {},
       };
     case faqConstants.GET_ALL_FAQ_FAILURE:
       return {
         ...state,
+        dataFaq: {},
         error: action.payload,
       };
     default:
