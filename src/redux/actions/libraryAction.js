@@ -35,3 +35,9 @@ export const getLibrary = (id) => (dispatch) => {
     },
   );
 };
+
+export const resetGetLibrary = () => (dispatch) => {
+  dispatch({
+    type: libraryConstants.RESET_LIBRARY,
+  });
+};

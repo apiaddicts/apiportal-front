@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
 import BannerCentered from '../components/Banner/BannerCentered';
 import Button from '../components/Buttons/Button';
 import CardBasic from '../components/Card/CardBasic';
@@ -7,73 +9,34 @@ import Carousel from '../components/Carousel/Carousel';
 import Item from '../components/Item/Item';
 import Tabs from '../components/Tabs/Tabs';
 import classes from '../styles/pages/home.module.scss';
-import { getHome } from '../redux/actions/homeAction';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
 import textureCircles from '../static/img/texture_circles.svg';
 import codeSnipet from '../static/img/code-snippet.png';
 import BannerImage from '../components/Banner/BannerImage';
 
+import { getHome } from '../redux/actions/homeAction';
+import { getLibrary, resetGetLibrary } from '../redux/actions/libraryAction';
+
 function ApiDetails({ setIsOpen }) {
 
   const dispatch = useDispatch();
+  const params = useParams();
   const { data } = useSelector((state) => state.demo);
+  const { library } = useSelector((state) => state.library);
 
   useEffect(() => {
     if (data && Object.keys(data).length === 0) {
       dispatch(getHome());
     }
+
+    if (params.id && library && Object.keys(library).length === 0) {
+      dispatch(getLibrary(params.id));
+    }
+
+    return () => {
+      dispatch(resetGetLibrary());
+    };
   }, []);
-
-  // const filterSection = data && data.contentSections ? data.contentSections.filter((item) => item.__component === 'home.work-section') : [];
-  // const backgroundSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].background ? filterSection[0].background.url : '';
-
-  // const itemsSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].Steps ? filterSection[0].Steps.map((i) => {
-  //   const response = {
-  //     icon: i.number,
-  //     title: i.title,
-  //     description: i.subtitle,
-  //   };
-  //   return response;
-  // }) : [];
-
-  const Steps = [
-    {
-      'id': 101,
-      'title': 'Integración ágil y dinámica',
-      'subtitle': 'Reduce los tiempos de integración y empieza a vender y gestionar de forma rápida y fácil.\n',
-      'number': 'successWindow',
-    },
-    {
-      'id': 102,
-      'title': 'Amplio catálogo de soluciones y APIs',
-      'subtitle': 'Podrás gestionar todo tipo de operaciones de negocio a través de tu cuenta y apps.',
-      'number': 'archivist',
-    },
-    {
-      'id': 103,
-      'title': 'Recursos y documentación developers',
-      'subtitle': 'Ten siempre disponible toda la documentación de tus APIs y apóyate en las guías elaboradas para ti.\n',
-      'number': 'note1',
-    },
-    {
-      'id': 101,
-      'title': 'Integración ágil y dinámica',
-      'subtitle': 'Reduce los tiempos de integración y empieza a vender y gestionar de forma rápida y fácil.\n',
-      'number': 'successWindow',
-    },
-    {
-      'id': 102,
-      'title': 'Amplio catálogo de soluciones y APIs',
-      'subtitle': 'Podrás gestionar todo tipo de operaciones de negocio a través de tu cuenta y apps.',
-      'number': 'archivist',
-    },
-    {
-      'id': 103,
-      'title': 'Recursos y documentación developers',
-      'subtitle': 'Ten siempre disponible toda la documentación de tus APIs y apóyate en las guías elaboradas para ti.\n',
-      'number': 'note1',
-    },
-  ];
 
   // Load discover section
   const filterDiscoverTab = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'home.discover-section') : [];
@@ -83,7 +46,14 @@ function ApiDetails({ setIsOpen }) {
 
   const filterDiscover = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sections.section-use-case') : [];
 
-  const buttonsLbls = [
+  const buttonsLbls = library && library.buttons && library.buttons.length > 0 ? library.buttons.map((item) => {
+    const data = {
+      label: item.name,
+      class: item.class,
+    };
+
+    return data;
+  }) : [
     {
       label: 'Probar API',
       class: 'primary',
@@ -93,12 +63,15 @@ function ApiDetails({ setIsOpen }) {
       class: 'ghost-variant',
     },
   ];
+
   return (
     <div>
-      {Object.keys(data).length > 0 ? (
+      {Object.keys(data).length > 0 && Object.keys(library).length > 0 ? (
         <>
           <section>
             <BannerImage
+              title={library.title}
+              img={library.image.length > 0 && library.image.length === 1 ? library.image[0].url : ''}
               buttons={buttonsLbls}
               setIsOpen={setIsOpen}
             />
@@ -112,24 +85,29 @@ function ApiDetails({ setIsOpen }) {
             <div className='row'>
               <div className={`flex-md-12 ${classes.section__content__title}`}>
                 <h1 className='h2 text__primary font-weight-bold mb-10 ml-5'>
-                  Benificios principales
+                  {library.benefits && library.benefits.length > 0 && library.benefits.length === 1 ?
+                    library.benefits[0].title :
+                    'Benificios principales'}
                 </h1>
               </div>
               <div className='row'>
                 <div className={`flex-sm-12 flex-md-6 flex-lg-4 ${classes.section__content__img}`}>
-                  <img src={codeSnipet} alt='Benefits' className='w-full' />
+                  <img src={library.benefits && library.benefits.length > 0 && library.benefits.length === 1 && library.benefits[0].background ? library.benefits[0].background.url : codeSnipet} alt='Benefits' className='w-full' />
                 </div>
                 <div className={`flex-sm-12 flex-md-10 flex-lg-8 ${classes.section__content__items} container`}>
                   <div className='row w-full'>
-                    {Steps.map((item, i) => (
-                      <div className='flex-sm-12 flex-md-10 flex-lg-4 mt-3'>
-                        <Item
-                          key={i}
-                          title={item.title}
-                          icon={item.number}
-                        />
-                      </div>
-                    ))}
+                    {library.benefits && library.benefits.length > 0 && library.benefits.length === 1 && library.benefits[0].Steps.length > 0 ? (
+                      library.benefits[0].Steps.map((item, i) => (
+                        <div className='flex-sm-12 flex-md-10 flex-lg-4 mt-3'>
+                          <Item
+                            key={i}
+                            title={item.title}
+                            icon={item.number}
+                          />
+                        </div>
+                      ))
+
+                    ) : (null)}
                   </div>
                 </div>
               </div>

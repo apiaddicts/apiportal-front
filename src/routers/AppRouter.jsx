@@ -25,7 +25,7 @@ import AddApp from '../PrivatePages/AddApp';
 function AppRouter() {
   const [isOpen, setIsOpen] = useState(false);
   const [openForm, setOpenForm] = useState(false);
-  const [privateSession, setPrivateSession] = useState(true);
+  const [privateSession, setPrivateSession] = useState(false);
 
   return (
     <BrowserRouter>
