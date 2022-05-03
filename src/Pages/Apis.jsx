@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+/* eslint-disable array-callback-return */
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Typography } from '@mui/material';
+import fake from '../fake';
 
 // import AccordionCheck from '../components/Accordion/AccordionCheck';
 
-import { Typography } from '@mui/material';
 import BannerImage from '../components/Banner/BannerImage';
 import SearchInput from '../components/Input/SearchInput';
 import InputSelect from '../components/Input/InputSelect';
@@ -27,26 +29,36 @@ const versions = [
   },
 ];
 function Apis() {
+  const [filterStatus, setFilterStatus] = useState('');
+  const [filterTags, setFilterTags] = useState('');
   const [activeTab, setActiveTab] = useState(versions[0].label);
 
   const onClickItem = (label) => {
     setActiveTab(label);
   };
 
-  const btns = [
-    {
-      label: 'BANCA',
-      class: 'gray',
-    },
-    {
-      label: 'vida',
-      class: 'gray',
-    },
-    {
-      label: 'SINIESTRO VEHICULAR',
-      class: 'gray',
-    },
-  ];
+  const handleChangeSelect = (label) => {
+    setFilterStatus(label);
+  };
+  const handleChangTags = (label) => {
+    setFilterTags(label);
+  };
+
+  const results = fake.filter((item) => {
+    return item.status.toLowerCase().includes(filterStatus.toLowerCase());
+  });
+
+  const resultsData = fake.filter((item) => {
+    return item.tags.map((tag) => {
+      tag.name.toLowerCase().includes(filterTags.toLowerCase());
+    });
+  });
+
+  useEffect(() => {
+    console.log(filterStatus);
+    console.log(results);
+    console.log(resultsData);
+  }, [results, filterStatus, filterTags]);
 
   const state = [
     {
@@ -64,23 +76,33 @@ function Apis() {
     },
   ];
 
-  const headerInfo =
-    {
-      status: 'Publicado',
-      version: 'v1.0',
-    };
   const items = [
     {
       title: 'SOLUTION',
       options: [
         {
-          label: 'Publicado',
-          name: 'publicado',
+          label: 'Bokers',
+          name: 'boker',
           count: '1',
         },
         {
-          label: 'Deprecated',
-          name: 'deprecated',
+          label: 'Canales no tradicionales',
+          name: 'canal',
+          count: '4',
+        },
+        {
+          label: 'Retail',
+          name: 'retail',
+          count: '4',
+        },
+        {
+          label: 'Talleres',
+          name: 'taller',
+          count: '4',
+        },
+        {
+          label: 'Banca',
+          name: 'banca',
           count: '4',
         },
       ],
@@ -89,13 +111,28 @@ function Apis() {
       title: 'TAGS',
       options: [
         {
-          label: 'Publicado',
-          name: 'publicado',
+          label: 'Banca',
+          name: 'banca',
           count: '12',
         },
         {
-          label: 'Deprecated',
-          name: 'deprecated',
+          label: 'Salud Colectiva',
+          name: 'salud colectiva',
+          count: '4',
+        },
+        {
+          label: 'Autos',
+          name: 'autos',
+          count: '4',
+        },
+        {
+          label: 'Sinietro Vehicular',
+          name: 'sinietro vehicular',
+          count: '4',
+        },
+        {
+          label: 'Riesgos Generales',
+          name: 'riesgos generales',
           count: '4',
         },
       ],
@@ -115,7 +152,7 @@ function Apis() {
                       className={classes.container__checkbox}
                       key={index}
                     >
-                      <CheckboxWrapper name={option.name} label={option.label} />
+                      <CheckboxWrapper name={option.name} label={option.label} handleChangeSelect={handleChangeSelect} />
                       {option.count && (<p className={classes.container__checkbox__counter}>{option.count}</p>)}
                     </div>
                   ))
@@ -142,7 +179,7 @@ function Apis() {
                       className={classes.container__checkbox}
                       key={index}
                     >
-                      <CheckboxWrapper name={option.name} label={option.label} />
+                      <CheckboxWrapper name={option.name} label={option.label} handleChangeSelect={handleChangTags} />
                       {option.count && (<p className={classes.container__checkbox__counter}>{option.count}</p>)}
                     </div>
                   ))
@@ -170,15 +207,17 @@ function Apis() {
           </div>
           <div className='flex-sm-12 flex-md-6'>
             <div className='row'>
-              {items.map((item, index) => (
-                <div className='flex-sm-12 flex-md-6 mt-8'>
+              {fake.map((item, index) => (
+                <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
                   <Link to='/api/1'>
                     <CardInformation
-                      title='title'
-                      headerInfo={headerInfo}
-                      buttons={btns}
+                      title={item.title}
+                      status={item.status}
+                      version={item.version}
+                      buttons={item.btns}
+                      colorStatus={item.color_status}
                       info='Documentación'
-                      description='Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text.'
+                      description={item.description}
                     />
                   </Link>
                 </div>
