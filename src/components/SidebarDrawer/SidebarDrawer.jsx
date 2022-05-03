@@ -17,65 +17,63 @@ function SidebarDrawer({ children }) {
     { route: '/ApiLibrary', text: 'Biblioteca de APIs', icon: <Settings /> },
   ];
   return (
-    <div>
-      <Drawer
-        variant='permanent'
-        sx={{
-          width: '400px',
-        }}
-      >
-        <List>
-          <ListItem>
-            <ListItemText>
-              <Typography variant='h3' component='div'>
-                Hola,
-              </Typography>
-            </ListItemText>
-          </ListItem>
-          <ListItem>
-            <ListItemText>
-              <Typography variant='h3' component='div' color='blue'>
-                Beatriz Abad
-              </Typography>
-            </ListItemText>
-          </ListItem>
-        </List>
-        <List>
-          <ListItem>
-            <ListItemText>
-              <Typography variant='h6' component='div'>
-                Organización
-              </Typography>
-              <Typography variant='h6' component='div'>
-                Administrador
-              </Typography>
-            </ListItemText>
-          </ListItem>
-        </List>
-        <List>
-          {
-            listItems.map((item, index) => (
-              <Link to={item.route} key={index}>
-                <ListItem button sx={{ color: '#53565A' }} component={Link} to={item.route}>
-                  <ListItemIcon>
-                    {item.icon}
-                  </ListItemIcon>
-                  <ListItemText primary={item.text} />
-                </ListItem>
-              </Link>
-            ))
-          }
-        </List>
-        <List>
-          <ListItem button>
-            <ListItemIcon>
-              <ChevronLeft />
-            </ListItemIcon>
-            <ListItemText primary='Ocultar menú' />
-          </ListItem>
-        </List>
-      </Drawer>
-    </div>
+    <Drawer
+      variant='permanent'
+      sx={{
+        width: '400px',
+      }}
+    >
+      <List sx={{ }}>
+        <ListItem>
+          <ListItemText>
+            <Typography variant='h3' component='div'>
+              Hola,
+            </Typography>
+          </ListItemText>
+        </ListItem>
+        <ListItem>
+          <ListItemText>
+            <Typography variant='h3' component='div' color='blue'>
+              Beatriz Abad
+            </Typography>
+          </ListItemText>
+        </ListItem>
+      </List>
+      <List>
+        <ListItem>
+          <ListItemText>
+            <Typography variant='h6' component='div'>
+              Organización
+            </Typography>
+            <Typography variant='h6' component='div'>
+              Administrador
+            </Typography>
+          </ListItemText>
+        </ListItem>
+      </List>
+      <List>
+        {
+          listItems.map((item, index) => (
+            <Link to={item.route} key={index}>
+              <ListItem button sx={{ color: '#53565A' }} component={Link} to={item.route}>
+                <ListItemIcon>
+                  {item.icon}
+                </ListItemIcon>
+                <ListItemText primary={item.text} />
+              </ListItem>
+            </Link>
+          ))
+        }
+      </List>
+      <List>
+        <ListItem button>
+          <ListItemIcon>
+            <ChevronLeft />
+          </ListItemIcon>
+          <ListItemText primary='Ocultar menú' />
+        </ListItem>
+      </List>
+    </Drawer>
   );
 }
 
