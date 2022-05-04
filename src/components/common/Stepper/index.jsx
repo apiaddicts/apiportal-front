@@ -30,7 +30,7 @@ export default function HorizontalStepper({
           </StepUI>
         ))}
       </StepperUI>
-      <div>
+      <ContainerSteps>
         {allStepsCompleted() ? (
           <>
             <Typography sx={{ mt: 2, mb: 1 }}>
@@ -46,7 +46,7 @@ export default function HorizontalStepper({
             {children}
           </ContainerSteps>
         )}
-      </div>
+      </ContainerSteps>
     </ContainerSteps>
   );
 }

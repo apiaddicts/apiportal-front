@@ -79,12 +79,12 @@ function AddApp(props) {
           allStepsCompleted={allStepsCompleted}
         >
           <>
-            <Typography sx={{ mt: 2, mb: 1 }}>
-              {activeStep === 0 && <Information fakeData={fakeData} />}
+            <Box sx={{ mt: 2, mb: 1, height: '100%' }}>
+              {activeStep === 0 && <Information fakeData={fakeData} styles={styles} />}
               {activeStep === 1 && <ApisStep />}
               {activeStep === 2 && <Connection />}
-            </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+            </Box>
+            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2, mb: 5 }}>
               <Button
                 color='inherit'
                 disabled={activeStep === 0}

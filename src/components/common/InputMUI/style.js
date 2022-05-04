@@ -2,13 +2,16 @@ import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 
 const Input = styled(TextField)({
+  margin: '0.8rem 0',
+  marginTop: '1.8rem',
   '& label.Mui-focused': {
     color: '#0033A0',
     position: 'absolute',
     top: '-15px',
   },
-  margin: '0.8rem 0',
-  marginTop: '1.8rem',
+  '& label': {
+    top: '-5px',
+  },
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
       border: 'none',
@@ -32,8 +35,7 @@ const Input = styled(TextField)({
     },
     '& .MuiInputBase-input': {
       padding: '0.5rem 1rem',
-      fontSize: '1.2rem',
-      fontWeight: 'bold',
+      fontSize: '1rem',
       color: '#2C3E50',
       border: 'none',
       borderRadius: '40px',
