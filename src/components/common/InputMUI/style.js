@@ -1,9 +1,9 @@
+import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 
 const Input = styled(TextField)({
   margin: '0.8rem 0',
-  marginTop: '1.8rem',
   '& label.Mui-focused': {
     color: '#0033A0',
     position: 'absolute',
@@ -56,3 +56,23 @@ export default Input;
 
 export const InputSelect = styled(Input)({
 });
+
+export const ContainerInput = styled(Box)({
+  marginTop: '1.8rem',
+  flexDirection: 'row',
+  position: 'relative',
+  display: 'flex',
+  alignItems: 'center',
+  width: '100%',
+});
+export const ContainerIcon = styled(Box)((icon) => ({
+  position: 'absolute',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '25px',
+  height: '25px',
+  right: icon ? '1.5rem' : '0.5rem',
+  backgroundColor: '#0033A0',
+}));
+
