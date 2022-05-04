@@ -1,7 +1,9 @@
 import { TextareaAutosize } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import Barlow from '../../../static/fonts/FS Joey Regular.ttf';
 
 const Textarea = styled(TextareaAutosize)({
+  fontFamily: 'Barlow',
   margin: '1.8rem 0',
   width: '100%',
   maxHeight: '100px',
@@ -16,6 +18,7 @@ const Textarea = styled(TextareaAutosize)({
   '&:focus': {
     border: 'none',
   },
+  src: Barlow,
 });
 
 export default Textarea;

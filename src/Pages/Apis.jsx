@@ -18,26 +18,28 @@ import ButtonGroupMUI from '../components/common/ButtonGroup';
 
 import { getLibraries } from '../redux/actions/libraryAction';
 import useSearch from '../hooks/useSearch';
+import useResults from '../hooks/useResults';
 
-const versions = [
-  {
-    label: 'v 1.0',
-  },
-  {
-    label: 'v 1.5',
-  },
-  {
-    label: 'v 2.0',
-  },
-];
 function Apis() {
+  const { libraries } = useSelector((state) => state.library);
+  const [resultsSearch, setResultsSearch] = useState([]);
+  const [resultsStatus, setResultsStatus] = useState([]);
+  const [resultsData, setResultsData] = useState(libraries);
+  const { resultValue, setResultValue } = useResults([]);
   const [filterLetter, setFilterLetter] = useState(true);
+
+  const versionsRepeated = libraries.map((element) => {
+    return element.version;
+  });
+  const versionArr = new Set(versionsRepeated);
+  const versions = [...versionArr];
+  const [activeTab, setActiveTab] = useState(versions[0]);
+
   const { value, setValue, formik } = useSearch({
     initialState: {
       search: '',
     },
   });
-
   const [filterStatus, setFilterStatus] = useState({
     active: false,
     label: '',
@@ -46,41 +48,33 @@ function Apis() {
     active: false,
     label: '',
   });
-  const [activeTab, setActiveTab] = useState(versions[0].label);
+  // eslint-disable-next-line no-unused-vars
+  const [filterTags, setFilterTags] = useState({
+    active: false,
+    label: '',
+  });
 
-  const { libraries } = useSelector((state) => state.library);
+  const results = libraries.filter((item) => {
+    if (formik.values.search === '') {
+      return null;
+    } if (formik.values.search !== '') {
+      return item.title.toLowerCase().includes(value.toLowerCase());
+    }
+    return null;
+  });
 
   const dispatch = useDispatch();
 
   const onClickItem = (label) => {
     setActiveTab(label);
+    // resultsData.filter((item) => {
+    //   if (item.version.toLowerCase() !== 'v 1.0') {
+    //     return setResultsData(libraries);
+    //   }
+    //   return setResultsData([item]);
+    // });
   };
 
-  const handleChangeSelect = (name, label, checked) => {
-    setFilterStatus({
-      active: checked,
-      label,
-    });
-  };
-  const handleChangFilter = (name, label, checked) => {
-    setFilter({
-      active: checked,
-      label,
-    });
-  };
-
-  const results = libraries.filter((item) => {
-    return item.status.toLowerCase().includes(filterStatus.label.toLowerCase());
-  });
-
-  const resultsData = libraries.filter((item) => {
-    return formik.values.search === '' ? item.version.toLowerCase().includes(activeTab.toLowerCase()) :
-      item.title.toLowerCase().includes(value.toLowerCase());
-  });
-
-  const filterResults = resultsData.filter((item) => {
-    return filterStatus.status ? null : item.title.toLowerCase().includes(filter.label.toLowerCase());
-  });
   resultsData.sort((a, b) => {
     if (filterLetter) {
       return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
@@ -88,109 +82,94 @@ function Apis() {
     return a.title.toLowerCase() < b.title.toLowerCase() ? 1 : -1;
   });
 
-  useEffect(() => {
+  const handleChangeSelect = (name, label, checked) => {
+    setFilterStatus({
+      active: checked,
+      label,
+    });
+  };
 
-  }, [filterLetter]);
-
-  // const array = [4, 1, 2, 1, 1, 3, 45, 13, 42, 52, 45, 25, 13, 40, 13, 2];
-
-  // const repetidos = {};
-
-  // eslint-disable-next-line no-return-assign
-  // const unique = (array) => array.filter((item) => !repetidos[item] && (repetidos[item] = true));
-  // libraries.forEach((item) => {
-  //   repetidos[item.title] = (repetidos[title] || 0) + 1;
-  // });
-
-  // const uniqueData = unique(resultsData);
+  const handleChangFilter = (name, label, checked) => {
+    setFilter({
+      active: checked,
+      label,
+    });
+  };
+  const handleChangFilterTags = (name, label, checked) => {
+    setFilterTags({
+      active: checked,
+      label,
+    });
+  };
 
   // Repetidos echos por kike
 
-  const state = [
-    {
-      title: 'ESTADO',
-      options: [
-        {
-          label: 'Publicado',
-          name: 'publicado',
-        },
-        {
-          label: 'Deprecado',
-          name: 'deprecado',
-        },
-      ],
-    },
-  ];
+  const titleRepeated = libraries.map((element) => {
+    return element.title;
+  });
+  const dataArr = new Set(titleRepeated);
+  const items = [...dataArr];
 
-  const items = [
-    {
-      title: 'SOLUTION',
-      options: [
-        {
-          label: 'Bokers',
-          name: 'boker',
-          count: '1',
-        },
-        {
-          label: 'API de salud colectiva',
-          name: 'canal',
-          count: '4',
-        },
-        {
-          label: 'Retail',
-          name: 'retail',
-          count: '4',
-        },
-        {
-          label: 'Talleres',
-          name: 'taller',
-          count: '4',
-        },
-        {
-          label: 'Banca',
-          name: 'banca',
-          count: '4',
-        },
-      ],
-    },
-    {
-      title: 'TAGS',
-      options: [
-        {
-          label: 'Banca',
-          name: 'banca',
-          count: '12',
-        },
-        {
-          label: 'Salud Colectiva',
-          name: 'salud colectiva',
-          count: '4',
-        },
-        {
-          label: 'Autos',
-          name: 'autos',
-          count: '4',
-        },
-        {
-          label: 'Sinietro Vehicular',
-          name: 'sinietro vehicular',
-          count: '4',
-        },
-        {
-          label: 'Riesgos Generales',
-          name: 'riesgos generales',
-          count: '4',
-        },
-      ],
-    },
-  ];
+  const stateRepeated = libraries.map((element) => {
+    return element.status;
+  });
+  const stateArr = new Set(stateRepeated);
+  const state = [...stateArr];
+
+  const arrayTagsRepeated = libraries.map((element) => {
+    return element.tags;
+  });
+  const tagsBtns = arrayTagsRepeated.flat();
+
+  const tagsArr = new Set(tagsBtns);
+  const tagsArrUnique = [...tagsArr];
+  const labelsTags = tagsArrUnique.map((item) => { return item.label; });
+  const labelsTagsArr = new Set(labelsTags);
+  const tags = [...labelsTagsArr];
+
+  const resState = libraries.filter((item) => {
+    if (filterStatus.active === false) {
+      return null;
+    } if (filterStatus.active === true) {
+      return item.status.toLowerCase().includes(filterStatus.label.toLowerCase());
+    }
+    return null;
+  });
+  const resTitle = libraries.filter((item) => {
+    if (filter.active === false) {
+      return null;
+    } if (filter.active === true) {
+      return item.title.toLowerCase().includes(filter.label.toLowerCase());
+    }
+    return null;
+  });
+
+  useEffect(() => {
+    setResultsStatus(resState);
+  }, [filterStatus]);
+
+  useEffect(() => {
+    setResultValue(resTitle);
+  }, [filter]);
 
   useEffect(() => {
     setValue(formik.values.search);
+    setResultsSearch(results);
+    console.log('Fuera del filter status');
+
     if (libraries && libraries.length === 0) {
       dispatch(getLibraries());
     }
+    setResultsData(libraries);
   }, [libraries, formik.values.search]);
+
+  resultsData.sort((a, b) => {
+    if (a.title.toLowerCase() > b.title.toLowerCase()) {
+      return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
+    }
+    return a.title.toLowerCase() < b.title.toLowerCase() ? 1 : -1;
+  });
+
   return (
     <div>
       {libraries && libraries.length > 0 ? (
@@ -198,58 +177,57 @@ function Apis() {
           <BannerImage />
           <section className={classes.container}>
             <article className={classes.container__left}>
-              {
-                state.map((item, index) => (
-                  <CustomizedAccordions key={index} title={item.title}>
-                    {
-                      item.options.map((option, index) => (
-                        <div
-                          className={classes.container__checkbox}
-                          key={index}
-                        >
-                          <CheckboxWrapper
-                            name={option.name}
-                            label={option.label}
-                            handleChangeSelect={handleChangeSelect}
-                          />
-                          {option.count && (<p className={classes.container__checkbox__counter}>{option.count}</p>)}
-                        </div>
-                      ))
-                    }
-                  </CustomizedAccordions>
-                ))
-              }
+              <CustomizedAccordions title='Status'>
+                {
+                  state.map((item, index) => (
+                    <div
+                      className={classes.container__checkbox}
+                      key={index}
+                    >
+                      <CheckboxWrapper
+                        name={item}
+                        label={item}
+                        handleChangeSelect={handleChangeSelect}
+                      />
+                      {/* {option.count && (<p className={classes.container__checkbox__counter}>{option.count}</p>)} */}
+                    </div>
+                  ))
+                }
+              </CustomizedAccordions>
               <div className='container py-3'>
                 <Typography>
                   VERSIÓN
                 </Typography>
                 <ButtonGroupMUI>
                   {versions.map((item, index) => (
-                    <ButtonCutom activeTab={activeTab} key={index} label={item.label} onClickItem={onClickItem} />
+                    <ButtonCutom key={index} activeTab={activeTab} label={item} onClickItem={onClickItem} />
                   ))}
                 </ButtonGroupMUI>
               </div>
-              {
-                items.map((item, index) => (
-                  <CustomizedAccordions key={index} title={item.title}>
-                    {
-                      item.options.map((option, index) => (
-                        <div
-                          className={classes.container__checkbox}
-                          key={index}
-                        >
-                          <CheckboxWrapper
-                            name={option.name}
-                            label={option.label}
-                            handleChangeSelect={handleChangFilter}
-                          />
-                          {option.count && (<p className={classes.container__checkbox__counter}>{option.count}</p>)}
-                        </div>
-                      ))
-                    }
-                  </CustomizedAccordions>
-                ))
-              }
+              <CustomizedAccordions title='Solutions'>
+                { items.map((item, index) => (
+                  <div className={classes.container__checkbox}>
+                    <CheckboxWrapper
+                      name={item}
+                      label={item}
+                      handleChangeSelect={handleChangFilter}
+                    />
+                    {/* {option.count && (<p className={classes.container__checkbox__counter}>{option.count}</p>)} */}
+                  </div>
+                ))}
+              </CustomizedAccordions>
+              <CustomizedAccordions title='Tags'>
+                { tags.map((item, index) => (
+                  <div className={classes.container__checkbox} key={index}>
+                    <CheckboxWrapper
+                      name={item}
+                      label={item}
+                      handleChangeSelect={handleChangFilterTags}
+                    />
+                    {/* {option.count && (<p className={classes.container__checkbox__counter}>{option.count}</p>)} */}
+                  </div>
+                ))}
+              </CustomizedAccordions>
             </article>
             <section className={classes.container__right}>
               <div className='w-full'>
@@ -265,7 +243,7 @@ function Apis() {
                     />
                   </div>
                   <div className='flex-sm-12 flex-md-4 mt-8'>
-                    <InputSelect setFilterLetter={setFilterLetter} />
+                    <InputSelect handleClick={setFilterLetter} />
                   </div>
                 </div>
               </div>
@@ -288,24 +266,8 @@ function Apis() {
                       </div>
                     ))
                   ) : null} */}
-                  {filterStatus.active ? (
-                    results.map((item, index) => (
-                      <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
-                        <Link to={`/api/${item.id}`}>
-                          <CardInformation
-                            title={item.title}
-                            status={item.status}
-                            version={item.version}
-                            buttons={item.tags}
-                            colorStatus={item.color_status}
-                            info='Documentación'
-                            description={item.description}
-                          />
-                        </Link>
-                      </div>
-                    ))
-                  ) : !filterStatus.active ? (
-                    !filter.active ? (
+                  {resultsStatus.length === 0 && resultValue.length === 0 ? (
+                    resultsSearch.length === 0 || formik.values.search === '' ? (
                       resultsData.map((item, index) => (
                         <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
                           <Link to={`/api/${item.id}`}>
@@ -320,9 +282,8 @@ function Apis() {
                             />
                           </Link>
                         </div>
-                      ))
-                    ) :
-                      filterResults.map((item, index) => (
+                      ))) : (
+                      resultsSearch.map((item, index) => (
                         <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
                           <Link to={`/api/${item.id}`}>
                             <CardInformation
@@ -337,7 +298,42 @@ function Apis() {
                           </Link>
                         </div>
                       ))
+                    )
                   ) : null}
+                  {resultsStatus.length !== 0 && (
+                    resultsStatus.map((item, index) => (
+                      <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
+                        <Link to={`/api/${item.id}`}>
+                          <CardInformation
+                            title={item.title}
+                            status={item.status}
+                            version={item.version}
+                            buttons={item.tags}
+                            colorStatus={item.color_status}
+                            info='Documentación'
+                            description={item.description}
+                          />
+                        </Link>
+                      </div>
+                    ))
+                  )}
+                  {resultValue.length !== 0 && (
+                    resultValue.map((item, index) => (
+                      <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
+                        <Link to={`/api/${item.id}`}>
+                          <CardInformation
+                            title={item.title}
+                            status={item.status}
+                            version={item.version}
+                            buttons={item.tags}
+                            colorStatus={item.color_status}
+                            info='Documentación'
+                            description={item.description}
+                          />
+                        </Link>
+                      </div>
+                    ))
+                  )}
                 </div>
               </div>
             </section>
@@ -350,3 +346,17 @@ function Apis() {
 };
 
 export default Apis;
+
+// // const results = libraries.filter((item) => {
+// //   return item.status.toLowerCase().includes(filterStatus.label.toLowerCase());
+// // });
+
+// // eslint-disable-next-line no-unused-vars
+// // const resultsData = libraries.filter((item) => {
+// //   return formik.values.search === '' ? item.version.toLowerCase().includes(activeTab.toLowerCase()) :
+// //     item.title.toLowerCase().includes(value.toLowerCase());
+// // });
+
+// // const filterResults = resultsData.filter((item) => {
+// //   return filterStatus.status ? null : item.title.toLowerCase().includes(filter.label.toLowerCase());
+// // });
