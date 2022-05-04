@@ -5,6 +5,7 @@ import Step from '@mui/material/Step';
 
 export const ContainerSteps = styled(Paper)({
   width: '100%',
+  height: '100%',
   overflow: 'hidden',
   marginTop: '24px',
   borderRadius: '0.5rem',

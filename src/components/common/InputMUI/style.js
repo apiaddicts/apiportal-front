@@ -35,8 +35,7 @@ const Input = styled(TextField)({
     },
     '& .MuiInputBase-input': {
       padding: '0.5rem 1rem',
-      fontSize: '1.2rem',
-      fontWeight: 'bold',
+      fontSize: '1rem',
       color: '#2C3E50',
       border: 'none',
       borderRadius: '40px',
