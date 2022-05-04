@@ -7,6 +7,7 @@ import Connection from './connection';
 import Information from './information';
 import Btn from '../../components/Buttons/Button';
 import styles from './style.module.scss';
+import fakeData from '../../fake-data-addapp.json';
 
 function AddApp(props) {
   const [activeStep, setActiveStep] = useState(0);
@@ -79,7 +80,7 @@ function AddApp(props) {
         >
           <>
             <Typography sx={{ mt: 2, mb: 1 }}>
-              {activeStep === 0 && <Information />}
+              {activeStep === 0 && <Information fakeData={fakeData} />}
               {activeStep === 1 && <ApisStep />}
               {activeStep === 2 && <Connection />}
             </Typography>
