@@ -10,7 +10,7 @@ import Input from '../Input';
 import { fieldsContactExtend } from '../Forms/fields';
 import useFormConfig from '../../hooks/useForm';
 
-function Footer({ props }) {
+function Footer({ isPrivate }) {
   const img = 'https://picsum.photos/1920/300';
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
@@ -24,18 +24,20 @@ function Footer({ props }) {
 
   return (
     <div>
-      <Base img={img}>
-        <div className={classes.footer__container}>
-          <div className={`${classes.divider} mb-4`} />
-          <h1 className='h2 text__secondary__white'>Dejanos tus datos para asesorarte</h1>
-          <p className='h5 text__secondary__white mb-10'>Contáctanos por medio de este formulario</p>
-        </div>
-        <div className={classes.button__fab}>
-          <button type='submit' onClick={() => { setContactForm(!contactForm); }}>
-            {contactForm ? <Icon id='MdClose' /> : <Icon id='MdMailOutline' />}
-          </button>
-        </div>
-      </Base>
+      {!isPrivate && (
+        <Base img={img}>
+          <div className={classes.footer__container}>
+            <div className={`${classes.divider} mb-4`} />
+            <h1 className='h2 text__secondary__white'>Dejanos tus datos para asesorarte</h1>
+            <p className='h5 text__secondary__white mb-10'>Contáctanos por medio de este formulario</p>
+          </div>
+          <div className={classes.button__fab}>
+            <button type='submit' onClick={() => { setContactForm(!contactForm); }}>
+              {contactForm ? <Icon id='MdClose' /> : <Icon id='MdMailOutline' />}
+            </button>
+          </div>
+        </Base>
+      )}
 
       {contactForm && (
         <div className={classes.footer__section}>

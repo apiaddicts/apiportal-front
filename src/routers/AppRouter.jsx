@@ -53,18 +53,21 @@ function AppRouter() {
         </>
       )}
       {privateSession && (
-        <Box sx={{ display: 'flex', backgroundColor: '#fbfbfb' }}>
-          <SidebarDrawer />
-          <Routes>
-            <Route path='/' element={<Admin />} />
-            <Route path='/apis' exact element={<Apis />} />
-            <Route path='/api/:id' exact element={<ApiDetails />} />
-            <Route path='/documentation/api' exact element={<ApiDocumentation />} />
-            <Route path='/apps' exact element={<Apps />} />
-            <Route path='/apps/nuevaApp' exact element={<AddApp />} />
-            <Route path='/ApiLibrary' exact element={<ApiLibrary />} />
-          </Routes>
-        </Box>
+        <>
+          <Box sx={{ display: 'flex' }}>
+            <SidebarDrawer />
+            <Routes>
+              <Route path='/' element={<Admin />} />
+              <Route path='/apis' exact element={<Apis />} />
+              <Route path='/api/:id' exact element={<ApiDetails />} />
+              <Route path='/documentation/api' exact element={<ApiDocumentation />} />
+              <Route path='/apps' exact element={<Apps />} />
+              <Route path='/apps/nuevaApp' exact element={<AddApp />} />
+              <Route path='/ApiLibrary' exact element={<ApiLibrary />} />
+            </Routes>
+          </Box>
+          {/* <Footer isPrivate={privateSession} /> */}
+        </>
       )}
     </BrowserRouter>
   );

@@ -7,10 +7,13 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Terminal from '@mui/icons-material/Terminal';
 import Settings from '@mui/icons-material/Settings';
-import { Typography } from '@mui/material';
+import { AppBar, Box, Button, Divider, Toolbar, Typography } from '@mui/material';
 import { ChevronLeft } from '@mui/icons-material';
+import PersonSharpIcon from '@mui/icons-material/PersonSharp';
+import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSharp';
 import { NavLink } from 'react-router-dom';
 import classes from './sliderdrawer.module.scss';
+import SuraLogoAlt from '../../static/img/sura_logo_alt.svg';
 
 function SidebarDrawer({ children }) {
   const listItems = [
@@ -21,6 +24,26 @@ function SidebarDrawer({ children }) {
 
   return (
     <div className={classes.backgroundSidebar}>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position='fixed' elevation={0} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: '#0033a0', padding: '0 80px' }}>
+          <Toolbar disableGutters>
+            <img src={SuraLogoAlt} alt='Sura Logo' />
+            <Button
+              variant='outlined'
+              startIcon={<PersonSharpIcon sx={{ color: '#00AEC7' }} />}
+              endIcon={<KeyboardArrowDownSharpIcon color='white' sx={{ color: '#fff' }} />}
+              sx={{
+                borderRadius: '20px',
+                border: '1px solid #00AEC7',
+                color: '#fff',
+              }}
+            >
+              Beatriz Abad
+            </Button>
+            <Divider orientation='vertical' variant='middle' flexItem />
+          </Toolbar>
+        </AppBar>
+      </Box>
       <Drawer
         variant='permanent'
         sx={{
@@ -81,7 +104,7 @@ function SidebarDrawer({ children }) {
           </ListItem>
           {
             listItems.map((item, index) => (
-              <ListItem button sx={{ color: '#53565A', paddingLeft: '97px' }} component={MyNavLink} to={item.route} exact>
+              <ListItem button key={index} sx={{ color: '#53565A', paddingLeft: '97px' }} component={MyNavLink} to={item.route} exact>
                 <ListItemIcon>
                   {item.icon}
                 </ListItemIcon>

@@ -157,7 +157,7 @@ function Apps(props) {
   ];
   const data = jsonApis;
   return (
-    <Container className='mt-10 pt-10'>
+    <Container fixed className='mt-10 pt-10'>
       <Title text='Apps' />
       <DataGridMUI headers={headers} data={data} />
     </Container>
