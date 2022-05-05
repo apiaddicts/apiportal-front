@@ -1,0 +1,54 @@
+@import "../../../styles/variables.scss";
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem 3rem 2rem;
+  &__left {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  &__left:disabled {
+    cursor: not-allowed;
+  }
+  &__right {
+    display: flex;
+    align-items: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  &__right:disabled {
+    cursor: not-allowed;
+  }
+  &__icon {
+    color: $secondary;
+    font-size: 1.5rem;
+  }
+  &__text {
+    font-size: 0.875rem;
+    color: $primary;
+    font-weight: 400;
+  }
+  &__pages {
+    display: flex;
+    justify-content: space-around;
+    &__page {
+      cursor: pointer;
+      color: $primary;
+      font-weight: 600;
+      font-size: 1rem;
+      background: none;
+      border: none;
+      
+    }
+  }
+}
+
+.active {
+    color: $secondary;
+}
