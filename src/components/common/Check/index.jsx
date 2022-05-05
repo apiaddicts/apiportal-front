@@ -5,12 +5,13 @@ function CheckboxWrapper({
   name,
   label,
   legend,
+  handleChangeSelect,
   ...otherProps
 }) {
 
-  const handleChange = (evt) => {
-    const { checked } = evt.target;
-    console.log(name, checked);
+  const handleChange = (e) => {
+    handleChangeSelect(name, label, e.target.checked);
+
   };
 
   const configCheckbox = {

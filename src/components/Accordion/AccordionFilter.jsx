@@ -12,11 +12,17 @@ function AccordionFilter({ items, active, setActive }) {
     setClicked(index);
   };
 
-  const toggleItem = (subindex) => {
+  const toggleItem = (subindex, qa) => {
     if (active === subindex) {
-      return setActive(null);
+      return setActive({
+        ...active,
+        filter: null,
+      });
     }
-    setActive(subindex);
+    setActive({
+      item: qa,
+      filter: subindex,
+    });
   };
 
   return (
@@ -36,7 +42,7 @@ function AccordionFilter({ items, active, setActive }) {
               <div className={classes.filter__body}>
                 <ul className={classes.filter__body__list}>
                   {item.questions.map((qa, subindex) => (
-                    <li className={active === subindex ? `${classes.filter__body__list__item} ${classes.item__active}` : `${classes.filter__body__list__item}`} onClick={() => { toggleItem(subindex); }} key={subindex}>{qa}</li>
+                    <li className={active.filter === subindex ? `${classes.filter__body__list__item} ${classes.item__active}` : `${classes.filter__body__list__item}`} onClick={() => { toggleItem(subindex, qa); }} key={subindex}>{qa}</li>
                   ))}
                 </ul>
               </div>
