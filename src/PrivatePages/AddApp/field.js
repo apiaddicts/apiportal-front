@@ -1,7 +1,7 @@
 export const fieldsAppSandbox = [
   {
     id: 'clientId',
-    initialValue: '',
+    initialValue: 'ClienteID',
     placeholder: 'Client ID',
     label: 'Client ID',
     validate: 'clientId',
@@ -11,7 +11,7 @@ export const fieldsAppSandbox = [
   },
   {
     id: 'clientSecret',
-    initialValue: '',
+    initialValue: 'ClientSecret',
     placeholder: 'Client Secret',
     label: 'Client Secret',
     validate: 'clientSecret',
@@ -22,7 +22,7 @@ export const fieldsAppSandbox = [
   },
   {
     id: 'host',
-    initialValue: '',
+    initialValue: 'ClientSecret',
     placeholder: 'Host',
     label: 'Host',
     validate: 'host',
@@ -35,8 +35,8 @@ export const fieldsAppSandbox = [
 
 export const fieldsAppPre = [
   {
-    id: 'clientId',
-    initialValue: '',
+    id: 'clientIdPre',
+    initialValue: 'ClienteIDPRE',
     placeholder: 'Client ID',
     validate: 'clientId',
     required: true,
@@ -44,24 +44,22 @@ export const fieldsAppPre = [
     disabled: false,
   },
   {
-    id: 'clientSecret',
-    initialValue: '',
+    id: 'clientSecretPre',
+    initialValue: 'ClientSecretPRE',
     placeholder: 'Client Secret',
     validate: 'clientSecret',
     required: true,
     type: 'password',
-    icon: true,
     iconName: 'MdOutlineRemoveRedEye',
     disabled: false,
   },
   {
-    id: 'host',
-    initialValue: '',
+    id: 'hostPre',
+    initialValue: 'ClientSecretPRE',
     placeholder: 'Host',
     validate: 'host',
     required: true,
     type: 'password',
-    icon: true,
     iconName: 'MdOutlineRemoveRedEye',
     disabled: false,
   },

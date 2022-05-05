@@ -1,12 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Input, { ContainerIcon, ContainerInput } from './style';
 
 function TextField({ field, formik, iconEye, iconCopy }) {
+  const [type, setType] = useState(false);
   const { values, errors, touched, handleChange, handleBlur, isSelect } = formik;
+
+  // Copy text to clipboard of input
+
+  const copyToClipboard = (value) => {
+    const input = document.createElement('input');
+    input.value = value;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+  };
 
   return (
     <ContainerInput>
-      <ContainerIcon icon={true} />
+      <ContainerIcon
+        icon
+        onClick={() => {
+          setType(!type);
+        }}
+      />
+      <ContainerIcon onClick={() => {
+        copyToClipboard(formik.values[field.id]);
+      }}
+      />
       <Input
         select={isSelect}
         fullWidth
@@ -15,7 +36,7 @@ function TextField({ field, formik, iconEye, iconCopy }) {
         label={field.label}
         disabled={field.disabled}
         error={touched[field.id] && !!errors[field.id]}
-        type={field.type}
+        type={field.id && type ? 'text' : field.type}
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder={field.placeholder}
