@@ -10,7 +10,8 @@
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
     "status": "APROBADO",
-    "description": "Descripción de la aplicación"
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 2,
@@ -23,7 +24,8 @@
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
     "status": "SOLICITADO",
-    "description": "Descripción de la aplicación"
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 3,
@@ -36,7 +38,8 @@
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
     "status": "APROBADO",
-    "description": "Descripción de la aplicación"
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },  
   {
     "id": 4,
@@ -49,7 +52,8 @@
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
     "status": "SOLICITADO",
-    "description": "Descripción de la aplicación"
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 5,
@@ -62,7 +66,8 @@
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
     "status": "APROBADO",
-    "description": "Descripción de la aplicación"
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 6,
@@ -75,7 +80,8 @@
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
     "status": "SOLICITADO",
-    "description": "Descripción de la aplicación"
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },  
   {
     "id": 7,
@@ -88,7 +94,8 @@
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
     "status": "SOLICITADO",
-    "description": "Descripción de la aplicación"
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 8,
@@ -101,7 +108,8 @@
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
     "status": "APROBADO",
-    "description": "Descripción de la aplicación"
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 9,
@@ -114,7 +122,8 @@
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
     "status": "APROBADO",
-    "description": "Descripción de la aplicación"
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 10,
@@ -127,7 +136,8 @@
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
     "status": "SOLICITADO",
-    "description": "Descripción de la aplicación"
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 11,
@@ -140,7 +150,8 @@
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
     "status": "APROBADO",
-    "description": "Descripción de la aplicación"
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 12,
@@ -153,6 +164,7 @@
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
     "status": "SOLICITADO",
-    "description": "Descripción de la aplicación"
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   }
 ]

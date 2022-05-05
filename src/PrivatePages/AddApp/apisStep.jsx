@@ -54,6 +54,29 @@ function ApisStep({ styles }) {
       },
     },
   ];
+
+  const headers2 = [
+    headers[0],
+    {
+      name: 'SOLUCIÓN',
+      selector: (row) => row.solution,
+      sortable: true,
+    },
+    headers[1],
+    {
+      name: '',
+      cell: (row) => {
+        return (
+          <ContainerIcon onClick={() => {
+            copyToClipboard(row.apis);
+          }}
+          >
+            <Icon id='MdOutlineContentCopy' />
+          </ContainerIcon>
+        );
+      },
+    },
+  ];
   const data = jsonApis;
 
   return (
@@ -75,7 +98,7 @@ function ApisStep({ styles }) {
           APIs de otras soluciones
         </Typography>
         <DataGridMUI
-          headers={headers}
+          headers={headers2}
           data={data}
           selectableRows
           selectableRowsComponent={Checkbox}
