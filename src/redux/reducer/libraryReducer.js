@@ -6,7 +6,7 @@ const initialState = {
   libraries: [],
   errorLibraries: {},
   loadingLibraries: false,
-  filters: [],
+  filters: {},
   // library constants
   library: {},
   errorLibrary: {},

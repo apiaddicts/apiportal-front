@@ -46,9 +46,40 @@ export const filterCheck = (label, checked, name) => (dispatch) => {
     type: libraryConstants.GET_ALL_LIBRARY_REQUEST,
   });
 
-  const { filters, backUpLibreries, libraries } = store.getState().library;
+  const { filters, backUpLibreries } = store.getState().library;
+  const newFilters = { ...filters };
 
-  if (filters.length === 0) {
+  if (checked) {
+    newFilters[name] = (name in newFilters) ? [...newFilters[name], label.toLowerCase()] : [label.toLowerCase()];
+  } else {
+    if (name in newFilters) newFilters[name] = newFilters[name].filter((item) => item !== label.toLowerCase());
+  }
+
+  const data = backUpLibreries.filter((item) => {
+    const conditions = [];
+    Object.keys(newFilters).forEach((key) => {
+      if (key === 'status') {
+        conditions.push((newFilters['status'].length) ? newFilters['status'].includes(item['status'].toLowerCase()) : true);
+      }
+      if (key === 'solution') {
+        conditions.push((newFilters['solution'].length) ? newFilters['solution'].includes(item['title'].toLowerCase()) : true);
+      }
+      if (key === 'tag') {
+        conditions.push((newFilters['tag'].length) ? newFilters['tag'].some((filteredTag) => {
+          return (item['tags'].map((tag) => tag.label.toLowerCase())).includes(filteredTag);
+        }) : true);
+      }
+    });
+    return conditions.every((v) => v === true);
+  });
+
+  dispatch({
+    type: libraryConstants.FILTER_ALL_LIBRARY,
+    data,
+    newFilters,
+  });
+
+  /*if (filters.length === 0) {
     const newFilters = [...filters, label];
     if (name === 0 && backUpLibreries.length > 0) {
       const data = backUpLibreries.filter((item) => {
@@ -130,7 +161,7 @@ export const filterCheck = (label, checked, name) => (dispatch) => {
         });
       }
     }
-  }
+  }*/
 
 };
 

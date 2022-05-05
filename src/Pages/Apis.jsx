@@ -13,12 +13,11 @@ import CustomizedAccordions from '../components/common/AccordionMUI';
 import CardInformation from '../components/Card/CardInformation';
 import ButtonCutom from '../components/common/ButtonMUI';
 import ButtonGroupMUI from '../components/common/ButtonGroup';
-import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
 
 import { getLibraries, filterCheck } from '../redux/actions/libraryAction';
 
 function Apis() {
-  const { libraries, backUpLibreries, loadingLibraries } = useSelector((state) => state.library);
+  const { libraries, filters, backUpLibreries, loadingLibraries } = useSelector((state) => state.library);
   const dispatch = useDispatch();
 
   const onClickItem = (label) => {
@@ -33,14 +32,14 @@ function Apis() {
   };
 
   const handleChangeStatus = (name, label, checked) => {
-    dispatch(filterCheck(label, checked, 0));
+    dispatch(filterCheck(label, checked, 'status'));
   };
 
   const handleChangeSolutions = (name, label, checked) => {
-    dispatch(filterCheck(label, checked, 1));
+    dispatch(filterCheck(label, checked, 'solution'));
   };
   const handleChangFilterTags = (name, label, checked) => {
-    dispatch(filterCheck(label, checked, 2));
+    dispatch(filterCheck(label, checked, 'tag'));
   };
   // Filters titles array
   const titleRepeated = backUpLibreries.map((element) => {
@@ -68,7 +67,7 @@ function Apis() {
   const tags = [...labelsTagsArr];
 
   // Filters version array
-  const versionRepeated = libraries.map((element) => {
+  const versionRepeated = backUpLibreries.map((element) => {
     return element.version;
   });
 
@@ -76,8 +75,7 @@ function Apis() {
   const versions = [...versionArr];
 
   useEffect(() => {
-
-    if (libraries && libraries.length === 0) {
+    if (libraries && libraries.length === 0 && Object.keys(filters).length === 0) {
       dispatch(getLibraries());
     }
   }, [libraries]);
@@ -85,111 +83,136 @@ function Apis() {
   console.log('Librerias array', libraries);
   return (
     <div>
-      {loadingLibraries === false && libraries && libraries.length > 0 ? (
-        <>
-          <BannerImage />
-          <section className={classes.container}>
-            <article className={classes.container__left}>
-              <CustomizedAccordions title='Status'>
-                {
-                  state.map((item, index) => (
-                    <div
-                      className={classes.container__checkbox}
-                      key={index}
-                    >
-                      <CheckboxWrapper
-                        name={item}
-                        label={item}
-                        handleChangeSelect={handleChangeStatus}
-                      />
+      <BannerImage />
+      <section className={classes.container}>
+        <article className={classes.container__left}>
+          <CustomizedAccordions title='Status'>
+            {
+              state.map((item, index) => (
+                <div
+                  className={classes.container__checkbox}
+                  key={index}
+                >
+                  <CheckboxWrapper
+                    name={item}
+                    label={item}
+                    handleChangeSelect={handleChangeStatus}
+                  />
+                </div>
+              ))
+            }
+          </CustomizedAccordions>
+          <div className='container py-3'>
+            <Typography>
+              Version
+            </Typography>
+            <ButtonGroupMUI>
+              {versions.map((item, index) => (
+                <ButtonCutom key={index} label={item} onClickItem={onClickItem} />
+              ))}
+            </ButtonGroupMUI>
+          </div>
+          <CustomizedAccordions title='Solutions'>
+            { items.map((item, index) => (
+              <div key={index} className={classes.container__checkbox}>
+                <CheckboxWrapper
+                  name={item}
+                  label={item}
+                  handleChangeSelect={handleChangeSolutions}
+                />
+              </div>
+            ))}
+          </CustomizedAccordions>
+          <CustomizedAccordions title='Tags'>
+            { tags.map((item, index) => (
+              <div className={classes.container__checkbox} key={index}>
+                <CheckboxWrapper
+                  name={item}
+                  label={item}
+                  handleChangeSelect={handleChangFilterTags}
+                />
+              </div>
+            ))}
+          </CustomizedAccordions>
+        </article>
+        <section className={classes.container__right}>
+          <div className='w-full'>
+            <div className='row'>
+              <div className='flex-sm-12 flex-md-8 mt-8'>
+                <SearchInput
+                  icon
+                  name='search'
+                  type='text'
+                  // onChange={formik.handleChange}
+                  placeholder='Buscar APIs...'
+                  borderRadius='20px'
+                />
+              </div>
+              <div className='flex-sm-12 flex-md-4 mt-8'>
+                {/* <InputSelect handleClick={setFilterLetter} /> */}
+                <InputSelect />
+              </div>
+            </div>
+          </div>
+          <div className='flex-sm-12 flex-md-6'>
+            <div className='row'>
+              {loadingLibraries === false && libraries ? (
+                libraries.length > 0 ? (
+                  libraries.map((item, index) => (
+                    <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
+                      <Link to={`/api/${item.id}`}>
+                        <CardInformation
+                          title={item.title}
+                          status={item.status}
+                          version={item.version}
+                          buttons={item.tags}
+                          colorStatus={item.color_status}
+                          info='Documentación'
+                          description={item.description}
+                        />
+                      </Link>
                     </div>
                   ))
-                }
-              </CustomizedAccordions>
-              <div className='container py-3'>
-                <Typography>
-                  VERSIÓN
-                </Typography>
-                <ButtonGroupMUI>
-                  <ButtonCutom />
-                  {versions.map((item, index) => (
-                    // activeTab={activeTab}
-                    <ButtonCutom key={index} label={item} onClickItem={onClickItem} />
-                  ))}
-                </ButtonGroupMUI>
-              </div>
-              <CustomizedAccordions title='Solutions'>
-                { items.map((item, index) => (
-                  <div key={index} className={classes.container__checkbox}>
-                    <CheckboxWrapper
-                      name={item}
-                      label={item}
-                      handleChangeSelect={handleChangeSolutions}
-                    />
+                ) : (
+                  <section
+                    style={{
+                      width: '100%',
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        margin: '2rem',
+                      }}
+                    >
+                      <h1>No hay data</h1>
+                    </div>
+                  </section>
+                )
+              ) : (
+                <section
+                  style={{
+                    width: '100%',
+                  }}
+                >
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      margin: '2rem',
+                    }}
+                  >
+                    <h1>Cargando....</h1>
                   </div>
-                ))}
-              </CustomizedAccordions>
-              <CustomizedAccordions title='Tags'>
-                { tags.map((item, index) => (
-                  <div className={classes.container__checkbox} key={index}>
-                    <CheckboxWrapper
-                      name={item}
-                      label={item}
-                      handleChangeSelect={handleChangFilterTags}
-                    />
-                  </div>
-                ))}
-              </CustomizedAccordions>
-            </article>
-            <section className={classes.container__right}>
-              <div className='w-full'>
-                <div className='row'>
-                  <div className='flex-sm-12 flex-md-8 mt-8'>
-                    <SearchInput
-                      icon
-                      name='search'
-                      type='text'
-                      // onChange={formik.handleChange}
-                      placeholder='Buscar APIs...'
-                      borderRadius='20px'
-                    />
-                  </div>
-                  <div className='flex-sm-12 flex-md-4 mt-8'>
-                    {/* <InputSelect handleClick={setFilterLetter} /> */}
-                    <InputSelect />
-                  </div>
-                </div>
-              </div>
-              <div className='flex-sm-12 flex-md-6'>
-                <div className='row'>
-                  {libraries.length > 0 ? (
-                    libraries.map((item, index) => (
-                      <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
-                        <Link to={`/api/${item.id}`}>
-                          <CardInformation
-                            title={item.title}
-                            status={item.status}
-                            version={item.version}
-                            buttons={item.tags}
-                            colorStatus={item.color_status}
-                            info='Documentación'
-                            description={item.description}
-                          />
-                        </Link>
-                      </div>
-                    ))
-                  ) : (
-                    <h1>No hay data</h1>
-                  )}
-                </div>
-              </div>
-            </section>
-          </section>
-        </>
-      ) : (
-        <SkeletonComponent />
-      )}
-
+                </section>
+              )}
+            </div>
+          </div>
+        </section>
+      </section>
     </div>
   );
 };
