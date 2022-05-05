@@ -3,7 +3,7 @@ import { Alert, Box, Stack } from '@mui/material';
 import CustomTooltip from '../../components/common/ToolTip';
 import { TypographyUI } from '../../components/common/TypographyMUI/style';
 import TextField from '../../components/common/InputMUI';
-import { fieldsAppSandbox } from './field';
+import { fieldsAppSandbox, fieldsAppPre } from './field';
 import useNewApp from '../../hooks/useNewApp';
 import CheckboxWrapper from '../../components/common/Check';
 
@@ -19,49 +19,50 @@ function Connection() {
   };
 
   const formConfig = useNewApp(fieldsAppSandbox, handleSubmit);
+  const formConfigPre = useNewApp(fieldsAppPre, handleSubmit);
   return (
     <Box sx={{ height: '100%' }}>
       <Box sx={{ mt: 4 }}>
         <Box sx={{ position: 'relative', display: 'inline-block', pr: 2 }}>
-          <CustomTooltip text='Name App'>
+          <CustomTooltip text='ETORNO SANDBOX'>
             ?
           </CustomTooltip>
           <TypographyUI>
-            EnTORNO SANDBOX
-          </TypographyUI>
-        </Box>
-        <div className='row'>
-          {fieldsAppSandbox.map((field) => (
-            <div className='flex-lg-4 flex-sm-12'>
-              <TextField field={field} formik={formConfig} />
-            </div>
-          ))}
-        </div>
-      </Box>
-      <Box sx={{ mt: 4 }}>
-        <Box sx={{ position: 'relative', display: 'inline-block', pr: 2 }}>
-          <CustomTooltip text='Name App'>
-            ?
-          </CustomTooltip>
-          <TypographyUI>
-            EnTORNO PRE
+            ENTORNO SANDBOX
           </TypographyUI>
         </Box>
         <div className='row'>
           {fieldsAppSandbox.map((field) => (
             <div key={field.id} className='flex-lg-4 flex-sm-12'>
-              <TextField field={field} formik={formConfig} />
+              <TextField field={field} formik={formConfig} iconCopy iconEye />
             </div>
           ))}
         </div>
       </Box>
       <Box sx={{ mt: 4 }}>
         <Box sx={{ position: 'relative', display: 'inline-block', pr: 2 }}>
-          <CustomTooltip text='Name App'>
+          <CustomTooltip text='ENTORNO PRE'>
             ?
           </CustomTooltip>
           <TypographyUI>
-            EnTORNO PRODUCCIÓN
+            ENTORNO PRE
+          </TypographyUI>
+        </Box>
+        <div className='row'>
+          {fieldsAppPre.map((field) => (
+            <div key={field.id} className='flex-lg-4 flex-sm-12'>
+              <TextField field={field} formik={formConfigPre} iconCopy iconEye />
+            </div>
+          ))}
+        </div>
+      </Box>
+      <Box sx={{ mt: 5, pb: showAlert ? 0 : 4 }}>
+        <Box sx={{ position: 'relative', display: 'inline-block', pr: 2 }}>
+          <CustomTooltip text='ENTORNO PRODUCCIÓN'>
+            ?
+          </CustomTooltip>
+          <TypographyUI>
+            ENTORNO PRODUCCIÓN
           </TypographyUI>
         </Box>
         <div className='row ml-0'>
@@ -69,7 +70,7 @@ function Connection() {
         </div>
       </Box>
       {showAlert && (
-        <Stack sx={{ width: '100%', mt: 4 }} spacing={2}>
+        <Stack sx={{ width: '100%', mt: 2, pb: 4 }} spacing={2}>
           <Alert severity='success'>Se ha solicitado el pase a producción de la app, te avisaremos cuando esté aprobada.</Alert>
         </Stack>
       )}
