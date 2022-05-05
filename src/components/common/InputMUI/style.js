@@ -65,14 +65,16 @@ export const ContainerInput = styled(Box)({
   alignItems: 'center',
   width: '100%',
 });
-export const ContainerIcon = styled(Box)((icon) => ({
+export const ContainerIcon = styled(Box)(({ icon }) => ({
+  cursor: 'pointer',
   position: 'absolute',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   width: '25px',
   height: '25px',
-  right: icon ? '1.5rem' : '0.5rem',
+  right: icon ? '60px' : '15px',
   backgroundColor: '#0033A0',
+  zIndex: '9999',
 }));
 

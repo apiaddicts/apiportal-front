@@ -1,5 +1,5 @@
-import React from 'react';
-import { Box } from '@mui/material';
+import React, { useState } from 'react';
+import { Alert, Box, Stack } from '@mui/material';
 import CustomTooltip from '../../components/common/ToolTip';
 import { TypographyUI } from '../../components/common/TypographyMUI/style';
 import TextField from '../../components/common/InputMUI';
@@ -8,9 +8,14 @@ import useNewApp from '../../hooks/useNewApp';
 import CheckboxWrapper from '../../components/common/Check';
 
 function Connection() {
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleSubmit = async (dataForm) => {
     console.log(dataForm);
+  };
+
+  const handleChangeSelect = (name, label, value) => {
+    setShowAlert(value);
   };
 
   const formConfig = useNewApp(fieldsAppSandbox, handleSubmit);
@@ -44,7 +49,7 @@ function Connection() {
         </Box>
         <div className='row'>
           {fieldsAppSandbox.map((field) => (
-            <div className='flex-lg-4 flex-sm-12'>
+            <div key={field.id} className='flex-lg-4 flex-sm-12'>
               <TextField field={field} formik={formConfig} />
             </div>
           ))}
@@ -60,9 +65,14 @@ function Connection() {
           </TypographyUI>
         </Box>
         <div className='row ml-0'>
-          <CheckboxWrapper label='Solicitar pase a producción' />
+          <CheckboxWrapper name='Solicitar a Pre' label='Solicitar pase a producción' handleChangeSelect={handleChangeSelect} />
         </div>
       </Box>
+      {showAlert && (
+        <Stack sx={{ width: '100%', mt: 4 }} spacing={2}>
+          <Alert severity='success'>Se ha solicitado el pase a producción de la app, te avisaremos cuando esté aprobada.</Alert>
+        </Stack>
+      )}
     </Box>
   );
 };
