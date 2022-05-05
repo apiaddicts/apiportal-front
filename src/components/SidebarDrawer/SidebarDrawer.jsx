@@ -15,7 +15,7 @@ import classes from './sliderdrawer.module.scss';
 function SidebarDrawer({ children }) {
   const listItems = [
     { route: '/apps', text: 'Apps', icon: <Terminal /> },
-    { route: '/apps/nuevaApp', text: 'Nueva App', icon: <Terminal /> },
+    { route: '/newApp', text: 'Nueva App', icon: <Terminal /> },
     { route: '/ApiLibrary', text: 'Biblioteca de APIs', icon: <Settings /> },
   ];
 

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 import { Box } from '@mui/material';
+
 import Navbar from '../components/Navbar/Navbar';
 
 import Home from '../Pages/Home';
@@ -21,16 +24,20 @@ import ApiLibrary from '../Pages/ApiLibrary';
 import SidebarDrawer from '../components/SidebarDrawer/SidebarDrawer';
 import Admin from '../PrivatePages/ProfileAdmin';
 import AddApp from '../PrivatePages/AddApp';
+import AppsDetail from '../PrivatePages/DetailApp';
 
 function AppRouter() {
+  const { email, password } = useSelector((state) => state.user);
+
   const [isOpen, setIsOpen] = useState(false);
   const [openForm, setOpenForm] = useState(false);
-  const [privateSession, setPrivateSession] = useState(true);
+
+  const privateSession = email !== '' && password !== '';
 
   return (
     <BrowserRouter>
       {isOpen && (
-        <Login setIsOpen={setIsOpen} setPrivateSession={setPrivateSession} />
+        <Login setIsOpen={setIsOpen} />
       )}
       {openForm && (
         <Register setOpenForm={setOpenForm} />
@@ -61,7 +68,8 @@ function AppRouter() {
             <Route path='/api/:id' exact element={<ApiDetails />} />
             <Route path='/documentation/api' exact element={<ApiDocumentation />} />
             <Route path='/apps' exact element={<Apps />} />
-            <Route path='/apps/nuevaApp' exact element={<AddApp />} />
+            <Route path='/apps/:id' exact element={<AppsDetail />} />
+            <Route path='/newApp' exact element={<AddApp />} />
             <Route path='/ApiLibrary' exact element={<ApiLibrary />} />
           </Routes>
         </Box>
