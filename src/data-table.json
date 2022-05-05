@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "version": 1.0,
     "app": "App de Salud",
     "enviroment": "Sandbox",
     "apis": "Salud colectiva",
@@ -8,10 +9,13 @@
     "company": "Organización nombre",
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
-    "status": "APROBADO"
+    "status": "APROBADO",
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 2,
+    "version": 1.0,
     "app": "App de Riesgos generales",
     "enviroment": "Sandbox / Producción",
     "apis": "Salud colectiva",
@@ -19,10 +23,13 @@
     "company": "Organización nombre",
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
-    "status": "SOLICITADO"
+    "status": "SOLICITADO",
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 3,
+    "version": 1.0,
     "app": "App Vehicular",
     "enviroment": "Sandbox",
     "apis": "Salud colectiva",
@@ -30,10 +37,13 @@
     "company": "Organización nombre",
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
-    "status": "APROBADO"
+    "status": "APROBADO",
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },  
   {
     "id": 4,
+    "version": 1.0,
     "app": "App de Salud",
     "enviroment": "Sandbox",
     "apis": "Salud colectiva",
@@ -41,10 +51,13 @@
     "company": "Organización nombre",
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
-    "status": "SOLICITADO"
+    "status": "SOLICITADO",
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 5,
+    "version": 1.5,
     "app": "App de Riesgos generales",
     "enviroment": "Sandbox / Producción",
     "apis": "Salud colectiva",
@@ -52,10 +65,13 @@
     "company": "Organización nombre",
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
-    "status": "APROBADO"
+    "status": "APROBADO",
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 6,
+    "version": 1.5,
     "app": "App Vehicular",
     "enviroment": "Sandbox",
     "apis": "Salud colectiva",
@@ -63,10 +79,13 @@
     "company": "Organización nombre",
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
-    "status": "SOLICITADO"
+    "status": "SOLICITADO",
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },  
   {
     "id": 7,
+    "version": 2.0,
     "app": "App de Salud",
     "enviroment": "Sandbox",
     "apis": "Salud colectiva",
@@ -74,10 +93,13 @@
     "company": "Organización nombre",
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
-    "status": "SOLICITADO"
+    "status": "SOLICITADO",
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 8,
+    "version": 2.0,
     "app": "App de Riesgos generales",
     "enviroment": "Sandbox / Producción",
     "apis": "Salud colectiva",
@@ -85,10 +107,13 @@
     "company": "Organización nombre",
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
-    "status": "APROBADO"
+    "status": "APROBADO",
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 9,
+    "version": 2.5,
     "app": "App Vehicular",
     "enviroment": "Sandbox",
     "apis": "Salud colectiva",
@@ -96,10 +121,13 @@
     "company": "Organización nombre",
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
-    "status": "APROBADO"
+    "status": "APROBADO",
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 10,
+    "version": 2.5,
     "app": "App de Salud",
     "enviroment": "Sandbox",
     "apis": "Salud colectiva",
@@ -107,10 +135,13 @@
     "company": "Organización nombre",
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
-    "status": "SOLICITADO"
+    "status": "SOLICITADO",
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 11,
+    "version": 3.0,
     "app": "App de Riesgos generales",
     "enviroment": "Sandbox / Producción",
     "apis": "Salud colectiva",
@@ -118,10 +149,13 @@
     "company": "Organización nombre",
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
-    "status": "APROBADO"
+    "status": "APROBADO",
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   },
   {
     "id": 12,
+    "version": 3.0,
     "app": "App Vehicular",
     "enviroment": "Sandbox",
     "apis": "Salud colectiva",
@@ -129,6 +163,8 @@
     "company": "Organización nombre",
     "creationDate": "12/01/2022 - 10:34",
     "lastModification": "12/01/2022 - 10:34",
-    "status": "SOLICITADO"
+    "status": "SOLICITADO",
+    "description": "Descripción de la aplicación",
+    "solution": "Brokers, Flotas, Telco, Retail"
   }
 ]

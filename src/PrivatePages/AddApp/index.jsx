@@ -80,7 +80,7 @@ function AddApp(props) {
         >
           <Box sx={{ mt: 2, mb: 1, height: '100%' }}>
             {activeStep === 0 && <Information fakeData={fakeData} styles={styles} />}
-            {activeStep === 1 && <ApisStep />}
+            {activeStep === 1 && <ApisStep styles={styles} />}
             {activeStep === 2 && <Connection />}
           </Box>
         </HorizontalStepper>

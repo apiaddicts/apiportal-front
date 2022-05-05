@@ -62,10 +62,17 @@ function CustomPagination({ rowCount, rowsPerPage, currentPage, onChangePage }) 
     </div>
   );
 }
-function DataGridMUI({ headers, data }) {
+function DataGridMUI({ headers, data, ...rest }) {
   return (
     <Card sx={{ borderRadius: '20px', marginTop: '1rem' }}>
-      <DataTable columns={headers} data={data} pagination paginationComponent={CustomPagination} sortIcon={<ExpandMoreIcon />} />
+      <DataTable
+        columns={headers}
+        data={data}
+        pagination
+        paginationComponent={CustomPagination}
+        {...rest}
+        sortIcon={<ExpandMoreIcon />}
+      />
     </Card>
   );
 }
