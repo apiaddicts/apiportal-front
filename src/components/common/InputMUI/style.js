@@ -1,14 +1,17 @@
+import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 
 const Input = styled(TextField)({
+  margin: '0.8rem 0',
   '& label.Mui-focused': {
     color: '#0033A0',
     position: 'absolute',
     top: '-15px',
   },
-  margin: '0.8rem 0',
-  marginTop: '1.8rem',
+  '& label': {
+    top: '-5px',
+  },
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
       border: 'none',
@@ -31,9 +34,8 @@ const Input = styled(TextField)({
       border: 'none',
     },
     '& .MuiInputBase-input': {
-      padding: '0.8rem 1rem',
-      fontSize: '1.2rem',
-      fontWeight: 'bold',
+      padding: '0.5rem 1rem',
+      fontSize: '1rem',
       color: '#2C3E50',
       border: 'none',
       borderRadius: '40px',
@@ -54,3 +56,25 @@ export default Input;
 
 export const InputSelect = styled(Input)({
 });
+
+export const ContainerInput = styled(Box)({
+  marginTop: '1.8rem',
+  flexDirection: 'row',
+  position: 'relative',
+  display: 'flex',
+  alignItems: 'center',
+  width: '100%',
+});
+export const ContainerIcon = styled(Box)(({ icon }) => ({
+  cursor: 'pointer',
+  position: 'absolute',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  width: '25px',
+  height: '25px',
+  right: icon ? '60px' : '15px',
+  backgroundColor: '#0033A0',
+  zIndex: '9999',
+}));
+

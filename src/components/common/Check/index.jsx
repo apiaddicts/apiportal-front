@@ -10,7 +10,7 @@ function CheckboxWrapper({
 }) {
 
   const handleChange = (e) => {
-    handleChangeSelect(name, label);
+    handleChangeSelect(name, label, e.target.checked);
 
   };
 
