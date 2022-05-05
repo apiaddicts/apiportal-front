@@ -49,10 +49,10 @@ function Admin() {
 
   return (
     <div className={classes.main__admin}>
-      <div className='w-full my-9'>
-        <Title text='Mi perfil' />
-      </div>
       <div className={classes.admin}>
+        <div className='w-full my-9'>
+          <Title text='Mi perfil' />
+        </div>
         <form onSubmit={formConfig.handleSubmit}>
           <div className={classes.admin__form}>
             <div className={classes.admin__form__container}>
