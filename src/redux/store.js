@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 import demoReducer from './reducer/demoReducer';
 import faqReducer from './reducer/faqReducer';
 import blogReducer from './reducer/blogReducer';
+import libraryReducer from './reducer/libraryReducer';
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
@@ -12,6 +13,7 @@ const reducers = combineReducers({
   demo: demoReducer,
   faq: faqReducer,
   blog: blogReducer,
+  library: libraryReducer,
 });
 
 const store = createStore(

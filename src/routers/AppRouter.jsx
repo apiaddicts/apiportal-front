@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Box } from '@mui/material';
 import Navbar from '../components/Navbar/Navbar';
 
 import Home from '../Pages/Home';
@@ -13,31 +14,58 @@ import Blog from '../Pages/Blog';
 import BlogDetails from '../Pages/BlogDetails';
 import Login from '../Pages/Login';
 import Register from '../Pages/Register';
+import ApiDetails from '../Pages/ApiDetails';
+import ApiDocumentation from '../Pages/ApiDocumentation';
+import Apps from '../Pages/Apps';
+import ApiLibrary from '../Pages/ApiLibrary';
+import SidebarDrawer from '../components/SidebarDrawer/SidebarDrawer';
+import Admin from '../PrivatePages/ProfileAdmin';
+import AddApp from '../PrivatePages/AddApp';
 
 function AppRouter() {
   const [isOpen, setIsOpen] = useState(false);
   const [openForm, setOpenForm] = useState(false);
+  const [privateSession, setPrivateSession] = useState(false);
 
   return (
     <BrowserRouter>
-      <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} />
       {isOpen && (
-        <Login setIsOpen={setIsOpen} />
+        <Login setIsOpen={setIsOpen} setPrivateSession={setPrivateSession} />
       )}
       {openForm && (
         <Register setOpenForm={setOpenForm} />
       )}
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<Pagina1 />} />
-        <Route path='/users' element={<Pagina2 />} />
-        <Route path='/apis' exact element={<Apis />} />
-        <Route path='/faqs' exact element={<Faqs />} />
-        <Route path='/blog' exact element={<Blog />} />
-        <Route path='/componentes' exact element={<Components />} />
-        <Route path='/blog/:id' exact element={<BlogDetails />} />
-      </Routes>
-      <Footer />
+      {!privateSession && (
+        <>
+          <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} privateSession={privateSession} />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/about' element={<Pagina1 />} />
+            <Route path='/users' element={<Pagina2 />} />
+            <Route path='/apis' exact element={<Apis />} />
+            <Route path='/faqs' exact element={<Faqs />} />
+            <Route path='/blog' exact element={<Blog />} />
+            <Route path='/componentes' exact element={<Components />} />
+            <Route path='/blog/:id' exact element={<BlogDetails />} />
+            <Route path='/api/:id' exact element={<ApiDetails setIsOpen={setIsOpen} />} />
+          </Routes>
+          <Footer />
+        </>
+      )}
+      {privateSession && (
+        <Box sx={{ display: 'flex', backgroundColor: '#fbfbfb' }}>
+          <SidebarDrawer />
+          <Routes>
+            <Route path='/' element={<Admin />} />
+            <Route path='/apis' exact element={<Apis />} />
+            <Route path='/api/:id' exact element={<ApiDetails />} />
+            <Route path='/documentation/api' exact element={<ApiDocumentation />} />
+            <Route path='/apps' exact element={<Apps />} />
+            <Route path='/apps/nuevaApp' exact element={<AddApp />} />
+            <Route path='/ApiLibrary' exact element={<ApiLibrary />} />
+          </Routes>
+        </Box>
+      )}
     </BrowserRouter>
   );
 };

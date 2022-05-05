@@ -1,6 +1,9 @@
 import blogConstants from '../constants/blogConstants';
 
 const initialState = {
+  // Data page blogs
+  data: {},
+  error: {},
   // Blogs constants
   blogs: [],
   errorBlogs: {},
@@ -20,10 +23,12 @@ export default function blogReducer(state = initialState, action) {
       return {
         ...state,
         blogs: action.payload,
+        errorBlogs: {},
       };
     case blogConstants.GET_ALL_BLOG_FAILURE:
       return {
         ...state,
+        blogs: [],
         errorBlogs: action.payload,
       };
     // Assignment of the load value of blog
@@ -31,11 +36,26 @@ export default function blogReducer(state = initialState, action) {
       return {
         ...state,
         blog: action.payload,
+        errorBlog: {},
       };
     case blogConstants.GET_BLOG_FAILURE:
       return {
         ...state,
+        blog: {},
         errorBlog: action.payload,
+      };
+    // Assignment of the load data to page blog
+    case blogConstants.GET_BLOG_DATA_ALL_SUCCESS:
+      return {
+        ...state,
+        data: action.payload,
+        error: {},
+      };
+    case blogConstants.GET_BLOG_DATA_ALL_FAILURE:
+      return {
+        ...state,
+        data: {},
+        error: action.payload,
       };
     // Reset data of the blog
     case blogConstants.RESET_BLOG:

@@ -1,0 +1,219 @@
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+
+import BannerCentered from '../components/Banner/BannerCentered';
+import Button from '../components/Buttons/Button';
+import CardBasic from '../components/Card/CardBasic';
+import Carousel from '../components/Carousel/Carousel';
+import Item from '../components/Item/Item';
+import Tabs from '../components/Tabs/Tabs';
+import classes from '../styles/pages/home.module.scss';
+import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
+import textureCircles from '../static/img/texture_circles.svg';
+import codeSnipet from '../static/img/code-snippet.png';
+import BannerImage from '../components/Banner/BannerImage';
+
+import { getHome } from '../redux/actions/homeAction';
+import { getLibrary, resetGetLibrary } from '../redux/actions/libraryAction';
+
+function ApiDetails({ setIsOpen }) {
+
+  const dispatch = useDispatch();
+  const params = useParams();
+  const { data } = useSelector((state) => state.demo);
+  const { library } = useSelector((state) => state.library);
+
+  useEffect(() => {
+    if (data && Object.keys(data).length === 0) {
+      dispatch(getHome());
+    }
+
+    if (params.id && library && Object.keys(library).length === 0) {
+      dispatch(getLibrary(params.id));
+    }
+
+    return () => {
+      dispatch(resetGetLibrary());
+    };
+  }, []);
+
+  // Load discover section
+  const filterDiscoverTab = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'home.discover-section') : [];
+
+  // Load buttons sections
+  const filterButtonSection = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sections.button-hero') : [];
+
+  const filterDiscover = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sections.section-use-case') : [];
+
+  const buttonsLbls = library && library.buttons && library.buttons.length > 0 ? library.buttons.map((item) => {
+    const data = {
+      label: item.name,
+      class: item.class,
+    };
+
+    return data;
+  }) : [
+    {
+      label: 'Probar API',
+      class: 'primary',
+    },
+    {
+      label: 'Documentación',
+      class: 'ghost-variant',
+    },
+  ];
+
+  return (
+    <div>
+      {Object.keys(data).length > 0 && Object.keys(library).length > 0 ? (
+        <>
+          <section>
+            <BannerImage
+              title={library.title}
+              img={library.image.length > 0 && library.image.length === 1 ? library.image[0].url : ''}
+              buttons={buttonsLbls}
+              setIsOpen={setIsOpen}
+            />
+          </section>
+          <section className={`container ${classes.section__content} pb-9`}>
+            <div className={classes.section__content__texture}>
+              <img src={textureCircles} alt='Texture' />
+            </div>
+          </section>
+          <section className='container mb-18'>
+            <div className='row'>
+              <div className={`flex-md-12 ${classes.section__content__title}`}>
+                <h1 className='h2 text__primary font-weight-bold mb-10 ml-5'>
+                  {library.benefits && library.benefits.length > 0 && library.benefits.length === 1 ?
+                    library.benefits[0].title :
+                    'Benificios principales'}
+                </h1>
+              </div>
+              <div className='row'>
+                <div className={`flex-sm-12 flex-md-6 flex-lg-4 ${classes.section__content__img}`}>
+                  <img src={library.benefits && library.benefits.length > 0 && library.benefits.length === 1 && library.benefits[0].background ? library.benefits[0].background.url : codeSnipet} alt='Benefits' className='w-full' />
+                </div>
+                <div className={`flex-sm-12 flex-md-10 flex-lg-8 ${classes.section__content__items} container`}>
+                  <div className='row w-full'>
+                    {library.benefits && library.benefits.length > 0 && library.benefits.length === 1 && library.benefits[0].Steps.length > 0 ? (
+                      library.benefits[0].Steps.map((item, i) => (
+                        <div className='flex-sm-12 flex-md-10 flex-lg-4 mt-3'>
+                          <Item
+                            key={i}
+                            title={item.title}
+                            icon={item.number}
+                          />
+                        </div>
+                      ))
+
+                    ) : (null)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section className={`${classes.section__works}`}>
+            <div className='container'>
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <h1 className={`h3 text-center text__secondary__white mb-5 ${classes.section__works__title}`}>
+                    ¿Cómo funciona?
+                  </h1>
+                </div>
+              </div>
+              <Tabs direction='center' colorTab='white' activeColor='yellow'>
+                {filterDiscoverTab.map((item, i) => (
+                  <div label={item.title} key={i}>
+                    <div className='row'>
+                      {item.Products.map((data, x) => (
+                        <div key={x} className='flex-lg-4 flex-md-12 flex-sm-12 py-6'>
+                          <Item
+                            number={data.num}
+                            title={data.title}
+                            description={data.subtitle}
+                            icon={data.icon}
+                            type='title'
+                            textColor='#d4d9db'
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </Tabs>
+              <div className='button__group mt-10 justify-center'>
+                {filterButtonSection && filterButtonSection.length > 0 ? (
+                  filterButtonSection[0].header.map((button, i) => (
+                    <div key={i} className='pr-2 mb-4'>
+                      <Button styles={button.keyword}>
+                        {button.title}
+                      </Button>
+                    </div>
+                  ))
+                ) : (null)}
+              </div>
+            </div>
+          </section>
+          <section className={`container ${classes.section__discover}`}>
+            <div className='row'>
+              <div className='flex-md-12 flex-sm-12'>
+                <h1 className='h2 text__primary font-weight-bold mb-2 ml-1'>
+                  Otras APIs que te pueden interesar
+                </h1>
+              </div>
+            </div>
+            <div className='row'>
+              <div className='flex-md-12 flex-sm-12'>
+                <p className='subtitle-1 ml-1 mb-10'>
+                  Encuentra las mejores APIs para tu negocio.
+                  Nuestras APIs son fáciles de personalizar e integrar, para comenzar a vender y gestionar los productos.
+                </p>
+              </div>
+            </div>
+            <div className='row'>
+              {
+                filterDiscover && filterDiscover[0].useCaseList && filterDiscover[0].useCaseList.length > 0 ? (
+                  filterDiscover[0].useCaseList.map((card, i) => (
+                    <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
+                      <CardBasic chipTitle={card.statusText} title={card.title} description={card.description} info={card.linkText} />
+                    </div>
+                  ))
+                ) : (null)
+              }
+            </div>
+          </section>
+          <section id='Banner'>
+            <BannerCentered
+              title='Integras tus sistemas con las APIs de SURA'
+              subtitle='Quisque rutrum. Sed augue ipsum.'
+              img='https://picsum.photos/1920/300'
+              buttonType='primary'
+              buttonLabel='empezar ahora'
+            />
+          </section>
+          <section className={`container ${classes.section__news}`}>
+            <div className='my-10'>
+              <div className={classes.section__news__title}>
+                <h1 className='h2 text__primary'>Novedades</h1>
+              </div>
+              <div className='mb-15'>
+                <p className='body-1 my-9'>
+                  Conoce todas las novedades sobre tecnología, APIs y transformación digital
+                </p>
+              </div>
+            </div>
+            <div>
+              <Carousel />
+            </div>
+          </section>
+
+        </>
+      ) : (
+        <SkeletonComponent />
+      )}
+    </div>
+  );
+};
+
+export default ApiDetails;

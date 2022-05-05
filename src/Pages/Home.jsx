@@ -8,12 +8,12 @@ import CardSlider from '../components/Card/CardSlider';
 import BannerCentered from '../components/Banner/BannerCentered';
 import Tabs from '../components/Tabs/Tabs';
 import Button from '../components/Buttons/Button';
-import Carousel from '../components/Carousel/Carousel';
+// import Carousel from '../components/Carousel/Carousel';
 import Slider from '../components/Slider/Slider';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
 import textureCircles from '../static/img/texture_circles.svg';
 import { getHome } from '../redux/actions/homeAction';
-// import Slick from '../components/SlickSlider/Slick';
+import Slick from '../components/SlickSlider/Slick';
 
 function Home() {
   const dispatch = useDispatch();
@@ -70,6 +70,46 @@ function Home() {
   const filterHomeBannerSubtitle = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].subtitle ? filterHomeBanner[0].subtitle : '';
   const filterHomeBannerImage = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].background ? filterHomeBanner[0].background.url : '';
   const filterHomeBannerNameButtom = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].buttons ? filterHomeBanner[0].buttons[0].name : '';
+
+  // TODO: Reemplazar DataFake
+  const slidesNew = [
+    {
+      img: 'https://picsum.photos/id/0/370/240',
+      title: 'tenetur magnam illo',
+      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+      linkText: 'Conoce más',
+    },
+    {
+      img: 'https://picsum.photos/id/1/370/240',
+      title: 'tenetur magnam illo',
+      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+      linkText: 'Conoce más',
+    },
+    {
+      img: 'https://picsum.photos/id/1031/370/240',
+      title: 'tenetur magnam illo',
+      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+      linkText: 'Conoce más',
+    },
+    {
+      img: 'https://picsum.photos/id/1066/370/240',
+      title: 'tenetur magnam illo',
+      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+      linkText: 'Conoce más',
+    },
+    {
+      img: 'https://picsum.photos/id/1078/370/240',
+      title: 'tenetur magnam illo',
+      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+      linkText: 'Conoce más',
+    },
+    {
+      img: 'https://picsum.photos/id/1079/370/240',
+      title: 'tenetur magnam illo',
+      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+      linkText: 'Conoce más',
+    },
+  ];
 
   return (
     <div>
@@ -168,7 +208,7 @@ function Home() {
                 </p>
               </div>
             </div>
-            <div className='row'>
+            <div className='row d-xs-none'>
               {
                 filterDiscover && filterDiscover[0].useCaseList && filterDiscover[0].useCaseList.length > 0 ? (
                   filterDiscover[0].useCaseList.map((card, i) => (
@@ -179,12 +219,22 @@ function Home() {
                 ) : (null)
               }
             </div>
+            <div className='container d-xs-only'>
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <Slick slides={filterDiscover[0].useCaseList} />
+                </div>
+              </div>
+            </div>
             <div className='row'>
-              <div className='flex-md-12'>
+              <div className='flex-md-12 flex-sm-12'>
                 <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
-                  <a href='' className={`button text__primary ${classes.section__discover__showmore__button}`}>
+                  <a href='' className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
                     <span className='mr-1'>ver todas</span>
                     <Icon id='MdOutlineEast' />
+                  </a>
+                  <a href='' className={`d-sm-none ${classes.section__discover__showmore__button}`}>
+                    Ver todas
                   </a>
                 </div>
               </div>
@@ -254,17 +304,20 @@ function Home() {
                 <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
                   <p className='body-1'>{filterWorks[2].subtitle ? filterWorks[2].subtitle : ''}</p>
                 </div>
-
-                <div className='d-xs-none container'>
-                  <Carousel />
+              </div>
+            </div>
+            <div className='container'>
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <Slick slides={slidesNew} />
                 </div>
-                <div className='container d-xs-only'>
-                  <CardSlider lists={slides} flag={false} />
+              </div>
+            </div>
+            <div className={`container ${classes.section__news__showmore}`}>
+              <div className='row justify-center'>
+                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center'>
+                  <a href=''>Ver más</a>
                 </div>
-                {/* <div className='container'>
-                  <Slick />
-                </div> */}
-
               </div>
             </div>
           </section>
