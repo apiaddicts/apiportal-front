@@ -1,28 +1,32 @@
 import { styled } from '@mui/material/styles';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
+import { FormControl } from '@mui/material';
+
+export const FormControlMain = styled(FormControl)({
+  '& .MuiFormControlLabel-root': {
+    padding: '0 0.5rem',
+    marginLeft: '0px',
+    '& .MuiFormControlLabel-label': {
+      fontSize: '1rem',
+    },
+  },
+});
 
 export const CustomFormControl = styled(FormControlLabel)(({ active }) => ({
-  margin: '0.5rem',
+  width: '100%',
+  display: 'block',
   borderRadius: '0.5rem',
   transition: 'all 0.3s ease-in-out',
-  padding: '0 0.4rem',
   textAlign: 'center',
-  width: '100%',
   cursor: 'pointer',
   backgroundColor: active ? '#0033A0' : '#fff',
+  color: active ? '#fff' : '#0033A0',
 }));
 
 export const CustomCheck = styled(Checkbox)({
   margin: '0px',
   padding: '0px',
   display: 'none',
-  '&:hover': {
-    backgroundColor: '#fff',
-    color: '#000',
-  },
-  '&:focus': {
-    backgroundColor: '#fff',
-    color: '#000',
-  },
 });
+
