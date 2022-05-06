@@ -22,7 +22,7 @@
 
 .prevArrow {
   position: absolute;
-  top: 100%;
+  bottom: -15%;
   left: 39%;
   z-index: 100;
   cursor: pointer;
@@ -35,13 +35,17 @@
     left: 1%;
   }
   @include breakpoint(lg) {
-    left: 39%;
-  }
+    left: 29%;
+    }
+    
+    @include breakpoint(xl) {
+      left: 38%;
+    }
 }
 
 .nextArrow {
   position: absolute;
-  top: 100%;
+  bottom: -15%;
   right: 39%;
   z-index: 100;
   cursor: pointer;
@@ -54,12 +58,17 @@
     right: 0%;
   }  
   @include breakpoint(lg) {
-    right: 39%;
+    right: 29%;
+    }
+    
+    @include breakpoint(xl) {
+      right: 38%;
   }
 }
 
 .slick-dots {
   position: absolute;
+  bottom: -80px !important;
 }
 
 .slick-dots li button:before {

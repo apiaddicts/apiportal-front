@@ -85,8 +85,8 @@ function AddApp(props) {
           </Box>
         </HorizontalStepper>
         <Box sx={{ mt: 10, mb: 10, width: '100%' }}>
-          <div className='row flex-end pr-10'>
-            <div className='flex-lg-3 flex-sm-12'>
+          <div className='row flex-end w-full m-0 p-0'>
+            <div className='flex-sm-10 flex-md-8 flex-lg-8 flex-xl-3 m-0 p-0'>
               {activeStep !== steps.length &&
                 (completed[activeStep] ? (
                   <Typography variant='caption' sx={{ display: 'inline-block' }}>

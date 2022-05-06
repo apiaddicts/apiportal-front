@@ -74,6 +74,7 @@ function ApiDetails({ setIsOpen }) {
               img={library.image.length > 0 && library.image.length === 1 ? library.image[0].url : ''}
               buttons={buttonsLbls}
               setIsOpen={setIsOpen}
+              description='In egestas blandit felis id porttitor. Mauris vel nibh ex. Integer iaculis placerat nunc, in ultricies nunc dignissim eu. '
             />
           </section>
           <section className={`container ${classes.section__content} pb-9`}>
@@ -83,22 +84,22 @@ function ApiDetails({ setIsOpen }) {
           </section>
           <section className='container mb-18'>
             <div className='row'>
-              <div className={`flex-md-12 ${classes.section__content__title}`}>
-                <h1 className='h2 text__primary font-weight-bold mb-10 ml-5'>
+              <div className={`flex-md-12 flex-sm-12 -ml-23 ${classes.section__content__title}`}>
+                <h1 className='h2 text__primary font-weight-bold mb-10 -ml-23 text-center-sm'>
                   {library.benefits && library.benefits.length > 0 && library.benefits.length === 1 ?
                     library.benefits[0].title :
                     'Benificios principales'}
                 </h1>
               </div>
-              <div className='row'>
+              <div className='row container'>
                 <div className={`flex-sm-12 flex-md-6 flex-lg-4 ${classes.section__content__img}`}>
                   <img src={library.benefits && library.benefits.length > 0 && library.benefits.length === 1 && library.benefits[0].background ? library.benefits[0].background.url : codeSnipet} alt='Benefits' className='w-full' />
                 </div>
                 <div className={`flex-sm-12 flex-md-10 flex-lg-8 ${classes.section__content__items} container`}>
-                  <div className='row w-full'>
+                  <div className='grid grid-lg-col-2'>
                     {library.benefits && library.benefits.length > 0 && library.benefits.length === 1 && library.benefits[0].Steps.length > 0 ? (
                       library.benefits[0].Steps.map((item, i) => (
-                        <div className='flex-sm-12 flex-md-10 flex-lg-4 mt-3'>
+                        <div className='mb-7'>
                           <Item
                             key={i}
                             title={item.title}

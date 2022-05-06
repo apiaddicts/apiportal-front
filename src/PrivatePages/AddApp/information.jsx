@@ -23,7 +23,7 @@ function Information({ fakeData, styles }) {
           NOMBRE DE LA APP
         </TypographyUI>
       </Box>
-      <InptSelectUI label='Nombre de la app'>
+      <InptSelectUI labe='Nombre de la app'>
         {fakeData['name-app'].map((option, index) => (
           <MenuItem key={option} value={option}>
             {option}

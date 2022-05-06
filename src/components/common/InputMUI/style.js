@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
 
-const Input = styled(TextField)({
+const Input = styled(TextField)(({ value }) => ({
   margin: '0.8rem 0',
   '& label.Mui-focused': {
     color: '#0033A0',
@@ -10,7 +10,7 @@ const Input = styled(TextField)({
     top: '-15px',
   },
   '& label': {
-    top: '-5px',
+    top: value ? '-15px' : '-8px',
   },
   '& .MuiOutlinedInput-root': {
     '& fieldset': {
@@ -49,16 +49,18 @@ const Input = styled(TextField)({
       },
     },
   },
-
-});
+}));
 
 export default Input;
 
-export const InputSelect = styled(Input)({
+export const InputSelect = styled(Input)(({ value }) => ({
   '& label': {
-    top: '-10px',
+    top: value ? '-15px' : '-8px',
   },
-});
+  ' & label.Mui-selected': {
+    top: '-5px',
+  },
+}));
 
 export const ContainerInput = styled(Box)({
   marginTop: '1.8rem',
