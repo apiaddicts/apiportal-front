@@ -69,6 +69,9 @@ export const filterCheck = (label, checked, name) => (dispatch) => {
           return (item['tags'].map((tag) => tag.label.toLowerCase())).includes(filteredTag);
         }) : true);
       }
+      if (key === 'version') {
+        conditions.push((newFilters['version'].length) ? newFilters['version'].includes(item['version'].toLowerCase()) : true);
+      }
     });
     return conditions.every((v) => v === true);
   });

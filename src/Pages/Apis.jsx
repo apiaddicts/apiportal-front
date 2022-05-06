@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@mui/material';
@@ -11,28 +11,43 @@ import classes from '../styles/pages/api.module.scss';
 import CheckboxWrapper from '../components/common/Check';
 import CustomizedAccordions from '../components/common/AccordionMUI';
 import CardInformation from '../components/Card/CardInformation';
-import ButtonCutom from '../components/common/ButtonMUI';
+// import ButtonCutom from '../components/common/ButtonMUI';
 import ButtonGroupMUI from '../components/common/ButtonGroup';
 
 import { getLibraries, filterCheck } from '../redux/actions/libraryAction';
+import CheckboxLabels from '../components/common/CustomCheck';
 
 function Apis() {
+  const [activeTab, setActiveTab] = useState('');
+
   const { libraries, filters, backUpLibreries, loadingLibraries } = useSelector((state) => state.library);
+
   const dispatch = useDispatch();
 
-  const onClickItem = (label) => {
-    console.log(label);
-    //   setActiveTab(label);
-  //   // resultsData.filter((item) => {
-  //   //   if (item.version.toLowerCase() !== 'v 1.0') {
-  //   //     return setResultsData(libraries);
-  //   //   }
-  //   //   return setResultsData([item]);
-  //   // });
-  };
+  // const onClickItem = (e) => {
+  //   console.log(e.target.value);
+  //   console.log(e.target.label);
+  //   console.log(e.target.name);
+  //   //   setActiveTab(label);
+  // //   // resultsData.filter((item) => {
+  // //   //   if (item.version.toLowerCase() !== 'v 1.0') {
+  // //   //     return setResultsData(libraries);
+  // //   //   }
+  // //   //   return setResultsData([item]);
+  // //   // });
+  // };
 
   const handleChangeStatus = (name, label, checked) => {
     dispatch(filterCheck(label, checked, 'status'));
+  };
+  const handleChangeVersions = (name, label, checked) => {
+    console.log(name, checked);
+    if (name === label && checked) {
+      setActiveTab(label);
+    } else {
+      setActiveTab('');
+    }
+    dispatch(filterCheck(label, checked, 'version'));
   };
 
   const handleChangeSolutions = (name, label, checked) => {
@@ -80,7 +95,7 @@ function Apis() {
     }
   }, [libraries]);
 
-  console.log('Librerias array', libraries);
+  // console.log('Librerias array', libraries);
   return (
     <div>
       <BannerImage />
@@ -108,7 +123,7 @@ function Apis() {
             </Typography>
             <ButtonGroupMUI>
               {versions.map((item, index) => (
-                <ButtonCutom key={index} label={item} onClickItem={onClickItem} />
+                <CheckboxLabels activeTab={activeTab} key={index} label={item} name={item} handleChangeSelect={handleChangeVersions} />
               ))}
             </ButtonGroupMUI>
           </div>

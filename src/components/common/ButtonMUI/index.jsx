@@ -6,6 +6,13 @@ export default function ButtonCutom({ label, onClickItem, activeTab }) {
     onClickItem(label);
   };
   return (
-    <ColorButton onClick={onClickTab} disableElevation variant={label === activeTab && 'contained'}>{label}</ColorButton>
+    <ColorButton
+      onClick={onClickTab}
+      disableElevation
+      variant={label === activeTab && 'contained'}
+    >
+      {label}
+
+    </ColorButton>
   );
 }
