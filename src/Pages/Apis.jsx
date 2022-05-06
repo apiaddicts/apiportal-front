@@ -14,7 +14,7 @@ import CardInformation from '../components/Card/CardInformation';
 // import ButtonCutom from '../components/common/ButtonMUI';
 import ButtonGroupMUI from '../components/common/ButtonGroup';
 
-import { getLibraries, filterCheck } from '../redux/actions/libraryAction';
+import { getLibraries, filterCheck, sortApiCollection } from '../redux/actions/libraryAction';
 import CheckboxLabels from '../components/common/CustomCheck';
 
 function Apis() {
@@ -55,6 +55,13 @@ function Apis() {
   };
   const handleChangFilterTags = (name, label, checked) => {
     dispatch(filterCheck(label, checked, 'tag'));
+  };
+  const handleChangeSearchFilter = (text) => {
+    dispatch(filterCheck(text, null, 'search'));
+  };
+
+  const handleSort = (sort) => {
+    dispatch(sortApiCollection(sort));
   };
   // Filters titles array
   const titleRepeated = backUpLibreries.map((element) => {
@@ -127,7 +134,7 @@ function Apis() {
               ))}
             </ButtonGroupMUI>
           </div>
-          <CustomizedAccordions title='Solutions'>
+          <CustomizedAccordions title='Solution'>
             { items.map((item, index) => (
               <div key={index} className={classes.container__checkbox}>
                 <CheckboxWrapper
@@ -138,7 +145,7 @@ function Apis() {
               </div>
             ))}
           </CustomizedAccordions>
-          <CustomizedAccordions title='Tags'>
+          <CustomizedAccordions title='Tag'>
             { tags.map((item, index) => (
               <div className={classes.container__checkbox} key={index}>
                 <CheckboxWrapper
@@ -158,14 +165,19 @@ function Apis() {
                   icon
                   name='search'
                   type='text'
-                  // onChange={formik.handleChange}
+                  onChange={(e) => {
+                    handleChangeSearchFilter(e.target.value);
+                  }}
                   placeholder='Buscar APIs...'
                   borderRadius='20px'
                 />
               </div>
               <div className='flex-sm-12 flex-md-4 mt-8'>
-                {/* <InputSelect handleClick={setFilterLetter} /> */}
-                <InputSelect />
+                <InputSelect handleSelect={(e) => {
+                  console.log(e);
+                  handleSort(e);
+                }}
+                />
               </div>
             </div>
           </div>

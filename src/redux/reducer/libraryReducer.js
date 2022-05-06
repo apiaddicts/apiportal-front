@@ -11,6 +11,7 @@ const initialState = {
   library: {},
   errorLibrary: {},
   loadingLibrary: false,
+  sort: 'asc',
 };
 
 // eslint-disable-next-line default-param-last
@@ -58,6 +59,7 @@ export default function libraryReducer(state = initialState, action) {
         libraries: action.data,
         filters: action.newFilters,
         loadingLibraries: false,
+        sort: action.sort,
       };
     // Reset data of the library
     case libraryConstants.RESET_LIBRARY:

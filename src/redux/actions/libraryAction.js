@@ -41,15 +41,53 @@ export const getLibrary = (id) => (dispatch) => {
   );
 };
 
+const sortCollection = (data, sort) => {
+  return (sort === 'asc') ? data.sort((a, b) => {
+    const fa = a.title.toLowerCase(),
+      fb = b.title.toLowerCase();
+
+    if (fa < fb) {
+      return -1;
+    }
+    if (fa > fb) {
+      return 1;
+    }
+    return 0;
+  }) : data.sort((a, b) => {
+    const fa = a.title.toLowerCase(),
+      fb = b.title.toLowerCase();
+
+    if (fa > fb) {
+      return -1;
+    }
+    if (fa < fb) {
+      return 1;
+    }
+    return 0;
+  });
+};
+
+export const sortApiCollection = (sort) => (dispatch) => {
+  const { libraries } = store.getState().library;
+  const data = sortCollection(libraries, sort);
+  dispatch({
+    type: libraryConstants.FILTER_ALL_LIBRARY,
+    data,
+    sort,
+  });
+};
+
 export const filterCheck = (label, checked, name) => (dispatch) => {
   dispatch({
     type: libraryConstants.GET_ALL_LIBRARY_REQUEST,
   });
 
-  const { filters, backUpLibreries } = store.getState().library;
+  const { filters, backUpLibreries, sort } = store.getState().library;
   const newFilters = { ...filters };
 
-  if (checked) {
+  if (checked == null) {
+    newFilters[name] = label.toLowerCase().trim();
+  } else if (checked) {
     newFilters[name] = (name in newFilters) ? [...newFilters[name], label.toLowerCase()] : [label.toLowerCase()];
   } else {
     if (name in newFilters) newFilters[name] = newFilters[name].filter((item) => item !== label.toLowerCase());
@@ -72,99 +110,19 @@ export const filterCheck = (label, checked, name) => (dispatch) => {
       if (key === 'version') {
         conditions.push((newFilters['version'].length) ? newFilters['version'].includes(item['version'].toLowerCase()) : true);
       }
+      if (key === 'search') {
+        conditions.push((newFilters['search'].length) ? item['title'].toLowerCase().includes(newFilters['search']) : true);
+      }
     });
     return conditions.every((v) => v === true);
   });
 
   dispatch({
     type: libraryConstants.FILTER_ALL_LIBRARY,
-    data,
+    data: sortCollection(data, sort),
     newFilters,
+    sort,
   });
-
-  /*if (filters.length === 0) {
-    const newFilters = [...filters, label];
-    if (name === 0 && backUpLibreries.length > 0) {
-      const data = backUpLibreries.filter((item) => {
-        return item.status.toLowerCase() === label.toLowerCase();
-      });
-
-      dispatch({
-        type: libraryConstants.FILTER_ALL_LIBRARY,
-        data,
-        newFilters,
-      });
-    }
-
-    if (name === 1 && backUpLibreries.length > 0) {
-      const data = backUpLibreries.filter((item) => {
-        return item.title.toLowerCase() === label.toLowerCase();
-      });
-
-      dispatch({
-        type: libraryConstants.FILTER_ALL_LIBRARY,
-        data,
-        newFilters,
-      });
-    }
-
-    if (name === 2 && backUpLibreries.length > 0) {
-      const data = [];
-      backUpLibreries.forEach((item) => {
-        item.tags.forEach((tag) => {
-          if (tag.label.toLowerCase() === label.toLowerCase()) {
-            data.push(item);
-          }
-        });
-      });
-
-      dispatch({
-        type: libraryConstants.FILTER_ALL_LIBRARY,
-        data,
-        newFilters,
-      });
-    }
-  } else {
-    if (checked) {
-      const newFilters = [...filters, label];
-      if (name === 0 && libraries.length > 0) {
-        const data = libraries.filter((item) => {
-          return item.status.toLowerCase() === label.toLowerCase();
-        });
-        dispatch({
-          type: libraryConstants.FILTER_ALL_LIBRARY,
-          data,
-          newFilters,
-        });
-      }
-
-      if (name === 1 && libraries.length > 0) {
-        const data = libraries.filter((item) => {
-          return item.title.toLowerCase() === label.toLowerCase();
-        });
-        dispatch({
-          type: libraryConstants.FILTER_ALL_LIBRARY,
-          data,
-          newFilters,
-        });
-      }
-
-    } else {
-      const newFilters = filters.filter((item) => {
-        return item.toLowerCase() !== label.toLowerCase();
-      });
-      if (newFilters > 0) {
-        console.log('Cargas nuevas');
-      } else {
-        const data = [...backUpLibreries];
-        dispatch({
-          type: libraryConstants.FILTER_ALL_LIBRARY,
-          data,
-          newFilters,
-        });
-      }
-    }
-  }*/
 
 };
 

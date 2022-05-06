@@ -3,9 +3,13 @@ import React, { useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import classes from './input.module.scss';
 
-function InputSelect({ label, children, handleClick }) {
+function InputSelect({ label, children, handleSelect }) {
   const [showFilteer, setShowFilteer] = useState(false);
   const [filter, setFilter] = useState('Nombre (A-Z)');
+
+  const handleChange = (sort) => {
+    handleSelect(sort);
+  };
 
   return (
     <div className={classes['form-wrapper-group']}>
@@ -29,7 +33,7 @@ function InputSelect({ label, children, handleClick }) {
                 () => {
                   setFilter('Nombre (A-Z)');
                   setShowFilteer(false);
-                  handleClick(true);
+                  handleChange('asc');
                 }
               }
               className={classes['filter-option']}
@@ -41,7 +45,7 @@ function InputSelect({ label, children, handleClick }) {
                 () => {
                   setFilter('Nombre (Z-A)');
                   setShowFilteer(false);
-                  handleClick(false);
+                  handleChange('desc');
                 }
               }
               className={classes['filter-option']}
