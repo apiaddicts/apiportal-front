@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { Box } from '@mui/material';
@@ -55,6 +55,7 @@ function AppRouter() {
             <Route path='/componentes' exact element={<Components />} />
             <Route path='/blog/:id' exact element={<BlogDetails />} />
             <Route path='/api/:id' exact element={<ApiDetails setIsOpen={setIsOpen} />} />
+            <Route path='*' element={<Navigate to='/' replace />} />
           </Routes>
           <Footer />
         </>
@@ -71,6 +72,7 @@ function AppRouter() {
             <Route path='/apps/:id' exact element={<AppsDetail />} />
             <Route path='/newApp' exact element={<AddApp />} />
             <Route path='/ApiLibrary' exact element={<ApiLibrary />} />
+            <Route path='*' element={<Navigate to='/' replace />} />
           </Routes>
         </Box>
       )}
