@@ -1018,11 +1018,12 @@ a {
 }
 
 .text-center-sm {
+  text-align: center;
   @include breakpoint(sm) {
-    text-align: center;
+    text-align: center !important;
   }
 
   @include breakpoint(lg) {
-    text-align: left;
+    text-align: left !important;
   }
 }

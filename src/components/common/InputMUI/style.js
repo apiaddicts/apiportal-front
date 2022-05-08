@@ -55,10 +55,14 @@ export default Input;
 
 export const InputSelect = styled(Input)(({ value }) => ({
   '& label': {
-    top: value ? '-15px' : '-8px',
+    top: '-8px',
+  },
+  '& label.Mui-focused': {
+    color: '#000',
+    top: '20px',
   },
   ' & label.Mui-selected': {
-    top: '-5px',
+    top: '0',
   },
 }));
 

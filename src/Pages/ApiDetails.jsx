@@ -5,7 +5,6 @@ import { useParams } from 'react-router-dom';
 import BannerCentered from '../components/Banner/BannerCentered';
 import Button from '../components/Buttons/Button';
 import CardBasic from '../components/Card/CardBasic';
-import Carousel from '../components/Carousel/Carousel';
 import Item from '../components/Item/Item';
 import Tabs from '../components/Tabs/Tabs';
 import classes from '../styles/pages/home.module.scss';
@@ -13,9 +12,49 @@ import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent
 import textureCircles from '../static/img/texture_circles.svg';
 import codeSnipet from '../static/img/code-snippet.png';
 import BannerImage from '../components/Banner/BannerImage';
+import Slick from '../components/SlickSlider/Slick';
 
 import { getHome } from '../redux/actions/homeAction';
 import { getLibrary, resetGetLibrary } from '../redux/actions/libraryAction';
+
+const slidesNew = [
+  {
+    img: 'https://picsum.photos/id/0/370/240',
+    title: 'tenetur magnam illo',
+    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    linkText: 'Conoce más',
+  },
+  {
+    img: 'https://picsum.photos/id/1/370/240',
+    title: 'tenetur magnam illo',
+    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    linkText: 'Conoce más',
+  },
+  {
+    img: 'https://picsum.photos/id/1031/370/240',
+    title: 'tenetur magnam illo',
+    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    linkText: 'Conoce más',
+  },
+  {
+    img: 'https://picsum.photos/id/1066/370/240',
+    title: 'tenetur magnam illo',
+    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    linkText: 'Conoce más',
+  },
+  {
+    img: 'https://picsum.photos/id/1078/370/240',
+    title: 'tenetur magnam illo',
+    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    linkText: 'Conoce más',
+  },
+  {
+    img: 'https://picsum.photos/id/1079/370/240',
+    title: 'tenetur magnam illo',
+    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    linkText: 'Conoce más',
+  },
+];
 
 function ApiDetails({ setIsOpen }) {
 
@@ -91,7 +130,7 @@ function ApiDetails({ setIsOpen }) {
                     'Benificios principales'}
                 </h1>
               </div>
-              <div className='row container'>
+              <div className='row px-5'>
                 <div className={`flex-sm-12 flex-md-6 flex-lg-4 ${classes.section__content__img}`}>
                   <img src={library.benefits && library.benefits.length > 0 && library.benefits.length === 1 && library.benefits[0].background ? library.benefits[0].background.url : codeSnipet} alt='Benefits' className='w-full' />
                 </div>
@@ -193,19 +232,33 @@ function ApiDetails({ setIsOpen }) {
               buttonLabel='empezar ahora'
             />
           </section>
-          <section className={`container ${classes.section__news}`}>
-            <div className='my-10'>
-              <div className={classes.section__news__title}>
-                <h1 className='h2 text__primary'>Novedades</h1>
-              </div>
-              <div className='mb-15'>
-                <p className='body-1 my-9'>
-                  Conoce todas las novedades sobre tecnología, APIs y transformación digital
-                </p>
+          <section className={classes.section__news}>
+            <div className='container'>
+              <div className='row'>
+                <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
+                  <h1 className='h2 text__primary'>Novedades</h1>
+                </div>
+
+                <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
+                  <p className='body-1'>
+                    Conoce todas las novedades sobre tecnología, APIs y transformación digital
+                  </p>
+                </div>
               </div>
             </div>
-            <div>
-              <Carousel />
+            <div className='container'>
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <Slick slides={slidesNew} />
+                </div>
+              </div>
+            </div>
+            <div className={`container ${classes.section__news__showmore}`}>
+              <div className='row justify-center'>
+                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
+                  <a href=''>Ver más</a>
+                </div>
+              </div>
             </div>
           </section>
 
