@@ -543,7 +543,7 @@ a {
   margin-bottom: 8rem;
 }
 .-ml-23 {
-  margin-left: -23px;
+  margin-left: -15px;
 }
 
 /* ------------------------------ 
@@ -1020,7 +1020,7 @@ a {
 .text-center-sm {
   text-align: center;
   @include breakpoint(sm) {
-    text-align: center !important;
+  text-align: center !important;
   }
 
   @include breakpoint(lg) {
