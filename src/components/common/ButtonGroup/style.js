@@ -3,10 +3,10 @@ import ButtonGroup from '@mui/material/ButtonGroup';
 
 const ButtonGroupCustom = styled(ButtonGroup)({
   display: 'flex',
+  overflow: 'hidden',
   alignItems: 'center',
   justifyContent: 'center',
-  borderRadius: '12px',
-  padding: '2px',
+  borderRadius: '15px',
   border: '1px solid #e0e0e0',
 });
 

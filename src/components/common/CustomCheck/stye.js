@@ -5,7 +5,7 @@ import { FormControl } from '@mui/material';
 
 export const FormControlMain = styled(FormControl)({
   '& .MuiFormControlLabel-root': {
-    padding: '0 0.5rem',
+    padding: '0 0.8rem',
     marginLeft: '0px',
     '& .MuiFormControlLabel-label': {
       fontSize: '1rem',
@@ -16,10 +16,10 @@ export const FormControlMain = styled(FormControl)({
 export const CustomFormControl = styled(FormControlLabel)(({ active }) => ({
   width: '100%',
   display: 'block',
-  borderRadius: '0.5rem',
   transition: 'all 0.3s ease-in-out',
   textAlign: 'center',
   cursor: 'pointer',
+  padding: '0 0.8rem',
   backgroundColor: active ? '#0033A0' : '#fff',
   color: active ? '#fff' : '#0033A0',
 }));

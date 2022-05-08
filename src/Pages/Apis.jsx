@@ -124,7 +124,7 @@ function Apis() {
               ))
             }
           </CustomizedAccordions>
-          <div className='container py-3'>
+          <div className='w-full p-3'>
             <Typography>
               Version
             </Typography>
