@@ -1,13 +1,17 @@
 import React from 'react';
 import classes from './title.module.scss';
 
-function Title({ text }) {
+function Title({ text, divider = true }) {
   return (
     <div>
       <h1 className={classes.title}>
         {text}
       </h1>
-      <div className={classes.divider} />
+      {
+        divider ? (
+          <div className={classes.divider} />
+        ) : (null)
+      }
     </div>
   );
 }
