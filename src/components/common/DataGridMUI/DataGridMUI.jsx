@@ -64,7 +64,7 @@ function CustomPagination({ rowCount, rowsPerPage, currentPage, onChangePage }) 
 }
 function DataGridMUI({ headers, data, ...rest }) {
   return (
-    <Card sx={{ borderRadius: '20px', marginTop: '1rem' }}>
+    <Card sx={{ borderRadius: '20px', marginTop: '1rem', boxShadow: 'none' }}>
       <DataTable
         columns={headers}
         data={data}

@@ -22,7 +22,7 @@ a {
     PADDINGS 
 ------------------------------ */
 .p-0 {
-  padding: 0px;
+  padding: 0px !important;
 }
 .p-1 {
   padding: 0.25rem;
@@ -542,6 +542,9 @@ a {
 .mb-18 {
   margin-bottom: 8rem;
 }
+.-ml-23 {
+  margin-left: -15px;
+}
 
 /* ------------------------------ 
     HEADINGS 
@@ -1002,4 +1005,25 @@ a {
 }
 .flex-end {
   justify-content: flex-end;
+}
+.grid {
+  display: grid;
+  justify-items: stretch;
+}
+
+.grid-lg-col-2 {
+  @include breakpoint(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.text-center-sm {
+  text-align: center;
+  @include breakpoint(sm) {
+  text-align: center !important;
+  }
+
+  @include breakpoint(lg) {
+    text-align: left !important;
+  }
 }

@@ -149,11 +149,28 @@
   
   p {
     color: #696974;
+    font-size: 16px;
+    
+      @include breakpoint(lg) {
+        font-size: 12px;
+      }
+    
+      @include breakpoint(xl) {
+        font-size: 16px;
+      }
   }
   
   span {
     font-weight: bold;
-    font-size: 13px;
+    font-size: 15px;
+    
+      @include breakpoint(lg) {
+        font-size: 12px;
+      }
+    
+      @include breakpoint(xl) {
+        font-size: 15px;
+      }
   }
   &:hover {
     border: 0.5px solid rgba(0, 0, 0, 0.617);

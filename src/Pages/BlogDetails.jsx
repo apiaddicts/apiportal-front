@@ -4,12 +4,51 @@ import { useParams } from 'react-router-dom';
 
 import BannerStatic from '../components/Banner/BannerStatic';
 import BlogDetailsInfo from '../components/BlogDetails';
-import Carousel from '../components/Carousel/Carousel';
+import Slick from '../components/SlickSlider/Slick';
 import Contact from '../components/Contact';
 import FooterAuthor from '../components/FooterAuthor';
 import { getBlog, resetGetBlog } from '../redux/actions/blogAction';
 import styles from '../styles/pages/blogDetails.module.scss';
 import classes from '../styles/pages/home.module.scss';
+
+const slidesNew = [
+  {
+    img: 'https://picsum.photos/id/0/370/240',
+    title: 'tenetur magnam illo',
+    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    linkText: 'Conoce más',
+  },
+  {
+    img: 'https://picsum.photos/id/1/370/240',
+    title: 'tenetur magnam illo',
+    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    linkText: 'Conoce más',
+  },
+  {
+    img: 'https://picsum.photos/id/1031/370/240',
+    title: 'tenetur magnam illo',
+    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    linkText: 'Conoce más',
+  },
+  {
+    img: 'https://picsum.photos/id/1066/370/240',
+    title: 'tenetur magnam illo',
+    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    linkText: 'Conoce más',
+  },
+  {
+    img: 'https://picsum.photos/id/1078/370/240',
+    title: 'tenetur magnam illo',
+    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    linkText: 'Conoce más',
+  },
+  {
+    img: 'https://picsum.photos/id/1079/370/240',
+    title: 'tenetur magnam illo',
+    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    linkText: 'Conoce más',
+  },
+];
 
 function BlogDetails() {
   const dispatch = useDispatch();
@@ -37,14 +76,32 @@ function BlogDetails() {
             <BlogDetailsInfo styles={styles} data={blog} />
             <FooterAuthor data={blog} />
             <section className={classes.section__news}>
-              <div className='container my-10'>
-                <div className={classes.section__news__title}>
-                  <h1 className='h2 text__primary'>También te puede interesar</h1>
+              <div className='container'>
+                <div className='row'>
+                  <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
+                    <h1 className='h2 text__primary'>Novedades</h1>
+                  </div>
+
+                  <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
+                    <p className='body-1'>
+                      Conoce todas las novedades sobre tecnología, APIs y transformación digital
+                    </p>
+                  </div>
                 </div>
-                <div className='mb-15'>
-                  <p className='body-1 my-9'>Conoce todas las novedades sobre tecnología, APIs y transformación digital</p>
+              </div>
+              <div className='container'>
+                <div className='row'>
+                  <div className='flex-md-12 flex-sm-12'>
+                    <Slick slides={slidesNew} />
+                  </div>
                 </div>
-                <Carousel />
+              </div>
+              <div className={`container ${classes.section__news__showmore}`}>
+                <div className='row justify-center'>
+                  <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
+                    <a href=''>Ver más</a>
+                  </div>
+                </div>
               </div>
             </section>
           </section>

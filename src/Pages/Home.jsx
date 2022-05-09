@@ -315,7 +315,7 @@ function Home() {
             </div>
             <div className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
-                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center'>
+                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
                   <a href=''>Ver más</a>
                 </div>
               </div>
