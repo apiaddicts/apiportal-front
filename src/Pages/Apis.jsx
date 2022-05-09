@@ -124,7 +124,7 @@ function Apis() {
               ))
             }
           </CustomizedAccordions>
-          <div className='w-full p-3'>
+          <div className='w-full p-4'>
             <Typography>
               Version
             </Typography>
