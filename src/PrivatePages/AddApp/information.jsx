@@ -1,5 +1,5 @@
 import { Box, MenuItem } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import Select from 'react-select';
 import CustomTooltip from '../../components/common/ToolTip';
 import InptSelectUI from '../../components/common/InputMUI/InptSelectUI';
@@ -7,11 +7,23 @@ import TextAreaUI from '../../components/common/TextAreaUI';
 import { TypographyUI } from '../../components/common/TypographyMUI/style';
 
 function Information({ fakeData, styles }) {
+  const [value, setVale] = useState({
+    cargo: '',
+    name: '',
+  });
   const options = [
     { value: 'chocolate', label: 'Chocolate' },
     { value: 'strawberry', label: 'Strawberry' },
     { value: 'vanilla', label: 'Vanilla' },
   ];
+
+  const handleChange = (event) => {
+    setVale({
+      ...value,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   console.log(fakeData['name-app']);
   return (
     <Box sx={{ height: '100%' }}>
@@ -23,7 +35,12 @@ function Information({ fakeData, styles }) {
           NOMBRE DE LA APP
         </TypographyUI>
       </Box>
-      <InptSelectUI labe='Nombre de la app'>
+      <InptSelectUI
+        name='name'
+        label='Nombre de la app'
+        value={value.name}
+        onChange={handleChange}
+      >
         {fakeData['name-app'].map((option, index) => (
           <MenuItem key={option} value={option}>
             {option}
@@ -40,7 +57,12 @@ function Information({ fakeData, styles }) {
               ORGANIZACIÓN
             </TypographyUI>
           </Box>
-          <InptSelectUI label='Nombre de la app'>
+          <InptSelectUI
+            name='cargo'
+            label='Nombre de la app'
+            value={value.cargo}
+            onChange={handleChange}
+          >
             {fakeData['organization'].map((option, index) => (
               <MenuItem key={option} value={option}>
                 {option}
