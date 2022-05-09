@@ -3,8 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
-    padding-right: 30px;
+    width: 80%;
 }
 .admin {
     margin: auto;
@@ -12,6 +11,8 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    width: 80%;
+    margin: auto;
 
     &__form {
         padding: 2.5rem 0;

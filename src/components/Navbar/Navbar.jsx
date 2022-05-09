@@ -47,14 +47,15 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
     <>
       <header className={classes.header}>
         <div className={classes.header__content}>
-          <a href='/' className={classes.header__content__logo}>
-            <img
-              src={SuraLogo}
-              alt=''
-              className={classes.header__content__logo__img}
-            />
-          </a>
-
+          <Link to='/'>
+            <a className={classes.header__content__logo}>
+              <img
+                src={SuraLogo}
+                alt=''
+                className={classes.header__content__logo__img}
+              />
+            </a>
+          </Link>
           <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
 
             <ul className='d-xs-none'>

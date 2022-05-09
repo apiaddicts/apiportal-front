@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import HorizontalStepper from '../../components/common/Stepper';
 import Title from '../../components/Title/Title';
@@ -38,9 +38,9 @@ function AddApp(props) {
     setActiveStep(newActiveStep);
   };
 
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
+  // const handleBack = () => {
+  //   setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  // };
 
   const handleStep = (step) => () => {
     setActiveStep(step);
@@ -78,26 +78,14 @@ function AddApp(props) {
           handleReset={handleReset}
           allStepsCompleted={allStepsCompleted}
         >
-          <>
-            <Typography sx={{ mt: 2, mb: 1 }}>
-              {activeStep === 0 && <Information fakeData={fakeData} />}
-              {activeStep === 1 && <ApisStep />}
-              {activeStep === 2 && <Connection />}
-            </Typography>
-            <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-              <Button
-                color='inherit'
-                disabled={activeStep === 0}
-                onClick={handleBack}
-                sx={{ mr: 1 }}
-              >
-                Back
-              </Button>
-            </Box>
-          </>
+          <Box sx={{ mt: 2, mb: 1, height: '100%' }}>
+            {activeStep === 0 && <Information fakeData={fakeData} styles={styles} />}
+            {activeStep === 1 && <ApisStep styles={styles} />}
+            {activeStep === 2 && <Connection />}
+          </Box>
         </HorizontalStepper>
-        <div className='container mt-10 pt-10'>
-          <div className='row'>
+        <Box sx={{ mt: 10, mb: 10, width: '100%' }}>
+          <div className='row flex-end pr-10'>
             <div className='flex-lg-3 flex-sm-12'>
               {activeStep !== steps.length &&
                 (completed[activeStep] ? (
@@ -117,12 +105,10 @@ function AddApp(props) {
                 ))}
             </div>
           </div>
-        </div>
+        </Box>
       </div>
     </div>
   );
 }
-
-AddApp.propTypes = {};
 
 export default AddApp;
