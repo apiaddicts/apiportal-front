@@ -13,7 +13,7 @@ export default function SimpleSlider({ slides }) {
   const [slideIndex, setSlideIndex] = useState(0);
 
   const settings = {
-    className: 'center',
+    className: 'center mt-10 mb-10',
     centerMode: true,
     centerPadding: '0',
     dots: true,
