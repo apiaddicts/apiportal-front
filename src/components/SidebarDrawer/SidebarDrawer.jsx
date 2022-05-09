@@ -7,10 +7,12 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Terminal from '@mui/icons-material/Terminal';
 import Settings from '@mui/icons-material/Settings';
-import { AppBar, Box, Button, Divider, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
 import { ChevronLeft } from '@mui/icons-material';
 import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSharp';
+import SearchIcon from '@mui/icons-material/Search';
+import LogoutIcon from '@mui/icons-material/Logout';
 import { NavLink } from 'react-router-dom';
 import classes from './sliderdrawer.module.scss';
 import SuraLogoAlt from '../../static/img/sura_logo_alt.svg';
@@ -18,29 +20,75 @@ import SuraLogoAlt from '../../static/img/sura_logo_alt.svg';
 function SidebarDrawer({ children }) {
   const listItems = [
     { route: '/apps', text: 'Apps', icon: <Terminal /> },
-    { route: '/apps/nuevaApp', text: 'Nueva App', icon: <Terminal /> },
-    { route: '/ApiLibrary', text: 'Biblioteca de APIs', icon: <Settings /> },
+    { route: '/newApp', text: 'Nueva App', icon: <Terminal /> },
+    { route: '/ApiLibrary/apiDetails', text: 'Biblioteca de APIs', icon: <Settings /> },
   ];
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <div className={classes.backgroundSidebar}>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position='fixed' elevation={0} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: '#0033a0', padding: '0 80px' }}>
-          <Toolbar disableGutters>
+        <AppBar position='fixed' elevation={0} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: '#0033a0', padding: '0 100px' }}>
+          <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <img src={SuraLogoAlt} alt='Sura Logo' />
-            <Button
-              variant='outlined'
-              startIcon={<PersonSharpIcon sx={{ color: '#00AEC7' }} />}
-              endIcon={<KeyboardArrowDownSharpIcon color='white' sx={{ color: '#fff' }} />}
-              sx={{
-                borderRadius: '20px',
-                border: '1px solid #00AEC7',
-                color: '#fff',
-              }}
-            >
-              Beatriz Abad
-            </Button>
-            <Divider orientation='vertical' variant='middle' flexItem />
+            <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              <Button
+                variant='outlined'
+                startIcon={<PersonSharpIcon sx={{ color: '#00AEC7' }} />}
+                endIcon={<KeyboardArrowDownSharpIcon color='white' sx={{ color: '#fff' }} />}
+                sx={{
+                  borderRadius: '20px',
+                  border: '1px solid #00AEC7',
+                  color: '#fff',
+                  marginRight: '1rem',
+                }}
+                onClick={handleClick}
+              >
+                Beatriz Abad
+              </Button>
+              <Menu
+                id='basic-menu'
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  'aria-labelledby': 'demo-customized-button',
+                }}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'right',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+              >
+                <MenuItem onClick={handleClose}>
+                  <ListItemIcon>
+                    <PersonSharpIcon />
+                  </ListItemIcon>
+                  <ListItemText>
+                    Mi perfil
+                  </ListItemText>
+                </MenuItem>
+                <MenuItem onClick={handleClose}>
+                  <ListItemIcon>
+                    <LogoutIcon />
+                  </ListItemIcon>
+                  <ListItemText>
+                    Salir
+                  </ListItemText>
+                </MenuItem>
+              </Menu>
+              <SearchIcon />
+            </Box>
           </Toolbar>
         </AppBar>
       </Box>
@@ -48,7 +96,6 @@ function SidebarDrawer({ children }) {
         variant='permanent'
         sx={{
           width: '388px',
-          background: '#ECF0F1',
         }}
       >
         <List

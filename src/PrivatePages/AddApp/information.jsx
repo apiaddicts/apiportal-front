@@ -15,7 +15,7 @@ function Information({ fakeData, styles }) {
   console.log(fakeData['name-app']);
   return (
     <Box sx={{ height: '100%' }}>
-      <Box sx={{ position: 'relative', display: 'inline-block', pr: 2 }}>
+      <Box sx={{ position: 'relative', display: 'inline-block', pr: 2, mb: 2 }}>
         <CustomTooltip text='Name App'>
           ?
         </CustomTooltip>
@@ -32,7 +32,7 @@ function Information({ fakeData, styles }) {
       </InptSelectUI>
       <div className='row mt-9'>
         <div className='flex-lg-6 flex-sm-12'>
-          <Box sx={{ position: 'relative', display: 'inline-block', pr: 2 }}>
+          <Box sx={{ position: 'relative', display: 'inline-block', pr: 2, mb: 2 }}>
             <CustomTooltip text='Name App'>
               ?
             </CustomTooltip>
@@ -49,7 +49,7 @@ function Information({ fakeData, styles }) {
           </InptSelectUI>
         </div>
         <div className='flex-lg-6 flex-sm-12 reltive'>
-          <Box sx={{ position: 'relative', display: 'inline-block', pr: 2 }}>
+          <Box sx={{ position: 'relative', display: 'inline-block', pr: 2, mb: 2 }}>
             <CustomTooltip text='No delimitará seleccionar apis de otras soluciones'>
               ?
             </CustomTooltip>

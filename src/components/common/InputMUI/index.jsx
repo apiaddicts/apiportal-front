@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
-import Input, { ContainerIcon, ContainerInput } from './style';
+import Input, { ContainerIcon, ContainerInput, InputDisabled } from './style';
+import Icon from '../../MdIcon/Icon';
 
 function TextField({ field, formik, iconEye, iconCopy }) {
   const [type, setType] = useState(false);
   const { values, errors, touched, handleChange, handleBlur, isSelect } = formik;
-
-  // Copy text to clipboard of input
 
   const copyToClipboard = (value) => {
     const input = document.createElement('input');
@@ -18,31 +17,57 @@ function TextField({ field, formik, iconEye, iconCopy }) {
 
   return (
     <ContainerInput>
-      <ContainerIcon
-        icon
-        onClick={() => {
-          setType(!type);
+      {iconEye && (
+        <ContainerIcon
+          icon
+          onClick={() => {
+            setType(!type);
+          }}
+        >
+          <Icon id='MdOutlineRemoveRedEye' />
+        </ContainerIcon>
+      )}
+      {iconCopy && (
+        <ContainerIcon onClick={() => {
+          copyToClipboard(formik.values[field.id]);
         }}
-      />
-      <ContainerIcon onClick={() => {
-        copyToClipboard(formik.values[field.id]);
-      }}
-      />
-      <Input
-        select={isSelect}
-        fullWidth
-        required={field.required && true}
-        id={field.id}
-        label={field.label}
-        disabled={field.disabled}
-        error={touched[field.id] && !!errors[field.id]}
-        type={field.id && type ? 'text' : field.type}
-        onChange={handleChange}
-        onBlur={handleBlur}
-        placeholder={field.placeholder}
-        value={values[field.id]}
-        // helperText={(touched[field.id] && errors[field.id]) ?? null}
-      />
+        >
+          <Icon id='MdOutlineContentCopy' />
+        </ContainerIcon>
+      )}
+      {field.disabled ? (
+        <InputDisabled
+          select={isSelect}
+          fullWidth
+          required={field.required && true}
+          id={field.id}
+          label={field.label}
+          disabled={field.disabled}
+          error={touched[field.id] && !!errors[field.id]}
+          type={field.id && type ? 'text' : field.type}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          placeholder={field.placeholder}
+          value={values[field.id]}
+          // helperText={(touched[field.id] && errors[field.id]) ?? null}
+        />
+      ) : (
+        <Input
+          select={isSelect}
+          fullWidth
+          required={field.required && true}
+          id={field.id}
+          label={field.label}
+          disabled={field.disabled}
+          error={touched[field.id] && !!errors[field.id]}
+          type={field.id && type ? 'text' : field.type}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          placeholder={field.placeholder}
+          value={values[field.id]}
+        />
+
+      )}
     </ContainerInput>
   );
 };

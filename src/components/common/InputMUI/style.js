@@ -55,6 +55,9 @@ const Input = styled(TextField)({
 export default Input;
 
 export const InputSelect = styled(Input)({
+  '& label': {
+    top: '-10px',
+  },
 });
 
 export const ContainerInput = styled(Box)({
@@ -68,13 +71,24 @@ export const ContainerInput = styled(Box)({
 export const ContainerIcon = styled(Box)(({ icon }) => ({
   cursor: 'pointer',
   position: 'absolute',
+  fontSize: '1.2rem',
+  opacity: '0.5',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   width: '25px',
   height: '25px',
-  right: icon ? '60px' : '15px',
-  backgroundColor: '#0033A0',
+  right: icon ? '40px' : '15px',
   zIndex: '9999',
+  // hover
+  '&:hover': {
+    opacity: '1',
+  },
 }));
+
+export const InputDisabled = styled(Input)({
+  '& label': {
+    top: '-15px',
+  },
+});
 

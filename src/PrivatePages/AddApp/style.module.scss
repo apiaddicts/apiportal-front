@@ -1,3 +1,4 @@
+@import '../../styles/variables.scss';
 .container__add__app {
     display: flex;
     flex-direction: column;
@@ -14,11 +15,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 90%;
+    width: 80%;
     height: 100%;
     padding: 0;
     @media (max-width: 768px) {
-        width: 100%;
+        width: 90%;
         padding: 0%;
         }
     }
@@ -27,4 +28,8 @@
         .mt-85 {
             margin-top: 100px !important;
         }
+}
+.color-primary {
+    color: $primary;
+    font-family: $barlow !important;
 }
