@@ -4,7 +4,7 @@ import Barlow from '../../../static/fonts/FS Joey Regular.ttf';
 
 const Textarea = styled(TextareaAutosize)({
   fontFamily: 'Barlow',
-  margin: '1.8rem 0',
+  margin: '.8rem 0 1.8rem 0',
   width: '100%',
   maxHeight: '100px',
   border: 'none',

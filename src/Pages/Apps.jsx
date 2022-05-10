@@ -2,6 +2,7 @@
 /* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
 import { Container, IconButton, Chip, Menu, MenuItem, ListItemText, ListItemIcon } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import RemoveRedEyeSharpIcon from '@mui/icons-material/RemoveRedEyeSharp';
@@ -12,6 +13,8 @@ import Title from '../components/Title/Title';
 import jsonApis from '../data-table.json';
 
 function Apps(props) {
+
+  const navigate = useNavigate();
   const headers = [
     {
       name: 'APP',
@@ -87,7 +90,7 @@ function Apps(props) {
       },
     },
     {
-      cell: () => {
+      cell: (row) => {
         const [anchorEl, setAnchorEl] = React.useState(null);
         const open = Boolean(anchorEl);
         const handleClick = (event) => {
@@ -95,6 +98,8 @@ function Apps(props) {
         };
         const handleClose = () => {
           setAnchorEl(null);
+          navigate(`/apps/${row.id}`);
+          localStorage.setItem('id', row.id);
         };
         return (
           <>

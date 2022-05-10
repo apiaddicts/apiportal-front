@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Button from '../Buttons/Button';
 import classes from './banner.module.scss';
 
-function BannerImage({ buttons, setIsOpen, title = '', img = '' }) {
+function BannerImage({ buttons, setIsOpen, title = '', img = '', description }) {
   //   const urlImg = 'https://picsum.photos/500/200';
   const navigate = useNavigate();
 
@@ -32,6 +32,11 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '' }) {
           {title !== '' ? title : 'Biblioteca de APIs' }
         </h1>
         <div className={`${classes.divider} mb-4 mt-3`} />
+        <div className={classes['width-text-banner']}>
+          <p className='subtitle-1'>
+            {description}
+          </p>
+        </div>
         <div className='w-full'>
           {buttons && (
             <div className='flex-md-12 flex-sm-12'>

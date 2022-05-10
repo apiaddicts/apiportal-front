@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { Box } from '@mui/material';
@@ -26,6 +26,7 @@ import Admin from '../PrivatePages/ProfileAdmin';
 import AddApp from '../PrivatePages/AddApp';
 import AppsDetail from '../PrivatePages/DetailApp';
 import ApiDetailed from '../PrivatePages/ApiDetails/ApiDetailed';
+import ChooseApi from '../PrivatePages/ChooseApi';
 
 function AppRouter() {
   const { email, password } = useSelector((state) => state.user);
@@ -56,6 +57,7 @@ function AppRouter() {
             <Route path='/componentes' exact element={<Components />} />
             <Route path='/blog/:id' exact element={<BlogDetails />} />
             <Route path='/api/:id' exact element={<ApiDetails setIsOpen={setIsOpen} />} />
+            <Route path='*' element={<Navigate to='/' replace />} />
           </Routes>
           <Footer />
         </>
@@ -71,9 +73,11 @@ function AppRouter() {
               <Route path='/documentation/api' exact element={<ApiDocumentation />} />
               <Route path='/apps' exact element={<Apps />} />
               <Route path='/apps/:id' exact element={<AppsDetail />} />
+              <Route path='/apps/apis' exact element={<ChooseApi />} />
               <Route path='/newApp' exact element={<AddApp />} />
               <Route path='/ApiLibrary' exact element={<ApiLibrary />} />
               <Route path='/ApiLibrary/apiDetails' exact element={<ApiDetailed />} />
+              <Route path='*' element={<Navigate to='/' replace />} />
             </Routes>
           </Box>
           <Box sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, position: 'absolute', background: '#fff' }}>
