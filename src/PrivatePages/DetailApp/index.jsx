@@ -1,8 +1,8 @@
 /* eslint-disable react/no-unstable-nested-components */
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { Container, Card, Grid, Box, Stack, Typography, Chip, Button, IconButton } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import EditIcon from '@mui/icons-material/Edit';
@@ -25,6 +25,9 @@ function AppsDetail(props) {
   const handleSubmit = async (dataForm) => {
     console.log(dataForm);
   };
+
+  const navigate = useNavigate();
+  const handleNavigate = useCallback(() => navigate('/apps/apis', { replace: true }, [navigate]));
 
   const formConfig = useNewApp(fieldsAppSandbox, handleSubmit);
   const formConfigPre = useNewApp(fieldsAppPre, handleSubmit);
@@ -146,7 +149,7 @@ function AppsDetail(props) {
         <Grid item xs={3} />
         <Grid item xs={3} className={classes.gridEnd}>
           <div className={classes.buttonApi}>
-            <Btn styles='primary'>
+            <Btn styles='primary' onClick={handleNavigate}>
               Añadir API
               <ArrowForwardIosIcon sx={{ fontSize: '16px', marginLeft: '8px' }} />
             </Btn>
@@ -154,14 +157,14 @@ function AppsDetail(props) {
 
         </Grid>
       </Grid>
-      <Card sx={{ borderRadius: '20px', marginTop: '25px', marginBottom: '50px', padding: '39px 32px 30px 32px' }}>
+      <Box sx={{ marginBottom: '50px' }}>
         <DataGridMUI
           headers={headers}
           data={jsonApis}
           // selectableRows
           paginationPerPage={5}
         />
-      </Card>
+      </Box>
       <Title text='Conexion' divider={false} />
       <Card sx={{ borderRadius: '20px', marginTop: '33px', padding: '35px 47px 43px 41px', marginBottom: '15px' }}>
         <Box sx={{ height: '100%' }}>

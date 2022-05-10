@@ -99,6 +99,7 @@ function Apps(props) {
         const handleClose = () => {
           setAnchorEl(null);
           navigate(`/apps/${row.id}`);
+          localStorage.setItem('id', row.id);
         };
         return (
           <>
@@ -161,9 +162,9 @@ function Apps(props) {
   ];
   const data = jsonApis;
   return (
-    <Container className='mt-10 pt-10'>
+    <Container fixed className='my-10 py-10'>
       <Title text='Apps' />
-      <DataGridMUI headers={headers} data={data} />
+      <DataGridMUI headers={headers} data={data} paginationPerPage={20} />
     </Container>
   );
 }

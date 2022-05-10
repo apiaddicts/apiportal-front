@@ -1,7 +1,8 @@
 @import '../../styles/variables.scss';
 
 .title {
-    font-size: 48px;
+    font-family: $fs-joey;
+    font-size: 3rem;
     font-weight: 700;
     color: $primary;
     margin-bottom: 0.5rem;
