@@ -28,7 +28,7 @@ function Footer({ isPrivate }) {
         <Base img={img}>
           <div className={classes.footer__container}>
             <div className={`${classes.divider} mb-4`} />
-            <h1 className='h2 text__secondary__white'>Dejanos tus datos para asesorarte</h1>
+            <h1 className='h2 text__secondary__white mb-3'>Dejanos tus datos para asesorarte</h1>
             <p className='h5 text__secondary__white mb-10'>Contáctanos por medio de este formulario</p>
           </div>
           <div className={classes.button__fab}>

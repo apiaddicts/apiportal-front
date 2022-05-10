@@ -68,11 +68,12 @@
         letter-spacing: 1.33333px;
         text-transform: uppercase;
         color: $secondary;
+        margin-right: 10px;
     }
 
     .svg {
-        color: $primary;
-        font-size: 25px;
+        font-size: 15px;
+        color: $secondary;
     }
 }
 
@@ -84,18 +85,21 @@
             flex-wrap: nowrap;
             &_slide {
                 min-width: 100%;
-                width: 100vw;
                 overflow: hidden;
                 transition: 0.3s ease all;
                 z-index: 100;
-                max-height: 500px;
+                max-height: 100%;
                 position: relative;
+                height: 533px;
             }
         }
         &_text {
             margin: auto;
             width: 80%;
-            padding: 5%;
+            padding: 10%;
+            height: 100%;
+            display: flex;
+            align-items: center;
 
             div {
                 p {
