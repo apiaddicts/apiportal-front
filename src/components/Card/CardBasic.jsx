@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { MdArrowRightAlt } from 'react-icons/md';
+import { MdEast } from 'react-icons/md';
 import Chip from '../Chip/Chip';
 import Base from './Base';
 
@@ -30,10 +30,10 @@ function CardBasic({ chipTitle, title, img, description, info, maxWidth }) {
           <p className='text-left'>
             {description}
           </p>
-          <div className='card_chip_info'>
+          <div className='card_chip_info mt-4'>
             <span>{info}</span>
             {' '}
-            <MdArrowRightAlt className='svg' />
+            <MdEast className='svg' />
           </div>
         </div>
       </section>

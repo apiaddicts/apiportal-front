@@ -830,6 +830,9 @@ a {
   }
   &__gray__gray_lighten-3 {
     color: $gray_lighten-3;
+  }  
+  &__gray__gray_lighten-4 {
+    color: $gray_lighten-4;
   }
   &__gray__gray_darken {
     color: $gray_darken;
@@ -1026,4 +1029,11 @@ a {
   @include breakpoint(lg) {
     text-align: left !important;
   }
+}
+
+.font-fs-joey {
+  font-family: $fs-joey !important;
+}
+.font-barlow {
+  font-family: $barlow !important;
 }

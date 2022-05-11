@@ -25,6 +25,8 @@ import SidebarDrawer from '../components/SidebarDrawer/SidebarDrawer';
 import Admin from '../PrivatePages/ProfileAdmin';
 import AddApp from '../PrivatePages/AddApp';
 import AppsDetail from '../PrivatePages/DetailApp';
+import ApiDetailed from '../PrivatePages/ApiDetails/ApiDetailed';
+import ChooseApi from '../PrivatePages/ChooseApi';
 
 function AppRouter() {
   const { email, password } = useSelector((state) => state.user);
@@ -61,19 +63,26 @@ function AppRouter() {
         </>
       )}
       {privateSession && (
-        <Box sx={{ display: 'flex', backgroundColor: '#fbfbfb' }}>
-          <SidebarDrawer />
-          <Routes>
-            <Route path='/' element={<Admin />} />
-            <Route path='/apis' exact element={<Apis />} />
-            <Route path='/api/:id' exact element={<ApiDetails />} />
-            <Route path='/documentation/api' exact element={<ApiDocumentation />} />
-            <Route path='/apps' exact element={<Apps />} />
-            <Route path='/apps/:id' exact element={<AppsDetail />} />
-            <Route path='/newApp' exact element={<AddApp />} />
-            <Route path='/ApiLibrary' exact element={<ApiLibrary />} />
-            <Route path='*' element={<Navigate to='/' replace />} />
-          </Routes>
+        <Box>
+          <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#fbfbfb' }}>
+            <SidebarDrawer />
+            <Routes>
+              <Route path='/' element={<Admin />} />
+              <Route path='/apis' exact element={<Apis />} />
+              <Route path='/api/:id' exact element={<ApiDetails />} />
+              <Route path='/documentation/api' exact element={<ApiDocumentation />} />
+              <Route path='/apps' exact element={<Apps />} />
+              <Route path='/apps/:id' exact element={<AppsDetail />} />
+              <Route path='/apps/apis' exact element={<ChooseApi />} />
+              <Route path='/newApp' exact element={<AddApp />} />
+              <Route path='/ApiLibrary' exact element={<ApiLibrary />} />
+              <Route path='/ApiLibrary/apiDetails' exact element={<ApiDetailed />} />
+              <Route path='*' element={<Navigate to='/' replace />} />
+            </Routes>
+          </Box>
+          <Box sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, position: 'absolute', background: '#fff' }}>
+            <Footer isPrivate={true} />
+          </Box>
         </Box>
       )}
     </BrowserRouter>

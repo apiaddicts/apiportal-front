@@ -22,15 +22,6 @@ function Faqs(props) {
     }
   }, []);
 
-  // const filterData = dataFaq && dataFaq.contentSections ? dataFaq.contentSections.filter((item) => item.__component === 'sura.list-buttons') : [];
-  // const items = filterData.length > 0 ? filterData.map((i) => {
-  //   const data = {};
-  //   data.title = i.Name;
-  //   data.questions = i.list.length > 0 ? i.list.map((d) => (d.name)) : [];;
-
-  //   return data;
-  // }) : [];
-
   const filterFaqs = dataFaq && dataFaq.contentSections ? dataFaq.contentSections.filter((item) => item.__component === 'sura.list-filter') : [];
 
   const faqs = filterFaqs.length > 0 ? filterFaqs.map((i, index) => {

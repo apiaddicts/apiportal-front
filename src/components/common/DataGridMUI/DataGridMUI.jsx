@@ -13,10 +13,9 @@ function getNumberOfPages(rowCount, rowsPerPage) {
 function toPages(pages) {
   const results = [];
 
-  for (let i = 1; i < pages; i++) {
+  for (let i = 1; i < pages + 1; i++) {
     results.push(i);
   }
-
   return results;
 }
 
@@ -50,7 +49,7 @@ function CustomPagination({ rowCount, rowsPerPage, currentPage, onChangePage }) 
           pageItems.map((page, index) => {
             const className = page === currentPage ? `${classes.active} ${classes.pagination__pages__page}` : `${classes.pagination__pages__page}`;
             return (
-              <button type='button' className={className} key={index} onClick={handlerPageNumber} value={page}>{`0${page}`}</button>
+              <button type='button' className={className} key={index} onClick={handlerPageNumber} value={page}>{page > 0 && page < 10 ? `0${page}` : page}</button>
             );
           })
         }
@@ -64,7 +63,7 @@ function CustomPagination({ rowCount, rowsPerPage, currentPage, onChangePage }) 
 }
 function DataGridMUI({ headers, data, ...rest }) {
   return (
-    <Card sx={{ borderRadius: '20px', marginTop: '1rem', boxShadow: 'none' }}>
+    <Card sx={{ borderRadius: '20px', marginTop: '1rem', boxShadow: '0px 4px 28px rgba(169, 177, 209, 0.12)' }}>
       <DataTable
         columns={headers}
         data={data}

@@ -135,6 +135,11 @@
     padding-bottom: 51px !important;
   }
 
+  &__subtitle {
+    white-space: pre-line;
+    line-height: 28px;
+  }
+
   &__showmore {
     width: 100%;
     &__button {
@@ -183,7 +188,9 @@
     height: 100%;
     &__img {
       position: relative;
+      width: 80%;
       img {
+        width: 100%;
         border-radius: 20px;
         @include breakpoint(xs) {
           display: none;
@@ -201,15 +208,16 @@
     &__card {
       position: absolute;
       border-radius: 20px;
-      box-shadow: 0px 3px 12px -2px rgba(0, 0, 0, 0.1);
+      // box-shadow: 0px 3px 12px -2px rgba(0, 0, 0, 0.1);
       background: $secondary_white;
       padding: 20px;
-      top: 0;
+      top: 10px;
       left: 439px;
-      max-height: 390px;
-      max-width: 738px;
+      width: 100%;
+      height: 100%;
       display: flex;
       align-items: center;
+      background: transparent;
       @include breakpoint(xs) {
         position: relative;
         top: 0;
@@ -230,7 +238,7 @@
       }
       @include breakpoint(lg) {
         position: absolute;
-        top: 10%;
+        top: -5%;
         left: 36%;
         max-width: 65%;
       }
@@ -259,7 +267,7 @@
     padding-bottom: 32px;
   }
   &__subtitle {
-    padding-bottom: 80px;
+    padding-bottom: 10px;
   }
 
   @include breakpoint(xs) {
