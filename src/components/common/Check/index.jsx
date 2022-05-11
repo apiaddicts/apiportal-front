@@ -16,6 +16,7 @@ function CheckboxWrapper({
 
   const configCheckbox = {
     onChange: handleChange,
+    ...otherProps,
   };
 
   return (

@@ -7,6 +7,7 @@ export default function CheckboxLabels({ name,
   legend,
   activeTab,
   handleChangeSelect,
+  ...otherProps
 }) {
   const [check, setCheck] = useState(false);
 
@@ -18,11 +19,16 @@ export default function CheckboxLabels({ name,
 
   const configCheckbox = {
     onChange: handleChange,
+    ...otherProps,
   };
   return (
     <FormControlMain>
       <FormGroup>
-        <CustomFormControl active={(label && check)} control={<CustomCheck {...configCheckbox} />} label={label} />
+        <CustomFormControl
+          active={!!((check && activeTab))}
+          control={<CustomCheck {...configCheckbox} />}
+          label={label}
+        />
       </FormGroup>
     </FormControlMain>
   );
