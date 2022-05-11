@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from '../Buttons/Button';
+import Icon from '../MdIcon/Icon';
 import classes from './banner.module.scss';
 
 function BannerImage({ buttons, setIsOpen, title = '', img = '', description }) {
@@ -23,7 +24,14 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description }) 
       <div
         className={classes.banner_img__backTo}
       >
-        <Link to={-1}> Volver</Link>
+        <Link to={-1} className={classes.banner_img__backTo__btn}>
+          <div>
+            <Icon id='MdKeyboardBackspace' />
+          </div>
+          <div className={classes.banner_img__backTo__label}>
+            <span>Volver</span>
+          </div>
+        </Link>
       </div>
       <div
         className={classes.banner_img__title}

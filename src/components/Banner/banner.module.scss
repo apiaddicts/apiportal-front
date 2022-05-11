@@ -68,18 +68,32 @@
     justify-content: center;
     width: 100%;
     height: 300px;
-    padding: 0% 4.5%;
+    // padding: 0% 4.5%;
     position: relative;
 
     &__backTo {
         width: 100%;
-        padding-left: 8%;
         padding-top: 3%;
+        padding-left: 3rem;
+        
+        &__btn{
+            display: flex;
+            align-items: center;
+            color: $primary;
+        }
+        &__label {
+            padding: 0 0.5rem;
+            font-weight: 700;
+            font-size: 16px;
+            letter-spacing: 1.33px;
+            text-transform: uppercase;
+            
+        }
     }
 
     &__title {
         width: 100%;
-        padding-left: 0 0.5%;
+        padding: 0 4.5%;
     }
 
     &__img {

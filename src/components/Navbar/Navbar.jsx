@@ -60,12 +60,12 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
 
             <ul className='d-xs-none'>
               <li className='pr-2'>
-                <Button type='button' styles='ghost-variant' onClick={() => { setIsOpen(true); }}>
+                <Button type='button' styles='ghost-variant' size='small' onClick={() => { setIsOpen(true); }}>
                   Iniciar sesión
                 </Button>
               </li>
               <li>
-                <Button type='button' styles='secundary' onClick={() => { setOpenForm(true); }}>
+                <Button type='button' styles='secundary' size='small' style={{ width: '114px', height: '32px' }} onClick={() => { setOpenForm(true); }}>
                   registrate
                 </Button>
               </li>
