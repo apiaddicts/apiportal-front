@@ -16,6 +16,7 @@ import ButtonGroupMUI from '../components/common/ButtonGroup';
 
 import { getLibraries, filterCheck, sortApiCollection } from '../redux/actions/libraryAction';
 import CheckboxLabels from '../components/common/CustomCheck';
+import Icon from '../components/MdIcon/Icon';
 
 function Apis() {
   const [activeTab, setActiveTab] = useState('');
@@ -205,7 +206,10 @@ function Apis() {
               </div>
             ))}
           </CustomizedAccordions>
-          <button type='button' className={classes.container__reset} onClick={resetFilters}>Reset</button>
+          <div className='container row py-2 px-10'>
+            <Icon id='MdDeleteOutline' />
+            <button type='button' className={classes.container__reset} onClick={resetFilters}>Eliminar filtros</button>
+          </div>
         </article>
         <section className={classes.container__right}>
           <div className='w-full'>
