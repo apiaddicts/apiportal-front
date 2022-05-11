@@ -21,8 +21,20 @@ function Apis() {
   const [activeTab, setActiveTab] = useState('');
 
   const { libraries, filters, backUpLibreries, loadingLibraries } = useSelector((state) => state.library);
+  const [filtersSelect, setFiltersSelect] = useState([]);
 
   const dispatch = useDispatch();
+
+  // remove all filters
+  const resetFilters = () => {
+    dispatch(getLibraries());
+    dispatch({
+      type: 'RESET_LIBRARY',
+    });
+    setFiltersSelect([]);
+    setActiveTab('');
+
+  };
 
   // const onClickItem = (e) => {
   //   console.log(e.target.value);
@@ -39,6 +51,7 @@ function Apis() {
 
   const handleChangeStatus = (name, label, checked) => {
     dispatch(filterCheck(label, checked, 'status'));
+    setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
   const handleChangeVersions = (name, label, checked) => {
     console.log(name, checked);
@@ -48,13 +61,16 @@ function Apis() {
       setActiveTab('');
     }
     dispatch(filterCheck(label, checked, 'version'));
+    setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
 
   const handleChangeSolutions = (name, label, checked) => {
     dispatch(filterCheck(label, checked, 'solution'));
+    setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
   const handleChangFilterTags = (name, label, checked) => {
     dispatch(filterCheck(label, checked, 'tag'));
+    setFiltersSelect({ ...filtersSelect, [name]: label });
   };
   const handleChangeSearchFilter = (text) => {
     dispatch(filterCheck(text, null, 'search'));
@@ -79,7 +95,6 @@ function Apis() {
       count: countRepeated[key],
     };
   });
-  console.log(items);
 
   // Filters status array
   const stateRepeated = backUpLibreries.map((element) => {
@@ -109,8 +124,6 @@ function Apis() {
       count: countRepeatedTags[key],
     };
   });
-
-  console.log(tags);
 
   // Filters version array
   const versionRepeated = backUpLibreries.map((element) => {
@@ -143,6 +156,7 @@ function Apis() {
                     name={item}
                     label={item}
                     handleChangeSelect={handleChangeStatus}
+                    checked={filtersSelect[item] !== undefined ? filtersSelect[item] : false}
                   />
                 </div>
               ))
@@ -154,7 +168,14 @@ function Apis() {
             </Typography>
             <ButtonGroupMUI>
               {versions.map((item, index) => (
-                <CheckboxLabels activeTab={activeTab} key={index} label={item} name={item} handleChangeSelect={handleChangeVersions} />
+                <CheckboxLabels
+                  activeTab={activeTab}
+                  key={index}
+                  label={item}
+                  name={item}
+                  handleChangeSelect={handleChangeVersions}
+                  checked={filtersSelect[item] !== undefined ? filtersSelect[item] : false}
+                />
               ))}
             </ButtonGroupMUI>
           </div>
@@ -165,6 +186,7 @@ function Apis() {
                   name={item.title}
                   label={item.title}
                   handleChangeSelect={handleChangeSolutions}
+                  checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
                 />
                 <p className={classes.container__checkbox__counter}>{item.count}</p>
               </div>
@@ -177,11 +199,13 @@ function Apis() {
                   name={item.label}
                   label={item.label}
                   handleChangeSelect={handleChangFilterTags}
+                  checked={filtersSelect[item.label] !== undefined ? filtersSelect[item.label] : false}
                 />
                 <p className={classes.container__checkbox__counter}>{item.count}</p>
               </div>
             ))}
           </CustomizedAccordions>
+          <button type='button' className={classes.container__reset} onClick={resetFilters}>Reset</button>
         </article>
         <section className={classes.container__right}>
           <div className='w-full'>
