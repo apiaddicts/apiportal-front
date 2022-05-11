@@ -66,9 +66,37 @@
       &__item {
         margin: 15px 0;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        &__chip {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 10px;
+          width: 50px;
+          height: 29px;
+          font-weight: 500;
+          font-size: 0.875rem;
+          font-family: $barlow;
+          color: $secondary_white;
+          border-radius: 0.313rem;
+        }
       }
     } 
   }
+}
+
+.POST {
+  background: $blue_sura !important;
+}
+.GET {
+  background: $green_sura;
+}
+.PUSH {
+  background: $orange_sura;
+}
+.DEL {
+  background: $red_sura;
 }
 
 .item__active{

@@ -111,6 +111,10 @@ function Home() {
     },
   ];
 
+  // fuction addLineBreak(){
+
+  // }
+
   return (
     <div>
       {Object.keys(data).length > 0 ? (
@@ -196,14 +200,14 @@ function Home() {
           <section className={`container ${classes.section__discover}`}>
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
-                <h1 className='h2 text__primary font-weight-bold mb-2 ml-1'>
+                <h1 className='h2 text__primary font-weight-bold mb-8'>
                   {filterDiscoverTitle || 'Descubre nuestras APIs'}
                 </h1>
               </div>
             </div>
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
-                <p className='subtitle-1 ml-1 mb-10'>
+                <p className={`subtitle-1 mb-10 text__gray__gray_lighten-4 ${classes.section__discover__subtitle}`}>
                   {filterDiscoverSubtitle || ''}
                 </p>
               </div>
