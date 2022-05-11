@@ -67,8 +67,19 @@ function Apis() {
   const titleRepeated = backUpLibreries.map((element) => {
     return element.title;
   });
-  const dataArr = new Set(titleRepeated);
-  const items = [...dataArr];
+  // count items repeated
+  const countRepeated = titleRepeated.reduce((acc, cur) => {
+    acc[cur] = (acc[cur] || 0) + 1;
+    return acc;
+  }, {});
+
+  const items = Object.keys(countRepeated).map((key) => {
+    return {
+      title: key,
+      count: countRepeated[key],
+    };
+  });
+  console.log(items);
 
   // Filters status array
   const stateRepeated = backUpLibreries.map((element) => {
@@ -85,8 +96,21 @@ function Apis() {
   const tagsArr = new Set(tagsBtns);
   const tagsArrUnique = [...tagsArr];
   const labelsTags = tagsArrUnique.map((item) => { return item.label; });
-  const labelsTagsArr = new Set(labelsTags);
-  const tags = [...labelsTagsArr];
+
+  // count labelsTags repeated
+  const countRepeatedTags = labelsTags.reduce((acc, cur) => {
+    acc[cur] = (acc[cur] || 0) + 1;
+    return acc;
+  }, {});
+
+  const tags = Object.keys(countRepeatedTags).map((key) => {
+    return {
+      label: key,
+      count: countRepeatedTags[key],
+    };
+  });
+
+  console.log(tags);
 
   // Filters version array
   const versionRepeated = backUpLibreries.map((element) => {
@@ -138,10 +162,11 @@ function Apis() {
             { items.map((item, index) => (
               <div key={index} className={classes.container__checkbox}>
                 <CheckboxWrapper
-                  name={item}
-                  label={item}
+                  name={item.title}
+                  label={item.title}
                   handleChangeSelect={handleChangeSolutions}
                 />
+                <p className={classes.container__checkbox__counter}>{item.count}</p>
               </div>
             ))}
           </CustomizedAccordions>
@@ -149,10 +174,11 @@ function Apis() {
             { tags.map((item, index) => (
               <div className={classes.container__checkbox} key={index}>
                 <CheckboxWrapper
-                  name={item}
-                  label={item}
+                  name={item.label}
+                  label={item.label}
                   handleChangeSelect={handleChangFilterTags}
                 />
+                <p className={classes.container__checkbox__counter}>{item.count}</p>
               </div>
             ))}
           </CustomizedAccordions>
