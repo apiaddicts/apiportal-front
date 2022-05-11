@@ -65,8 +65,7 @@ export default function libraryReducer(state = initialState, action) {
     case libraryConstants.RESET_LIBRARY:
       return {
         ...state,
-        library: {},
-        errorLibrary: {},
+        filters: {},
       };
     default:
       return state;
