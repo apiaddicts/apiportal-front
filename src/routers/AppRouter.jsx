@@ -25,6 +25,9 @@ import SidebarDrawer from '../components/SidebarDrawer/SidebarDrawer';
 import Admin from '../PrivatePages/ProfileAdmin';
 import AddApp from '../PrivatePages/AddApp';
 import AppsDetail from '../PrivatePages/DetailApp';
+// Ejemplos
+import Swagger from '../Pages/ejemplos/Swagger';
+import Redoc from '../Pages/ejemplos/Redoc';
 
 function AppRouter() {
   const { email, password } = useSelector((state) => state.user);
@@ -72,6 +75,8 @@ function AppRouter() {
             <Route path='/apps/:id' exact element={<AppsDetail />} />
             <Route path='/newApp' exact element={<AddApp />} />
             <Route path='/ApiLibrary' exact element={<ApiLibrary />} />
+            <Route path='/swagger' exact element={<Swagger />} />
+            <Route path='/redoc' exact element={<Redoc />} />
             <Route path='*' element={<Navigate to='/' replace />} />
           </Routes>
         </Box>
