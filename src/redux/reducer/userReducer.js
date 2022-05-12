@@ -1,13 +1,19 @@
 import userConstants from '../constants/userConstats';
 
-const user = JSON.parse(localStorage.getItem('user'));
+const token = JSON.parse(localStorage.getItem('token'));
 
-const initialState = user ? {
-  password: user.password,
-  email: user.email,
+const initialState = token ? {
+  id: token.id,
+  token: token.token,
+  loadinSignUp: false,
+  signUpData: {},
+  user: {},
 } : {
-  password: '',
-  email: '',
+  user: {},
+  id: '',
+  token: '',
+  loadingSignUp: false,
+  signUpData: {},
 };
 
 // eslint-disable-next-line default-param-last
@@ -19,6 +25,39 @@ export default function userReducer(state = initialState, action) {
         ...state,
         password: action.password,
         email: action.email,
+      };
+    // sign up user
+    case userConstants.SIGNUP_REQUEST:
+      return {
+        ...state,
+        loadingSignUp: true,
+        signUpData: {},
+      };
+    case userConstants.SIGNUP_SUCCESS:
+      return {
+        ...state,
+        loadingSignUp: false,
+        signUpData: action.response,
+      };
+    // login user
+    case userConstants.GET_USER_SUCCESS:
+      return {
+        ...state,
+        user: action.response,
+      };
+    case userConstants.LOGIN_SUCCESS:
+      return {
+        ...state,
+        id: action.id,
+        token: action.token,
+      };
+    // logout
+    case userConstants.LOGOUT_USER:
+      return {
+        ...state,
+        id: '',
+        token: '',
+        user: {},
       };
     default:
       return state;

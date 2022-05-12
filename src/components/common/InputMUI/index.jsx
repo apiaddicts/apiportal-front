@@ -64,7 +64,9 @@ function TextField({ field, formik, iconEye, iconCopy }) {
           onChange={handleChange}
           onBlur={handleBlur}
           placeholder={field.placeholder}
-          value={values[field.id]}
+          // value={values[field.id]}
+          value={field.initialValue !== '' ? field.initialValue : values[field.id]}
+          // value={value[field.id] === '' && field.initialValue !== '' ? field.initialValue : value[field.id]}
         />
 
       )}
