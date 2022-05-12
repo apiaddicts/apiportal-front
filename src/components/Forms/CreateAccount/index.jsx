@@ -1,13 +1,33 @@
 import React from 'react';
+
+import { useDispatch } from 'react-redux';
+
 import Input from '../../Input';
 import useFormConfig from '../../../hooks/useForm';
 import Button from '../../Buttons/Button';
 import { fieldsRegister } from '../fields';
+
+import { signUp } from '../../../redux/actions/userAction';
+
 import './index.scss';
 
 function CreateAccount() {
+  const dispatch = useDispatch();
+
   const handleSubmit = async (values) => {
-    console.log(values);
+    const data = {
+      properties: {
+        email: values.email,
+        firstName: values.first_name,
+        lastName: values.last_name,
+        appType: 'portal',
+        confirmation: 'signup',
+        password: values.password,
+        notify: true,
+      },
+    };
+
+    dispatch(signUp(data));
   };
 
   const formConfig = useFormConfig(fieldsRegister, handleSubmit);
