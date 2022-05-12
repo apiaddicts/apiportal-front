@@ -24,7 +24,6 @@ function Information({ fakeData, styles }) {
     });
   };
 
-  console.log(fakeData['name-app']);
   return (
     <Box sx={{ height: '100%' }}>
       <Box sx={{ position: 'relative', display: 'inline-block', pr: 2, mb: 2 }}>
