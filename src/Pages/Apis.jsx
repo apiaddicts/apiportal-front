@@ -146,7 +146,7 @@ function Apis() {
       <BannerImage />
       <section className={classes.container}>
         <article className={classes.container__left}>
-          <CustomizedAccordions title='Status'>
+          <CustomizedAccordions title='Estado'>
             {
               state.map((item, index) => (
                 <div
@@ -163,11 +163,20 @@ function Apis() {
               ))
             }
           </CustomizedAccordions>
-          <div className='w-full p-4'>
-            <Typography>
+          <div className='w-full pl-4'>
+            <Typography
+              sx={{
+                fontSize: '1rem',
+                fontWeight: '700',
+                textTransform: 'uppercase',
+                letterSpacing: '1.33px',
+                color: '#53565A',
+                marginBottom: '15px',
+              }}
+            >
               Version
             </Typography>
-            <ButtonGroupMUI>
+            <ButtonGroupMUI sx={{ marginBottom: '15px' }}>
               {versions.map((item, index) => (
                 <CheckboxLabels
                   activeTab={activeTab}
@@ -193,7 +202,7 @@ function Apis() {
               </div>
             ))}
           </CustomizedAccordions>
-          <CustomizedAccordions title='Tag'>
+          <CustomizedAccordions title='Tags'>
             { tags.map((item, index) => (
               <div className={classes.container__checkbox} key={index}>
                 <CheckboxWrapper
@@ -206,7 +215,7 @@ function Apis() {
               </div>
             ))}
           </CustomizedAccordions>
-          <div className='container row py-2 px-10'>
+          <div className={`container ${classes.container__filters}`}>
             <Icon id='MdDeleteOutline' />
             <button type='button' className={classes.container__reset} onClick={resetFilters}>Eliminar filtros</button>
           </div>

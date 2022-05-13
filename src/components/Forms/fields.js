@@ -95,20 +95,20 @@ export const fieldsLogin = [
 ];
 export const fieldsContact = [
   {
+    id: 'name',
+    initialValue: '',
+    placeholder: 'Nombre',
+    validate: 'Nombre',
+    required: true,
+    type: 'text',
+  },
+  {
     id: 'email',
     initialValue: '',
     placeholder: 'Email',
     validate: 'email',
     required: true,
     type: 'email',
-  },
-  {
-    id: 'name',
-    initialValue: '',
-    placeholder: 'Name',
-    validate: 'name',
-    required: true,
-    type: 'text',
   },
 ];
 export const fieldsContactExtend = [

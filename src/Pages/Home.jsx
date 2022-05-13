@@ -156,7 +156,7 @@ function Home() {
             <div className='container'>
               <div className='row'>
                 <div className='flex-md-12 flex-sm-12'>
-                  <h1 className={`h3 text-center text__secondary__white mb-5 ${classes.section__works__title}`}>
+                  <h1 className={`h3 text__secondary__white mb-5 ${classes.section__works__title}`}>
                     {filterWorks[0].title ? filterWorks[0].title : '¿Cómo funciona?'}
                   </h1>
                 </div>
@@ -205,7 +205,7 @@ function Home() {
                 </h1>
               </div>
             </div>
-            <div className='row'>
+            <div className='row d-xs-none'>
               <div className='flex-md-12 flex-sm-12'>
                 <p className={`subtitle-1 mb-10 text__gray__gray_lighten-4 ${classes.section__discover__subtitle}`}>
                   {filterDiscoverSubtitle || ''}
@@ -320,7 +320,7 @@ function Home() {
             <div className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
                 <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
-                  <a href=''>Ver más</a>
+                  <a href=''>Ver todas</a>
                 </div>
               </div>
             </div>

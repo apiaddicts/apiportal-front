@@ -2,172 +2,173 @@
 @import "./../../styles/mixins/mixin.scss";
 
 .divider {
-    border-bottom: 4px solid $secondary_yellow;
-    width: 56px;
-    margin-top: 8px;
-    margin-bottom: 34px;
-    @include breakpoint(xs){
-        margin-top: 0;
-        margin-bottom: 0;
-    }
+  border-bottom: 4px solid $secondary_yellow;
+  width: 56px;
+  margin-top: 8px;
+  margin-bottom: 34px;
+  @include breakpoint(xs) {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
 }
-.banner{
-    &__container {
+.banner {
+  &__container {
     height: 100%;
     width: 100%;
     background: $primary;
+  }
+  &__content {
+    padding-top: 101px;
+    padding-bottom: 85px;
+    @include breakpoint(xs) {
+      padding-top: 39px;
+      padding-bottom: 45px;
     }
-    &__content{
-        padding-top: 101px;      
-        padding-bottom: 85px;
-        @include breakpoint(xs){
-            padding-top: 39px;
-            padding-bottom: 45px;
-        }
+  }
+  &__centered {
+    padding: 81px 0;
+    @include breakpoint(xs) {
+      padding: 54px 0 !important;
     }
-    &__centered{
-        padding: 81px 0;
-        @include breakpoint(xs) {
-            padding: 54px 0 !important;
-        }
+  }
+  &__vertical {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+    align-items: center;
+    justify-items: center;
+    &__content {
+      height: 100%;
+      display: grid;
+      align-content: center;
+      justify-content: center;
     }
-    &__vertical{
-        height: 100vh;
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        gap: 1rem;
-        align-items: center;
-        justify-items: center;
-        &__content{
-            height: 100%;
-            display: grid;
-            align-content: center;
-            justify-content: center;
-        }    
-        
+  }
+  &__list {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    &__avatar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: $secondary;
+      padding: 6px;
+      margin: 20px;
+      border-radius: 50%;
     }
-    &__list{
-        display: flex;
-        justify-items: center;
-        align-items: center;
-        &__avatar{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: $secondary;
-            padding: 6px;
-            margin: 20px;
-            border-radius: 50%;
-        }
-    }
+  }
 }
 .banner_img {
-    
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  height: 300px;
+  // padding: 0% 4.5%;
+  position: relative;
+
+  &__layout {
+    position: absolute;
     width: 100%;
-    height: 300px;
-    // padding: 0% 4.5%;
-    position: relative;
+    height: 400px;
+    z-index: -1;
+    background: #F5F6F8;
+  }
 
-    &__backTo {
-        width: 100%;
-        padding-top: 3%;
-        padding-left: 3rem;
-        
-        &__btn{
-            display: flex;
-            align-items: center;
-            color: $primary;
-        }
-        &__label {
-            padding: 0 0.5rem;
-            font-weight: 700;
-            font-size: 16px;
-            letter-spacing: 1.33px;
-            text-transform: uppercase;
-            
-        }
+  &__backTo {
+    width: 100%;
+    padding-top: 3%;
+    padding-left: 3rem;
+
+    &__btn {
+      display: flex;
+      align-items: center;
+      color: $primary;
+    }
+    &__label {
+      padding: 0 0.5rem;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 1.33px;
+      text-transform: uppercase;
+    }
+  }
+
+  &__title {
+    width: 100%;
+    padding: 0 4.5%;
+  }
+
+  &__img {
+    position: absolute;
+    height: 432px;
+    width: 593px;
+    z-index: 2;
+    top: 30px;
+    right: 7%;
+    border-radius: 0 0 50px 0;
+
+    @include breakpoint(xs) {
+      height: 141px;
+      width: 293px;
+      right: 15%;
+      top: 30px;
+      display: none;
     }
 
-    &__title {
-        width: 100%;
-        padding: 0 4.5%;
+    @include breakpoint(md) {
+      height: 141px;
+      width: 293px;
+      right: 15%;
+      display: none;
     }
 
-    &__img {
-        position: absolute;
-        height: 432px;
-        width: 593px;
-        z-index: 2;
-        top: 30px;
-        right: 7%;
-        border-radius: 0 0 50px 0;
-        
-        @include breakpoint(xs) {
-            height: 141px;
-            width: 293px;
-            right: 15%;
-            top: 30px;
-                display: none;
-        }
-        
-        @include breakpoint(md) {
-            height: 141px;
-            width: 293px;
-            right: 15%;
-            display: none;
-        }
-        
-        @include breakpoint(lg) {
-            display: block;
-            height: 232px;
-            width: 393px;
-            z-index: 2;
-            top: 30px;
-            right: 5%;
-            }
-            
-            @include breakpoint(xl) {
-                height: 432px;
-                width: 593px;
-                z-index: 2;
-                top: 30px;
-            right: 7%;
-        }
+    @include breakpoint(lg) {
+      display: block;
+      height: 232px;
+      width: 393px;
+      z-index: 2;
+      top: 30px;
+      right: 5%;
     }
 
-    &__footer {
-        width: 100%;
-        height: 60px;
-        background: url("../../static/img/1595328.png");
-        // background: radial-gradient(farthest-side,transparent 20%,transparent 90% ,purple 93%, purple 96%,transparent) left center/30px 30px;
-        background-repeat: space;
-        margin-top: 5%;
-        position: absolute;
-            bottom: -45px;
+    @include breakpoint(xl) {
+      height: 432px;
+      width: 593px;
+      z-index: 2;
+      top: 30px;
+      right: 7%;
     }
+  }
+
+  &__footer {
+    width: 100%;
+    height: 60px;
+    background: url("../../static/img/1595328.png");
+    margin-top: 5%;
+    position: absolute;
+    bottom: -6px;
+    z-index: -1;
+  }
 }
 .heroOverlay {
-    height: 100%;
-    width: 100%;
-    background: rgba(0, 0, 0, 0.7);
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .input__search {
-    width: 50%;
+  width: 50%;
 }
 
 .width-text-banner {
-    width: 500px;
-    margin-bottom: 22px;
-    margin-top: 45px;
+  width: 500px;
+  margin-bottom: 22px;
+  margin-top: 45px;
 
-    @include breakpoint(xs) {
-        width: 100%;
-    }
+  @include breakpoint(xs) {
+    width: 100%;
+  }
 }
-
-
-

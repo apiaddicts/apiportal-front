@@ -26,7 +26,7 @@ function Footer({ isPrivate }) {
     <div>
       {!isPrivate && (
         <Base img={img}>
-          <div className={classes.footer__container}>
+          <div className={`container ${classes.footer__container}`}>
             <div className={`${classes.divider} mb-4`} />
             <h1 className='h2 text__secondary__white mb-3'>Dejanos tus datos para asesorarte</h1>
             <p className='h5 text__secondary__white mb-10'>Contáctanos por medio de este formulario</p>
@@ -71,18 +71,18 @@ function Footer({ isPrivate }) {
           <img src={SuraLogo} alt='' />
         </div>
         <div className={classes.email}>
-          <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3'>Correo electronico</h1>
+          <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3 mb-2'>Correo electronico</h1>
           <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>mxEmpresasSura@segurossura.com.mex</p>
         </div>
         <div className={classes.policies}>
-          <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3'>Política de</h1>
+          <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3 mb-2'>Política de</h1>
           <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>Privacidad de datos</p>
         </div>
 
       </div>
       <div className={`container ${classes.footer__social}`}>
         <div className={classes.footer__social__copyright}>
-          <p className='caption text-uppercase text__gray__gray_lighten-3'>
+          <p className='caption text-uppercase text__gray__gray_lighten-3 mb-3'>
             &copy;
             {' '}
             <span>{ year }</span>

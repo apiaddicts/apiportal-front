@@ -2,7 +2,7 @@ import React from 'react';
 import icons from '../../static/icons-sura';
 import './item.scss';
 
-function Item({ icon, title, description, type = 'basic', number, textColor = '#000', iconColor = '#fff', background = '#00acc742' }) {
+function Item({ icon, title, description, type = 'basic', number, textColor = '#000', iconColor = '#fff', background = '#00acc742', small = false }) {
   const color = (color) => ({
     color: `${color}`,
   });
@@ -28,7 +28,7 @@ function Item({ icon, title, description, type = 'basic', number, textColor = '#
             </div>
           ) : (null)}
           {type !== 'title' ? (
-            <h1>{title}</h1>
+            <h1 className='mb-3'>{title}</h1>
           ) : (null)}
           <p style={color(textColor)}>{description}</p>
         </div>

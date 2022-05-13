@@ -4,7 +4,7 @@ import Chip from '../Chip/Chip';
 import Base from './Base';
 import './cards.scss';
 
-function CardInformation({ img, buttons, title, description, reading, info, maxWidth, version, status, colorStatus }) {
+function CardInformation({ img, buttons, title, description, reading, info, maxWidth, version, status, colorStatus, theme }) {
 
   return (
     <Base maxWidth={maxWidth}>
@@ -23,7 +23,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
         </div>
       )}
       <div className={`pr-8 pl-8 pb-8 pt-2 ${reading ? 'py-2' : null}`}>
-        <p className={`h5 w-full font-weight-semi-bold ${reading ? 'px-8' : null}`}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
+        <p className={`h3 w-full font-weight-semi-bold ${reading ? 'px-8' : null}  ${theme === 'primary' ? 'text__primary' : ''} `}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
         <div className='card__information'>
           <div className={`card__information__tags ${buttons.length >= 3 ? 'tags-flex-wrap' : null} ${reading ? 'px-8' : null}`}>
             {buttons.map((button, index) => (

@@ -60,7 +60,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
 
             <ul className='d-xs-none'>
               <li className='pr-2'>
-                <Button type='button' styles='ghost-variant' size='small' onClick={() => { setIsOpen(true); }}>
+                <Button type='button' styles='ghost-variant' preIcon='MdOutlinePersonOutline' size='small' onClick={() => { setIsOpen(true); }}>
                   Iniciar sesión
                 </Button>
               </li>

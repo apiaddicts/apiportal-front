@@ -769,6 +769,16 @@ a {
   color: $secondary_white;
 }
 
+.primary {
+  background-color: $gray_lighten-1;
+  color: $primary;
+  border-radius: 50px;
+  font-weight: 500;
+  padding: 6px 10px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
 .get {
   background-color: #97d700;
   color: $secondary_white;
