@@ -33,7 +33,7 @@
   font-size: 16px;
   line-height: 19px;
   text-align: center;
-  padding: 13px 32px;
+  padding: 18px 32px;
   text-transform: uppercase !important;
   display: flex;
   justify-content: center;
@@ -41,6 +41,11 @@
   width: 210px;
   min-width: 100%;
   border: 1px solid #E3E829;
+  &__icon {
+    margin-right: 10px;
+    font-size: 20px;
+    color: $secondary;
+  }
 }
 
 .btn-none {
@@ -71,7 +76,7 @@
 }
 
 .btn-ghost-variant {
-  @include button-bg(transparent);
+  @include button-bg($secondary_white);
   @include letter($primary);
   @include border($secondary);
 }

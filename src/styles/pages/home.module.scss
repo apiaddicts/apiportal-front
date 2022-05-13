@@ -82,6 +82,7 @@
     padding-bottom: 59px !important;
   }
   &__title{
+    text-align: center;
     @include breakpoint(xs) {
       text-align: left !important;
       font-size: 26px !important;
@@ -169,9 +170,18 @@
 .section__experiences {
   background: $gray_lighten-1;
   padding-top: 75px;
-
+  padding-bottom: 100px;
+  @include breakpoint(xl){
+    padding-bottom: 0px;
+  }
   @include breakpoint(xs){
     padding-top: 45px;
+    padding-bottom: 0px;
+  }
+
+  &__subtitle {
+    padding-top: 0.5rem;
+    padding-bottom: 2rem;
   }
   
   &__tabs {
@@ -200,7 +210,7 @@
         }
         @include breakpoint(lg) {
           display: block;
-          width: 50%;
+          width: 60%;
         }
 
       }
@@ -208,7 +218,6 @@
     &__card {
       position: absolute;
       border-radius: 20px;
-      // box-shadow: 0px 3px 12px -2px rgba(0, 0, 0, 0.1);
       background: $secondary_white;
       padding: 20px;
       top: 10px;
@@ -232,15 +241,20 @@
       }
       @include breakpoint(md) {
         position: relative;
-        top: 0%;
+        top: 2%;
         left: 0%;
         max-width: 700px;
       }
+
       @include breakpoint(lg) {
         position: absolute;
-        top: -5%;
+        top: 5%;
         left: 36%;
         max-width: 65%;
+      }
+
+      @include breakpoint(xl) {
+        top: -5%;
       }
 
     }
@@ -265,9 +279,16 @@
   }
   &__title{
     padding-bottom: 32px;
+    @include breakpoint(xs) {
+      padding-bottom: 0px;
+      margin-bottom: 0px !important;
+    }
   }
   &__subtitle {
     padding-bottom: 10px;
+    @include breakpoint(xs) {
+      padding-bottom: 0px;
+    }
   }
 
   @include breakpoint(xs) {

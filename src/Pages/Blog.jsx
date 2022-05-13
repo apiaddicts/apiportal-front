@@ -154,6 +154,7 @@ function Blog() {
                                   buttons={tab.cards && tab.cards[0].steps}
                                   description={tab.cards && tab.cards[0].description}
                                   reading={tab.cards && tab.cards[0].timeRead}
+                                  theme='primary'
                                 />
                               </div>
                             </div>
@@ -171,6 +172,7 @@ function Blog() {
                                           description={results.description}
                                           title={results.title}
                                           buttons={results.tags && results.tags.length > 0 ? results.tags : []}
+                                          theme='primary'
                                         />
                                       </Link>
                                     ))
@@ -252,11 +254,11 @@ function Blog() {
             <div className='container'>
               <div className='row'>
                 <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
-                  <h1 className='h2 text__primary'>Novedades</h1>
+                  <h1 className='h2 text__primary'>También te puede interesar</h1>
                 </div>
 
                 <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
-                  <p className='body-1'>
+                  <p className='body-1 text__gray__gray_darken'>
                     Conoce todas las novedades sobre tecnología, APIs y transformación digital
                   </p>
                 </div>
