@@ -42,17 +42,20 @@ export const signUp = (data) => (dispatch) => {
 export const getUser = (tokens) => (dispatch) => {
   userService.getUserDetails(tokens.token, tokens.id).then(
     (response) => {
-      dispatch({ type: userConstants.GET_USER_SUCCESS, response });
-      dispatch({
-        type: userConstants.LOGIN_SUCCESS,
-        id: tokens.id,
-        token: tokens.token,
-      });
+      if (response && Object.keys(response).length > 0) {
+        dispatch({ type: userConstants.GET_USER_SUCCESS, response });
+        dispatch({
+          type: userConstants.LOGIN_SUCCESS,
+          id: tokens.id,
+          token: tokens.token,
+        });
+      } else {
+        localStorage.removeItem('token');
+        dispatch({ type: userConstants.LOGOUT_USER });
+      }
     },
     (error) => {
-      localStorage.removeItem('token');
-      dispatch({ type: userConstants.LOGOUT_USER });
-      console.error(error);
+      console.log(error);
     },
   );
 };

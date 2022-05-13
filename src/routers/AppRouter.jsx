@@ -49,7 +49,7 @@ function AppRouter() {
       };
       dispatch(getUser(tokens));
     }
-  }, [user]);
+  }, []);
 
   return (
     <BrowserRouter>
@@ -85,15 +85,13 @@ function AppRouter() {
                 <SidebarDrawer user={user} />
                 <Routes>
                   <Route path='/user' element={<Admin />} />
-                  <Route path='/apis' exact element={<Apis />} />
-                  <Route path='/api/:id' exact element={<ApiDetails />} />
-                  <Route path='/documentation/api' exact element={<ApiDocumentation />} />
                   <Route path='/apps' exact element={<Apps />} />
+                  <Route path='/documentation/api' exact element={<ApiDocumentation />} />
                   <Route path='/apps/:id' exact element={<AppsDetail />} />
                   <Route path='/apps/apis' exact element={<ChooseApi />} />
                   <Route path='/newApp' exact element={<AddApp />} />
                   <Route path='/ApiLibrary' exact element={<ApiLibrary />} />
-                  <Route path='/ApiLibrary/apiDetails' exact element={<ApiDetailed />} />
+                  <Route path='/ApiLibrary/:id' exact element={<ApiDetailed />} />
                   <Route path='*' element={<Navigate to='/apps' replace />} />
                 </Routes>
               </Box>
