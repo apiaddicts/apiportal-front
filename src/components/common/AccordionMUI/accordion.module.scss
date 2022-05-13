@@ -1,0 +1,10 @@
+@import '../../../styles/variables.scss';
+
+.title {
+    font-family: $barlow;
+    font-size: 1rem;
+    font-weight: 700 !important;
+    text-transform: uppercase;
+    letter-spacing: 1.33px !important;
+    color: $gray_darken;
+}

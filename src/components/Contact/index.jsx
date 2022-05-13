@@ -30,7 +30,7 @@ function Contact() {
         </div>
         <div className={pathname !== '/blog' ? classes.contact__header__title__alternative : classes.contact__header__title}>
           <div className={pathname !== '/blog' ? classes.contact__alternative__description : classes.contact__description}>
-            <p className=''>¡Entérate de lo último!</p>
+            <p className='pt-5 pb-2'>¡Entérate de lo último!</p>
           </div>
           <div className={pathname !== '/blog' ? classes.contact__alternative__description : classes.contact__description}>
             <p className=''> Escoge una o varias capacidades y sé el primero en enterarte.</p>

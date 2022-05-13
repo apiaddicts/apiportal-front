@@ -24,7 +24,16 @@ function CheckboxWrapper({
       <FormLabel component='legend'>{legend}</FormLabel>
       <FormGroup>
         <FormControlLabel
-          control={<Checkbox {...configCheckbox} />}
+          control={(
+            <Checkbox
+              sx={{
+                '&.Mui-checked': {
+                  color: '#00AEC7',
+                },
+              }}
+              {...configCheckbox}
+            />
+          )}
           label={label}
         />
       </FormGroup>

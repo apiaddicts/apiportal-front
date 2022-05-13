@@ -22,7 +22,7 @@ function Accordion({ title, body, active, setActive }) {
   return (
     <div className={classes.accordion}>
       <div
-        className={active.item === title ? `${classes.accordion__head} ${classes.active}` : `${classes.accordion__head}`}
+        className={active.item === title || active.item === title.subtitle ? `${classes.accordion__head} ${classes.active}` : `${classes.accordion__head}`}
         onClick={() => {
           toggleItem();
         }}
