@@ -127,9 +127,7 @@ export const filterCheck = (label, checked, name) => (dispatch) => {
 };
 
 export const resetGetLibrary = () => (dispatch) => {
-  const { filters } = store.getState().library;
   dispatch({
     type: libraryConstants.RESET_LIBRARY,
   });
-  console.log(filters);
 };

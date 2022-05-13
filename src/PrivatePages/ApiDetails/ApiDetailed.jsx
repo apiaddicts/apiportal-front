@@ -1,11 +1,24 @@
 /* eslint-disable array-callback-return */
+import React, { useState, useEffect } from 'react';
+
+import { useParams } from 'react-router-dom';
+
+import { useDispatch, useSelector } from 'react-redux';
+
 import { Box, Container } from '@mui/material';
-import React, { useState } from 'react';
+
 import Title from '../../components/Title/Title';
 import AccordionFilter from '../../components/Accordion/AccordionFilter';
 import Accordion from '../../components/Accordion/Accordion';
 
+import { getLibrary, resetGetLibrary } from '../../redux/actions/libraryAction';
+
 function ApiDetails(props) {
+  const { library } = useSelector((state) => state.library);
+
+  const params = useParams();
+  const dispatch = useDispatch();
+
   const [active, setActive] = useState({ filter: false, item: null, status: false });
   const [endpoint, setEndpoint] = useState({ filter: false, item: null, status: false });
   const infoApi = [
@@ -26,9 +39,20 @@ function ApiDetails(props) {
     },
   ];
 
+  useEffect(() => {
+
+    if (params.id && library && Object.keys(library).length === 0) {
+      dispatch(getLibrary(params.id));
+    }
+
+    return () => {
+      dispatch(resetGetLibrary());
+    };
+  }, []);
+
   return (
     <Container fixed className='my-10 py-10'>
-      <Title text='API de Salud Colectiva' />
+      <Title text={library.title ? library.title : ''} />
       <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 4fr', gap: '3rem', alignItems: 'baseline' }}>
         <div>
           <AccordionFilter items={infoApi} active={active} setActive={setActive} />

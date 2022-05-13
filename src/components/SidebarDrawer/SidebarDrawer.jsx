@@ -27,7 +27,7 @@ function SidebarDrawer({ children, user }) {
   const listItems = [
     { route: '/apps', text: 'Apps', icon: <Terminal /> },
     { route: '/newApp', text: 'Nueva App', icon: <Terminal /> },
-    { route: '/ApiLibrary/apiDetails', text: 'Biblioteca de APIs', icon: <Settings /> },
+    { route: '/ApiLibrary', text: 'Biblioteca de APIs', icon: <Settings /> },
   ];
 
   const dispatch = useDispatch();
