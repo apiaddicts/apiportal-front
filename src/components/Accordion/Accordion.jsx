@@ -4,7 +4,6 @@ import classes from './accordion.module.scss';
 
 function Accordion({ title, body, active, setActive }) {
   // const [flag, setFlag] = useState(false);
-  console.log(active, setActive);
 
   const toggleItem = () => {
     if (active.item === title) {

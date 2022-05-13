@@ -26,15 +26,15 @@ export const adminFields = [
     required: true,
     type: 'email',
   },
-  {
-    id: 'phone',
-    initialValue: '',
-    placeholder: 'Celular',
-    label: 'Celular',
-    validate: 'phone',
-    required: true,
-    type: 'number',
-  },
+  // {
+  //   id: 'phone',
+  //   initialValue: '',
+  //   placeholder: 'Celular',
+  //   label: 'Celular',
+  //   validate: 'phone',
+  //   required: true,
+  //   type: 'number',
+  // },
 ];
 
 export const adminFieldsOrg = [
