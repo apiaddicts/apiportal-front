@@ -48,7 +48,7 @@
   font-weight: 600;
   font-size: 18px;
   text-align: center;
-  color: $secondary_white;
+  color: $secondary;
   cursor: pointer;
 }
 
@@ -58,4 +58,13 @@
 
 .tab-list-active-secundary {
   border-bottom: 1px solid $secondary_yellow;
+  color: $secondary_white;
+}
+
+.icon {
+  color: $secondary;
+  font-size: 1.25rem;
+}
+.icon-active {
+  color: $secondary_white;
 }

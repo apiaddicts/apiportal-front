@@ -15,7 +15,7 @@ import classes from '../styles/pages/login.module.scss';
 import useLoginConfig from '../hooks/useLogin';
 
 function Login({ setIsOpen, setPrivateSession }) {
-  const [showAlert, setShowAlert] = useState(true);
+  const [showAlert, setShowAlert] = useState(false);
   const [showForm, setShowForm] = useState(true);
   const [showResetForm, setShowResetForm] = useState(false);
 

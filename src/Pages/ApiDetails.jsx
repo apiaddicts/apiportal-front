@@ -16,6 +16,7 @@ import Slick from '../components/SlickSlider/Slick';
 
 import { getHome } from '../redux/actions/homeAction';
 import { getLibrary, resetGetLibrary } from '../redux/actions/libraryAction';
+import Icon from '../components/MdIcon/Icon';
 
 const slidesNew = [
   {
@@ -131,18 +132,19 @@ function ApiDetails({ setIsOpen }) {
                 </h1>
               </div>
               <div className='row px-5'>
-                <div className={`flex-sm-12 flex-md-6 flex-lg-4 ${classes.section__content__img}`}>
+                <div className={`flex-sm-12 flex-md-6 flex-lg-6 ${classes.section__content__img}`}>
                   <img src={library.benefits && library.benefits.length > 0 && library.benefits.length === 1 && library.benefits[0].background ? library.benefits[0].background.url : codeSnipet} alt='Benefits' className='w-full' />
                 </div>
-                <div className={`flex-sm-12 flex-md-10 flex-lg-8 ${classes.section__content__items} container`}>
-                  <div className='grid grid-lg-col-2'>
+                <div className='flex-sm-12 flex-md-6 flex-lg-6 container' style={{ display: 'flex', alignItems: 'center', padding: '0 4rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem', alignContent: 'center' }}>
                     {library.benefits && library.benefits.length > 0 && library.benefits.length === 1 && library.benefits[0].Steps.length > 0 ? (
                       library.benefits[0].Steps.map((item, i) => (
-                        <div className='mb-7'>
+                        <div>
                           <Item
                             key={i}
                             title={item.title}
                             icon={item.number}
+                            styles={{ fontSize: '18px', fontWeight: '600' }}
                           />
                         </div>
                       ))
@@ -185,7 +187,7 @@ function ApiDetails({ setIsOpen }) {
               <div className='button__group mt-10 justify-center'>
                 {filterButtonSection && filterButtonSection.length > 0 ? (
                   filterButtonSection[0].header.map((button, i) => (
-                    <div key={i} className='pr-2 mb-4'>
+                    <div key={i} className='pr-10 mb-4'>
                       <Button styles={button.keyword}>
                         {button.title}
                       </Button>
@@ -205,8 +207,10 @@ function ApiDetails({ setIsOpen }) {
             </div>
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
-                <p className='subtitle-1 ml-1 mb-10'>
+                <p className={`subtitle-1 mb-10 text__gray__gray_lighten-4 ${classes.section__discover__subtitle}`}>
                   Encuentra las mejores APIs para tu negocio.
+                  {' '}
+                  <br />
                   Nuestras APIs son fáciles de personalizar e integrar, para comenzar a vender y gestionar los productos.
                 </p>
               </div>
@@ -222,10 +226,23 @@ function ApiDetails({ setIsOpen }) {
                 ) : (null)
               }
             </div>
+            <div className='row'>
+              <div className='flex-md-12 flex-sm-12'>
+                <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
+                  <a href='' className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
+                    <span className='mr-1'>ver todas</span>
+                    <Icon id='MdOutlineEast' />
+                  </a>
+                  <a href='' className={`d-sm-none ${classes.section__discover__showmore__button}`}>
+                    Ver todas
+                  </a>
+                </div>
+              </div>
+            </div>
           </section>
           <section id='Banner'>
             <BannerCentered
-              title='Integras tus sistemas con las APIs de SURA'
+              title='Integra tus sistemas con las APIs de SURA'
               subtitle='Quisque rutrum. Sed augue ipsum.'
               img='https://picsum.photos/1920/300'
               buttonType='primary'

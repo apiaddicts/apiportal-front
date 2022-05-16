@@ -1,0 +1,42 @@
+@import '../../../styles/variables.scss';
+@import '../../../styles/mixins/mixin.scss';
+
+.login {
+    &__checkbox {
+        display: flex;
+        align-items: center;
+        input[type="checkbox"] + span {
+            font-weight: 400;
+            font-size: 1rem;
+        }
+        input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+        input[type="checkbox"]:checked {
+            background-color: $primary;
+        }
+    }
+
+    &__btn{
+        width: 100%; 
+        display: grid; 
+        grid-template-columns: repeat(12, 1fr);
+        &__button {
+            grid-column: 5/9;
+            @include breakpoint(xs) {
+                grid-column: 1/13;
+            }
+
+            @include breakpoint(sm) {
+                grid-column: 4/8;
+            }
+            @include breakpoint(md) {
+                grid-column: 3/8;
+            }
+            @include breakpoint(lg) {
+                grid-column: 5/9;
+            }
+        }
+    }
+}

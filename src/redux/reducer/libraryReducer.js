@@ -66,7 +66,8 @@ export default function libraryReducer(state = initialState, action) {
       return {
         ...state,
         library: {},
-        errorLibrary: {},
+        filters: {},
+        libraries: [],
       };
     default:
       return state;

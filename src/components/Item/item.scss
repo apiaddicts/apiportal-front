@@ -24,6 +24,9 @@
         line-height: 50px;
         letter-spacing: 0.25px;
         color: $secondary_white;
+        @include breakpoint(xs) {
+            padding-bottom: 0.5rem;
+        }
     }
 }
 
@@ -38,23 +41,25 @@
     justify-content: center;
     align-items: flex-start;
     .circle {
-        width: 80px;
-        height: 80px;
+        // width: 80px;
+        // height: 80px;
         border-radius: 100%;
-        background: #00acc742;
+        // background: #00acc742;
         display: flex;
         justify-content:center;
         align-items: center;
         margin-left: 5%;
 
         .icon {
-            font-size: 56px;
             color: $primary;
             display: flex;
             align-items: center;
             justify-content: center;
             @include breakpoint(xs){
                 font-size: 12px !important;
+            }
+            img {
+                width: 100%;
             }
         }
     }
@@ -63,6 +68,9 @@
 .item_description {
     width: 85%;
     padding-left: 2rem;
+    @include breakpoint(xs) {
+        padding-left: 1rem;
+    }
     padding-right: 2.5%;
     display: flex;
     align-items: center;

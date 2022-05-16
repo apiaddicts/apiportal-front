@@ -16,6 +16,7 @@ function CheckboxWrapper({
 
   const configCheckbox = {
     onChange: handleChange,
+    ...otherProps,
   };
 
   return (
@@ -23,7 +24,16 @@ function CheckboxWrapper({
       <FormLabel component='legend'>{legend}</FormLabel>
       <FormGroup>
         <FormControlLabel
-          control={<Checkbox {...configCheckbox} />}
+          control={(
+            <Checkbox
+              sx={{
+                '&.Mui-checked': {
+                  color: '#00AEC7',
+                },
+              }}
+              {...configCheckbox}
+            />
+          )}
           label={label}
         />
       </FormGroup>

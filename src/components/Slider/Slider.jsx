@@ -30,7 +30,6 @@ function Slider({ slides }) {
     }
   };
   const previousSlide = () => {
-    console.log('BACK');
 
     if (slider.current.children.length > 0) {
 
@@ -65,12 +64,12 @@ function Slider({ slides }) {
                     <div className='divider mb-4' />
                   </div>
 
-                  <div className='flex-md-12 flex-sm-12'>
+                  <div className='flex-md-6 flex-sm-12'>
                     <h1 className='h1 text__secondary__white'>{x.title}</h1>
                   </div>
 
-                  <div className='flex-md-4 flex-sm-12'>
-                    <div className='button__group mt-5'>
+                  <div className='flex-md-12 flex-sm-12 mt-5'>
+                    <div className='button__group mt-10'>
                       {
                         x.actionButtons !== null ? (
                           x.actionButtons.map((i, index) => (

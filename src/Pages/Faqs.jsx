@@ -22,15 +22,6 @@ function Faqs(props) {
     }
   }, []);
 
-  // const filterData = dataFaq && dataFaq.contentSections ? dataFaq.contentSections.filter((item) => item.__component === 'sura.list-buttons') : [];
-  // const items = filterData.length > 0 ? filterData.map((i) => {
-  //   const data = {};
-  //   data.title = i.Name;
-  //   data.questions = i.list.length > 0 ? i.list.map((d) => (d.name)) : [];;
-
-  //   return data;
-  // }) : [];
-
   const filterFaqs = dataFaq && dataFaq.contentSections ? dataFaq.contentSections.filter((item) => item.__component === 'sura.list-filter') : [];
 
   const faqs = filterFaqs.length > 0 ? filterFaqs.map((i, index) => {
@@ -57,18 +48,20 @@ function Faqs(props) {
             img={dataFaq.contentSections[0].background.url}
           />
 
-          <section className='container mt-10 mb-10 pb-10 pt-10'>
+          <section className={`container ${classes.faq}`}>
             <div className={classes.faq__content}>
-              <div className={classes.faq__content__filter}>
+              <div className={`d-xs-none ${classes.faq__content__filter}`}>
                 <AccordionFilter items={fFaqs} active={active} setActive={setActive} />
               </div>
               <div className={classes.faq__content__qa}>
                 { faqs.length > 0 ? (
                   faqs.map((item, i) => (
                     <div key={i}>
-                      <h1 className='h3 text__primary mb-5'>{item.question}</h1>
+                      <h1 className='h3 text__primary mb-5 mt-5'>{item.question}</h1>
                       {item.data.map((faq, index) => (
-                        <Accordion key={index} title={faq.title} active={active} setActive={setActive} />
+                        <div className={classes.faq__question}>
+                          <Accordion key={index} title={faq.title} active={active} setActive={setActive} />
+                        </div>
                       ))}
                     </div>
                   ))

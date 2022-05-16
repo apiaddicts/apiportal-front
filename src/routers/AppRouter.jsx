@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import { Box } from '@mui/material';
 
@@ -25,17 +25,35 @@ import SidebarDrawer from '../components/SidebarDrawer/SidebarDrawer';
 import Admin from '../PrivatePages/ProfileAdmin';
 import AddApp from '../PrivatePages/AddApp';
 import AppsDetail from '../PrivatePages/DetailApp';
+import ApiDetailed from '../PrivatePages/ApiDetails/ApiDetailed';
+import ChooseApi from '../PrivatePages/ChooseApi';
+
 // Ejemplos
 import Swagger from '../Pages/ejemplos/Swagger';
 import Redoc from '../Pages/ejemplos/Redoc';
 
+import { getUser } from '../redux/actions/userAction';
+import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
+
 function AppRouter() {
-  const { email, password } = useSelector((state) => state.user);
+  const { id, token, user } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
 
   const [isOpen, setIsOpen] = useState(false);
   const [openForm, setOpenForm] = useState(false);
 
-  const privateSession = email !== '' && password !== '';
+  const privateSession = id !== '' && token !== '';
+
+  useEffect(() => {
+    if (id !== '' && token !== '' && user && Object.keys(user).length === 0) {
+      const tokens = {
+        id,
+        token,
+      };
+      dispatch(getUser(tokens));
+    }
+  }, []);
 
   return (
     <BrowserRouter>
@@ -43,7 +61,7 @@ function AppRouter() {
         <Login setIsOpen={setIsOpen} />
       )}
       {openForm && (
-        <Register setOpenForm={setOpenForm} />
+        <Register setOpenForm={setOpenForm} setIsOpen={setIsOpen} />
       )}
       {!privateSession && (
         <>
@@ -64,21 +82,31 @@ function AppRouter() {
         </>
       )}
       {privateSession && (
-        <Box sx={{ display: 'flex', backgroundColor: '#fbfbfb' }}>
-          <SidebarDrawer />
-          <Routes>
-            <Route path='/' element={<Admin />} />
-            <Route path='/apis' exact element={<Apis />} />
-            <Route path='/api/:id' exact element={<ApiDetails />} />
-            <Route path='/documentation/api' exact element={<ApiDocumentation />} />
-            <Route path='/apps' exact element={<Apps />} />
-            <Route path='/apps/:id' exact element={<AppsDetail />} />
-            <Route path='/newApp' exact element={<AddApp />} />
-            <Route path='/ApiLibrary' exact element={<ApiLibrary />} />
-            <Route path='/swagger' exact element={<Swagger />} />
-            <Route path='/redoc' exact element={<Redoc />} />
-            <Route path='*' element={<Navigate to='/' replace />} />
-          </Routes>
+        <Box>
+          {user && Object.keys(user).length > 0 ? (
+            <>
+              <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#fbfbfb' }}>
+                <SidebarDrawer user={user} />
+                <Routes>
+                  <Route path='/user' element={<Admin />} />
+                  <Route path='/apps' exact element={<Apps />} />
+                  <Route path='/documentation/api' exact element={<ApiDocumentation />} />
+                  <Route path='/apps/:id' exact element={<AppsDetail />} />
+                  <Route path='/apps/apis' exact element={<ChooseApi />} />
+                  <Route path='/newApp' exact element={<AddApp />} />
+                  <Route path='/ApiLibrary' exact element={<ApiLibrary />} />
+                  <Route path='/ApiLibrary/:id' exact element={<ApiDetailed />} />
+                  <Route path='/swagger' exact element={<Swagger />} />
+                  <Route path='/redoc' exact element={<Redoc />} />
+                  <Route path='*' element={<Navigate to='/apps' replace />} />
+                </Routes>
+              </Box>
+              <Box sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, position: 'absolute', background: '#fff' }}>
+                <Footer isPrivate={true} />
+              </Box>
+            </>
+          ) : (<SkeletonComponent />)}
+
         </Box>
       )}
     </BrowserRouter>

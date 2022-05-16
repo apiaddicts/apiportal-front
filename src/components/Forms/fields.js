@@ -3,7 +3,7 @@ export const fieldsRegister = [
     id: 'first_name',
     initialValue: '',
     placeholder: 'John',
-    label: 'First name',
+    label: 'Nombre',
     validate: 'first_name',
     required: true,
     type: 'text',
@@ -12,7 +12,7 @@ export const fieldsRegister = [
     id: 'last_name',
     initialValue: '',
     placeholder: 'Doe',
-    label: 'Last name',
+    label: 'Apellidos',
     validate: 'last_name',
     required: true,
     type: 'text',
@@ -66,7 +66,7 @@ export const fieldsRegister = [
     id: 'password_confirmation',
     initialValue: '',
     placeholder: '********',
-    label: 'Confirmar password',
+    label: 'Repeat password',
     validate: 'password_confirmation',
     required: true,
     type: 'password',
@@ -95,20 +95,20 @@ export const fieldsLogin = [
 ];
 export const fieldsContact = [
   {
+    id: 'name',
+    initialValue: '',
+    placeholder: 'Nombre',
+    validate: 'Nombre',
+    required: true,
+    type: 'text',
+  },
+  {
     id: 'email',
     initialValue: '',
     placeholder: 'Email',
     validate: 'email',
     required: true,
     type: 'email',
-  },
-  {
-    id: 'name',
-    initialValue: '',
-    placeholder: 'Name',
-    validate: 'name',
-    required: true,
-    type: 'text',
   },
 ];
 export const fieldsContactExtend = [

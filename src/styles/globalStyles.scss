@@ -745,6 +745,7 @@ a {
     font-size: 13px;
     line-height: 16px;
     letter-spacing: 0.4px;
+    text-transform: uppercase;
   }
 }
 
@@ -766,6 +767,16 @@ a {
   border-radius: 5px;
   background-color: $success;
   color: $secondary_white;
+}
+
+.primary {
+  background-color: $gray_lighten-1;
+  color: $primary;
+  border-radius: 50px;
+  font-weight: 500;
+  padding: 6px 10px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
 }
 
 .get {
@@ -799,11 +810,12 @@ a {
 
 .gray {
   background-color: $gray_lighten-1;
-  color: $primary;
+  color: $gray_darken;
   border-radius: 50px;
-  font-weight: 200;
-  padding: 10px 15px;
-  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 10px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
 }
 .text {
   color: $gray;
@@ -830,6 +842,9 @@ a {
   }
   &__gray__gray_lighten-3 {
     color: $gray_lighten-3;
+  }  
+  &__gray__gray_lighten-4 {
+    color: $gray_lighten-4;
   }
   &__gray__gray_darken {
     color: $gray_darken;
@@ -1026,4 +1041,11 @@ a {
   @include breakpoint(lg) {
     text-align: left !important;
   }
+}
+
+.font-fs-joey {
+  font-family: $fs-joey !important;
+}
+.font-barlow {
+  font-family: $barlow !important;
 }
