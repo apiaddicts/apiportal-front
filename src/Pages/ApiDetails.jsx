@@ -135,15 +135,16 @@ function ApiDetails({ setIsOpen }) {
                 <div className={`flex-sm-12 flex-md-6 flex-lg-6 ${classes.section__content__img}`}>
                   <img src={library.benefits && library.benefits.length > 0 && library.benefits.length === 1 && library.benefits[0].background ? library.benefits[0].background.url : codeSnipet} alt='Benefits' className='w-full' />
                 </div>
-                <div className={`flex-sm-12 flex-md-6 flex-lg-6 ${classes.section__content__items} container`}>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', columnGap: '5rem', gridRow: 'autofit' }}>
+                <div className='flex-sm-12 flex-md-6 flex-lg-6 container' style={{ display: 'flex', alignItems: 'center', padding: '0 4rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem', alignContent: 'center' }}>
                     {library.benefits && library.benefits.length > 0 && library.benefits.length === 1 && library.benefits[0].Steps.length > 0 ? (
                       library.benefits[0].Steps.map((item, i) => (
-                        <div style={{ fontSize: '18px !important' }}>
+                        <div>
                           <Item
                             key={i}
                             title={item.title}
                             icon={item.number}
+                            styles={{ fontSize: '18px', fontWeight: '600' }}
                           />
                         </div>
                       ))
@@ -186,7 +187,7 @@ function ApiDetails({ setIsOpen }) {
               <div className='button__group mt-10 justify-center'>
                 {filterButtonSection && filterButtonSection.length > 0 ? (
                   filterButtonSection[0].header.map((button, i) => (
-                    <div key={i} className='pr-2 mb-4'>
+                    <div key={i} className='pr-10 mb-4'>
                       <Button styles={button.keyword}>
                         {button.title}
                       </Button>

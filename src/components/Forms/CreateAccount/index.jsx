@@ -38,7 +38,9 @@ function CreateAccount() {
       onSubmit={formConfig.handleSubmit}
     >
       {fieldsRegister.map((field) => (
-        <Input footer key={field.id} field={field} formik={formConfig} />
+        <div className='mb-2'>
+          <Input footer key={field.id} field={field} formik={formConfig} />
+        </div>
       ))}
       {/* checkbox */}
       <div className='create-account__checkbox'>
@@ -50,16 +52,19 @@ function CreateAccount() {
           .
         </span>
       </div>
-      <Button
-        styles='secundary'
-        type='submit'
-        disabled={
-          !formConfig.dirty || !formConfig.isValid || formConfig.isSubmitting
-        }
-        opacity={!formConfig.dirty || !formConfig.isValid || formConfig.isSubmitting ? 0.5 : 1}
-      >
-        Submit
-      </Button>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', width: '100%' }}>
+        <Button
+          style={{ gridColumn: '5/9' }}
+          styles='primary-blue'
+          type='submit'
+          disabled={
+            !formConfig.dirty || !formConfig.isValid || formConfig.isSubmitting
+          }
+          opacity={!formConfig.dirty || !formConfig.isValid || formConfig.isSubmitting ? 0.5 : 1}
+        >
+          Registrarme
+        </Button>
+      </div>
       {/* <Dialog
         formStatus={formConfig.formStatus}
         setFormStatus={formConfig.setStatus}
