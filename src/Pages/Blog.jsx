@@ -155,6 +155,7 @@ function Blog() {
                                   description={tab.cards && tab.cards[0].description}
                                   reading={tab.cards && tab.cards[0].timeRead}
                                   theme='primary'
+                                  blog={true}
                                 />
                               </div>
                             </div>
