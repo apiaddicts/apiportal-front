@@ -76,10 +76,36 @@ function signUp(data) {
     });
 }
 
+function getUserEntityTag(data, token, id) {
+  const requestOptions = {
+    method: 'HEAD',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    // body: JSON.stringify(data),
+  };
+
+  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
+  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
+  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
+  const url = `${urlService}/users/${id}?api-version=${config.apiVersion}`;
+  return fetch(url, requestOptions)
+    .then((response) => response.text().then((text) => {
+      const etag = response.headers.get('ETag');
+      const data = { etag: etag.replace(/['"]+/g, '') };
+      switch (response.status) {
+        case 200:
+          return data;
+        default:
+          return Promise.reject(data);
+      }
+    }))
+    .then((result) => result);
+}
+
 const userService = {
   login,
   getUserDetails,
   getUserSuscriptions,
+  getUserEntityTag,
   signUp,
 };
 

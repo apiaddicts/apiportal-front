@@ -1,10 +1,12 @@
 import userConstants from '../constants/userConstats';
 
 const token = JSON.parse(localStorage.getItem('token'));
+const etag = JSON.parse(localStorage.getItem('etag'));
 
-const initialState = token ? {
+const initialState = token && etag ? {
   id: token.id,
   token: token.token,
+  etag: etag.etag,
   loadinSignUp: false,
   signUpData: {},
   user: {},
@@ -12,6 +14,7 @@ const initialState = token ? {
   user: {},
   id: '',
   token: '',
+  etag: '',
   loadingSignUp: false,
   signUpData: {},
 };

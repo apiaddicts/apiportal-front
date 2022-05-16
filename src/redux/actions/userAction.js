@@ -10,6 +10,7 @@ export const login = (data) => (dispatch) => {
     if (response && Object.keys(response).length > 0) {
       localStorage.setItem('token', JSON.stringify(response));
       dispatch(getUser(response));
+      dispatch(getUserEntityTag(data, response));
     }
   }, (error) => {
     console.error(error);
@@ -53,6 +54,22 @@ export const getUser = (tokens) => (dispatch) => {
         localStorage.removeItem('token');
         dispatch({ type: userConstants.LOGOUT_USER });
       }
+    },
+    (error) => {
+      console.log(error);
+    },
+  );
+};
+
+export const getUserEntityTag = (properties, tokens) => (dispatch) => {
+  const data = {
+    properties,
+  };
+
+  userService.getUserEntityTag(data, tokens.token, tokens.id).then(
+    (response) => {
+      localStorage.setItem('If-Match', JSON.stringify(response));
+      console.log(response);
     },
     (error) => {
       console.log(error);
