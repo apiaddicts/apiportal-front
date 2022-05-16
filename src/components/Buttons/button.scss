@@ -63,6 +63,12 @@
   @include letter($primary);
 }
 
+.btn-primary-blue {
+  @include button-bg($primary);
+  @include letter($secondary_white);
+  @include border($primary)
+}
+
 .btn-secundary-white {
   @include button-bg($secondary_white);
   @include letter(#0033a0);

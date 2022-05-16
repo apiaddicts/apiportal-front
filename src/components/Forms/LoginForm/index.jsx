@@ -1,6 +1,7 @@
 import React from 'react';
 import Input from '../../Input';
 import Button from '../../Buttons/Button';
+import styles from './login.module.scss';
 
 function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin }) {
 
@@ -12,24 +13,26 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin }) {
         ))}
       </div>
       <div className={classes.login__footer}>
-        <div className={classes.login__checkbox}>
+        <div className={styles.login__checkbox}>
           <input type='checkbox' />
-          <span>Recordar contraseña</span>
+          <span className='ml-2'>Recordar contraseña</span>
         </div>
         <p
           onClick={() => {
             setShowResetForm(true);
             setShowForm(false);
           }}
-          className={classes.login__links}
+          className='text__secondary font-weight-bold caption'
         >
           ¿Olvidaste tu contraseña?
         </p>
       </div>
-      <div className={classes.login__button}>
-        <Button styles='secundary' type='submit'>
-          Iniciar sesión
-        </Button>
+      <div className={styles.login__btn}>
+        <div className={styles.login__btn__button}>
+          <Button styles='primary-blue' type='submit'>
+            Iniciar sesión
+          </Button>
+        </div>
       </div>
     </form>
   );
