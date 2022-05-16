@@ -21,11 +21,12 @@ function Button({ children, styles, opacity, size = 'regular', preIcon, ...rest 
     <button
       className={
         styles === 'primary' ? 'btn btn-primary' :
-          styles === 'secundary' ? 'btn btn-secundary' :
-            styles === 'secundary-white' ? 'btn btn-secundary-white' :
-              styles === 'ghost' ? 'btn btn-ghost' :
-                styles === 'ghost-variant' ?
-                  'btn btn-ghost-variant' : 'btn-none'
+          styles === 'primary-blue' ? 'btn btn-primary-blue' :
+            styles === 'secundary' ? 'btn btn-secundary' :
+              styles === 'secundary-white' ? 'btn btn-secundary-white' :
+                styles === 'ghost' ? 'btn btn-ghost' :
+                  styles === 'ghost-variant' ?
+                    'btn btn-ghost-variant' : 'btn-none'
       }
       style={btnStyled(size, opacity)}
       {...rest}

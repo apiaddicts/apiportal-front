@@ -60,3 +60,13 @@
     text-decoration-line: underline;
 
 }
+
+.footer-register {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); 
+    width: 100%;
+}
+
+.footer-register-button {
+    grid-column: 5/9;
+}
