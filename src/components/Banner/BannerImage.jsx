@@ -36,7 +36,7 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description }) 
         <div
           className={classes.banner_img__title}
         >
-          <h1 className='h2 mb-3 text__primary'>
+          <h1 className='h1 mb-3 text__primary'>
             {title !== '' ? title : 'Biblioteca de APIs' }
           </h1>
           <div className={`${classes.divider} mb-4 mt-3`} />
