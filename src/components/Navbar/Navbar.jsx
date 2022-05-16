@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MdSearch, MdClose, MdMenu } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import classes from './navbar.module.scss';
 import SuraLogo from '../../static/img/sura_logo.svg';
@@ -38,7 +38,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
 
   const listOptions = [
     { icon: '', name: 'APIs', route: '/apis' },
-    { icon: 'MdArrowDropDown', name: 'Documentación', route: '/documentacion' },
+    // { icon: 'MdArrowDropDown', name: 'Documentación', route: '/documentacion' },
     { icon: '', name: 'Blog', route: '/blog' },
     { icon: '', name: 'FAQs', route: '/faqs' },
   ];
@@ -47,7 +47,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
     <>
       <header className={classes.header}>
         <div className={classes.header__content}>
-          <Link to='/'>
+          <NavLink to='/'>
             <a className={classes.header__content__logo}>
               <img
                 src={SuraLogo}
@@ -55,7 +55,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
                 className={classes.header__content__logo__img}
               />
             </a>
-          </Link>
+          </NavLink>
           <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
 
             <ul className='d-xs-none'>
@@ -82,13 +82,13 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
                 </div>
               </div>
               <div className={classes.navbar__xs__section}>
-                <Link to='/' className={classes.navbar__xs__section__logo}>SEGUROS</Link>
+                <NavLink to='/' className={classes.navbar__xs__section__logo}>SEGUROS</NavLink>
               </div>
 
               <ul>
                 {
                   listOptions.map((item, index) => (
-                    <Link to={item.route} key={index} className='text__primary font-weight-medium' onClick={menuToggleHandler}>
+                    <NavLink to={item.route} key={index} className='text__primary font-weight-medium' onClick={menuToggleHandler}>
                       <li>
 
                         <div className={classes.navbar__xs__icon}>
@@ -102,7 +102,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
 
                       </li>
 
-                    </Link>
+                    </NavLink>
                   ))
                 }
                 <li className={classes.navbar__xs__opt__login}>
@@ -161,10 +161,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
               <Link to='/blog'>BLOG</Link>
             </li>
             <li>
-              <a href='/faqs'>FAQs</a>
-            </li>
-            <li>
-              <a href=''>CONTACTO</a>
+              <Link to='/faqs'>FAQs</Link>
             </li>
           </ul>
         </div>
