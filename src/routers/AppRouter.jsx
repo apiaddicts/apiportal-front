@@ -28,6 +28,10 @@ import AppsDetail from '../PrivatePages/DetailApp';
 import ApiDetailed from '../PrivatePages/ApiDetails/ApiDetailed';
 import ChooseApi from '../PrivatePages/ChooseApi';
 
+// Ejemplos
+import Swagger from '../Pages/ejemplos/Swagger';
+import Redoc from '../Pages/ejemplos/Redoc';
+
 import { getUser } from '../redux/actions/userAction';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
 
@@ -92,6 +96,8 @@ function AppRouter() {
                   <Route path='/newApp' exact element={<AddApp />} />
                   <Route path='/ApiLibrary' exact element={<ApiLibrary />} />
                   <Route path='/ApiLibrary/:id' exact element={<ApiDetailed />} />
+                  <Route path='/swagger' exact element={<Swagger />} />
+                  <Route path='/redoc' exact element={<Redoc />} />
                   <Route path='*' element={<Navigate to='/apps' replace />} />
                 </Routes>
               </Box>
