@@ -64,8 +64,6 @@ stages:
               steps:
                 - checkout: self
                   submodules: true
-                - script: envsubst < openshift/manifest.yaml > openshift/manifest.yaml
-                  displayName: Subsitute variables in manifest
                 # - task: qetza.replacetokens.replacetokens-task.replacetokens@3
                 #   displayName: Replace variables - Kubernetes Manifest
                 #   inputs:
@@ -82,7 +80,7 @@ stages:
                     openshiftService: $(openshiftServiceConnection)
                 # A script task making use of 'oc'
                 - script: |
-                    oc apply -f openshift/manifest.yaml -n front-api-cloud-dev
+                    envsubst < openshift/manifest.yaml | oc apply -n api-cloud-dev -f -
                   displayName: Apply deployment
                 # Single shot 'oc' command
                 - task: oc-cmd@2
