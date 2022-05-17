@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: $AZNAME
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: $AZNAME
+  template:
+    metadata:
+      labels:
+        app: $AZNAME
+    spec:
+      containers:
+        - name: $AZNAME
+          image: $AZIMAGE
+          ports:
+            - containerPort: $AZPORT
+          resources:
+            requests:
+              cpu: "500m"
+              memory: "1Gi"
+            limits:
+              cpu: "1000m"
+              memory: "2Gi"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: $AZNAME
+spec:
+  selector:
+    app: $AZNAME
+  ports:
+    - nodePort: 0
+      port: 80
+      protocol: TCP
+      targetPort: $AZPORT
+
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: $AZNAME
+  annotations:
+    haproxy.router.openshift.io/hsts_header: max-age=31536000;includeSubDomains;preload
+spec:
+  host: $HTTP_HOST
+  port:
+    targetPort: 80
+  to:
+    kind: Service
+    name: $AZNAME
