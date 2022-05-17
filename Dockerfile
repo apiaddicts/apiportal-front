@@ -9,6 +9,10 @@ COPY package*.json /usr/src/app/
 
 # USER node
 RUN npm install
+ARG NODE_APP_ENV
+ARG NODE_APP_PORT
+ARG SITE_URL
+ARG STRAPI_URL
 COPY . /usr/src/app/
 RUN npm run build
 EXPOSE 3000

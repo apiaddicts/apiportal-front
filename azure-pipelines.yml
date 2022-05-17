@@ -23,6 +23,8 @@ stages:
   - stage: Build
     jobs:
       - job: Build
+        variables:
+          - group: frontend-variables-${{variables.environment}}
         steps:
           - task: Docker@2
             displayName: Login to ACR
@@ -30,12 +32,21 @@ stages:
               command: login
               containerRegistry: $(dockerRegistryConnection)
           - task: Docker@2
-            displayName: Build and Push
+            displayName: Build
             inputs:
-              command: buildAndPush
+              command: build
               repository: $(azName)
               Dockerfile: Dockerfile
               buildContext: .
+              args: --build-arg NODE_APP_ENV --build-arg NODE_APP_PORT --build-arg SITE_URL --build-arg STRAPI_URL
+              tags: |
+                $(Build.SourceBranchName)
+                $(Build.SourceVersion)
+          - task: Docker@2
+            displayName: Push
+            inputs:
+              command: push
+              repository: $(azName)
               tags: |
                 $(Build.SourceBranchName)
                 $(Build.SourceVersion)
