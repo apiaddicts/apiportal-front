@@ -82,7 +82,7 @@ stages:
                     openshiftService: $(openshiftServiceConnection)
                 # A script task making use of 'oc'
                 - script: |
-                    oc apply -f openshift/manifest.yaml -n api-cloud-dev
+                    oc apply -f openshift/manifest.yaml -n front-api-cloud-dev
                   displayName: Apply deployment
                 # Single shot 'oc' command
                 - task: oc-cmd@2
