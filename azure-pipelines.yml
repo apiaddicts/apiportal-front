@@ -87,4 +87,4 @@ stages:
                   displayName: Wait for deployment
                   inputs:
                     openshiftService: $(openshiftServiceConnection)
-                    cmd: "rollout status -w deployment/$(az-name)"
+                    cmd: "rollout status -w deployment/$(azName)"
