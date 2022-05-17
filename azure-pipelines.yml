@@ -1,0 +1,81 @@
+trigger:
+  branches:
+    include:
+      - develop
+      - main
+      - pre
+
+pool:
+  name: Azure Pipelines
+  vmImage: ubuntu-20.04
+
+variables:
+  azName: devportal-front
+  azPort: 3000
+  azImage: $(dockerRegistry)/$(azName):$(Build.SourceVersion)
+  ${{ if eq(variables['Build.SourceBranchName'], 'develop') }}:
+    dockerRegistry: azurecontainerregistrysuradev.azurecr.io
+    dockerRegistryConnection: AzRegistryContainerDev
+    openshiftServiceConnection: "ARO-Dev"
+    environment: dev
+
+stages:
+  - stage: Build
+    jobs:
+      - job: Build
+        steps:
+          - task: Docker@2
+            displayName: Login to ACR
+            inputs:
+              command: login
+              containerRegistry: $(dockerRegistryConnection)
+          - task: Docker@2
+            displayName: Build and Push
+            inputs:
+              command: buildAndPush
+              repository: $(azName)
+              Dockerfile: Dockerfile
+              buildContext: .
+              tags: |
+                $(Build.SourceBranchName)
+                $(Build.SourceVersion)
+  - stage: Deploy
+    jobs:
+      - deployment: Deploy
+        variables:
+          - group: frontend-variables-${{variables.environment}}
+            #ENVIRONMENT: 'Development'
+        displayName: "Deploy to Dev"
+        environment: $(environment)
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                  submodules: true
+                - script: envsubst < openshift/manifest.yaml > openshift/manifest.yaml
+                  displayName: Subsitute variables in manifest
+                # - task: qetza.replacetokens.replacetokens-task.replacetokens@3
+                #   displayName: Replace variables - Kubernetes Manifest
+                #   inputs:
+                #     rootDirectory: $(System.DefaultWorkingDirectory)/kubernetes
+                #     targetFiles: "openshift/*.yaml"
+                #     keepToken: true
+                #     tokenPrefix: __
+                #     tokenSuffix: __
+
+                # Install oc so that it can be used within a 'script' or bash 'task'
+                - task: oc-setup@2
+                  displayName: Setup oc
+                  inputs:
+                    openshiftService: $(openshiftServiceConnection)
+                # A script task making use of 'oc'
+                - script: |
+                    oc apply -f openshift/manifest.yaml -n api-cloud-dev
+                  displayName: Apply deployment
+                # Single shot 'oc' command
+                - task: oc-cmd@2
+                  displayName: Wait for deployment
+                  inputs:
+                    openshiftService: $(openshiftServiceConnection)
+                    cmd: "rollout status -w deployment/$(az-name)"
