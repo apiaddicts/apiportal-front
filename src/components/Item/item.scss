@@ -1,7 +1,13 @@
 @import '../../styles/variables.scss';
+@import "./../../styles/mixins/mixin.scss";
 
+.main_item_contain {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 .item_title {
-    margin-left: 6.5%;
+    margin-bottom: 10px;
     .number {
         font-family: $fs-joey;
         font-style: normal;
@@ -15,10 +21,10 @@
         font-family: $fs-joey;
         font-style: normal;
         font-weight: 700;
-        font-size: 36px;
+        font-size: 30px;
         line-height: 50px;
         letter-spacing: 0.25px;
-        color: red;
+        color: $secondary_white;
     }
 }
 
@@ -28,30 +34,36 @@
 }
 
 .item_circle {
-    width: 18%;
+    width: 22%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     .circle {
         width: 80px;
         height: 80px;
-        border-radius: 40px;
-        background: rgba(183, 176, 156, 0.1);
+        border-radius: 100%;
+        background: #00acc742;
         display: flex;
         justify-content:center;
         align-items: center;
         margin-left: 5%;
 
         .icon {
-            font-size: 25px;
+            font-size: 56px;
             color: $primary;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            @include breakpoint(xs){
+                font-size: 12px !important;
+            }
         }
     }
 }
 
 .item_description {
     width: 85%;
-    padding-left: 2.5%;
+    padding-left: 2rem;
     padding-right: 2.5%;
     display: flex;
     align-items: center;
@@ -63,6 +75,9 @@
         font-size: 22px;
         line-height: 26px;
         letter-spacing: 0.157143px;
+        @include breakpoint(xs) {
+            font-size: 16px;
+        }
     }
     p {
         font-family: $barlow;

@@ -1,0 +1,61 @@
+@import "../../styles/variables.scss";
+
+.tab-list {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  padding-left: 0;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.tab-list_no_line {
+  border-bottom: 0px solid rgba(0, 0, 0, 0.15);
+  padding-left: 0;
+  display: flex;
+}
+
+.tab-list-center {
+  justify-content: center;
+}
+
+.tab-list-right {
+  justify-content: right;
+}
+
+.tab-list-item-primary {
+  display: inline-block;
+  list-style: none;
+  margin-bottom: -1px;
+  padding: 0.5rem 2rem 1.75rem 2rem;
+  font-family: $barlow;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+  color: #53565a;
+  cursor: pointer;
+}
+
+.tab-list-item-secundary {
+  display: inline-block;
+  list-style: none;
+  margin-bottom: -1px;
+  padding: 0.5rem 0.75rem;
+  font-family: $barlow;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 18px;
+  text-align: center;
+  color: $secondary_white;
+  cursor: pointer;
+}
+
+.tab-list-active-primary {
+  border-bottom: 5px solid $primary;
+}
+
+.tab-list-active-secundary {
+  border-bottom: 1px solid $secondary_yellow;
+}

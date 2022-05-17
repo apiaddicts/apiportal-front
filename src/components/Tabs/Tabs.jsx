@@ -1,0 +1,44 @@
+import React, { useState } from 'react';
+import Tab from './Tab';
+
+import './tabs.scss';
+
+function Tabs({ children, line = false, direction = 'left', activeColor = 'primary', colorTab = 'primary', deTbas }) {
+
+  const [activeTab, setActiveTab] = useState(children[0].props.label);
+
+  const onClickTabItem = (tab) => {
+    setActiveTab(tab);
+    deTbas(tab);
+  };
+
+  return (
+    <div className='tabs'>
+      <ol className={`${activeTab ? 'p5' : null} ${line ? 'tab-list' : 'tab-list_no_line'} ${direction === 'center' ? 'tab-list-center' : direction === 'right' ? 'tab-list-right' : 'tab-list-left'}  `}>
+        {children.map((child) => {
+          const { label } = child.props;
+
+          return (
+            <Tab
+              activeTab={activeTab}
+              key={label}
+              label={label}
+              onClick={onClickTabItem}
+              activeColor={activeColor}
+              colorTab={colorTab}
+            />
+          );
+        })}
+      </ol>
+      <div className='tab-content'>
+        {children.map((child) => {
+          if (child.props.label !== activeTab) return undefined;
+          return child.props.children;
+        })}
+      </div>
+    </div>
+  );
+
+}
+
+export default Tabs;

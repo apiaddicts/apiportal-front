@@ -1,0 +1,46 @@
+@import "./../../styles/variables.scss";
+
+.divider {
+  border-bottom: 4px solid #F6DF67;
+  width: 24px;
+  border-radius: 10px;
+}
+.item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1rem;
+  padding-top: 20px;
+  margin: 20px;
+  
+  &__border {
+    border-top: 1px solid #CCD6EC;
+}
+  
+  &__avatar {
+    &__img {
+      vertical-align: middle;
+      width: 85px;
+      height: 85px;
+      border-radius: 50%;
+    }
+  }
+  &__content {
+    &__title {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      font-family: $barlow;
+      margin-bottom: 8px;
+      color: $primary;
+      text-transform: uppercase;
+    }
+    &__paragraph {
+      font-size: 16px;
+      font-weight: 400;
+      font-family: $barlow;
+      letter-spacing: 0.2px;
+      color: $gray-darken;
+      width: 100%;
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import Button from '../Buttons/Button';
 import classes from './slider.module.scss';
 
 function Slider({ slides }) {
@@ -54,12 +55,39 @@ function Slider({ slides }) {
   return (
     <div className={classes.container}>
       <div className={classes.container__slider} ref={slider}>
-        {slides.map((x) => (
-          <div className={classes.container__slider__slide}>
+        {slides.map((x, i) => (
+          <div key={i} className={classes.container__slider__slide}>
             <img src={x.imgSrc} alt='banner Slider' />
             <div className={classes.container__slider__slide__text}>
-              <h1>{x.title}</h1>
-              <h2>{x.subtitle}</h2>
+              <div className='container align-center'>
+                <div className='row'>
+                  <div className='flex-md-12 flex-sm-12'>
+                    <div className='divider mb-4' />
+                  </div>
+
+                  <div className='flex-md-12 flex-sm-12'>
+                    <h1 className='h1 text__secondary__white'>{x.title}</h1>
+                  </div>
+
+                  <div className='flex-md-4 flex-sm-12'>
+                    <div className='button__group mt-5'>
+                      {
+                        x.actionButtons !== null ? (
+                          x.actionButtons.map((i, index) => (
+                            <div key={index + i} className='pr-2 mb-4 justify-start'>
+                              <Button styles={i.type}>
+                                {i.label}
+                              </Button>
+                            </div>
+                          ))
+                        ) : (null)
+                      }
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
             </div>
           </div>
         ))}

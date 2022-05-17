@@ -6,12 +6,27 @@ import classes from './banner.module.scss';
 function BannerCentered({ title, subtitle, buttonLabel, img, buttonType }) {
   return (
     <Base img={img}>
-      <div className={classes.banner__centered}>
-        <h1 className='h2 mb-3 text__secondary'>{title}</h1>
-        <p className='h4 mb-5 text__secondary__white font-weight-semi-bold'>{subtitle}</p>
-        <Button type={buttonType}>
-          {buttonLabel}
-        </Button>
+      <div className={`container ${classes.banner__centered}`}>
+        <div className='row justify-center text-center'>
+          <div className='flex-md-12 flex-sm-12'>
+            <h1 className='h2 mb-3 text__secondary'>{title}</h1>
+          </div>
+        </div>
+
+        <div className='row justify-center text-center'>
+          <div className='flex-md-12 flex-sm-12'>
+            <p className='h5 mb-5 text__secondary__white font-weight-semi-bold'>{subtitle}</p>
+          </div>
+        </div>
+
+        <div className='row justify-center text-center'>
+          <div className='flex-lg-2 flex-md-5 flex-sm-12'>
+            <Button styles={buttonType}>
+              {buttonLabel}
+            </Button>
+          </div>
+        </div>
+
       </div>
     </Base>
   );

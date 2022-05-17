@@ -1,0 +1,190 @@
+@import "../../styles/variables.scss";
+
+.contact {
+    border-radius: 12px;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: $gray_lighten-1;
+    height: 560px;
+
+    &__container {
+        width: 90%;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        padding: 40px 5px;
+    }
+
+    &__header {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+
+        &__icon {
+            font-size: 60px;
+            color: $secondary;
+        }
+
+        &__title {
+            width: 90%;
+            font-family: 'FS Joey';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 36px;
+            text-align: center;
+            line-height: 48px;
+            color: $primary;
+        }
+    }
+
+    &__description {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        margin-bottom: 1rem;
+        text-align: center;
+        width: 100%;
+        font-family: $barlow;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 26px;
+        letter-spacing: 0.157143px;
+        color: $primary;
+    }
+    &__description p {
+        text-align: center;
+        width: 100%;
+    }
+
+    &__container__form {
+        display: flex;
+        flex-wrap: wrap;
+        // justify-content: center;
+        // align-items: center;
+        width: 100%;
+        padding: 0px 3%;
+    }
+
+    &__form {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        // justify-content: space-between;
+        &__input {
+            width: 100%;
+            margin-right: 5%;
+            padding: 8px 0px;
+            }
+            
+            &__button {
+                margin-right: 5%;
+                padding: 15px 0px;
+                // margin-top: 12px;
+                }
+                }
+                
+                // Container Alternative
+                
+                &__container__alternative {
+                    width: 100%;
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    align-items: center;
+                }
+                
+                &__alternative__header {
+                    width: 80%;
+                    flex-wrap: wrap;
+                    margin: auto;
+                    display: flex;
+                    justify-content: flex-start;
+                    align-items: center;
+                
+                    @media (max-width: 768px) {
+                        justify-content: center;
+                        align-items: center;
+                    }
+                
+                    p {
+                        margin-left: 20px;
+                    }
+                }
+                
+                &__alternative__title {
+                    font-family: 'FS Joey';
+                    font-style: normal;
+                    font-weight: 700;
+                    font-size: 36px;
+                    line-height: 48px;
+                    color: $primary;
+                
+                    @media (max-width: 768px) {
+                        text-align: center;
+                        margin-left: 0px!important;
+                    }
+                }
+                
+                &__header__title__alternative {
+                    width: 80%;
+                    margin: auto;
+                    flex-wrap: wrap;
+                    display: flex;
+                    padding: 20px 0;
+                
+                    @media (max-width: 768px) {
+                        justify-content: center;
+                        align-items: center;
+                    }
+                }
+                
+                &__alternative__description {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: flex-start;
+                    margin-bottom: 1rem;
+                    font-family: $barlow;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 26px;
+                    letter-spacing: 0.157143px;
+                    color: $primary;
+                }
+                
+                &__container__alternative__form {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    align-items: center;
+                    width: 80%;
+                    margin: auto;
+                
+                }
+                
+                &__alternative__form {
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                
+                    @media (max-width: 768px) {
+                        flex-direction: column;
+        }
+    }
+}

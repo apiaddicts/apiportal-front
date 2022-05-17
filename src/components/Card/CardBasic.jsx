@@ -1,14 +1,15 @@
 import React from 'react';
 
 import { MdArrowRightAlt } from 'react-icons/md';
-import ChipGreen from '../Chip/ChipGreen';
+import Chip from '../Chip/Chip';
 import Base from './Base';
 
 import './cards.scss';
 
-function CardBasic({ chipTitle, title, img, description, info }) {
+function CardBasic({ chipTitle, title, img, description, info, maxWidth }) {
+
   return (
-    <Base>
+    <Base maxWidth={maxWidth}>
       {img ? (
         <picture>
           <img className='card_img' src={img} alt={img} />
@@ -18,22 +19,22 @@ function CardBasic({ chipTitle, title, img, description, info }) {
         <div className='card_chip_title'>
           {chipTitle ? (
             <>
-              <ChipGreen title={chipTitle} />
-              <h1 className='chip_title'>lorems</h1>
+              <Chip title={chipTitle} className={`${chipTitle.toLowerCase()} chip_tag_rounded`} />
+              <h1 className='chip_title'>{title}</h1>
             </>
           ) : (
-            <h1 className='title'>lorems</h1>
+            <h1 className='h3 font-weight-thin px-8 py-5 text__primary'>{title}</h1>
           )}
         </div>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Nam molestiae, corporis eaque deleniti eligendi aut modi illo perspiciatis.
-          Impedit suscipit totam quo ea odit officiis culpa voluptatum sed fugiat quibusdam?
-        </p>
-        <div className='card_chip_info'>
-          <span>MÁS INFORMACIÓN</span>
-          {' '}
-          <MdArrowRightAlt className='svg' />
+        <div className='card_chip_desciption'>
+          <p className='text-left'>
+            {description}
+          </p>
+          <div className='card_chip_info'>
+            <span>{info}</span>
+            {' '}
+            <MdArrowRightAlt className='svg' />
+          </div>
         </div>
       </section>
     </Base>
