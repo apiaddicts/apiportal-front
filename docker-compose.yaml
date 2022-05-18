@@ -2,5 +2,13 @@ version: '3'
 services:
   nextjs:
     image: registry.gitlab.com/cloudappi/sura/dev-portal-sura-frontend:_VERSION
+    environment:
+      - REACT_APP_STRAPI_URL: ${REACT_APP_STRAPI_URL}
+      - REACT_APP_SURA_URL: ${REACT_APP_SURA_URL}
+      - REACT_APP_SUBSCRIPTION_ID: ${REACT_APP_SUBSCRIPTION_ID} 
+      - REACT_APP_RESOURCE_GROUP_NAME: ${REACT_APP_RESOURCE_GROUP_NAME}
+      - REACT_APP_SERVICE_NAME: ${REACT_APP_SERVICE_NAME}
+      - REACT_APP_API_VERSION: ${REACT_APP_API_VERSION} 
+      - REACT_APP_HMAC_AUTH_HEADER: ${REACT_APP_HMAC_AUTH_HEADER}    
     ports:
       - $PORT:3000
