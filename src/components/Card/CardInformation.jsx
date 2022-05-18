@@ -34,7 +34,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
           <div className={`card__information__tags ${buttons.length >= 3 ? 'tags-flex-wrap' : null} ${reading ? 'px-8' : null}`}>
             {buttons.map((button, index) => (
               <div key={index} className='pr-2'>
-                <Chip title={button.label} className={`${button.class} ${buttons.length >= 4 ? 'tags-reponsive' : null} `} />
+                <Chip title={button.label} className={`${button.class} ${buttons.length >= 4 ? 'tags-reponsive' : null} `} spanClass={button.spanClass} />
               </div>
             ))}
           </div>
