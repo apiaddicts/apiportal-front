@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-import { FaFacebookF, FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa';
+import { FaFacebookF, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { GoMail } from 'react-icons/go';
+import { RiInstagramFill } from 'react-icons/ri';
 import Base from './Base';
 import classes from './footer.module.scss';
 import Icon from '../MdIcon/Icon';
@@ -33,7 +35,7 @@ function Footer({ isPrivate }) {
           </div>
           <div className={classes.button__fab}>
             <button type='submit' onClick={() => { setContactForm(!contactForm); }}>
-              {contactForm ? <Icon id='MdClose' /> : <Icon id='MdMailOutline' />}
+              {contactForm ? <Icon id='MdClose' /> : <GoMail />}
             </button>
           </div>
         </Base>
@@ -109,7 +111,7 @@ function Footer({ isPrivate }) {
           <FaFacebookF />
           <FaTwitter />
           <FaYoutube />
-          <FaInstagram />
+          <RiInstagramFill />
         </div>
       </div>
 

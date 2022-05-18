@@ -64,7 +64,7 @@
   }
   &__social {
     display: grid;
-    grid-template-columns: 10fr 1fr;
+    grid-template-columns: 8fr 1fr;
     grid-template-areas: "copyright icons";
     align-items: center;
     padding: 30px 5px;
@@ -162,11 +162,14 @@
     border: none;
     border-radius: 50%;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.12), 0px 6px 6px rgba(0, 0, 0, 0.24);
-    font-size: 32px;
+    font-size: 34px;
     color: $secondary_white;
     height: 72px;
     width: 72px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     &:hover {
       transform: scale(1.1);
       transition: 0.3s ease all;
