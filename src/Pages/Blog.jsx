@@ -114,7 +114,7 @@ function Blog() {
   };
 
   return (
-    <div>
+    <div style={{ paddingTop: '114px' }}>
       {blogs.length > 0 && Object.keys(data).length > 0 ? (
         <div>
           <section>
@@ -274,7 +274,7 @@ function Blog() {
             </div>
             <div className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
-                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
+                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center'>
                   <a href=''>Ver más</a>
                 </div>
               </div>

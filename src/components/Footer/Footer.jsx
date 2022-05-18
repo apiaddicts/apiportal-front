@@ -43,16 +43,30 @@ function Footer({ isPrivate }) {
         <div className={classes.footer__section}>
           <div className={`container ${classes.footer__section__contact}`}>
             <div className='mb-5'>
-              <div className='row'>
-                {fieldsContactExtend.map((field) => (
-                  <Input footer key={field.id} field={field} formik={formConfig} />
-                ))}
+              <div className='row justify-center'>
+                <div className='container'>
+                  <div className='row'>
+                    {fieldsContactExtend.map((field) => (
+                      <Input footer key={field.id} field={field} formik={formConfig} />
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
-            <div className='row mb-5'>
-              <div className='flex-md-12 flex-sm-12'>
-                <input type='checkbox' id='checkbox' />
-                <label>Acepto recibir correos de acuerdo con los siguientes términos y condiciones.</label>
+            <div className='row mb-5 px-5'>
+              <div className='container'>
+                <div className='row'>
+                  <div className={`flex-md-12 flex-sm-12 ${classes.footer__section__contact__terms}`}>
+                    <input type='checkbox' id='checkbox' />
+                    <span>
+                      {' '}
+                      Acepto recibir correos de acuerdo con los siguientes
+                      {' '}
+                      <a href=''>términos y condiciones.</a>
+                      {' '}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
             <div className='row mb-5 mt-10 justify-center'>

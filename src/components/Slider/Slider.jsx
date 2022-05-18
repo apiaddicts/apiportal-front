@@ -52,12 +52,12 @@ function Slider({ slides }) {
   };
 
   return (
-    <div className={classes.container}>
-      <div className={classes.container__slider} ref={slider}>
+    <div className={classes.content}>
+      <div className={classes.content__slider} ref={slider}>
         {slides.map((x, i) => (
-          <div key={i} className={classes.container__slider__slide}>
+          <div key={i} className={classes.content__slider__slide}>
             <img src={x.imgSrc} alt='banner Slider' />
-            <div className={classes.container__slider__slide__text}>
+            <div className={classes.content__slider__slide__text}>
               <div className='container align-center'>
                 <div className='row'>
                   <div className='flex-md-12 flex-sm-12'>

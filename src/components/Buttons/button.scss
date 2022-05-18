@@ -31,21 +31,22 @@
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
-  line-height: 19px;
+  line-height: 19.2px;
+  letter-spacing: 1.33px;
   text-align: center;
   padding: 18px 32px;
   text-transform: uppercase !important;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 210px;
-  min-width: 100%;
+  width: 100%;
   border: 1px solid #E3E829;
   &__icon {
-    margin-right: 10px;
-    font-size: 20px;
+    font-size: 22px;
+    text-align: center;
     color: $secondary;
   }
+
 }
 
 .btn-none {

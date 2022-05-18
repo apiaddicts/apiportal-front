@@ -37,19 +37,6 @@ function Apis() {
 
   };
 
-  // const onClickItem = (e) => {
-  //   console.log(e.target.value);
-  //   console.log(e.target.label);
-  //   console.log(e.target.name);
-  //   //   setActiveTab(label);
-  // //   // resultsData.filter((item) => {
-  // //   //   if (item.version.toLowerCase() !== 'v 1.0') {
-  // //   //     return setResultsData(libraries);
-  // //   //   }
-  // //   //   return setResultsData([item]);
-  // //   // });
-  // };
-
   const handleChangeStatus = (name, label, checked) => {
     dispatch(filterCheck(label, checked, 'status'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
@@ -142,7 +129,7 @@ function Apis() {
 
   // console.log('Librerias array', libraries);
   return (
-    <div>
+    <div style={{ paddingTop: '114px' }}>
       <BannerImage />
       <section className={classes.container}>
         <article className={classes.container__left}>

@@ -168,11 +168,7 @@
   z-index: 100;
   &__nav {
     background: $secondary_white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     color: $secondary_white;
-    height: 42px;
     padding: 0 1.5rem;
     transition: 0.3s ease all;
     color: $primary;
@@ -248,6 +244,12 @@
         }
       }
     }
+  }
+  &__options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 42px;
   }
 }
 

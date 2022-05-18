@@ -1,5 +1,4 @@
 const config = {
-  //   apiUrl: 'http://localhost:1340',
   apiUrl: process.env.REACT_APP_STRAPI_URL,
   suraUrl: process.env.REACT_APP_SURA_URL,
   subscriptionId: process.env.REACT_APP_SUBSCRIPTION_ID,

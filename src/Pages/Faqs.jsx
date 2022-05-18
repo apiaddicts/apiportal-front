@@ -40,7 +40,7 @@ function Faqs(props) {
   }) : [];
 
   return (
-    <div>
+    <div style={{ paddingTop: '114px' }}>
       {Object.keys(dataFaq).length > 0 ? (
         <div>
           <BannerStatic

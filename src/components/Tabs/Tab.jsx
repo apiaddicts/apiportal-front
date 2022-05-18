@@ -21,7 +21,7 @@ function Tab({ activeTab, label, onClick, activeColor, colorTab, preIcon }) {
           {label}
         </li>
       ) : (
-        <div style={{ display: 'flex' }} className={`${classIcon}`}>
+        <div style={{ display: 'flex' }} className={`px-4 ${classIcon}`}>
           <Icon id={preIcon} />
           <li className={`${classNameTab}`} onClick={onClickTab}>
             {label}
