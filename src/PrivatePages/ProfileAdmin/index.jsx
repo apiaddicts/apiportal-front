@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect } from 'react';
+import React from 'react';
 // import { MenuItem } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import TextField from '../../components/common/InputMUI';
-import { adminFields } from './adminField';
-import useFormConfig from '../../hooks/useForm';
+// import { adminFields } from './adminField';
+import useFormUserConfig from '../../hooks/useFormUser';
 import classes from './style.module.scss';
 // import TextAreaUI from '../../components/common/TextAreaUI';
 // import InptSelectUI from '../../components/common/InputMUI/InptSelectUI';
@@ -13,6 +13,7 @@ import TypographyUI from '../../components/common/TypographyMUI';
 // import Icon from '../../components/MdIcon/Icon';
 import Button from '../../components/Buttons/Button';
 import Title from '../../components/Title/Title';
+import { updateUser } from '../../redux/actions/userAction';
 
 // const cargo = [
 //   {
@@ -34,21 +35,19 @@ import Title from '../../components/Title/Title';
 // ];
 
 function Admin() {
-  // const [cargoOrg, setCargoOrg] = useState('');
-  const { user } = useSelector((state) => state.user);
+  const { user, loadingUser } = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
+
   const handleSubmit = async (values) => {
-    console.log(values);
+    const data = {
+      properties: {
+        firstName: values.first_name,
+        lastName: values.last_name,
+      },
+    };
+    dispatch(updateUser(data));
   };
-
-  // const handleChange = (event) => {
-  //   setCargoOrg(event.target.value);
-  // };
-
-  const formConfig = useFormConfig(adminFields, handleSubmit);
-
-  useEffect(() => {
-    console.log(formConfig.values);
-  }, [formConfig.values]);
 
   const name = user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? user.properties.firstName : '';
   const lastName = user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? user.properties.lastName : '';
@@ -81,12 +80,14 @@ function Admin() {
       validate: 'email',
       required: true,
       type: 'email',
+      disabled: true,
     },
   ];
 
+  const formConfig = useFormUserConfig(labelsUser, handleSubmit);
   return (
     <div className={classes.main__admin}>
-      {user && Object.keys(user).length > 0 ? (
+      {user && Object.keys(user).length > 0 && loadingUser === false ? (
         <div className={classes.admin}>
           <div className='w-full my-9'>
             <Title text='Mi perfil' />
