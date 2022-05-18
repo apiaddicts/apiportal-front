@@ -1,0 +1,81 @@
+trigger:
+  branches:
+    include:
+      - develop
+      - main
+      - pre
+
+pool:
+  name: Azure Pipelines
+  vmImage: ubuntu-20.04
+
+variables:
+  azName: devportal-front
+  azPort: 3000
+  azImage: $(dockerRegistry)/$(azName):$(Build.SourceVersion)
+  ${{ if eq(variables['Build.SourceBranchName'], 'develop') }}:
+    dockerRegistry: azurecontainerregistrysuradev.azurecr.io
+    dockerRegistryConnection: AzRegistryContainerDev
+    openshiftServiceConnection: "ARO-Dev"
+    environment: dev
+
+stages:
+  - stage: Build
+    jobs:
+      - job: Build
+        variables:
+          - group: frontend-variables-${{variables.environment}}
+        steps:
+          - task: Docker@2
+            displayName: Login to ACR
+            inputs:
+              command: login
+              containerRegistry: $(dockerRegistryConnection)
+          - task: Docker@2
+            displayName: Build
+            inputs:
+              command: build
+              repository: $(azName)
+              Dockerfile: Dockerfile
+              buildContext: .
+              args: --build-arg NODE_APP_ENV --build-arg NODE_APP_PORT --build-arg SITE_URL --build-arg STRAPI_URL
+              tags: |
+                $(Build.SourceBranchName)
+                $(Build.SourceVersion)
+          - task: Docker@2
+            displayName: Push
+            inputs:
+              command: push
+              repository: $(azName)
+              tags: |
+                $(Build.SourceBranchName)
+                $(Build.SourceVersion)
+  - stage: Deploy
+    jobs:
+      - deployment: Deploy
+        variables:
+          - group: frontend-variables-${{variables.environment}}
+            #ENVIRONMENT: 'Development'
+        displayName: "Deploy to Dev"
+        environment: $(environment)
+        strategy:
+          runOnce:
+            deploy:
+              steps:
+                - checkout: self
+                  submodules: true
+                # Install oc so that it can be used within a 'script' or bash 'task'
+                - task: oc-setup@2
+                  displayName: Setup oc
+                  inputs:
+                    openshiftService: $(openshiftServiceConnection)
+                # A script task making use of 'oc'
+                - script: |
+                    envsubst < openshift/manifest.yaml | oc apply -n api-cloud-dev -f -
+                  displayName: Apply deployment
+                # Single shot 'oc' command
+                - task: oc-cmd@2
+                  displayName: Wait for deployment
+                  inputs:
+                    openshiftService: $(openshiftServiceConnection)
+                    cmd: "rollout status -w deployment/$(azName)"

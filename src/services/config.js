@@ -1,11 +1,11 @@
 const config = {
-//   apiUrl: 'http://localhost:1340',
-  apiUrl: 'https://pre-strapi-sura.cloudappi.net',
-  suraUrl: 'https://cloudappi-apim.management.azure-api.net',
-  subscriptionId: '8e7674e5-98c5-4ccb-9b4c-bd5eec3dc202',
-  resourceGroupName: 'grdatafactory',
-  serviceName: 'cloudappi-apim',
-  apiVersion: '2021-08-01',
-  hmacAuthHeader: 'SharedAccessSignature integration&202206090144&mezCbWwQlNcohcjSez0cmEmhTBjc4PBgR7DGSSK5DbA1VN8m6//JxgaGZ+hSJaDFaM7u8hWk9BUS8MVpKRJ72g==',
+  //   apiUrl: 'http://localhost:1340',
+  apiUrl: process.env.REACT_APP_STRAPI_URL,
+  suraUrl: process.env.REACT_APP_SURA_URL,
+  subscriptionId: process.env.REACT_APP_SUBSCRIPTION_ID,
+  resourceGroupName: process.env.REACT_APP_RESOURCE_GROUP_NAME,
+  serviceName: process.env.REACT_APP_SERVICE_NAME,
+  apiVersion: process.env.REACT_APP_API_VERSION,
+  hmacAuthHeader: process.env.REACT_APP_HMAC_AUTH_HEADER,
 };
 export default config;
