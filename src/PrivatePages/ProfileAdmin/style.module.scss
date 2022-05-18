@@ -1,0 +1,87 @@
+.main__admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+}
+.admin {
+    margin: auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+
+    &__form {
+        padding: 2.5rem 0;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        background: #fff;
+        border-radius: 12px;
+    }
+
+    &__form__container {
+        padding: 0 3rem;
+
+        &__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+
+            &__avatar{
+                cursor: pointer;
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 80px;
+                height: 80px;
+                border: 3px solid #0033A0;
+                border-radius: 100%;
+
+                &__input {
+                    display: none;
+                }
+
+                &__icon{
+                    position: absolute;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 25px;
+                    height: 25px;
+                    bottom: 0%;
+                    right: 0%;
+                    background: #0033A0;
+                    color: #fff;
+                    border-radius: 100%;
+                }
+            }
+        }
+        &__button {
+            margin-top: 50px;
+            margin-bottom: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            width: 100%;
+        }
+    }
+&__filter__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0px 2px 20px #ECF0F1;
+    overflow: hidden;
+    max-height: 0;
+    transition: all 0.3s ease-in-out;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+}

@@ -22,7 +22,7 @@ a {
     PADDINGS 
 ------------------------------ */
 .p-0 {
-  padding: 0px;
+  padding: 0px !important;
 }
 .p-1 {
   padding: 0.25rem;
@@ -539,6 +539,12 @@ a {
 .mb-15 {
   margin-bottom: 5.5rem;
 }
+.mb-18 {
+  margin-bottom: 8rem;
+}
+.-ml-23 {
+  margin-left: -15px;
+}
 
 /* ------------------------------ 
     HEADINGS 
@@ -717,7 +723,7 @@ a {
   line-height: 1.5 !important;
 }
 .card {
-  box-shadow: 3px -5px 40px rgba(0, 51, 160, 0.1);
+  box-shadow: 0px 3px 12px -2px rgba(0, 0, 0, 0.1);
   background-color: $secondary_white;
   border-radius: 20px;
   width: 100%;
@@ -739,6 +745,7 @@ a {
     font-size: 13px;
     line-height: 16px;
     letter-spacing: 0.4px;
+    text-transform: uppercase;
   }
 }
 
@@ -762,11 +769,25 @@ a {
   color: $secondary_white;
 }
 
+.primary {
+  background-color: $gray_lighten-1;
+  color: $primary;
+  border-radius: 50px;
+  font-weight: 500;
+  padding: 6px 10px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+}
+
 .get {
   background-color: #97d700;
   color: $secondary_white;
 }
 
+.version {
+  background-color: rgba(0, 0, 0, 0.38);
+  color: $secondary_white;
+}
 .post {
   background-color: $primary;
   color: $secondary_white;
@@ -789,11 +810,12 @@ a {
 
 .gray {
   background-color: $gray_lighten-1;
-  color: $primary;
+  color: $gray_darken;
   border-radius: 50px;
-  font-weight: 200;
-  padding: 10px 15px;
-  font-size: 14px;
+  font-weight: 500;
+  padding: 6px 10px;
+  font-size: 10px;
+  letter-spacing: 1.5px;
 }
 .text {
   color: $gray;
@@ -820,6 +842,9 @@ a {
   }
   &__gray__gray_lighten-3 {
     color: $gray_lighten-3;
+  }  
+  &__gray__gray_lighten-4 {
+    color: $gray_lighten-4;
   }
   &__gray__gray_darken {
     color: $gray_darken;
@@ -963,4 +988,64 @@ a {
 .content-demo {
   margin: auto;
   width: 500px;
+}
+
+.css-1s2u09g-control {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(37%) !important;
+  border: none !important;
+  border-radius: 20px !important;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1) !important;
+  padding: 3px 5px !important;
+  width: 100% !important;
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+}
+.css-1pahdxg-control {
+  position: absolute !important;
+  top: 50% !important;
+  transform: translateY(37%) !important;
+  border: none !important;
+  border-radius: 20px !important;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1) !important;
+  padding: 3px 5px !important;
+  width: 100% !important;
+  flex: 0 0 100% !important;
+  max-width: 100% !important;
+}
+
+.relative {
+  position: relative;
+}
+.flex-end {
+  justify-content: flex-end;
+}
+.grid {
+  display: grid;
+  justify-items: stretch;
+}
+
+.grid-lg-col-2 {
+  @include breakpoint(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.text-center-sm {
+  text-align: center;
+  @include breakpoint(sm) {
+  text-align: center !important;
+  }
+
+  @include breakpoint(lg) {
+    text-align: left !important;
+  }
+}
+
+.font-fs-joey {
+  font-family: $fs-joey !important;
+}
+.font-barlow {
+  font-family: $barlow !important;
 }

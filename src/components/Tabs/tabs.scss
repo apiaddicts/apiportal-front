@@ -41,14 +41,15 @@
 .tab-list-item-secundary {
   display: inline-block;
   list-style: none;
-  margin-bottom: -1px;
-  padding: 0.5rem 0.75rem;
+  margin: 0.5rem 0.75rem;
+  padding-bottom: 0.25rem;
   font-family: $barlow;
   font-style: normal;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 1.375rem;
+  letter-spacing: 0.16px;
   text-align: center;
-  color: $secondary_white;
+  color: $secondary;
   cursor: pointer;
 }
 
@@ -58,4 +59,13 @@
 
 .tab-list-active-secundary {
   border-bottom: 1px solid $secondary_yellow;
+  color: $secondary_white;
+}
+
+.icon {
+  color: $secondary;
+  font-size: 1.25rem;
+}
+.icon-active {
+  color: $secondary_white;
 }

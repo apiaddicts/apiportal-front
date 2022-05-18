@@ -4,7 +4,6 @@
 .main_item_contain {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
 }
 .item_title {
     margin-bottom: 10px;
@@ -13,18 +12,21 @@
         font-style: normal;
         font-weight: 700;
         font-size: 36px;
-        line-height: 50px;
+        line-height: 45px;
         letter-spacing: 0.25px;
         color: $secondary_yellow;
     }
     .title {
-        font-family: $fs-joey;
+        font-family: $barlow;
         font-style: normal;
-        font-weight: 700;
-        font-size: 30px;
-        line-height: 50px;
-        letter-spacing: 0.25px;
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 36px;
+        letter-spacing: 1.25px;
         color: $secondary_white;
+        @include breakpoint(xs) {
+            padding-bottom: 0.5rem;
+        }
     }
 }
 
@@ -39,17 +41,16 @@
     justify-content: center;
     align-items: flex-start;
     .circle {
-        width: 80px;
-        height: 80px;
+        // width: 80px;
+        // height: 80px;
         border-radius: 100%;
-        background: #00acc742;
+        // background: #00acc742;
         display: flex;
         justify-content:center;
         align-items: center;
         margin-left: 5%;
 
         .icon {
-            font-size: 56px;
             color: $primary;
             display: flex;
             align-items: center;
@@ -57,13 +58,19 @@
             @include breakpoint(xs){
                 font-size: 12px !important;
             }
+            img {
+                width: 100%;
+            }
         }
     }
 }
 
 .item_description {
     width: 85%;
-    padding-left: 2rem;
+    padding-left: 0.75rem;
+    @include breakpoint(xs) {
+        padding-left: 1rem;
+    }
     padding-right: 2.5%;
     display: flex;
     align-items: center;

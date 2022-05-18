@@ -1,23 +1,21 @@
 /* eslint-disable import/no-unresolved */
-import React from 'react';
+import React, { useState } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import Icon from '../MdIcon/Icon';
+import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import CardBasic from '../Card/CardBasic';
 
-export default function SimpleSlider(slides) {
+import './Slick.scss';
 
-  const imgs = [
-    { img: 'https://images.unsplash.com/photo-1640955014216-75201056c829?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1632&q=80' },
-    { img: 'https://images.unsplash.com/photo-1648737153811-69a6d8c528bf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80' },
-    { img: 'https://images.unsplash.com/photo-1515086828834-023d61380316?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1174&q=80' },
-    { img: 'https://images.unsplash.com/photo-1515432085503-cabf2fbcd690?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80' },
-    { img: 'https://images.unsplash.com/photo-1643297654395-d6375d07215c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=832&q=80' },
-    { img: 'https://images.unsplash.com/photo-1576089172869-4f5f6f315620?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=926&q=80' },
-  ];
+export default function SimpleSlider({ slides }) {
+
+  const [slideIndex, setSlideIndex] = useState(0);
 
   const settings = {
+    className: 'center mt-10 mb-10',
+    centerMode: true,
+    centerPadding: '0',
     dots: true,
     infinite: true,
     speed: 500,
@@ -26,43 +24,69 @@ export default function SimpleSlider(slides) {
     arrows: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
+    focusOnSelect: true,
+    // adaptiveHeight: true,
+    beforeChange: (current, next) => setSlideIndex(next),
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   return (
     <Slider {...settings}>
-      {imgs.map((src, i) => (
-        <div key={i} className='mr-10'>
-          <CardBasic info='MÁS INFORMACIÓN' img={src.img} title={`title ${i}`} description=' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ab voluptatum nisi alias veniam nesciunt facere non culpa itaque architecto ipsam iusto, repellat est sit? Esse et id vero ut! Lorem ipsum dolor, sit amet ' />
+      {slides.map((slide, i) => (
+        <div key={i} className={i === slideIndex ? 'activeSlide' : 'slide'} style={{ padding: '15px' }}>
+          <CardBasic chipTitle={slide.statusText ? slide.statusText : ''} info={slide.linkText} img={slide.img ? slide.img : ''} title={slide.title} description={slide.description} />
         </div>
       ))}
     </Slider>
   );
 }
 
-function SamplePrevArrow(props) {
-  const { className, onClick } = props;
+function SamplePrevArrow({ onClick }) {
   return (
-    <span
-      className={className}
-      style={{ display: 'block', background: 'red' }}
+    <div
+      className='prevArrow'
       onClick={onClick}
-      role='menuitem'
-      tabIndex='0'
+      role='button'
+      tabIndex={0}
     >
-      <Icon id='MdChevronLeft' />
-    </span>
+      <MdArrowBackIos />
+    </div>
   );
 }
-function SampleNextArrow(props) {
-  const { className, onClick } = props;
+function SampleNextArrow({ onClick }) {
   return (
-    <span
-      className={className}
-      style={{ display: 'block', background: 'red' }}
+    <div
+      className='nextArrow'
       onClick={onClick}
-      role='menuitem'
-      tabIndex='0'
+      role='button'
+      tabIndex={0}
     >
-      <Icon id='MdChevronRight' />
-    </span>
+      <MdArrowForwardIos />
+    </div>
   );
 }

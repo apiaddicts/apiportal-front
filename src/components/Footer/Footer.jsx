@@ -10,7 +10,7 @@ import Input from '../Input';
 import { fieldsContactExtend } from '../Forms/fields';
 import useFormConfig from '../../hooks/useForm';
 
-function Footer({ props }) {
+function Footer({ isPrivate }) {
   const img = 'https://picsum.photos/1920/300';
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
@@ -24,33 +24,49 @@ function Footer({ props }) {
 
   return (
     <div>
-      <Base img={img}>
-        <div className={classes.footer__container}>
-          <div className={`${classes.divider} mb-4`} />
-          <h1 className='h2 text__secondary__white'>Dejanos tus datos para asesorarte</h1>
-          <p className='h5 text__secondary__white mb-10'>Contáctanos por medio de este formulario</p>
-        </div>
-        <div className={classes.button__fab}>
-          <button type='submit' onClick={() => { setContactForm(!contactForm); }}>
-            {contactForm ? <Icon id='MdClose' /> : <Icon id='MdMailOutline' />}
-          </button>
-        </div>
-      </Base>
+      {!isPrivate && (
+        <Base img={img}>
+          <div className={`container ${classes.footer__container}`}>
+            <div className={`${classes.divider} mb-4`} />
+            <h1 className='h2 text__secondary__white mb-3'>Dejanos tus datos para asesorarte</h1>
+            <p className='h5 text__secondary__white mb-10'>Contáctanos por medio de este formulario</p>
+          </div>
+          <div className={classes.button__fab}>
+            <button type='submit' onClick={() => { setContactForm(!contactForm); }}>
+              {contactForm ? <Icon id='MdClose' /> : <Icon id='MdMailOutline' />}
+            </button>
+          </div>
+        </Base>
+      )}
 
       {contactForm && (
         <div className={classes.footer__section}>
           <div className={`container ${classes.footer__section__contact}`}>
             <div className='mb-5'>
-              <div className='row'>
-                {fieldsContactExtend.map((field) => (
-                  <Input footer key={field.id} field={field} formik={formConfig} />
-                ))}
+              <div className='row justify-center'>
+                <div className='container'>
+                  <div className='row'>
+                    {fieldsContactExtend.map((field) => (
+                      <Input footer key={field.id} field={field} formik={formConfig} />
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
-            <div className='row mb-5'>
-              <div className='flex-md-12 flex-sm-12'>
-                <input type='checkbox' id='checkbox' />
-                <label>Acepto recibir correos de acuerdo con los siguientes términos y condiciones.</label>
+            <div className='row mb-5 px-5'>
+              <div className='container'>
+                <div className='row'>
+                  <div className={`flex-md-12 flex-sm-12 ${classes.footer__section__contact__terms}`}>
+                    <input type='checkbox' id='checkbox' />
+                    <span>
+                      {' '}
+                      Acepto recibir correos de acuerdo con los siguientes
+                      {' '}
+                      <a href=''>términos y condiciones.</a>
+                      {' '}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
             <div className='row mb-5 mt-10 justify-center'>
@@ -69,18 +85,18 @@ function Footer({ props }) {
           <img src={SuraLogo} alt='' />
         </div>
         <div className={classes.email}>
-          <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3'>Correo electronico</h1>
+          <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3 mb-2'>Correo electronico</h1>
           <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>mxEmpresasSura@segurossura.com.mex</p>
         </div>
         <div className={classes.policies}>
-          <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3'>Política de</h1>
+          <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3 mb-2'>Política de</h1>
           <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>Privacidad de datos</p>
         </div>
 
       </div>
       <div className={`container ${classes.footer__social}`}>
         <div className={classes.footer__social__copyright}>
-          <p className='caption text-uppercase text__gray__gray_lighten-3'>
+          <p className='caption text-uppercase text__gray__gray_lighten-3 mb-3'>
             &copy;
             {' '}
             <span>{ year }</span>

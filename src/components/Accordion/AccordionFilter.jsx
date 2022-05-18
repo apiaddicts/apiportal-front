@@ -1,9 +1,9 @@
+/* eslint-disable array-callback-return */
 import React, { useState } from 'react';
 import Icon from '../MdIcon/Icon';
 import classes from './accordion.module.scss';
 
-function AccordionFilter({ items }) {
-  const [active, setActive] = useState(false);
+function AccordionFilter({ items, active, setActive }) {
   const [clicked, setClicked] = useState(false);
   const toggle = (index) => {
     if (clicked === index) {
@@ -12,11 +12,19 @@ function AccordionFilter({ items }) {
     setClicked(index);
   };
 
-  const toggleItem = (subindex) => {
+  const toggleItem = (subindex, qa) => {
     if (active === subindex) {
-      return setActive(null);
+      return setActive({
+        ...active,
+        filter: null,
+        status: false,
+      });
     }
-    setActive(subindex);
+    setActive({
+      item: qa?.subtitle,
+      filter: subindex,
+      status: true,
+    });
   };
 
   return (
@@ -35,9 +43,23 @@ function AccordionFilter({ items }) {
             {clicked === index ? (
               <div className={classes.filter__body}>
                 <ul className={classes.filter__body__list}>
-                  {item.questions.map((qa, subindex) => (
-                    <li className={active === subindex ? `${classes.filter__body__list__item} ${classes.item__active}` : `${classes.filter__body__list__item}`} onClick={() => { toggleItem(subindex); }} key={subindex}>{qa}</li>
-                  ))}
+                  {item.questions.map((qa, subindex) => {
+                    if (Object.hasOwn(qa, 'method')) {
+                      return (
+                        <li className={classes.filter__body__list__item} onClick={() => { toggleItem(subindex, qa); }} key={subindex}>
+                          <div className={`${qa.method.toLowerCase()} ${classes.filter__body__list__item__chip}`}>
+                            {qa.method}
+                          </div>
+                          <span>{qa.subtitle}</span>
+                        </li>
+                      );
+                    } if (!Object.hasOwn(qa, 'method')) {
+                      return (
+                        <li className={active.filter === subindex ? `${classes.filter__body__list__item} ${classes.item__active}` : `${classes.filter__body__list__item}`} onClick={() => { toggleItem(subindex, qa); }} key={subindex}>{qa}</li>
+                      );
+                    }
+
+                  })}
                 </ul>
               </div>
             ) : null}

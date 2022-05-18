@@ -1,0 +1,92 @@
+@import "../../styles/variables.scss";
+@import "../../styles/mixins/mixin.scss";
+
+.slide {
+  transform: translateY(5%);
+  transition: transform 300ms;
+  @include breakpoint(xs) {
+    transform: none;
+  }
+  @include breakpoint(sm) {
+    transform: none;
+  }
+  @include breakpoint(lg) {
+    transform: translateY(10%);
+    transition: transform 300ms;
+  }
+}
+
+.slick-list {
+  height: 100%;
+}
+
+.slick-slider {
+  height: 100%;
+}
+
+.slick-slide {
+  padding: 10px;
+}
+
+.slideWrapper {
+  padding: 10px 40px;
+}
+
+.prevArrow {
+  position: absolute;
+  bottom: 0%;
+  left: 39%;
+  z-index: 100;
+  cursor: pointer;
+  font-size: 2rem;
+  color: $gray_lighten-3;
+  @include breakpoint(xs) {
+    left: 1%;
+  }
+  @include breakpoint(sm) {
+    left: 1%;
+  }
+  @include breakpoint(lg) {
+    left: 29%;
+    }
+    
+    @include breakpoint(xl) {
+      left: 38%;
+    }
+}
+
+.nextArrow {
+  position: absolute;
+  bottom: 0%;
+  right: 39%;
+  z-index: 100;
+  cursor: pointer;
+  font-size: 2rem;
+  color: $gray_lighten-3;
+  @include breakpoint(xs) {
+    right: 1%;
+  }
+  @include breakpoint(sm) {
+    right: 0%;
+  }  
+  @include breakpoint(lg) {
+    right: 29%;
+    }
+    
+    @include breakpoint(xl) {
+      right: 38%;
+  }
+}
+
+.slick-dots {
+  position: absolute;
+  bottom: 12px !important;
+}
+
+.slick-dots li button:before {
+  font-size: 9px;
+}
+.slick-dots li.slick-active button:before {
+  color: $secondary;
+  mix-blend-mode: normal;
+}

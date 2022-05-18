@@ -31,16 +31,22 @@
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
-  line-height: 19px;
+  line-height: 19.2px;
+  letter-spacing: 1.33px;
   text-align: center;
-  padding: 13px 32px;
+  padding: 18px 32px;
   text-transform: uppercase !important;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 210px;
-  min-width: 100%;
+  width: 100%;
   border: 1px solid #E3E829;
+  &__icon {
+    font-size: 22px;
+    text-align: center;
+    color: $secondary;
+  }
+
 }
 
 .btn-none {
@@ -58,6 +64,12 @@
   @include letter($primary);
 }
 
+.btn-primary-blue {
+  @include button-bg($primary);
+  @include letter($secondary_white);
+  @include border($primary)
+}
+
 .btn-secundary-white {
   @include button-bg($secondary_white);
   @include letter(#0033a0);
@@ -71,7 +83,7 @@
 }
 
 .btn-ghost-variant {
-  @include button-bg(transparent);
+  @include button-bg($secondary_white);
   @include letter($primary);
   @include border($secondary);
 }

@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM node:12-alpine
 # ENV NODE_OPTIONS=--openssl-legacy-provider
 ENV NODE_ENV production
 ENV DISABLE_ESLINT_PLUGIN true

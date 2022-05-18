@@ -1,20 +1,84 @@
+@import "./../variables.scss";
 .container {
     width: 100%;
     margin-top: 150px;
     display: flex;
     justify-content: center;
     flex-flow: nowrap row;
-    padding: 0% 7.5%;
+    // padding: 0% 3.5%;
 
     &__left {
-        width: 20%;
-    }
-    &__right {
+        // width: 20%;
+        
+        @include breakpoint(xs) {
+          display: none;
+        }
+        @include breakpoint(md) {
+          display: none;
+        }
+        
+        @include breakpoint(lg) {
+          display: block;
+            // width: 20%;
+        }
+        }
+        &__right {
         width: 80%;
-        padding: 2% 8%;
+        padding: 2% 2%;
+        @include breakpoint(xs) {
+          width: 100%;
+          padding: 0;
+          margin-bottom: 20px;
+        }
+        
+        @include breakpoint(md) {
+          width: 100%;
+          padding: 0;
+          margin-bottom: 20px;
+        }
+        
+        @include breakpoint(lg) {
+          width: 80%;
+          padding: 2% 3.2%;
+        }
+    }
+    &__filters {
+      display: flex;
+      color: rgba(0, 0, 0, 0.38);
+    }
+    &__reset {
+      background: none;
+      border: none;
+      font-style: normal;
+      font-weight: 500;
+      font-size: 10px;
+      // line-height: 16px;
+      color: rgba(0, 0, 0, 0.38);
+      cursor: pointer;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+
     }
 }
 
+.container__checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &__counter {
+    display: flex;
+    width: 25px;
+    height: 25px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    background-color: #e3e8e9;
+    color: #000;
+    margin: 0.5rem 0;
+    text-align: center;
+  }
+}
 // .box {
 // //   position: absolute;
 // //   top: 50%;

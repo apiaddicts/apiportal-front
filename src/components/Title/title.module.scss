@@ -1,0 +1,15 @@
+@import '../../styles/variables.scss';
+
+.title {
+    font-family: $fs-joey;
+    font-size: 3rem;
+    font-weight: 700;
+    color: $primary;
+    margin-bottom: 0.5rem;
+}
+.divider {
+    width: 56px;
+    height: 4px;
+    background: $secondary_yellow;
+    border-radius: 4px;
+}

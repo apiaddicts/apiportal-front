@@ -31,7 +31,7 @@
     align-items: center;
     gap: 4rem;
     border-bottom: 1px solid #e6e7ee;
-    padding-top: 3rem;
+    padding-top: 5rem;
     padding-bottom: 16px;
     padding-left: 0;
     padding-right: 0;
@@ -92,13 +92,39 @@
     }
   }
   &__section {
-    background: #ECF0F1;
+    background: #ecf0f1;
     &__contact {
       padding-top: 100px;
       padding-bottom: 73px;
-    }
-    input[type="checkbox"] {
-      width: 20px;
+      &__terms {
+        display: flex;
+        align-items: center;
+        input[id="checkbox"] {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          border: 3px solid #0033a0 !important;
+          border-radius: 3px;
+          cursor: pointer;
+          margin-right: 12px;
+        }
+        span {
+          color: $primary;
+          font-size: 0.938rem;
+          font-weight: 400;
+          letter-spacing: 0.25px;
+          font-family: $barlow;
+          line-height: 20px;
+          a {
+            color: $primary;
+            font-weight: 700;
+            letter-spacing: 0.25px;
+            font-family: $barlow;
+            line-height: 20px;
+            text-decoration: underline;
+          }
+        }
+      }
     }
   }
 }

@@ -1,12 +1,27 @@
 @import "./../variables.scss";
+@import "./../mixins/mixin.scss";
 
 .faq {
+  padding-top: 109px;
+  padding-bottom: 109px;
+  @include breakpoint(xs) {
+    padding: 30px 0px;
+  }
+  &__question {
+    margin-bottom: 0.125rem;
+    @include breakpoint(xs) {
+      margin: 0;
+    }
+  }
   &__content {
     display: grid;
     grid-template-columns: 1fr 4fr;
     gap: 4rem;
     align-items: baseline;
     justify-items: center;
+    @include breakpoint(xs) {
+      grid-template-columns: 1fr;
+    }
     &__qa {
       width: 100%;
     }

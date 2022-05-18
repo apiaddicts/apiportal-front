@@ -1,13 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { MdSearch, MdClose, MdMenu } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import classes from './navbar.module.scss';
 import SuraLogo from '../../static/img/sura_logo.svg';
 import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
 
-function Navbar({ setIsOpen, setOpenForm }) {
+function Navbar({ setIsOpen, setOpenForm, privateSession }) {
+  // const [stickyClass, setStickyClass] = useState({ position: 'relative', height: '100%' });
+  // const stickyNavbar = () => {
+  //   if (window !== undefined) {
+  //     const windowHeight = window.scrollY;
+  //     console.log(windowHeight);
+  //     windowHeight > 0 ? setStickyClass({ position: 'fixed', top: '0', zIndex: '5000', width: '100%', transition: 'position 3s ease-in' }) : setStickyClass({ position: 'relative' });
+  //   }
+  // };
+  // useEffect(() => {
+  //   window.addEventListener('scroll', stickyNavbar);
+  //   return () => {
+  //     window.removeEventListener('scroll', stickyNavbar);
+  //   };
+  // }, []);
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [size, setSize] = useState({
     width: undefined,
@@ -38,31 +53,34 @@ function Navbar({ setIsOpen, setOpenForm }) {
 
   const listOptions = [
     { icon: '', name: 'APIs', route: '/apis' },
-    { icon: 'MdArrowDropDown', name: 'Documentación', route: '/documentacion' },
+    // { icon: 'MdArrowDropDown', name: 'Documentación', route: '/documentacion' },
     { icon: '', name: 'Blog', route: '/blog' },
     { icon: '', name: 'FAQs', route: '/faqs' },
   ];
 
   return (
-    <>
+    <div style={{ position: 'fixed', top: '0', width: '100%', zIndex: '5000' }}>
       <header className={classes.header}>
-        <div className={classes.header__content}>
-          <a href='/' className={classes.header__content__logo}>
-            <img
-              src={SuraLogo}
-              alt=''
-              className={classes.header__content__logo__img}
-            />
-          </a>
+        <div className={`container ${classes.header__content}`}>
+          <NavLink to='/'>
+            <a className={classes.header__content__logo}>
+              <img
+                src={SuraLogo}
+                alt=''
+                className={classes.header__content__logo__img}
+              />
+            </a>
+          </NavLink>
           <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
+
             <ul className='d-xs-none'>
               <li className='pr-2'>
-                <Button type='button' styles='ghost-variant' onClick={() => { setIsOpen(true); }}>
+                <Button type='button' styles='ghost-variant' preIcon='MdOutlinePersonOutline' size='small' onClick={() => { setIsOpen(true); }}>
                   Iniciar sesión
                 </Button>
               </li>
               <li>
-                <Button type='button' styles='secundary' onClick={() => { setOpenForm(true); }}>
+                <Button type='button' styles='secundary' size='small' style={{ width: '140px', height: '32px' }} onClick={() => { setOpenForm(true); }}>
                   registrate
                 </Button>
               </li>
@@ -79,13 +97,13 @@ function Navbar({ setIsOpen, setOpenForm }) {
                 </div>
               </div>
               <div className={classes.navbar__xs__section}>
-                SEGUROS
+                <NavLink to='/' className={classes.navbar__xs__section__logo}>SEGUROS</NavLink>
               </div>
 
               <ul>
                 {
                   listOptions.map((item, index) => (
-                    <Link to={item.route} key={index} className='text__primary font-weight-medium' onClick={menuToggleHandler}>
+                    <NavLink to={item.route} key={index} className='text__primary font-weight-medium' onClick={menuToggleHandler}>
                       <li>
 
                         <div className={classes.navbar__xs__icon}>
@@ -99,7 +117,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
 
                       </li>
 
-                    </Link>
+                    </NavLink>
                   ))
                 }
                 <li className={classes.navbar__xs__opt__login}>
@@ -136,37 +154,38 @@ function Navbar({ setIsOpen, setOpenForm }) {
               <MdSearch />
             </div>
           </nav>
+
           <div className={classes.header__content__toggle}>
             {!menuOpen ? <MdMenu onClick={menuToggleHandler} /> : <div />}
           </div>
         </div>
       </header>
       <div className={classes.buttom__nav}>
-        <div className={classes.buttom__nav__logo}>
-          SEGUROS
+        <div className={`container ${classes.buttom__options}`}>
+          <Link to='/' className={classes.buttom__nav__logo}>
+            SEGUROS
+          </Link>
+          <div className={classes.buttom__nav__options}>
+            <ul>
+              <li>
+                <Link to='/apis'>APIs</Link>
+              </li>
+              <li>
+                <a href=''>DOCUMENTACIÓN</a>
+              </li>
+              <li>
+                <Link to='/blog'>BLOG</Link>
+              </li>
+              <li>
+                <Link to='/faqs'>FAQs</Link>
+              </li>
+            </ul>
+          </div>
         </div>
-        <div className={classes.buttom__nav__options}>
-          <ul>
-            <li>
-              <Link to='/apis'>APIs</Link>
-            </li>
-            <li>
-              <a href=''>DOCUMENTACIÓN</a>
-            </li>
-            <li>
-              <Link to='/blog'>BLOG</Link>
-            </li>
-            <li>
-              <a href='/faqs'>FAQs</a>
-            </li>
-            <li>
-              <a href=''>CONTACTO</a>
-            </li>
-          </ul>
-        </div>
+
       </div>
 
-    </>
+    </div>
   );
 }
 

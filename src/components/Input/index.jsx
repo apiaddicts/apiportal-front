@@ -8,7 +8,7 @@ function Input({ field, formik, footer }) {
   const { values, errors, touched, handleChange, handleBlur } = formik;
 
   return (
-    <div style={footer ? { width: '50%', padding: '0 9px' } : { width: '100%' }} className={`${classes.wrapper__input} mt-3`}>
+    <div style={footer ? { width: '50%', padding: '0 38px' } : { width: '100%' }} className={`${classes.wrapper__input} mt-3`}>
       {field.label && (
         <p>
           {field.label}
@@ -35,7 +35,7 @@ function Input({ field, formik, footer }) {
       </div>
       {touched[field.id] && !!errors[field.id] ? (
         <p className={`${classes.wrapper__input__required}`}>{errors[field.id]}</p>
-      ) : (field.label && <p className={`${classes.wrapper__input__required}`}>Required *</p>)}
+      ) : (field.label && <p className={`${classes.wrapper__input__required}`}>Requerido *</p>)}
     </div>
   );
 }

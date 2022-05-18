@@ -43,6 +43,14 @@
     }
 
     &__nav {
+
+      &__overlay {
+        width: 100%;
+        height: 100%;
+        background: rgba($color: #000, $alpha: 0.7);
+        position: relative;
+        z-index: -1;
+      }
       top: 0;
       right: 100%;
       bottom: 0;
@@ -80,10 +88,8 @@
 
         li {
           &:not(:last-child) {
-            // margin-bottom: ;
             @include breakpoint(md) {
               margin-bottom: 0;
-              // margin-right: ;
             }
           }
           a {
@@ -107,6 +113,7 @@
 
       &.isMenu {
         width: 90%;
+        height: 100%;
         transform: translate(100%);
       }
     }
@@ -160,14 +167,11 @@
   position: relative;
   z-index: 100;
   &__nav {
-    background: $primary;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background: $secondary_white;
     color: $secondary_white;
-    height: 42px;
     padding: 0 1.5rem;
     transition: 0.3s ease all;
+    color: $primary;
     @include breakpoint(md) {
       padding: 0 3rem;
     }
@@ -175,6 +179,7 @@
       font-weight: 600;
       size: 20px;
       font-family: $barlow;
+      color: $primary;
     }
     &__options {
       top: 0;
@@ -228,7 +233,7 @@
             font-weight: map-deep-get($font-weights, "medium") !important;
 
             &:hover {
-              color: $secondary;
+              // color: $secondary;
               font-weight: map-deep-get($font-weights, "bold") !important;
             }
             &:active {
@@ -239,6 +244,12 @@
         }
       }
     }
+  }
+  &__options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 42px;
   }
 }
 
@@ -257,12 +268,15 @@
     }
     &__section {
       width: 100%;
-      background: $primary;
-      color: $secondary_white;
+      background: $secondary_white;
+      color: $primary;
       text-align: left;
       font-size: 16px;
       font-weight: 600;
       padding: 11px 208px 9px 40px;
+      &__logo{
+        color: $primary;
+      }
     }
     &__item {
       font-weight: 500;

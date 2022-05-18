@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Item from '../components/Item/Item';
 import classes from '../styles/pages/home.module.scss';
 import Icon from '../components/MdIcon/Icon';
@@ -8,12 +9,12 @@ import CardSlider from '../components/Card/CardSlider';
 import BannerCentered from '../components/Banner/BannerCentered';
 import Tabs from '../components/Tabs/Tabs';
 import Button from '../components/Buttons/Button';
-import Carousel from '../components/Carousel/Carousel';
+// import Carousel from '../components/Carousel/Carousel';
 import Slider from '../components/Slider/Slider';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
 import textureCircles from '../static/img/texture_circles.svg';
 import { getHome } from '../redux/actions/homeAction';
-// import Slick from '../components/SlickSlider/Slick';
+import Slick from '../components/SlickSlider/Slick';
 
 function Home() {
   const dispatch = useDispatch();
@@ -71,8 +72,48 @@ function Home() {
   const filterHomeBannerImage = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].background ? filterHomeBanner[0].background.url : '';
   const filterHomeBannerNameButtom = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].buttons ? filterHomeBanner[0].buttons[0].name : '';
 
+  // TODO: Reemplazar DataFake
+  const slidesNew = [
+    {
+      img: 'https://picsum.photos/id/0/370/240',
+      title: 'tenetur magnam illo',
+      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+      linkText: 'Conoce más',
+    },
+    {
+      img: 'https://picsum.photos/id/1/370/240',
+      title: 'tenetur magnam illo',
+      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+      linkText: 'Conoce más',
+    },
+    {
+      img: 'https://picsum.photos/id/1031/370/240',
+      title: 'tenetur magnam illo',
+      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+      linkText: 'Conoce más',
+    },
+    {
+      img: 'https://picsum.photos/id/1066/370/240',
+      title: 'tenetur magnam illo',
+      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+      linkText: 'Conoce más',
+    },
+    {
+      img: 'https://picsum.photos/id/1078/370/240',
+      title: 'tenetur magnam illo',
+      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+      linkText: 'Conoce más',
+    },
+    {
+      img: 'https://picsum.photos/id/1079/370/240',
+      title: 'tenetur magnam illo',
+      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+      linkText: 'Conoce más',
+    },
+  ];
+
   return (
-    <div>
+    <div style={{ paddingTop: '114px' }}>
       {Object.keys(data).length > 0 ? (
         <div>
           <section>
@@ -100,8 +141,8 @@ function Home() {
                     description={item.description}
                     icon={item.icon}
                     iconColor='#0033A0'
-                    background='#ECF0F1
-                  '
+                    background='#ECF0F1'
+                    textColor='#53565A'
                   />
                 ))}
               </div>
@@ -112,7 +153,7 @@ function Home() {
             <div className='container'>
               <div className='row'>
                 <div className='flex-md-12 flex-sm-12'>
-                  <h1 className={`h3 text-center text__secondary__white mb-5 ${classes.section__works__title}`}>
+                  <h1 className={`h3 text__secondary__white mb-5 ${classes.section__works__title}`}>
                     {filterWorks[0].title ? filterWorks[0].title : '¿Cómo funciona?'}
                   </h1>
                 </div>
@@ -120,7 +161,7 @@ function Home() {
               <Tabs direction='center' colorTab='white' activeColor='yellow'>
                 {
                   filterDiscoverTab.map((item, i) => (
-                    <div label={item.title} key={i}>
+                    <div label={item.title} key={i} preIcon={item.smallText}>
                       <div className='row'>
                         {item.Products.map((data, x) => (
                           <div key={x} className='flex-lg-4 flex-md-12 flex-sm-12 py-6'>
@@ -128,9 +169,9 @@ function Home() {
                               number={data.num}
                               title={data.title}
                               description={data.subtitle}
-                              icon={data.icon}
+                              icon={data.iconText}
                               type='title'
-                              textColor='#d4d9db'
+                              textColor='#ECF0F1'
                             />
                           </div>
                         ))}
@@ -139,10 +180,10 @@ function Home() {
                   ))
                 }
               </Tabs>
-              <div className='button__group mt-10 justify-center'>
+              <div className='mt-10 justify-center' style={{ display: 'grid', gap: '2rem', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 210px))' }}>
                 {filterButtonSection && filterButtonSection.length > 0 ? (
                   filterButtonSection[0].header.map((button, i) => (
-                    <div key={i} className='pr-2 mb-4'>
+                    <div key={i} className='mb-4'>
                       <Button styles={button.keyword}>
                         {button.title}
                       </Button>
@@ -156,19 +197,19 @@ function Home() {
           <section className={`container ${classes.section__discover}`}>
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
-                <h1 className='h2 text__primary font-weight-bold mb-2 ml-1'>
+                <h1 className='h2 text__primary font-weight-bold mb-8'>
                   {filterDiscoverTitle || 'Descubre nuestras APIs'}
                 </h1>
               </div>
             </div>
-            <div className='row'>
+            <div className='row d-xs-none'>
               <div className='flex-md-12 flex-sm-12'>
-                <p className='subtitle-1 ml-1 mb-10'>
+                <p className={`subtitle-1 mb-10 text__gray__gray_lighten-4 ${classes.section__discover__subtitle}`}>
                   {filterDiscoverSubtitle || ''}
                 </p>
               </div>
             </div>
-            <div className='row'>
+            <div className='row d-xs-none'>
               {
                 filterDiscover && filterDiscover[0].useCaseList && filterDiscover[0].useCaseList.length > 0 ? (
                   filterDiscover[0].useCaseList.map((card, i) => (
@@ -179,13 +220,23 @@ function Home() {
                 ) : (null)
               }
             </div>
+            <div className='container d-xs-only'>
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <Slick slides={filterDiscover[0].useCaseList} />
+                </div>
+              </div>
+            </div>
             <div className='row'>
-              <div className='flex-md-12'>
+              <div className='flex-md-12 flex-sm-12'>
                 <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
-                  <a href='' className={`button text__primary ${classes.section__discover__showmore__button}`}>
+                  <Link to='/apis' className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
                     <span className='mr-1'>ver todas</span>
                     <Icon id='MdOutlineEast' />
-                  </a>
+                  </Link>
+                  <Link to='/apis' className={`d-sm-none ${classes.section__discover__showmore__button}`}>
+                    Ver todas
+                  </Link>
                 </div>
               </div>
             </div>
@@ -215,7 +266,7 @@ function Home() {
                                 <div className={classes.section__experiences__content}>
                                   <div className={classes.section__experiences__content__img}>
                                     <div className={classes.section__experiences__content__img__overlay}>
-                                      <img src={tab.img.length > 0 ? tab.img[0].url : 'https://picsum.photos/500/350'} alt='' />
+                                      <img src={tab.img.length > 0 ? tab.img[0].url : 'https://picsum.photos/505/386'} alt='' />
                                     </div>
                                   </div>
                                   <div className={classes.section__experiences__content__card}>
@@ -254,17 +305,20 @@ function Home() {
                 <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
                   <p className='body-1'>{filterWorks[2].subtitle ? filterWorks[2].subtitle : ''}</p>
                 </div>
-
-                <div className='d-xs-none container'>
-                  <Carousel />
+              </div>
+            </div>
+            <div className='container'>
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <Slick slides={slidesNew} />
                 </div>
-                <div className='container d-xs-only'>
-                  <CardSlider lists={slides} flag={false} />
+              </div>
+            </div>
+            <div className={`container ${classes.section__news__showmore}`}>
+              <div className='row justify-center'>
+                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center'>
+                  <a href=''>Ver todas</a>
                 </div>
-                {/* <div className='container'>
-                  <Slick />
-                </div> */}
-
               </div>
             </div>
           </section>

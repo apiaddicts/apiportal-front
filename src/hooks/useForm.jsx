@@ -7,11 +7,11 @@ import * as Yup from 'yup';
 const validationSchema = Yup.object().shape({
   first_name: string().required('El nombre es obligatorio'),
   last_name: string().required('El apellido es obligatorio'),
-  phone: string()
-    .matches(new RegExp(/(^[0-9]+$)/), 'Must contain only numbers')
-    .min(10, 'Must be at least 10 characters long').required('El número es obligatorio'),
-  company: string().required('El nombre de la empresa es obligatorio'),
-  industry: string().required('El sector es obligatorio'),
+  // phone: string()
+  //   .matches(new RegExp(/(^[0-9]+$)/), 'Must contain only numbers')
+  //   .min(10, 'Must be at least 10 characters long').required('El número es obligatorio'),
+  // company: string().required('El nombre de la empresa es obligatorio'),
+  // industry: string().required('El sector es obligatorio'),
   email: string().email('Please provide a valid email').required('El email es obligatorio'),
   password: string()
     .matches(new RegExp(/(?=.*[a-z])/), 'Must contain lowercase a-z characters')

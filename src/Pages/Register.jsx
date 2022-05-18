@@ -1,38 +1,44 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import Modal from '../components/Modal';
 import Icon from '../components/MdIcon/Icon';
 import classes from '../styles/pages/login.module.scss';
 import CreateAccount from '../components/Forms/CreateAccount';
+import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
 
-function Register({ setOpenForm }) {
+function Register({ setOpenForm, setIsOpen }) {
 
-  // const encriptEmail = (email) => {
-  //   const res = email.replace(/[a-z0-9\-_.]+@/ig, (c) => `${c.substr(0, 1) + c.split('').slice(1, -1).map((v) => '*').join('')}@`);
-  //   return res;
-  // };
+  const { loadingSignUp, signUpData } = useSelector((state) => state.user);
 
-  //   const handleSubmit = (dataForm) => {
-  //     alert(
-  //       JSON.stringify(dataForm, null, 2),
-  //     );
-  //   };
+  useEffect(() => {
+    if (signUpData && Object.keys(signUpData).length > 0) {
+      setIsOpen(true);
+      setOpenForm(false);
+    }
+  }, [signUpData]);
 
   return (
     <Modal>
-      <button
-        className={classes.login__close}
-        type='button'
-        onClick={() => {
-          setOpenForm(false);
-        }}
-      >
-        <Icon id='MdClose' />
-      </button>
-      <div className={classes.login__wrapper}>
-        <h1 className={classes.login__title}>Crear Cuenta</h1>
-        <CreateAccount />
-      </div>
+      {loadingSignUp === false ? (
+        <>
+          <button
+            className={classes.login__close}
+            type='button'
+            onClick={() => {
+              setOpenForm(false);
+            }}
+          >
+            <Icon id='MdClose' />
+          </button>
+          <div className={classes.login__wrapper}>
+            <h1 className={classes.login__title}>Crear Cuenta</h1>
+            <CreateAccount />
+          </div>
+        </>
+      ) : (
+        <SkeletonComponent />
 
+      )}
     </Modal>
   );
 };

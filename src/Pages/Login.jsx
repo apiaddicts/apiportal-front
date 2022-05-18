@@ -1,27 +1,30 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+
 import Form from '../components/Forms/LoginForm';
 import Modal from '../components/Modal';
 import Icon from '../components/MdIcon/Icon';
-import classes from '../styles/pages/login.module.scss';
 import AlertFeedbock from '../components/AlertFeedback';
 import ResetPassword from '../components/Forms/ResetPassword';
 import { fieldsLogin } from '../components/Forms/fields';
+
+import { login } from '../redux/actions/userAction';
+
+import classes from '../styles/pages/login.module.scss';
+
 import useLoginConfig from '../hooks/useLogin';
 
-function Login({ setIsOpen }) {
-  const [showAlert, setShowAlert] = useState(true);
+function Login({ setIsOpen, setPrivateSession }) {
+  const [showAlert, setShowAlert] = useState(false);
   const [showForm, setShowForm] = useState(true);
   const [showResetForm, setShowResetForm] = useState(false);
 
-  // const encriptEmail = (email) => {
-  //   const res = email.replace(/[a-z0-9\-_.]+@/ig, (c) => `${c.substr(0, 1) + c.split('').slice(1, -1).map((v) => '*').join('')}@`);
-  //   return res;
-  // };
+  const dispatch = useDispatch();
 
+  // This function is responsible for sending the user to local storage
   const handleSubmit = (dataForm) => {
-    alert(
-      JSON.stringify(dataForm, null, 2),
-    );
+    dispatch(login(dataForm));
+    setIsOpen(false);
   };
 
   const formConfig = useLoginConfig(fieldsLogin, handleSubmit);

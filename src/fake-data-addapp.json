@@ -1,0 +1,17 @@
+{
+    "name-app": [
+        "Nombre de la aplicación1",
+        "Nombre de la aplicación2",
+        "Nombre de la aplicación3"
+    ],
+    "organization": [
+        "Descripción de la aplicación1",
+        "Descripción de la aplicación2",
+        "Descripción de la aplicación3"
+    ],
+    "reference": [
+        "Referencia de la aplicación1",
+        "Referencia de la aplicación2",
+        "Referencia de la aplicación3"
+    ]
+}

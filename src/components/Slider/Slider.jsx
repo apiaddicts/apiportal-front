@@ -30,7 +30,6 @@ function Slider({ slides }) {
     }
   };
   const previousSlide = () => {
-    console.log('BACK');
 
     if (slider.current.children.length > 0) {
 
@@ -53,24 +52,24 @@ function Slider({ slides }) {
   };
 
   return (
-    <div className={classes.container}>
-      <div className={classes.container__slider} ref={slider}>
+    <div className={classes.content}>
+      <div className={classes.content__slider} ref={slider}>
         {slides.map((x, i) => (
-          <div key={i} className={classes.container__slider__slide}>
+          <div key={i} className={classes.content__slider__slide}>
             <img src={x.imgSrc} alt='banner Slider' />
-            <div className={classes.container__slider__slide__text}>
+            <div className={classes.content__slider__slide__text}>
               <div className='container align-center'>
                 <div className='row'>
                   <div className='flex-md-12 flex-sm-12'>
                     <div className='divider mb-4' />
                   </div>
 
-                  <div className='flex-md-12 flex-sm-12'>
+                  <div className='flex-md-6 flex-sm-12'>
                     <h1 className='h1 text__secondary__white'>{x.title}</h1>
                   </div>
 
-                  <div className='flex-md-4 flex-sm-12'>
-                    <div className='button__group mt-5'>
+                  <div className='flex-md-12 flex-sm-12 mt-5'>
+                    <div className='button__group mt-10'>
                       {
                         x.actionButtons !== null ? (
                           x.actionButtons.map((i, index) => (
