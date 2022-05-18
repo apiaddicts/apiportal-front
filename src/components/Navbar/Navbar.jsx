@@ -8,20 +8,6 @@ import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
 
 function Navbar({ setIsOpen, setOpenForm, privateSession }) {
-  // const [stickyClass, setStickyClass] = useState({ position: 'relative', height: '100%' });
-  // const stickyNavbar = () => {
-  //   if (window !== undefined) {
-  //     const windowHeight = window.scrollY;
-  //     console.log(windowHeight);
-  //     windowHeight > 0 ? setStickyClass({ position: 'fixed', top: '0', zIndex: '5000', width: '100%', transition: 'position 3s ease-in' }) : setStickyClass({ position: 'relative' });
-  //   }
-  // };
-  // useEffect(() => {
-  //   window.addEventListener('scroll', stickyNavbar);
-  //   return () => {
-  //     window.removeEventListener('scroll', stickyNavbar);
-  //   };
-  // }, []);
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [size, setSize] = useState({
@@ -170,9 +156,9 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
               <li>
                 <Link to='/apis'>APIs</Link>
               </li>
-              <li>
+              {/* <li>
                 <a href=''>DOCUMENTACIÓN</a>
-              </li>
+              </li> */}
               <li>
                 <Link to='/blog'>BLOG</Link>
               </li>

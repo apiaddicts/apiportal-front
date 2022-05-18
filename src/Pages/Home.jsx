@@ -79,36 +79,42 @@ function Home() {
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
     {
       img: 'https://picsum.photos/id/1/370/240',
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
     {
       img: 'https://picsum.photos/id/1031/370/240',
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
     {
       img: 'https://picsum.photos/id/1066/370/240',
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
     {
       img: 'https://picsum.photos/id/1078/370/240',
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
     {
       img: 'https://picsum.photos/id/1079/370/240',
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
   ];
 
@@ -130,10 +136,10 @@ function Home() {
                   {titleSection || 'Benificios principales'}
                 </h1>
               </div>
-              <div className={`flex-md-6 flex-sm-12 ${classes.section__content__img}`}>
+              <div className={`flex-md-5 flex-lg-5 flex-sm-12 ${classes.section__content__img}`}>
                 <img src={backgroundSection || 'https://picsum.photos/500/300'} alt='Benefits' className='ml-4' />
               </div>
-              <div className={`flex-lg-6 flex-sm-12 ${classes.section__content__items}`}>
+              <div className={`flex-md-7 flex-lg-7 flex-sm-12 ${classes.section__content__items}`}>
                 {itemsSection.map((item, i) => (
                   <Item
                     key={i}
@@ -317,7 +323,7 @@ function Home() {
             <div className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
                 <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center'>
-                  <a href=''>Ver todas</a>
+                  <a href='/apis'>Ver todas</a>
                 </div>
               </div>
             </div>
