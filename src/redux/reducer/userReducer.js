@@ -1,7 +1,7 @@
 import userConstants from '../constants/userConstats';
 
 const token = JSON.parse(localStorage.getItem('token'));
-const etag = JSON.parse(localStorage.getItem('etag'));
+const etag = JSON.parse(localStorage.getItem('If-Match'));
 
 const initialState = token && etag ? {
   id: token.id,
@@ -10,8 +10,10 @@ const initialState = token && etag ? {
   loadinSignUp: false,
   signUpData: {},
   user: {},
+  loadingUser: false,
 } : {
   user: {},
+  loadingUser: false,
   id: '',
   token: '',
   etag: '',
@@ -43,10 +45,16 @@ export default function userReducer(state = initialState, action) {
         signUpData: action.response,
       };
     // login user
+    case userConstants.GET_USER_REQUEST:
+      return {
+        ...state,
+        loadingUser: true,
+      };
     case userConstants.GET_USER_SUCCESS:
       return {
         ...state,
         user: action.response,
+        loadingUser: false,
       };
     case userConstants.LOGIN_SUCCESS:
       return {
@@ -54,12 +62,19 @@ export default function userReducer(state = initialState, action) {
         id: action.id,
         token: action.token,
       };
-    // logout
+    // save entity tag
+    case userConstants.HEAD_ETAG_SUCCESS:
+      return {
+        ...state,
+        etag: action.response.etag,
+      };
+      // logout
     case userConstants.LOGOUT_USER:
       return {
         ...state,
         id: '',
         token: '',
+        etag: '',
         user: {},
       };
     default:

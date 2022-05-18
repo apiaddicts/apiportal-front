@@ -2,6 +2,8 @@ import handleResponse from './handleResponse';
 import handleResponseToken from './handleResponseToken';
 import config from './config';
 
+import store from '../redux/store';
+
 function login(email, password) {
   const requestOptions = {
     method: 'GET',
@@ -56,31 +58,10 @@ function getUserSuscriptions(subscriptionId, resourceGroupName, serviceName, api
     });
 }
 
-function signUp(data) {
-  const requestOptions = {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json', 'Accept': '*/*', 'Authorization': `${config.hmacAuthHeader}` },
-    body: JSON.stringify(data),
-  };
-  const uuid = crypto.randomUUID();
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/users/${uuid}?api-version=${config.apiVersion}`;
-  return fetch(
-    url,
-    requestOptions,
-  ).then(handleResponse)
-    .then((response) => {
-      return response;
-    });
-}
-
-function getUserEntityTag(data, token, id) {
+function getUserEntityTag(token, id) {
   const requestOptions = {
     method: 'HEAD',
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
-    // body: JSON.stringify(data),
   };
 
   const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
@@ -101,12 +82,53 @@ function getUserEntityTag(data, token, id) {
     .then((result) => result);
 }
 
+function updateUser(data) {
+  const { id, token, etag } = store.getState().user;
+  const requestOptions = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}`, 'If-Match': `${etag}` },
+    body: JSON.stringify(data),
+  };
+
+  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
+  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
+  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
+  const url = `${urlService}/users/${id}?api-version=${config.apiVersion}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response;
+    });
+}
+
+function signUp(data) {
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', 'Accept': '*/*', 'Authorization': `${config.hmacAuthHeader}` },
+    body: JSON.stringify(data),
+  };
+  const uuid = crypto.randomUUID();
+  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
+  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
+  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
+  const url = `${urlService}/users/${uuid}?api-version=${config.apiVersion}`;
+  return fetch(
+    url,
+    requestOptions,
+  ).then(handleResponse)
+    .then((response) => {
+      return response;
+    });
+}
+
 const userService = {
   login,
   getUserDetails,
   getUserSuscriptions,
   getUserEntityTag,
   signUp,
+  updateUser,
 };
 
 export default userService;
