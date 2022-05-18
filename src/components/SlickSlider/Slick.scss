@@ -2,7 +2,7 @@
 @import "../../styles/mixins/mixin.scss";
 
 .slide {
-  transform: translateY(5%) scale(0.9);
+  transform: translateY(5%);
   transition: transform 300ms;
   @include breakpoint(xs) {
     transform: none;
@@ -11,9 +11,21 @@
     transform: none;
   }
   @include breakpoint(lg) {
-    transform: translateY(5%) scale(0.9);
+    transform: translateY(10%);
     transition: transform 300ms;
   }
+}
+
+.slick-list {
+  height: 100%;
+}
+
+.slick-slider {
+  height: 100%;
+}
+
+.slick-slide {
+  padding: 10px;
 }
 
 .slideWrapper {
@@ -22,7 +34,7 @@
 
 .prevArrow {
   position: absolute;
-  bottom: -15%;
+  bottom: 0%;
   left: 39%;
   z-index: 100;
   cursor: pointer;
@@ -45,7 +57,7 @@
 
 .nextArrow {
   position: absolute;
-  bottom: -15%;
+  bottom: 0%;
   right: 39%;
   z-index: 100;
   cursor: pointer;
@@ -68,7 +80,7 @@
 
 .slick-dots {
   position: absolute;
-  bottom: -80px !important;
+  bottom: 12px !important;
 }
 
 .slick-dots li button:before {

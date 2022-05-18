@@ -8,6 +8,21 @@ import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
 
 function Navbar({ setIsOpen, setOpenForm, privateSession }) {
+  // const [stickyClass, setStickyClass] = useState({ position: 'relative', height: '100%' });
+  // const stickyNavbar = () => {
+  //   if (window !== undefined) {
+  //     const windowHeight = window.scrollY;
+  //     console.log(windowHeight);
+  //     windowHeight > 0 ? setStickyClass({ position: 'fixed', top: '0', zIndex: '5000', width: '100%', transition: 'position 3s ease-in' }) : setStickyClass({ position: 'relative' });
+  //   }
+  // };
+  // useEffect(() => {
+  //   window.addEventListener('scroll', stickyNavbar);
+  //   return () => {
+  //     window.removeEventListener('scroll', stickyNavbar);
+  //   };
+  // }, []);
+
   const [menuOpen, setMenuOpen] = useState(false);
   const [size, setSize] = useState({
     width: undefined,
@@ -44,9 +59,9 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
   ];
 
   return (
-    <>
+    <div style={{ position: 'fixed', top: '0', width: '100%', zIndex: '5000' }}>
       <header className={classes.header}>
-        <div className={classes.header__content}>
+        <div className={`container ${classes.header__content}`}>
           <NavLink to='/'>
             <a className={classes.header__content__logo}>
               <img
@@ -65,7 +80,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
                 </Button>
               </li>
               <li>
-                <Button type='button' styles='secundary' size='small' style={{ width: '114px', height: '32px' }} onClick={() => { setOpenForm(true); }}>
+                <Button type='button' styles='secundary' size='small' style={{ width: '140px', height: '32px' }} onClick={() => { setOpenForm(true); }}>
                   registrate
                 </Button>
               </li>
@@ -146,28 +161,31 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
         </div>
       </header>
       <div className={classes.buttom__nav}>
-        <Link to='/' className={classes.buttom__nav__logo}>
-          SEGUROS
-        </Link>
-        <div className={classes.buttom__nav__options}>
-          <ul>
-            <li>
-              <Link to='/apis'>APIs</Link>
-            </li>
-            <li>
-              <a href=''>DOCUMENTACIÓN</a>
-            </li>
-            <li>
-              <Link to='/blog'>BLOG</Link>
-            </li>
-            <li>
-              <Link to='/faqs'>FAQs</Link>
-            </li>
-          </ul>
+        <div className={`container ${classes.buttom__options}`}>
+          <Link to='/' className={classes.buttom__nav__logo}>
+            SEGUROS
+          </Link>
+          <div className={classes.buttom__nav__options}>
+            <ul>
+              <li>
+                <Link to='/apis'>APIs</Link>
+              </li>
+              <li>
+                <a href=''>DOCUMENTACIÓN</a>
+              </li>
+              <li>
+                <Link to='/blog'>BLOG</Link>
+              </li>
+              <li>
+                <Link to='/faqs'>FAQs</Link>
+              </li>
+            </ul>
+          </div>
         </div>
+
       </div>
 
-    </>
+    </div>
   );
 }
 

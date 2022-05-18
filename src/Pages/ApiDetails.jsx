@@ -105,7 +105,7 @@ function ApiDetails({ setIsOpen }) {
   ];
 
   return (
-    <div>
+    <div style={{ paddingTop: '114px' }}>
       {Object.keys(data).length > 0 && Object.keys(library).length > 0 ? (
         <>
           <section>
@@ -167,7 +167,7 @@ function ApiDetails({ setIsOpen }) {
               </div>
               <Tabs direction='center' colorTab='white' activeColor='yellow'>
                 {filterDiscoverTab.map((item, i) => (
-                  <div label={item.title} key={i}>
+                  <div label={item.title} key={i} preIcon={item.smallText}>
                     <div className='row'>
                       {item.Products.map((data, x) => (
                         <div key={x} className='flex-lg-4 flex-md-12 flex-sm-12 py-6'>
@@ -185,10 +185,10 @@ function ApiDetails({ setIsOpen }) {
                   </div>
                 ))}
               </Tabs>
-              <div className='button__group mt-10 justify-center'>
+              <div className='mt-10 justify-center' style={{ display: 'grid', gap: '2rem', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 210px))' }}>
                 {filterButtonSection && filterButtonSection.length > 0 ? (
                   filterButtonSection[0].header.map((button, i) => (
-                    <div key={i} className='pr-10 mb-4'>
+                    <div key={i} className='mb-4'>
                       <Button styles={button.keyword}>
                         {button.title}
                       </Button>

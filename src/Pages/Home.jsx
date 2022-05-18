@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Item from '../components/Item/Item';
 import classes from '../styles/pages/home.module.scss';
 import Icon from '../components/MdIcon/Icon';
@@ -111,12 +112,8 @@ function Home() {
     },
   ];
 
-  // fuction addLineBreak(){
-
-  // }
-
   return (
-    <div>
+    <div style={{ paddingTop: '114px' }}>
       {Object.keys(data).length > 0 ? (
         <div>
           <section>
@@ -144,8 +141,8 @@ function Home() {
                     description={item.description}
                     icon={item.icon}
                     iconColor='#0033A0'
-                    background='#ECF0F1
-                  '
+                    background='#ECF0F1'
+                    textColor='#53565A'
                   />
                 ))}
               </div>
@@ -164,7 +161,7 @@ function Home() {
               <Tabs direction='center' colorTab='white' activeColor='yellow'>
                 {
                   filterDiscoverTab.map((item, i) => (
-                    <div label={item.title} key={i}>
+                    <div label={item.title} key={i} preIcon={item.smallText}>
                       <div className='row'>
                         {item.Products.map((data, x) => (
                           <div key={x} className='flex-lg-4 flex-md-12 flex-sm-12 py-6'>
@@ -172,9 +169,9 @@ function Home() {
                               number={data.num}
                               title={data.title}
                               description={data.subtitle}
-                              icon={data.icon}
+                              icon={data.iconText}
                               type='title'
-                              textColor='#d4d9db'
+                              textColor='#ECF0F1'
                             />
                           </div>
                         ))}
@@ -183,10 +180,10 @@ function Home() {
                   ))
                 }
               </Tabs>
-              <div className='button__group mt-10 justify-center'>
+              <div className='mt-10 justify-center' style={{ display: 'grid', gap: '2rem', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 210px))' }}>
                 {filterButtonSection && filterButtonSection.length > 0 ? (
                   filterButtonSection[0].header.map((button, i) => (
-                    <div key={i} className='pr-10 mb-4'>
+                    <div key={i} className='mb-4'>
                       <Button styles={button.keyword}>
                         {button.title}
                       </Button>
@@ -233,13 +230,13 @@ function Home() {
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
                 <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
-                  <a href='' className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
+                  <Link to='/apis' className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
                     <span className='mr-1'>ver todas</span>
                     <Icon id='MdOutlineEast' />
-                  </a>
-                  <a href='' className={`d-sm-none ${classes.section__discover__showmore__button}`}>
+                  </Link>
+                  <Link to='/apis' className={`d-sm-none ${classes.section__discover__showmore__button}`}>
                     Ver todas
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -269,7 +266,7 @@ function Home() {
                                 <div className={classes.section__experiences__content}>
                                   <div className={classes.section__experiences__content__img}>
                                     <div className={classes.section__experiences__content__img__overlay}>
-                                      <img src={tab.img.length > 0 ? tab.img[0].url : 'https://picsum.photos/500/350'} alt='' />
+                                      <img src={tab.img.length > 0 ? tab.img[0].url : 'https://picsum.photos/505/386'} alt='' />
                                     </div>
                                   </div>
                                   <div className={classes.section__experiences__content__card}>
@@ -319,7 +316,7 @@ function Home() {
             </div>
             <div className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
-                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
+                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center'>
                   <a href=''>Ver todas</a>
                 </div>
               </div>

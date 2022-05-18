@@ -12,17 +12,17 @@
         font-style: normal;
         font-weight: 700;
         font-size: 36px;
-        line-height: 50px;
+        line-height: 45px;
         letter-spacing: 0.25px;
         color: $secondary_yellow;
     }
     .title {
-        font-family: $fs-joey;
+        font-family: $barlow;
         font-style: normal;
-        font-weight: 700;
-        font-size: 30px;
-        line-height: 50px;
-        letter-spacing: 0.25px;
+        font-weight: 600;
+        font-size: 28px;
+        line-height: 36px;
+        letter-spacing: 1.25px;
         color: $secondary_white;
         @include breakpoint(xs) {
             padding-bottom: 0.5rem;
@@ -67,7 +67,7 @@
 
 .item_description {
     width: 85%;
-    padding-left: 2rem;
+    padding-left: 0.75rem;
     @include breakpoint(xs) {
         padding-left: 1rem;
     }
