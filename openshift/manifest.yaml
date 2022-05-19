@@ -24,6 +24,7 @@ spec:
             limits:
               cpu: "1000m"
               memory: "2Gi"
+      imagePullpolicy: Always
       imagePullSecrets:
         - name: gitlab-cloudappi
 
