@@ -25,7 +25,7 @@ export default function SimpleSlider({ slides }) {
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
     focusOnSelect: true,
-    adaptiveHeight: true,
+    // adaptiveHeight: true,
     beforeChange: (current, next) => setSlideIndex(next),
     initialSlide: 0,
     responsive: [
@@ -58,8 +58,8 @@ export default function SimpleSlider({ slides }) {
   return (
     <Slider {...settings}>
       {slides.map((slide, i) => (
-        <div key={i} className={i === slideIndex ? 'activeSlide' : 'slide'}>
-          <CardBasic chipTitle={slide.statusText ? slide.statusText : ''} info={slide.linkText} img={slide.img ? slide.img : ''} title={slide.title} description={slide.description} />
+        <div key={i} className={i === slideIndex ? 'activeSlide' : 'slide'} style={{ padding: '15px' }}>
+          <CardBasic chipTitle={slide.statusText ? slide.statusText : ''} info={slide.linkText} img={slide.img ? slide.img : ''} title={slide.title} description={slide.description} route={slide.route} />
         </div>
       ))}
     </Slider>

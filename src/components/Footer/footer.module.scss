@@ -64,7 +64,7 @@
   }
   &__social {
     display: grid;
-    grid-template-columns: 10fr 1fr;
+    grid-template-columns: 8fr 1fr;
     grid-template-areas: "copyright icons";
     align-items: center;
     padding: 30px 5px;
@@ -92,13 +92,39 @@
     }
   }
   &__section {
-    background: #ECF0F1;
+    background: #ecf0f1;
     &__contact {
       padding-top: 100px;
       padding-bottom: 73px;
-    }
-    input[type="checkbox"] {
-      width: 20px;
+      &__terms {
+        display: flex;
+        align-items: center;
+        input[id="checkbox"] {
+          display: inline-block;
+          width: 20px;
+          height: 20px;
+          border: 3px solid #0033a0 !important;
+          border-radius: 3px;
+          cursor: pointer;
+          margin-right: 12px;
+        }
+        span {
+          color: $primary;
+          font-size: 0.938rem;
+          font-weight: 400;
+          letter-spacing: 0.25px;
+          font-family: $barlow;
+          line-height: 20px;
+          a {
+            color: $primary;
+            font-weight: 700;
+            letter-spacing: 0.25px;
+            font-family: $barlow;
+            line-height: 20px;
+            text-decoration: underline;
+          }
+        }
+      }
     }
   }
 }
@@ -136,11 +162,14 @@
     border: none;
     border-radius: 50%;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.12), 0px 6px 6px rgba(0, 0, 0, 0.24);
-    font-size: 32px;
+    font-size: 34px;
     color: $secondary_white;
     height: 72px;
     width: 72px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     &:hover {
       transform: scale(1.1);
       transition: 0.3s ease all;

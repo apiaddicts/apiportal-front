@@ -1,6 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
-import { FaFacebookF, FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa';
+import { FaFacebookF, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { GoMail } from 'react-icons/go';
+import { RiInstagramFill } from 'react-icons/ri';
 import Base from './Base';
 import classes from './footer.module.scss';
 import Icon from '../MdIcon/Icon';
@@ -33,7 +35,7 @@ function Footer({ isPrivate }) {
           </div>
           <div className={classes.button__fab}>
             <button type='submit' onClick={() => { setContactForm(!contactForm); }}>
-              {contactForm ? <Icon id='MdClose' /> : <Icon id='MdMailOutline' />}
+              {contactForm ? <Icon id='MdClose' /> : <GoMail />}
             </button>
           </div>
         </Base>
@@ -43,16 +45,30 @@ function Footer({ isPrivate }) {
         <div className={classes.footer__section}>
           <div className={`container ${classes.footer__section__contact}`}>
             <div className='mb-5'>
-              <div className='row'>
-                {fieldsContactExtend.map((field) => (
-                  <Input footer key={field.id} field={field} formik={formConfig} />
-                ))}
+              <div className='row justify-center'>
+                <div className='container'>
+                  <div className='row'>
+                    {fieldsContactExtend.map((field) => (
+                      <Input footer key={field.id} field={field} formik={formConfig} />
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
-            <div className='row mb-5'>
-              <div className='flex-md-12 flex-sm-12'>
-                <input type='checkbox' id='checkbox' />
-                <label>Acepto recibir correos de acuerdo con los siguientes términos y condiciones.</label>
+            <div className='row mb-5 px-5'>
+              <div className='container'>
+                <div className='row'>
+                  <div className={`flex-md-12 flex-sm-12 ${classes.footer__section__contact__terms}`}>
+                    <input type='checkbox' id='checkbox' />
+                    <span>
+                      {' '}
+                      Acepto recibir correos de acuerdo con los siguientes
+                      {' '}
+                      <a href=''>términos y condiciones.</a>
+                      {' '}
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
             <div className='row mb-5 mt-10 justify-center'>
@@ -95,7 +111,7 @@ function Footer({ isPrivate }) {
           <FaFacebookF />
           <FaTwitter />
           <FaYoutube />
-          <FaInstagram />
+          <RiInstagramFill />
         </div>
       </div>
 

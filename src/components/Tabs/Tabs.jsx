@@ -16,7 +16,7 @@ function Tabs({ children, line = false, direction = 'left', activeColor = 'prima
     <div className='tabs'>
       <ol className={`${activeTab ? 'p5' : null} ${line ? 'tab-list' : 'tab-list_no_line'} ${direction === 'center' ? 'tab-list-center' : direction === 'right' ? 'tab-list-right' : 'tab-list-left'}  `}>
         {children.map((child) => {
-          const { label } = child.props;
+          const { label, preIcon } = child.props;
 
           return (
             <Tab
@@ -26,6 +26,7 @@ function Tabs({ children, line = false, direction = 'left', activeColor = 'prima
               onClick={onClickTabItem}
               activeColor={activeColor}
               colorTab={colorTab}
+              preIcon={preIcon}
             />
           );
         })}

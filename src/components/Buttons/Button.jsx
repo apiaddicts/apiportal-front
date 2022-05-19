@@ -36,7 +36,9 @@ function Button({ children, styles, opacity, size = 'regular', preIcon, ...rest 
           <Icon id={preIcon} />
         </div>
       )}
-      {children}
+      <div style={{ minWidth: '146px' }}>
+        {children}
+      </div>
     </button>
   );
 }
