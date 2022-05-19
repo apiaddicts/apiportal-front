@@ -40,7 +40,7 @@ function Home() {
   // Load section
   const filterSection = data && data.contentSections ? data.contentSections.filter((item) => item.__component === 'home.work-section') : [];
   const titleSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].title ? filterSection[0].title : '';
-  const backgroundSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].background ? `https://pre-strapi-sura.cloudappi.net${filterSection[0].background.url}` : '';
+  const backgroundSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].background ? filterSection[0].background.url : '';
   console.log(backgroundSection);
   const itemsSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].Steps ? filterSection[0].Steps.map((i) => {
     const response = {
