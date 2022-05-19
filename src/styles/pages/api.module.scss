@@ -25,13 +25,13 @@
           display: block;
             // width: 20%;
         }
-        }
-        &__right {
+    }
+    &__right {
         width: 80%;
         padding: 2% 2%;
         @include breakpoint(xs) {
           width: 100%;
-          padding: 0;
+          padding: 0 15px;
           margin-bottom: 20px;
         }
         
