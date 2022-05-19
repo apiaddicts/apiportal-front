@@ -1,9 +1,15 @@
 import React, { useRef } from 'react';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+// import { useNavigate } from 'react-router-dom';
 import Button from '../Buttons/Button';
 import classes from './slider.module.scss';
 
 function Slider({ slides }) {
+  // const navigate = useNavigate();
+  // const pushRoute = (route) => {
+  //   console.log('si');
+  //   navigate(route, { replace: true });
+  // };
   const slider = useRef(null);
   const nextSlide = () => {
     if (slider.current.children.length > 0) {

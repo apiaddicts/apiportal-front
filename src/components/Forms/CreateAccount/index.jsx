@@ -43,7 +43,7 @@ function CreateAccount() {
         </div>
       ))}
       {/* checkbox */}
-      <div className='create-account__checkbox'>
+      <div className='container create-account__checkbox'>
         <input type='checkbox' id='checkbox' />
         <span>
           Acepto recibir correos de acuerdo con los siguientes
@@ -52,24 +52,21 @@ function CreateAccount() {
           .
         </span>
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(12, 1fr)', width: '100%' }}>
-        <Button
-          style={{ gridColumn: '5/9' }}
-          styles='primary-blue'
-          type='submit'
-          disabled={
-            !formConfig.dirty || !formConfig.isValid || formConfig.isSubmitting
-          }
-          opacity={!formConfig.dirty || !formConfig.isValid || formConfig.isSubmitting ? 0.5 : 1}
-        >
-          Registrarme
-        </Button>
+      <div className='end-create-btn'>
+        <div className='end-create-btn-input'>
+          <Button
+            style={{ width: '100%' }}
+            styles='primary-blue'
+            type='submit'
+            disabled={
+              !formConfig.dirty || !formConfig.isValid || formConfig.isSubmitting
+            }
+            opacity={!formConfig.dirty || !formConfig.isValid || formConfig.isSubmitting ? 0.5 : 1}
+          >
+            Registrarme
+          </Button>
+        </div>
       </div>
-      {/* <Dialog
-        formStatus={formConfig.formStatus}
-        setFormStatus={formConfig.setStatus}
-        redirectTo='/'
-      /> */}
     </form>
   );
 }

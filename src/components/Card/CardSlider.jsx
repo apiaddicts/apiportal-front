@@ -77,13 +77,13 @@ function CardSlider({ lists, flag = true }) {
           <div key={i} className='card_slider_container_slider_slide'>
             <Base>
               {flag ? (
-                <div className='container card_slider_container_text'>
+                <div className='card_slider_container_text'>
                   <div className='row'>
-                    <div className='flex-sm-12 flex-md-12 h3 text__secondary font-fs-joey pb-10'>
-                      <h1>{item.title}</h1>
+                    <div className='flex-sm-12 flex-md-12 text__secondary pb-8'>
+                      <h1 className='h3 font-fs-joey'>{item.title}</h1>
                     </div>
                     <div className='flex-sm-12 flex-md-12 body-1 text__gray__gray_darken font-weight-regular'>
-                      <p>{item.description}</p>
+                      <p style={{ lineHeight: '28px' }}>{item.description}</p>
                     </div>
                     <div className='flex-sm-12 flex-md-12 mt-10 card_slider_container_footer'>
                       <span className='card_slider_container_footer_icon'>
