@@ -5,6 +5,7 @@ import Icon from '../MdIcon/Icon';
 import classes from './banner.module.scss';
 
 function BannerImage({ buttons, setIsOpen, title = '', img = '', description }) {
+
   const navigate = useNavigate();
 
   const handleClick = () => {
