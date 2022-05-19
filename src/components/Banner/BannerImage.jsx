@@ -1,10 +1,11 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+
 import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
 import classes from './banner.module.scss';
 
-function BannerImage({ buttons, setIsOpen, title = '', img = '', description }) {
+function BannerImage({ buttons, setIsOpen, title = '', img = '', description, redirect = '/' }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -24,7 +25,7 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description }) 
         <div
           className={classes.banner_img__backTo}
         >
-          <Link to={-1} className={classes.banner_img__backTo__btn}>
+          <Link to={redirect} className={classes.banner_img__backTo__btn}>
             <div>
               <Icon id='MdKeyboardBackspace' />
             </div>
