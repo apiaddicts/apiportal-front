@@ -68,6 +68,9 @@
   height: 300px;
   // padding: 0% 4.5%;
   position: relative;
+  @include breakpoint(xs) {
+    height: 260px;
+  }
 
   &__layout {
     position: absolute;
@@ -75,12 +78,18 @@
     height: 400px;
     z-index: 1;
     background: #F5F6F8;
+    @include breakpoint(xs) {
+      height: 290px;
+    }
   }
 
   &__backTo {
     width: 100%;
     padding-top: 3%;
     padding-left: 3rem;
+    @include breakpoint(xs) {
+      padding-left: 1rem;
+    }
 
     &__btn {
       display: flex;
@@ -99,6 +108,9 @@
   &__title {
     width: 100%;
     padding: 0 4.5%;
+    @include breakpoint(xs) {
+      margin-top: 50px;
+    }
   }
 
   &__img {
@@ -111,26 +123,32 @@
     border-radius: 0 0 50px 0;
 
     @include breakpoint(xs) {
-      height: 141px;
-      width: 293px;
-      right: 15%;
-      top: 30px;
-      display: none;
+      height: 170px;
+      width: 260px;
+      top: 160px;
+      right: 5%;
+    }
+
+    @include breakpoint(sm) {
+      height: 232px;
+      width: 393px;
+      top: 200px;
+      right: 5%;
     }
 
     @include breakpoint(md) {
-      height: 141px;
-      width: 293px;
-      right: 15%;
-      display: none;
+      height: 232px;
+      width: 393px;
+      top: 200px;
+      right: 5%;
     }
 
     @include breakpoint(lg) {
       display: block;
-      height: 232px;
-      width: 393px;
+      height: 332px;
+      width: 493px;
       z-index: 2;
-      top: 30px;
+      top: 120px;
       right: 5%;
     }
 
