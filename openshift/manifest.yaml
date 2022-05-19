@@ -17,6 +17,7 @@ spec:
           image: $AZIMAGE
           ports:
             - containerPort: $AZPORT
+              name: $AZPORTNAME
           resources:
             requests:
               cpu: "500m"
@@ -40,7 +41,7 @@ spec:
     - nodePort: 0
       port: 80
       protocol: TCP
-      targetPort: $AZPORT
+      targetPort: $AZPORTNAME
 
 ---
 apiVersion: route.openshift.io/v1
