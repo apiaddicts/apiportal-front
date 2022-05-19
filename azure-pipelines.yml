@@ -15,7 +15,7 @@ variables:
   azImage: $(dockerRegistry)/$(azName):$(Build.SourceVersion)
   ${{ if eq(variables['Build.SourceBranchName'], 'develop') }}:
     dockerRegistry: azurecontainerregistrysuradev.azurecr.io
-    dockerRegistryConnection: AzRegistryContainerDev
+    dockerRegistryConnection: Cloudappi-GitlabRegistry
     openshiftServiceConnection: "ARO-Dev"
     environment: dev
 
