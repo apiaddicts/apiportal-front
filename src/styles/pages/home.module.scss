@@ -17,15 +17,19 @@
 
   &__texture {
     position: absolute;
-    left: 95.5%;
-    top: -12%;
-    @include breakpoint(xs) {
-      left: 80%;
-      top: -5%;
-      width: 25%;
-    }
+    width: 100vw;
+    max-width: 100%;
+    left: 0;
+    right: 0;
+    transform: translateY(30%);
+    display: flex;
+    justify-content: flex-end;
+
     img {
-      width: 100%;
+      width: 146px;
+      @include breakpoint(xs) {
+        width: 90px;
+      }
     }
   }
 
@@ -69,6 +73,9 @@
     display: grid;
     gap: 2rem;
     padding-left: 6rem !important;
+    @include breakpoint(xs) {
+      padding-left: 1rem !important;
+    }
   } 
 }
 
@@ -82,6 +89,18 @@
     padding-top: 49px !important;
     padding-bottom: 59px !important;
   }
+
+  &__buttons {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 210px));
+    @include breakpoint(xs) {
+      gap: 0.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 100%));
+    }
+  }
+
+
   &__title{
     text-align: center;
     @include breakpoint(xs) {
@@ -137,6 +156,17 @@
     padding-bottom: 51px !important;
   }
 
+  &__texture {
+    position: absolute;
+    width: 100vw;
+    max-width: 100%;
+    left: 0;
+    right: 0;
+    transform: translateY(122%);
+    display: flex;
+    justify-content: flex-end;
+  }
+
   &__subtitle {
     white-space: pre-line;
     line-height: 28px;
@@ -156,10 +186,10 @@
         font-weight: 700;
       }
       @include breakpoint(sm) {
-        justify-content: center !important;
+        justify-content: flex-end !important;
       }
       @include breakpoint(lg) {
-        justify-content: end !important;
+        justify-content: flex-end !important;
       }
     }
     a {

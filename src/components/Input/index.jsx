@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
+// import { FiAlertCircle } from 'react-icons/fi';
 import Icon from '../MdIcon/Icon';
 import classes from './input.module.scss';
 
@@ -31,7 +32,7 @@ function Input({ field, formik, footer }) {
         }}
         className={touched[field.id] && !!errors[field.id] ? classes.input__icon__right__error : classes.input__icon__right}
       >
-        {field.icon && <Icon id={field.iconName} />}
+        {field.icon && <Icon id={field.iconName} /> }
       </div>
       {touched[field.id] && !!errors[field.id] ? (
         <p className={`${classes.wrapper__input__required}`}>{errors[field.id]}</p>

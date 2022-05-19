@@ -13,6 +13,7 @@ import Button from '../components/Buttons/Button';
 import Slider from '../components/Slider/Slider';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
 import textureCircles from '../static/img/texture_circles.svg';
+import textureCirclesAlt from '../static/img/texture_circles_alt.svg';
 import { getHome } from '../redux/actions/homeAction';
 import Slick from '../components/SlickSlider/Slick';
 
@@ -40,6 +41,7 @@ function Home() {
   const filterSection = data && data.contentSections ? data.contentSections.filter((item) => item.__component === 'home.work-section') : [];
   const titleSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].title ? filterSection[0].title : '';
   const backgroundSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].background ? filterSection[0].background.url : '';
+  console.log(backgroundSection);
   const itemsSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].Steps ? filterSection[0].Steps.map((i) => {
     const response = {
       icon: i.number,
@@ -125,11 +127,10 @@ function Home() {
           <section>
             <Slider slides={slides} />
           </section>
-
+          <div className={classes.section__content__texture}>
+            <img src={textureCircles} alt='Texture' />
+          </div>
           <section className={`container ${classes.section__content}`}>
-            <div className={classes.section__content__texture}>
-              <img src={textureCircles} alt='Texture' />
-            </div>
             <div className='row'>
               <div className={`flex-md-12 ${classes.section__content__title}`}>
                 <h1 className='h2 text__primary font-weight-bold mb-10 ml-5'>
@@ -186,7 +187,7 @@ function Home() {
                   ))
                 }
               </Tabs>
-              <div className='mt-10 justify-center' style={{ display: 'grid', gap: '2rem', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 210px))' }}>
+              <div className={`mt-10 justify-center ${classes.section__works__buttons}`}>
                 {filterButtonSection && filterButtonSection.length > 0 ? (
                   filterButtonSection[0].header.map((button, i) => (
                     <div key={i} className='mb-4'>
@@ -200,6 +201,9 @@ function Home() {
             </div>
           </section>
 
+          <div className={`d-xs-none ${classes.section__discover__texture}`}>
+            <img src={textureCirclesAlt} alt='' />
+          </div>
           <section className={`container ${classes.section__discover}`}>
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
