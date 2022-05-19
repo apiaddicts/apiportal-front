@@ -13,6 +13,7 @@ import Button from '../components/Buttons/Button';
 import Slider from '../components/Slider/Slider';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
 import textureCircles from '../static/img/texture_circles.svg';
+import textureCirclesAlt from '../static/img/texture_circles_alt.svg';
 import { getHome } from '../redux/actions/homeAction';
 import Slick from '../components/SlickSlider/Slick';
 
@@ -40,6 +41,7 @@ function Home() {
   const filterSection = data && data.contentSections ? data.contentSections.filter((item) => item.__component === 'home.work-section') : [];
   const titleSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].title ? filterSection[0].title : '';
   const backgroundSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].background ? filterSection[0].background.url : '';
+  console.log(backgroundSection);
   const itemsSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].Steps ? filterSection[0].Steps.map((i) => {
     const response = {
       icon: i.number,
@@ -79,36 +81,42 @@ function Home() {
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
     {
       img: 'https://picsum.photos/id/1/370/240',
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
     {
       img: 'https://picsum.photos/id/1031/370/240',
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
     {
       img: 'https://picsum.photos/id/1066/370/240',
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
     {
       img: 'https://picsum.photos/id/1078/370/240',
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
     {
       img: 'https://picsum.photos/id/1079/370/240',
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
   ];
 
@@ -119,21 +127,20 @@ function Home() {
           <section>
             <Slider slides={slides} />
           </section>
-
+          <div className={classes.section__content__texture}>
+            <img src={textureCircles} alt='Texture' />
+          </div>
           <section className={`container ${classes.section__content}`}>
-            <div className={classes.section__content__texture}>
-              <img src={textureCircles} alt='Texture' />
-            </div>
             <div className='row'>
               <div className={`flex-md-12 ${classes.section__content__title}`}>
                 <h1 className='h2 text__primary font-weight-bold mb-10 ml-5'>
                   {titleSection || 'Benificios principales'}
                 </h1>
               </div>
-              <div className={`flex-md-6 flex-sm-12 ${classes.section__content__img}`}>
+              <div className={`flex-md-5 flex-lg-5 flex-sm-12 ${classes.section__content__img}`}>
                 <img src={backgroundSection || 'https://picsum.photos/500/300'} alt='Benefits' className='ml-4' />
               </div>
-              <div className={`flex-lg-6 flex-sm-12 ${classes.section__content__items}`}>
+              <div className={`flex-md-7 flex-lg-7 flex-sm-12 ${classes.section__content__items}`}>
                 {itemsSection.map((item, i) => (
                   <Item
                     key={i}
@@ -180,7 +187,7 @@ function Home() {
                   ))
                 }
               </Tabs>
-              <div className='mt-10 justify-center' style={{ display: 'grid', gap: '2rem', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 210px))' }}>
+              <div className={`mt-10 justify-center ${classes.section__works__buttons}`}>
                 {filterButtonSection && filterButtonSection.length > 0 ? (
                   filterButtonSection[0].header.map((button, i) => (
                     <div key={i} className='mb-4'>
@@ -194,6 +201,9 @@ function Home() {
             </div>
           </section>
 
+          <div className={`d-xs-none ${classes.section__discover__texture}`}>
+            <img src={textureCirclesAlt} alt='' />
+          </div>
           <section className={`container ${classes.section__discover}`}>
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
@@ -317,7 +327,7 @@ function Home() {
             <div className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
                 <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center'>
-                  <a href=''>Ver todas</a>
+                  <a href='/apis'>Ver todas</a>
                 </div>
               </div>
             </div>

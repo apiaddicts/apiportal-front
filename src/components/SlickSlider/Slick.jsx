@@ -59,7 +59,7 @@ export default function SimpleSlider({ slides }) {
     <Slider {...settings}>
       {slides.map((slide, i) => (
         <div key={i} className={i === slideIndex ? 'activeSlide' : 'slide'} style={{ padding: '15px' }}>
-          <CardBasic chipTitle={slide.statusText ? slide.statusText : ''} info={slide.linkText} img={slide.img ? slide.img : ''} title={slide.title} description={slide.description} />
+          <CardBasic chipTitle={slide.statusText ? slide.statusText : ''} info={slide.linkText} img={slide.img ? slide.img : ''} title={slide.title} description={slide.description} route={slide.route} />
         </div>
       ))}
     </Slider>

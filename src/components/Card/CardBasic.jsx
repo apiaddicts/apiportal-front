@@ -6,7 +6,7 @@ import Base from './Base';
 
 import './cards.scss';
 
-function CardBasic({ chipTitle, title, img, description, info, maxWidth }) {
+function CardBasic({ chipTitle, title, img, description, info, route, maxWidth }) {
 
   return (
     <Base maxWidth={maxWidth}>
@@ -23,18 +23,18 @@ function CardBasic({ chipTitle, title, img, description, info, maxWidth }) {
               <h1 className='chip_title'>{title}</h1>
             </>
           ) : (
-            <h1 className='h3 font-weight-bold px-8 py-5 text__primary'>{title}</h1>
+            <h1 className='h4 font-weight-bold px-8 py-5 text__primary'>{title}</h1>
           )}
         </div>
         <div className='card_chip_desciption'>
           <p className='text-left'>
             {description}
           </p>
-          <div className='card_chip_info mt-4'>
+          <a className='card_chip_info mt-4' href={route}>
             <span>{info}</span>
             {' '}
             <MdEast className='svg' />
-          </div>
+          </a>
         </div>
       </section>
     </Base>

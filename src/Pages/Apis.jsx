@@ -131,13 +131,13 @@ function Apis() {
   return (
     <div style={{ paddingTop: '114px' }}>
       <BannerImage />
-      <section className={classes.container}>
-        <article className={classes.container__left}>
+      <section className={classes.wrapper}>
+        <article className={classes.wrapper__left}>
           <CustomizedAccordions title='Estado'>
             {
               state.map((item, index) => (
                 <div
-                  className={classes.container__checkbox}
+                  className={classes.wrapper__checkbox}
                   key={index}
                 >
                   <CheckboxWrapper
@@ -178,36 +178,36 @@ function Apis() {
           </div>
           <CustomizedAccordions title='Solution'>
             { items.map((item, index) => (
-              <div key={index} className={classes.container__checkbox}>
+              <div key={index} className={classes.wrapper__checkbox}>
                 <CheckboxWrapper
                   name={item.title}
                   label={item.title}
                   handleChangeSelect={handleChangeSolutions}
                   checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
                 />
-                <p className={classes.container__checkbox__counter}>{item.count}</p>
+                <p className={classes.wrapper__checkbox__counter}>{item.count}</p>
               </div>
             ))}
           </CustomizedAccordions>
           <CustomizedAccordions title='Tags'>
             { tags.map((item, index) => (
-              <div className={classes.container__checkbox} key={index}>
+              <div className={classes.wrapper__checkbox} key={index}>
                 <CheckboxWrapper
                   name={item.label}
                   label={item.label}
                   handleChangeSelect={handleChangFilterTags}
                   checked={filtersSelect[item.label] !== undefined ? filtersSelect[item.label] : false}
                 />
-                <p className={classes.container__checkbox__counter}>{item.count}</p>
+                <p className={classes.wrapper__checkbox__counter}>{item.count}</p>
               </div>
             ))}
           </CustomizedAccordions>
-          <div className={`container ${classes.container__filters}`}>
+          <div className={classes.wrapper__filters}>
             <Icon id='MdDeleteOutline' />
-            <button type='button' className={classes.container__reset} onClick={resetFilters}>Eliminar filtros</button>
+            <button type='button' className={classes.wrapper__reset} onClick={resetFilters}>Eliminar filtros</button>
           </div>
         </article>
-        <section className={classes.container__right}>
+        <section className={classes.wrapper__right}>
           <div className='w-full'>
             <div className='row'>
               <div className='flex-sm-12 flex-md-8 mt-8'>
