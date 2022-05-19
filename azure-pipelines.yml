@@ -38,7 +38,7 @@ stages:
               repository: $(azName)
               Dockerfile: Dockerfile
               buildContext: .
-              args: --build-arg NODE_APP_ENV --build-arg NODE_APP_PORT --build-arg SITE_URL --build-arg STRAPI_URL
+              args: --build-arg REACT_APP_RESOURCE_GROUP_NAME --build-arg REACT_APP_SERVICE_NAME --build-arg REACT_APP_STRAPI_URL --build-arg REACT_APP_SUBSCRIPTION_ID --build-arg REACT_APP_SURA_URL
               tags: |
                 $(Build.SourceBranchName)
                 $(Build.SourceVersion)
