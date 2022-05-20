@@ -207,7 +207,7 @@ function Home() {
           <section className={`container ${classes.section__discover}`}>
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
-                <h1 className='h2 text__primary font-weight-bold mb-8'>
+                <h1 className={`h2 text__primary font-weight-bold ${classes.section__discover__title}`}>
                   {filterDiscoverTitle || 'Descubre nuestras APIs'}
                 </h1>
               </div>
@@ -279,8 +279,15 @@ function Home() {
                                       <img src={tab.img.length > 0 ? tab.img[0].url : 'https://picsum.photos/505/386'} alt='' />
                                     </div>
                                   </div>
-                                  <div className={classes.section__experiences__content__card}>
+                                  <div className={`d-xs-none ${classes.section__experiences__content__card}`}>
                                     <CardSlider lists={tab.cards.length > 0 ? tab.cards : []} />
+                                  </div>
+                                  <div className='container d-xs-only'>
+                                    <div className='row'>
+                                      <div className='flex-md-12 flex-sm-12'>
+                                        <Slick slides={tab.cards.length > 0 ? tab.cards : []} tabCard={true} footerTabCard={tab.cards[i]} />
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
