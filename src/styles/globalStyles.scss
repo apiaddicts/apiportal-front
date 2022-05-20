@@ -891,6 +891,8 @@ a {
   // justify-content: center;
   align-content: center;
   flex-direction: row;
+  position: relative;
+  z-index: 10;
   @include breakpoint(xs) {
     flex-direction: column;
     div {
