@@ -68,9 +68,9 @@
   height: 300px;
   // padding: 0% 4.5%;
   position: relative;
-  @include breakpoint(xs) {
-    min-height: 260px;
-  }
+  // @include breakpoint(xs) {
+  //   min-height: 260px;
+  // }
 
   &__layout {
     position: absolute;
@@ -78,9 +78,9 @@
     height: 400px;
     z-index: 1;
     background: #F5F6F8;
-    @include breakpoint(xs) {
-      min-height: 290px;
-    }
+    // @include breakpoint(xs) {
+    //   min-height: 290px;
+    // }
   }
 
   &__backTo {
@@ -171,6 +171,19 @@
     z-index: 1;
   }
 }
+
+.banner_custom__layout--height{
+  @include breakpoint(xs) {
+    height: 290px;
+  }
+}
+
+.banner_custom__img--dnone{
+  @include breakpoint(xs) {
+    display: none;
+  }
+}
+
 .heroOverlay {
   height: 100%;
   width: 100%;
