@@ -42,6 +42,7 @@
   color: $gray_lighten-3;
   @include breakpoint(xs) {
     left: 1%;
+    bottom: 20px;
   }
   @include breakpoint(sm) {
     left: 1%;
@@ -65,6 +66,7 @@
   color: $gray_lighten-3;
   @include breakpoint(xs) {
     right: 1%;
+    bottom: 20px;
   }
   @include breakpoint(sm) {
     right: 0%;
@@ -81,6 +83,10 @@
 .slick-dots {
   position: absolute;
   bottom: 12px !important;
+
+  @include breakpoint(xs) {
+    bottom: 30px !important;
+  }
 }
 
 .slick-dots li button:before {
