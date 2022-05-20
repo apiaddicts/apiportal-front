@@ -13,7 +13,7 @@ variables:
   azName: devportal-front
   gitlabRepository: cloudappi/sura/dev-portal-sura-frontend
   azPort: 3000
-  azPortName: http-devportal
+  azPortName: http
   azImage: $(dockerRegistry)/$(gitlabRepository):$(Build.SourceVersion)
   dockerRegistry: registry.gitlab.com
   dockerRegistryConnection: Cloudappi-GitlabRegistry
