@@ -47,12 +47,12 @@
     left: 1%;
   }
   @include breakpoint(lg) {
-    left: 29%;
-    }
-    
-    @include breakpoint(xl) {
-      left: 38%;
-    }
+    left: 36%;
+  }
+
+  @include breakpoint(xl) {
+    left: 38%;
+  }
 }
 
 .nextArrow {
@@ -68,13 +68,13 @@
   }
   @include breakpoint(sm) {
     right: 0%;
-  }  
+  }
   @include breakpoint(lg) {
-    right: 29%;
-    }
-    
-    @include breakpoint(xl) {
-      right: 38%;
+    right: 36%;
+  }
+
+  @include breakpoint(xl) {
+    right: 38%;
   }
 }
 
