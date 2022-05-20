@@ -128,7 +128,7 @@ function Apis({ setIsOpen }) {
 
   return (
     <div style={{ paddingTop: '114px' }}>
-      <BannerImage />
+      <BannerImage css_styles={{ 'layout_height': 'banner_custom__layout--height' }} />
       <section className={classes.wrapper}>
         <article className={classes.wrapper__left}>
           <CustomizedAccordions title='Estado'>
