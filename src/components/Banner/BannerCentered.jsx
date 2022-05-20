@@ -3,7 +3,13 @@ import Base from './Base';
 import Button from '../Buttons/Button';
 import classes from './banner.module.scss';
 
-function BannerCentered({ title, subtitle, buttonLabel, img, buttonType }) {
+function BannerCentered({ title, subtitle, buttonLabel, img, buttonType, redirect }) {
+  const handleClick = () => {
+    if (redirect === null) {
+      document.getElementById('data').scrollIntoView(true);
+    }
+  };
+
   return (
     <Base img={img}>
       <div className={`container ${classes.banner__centered}`}>
@@ -21,7 +27,7 @@ function BannerCentered({ title, subtitle, buttonLabel, img, buttonType }) {
 
         <div className='row justify-center text-center'>
           <div className='flex-lg-3 flex-md-5 flex-sm-12 flex-xl-3'>
-            <Button styles={buttonType}>
+            <Button onClick={handleClick} styles={buttonType}>
               {buttonLabel}
             </Button>
           </div>

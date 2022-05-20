@@ -9,7 +9,9 @@ function Tabs({ children, line = false, direction = 'left', activeColor = 'prima
 
   const onClickTabItem = (tab) => {
     setActiveTab(tab);
-    deTbas(tab);
+    if (deTbas !== undefined) {
+      deTbas(tab);
+    }
   };
 
   return (
