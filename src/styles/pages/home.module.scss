@@ -232,6 +232,7 @@
     padding-bottom: 200px;
     @include breakpoint(xs) {
       padding-bottom: 114px;
+      margin-top: -27px;
     }
     height: 100%;
     &__img {
