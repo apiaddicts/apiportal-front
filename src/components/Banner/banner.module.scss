@@ -69,7 +69,7 @@
   // padding: 0% 4.5%;
   position: relative;
   @include breakpoint(xs) {
-    height: 260px;
+    min-height: 260px;
   }
 
   &__layout {
@@ -79,7 +79,7 @@
     z-index: -1;
     background: #F5F6F8;
     @include breakpoint(xs) {
-      height: 290px;
+      min-height: 290px;
     }
   }
 
