@@ -5,7 +5,7 @@ import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
 import classes from './banner.module.scss';
 
-function BannerImage({ buttons, setIsOpen, title = '', img = '', description, redirect = '/' }) {
+function BannerImage({ buttons, setIsOpen, title = '', img = '', description, css_styles, redirect = '/' }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -63,7 +63,7 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, re
           </div>
         </div>
         <img
-          className={classes.banner_img__img}
+          className={`${classes.banner_img__img} ${css_styles}`}
           src={img !== '' ? img : 'https://picsum.photos/500/200'}
           alt='lorem'
         />
