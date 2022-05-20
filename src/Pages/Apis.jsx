@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@mui/material';
 
@@ -18,7 +18,7 @@ import { getLibraries, filterCheck, sortApiCollection } from '../redux/actions/l
 import CheckboxLabels from '../components/common/CustomCheck';
 import Icon from '../components/MdIcon/Icon';
 
-function Apis() {
+function Apis({ setIsOpen }) {
   const [activeTab, setActiveTab] = useState('');
 
   const { libraries, filters, backUpLibreries, loadingLibraries } = useSelector((state) => state.library);
@@ -237,17 +237,17 @@ function Apis() {
                 libraries.length > 0 ? (
                   libraries.map((item, index) => (
                     <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
-                      <Link to={`/api/${item.id}`}>
-                        <CardInformation
-                          title={item.title}
-                          status={item.status}
-                          version={item.version}
-                          buttons={item.tags}
-                          colorStatus={item.color_status}
-                          info='Ver Documentación'
-                          description={item.description}
-                        />
-                      </Link>
+                      <CardInformation
+                        title={item.title}
+                        status={item.status}
+                        version={item.version}
+                        buttons={item.tags}
+                        colorStatus={item.color_status}
+                        info='Ver Documentación'
+                        description={item.description}
+                        link={`/api/${item.id}`}
+                        modal={setIsOpen}
+                      />
                     </div>
                   ))
                 ) : (

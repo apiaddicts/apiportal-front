@@ -115,6 +115,7 @@ function ApiDetails({ setIsOpen }) {
               buttons={buttonsLbls}
               setIsOpen={setIsOpen}
               css_styles='d-none'
+              redirect='/apis'
               description='In egestas blandit felis id porttitor. Mauris vel nibh ex. Integer iaculis placerat nunc, in ultricies nunc dignissim eu. '
             />
           </section>
