@@ -144,7 +144,7 @@ function ApiDetails({ setIsOpen }) {
                             key={i}
                             title={item.title}
                             icon={item.number}
-                            titleStyles={{ fontSize: '19px', fontWeight: '600' }}
+                            titleStyles={{ fontSize: '18px', fontWeight: '500', color: '#53565A' }}
                             iconStyle={{ width: '50px', height: '50px' }}
                           />
                         </div>
