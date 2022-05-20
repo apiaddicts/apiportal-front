@@ -2,7 +2,6 @@ import React from 'react';
 import { InputSelect } from './style';
 
 function InptSelectUI({ children, label, value, placeholder, ...rest }) {
-  console.log();
   return (
     <InputSelect
       fullWidth

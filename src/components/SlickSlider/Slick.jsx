@@ -8,9 +8,12 @@ import CardBasic from '../Card/CardBasic';
 
 import './Slick.scss';
 
-export default function SimpleSlider({ slides, tabCard, footerTabCard }) {
+export default function SimpleSlider({ slides, tabCard, footerTabCard, setIsOpen }) {
   const [slideIndex, setSlideIndex] = useState(0);
 
+  const handleRoute = () => {
+    setIsOpen(true);
+  };
   const settings = {
     className: 'center mt-10 mb-10',
     centerMode: true,
@@ -58,7 +61,7 @@ export default function SimpleSlider({ slides, tabCard, footerTabCard }) {
     <Slider {...settings}>
       {slides.map((slide, i) => (
         <div key={i} className={i === slideIndex ? 'activeSlide' : 'slide'} style={{ padding: '15px' }}>
-          <CardBasic chipTitle={slide.statusText ? slide.statusText : ''} info={slide.linkText} img={slide.img ? slide.img : ''} title={slide.title} description={slide.description} route={slide.route} tabCard={tabCard} footerTabCard={footerTabCard} />
+          <CardBasic chipTitle={slide.statusText ? slide.statusText : ''} info={slide.linkText} img={slide.img ? slide.img : ''} title={slide.title} description={slide.description} route={handleRoute} tabCard={tabCard} footerTabCard={footerTabCard} />
         </div>
       ))}
     </Slider>

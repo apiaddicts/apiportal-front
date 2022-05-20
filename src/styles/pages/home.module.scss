@@ -286,8 +286,8 @@
 
       @include breakpoint(lg) {
         position: absolute;
-        top: -2%;
-        left: 36%;
+        top: -63px;
+        left: 38%;
         max-width: 65%;
       }
 
@@ -306,13 +306,14 @@
 
   &__showmore {
     margin-top: 45px !important;
-    a {
+    div {
       text-decoration: none;
       color: $secondary;
       text-transform: uppercase;
       font-size: 16px;
       font-weight: 700;
       letter-spacing: 1.33px;
+      cursor: pointer;
     }
   }
   &__title{

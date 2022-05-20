@@ -67,7 +67,7 @@ function AppRouter() {
         <>
           <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} privateSession={privateSession} />
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/' element={<Home setIsOpen={setIsOpen} />} />
             <Route path='/about' element={<Pagina1 />} />
             <Route path='/users' element={<Pagina2 />} />
             <Route path='/apis' exact element={<Apis setIsOpen={setIsOpen} />} />
