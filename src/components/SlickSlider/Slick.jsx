@@ -8,8 +8,7 @@ import CardBasic from '../Card/CardBasic';
 
 import './Slick.scss';
 
-export default function SimpleSlider({ slides }) {
-
+export default function SimpleSlider({ slides, tabCard, footerTabCard }) {
   const [slideIndex, setSlideIndex] = useState(0);
 
   const settings = {
@@ -59,7 +58,7 @@ export default function SimpleSlider({ slides }) {
     <Slider {...settings}>
       {slides.map((slide, i) => (
         <div key={i} className={i === slideIndex ? 'activeSlide' : 'slide'} style={{ padding: '15px' }}>
-          <CardBasic chipTitle={slide.statusText ? slide.statusText : ''} info={slide.linkText} img={slide.img ? slide.img : ''} title={slide.title} description={slide.description} route={slide.route} />
+          <CardBasic chipTitle={slide.statusText ? slide.statusText : ''} info={slide.linkText} img={slide.img ? slide.img : ''} title={slide.title} description={slide.description} route={slide.route} tabCard={tabCard} footerTabCard={footerTabCard} />
         </div>
       ))}
     </Slider>

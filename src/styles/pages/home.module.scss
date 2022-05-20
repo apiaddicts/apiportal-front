@@ -166,6 +166,13 @@
     display: flex;
     justify-content: flex-end;
   }
+  &__title {
+    margin-bottom: 2rem;
+    @include breakpoint(xs) {
+      margin-bottom: 0;
+    }
+
+  }
 
   &__subtitle {
     white-space: pre-line;
@@ -279,7 +286,7 @@
 
       @include breakpoint(lg) {
         position: absolute;
-        top: 5%;
+        top: -2%;
         left: 36%;
         max-width: 65%;
       }
