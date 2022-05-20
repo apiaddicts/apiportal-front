@@ -31,7 +31,7 @@ function Register({ setOpenForm, setIsOpen }) {
             <Icon id='MdClose' />
           </button>
           <div className={classes.login__wrapper}>
-            <h1 className={classes.login__title}>Crear Cuenta</h1>
+            <h1 className={classes.login__title}>Crea tu Cuenta</h1>
             <CreateAccount />
           </div>
         </>

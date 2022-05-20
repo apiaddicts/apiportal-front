@@ -1,12 +1,14 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+
 import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
 import classes from './banner.module.scss';
 
-function BannerImage({ buttons, setIsOpen, title = '', img = '', description }) {
-  const navigate = useNavigate();
+function BannerImage({ buttons, setIsOpen, title = '', img = '', description, css_styles, redirect = '/' }) {
 
+  const { layout_height, image_display } = css_styles;
+  const navigate = useNavigate();
   const handleClick = () => {
     const session = localStorage.getItem('session');
     if (session) {
@@ -20,11 +22,11 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description }) 
     <div
       className={classes.banner_img}
     >
-      <div className={classes.banner_img__layout}>
+      <div className={`${classes.banner_img__layout} ${classes[layout_height]}`}>
         <div
           className={classes.banner_img__backTo}
         >
-          <Link to={-1} className={classes.banner_img__backTo__btn}>
+          <Link to={redirect} className={classes.banner_img__backTo__btn}>
             <div>
               <Icon id='MdKeyboardBackspace' />
             </div>
@@ -62,7 +64,7 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description }) 
           </div>
         </div>
         <img
-          className={classes.banner_img__img}
+          className={`${classes.banner_img__img} ${classes[image_display]}`}
           src={img !== '' ? img : 'https://picsum.photos/500/200'}
           alt='lorem'
         />

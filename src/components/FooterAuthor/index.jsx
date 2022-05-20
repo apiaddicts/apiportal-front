@@ -3,7 +3,6 @@ import ItemAvatar from '../Item/ItemAvatar';
 import classes from './footer-social.module.scss';
 
 function FooterAuthor({ data }) {
-  console.log(data);
   return (
     <div className={classes.footer__author}>
       <ItemAvatar

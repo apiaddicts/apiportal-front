@@ -1,9 +1,15 @@
 import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+
 import Button from '../Buttons/Button';
+
 import classes from './slider.module.scss';
 
 function Slider({ slides }) {
+  const navigate = useNavigate();
+
   const slider = useRef(null);
   const nextSlide = () => {
     if (slider.current.children.length > 0) {
@@ -51,6 +57,17 @@ function Slider({ slides }) {
 
   };
 
+  const handleClick = (click) => {
+
+    if (click !== '') {
+      navigate(click);
+    } else {
+      // navigate('/#Banner');
+      document.getElementById('data').scrollIntoView(true);
+      // location.hash = '#Banner';
+    }
+  };
+
   return (
     <div className={classes.content}>
       <div className={classes.content__slider} ref={slider}>
@@ -74,7 +91,7 @@ function Slider({ slides }) {
                         x.actionButtons !== null ? (
                           x.actionButtons.map((i, index) => (
                             <div key={index + i} className='pr-2 mb-4 justify-start'>
-                              <Button styles={i.type}>
+                              <Button styles={i.type} onClick={() => handleClick(i.route)}>
                                 {i.label}
                               </Button>
                             </div>

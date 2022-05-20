@@ -78,7 +78,6 @@ function Blog() {
   useEffect(() => {
     setValue(formik.values.search);
     setResultsSearch(results);
-    console.log(results);
   }, [formik.values.search]);
 
   useEffect(() => {

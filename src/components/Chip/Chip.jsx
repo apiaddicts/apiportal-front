@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Chip({ title, className = 'verde' }) {
+function Chip({ title, className = 'verde', spanClass }) {
   return (
     <div className={`chip ${className}`}>
-      <span>
+      <span className={spanClass}>
         {title}
       </span>
     </div>

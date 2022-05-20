@@ -18,7 +18,6 @@ function Contact() {
 
   const formConfig = useLoginConfig(fieldsContact, handleSubmit);
 
-  // console.log(pathname !== '/blog');
   return (
     <div className={classes.contact}>
       <div className={pathname !== '/blog' ? classes.contact__container__alternative : classes.contact__container}>

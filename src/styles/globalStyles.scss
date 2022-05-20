@@ -749,6 +749,13 @@ a {
   }
 }
 
+.blog-chip{
+  font-weight: 600 !important;
+  letter-spacing: 0.4px !important;
+  font-size: 14px !important;
+  text-transform: none !important;
+}
+
 .chip_tag_rounded {
   width: 90px;
   height: 76px;
@@ -849,6 +856,9 @@ a {
   &__gray__gray_darken {
     color: $gray_darken;
   }
+  &__dark{
+    color: $dark;
+  }
   &__size-1 {
     font-size: 154px;
   }
@@ -881,8 +891,14 @@ a {
   // justify-content: center;
   align-content: center;
   flex-direction: row;
+  position: relative;
+  z-index: 10;
   @include breakpoint(xs) {
     flex-direction: column;
+    div {
+      margin-right: 0px;
+      margin-bottom: 5px;
+    }
   }
 }
 

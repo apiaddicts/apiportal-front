@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@mui/material';
 
@@ -18,7 +18,7 @@ import { getLibraries, filterCheck, sortApiCollection } from '../redux/actions/l
 import CheckboxLabels from '../components/common/CustomCheck';
 import Icon from '../components/MdIcon/Icon';
 
-function Apis() {
+function Apis({ setIsOpen }) {
   const [activeTab, setActiveTab] = useState('');
 
   const { libraries, filters, backUpLibreries, loadingLibraries } = useSelector((state) => state.library);
@@ -42,7 +42,6 @@ function Apis() {
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
   const handleChangeVersions = (name, label, checked) => {
-    console.log(name, checked);
     if (name === label && checked) {
       setActiveTab(label);
     } else {
@@ -127,17 +126,16 @@ function Apis() {
     }
   }, [libraries]);
 
-  // console.log('Librerias array', libraries);
   return (
     <div style={{ paddingTop: '114px' }}>
-      <BannerImage />
-      <section className={classes.container}>
-        <article className={classes.container__left}>
+      <BannerImage css_styles={{ 'layout_height': 'banner_custom__layout--height' }} />
+      <section className={classes.wrapper}>
+        <article className={classes.wrapper__left}>
           <CustomizedAccordions title='Estado'>
             {
               state.map((item, index) => (
                 <div
-                  className={classes.container__checkbox}
+                  className={classes.wrapper__checkbox}
                   key={index}
                 >
                   <CheckboxWrapper
@@ -178,36 +176,36 @@ function Apis() {
           </div>
           <CustomizedAccordions title='Solution'>
             { items.map((item, index) => (
-              <div key={index} className={classes.container__checkbox}>
+              <div key={index} className={classes.wrapper__checkbox}>
                 <CheckboxWrapper
                   name={item.title}
                   label={item.title}
                   handleChangeSelect={handleChangeSolutions}
                   checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
                 />
-                <p className={classes.container__checkbox__counter}>{item.count}</p>
+                <p className={classes.wrapper__checkbox__counter}>{item.count}</p>
               </div>
             ))}
           </CustomizedAccordions>
           <CustomizedAccordions title='Tags'>
             { tags.map((item, index) => (
-              <div className={classes.container__checkbox} key={index}>
+              <div className={classes.wrapper__checkbox} key={index}>
                 <CheckboxWrapper
                   name={item.label}
                   label={item.label}
                   handleChangeSelect={handleChangFilterTags}
                   checked={filtersSelect[item.label] !== undefined ? filtersSelect[item.label] : false}
                 />
-                <p className={classes.container__checkbox__counter}>{item.count}</p>
+                <p className={classes.wrapper__checkbox__counter}>{item.count}</p>
               </div>
             ))}
           </CustomizedAccordions>
-          <div className={`container ${classes.container__filters}`}>
+          <div className={classes.wrapper__filters}>
             <Icon id='MdDeleteOutline' />
-            <button type='button' className={classes.container__reset} onClick={resetFilters}>Eliminar filtros</button>
+            <button type='button' className={classes.wrapper__reset} onClick={resetFilters}>Eliminar filtros</button>
           </div>
         </article>
-        <section className={classes.container__right}>
+        <section className={classes.wrapper__right}>
           <div className='w-full'>
             <div className='row'>
               <div className='flex-sm-12 flex-md-8 mt-8'>
@@ -237,17 +235,17 @@ function Apis() {
                 libraries.length > 0 ? (
                   libraries.map((item, index) => (
                     <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
-                      <Link to={`/api/${item.id}`}>
-                        <CardInformation
-                          title={item.title}
-                          status={item.status}
-                          version={item.version}
-                          buttons={item.tags}
-                          colorStatus={item.color_status}
-                          info='Ver Documentación'
-                          description={item.description}
-                        />
-                      </Link>
+                      <CardInformation
+                        title={item.title}
+                        status={item.status}
+                        version={item.version}
+                        buttons={item.tags}
+                        colorStatus={item.color_status}
+                        info='Ver Documentación'
+                        description={item.description}
+                        link={`/api/${item.id}`}
+                        modal={setIsOpen}
+                      />
                     </div>
                   ))
                 ) : (

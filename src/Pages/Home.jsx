@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Item from '../components/Item/Item';
 import classes from '../styles/pages/home.module.scss';
 import Icon from '../components/MdIcon/Icon';
@@ -13,12 +14,15 @@ import Button from '../components/Buttons/Button';
 import Slider from '../components/Slider/Slider';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
 import textureCircles from '../static/img/texture_circles.svg';
+import textureCirclesAlt from '../static/img/texture_circles_alt.svg';
 import { getHome } from '../redux/actions/homeAction';
 import Slick from '../components/SlickSlider/Slick';
 
-function Home() {
+function Home({ setIsOpen }) {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.demo);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (data && Object.keys(data).length === 0) {
@@ -71,6 +75,7 @@ function Home() {
   const filterHomeBannerSubtitle = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].subtitle ? filterHomeBanner[0].subtitle : '';
   const filterHomeBannerImage = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].background ? filterHomeBanner[0].background.url : '';
   const filterHomeBannerNameButtom = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].buttons ? filterHomeBanner[0].buttons[0].name : '';
+  const filterHomeBannerNameType = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].buttons ? filterHomeBanner[0].buttons[0].type : '';
 
   // TODO: Reemplazar DataFake
   const slidesNew = [
@@ -79,61 +84,80 @@ function Home() {
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
     {
       img: 'https://picsum.photos/id/1/370/240',
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
     {
       img: 'https://picsum.photos/id/1031/370/240',
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
     {
       img: 'https://picsum.photos/id/1066/370/240',
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
     {
       img: 'https://picsum.photos/id/1078/370/240',
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
     {
       img: 'https://picsum.photos/id/1079/370/240',
       title: 'tenetur magnam illo',
       description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
       linkText: 'Conoce más',
+      route: '/apis',
     },
   ];
+
+  const handleClickNavigation = (flag) => {
+    if (flag) {
+      navigate('/apis#');
+    } else {
+      document.getElementById('data').scrollIntoView(true);
+    }
+  };
+
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
 
   return (
     <div style={{ paddingTop: '114px' }}>
       {Object.keys(data).length > 0 ? (
         <div>
+          {/* Slider */}
           <section>
             <Slider slides={slides} />
           </section>
-
+          <div className={classes.section__content__texture}>
+            <img src={textureCircles} alt='Texture' />
+          </div>
+          {/* Beneficios principales */}
           <section className={`container ${classes.section__content}`}>
-            <div className={classes.section__content__texture}>
-              <img src={textureCircles} alt='Texture' />
-            </div>
             <div className='row'>
               <div className={`flex-md-12 ${classes.section__content__title}`}>
                 <h1 className='h2 text__primary font-weight-bold mb-10 ml-5'>
                   {titleSection || 'Benificios principales'}
                 </h1>
               </div>
-              <div className={`flex-md-6 flex-sm-12 ${classes.section__content__img}`}>
+              <div className={`flex-md-5 flex-lg-5 flex-sm-12 ${classes.section__content__img}`}>
                 <img src={backgroundSection || 'https://picsum.photos/500/300'} alt='Benefits' className='ml-4' />
               </div>
-              <div className={`flex-lg-6 flex-sm-12 ${classes.section__content__items}`}>
+              <div className={`flex-md-7 flex-lg-7 flex-sm-12 ${classes.section__content__items}`}>
                 {itemsSection.map((item, i) => (
                   <Item
                     key={i}
@@ -148,7 +172,7 @@ function Home() {
               </div>
             </div>
           </section>
-
+          {/* Como funciona */}
           <section className={`${classes.section__works}`}>
             <div className='container'>
               <div className='row'>
@@ -180,11 +204,11 @@ function Home() {
                   ))
                 }
               </Tabs>
-              <div className='mt-10 justify-center' style={{ display: 'grid', gap: '2rem', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 210px))' }}>
+              <div className={`mt-10 justify-center ${classes.section__works__buttons}`}>
                 {filterButtonSection && filterButtonSection.length > 0 ? (
                   filterButtonSection[0].header.map((button, i) => (
                     <div key={i} className='mb-4'>
-                      <Button styles={button.keyword}>
+                      <Button styles={button.keyword} onClick={() => handleClickNavigation(button.isKeywordInverted)}>
                         {button.title}
                       </Button>
                     </div>
@@ -194,10 +218,14 @@ function Home() {
             </div>
           </section>
 
+          <div className={`d-xs-none ${classes.section__discover__texture}`}>
+            <img src={textureCirclesAlt} alt='' />
+          </div>
+          {/* Descubre nuestras APis */}
           <section className={`container ${classes.section__discover}`}>
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
-                <h1 className='h2 text__primary font-weight-bold mb-8'>
+                <h1 className={`h2 text__primary font-weight-bold ${classes.section__discover__title}`}>
                   {filterDiscoverTitle || 'Descubre nuestras APIs'}
                 </h1>
               </div>
@@ -214,7 +242,7 @@ function Home() {
                 filterDiscover && filterDiscover[0].useCaseList && filterDiscover[0].useCaseList.length > 0 ? (
                   filterDiscover[0].useCaseList.map((card, i) => (
                     <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
-                      <CardBasic chipTitle={card.statusText} title={card.title} description={card.description} info={card.linkText} />
+                      <CardBasic chipTitle={card.statusText} title={card.title} description={card.description} info={card.linkText} route={handleOpenModal} />
                     </div>
                   ))
                 ) : (null)
@@ -241,7 +269,7 @@ function Home() {
               </div>
             </div>
           </section>
-
+          {/* Nuestras Experiencias */}
           <section className={classes.section__experiences}>
             <div className='container'>
               <div className={classes.section__experiences__title}>
@@ -269,8 +297,15 @@ function Home() {
                                       <img src={tab.img.length > 0 ? tab.img[0].url : 'https://picsum.photos/505/386'} alt='' />
                                     </div>
                                   </div>
-                                  <div className={classes.section__experiences__content__card}>
+                                  <div className={`d-xs-none ${classes.section__experiences__content__card}`}>
                                     <CardSlider lists={tab.cards.length > 0 ? tab.cards : []} />
+                                  </div>
+                                  <div className='container d-xs-only'>
+                                    <div className='row'>
+                                      <div className='flex-md-12 flex-sm-12'>
+                                        <Slick slides={tab.cards.length > 0 ? tab.cards : []} tabCard={true} footerTabCard={tab.cards[i]} />
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -284,7 +319,7 @@ function Home() {
               </div>
             </div>
           </section>
-
+          {/* Integra */}
           <section id='Banner'>
             <BannerCentered
               title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : 'Integras tus sistemas con las APIs de SURA'}
@@ -292,6 +327,7 @@ function Home() {
               img={filterHomeBannerImage !== '' ? filterHomeBannerImage : 'https://picsum.photos/1920/300'}
               buttonType='primary'
               buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : 'empezar ahora'}
+              redirect={filterHomeBannerNameType}
             />
           </section>
 
@@ -310,20 +346,20 @@ function Home() {
             <div className='container'>
               <div className='row'>
                 <div className='flex-md-12 flex-sm-12'>
-                  <Slick slides={slidesNew} />
+                  <Slick slides={slidesNew} setIsOpen={setIsOpen} />
                 </div>
               </div>
             </div>
             <div className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
                 <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center'>
-                  <a href=''>Ver todas</a>
+                  <div onClick={() => handleClickNavigation(true)}>Ver Más</div>
                 </div>
               </div>
             </div>
           </section>
+          <div id='data' />
         </div>
-
       ) : (
         <SkeletonComponent />
       )}

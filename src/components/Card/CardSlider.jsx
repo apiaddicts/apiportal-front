@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+// import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import * as MaterialDesign from 'react-icons/md';
 
 import Base from './Base';
@@ -75,15 +75,15 @@ function CardSlider({ lists, flag = true }) {
       <div className='card_slider_container_slider' ref={slider}>
         {lists.map((item, i) => (
           <div key={i} className='card_slider_container_slider_slide'>
-            <Base>
+            <Base style={{ height: '84% !important' }}>
               {flag ? (
-                <div className='container card_slider_container_text'>
+                <div className='card_slider_container_text'>
                   <div className='row'>
-                    <div className='flex-sm-12 flex-md-12 h3 text__secondary font-fs-joey pb-10'>
-                      <h1>{item.title}</h1>
+                    <div className='flex-sm-12 flex-md-12 text__secondary pb-8'>
+                      <h1 className='h3 font-fs-joey'>{item.title}</h1>
                     </div>
                     <div className='flex-sm-12 flex-md-12 body-1 text__gray__gray_darken font-weight-regular'>
-                      <p>{item.description}</p>
+                      <p style={{ lineHeight: '28px' }}>{item.description}</p>
                     </div>
                     <div className='flex-sm-12 flex-md-12 mt-10 card_slider_container_footer'>
                       <span className='card_slider_container_footer_icon'>
@@ -114,10 +114,16 @@ function CardSlider({ lists, flag = true }) {
       </div>
       <div className='card_slider_controls'>
         <button type='submit' className='card_slider_controls_left' onClick={previousSlide}>
-          <MdChevronLeft />
+          <svg width='19' height='30' viewBox='0 0 19 30' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <path opacity='0.5' d='M18 29L2 14.9998L18 1' stroke='#00AEC7' strokeWidth='1.5' />
+          </svg>
+
         </button>
         <button type='submit' className='card_slider_controls_right' onClick={nextSlide}>
-          <MdChevronRight />
+          <svg width='19' height='30' viewBox='0 0 19 30' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <path d='M1 29L17 14.9998L1 1' stroke='#00AEC7' strokeWidth='1.5' />
+          </svg>
+
         </button>
       </div>
     </div>

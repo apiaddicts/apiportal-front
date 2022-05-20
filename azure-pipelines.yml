@@ -11,11 +11,13 @@ pool:
 
 variables:
   azName: devportal-front
+  gitlabRepository: cloudappi/sura/dev-portal-sura-frontend
   azPort: 3000
-  azImage: $(dockerRegistry)/$(azName):$(Build.SourceVersion)
+  azPortName: http
+  azImage: $(dockerRegistry)/$(gitlabRepository):$(Build.SourceVersion)
+  dockerRegistry: registry.gitlab.com
+  dockerRegistryConnection: Cloudappi-GitlabRegistry
   ${{ if eq(variables['Build.SourceBranchName'], 'develop') }}:
-    dockerRegistry: azurecontainerregistrysuradev.azurecr.io
-    dockerRegistryConnection: AzRegistryContainerDev
     openshiftServiceConnection: "ARO-Dev"
     environment: dev
 
@@ -35,10 +37,10 @@ stages:
             displayName: Build
             inputs:
               command: build
-              repository: $(azName)
+              repository: $(gitlabRepository)
               Dockerfile: Dockerfile
               buildContext: .
-              args: --build-arg NODE_APP_ENV --build-arg NODE_APP_PORT --build-arg SITE_URL --build-arg STRAPI_URL
+              arguments: --build-arg REACT_APP_RESOURCE_GROUP_NAME --build-arg REACT_APP_SERVICE_NAME --build-arg REACT_APP_STRAPI_URL --build-arg REACT_APP_SUBSCRIPTION_ID --build-arg REACT_APP_SURA_URL
               tags: |
                 $(Build.SourceBranchName)
                 $(Build.SourceVersion)
@@ -46,7 +48,7 @@ stages:
             displayName: Push
             inputs:
               command: push
-              repository: $(azName)
+              repository: $(gitlabRepository)
               tags: |
                 $(Build.SourceBranchName)
                 $(Build.SourceVersion)

@@ -48,7 +48,7 @@ export const fieldsRegister = [
     id: 'email',
     initialValue: '',
     placeholder: 'youremail@domain.com',
-    label: 'Email',
+    label: 'Correo electrónico',
     validate: 'email',
     required: true,
     type: 'email',
