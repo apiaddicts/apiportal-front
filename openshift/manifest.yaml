@@ -53,7 +53,7 @@ metadata:
 spec:
   host: $HTTP_HOST
   port:
-    targetPort: 80
+    targetPort: $AZPORTNAME
   to:
     kind: Service
     name: $AZNAME
