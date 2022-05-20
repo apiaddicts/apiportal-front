@@ -114,6 +114,7 @@ function ApiDetails({ setIsOpen }) {
               img={library.image.length > 0 && library.image.length === 1 ? library.image[0].url : ''}
               buttons={buttonsLbls}
               setIsOpen={setIsOpen}
+              css_styles='d-none'
               redirect='/apis'
               description='In egestas blandit felis id porttitor. Mauris vel nibh ex. Integer iaculis placerat nunc, in ultricies nunc dignissim eu. '
             />
@@ -123,7 +124,7 @@ function ApiDetails({ setIsOpen }) {
               <img src={textureCircles} alt='Texture' />
             </div>
           </section>
-          <section className='container mb-18'>
+          <section className='container mb-15'>
             <div className='row'>
               <div className={`flex-md-12 flex-sm-12 -ml-23 ${classes.section__content__title}`}>
                 <h1 className='h2 text__primary font-weight-bold mb-10 -ml-23 text-center-sm'>
@@ -145,7 +146,7 @@ function ApiDetails({ setIsOpen }) {
                             key={i}
                             title={item.title}
                             icon={item.number}
-                            titleStyles={{ fontSize: '19px', fontWeight: '600' }}
+                            titleStyles={{ fontSize: '18px', fontWeight: '500', color: '#53565A' }}
                             iconStyle={{ width: '50px', height: '50px' }}
                           />
                         </div>
