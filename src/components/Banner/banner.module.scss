@@ -75,7 +75,7 @@
   &__layout {
     position: absolute;
     width: 100%;
-    height: 400px;
+    height: 348px;
     z-index: 1;
     background: #F5F6F8;
     // @include breakpoint(xs) {
@@ -85,11 +85,7 @@
 
   &__backTo {
     width: 100%;
-    padding-top: 3%;
-    padding-left: 3rem;
-    @include breakpoint(xs) {
-      padding-left: 1rem;
-    }
+    padding: 6% 0 2%;
 
     &__btn {
       display: flex;
@@ -107,40 +103,41 @@
 
   &__title {
     width: 100%;
-    padding: 0 4.5%;
+    padding-left: 3rem;
     @include breakpoint(xs) {
       margin-top: 50px;
+      padding-left: 0px;
     }
   }
 
   &__img {
     position: absolute;
-    height: 432px;
+    height: 341px;
     width: 593px;
     z-index: 2;
-    top: 30px;
-    right: 7%;
+    top: 71px;
+    right: 20%;
     border-radius: 0 0 50px 0;
 
     @include breakpoint(xs) {
       height: 170px;
       width: 260px;
-      top: 160px;
-      right: 5%;
+      top: 154px;
+      right: 0%;
     }
 
     @include breakpoint(sm) {
       height: 232px;
       width: 393px;
       top: 200px;
-      right: 5%;
+      right: 0%;
     }
 
     @include breakpoint(md) {
       height: 232px;
       width: 393px;
       top: 200px;
-      right: 5%;
+      right: 0%;
     }
 
     @include breakpoint(lg) {
@@ -148,16 +145,16 @@
       height: 332px;
       width: 493px;
       z-index: 2;
-      top: 120px;
-      right: 5%;
+      top: 71px;
+      right: 0%;
     }
 
     @include breakpoint(xl) {
-      height: 432px;
+      height: 341px;
       width: 593px;
       z-index: 2;
-      top: 30px;
-      right: 7%;
+      top: 71px;
+      right: 0%;
     }
   }
 
@@ -165,9 +162,8 @@
     width: 100%;
     height: 60px;
     background: url("../../static/img/1595328.png");
-    margin-top: 5%;
     position: absolute;
-    bottom: -6px;
+    bottom: 0px;
     z-index: 1;
   }
 }

@@ -189,6 +189,7 @@ $width-container-xl: 130rem;
 .container {
   width: $width-container-sm;
   margin: 0 auto;
+  position: relative;
   @include breakpoint(md) {
     width: 1168px;
   }

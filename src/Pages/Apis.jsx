@@ -131,125 +131,144 @@ function Apis({ setIsOpen }) {
   return (
     <div style={{ paddingTop: '114px' }}>
       <BannerImage css_styles={{ 'layout_height': 'banner_custom__layout--height' }} />
-      <section className={classes.wrapper}>
-        <article className={classes.wrapper__left}>
-          <CustomizedAccordions title='Estado'>
-            {
-              state.map((item, index) => (
-                <div
-                  className={classes.wrapper__checkbox}
-                  key={index}
-                >
-                  <CheckboxWrapper
-                    name={item}
+      <div className='container'>
+        <section className={classes.wrapper}>
+          <article className={classes.wrapper__left}>
+            <CustomizedAccordions title='Estado'>
+              {
+                state.map((item, index) => (
+                  <div
+                    className={classes.wrapper__checkbox}
+                    key={index}
+                  >
+                    <CheckboxWrapper
+                      name={item}
+                      label={item}
+                      handleChangeSelect={handleChangeStatus}
+                      checked={filtersSelect[item] !== undefined ? filtersSelect[item] : false}
+                    />
+                  </div>
+                ))
+              }
+            </CustomizedAccordions>
+            <div className='w-full pl-4'>
+              <Typography
+                sx={{
+                  fontSize: '1rem',
+                  fontWeight: '700',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1.33px',
+                  color: '#53565A',
+                  marginBottom: '15px',
+                }}
+              >
+                Version
+              </Typography>
+              <ButtonGroupMUI sx={{ marginBottom: '15px' }}>
+                {versions.map((item, index) => (
+                  <CheckboxLabels
+                    activeTab={activeTab}
+                    key={index}
                     label={item}
-                    handleChangeSelect={handleChangeStatus}
+                    name={item}
+                    handleChangeSelect={handleChangeVersions}
                     checked={filtersSelect[item] !== undefined ? filtersSelect[item] : false}
                   />
+                ))}
+              </ButtonGroupMUI>
+            </div>
+            <CustomizedAccordions title='Solution'>
+              { items.map((item, index) => (
+                <div key={index} className={classes.wrapper__checkbox}>
+                  <CheckboxWrapper
+                    name={item.title}
+                    label={item.title}
+                    handleChangeSelect={handleChangeSolutions}
+                    checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
+                  />
+                  <p className={classes.wrapper__checkbox__counter}>{item.count}</p>
                 </div>
-              ))
-            }
-          </CustomizedAccordions>
-          <div className='w-full pl-4'>
-            <Typography
-              sx={{
-                fontSize: '1rem',
-                fontWeight: '700',
-                textTransform: 'uppercase',
-                letterSpacing: '1.33px',
-                color: '#53565A',
-                marginBottom: '15px',
-              }}
-            >
-              Version
-            </Typography>
-            <ButtonGroupMUI sx={{ marginBottom: '15px' }}>
-              {versions.map((item, index) => (
-                <CheckboxLabels
-                  activeTab={activeTab}
-                  key={index}
-                  label={item}
-                  name={item}
-                  handleChangeSelect={handleChangeVersions}
-                  checked={filtersSelect[item] !== undefined ? filtersSelect[item] : false}
-                />
               ))}
-            </ButtonGroupMUI>
-          </div>
-          <CustomizedAccordions title='Solution'>
-            { items.map((item, index) => (
-              <div key={index} className={classes.wrapper__checkbox}>
-                <CheckboxWrapper
-                  name={item.title}
-                  label={item.title}
-                  handleChangeSelect={handleChangeSolutions}
-                  checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
-                />
-                <p className={classes.wrapper__checkbox__counter}>{item.count}</p>
-              </div>
-            ))}
-          </CustomizedAccordions>
-          <CustomizedAccordions title='Tags'>
-            { tags.map((item, index) => (
-              <div className={classes.wrapper__checkbox} key={index}>
-                <CheckboxWrapper
-                  name={item.label}
-                  label={item.label}
-                  handleChangeSelect={handleChangFilterTags}
-                  checked={filtersSelect[item.label] !== undefined ? filtersSelect[item.label] : false}
-                />
-                <p className={classes.wrapper__checkbox__counter}>{item.count}</p>
-              </div>
-            ))}
-          </CustomizedAccordions>
-          <div className={classes.wrapper__filters}>
-            <Icon id='MdDeleteOutline' />
-            <button type='button' className={classes.wrapper__reset} onClick={resetFilters}>Eliminar filtros</button>
-          </div>
-        </article>
-        <section className={classes.wrapper__right}>
-          <div className='w-full'>
-            <div className='row'>
-              <div className='flex-sm-12 flex-md-8 mt-8'>
-                <SearchInput
-                  icon
-                  name='search'
-                  type='text'
-                  onChange={(e) => {
-                    handleChangeSearchFilter(e.target.value);
+            </CustomizedAccordions>
+            <CustomizedAccordions title='Tags'>
+              { tags.map((item, index) => (
+                <div className={classes.wrapper__checkbox} key={index}>
+                  <CheckboxWrapper
+                    name={item.label}
+                    label={item.label}
+                    handleChangeSelect={handleChangFilterTags}
+                    checked={filtersSelect[item.label] !== undefined ? filtersSelect[item.label] : false}
+                  />
+                  <p className={classes.wrapper__checkbox__counter}>{item.count}</p>
+                </div>
+              ))}
+            </CustomizedAccordions>
+            <div className={classes.wrapper__filters}>
+              <Icon id='MdDeleteOutline' />
+              <button type='button' className={classes.wrapper__reset} onClick={resetFilters}>Eliminar filtros</button>
+            </div>
+          </article>
+          <section className={classes.wrapper__right}>
+            <div className='w-full'>
+              <div className='row'>
+                <div className='flex-sm-12 flex-md-8 mt-8'>
+                  <SearchInput
+                    icon
+                    name='search'
+                    type='text'
+                    onChange={(e) => {
+                      handleChangeSearchFilter(e.target.value);
+                    }}
+                    placeholder='Buscar APIs...'
+                    borderRadius='20px'
+                  />
+                </div>
+                <div className='flex-sm-12 flex-md-4 mt-8'>
+                  <InputSelect handleSelect={(e) => {
+                    console.log(e);
+                    handleSort(e);
                   }}
-                  placeholder='Buscar APIs...'
-                  borderRadius='20px'
-                />
-              </div>
-              <div className='flex-sm-12 flex-md-4 mt-8'>
-                <InputSelect handleSelect={(e) => {
-                  console.log(e);
-                  handleSort(e);
-                }}
-                />
+                  />
+                </div>
               </div>
             </div>
-          </div>
-          <div className='flex-sm-12 flex-md-6'>
-            <div className='row'>
-              {loadingLibraries === false && libraries ? (
-                libraries.length > 0 ? (
-                  libraries.map((item, index) => (
-                    <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
-                      <CardInformation
-                        title={item.title}
-                        status={item.status}
-                        version={item.version}
-                        buttons={item.tags}
-                        colorStatus={item.color_status}
-                        info='Ver Documentación'
-                        description={item.description}
-                        link={`/api/${item.id}`}
-                        modal={setIsOpen}
-                      />
-                    </div>
-                  ))
+            <div className='flex-sm-12 flex-md-6'>
+              <div className='row'>
+                {loadingLibraries === false && libraries ? (
+                  libraries.length > 0 ? (
+                    libraries.map((item, index) => (
+                      <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
+                        <CardInformation
+                          title={item.title}
+                          status={item.status}
+                          version={item.version}
+                          buttons={item.tags}
+                          colorStatus={item.color_status}
+                          info='Ver Documentación'
+                          description={item.description}
+                          link={`/api/${item.id}`}
+                          modal={setIsOpen}
+                        />
+                      </div>
+                    ))
+                  ) : (
+                    <section
+                      style={{
+                        width: '100%',
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          margin: '2rem',
+                        }}
+                      >
+                        <h1>No hay data</h1>
+                      </div>
+                    </section>
+                  )
                 ) : (
                   <section
                     style={{
@@ -264,32 +283,15 @@ function Apis({ setIsOpen }) {
                         margin: '2rem',
                       }}
                     >
-                      <h1>No hay data</h1>
+                      <h1>Cargando....</h1>
                     </div>
                   </section>
-                )
-              ) : (
-                <section
-                  style={{
-                    width: '100%',
-                  }}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      margin: '2rem',
-                    }}
-                  >
-                    <h1>Cargando....</h1>
-                  </div>
-                </section>
-              )}
+                )}
+              </div>
             </div>
-          </div>
+          </section>
         </section>
-      </section>
+      </div>
     </div>
   );
 };
