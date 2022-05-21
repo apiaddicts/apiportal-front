@@ -22,7 +22,13 @@
     @media (min-width: 600px) {
       @content;
     }
-  }    
+  }
+  @if $point == xsl {
+    // 600px
+    @media (max-width: 900px) {
+      @content;
+    }
+  }
   @if $point == xs {
     // 600px and down
     @media (max-width: 600px) {
