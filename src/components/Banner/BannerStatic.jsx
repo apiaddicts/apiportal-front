@@ -4,11 +4,11 @@ import classes from './banner.module.scss';
 import Button from '../Buttons/Button';
 import SearchInput from '../Input/SearchInput';
 
-function BannerStatic({ title, subtitle, img, isSearch, buttons, ...props }) {
+function BannerStatic({ title, subtitle, img, isSearch, buttons, styles, stylesTitle, ...props }) {
 
   return (
-    <Base img={img}>
-      <div className={`container ${classes.banner__content}`}>
+    <Base style={styles} img={img}>
+      <div style={stylesTitle} className={`container ${classes.banner__content}`}>
         <div className='row'>
           <div className='flex-md-12 flex-sm-12'>
             <h1 className='h1 text__secondary__white'>{ title }</h1>

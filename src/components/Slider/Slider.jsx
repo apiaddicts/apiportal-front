@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 
+import { HashLink } from 'react-router-hash-link';
+
 import Button from '../Buttons/Button';
 
 import classes from './slider.module.scss';
@@ -62,9 +64,7 @@ function Slider({ slides }) {
     if (click !== '') {
       navigate(click);
     } else {
-      // navigate('/#Banner');
-      document.getElementById('data').scrollIntoView(true);
-      // location.hash = '#Banner';
+      // document.getElementById('data').scrollIntoView(true);
     }
   };
 
@@ -91,9 +91,18 @@ function Slider({ slides }) {
                         x.actionButtons !== null ? (
                           x.actionButtons.map((i, index) => (
                             <div key={index + i} className='pr-2 mb-4 justify-start'>
-                              <Button styles={i.type} onClick={() => handleClick(i.route)}>
-                                {i.label}
-                              </Button>
+                              {i.route !== '' ? (
+                                <Button styles={i.type} onClick={() => handleClick(i.route)}>
+                                  {i.label}
+                                </Button>
+
+                              ) : (
+                                <HashLink smooth to='/#data'>
+                                  <Button styles={i.type} onClick={() => handleClick(i.route)}>
+                                    {i.label}
+                                  </Button>
+                                </HashLink>
+                              )}
                             </div>
                           ))
                         ) : (null)

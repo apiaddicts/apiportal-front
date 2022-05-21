@@ -91,11 +91,26 @@
             }
             
             &__button {
-                margin-right: 5%;
+                // margin-right: 5%;
+                margin-left: 20px;
                 padding: 15px 0px;
                 // margin-top: 12px;
+
+                @media (max-width: 768px) {
+                    width: 91%;
+                    margin-left: 0px;
                 }
                 }
+            
+        &__new {
+            margin: 8px 30px 8px 0px;
+            @media (max-width: 768px) {
+                margin: 0px 0px 20px 0px;
+            }
+        }
+        }
+
+        
                 
                 // Container Alternative
                 
@@ -126,10 +141,10 @@
                 }
                 
                 &__alternative__title {
-                    font-family: 'FS Joey';
+                    font-family: $fs-joey;
                     font-style: normal;
                     font-weight: 700;
-                    font-size: 36px;
+                    font-size: 46px;
                     line-height: 48px;
                     color: $primary;
                 
@@ -153,6 +168,25 @@
                 }
                 
                 &__alternative__description {
+                    display: none;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: flex-start;
+                    margin-bottom: 1rem;
+                    font-family: $barlow;
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 18px;
+                    line-height: 26px;
+                    letter-spacing: 0.157143px;
+                    color: $primary;
+
+                    @media (max-width: 768px) {
+                        display: flex;
+                    }
+                }
+
+                &__alternative__description_normal {
                     display: flex;
                     flex-direction: row;
                     justify-content: center;
@@ -165,6 +199,10 @@
                     line-height: 26px;
                     letter-spacing: 0.157143px;
                     color: $primary;
+
+                    @media (max-width: 768px) {
+                        display: none;
+                    }
                 }
                 
                 &__container__alternative__form {

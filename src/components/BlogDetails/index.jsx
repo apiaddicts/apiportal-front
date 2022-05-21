@@ -6,6 +6,13 @@ import Chip from '../Chip/Chip';
 moment.locale('es');
 
 function BlogDetailsInfo({ styles, data }) {
+  const styleChip = {
+    color: '#0033A0',
+    fontWeight: 500,
+    fontSize: '14px',
+    lineHeight: '16px',
+  };
+
   return (
     <>
       <div className={styles.blog__details__header}>
@@ -17,7 +24,7 @@ function BlogDetailsInfo({ styles, data }) {
           <div className={styles.blog__details__header__tags}>
             {data.tags.length > 0 ? data.tags.map((tag, index) => (
               <span key={index} className={styles.blog__details__tag}>
-                <Chip title={tag.title} className='gray' />
+                <Chip title={tag.title} className='gray' styleChip={styleChip} />
               </span>
             )) : (null)}
           </div>
@@ -79,29 +86,6 @@ function BlogDetailsInfo({ styles, data }) {
       )) : (null)}
 
       <div className={styles.blog__details__list__content}>
-        {/* <ul>
-          <li className={styles.blog__details__list__content__items}>
-            <p className={styles.blog__details__list__item__title}>
-              <span className={styles.blog__details__list__item__title__text}>
-                Lorem ipsum dolor sit amet.
-              </span>
-            </p>
-          </li>
-          <li className={styles.blog__details__list__content__items}>
-            <p className={styles.blog__details__list__item__title}>
-              <span className={styles.blog__details__list__item__title__text}>
-                Lorem ipsum dolor sit amet.
-              </span>
-            </p>
-          </li>
-          <li className={styles.blog__details__list__content__items}>
-            <p className={styles.blog__details__list__item__title}>
-              <span className={styles.blog__details__list__item__title__text}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </span>
-            </p>
-          </li>
-        </ul> */}
         <div className={styles.blog__details__social__content}>
           <p>COMPARTIR:</p>
           <div className={styles.blog__details__social__icons}>
