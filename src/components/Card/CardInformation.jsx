@@ -37,21 +37,21 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
             </div>
           )}
           {version && status && (
-            <div onClick={clickLink} style={{ cursor: 'pointer' }} className='header-api px-8 pt-5'>
-              <div className={colorStatus}>
+            <div onClick={clickLink} style={{ cursor: 'pointer' }} className='header-api px-8 pt-5 letter__spacing'>
+              <div className={`${colorStatus}`}>
                 <p>●</p>
                 <p className='ml-3 font-weight-bold text-uppercase'>{status}</p>
               </div>
-              <Chip title={version} className='version text-uppercase font-weight-medium' />
+              <Chip title={version} className='version text-uppercase font-weight-medium' spanClass='fs__14' />
             </div>
           )}
           <div className={`pr-8 pl-8 pb-8 pt-2 ${reading ? 'py-2' : null}`} style={blogClasses}>
-            <p onClick={clickLink} className={`h3 w-full font-weight-semi-bold ${reading ? 'px-8' : null}  ${theme === 'primary' ? 'text__primary' : ''} `} style={blogTitleStyles}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
+            <p onClick={clickLink} className={`h3 w-full font-weight-semi-bold text__dark ${reading ? 'px-8' : null}  ${theme === 'primary' ? 'text__primary' : ''} `} style={blogTitleStyles}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
             <div onClick={clickLink} className='card__information' style={blogTitleStyles}>
               <div className={`card__information__tags ${buttons.length >= 3 ? 'tags-flex-wrap' : null} ${reading ? 'px-8' : null}`}>
                 {buttons.map((button, index) => (
                   <div key={index} className='pr-2'>
-                    <Chip title={button.label} className={`${button.class} ${buttons.length >= 4 ? 'tags-reponsive' : null} `} spanClass={button.spanClass} />
+                    <Chip title={button.label} className={`${button.class} ${buttons.length >= 4 ? 'tags-reponsive' : null} `} spanClass={`${button.spanClass} fs__10 font-weight-medium`} />
                   </div>
                 ))}
               </div>
