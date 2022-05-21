@@ -7,7 +7,7 @@ import classes from './banner.module.scss';
 
 function BannerImage({ buttons, setIsOpen, title = '', img = '', description, css_styles, redirect = '/' }) {
 
-  const { layout_height, image_display } = css_styles;
+  const { layout_height, apiindividual_height, image_display } = css_styles;
   const navigate = useNavigate();
   const handleClick = () => {
     const session = localStorage.getItem('session');
@@ -22,7 +22,7 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
     <div
       className={classes.banner_img}
     >
-      <div className={`${classes.banner_img__layout} ${classes[layout_height]}`}>
+      <div className={`${classes.banner_img__layout} ${classes[layout_height]} ${classes[apiindividual_height]}`}>
         <div className='container'>
           <div
             className={classes.banner_img__backTo}

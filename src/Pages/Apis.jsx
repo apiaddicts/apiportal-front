@@ -209,7 +209,7 @@ function Apis({ setIsOpen }) {
           <section className={classes.wrapper__right}>
             <div className='w-full'>
               <div className='row'>
-                <div className='flex-sm-12 flex-md-8 mt-8'>
+                <div className='flex-sm-12 flex-md-8'>
                   <SearchInput
                     icon
                     name='search'
@@ -221,7 +221,7 @@ function Apis({ setIsOpen }) {
                     borderRadius='20px'
                   />
                 </div>
-                <div className='flex-sm-12 flex-md-4 mt-8'>
+                <div className='flex-sm-12 flex-md-4'>
                   <InputSelect handleSelect={(e) => {
                     console.log(e);
                     handleSort(e);

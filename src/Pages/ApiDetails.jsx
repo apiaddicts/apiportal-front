@@ -114,7 +114,7 @@ function ApiDetails({ setIsOpen }) {
               img={library.image.length > 0 && library.image.length === 1 ? library.image[0].url : ''}
               buttons={buttonsLbls}
               setIsOpen={setIsOpen}
-              css_styles={{ 'image_display': 'banner_custom__img--dnone' }}
+              css_styles={{ 'image_display': 'banner_custom__img--dnone', 'apiindividual_height': 'banner_apiindividual__layout--height' }}
               redirect='/apis'
               description='In egestas blandit felis id porttitor. Mauris vel nibh ex. Integer iaculis placerat nunc, in ultricies nunc dignissim eu. '
             />
@@ -195,6 +195,9 @@ function ApiDetails({ setIsOpen }) {
                 ) : (null)}
               </div>
             </div>
+          </section>
+          <section className={classes.section__content__texture}>
+            <div className={classes.texture__image}> </div>
           </section>
           <section className={`container ${classes.section__discover}`}>
             <div className='row'>
