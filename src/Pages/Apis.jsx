@@ -42,7 +42,6 @@ function Apis({ setIsOpen }) {
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
   const handleChangeVersions = (name, label, checked) => {
-    console.log(name, checked);
     if (name === label && checked) {
       setActiveTab(label);
     } else {
@@ -127,10 +126,9 @@ function Apis({ setIsOpen }) {
     }
   }, [libraries]);
 
-  // console.log('Librerias array', libraries);
   return (
-    <div style={{ paddingTop: '114px' }}>
-      <BannerImage />
+    <div id='apiHome' style={{ paddingTop: '114px' }}>
+      <BannerImage css_styles={{ 'layout_height': 'banner_custom__layout--height' }} />
       <section className={classes.wrapper}>
         <article className={classes.wrapper__left}>
           <CustomizedAccordions title='Estado'>

@@ -10,7 +10,6 @@ function AlertFeedbock({ setShowAlert, error, success }) {
         type='button'
         onClick={() => {
           setShowAlert(false);
-        //   console.log(false);
         }}
       >
         <Icon id='MdClose' />

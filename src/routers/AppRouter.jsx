@@ -67,14 +67,14 @@ function AppRouter() {
         <>
           <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} privateSession={privateSession} />
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path='/' element={<Home setIsOpen={setIsOpen} />} />
             <Route path='/about' element={<Pagina1 />} />
             <Route path='/users' element={<Pagina2 />} />
             <Route path='/apis' exact element={<Apis setIsOpen={setIsOpen} />} />
             <Route path='/faqs' exact element={<Faqs />} />
             <Route path='/blog' exact element={<Blog />} />
             <Route path='/componentes' exact element={<Components />} />
-            <Route path='/blog/:id' exact element={<BlogDetails />} />
+            <Route path='/blog/:id' exact element={<BlogDetails setIsOpen={setIsOpen} />} />
             <Route path='/api/:id' exact element={<ApiDetails setIsOpen={setIsOpen} />} />
             <Route path='*' element={<Navigate to='/' replace />} />
           </Routes>

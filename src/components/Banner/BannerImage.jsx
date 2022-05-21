@@ -6,8 +6,9 @@ import Icon from '../MdIcon/Icon';
 import classes from './banner.module.scss';
 
 function BannerImage({ buttons, setIsOpen, title = '', img = '', description, css_styles, redirect = '/' }) {
-  const navigate = useNavigate();
 
+  const { layout_height, image_display } = css_styles;
+  const navigate = useNavigate();
   const handleClick = () => {
     const session = localStorage.getItem('session');
     if (session) {
@@ -21,7 +22,7 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
     <div
       className={classes.banner_img}
     >
-      <div className={classes.banner_img__layout}>
+      <div className={`${classes.banner_img__layout} ${classes[layout_height]}`}>
         <div
           className={classes.banner_img__backTo}
         >
@@ -63,7 +64,7 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
           </div>
         </div>
         <img
-          className={`${classes.banner_img__img} ${css_styles}`}
+          className={`${classes.banner_img__img} ${classes[image_display]}`}
           src={img !== '' ? img : 'https://picsum.photos/500/200'}
           alt='lorem'
         />

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React from 'react';
 
 import { MdEast } from 'react-icons/md';
@@ -50,11 +51,11 @@ function CardBasic({ chipTitle, title, img, description, info, route, maxWidth, 
                 <p className='text-left'>
                   {description}
                 </p>
-                <a className='card_chip_info mt-4' href={route}>
+                <div className='card_chip_info mt-4' onClick={route}>
                   <span>{info}</span>
                   {' '}
                   <MdEast className='svg' />
-                </a>
+                </div>
               </div>
             </section>
           </div>

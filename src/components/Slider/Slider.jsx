@@ -1,15 +1,17 @@
 import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-// import { useNavigate } from 'react-router-dom';
+
+import { HashLink } from 'react-router-hash-link';
+
 import Button from '../Buttons/Button';
+
 import classes from './slider.module.scss';
 
 function Slider({ slides }) {
-  // const navigate = useNavigate();
-  // const pushRoute = (route) => {
-  //   console.log('si');
-  //   navigate(route, { replace: true });
-  // };
+  const navigate = useNavigate();
+
   const slider = useRef(null);
   const nextSlide = () => {
     if (slider.current.children.length > 0) {
@@ -57,6 +59,15 @@ function Slider({ slides }) {
 
   };
 
+  const handleClick = (click) => {
+
+    if (click !== '') {
+      navigate(click);
+    } else {
+      // document.getElementById('data').scrollIntoView(true);
+    }
+  };
+
   return (
     <div className={classes.content}>
       <div className={classes.content__slider} ref={slider}>
@@ -80,9 +91,18 @@ function Slider({ slides }) {
                         x.actionButtons !== null ? (
                           x.actionButtons.map((i, index) => (
                             <div key={index + i} className='pr-2 mb-4 justify-start'>
-                              <Button styles={i.type}>
-                                {i.label}
-                              </Button>
+                              {i.route !== '' ? (
+                                <Button styles={i.type} onClick={() => handleClick(i.route)}>
+                                  {i.label}
+                                </Button>
+
+                              ) : (
+                                <HashLink smooth to='/#data'>
+                                  <Button styles={i.type} onClick={() => handleClick(i.route)}>
+                                    {i.label}
+                                  </Button>
+                                </HashLink>
+                              )}
                             </div>
                           ))
                         ) : (null)
