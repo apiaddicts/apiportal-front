@@ -74,7 +74,7 @@ function AppRouter() {
             <Route path='/faqs' exact element={<Faqs />} />
             <Route path='/blog' exact element={<Blog />} />
             <Route path='/componentes' exact element={<Components />} />
-            <Route path='/blog/:id' exact element={<BlogDetails />} />
+            <Route path='/blog/:id' exact element={<BlogDetails setIsOpen={setIsOpen} />} />
             <Route path='/api/:id' exact element={<ApiDetails setIsOpen={setIsOpen} />} />
             <Route path='*' element={<Navigate to='/' replace />} />
           </Routes>

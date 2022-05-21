@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 
 import BannerStatic from '../components/Banner/BannerStatic';
 import BlogDetailsInfo from '../components/BlogDetails';
@@ -50,7 +51,17 @@ const slidesNew = [
   },
 ];
 
-function BlogDetails() {
+const stylesPerso = {
+  height: '345px',
+  paddingTop: '0px',
+  paddingBottom: '0px',
+};
+
+const stylesBannerTitle = {
+  marginTop: '101px',
+};
+
+function BlogDetails({ setIsOpen }) {
   const dispatch = useDispatch();
 
   const params = useParams();
@@ -71,6 +82,8 @@ function BlogDetails() {
           <BannerStatic
             title={blog.title ? blog.title : 'Descubre las novedades de SURA'}
             img={blog.image ? blog.image[0].url : 'https://picsum.photos/1920/300'}
+            styles={stylesPerso}
+            stylesTitle={stylesBannerTitle}
           />
           <section className='container mt-10 py-5'>
             <BlogDetailsInfo styles={styles} data={blog} />
@@ -79,7 +92,7 @@ function BlogDetails() {
               <div className='container'>
                 <div className='row'>
                   <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
-                    <h1 className='h2 text__primary'>Novedades</h1>
+                    <h1 className='h2 text__primary'>También te puede interesar</h1>
                   </div>
 
                   <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
@@ -92,14 +105,16 @@ function BlogDetails() {
               <div className='container'>
                 <div className='row'>
                   <div className='flex-md-12 flex-sm-12'>
-                    <Slick slides={slidesNew} />
+                    <Slick slides={slidesNew} setIsOpen={setIsOpen} />
                   </div>
                 </div>
               </div>
               <div className={`container ${classes.section__news__showmore}`}>
                 <div className='row justify-center'>
                   <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
-                    <a href=''>Ver más</a>
+                    <HashLink smooth to='/apis#apiHome'>
+                      <div>Ver Más</div>
+                    </HashLink>
                   </div>
                 </div>
               </div>
