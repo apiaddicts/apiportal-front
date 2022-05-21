@@ -29,16 +29,19 @@ function Contact() {
         </div>
         <div className={pathname !== '/blog' ? classes.contact__header__title__alternative : classes.contact__header__title}>
           <div className={pathname !== '/blog' ? classes.contact__alternative__description : classes.contact__description}>
-            <p className='pt-5 pb-2'>¡Entérate de lo último!</p>
+            <p className='pt-5 pb-2'>¡Entérate de lo último! </p>
           </div>
           <div className={pathname !== '/blog' ? classes.contact__alternative__description : classes.contact__description}>
             <p className=''> Escoge una o varias capacidades y sé el primero en enterarte.</p>
+          </div>
+          <div className={pathname !== '/blog' ? classes.contact__alternative__description_normal : classes.contact__description}>
+            <p className=''> ¡Entérate de lo último! Escoge una o varias capacidades y sé el primero en enterarte.</p>
           </div>
         </div>
         <div className={pathname !== '/blog' ? classes.contact__container__alternative__form : classes.contact__container__form}>
           <form className={pathname !== '/blog' ? classes.contact__alternative__form : classes.contact__form}>
             {fieldsContact.map((field) => (
-              <Input key={field.id} field={field} formik={formConfig} />
+              <Input styleInput={classes.contact__form__new} key={field.id} field={field} formik={formConfig} />
             ))}
             <div className={classes.contact__form__button}>
               <Button styles='secundary'>

@@ -1,7 +1,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+
+import { HashLink } from 'react-router-hash-link';
+
 import Item from '../components/Item/Item';
 import classes from '../styles/pages/home.module.scss';
 import Icon from '../components/MdIcon/Icon';
@@ -21,8 +23,6 @@ import Slick from '../components/SlickSlider/Slick';
 function Home({ setIsOpen }) {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.demo);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (data && Object.keys(data).length === 0) {
@@ -123,14 +123,6 @@ function Home({ setIsOpen }) {
     },
   ];
 
-  const handleClickNavigation = (flag) => {
-    if (flag) {
-      navigate('/apis#');
-    } else {
-      document.getElementById('data').scrollIntoView(true);
-    }
-  };
-
   const handleOpenModal = () => {
     setIsOpen(true);
   };
@@ -208,9 +200,21 @@ function Home({ setIsOpen }) {
                 {filterButtonSection && filterButtonSection.length > 0 ? (
                   filterButtonSection[0].header.map((button, i) => (
                     <div key={i} className='mb-4'>
-                      <Button styles={button.keyword} onClick={() => handleClickNavigation(button.isKeywordInverted)}>
-                        {button.title}
-                      </Button>
+                      {button.isKeywordInverted ? (
+                        <HashLink smooth to='/apis#apiHome'>
+                          <Button styles={button.keyword}>
+                            {button.title}
+                          </Button>
+
+                        </HashLink>
+                      ) : (
+                        <HashLink smooth to='/#data'>
+                          <Button styles={button.keyword}>
+                            {button.title}
+                          </Button>
+                        </HashLink>
+                      )}
+
                     </div>
                   ))
                 ) : (null)}
@@ -258,13 +262,13 @@ function Home({ setIsOpen }) {
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
                 <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
-                  <Link to='/apis' className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
+                  <HashLink smooth to='/apis#apiHome' className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
                     <span className='mr-1'>ver todas</span>
                     <Icon id='MdOutlineEast' />
-                  </Link>
-                  <Link to='/apis' className={`d-sm-none ${classes.section__discover__showmore__button}`}>
+                  </HashLink>
+                  <HashLink smooth to='/apis#apiHome' className={`d-sm-none ${classes.section__discover__showmore__button}`}>
                     Ver todas
-                  </Link>
+                  </HashLink>
                 </div>
               </div>
             </div>
@@ -353,7 +357,9 @@ function Home({ setIsOpen }) {
             <div className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
                 <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center'>
-                  <div onClick={() => handleClickNavigation(true)}>Ver Más</div>
+                  <HashLink smooth to='/apis#apiHome'>
+                    <div>Ver Más</div>
+                  </HashLink>
                 </div>
               </div>
             </div>

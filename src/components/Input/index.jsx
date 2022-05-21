@@ -4,10 +4,10 @@ import React, { useState } from 'react';
 import Icon from '../MdIcon/Icon';
 import classes from './input.module.scss';
 
-function Input({ field, formik, footer }) {
+function Input({ field, formik, footer, styleInput }) {
   const [type, setType] = useState(false);
   const { values, errors, touched, handleChange, handleBlur } = formik;
-
+  console.log(styleInput);
   return (
     <div style={footer ? { width: '50%', padding: '0 38px' } : { width: '100%' }} className={`${classes.wrapper__input} mt-3`}>
       {field.label && (
@@ -18,7 +18,7 @@ function Input({ field, formik, footer }) {
         </p>
       )}
       <input
-        className={touched[field.id] && !!errors[field.id] ? classes.input__error : classes.input}
+        className={touched[field.id] && !!errors[field.id] ? classes.input__error : `${classes.input} ${styleInput}`}
         id={field.id}
         type={touched[field.id] && type ? 'text' : field.type}
         onChange={handleChange}
