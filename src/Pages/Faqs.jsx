@@ -9,10 +9,9 @@ import BannerStatic from '../components/Banner/BannerStatic';
 import classes from '../styles/pages/faqs.module.scss';
 
 function Faqs(props) {
-  const [active, setActive] = useState({
-    filter: false,
-    item: null,
-  });
+  const [clicked, setClicked] = useState(0);
+  const [subItem, setSubItem] = useState(0);
+  const [smallItem, setSmallItem] = useState(false);
   const dispatch = useDispatch();
   const { dataFaq } = useSelector((state) => state.faq);
 
@@ -51,21 +50,35 @@ function Faqs(props) {
           <section className={`container ${classes.faq}`}>
             <div className={classes.faq__content}>
               <div className={`d-xs-none ${classes.faq__content__filter}`}>
-                <AccordionFilter items={fFaqs} active={active} setActive={setActive} />
+                <AccordionFilter items={fFaqs} clicked={clicked} setClicked={setClicked} subItem={subItem} setSubItem={setSubItem} />
               </div>
               <div className={classes.faq__content__qa}>
                 { faqs.length > 0 ? (
-                  faqs.map((item, i) => (
-                    <div key={i}>
-                      <h1 className='h3 text__primary mb-5 mt-5'>{item.question}</h1>
-                      {item.data.map((faq, index) => (
-                        <div className={classes.faq__question}>
-                          <Accordion key={index} title={faq.title} active={active} setActive={setActive} />
+                  faqs.map((item, i) => {
+                    return (
+                      clicked === i && (
+                        <div key={i}>
+                          <h1 className='h3 text__primary mb-5 mt-5'>{item.question}</h1>
+                          <Accordion items={item.data} subItem={subItem} setSubItem={setSubItem} />
                         </div>
-                      ))}
-                    </div>
-                  ))
+                      )
+                    );
+                  })
                 ) : null}
+              </div>
+              <div className={classes.faq__content__qa__xs}>
+                {
+                  faqs.length > 0 ? (
+                    faqs.map((faq, index) => {
+                      return (
+                        <div key={index}>
+                          <h1 className='h3 text__primary mb-5 mt-5'>{faq.question}</h1>
+                          <Accordion items={faq.data} subItem={smallItem} setSubItem={setSmallItem} />
+                        </div>
+                      );
+                    })
+                  ) : null
+                }
               </div>
             </div>
           </section>
