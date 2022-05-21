@@ -100,7 +100,7 @@ function ApiDetails({ setIsOpen }) {
     },
     {
       label: 'Documentación',
-      class: 'ghost-variant',
+      class: 'btn-tertiary-white',
     },
   ];
 

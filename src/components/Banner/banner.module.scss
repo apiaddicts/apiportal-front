@@ -72,7 +72,7 @@
   &__layout {
     position: absolute;
     width: 100%;
-    height: 390px;
+    height: 439px;
     z-index: 1;
     background: #F5F6F8;
   }
@@ -128,15 +128,15 @@
     }
 
     @include breakpoint(md) {
-      height: 232px;
+      height: 332px;
       width: 393px;
-      top: 200px;
-      right: 0%;
+      top: 130px;
+      right: 17%;
     }
 
     @include breakpoint(lg) {
       display: block;
-      height: 332px;
+      height: 432px;
       width: 493px;
       z-index: 2;
       top: 71px;
@@ -144,7 +144,7 @@
     }
 
     @include breakpoint(xl) {
-      height: 341px;
+      height: 432px;
       width: 593px;
       z-index: 2;
       top: 71px;

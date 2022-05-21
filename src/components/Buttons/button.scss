@@ -87,3 +87,9 @@
   @include letter($primary);
   @include border($secondary);
 }
+
+.btn-tertiary-white {
+  @include button-bg($gray-lighten-0);
+  @include letter($primary);
+  @include border($primary);
+}

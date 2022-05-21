@@ -52,13 +52,16 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
               {buttons && (
                 <div className='flex-md-12 flex-sm-12'>
                   <div className='button__group mt-5'>
-                    {!buttons ? '' : buttons.map((button, index) => (
-                      <div key={index} className='mr-10 pr-2'>
-                        <Button styles={button.class} onClick={handleClick}>
-                          {button.label}
-                        </Button>
-                      </div>
-                    ))}
+                    {!buttons ? '' : buttons.map((button, index) => {
+                      console.log('button', button.class);
+                      return (
+                        <div key={index} className='mr-10 pr-2'>
+                          <Button styles={button.class} onClick={handleClick}>
+                            {button.label}
+                          </Button>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}
