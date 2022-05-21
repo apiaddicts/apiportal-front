@@ -68,19 +68,13 @@
   height: 300px;
   // padding: 0% 4.5%;
   position: relative;
-  // @include breakpoint(xs) {
-  //   min-height: 260px;
-  // }
 
   &__layout {
     position: absolute;
     width: 100%;
-    height: 348px;
+    height: 390px;
     z-index: 1;
     background: #F5F6F8;
-    // @include breakpoint(xs) {
-    //   min-height: 290px;
-    // }
   }
 
   &__backTo {
