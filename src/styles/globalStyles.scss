@@ -742,7 +742,7 @@ a {
     font-family: $barlow;
     font-style: normal;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 14px;
     line-height: 16px;
     letter-spacing: 0.4px;
     text-transform: uppercase;
@@ -1064,4 +1064,15 @@ a {
 }
 .font-barlow {
   font-family: $barlow !important;
+}
+
+.fs{
+  &__10 { font-size: 10px !important; }
+  &__11 { font-size: 11px !important; }  
+  &__12 { font-size: 12px !important; }
+  &__13 { font-size: 13px !important; }
+  &__14 { font-size: 14px !important; }
+  &__15 { font-size: 15px !important; }
+  &__16 { font-size: 16px !important; }
+  &__17 { font-size: 17px !important; }
 }
