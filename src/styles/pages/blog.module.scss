@@ -209,24 +209,25 @@
 .apis {
   &__library {
     margin-top: 40px;
+    align-items: flex-start;
     &__cards {
-      grid-area: cards;
+      // grid-area: cards;
       display: grid;
       grid-template-columns: repeat(2, 2fr);
-      gap: 1rem;
+      gap: 2rem;
       @include breakpoint(xs) {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 2rem;
         max-height: 100% !important;
       }      
       @include breakpoint(sm) {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 2rem;
         max-height: 100% !important;
       }      
       @include breakpoint(lg) {
         grid-template-columns: repeat(2, 2fr);
-        gap: 1rem;
+        gap: 2rem;
       }
       a {
         max-height: 500px;

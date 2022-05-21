@@ -218,6 +218,21 @@
     letter-spacing: 1.5px;
 }
 
+.no__shadow{
+    box-shadow: none !important;
+}
+
+.custom_card__height{
+    height: 361px !important;
+    .card-header{
+        height: 133px;
+    }
+    .body-2{
+        height: 70px !important;
+        overflow: hidden;
+    }
+}
+
 .green {
     display: flex;
     font-size: 15px;

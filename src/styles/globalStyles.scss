@@ -730,6 +730,7 @@ a {
   height: 100%;
   overflow: hidden;
   color: #53565a;
+  box-sizing: content-box;
 }
 .chip {
   display: inline-block;
@@ -750,7 +751,7 @@ a {
 }
 
 .blog-chip{
-  font-weight: 600 !important;
+  font-weight: 500 !important;
   letter-spacing: 0.4px !important;
   font-size: 14px !important;
   text-transform: none !important;
@@ -930,6 +931,10 @@ a {
 }
 .justify-start {
   justify-content: start;
+}
+
+.text-capitalize{
+  text-transform: capitalize !important;
 }
 
 .align-center {

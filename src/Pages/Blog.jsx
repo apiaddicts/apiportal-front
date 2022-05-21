@@ -154,6 +154,7 @@ function Blog() {
                                   description={tab.cards && tab.cards[0].description}
                                   reading={tab.cards && tab.cards[0].timeRead}
                                   theme='primary'
+                                  css_styles={{ 'override_card_style': 'no__shadow' }}
                                   blog={true}
                                 />
                               </div>
@@ -172,6 +173,7 @@ function Blog() {
                                           description={results.description}
                                           title={results.title}
                                           buttons={results.tags && results.tags.length > 0 ? results.tags : []}
+                                          css_styles={{ 'override_card_height': 'custom_card__height' }}
                                           theme='primary'
                                         />
                                       </Link>

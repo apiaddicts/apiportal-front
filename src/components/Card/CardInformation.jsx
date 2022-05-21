@@ -8,9 +8,8 @@ import Chip from '../Chip/Chip';
 import Base from './Base';
 import './cards.scss';
 
-function CardInformation({ img, buttons, title, description, reading, info, maxWidth, version, status, colorStatus, theme, blog, modal, link }) {
+function CardInformation({ img, buttons, title, description, reading, info, maxWidth, version, status, colorStatus, theme, blog, modal, link, css_styles }) {
   const navigate = useNavigate();
-
   const blogClasses = {
     paddingTop: blog ? '51px' : '',
     paddingBottom: blog ? '35px' : '',
@@ -30,7 +29,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
   return (
     <div>
       {link !== undefined ? (
-        <Base maxWidth={maxWidth}>
+        <Base maxWidth={maxWidth} css_styles={css_styles}>
           {img && (
             <div className='card-header'>
               <img src={img} alt='' />
@@ -78,7 +77,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
           </div>
         </Base>
       ) : (
-        <Base maxWidth={maxWidth}>
+        <Base maxWidth={maxWidth} css_styles={css_styles}>
           {img && (
             <div className='card-header'>
               <img src={img} alt='' />
@@ -99,7 +98,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
               <div className={`card__information__tags ${buttons.length >= 3 ? 'tags-flex-wrap' : null} ${reading ? 'px-8' : null}`}>
                 {buttons.map((button, index) => (
                   <div key={index} className='pr-2'>
-                    <Chip title={button.label} className={`${button.class} ${buttons.length >= 4 ? 'tags-reponsive' : null} `} spanClass={button.spanClass} />
+                    <Chip title={button.label} className={`${button.class} ${buttons.length >= 4 ? 'tags-reponsive' : null} `} spanClass={`${button.spanClass} fs__14 font-weight-medium text-capitalize`} />
                   </div>
                 ))}
               </div>
@@ -122,6 +121,10 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
     </div>
 
   );
+};
+
+CardInformation.defaultProps = {
+  css_styles: '',
 };
 
 export default CardInformation;
