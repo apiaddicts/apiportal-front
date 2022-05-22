@@ -124,14 +124,17 @@ function BlogDetails({ setIsOpen }) {
                 <div className='row justify-center'>
                   <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
                     <HashLink smooth to='/apis#apiHome'>
-                      <div>Ver Más</div>
+                      <div className='d-xs-none'>Ver Más</div>
+                      <div className='d-xs-only'>Ver todas</div>
                     </HashLink>
                   </div>
                 </div>
               </div>
             </section>
           </section>
-          <Contact css_styles={{ 'display_detail_description': 'd-block' }} />
+          <section className={styles.container_contact__details}>
+            <Contact css_styles={{ 'display_detail_description': 'd-block', 'border_radius': 'no_border__radius' }} />
+          </section>
         </>
       ) : (null)}
 

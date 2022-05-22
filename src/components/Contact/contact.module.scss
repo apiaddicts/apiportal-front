@@ -229,3 +229,10 @@
         }
     }
 }
+
+.no_border__radius{
+    border-radius: 0 !important;
+    @include breakpoint(xs) {
+        border-radius: 12px !important;
+    }
+}
