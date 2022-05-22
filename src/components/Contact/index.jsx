@@ -34,9 +34,6 @@ function Contact() {
           <div className={pathname !== '/blog' ? classes.contact__alternative__description : classes.contact__description}>
             <p className=''> Escoge una o varias capacidades y sé el primero en enterarte.</p>
           </div>
-          <div className={pathname !== '/blog' ? classes.contact__alternative__description_normal : classes.contact__description}>
-            <p className=''> ¡Entérate de lo último! Escoge una o varias capacidades y sé el primero en enterarte.</p>
-          </div>
         </div>
         <div className={pathname !== '/blog' ? classes.contact__container__alternative__form : classes.contact__container__form}>
           <form className={pathname !== '/blog' ? classes.contact__alternative__form : classes.contact__form}>

@@ -140,7 +140,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 30px;
     color: $primary;
 
     &__buttons__before {
@@ -247,9 +246,6 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-areas: "cards suggestions"
-                         "cards contact"
-                         "cards contact"
-                         "cards contact"
                          "footer footer";
     gap: 3rem;
 

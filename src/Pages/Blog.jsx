@@ -183,13 +183,12 @@ function Blog() {
                               </div>
                               <div id='Suggestions' className={`d-xs-none ${stylesBlog.apis__library__suggestions}`}>
                                 <div className={stylesBlog.apis__library__suggestions__content}>
-                                  <h1 className={stylesBlog.apis__library__suggestions__content__title}>Lo más reciente</h1>
+                                  <h1 className={`${stylesBlog.apis__library__suggestions__content__title} fs__16 text-uppercase text__gray__gray_darken`}>Lo más reciente</h1>
                                   <Novedades />
+                                  <Contact />
                                 </div>
                               </div>
-                              <div id='Contact' className={stylesBlog.apis__library__contact}>
-                                <Contact />
-                              </div>
+
                               <div id='Footer' className={stylesBlog.apis__library__footer}>
                                 <div className={stylesBlog.section__result__content__pagination}>
                                   <div
@@ -252,7 +251,7 @@ function Blog() {
             )
 
           }
-          <section className={classes.section__news}>
+          <section className={`${classes.section__news} ${classes.section__news_toppadding}`}>
             <div className='container'>
               <div className='row'>
                 <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
