@@ -8,7 +8,9 @@ import icons from '../../static/icons-sura';
 import { fieldsContact } from '../Forms/fields';
 import useLoginConfig from '../../hooks/useLogin';
 
-function Contact() {
+function Contact({ css_styles }) {
+
+  const { display_contact } = css_styles;
   const location = useLocation();
   const { pathname } = location;
 
@@ -19,7 +21,7 @@ function Contact() {
   const formConfig = useLoginConfig(fieldsContact, handleSubmit);
 
   return (
-    <div className={classes.contact}>
+    <div className={`${classes.contact} ${display_contact}`}>
       <div className={pathname !== '/blog' ? classes.contact__container__alternative : classes.contact__container}>
         <div className={pathname !== '/blog' ? classes.contact__alternative__header : classes.contact__header}>
           <div className={classes.contact__header__icon}>
@@ -50,6 +52,10 @@ function Contact() {
       </div>
     </div>
   );
+};
+
+Contact.defaultProps = {
+  css_styles: '',
 };
 
 export default Contact;
