@@ -16,20 +16,19 @@
   position: relative;
 
   &__texture {
-    position: absolute;
-    width: 100vw;
+    position: relative;
+    width: 100%;
     max-width: 100%;
-    left: 0;
-    right: 0;
-    transform: translateY(30%);
-    display: flex;
-    justify-content: flex-end;
-
+    height: 85px;
+    .texture__image{
+      width: 300px;
+      height: 100%;
+      position: absolute;
+      right: 0;
+      background: url("../../static/img/1595328.png") repeat;
+    }
     img {
       width: 146px;
-      @include breakpoint(xs) {
-        width: 90px;
-      }
     }
   }
 
@@ -148,7 +147,7 @@
 }
 
 .section__discover {
-  padding-top: 95px !important;
+  padding-top: 0px !important;
   padding-bottom: 77px !important;
 
   @include breakpoint(xs){
