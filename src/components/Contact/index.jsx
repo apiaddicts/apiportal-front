@@ -10,7 +10,7 @@ import useLoginConfig from '../../hooks/useLogin';
 
 function Contact({ css_styles }) {
 
-  const { display_contact } = css_styles;
+  const { display_contact, display_detail_description } = css_styles;
   const location = useLocation();
   const { pathname } = location;
 
@@ -28,6 +28,7 @@ function Contact({ css_styles }) {
             {icons('email')}
           </div>
           <p className={pathname !== '/blog' ? classes.contact__alternative__title : classes.contact__header__title}>Sigamos conectados</p>
+          <p className={`pt-5 pb-2 d-none text__primary fs__22 m-0 ${display_detail_description}`}>¡Entérate de lo último! Escoge una o varias capacidades y sé el primero en enterarte.</p>
         </div>
         <div className={pathname !== '/blog' ? classes.contact__header__title__alternative : classes.contact__header__title}>
           <div className={pathname !== '/blog' ? classes.contact__alternative__description : classes.contact__description}>

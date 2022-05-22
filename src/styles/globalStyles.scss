@@ -296,7 +296,7 @@ a {
     MARGINS 
 ------------------------------ */
 .m-0 {
-  margin: 0px;
+  margin: 0px !important;
 }
 .m-1 {
   margin: 0.25rem;
@@ -943,6 +943,9 @@ a {
 
 .d-none {
   display: none;
+}
+.d-block{
+  display: block !important;
 }
 
 .d-xs-none {

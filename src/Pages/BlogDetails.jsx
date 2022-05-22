@@ -131,7 +131,7 @@ function BlogDetails({ setIsOpen }) {
               </div>
             </section>
           </section>
-          <Contact />
+          <Contact css_styles={{ 'display_detail_description': 'd-block' }} />
         </>
       ) : (null)}
 
