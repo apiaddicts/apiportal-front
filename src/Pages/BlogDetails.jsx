@@ -11,6 +11,7 @@ import FooterAuthor from '../components/FooterAuthor';
 import { getBlog, resetGetBlog } from '../redux/actions/blogAction';
 import styles from '../styles/pages/blogDetails.module.scss';
 import classes from '../styles/pages/home.module.scss';
+import Icon from '../components/MdIcon/Icon';
 
 const slidesNew = [
   {
@@ -88,6 +89,16 @@ function BlogDetails({ setIsOpen }) {
           <section className='container mt-10 py-5'>
             <BlogDetailsInfo styles={styles} data={blog} />
             <FooterAuthor data={blog} />
+            <section className={styles.container_arrows}>
+              <div className={styles.container_arrows__left}>
+                <span className='fs__24 text__secondary'><Icon id='MdChevronLeft' /></span>
+                <span>Anterior</span>
+              </div>
+              <div className={styles.container_arrows__right}>
+                <span>Siguiente</span>
+                <span className='fs__24 text__secondary'><Icon id='MdChevronRight' /></span>
+              </div>
+            </section>
             <section className={classes.section__news}>
               <div className='container'>
                 <div className='row'>

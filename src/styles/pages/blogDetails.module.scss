@@ -184,6 +184,12 @@
         }
     }
 
+    &__ul__list{
+        width: 100%;
+        font-size: 18px;
+        color: $gray_darken;
+    }
+
     &__image__container {
         width: 50%;
         border-radius: 20px;
@@ -296,5 +302,20 @@
             margin: 0 10px;
             cursor: pointer;
         }
+    }
+}
+
+.container_arrows{
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $primary;
+    font-size: 18px;
+    &__left,
+    &__right{
+        cursor: pointer;
+        display: flex;
+        align-items: center;
     }
 }
