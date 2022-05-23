@@ -140,7 +140,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 30px;
     color: $primary;
 
     &__buttons__before {
@@ -209,24 +208,25 @@
 .apis {
   &__library {
     margin-top: 40px;
+    align-items: flex-start;
     &__cards {
-      grid-area: cards;
+      // grid-area: cards;
       display: grid;
       grid-template-columns: repeat(2, 2fr);
-      gap: 1rem;
+      gap: 2rem;
       @include breakpoint(xs) {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 2rem;
         max-height: 100% !important;
       }      
       @include breakpoint(sm) {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        gap: 2rem;
         max-height: 100% !important;
       }      
       @include breakpoint(lg) {
         grid-template-columns: repeat(2, 2fr);
-        gap: 1rem;
+        gap: 2rem;
       }
       a {
         max-height: 500px;
@@ -246,9 +246,6 @@
     display: grid;
     grid-template-columns: 2fr 1fr;
     grid-template-areas: "cards suggestions"
-                         "cards contact"
-                         "cards contact"
-                         "cards contact"
                          "footer footer";
     gap: 3rem;
 

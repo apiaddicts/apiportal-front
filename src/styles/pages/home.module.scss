@@ -299,13 +299,22 @@
   }
 }
 
+.section__news_toppadding{
+  padding-top: 0 !important;
+}
 .section__news {
   text-align: center;
   padding-top: 94px;
   padding-bottom: 88px;
+  @include breakpoint(xs) {
+    padding-bottom: 0 !important;
+  }
 
   &__showmore {
     margin-top: 45px !important;
+    @include breakpoint(xs) {
+      margin-top: 0 !important;
+    }
     div {
       text-decoration: none;
       color: $secondary;

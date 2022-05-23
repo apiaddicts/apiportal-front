@@ -1,6 +1,7 @@
 import React from 'react';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaTelegramPlane } from 'react-icons/fa';
 import moment from 'moment';
+import 'moment/locale/es';
 import Chip from '../Chip/Chip';
 
 moment.locale('es');
@@ -11,6 +12,7 @@ function BlogDetailsInfo({ styles, data }) {
     fontWeight: 500,
     fontSize: '14px',
     lineHeight: '16px',
+    textTransform: 'capitalize',
   };
 
   return (
@@ -19,7 +21,7 @@ function BlogDetailsInfo({ styles, data }) {
         <div className={styles.blog__details__header__content}>
           <div className={styles.blog__details__header__title}>
             <p>{data.timeRead ? data.timeRead : 'Lectura de 5 min.'}</p>
-            <p>{data.created_at ? moment(data.created_at, moment.HTML5_FMT.DATETIME_LOCAL).format('L') : '16 febrero del 2022'}</p>
+            <p>{data.created_at ? moment(data.created_at).format('LL') : '16 febrero del 2022'}</p>
           </div>
           <div className={styles.blog__details__header__tags}>
             {data.tags.length > 0 ? data.tags.map((tag, index) => (
@@ -38,10 +40,10 @@ function BlogDetailsInfo({ styles, data }) {
               <FaFacebookF />
             </div>
             <div className={styles.blog__details__social__icon__content}>
-              <FaTwitter />
+              <FaLinkedinIn />
             </div>
             <div className={styles.blog__details__social__icon__content}>
-              <FaLinkedinIn />
+              <FaTwitter />
             </div>
             <div className={styles.blog__details__social__icon__content}>
               <FaTelegramPlane />
@@ -49,7 +51,7 @@ function BlogDetailsInfo({ styles, data }) {
           </div>
         </div>
       </div>
-
+      {/* TODO: Change all section with only Markdown that receives from Strapi */}
       {data.questions.length > 0 ? data.questions.map((question, i) => (
         question.seccion === 'Normal' ? (
           <div key={i} className={styles.blog__details}>
@@ -81,6 +83,14 @@ function BlogDetailsInfo({ styles, data }) {
             <p className={styles.blog__details__title__text}>
               {question.description ? question.description : ''}
             </p>
+            <p className={styles.blog__details__ul__list}>
+              <ul>
+                <li>In egestas blandit felis id porttitor. </li>
+                <li>Felis id porttitor.</li>
+                <li>Luctus posuere lacus.</li>
+                <li>Proin eros elit, aliquet nec magna ornare</li>
+              </ul>
+            </p>
           </div>
         )
       )) : (null)}
@@ -93,10 +103,10 @@ function BlogDetailsInfo({ styles, data }) {
               <FaFacebookF />
             </div>
             <div className={styles.blog__details__social__icon__content}>
-              <FaTwitter />
+              <FaLinkedinIn />
             </div>
             <div className={styles.blog__details__social__icon__content}>
-              <FaLinkedinIn />
+              <FaTwitter />
             </div>
             <div className={styles.blog__details__social__icon__content}>
               <FaTelegramPlane />
