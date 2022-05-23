@@ -7,7 +7,6 @@ import classes from './input.module.scss';
 function Input({ field, formik, footer, styleInput }) {
   const [type, setType] = useState(false);
   const { values, errors, touched, handleChange, handleBlur } = formik;
-  console.log(styleInput);
   return (
     <div style={footer ? { width: '50%', padding: '0 38px' } : { width: '100%' }} className={`${classes.wrapper__input} mt-3`}>
       {field.label && (

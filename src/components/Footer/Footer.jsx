@@ -8,19 +8,22 @@ import classes from './footer.module.scss';
 import Icon from '../MdIcon/Icon';
 import SuraLogo from '../../static/img/sura_logo.svg';
 import Button from '../Buttons/Button';
-import Input from '../Input';
-import { fieldsContactExtend } from '../Forms/fields';
-import useFormConfig from '../../hooks/useForm';
+// import Input from '../Input';
+import InputUI from '../Input/InputUI/InputUI';
+// import { fieldsContactExtend } from '../Forms/fields';
+// import useFormConfig from '../../hooks/useForm';
+import TextAreaUI from '../Input/InputUI/TextAreaUI';
+import SelectUI from '../Input/InputUI/SelectUI';
 
 function Footer({ isPrivate }) {
   const img = 'https://picsum.photos/1920/300';
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
-  const handleSubmit = async (values) => {
-    console.log(values);
-  };
+  // const handleSubmit = async (values) => {
+  //   console.log(values);
+  // };
 
-  const formConfig = useFormConfig(fieldsContactExtend, handleSubmit);
+  // const formConfig = useFormConfig(fieldsContactExtend, handleSubmit);
 
   const [contactForm, setContactForm] = useState(false);
 
@@ -47,18 +50,45 @@ function Footer({ isPrivate }) {
             <div className='mb-5'>
               <div className='row justify-center'>
                 <div className='container'>
-                  <div className='row'>
-                    {fieldsContactExtend.map((field) => (
+                  <div className='row justify-center mb-10'>
+                    {/* {fieldsContactExtend.map((field) => (
                       <Input footer key={field.id} field={field} formik={formConfig} />
-                    ))}
+                    ))} */}
+                    <div className='flex-sm-12 flex-md-4'>
+                      <InputUI type='text' label='Nombre*' required={true} />
+                    </div>
+                    <div className='flex-sm-12 flex-md-4'>
+                      <InputUI type='text' label='Apellidos*' required={true} />
+                    </div>
+                  </div>
+                  <div className='row justify-center mb-10'>
+                    <div className='flex-sm-12 flex-md-4'>
+                      <InputUI type='email' label='Correo electrónico*' required={true} />
+                    </div>
+                    <div className='flex-sm-12 flex-md-4'>
+                      <InputUI type='tel' label='Celular*' required={true} />
+                    </div>
+                  </div>
+                  <div className='row justify-center mb-10'>
+                    <div className='flex-sm-12 flex-md-4'>
+                      <SelectUI label='Temas' required={true} options={[{ value: 'Sup', text: 'Soporte' }, { value: 'Com', text: 'Comercial' }, { value: 'Admin', text: 'Administración' }]} />
+                    </div>
+                    <div className='flex-sm-12 flex-md-4'>
+                      <InputUI type='text' label='Asunto*' required={true} />
+                    </div>
+                  </div>
+                  <div className='row justify-center'>
+                    <div className='flex-sm-12 flex-md-8'>
+                      <TextAreaUI label='Mensaje' counter={50} />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
             <div className='row mb-5 px-5'>
               <div className='container'>
-                <div className='row'>
-                  <div className={`flex-md-12 flex-sm-12 ${classes.footer__section__contact__terms}`}>
+                <div className='row justify-center'>
+                  <div className={`flex-sm-12 flex-md-8 flex-sm-8 ${classes.footer__section__contact__terms}`}>
                     <input type='checkbox' id='checkbox' />
                     <span>
                       {' '}
@@ -80,7 +110,6 @@ function Footer({ isPrivate }) {
             </div>
           </div>
         </div>
-
       )}
       <div className={`container ${classes.footer__end}`}>
         <div className={classes.logo}>
