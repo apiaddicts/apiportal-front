@@ -17,23 +17,27 @@
     }
 
     &__slide {
-      min-width: 1168px;
+      min-width: 100%;
       overflow: hidden;
       transition: 0.3s ease all;
-      max-height: 100vh;
-      min-height: 600px;
+      max-height: 588px;
       position: relative;
-      @include breakpoint(xs) {
-        min-width: 100%;
-      }
-      // min-width: 100%;
-      // overflow: hidden;
-      // transition: 0.3s ease all;
-      // max-height: 588px;
-      // position: relative;
 
       @include breakpoint(xs) {
         max-height: 100%;
+      }
+
+      @include breakpoint(md) {
+        max-height: 100vh;
+        height: 60vh;
+      }
+
+      @include breakpoint(lg) {
+        min-width: 100%;
+        overflow: hidden;
+        transition: 0.3s ease all;
+        max-height: 588px;
+        position: relative;
       }
 
       img {
@@ -69,7 +73,7 @@
 
   @include breakpoint(xs) {
     height: 10%;
-    bottom: -1%;
+    bottom: 10%;
     top: auto;
   }
 
