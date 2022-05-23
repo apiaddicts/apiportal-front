@@ -112,6 +112,8 @@ function Blog() {
 
   };
 
+  let cardCounter = 0;
+
   return (
     <div style={{ paddingTop: '114px' }}>
       {blogs.length > 0 && Object.keys(data).length > 0 ? (
@@ -125,13 +127,14 @@ function Blog() {
                   isSearch
                   onChange={formik.handleChange}
                   value={formik.values.search}
+                  css_styles={{ 'custom_padding': 'px-3' }}
                 />
               ) : (null)
             }
           </section>
           {
             resultsSearch.length === 0 && formik.values.search === '' ? (
-              <section className='container'>
+              <section className='container px-3'>
                 <div className='row'>
                   <div className='flex-md-12 flex-sm-12 mt-9'>
                     <Tabs
@@ -154,6 +157,7 @@ function Blog() {
                                   description={tab.cards && tab.cards[0].description}
                                   reading={tab.cards && tab.cards[0].timeRead}
                                   theme='primary'
+                                  css_styles={{ 'override_card_style': 'no__shadow' }}
                                   blog={true}
                                 />
                               </div>
@@ -165,29 +169,36 @@ function Blog() {
                                   resultsData.length === 0 ? (
                                     <span>Sin resultados disponibles</span>
                                   ) : (
-                                    resultsData.map((results, index) => (
-                                      <Link to={`/blog/${results.id}`} key={index}>
-                                        <CardInformation
-                                          img={results.image ? results.image[0].url : ''}
-                                          description={results.description}
-                                          title={results.title}
-                                          buttons={results.tags && results.tags.length > 0 ? results.tags : []}
-                                          theme='primary'
-                                        />
-                                      </Link>
-                                    ))
+                                    resultsData.map((results, index) => {
+                                      cardCounter++;
+                                      return (
+                                        <>
+                                          <Link to={`/blog/${results.id}`} key={index}>
+                                            <CardInformation
+                                              img={results.image ? results.image[0].url : ''}
+                                              description={results.description}
+                                              title={results.title}
+                                              buttons={results.tags && results.tags.length > 0 ? results.tags : []}
+                                              css_styles={{ 'override_card_height': 'custom_card__height' }}
+                                              theme='primary'
+                                              info='Conoce más'
+                                            />
+                                          </Link>
+                                          { cardCounter === 3 && <Contact css_styles={{ 'display_contact': 'd-xs-only' }} /> }
+                                        </>
+                                      );
+                                    })
                                   )
                                 }
                               </div>
                               <div id='Suggestions' className={`d-xs-none ${stylesBlog.apis__library__suggestions}`}>
                                 <div className={stylesBlog.apis__library__suggestions__content}>
-                                  <h1 className={stylesBlog.apis__library__suggestions__content__title}>Lo más reciente</h1>
+                                  <h1 className={`${stylesBlog.apis__library__suggestions__content__title} fs__16 text-uppercase text__gray__gray_darken`}>Lo más reciente</h1>
                                   <Novedades />
+                                  <Contact />
                                 </div>
                               </div>
-                              <div id='Contact' className={stylesBlog.apis__library__contact}>
-                                <Contact />
-                              </div>
+
                               <div id='Footer' className={stylesBlog.apis__library__footer}>
                                 <div className={stylesBlog.section__result__content__pagination}>
                                   <div
@@ -250,7 +261,7 @@ function Blog() {
             )
 
           }
-          <section className={classes.section__news}>
+          <section className={`${classes.section__news} ${classes.section__news_toppadding} d-xs-none`}>
             <div className='container'>
               <div className='row'>
                 <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>

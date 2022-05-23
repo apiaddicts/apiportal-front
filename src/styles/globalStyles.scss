@@ -296,7 +296,7 @@ a {
     MARGINS 
 ------------------------------ */
 .m-0 {
-  margin: 0px;
+  margin: 0px !important;
 }
 .m-1 {
   margin: 0.25rem;
@@ -730,6 +730,7 @@ a {
   height: 100%;
   overflow: hidden;
   color: #53565a;
+  box-sizing: content-box;
 }
 .chip {
   display: inline-block;
@@ -750,7 +751,7 @@ a {
 }
 
 .blog-chip{
-  font-weight: 600 !important;
+  font-weight: 500 !important;
   letter-spacing: 0.4px !important;
   font-size: 14px !important;
   text-transform: none !important;
@@ -932,12 +933,19 @@ a {
   justify-content: start;
 }
 
+.text-capitalize{
+  text-transform: capitalize !important;
+}
+
 .align-center {
   align-items: center;
 }
 
 .d-none {
   display: none;
+}
+.d-block{
+  display: block !important;
 }
 
 .d-xs-none {
@@ -1075,4 +1083,12 @@ a {
   &__15 { font-size: 15px !important; }
   &__16 { font-size: 16px !important; }
   &__17 { font-size: 17px !important; }
+  &__18 { font-size: 18px !important; }
+  &__19 { font-size: 19px !important; }
+  &__20 { font-size: 20px !important; }
+  &__22 { font-size: 22px !important; }
+  &__24 { font-size: 24px !important; }
+  &__26 { font-size: 26px !important; }
+  &__28 { font-size: 28px !important; }
+  &__30 { font-size: 30px !important; }
 }
