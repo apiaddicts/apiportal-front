@@ -135,7 +135,7 @@ function Home({ setIsOpen }) {
           <section>
             <Slider slides={slides} />
           </section>
-          <div className={classes.section__content__texture}>
+          <div className={classes.svg__texture}>
             <img src={textureCircles} alt='Texture' />
           </div>
           {/* Beneficios principales */}
@@ -149,7 +149,7 @@ function Home({ setIsOpen }) {
               <div className={`flex-md-5 flex-lg-5 flex-sm-12 ${classes.section__content__img}`}>
                 <img src={backgroundSection || 'https://picsum.photos/500/300'} alt='Benefits' className='ml-4' />
               </div>
-              <div className={`flex-md-7 flex-lg-7 flex-sm-12 ${classes.section__content__items}`}>
+              <div className={`flex-md-12 flex-md-7 flex-lg-7 flex-sm-12 ${classes.section__content__items}`}>
                 {itemsSection.map((item, i) => (
                   <Item
                     key={i}
@@ -226,7 +226,7 @@ function Home({ setIsOpen }) {
             <img src={textureCirclesAlt} alt='' />
           </div>
           {/* Descubre nuestras APis */}
-          <section className={`container ${classes.section__discover}`}>
+          <section className={`container ${classes.section__discover__sc}`}>
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
                 <h1 className={`h2 text__primary font-weight-bold ${classes.section__discover__title}`}>

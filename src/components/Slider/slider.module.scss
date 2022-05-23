@@ -17,11 +17,20 @@
     }
 
     &__slide {
-      min-width: 100%;
+      min-width: 1168px;
       overflow: hidden;
       transition: 0.3s ease all;
-      max-height: 588px;
+      max-height: 100vh;
+      min-height: 600px;
       position: relative;
+      @include breakpoint(xs) {
+        min-width: 100%;
+      }
+      // min-width: 100%;
+      // overflow: hidden;
+      // transition: 0.3s ease all;
+      // max-height: 588px;
+      // position: relative;
 
       @include breakpoint(xs) {
         max-height: 100%;
@@ -60,7 +69,7 @@
 
   @include breakpoint(xs) {
     height: 10%;
-    bottom: 10%;
+    bottom: -1%;
     top: auto;
   }
 
