@@ -165,6 +165,9 @@
         line-height: 36px;
         letter-spacing: -0.2px;
         color: #000000;
+        @include breakpoint(xs) {
+            color: $primary;
+        }
 
         @media (max-width: 768px) {
             padding: 15px 0;
@@ -182,6 +185,12 @@
             line-height: 28px;
             color: $gray_darken;
         }
+    }
+
+    &__ul__list{
+        width: 100%;
+        font-size: 18px;
+        color: $gray_darken;
     }
 
     &__image__container {
@@ -296,5 +305,29 @@
             margin: 0 10px;
             cursor: pointer;
         }
+    }
+}
+
+.container_arrows{
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $primary;
+    font-size: 18px;
+    &__left,
+    &__right{
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.container_contact__details{
+    box-sizing: content-box;
+    @include breakpoint(xs) {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+        margin-bottom: 0.75rem;
     }
 }

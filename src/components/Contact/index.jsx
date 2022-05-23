@@ -8,7 +8,9 @@ import icons from '../../static/icons-sura';
 import { fieldsContact } from '../Forms/fields';
 import useLoginConfig from '../../hooks/useLogin';
 
-function Contact() {
+function Contact({ css_styles }) {
+
+  const { display_contact, display_detail_description, border_radius } = css_styles;
   const location = useLocation();
   const { pathname } = location;
 
@@ -19,13 +21,14 @@ function Contact() {
   const formConfig = useLoginConfig(fieldsContact, handleSubmit);
 
   return (
-    <div className={classes.contact}>
+    <div className={`${classes.contact} ${display_contact} ${classes[border_radius]}`}>
       <div className={pathname !== '/blog' ? classes.contact__container__alternative : classes.contact__container}>
         <div className={pathname !== '/blog' ? classes.contact__alternative__header : classes.contact__header}>
           <div className={classes.contact__header__icon}>
             {icons('email')}
           </div>
           <p className={pathname !== '/blog' ? classes.contact__alternative__title : classes.contact__header__title}>Sigamos conectados</p>
+          <p className={`pt-5 pb-2 d-none text__primary fs__22 m-0 ${display_detail_description} d-xs-none`}>¡Entérate de lo último! Escoge una o varias capacidades y sé el primero en enterarte.</p>
         </div>
         <div className={pathname !== '/blog' ? classes.contact__header__title__alternative : classes.contact__header__title}>
           <div className={pathname !== '/blog' ? classes.contact__alternative__description : classes.contact__description}>
@@ -33,9 +36,6 @@ function Contact() {
           </div>
           <div className={pathname !== '/blog' ? classes.contact__alternative__description : classes.contact__description}>
             <p className=''> Escoge una o varias capacidades y sé el primero en enterarte.</p>
-          </div>
-          <div className={pathname !== '/blog' ? classes.contact__alternative__description_normal : classes.contact__description}>
-            <p className=''> ¡Entérate de lo último! Escoge una o varias capacidades y sé el primero en enterarte.</p>
           </div>
         </div>
         <div className={pathname !== '/blog' ? classes.contact__container__alternative__form : classes.contact__container__form}>
@@ -53,6 +53,10 @@ function Contact() {
       </div>
     </div>
   );
+};
+
+Contact.defaultProps = {
+  css_styles: '',
 };
 
 export default Contact;

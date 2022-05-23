@@ -10,7 +10,7 @@ function Novedades() {
       {
         jsonData.length === 0 ? <p>No hay resultados</p> :
           jsonData.map((result, index) => (
-            <ItemAvatar key={index} title={result.title} paragraph={result.description} img={result.image} border={true} />
+            <ItemAvatar key={index} title={result.title} paragraph={result.description} img={result.image} border={true} css_styles={{ 'custom_title': 'fs__10', 'custom_paragraph': 'fs__16' }} />
           ))
       }
     </div>
