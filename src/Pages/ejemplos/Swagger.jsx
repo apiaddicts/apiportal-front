@@ -5,7 +5,7 @@ import 'swagger-ui-react/swagger-ui.css';
 
 function Swagger() {
   return (
-    <div>
+    <div style={{ marginTop: '50px' }}>
       <SwaggerUI
         // url='https://petstore.swagger.io/v2/swagger.json'
         // url='https://raw.githubusercontent.com/ErikWittern/openapi-snippet/main/test/petstore_oas.json'
