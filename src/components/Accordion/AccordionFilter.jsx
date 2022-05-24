@@ -4,7 +4,6 @@ import Icon from '../MdIcon/Icon';
 import classes from './accordion.module.scss';
 
 function AccordionFilter({ items, clicked, setClicked, subItem, setSubItem }) {
-  // const [clicked, setClicked] = useState(false);
   const toggle = (index) => {
     if (clicked === index) {
       setSubItem(0);

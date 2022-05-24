@@ -7,7 +7,7 @@
   width: 100%;
   height: 100%;
   @include breakpoint(xs) {
-    height: 100vh;
+    height: 700px;
   }
   &__slider {
     display: flex;
@@ -25,11 +25,6 @@
 
       @include breakpoint(xs) {
         max-height: 100%;
-      }
-
-      @include breakpoint(md) {
-        max-height: 100vh;
-        height: 60vh;
       }
 
       @include breakpoint(lg) {
@@ -73,7 +68,7 @@
 
   @include breakpoint(xs) {
     height: 10%;
-    bottom: 10%;
+    bottom: 20px;
     top: auto;
   }
 

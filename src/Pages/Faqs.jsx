@@ -56,29 +56,29 @@ function Faqs(props) {
                 { faqs.length > 0 ? (
                   faqs.map((item, i) => {
                     return (
-                      clicked === i && (
-                        <div key={i}>
-                          <h1 className='h3 text__primary mb-5 mt-5'>{item.question}</h1>
-                          <Accordion items={item.data} subItem={subItem} setSubItem={setSubItem} />
-                        </div>
-                      )
+                      <div key={i}>
+                        <h1 className='h3 text__primary mb-5 mt-5'>{item.question}</h1>
+                        <Accordion items={item.data} arrItems={faqs} subItem={subItem} setSubItem={setSubItem} clicked={clicked} setClicked={setClicked} label={item.question} />
+                      </div>
                     );
                   })
                 ) : null}
               </div>
-              <div className={classes.faq__content__qa__xs}>
-                {
-                  faqs.length > 0 ? (
-                    faqs.map((faq, index) => {
-                      return (
-                        <div key={index}>
-                          <h1 className='h3 text__primary mb-5 mt-5'>{faq.question}</h1>
-                          <Accordion items={faq.data} subItem={smallItem} setSubItem={setSmallItem} />
-                        </div>
-                      );
-                    })
-                  ) : null
-                }
+              <div className='d-xs-only'>
+                <div className={`row ${classes.faq__content__qa__xs}`}>
+                  {
+                    faqs.length > 0 ? (
+                      faqs.map((faq, index) => {
+                        return (
+                          <div key={index} className='flex-sm-12'>
+                            <h1 className={`${classes.faq__content__qa__xs__title} text__primary mb-5 mt-5`}>{faq.question}</h1>
+                            <Accordion items={faq.data} subItem={smallItem} setSubItem={setSmallItem} />
+                          </div>
+                        );
+                      })
+                    ) : null
+                  }
+                </div>
               </div>
             </div>
           </section>
