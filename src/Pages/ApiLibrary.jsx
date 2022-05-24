@@ -62,7 +62,7 @@ function AppLibrary(props) {
               libraries.length > 0 ? (
                 libraries.map((item, index) => (
                   <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
-                    <Link to={`/ApiLibrary/${item.id}`}>
+                    <Link to='/swagger'>
                       <CardInformation
                         title={item.title}
                         status={item.status}
