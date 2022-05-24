@@ -1117,4 +1117,8 @@ a {
     color: $gray_darken;
     font-weight: map-deep-get($font-weights, "bold") !important;
   }
-} 
+}
+
+.mr-auto{
+  margin-right: auto !important;
+}
