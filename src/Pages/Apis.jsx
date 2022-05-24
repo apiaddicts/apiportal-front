@@ -184,7 +184,7 @@ function Apis({ setIsOpen }) {
                     handleChangeSelect={handleChangeSolutions}
                     checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
                   />
-                  <p className={classes.wrapper__checkbox__counter}>{item.count}</p>
+                  <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{item.count}</p>
                 </div>
               ))}
             </CustomizedAccordions>
@@ -246,6 +246,7 @@ function Apis({ setIsOpen }) {
                           description={item.description}
                           link={`/api/${item.id}`}
                           modal={setIsOpen}
+                          css_styles={{ 'custom_title_size': 'fs__22', 'custom_status_size': 'fs__10' }}
                         />
                       </div>
                     ))
