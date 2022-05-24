@@ -114,7 +114,7 @@ function ApiDetails({ setIsOpen }) {
               img={library.image.length > 0 && library.image.length === 1 ? library.image[0].url : ''}
               buttons={buttonsLbls}
               setIsOpen={setIsOpen}
-              css_styles={{ 'image_display': 'banner_custom__img--dnone', 'apiindividual_height': 'banner_apiindividual__layout--height' }}
+              css_styles={{ 'image_display': 'banner_custom__img--dnone', 'apiindividual_height': 'banner_apiindividual__layout--height', 'custom_line_height': 'line-height-1' }}
               redirect='/apis'
               description='In egestas blandit felis id porttitor. Mauris vel nibh ex. Integer iaculis placerat nunc, in ultricies nunc dignissim eu. '
             />
@@ -274,8 +274,8 @@ function ApiDetails({ setIsOpen }) {
             </div>
             <div className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
-                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
-                  <a href=''>Ver más</a>
+                <div className={`flex-lg-2 flex-md-6 flex-sm-12 text-center ${classes.custom_top}`}>
+                  <a href='' className='text__secondary'>Ver más</a>
                 </div>
               </div>
             </div>

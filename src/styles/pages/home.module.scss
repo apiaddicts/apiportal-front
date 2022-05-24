@@ -397,3 +397,10 @@
     display: block;
   }
 }
+
+.custom_top{
+  margin-top: 1rem;
+  @include breakpoint(xs) {
+    margin: 2rem 0 !important;
+  }
+}
