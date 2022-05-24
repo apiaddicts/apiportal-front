@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Container, Grid } from '@mui/material';
 
@@ -62,18 +62,17 @@ function AppLibrary(props) {
               libraries.length > 0 ? (
                 libraries.map((item, index) => (
                   <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
-                    {/* <Link to={`/ApiLibrary/${item.id}`}> */}
-                    <CardInformation
-                      title={item.title}
-                      status={item.status}
-                      version={item.version}
-                      buttons={item.tags}
-                      colorStatus={item.color_status}
-                      info='Documentación'
-                      description={item.description}
-                      link='/swagger'
-                    />
-                    {/* </Link> */}
+                    <Link to='/swagger'>
+                      <CardInformation
+                        title={item.title}
+                        status={item.status}
+                        version={item.version}
+                        buttons={item.tags}
+                        colorStatus={item.color_status}
+                        info='Documentación'
+                        description={item.description}
+                      />
+                    </Link>
                   </div>
                 ))
               ) : (
