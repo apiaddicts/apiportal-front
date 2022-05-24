@@ -1,0 +1,62 @@
+@import "./../../styles/variables.scss";
+@import "./../../styles/mixins/mixin.scss";
+
+.wrapper_pagination{
+  width: 100%;
+  display: flex;
+  .wrapper_pagination__info{
+    color: $gray_darken;
+    font-weight: 600;
+    @include breakpoint(xs) {
+      display: none;
+    }
+  }
+  .wrapper_pagination_pages{
+    display: flex;
+    @include breakpoint(xs) {
+      width: 100%;
+    }
+    .wrapper_pagination_page{
+      display: flex;
+      color: $gray_darken;
+      font-size: 16px;
+      align-items: center;
+      @include breakpoint(xs) {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .wrapper_left__arrow,
+      .wrapper_right__arrow{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $secondary;
+        cursor: pointer;
+        .arrow{
+          font-size: 26px;
+        }
+      }
+      .wrapper_numbers{
+        display: flex;
+        .number_page{
+          margin: 0 5px;
+          &_active{
+            color: $primary;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+    .input_number{
+      border: 1px solid $gray_lighten-1;
+      height: 32px;
+      width: 62px;
+      border-radius: 8px;
+      text-align: center;
+      @include breakpoint(xs) {
+       display: none;
+      }
+    }
+  }
+
+}

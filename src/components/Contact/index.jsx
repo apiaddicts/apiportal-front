@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+// import { useLocation } from 'react-router-dom';
 import classes from './contact.module.scss';
 // import Icon from '../MdIcon/Icon';
 import Input from '../Input';
@@ -8,11 +8,11 @@ import icons from '../../static/icons-sura';
 import { fieldsContact } from '../Forms/fields';
 import useLoginConfig from '../../hooks/useLogin';
 
-function Contact({ css_styles }) {
+function Contact({ css_styles, pathname }) {
 
   const { display_contact, display_detail_description, border_radius } = css_styles;
-  const location = useLocation();
-  const { pathname } = location;
+  // const location = useLocation();
+  // const { pathname } = location;
 
   const handleSubmit = async (values) => {
     console.log(values);

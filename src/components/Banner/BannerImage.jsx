@@ -7,7 +7,7 @@ import classes from './banner.module.scss';
 
 function BannerImage({ buttons, setIsOpen, title = '', img = '', description, css_styles, redirect = '/' }) {
 
-  const { layout_height, apiindividual_height, image_display } = css_styles;
+  const { layout_height, apiindividual_height, image_display, custom_line_height } = css_styles;
   const navigate = useNavigate();
   const handleClick = () => {
     const session = localStorage.getItem('session');
@@ -44,7 +44,7 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
             </h1>
             <div className={`${classes.divider} mb-4 mt-3`} />
             <div className={classes['width-text-banner']}>
-              <p className='subtitle-1'>
+              <p className={`subtitle-1 ${custom_line_height}`}>
                 {description}
               </p>
             </div>
@@ -53,6 +53,7 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
                 <div className='flex-md-12 flex-sm-12'>
                   <div className='button__group mt-5'>
                     {!buttons ? '' : buttons.map((button, index) => {
+                      console.log('button', button);
                       return (
                         <div key={index} className='mr-10 pr-2'>
                           <Button styles={button.class} onClick={handleClick}>
