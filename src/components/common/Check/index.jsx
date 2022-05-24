@@ -27,6 +27,9 @@ function CheckboxWrapper({
           control={(
             <Checkbox
               sx={{
+                '&.MuiCheckbox-root': {
+                  borderRadius: '10px',
+                },
                 '&.Mui-checked': {
                   color: '#00AEC7',
                 },
