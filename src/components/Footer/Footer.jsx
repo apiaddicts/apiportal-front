@@ -34,11 +34,11 @@ function Footer({ isPrivate }) {
           <div className={`container ${classes.footer__container}`}>
             <div className={`${classes.divider} mb-4`} />
             <h1 className='h2 text__secondary__white mb-3'>Dejanos tus datos para asesorarte</h1>
-            <p className='h5 text__secondary__white mb-10'>Contáctanos por medio de este formulario</p>
+            <p style={{ fontWeight: 400 }} className='h5 text__secondary__white mb-10'>Contáctanos por medio de este formulario</p>
           </div>
           <div className={classes.button__fab}>
             <button type='submit' onClick={() => { setContactForm(!contactForm); }}>
-              {contactForm ? <Icon id='MdClose' /> : <GoMail />}
+              {contactForm ? <Icon style={{ fontSize: '44px' }} id='MdClose' /> : <GoMail style={{ fontSize: '44px' }} />}
             </button>
           </div>
         </Base>
