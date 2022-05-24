@@ -291,6 +291,11 @@ a {
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
 }
+.pxs-none {
+  @include breakpoint(xs) {
+    padding: 0 !important;
+  }
+}
 
 /* ------------------------------ 
     MARGINS 
