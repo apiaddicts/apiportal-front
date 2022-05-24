@@ -196,7 +196,7 @@ function ApiDetails({ setIsOpen }) {
               </div>
             </div>
           </section>
-          <section className={classes.section__content__texture}>
+          <section className={`${classes.section__content__texture} d-xs-none`}>
             <div className={classes.texture__image}> </div>
           </section>
           <section className={`container ${classes.section__discover}`}>

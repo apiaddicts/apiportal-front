@@ -154,7 +154,10 @@
 
   &__footer {
     width: 100%;
-    height: 60px;
+    height: 63px;
+    @include breakpoint(xs) {
+      height: 99px;
+    }
     background: url("../../static/img/1595328.png");
     position: absolute;
     bottom: 0px;
