@@ -7,6 +7,24 @@
   top: 650px;
 }
 
+.svg__texture {
+  position: absolute;
+  width: 100vw;
+  max-width: 100%;
+  left: 0;
+  right: 0;
+  transform: translateY(30%);
+  display: flex;
+  justify-content: flex-end;
+  
+  img {
+    width: 146px;
+    @include breakpoint(xs) {
+      width: 90px;
+    }
+  }
+}
+
 .title__align {
   align-self: flex-start;
 }
@@ -16,20 +34,20 @@
   position: relative;
 
   &__texture {
-    position: absolute;
-    width: 100vw;
+    position: relative;
+    width: 100%;
     max-width: 100%;
-    left: 0;
-    right: 0;
-    transform: translateY(30%);
-    display: flex;
-    justify-content: flex-end;
-
+    height: 99px;
+    margin-top: 20px;
+    .texture__image{
+      width: 300px;
+      height: 100%;
+      position: absolute;
+      right: 0;
+      background: url("../../static/img/1595328.png") repeat;
+    }
     img {
       width: 146px;
-      @include breakpoint(xs) {
-        width: 90px;
-      }
     }
   }
 
@@ -75,6 +93,12 @@
     padding-left: 6rem !important;
     @include breakpoint(xs) {
       padding-left: 1rem !important;
+    }
+    @include breakpoint(md) {
+      padding-left: 0rem !important;
+    }
+    @include breakpoint(lg) {
+      padding-left: 6rem !important;
     }
   } 
 }
@@ -148,8 +172,12 @@
 }
 
 .section__discover {
-  padding-top: 95px !important;
+  padding-top: 0px !important;
   padding-bottom: 77px !important;
+  &__sc {
+    padding-top: 95px;
+    padding-bottom: 77px;
+  }
 
   @include breakpoint(xs){
     padding-top: 54px !important;
@@ -165,6 +193,12 @@
     transform: translateY(122%);
     display: flex;
     justify-content: flex-end;
+    @include breakpoint(sm) {
+      display: none;
+    }
+    @include breakpoint(lg) {
+      display: flex;
+    }
   }
   &__title {
     margin-bottom: 2rem;
@@ -209,9 +243,14 @@
   background: $gray_lighten-1;
   padding-top: 75px;
   padding-bottom: 100px;
+  @include breakpoint(sm) {
+    padding-bottom: 0px;
+  }
+
   @include breakpoint(xl){
     padding-bottom: 0px;
   }
+
   @include breakpoint(xs){
     padding-top: 45px;
     padding-bottom: 0px;
@@ -231,8 +270,16 @@
     margin-top: 40px;
     padding-bottom: 200px;
     @include breakpoint(xs) {
-      padding-bottom: 114px;
+      padding-bottom: 70px;
       margin-top: -27px;
+    }
+    @include breakpoint(sm) {
+      padding-bottom: 90px;
+      margin-top: 0px;
+    }
+    @include breakpoint(lg) {
+      padding-bottom: 200px;
+      margin-top: 40px;
     }
     height: 100%;
     &__img {
@@ -300,13 +347,22 @@
   }
 }
 
+.section__news_toppadding{
+  padding-top: 0 !important;
+}
 .section__news {
   text-align: center;
   padding-top: 94px;
   padding-bottom: 88px;
+  @include breakpoint(xs) {
+    padding-bottom: 0 !important;
+  }
 
   &__showmore {
     margin-top: 45px !important;
+    @include breakpoint(xs) {
+      margin-top: 0 !important;
+    }
     div {
       text-decoration: none;
       color: $secondary;

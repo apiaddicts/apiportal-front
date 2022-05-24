@@ -25,6 +25,7 @@ $secondary: #00aec7;
 $secondary_white: #ffffff;
 $secondary_yellow: #e3e829;
 $gray: #768692;
+$gray-lighten-0: #F5F6F8;
 $gray_lighten-1: #ecf0f1;
 $gray_lighten-2: #8189a9;
 $gray_lighten-3: #8b92b1;
@@ -39,7 +40,7 @@ $blue_sura: #003C71;
 $orange_sura: #F1B434;
 $red_sura: #F54B5E;
 
-/* ------------------------------ 
+/* ------------------------------
     WEIGHTS 
 ------------------------------ */
 $font-weights: () !default;
@@ -174,7 +175,7 @@ $heading: map-deep-merge(
     GRID LAYOUT 
 ------------------------------ */
 $gutter-padding-horizontal: 1.5rem;
-$gutter-margin-vertical: 2rem;
+$gutter-margin-vertical: 1rem;
 
 $sm: 0em;
 $md: 34.5625em; // 553px / 16px
@@ -189,8 +190,10 @@ $width-container-xl: 130rem;
 .container {
   width: $width-container-sm;
   margin: 0 auto;
+  position: relative;
   @include breakpoint(md) {
-    width: 1168px;
+    width: 90%;
+    max-width: 1168px;
   }
   @include breakpoint(lg) {
     max-width: 1168px;

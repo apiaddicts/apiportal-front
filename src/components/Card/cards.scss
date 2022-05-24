@@ -201,6 +201,10 @@
     }
 }
 
+.card__title_blog {
+    font-size: 28px !important;
+}
+
 .tags-flex-wrap {
     flex-wrap: wrap;
 }
@@ -212,6 +216,41 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+
+.letter__spacing{
+    letter-spacing: 1.5px;
+}
+
+.no__shadow{
+    box-shadow: none !important;
+}
+
+.custom_card__height{
+    height: 361px !important;
+    @include breakpoint(xs) {
+        height: 395px !important;
+    }
+    .card-header{
+        height: 133px;
+        @include breakpoint(xs) {
+            height: 180px;
+        }
+    }
+    .body-2{
+        height: 70px !important;
+        overflow: hidden;
+    }
+    .hidden__tags{
+        @include breakpoint(xs) {
+            display: none;
+        }
+    }
+    .card_chip_info{
+        @include breakpoint(md) {
+            display: none;
+        }
+    }
 }
 
 .green {

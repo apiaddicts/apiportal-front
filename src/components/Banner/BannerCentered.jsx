@@ -1,14 +1,12 @@
 import React from 'react';
+
+import { HashLink } from 'react-router-hash-link';
+
 import Base from './Base';
 import Button from '../Buttons/Button';
 import classes from './banner.module.scss';
 
 function BannerCentered({ title, subtitle, buttonLabel, img, buttonType, redirect }) {
-  const handleClick = () => {
-    if (redirect === null) {
-      document.getElementById('data').scrollIntoView(true);
-    }
-  };
 
   return (
     <Base img={img}>
@@ -27,9 +25,18 @@ function BannerCentered({ title, subtitle, buttonLabel, img, buttonType, redirec
 
         <div className='row justify-center text-center'>
           <div className='flex-lg-3 flex-md-5 flex-sm-12 flex-xl-3'>
-            <Button onClick={handleClick} styles={buttonType}>
-              {buttonLabel}
-            </Button>
+
+            {redirect === null ? (
+              <HashLink smooth to='/#data'>
+                <Button styles={buttonType}>
+                  {buttonLabel}
+                </Button>
+              </HashLink>
+            ) : (
+              <Button styles={buttonType}>
+                {buttonLabel}
+              </Button>
+            )}
           </div>
         </div>
 

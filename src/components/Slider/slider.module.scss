@@ -27,6 +27,19 @@
         max-height: 100%;
       }
 
+      @include breakpoint(md) {
+        max-height: 100vh;
+        height: 60vh;
+      }
+
+      @include breakpoint(lg) {
+        min-width: 100%;
+        overflow: hidden;
+        transition: 0.3s ease all;
+        max-height: 588px;
+        position: relative;
+      }
+
       img {
         width: 100%;
         height: 100%;

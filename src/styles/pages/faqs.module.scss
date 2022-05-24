@@ -24,6 +24,15 @@
     }
     &__qa {
       width: 100%;
+      @include breakpoint(xs) {
+        display: none;
+      }
+      &__xs {
+        display: none;
+        @include breakpoint(xs) {
+          display: block;
+        }
+      }
     }
     &__filter{
       width: 100%;
