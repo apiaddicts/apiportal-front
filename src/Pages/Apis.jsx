@@ -222,7 +222,7 @@ function Apis({ setIsOpen }) {
                     borderRadius='20px'
                   />
                 </div>
-                <div className='flex-sm-12 flex-md-4'>
+                <div className='flex-sm-12 flex-md-4 pl-0'>
                   <InputSelect handleSelect={(e) => {
                     console.log(e);
                     handleSort(e);
