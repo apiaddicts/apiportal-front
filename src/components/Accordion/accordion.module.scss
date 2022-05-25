@@ -22,8 +22,11 @@
     &__title {
       font-size: 22px;
       font-weight: 500;
+      @include breakpoint(xs) {
+        font-size: 18px;
+      }
       &__actionbutton {
-        font-size: 36px;
+        font-size: 20px;
       }
     }
   }

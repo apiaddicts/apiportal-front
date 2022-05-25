@@ -32,6 +32,9 @@
         @include breakpoint(xs) {
           display: block;
         }
+        &__title {
+          font-size: 26px !important;
+        }
       }
     }
     &__filter{

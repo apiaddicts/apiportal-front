@@ -177,6 +177,9 @@
   &__sc {
     padding-top: 95px;
     padding-bottom: 77px;
+    @include breakpoint(xs) {
+      padding-top: 54px;
+    }
   }
 
   @include breakpoint(xs){
@@ -356,6 +359,12 @@
   padding-bottom: 88px;
   @include breakpoint(xs) {
     padding-bottom: 0 !important;
+  }
+
+  &__content {
+    @include breakpoint(xs) {
+      padding-bottom: 67px !important;
+    }
   }
 
   &__showmore {
