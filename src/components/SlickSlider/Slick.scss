@@ -42,17 +42,18 @@
   color: $gray_lighten-3;
   @include breakpoint(xs) {
     left: 1%;
+    bottom: 20px;
   }
   @include breakpoint(sm) {
     left: 1%;
   }
   @include breakpoint(lg) {
-    left: 29%;
-    }
-    
-    @include breakpoint(xl) {
-      left: 38%;
-    }
+    left: 36%;
+  }
+
+  @include breakpoint(xl) {
+    left: 38%;
+  }
 }
 
 .nextArrow {
@@ -65,22 +66,27 @@
   color: $gray_lighten-3;
   @include breakpoint(xs) {
     right: 1%;
+    bottom: 20px;
   }
   @include breakpoint(sm) {
     right: 0%;
-  }  
+  }
   @include breakpoint(lg) {
-    right: 29%;
-    }
-    
-    @include breakpoint(xl) {
-      right: 38%;
+    right: 36%;
+  }
+
+  @include breakpoint(xl) {
+    right: 38%;
   }
 }
 
 .slick-dots {
   position: absolute;
   bottom: 12px !important;
+
+  @include breakpoint(xs) {
+    bottom: 30px !important;
+  }
 }
 
 .slick-dots li button:before {

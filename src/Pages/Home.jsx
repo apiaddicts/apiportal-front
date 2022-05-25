@@ -1,6 +1,9 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+
+import { HashLink } from 'react-router-hash-link';
+
 import Item from '../components/Item/Item';
 import classes from '../styles/pages/home.module.scss';
 import Icon from '../components/MdIcon/Icon';
@@ -17,7 +20,7 @@ import textureCirclesAlt from '../static/img/texture_circles_alt.svg';
 import { getHome } from '../redux/actions/homeAction';
 import Slick from '../components/SlickSlider/Slick';
 
-function Home() {
+function Home({ setIsOpen }) {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.demo);
 
@@ -41,7 +44,6 @@ function Home() {
   const filterSection = data && data.contentSections ? data.contentSections.filter((item) => item.__component === 'home.work-section') : [];
   const titleSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].title ? filterSection[0].title : '';
   const backgroundSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].background ? filterSection[0].background.url : '';
-  console.log(backgroundSection);
   const itemsSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].Steps ? filterSection[0].Steps.map((i) => {
     const response = {
       icon: i.number,
@@ -73,6 +75,7 @@ function Home() {
   const filterHomeBannerSubtitle = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].subtitle ? filterHomeBanner[0].subtitle : '';
   const filterHomeBannerImage = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].background ? filterHomeBanner[0].background.url : '';
   const filterHomeBannerNameButtom = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].buttons ? filterHomeBanner[0].buttons[0].name : '';
+  const filterHomeBannerNameType = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].buttons ? filterHomeBanner[0].buttons[0].type : '';
 
   // TODO: Reemplazar DataFake
   const slidesNew = [
@@ -120,16 +123,22 @@ function Home() {
     },
   ];
 
+  const handleOpenModal = () => {
+    setIsOpen(true);
+  };
+
   return (
     <div style={{ paddingTop: '114px' }}>
       {Object.keys(data).length > 0 ? (
         <div>
+          {/* Slider */}
           <section>
             <Slider slides={slides} />
           </section>
-          <div className={classes.section__content__texture}>
+          <div className={classes.svg__texture}>
             <img src={textureCircles} alt='Texture' />
           </div>
+          {/* Beneficios principales */}
           <section className={`container ${classes.section__content}`}>
             <div className='row'>
               <div className={`flex-md-12 ${classes.section__content__title}`}>
@@ -140,7 +149,7 @@ function Home() {
               <div className={`flex-md-5 flex-lg-5 flex-sm-12 ${classes.section__content__img}`}>
                 <img src={backgroundSection || 'https://picsum.photos/500/300'} alt='Benefits' className='ml-4' />
               </div>
-              <div className={`flex-md-7 flex-lg-7 flex-sm-12 ${classes.section__content__items}`}>
+              <div className={`flex-md-12 flex-md-7 flex-lg-7 flex-sm-12 ${classes.section__content__items}`}>
                 {itemsSection.map((item, i) => (
                   <Item
                     key={i}
@@ -155,7 +164,7 @@ function Home() {
               </div>
             </div>
           </section>
-
+          {/* Como funciona */}
           <section className={`${classes.section__works}`}>
             <div className='container'>
               <div className='row'>
@@ -191,9 +200,21 @@ function Home() {
                 {filterButtonSection && filterButtonSection.length > 0 ? (
                   filterButtonSection[0].header.map((button, i) => (
                     <div key={i} className='mb-4'>
-                      <Button styles={button.keyword}>
-                        {button.title}
-                      </Button>
+                      {button.isKeywordInverted ? (
+                        <HashLink smooth to='/apis#apiHome'>
+                          <Button styles={button.keyword}>
+                            {button.title}
+                          </Button>
+
+                        </HashLink>
+                      ) : (
+                        <HashLink smooth to='/#data'>
+                          <Button styles={button.keyword}>
+                            {button.title}
+                          </Button>
+                        </HashLink>
+                      )}
+
                     </div>
                   ))
                 ) : (null)}
@@ -204,10 +225,11 @@ function Home() {
           <div className={`d-xs-none ${classes.section__discover__texture}`}>
             <img src={textureCirclesAlt} alt='' />
           </div>
-          <section className={`container ${classes.section__discover}`}>
+          {/* Descubre nuestras APis */}
+          <section className={`container ${classes.section__discover__sc}`}>
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
-                <h1 className='h2 text__primary font-weight-bold mb-8'>
+                <h1 className={`h2 text__primary font-weight-bold ${classes.section__discover__title}`}>
                   {filterDiscoverTitle || 'Descubre nuestras APIs'}
                 </h1>
               </div>
@@ -224,7 +246,7 @@ function Home() {
                 filterDiscover && filterDiscover[0].useCaseList && filterDiscover[0].useCaseList.length > 0 ? (
                   filterDiscover[0].useCaseList.map((card, i) => (
                     <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
-                      <CardBasic chipTitle={card.statusText} title={card.title} description={card.description} info={card.linkText} />
+                      <CardBasic chipTitle={card.statusText} title={card.title} description={card.description} info={card.linkText} route={handleOpenModal} />
                     </div>
                   ))
                 ) : (null)
@@ -232,7 +254,7 @@ function Home() {
             </div>
             <div className='container d-xs-only'>
               <div className='row'>
-                <div className='flex-md-12 flex-sm-12'>
+                <div className='flex-md-12 flex-sm-12 pxs-none'>
                   <Slick slides={filterDiscover[0].useCaseList} />
                 </div>
               </div>
@@ -240,18 +262,18 @@ function Home() {
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
                 <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
-                  <Link to='/apis' className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
+                  <HashLink smooth to='/apis#apiHome' className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
                     <span className='mr-1'>ver todas</span>
                     <Icon id='MdOutlineEast' />
-                  </Link>
-                  <Link to='/apis' className={`d-sm-none ${classes.section__discover__showmore__button}`}>
+                  </HashLink>
+                  <HashLink smooth to='/apis#apiHome' className={`d-sm-none ${classes.section__discover__showmore__button}`}>
                     Ver todas
-                  </Link>
+                  </HashLink>
                 </div>
               </div>
             </div>
           </section>
-
+          {/* Nuestras Experiencias */}
           <section className={classes.section__experiences}>
             <div className='container'>
               <div className={classes.section__experiences__title}>
@@ -279,8 +301,15 @@ function Home() {
                                       <img src={tab.img.length > 0 ? tab.img[0].url : 'https://picsum.photos/505/386'} alt='' />
                                     </div>
                                   </div>
-                                  <div className={classes.section__experiences__content__card}>
+                                  <div className={`d-xs-none ${classes.section__experiences__content__card}`}>
                                     <CardSlider lists={tab.cards.length > 0 ? tab.cards : []} />
+                                  </div>
+                                  <div className='container d-xs-only'>
+                                    <div className='row'>
+                                      <div className='flex-md-12 flex-sm-12'>
+                                        <Slick slides={tab.cards.length > 0 ? tab.cards : []} tabCard={true} footerTabCard={tab.cards[i]} />
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -294,7 +323,7 @@ function Home() {
               </div>
             </div>
           </section>
-
+          {/* Integra */}
           <section id='Banner'>
             <BannerCentered
               title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : 'Integras tus sistemas con las APIs de SURA'}
@@ -302,10 +331,11 @@ function Home() {
               img={filterHomeBannerImage !== '' ? filterHomeBannerImage : 'https://picsum.photos/1920/300'}
               buttonType='primary'
               buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : 'empezar ahora'}
+              redirect={filterHomeBannerNameType}
             />
           </section>
 
-          <section className={classes.section__news}>
+          <section className={`${classes.section__news} ${classes.section__news__content}`}>
             <div className='container'>
               <div className='row'>
                 <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
@@ -320,20 +350,22 @@ function Home() {
             <div className='container'>
               <div className='row'>
                 <div className='flex-md-12 flex-sm-12'>
-                  <Slick slides={slidesNew} />
+                  <Slick slides={slidesNew} setIsOpen={setIsOpen} />
                 </div>
               </div>
             </div>
             <div className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
-                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center'>
-                  <a href='/apis'>Ver todas</a>
+                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
+                  <HashLink smooth to='/apis#apiHome'>
+                    <div>Ver Más</div>
+                  </HashLink>
                 </div>
               </div>
             </div>
           </section>
+          <div id='data' />
         </div>
-
       ) : (
         <SkeletonComponent />
       )}

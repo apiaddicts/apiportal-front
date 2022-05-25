@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { HashLink } from 'react-router-hash-link';
+
 import stylesBlog from '../styles/pages/blog.module.scss';
 import classes from '../styles/pages/home.module.scss';
-// import jsonData from '../data-fake.json';
 
 import BannerStatic from '../components/Banner/BannerStatic';
 import Tabs from '../components/Tabs/Tabs';
@@ -21,43 +22,43 @@ import { getBlogData, getBlogs } from '../redux/actions/blogAction';
 const slidesNew = [
   {
     img: 'https://picsum.photos/id/0/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    title: 'Lorem ipsum',
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
     linkText: 'Conoce más',
   },
   {
     img: 'https://picsum.photos/id/1/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    title: 'Lorem ipsum',
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
     linkText: 'Conoce más',
   },
   {
     img: 'https://picsum.photos/id/1031/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    title: 'Lorem ipsum',
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
     linkText: 'Conoce más',
   },
   {
     img: 'https://picsum.photos/id/1066/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    title: 'Lorem ipsum',
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
     linkText: 'Conoce más',
   },
   {
     img: 'https://picsum.photos/id/1078/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    title: 'Lorem ipsum',
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
     linkText: 'Conoce más',
   },
   {
     img: 'https://picsum.photos/id/1079/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
+    title: 'Lorem ipsum',
+    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
     linkText: 'Conoce más',
   },
 ];
 
-function Blog() {
+function Blog({ setIsOpen }) {
   const { blogs, data } = useSelector((state) => state.blog);
   // eslint-disable-next-line no-unused-vars
   const [resultsSearch, setResultsSearch] = useState([]);
@@ -78,7 +79,6 @@ function Blog() {
   useEffect(() => {
     setValue(formik.values.search);
     setResultsSearch(results);
-    console.log(results);
   }, [formik.values.search]);
 
   useEffect(() => {
@@ -113,6 +113,8 @@ function Blog() {
 
   };
 
+  let cardCounter = 0;
+
   return (
     <div style={{ paddingTop: '114px' }}>
       {blogs.length > 0 && Object.keys(data).length > 0 ? (
@@ -126,13 +128,14 @@ function Blog() {
                   isSearch
                   onChange={formik.handleChange}
                   value={formik.values.search}
+                  css_styles={{ 'custom_padding': 'px-3' }}
                 />
               ) : (null)
             }
           </section>
           {
             resultsSearch.length === 0 && formik.values.search === '' ? (
-              <section className='container'>
+              <section className='container px-3'>
                 <div className='row'>
                   <div className='flex-md-12 flex-sm-12 mt-9'>
                     <Tabs
@@ -155,6 +158,7 @@ function Blog() {
                                   description={tab.cards && tab.cards[0].description}
                                   reading={tab.cards && tab.cards[0].timeRead}
                                   theme='primary'
+                                  css_styles={{ 'override_card_style': 'no__shadow' }}
                                   blog={true}
                                 />
                               </div>
@@ -166,29 +170,37 @@ function Blog() {
                                   resultsData.length === 0 ? (
                                     <span>Sin resultados disponibles</span>
                                   ) : (
-                                    resultsData.map((results, index) => (
-                                      <Link to={`/blog/${results.id}`} key={index}>
-                                        <CardInformation
-                                          img={results.image ? results.image[0].url : ''}
-                                          description={results.description}
-                                          title={results.title}
-                                          buttons={results.tags && results.tags.length > 0 ? results.tags : []}
-                                          theme='primary'
-                                        />
-                                      </Link>
-                                    ))
+                                    resultsData.map((results, index) => {
+                                      cardCounter++;
+                                      return (
+                                        <>
+                                          <Link to={`/blog/${results.id}`} key={index}>
+                                            <CardInformation
+                                              img={results.image ? results.image[0].url : ''}
+                                              description={results.description}
+                                              title={results.title}
+                                              buttons={results.tags && results.tags.length > 0 ? results.tags : []}
+                                              css_styles={{ 'override_card_height': 'custom_card__height' }}
+                                              theme='primary'
+                                              info='Conoce más'
+                                              blogTitle={true}
+                                            />
+                                          </Link>
+                                          {cardCounter === 3 && <Contact pathname='/blog' css_styles={{ 'display_contact': 'd-xs-only' }} /> }
+                                        </>
+                                      );
+                                    })
                                   )
                                 }
                               </div>
                               <div id='Suggestions' className={`d-xs-none ${stylesBlog.apis__library__suggestions}`}>
                                 <div className={stylesBlog.apis__library__suggestions__content}>
-                                  <h1 className={stylesBlog.apis__library__suggestions__content__title}>Lo más reciente</h1>
+                                  <h1 className={`${stylesBlog.apis__library__suggestions__content__title} fs__16 text-uppercase text__gray__gray_darken`}>Lo más reciente</h1>
                                   <Novedades />
+                                  <Contact pathname='/blog' />
                                 </div>
                               </div>
-                              <div id='Contact' className={stylesBlog.apis__library__contact}>
-                                <Contact />
-                              </div>
+
                               <div id='Footer' className={stylesBlog.apis__library__footer}>
                                 <div className={stylesBlog.section__result__content__pagination}>
                                   <div
@@ -235,6 +247,7 @@ function Blog() {
                   {resultsSearch.length === 0 ? (
                     <p>Sin Resltados</p>
                   ) : (
+
                     resultsSearch.map((results, index) => (
                       <Link to={`/blog/${results.id}`} key={index}>
                         <CardInformation
@@ -242,44 +255,87 @@ function Blog() {
                           description={results.description}
                           title={results.title}
                           buttons={results.tags && results.tags.length > 0 ? results.tags : []}
+                          css_styles={{ 'override_card_height': 'custom_card__height' }}
+                          theme='primary'
+                          info='Conoce más'
+                          blogTitle={true}
                         />
                       </Link>
                     ))
                   )}
                 </div>
+                <br />
+                {resultsSearch.length === 0 ? (null) : (
+                  <div id='Footer' className={stylesBlog.apis__library__footer}>
+                    <div className={stylesBlog.section__result__content__pagination}>
+                      <div
+                        className={
+                          stylesBlog.section__result__content__pagination__buttons__before
+                        }
+                      >
+                        <Icon id='MdNavigateBefore' />
+                        <p>Anterior</p>
+                      </div>
+                      <div className={stylesBlog.section__result__content__pagination__number}>
+                        <p>01</p>
+                        <p>02</p>
+                        <p>...</p>
+                        <p>10</p>
+                      </div>
+                      <div
+                        className={
+                          stylesBlog.section__result__content__pagination__buttons__next
+                        }
+                      >
+                        <p>Siguente</p>
+                        <Icon id='MdNavigateNext' />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </section>
             )
 
           }
-          <section className={classes.section__news}>
-            <div className='container'>
-              <div className='row'>
-                <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
-                  <h1 className='h2 text__primary'>También te puede interesar</h1>
-                </div>
+          {
+            resultsSearch.length === 0 ? (
+              <section style={{ marginTop: '-50px' }} className={`${classes.section__news} ${classes.section__news_toppadding} d-xs-none`}>
+                <div className='container'>
+                  <div className='row'>
+                    <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
+                      <h1 className='h2 text__primary'>También te puede interesar</h1>
+                    </div>
 
-                <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
-                  <p className='body-1 text__gray__gray_darken'>
-                    Conoce todas las novedades sobre tecnología, APIs y transformación digital
-                  </p>
+                    <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
+                      <p className='body-1 text__gray__gray_darken'>
+                        Conoce todas las novedades sobre tecnología, APIs y transformación digital
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className='container'>
-              <div className='row'>
-                <div className='flex-md-12 flex-sm-12'>
-                  <Slick slides={slidesNew} />
+                <div className='container'>
+                  <div className='row'>
+                    <div className='flex-md-12 flex-sm-12'>
+                      <Slick slides={slidesNew} setIsOpen={setIsOpen} />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className={`container ${classes.section__news__showmore}`}>
-              <div className='row justify-center'>
-                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center'>
-                  <a href=''>Ver más</a>
+                <div className={`container ${classes.section__news__showmore}`}>
+                  <div className='row justify-center'>
+                    <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center'>
+                      <HashLink smooth to='/apis#apiHome'>
+                        <div>Ver más</div>
+                      </HashLink>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-          </section>
+              </section>
+            ) : (
+              <section>
+                <Contact css_styles={{ 'display_detail_description': 'd-block', 'border_radius': 'no_border__radius' }} />
+              </section>
+            )
+          }
         </div>
       ) : (
         <SkeletonComponent />

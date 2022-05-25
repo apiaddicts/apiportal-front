@@ -16,9 +16,19 @@
     }
     .email {
       grid-area: email;
+      @include breakpoint(xs) {
+        h1, p {
+          font-size: 16px !important;
+        }
+      }
     }
     .policies {
       grid-area: policies;
+      @include breakpoint(xs) {
+        h1, p {
+          font-size: 16px !important;
+        }
+      }
     }
 
     .email,
@@ -49,9 +59,11 @@
     @include breakpoint(xs) {
       grid-template-columns: 1fr;
       grid-template-areas: "logo" "email" "policies";
-      gap: 1rem;
-      padding-top: 3rem;
+      gap: 2rem;
+      padding-top: 4rem;
+      padding-bottom: 2rem;
       align-content: center;
+      text-align: center;
       .logo {
         margin-left: auto;
         margin-right: auto;
@@ -81,13 +93,15 @@
     @include breakpoint(xs) {
       grid-template-columns: 1fr;
       grid-template-areas: "icons" "copyright";
-      gap: 1rem;
-      padding-top: 1rem;
+      gap: 2rem;
+      padding-top: 2rem;
       &__copyright {
         text-align: center;
       }
       &__icons {
         justify-content: space-around;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #e6e7ee;
       }
     }
   }
@@ -164,8 +178,8 @@
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.12), 0px 6px 6px rgba(0, 0, 0, 0.24);
     font-size: 34px;
     color: $secondary_white;
-    height: 72px;
-    width: 72px;
+    height: 100px;
+    width: 100px;
     cursor: pointer;
     display: flex;
     justify-content: center;

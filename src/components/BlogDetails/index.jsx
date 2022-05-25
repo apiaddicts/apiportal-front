@@ -1,23 +1,32 @@
 import React from 'react';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaTelegramPlane } from 'react-icons/fa';
 import moment from 'moment';
+import 'moment/locale/es';
 import Chip from '../Chip/Chip';
 
 moment.locale('es');
 
 function BlogDetailsInfo({ styles, data }) {
+  const styleChip = {
+    color: '#0033A0',
+    fontWeight: 500,
+    fontSize: '14px',
+    lineHeight: '16px',
+    textTransform: 'capitalize',
+  };
+
   return (
     <>
       <div className={styles.blog__details__header}>
         <div className={styles.blog__details__header__content}>
           <div className={styles.blog__details__header__title}>
             <p>{data.timeRead ? data.timeRead : 'Lectura de 5 min.'}</p>
-            <p>{data.created_at ? moment(data.created_at, moment.HTML5_FMT.DATETIME_LOCAL).format('L') : '16 febrero del 2022'}</p>
+            <p>{data.created_at ? moment(data.created_at).format('LL') : '16 febrero del 2022'}</p>
           </div>
           <div className={styles.blog__details__header__tags}>
             {data.tags.length > 0 ? data.tags.map((tag, index) => (
               <span key={index} className={styles.blog__details__tag}>
-                <Chip title={tag.title} className='gray' />
+                <Chip title={tag.title} className='gray' styleChip={styleChip} />
               </span>
             )) : (null)}
           </div>
@@ -31,10 +40,10 @@ function BlogDetailsInfo({ styles, data }) {
               <FaFacebookF />
             </div>
             <div className={styles.blog__details__social__icon__content}>
-              <FaTwitter />
+              <FaLinkedinIn />
             </div>
             <div className={styles.blog__details__social__icon__content}>
-              <FaLinkedinIn />
+              <FaTwitter />
             </div>
             <div className={styles.blog__details__social__icon__content}>
               <FaTelegramPlane />
@@ -42,7 +51,7 @@ function BlogDetailsInfo({ styles, data }) {
           </div>
         </div>
       </div>
-
+      {/* TODO: Change all section with only Markdown that receives from Strapi */}
       {data.questions.length > 0 ? data.questions.map((question, i) => (
         question.seccion === 'Normal' ? (
           <div key={i} className={styles.blog__details}>
@@ -74,34 +83,19 @@ function BlogDetailsInfo({ styles, data }) {
             <p className={styles.blog__details__title__text}>
               {question.description ? question.description : ''}
             </p>
+            <p className={styles.blog__details__ul__list}>
+              <ul>
+                <li>In egestas blandit felis id porttitor. </li>
+                <li>Felis id porttitor.</li>
+                <li>Luctus posuere lacus.</li>
+                <li>Proin eros elit, aliquet nec magna ornare</li>
+              </ul>
+            </p>
           </div>
         )
       )) : (null)}
 
       <div className={styles.blog__details__list__content}>
-        {/* <ul>
-          <li className={styles.blog__details__list__content__items}>
-            <p className={styles.blog__details__list__item__title}>
-              <span className={styles.blog__details__list__item__title__text}>
-                Lorem ipsum dolor sit amet.
-              </span>
-            </p>
-          </li>
-          <li className={styles.blog__details__list__content__items}>
-            <p className={styles.blog__details__list__item__title}>
-              <span className={styles.blog__details__list__item__title__text}>
-                Lorem ipsum dolor sit amet.
-              </span>
-            </p>
-          </li>
-          <li className={styles.blog__details__list__content__items}>
-            <p className={styles.blog__details__list__item__title}>
-              <span className={styles.blog__details__list__item__title__text}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </span>
-            </p>
-          </li>
-        </ul> */}
         <div className={styles.blog__details__social__content}>
           <p>COMPARTIR:</p>
           <div className={styles.blog__details__social__icons}>
@@ -109,10 +103,10 @@ function BlogDetailsInfo({ styles, data }) {
               <FaFacebookF />
             </div>
             <div className={styles.blog__details__social__icon__content}>
-              <FaTwitter />
+              <FaLinkedinIn />
             </div>
             <div className={styles.blog__details__social__icon__content}>
-              <FaLinkedinIn />
+              <FaTwitter />
             </div>
             <div className={styles.blog__details__social__icon__content}>
               <FaTelegramPlane />

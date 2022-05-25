@@ -9,7 +9,7 @@ import Item from '../components/Item/Item';
 import Tabs from '../components/Tabs/Tabs';
 import classes from '../styles/pages/home.module.scss';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
-import textureCircles from '../static/img/texture_circles.svg';
+// import textureCircles from '../static/img/texture_circles.svg';
 import codeSnipet from '../static/img/code-snippet.png';
 import BannerImage from '../components/Banner/BannerImage';
 import Slick from '../components/SlickSlider/Slick';
@@ -100,7 +100,7 @@ function ApiDetails({ setIsOpen }) {
     },
     {
       label: 'Documentación',
-      class: 'ghost-variant',
+      class: 'btn-tertiary-white',
     },
   ];
 
@@ -114,16 +114,13 @@ function ApiDetails({ setIsOpen }) {
               img={library.image.length > 0 && library.image.length === 1 ? library.image[0].url : ''}
               buttons={buttonsLbls}
               setIsOpen={setIsOpen}
+              css_styles={{ 'image_display': 'banner_custom__img--dnone', 'apiindividual_height': 'banner_apiindividual__layout--height', 'custom_line_height': 'line-height-1' }}
               redirect='/apis'
               description='In egestas blandit felis id porttitor. Mauris vel nibh ex. Integer iaculis placerat nunc, in ultricies nunc dignissim eu. '
             />
           </section>
-          <section className={`container ${classes.section__content} pb-9`}>
-            <div className={classes.section__content__texture}>
-              <img src={textureCircles} alt='Texture' />
-            </div>
-          </section>
-          <section className='container mb-18'>
+          <section className={`container ${classes.section__content} pb-9`}>&nbsp;</section>
+          <section className='container mb-15'>
             <div className='row'>
               <div className={`flex-md-12 flex-sm-12 -ml-23 ${classes.section__content__title}`}>
                 <h1 className='h2 text__primary font-weight-bold mb-10 -ml-23 text-center-sm'>
@@ -145,7 +142,7 @@ function ApiDetails({ setIsOpen }) {
                             key={i}
                             title={item.title}
                             icon={item.number}
-                            titleStyles={{ fontSize: '19px', fontWeight: '600' }}
+                            titleStyles={{ fontSize: '18px', fontWeight: '500', color: '#53565A' }}
                             iconStyle={{ width: '50px', height: '50px' }}
                           />
                         </div>
@@ -198,6 +195,9 @@ function ApiDetails({ setIsOpen }) {
                 ) : (null)}
               </div>
             </div>
+          </section>
+          <section className={`${classes.section__content__texture} d-xs-none`}>
+            <div className={classes.texture__image}> </div>
           </section>
           <section className={`container ${classes.section__discover}`}>
             <div className='row'>
@@ -274,8 +274,8 @@ function ApiDetails({ setIsOpen }) {
             </div>
             <div className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
-                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
-                  <a href=''>Ver más</a>
+                <div className={`flex-lg-2 flex-md-6 flex-sm-12 text-center ${classes.custom_top}`}>
+                  <a href='' className='text__secondary'>Ver más</a>
                 </div>
               </div>
             </div>
