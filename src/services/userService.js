@@ -105,7 +105,7 @@ function updateUser(data) {
 function signUp(data) {
   const requestOptions = {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json', 'Accept': '*/*', 'Authorization': `${config.hmacAuthHeader}` },
+    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `${config.hmacAuthHeader}` },
     body: JSON.stringify(data),
   };
   const uuid = crypto.randomUUID();
