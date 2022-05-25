@@ -20,10 +20,9 @@ function CreateAccount() {
         email: values.email,
         firstName: values.first_name,
         lastName: values.last_name,
-        appType: 'portal',
+        appType: 'developerPortal',
         confirmation: 'signup',
         password: values.password,
-        notify: true,
       },
     };
 
