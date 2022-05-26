@@ -1,40 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-// import { MenuItem } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container } from '@mui/material';
 
 import TextField from '../../components/common/InputMUI';
-// import { adminFields } from './adminField';
 import useFormUserConfig from '../../hooks/useFormUser';
 import classes from './style.module.scss';
-// import TextAreaUI from '../../components/common/TextAreaUI';
-// import InptSelectUI from '../../components/common/InputMUI/InptSelectUI';
 import TypographyUI from '../../components/common/TypographyMUI';
-// import Icon from '../../components/MdIcon/Icon';
 import Button from '../../components/Buttons/Button';
 import Title from '../../components/Title/Title';
 import { updateUser } from '../../redux/actions/userAction';
 import Suscriptions from './containers/Suscriptions';
-
-// const cargo = [
-//   {
-//     value: 'ceo',
-//     label: 'CEO',
-//   },
-//   {
-//     value: 'cfo',
-//     label: 'CFO',
-//   },
-//   {
-//     value: 'cto',
-//     label: 'CTO',
-//   },
-//   {
-//     value: 'cmo',
-//     label: 'CMO',
-//   },
-// ];
 
 function Admin() {
   const { user, loadingUser } = useSelector((state) => state.user);
@@ -48,6 +24,7 @@ function Admin() {
         lastName: values.last_name,
       },
     };
+    console.log('data', data);
     dispatch(updateUser(data));
   };
 
