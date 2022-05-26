@@ -1096,6 +1096,28 @@ a {
   &__26 { font-size: 26px !important; }
   &__28 { font-size: 28px !important; }
   &__30 { font-size: 30px !important; }
+  &__32 { font-size: 32px !important; }
+  &__34 { font-size: 34px !important; }
+  &__36 { font-size: 36px !important; }
+}
+
+.ls{
+  &_05{ letter-spacing: 0.5; }
+  &_1{ letter-spacing: 1; }
+  &_1_5{ letter-spacing: 1.5; }
+}
+
+.justify_content{
+  &__start{ justify-content: flex-start; }
+  &__center{ justify-content: center; }
+  &__end{ justify-content: flex-end; }
+  &__between{ justify-content: space-between; }
+}
+
+.align_items{
+  &__center{ align-items: center; }
+  &__top{ align-items: flex-start; }
+  &__bottom{ align-items: flex-end; }
 }
 
 .MuiButtonGroup-root{

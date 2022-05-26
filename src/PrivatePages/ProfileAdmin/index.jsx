@@ -2,6 +2,7 @@
 import React from 'react';
 // import { MenuItem } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
+import { Container } from '@mui/material';
 
 import TextField from '../../components/common/InputMUI';
 // import { adminFields } from './adminField';
@@ -14,6 +15,7 @@ import TypographyUI from '../../components/common/TypographyMUI';
 import Button from '../../components/Buttons/Button';
 import Title from '../../components/Title/Title';
 import { updateUser } from '../../redux/actions/userAction';
+import Suscriptions from './containers/Suscriptions';
 
 // const cargo = [
 //   {
@@ -86,93 +88,48 @@ function Admin() {
 
   const formConfig = useFormUserConfig(labelsUser, handleSubmit);
   return (
-    <div className={classes.main__admin}>
-      {user && Object.keys(user).length > 0 && loadingUser === false ? (
-        <div className={classes.admin}>
-          <div className='w-full my-9'>
-            <Title text='Mi perfil' />
-          </div>
-          <form onSubmit={formConfig.handleSubmit}>
-            <div className={classes.admin__form}>
-              <div className={classes.admin__form__container}>
-                <div className={classes.admin__form__container__header}>
-                  <TypographyUI title='Datos personales' />
-                  {/* <label htmlFor='contained-button-file'>
-                  <div className={classes.admin__form__container__header__avatar}>
-                    <Input
-                      name='avatar'
-                      accept='image/*'
-                      type='file'
-                      id='contained-button-file'
-                      className={classes.admin__form__container__header__avatar__input}
-                      onChange={formConfig.handleChange}
-                    />
-                    <Avatar
-                      alt='Remy Sharp'
-                      src='https://api.lorem.space/image/face?w=150&h=150'
-                      sx={{ width: 74, height: 74 }}
-                    />
-                    <div className={classes.admin__form__container__header__avatar__icon}>
-                      <Icon id='MdOutlineCameraAlt' />
+    <div className='w-full'>
+      <Container fixed className='my-10 py-10'>
+        <div className={classes.main__admin}>
+          {user && Object.keys(user).length > 0 && loadingUser === false ? (
+            <div className={classes.admin}>
+              <div className='w-full my-9'>
+                <Title text='Mi perfil' />
+              </div>
+              <form onSubmit={formConfig.handleSubmit} className={classes.admin__form}>
+                <div className={classes.admin__form__container}>
+                  <div className={classes.admin__form__container__header}>
+                    <TypographyUI title='Datos personales' />
+                    <div className='fs__16 text__gray__gray_darken ls_05'>
+                      <span className='text-uppercase font-weight-semi-bold'>Fecha de registro:</span>
+                      <span className='fs'>12/05/2022</span>
                     </div>
                   </div>
-                </label> */}
-                </div>
-                <div className='row'>
-                  {labelsUser.map((field, i) => (
+                  <div className='row'>
+                    {labelsUser.map((field, i) => (
+                      <div className='flex-lg-6 flex-sm-12'>
+                        <TextField key={i} field={field} formik={formConfig} />
+                      </div>
+                    ))}
+                  </div>
+                  <div className='row align_items__center mt-4 justify_content__between'>
                     <div className='flex-lg-6 flex-sm-12'>
-                      <TextField key={i} field={field} formik={formConfig} />
+                      <div className='fs__16 text__primary ls_05 text-uppercase font-weight-bold'>Restablecer password</div>
                     </div>
-                  ))}
-                  {/* <div className='w-full'>
-                  <div className='flex-lg-6 flex-sm-12'>
-                    <InptSelectUI
-                      fullWidth
-                      select
-                      label='Cargo'
-                      value={cargoOrg}
-                      onChange={handleChange}
-                    >
-                      {cargo.map((option, index) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                    </InptSelectUI>
+                    <div className='flex-lg-3 flex-sm-12'>
+                      <Button type='submit' styles='primary'>
+                        Guardar
+                      </Button>
+                    </div>
                   </div>
-                </div> */}
                 </div>
-              </div>
-              {/* <div className={classes.admin__form__container}>
-              <TypographyUI title='Datos Organización' />
-              <div className='row'>
-                {adminFieldsOrg.map((field) => (
-                  <div className={`${field.id === 'nom_comercial' ? 'flex-lg-12 flex-sm-12' : 'flex-lg-6 flex-sm-12'}`}>
-                    <TextField key={field.id} field={field} formik={formConfig} />
-                  </div>
-                ))}
-                <div className='flex-lg-12 flex-sm-12'>
-                  <TextAreaUI
-                    minRows={3}
-                    placeholder='Descripción'
-                  />
-                </div>
-              </div>
-            </div> */}
+              </form>
             </div>
-            <div className={classes.admin__form__container__button}>
-              <div className='row'>
-                <div className='flex-lg-3 flex-sm-12'>
-                  <Button type='submit' styles='primary'>
-                    Guardar
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      ) : (null)}
+          ) : (null)}
 
+        </div>
+      </Container>
+      <Suscriptions />
     </div>
   );
 }
