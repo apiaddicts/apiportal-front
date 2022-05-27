@@ -2,8 +2,8 @@ trigger:
   branches:
     include:
       - develop
-      - main
-      - pre
+      #  - main
+      #  - pre
 
 pool:
   name: Azure Pipelines
