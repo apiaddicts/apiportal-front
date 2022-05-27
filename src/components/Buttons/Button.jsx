@@ -14,6 +14,8 @@ function Button({ children, styles, opacity, size = 'regular', preIcon, ...rest 
       return { height: '32px', opacity };
     } if (height === 'large') {
       return { height: '50px', opacity };
+    } if (height === 'responsive') {
+      return { height: '100%', opacity };
     }
   };
 
@@ -26,8 +28,8 @@ function Button({ children, styles, opacity, size = 'regular', preIcon, ...rest 
               styles === 'secundary-white' ? 'btn btn-secundary-white' :
                 styles === 'tertiary-white' ? 'btn btn-tertiary-white' :
                   styles === 'ghost' ? 'btn btn-ghost' :
-                    styles === 'ghost-variant' ?
-                      'btn btn-ghost-variant' : 'btn-none'
+                    styles === 'ghost-variant' ? 'btn btn-ghost-variant' :
+                      styles === 'greey-primary' ? 'btn btn-grey' : 'btn-none'
       }
       style={btnStyled(size, opacity)}
       {...rest}

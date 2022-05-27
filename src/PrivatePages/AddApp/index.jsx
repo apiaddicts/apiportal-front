@@ -100,7 +100,7 @@ function AddApp(props) {
                   <Btn styles='primary' onClick={handleComplete}>
                     {completedSteps() === totalSteps() - 1 ?
                       'Finish' :
-                      'Siguinte'}
+                      'Siguiente'}
                   </Btn>
                 ))}
             </div>

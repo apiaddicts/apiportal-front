@@ -7,6 +7,7 @@ import faqReducer from './reducer/faqReducer';
 import blogReducer from './reducer/blogReducer';
 import libraryReducer from './reducer/libraryReducer';
 import userReducer from './reducer/userReducer';
+import productReducer from './reducer/productReducer';
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
@@ -16,6 +17,7 @@ const reducers = combineReducers({
   blog: blogReducer,
   library: libraryReducer,
   user: userReducer,
+  products: productReducer,
 });
 
 const store = createStore(
