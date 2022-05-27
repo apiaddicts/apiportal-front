@@ -81,7 +81,7 @@ function Slider({ slides }) {
                     <div className='divider mb-4' />
                   </div>
 
-                  <div className='flex-md-6 flex-sm-12'>
+                  <div className='flex-md-6 flex-lg-8 flex-xl-6 flex-sm-12'>
                     <h1 className='h1 text__secondary__white'>{x.title}</h1>
                   </div>
 

@@ -37,7 +37,6 @@ function Faqs(props) {
       questions: arrQa,
     };
   }) : [];
-
   return (
     <div style={{ paddingTop: '114px' }}>
       {Object.keys(dataFaq).length > 0 ? (
@@ -58,7 +57,7 @@ function Faqs(props) {
                     return (
                       <div key={i}>
                         <h1 className='h3 text__primary mb-5 mt-5'>{item.question}</h1>
-                        <Accordion items={item.data} arrItems={faqs} subItem={subItem} setSubItem={setSubItem} clicked={clicked} setClicked={setClicked} label={item.question} />
+                        <Accordion items={item.data} arrItems={faqs} subItem={subItem} setSubItem={setSubItem} clicked={clicked} setClicked={setClicked} />
                       </div>
                     );
                   })

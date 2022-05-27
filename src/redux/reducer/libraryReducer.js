@@ -12,6 +12,11 @@ const initialState = {
   errorLibrary: {},
   loadingLibrary: false,
   sort: 'asc',
+  apis: {},
+  errorApis: {},
+  api: {},
+  errorApi: {},
+
 };
 
 // eslint-disable-next-line default-param-last
@@ -68,6 +73,30 @@ export default function libraryReducer(state = initialState, action) {
         library: {},
         filters: {},
         libraries: [],
+      };
+    case libraryConstants.GET_APIS_SUCCESS:
+      return {
+        ...state,
+        apis: action.payload,
+        errorApis: {},
+      };
+    case libraryConstants.GET_APIS_FAILURE:
+      return {
+        ...state,
+        apis: {},
+        errorApis: action.payload,
+      };
+    case libraryConstants.GET_API_SUCCESS:
+      return {
+        ...state,
+        api: action.payload,
+        errorApi: {},
+      };
+    case libraryConstants.GET_API_FAILURE:
+      return {
+        ...state,
+        api: {},
+        errorApi: action.payload,
       };
     default:
       return state;

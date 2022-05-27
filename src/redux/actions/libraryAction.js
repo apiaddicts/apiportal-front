@@ -41,6 +41,40 @@ export const getLibrary = (id) => (dispatch) => {
   );
 };
 
+export const listApis = () => (dispatch) => {
+  libraryService.getApis().then(
+    (res) => {
+      dispatch({
+        type: libraryConstants.GET_APIS_SUCCESS,
+        payload: res,
+      });
+    },
+    (error) => {
+      dispatch({
+        type: libraryConstants.GET_APIS_FAILURE,
+        payload: error,
+      });
+    },
+  );
+};
+
+export const getApi = (id) => (dispatch) => {
+  libraryService.getAPi(id).then(
+    (res) => {
+      dispatch({
+        type: libraryConstants.GET_API_SUCCESS,
+        payload: res,
+      });
+    },
+    (error) => {
+      dispatch({
+        type: libraryConstants.GET_API_FAILURE,
+        payload: error,
+      });
+    },
+  );
+};
+
 const sortCollection = (data, sort) => {
   return (sort === 'asc') ? data.sort((a, b) => {
     const fa = a.title.toLowerCase(),
@@ -131,3 +165,4 @@ export const resetGetLibrary = () => (dispatch) => {
     type: libraryConstants.RESET_LIBRARY,
   });
 };
+

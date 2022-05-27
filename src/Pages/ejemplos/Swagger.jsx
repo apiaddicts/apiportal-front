@@ -9,7 +9,8 @@ function Swagger() {
       <SwaggerUI
         // url='https://petstore.swagger.io/v2/swagger.json'
         // url='https://raw.githubusercontent.com/ErikWittern/openapi-snippet/main/test/petstore_oas.json'
-        url='https://api.apis.guru/v2/specs/instagram.com/1.0.0/swagger.yaml'
+        // url='https://api.apis.guru/v2/specs/instagram.com/1.0.0/swagger.yaml'
+        url='https://petstore.swagger.io/v2/swagger.json'
       />
     </div>
   );
