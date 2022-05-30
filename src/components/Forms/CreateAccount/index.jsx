@@ -6,7 +6,6 @@ import Input from '../../Input';
 import useFormConfig from '../../../hooks/useForm';
 import Button from '../../Buttons/Button';
 import { fieldsRegister } from '../fields';
-
 import { signUp } from '../../../redux/actions/userAction';
 
 import './index.scss';
@@ -43,7 +42,7 @@ function CreateAccount() {
       ))}
       {/* checkbox */}
       <div className='container create-account__checkbox'>
-        <input type='checkbox' id='checkbox' />
+        <input type='checkbox' id='terms' name='terms' />
         <span>
           Acepto recibir correos de acuerdo con los siguientes
           {' '}

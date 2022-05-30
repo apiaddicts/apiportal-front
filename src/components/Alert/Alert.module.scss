@@ -1,0 +1,47 @@
+@import "./../../styles/mixins/mixin.scss";
+
+$alert-danger: #F03738;
+$alert-success: #3B7302;
+$alert-info: #040DBF;
+
+.wrapper_alert{ width: 100%; }
+.alert__danger,
+.alert__success,
+.alert__info{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  .icon{ 
+    width: 5%;
+    font-size: 20px; 
+  }
+  .message{ 
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+  }
+  .close{ 
+    width: 5%;
+    color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+}
+
+.alert__danger{
+  border: 1px solid $alert-danger;
+  @include background-opacity($alert-danger, 0.2);
+  .icon{ color: $alert-danger; }
+}
+
+.alert__success{
+  border: 1px solid $alert-success;
+  @include background-opacity($alert-success, 0.2);
+  .icon{ color: $alert-success; }
+}
+
+.alert__info{
+  border: 1px solid $alert-info;
+  @include background-opacity($alert-info, 0.2);
+  .icon{ color: $alert-info; }
+}

@@ -10,7 +10,7 @@ import Title from '../components/Title/Title';
 import SearchInput from '../components/Input/SearchInput';
 import InputSelect from '../components/Input/InputSelect';
 import CardInformation from '../components/Card/CardInformation';
-import { filterCheck, sortApiCollection, listApis } from '../redux/actions/libraryAction';
+import { sortApiCollection, listApis } from '../redux/actions/libraryAction';
 
 function AppLibrary(props) {
 
@@ -19,18 +19,12 @@ function AppLibrary(props) {
   const dispatch = useDispatch();
 
   const handleChangeSearchFilter = (text) => {
-    dispatch(filterCheck(text, null, 'search'));
+    console.log(text);
   };
 
   const handleSort = (sort) => {
     dispatch(sortApiCollection(sort));
   };
-
-  // useEffect(() => {
-  //   if (libraries && libraries.length === 0 && Object.keys(filters).length === 0) {
-  //     dispatch(getLibraries());
-  //   }
-  // }, [libraries]);
 
   useEffect(() => {
     if (apis && Object.keys(apis).length === 0) {
@@ -51,7 +45,7 @@ function AppLibrary(props) {
   }) : [];
 
   return (
-    <Container fixed className='my-10 py-10'>
+    <Container fixed className='py-10 table-left'>
       <Title className='mb-18' text='Biblioteca de Apis' />
       <Grid style={{ marginTop: '20px' }} container spacing={10}>
         <Grid item xs={8}>

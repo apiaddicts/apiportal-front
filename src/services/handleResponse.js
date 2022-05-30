@@ -1,3 +1,5 @@
+import { logout } from '../redux/actions/userAction';
+
 const statusCode = {
   HTTP_200_OK: 200,
   HTTP_201_CREATED: 201,
@@ -31,6 +33,8 @@ const statusCode = {
 
 function handleResponse(response) {
 
+  // const dispatch = useDispatch();
+
   return response.text().then((text) => {
     const data = text && JSON.parse(text);
     switch (response.status) {
@@ -43,7 +47,9 @@ function handleResponse(response) {
       case statusCode.HTTP_304_NOT_MODIFIED:
         return 'Not_Modified';
       case statusCode.HTTP_401_UNAUTHORIZED:
-        return {};
+        return (dispatch) => {
+          dispatch(logout());
+        };
       default:
         return Promise.reject(data);
     }
