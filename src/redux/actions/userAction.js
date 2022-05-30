@@ -29,7 +29,7 @@ export const logout = () => (dispatch) => {
 };
 
 export const signUp = (data) => (dispatch) => {
-  dispatch({ type: userConstants.SIGNUP_REQUEST });
+  // dispatch({ type: userConstants.SIGNUP_REQUEST });
   userService.signUp(data).then(
     (response) => {
       dispatch({
@@ -39,6 +39,10 @@ export const signUp = (data) => (dispatch) => {
     },
     (error) => {
       console.log(error);
+      dispatch({
+        type: userConstants.SIGNUP_FAILURE,
+        error,
+      });
     },
   );
 };
@@ -96,3 +100,23 @@ export const updateUser = (data) => (dispatch) => {
     },
   );
 };
+// export const resetPassword = (data) => (dispatch) => {
+//   userService.resetPassword(data).then(
+//     (response) => {
+//       if (response && Object.keys(response).length > 0) {
+
+//       }
+//       // if (Object.keys(response).length > 0) {
+//       //   const { id, token } = store.getState().user;
+//       //   const tokens = {
+//       //     token,
+//       //     id,
+//       //   };
+//       //   dispatch(getUser(tokens));
+//       }
+//     },
+//     (error) => {
+//       console.log(error);
+//     },
+//   );
+// };

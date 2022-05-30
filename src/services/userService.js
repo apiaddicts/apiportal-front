@@ -122,6 +122,25 @@ function signUp(data) {
     });
 }
 
+// function resetPassword(data) {
+//   const requestOptions = {
+//     method: 'POST',
+//     headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `${config.hmacAuthHeader}` },
+//     body: JSON.stringify(data),
+//   };
+//   const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
+//   const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
+//   const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
+//   const url = `${urlService}/confirmations/password?api-version=${config.apiVersion}`;
+//   return fetch(
+//     url,
+//     requestOptions,
+//   ).then(handleResponse)
+//     .then((response) => {
+//       return response;
+//     });
+// }
+
 const userService = {
   login,
   getUserDetails,
@@ -129,6 +148,7 @@ const userService = {
   getUserEntityTag,
   signUp,
   updateUser,
+  // resetPassword,
 };
 
 export default userService;

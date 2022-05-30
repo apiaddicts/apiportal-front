@@ -515,7 +515,7 @@ a {
   margin-bottom: 0.25rem;
 }
 .mb-2 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.5rem !important;
 }
 .mb-3 {
   margin-bottom: 0.75rem;
@@ -1107,6 +1107,9 @@ a {
   &_1_5{ letter-spacing: 1.5; }
 }
 
+.display_flex{
+  display: flex;
+}
 .justify_content{
   &__start{ justify-content: flex-start; }
   &__center{ justify-content: center; }
@@ -1149,8 +1152,15 @@ a {
 .mr-auto{
   margin-right: auto !important;
 }
+.ml-auto{
+  margin-left: auto !important;
+}
 
 .table-left {
     margin-left: 5% !important;
     margin-top: 87px !important;
+}
+
+.cpointer{
+  cursor: pointer;
 }

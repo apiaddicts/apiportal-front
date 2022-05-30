@@ -1,19 +1,20 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container } from '@mui/material';
 
 import TextField from '../../components/common/InputMUI';
 import useFormUserConfig from '../../hooks/useFormUser';
 import classes from './style.module.scss';
-import TypographyUI from '../../components/common/TypographyMUI';
 import Button from '../../components/Buttons/Button';
 import Title from '../../components/Title/Title';
 import { updateUser } from '../../redux/actions/userAction';
 import Suscriptions from './containers/Suscriptions';
+import RestorePassword from './containers/RestorePassword';
 
 function Admin() {
   const { user, loadingUser } = useSelector((state) => state.user);
+  const [displayResetPassword, setDisplayResetPassword] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -24,10 +25,19 @@ function Admin() {
         lastName: values.last_name,
       },
     };
-    console.log('data', data);
     dispatch(updateUser(data));
   };
-
+  const resetPassword = () => {
+    setDisplayResetPassword(!displayResetPassword);
+    console.log('display password form', displayResetPassword);
+    // const data = {
+    //   properties: {
+    //     to: user?.properties?.email,
+    //     apptype: 'developerPortal',
+    //   },
+    // };
+    // console.log('resetPassword', data);
+  };
   const name = user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? user.properties.firstName : '';
   const lastName = user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? user.properties.lastName : '';
   const email = user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? user.properties.email : '';
@@ -76,7 +86,7 @@ function Admin() {
               <form onSubmit={formConfig.handleSubmit} className={classes.admin__form}>
                 <div className={classes.admin__form__container}>
                   <div className={classes.admin__form__container__header}>
-                    <TypographyUI title='Datos personales' />
+                    <div className='font-fs-joey fs__36 font-weight-bold text__primary'>Datos personales</div>
                     <div className='fs__16 text__gray__gray_darken ls_05'>
                       <span className='text-uppercase font-weight-semi-bold'>Fecha de registro:</span>
                       <span className='fs'>12/05/2022</span>
@@ -91,14 +101,25 @@ function Admin() {
                   </div>
                   <div className='row align_items__center mt-4 justify_content__between'>
                     <div className='flex-lg-6 flex-sm-12'>
-                      <div className='fs__16 text__primary ls_05 text-uppercase font-weight-bold'>Restablecer password</div>
+                      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+                      <div
+                        className='fs__16 text__gray__gray_darken ls_05 text-uppercase font-weight-bold ml-3 cpointer'
+                        onClick={resetPassword}
+                      >
+                        Restablecer password
+                      </div>
                     </div>
-                    <div className='flex-lg-3 flex-sm-12'>
-                      <Button type='submit' styles='primary'>
-                        Guardar
-                      </Button>
-                    </div>
+                    {
+                      !displayResetPassword && (
+                        <div className='flex-lg-3 flex-sm-12'>
+                          <Button type='submit' styles='primary'>
+                            Guardar
+                          </Button>
+                        </div>
+                      )
+                    }
                   </div>
+                  <RestorePassword display={displayResetPassword} />
                 </div>
               </form>
             </div>
