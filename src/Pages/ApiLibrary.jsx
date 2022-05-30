@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,21 +10,29 @@ import { Container, Grid } from '@mui/material';
 import Multiselect from 'multiselect-react-dropdown';
 import Title from '../components/Title/Title';
 import SearchInput from '../components/Input/SearchInput';
+import Icon from '../components/MdIcon/Icon';
 
 import CardInformationLibrary from '../components/Card/CardInformationLibrary';
-import { listApis, searchApis, getListTags, filterAPIsByTags, resetLibraryApi } from '../redux/actions/libraryAction';
+import { listApis, searchApis, getListTags, filterAPIsByTags, resetLibraryApi, getLibraryApiNextSearch, getLibraryApiPreviosSearch, getLibraryApiNext, getLibraryApiPrevios } from '../redux/actions/libraryAction';
 
-import '../styles/pages/apiLibrary.module.scss';
+import classes from '../styles/pages/apiLibrary.module.scss';
 
 function AppLibrary(props) {
 
-  const { libraries, loadingLibraries, apis, tagsList } = useSelector((state) => state.library);
+  const { libraries, loadingLibraries, apis, tagsList, apisSkip } = useSelector((state) => state.library);
 
   const dispatch = useDispatch();
+
+  const [search, setSearch] = useState('');
 
   const handleChangeSearchFilter = (text) => {
     if (text.trim().length >= 3) {
       dispatch(searchApis(text));
+      setSearch(text);
+    }
+
+    if (text.trim().length < 3) {
+      setSearch('');
     }
 
     if (text.trim().length === 0) {
@@ -102,6 +111,22 @@ function AppLibrary(props) {
       description: api.properties.description,
     };
   }) : [];
+
+  const handleNextLibrary = (url) => {
+    if (search.length > 0) {
+      dispatch(getLibraryApiNextSearch(search));
+    } else {
+      dispatch(getLibraryApiNext());
+    };
+  };
+
+  const handlePreviousLibrary = () => {
+    if (search.length > 0) {
+      dispatch(getLibraryApiPreviosSearch(search));
+    } else {
+      dispatch(getLibraryApiPrevios());
+    }
+  };
 
   return (
     <Container fixed className='py-10 table-left'>
@@ -190,6 +215,28 @@ function AppLibrary(props) {
               </section>
             )}
           </div>
+        </Grid>
+      </Grid>
+      <Grid item xs={12}>
+        <Grid container spacing={4} direction='row' justifyContent='space-between'>
+          <Grid item xs={3}>
+            {apisSkip > 0 ? (
+              <div onClick={() => handlePreviousLibrary()} className={classes.pagination}>
+                <Icon id='MdNavigateBefore' />
+                <p>Anterior</p>
+              </div>
+
+            ) : (null)}
+          </Grid>
+          <Grid item xs={1}>
+            {apis.nextLink !== undefined ? (
+              <div onClick={() => handleNextLibrary()} className={classes.pagination}>
+                <p>Siguiente</p>
+                <Icon id='MdNavigateNext' />
+              </div>
+
+            ) : (null)}
+          </Grid>
         </Grid>
       </Grid>
     </Container>

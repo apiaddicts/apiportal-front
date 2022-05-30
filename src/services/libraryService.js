@@ -27,7 +27,7 @@ function getApiBookStore(id) {
     });
 }
 
-function getApis() {
+function getApis(top, skip) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
@@ -37,7 +37,7 @@ function getApis() {
   const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
   const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
   const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/apis?api-version=${config.apiVersion}&expandApiVersionSet=true&$top=50&$skip=0&$filter=isCurrent`;
+  const url = `${urlService}/apis?api-version=${config.apiVersion}&expandApiVersionSet=true&$top=${top}&$skip=${skip}&$filter=isCurrent`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
@@ -135,7 +135,7 @@ function filterAPIsByTags(search, filter = 'isCurrent', top = 2, skip = 0, inclu
     });
 }
 
-function searchApis(search, top = 2, skip = 0) {
+function searchApis(search, top, skip) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',

@@ -23,6 +23,8 @@ const initialState = {
   tagsList: {},
   errorTagsList: {},
 
+  apisSkip: 0,
+
 };
 
 // eslint-disable-next-line default-param-last
@@ -100,7 +102,13 @@ export default function libraryReducer(state = initialState, action) {
         filters: {},
         libraries: [],
       };
-    // Reset data of the api libreri
+    // libraries next data
+    case libraryConstants.GET_LIBRARY_SKIP:
+      return {
+        ...state,
+        apisSkip: action.skip,
+      };
+    // Reset data of the api librerie
     case libraryConstants.RESET_LIBRARY_API:
       return {
         ...state,
@@ -109,6 +117,7 @@ export default function libraryReducer(state = initialState, action) {
         errorTagsList: {},
         apis: {},
         errorApis: {},
+        apisSkip: 0,
       };
     case libraryConstants.GET_APIS_SUCCESS:
       return {
