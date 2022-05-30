@@ -100,3 +100,23 @@ export const updateUser = (data) => (dispatch) => {
     },
   );
 };
+// export const resetPassword = (data) => (dispatch) => {
+//   userService.resetPassword(data).then(
+//     (response) => {
+//       if (response && Object.keys(response).length > 0) {
+
+//       }
+//       // if (Object.keys(response).length > 0) {
+//       //   const { id, token } = store.getState().user;
+//       //   const tokens = {
+//       //     token,
+//       //     id,
+//       //   };
+//       //   dispatch(getUser(tokens));
+//       }
+//     },
+//     (error) => {
+//       console.log(error);
+//     },
+//   );
+// };
