@@ -1,23 +1,13 @@
 /* eslint-disable prefer-regex-literals */
 import { useFormik } from 'formik';
 import { useState } from 'react';
-// import { string } from 'yup';
+import { string } from 'yup';
 import * as Yup from 'yup';
 
 const validationSchema = Yup.object().shape({
-  // email: string().email('Please provide a valid email').required('El email es obligatorio'),
-  // password: string()
-  //   .matches(new RegExp(/(?=.*[a-z])/), 'Must contain lowercase a-z characters')
-  //   .matches(new RegExp(/(?=.*[A-Z])/), 'Must contain uppercase A-Z characters')
-  //   .matches(new RegExp(/(?=.*[0-9])/), 'Must contain at least one number')
-  //   .matches(
-  //     new RegExp(/(?=.*[!@#$%^&*])/),
-  //     'Must contain at least one !@#$%^&* special character',
-  //   )
-  //   .min(8, 'Must be at least 8 characters long')
-  //   .trim('Spaces are not allowed')
-  //   .strict()
-  //   .required('La contraseña es obligatoria'),
+  password: string().required('La contraseña actual es obligatoria'),
+  new_password: string().required('La nueva contraseña es obligatoria'),
+  confirm: string().required('Por favor escribir nuevamente su nueva contraseña'),
 });
 
 const objectFromArray = (fields, key) => {
@@ -32,7 +22,7 @@ const objectFromArray = (fields, key) => {
   return Object.fromEntries(mappedProps);
 };
 
-function useLoginConfig(
+function useFormRestorePassword(
   fields,
   customHandleSubmit,
 ) {
@@ -55,4 +45,4 @@ function useLoginConfig(
   return { ...formik, formStatus, setFormStatus };
 }
 
-export default useLoginConfig;
+export default useFormRestorePassword;

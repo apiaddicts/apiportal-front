@@ -278,3 +278,12 @@
     justify-content: space-between;
     color: #e91818;
 }
+
+
+// lIBRARY CARD
+.description {
+    text-overflow: ellipsis;
+    width: 365px;
+    white-space: nowrap;
+    overflow: hidden;
+}
