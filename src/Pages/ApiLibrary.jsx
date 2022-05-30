@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 import { Container, Grid } from '@mui/material';
 
-import Multiselect from 'multiselect-react-dropdown';
+// import Multiselect from 'multiselect-react-dropdown';
 import Title from '../components/Title/Title';
 import SearchInput from '../components/Input/SearchInput';
 
@@ -30,17 +30,17 @@ function AppLibrary(props) {
   };
 
   // const selectData = tagsList && Object.keys(tagsList).length > 0 ? { options: [{ name: 'Option 1️⃣', id: 1 }, { name: 'Option 2️⃣', id: 2 }] } : [];
-  const selectData = [];
+  // const selectData = [];
 
-  const onSelect = (selectedList, selectedItem) => {
-    console.log(selectedList);
-    console.log(selectedItem);
-  };
+  // const onSelect = (selectedList, selectedItem) => {
+  //   console.log(selectedList);
+  //   console.log(selectedItem);
+  // };
 
-  const onRemove = (selectedList, removedItem) => {
-    console.log(selectedList);
-    console.log(removedItem);
-  };
+  // const onRemove = (selectedList, removedItem) => {
+  //   console.log(selectedList);
+  //   console.log(removedItem);
+  // };
 
   useEffect(() => {
     if (apis && Object.keys(apis).length === 0) {
@@ -84,7 +84,7 @@ function AppLibrary(props) {
             borderRadius='20px'
           />
         </Grid>
-        <Grid item xs={4}>
+        {/* <Grid item xs={4}>
           <Multiselect
             options={selectData.options} // Options to display in the dropdown
             // selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
@@ -92,7 +92,7 @@ function AppLibrary(props) {
             onRemove={onRemove} // Function will trigger on remove event
             displayValue='name' // Property name to display in the dropdown options
           />
-        </Grid>
+        </Grid> */}
       </Grid>
       <Grid style={{ marginTop: '10px' }} container spacing={2}>
         <Grid item xs={12}>
