@@ -59,11 +59,30 @@ function getAPi(id) {
     });
 }
 
+function getApiOpenAPI(id) {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Accept': 'application/vnd.oai.openapi+json; charset=utf-8' },
+  };
+
+  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
+  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
+  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
+  const url = `${urlService}/apis/${id}?api-version=${config.apiVersion}`;
+  console.log(url);
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response;
+    });
+}
+
 const libraryService = {
   getApiBookStores,
   getApiBookStore,
   getApis,
   getAPi,
+  getApiOpenAPI,
 };
 
 export default libraryService;

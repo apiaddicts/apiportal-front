@@ -16,6 +16,8 @@ const initialState = {
   errorApis: {},
   api: {},
   errorApi: {},
+  jsonOpenApi: {},
+  errorJsonOpenApi: {},
 
 };
 
@@ -97,6 +99,18 @@ export default function libraryReducer(state = initialState, action) {
         ...state,
         api: {},
         errorApi: action.payload,
+      };
+    case libraryConstants.GET_API_OPENAPI_SUCCESS:
+      return {
+        ...state,
+        jsonOpenApi: action.payload,
+        errorJsonOpenApi: {},
+      };
+    case libraryConstants.GET_API_OPENAPI_FAILURE:
+      return {
+        ...state,
+        jsonOpenApi: {},
+        errorJsonOpenApi: action.payload,
       };
     default:
       return state;

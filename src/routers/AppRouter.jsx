@@ -96,7 +96,7 @@ function AppRouter() {
                   <Route path='/newApp' exact element={<AddApp />} />
                   <Route path='/ApiLibrary' exact element={<ApiLibrary />} />
                   <Route path='/ApiLibrary/:id' exact element={<ApiDetailed />} />
-                  <Route path='/swagger' exact element={<Swagger />} />
+                  <Route path='/ApiLibrary/try/:id' exact element={<Swagger />} />
                   <Route path='/redoc' exact element={<Redoc />} />
                   <Route path='*' element={<Navigate to='/apps' replace />} />
                 </Routes>
