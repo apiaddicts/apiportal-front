@@ -16,6 +16,10 @@ const initialState = {
   errorApis: {},
   api: {},
   errorApi: {},
+  // get list tags to api
+  loadingTags: false,
+  tagsList: {},
+  errorTagsList: {},
 
 };
 
@@ -65,6 +69,26 @@ export default function libraryReducer(state = initialState, action) {
         filters: action.newFilters,
         loadingLibraries: false,
         sort: action.sort,
+      };
+    // Assignment of the load value tags apis
+    case libraryConstants.GET_APIS_TAGS_REQUEST:
+      return {
+        ...state,
+        loadingTags: true,
+      };
+    case libraryConstants.GET_APIS_TAGS_SUCCESS:
+      return {
+        ...state,
+        loadingTags: false,
+        tagsList: action.res,
+        errorTagsList: {},
+      };
+    case libraryConstants.GET_APIS_TAGS_FAILURE:
+      return {
+        ...state,
+        loadingTags: false,
+        tagsList: {},
+        errorTagsList: action.err,
       };
     // Reset data of the library
     case libraryConstants.RESET_LIBRARY:

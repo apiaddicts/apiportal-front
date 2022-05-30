@@ -6,24 +6,40 @@ import { Link } from 'react-router-dom';
 
 import { Container, Grid } from '@mui/material';
 
+import Multiselect from 'multiselect-react-dropdown';
 import Title from '../components/Title/Title';
 import SearchInput from '../components/Input/SearchInput';
-import InputSelect from '../components/Input/InputSelect';
-import CardInformation from '../components/Card/CardInformation';
-import { sortApiCollection, listApis } from '../redux/actions/libraryAction';
+
+import CardInformationLibrary from '../components/Card/CardInformationLibrary';
+import { listApis, searchApis, getListTags } from '../redux/actions/libraryAction';
 
 function AppLibrary(props) {
 
-  const { libraries, loadingLibraries, apis } = useSelector((state) => state.library);
+  const { libraries, loadingLibraries, apis, tagsList } = useSelector((state) => state.library);
 
   const dispatch = useDispatch();
 
   const handleChangeSearchFilter = (text) => {
-    console.log(text);
+    if (text.trim().length >= 3) {
+      dispatch(searchApis(text));
+    }
+
+    if (text.trim().length === 0) {
+      dispatch(listApis());
+    }
   };
 
-  const handleSort = (sort) => {
-    dispatch(sortApiCollection(sort));
+  // const selectData = tagsList && Object.keys(tagsList).length > 0 ? { options: [{ name: 'Option 1️⃣', id: 1 }, { name: 'Option 2️⃣', id: 2 }] } : [];
+  const selectData = [];
+
+  const onSelect = (selectedList, selectedItem) => {
+    console.log(selectedList);
+    console.log(selectedItem);
+  };
+
+  const onRemove = (selectedList, removedItem) => {
+    console.log(selectedList);
+    console.log(removedItem);
   };
 
   useEffect(() => {
@@ -31,6 +47,14 @@ function AppLibrary(props) {
       dispatch(listApis());
     }
   }, [dispatch, apis]);
+
+  useEffect(() => {
+    if (tagsList && Object.keys(tagsList).length === 0) {
+      dispatch(getListTags());
+    };
+  }, [tagsList]);
+
+  console.log(tagsList);
 
   const arrApis = apis && Object.keys(apis).length > 0 ? apis.value.map((api) => {
     return {
@@ -61,9 +85,12 @@ function AppLibrary(props) {
           />
         </Grid>
         <Grid item xs={4}>
-          <InputSelect handleSelect={(e) => {
-            handleSort(e);
-          }}
+          <Multiselect
+            options={selectData.options} // Options to display in the dropdown
+            // selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
+            onSelect={onSelect} // Function will trigger on select event
+            onRemove={onRemove} // Function will trigger on remove event
+            displayValue='name' // Property name to display in the dropdown options
           />
         </Grid>
       </Grid>
@@ -75,7 +102,8 @@ function AppLibrary(props) {
                 arrApis.map((item, index) => (
                   <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
                     <Link to={`/ApiLibrary/${item.apiName}`}>
-                      <CardInformation
+                      <CardInformationLibrary
+                        apiName={item.apiName}
                         title={item.title}
                         status={item.status}
                         version={item.version}

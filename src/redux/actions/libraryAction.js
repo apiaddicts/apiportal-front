@@ -75,6 +75,25 @@ export const getApi = (id) => (dispatch) => {
   );
 };
 
+export const getListTags = () => (dispatch) => {
+  dispatch({ type: libraryConstants.GET_APIS_TAGS_REQUEST });
+  libraryService.getListTags().then(
+    (res) => {
+      console.log(res);
+      dispatch({
+        type: libraryConstants.GET_APIS_TAGS_SUCCESS,
+        payload: res,
+      });
+    },
+    (err) => {
+      dispatch({
+        type: libraryConstants.GET_APIS_TAGS_FAILURE,
+        payload: err,
+      });
+    },
+  );
+};
+
 const sortCollection = (data, sort) => {
   return (sort === 'asc') ? data.sort((a, b) => {
     const fa = a.title.toLowerCase(),
@@ -109,6 +128,24 @@ export const sortApiCollection = (sort) => (dispatch) => {
     data,
     sort,
   });
+};
+
+export const searchApis = (search) => (dispatch) => {
+  libraryService.searchApis(search).then(
+    (res) => {
+      console.log(res);
+      dispatch({
+        type: libraryConstants.GET_APIS_SUCCESS,
+        payload: res,
+      });
+    },
+    (error) => {
+      dispatch({
+        type: libraryConstants.GET_APIS_FAILURE,
+        payload: error,
+      });
+    },
+  );
 };
 
 export const filterCheck = (label, checked, name) => (dispatch) => {
