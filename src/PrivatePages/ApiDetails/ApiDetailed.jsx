@@ -26,7 +26,7 @@ function ApiDetails(props) {
 
   const infoApi = [{
     title: 'Información API',
-    questions: ['Información', 'Descripción', 'Versiones', 'Condiciones de Uso', 'Sandbox', 'Autenticación'],
+    questions: ['Información', 'Descripción', 'Versiones', 'Autenticación', 'Sandbox'],
   }];
 
   useEffect(() => {

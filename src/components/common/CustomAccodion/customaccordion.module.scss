@@ -154,4 +154,42 @@
   color: $primary;          
 }
 
+.auth__title {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+.auth__subtitle {
+  font-size: 1rem;
+  font-weight: 400;
+}
+.auth__body {
+  font-weight: 700;
+  margin-right: 5px;
+}
+.table__auth  {
+  width: 100%;
+  margin: 1rem 0;
+  table, th, td {
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th, td {
+    padding: 5px;
+    text-align: left;
+  }
+  &__subrow {
+    background-color: rgba($color: #000, $alpha: 0.1)
+  }
+}
+
+.scopes{ 
+  &__code {
+    color: $primary;
+    background-color: #f1f1f1;
+    border-radius: 2px;
+    border: 1px solid rgba(38, 50, 56, 0.1);
+    padding: 0px 5px;
+  }
+}
+
 
