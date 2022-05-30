@@ -128,7 +128,7 @@ export const getProductosNext = (url) => (dispatch) => {
   const { productsSkip } = store.getState().products;
   const skip = productsSkip + 1;
 
-  dispatch(listProducts(2, skip));
+  dispatch(listProducts(2, 2));
   dispatch({ type: productsConstants.GET_PRODUCTS_SKIP, skip });
 };
 
@@ -136,7 +136,7 @@ export const getProductPrevious = () => (dispatch) => {
   const { productsSkip } = store.getState().products;
   const skip = productsSkip - 1;
 
-  dispatch(listProducts(2, skip));
+  dispatch(listProducts(2, 2));
   dispatch({ type: productsConstants.GET_PRODUCTS_SKIP, skip });
 };
 
