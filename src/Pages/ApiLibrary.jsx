@@ -6,12 +6,14 @@ import { Link } from 'react-router-dom';
 
 import { Container, Grid } from '@mui/material';
 
-// import Multiselect from 'multiselect-react-dropdown';
+import Multiselect from 'multiselect-react-dropdown';
 import Title from '../components/Title/Title';
 import SearchInput from '../components/Input/SearchInput';
 
 import CardInformationLibrary from '../components/Card/CardInformationLibrary';
-import { listApis, searchApis, getListTags } from '../redux/actions/libraryAction';
+import { listApis, searchApis, getListTags, filterAPIsByTags, resetLibraryApi } from '../redux/actions/libraryAction';
+
+import '../styles/pages/apiLibrary.module.scss';
 
 function AppLibrary(props) {
 
@@ -29,23 +31,52 @@ function AppLibrary(props) {
     }
   };
 
-  // const selectData = tagsList && Object.keys(tagsList).length > 0 ? { options: [{ name: 'Option 1️⃣', id: 1 }, { name: 'Option 2️⃣', id: 2 }] } : [];
-  // const selectData = [];
+  const selectData = tagsList && Object.keys(tagsList).length > 0 && tagsList.value && tagsList.value.length > 0 ? tagsList.value.map((item, index) => {
+    const options = {
+      name: item.properties.displayName ? item.properties.displayName : item.name,
+      id: index,
+    };
+    return options;
+  }) : [];
 
-  // const onSelect = (selectedList, selectedItem) => {
-  //   console.log(selectedList);
-  //   console.log(selectedItem);
-  // };
+  const onSelect = (selectedList, selectedItem) => {
+    let search = '';
+    selectedList.forEach((items, index) => {
+      let data = '';
+      if (search.length === 0) {
+        data = `tags[${index}]=${items.name}`;
+      } else {
+        data = `&tags[${index}]=${items.name}`;
+      }
+      search = search + data;
+    });
+    dispatch(filterAPIsByTags(search));
+  };
 
-  // const onRemove = (selectedList, removedItem) => {
-  //   console.log(selectedList);
-  //   console.log(removedItem);
-  // };
+  const onRemove = (selectedList, removedItem) => {
+
+    if (selectedList.length > 0) {
+      let search = '';
+      selectedList.forEach((items, index) => {
+        let data = '';
+        if (search.length === 0) {
+          data = `tags[${index}]=${items.name}`;
+        } else {
+          data = `&tags[${index}]=${items.name}`;
+        }
+        search = search + data;
+      });
+      dispatch(filterAPIsByTags(search));
+    } else {
+      dispatch(listApis());
+    }
+  };
 
   useEffect(() => {
     if (apis && Object.keys(apis).length === 0) {
       dispatch(listApis());
     }
+
   }, [dispatch, apis]);
 
   useEffect(() => {
@@ -54,7 +85,11 @@ function AppLibrary(props) {
     };
   }, [tagsList]);
 
-  console.log(tagsList);
+  useEffect(() => {
+    return () => {
+      dispatch(resetLibraryApi());
+    };
+  }, []);
 
   const arrApis = apis && Object.keys(apis).length > 0 ? apis.value.map((api) => {
     return {
@@ -72,7 +107,7 @@ function AppLibrary(props) {
     <Container fixed className='py-10 table-left'>
       <Title className='mb-18' text='Biblioteca de Apis' />
       <Grid style={{ marginTop: '20px' }} container spacing={10}>
-        <Grid item xs={8}>
+        <Grid item xs={7}>
           <SearchInput
             icon
             name='search'
@@ -84,15 +119,18 @@ function AppLibrary(props) {
             borderRadius='20px'
           />
         </Grid>
-        {/* <Grid item xs={4}>
+        <Grid item xs={5}>
           <Multiselect
-            options={selectData.options} // Options to display in the dropdown
+            className='inputSelect'
+            options={selectData} // Options to display in the dropdown
             // selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
             onSelect={onSelect} // Function will trigger on select event
             onRemove={onRemove} // Function will trigger on remove event
             displayValue='name' // Property name to display in the dropdown options
+            // selectionLimit={2}
+            placeholder=''
           />
-        </Grid> */}
+        </Grid>
       </Grid>
       <Grid style={{ marginTop: '10px' }} container spacing={2}>
         <Grid item xs={12}>

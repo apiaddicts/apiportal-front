@@ -79,7 +79,6 @@ export const getListTags = () => (dispatch) => {
   dispatch({ type: libraryConstants.GET_APIS_TAGS_REQUEST });
   libraryService.getListTags().then(
     (res) => {
-      console.log(res);
       dispatch({
         type: libraryConstants.GET_APIS_TAGS_SUCCESS,
         payload: res,
@@ -165,6 +164,23 @@ export const searchApis = (search) => (dispatch) => {
   );
 };
 
+export const filterAPIsByTags = (search) => (dispatch) => {
+  libraryService.filterAPIsByTags(search).then(
+    (res) => {
+      dispatch({
+        type: libraryConstants.GET_APIS_SUCCESS,
+        payload: res,
+      });
+    },
+    (error) => {
+      dispatch({
+        type: libraryConstants.GET_APIS_FAILURE,
+        payload: error,
+      });
+    },
+  );
+};
+
 export const filterCheck = (label, checked, name) => (dispatch) => {
   dispatch({
     type: libraryConstants.GET_ALL_LIBRARY_REQUEST,
@@ -220,3 +236,8 @@ export const resetGetLibrary = () => (dispatch) => {
   });
 };
 
+export const resetLibraryApi = () => (dispatch) => {
+  dispatch({
+    type: libraryConstants.RESET_LIBRARY_API,
+  });
+};

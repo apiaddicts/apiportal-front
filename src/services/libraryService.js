@@ -118,7 +118,7 @@ function getListTagsByApi(apiName) {
     });
 }
 
-function filterAPIsByTags(top, skip, filter = 'isCurrent', includeNotTaggedApis = false) {
+function filterAPIsByTags(search, filter = 'isCurrent', top = 2, skip = 0, includeNotTaggedApis = false) {
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
@@ -127,8 +127,7 @@ function filterAPIsByTags(top, skip, filter = 'isCurrent', includeNotTaggedApis 
   const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
   const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
   const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/apis?api-version=${config.apiVersion}&expandApiVersionSet=${true}&$top=${top}&$skip=${skip}&$filter=${filter}&includeNotTaggedApis=${includeNotTaggedApis}`;
-
+  const url = `${urlService}/apis?api-version=${config.apiVersion}&expandApiVersionSet=${true}&$top=${top}&$skip=${skip}&$filter=${filter}&includeNotTaggedApis=${includeNotTaggedApis}&${search}`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
