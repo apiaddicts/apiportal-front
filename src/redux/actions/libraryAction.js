@@ -75,6 +75,23 @@ export const getApi = (id) => (dispatch) => {
   );
 };
 
+export const getApiOpenAPI = (id) => (dispatch) => {
+  libraryService.getApiOpenAPI(id).then(
+    (res) => {
+      dispatch({
+        type: libraryConstants.GET_API_OPENAPI_SUCCESS,
+        payload: res,
+      });
+    },
+    (error) => {
+      dispatch({
+        type: libraryConstants.GET_API_OPENAPI_FAILURE,
+        payload: error,
+      });
+    },
+  );
+};
+
 const sortCollection = (data, sort) => {
   return (sort === 'asc') ? data.sort((a, b) => {
     const fa = a.title.toLowerCase(),
