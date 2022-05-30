@@ -26,6 +26,8 @@ const libraryConstants = {
   FILTER_ALL_LIBRARY: 'FILTER_ALL_LIBRARY',
 
   RESET_LIBRARY: 'RESET_LIBRARY',
+
+  RESET_LIBRARY_API: 'RESET_LIBRARY_API',
 };
 
 export default libraryConstants;

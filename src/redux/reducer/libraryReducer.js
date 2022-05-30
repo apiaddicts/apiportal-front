@@ -19,6 +19,10 @@ const initialState = {
   jsonOpenApi: {},
   errorJsonOpenApi: {},
 
+  loadingTags: false,
+  tagsList: {},
+  errorTagsList: {},
+
 };
 
 // eslint-disable-next-line default-param-last
@@ -78,7 +82,7 @@ export default function libraryReducer(state = initialState, action) {
       return {
         ...state,
         loadingTags: false,
-        tagsList: action.res,
+        tagsList: action.payload,
         errorTagsList: {},
       };
     case libraryConstants.GET_APIS_TAGS_FAILURE:
@@ -95,6 +99,16 @@ export default function libraryReducer(state = initialState, action) {
         library: {},
         filters: {},
         libraries: [],
+      };
+    // Reset data of the api libreri
+    case libraryConstants.RESET_LIBRARY_API:
+      return {
+        ...state,
+        loadingTags: false,
+        tagsList: {},
+        errorTagsList: {},
+        apis: {},
+        errorApis: {},
       };
     case libraryConstants.GET_APIS_SUCCESS:
       return {
