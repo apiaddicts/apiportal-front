@@ -59,11 +59,68 @@ function getAPi(id) {
     });
 }
 
+function getListTags() {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
+  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
+  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
+  const url = `${urlService}/tags?api-version=${config.apiVersion}&scope=apis`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response;
+    });
+}
+
+function filterAPIsByTags(top, skip, filter = 'isCurrent', includeNotTaggedApis = false) {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
+  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
+  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
+  const url = `${urlService}/apis?api-version=${config.apiVersion}&expandApiVersionSet=${true}&$top=${top}&$skip=${skip}&$filter=${filter}&includeNotTaggedApis=${includeNotTaggedApis}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response;
+    });
+}
+
+function searchApis(top, skip, search) {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
+  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
+  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
+  const url = `${urlService}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}')) or (contains(properties/description,${search}'))`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response;
+    });
+}
+
 const libraryService = {
   getApiBookStores,
   getApiBookStore,
   getApis,
   getAPi,
+  getListTags,
+  filterAPIsByTags,
+  searchApis,
 };
 
 export default libraryService;

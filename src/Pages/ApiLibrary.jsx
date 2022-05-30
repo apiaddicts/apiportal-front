@@ -10,17 +10,16 @@ import Title from '../components/Title/Title';
 import SearchInput from '../components/Input/SearchInput';
 import InputSelect from '../components/Input/InputSelect';
 import CardInformation from '../components/Card/CardInformation';
-
-import { getLibraries, filterCheck, sortApiCollection } from '../redux/actions/libraryAction';
+import { sortApiCollection, listApis } from '../redux/actions/libraryAction';
 
 function AppLibrary(props) {
 
-  const { libraries, filters, loadingLibraries } = useSelector((state) => state.library);
+  const { libraries, loadingLibraries, apis } = useSelector((state) => state.library);
 
   const dispatch = useDispatch();
 
   const handleChangeSearchFilter = (text) => {
-    dispatch(filterCheck(text, null, 'search'));
+    console.log(text);
   };
 
   const handleSort = (sort) => {
@@ -28,12 +27,25 @@ function AppLibrary(props) {
   };
 
   useEffect(() => {
-    if (libraries && libraries.length === 0 && Object.keys(filters).length === 0) {
-      dispatch(getLibraries());
+    if (apis && Object.keys(apis).length === 0) {
+      dispatch(listApis());
     }
-  }, [libraries]);
+  }, [dispatch, apis]);
+
+  const arrApis = apis && Object.keys(apis).length > 0 ? apis.value.map((api) => {
+    return {
+      apiName: api.name,
+      title: api.properties.displayName,
+      status: 'Publicado',
+      version: api.properties.apiVersion,
+      tags: [{ label: 'ejemplo' }],
+      color_status: 'green',
+      description: api.properties.description,
+    };
+  }) : [];
+
   return (
-    <Container fixed className='my-10 py-10'>
+    <Container fixed className='py-10 table-left'>
       <Title className='mb-18' text='Biblioteca de Apis' />
       <Grid style={{ marginTop: '20px' }} container spacing={10}>
         <Grid item xs={8}>
@@ -59,10 +71,10 @@ function AppLibrary(props) {
         <Grid item xs={12}>
           <div className='row'>
             {loadingLibraries === false && libraries ? (
-              libraries.length > 0 ? (
-                libraries.map((item, index) => (
+              arrApis.length > 0 ? (
+                arrApis.map((item, index) => (
                   <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
-                    <Link to='/swagger'>
+                    <Link to={`/ApiLibrary/${item.apiName}`}>
                       <CardInformation
                         title={item.title}
                         status={item.status}

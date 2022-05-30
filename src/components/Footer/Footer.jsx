@@ -50,35 +50,35 @@ function Footer({ isPrivate }) {
             <div className='mb-5'>
               <div className='row justify-center'>
                 <div className='container'>
-                  <div className='row justify-center mb-10'>
+                  <div className='row justify-center'>
                     {/* {fieldsContactExtend.map((field) => (
                       <Input footer key={field.id} field={field} formik={formConfig} />
                     ))} */}
-                    <div className='flex-sm-12 flex-md-4'>
+                    <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
                       <InputUI type='text' label='Nombre*' required={true} />
                     </div>
-                    <div className='flex-sm-12 flex-md-4'>
+                    <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
                       <InputUI type='text' label='Apellidos*' required={true} />
                     </div>
                   </div>
-                  <div className='row justify-center mb-10'>
-                    <div className='flex-sm-12 flex-md-4'>
+                  <div className='row justify-center'>
+                    <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
                       <InputUI type='email' label='Correo electrónico*' required={true} />
                     </div>
-                    <div className='flex-sm-12 flex-md-4'>
+                    <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
                       <InputUI type='tel' label='Celular*' required={true} />
                     </div>
                   </div>
-                  <div className='row justify-center mb-10'>
-                    <div className='flex-sm-12 flex-md-4'>
+                  <div className='row justify-center'>
+                    <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
                       <SelectUI label='Temas' required={true} options={[{ value: 'Sup', text: 'Soporte' }, { value: 'Com', text: 'Comercial' }, { value: 'Admin', text: 'Administración' }]} />
                     </div>
-                    <div className='flex-sm-12 flex-md-4'>
+                    <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
                       <InputUI type='text' label='Asunto*' required={true} />
                     </div>
                   </div>
                   <div className='row justify-center'>
-                    <div className='flex-sm-12 flex-md-8'>
+                    <div className='flex-sm-12 flex-md-8 flex-lg-8 pb-5'>
                       <TextAreaUI label='Mensaje' counter={50} />
                     </div>
                   </div>
@@ -102,7 +102,7 @@ function Footer({ isPrivate }) {
               </div>
             </div>
             <div className='row mb-5 mt-10 justify-center'>
-              <div className='flex-md-3 flex-sm-12'>
+              <div className='flex-md-4 flex-lg-3 flex-sm-12'>
                 <Button styles='secundary' type='submit'>
                   ¡Estoy interesado!
                 </Button>

@@ -108,7 +108,7 @@ function BlogDetails({ setIsOpen }) {
 
                   <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
                     <p className='body-1'>
-                      Conoce todas las novedades sobre tecnología, APIs y transformación digital
+                      Conocs todas las novedades sobre tecnología, APIs y transformación digital
                     </p>
                   </div>
                 </div>
