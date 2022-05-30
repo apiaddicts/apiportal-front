@@ -1,12 +1,15 @@
-.chip {
-    padding: 4px 10px !important;
-    background: #ECF0F1 !important;
-    margin-right: 5px !important;
-    margin-bottom: 5px !important;
-    border-radius: 11px;
-    display: inline-flex;
-    align-items: center;
-    font-size: 13px;
-    line-height: 19px;
-    color: #53565A;
+
+.pagination {
+    cursor: pointer;
+    display: flex;
+    color: #0033A0;
+    font-size: 20px;
+    
+    p {
+        font-family: 'Barlow';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 32px;
+    }
 }

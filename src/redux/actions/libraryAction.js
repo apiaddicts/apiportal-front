@@ -41,8 +41,8 @@ export const getLibrary = (id) => (dispatch) => {
   );
 };
 
-export const listApis = () => (dispatch) => {
-  libraryService.getApis().then(
+export const listApis = (top = 4, skip = 0) => (dispatch) => {
+  libraryService.getApis(top, skip).then(
     (res) => {
       dispatch({
         type: libraryConstants.GET_APIS_SUCCESS,
@@ -146,8 +146,8 @@ export const sortApiCollection = (sort) => (dispatch) => {
   });
 };
 
-export const searchApis = (search) => (dispatch) => {
-  libraryService.searchApis(search).then(
+export const searchApis = (search, top = 2, skip = 0) => (dispatch) => {
+  libraryService.searchApis(search, top, skip).then(
     (res) => {
       console.log(res);
       dispatch({
@@ -228,6 +228,38 @@ export const filterCheck = (label, checked, name) => (dispatch) => {
     sort,
   });
 
+};
+
+export const getLibraryApiNextSearch = (search) => (dispatch) => {
+  const { apisSkip } = store.getState().library;
+
+  const skip = apisSkip + 2;
+  dispatch(searchApis(search, 2, skip));
+  dispatch({ type: libraryConstants.GET_LIBRARY_SKIP, skip });
+};
+
+export const getLibraryApiPreviosSearch = (search) => (dispatch) => {
+  const { apisSkip } = store.getState().library;
+
+  const skip = apisSkip - 2;
+  dispatch(searchApis(search, 2, skip));
+  dispatch({ type: libraryConstants.GET_LIBRARY_SKIP, skip });
+};
+
+export const getLibraryApiNext = () => (dispatch) => {
+  const { apisSkip } = store.getState().library;
+  const skip = apisSkip + 4;
+
+  dispatch(listApis(4, skip));
+  dispatch({ type: libraryConstants.GET_LIBRARY_SKIP, skip });
+};
+
+export const getLibraryApiPrevios = () => (dispatch) => {
+  const { apisSkip } = store.getState().library;
+  const skip = apisSkip - 4;
+
+  dispatch(listApis(4, skip));
+  dispatch({ type: libraryConstants.GET_LIBRARY_SKIP, skip });
 };
 
 export const resetGetLibrary = () => (dispatch) => {
