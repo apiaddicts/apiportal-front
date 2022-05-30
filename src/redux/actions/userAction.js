@@ -29,7 +29,7 @@ export const logout = () => (dispatch) => {
 };
 
 export const signUp = (data) => (dispatch) => {
-  dispatch({ type: userConstants.SIGNUP_REQUEST });
+  // dispatch({ type: userConstants.SIGNUP_REQUEST });
   userService.signUp(data).then(
     (response) => {
       dispatch({
@@ -39,6 +39,10 @@ export const signUp = (data) => (dispatch) => {
     },
     (error) => {
       console.log(error);
+      dispatch({
+        type: userConstants.SIGNUP_FAILURE,
+        error,
+      });
     },
   );
 };

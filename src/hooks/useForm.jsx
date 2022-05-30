@@ -53,6 +53,7 @@ function useFormConfig(
     onSubmit: async (values, { resetForm }) => {
       setFormStatus({ status: 'loading' });
       const submitResponse = await customHandleSubmit(values);
+      console.log('submitResponse', submitResponse);
       setFormStatus(submitResponse);
       submitResponse.status === 'success' && resetForm();
     },
