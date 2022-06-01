@@ -176,3 +176,13 @@ export const fieldsContactExtend = [
     type: 'textarea',
   },
 ];
+export const fieldsForgotPassword = [
+  {
+    id: 'email',
+    initialValue: '',
+    placeholder: 'Email',
+    validate: 'email',
+    required: true,
+    type: 'email',
+  },
+];
