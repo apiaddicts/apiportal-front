@@ -11,6 +11,7 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
+    "base-64": "^1.0.0",
     "formik": "^2.2.9",
     "moment": "^2.29.3",
     "multiselect-react-dropdown": "^2.0.22",

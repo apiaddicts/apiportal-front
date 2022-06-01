@@ -4,18 +4,19 @@ import Icon from '../MdIcon/Icon';
 import classes from './Alert.module.scss';
 
 function Alert({ alert_type, title, msg, css_styles }) {
-  const { responseError } = useSelector((state) => state.user);
+  const { responseError, responseRestoreError } = useSelector((state) => state.user);
   const { custom_padding, custom_margin } = css_styles;
   const [showAlert, setShowAlert] = useState('d-none');
   const [message, setMessage] = useState(msg);
   useEffect(() => {
-    setShowAlert('d-block');
-    setMessage('Mensaje');
-    // setShowAlert(Object.prototype.hasOwnProperty.call(responseError, 'error') ? 'd-block' : 'd-none');
-    // setMessage(responseError?.error?.details[0]?.message);
-  }, [responseError]);
-
-  console.log(responseError);
+    if (Object.keys(responseRestoreError).length > 0) {
+      setShowAlert('d-block');
+      setMessage(responseRestoreError.error.statusText);
+    } else if (Object.keys(responseError).length) {
+      setShowAlert('d-block');
+      setMessage(responseError?.error?.details[0]?.message);
+    }
+  }, [responseError, responseRestoreError]);
 
   let icon = '';
   switch (alert_type) {
