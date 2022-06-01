@@ -12,6 +12,7 @@ const initialState = token && etag ? {
   user: {},
   loadingUser: false,
   responseError: {},
+  responseRestoreError: {},
 } : {
   user: {},
   loadingUser: false,
@@ -21,6 +22,7 @@ const initialState = token && etag ? {
   loadingSignUp: false,
   signUpData: {},
   responseError: {},
+  responseRestoreError: {},
 };
 
 // eslint-disable-next-line default-param-last
@@ -51,6 +53,12 @@ export default function userReducer(state = initialState, action) {
         ...state,
         loadingSignUp: false,
         responseError: action.error,
+      };
+    case userConstants.RESTORE_SIGNUP_FAILURE:
+      return {
+        ...state,
+        loadingSignUp: false,
+        responseRestoreError: action.response,
       };
     // login user
     case userConstants.GET_USER_REQUEST:
@@ -84,6 +92,9 @@ export default function userReducer(state = initialState, action) {
         token: '',
         etag: '',
         user: {},
+        signUpData: {},
+        responseError: {},
+        responseRestoreError: {},
       };
     default:
       return state;

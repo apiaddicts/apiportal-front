@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 const validationSchema = Yup.object().shape({
   password: string().required('La contraseña actual es obligatoria'),
   new_password: string().required('La nueva contraseña es obligatoria'),
-  confirm: string().required('Por favor escribir nuevamente su nueva contraseña'),
+  confirm_password: string().oneOf([Yup.ref('new_password'), null], 'Las contraseñas deben coincidir'),
 });
 
 const objectFromArray = (fields, key) => {
@@ -33,10 +33,15 @@ function useFormRestorePassword(
   const formik = useFormik({
     initialValues: objectFromArray(fields, 'initialValue'),
     onSubmit: async (values, { resetForm }) => {
-      setFormStatus({ status: 'loading' });
-      const submitResponse = await customHandleSubmit(values);
-      setFormStatus(submitResponse);
-      submitResponse.status === 'success' && resetForm();
+      try {
+        setFormStatus({ status: 'loading' });
+        const submitResponse = await customHandleSubmit(values);
+        console.log('submitResponse', submitResponse);
+        setFormStatus(submitResponse);
+        submitResponse.status === 'success' && resetForm();
+      } catch (error) {
+        console.log('Error', error);
+      }
     },
     validationSchema,
     enableReinitialize: true,

@@ -37,7 +37,7 @@ function CreateAccount() {
     >
       {fieldsRegister.map((field) => (
         <div className='mb-2'>
-          <Input footer key={field.id} field={field} formik={formConfig} />
+          <Input key={field.id} field={field} formik={formConfig} />
         </div>
       ))}
       {/* checkbox */}
