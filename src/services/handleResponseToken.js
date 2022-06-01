@@ -1,4 +1,4 @@
-import { logout } from '../redux/actions/userAction';
+// import { logout } from '../redux/actions/userAction';
 
 const statusCode = {
   HTTP_200_OK: 200,
@@ -49,7 +49,7 @@ function handleResponseToken(response) {
       case statusCode.HTTP_401_UNAUTHORIZED:
         return (dispatch) => {
           dispatch(logout());
-        };;
+        };
       default:
         return Promise.reject(data);
     }
