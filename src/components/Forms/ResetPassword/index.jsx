@@ -1,35 +1,37 @@
 import React from 'react';
-import useContact from '../../../hooks/useContact';
+import { useDispatch } from 'react-redux';
+import useFormForgotPassword from '../../../hooks/useFormForgotPassword';
 import Button from '../../Buttons/Button';
 import Input from '../../Input';
+import { fieldsForgotPassword } from '../fields';
+import { resetPassword } from '../../../redux/actions/userAction';
+import Alert from '../../Alert';
 import './index.scss';
 
 function ResetPassword() {
-
-  const fields = [
-    {
-      id: 'email',
-      initialValue: '',
-      placeholder: 'Email',
-      label: 'Email',
-      validate: 'email',
-      required: true,
-      type: 'email',
-    },
-  ];
-
-  const formConfig = useContact(fields);
-
-  const handleSubmit = () => {
-    const dataForm = formConfig.values;
-    alert(JSON.stringify(dataForm, null, 2));
+  const dispatch = useDispatch();
+  const handleSubmit = (dataForm) => {
+    const data = {
+      properties: {
+        to: dataForm.email,
+        appType: 'developerPortal',
+      },
+    };
+    dispatch(resetPassword(data));
   };
+  const formConfig = useFormForgotPassword(fieldsForgotPassword, handleSubmit);
+
   return (
     <div className='w-full px-8'>
       <p className='py-5 text__reset-password'>Introduce tu email y te enviaremos una nueva contraseña para que puedas acceder.</p>
+      <Alert
+        css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
+        alert_type='alert__success'
+        title='Solicitud enviada'
+      />
       <form onSubmit={formConfig.handleSubmit}>
         <div className='py-4'>
-          {fields.map((field) => (
+          {fieldsForgotPassword.map((field) => (
             <Input key={field.id} field={field} formik={formConfig} />
           ))}
         </div>
@@ -40,9 +42,12 @@ function ResetPassword() {
               handleSubmit();
             }}
             type='submit'
+            disabled={
+              !formConfig.dirty || !formConfig.isValid || formConfig.isSubmitting
+            }
+            opacity={!formConfig.dirty || !formConfig.isValid || formConfig.isSubmitting ? 0.5 : 1}
           >
             Recuperar Contraseña
-
           </Button>
         </div>
       </form>

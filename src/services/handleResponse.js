@@ -43,7 +43,7 @@ function handleResponse(response) {
       case statusCode.HTTP_201_CREATED:
         return data;
       case statusCode.HTTP_204_NO_CONTENT:
-        return data;
+        return { status: response.status, statusText: response.statusText };
       case statusCode.HTTP_304_NOT_MODIFIED:
         return 'Not_Modified';
       case statusCode.HTTP_401_UNAUTHORIZED:

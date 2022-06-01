@@ -1,22 +1,34 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Icon from '../MdIcon/Icon';
+import userConstants from '../../redux/constants/userConstats';
 import classes from './Alert.module.scss';
 
 function Alert({ alert_type, title, msg, css_styles }) {
-  const { responseError, responseRestoreError } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const { responseError, responseRestoreError, responseResetSignup } = useSelector((state) => state.user);
   const { custom_padding, custom_margin } = css_styles;
   const [showAlert, setShowAlert] = useState('d-none');
   const [message, setMessage] = useState(msg);
   useEffect(() => {
-    if (Object.keys(responseRestoreError).length > 0) {
+    if (Object.keys(responseResetSignup).length > 0) {
+      setShowAlert('d-block');
+      setMessage('Favor de revisar su correo electronico');
+    } else if (Object.keys(responseRestoreError).length > 0) {
       setShowAlert('d-block');
       setMessage(responseRestoreError.error.statusText);
     } else if (Object.keys(responseError).length) {
       setShowAlert('d-block');
       setMessage(responseError?.error?.details[0]?.message);
     }
-  }, [responseError, responseRestoreError]);
+  }, [responseError, responseRestoreError, responseResetSignup]);
+
+  const handleClose = () => {
+    setShowAlert('d-none');
+    dispatch({
+      type: userConstants.RESET_ALERT,
+    });
+  };
 
   let icon = '';
   switch (alert_type) {
@@ -35,7 +47,7 @@ function Alert({ alert_type, title, msg, css_styles }) {
           <span className='fs__14'>{ message }</span>
         </div>
         {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-        <div className={classes.close} onClick={() => setShowAlert('d-none')}>
+        <div className={classes.close} onClick={() => handleClose()}>
           <Icon id='MdClose' />
         </div>
       </div>

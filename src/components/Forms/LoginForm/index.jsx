@@ -22,7 +22,7 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin }) {
             setShowResetForm(true);
             setShowForm(false);
           }}
-          className='text__secondary font-weight-bold caption'
+          className='text__secondary font-weight-bold caption cpointer'
         >
           ¿Olvidaste tu contraseña?
         </p>

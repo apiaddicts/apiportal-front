@@ -132,3 +132,18 @@ export const changePassword = (newPassword) => (dispatch) => {
     },
   );
 };
+export const resetPassword = (data) => (dispatch) => {
+  userService.resetPassword(data).then(
+    (response) => {
+      if (response.status === 204) {
+        dispatch({
+          type: userConstants.RESET_SIGNUP,
+          response,
+        });
+      }
+    },
+    (error) => {
+      console.log('Update password error', error);
+    },
+  );
+};
