@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container } from '@mui/material';
 
-import TextField from '../../components/common/InputMUI';
+import Input from '../../components/Input';
 import useFormUserConfig from '../../hooks/useFormUser';
 import classes from './style.module.scss';
 import Button from '../../components/Buttons/Button';
@@ -14,7 +14,7 @@ import RestorePassword from './containers/RestorePassword';
 
 function Admin() {
   const { user, loadingUser } = useSelector((state) => state.user);
-  const [displayResetPassword, setDisplayResetPassword] = useState(false);
+  const [displayRestorePassword, setDisplayRestorePassword] = useState(false);
 
   const dispatch = useDispatch();
 
@@ -26,17 +26,6 @@ function Admin() {
       },
     };
     dispatch(updateUser(data));
-  };
-  const resetPassword = () => {
-    setDisplayResetPassword(!displayResetPassword);
-    console.log('display password form', displayResetPassword);
-    // const data = {
-    //   properties: {
-    //     to: user?.properties?.email,
-    //     apptype: 'developerPortal',
-    //   },
-    // };
-    // console.log('resetPassword', data);
   };
   const name = user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? user.properties.firstName : '';
   const lastName = user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? user.properties.lastName : '';
@@ -84,45 +73,52 @@ function Admin() {
               <div className='w-full my-9'>
                 <Title text='Mi perfil' />
               </div>
-              <form onSubmit={formConfig.handleSubmit} className={classes.admin__form}>
-                <div className={classes.admin__form__container}>
-                  <div className={classes.admin__form__container__header}>
-                    <div className='font-fs-joey fs__36 font-weight-bold text__primary'>Datos personales</div>
-                    <div className='fs__16 text__gray__gray_darken ls_05'>
-                      <span className='text-uppercase font-weight-semi-bold'>Fecha de registro:</span>
-                      <span className='fs'>12/05/2022</span>
-                    </div>
-                  </div>
-                  <div className='row'>
-                    {labelsUser.map((field, i) => (
-                      <div key={i} className='flex-lg-6 flex-sm-12'>
-                        <TextField field={field} formik={formConfig} />
-                      </div>
-                    ))}
-                  </div>
-                  <div className='row align_items__center mt-4 justify_content__between'>
-                    <div className='flex-lg-6 flex-sm-12'>
-                      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-                      <div
-                        className='fs__16 text__gray__gray_darken ls_05 text-uppercase font-weight-bold ml-3 cpointer'
-                        onClick={resetPassword}
-                      >
-                        Restablecer password
+              <div className={classes.admin__form}>
+                <form onSubmit={formConfig.handleSubmit}>
+                  <div className={classes.admin__form__container}>
+                    <div className={classes.admin__form__container__header}>
+                      <div className='font-fs-joey fs__36 font-weight-bold text__primary'>Datos personales</div>
+                      <div className='fs__16 text__gray__gray_darken ls_05'>
+                        <span className='text-uppercase font-weight-semi-bold'>Fecha de registro:</span>
+                        <span className='fs'>12/05/2022</span>
                       </div>
                     </div>
-                    {
-                      !displayResetPassword && (
-                        <div className='flex-lg-3 flex-sm-12'>
-                          <Button type='submit' styles='primary'>
-                            Guardar
-                          </Button>
+                    <div className='row'>
+                      {labelsUser.map((field) => (
+                        <div className='flex-lg-6 flex-sm-12'>
+                          <Input key={field.id} field={field} formik={formConfig} />
                         </div>
-                      )
-                    }
+                      ))}
+                    </div>
+                    <div className='row align_items__center mt-4 justify_content__between'>
+                      <div className='flex-lg-6 flex-sm-12'>
+                        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+                        <div
+                          className='fs__16 text__gray__gray_darken ls_05 text-uppercase font-weight-bold ml-3 cpointer'
+                          onClick={() => setDisplayRestorePassword(!displayRestorePassword)}
+                        >
+                          Restablecer password
+                        </div>
+                      </div>
+                      {
+                        !displayRestorePassword && (
+                          <div className='flex-lg-3 flex-sm-12'>
+                            <Button
+                              type='submit'
+                              styles='primary'
+                            >
+                              Guardar
+                            </Button>
+                          </div>
+                        )
+                      }
+                    </div>
                   </div>
-                  <RestorePassword display={displayResetPassword} />
+                </form>
+                <div className={classes.admin__form__container}>
+                  <RestorePassword userEmail={user?.properties?.email} display={displayRestorePassword} />
                 </div>
-              </form>
+              </div>
             </div>
           ) : (null)}
 

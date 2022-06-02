@@ -6,5 +6,6 @@ const config = {
   serviceName: process.env.REACT_APP_SERVICE_NAME,
   apiVersion: '2021-08-01',
   hmacAuthHeader: 'SharedAccessSignature integration&202206090144&mezCbWwQlNcohcjSez0cmEmhTBjc4PBgR7DGSSK5DbA1VN8m6//JxgaGZ+hSJaDFaM7u8hWk9BUS8MVpKRJ72g==',
+  rememberkey: process.env.REACT_APP_REMEMBER_KEY,
 };
 export default config;

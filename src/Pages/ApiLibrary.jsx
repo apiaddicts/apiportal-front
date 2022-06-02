@@ -129,7 +129,7 @@ function AppLibrary(props) {
   };
 
   return (
-    <Container fixed className='py-10 table-left'>
+    <Container fixed className='py-10 mt-10'>
       <Title className='mb-18' text='Biblioteca de Apis' />
       <Grid style={{ marginTop: '20px' }} container spacing={10}>
         <Grid item xs={7}>

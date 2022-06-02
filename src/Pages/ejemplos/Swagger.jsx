@@ -7,6 +7,7 @@ import 'swagger-ui-react/swagger-ui.css';
 import { useDispatch, useSelector } from 'react-redux';
 // import config from '../../services/config';
 
+import { Container } from '@mui/material';
 import { getApiOpenAPI } from '../../redux/actions/libraryAction';
 
 function Swagger() {
@@ -33,12 +34,14 @@ function Swagger() {
 
   return (
     <div style={{ marginTop: '50px' }}>
-      <SwaggerUI
+      <Container fixed className='py-10 mt-10'>
+        <SwaggerUI
         // url='https://petstore.swagger.io/v2/swagger.json'
         // url='https://cloudappi-apim.management.azure-api.net/subscriptions/8e7674e5-98c5-4ccb-9b4c-bd5eec3dc202/resourceGroups/grdatafactory/providers/Microsoft.ApiManagement/service/cloudappi-apim/apis/demo-conference-api-v1?api-version=2021-08-01'
         // url='https://api.apis.guru/v2/specs/instagram.com/1.0.0/swagger.yaml'
-        spec={jsonOpenApi}
-      />
+          spec={jsonOpenApi}
+        />
+      </Container>
     </div>
   );
 };
