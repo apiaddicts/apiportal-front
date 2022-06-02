@@ -28,7 +28,7 @@
     }
     &__right {
         width: 80%;
-        padding: 0 0 2% 2%;
+        padding: 0 0 2% 4%;
         @include breakpoint(xs) {
           width: 100%;
           padding: 0 15px;
@@ -43,7 +43,7 @@
         
         @include breakpoint(lg) {
           width: 80%;
-          padding: 0 0 2% 3.2%;
+          padding: 0 0 2% 11%;
         }
     }
     &__filters {

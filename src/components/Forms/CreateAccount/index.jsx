@@ -6,7 +6,6 @@ import Input from '../../Input';
 import useFormConfig from '../../../hooks/useForm';
 import Button from '../../Buttons/Button';
 import { fieldsRegister } from '../fields';
-
 import { signUp } from '../../../redux/actions/userAction';
 
 import './index.scss';
@@ -20,10 +19,9 @@ function CreateAccount() {
         email: values.email,
         firstName: values.first_name,
         lastName: values.last_name,
-        appType: 'portal',
+        appType: 'developerPortal',
         confirmation: 'signup',
         password: values.password,
-        notify: true,
       },
     };
 
@@ -39,12 +37,12 @@ function CreateAccount() {
     >
       {fieldsRegister.map((field) => (
         <div className='mb-2'>
-          <Input footer key={field.id} field={field} formik={formConfig} />
+          <Input key={field.id} field={field} formik={formConfig} />
         </div>
       ))}
       {/* checkbox */}
       <div className='container create-account__checkbox'>
-        <input type='checkbox' id='checkbox' />
+        <input type='checkbox' id='terms' name='terms' />
         <span>
           Acepto recibir correos de acuerdo con los siguientes
           {' '}

@@ -1,0 +1,36 @@
+@import "./../variables.scss";
+
+
+.pagination {
+    cursor: pointer;
+    display: flex;
+    color: $primary;
+    font-size: 20px;
+    
+    p {
+        font-family: $barlow;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 32px;
+    }
+}
+
+.filter {
+    margin-right: 15px;
+    font-family: $barlow;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    color: #53565A;
+}
+
+.selectIn {
+    width: 100%;
+}
+
+.margin_left {
+    margin-left: 5% !important;
+}

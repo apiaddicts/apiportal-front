@@ -93,3 +93,9 @@
   @include letter($primary);
   @include border($primary);
 }
+
+.btn-grey {
+  @include button-bg($gray_lighten-1);
+  @include letter($gray_darken);
+  @include border($gray_lighten-1);
+}

@@ -1,0 +1,209 @@
+@import "./../../../styles/variables.scss";
+
+.accordion {
+  width: 100%;
+  transition: 0.3s ease all;
+  padding: 0.5rem 0;
+  @include breakpoint(xs) {
+    padding: 0;
+  }
+  &__head {
+    transition: 0.3s ease all;
+    background: rgba($color: $gray-lighten-1, $alpha: 0.7);
+    color: $gray_darken;
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 23px 30px;
+    position: relative;
+    cursor: pointer;
+    &__title {
+      font-size: 22px;
+      font-weight: 500;
+      @include breakpoint(xs) {
+        font-size: 18px;
+      }
+      &__actionbutton {
+        font-size: 20px;
+      }
+    }
+  }
+  &__body {
+    transition: 0.3s ease all;
+    width: 100%;
+    height: 100%;
+    padding: 35px 30px;
+    box-shadow: 0px 3px 12px -2px rgba(0, 0, 0, 0.1);
+    margin-top: -9px;
+    border-radius: 0 0 20px 20px;
+
+    &__description {
+      font-size: 18px;
+      font-weight: 400;
+      color: $gray_darken;
+      line-height: 28px;
+      padding-bottom: 1rem;
+    }
+
+    &__title {
+      display: grid;
+      grid-template-columns: 140px 2fr;
+      gap: 1rem;
+      padding: 1rem 0.5rem;
+      align-items: center;
+
+      h1 {
+        font-size: 1rem;
+        font-weight: 400;   
+        color: $gray_darken;
+      }
+
+      p {
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.1px;
+      }
+
+    }
+
+    &__content {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 1rem;
+      align-items: center;
+    }
+  }
+}
+  
+.active {
+  transition: 0.3s ease all;
+  background: $primary;
+  color: $secondary_white;
+}
+
+.filter {
+  width: 100%;
+  margin: 30px 0;
+  &__title{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 1.33px;
+    font-family: $barlow;
+    text-transform: uppercase;
+    color: $gray_darken;
+    cursor: pointer;
+  }
+  &__body{
+    font-size: 16px;
+    font-family: $barlow;
+    font-weight: 400;
+    &__list {
+      list-style: none;
+      padding: 0;
+      &__item {
+        margin: 15px 0;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        &__chip {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-right: 10px;
+          width: 50px;
+          height: 29px;
+          font-weight: 500;
+          font-size: 0.875rem;
+          font-family: $barlow;
+          color: $secondary_white;
+          border-radius: 0.313rem;
+        }
+      }
+    } 
+  }
+}
+
+.POST {
+  background: $blue_sura !important;
+}
+.GET {
+  background: $green_sura;
+}
+.PUSH {
+  background: $orange_sura;
+}
+.DEL {
+  background: $red_sura;
+}
+
+.item__active{
+  margin: 15px 0;
+  padding-left: 10px;
+  font-weight: 700;
+  border-left: 2px solid $secondary;
+  color: $primary;          
+}
+
+.auth__title {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+.auth__subtitle {
+  font-size: 1rem;
+  font-weight: 400;
+}
+.auth__body {
+  font-weight: 700;
+  margin-right: 5px;
+}
+.table__auth  {
+  width: 100%;
+  margin: 1rem 0;
+  table, th, td {
+    border-collapse: collapse;
+    font-size: 14px;
+  }
+  th, td {
+    padding: 5px;
+    text-align: left;
+  }
+  &__subrow {
+    background-color: rgba($color: #000, $alpha: 0.1)
+  }
+}
+
+.scopes{ 
+  li {
+    padding: 10px;
+    span {
+      font-size: 1rem;
+    }
+  }
+  &__code {
+    color: $primary;
+    background: #FAFAFC;
+    border-radius: 12px;
+    border: 1px solid #ECF0F1;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+    padding: 0.5rem 11px;
+    &__item {
+      padding: 0 10px;
+      border-radius: 12px;
+      border: 1px solid #ECF0F1;
+      background: #FAFAFC;
+      color: $primary;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+  }
+}
+
+

@@ -27,6 +27,8 @@ import AddApp from '../PrivatePages/AddApp';
 import AppsDetail from '../PrivatePages/DetailApp';
 import ApiDetailed from '../PrivatePages/ApiDetails/ApiDetailed';
 import ChooseApi from '../PrivatePages/ChooseApi';
+import CustomFooter from '../components/common/CustomFooter/CustomFooter';
+// import CustomContainer from '../components/common/CustomContainer/CustomContainer';
 
 // Ejemplos
 import Swagger from '../Pages/ejemplos/Swagger';
@@ -84,7 +86,7 @@ function AppRouter() {
       {privateSession && (
         <Box>
           {user && Object.keys(user).length > 0 ? (
-            <>
+            <Box>
               <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#fbfbfb' }}>
                 <SidebarDrawer user={user} />
                 <Routes>
@@ -96,15 +98,16 @@ function AppRouter() {
                   <Route path='/newApp' exact element={<AddApp />} />
                   <Route path='/ApiLibrary' exact element={<ApiLibrary />} />
                   <Route path='/ApiLibrary/:id' exact element={<ApiDetailed />} />
-                  <Route path='/swagger' exact element={<Swagger />} />
+                  <Route path='/ApiLibrary/try/:id' exact element={<Swagger />} />
                   <Route path='/redoc' exact element={<Redoc />} />
                   <Route path='*' element={<Navigate to='/apps' replace />} />
                 </Routes>
               </Box>
-              <Box sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, position: 'absolute', background: '#fff' }}>
-                <Footer isPrivate={true} />
+              <Box sx={{ zIndex: 1300, position: 'absolute', background: '#fff' }}>
+                <CustomFooter />
               </Box>
-            </>
+
+            </Box>
           ) : (<SkeletonComponent />)}
 
         </Box>

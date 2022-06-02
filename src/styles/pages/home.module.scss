@@ -177,6 +177,9 @@
   &__sc {
     padding-top: 95px;
     padding-bottom: 77px;
+    @include breakpoint(xs) {
+      padding-top: 54px;
+    }
   }
 
   @include breakpoint(xs){
@@ -358,6 +361,12 @@
     padding-bottom: 0 !important;
   }
 
+  &__content {
+    @include breakpoint(xs) {
+      padding-bottom: 67px !important;
+    }
+  }
+
   &__showmore {
     margin-top: 45px !important;
     @include breakpoint(xs) {
@@ -395,5 +404,12 @@
 
   @media (max-width: 768px) {
     display: block;
+  }
+}
+
+.custom_top{
+  margin-top: 1rem;
+  @include breakpoint(xs) {
+    margin: 2rem 0 !important;
   }
 }

@@ -17,6 +17,7 @@ import ButtonGroupMUI from '../components/common/ButtonGroup';
 import { getLibraries, filterCheck, sortApiCollection } from '../redux/actions/libraryAction';
 import CheckboxLabels from '../components/common/CustomCheck';
 import Icon from '../components/MdIcon/Icon';
+import PaginacionApis from '../components/PaginacionApis';
 
 function Apis({ setIsOpen }) {
   const [activeTab, setActiveTab] = useState('');
@@ -221,7 +222,7 @@ function Apis({ setIsOpen }) {
                     borderRadius='20px'
                   />
                 </div>
-                <div className='flex-sm-12 flex-md-4'>
+                <div className='flex-sm-12 flex-md-4 pl-0'>
                   <InputSelect handleSelect={(e) => {
                     console.log(e);
                     handleSort(e);
@@ -288,6 +289,7 @@ function Apis({ setIsOpen }) {
                 )}
               </div>
             </div>
+            <PaginacionApis css_styles={{ 'custom_margin': 'mt-10' }} />
           </section>
         </section>
       </div>

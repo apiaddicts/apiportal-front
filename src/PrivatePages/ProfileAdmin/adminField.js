@@ -102,3 +102,33 @@ export const adminFieldsOrg = [
     type: 'text',
   },
 ];
+
+export const restorePasswordField = [
+  {
+    id: 'password',
+    initialValue: '',
+    placeholder: '********',
+    label: 'Password',
+    validate: 'password',
+    required: true,
+    type: 'password',
+  },
+  {
+    id: 'new_password',
+    initialValue: '',
+    placeholder: '********',
+    label: 'Nueva Password',
+    validate: 'new_password',
+    required: true,
+    type: 'password',
+  },
+  {
+    id: 'confirm_password',
+    initialValue: '',
+    placeholder: '********',
+    label: 'Confirmar Password',
+    validate: 'confirm_password',
+    required: true,
+    type: 'password',
+  },
+];

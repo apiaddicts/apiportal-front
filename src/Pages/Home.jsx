@@ -254,7 +254,7 @@ function Home({ setIsOpen }) {
             </div>
             <div className='container d-xs-only'>
               <div className='row'>
-                <div className='flex-md-12 flex-sm-12'>
+                <div className='flex-md-12 flex-sm-12 pxs-none'>
                   <Slick slides={filterDiscover[0].useCaseList} />
                 </div>
               </div>
@@ -335,7 +335,7 @@ function Home({ setIsOpen }) {
             />
           </section>
 
-          <section className={classes.section__news}>
+          <section className={`${classes.section__news} ${classes.section__news__content}`}>
             <div className='container'>
               <div className='row'>
                 <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
@@ -356,7 +356,7 @@ function Home({ setIsOpen }) {
             </div>
             <div className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
-                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center'>
+                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
                   <HashLink smooth to='/apis#apiHome'>
                     <div>Ver Más</div>
                   </HashLink>

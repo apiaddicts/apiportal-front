@@ -1,9 +1,9 @@
+/* eslint-disable no-restricted-syntax */
 import React from 'react';
 import Icon from '../MdIcon/Icon';
 import classes from './accordion.module.scss';
 
-function Accordion({ subItem, setSubItem, items }) {
-
+function Accordion({ subItem, setSubItem, items, arrItems, clicked }) {
   const toggleItem = (index) => {
     if (subItem === index) {
       return setSubItem(null);
@@ -32,7 +32,7 @@ function Accordion({ subItem, setSubItem, items }) {
                       <p>{item.title}</p>
                     </div>
                     <div className={classes.accordion__head__title__actionbutton}>
-                      {subItem === index ? <Icon id='MdExpandLess' /> : <Icon id='MdExpandMore' />}
+                      {subItem === index ? <Icon id='MdArrowDropUp' /> : <Icon id='MdArrowDropDown' />}
                     </div>
                   </div>
                   {
