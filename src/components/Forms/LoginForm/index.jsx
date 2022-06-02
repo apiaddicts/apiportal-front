@@ -13,7 +13,7 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin }) {
         css_styles={{ custom_padding: 'p-4', custom_margin: 'mt-4' }}
         alert_type='alert__danger'
         title='Error on login'
-        msg={['The data entered are not correct, try to change the password, if you do not remember you can ', <a href='#'>forgot your password</a>]}
+        msg={['The data entered are not correct, try to change the password, if you do not remember you can ', <p>forgot your password</p>]}
       />
       <div className='my-5 w-full'>
         {
