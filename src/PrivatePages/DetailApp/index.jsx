@@ -102,11 +102,9 @@ function AppsDetail(props) {
           appType: 'developerPortal',
         },
       };
-      dispatch(subscribeToAProduct(data, user.name));
+      dispatch(subscribeToAProduct(data, user.name, params.id));
     }
   };
-
-  console.log(productSubscriptions);
 
   return (
     <Container className='py-10 table-left'>
@@ -124,6 +122,7 @@ function AppsDetail(props) {
             </div>
           </Link>
           <Title text={product.name} />
+          {/* Card description */}
           <Card sx={{ borderRadius: '20px', marginTop: '1rem', paddingTop: '3px', paddingLeft: '41px', paddingRight: '45px', paddingBottom: '40px', marginBottom: '50px' }}>
             <Grid style={{ marginTop: '0px' }} container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
               <Grid item xs={6}>
@@ -241,7 +240,10 @@ function AppsDetail(props) {
                             name='name'
                             type='text'
                             label='Buscar Nombre'
-                            onChange={formik.handleChange}
+                            onChange={(e) => {
+                              formik.handleChange(e);
+                              formik.setFieldValue('description', '');
+                            }}
                             value={formik.values.name}
                           />
                         </div>
@@ -259,7 +261,10 @@ function AppsDetail(props) {
                             name='description'
                             type='text'
                             label='Buscar Descripcion'
-                            onChange={formik.handleChange}
+                            onChange={(e) => {
+                              formik.handleChange(e);
+                              formik.setFieldValue('name', '');
+                            }}
                             value={formik.values.description}
                           />
                         </div>

@@ -87,7 +87,11 @@ function Apps(props) {
             type='text'
             placeholder='Buscar'
             icon
-            onChange={formik.handleChange}
+            onChange={(e) => {
+              formik.handleChange(e);
+              formik.setFieldValue('description', '');
+              formik.setFieldValue('name', '');
+            }}
             value={formik.values.search}
           />
         </Grid>
@@ -113,7 +117,11 @@ function Apps(props) {
                               name='name'
                               type='text'
                               label='Buscar Nombre'
-                              onChange={formik.handleChange}
+                              onChange={(e) => {
+                                formik.handleChange(e);
+                                formik.setFieldValue('description', '');
+                                formik.setFieldValue('search', '');
+                              }}
                               value={formik.values.name}
                             />
                           </div>
@@ -130,7 +138,11 @@ function Apps(props) {
                               name='description'
                               type='text'
                               label='Buscar Descripcion'
-                              onChange={formik.handleChange}
+                              onChange={(e) => {
+                                formik.handleChange(e);
+                                formik.setFieldValue('name', '');
+                                formik.setFieldValue('search', '');
+                              }}
                               value={formik.values.description}
                             />
                           </div>

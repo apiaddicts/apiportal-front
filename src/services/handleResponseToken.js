@@ -1,4 +1,4 @@
-import { logout } from '../redux/actions/userAction';
+// import { logout } from '../redux/actions/userAction';
 
 const statusCode = {
   HTTP_200_OK: 200,
