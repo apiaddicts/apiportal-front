@@ -97,7 +97,7 @@ function AppsDetail(props) {
     if (searchSuscription.trim().length > 0 && user && Object.keys(user).length > 0) {
       const data = {
         properties: {
-          name: `${searchSuscription} subscription`,
+          name: searchSuscription,
           scope: `/products/${product.name}`,
           appType: 'developerPortal',
         },
@@ -176,11 +176,9 @@ function AppsDetail(props) {
                                 </p>
                               </TableCell>
                               <TableCell>
-                                input
                                 <PasswordGenerate idSuscripcion={row.name} user={user} version={1} />
                               </TableCell>
                               <TableCell>
-                                input
                                 <PasswordGenerate idSuscripcion={row.name} user={user} version={2} />
                               </TableCell>
                               <TableCell>
