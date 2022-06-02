@@ -87,7 +87,7 @@ function AppRouter() {
         <Box>
           {user && Object.keys(user).length > 0 ? (
             <Box>
-              <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#fbfbfb', overflow: 'auto', height: '79vh' }}>
+              <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#fbfbfb' }}>
                 <SidebarDrawer user={user} />
                 <Routes>
                   <Route path='/user' element={<Admin />} />
