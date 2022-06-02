@@ -5,9 +5,7 @@ import { string } from 'yup';
 import * as Yup from 'yup';
 
 const validationSchema = Yup.object().shape({
-  password: string().required('La contraseña actual es obligatoria'),
-  new_password: string().required('La nueva contraseña es obligatoria'),
-  confirm_password: string().oneOf([Yup.ref('new_password'), null], 'Las contraseñas deben coincidir'),
+  email: string().email('Please provide a valid email').required('El email es obligatorio'),
 });
 
 const objectFromArray = (fields, key) => {
@@ -22,7 +20,7 @@ const objectFromArray = (fields, key) => {
   return Object.fromEntries(mappedProps);
 };
 
-function useFormRestorePassword(
+function useFormForgotPassword(
   fields,
   customHandleSubmit,
 ) {
@@ -50,4 +48,4 @@ function useFormRestorePassword(
   return { ...formik, formStatus, setFormStatus };
 }
 
-export default useFormRestorePassword;
+export default useFormForgotPassword;

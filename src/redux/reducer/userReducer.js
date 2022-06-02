@@ -12,6 +12,8 @@ const initialState = token && etag ? {
   user: {},
   loadingUser: false,
   responseError: {},
+  responseRestoreError: {},
+  responseResetSignup: {},
 } : {
   user: {},
   loadingUser: false,
@@ -21,10 +23,13 @@ const initialState = token && etag ? {
   loadingSignUp: false,
   signUpData: {},
   responseError: {},
+  responseRestoreError: {},
+  responseResetSignup: {},
 };
 
 // eslint-disable-next-line default-param-last
 export default function userReducer(state = initialState, action) {
+  console.log('action', action);
   switch (action.type) {
     // save user in local storage
     case userConstants.SAVE_USER:
@@ -52,6 +57,18 @@ export default function userReducer(state = initialState, action) {
         loadingSignUp: false,
         responseError: action.error,
       };
+    case userConstants.RESTORE_SIGNUP_FAILURE:
+      return {
+        ...state,
+        loadingSignUp: false,
+        responseRestoreError: action.response,
+      };
+    case userConstants.RESET_SIGNUP:
+      return {
+        ...state,
+        loadingSignUp: false,
+        responseResetSignup: action.response,
+      };
     // login user
     case userConstants.GET_USER_REQUEST:
       return {
@@ -77,6 +94,14 @@ export default function userReducer(state = initialState, action) {
         etag: action.response.etag,
       };
       // logout
+    case userConstants.RESET_ALERT:
+      console.log('entro al reset alert');
+      return {
+        ...state,
+        responseError: {},
+        responseRestoreError: {},
+        responseResetSignup: {},
+      };
     case userConstants.LOGOUT_USER:
       return {
         ...state,
@@ -84,6 +109,10 @@ export default function userReducer(state = initialState, action) {
         token: '',
         etag: '',
         user: {},
+        signUpData: {},
+        responseError: {},
+        responseRestoreError: {},
+        responseResetSignup: {},
       };
     default:
       return state;

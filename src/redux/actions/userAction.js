@@ -100,23 +100,50 @@ export const updateUser = (data) => (dispatch) => {
     },
   );
 };
-// export const resetPassword = (data) => (dispatch) => {
-//   userService.resetPassword(data).then(
-//     (response) => {
-//       if (response && Object.keys(response).length > 0) {
-
-//       }
-//       // if (Object.keys(response).length > 0) {
-//       //   const { id, token } = store.getState().user;
-//       //   const tokens = {
-//       //     token,
-//       //     id,
-//       //   };
-//       //   dispatch(getUser(tokens));
-//       }
-//     },
-//     (error) => {
-//       console.log(error);
-//     },
-//   );
-// };
+export const verifyOldPassword = (data) => (dispatch) => {
+  userService.verifyOldPassword(data).then(
+    (response) => {
+      if (response && Object.keys(response).length > 0) {
+        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+          if (response?.error?.status === 401) {
+            dispatch({
+              type: userConstants.RESTORE_SIGNUP_FAILURE,
+              response,
+            });
+          }
+        } else {
+          dispatch(getUserEntityTag(data, response));
+          dispatch(changePassword(data.new_password));
+        }
+      }
+    },
+    (error) => {
+      console.log(error);
+    },
+  );
+};
+export const changePassword = (newPassword) => (dispatch) => {
+  userService.changePassword(newPassword).then(
+    (response) => {
+      dispatch(logout());
+    },
+    (error) => {
+      console.log('Update password error', error);
+    },
+  );
+};
+export const resetPassword = (data) => (dispatch) => {
+  userService.resetPassword(data).then(
+    (response) => {
+      if (response.status === 204) {
+        dispatch({
+          type: userConstants.RESET_SIGNUP,
+          response,
+        });
+      }
+    },
+    (error) => {
+      console.log('Update password error', error);
+    },
+  );
+};

@@ -24,6 +24,7 @@ function Input({ field, formik, footer, styleInput }) {
         onBlur={handleBlur}
         placeholder={field.placeholder}
         value={values[field.id]}
+        disabled={field.disabled}
       />
       <div
         onClick={() => {
