@@ -33,8 +33,6 @@ function Login({ setIsOpen, setPrivateSession }) {
     }
   }, [token]);
 
-  console.log('responseError en login', token);
-
   const formConfig = useLoginConfig(fieldsLogin, handleSubmit);
   return (
     <Modal>

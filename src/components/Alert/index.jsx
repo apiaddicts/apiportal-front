@@ -23,7 +23,6 @@ function Alert({ alert_type, title, msg, css_styles }) {
         setMessage(responseError?.error?.details[0]?.message);
       } else {
         setMessage(msg);
-        console.log('responseError', responseError);
       }
     }
   }, [responseError, responseRestoreError, responseResetSignup]);
