@@ -26,8 +26,8 @@ import { logout } from '../../redux/actions/userAction';
 function SidebarDrawer({ children, user }) {
   const listItems = [
     { route: '/apps', text: 'Productos', icon: <Terminal /> },
-    { route: '/newApp', text: 'Nueva App', icon: <Terminal /> },
     { route: '/ApiLibrary', text: 'Biblioteca de APIs', icon: <Settings /> },
+    { route: '/newApp', text: 'Nueva App', icon: <Terminal /> },
   ];
 
   const dispatch = useDispatch();
@@ -52,6 +52,7 @@ function SidebarDrawer({ children, user }) {
 
   return (
     <div className={classes.backgroundSidebar}>
+      {/* <CssBaseline /> */}
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position='fixed' elevation={0} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: '#0033a0', padding: '0 100px' }}>
           <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -117,6 +118,7 @@ function SidebarDrawer({ children, user }) {
         sx={{
           width: '388px',
         }}
+
       >
         <List
           sx={{ paddingRight: '80px' }}
@@ -208,7 +210,7 @@ function SidebarDrawer({ children, user }) {
   );
 }
 function MyNavLink(props) {
-  return <NavLink {...props} activeclassname='active' />;
+  return <NavLink {...props} activeClassName='active' />;
 }
 
 export default SidebarDrawer;

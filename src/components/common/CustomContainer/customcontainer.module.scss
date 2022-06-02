@@ -1,0 +1,62 @@
+@import "../../../styles/variables.scss";
+
+$drawerWidth: 240px;
+
+.title {
+  font-family: $fs-joey;
+  font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: -0.6px;
+  &__name {
+    font-family: $fs-joey;
+    font-weight: 500;
+    font-size: 2.5rem;
+  }
+  &__developer {
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: $gray_darken;
+  }
+  &__organization {
+    font-weight: 400;
+    font-size: 1.25rem;
+    color: $gray_darken;
+  }
+  &__role {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: $gray_darken;
+  }
+}
+
+.root {
+  display: flex;
+  min-height: 100vh;
+  margin-bottom: 250px;
+}
+
+.drawer {
+  width: $drawerWidth;
+  flex-shrink: 0;
+}
+
+.drawerPaper {
+  width: $drawerWidth;
+}
+
+.content {
+  flex-grow: 1;
+  padding: 24px;
+  min-height: 100vh;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 3000;
+  background: #fff;
+}

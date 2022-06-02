@@ -52,6 +52,7 @@
       grid-template-columns: 140px 2fr;
       gap: 1rem;
       padding: 1rem 0.5rem;
+      align-items: center;
 
       h1 {
         font-size: 1rem;
@@ -65,18 +66,13 @@
         letter-spacing: 0.1px;
       }
 
-      input {
-        background: #FAFAFC;
-        border-radius: 12px;
-        border: 1px solid #ECF0F1;
-        height: 40px;
-        color: $primary;
-        font-weight: 600;
-        letter-spacing: 0.1px;
-        font-size: 16px;
-        padding: 0 0.5rem;
-      }
+    }
 
+    &__content {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 1rem;
+      align-items: center;
     }
   }
 }
@@ -183,12 +179,30 @@
 }
 
 .scopes{ 
+  li {
+    padding: 10px;
+    span {
+      font-size: 1rem;
+    }
+  }
   &__code {
     color: $primary;
-    background-color: #f1f1f1;
-    border-radius: 2px;
-    border: 1px solid rgba(38, 50, 56, 0.1);
-    padding: 0px 5px;
+    background: #FAFAFC;
+    border-radius: 12px;
+    border: 1px solid #ECF0F1;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.1px;
+    padding: 0.5rem 11px;
+    &__item {
+      padding: 0 10px;
+      border-radius: 12px;
+      border: 1px solid #ECF0F1;
+      background: #FAFAFC;
+      color: $primary;
+      font-size: 1rem;
+      font-weight: 500;
+    }
   }
 }
 

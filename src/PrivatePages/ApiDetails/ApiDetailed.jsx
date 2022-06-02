@@ -11,7 +11,7 @@ import Title from '../../components/Title/Title';
 import AccordionFilter from '../../components/Accordion/AccordionFilter';
 import SkeletonComponent from '../../components/SkeletonComponent/SkeletonComponent';
 
-import { getApi } from '../../redux/actions/libraryAction';
+import { getApi, resetApiDetailed } from '../../redux/actions/libraryAction';
 import CustomAccordion from '../../components/common/CustomAccodion/CustomAccordion';
 import Icon from '../../components/MdIcon/Icon';
 
@@ -26,23 +26,34 @@ function ApiDetails(props) {
 
   const infoApi = [{
     title: 'Información API',
-    questions: ['Información', 'Descripción', 'Versiones', 'Autenticación', 'Sandbox'],
+    questions: [
+      'Información',
+      'Descripción',
+      'Versiones',
+      'Autenticación',
+      // 'Sandbox',
+    ],
   }];
 
   useEffect(() => {
     if (params.id && api && Object.keys(api).length === 0) {
       dispatch(getApi(params.id));
     }
-
   }, [dispatch, api]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(resetApiDetailed());
+    };
+  }, []);
+
   return (
-    <Container fixed className='my-10 py-10'>
+    <Container fixed className='my-10 py-10' sx={{ height: '100%' }}>
       {api && Object.keys(api).length > 0 ? (
         <div>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Title text={api.properties.displayName ? api.properties.displayName : 'Demo API'} />
-            <Link to={`/ApiLibrary/try/${api.name}`} style={{ background: '#E3E829', borderRadius: '100px', padding: '1rem', width: '97px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontWeight: '700', fontSize: '1rem', letterSpacing: '0.8px', color: '#0033A0' }}>
+            <Link to={`/ApiLibrary/try/${api.name}`} style={{ background: '#E3E829', borderRadius: '100px', padding: '12px 1rem', width: '97px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontWeight: '700', fontSize: '1rem', letterSpacing: '0.8px', color: '#0033A0' }}>
               <span>Try it</span>
               <Icon id='MdChevronRight' />
             </Link>

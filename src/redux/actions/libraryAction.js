@@ -273,3 +273,32 @@ export const resetLibraryApi = () => (dispatch) => {
     type: libraryConstants.RESET_LIBRARY_API,
   });
 };
+
+export const resetApiDetailed = () => (dispatch) => {
+  dispatch({
+    type: libraryConstants.RESET_API_DETAILED,
+  });
+};
+
+export const getApiHostnames = (apiName) => (dispatch) => {
+  libraryService.getApiHostnames(apiName).then(
+    (res) => {
+      dispatch({
+        type: libraryConstants.GET_API_HOSTNAMES_SUCCESS,
+        payload: res,
+      });
+    },
+    (error) => {
+      dispatch({
+        type: libraryConstants.GET_API_HOSTNAMES_FAILURE,
+        payload: error,
+      });
+    },
+  );
+};
+
+export const resetApiHostname = () => (dispatch) => {
+  dispatch({
+    type: libraryConstants.RESET_API_HOSTNAMES,
+  });
+};

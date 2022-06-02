@@ -25,6 +25,9 @@ const initialState = {
 
   apisSkip: 0,
 
+  hostnames: {},
+  errorHostnames: {},
+
 };
 
 // eslint-disable-next-line default-param-last
@@ -143,6 +146,12 @@ export default function libraryReducer(state = initialState, action) {
         api: {},
         errorApi: action.payload,
       };
+    case libraryConstants.RESET_API_DETAILED:
+      return {
+        ...state,
+        api: {},
+        errorApi: {},
+      };
     case libraryConstants.GET_API_OPENAPI_SUCCESS:
       return {
         ...state,
@@ -154,6 +163,24 @@ export default function libraryReducer(state = initialState, action) {
         ...state,
         jsonOpenApi: {},
         errorJsonOpenApi: action.payload,
+      };
+    case libraryConstants.GET_API_HOSTNAMES_SUCCESS:
+      return {
+        ...state,
+        hostnames: action.payload,
+        errorHostnames: {},
+      };
+    case libraryConstants.GET_API_HOSTNAMES_FAILURE:
+      return {
+        ...state,
+        hostnames: {},
+        errorHostnames: action.payload,
+      };
+    case libraryConstants.RESET_API_HOSTNAMES:
+      return {
+        ...state,
+        hostnames: {},
+        errorHostnames: {},
       };
     default:
       return state;
