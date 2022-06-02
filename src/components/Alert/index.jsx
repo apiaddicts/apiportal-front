@@ -17,9 +17,14 @@ function Alert({ alert_type, title, msg, css_styles }) {
     } else if (Object.keys(responseRestoreError).length > 0) {
       setShowAlert('d-block');
       setMessage(responseRestoreError.error.statusText);
-    } else if (Object.keys(responseError).length) {
+    } else if (Object.keys(responseError).length > 0) {
       setShowAlert('d-block');
-      setMessage(responseError?.error?.details[0]?.message);
+      if (Object.prototype.hasOwnProperty.call(responseError?.error, 'details')) {
+        setMessage(responseError?.error?.details[0]?.message);
+      } else {
+        setMessage(msg);
+        console.log('responseError', responseError);
+      }
     }
   }, [responseError, responseRestoreError, responseResetSignup]);
 

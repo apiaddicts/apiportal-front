@@ -10,12 +10,21 @@ export const login = (data) => (dispatch) => {
 
   userService.login(data.email, data.password).then((response) => {
     if (response && Object.keys(response).length > 0) {
-      localStorage.setItem('token', JSON.stringify(response));
-      dispatch(getUser(response));
-      dispatch(getUserEntityTag(data, response));
+      if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+        dispatch({
+          type: userConstants.LOGIN_FAILURE,
+          error: response,
+        });
+        console.log('error en login', response);
+      } else {
+        localStorage.setItem('token', JSON.stringify(response));
+        dispatch(getUser(response));
+        dispatch(getUserEntityTag(data, response));
+        dispatch({ type: userConstants.RESET_ALERT });
+      }
     }
   }, (error) => {
-    console.error(error);
+    console.error('error', error);
   });
 
 };
@@ -38,7 +47,6 @@ export const signUp = (data) => (dispatch) => {
       });
     },
     (error) => {
-      console.log(error);
       dispatch({
         type: userConstants.SIGNUP_FAILURE,
         error,

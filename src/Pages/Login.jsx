@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Form from '../components/Forms/LoginForm';
 import Modal from '../components/Modal';
@@ -15,6 +15,7 @@ import classes from '../styles/pages/login.module.scss';
 import useLoginConfig from '../hooks/useLogin';
 
 function Login({ setIsOpen, setPrivateSession }) {
+  const { token } = useSelector((state) => state.user);
   const [showAlert, setShowAlert] = useState(false);
   const [showForm, setShowForm] = useState(true);
   const [showResetForm, setShowResetForm] = useState(false);
@@ -24,8 +25,15 @@ function Login({ setIsOpen, setPrivateSession }) {
   // This function is responsible for sending the user to local storage
   const handleSubmit = (dataForm) => {
     dispatch(login(dataForm));
-    setIsOpen(false);
   };
+
+  useEffect(() => {
+    if (token.length > 0) {
+      setIsOpen(false);
+    }
+  }, [token]);
+
+  console.log('responseError en login', token);
 
   const formConfig = useLoginConfig(fieldsLogin, handleSubmit);
   return (
