@@ -118,10 +118,12 @@ function getListTagsByApi(apiName) {
     });
 }
 
-function filterAPIsByTags(search, filter = 'isCurrent', top = 2, skip = 0, includeNotTaggedApis = false) {
+function filterAPIsByTags(search, filter = 'isCurrent', top = 4, skip = 0, includeNotTaggedApis = false) {
+  const { token } = store.getState().user;
+
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
   const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;

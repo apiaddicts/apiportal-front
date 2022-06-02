@@ -33,8 +33,6 @@ const statusCode = {
 
 function handleResponse(response) {
 
-  // const dispatch = useDispatch();
-
   return response.text().then((text) => {
     const data = text && JSON.parse(text);
     switch (response.status) {

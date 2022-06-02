@@ -74,8 +74,9 @@ function Admin() {
   ];
 
   const formConfig = useFormUserConfig(labelsUser, handleSubmit);
+
   return (
-    <div className='w-full'>
+    <div className={`w-full ${classes.margin_left}`}>
       <Container fixed className='my-10 py-10'>
         <div className={classes.main__admin}>
           {user && Object.keys(user).length > 0 && loadingUser === false ? (
@@ -94,8 +95,8 @@ function Admin() {
                   </div>
                   <div className='row'>
                     {labelsUser.map((field, i) => (
-                      <div className='flex-lg-6 flex-sm-12'>
-                        <TextField key={i} field={field} formik={formConfig} />
+                      <div key={i} className='flex-lg-6 flex-sm-12'>
+                        <TextField field={field} formik={formConfig} />
                       </div>
                     ))}
                   </div>
@@ -127,7 +128,7 @@ function Admin() {
 
         </div>
       </Container>
-      <Suscriptions />
+      <Suscriptions user={user} />
     </div>
   );
 }

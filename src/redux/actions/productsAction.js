@@ -126,17 +126,17 @@ export const getProductDetail = (productName) => (dispatch) => {
 
 export const getProductosNext = (url) => (dispatch) => {
   const { productsSkip } = store.getState().products;
-  const skip = productsSkip + 1;
+  const skip = productsSkip + 2;
 
-  dispatch(listProducts(2, 2));
+  dispatch(listProducts(2, skip));
   dispatch({ type: productsConstants.GET_PRODUCTS_SKIP, skip });
 };
 
 export const getProductPrevious = () => (dispatch) => {
   const { productsSkip } = store.getState().products;
-  const skip = productsSkip - 1;
+  const skip = productsSkip - 2;
 
-  dispatch(listProducts(2, 2));
+  dispatch(listProducts(2, skip));
   dispatch({ type: productsConstants.GET_PRODUCTS_SKIP, skip });
 };
 

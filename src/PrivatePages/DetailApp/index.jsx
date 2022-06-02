@@ -1,45 +1,47 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-unstable-nested-components */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Container, Card, Grid, Box, TableHead, TableRow, TableCell, Table, TableContainer, TableBody } from '@mui/material';
 import { Link, useParams } from 'react-router-dom';
+
+import moment from 'moment';
 
 import { useSelector, useDispatch } from 'react-redux';
 
 import Title from '../../components/Title/Title';
 import Btn from '../../components/Buttons/Button';
-import { fieldsAppSandbox, fieldsAppPre } from '../AddApp/field';
-import CustomTooltip from '../../components/common/ToolTip';
-import { TypographyUI } from '../../components/common/TypographyMUI/style';
-import TextField from '../../components/common/InputMUI';
+
 import Spinner from '../../components/Spinner';
 import Icon from '../../components/MdIcon/Icon';
 import InputResponse from '../../components/Input/InputUI/InputResponse';
+import PasswordGenerate from '../../components/common/InputMUI/passwordGenerate';
 
 import { getProductDetail, resetProduct, filterProductAPIsByName, filterProductAPIsByDescription, getProductApis, getProductApiNext, getProductApiPrevious } from '../../redux/actions/productsAction';
+import { subscribeToAProduct } from '../../redux/actions/subscriptionsAction';
 
 import useSearch from '../../hooks/useSearch';
 
-import useNewApp from '../../hooks/useNewApp';
+import 'moment/locale/es';
+
 import classes from './detail.module.scss';
 
+moment.locale('es');
 function AppsDetail(props) {
   const { product, productApis, productSubscriptions, spinnerApis, productsApisSkip } = useSelector((state) => state.products);
-  const handleSubmit = async (dataForm) => {
-    console.log(dataForm);
-  };
+  const { user } = useSelector((state) => state.user);
+  const { loadingCreateSubscription } = useSelector((state) => state.suscripcions);
 
   const dispatch = useDispatch();
   const params = useParams();
 
-  const formConfig = useNewApp(fieldsAppSandbox, handleSubmit);
-  const formConfigPre = useNewApp(fieldsAppPre, handleSubmit);
+  const [searchSuscription, setSearchSuscription] = useState('');
 
   const { formik } = useSearch({
     initialState: {
       name: '',
       description: '',
+      suscription: '',
     },
   });
 
@@ -60,9 +62,24 @@ function AppsDetail(props) {
   }, [formik.values.name, formik.values.description]);
 
   useEffect(() => {
+    if (formik.values.suscription.trim().length > 1) {
+      setSearchSuscription(formik.values.suscription);
+    }
+
+    if (formik.values.suscription.trim().length === 0) {
+      setSearchSuscription('');
+    }
+
+  }, [formik.values.suscription]);
+
+  useEffect(() => {
     if (params.id && product && Object.keys(product).length === 0) {
       dispatch(getProductDetail(params.id));
     }
+
+  }, []);
+
+  useEffect(() => {
     return () => {
       dispatch(resetProduct());
     };
@@ -75,6 +92,21 @@ function AppsDetail(props) {
   const handlePreviousProductApi = () => {
     dispatch(getProductApiPrevious(params.id));
   };
+
+  const handleSubmitSuscription = () => {
+    if (searchSuscription.trim().length > 0 && user && Object.keys(user).length > 0) {
+      const data = {
+        properties: {
+          name: `${searchSuscription} subscription`,
+          scope: `/products/${product.name}`,
+          appType: 'developerPortal',
+        },
+      };
+      dispatch(subscribeToAProduct(data, user.name));
+    }
+  };
+
+  console.log(productSubscriptions);
 
   return (
     <Container className='py-10 table-left'>
@@ -113,78 +145,81 @@ function AppsDetail(props) {
             <Title text='Suscripción' divider={false} />
             {productSubscriptions && Object.keys(productSubscriptions).length > 0 && productSubscriptions.count > 0 ? (
               <Box sx={{ height: '100%' }}>
-                <Box sx={{ mt: 4 }}>
-                  <Box sx={{ position: 'relative', display: 'inline-block', pr: 2 }}>
-                    <CustomTooltip text='ETORNO SANDBOX'>
-                      ?
-                    </CustomTooltip>
-                    <TypographyUI>
-                      ENTORNO SANDBOX
-                    </TypographyUI>
-                  </Box>
-                  <div className='row'>
-                    {fieldsAppSandbox.map((field) => (
-                      <div key={field.id} className='flex-lg-4 flex-sm-12'>
-                        <TextField field={field} formik={formConfig} iconCopy iconEye />
-                      </div>
-                    ))}
-                  </div>
-                </Box>
-                <Box sx={{ mt: 4 }}>
-                  <Box sx={{ position: 'relative', display: 'inline-block', pr: 2 }}>
-                    <CustomTooltip text='ENTORNO PRE'>
-                      ?
-                    </CustomTooltip>
-                    <TypographyUI>
-                      ENTORNO PRE
-                    </TypographyUI>
-                  </Box>
-                  <div className='row'>
-                    {fieldsAppPre.map((field) => (
-                      <div key={field.id} className='flex-lg-4 flex-sm-12'>
-                        <TextField field={field} formik={formConfigPre} iconCopy iconEye />
-                      </div>
-                    ))}
-                  </div>
-                </Box>
-                <Box sx={{ mt: 5 }}>
-                  <Box sx={{ position: 'relative', display: 'inline-block', pr: 2 }}>
-                    <CustomTooltip text='ENTORNO PRODUCCIÓN'>
-                      ?
-                    </CustomTooltip>
-                    <TypographyUI>
-                      ENTORNO PRODUCCIÓN
-                    </TypographyUI>
-                  </Box>
-                </Box>
-                <Grid container>
-                  <Grid item xs={4}>
-                    <div className={classes.btn}>
-                      <Btn styles='primary'>
-                        Solicitar pase a producción
-                      </Btn>
-                    </div>
-
-                  </Grid>
-                </Grid>
+                <TableContainer>
+                  <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell>
+                          Solicitud
+                        </TableCell>
+                        <TableCell>
+                          Primary key
+                        </TableCell>
+                        <TableCell>
+                          Secundary key
+                        </TableCell>
+                        <TableCell>
+                          Estado
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {productSubscriptions.value && productSubscriptions.value.length > 0 ? (
+                        <>
+                          {productSubscriptions.value.map((row, i) => (
+                            <TableRow
+                              key={i}
+                              sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer', zIndex: 6 }}
+                            >
+                              <TableCell>
+                                <p>
+                                  {moment(row.properties.createdDate).format('DD/MM/YYYY')}
+                                </p>
+                              </TableCell>
+                              <TableCell>
+                                input
+                                <PasswordGenerate idSuscripcion={row.name} user={user} version={1} />
+                              </TableCell>
+                              <TableCell>
+                                input
+                                <PasswordGenerate idSuscripcion={row.name} user={user} version={2} />
+                              </TableCell>
+                              <TableCell>
+                                {row.properties.state}
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </>
+                      ) : (null)}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
               </Box>
             ) : (
               <Box sx={{ height: '100%' }}>
-                <div className={classes.form_suscriptione} style={{ height: '36px' }}>
-                  <div className={classes.form_suscriptione__input}>
-                    <InputResponse
-                      type='text'
-                      label='Nombre de la suscripción a este producto'
-                    />
+                {loadingCreateSubscription ? (
+                  <Spinner styles={{ height: '200px' }} title='Subscribiendo...' />
+                ) : (
+                  <div className={classes.form_suscriptione} style={{ height: '36px' }}>
+                    <div className={classes.form_suscriptione__input}>
+                      <InputResponse
+                        name='suscription'
+                        type='text'
+                        label='Nombre de la suscripción a este producto'
+                        onChange={formik.handleChange}
+                        value={formik.values.suscription}
+                      />
+                    </div>
+                    <div className={classes.form_suscriptione____btn}>
+                      <Btn size='responsive' onClick={handleSubmitSuscription} styles={searchSuscription.length > 0 ? 'primary' : 'greey-primary'}>SUSCRIBIRME</Btn>
+                    </div>
                   </div>
-                  <div className={classes.form_suscriptione____btn}>
-                    <Btn size='responsive' styles='greey-primary'>SUSCRIBIRME</Btn>
-                  </div>
-                </div>
+
+                )}
               </Box>
             )}
           </Card>
-
+          {/* APis del producto */}
           <Card sx={{ borderRadius: '20px', marginTop: '33px', padding: '35px 47px 43px 41px', marginBottom: '15px' }}>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
               <Grid item xs={6}>
