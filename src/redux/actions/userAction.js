@@ -1,21 +1,35 @@
 /* eslint-disable no-use-before-define */
 import userConstants from '../constants/userConstats';
 import userService from '../../services/userService';
+import config from '../../services/config';
 
 import store from '../store';
 
 // eslint-disable-next-line import/prefer-default-export
 export const login = (data) => (dispatch) => {
   dispatch({ type: userConstants.LOGIN_REQUEST });
-
   userService.login(data.email, data.password).then((response) => {
     if (response && Object.keys(response).length > 0) {
-      localStorage.setItem('token', JSON.stringify(response));
-      dispatch(getUser(response));
-      dispatch(getUserEntityTag(data, response));
+      if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+        dispatch({
+          type: userConstants.LOGIN_FAILURE,
+          error: response,
+        });
+      } else {
+        if (data.remember) {
+          const passwordEncrypted = btoa(data.password);
+          const secureKeyEncrypted = btoa(`${passwordEncrypted}:${config.rememberkey}`);
+          localStorage.setItem('email', data.email);
+          localStorage.setItem('password', secureKeyEncrypted);
+        }
+        localStorage.setItem('token', JSON.stringify(response));
+        dispatch(getUser(response));
+        dispatch(getUserEntityTag(data, response));
+        dispatch({ type: userConstants.RESET_ALERT });
+      }
     }
   }, (error) => {
-    console.error(error);
+    console.error('error', error);
   });
 
 };
@@ -38,7 +52,6 @@ export const signUp = (data) => (dispatch) => {
       });
     },
     (error) => {
-      console.log(error);
       dispatch({
         type: userConstants.SIGNUP_FAILURE,
         error,
