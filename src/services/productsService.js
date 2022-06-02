@@ -77,7 +77,7 @@ function filterProductsByDescription(search, top, skip) {
     });
 }
 
-function filterProductAPIsByName(productName, search) {
+function filterProductAPIsByName(productName, search, top, skip) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
@@ -87,7 +87,7 @@ function filterProductAPIsByName(productName, search) {
   const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
   const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
   const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/products/${productName}/apis?api-version=${config.apiVersion}&$filter=(contains(properties/displayName,'${search}'))`;
+  const url = `${urlService}/products/${productName}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}'))`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -96,7 +96,7 @@ function filterProductAPIsByName(productName, search) {
     });
 }
 
-function filterProductAPIsByDescription(productName, search) {
+function filterProductAPIsByDescription(productName, search, top, skip) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
@@ -106,7 +106,7 @@ function filterProductAPIsByDescription(productName, search) {
   const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
   const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
   const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/products/${productName}/apis?api-version=${config.apiVersion}&$filter=(contains(properties/description,'${search}'))`;
+  const url = `${urlService}/products/${productName}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/description,'${search}'))`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)

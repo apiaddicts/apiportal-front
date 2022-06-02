@@ -129,10 +129,10 @@ function AppLibrary(props) {
   };
 
   return (
-    <Container fixed className='py-10 mt-10'>
+    <Container fixed className={`${classes.margin_left} py-10 mt-10 `}>
       <Title className='mb-18' text='Biblioteca de Apis' />
       <Grid style={{ marginTop: '20px' }} container spacing={10}>
-        <Grid item xs={7}>
+        <Grid item xs={6}>
           <SearchInput
             icon
             name='search'
@@ -144,17 +144,26 @@ function AppLibrary(props) {
             borderRadius='20px'
           />
         </Grid>
-        <Grid item xs={5}>
-          <Multiselect
-            className='inputSelect'
-            options={selectData} // Options to display in the dropdown
-            // selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
-            onSelect={onSelect} // Function will trigger on select event
-            onRemove={onRemove} // Function will trigger on remove event
-            displayValue='name' // Property name to display in the dropdown options
-            // selectionLimit={2}
-            placeholder=''
-          />
+        <Grid item xs={6}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
+            <span className={classes.filter}>
+              Filtrar por
+              {' '}
+              <b>Tag</b>
+              {' '}
+              :
+            </span>
+            <Multiselect
+              className={`inputSelect ${classes.selectIn}`}
+              options={selectData} // Options to display in the dropdown
+              // selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
+              onSelect={onSelect} // Function will trigger on select event
+              onRemove={onRemove} // Function will trigger on remove event
+              displayValue='name' // Property name to display in the dropdown options
+              // selectionLimit={2}
+              placeholder=''
+            />
+          </div>
         </Grid>
       </Grid>
       <Grid style={{ marginTop: '10px' }} container spacing={2}>
