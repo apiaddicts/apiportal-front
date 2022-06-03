@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { IconButton, Menu, MenuItem } from '@mui/material';
 // import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import Icon from '../../../../../components/MdIcon/Icon';
+import Icon from '../MdIcon/Icon';
 import classes from './MenuOptions.module.scss';
 
 function MenuOptions(props) {
