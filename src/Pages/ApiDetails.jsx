@@ -231,13 +231,13 @@ function ApiDetails({ setIsOpen }) {
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
                 <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
-                  <a href='' className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
+                  <div className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
                     <span className='mr-1'>ver todas</span>
                     <Icon id='MdOutlineEast' />
-                  </a>
-                  <a href='' className={`d-sm-none ${classes.section__discover__showmore__button}`}>
+                  </div>
+                  <div className={`d-sm-none ${classes.section__discover__showmore__button}`}>
                     Ver todas
-                  </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -275,7 +275,7 @@ function ApiDetails({ setIsOpen }) {
             <div className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
                 <div className={`flex-lg-2 flex-md-6 flex-sm-12 text-center ${classes.custom_top}`}>
-                  <a href='' className='text__secondary'>Ver más</a>
+                  <div className='text__secondary'>Ver más</div>
                 </div>
               </div>
             </div>

@@ -130,7 +130,7 @@ function AppLibrary(props) {
 
   return (
     <Container fixed className={`${classes.margin_left} py-10 mt-10 `}>
-      <Title className='mb-18' text='Biblioteca de Apis' />
+      <Title stylesTitle={{ fontSize: '48px' }} className='mb-18' text='Biblioteca de Apis' />
       <Grid style={{ marginTop: '20px' }} container spacing={10}>
         <Grid item xs={6}>
           <SearchInput

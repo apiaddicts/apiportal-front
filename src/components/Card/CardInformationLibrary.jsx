@@ -109,18 +109,18 @@ function CardInformationLibrary({ apiName, img, title, description, reading, inf
             <div className='header-api px-8 pt-5'>
               <div className={colorStatus}>
                 <p>●</p>
-                <p className='ml-3 font-weight-bold text-uppercase'>{status}</p>
+                <p style={{ fontSize: '10px' }} className='ml-3 font-weight-bold text-uppercase'>{status}</p>
               </div>
               <Chip title={version} className=' gray version text-uppercase font-weight-medium ' />
             </div>
           )}
           <div className={`pr-8 pl-8 pb-8 pt-2 ${reading ? 'py-2' : null}`} style={blogClasses}>
-            <p className={`${blogTitle ? 'card__title_blog' : 'h3'} w-full font-weight-semi-bold ${reading ? 'px-8' : null}  ${theme === 'primary' ? 'text__primary' : ''} `}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
+            <p className={`${blogTitle ? 'card__title_blog' : 'h5'} w-full font-weight-semi-bold ${reading ? 'px-8' : null}  ${theme === 'primary' ? 'text__primary' : ''} `}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
             <div className='card__information hidden__tags' style={blogTitleStyles}>
               <div className={`card__information__tags ${buttons.length >= 3 ? 'tags-flex-wrap' : null} ${reading ? 'px-8' : null}`}>
                 {buttons.map((button, index) => (
                   <div key={index} className='pr-2'>
-                    <Chip title={button.label} className={`gray ${buttons.length >= 4 ? 'tags-reponsive' : null} `} spanClass={`${button.spanClass} fs__14 ${blogTitle === true ? '' : 'font-weight-medium'} text-capitalize`} />
+                    <Chip title={button.label} className={`gray ${buttons.length >= 4 ? 'tags-reponsive' : null} `} spanClass={`${button.spanClass} fs__10 ${blogTitle === true ? '' : 'font-weight-medium'} text-capitalize`} />
                   </div>
                 ))}
               </div>
