@@ -66,7 +66,6 @@ function regenerateSubscription(userId, subscriptionId, fragmentUrl) {
     method: 'POST',
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
-
   const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
   const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
   const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
@@ -99,12 +98,54 @@ function listSubscriptionSecrets(userId, subscriptionId) {
     });
 }
 
+function renameSubscription(userId, subscriptionId, data) {
+  const { token } = store.getState().user;
+  const requestOptions = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    body: JSON.stringify(data),
+  };
+
+  const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
+  const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
+  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
+  const url = `${urlService}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response;
+    });
+}
+
+function cancelSubscription(userId, subscriptionId, data) {
+  const { token } = store.getState().user;
+  const requestOptions = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    body: JSON.stringify(data),
+  };
+
+  const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
+  const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
+  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
+  const url = `${urlService}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response;
+    });
+}
+
 const subscriptionsService = {
   listUserSubscriptions,
   listSubscriptionSecrets,
   subscribeToAProduct,
   getName,
   regenerateSubscription,
+  renameSubscription,
+  cancelSubscription,
 };
 
 export default subscriptionsService;
