@@ -171,9 +171,6 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
               <li>
                 <Link to='/apis'>APIs</Link>
               </li>
-              {/* <li>
-                <a href=''>DOCUMENTACIÓN</a>
-              </li> */}
               <li>
                 <Link to='/blog'>BLOG</Link>
               </li>

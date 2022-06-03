@@ -310,7 +310,7 @@ function AppsDetail(props) {
                 <Grid item xs={1}>
                   {productApis.nextLink !== undefined ? (
                     <div onClick={() => handleNextProductApi()} className={classes.pagination}>
-                      <p>Siguente</p>
+                      <p className={classes.next}>Siguente</p>
                       <Icon id='MdNavigateNext' />
                     </div>
                   ) : (null)}

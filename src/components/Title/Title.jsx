@@ -1,10 +1,10 @@
 import React from 'react';
 import classes from './title.module.scss';
 
-function Title({ text, divider = true }) {
+function Title({ text, divider = true, stylesTitle }) {
   return (
     <div>
-      <h1 className={classes.title}>
+      <h1 style={stylesTitle} className={classes.title}>
         {text}
       </h1>
       {
