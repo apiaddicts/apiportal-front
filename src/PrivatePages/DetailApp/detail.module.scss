@@ -64,6 +64,14 @@
         font-size: 14px;
         line-height: 32px;
     }
+
+    .next {
+        margin-left: -20px;
+
+        @media (min-width: 1440px) {
+            margin-left: -10px;
+        }
+    }
 }
 
 .gridEnd {

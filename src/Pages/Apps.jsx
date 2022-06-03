@@ -79,7 +79,7 @@ function Apps(props) {
     <Container fixed className='py-10 table-left'>
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <Title text='Productos' />
+          <Title text='Productos' stylesTitle={{ fontSize: '48px' }} />
         </Grid>
         <Grid item xs={6}>
           <SearchInput
@@ -190,7 +190,7 @@ function Apps(props) {
                 <Grid item xs={1}>
                   {products.nextLink !== undefined ? (
                     <div onClick={() => handleNextProduct(products.nextLink)} className={classes.pagination}>
-                      <p>Siguiente</p>
+                      <p className={classes.next}>Siguiente</p>
                       <Icon id='MdNavigateNext' />
                     </div>
 
