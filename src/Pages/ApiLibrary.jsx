@@ -145,7 +145,7 @@ function AppLibrary(props) {
           />
         </Grid>
         <Grid item xs={6}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className='display_flex justify_content__between align_items__center'>
             <span className={classes.filter}>
               Filtrar por
               {' '}
