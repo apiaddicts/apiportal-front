@@ -7,6 +7,8 @@ const initialState = {
   loadingSubscriptionsUser: false,
   // create subscription to product
   loadingCreateSubscription: false,
+  // renameSubscription
+  renameSubscriptionResponse: {},
 };
 
 // eslint-disable-next-line default-param-last
@@ -48,6 +50,16 @@ export default function subscriptionsReducer(state = initialState, action) {
         ...state,
         loadingCreateSubscription: false,
       };
+    case subscriptionsConstants.RENAME_SUBSCRIPTIONS_SUCCESS:
+      return {
+        ...state,
+        renameSubscriptionResponse: action.response,
+      };
+    case subscriptionsConstants.RENAME_SUBSCRIPTIONS_FAILURE:
+      return {
+        ...state,
+        renameSubscriptionResponse: action.error,
+      };
     // Case to bring reset values subscriptions
     case subscriptionsConstants.RESET_SUBSCRIPTIONS_USER:
       return {
@@ -55,6 +67,7 @@ export default function subscriptionsReducer(state = initialState, action) {
         suscripcionsUser: {},
         errorSubscriptionsUser: {},
         loadingSubscriptionsUser: false,
+        renameSubscriptionResponse: {},
       };
     default:
       return state;

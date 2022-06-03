@@ -1,32 +1,53 @@
 
-import React, { useEffect } from 'react';
-
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
-import { Container, TableHead, TableRow, TableCell, Table, TableContainer, TableBody } from '@mui/material';
-
+import { Container, TableHead, TableRow, TableCell, Table, TableContainer, TableBody, Chip } from '@mui/material';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import moment from 'moment';
 import PasswordGenerate from '../../../../components/common/InputMUI/passwordGenerate';
 import ProductName from '../Product';
-
-import { listUserSubscriptions, resetSubscriptionsUser } from '../../../../redux/actions/subscriptionsAction';
-
+import {
+  listUserSubscriptions,
+  resetSubscriptionsUser,
+  renameSubscription } from '../../../../redux/actions/subscriptionsAction';
 import 'moment/locale/es';
-
+import MenuOptions from './MenuOptions';
 import classes from './Suscriptions.module.scss';
 
 moment.locale('es');
 function Suscriptions({ user }) {
 
-  const { suscripcionsUser } = useSelector((state) => state.suscripcions);
-
+  const { suscripcionsUser, renameSubscriptionResponse } = useSelector((state) => state.suscripcions);
+  const [edit, setEdit] = useState('');
   const dispatch = useDispatch();
+  const handleRename = (rowRename) => {
+    setEdit(rowRename.id);
+  };
+
+  const handleKeyDown = (row, e) => {
+    if (e.key === 'Enter') {
+      const data = {
+        'properties': {
+          'name': e.target.value,
+        },
+      };
+      dispatch(renameSubscription(user.name, row.name, data));
+    } else if (e.key === 'Escape') {
+      setEdit('');
+    }
+  };
+
+  useEffect(() => {
+    if (Object.keys(renameSubscriptionResponse).length > 0 && Object.prototype.hasOwnProperty.call(renameSubscriptionResponse, 'status')) {
+      dispatch(resetSubscriptionsUser());
+      setEdit('');
+    }
+  }, [renameSubscriptionResponse]);
 
   useEffect(() => {
     if (suscripcionsUser && Object.keys(user).length > 0 && Object.keys(suscripcionsUser).length === 0) {
       dispatch(listUserSubscriptions(user.name));
     }
-
   }, [suscripcionsUser]);
 
   useEffect(() => {
@@ -36,7 +57,7 @@ function Suscriptions({ user }) {
   }, []);
 
   return (
-    <Container className='my-10'>
+    <Container className='my-10' maxWidth='xl'>
       <div className={classes.wrapper}>
         <div className='w-full'>
           <div className='font-fs-joey fs__36 font-weight-bold text__primary'>Suscripciones</div>
@@ -45,10 +66,10 @@ function Suscriptions({ user }) {
               <Table sx={{ minWidth: 650 }} aria-label='simple table'>
                 <TableHead>
                   <TableRow>
-                    <TableCell style={{ width: '100px' }} size='small'>
+                    <TableCell style={{ width: '325px' }}>
                       Nombre
                     </TableCell>
-                    <TableCell>
+                    <TableCell style={{ width: '70px' }}>
                       Solicitud
                     </TableCell>
                     <TableCell>
@@ -60,8 +81,11 @@ function Suscriptions({ user }) {
                     <TableCell>
                       Producto
                     </TableCell>
-                    <TableCell>
+                    <TableCell style={{ width: '90px' }}>
                       Estado
+                    </TableCell>
+                    <TableCell style={{ width: '50px' }}>
+                      &nbsp;
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -74,7 +98,19 @@ function Suscriptions({ user }) {
                           sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer', zIndex: 6 }}
                         >
                           <TableCell>
-                            <p>{row.properties.displayName}</p>
+                            {
+                              edit.length > 0 && edit === row.id ? (
+                                <input
+                                  id={row.id}
+                                  type='text'
+                                  placeholder='Nuevo nombre'
+                                  defaultValue={row.properties.displayName}
+                                  onKeyDown={(e) => handleKeyDown(row, e)}
+                                  className={classes.input}
+                                />
+                              ) :
+                                <p>{row.properties.displayName}</p>
+                            }
                           </TableCell>
                           <TableCell>
                             <p>
@@ -91,7 +127,25 @@ function Suscriptions({ user }) {
                             <ProductName scope={row.properties.scope} />
                           </TableCell>
                           <TableCell>
-                            {row.properties.state}
+                            <Chip
+                              color='secondary'
+                              title={row.properties.state}
+                              icon={<FiberManualRecordIcon sx={{ fontSize: '8px' }} />}
+                              label={row.properties.state}
+                              sx={{
+                                background: 'rgba(241, 180, 52, 0.10)',
+                                color: '#F1B434',
+                                fontWeight: '700',
+                                fontSize: '0.625rem',
+                                letterSpacing: '0.8 px',
+                                padding: '2px',
+                                height: '20px',
+                                textTransform: 'uppercase',
+                              }}
+                            />
+                          </TableCell>
+                          <TableCell>
+                            <MenuOptions row={row} handleRename={handleRename} />
                           </TableCell>
                         </TableRow>
                       ))}

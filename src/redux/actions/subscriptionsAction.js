@@ -25,3 +25,12 @@ export const subscribeToAProduct = (data, userId) => (dispatch) => {
 export const resetSubscriptionsUser = () => (dispatch) => {
   dispatch({ type: subscriptionsConstants.RESET_SUBSCRIPTIONS_USER });
 };
+
+export const renameSubscription = (userId, subscriptionId, data) => (dispatch) => {
+  subscriptionsService.renameSubscription(userId, subscriptionId, data)
+    .then((response) => {
+      dispatch({ type: subscriptionsConstants.RENAME_SUBSCRIPTIONS_SUCCESS, response });
+    }, (error) => {
+      dispatch({ type: subscriptionsConstants.RENAME_SUBSCRIPTIONS_FAILURE, error });
+    });
+};
