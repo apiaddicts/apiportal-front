@@ -28,6 +28,7 @@ import AppsDetail from '../PrivatePages/DetailApp';
 import ApiDetailed from '../PrivatePages/ApiDetails/ApiDetailed';
 import ChooseApi from '../PrivatePages/ChooseApi';
 import CustomFooter from '../components/common/CustomFooter/CustomFooter';
+import ApiSubscriptions from '../PrivatePages/ApiSubscriptions';
 // import CustomContainer from '../components/common/CustomContainer/CustomContainer';
 
 // Ejemplos
@@ -96,6 +97,7 @@ function AppRouter() {
                   <Route path='/apps/:id' exact element={<AppsDetail />} />
                   <Route path='/apps/apis' exact element={<ChooseApi />} />
                   <Route path='/newApp' exact element={<AddApp />} />
+                  <Route path='/subscriptions' exact element={<ApiSubscriptions />} />
                   <Route path='/ApiLibrary' exact element={<ApiLibrary />} />
                   <Route path='/ApiLibrary/:id' exact element={<ApiDetailed />} />
                   <Route path='/ApiLibrary/try/:id' exact element={<Swagger />} />
