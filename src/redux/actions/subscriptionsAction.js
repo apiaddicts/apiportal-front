@@ -34,3 +34,12 @@ export const renameSubscription = (userId, subscriptionId, data) => (dispatch) =
       dispatch({ type: subscriptionsConstants.RENAME_SUBSCRIPTIONS_FAILURE, error });
     });
 };
+
+export const cancelSubscription = (userId, subscriptionId, data) => (dispatch) => {
+  subscriptionsService.cancelSubscription(userId, subscriptionId, data)
+    .then((response) => {
+      dispatch({ type: subscriptionsConstants.CANCEL_SUBSCRIPTIONS_SUCCESS, response });
+    }, (error) => {
+      dispatch({ type: subscriptionsConstants.CANCEL_SUBSCRIPTIONS_FAILURE, error });
+    });
+};

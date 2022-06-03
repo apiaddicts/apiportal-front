@@ -9,7 +9,8 @@ import ProductName from '../Product';
 import {
   listUserSubscriptions,
   resetSubscriptionsUser,
-  renameSubscription } from '../../../../redux/actions/subscriptionsAction';
+  renameSubscription,
+  cancelSubscription } from '../../../../redux/actions/subscriptionsAction';
 import 'moment/locale/es';
 import MenuOptions from './MenuOptions';
 import classes from './Suscriptions.module.scss';
@@ -17,11 +18,20 @@ import classes from './Suscriptions.module.scss';
 moment.locale('es');
 function Suscriptions({ user }) {
 
-  const { suscripcionsUser, renameSubscriptionResponse } = useSelector((state) => state.suscripcions);
+  const { suscripcionsUser, renameSubscriptionResponse, cancelSubscriptionResponse } = useSelector((state) => state.suscripcions);
   const [edit, setEdit] = useState('');
   const dispatch = useDispatch();
   const handleRename = (rowRename) => {
     setEdit(rowRename.id);
+  };
+
+  const handleCancel = (rowCancel) => {
+    const data = {
+      'properties': {
+        'state': 'Cancelled',
+      },
+    };
+    dispatch(cancelSubscription(user.name, rowCancel.name, data));
   };
 
   const handleKeyDown = (row, e) => {
@@ -36,6 +46,13 @@ function Suscriptions({ user }) {
       setEdit('');
     }
   };
+
+  useEffect(() => {
+    if (Object.keys(cancelSubscriptionResponse).length > 0 && Object.prototype.hasOwnProperty.call(cancelSubscriptionResponse, 'status')) {
+      dispatch(resetSubscriptionsUser());
+      setEdit('');
+    }
+  }, [cancelSubscriptionResponse]);
 
   useEffect(() => {
     if (Object.keys(renameSubscriptionResponse).length > 0 && Object.prototype.hasOwnProperty.call(renameSubscriptionResponse, 'status')) {
@@ -145,7 +162,7 @@ function Suscriptions({ user }) {
                             />
                           </TableCell>
                           <TableCell>
-                            <MenuOptions row={row} handleRename={handleRename} />
+                            <MenuOptions row={row} handleRename={handleRename} handleCancel={handleCancel} />
                           </TableCell>
                         </TableRow>
                       ))}

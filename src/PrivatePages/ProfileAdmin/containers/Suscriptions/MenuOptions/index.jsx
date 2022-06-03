@@ -7,7 +7,7 @@ import classes from './MenuOptions.module.scss';
 
 function MenuOptions(props) {
 
-  const { row, handleRename } = props;
+  const { row, handleRename, handleCancel } = props;
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -17,6 +17,10 @@ function MenuOptions(props) {
 
   const handleEdit = () => {
     handleRename(row);
+    setAnchorEl(null);
+  };
+  const handleCancelSubscription = () => {
+    handleCancel(row);
     setAnchorEl(null);
   };
   const handleClose = () => {
@@ -53,7 +57,7 @@ function MenuOptions(props) {
           <Icon id='MdOutlineEdit' css_styles={{ 'custom_icon_styles': 'fs__20 text_gray__gray_darken mr-2' }} />
           Renombrar
         </MenuItem>
-        <MenuItem onClick={handleClose}>
+        <MenuItem onClick={handleCancelSubscription}>
           <Icon id='MdDeleteOutline' css_styles={{ 'custom_icon_styles': 'fs__20 text_gray__gray_darken mr-2' }} />
           Cancelar
         </MenuItem>
