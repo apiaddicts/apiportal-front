@@ -53,7 +53,7 @@ function ApiDetails(props) {
         <div>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Title text={api.properties.displayName ? api.properties.displayName : 'Demo API'} />
-            <Link to={`/ApiLibrary/try/${api.name}`} style={{ background: '#E3E829', borderRadius: '100px', padding: '12px 1rem', width: '97px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontWeight: '700', fontSize: '1rem', letterSpacing: '0.8px', color: '#0033A0' }}>
+            <Link to={`/apiBookstores/try/${api.name}`} style={{ background: '#E3E829', borderRadius: '100px', padding: '12px 1rem', width: '97px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontWeight: '700', fontSize: '1rem', letterSpacing: '0.8px', color: '#0033A0' }}>
               <span>Try it</span>
               <Icon id='MdChevronRight' />
             </Link>

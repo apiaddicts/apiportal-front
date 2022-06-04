@@ -173,7 +173,7 @@ function AppLibrary(props) {
               arrApis.length > 0 ? (
                 arrApis.map((item, index) => (
                   <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
-                    <Link to={`/ApiLibrary/${item.apiName}`}>
+                    <Link to={`/apiBookstores/${item.apiName}`}>
                       <CardInformationLibrary
                         apiName={item.apiName}
                         title={item.title}
