@@ -11,7 +11,7 @@ import jsonApis from '../../data-table.json';
 function index(props) {
   const idApi = localStorage.getItem('id');
   const navigate = useNavigate();
-  const handleNavigate = useCallback(() => navigate(`/apps/${idApi}`, { replace: true }, [navigate]));
+  const handleNavigate = useCallback(() => navigate(`/products/${idApi}`, { replace: true }, [navigate]));
 
   const headers = [
     {

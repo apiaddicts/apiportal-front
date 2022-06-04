@@ -1,5 +1,3 @@
-// import { logout } from '../redux/actions/userAction';
-
 const statusCode = {
   HTTP_200_OK: 200,
   HTTP_201_CREATED: 201,
@@ -47,8 +45,11 @@ function handleResponseToken(response) {
       case statusCode.HTTP_304_NOT_MODIFIED:
         return 'Not_Modified';
       case statusCode.HTTP_401_UNAUTHORIZED:
-        return (dispatch) => {
-          dispatch(logout());
+        return {
+          error: {
+            status: response.status,
+            statusText: response.statusText,
+          },
         };
       default:
         return Promise.reject(data);

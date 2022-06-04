@@ -59,4 +59,12 @@
         font-size: 14px;
         line-height: 32px;
     }
+
+    .next {
+        margin-left: -30px;
+
+        @media (min-width: 1440px) {
+            margin-left: -10px;
+        }
+    }
 }

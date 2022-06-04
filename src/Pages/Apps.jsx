@@ -64,7 +64,7 @@ function Apps(props) {
   }, []);
 
   const handleClickRow = (id) => {
-    navigate(`/apps/${id}`);
+    navigate(`/products/${id}`);
   };
 
   const handleNextProduct = (url) => {
@@ -76,10 +76,10 @@ function Apps(props) {
   };
 
   return (
-    <Container fixed className='py-10 mt-10'>
+    <Container fixed className='py-10 table-left'>
       <Grid container spacing={2}>
         <Grid item xs={6}>
-          <Title text='Productos' />
+          <Title text='Productos' stylesTitle={{ fontSize: '48px' }} />
         </Grid>
         <Grid item xs={6}>
           <SearchInput
@@ -87,7 +87,11 @@ function Apps(props) {
             type='text'
             placeholder='Buscar'
             icon
-            onChange={formik.handleChange}
+            onChange={(e) => {
+              formik.handleChange(e);
+              formik.setFieldValue('description', '');
+              formik.setFieldValue('name', '');
+            }}
             value={formik.values.search}
           />
         </Grid>
@@ -113,7 +117,11 @@ function Apps(props) {
                               name='name'
                               type='text'
                               label='Buscar Nombre'
-                              onChange={formik.handleChange}
+                              onChange={(e) => {
+                                formik.handleChange(e);
+                                formik.setFieldValue('description', '');
+                                formik.setFieldValue('search', '');
+                              }}
                               value={formik.values.name}
                             />
                           </div>
@@ -130,7 +138,11 @@ function Apps(props) {
                               name='description'
                               type='text'
                               label='Buscar Descripcion'
-                              onChange={formik.handleChange}
+                              onChange={(e) => {
+                                formik.handleChange(e);
+                                formik.setFieldValue('name', '');
+                                formik.setFieldValue('search', '');
+                              }}
                               value={formik.values.description}
                             />
                           </div>
@@ -178,7 +190,7 @@ function Apps(props) {
                 <Grid item xs={1}>
                   {products.nextLink !== undefined ? (
                     <div onClick={() => handleNextProduct(products.nextLink)} className={classes.pagination}>
-                      <p>Siguiente</p>
+                      <p className={classes.next}>Siguiente</p>
                       <Icon id='MdNavigateNext' />
                     </div>
 

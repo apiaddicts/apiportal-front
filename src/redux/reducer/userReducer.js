@@ -29,7 +29,6 @@ const initialState = token && etag ? {
 
 // eslint-disable-next-line default-param-last
 export default function userReducer(state = initialState, action) {
-  console.log('action', action);
   switch (action.type) {
     // save user in local storage
     case userConstants.SAVE_USER:
@@ -87,6 +86,12 @@ export default function userReducer(state = initialState, action) {
         id: action.id,
         token: action.token,
       };
+    case userConstants.LOGIN_FAILURE:
+      return {
+        ...state,
+        loadingSignUp: false,
+        responseError: action.error,
+      };
     // save entity tag
     case userConstants.HEAD_ETAG_SUCCESS:
       return {
@@ -95,7 +100,6 @@ export default function userReducer(state = initialState, action) {
       };
       // logout
     case userConstants.RESET_ALERT:
-      console.log('entro al reset alert');
       return {
         ...state,
         responseError: {},

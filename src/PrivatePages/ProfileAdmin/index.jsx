@@ -63,9 +63,10 @@ function Admin() {
   ];
 
   const formConfig = useFormUserConfig(labelsUser, handleSubmit);
+
   return (
-    <div className='w-full'>
-      <Container fixed className='my-10 py-10'>
+    <div className={`w-full ${classes.margin_left}`}>
+      <Container fixed className='my-10 py-10' maxWidth='xl'>
         <div className={classes.main__admin}>
           {user && Object.keys(user).length > 0 && loadingUser === false ? (
             <div className={classes.admin}>
@@ -123,7 +124,7 @@ function Admin() {
 
         </div>
       </Container>
-      <Suscriptions />
+      <Suscriptions user={user} />
     </div>
   );
 }

@@ -41,7 +41,6 @@ export const searchProducts = (search, top = 2, skip = 0) => (dispatch) => {
 };
 
 export const filterProductsByName = (search, top = 1, skip = 0) => (dispatch) => {
-  dispatch({ type: productsConstants.GET_PRODUCTS_REQUEST });
 
   productsService.filterProductsByName(search, top, skip).then(
     (response) => {
@@ -58,7 +57,6 @@ export const filterProductsByName = (search, top = 1, skip = 0) => (dispatch) =>
 };
 
 export const filterProductsByDescription = (search, top = 1, skip = 0) => (dispatch) => {
-  dispatch({ type: productsConstants.GET_PRODUCTS_REQUEST });
 
   productsService.filterProductsByDescription(search, top, skip).then(
     (response) => {
@@ -70,18 +68,18 @@ export const filterProductsByDescription = (search, top = 1, skip = 0) => (dispa
   );
 };
 
-export const filterProductAPIsByName = (productName, search) => (dispatch) => {
+export const filterProductAPIsByName = (productName, search, top = 1, skip = 0) => (dispatch) => {
   dispatch({ type: productsConstants.GET_PRODUCT_API_REQUEST });
-  productsService.filterProductAPIsByName(productName, search).then((response) => {
+  productsService.filterProductAPIsByName(productName, search, top, skip).then((response) => {
     dispatch({ type: productsConstants.GET_PRODUCT_API_SUCCESS, response });
   }, (error) => {
     dispatch({ type: productsConstants.GET_PRODUCT_API_FAILURE, error });
   });
 };
 
-export const filterProductAPIsByDescription = (productName, search) => (dispatch) => {
+export const filterProductAPIsByDescription = (productName, search, top = 1, skip = 0) => (dispatch) => {
   dispatch({ type: productsConstants.GET_PRODUCT_API_REQUEST });
-  productsService.filterProductAPIsByDescription(productName, search).then((response) => {
+  productsService.filterProductAPIsByDescription(productName, search, top, skip).then((response) => {
     dispatch({ type: productsConstants.GET_PRODUCT_API_SUCCESS, response });
   }, (error) => {
     dispatch({ type: productsConstants.GET_PRODUCT_API_FAILURE, error });
@@ -126,17 +124,17 @@ export const getProductDetail = (productName) => (dispatch) => {
 
 export const getProductosNext = (url) => (dispatch) => {
   const { productsSkip } = store.getState().products;
-  const skip = productsSkip + 1;
+  const skip = productsSkip + 2;
 
-  dispatch(listProducts(2, 2));
+  dispatch(listProducts(2, skip));
   dispatch({ type: productsConstants.GET_PRODUCTS_SKIP, skip });
 };
 
 export const getProductPrevious = () => (dispatch) => {
   const { productsSkip } = store.getState().products;
-  const skip = productsSkip - 1;
+  const skip = productsSkip - 2;
 
-  dispatch(listProducts(2, 2));
+  dispatch(listProducts(2, skip));
   dispatch({ type: productsConstants.GET_PRODUCTS_SKIP, skip });
 };
 

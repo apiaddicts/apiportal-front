@@ -12,7 +12,7 @@ export const getHome = () => (dispatch) => {
     },
     (error) => {
       dispatch({
-        type: userConstants.GET_ALL_HOME_FAILURE,
+        type: homeConstants.GET_ALL_HOME_FAILURE,
         payload: error,
       });
     },
