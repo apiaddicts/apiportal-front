@@ -130,240 +130,103 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                       ) : subItem === 3 ? (
                         <div>
                           {
-                            !jsonOpenApi.components.securitySchemes.OAuth2 && (
-                              <div>
-                                <div className={classes.accordion__body__title}>
-                                  <h1>Esquema de seguridad</h1>
-                                  <p>{!jsonOpenApi.components.securitySchemes.OAuth2?.type}</p>
-                                </div>
-                                <div>
-                                  {!jsonOpenApi.components.securitySchemes.OAuth2?.description && (<p>{jsonOpenApi.components.securitySchemes.description}</p>)}
-                                </div>
-                                {!jsonOpenApi.components.securitySchemes.OAuth2?.flows && (
-                                  <div>
-                                    {!jsonOpenApi.components.securitySchemes.OAuth2?.flows?.authorizationCode && (
-                                      <div className={classes.wrapper__auth}>
-                                        <div>
-                                          <p className={classes.wrapper__auth__title}>Authorization</p>
-                                        </div>
-                                        <div>
-                                          {!jsonOpenApi.components.securitySchemes.flow?.authorizationCode.authorizationUrl && (
-                                            <div className={classes.wrapper__auth__content}>
-                                              <span className={classes.wrapper__auth__content__title}>Authorization URL</span>
-                                              <code className={classes.wrapper__auth__content__code}>Lorem ipsum dolor sit amet.</code>
-                                            </div>
-                                          )}
-                                          {!jsonOpenApi.components.securitySchemes.flow?.authorizationCode.tokenUrl && (
-                                            <div className={classes.wrapper__auth__content}>
-                                              <span className={classes.wrapper__auth__content__title}>Token URL</span>
-                                              <code className={classes.wrapper__auth__content__code}>{jsonOpenApi.components.securitySchemes.flow?.authorizationCode.authorizationUrl}</code>
-                                            </div>
-                                          )}
-                                          {!jsonOpenApi.components.securitySchemes.flow?.authorizationCode.refreshUrl && (
-                                            <div className={classes.wrapper__auth__content}>
-                                              <span className={classes.wrapper__auth__content__title}>Refresh URL</span>
-                                              <code className={classes.wrapper__auth__content__code}>{jsonOpenApi.components.securitySchemes.flow?.authorizationCode.authorizationUrl}</code>
-                                            </div>
-                                          )}
-                                          {!jsonOpenApi.components.securitySchemes.flow?.authorizationCode.scopes && (
-                                            <div>
-                                              <p className={classes.wrapper__auth__content__title}>Scopes</p>
-                                              <ul className={classes.wrapper__auth__content__scopes}>
-                                                <li className={classes.wrapper__auth__content__scopes__item}>
-                                                  <code className={classes.wrapper__auth__content__code}>read</code>
-                                                  <span>{jsonOpenApi.components.securitySchemes.flow?.authorizationCode.scopes.read}</span>
-                                                </li>
-                                                <li className={classes.wrapper__auth__content__scopes__item}>
-                                                  <code className={classes.wrapper__auth__content__code}>write</code>
-                                                  <span>{jsonOpenApi.components.securitySchemes.flow?.authorizationCode.scopes.write}</span>
-                                                </li>
-                                                <li className={classes.wrapper__auth__content__scopes__item}>
-                                                  <code className={classes.wrapper__auth__content__code}>admin</code>
-                                                  <span>{jsonOpenApi.components.securitySchemes.flow?.authorizationCode.scopes.admin}</span>
-                                                </li>
-                                              </ul>
-                                            </div>
-                                          )}
-                                        </div>
+                            jsonOpenApi.components && jsonOpenApi.components.securitySchemes && (
+                              Object.keys(jsonOpenApi.components.securitySchemes).map((key, index) => {
+                                return (
+                                  <div key={index}>
+                                    <div className={classes.accordion__title}>
+                                      <h1>{key}</h1>
+                                    </div>
+                                    {jsonOpenApi.components.securitySchemes[key]?.description && (
+                                      <div className={classes.accordion__body__description}>
+                                        <p>{jsonOpenApi.components.securitySchemes[key].description}</p>
                                       </div>
                                     )}
-                                    {!jsonOpenApi.components.securitySchemes.OAuth2?.flows?.implicit && (
-                                      <div className={classes.wrapper__auth}>
-                                        <div>
-                                          <p className={classes.wrapper__auth__title}>Implicit</p>
-                                        </div>
-                                        <div>
-                                          {!jsonOpenApi.components.securitySchemes.flow?.implicit.authorizationUrl && (
-                                            <div className={classes.wrapper__auth__content}>
-                                              <span className={classes.wrapper__auth__content__title}>Authorization URL</span>
-                                              <code className={classes.wrapper__auth__content__code}>{jsonOpenApi.components.securitySchemes.flow?.implicit.authorizationUrl}</code>
-                                            </div>
-                                          )}
-                                          {!jsonOpenApi.components.securitySchemes.flow?.implicit.tokenUrl && (
-                                            <div className={classes.wrapper__auth__content}>
-                                              <span className={classes.wrapper__auth__content__title}>Token URL</span>
-                                              <code className={classes.wrapper__auth__content__code}>{jsonOpenApi.components.securitySchemes.flow?.implicit.authorizationUrl}</code>
-                                            </div>
-                                          )}
-                                          {!jsonOpenApi.components.securitySchemes.flow?.implicit.refreshUrl && (
-                                            <div className={classes.wrapper__auth__content}>
-                                              <span className={classes.wrapper__auth__content__title}>Refresh URL</span>
-                                              <code className={classes.wrapper__auth__content__code}>{jsonOpenApi.components.securitySchemes.flow?.implicit.authorizationUrl}</code>
-                                            </div>
-                                          )}
-                                          {!jsonOpenApi.components.securitySchemes.flow?.implicit.scopes && (
-                                            <div>
-                                              <p className={classes.wrapper__auth__content__title}>Scopes</p>
-                                              <ul className={classes.wrapper__auth__content__scopes}>
-                                                <li className={classes.wrapper__auth__content__scopes__item}>
-                                                  <code className={classes.wrapper__auth__content__code}>read</code>
-                                                  <span>{jsonOpenApi.components.securitySchemes.flow?.implicit.scopes.read}</span>
-                                                </li>
-                                                <li className={classes.wrapper__auth__content__scopes__item}>
-                                                  <code className={classes.wrapper__auth__content__code}>write</code>
-                                                  <span>{jsonOpenApi.components.securitySchemes.flow?.implicit.scopes.write}</span>
-                                                </li>
-                                                <li className={classes.wrapper__auth__content__scopes__item}>
-                                                  <code className={classes.wrapper__auth__content__code}>admin</code>
-                                                  <span>{jsonOpenApi.components.securitySchemes.flow?.implicit.scopes.admin}</span>
-                                                </li>
-                                              </ul>
-                                            </div>
-                                          )}
-                                        </div>
+                                    <div>
+                                      <div className={classes.accordion__body__title}>
+                                        <h1>Esquema de seguridad: </h1>
+                                        {(() => {
+                                          switch (jsonOpenApi.components.securitySchemes[key].type.toLowerCase()) {
+                                            case 'http':
+                                              return <p>HTTP</p>;
+                                            case 'apikey':
+                                              return <p>API Key</p>;
+                                            case 'oauth2':
+                                              return <p>OAuth 2.0</p>;
+                                            default:
+                                              return <p />;
+                                          }
+                                        })()}
                                       </div>
-                                    )}
-                                    {!jsonOpenApi.components.securitySchemes.OAuth2?.flows?.password && (
-                                      <div className={classes.wrapper__auth}>
-                                        <div>
-                                          <p className={classes.wrapper__auth__title}>Password</p>
+                                      {jsonOpenApi.components.securitySchemes[key].type.toLowerCase() === 'http' && jsonOpenApi.components.securitySchemes[key]?.scheme && (
+                                        <div className={classes.accordion__body__title}>
+                                          <h1>Autorización HTTP: </h1>
+                                          <p>{jsonOpenApi.components.securitySchemes[key].scheme}</p>
                                         </div>
-                                        <div>
-                                          {!jsonOpenApi.components.securitySchemes.flow?.password.authorizationUrl && (
-                                            <div className={classes.wrapper__auth__content}>
-                                              <span className={classes.wrapper__auth__content__title}>Authorization URL</span>
-                                              <code className={classes.wrapper__auth__content__code}>{jsonOpenApi.components.securitySchemes.flow?.password.authorizationUrl}</code>
-                                            </div>
-                                          )}
-                                          {!jsonOpenApi.components.securitySchemes.flow?.password.tokenUrl && (
-                                            <div className={classes.wrapper__auth__content}>
-                                              <span className={classes.wrapper__auth__content__title}>Token URL</span>
-                                              <code className={classes.wrapper__auth__content__code}>{jsonOpenApi.components.securitySchemes.flow?.password.authorizationUrl}</code>
-                                            </div>
-                                          )}
-                                          {!jsonOpenApi.components.securitySchemes.flow?.password.refreshUrl && (
-                                            <div className={classes.wrapper__auth__content}>
-                                              <span className={classes.wrapper__auth__content__title}>Refresh URL</span>
-                                              <code className={classes.wrapper__auth__content__code}>{jsonOpenApi.components.securitySchemes.flow?.password.authorizationUrl}</code>
-                                            </div>
-                                          )}
-                                          {!jsonOpenApi.components.securitySchemes.flow?.password.scopes && (
-                                            <div>
-                                              <p className={classes.wrapper__auth__content__title}>Scopes</p>
-                                              <ul className={classes.wrapper__auth__content__scopes}>
-                                                <li className={classes.wrapper__auth__content__scopes__item}>
-                                                  <code className={classes.wrapper__auth__content__code}>read</code>
-                                                  <span>{jsonOpenApi.components.securitySchemes.flow?.password.scopes.read}</span>
-                                                </li>
-                                                <li className={classes.wrapper__auth__content__scopes__item}>
-                                                  <code className={classes.wrapper__auth__content__code}>write</code>
-                                                  <span>{jsonOpenApi.components.securitySchemes.flow?.password.scopes.write}</span>
-                                                </li>
-                                                <li className={classes.wrapper__auth__content__scopes__item}>
-                                                  <code className={classes.wrapper__auth__content__code}>admin</code>
-                                                  <span>{jsonOpenApi.components.securitySchemes.flow?.password.scopes.admin}</span>
-                                                </li>
-                                              </ul>
-                                            </div>
-                                          )}
+                                      )}
+                                      {jsonOpenApi.components.securitySchemes[key].type.toLowerCase() === 'http' && jsonOpenApi.components.securitySchemes[key]?.scheme &&
+                                        jsonOpenApi.components.securitySchemes[key].scheme === 'bearer' && jsonOpenApi.components.securitySchemes[key]?.bearerFormat && (
+                                        <div className={classes.accordion__body__title}>
+                                          <h1>Formato: </h1>
+                                          <p>{jsonOpenApi.components.securitySchemes[key].bearerFormat}</p>
                                         </div>
-                                      </div>
-                                    )}
-                                    {!jsonOpenApi.components.securitySchemes.OAuth2?.flows?.clientCredentials && (
-                                      <div className={classes.wrapper__auth}>
-                                        <div>
-                                          <p className={classes.wrapper__auth__title}>Client Credentials</p>
+                                      )}
+                                      {jsonOpenApi.components.securitySchemes[key].type.toLowerCase() === 'apikey' && jsonOpenApi.components.securitySchemes[key]?.in && (
+                                        <div className={classes.accordion__body__title}>
+                                          <h1>{`Parámetro (${jsonOpenApi.components.securitySchemes[key].in}): `}</h1>
+                                          <p>{jsonOpenApi.components.securitySchemes[key].name}</p>
                                         </div>
-                                        <div>
-                                          {!jsonOpenApi.components.securitySchemes.OAuth2?.flow?.clientCredentials.authorizationUrl && (
-                                            <div className={classes.wrapper__auth__content}>
-                                              <span className={classes.wrapper__auth__content__title}>Authorization URL</span>
-                                              <code className={classes.wrapper__auth__content__code}>{jsonOpenApi.components.securitySchemes.OAuth2?.flow?.clientCredentials.authorizationUrl}</code>
+                                      )}
+                                      {jsonOpenApi.components.securitySchemes[key].type.toLowerCase() === 'oauth2' && jsonOpenApi.components.securitySchemes[key]?.flows && (
+                                        Object.keys(jsonOpenApi.components.securitySchemes[key].flows).map((flow, index) => {
+                                          return (
+                                            <div key={index}>
+                                              <div className={classes.accordion__title}>
+                                                <p>{`Flujo ${flow}`}</p>
+                                              </div>
+                                              {jsonOpenApi.components.securitySchemes[key].flows[flow]?.authorizationUrl && (
+                                                <div className={classes.accordion__body__title}>
+                                                  <h1>URL de Autorización: </h1>
+                                                  <code className={classes.scopes__code}>{jsonOpenApi.components.securitySchemes[key].flows[flow].authorizationUrl}</code>
+                                                </div>
+                                              )}
+                                              {jsonOpenApi.components.securitySchemes[key].flows[flow]?.tokenUrl && (
+                                                <div className={classes.accordion__body__title}>
+                                                  <h1>URL de Token: </h1>
+                                                  <code className={classes.scopes__code}>{jsonOpenApi.components.securitySchemes[key].flows[flow].tokenUrl}</code>
+                                                </div>
+                                              )}
+                                              {jsonOpenApi.components.securitySchemes[key].flows[flow]?.refreshUrl && (
+                                                <div className={classes.accordion__body__title}>
+                                                  <h1>URL de Refresco: </h1>
+                                                  <code className={classes.scopes__code}>{jsonOpenApi.components.securitySchemes[key].flows[flow].refreshUrl}</code>
+                                                </div>
+                                              )}
+                                              {jsonOpenApi.components.securitySchemes[key].flows[flow]?.scopes && (
+                                                <div className={classes.accordion__body__title}>
+                                                  <h1>Scopes: </h1>
+                                                  <div>
+                                                    <ul className={classes.scopes}>
+                                                      {Object.keys(jsonOpenApi.components.securitySchemes[key].flows[flow].scopes).map((scope, index) => {
+                                                        return (
+                                                          <li key={index}>
+                                                            <code className={classes.wrapper__auth__content__code}>{scope}</code>
+                                                            <span>{jsonOpenApi.components.securitySchemes[key].flows[flow].scopes[scope]}</span>
+                                                          </li>
+                                                        );
+                                                      })}
+                                                    </ul>
+                                                  </div>
+                                                </div>
+                                              )}
                                             </div>
-                                          )}
-                                          {!jsonOpenApi.components.securitySchemes.OAuth2?.flow?.clientCredentials.tokenUrl && (
-                                            <div className={classes.wrapper__auth__content}>
-                                              <span className={classes.wrapper__auth__content__title}>Token URL</span>
-                                              <code className={classes.wrapper__auth__content__code}>{jsonOpenApi.components.securitySchemes.OAuth2?.flow?.clientCredentials.authorizationUrl}</code>
-                                            </div>
-                                          )}
-                                          {!jsonOpenApi.components.securitySchemes.OAuth2?.flow?.clientCredentials.refreshUrl && (
-                                            <div className={classes.wrapper__auth__content}>
-                                              <span className={classes.wrapper__auth__content__title}>Refresh URL</span>
-                                              <code className={classes.wrapper__auth__content__code}>{jsonOpenApi.components.securitySchemes.OAuth2?.flow?.clientCredentials.authorizationUrl}</code>
-                                            </div>
-                                          )}
-                                          {!jsonOpenApi.components.securitySchemes.OAuth2?.flow?.clientCredentials.scopes && (
-                                            <div>
-                                              <p className={classes.wrapper__auth__content__title}>Scopes</p>
-                                              <ul className={classes.wrapper__auth__content__scopes}>
-                                                <li className={classes.wrapper__auth__content__scopes__item}>
-                                                  <code className={classes.wrapper__auth__content__code}>read</code>
-                                                  <span>{jsonOpenApi.components.securitySchemes.OAuth2?.flow?.clientCredentials.scopes.read}</span>
-                                                </li>
-                                                <li className={classes.wrapper__auth__content__scopes__item}>
-                                                  <code className={classes.wrapper__auth__content__code}>write</code>
-                                                  <span>{jsonOpenApi.components.securitySchemes.OAuth2?.flow?.clientCredentials.scopes.write}</span>
-                                                </li>
-                                                <li className={classes.wrapper__auth__content__scopes__item}>
-                                                  <code className={classes.wrapper__auth__content__code}>admin</code>
-                                                  <span>{jsonOpenApi.components.securitySchemes.OAuth2?.flow?.clientCredentials.scopes.admin}</span>
-                                                </li>
-                                              </ul>
-                                            </div>
-                                          )}
-                                        </div>
-                                      </div>
-                                    )}
+                                          );
+                                        })
+                                      )}
+                                    </div>
                                   </div>
-                                )}
-                              </div>
-                            )
-                          }
-                          {
-                            jsonOpenApi.components.securitySchemes.apiKeyHeader && (
-                              <div className={classes.wrapper__auth__apikey}>
-                                <div className={classes.accordion__body__title}>
-                                  <h1>Esquema de seguridad</h1>
-                                  <p>{jsonOpenApi.components.securitySchemes.apiKeyHeader.type}</p>
-                                </div>
-                                <div className={classes.wrapper__auth}>
-                                  <div>
-                                    <p className={classes.wrapper__auth__title}>Header parameter</p>
-                                  </div>
-                                  <div>
-                                    <p>{jsonOpenApi.components.securitySchemes.apiKeyHeader.name}</p>
-                                  </div>
-                                </div>
-                              </div>
-                            )
-                          }
-                          {
-                            jsonOpenApi.components.securitySchemes.apiKeyQuery && (
-                              <div className={classes.wrapper__auth__apikey}>
-                                <div className={classes.accordion__body__title}>
-                                  <h1>Esquema de seguridad</h1>
-                                  <p>{jsonOpenApi.components.securitySchemes.apiKeyQuery.type}</p>
-                                </div>
-                                <div className={classes.wrapper__auth}>
-                                  <div>
-                                    <p className={classes.wrapper__auth__title}>Query parameter</p>
-                                  </div>
-                                  <div>
-                                    <p>{jsonOpenApi.components.securitySchemes.apiKeyQuery.name}</p>
-                                  </div>
-                                </div>
-                              </div>
+                                );
+                              })
                             )
                           }
                         </div>

@@ -7,6 +7,18 @@
   @include breakpoint(xs) {
     padding: 0;
   }
+  &__title {
+    padding: 0.5rem 1rem 0.5rem 0.5rem;
+    h1 {
+      font-size: 1.2rem;
+      font-weight: bold;   
+      color: $blue_sura;
+    }
+    p {
+      font-size: 1rem;
+      font-weight: bold;   
+    }
+  }
   &__head {
     transition: 0.3s ease all;
     background: rgba($color: $gray-lighten-1, $alpha: 0.7);
@@ -45,13 +57,16 @@
       color: $gray_darken;
       line-height: 28px;
       padding-bottom: 1rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
     }
 
     &__title {
+
       display: grid;
       grid-template-columns: 1fr 3fr;
       gap: 1rem;
-      padding: 1rem 0.5rem;
+      padding: 0 0.5rem 1rem;
       align-items: center;
 
       h1 {
@@ -178,14 +193,18 @@
   }
 }
 
-.scopes{ 
+.scopes{
+  padding: 0;
   li {
-    padding: 10px;
+    padding: 10px 10px 10px 0;
+    list-style-type: none;
     span {
       font-size: 1rem;
     }
   }
   &__code {
+    max-width: 600px;
+    word-break: break-all;
     color: $primary;
     background: #FAFAFC;
     border-radius: 12px;
@@ -239,7 +258,7 @@
       font-weight: 500;
       letter-spacing: 0.1px;
       padding: 0.5rem 11px;
-      margin: 0 15px;
+      margin: 0 15px 0 0;
     }
     &__scopes {
       &__item {
