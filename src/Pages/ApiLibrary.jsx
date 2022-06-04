@@ -132,7 +132,7 @@ function AppLibrary(props) {
     <Container fixed className={`${classes.margin_left} py-10 mt-10 `}>
       <Title stylesTitle={{ fontSize: '48px' }} className='mb-18' text='Biblioteca de Apis' />
       <Grid style={{ marginTop: '20px' }} container spacing={10}>
-        <Grid item xs={5}>
+        <Grid item xs={6}>
           <SearchInput
             icon
             name='search'
@@ -144,8 +144,8 @@ function AppLibrary(props) {
             borderRadius='20px'
           />
         </Grid>
-        <Grid item xs={7}>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+        <Grid item xs={6}>
+          <div className='display_flex justify_content__between align_items__center'>
             <span className={classes.filter}>
               Filtrar por
               {' '}

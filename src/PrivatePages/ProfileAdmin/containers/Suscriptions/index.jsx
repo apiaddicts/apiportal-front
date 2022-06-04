@@ -12,7 +12,7 @@ import {
   renameSubscription,
   cancelSubscription } from '../../../../redux/actions/subscriptionsAction';
 import 'moment/locale/es';
-import MenuOptions from './MenuOptions';
+import MenuOptions from '../../../../components/MenuOptions';
 import classes from './Suscriptions.module.scss';
 
 moment.locale('es');
