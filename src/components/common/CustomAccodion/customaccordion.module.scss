@@ -49,7 +49,7 @@
 
     &__title {
       display: grid;
-      grid-template-columns: 140px 2fr;
+      grid-template-columns: 1fr 3fr;
       gap: 1rem;
       padding: 1rem 0.5rem;
       align-items: center;
@@ -202,6 +202,49 @@
       color: $primary;
       font-size: 1rem;
       font-weight: 500;
+    }
+  }
+}
+
+.wrapper__auth {
+  // style={{ display: 'grid', gap: '1rem', gridTemplateColumns: '1fr 3fr' }}
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  gap: 1rem;
+  align-items: center; 
+  margin: 1rem 0;
+
+  &__apikey {
+    margin: 1rem 0;
+  }
+  &__title {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #53565a;
+  }
+  &__content {
+    display: flex;
+    align-items: center;
+    &__title {
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1px;
+    }
+    &__code {
+      color: $primary;
+      background: #FAFAFC;
+      border-radius: 12px;
+      border: 1px solid #ECF0F1;
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 0.1px;
+      padding: 0.5rem 11px;
+      margin: 0 15px;
+    }
+    &__scopes {
+      &__item {
+        padding: 10px 5px;
+      }
     }
   }
 }

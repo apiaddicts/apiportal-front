@@ -30,6 +30,7 @@ import Swagger from '../Pages/ejemplos/Swagger';
 
 import { getUser } from '../redux/actions/userAction';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
+// import ResetPassword from '../Pages/ResetPassword';
 
 function AppRouter() {
   const { id, token, user } = useSelector((state) => state.user);
@@ -70,7 +71,7 @@ function AppRouter() {
             <Route path='/blog' exact element={<Blog setIsOpen={setIsOpen} />} />
             <Route path='/blog/:id' exact element={<BlogDetails setIsOpen={setIsOpen} />} />
             <Route path='/componentes' exact element={<Components />} />
-            <Route path='*' element={<Navigate to='/' replace />} />
+            {/* <Route path='*' element={<Navigate to='/' replace />} /> */}
           </Routes>
           <Footer />
         </>
@@ -79,7 +80,7 @@ function AppRouter() {
         <Box>
           {user && Object.keys(user).length > 0 ? (
             <Box>
-              <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#fbfbfb' }}>
+              <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#fbfbfb', minHeight: '100vh' }}>
                 <SidebarDrawer user={user} />
                 <Routes>
                   <Route path='/user' element={<Admin />} />
