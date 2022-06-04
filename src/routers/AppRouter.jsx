@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Box } from '@mui/material';
@@ -30,12 +30,13 @@ import Swagger from '../Pages/ejemplos/Swagger';
 
 import { getUser } from '../redux/actions/userAction';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
-// import ResetPassword from '../Pages/ResetPassword';
+import ResetPassword from '../Pages/ResetPassword';
 
 function AppRouter() {
   const { id, token, user } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const [isOpen, setIsOpen] = useState(false);
   const [openForm, setOpenForm] = useState(false);
@@ -53,7 +54,7 @@ function AppRouter() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <>
       {isOpen && (
         <Login setIsOpen={setIsOpen} />
       )}
@@ -62,7 +63,10 @@ function AppRouter() {
       )}
       {!privateSession && (
         <>
-          <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} privateSession={privateSession} />
+          {
+            location.pathname !== '/confirmPassword' &&
+            <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} privateSession={privateSession} />
+          }
           <Routes>
             <Route path='/' element={<Home setIsOpen={setIsOpen} />} />
             <Route path='/apis' exact element={<Apis setIsOpen={setIsOpen} />} />
@@ -71,9 +75,13 @@ function AppRouter() {
             <Route path='/blog' exact element={<Blog setIsOpen={setIsOpen} />} />
             <Route path='/blog/:id' exact element={<BlogDetails setIsOpen={setIsOpen} />} />
             <Route path='/componentes' exact element={<Components />} />
+            <Route path='/confirmPassword' exact element={<ResetPassword />} />
             {/* <Route path='*' element={<Navigate to='/' replace />} /> */}
           </Routes>
-          <Footer />
+          {
+            location.pathname !== '/confirmPassword' &&
+            <Footer />
+          }
         </>
       )}
       {privateSession && (
@@ -103,7 +111,7 @@ function AppRouter() {
 
         </Box>
       )}
-    </BrowserRouter>
+    </>
   );
 };
 

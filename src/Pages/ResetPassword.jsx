@@ -1,14 +1,33 @@
 // import { Container } from '@mui/material';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
+import { useSearchParams } from 'react-router-dom';
 import Alert from '@mui/material/Alert';
 import Button from '../components/Buttons/Button';
 import classes from '../styles/pages/resetpassword.module.scss';
 import InputUI from '../components/Input/InputUI/InputUI';
 import SuraLogo from '../static/img/sura_logo_alt.svg';
 import CustomFooter from '../components/common/CustomFooter/CustomFooter';
+import { resetPasswordWithTicket } from '../redux/actions/userAction';
 
 function ResetPassword(props) {
+
+  const { responseResetPwdError } = useSelector((state) => state.user);
+  const [hasErrors, setHasErrors] = useState(false);
+  const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const queryParams = {
+    id: searchParams.get('userid'),
+    ticketid: searchParams.get('ticketid'),
+    ticket: searchParams.get('ticket'),
+  };
+
+  useEffect(() => {
+    if (Object.keys(responseResetPwdError).length > 0) {
+      setHasErrors(true);
+    }
+  }, [responseResetPwdError]);
 
   const formik = useFormik({
     initialValues: {
@@ -16,8 +35,12 @@ function ResetPassword(props) {
       confirmPassword: '',
     },
     onSubmit: (values) => {
-      //Agregar evento para cambio de contraseña
-      console.log(values);
+      const data = {
+        properties: {
+          password: values.password,
+        },
+      };
+      dispatch(resetPasswordWithTicket(queryParams, data));
     },
     validate: (values) => {
       const errors = {};
@@ -48,15 +71,14 @@ function ResetPassword(props) {
               <div className='row'>
                 <div className='flex-sm-12 flex-md-12'>
                   <h1>Ingresa tu nueva contraseña</h1>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className={classes.wrapper__content__text}>
-            <div className='container'>
-              <div className='row'>
-                <div className='flex-sm-12 flex-md-12'>
                   <p>Tu nueva contraseña debe ser diferente a la anterior</p>
+                  {
+                    hasErrors &&
+                    // eslint-disable-next-line react/jsx-wrap-multilines
+                    <Alert severity='error'>
+                      <p>{responseResetPwdError?.error?.statusText}</p>
+                    </Alert>
+                  }
                 </div>
               </div>
             </div>

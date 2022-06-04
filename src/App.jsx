@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import store from './redux/store';
 import AppRouter from './routers/AppRouter';
 // import ExternalRouter from './routers/ExternalRouter';
@@ -7,7 +8,9 @@ import AppRouter from './routers/AppRouter';
 function App() {
   return (
     <Provider store={store}>
-      <AppRouter />
+      <BrowserRouter>
+        <AppRouter />
+      </BrowserRouter>
       {/* <ExternalRouter /> */}
     </Provider>
   );
