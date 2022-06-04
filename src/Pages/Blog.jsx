@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
+import _ from 'underscore';
+
+import moment from 'moment';
+
 import { HashLink } from 'react-router-hash-link';
 
 import stylesBlog from '../styles/pages/blog.module.scss';
@@ -19,45 +23,7 @@ import useSearch from '../hooks/useSearch';
 import Icon from '../components/MdIcon/Icon';
 import { getBlogData, getBlogs } from '../redux/actions/blogAction';
 
-const slidesNew = [
-  {
-    img: 'https://picsum.photos/id/0/370/240',
-    title: 'Lorem ipsum',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1/370/240',
-    title: 'Lorem ipsum',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1031/370/240',
-    title: 'Lorem ipsum',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1066/370/240',
-    title: 'Lorem ipsum',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1078/370/240',
-    title: 'Lorem ipsum',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1079/370/240',
-    title: 'Lorem ipsum',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
-    linkText: 'Conoce más',
-  },
-];
-
+moment.locale('es');
 function Blog({ setIsOpen }) {
   const { blogs, data } = useSelector((state) => state.blog);
   // eslint-disable-next-line no-unused-vars
@@ -115,8 +81,23 @@ function Blog({ setIsOpen }) {
 
   let cardCounter = 0;
 
+  const datanews = blogs.length > 0 ? _.sortBy(blogs, (m) => {
+    return moment(m.created_at).toDate().getTime();
+  }) : [];
+
+  const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
+    const itemData = {
+      img: item.image[0].url,
+      title: item.title,
+      description: item.description,
+      linkText: 'Conoce más',
+      route: `/blog/${item.id}#blogDetail`,
+    };
+    return itemData;
+  }) : [];
+
   return (
-    <div style={{ paddingTop: '114px' }}>
+    <div id='blogIndex' style={{ paddingTop: '114px' }}>
       {blogs.length > 0 && Object.keys(data).length > 0 ? (
         <div>
           <section>
@@ -316,7 +297,7 @@ function Blog({ setIsOpen }) {
                 <div className='container'>
                   <div className='row'>
                     <div className='flex-md-12 flex-sm-12'>
-                      <Slick slides={slidesNew} setIsOpen={setIsOpen} />
+                      <Slick slides={slidesNew} />
                     </div>
                   </div>
                 </div>

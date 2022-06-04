@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 
 import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
@@ -53,14 +54,25 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
                 <div className='flex-md-12 flex-sm-12'>
                   <div className='button__group mt-5'>
                     {!buttons ? '' : buttons.map((button, index) => {
-                      console.log('button', button);
+                      if (button.link !== undefined && button.link !== '') {
+                        return (
+                          <div key={index} className='mr-10 pr-2'>
+                            <HashLink smooth to={button.link !== undefined ? button.link : ''}>
+                              <Button styles={button.class}>
+                                {button.label}
+                              </Button>
+                            </HashLink>
+                          </div>
+                        );
+                      }
                       return (
                         <div key={index} className='mr-10 pr-2'>
-                          <Button styles={button.class} onClick={handleClick}>
+                          <Button onClick={handleClick} styles={button.class}>
                             {button.label}
                           </Button>
                         </div>
                       );
+
                     })}
                   </div>
                 </div>

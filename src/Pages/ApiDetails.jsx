@@ -90,6 +90,7 @@ function ApiDetails({ setIsOpen }) {
     const data = {
       label: item.name,
       class: item.class,
+      link: item.link !== '' ? `/api/${params.id}#contact` : '',
     };
 
     return data;
@@ -272,7 +273,7 @@ function ApiDetails({ setIsOpen }) {
                 </div>
               </div>
             </div>
-            <div className={`container ${classes.section__news__showmore}`}>
+            <div id='contact' className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
                 <div className={`flex-lg-2 flex-md-6 flex-sm-12 text-center ${classes.custom_top}`}>
                   <div className='text__secondary'>Ver más</div>
@@ -280,7 +281,7 @@ function ApiDetails({ setIsOpen }) {
               </div>
             </div>
           </section>
-
+          <div id='contact' />
         </>
       ) : (
         <SkeletonComponent />

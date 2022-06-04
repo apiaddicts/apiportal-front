@@ -25,8 +25,8 @@ import { logout } from '../../redux/actions/userAction';
 
 function SidebarDrawer({ children, user }) {
   const listItems = [
-    { route: '/apps', text: 'Productos', icon: <Terminal /> },
-    { route: '/ApiLibrary', text: 'Biblioteca de APIs', icon: <Settings /> },
+    { route: '/products', text: 'Productos', icon: <Terminal /> },
+    { route: '/apiBookstores', text: 'Biblioteca de APIs', icon: <Settings /> },
     { route: '/subscriptions', text: 'Suscripciones', icon: <Terminal /> },
   ];
 
