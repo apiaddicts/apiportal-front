@@ -20,11 +20,11 @@ import Apps from '../Pages/Apps';
 import ApiLibrary from '../Pages/ApiLibrary';
 import SidebarDrawer from '../components/SidebarDrawer/SidebarDrawer';
 import Admin from '../PrivatePages/ProfileAdmin';
-import AddApp from '../PrivatePages/AddApp';
 import AppsDetail from '../PrivatePages/DetailApp';
 import ApiDetailed from '../PrivatePages/ApiDetails/ApiDetailed';
 // import ChooseApi from '../PrivatePages/ChooseApi';
 import CustomFooter from '../components/common/CustomFooter/CustomFooter';
+import ApiSubscriptions from '../PrivatePages/ApiSubscriptions';
 
 import Swagger from '../Pages/ejemplos/Swagger';
 
@@ -98,7 +98,7 @@ function AppRouter() {
                   <Route path='/apiBookstores/:id' exact element={<ApiDetailed />} />
                   <Route path='/apiBookstores/try/:id' exact element={<Swagger />} />
                   {/* <Route path='/apps/apis' exact element={<ChooseApi />} /> */}
-                  <Route path='/subscriptions' exact element={<AddApp />} />
+                  <Route path='/subscriptions' exact element={<ApiSubscriptions />} />
                   <Route path='*' element={<Navigate to='/products' replace />} />
                 </Routes>
               </Box>

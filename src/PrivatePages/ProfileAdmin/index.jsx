@@ -124,7 +124,9 @@ function Admin() {
 
         </div>
       </Container>
-      <Suscriptions user={user} />
+      <div className={classes.main__admin}>
+        <Suscriptions user={user} />
+      </div>
     </div>
   );
 }
