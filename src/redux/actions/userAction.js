@@ -160,3 +160,22 @@ export const resetPassword = (data) => (dispatch) => {
     },
   );
 };
+export const resetPasswordWithTicket = (queryParams, data, password) => (dispatch) => {
+  userService.resetPasswordWithTicket(queryParams, data, password).then(
+    (response) => {
+      if (response && Object.keys(response).length > 0) {
+        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+          if (response?.error?.status === 401) {
+            dispatch({ type: userConstants.RESET_PASSWORD_TICKET_FAILURE, response });
+          }
+        } else {
+          dispatch(logout());
+          window.location = '/';
+        }
+      }
+    },
+    (error) => {
+      console.log('Reset password error', error);
+    },
+  );
+};

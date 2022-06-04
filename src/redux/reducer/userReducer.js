@@ -14,6 +14,7 @@ const initialState = token && etag ? {
   responseError: {},
   responseRestoreError: {},
   responseResetSignup: {},
+  responseResetPwdError: {},
 } : {
   user: {},
   loadingUser: false,
@@ -25,6 +26,7 @@ const initialState = token && etag ? {
   responseError: {},
   responseRestoreError: {},
   responseResetSignup: {},
+  responseResetPwdError: {},
 };
 
 // eslint-disable-next-line default-param-last
@@ -98,13 +100,20 @@ export default function userReducer(state = initialState, action) {
         ...state,
         etag: action.response.etag,
       };
-      // logout
+    case userConstants.RESET_PASSWORD_TICKET_FAILURE:
+      return {
+        ...state,
+        loadingSignUp: false,
+        responseResetPwdError: action.response,
+      };
+    // logout
     case userConstants.RESET_ALERT:
       return {
         ...state,
         responseError: {},
         responseRestoreError: {},
         responseResetSignup: {},
+        responseResetPwdError: {},
       };
     case userConstants.LOGOUT_USER:
       return {
@@ -117,6 +126,7 @@ export default function userReducer(state = initialState, action) {
         responseError: {},
         responseRestoreError: {},
         responseResetSignup: {},
+        responseResetPwdError: {},
       };
     default:
       return state;
