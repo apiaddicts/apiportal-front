@@ -1197,6 +1197,11 @@ a {
   background-color: #53565A;
 }
 
+
+.no_scroll{
+  height: 100vh;
+  overflow-y: hidden;
+}
 // .multiSelectContainer
 // {
 //   input {

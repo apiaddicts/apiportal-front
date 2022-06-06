@@ -61,12 +61,31 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
 
             <ul className='d-xs-none'>
               <li className='pr-2'>
-                <Button type='button' styles='ghost-variant' preIcon='MdOutlinePersonOutline' size='small' style={{ width: '200px', height: '32px' }} onClick={() => { setIsOpen(true); }}>
+                <Button
+                  type='button'
+                  styles='ghost-variant'
+                  preIcon='MdOutlinePersonOutline'
+                  size='small'
+                  style={{ width: '200px', height: '32px' }}
+                  onClick={() => {
+                    setIsOpen(true);
+                    document.body.classList.add('no_scroll');
+                  }}
+                >
                   Iniciar sesión
                 </Button>
               </li>
               <li>
-                <Button type='button' styles='secundary' size='small' style={{ width: '140px', height: '32px' }} onClick={() => { setOpenForm(true); }}>
+                <Button
+                  type='button'
+                  styles='secundary'
+                  size='small'
+                  style={{ width: '140px', height: '32px' }}
+                  onClick={() => {
+                    setOpenForm(true);
+                    document.body.classList.add('no_scroll');
+                  }}
+                >
                   registrate
                 </Button>
               </li>
