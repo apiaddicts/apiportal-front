@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Icon from '../../MdIcon/Icon';
 import classes from './customaccordion.module.scss';
-import { listApis, getApiHostnames } from '../../../redux/actions/libraryAction';
+import { listApis, getApiHostnames, getApiOpenAPI } from '../../../redux/actions/libraryAction';
 
 function CustomAccordion({ items, subItem, setSubItem }) {
-  const { apis, hostnames } = useSelector((state) => state.library);
+  const { apis, hostnames, jsonOpenApi } = useSelector((state) => state.library);
   const dispatch = useDispatch();
   const toggleItem = (index) => {
     if (subItem === index) {
@@ -29,7 +29,10 @@ function CustomAccordion({ items, subItem, setSubItem }) {
     if (hostnames && Object.keys(hostnames).length === 0) {
       dispatch(getApiHostnames(items.name));
     }
-  }, [dispatch, apis]);
+    if (jsonOpenApi && Object.keys(jsonOpenApi).length === 0) {
+      dispatch(getApiOpenAPI(items.name));
+    }
+  }, [dispatch, apis, hostnames, jsonOpenApi]);
 
   const mApis = apis && Object.keys(apis).length > 0 ? apis.value.map((f) => {
     return f;
@@ -39,12 +42,14 @@ function CustomAccordion({ items, subItem, setSubItem }) {
     return x.properties.value;
   }) : [];
 
+  console.log(jsonOpenApi);
+
   return (
     <div>
       { items && Object.keys(items).length > 0 ? (
         <div>
           {arrOption.map((option, index) => (
-            <div className={classes.accordion}>
+            <div className={classes.accordion} key={index}>
               <div
                 className={subItem === index ? `${classes.accordion__head} ${classes.active}` : `${classes.accordion__head}`}
                 onClick={() => {
@@ -117,7 +122,7 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                               </div>
                               <div className={classes.accordion__body__title}>
                                 <h1>URI Live:</h1>
-                                <code className={classes.scopes__code}>{`https://${hostname}/${items.properties.path}/${items.properties.apiVersion}/`}</code>
+                                <code className={classes.scopes__code}>{`https://${hostname}/${items.properties.path}/${pos.properties.apiVersion}/`}</code>
                               </div>
                             </div>
                           ))}
@@ -125,73 +130,103 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                       ) : subItem === 3 ? (
                         <div>
                           {
-                            Object.keys(items.properties.authenticationSettings).includes('oAuth2') && (
-                              <div>
-                                <div className={classes.accordion__body__title}>
-                                  <h1>Esquema de seguridad</h1>
-                                  <p>OAuth2</p>
-                                </div>
-                                <div className={classes.accordion__body__title}>
-                                  <h1>Implicit OAuth Flow</h1>
-                                  <div>
-                                    <div className={classes.accordion__body__content}>
-                                      <p>URL de Autorización</p>
-                                      <code className={classes.scopes__code}>{items.properties.serviceUrl}</code>
+                            jsonOpenApi.components && jsonOpenApi.components.securitySchemes && (
+                              Object.keys(jsonOpenApi.components.securitySchemes).map((key, index) => {
+                                return (
+                                  <div key={index}>
+                                    <div className={classes.accordion__title}>
+                                      <h1>{key}</h1>
                                     </div>
+                                    {jsonOpenApi.components.securitySchemes[key]?.description && (
+                                      <div className={classes.accordion__body__description}>
+                                        <p>{jsonOpenApi.components.securitySchemes[key].description}</p>
+                                      </div>
+                                    )}
                                     <div>
-                                      <p>Scopes:</p>
-                                      <ul className={classes.scopes}>
-                                        <li>
-                                          <code className={classes.scopes__code__item}>write</code>
-                                          <span>- Lorem ipsum dolor sit.</span>
-                                        </li>
-                                        <li>
-                                          <code className={classes.scopes__code__item}>read</code>
-                                          <span>- Lorem ipsum dolor sit.</span>
-                                        </li>
-                                        <li>
-                                          <code className={classes.scopes__code__item}>profile</code>
-                                          <span>- Lorem ipsum dolor sit.</span>
-                                        </li>
-                                      </ul>
+                                      <div className={classes.accordion__body__title}>
+                                        <h1>Esquema de seguridad: </h1>
+                                        {(() => {
+                                          switch (jsonOpenApi.components.securitySchemes[key].type.toLowerCase()) {
+                                            case 'http':
+                                              return <p>HTTP</p>;
+                                            case 'apikey':
+                                              return <p>API Key</p>;
+                                            case 'oauth2':
+                                              return <p>OAuth 2.0</p>;
+                                            default:
+                                              return <p />;
+                                          }
+                                        })()}
+                                      </div>
+                                      {jsonOpenApi.components.securitySchemes[key].type.toLowerCase() === 'http' && jsonOpenApi.components.securitySchemes[key]?.scheme && (
+                                        <div className={classes.accordion__body__title}>
+                                          <h1>Autorización HTTP: </h1>
+                                          <p>{jsonOpenApi.components.securitySchemes[key].scheme}</p>
+                                        </div>
+                                      )}
+                                      {jsonOpenApi.components.securitySchemes[key].type.toLowerCase() === 'http' && jsonOpenApi.components.securitySchemes[key]?.scheme &&
+                                        jsonOpenApi.components.securitySchemes[key].scheme === 'bearer' && jsonOpenApi.components.securitySchemes[key]?.bearerFormat && (
+                                        <div className={classes.accordion__body__title}>
+                                          <h1>Formato: </h1>
+                                          <p>{jsonOpenApi.components.securitySchemes[key].bearerFormat}</p>
+                                        </div>
+                                      )}
+                                      {jsonOpenApi.components.securitySchemes[key].type.toLowerCase() === 'apikey' && jsonOpenApi.components.securitySchemes[key]?.in && (
+                                        <div className={classes.accordion__body__title}>
+                                          <h1>{`Parámetro (${jsonOpenApi.components.securitySchemes[key].in}): `}</h1>
+                                          <p>{jsonOpenApi.components.securitySchemes[key].name}</p>
+                                        </div>
+                                      )}
+                                      {jsonOpenApi.components.securitySchemes[key].type.toLowerCase() === 'oauth2' && jsonOpenApi.components.securitySchemes[key]?.flows && (
+                                        Object.keys(jsonOpenApi.components.securitySchemes[key].flows).map((flow, index) => {
+                                          return (
+                                            <div key={index}>
+                                              <div className={classes.accordion__title}>
+                                                <p>{`Flujo ${flow}`}</p>
+                                              </div>
+                                              {jsonOpenApi.components.securitySchemes[key].flows[flow]?.authorizationUrl && (
+                                                <div className={classes.accordion__body__title}>
+                                                  <h1>URL de Autorización: </h1>
+                                                  <code className={classes.scopes__code}>{jsonOpenApi.components.securitySchemes[key].flows[flow].authorizationUrl}</code>
+                                                </div>
+                                              )}
+                                              {jsonOpenApi.components.securitySchemes[key].flows[flow]?.tokenUrl && (
+                                                <div className={classes.accordion__body__title}>
+                                                  <h1>URL de Token: </h1>
+                                                  <code className={classes.scopes__code}>{jsonOpenApi.components.securitySchemes[key].flows[flow].tokenUrl}</code>
+                                                </div>
+                                              )}
+                                              {jsonOpenApi.components.securitySchemes[key].flows[flow]?.refreshUrl && (
+                                                <div className={classes.accordion__body__title}>
+                                                  <h1>URL de Refresco: </h1>
+                                                  <code className={classes.scopes__code}>{jsonOpenApi.components.securitySchemes[key].flows[flow].refreshUrl}</code>
+                                                </div>
+                                              )}
+                                              {jsonOpenApi.components.securitySchemes[key].flows[flow]?.scopes && (
+                                                <div className={classes.accordion__body__title}>
+                                                  <h1>Scopes: </h1>
+                                                  <div>
+                                                    <ul className={classes.scopes}>
+                                                      {Object.keys(jsonOpenApi.components.securitySchemes[key].flows[flow].scopes).map((scope, index) => {
+                                                        return (
+                                                          <li key={index}>
+                                                            <code className={classes.wrapper__auth__content__code}>{scope}</code>
+                                                            <span>{jsonOpenApi.components.securitySchemes[key].flows[flow].scopes[scope]}</span>
+                                                          </li>
+                                                        );
+                                                      })}
+                                                    </ul>
+                                                  </div>
+                                                </div>
+                                              )}
+                                            </div>
+                                          );
+                                        })
+                                      )}
                                     </div>
-
                                   </div>
-                                </div>
-                              </div>
-                            )
-                          }
-                          {
-                            Object.keys(items.properties.authenticationSettings).includes('openid') && (
-                              <div>
-                                <div className={classes.accordion__body__title}>
-                                  <h1>Esquema de seguridad</h1>
-                                  <p>API Key</p>
-                                </div>
-                                <div className={classes.accordion__body__title}>
-                                  <h1>Parametros</h1>
-                                  <div>
-                                    <div>
-                                      <p>API Key Auth:</p>
-                                      <ul className={classes.scopes}>
-                                        <li>
-                                          <code className={classes.scopes__code__item}>type</code>
-                                          <span> apiKey</span>
-                                        </li>
-                                        <li>
-                                          <code className={classes.scopes__code__item}>in</code>
-                                          <span> header</span>
-                                        </li>
-                                        <li>
-                                          <code className={classes.scopes__code__item}>header</code>
-                                          <span> X-API-KEY</span>
-                                        </li>
-                                      </ul>
-                                    </div>
-
-                                  </div>
-                                </div>
-                              </div>
+                                );
+                              })
                             )
                           }
                         </div>

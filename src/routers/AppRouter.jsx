@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { Box } from '@mui/material';
@@ -20,21 +20,23 @@ import Apps from '../Pages/Apps';
 import ApiLibrary from '../Pages/ApiLibrary';
 import SidebarDrawer from '../components/SidebarDrawer/SidebarDrawer';
 import Admin from '../PrivatePages/ProfileAdmin';
-import AddApp from '../PrivatePages/AddApp';
 import AppsDetail from '../PrivatePages/DetailApp';
 import ApiDetailed from '../PrivatePages/ApiDetails/ApiDetailed';
 // import ChooseApi from '../PrivatePages/ChooseApi';
 import CustomFooter from '../components/common/CustomFooter/CustomFooter';
+import ApiSubscriptions from '../PrivatePages/ApiSubscriptions';
 
 import Swagger from '../Pages/ejemplos/Swagger';
 
 import { getUser } from '../redux/actions/userAction';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
+import ResetPassword from '../Pages/ResetPassword';
 
 function AppRouter() {
   const { id, token, user } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
+  const location = useLocation();
 
   const [isOpen, setIsOpen] = useState(false);
   const [openForm, setOpenForm] = useState(false);
@@ -52,7 +54,7 @@ function AppRouter() {
   }, []);
 
   return (
-    <BrowserRouter>
+    <>
       {isOpen && (
         <Login setIsOpen={setIsOpen} />
       )}
@@ -61,7 +63,10 @@ function AppRouter() {
       )}
       {!privateSession && (
         <>
-          <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} privateSession={privateSession} />
+          {
+            location.pathname !== '/confirmPassword' &&
+            <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} privateSession={privateSession} />
+          }
           <Routes>
             <Route path='/' element={<Home setIsOpen={setIsOpen} />} />
             <Route path='/apis' exact element={<Apis setIsOpen={setIsOpen} />} />
@@ -70,16 +75,20 @@ function AppRouter() {
             <Route path='/blog' exact element={<Blog setIsOpen={setIsOpen} />} />
             <Route path='/blog/:id' exact element={<BlogDetails setIsOpen={setIsOpen} />} />
             <Route path='/componentes' exact element={<Components />} />
-            <Route path='*' element={<Navigate to='/' replace />} />
+            <Route path='/confirmPassword' exact element={<ResetPassword />} />
+            {/* <Route path='*' element={<Navigate to='/' replace />} /> */}
           </Routes>
-          <Footer />
+          {
+            location.pathname !== '/confirmPassword' &&
+            <Footer />
+          }
         </>
       )}
       {privateSession && (
         <Box>
           {user && Object.keys(user).length > 0 ? (
             <Box>
-              <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#fbfbfb' }}>
+              <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#fbfbfb', minHeight: '100vh' }}>
                 <SidebarDrawer user={user} />
                 <Routes>
                   <Route path='/user' element={<Admin />} />
@@ -89,7 +98,7 @@ function AppRouter() {
                   <Route path='/apiBookstores/:id' exact element={<ApiDetailed />} />
                   <Route path='/apiBookstores/try/:id' exact element={<Swagger />} />
                   {/* <Route path='/apps/apis' exact element={<ChooseApi />} /> */}
-                  <Route path='/subscriptions' exact element={<AddApp />} />
+                  <Route path='/subscriptions' exact element={<ApiSubscriptions />} />
                   <Route path='*' element={<Navigate to='/products' replace />} />
                 </Routes>
               </Box>
@@ -102,7 +111,7 @@ function AppRouter() {
 
         </Box>
       )}
-    </BrowserRouter>
+    </>
   );
 };
 

@@ -116,7 +116,7 @@ function SidebarDrawer({ children, user }) {
       <Drawer
         variant='permanent'
         sx={{
-          width: '388px',
+          width: '300px',
         }}
 
       >

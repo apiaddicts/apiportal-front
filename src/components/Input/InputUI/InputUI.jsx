@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import classes from './inputui.module.scss';
 
-function InputUI({ type = 'text', label, required = false }) {
+function InputUI({ type = 'text', label, required = false, ...rest }) {
   const [isActive, setIsActive] = useState(false);
   const [value, setValue] = useState('');
 
@@ -17,9 +17,9 @@ function InputUI({ type = 'text', label, required = false }) {
 
   return (
     <div className={classes.wrapper__input}>
-      <input type={type} required={required ? 'required' : ''} value={value} onChange={(e) => handleTextChange(e.target.value)} />
+      <input type={type} required={required ? 'required' : ''} value={value} onKeyPress={(e) => handleTextChange(e.target.value)} {...rest} />
       <label className={isActive ? `${classes.active}` : ''}>{label}</label>
-      { required && (<span className={classes.required}>Requerido *</span>)}
+      { required && (<span className={classes.required}>{isActive}</span>)}
     </div>
   );
 }

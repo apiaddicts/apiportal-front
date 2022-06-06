@@ -3,7 +3,7 @@ import { CssBaseline, Drawer, List, ListItem, listItemClasses, ListItemIcon, Lis
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 // import SidebarDrawer from '../../SidebarDrawer/SidebarDrawer';
-import CustomFooter from '../CustomFooter/CustomFooter';
+// import CustomFooter from '../CustomFooter/CustomFooter';
 import CustomHeader from '../CustomHeader/CustomHeader';
 import classes from './customcontainer.module.scss';
 
@@ -105,7 +105,7 @@ function CustomContainer({ children, user }) {
         </main>
       </div>
       <div className={classes.footer}>
-        <CustomFooter />
+        <h1>FOOTer</h1>
       </div>
     </>
   );

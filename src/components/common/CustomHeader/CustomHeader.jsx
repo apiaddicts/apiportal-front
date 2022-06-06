@@ -4,6 +4,8 @@ import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSha
 import SearchIcon from '@mui/icons-material/Search';
 import LogoutIcon from '@mui/icons-material/Logout';
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import SuraLogoAlt from '../../../static/img/sura_logo_alt.svg';
 import { logout } from '../../../redux/actions/userAction';
 
@@ -16,6 +18,8 @@ function CustomHeader({ user }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleUser = () => {
     navigate('/user');

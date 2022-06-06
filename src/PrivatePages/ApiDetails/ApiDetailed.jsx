@@ -31,7 +31,6 @@ function ApiDetails(props) {
       'Descripción',
       'Versiones',
       'Autenticación',
-      // 'Sandbox',
     ],
   }];
 

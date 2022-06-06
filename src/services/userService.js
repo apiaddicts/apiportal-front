@@ -1,6 +1,7 @@
 import handleResponse from './handleResponse';
 import handleResponseToken from './handleResponseToken';
 import handleResponseRestore from './handleResponseRestore';
+import handleResponseResetPwd from './handleResponseResetPwd';
 import config from './config';
 
 import store from '../redux/store';
@@ -181,6 +182,23 @@ function resetPassword(data) {
     });
 }
 
+function resetPasswordWithTicket(queryParams, data) {
+  const requestOptions = {
+    method: 'PATCH',
+    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `Ticket id="${queryParams.ticketid}",ticket="${queryParams.ticket}"` },
+    body: JSON.stringify(data),
+  };
+  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
+  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
+  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
+  const url = `${urlService}/users/${queryParams.id}?api-version=${config.apiVersion}`;
+  return fetch(url, requestOptions)
+    .then(handleResponseResetPwd)
+    .then((response) => {
+      return response;
+    });
+}
+
 const userService = {
   login,
   getUserDetails,
@@ -191,6 +209,7 @@ const userService = {
   verifyOldPassword,
   changePassword,
   resetPassword,
+  resetPasswordWithTicket,
 };
 
 export default userService;
