@@ -2,6 +2,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import moment from 'moment';
+
+import _ from 'underscore';
+
 import BannerCentered from '../components/Banner/BannerCentered';
 import Button from '../components/Buttons/Button';
 import CardBasic from '../components/Card/CardBasic';
@@ -9,53 +13,15 @@ import Item from '../components/Item/Item';
 import Tabs from '../components/Tabs/Tabs';
 import classes from '../styles/pages/home.module.scss';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
-// import textureCircles from '../static/img/texture_circles.svg';
+
 import codeSnipet from '../static/img/code-snippet.png';
 import BannerImage from '../components/Banner/BannerImage';
 import Slick from '../components/SlickSlider/Slick';
 
 import { getHome } from '../redux/actions/homeAction';
 import { getLibrary, resetGetLibrary } from '../redux/actions/libraryAction';
+import { getBlogs } from '../redux/actions/blogAction';
 import Icon from '../components/MdIcon/Icon';
-
-const slidesNew = [
-  {
-    img: 'https://picsum.photos/id/0/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1031/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1066/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1078/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1079/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-    linkText: 'Conoce más',
-  },
-];
 
 function ApiDetails({ setIsOpen }) {
 
@@ -63,6 +29,7 @@ function ApiDetails({ setIsOpen }) {
   const params = useParams();
   const { data } = useSelector((state) => state.demo);
   const { library } = useSelector((state) => state.library);
+  const { blogs } = useSelector((state) => state.blog);
 
   useEffect(() => {
     if (data && Object.keys(data).length === 0) {
@@ -77,6 +44,12 @@ function ApiDetails({ setIsOpen }) {
       dispatch(resetGetLibrary());
     };
   }, []);
+
+  useEffect(() => {
+    if (blogs && blogs.length === 0) {
+      dispatch(getBlogs());
+    }
+  }, [dispatch, blogs]);
 
   // Load discover section
   const filterDiscoverTab = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'home.discover-section') : [];
@@ -104,6 +77,21 @@ function ApiDetails({ setIsOpen }) {
       class: 'btn-tertiary-white',
     },
   ];
+
+  const datanews = blogs.length > 0 ? _.sortBy(blogs, (m) => {
+    return moment(m.created_at).toDate().getTime();
+  }) : [];
+
+  const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
+    const itemData = {
+      img: item.image[0].url,
+      title: item.title,
+      description: item.description,
+      linkText: 'Conoce más',
+      route: `/blog/${item.id}#blogDetail`,
+    };
+    return itemData;
+  }) : [];
 
   return (
     <div style={{ paddingTop: '114px' }}>
