@@ -41,7 +41,6 @@ function Login({ setIsOpen, setPrivateSession }) {
         type='button'
         onClick={() => {
           setIsOpen(false);
-          document.body.classList.remove('no_scroll');
         }}
       >
         <Icon id='MdClose' css_styles={{ 'custom_icon_styles': 'fs__20 text_gray__gray_darken' }} />

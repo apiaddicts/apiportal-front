@@ -26,7 +26,6 @@ function Register({ setOpenForm, setIsOpen }) {
             type='button'
             onClick={() => {
               setOpenForm(false);
-              document.body.classList.remove('no_scroll');
             }}
           >
             <Icon

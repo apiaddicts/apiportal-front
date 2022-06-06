@@ -26,7 +26,6 @@ export const login = (data) => (dispatch) => {
         dispatch(getUser(response));
         dispatch(getUserEntityTag(data, response));
         dispatch({ type: userConstants.RESET_ALERT });
-        document.body.classList.remove('no_scroll');
       }
     }
   }, (error) => {
@@ -41,7 +40,6 @@ export const logout = () => (dispatch) => {
   dispatch({
     type: userConstants.LOGOUT_USER,
   });
-  window.location = '/';
 };
 
 export const signUp = (data) => (dispatch) => {
@@ -52,7 +50,6 @@ export const signUp = (data) => (dispatch) => {
         type: userConstants.SIGNUP_SUCCESS,
         response,
       });
-      document.body.classList.remove('no_scroll');
     },
     (error) => {
       dispatch({
@@ -173,7 +170,6 @@ export const resetPasswordWithTicket = (queryParams, data, password) => (dispatc
           }
         } else {
           dispatch(logout());
-          window.location = '/';
         }
       }
     },
