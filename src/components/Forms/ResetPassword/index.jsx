@@ -23,8 +23,9 @@ function ResetPassword() {
 
   return (
     <div className='w-full px-8'>
-      <p className='py-5 text__reset-password'>Introduce tu email y te enviaremos una nueva contraseña para que puedas acceder.</p>
+      <p className='py-5 text__reset-password'>Introduce tu email y te enviaremos un correo electrónico de confirmación de cambio de contraseña con las instrucciones para que puedas realizar el cambio de contraseña.</p>
       <Alert
+        key={Math.floor(Math.random() * 100) + 1}
         css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
         alert_type='alert__success'
         title='Solicitud enviada'

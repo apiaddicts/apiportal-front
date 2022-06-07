@@ -22,6 +22,7 @@ function CreateAccount() {
         appType: 'developerPortal',
         confirmation: 'signup',
         password: values.password,
+        state: 'pending',
       },
     };
 
@@ -35,8 +36,8 @@ function CreateAccount() {
       className='create-account'
       onSubmit={formConfig.handleSubmit}
     >
-      {fieldsRegister.map((field) => (
-        <div className='mb-2'>
+      {fieldsRegister.map((field, index) => (
+        <div className='mb-2' key={index}>
           <Input key={field.id} field={field} formik={formConfig} />
         </div>
       ))}

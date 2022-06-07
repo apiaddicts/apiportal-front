@@ -26,6 +26,22 @@ function login(email, password) {
     });
 }
 
+function confirmAccount(queryParams) {
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `Ticket id="${queryParams.ticketId}",ticket="${queryParams.ticket}"` },
+  };
+  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
+  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
+  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
+  const url = `${urlService}/users/${queryParams.userId}/identities/Basic/${queryParams.identity}?api-version=${config.apiVersion}`;
+  return fetch(url, requestOptions)
+    .then(handleResponseToken)
+    .then((response) => {
+      return { ...response, id: queryParams.userId };
+    });
+}
+
 function getUserDetails(token, id) {
   const requestOptions = {
     method: 'GET',
@@ -201,6 +217,7 @@ function resetPasswordWithTicket(queryParams, data) {
 
 const userService = {
   login,
+  confirmAccount,
   getUserDetails,
   getUserSuscriptions,
   getUserEntityTag,

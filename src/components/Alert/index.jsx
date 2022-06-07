@@ -13,7 +13,7 @@ function Alert({ alert_type, title, msg, css_styles }) {
   useEffect(() => {
     if (Object.keys(responseResetSignup).length > 0) {
       setShowAlert('d-block');
-      setMessage('Favor de revisar su correo electronico');
+      setMessage(['Se ha enviado un correo electrónico de confirmación de cambio de contraseña, siga las instrucciones del correo electrónico para relizar el cambio de contraseña.']);
     } else if (Object.keys(responseRestoreError).length > 0) {
       setShowAlert('d-block');
       setMessage(responseRestoreError.error.statusText);
@@ -48,6 +48,7 @@ function Alert({ alert_type, title, msg, css_styles }) {
         <div className={classes.icon}>{ icon }</div>
         <div className={classes.message}>
           { title && <span className='fs__16 font-weight-bold'>{title}</span> }
+          <br />
           <span className='fs__14'>{ message }</span>
         </div>
         {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
