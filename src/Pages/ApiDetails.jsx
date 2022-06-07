@@ -19,7 +19,7 @@ import BannerImage from '../components/Banner/BannerImage';
 import Slick from '../components/SlickSlider/Slick';
 
 import { getHome } from '../redux/actions/homeAction';
-import { getLibrary, resetGetLibrary } from '../redux/actions/libraryAction';
+import { getLibrary, getLibraries, resetGetLibrary } from '../redux/actions/libraryAction';
 import { getBlogs } from '../redux/actions/blogAction';
 import Icon from '../components/MdIcon/Icon';
 
@@ -28,7 +28,7 @@ function ApiDetails({ setIsOpen }) {
   const dispatch = useDispatch();
   const params = useParams();
   const { data } = useSelector((state) => state.demo);
-  const { library } = useSelector((state) => state.library);
+  const { library, libraries } = useSelector((state) => state.library);
   const { blogs } = useSelector((state) => state.blog);
 
   useEffect(() => {
@@ -40,6 +40,9 @@ function ApiDetails({ setIsOpen }) {
       dispatch(getLibrary(params.id));
     }
 
+  }, []);
+
+  useEffect(() => {
     return () => {
       dispatch(resetGetLibrary());
     };
@@ -51,13 +54,19 @@ function ApiDetails({ setIsOpen }) {
     }
   }, [dispatch, blogs]);
 
+  useEffect(() => {
+    if (libraries && libraries.length === 0) {
+      dispatch(getLibraries());
+    }
+  }, [libraries]);
+
   // Load discover section
   const filterDiscoverTab = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'home.discover-section') : [];
 
   // Load buttons sections
   const filterButtonSection = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sections.button-hero') : [];
 
-  const filterDiscover = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sections.section-use-case') : [];
+  // const filterDiscover = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sections.section-use-case') : [];
 
   const buttonsLbls = library && library.buttons && library.buttons.length > 0 ? library.buttons.map((item) => {
     const data = {
@@ -93,8 +102,18 @@ function ApiDetails({ setIsOpen }) {
     return itemData;
   }) : [];
 
+  const random = Math.floor(Math.random() * libraries.length);
+  const random2 = Math.floor(Math.random() * libraries.length);
+  const random3 = Math.floor(Math.random() * libraries.length);
+
+  const apisNews = libraries.length > 0 ? [libraries[random], libraries[random2], libraries[random3]] : [];
+
+  const handleClickPage = (id) => {
+    dispatch(getLibrary(id));
+  };
+
   return (
-    <div style={{ paddingTop: '114px' }}>
+    <div id='api' style={{ paddingTop: '114px' }}>
       {Object.keys(data).length > 0 && Object.keys(library).length > 0 ? (
         <>
           <section>
@@ -208,10 +227,17 @@ function ApiDetails({ setIsOpen }) {
             </div>
             <div className='row'>
               {
-                filterDiscover && filterDiscover[0].useCaseList && filterDiscover[0].useCaseList.length > 0 ? (
-                  filterDiscover[0].useCaseList.map((card, i) => (
+                apisNews && apisNews.length > 0 ? (
+                  apisNews.map((card, i) => (
                     <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
-                      <CardBasic chipTitle={card.statusText} title={card.title} description={card.description} info={card.linkText} />
+                      <CardBasic
+                        chipTitle={card.status && card.status === 'Publicado' ? 'GET' : 'POST'}
+                        title={card.title}
+                        description={card.description}
+                        info='MÁS INFORMACIÓN'
+                        url={`/api/${card.id}#api`}
+                        route={() => handleClickPage(card.id)}
+                      />
                     </div>
                   ))
                 ) : (null)

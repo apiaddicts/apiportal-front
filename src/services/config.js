@@ -13,6 +13,10 @@ const createSharedAccessToken = (apimUid, apimAccessKey, validDays) => {
   return sasToken;
 };
 
+const createURLSura = () => {
+  return `${process.env.REACT_APP_SURA_URL}/subscriptions/${process.env.REACT_APP_SUBSCRIPTION_ID}/resourceGroups/${process.env.REACT_APP_RESOURCE_GROUP_NAME}/providers/Microsoft.ApiManagement/service/${process.env.REACT_APP_SERVICE_NAME}`;
+};
+
 const config = {
   apiUrl: process.env.REACT_APP_STRAPI_URL,
   suraUrl: process.env.REACT_APP_SURA_URL,
@@ -22,6 +26,7 @@ const config = {
   apiVersion: '2021-08-01',
   hmacAuthHeader: createSharedAccessToken('integration', process.env.REACT_APP_PRIMARY_KEY, 14),
   rememberkey: process.env.REACT_APP_REMEMBER_KEY,
+  url: createURLSura(),
 };
 
 export default config;

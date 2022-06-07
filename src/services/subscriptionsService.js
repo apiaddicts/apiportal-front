@@ -10,10 +10,7 @@ function listUserSubscriptions(userId) {
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/users/${userId}/subscriptions?api-version=${config.apiVersion}`;
+  const url = `${config.url}/users/${userId}/subscriptions?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -31,10 +28,7 @@ function subscribeToAProduct(data, userId) {
     body: JSON.stringify(data),
   };
 
-  const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
+  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -66,10 +60,8 @@ function regenerateSubscription(userId, subscriptionId, fragmentUrl) {
     method: 'POST',
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
-  const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/users/${userId}/subscriptions/${subscriptionId}/${fragmentUrl}?api-version=${config.apiVersion}`;
+
+  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}/${fragmentUrl}?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -86,10 +78,7 @@ function listSubscriptionSecrets(userId, subscriptionId) {
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/users/${userId}/subscriptions/${subscriptionId}/listSecrets?api-version=${config.apiVersion}`;
+  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}/listSecrets?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -106,10 +95,7 @@ function renameSubscription(userId, subscriptionId, data) {
     body: JSON.stringify(data),
   };
 
-  const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
+  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -126,10 +112,7 @@ function cancelSubscription(userId, subscriptionId, data) {
     body: JSON.stringify(data),
   };
 
-  const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
+  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)

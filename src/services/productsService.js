@@ -10,10 +10,7 @@ function listProducts(top, skip) {
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/products?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}`;
+  const url = `${config.url}/products?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -29,10 +26,7 @@ function searchProducts(search, top, skip) {
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/products?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}')) or (contains(properties/description,'${search}'))`;
+  const url = `${config.url}/products?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}')) or (contains(properties/description,'${search}'))`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -47,10 +41,8 @@ function filterProductsByName(search, top, skip) {
     method: 'GET',
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
-  const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/products?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}'))`;
+
+  const url = `${config.url}/products?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}'))`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -65,10 +57,8 @@ function filterProductsByDescription(search, top, skip) {
     method: 'GET',
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
-  const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/products?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/description,'${search}'))`;
+
+  const url = `${config.url}/products?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/description,'${search}'))`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -84,10 +74,7 @@ function filterProductAPIsByName(productName, search, top, skip) {
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/products/${productName}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}'))`;
+  const url = `${config.url}/products/${productName}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}'))`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -103,10 +90,7 @@ function filterProductAPIsByDescription(productName, search, top, skip) {
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/products/${productName}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/description,'${search}'))`;
+  const url = `${config.url}/products/${productName}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/description,'${search}'))`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -122,10 +106,7 @@ function getProductDetail(productName) {
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/products/${productName}?api-version=${config.apiVersion}`;
+  const url = `${config.url}/products/${productName}?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -141,10 +122,7 @@ function getProductSuscripcion(productName) {
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/users/${id}/subscriptions?api-version=${config.apiVersion}&$filter=(properties/scope eq '/products/${productName}')`;
+  const url = `${config.url}/users/${id}/subscriptions?api-version=${config.apiVersion}&$filter=(properties/scope eq '/products/${productName}')`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -160,10 +138,7 @@ function getProductApis(productName, top, skip) {
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlMain = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlMain}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/products/${productName}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}`;
+  const url = `${config.url}/products/${productName}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)

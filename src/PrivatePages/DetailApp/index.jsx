@@ -5,9 +5,12 @@
 import React, { useEffect, useState } from 'react';
 
 import { Container, Card, Grid, Box, TableHead, TableRow, TableCell, Table, TableContainer, TableBody } from '@mui/material';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import moment from 'moment';
+
+
+import { HashLink } from 'react-router-hash-link';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -27,7 +30,6 @@ import useSearch from '../../hooks/useSearch';
 import 'moment/locale/es';
 
 import classes from './detail.module.scss';
-import { HashLink } from 'react-router-hash-link';
 
 moment.locale('es');
 function AppsDetail(props) {
@@ -37,7 +39,6 @@ function AppsDetail(props) {
 
   const dispatch = useDispatch();
   const params = useParams();
-  const navigate = useNavigate();
 
   const [searchSuscription, setSearchSuscription] = useState('');
 
@@ -88,10 +89,6 @@ function AppsDetail(props) {
     };
   }, []);
 
-  const handleClickRow = (id) => {
-    navigate(`/apiBookstores/${id}`);
-  };
-
   const handleNextProductApi = (url) => {
     dispatch(getProductApiNext(url, params.id));
   };
@@ -112,6 +109,10 @@ function AppsDetail(props) {
       dispatch(subscribeToAProduct(data, user.name, params.id));
     }
   };
+
+
+  console.log('PRODUCTOS', product);
+  console.log('SUSCRIPCIONES', productSubscriptions)
 
   return (
     <div>

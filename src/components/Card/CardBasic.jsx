@@ -2,14 +2,14 @@
 import React from 'react';
 
 import { MdEast } from 'react-icons/md';
+import { HashLink } from 'react-router-hash-link';
 import Chip from '../Chip/Chip';
 import Icon from '../MdIcon/Icon';
 import Base from './Base';
 
 import './cards.scss';
 
-function CardBasic({ chipTitle, title, img, description, info, route, maxWidth, tabCard, footerTabCard }) {
-
+function CardBasic({ chipTitle, title, img, description, info, route, maxWidth, tabCard, footerTabCard, url }) {
   return (
     <Base maxWidth={maxWidth}>
 
@@ -51,11 +51,31 @@ function CardBasic({ chipTitle, title, img, description, info, route, maxWidth, 
                 <p className='text-left'>
                   {description}
                 </p>
-                <div className='card_chip_info mt-4' onClick={route}>
-                  <span>{info}</span>
-                  {' '}
-                  <MdEast className='svg' />
-                </div>
+                {url !== undefined && url !== '' && route && route !== undefined ? (
+                  <div className='card_chip_info mt-4' onClick={route}>
+                    <HashLink smooth to={url}>
+                      <span>{info}</span>
+                      {' '}
+                      <MdEast className='svg' />
+                    </HashLink>
+
+                  </div>
+                ) : url !== undefined && url !== '' ? (
+                  <div className='card_chip_info mt-4'>
+                    <HashLink smooth to={url}>
+                      <span>{info}</span>
+                      {' '}
+                      <MdEast className='svg' />
+                    </HashLink>
+
+                  </div>
+                ) : (
+                  <div className='card_chip_info mt-4' onClick={route}>
+                    <span>{info}</span>
+                    {' '}
+                    <MdEast className='svg' />
+                  </div>
+                )}
               </div>
             </section>
           </div>
