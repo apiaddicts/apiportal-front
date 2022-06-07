@@ -16,7 +16,6 @@ import { AppBar, Box, Button, Menu, MenuItem, Toolbar } from '@mui/material';
 import { ChevronLeft } from '@mui/icons-material';
 import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSharp';
-import SearchIcon from '@mui/icons-material/Search';
 import LogoutIcon from '@mui/icons-material/Logout';
 import classes from './sliderdrawer.module.scss';
 import SuraLogoAlt from '../../static/img/sura_logo_alt.svg';
@@ -108,7 +107,6 @@ function SidebarDrawer({ children, user }) {
                   </ListItemText>
                 </MenuItem>
               </Menu>
-              <SearchIcon />
             </Box>
           </Toolbar>
         </AppBar>

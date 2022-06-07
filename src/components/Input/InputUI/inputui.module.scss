@@ -70,6 +70,7 @@
     transform: translate(0, 18px) scale(1);
     transform-origin: top left;
     transition: all 0.2s ease-out;
+    cursor: text;
   }
   &:focus-within {
     label {

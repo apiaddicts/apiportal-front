@@ -76,12 +76,31 @@ function Apps(props) {
   };
 
   return (
-    <Container fixed className='py-10 table-left'>
-      <Grid container spacing={2}>
-        <Grid item xs={6}>
-          <Title text='Productos' stylesTitle={{ fontSize: '48px' }} />
+    <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 2fr))', alignItems: 'center' }}>
+        <div>
+          <Title text='Productos' />
+        </div>
+        <div>
+          <SearchInput
+            name='search'
+            type='text'
+            placeholder='Buscar'
+            icon
+            onChange={(e) => {
+              formik.handleChange(e);
+              formik.setFieldValue('description', '');
+              formik.setFieldValue('name', '');
+            }}
+            value={formik.values.search}
+          />
+        </div>
+      </div>
+      {/* <Grid spacing={2} alignItems='center'>
+        <Grid xs={6}>
+          <Title text='Productos' />
         </Grid>
-        <Grid item xs={6}>
+        <Grid xs={6}>
           <SearchInput
             name='search'
             type='text'
@@ -95,12 +114,12 @@ function Apps(props) {
             value={formik.values.search}
           />
         </Grid>
-      </Grid>
+      </Grid> */}
       { spinner ? (
         <Spinner styles={{ height: '500px' }} title='Cargando...' />
       ) : (
-        <Grid style={{ marginTop: '20px' }} container spacing={2}>
-          <Card sx={{ borderRadius: '20px', marginTop: '33px', padding: '35px 47px 43px 41px', marginBottom: '15px', width: '100%' }}>
+        <div>
+          <Card sx={{ borderRadius: '20px', marginTop: '20px', padding: '35px 47px 43px 41px', marginBottom: '15px', width: '100%' }}>
             <Grid item sx={{ marginBottom: '31px' }} xs={12}>
               <TableContainer>
                 <Table sx={{ minWidth: 650 }} aria-label='simple table'>
@@ -177,21 +196,25 @@ function Apps(props) {
               </TableContainer>
             </Grid>
             <Grid item xs={12}>
-              <Grid container spacing={4} direction='row' justifyContent='space-between'>
-                <Grid item xs={3}>
+              <Grid container direction='row' justifyContent='space-between'>
+                <Grid xs={3}>
                   {productsSkip > 0 ? (
                     <div onClick={() => handlePreviousProduct()} className={classes.pagination}>
-                      <Icon id='MdNavigateBefore' />
+                      <div className={classes.pagination__icon}>
+                        <Icon id='MdNavigateBefore' />
+                      </div>
                       <p>Anterior</p>
                     </div>
 
                   ) : (null)}
                 </Grid>
-                <Grid item xs={1}>
+                <Grid xs={1}>
                   {products.nextLink !== undefined ? (
                     <div onClick={() => handleNextProduct(products.nextLink)} className={classes.pagination}>
                       <p className={classes.next}>Siguiente</p>
-                      <Icon id='MdNavigateNext' />
+                      <div className={classes.pagination__icon}>
+                        <Icon id='MdNavigateNext' />
+                      </div>
                     </div>
 
                   ) : (null)}
@@ -200,8 +223,7 @@ function Apps(props) {
             </Grid>
 
           </Card>
-        </Grid>
-
+        </div>
       )}
 
     </Container>

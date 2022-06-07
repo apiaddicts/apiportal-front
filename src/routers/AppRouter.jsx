@@ -90,17 +90,19 @@ function AppRouter() {
             <Box>
               <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#fbfbfb', minHeight: '100vh' }}>
                 <SidebarDrawer user={user} />
-                <Routes>
-                  <Route path='/user' element={<Admin />} />
-                  <Route path='/products' exact element={<Apps />} />
-                  <Route path='/products/:id' exact element={<AppsDetail />} />
-                  <Route path='/apiBookstores' exact element={<ApiLibrary />} />
-                  <Route path='/apiBookstores/:id' exact element={<ApiDetailed />} />
-                  <Route path='/apiBookstores/try/:id' exact element={<Swagger />} />
-                  {/* <Route path='/apps/apis' exact element={<ChooseApi />} /> */}
-                  <Route path='/subscriptions' exact element={<ApiSubscriptions />} />
-                  <Route path='*' element={<Navigate to='/products' replace />} />
-                </Routes>
+                <div className='container' style={{ marginTop: '152px', marginBottom: '87px' }}>
+                  <Routes>
+                    <Route path='/user' element={<Admin />} />
+                    <Route path='/products' exact element={<Apps />} />
+                    <Route path='/products/:id' exact element={<AppsDetail />} />
+                    <Route path='/apiBookstores' exact element={<ApiLibrary />} />
+                    <Route path='/apiBookstores/:id' exact element={<ApiDetailed />} />
+                    <Route path='/apiBookstores/try/:id' exact element={<Swagger />} />
+                    {/* <Route path='/apps/apis' exact element={<ChooseApi />} /> */}
+                    <Route path='/subscriptions' exact element={<ApiSubscriptions />} />
+                    <Route path='*' element={<Navigate to='/products' replace />} />
+                  </Routes>
+                </div>
               </Box>
               <Box sx={{ zIndex: 1300, position: 'absolute', background: '#fff' }}>
                 <CustomFooter />
