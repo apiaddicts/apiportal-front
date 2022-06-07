@@ -49,7 +49,6 @@ function AppsDetail(props) {
   });
 
   useEffect(() => {
-
     if (formik.values.name.trim().length >= 3) {
       dispatch(filterProductAPIsByName(params.id, formik.values.name));
     }
@@ -249,7 +248,11 @@ function AppsDetail(props) {
                         ))}
                       </>
                     ) : (
-                      <Spinner styles={{ height: '200px' }} title='Cargando...' />
+                      <TableRow>
+                        <TableCell colSpan={2}>
+                          <Spinner styles={{ height: '200px' }} title='Cargando...' />
+                        </TableCell>
+                      </TableRow>
                     )}
 
                   </TableBody>
