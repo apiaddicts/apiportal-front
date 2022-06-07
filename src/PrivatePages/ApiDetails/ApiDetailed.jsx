@@ -47,7 +47,7 @@ function ApiDetails(props) {
   }, []);
 
   return (
-    <Container fixed className='my-10 py-10' sx={{ height: '100%' }}>
+    <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>
       {api && Object.keys(api).length > 0 ? (
         <div>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

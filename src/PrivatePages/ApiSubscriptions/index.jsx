@@ -19,16 +19,14 @@ function Admin() {
   }, [suscripcionsUser]);
 
   return (
-    <div className={`w-full py-10 ${classes.margin_left}`}>
-      <Container fixed className='my-10 py-10' maxWidth='xl'>
-        <div className={classes.wrapper_subscriptions}>
-          <div className='w-full my-9'>
-            <Title text='Suscripciones' />
-          </div>
+    <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>
+      <div className={classes.wrapper_subscriptions}>
+        <div className='mb-5'>
+          <Title text='Suscripciones' />
         </div>
-        <Suscriptions user={user} suscriptions={suscripcionsUser} />
-      </Container>
-    </div>
+      </div>
+      <Suscriptions user={user} suscriptions={suscripcionsUser} title='Suscripciones' />
+    </Container>
   );
 }
 

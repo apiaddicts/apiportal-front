@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, TableHead, TableRow, TableCell, Table, TableContainer, TableBody, Chip } from '@mui/material';
+import { TableHead, TableRow, TableCell, Table, TableContainer, TableBody, Chip, Container } from '@mui/material';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import moment from 'moment';
 import PasswordGenerate from '../common/InputMUI/passwordGenerate';
@@ -15,7 +15,7 @@ import MenuOptions from '../MenuOptions';
 import classes from './Suscriptions.module.scss';
 
 moment.locale('es');
-function Suscriptions({ user, suscriptions }) {
+function Suscriptions({ user, suscriptions, title }) {
   const { renameSubscriptionResponse, cancelSubscriptionResponse } = useSelector((state) => state.suscripcions);
   const [edit, setEdit] = useState('');
   const dispatch = useDispatch();
@@ -72,10 +72,10 @@ function Suscriptions({ user, suscriptions }) {
   }, []);
 
   return (
-    <Container className='my-10' maxWidth='xl'>
+    <div>
       <div className={classes.wrapper}>
-        <div className='w-full'>
-          <div className='font-fs-joey fs__36 font-weight-bold text__primary'>Suscripciones</div>
+        <Container>
+          <div className='font-fs-joey fs__36 font-weight-bold text__primary'>{ title }</div>
           {suscriptions && Object.keys(suscriptions).length > 0 && suscriptions.value.length > 0 ? (
             <TableContainer>
               <Table sx={{ minWidth: 650 }} aria-label='simple table'>
@@ -171,11 +171,11 @@ function Suscriptions({ user, suscriptions }) {
               </Table>
             </TableContainer>
           ) : (
-            <h3 styles={{ width: '100%', textAlign: 'center' }}>No hay datos</h3>
+            <h3 style={{ width: '100%', textAlign: 'center', color: '#53565A', fontSize: '1rem' }}>Informacion no disponible</h3>
           )}
-        </div>
+        </Container>
       </div>
-    </Container>
+    </div>
   );
 }
 

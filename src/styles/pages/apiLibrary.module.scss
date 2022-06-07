@@ -7,6 +7,11 @@
     display: flex;
     color: $primary;
     font-size: 20px;
+    align-items: center;
+
+    &__icon {
+        color: $secondary;
+    }
     
     p {
         font-family: $barlow;
