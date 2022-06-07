@@ -7,7 +7,7 @@ import subscriptionsService from '../../../services/subscriptionsService';
 
 import './passwordGenerate.scss';
 
-function PasswordGenerate({ idSuscripcion, user, version }) {
+function PasswordGenerate({ idSuscripcion, user, version, status }) {
 
   const dispatch = useDispatch();
   const [hidden, setHidden] = useState(false);
@@ -74,9 +74,14 @@ function PasswordGenerate({ idSuscripcion, user, version }) {
       <button onClick={handleClickHidden} className='btn-input' type='button'>
         <Icon id='MdOutlineRemoveRedEye' />
       </button>
-      <button onClick={() => handleReloadRegerateSubscription()} className='btn-input' type='button'>
-        <Icon id='MdAutorenew' />
-      </button>
+      {
+        status && status !== 'cancelled' ? (
+          <button onClick={() => handleReloadRegerateSubscription()} className='btn-input' type='button'>
+            <Icon id='MdAutorenew' />
+          </button>
+        ) : (null)
+      }
+
     </div>
   );
 };

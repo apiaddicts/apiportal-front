@@ -110,6 +110,10 @@ function AppsDetail(props) {
     }
   };
 
+
+  console.log('PRODUCTOS', product);
+  console.log('SUSCRIPCIONES', productSubscriptions)
+
   return (
     <div>
       {product && Object.keys(product).length === 0 ? null : (

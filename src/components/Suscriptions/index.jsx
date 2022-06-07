@@ -136,7 +136,7 @@ function Suscriptions({ user, suscriptions, title }) {
                                   <PasswordGenerate idSuscripcion={row.name} user={user} version={1} />
                                 </TableCell>
                                 <TableCell>
-                                  <PasswordGenerate idSuscripcion={row.name} user={user} version={2} />
+                                  <PasswordGenerate idSuscripcion={row.name} user={user} version={2} status={row.properties.state} />
                                 </TableCell>
                                 <TableCell>
                                   <ProductName scope={row.properties.scope} />
