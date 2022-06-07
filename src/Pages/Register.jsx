@@ -40,7 +40,7 @@ function Register({ setOpenForm, setIsOpen }) {
             <Alert
               css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
               alert_type='alert__danger'
-              title='Error on register'
+              title='Error al registrarte'
             />
             <CreateAccount />
           </div>

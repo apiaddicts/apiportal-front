@@ -76,7 +76,7 @@ function AppRouter() {
             <Route path='/blog/:id' exact element={<BlogDetails setIsOpen={setIsOpen} />} />
             <Route path='/componentes' exact element={<Components />} />
             <Route path='/confirmPassword' exact element={<ResetPassword />} />
-            {/* <Route path='*' element={<Navigate to='/' replace />} /> */}
+            <Route path='*' element={<Navigate to='/' replace />} />
           </Routes>
           {
             location.pathname !== '/confirmPassword' &&
