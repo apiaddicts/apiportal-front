@@ -42,22 +42,21 @@ export const confirmAccount = (queryParams, setIsOpen) => (dispatch) => {
     (response) => {
       console.log(response, store.getState().user.accountVerificationSent);
       if (response.status === 204) {
-        console.log(response);
         dispatch({
           type: userConstants.CONFIRM_ACCOUNT_SUCCESS,
         });
-        dispatch(getUser(response));
-        dispatch(getUserEntityTag(response));
-        dispatch({ type: userConstants.RESET_ALERT });
-        navigate('/user');
+        setTimeout(() => {
+          dispatch(getUser(response));
+          dispatch(getUserEntityTag(response));
+          dispatch({ type: userConstants.RESET_ALERT });
+        }, 3000);
       } else {
-        console.log('Error...');
         dispatch({
           type: userConstants.CONFIRM_ACCOUNT_FAILURE,
           error: response,
         });
         dispatch(logout());
-        navigate('/');
+        window.location = '/';
       }
     },
     (error) => {
