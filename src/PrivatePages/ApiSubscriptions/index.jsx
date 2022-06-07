@@ -25,7 +25,7 @@ function Admin() {
           <Title text='Suscripciones' />
         </div>
       </div>
-      <Suscriptions user={user} suscriptions={suscripcionsUser} title='Suscripciones' />
+      <Suscriptions user={user} suscriptions={suscripcionsUser} title='' />
     </Container>
   );
 }
