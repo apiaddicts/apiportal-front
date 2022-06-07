@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { Link } from 'react-router-dom';
 
-import { Container, Grid } from '@mui/material';
+import { Container } from '@mui/material';
 
 import Multiselect from 'multiselect-react-dropdown';
 import Title from '../components/Title/Title';
@@ -131,8 +131,8 @@ function AppLibrary(props) {
   return (
     <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important' }}>
       <Title stylesTitle={{ fontSize: '48px' }} text='Biblioteca de Apis' />
-      <Grid style={{ marginTop: '1rem' }} container spacing={1}>
-        <Grid item xs={3}>
+      <div className={classes.wrapper__filters}>
+        <div>
           <SearchInput
             icon
             name='search'
@@ -143,89 +143,85 @@ function AppLibrary(props) {
             placeholder='Buscar APIs...'
             borderRadius='20px'
           />
-        </Grid>
-        <Grid item xs={9}>
-          <div className='display_flex justify_content__between align_items__center'>
-            <span className={classes.filter}>
-              Filtrar por
-              {' '}
-              <b>Tag</b>
-              {' '}
-              :
-            </span>
-            <Multiselect
-              className={`inputSelect ${classes.selectIn}`}
-              options={selectData} // Options to display in the dropdown
-              // selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
-              onSelect={onSelect} // Function will trigger on select event
-              onRemove={onRemove} // Function will trigger on remove event
-              displayValue='name' // Property name to display in the dropdown options
-              // selectionLimit={2}
-              placeholder=''
-            />
-          </div>
-        </Grid>
-      </Grid>
-      <Grid style={{ marginTop: '10px' }} container spacing={2}>
-        <Grid item xs={12}>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', alignItems: 'center', justifyContent: 'center', columnGap: '3.563rem', rowGap: '1.875rem' }}>
-            {loadingLibraries === false && libraries ? (
-              arrApis.length > 0 ? (
-                arrApis.map((item, index) => (
-                  <div key={index}>
-                    <Link to={`/apiBookstores/${item.apiName}`}>
-                      <CardInformationLibrary
-                        apiName={item.apiName}
-                        title={item.title}
-                        status={item.status}
-                        version={item.version}
-                        buttons={item.tags}
-                        colorStatus={item.color_status}
-                        info='Documentación'
-                        description={item.description}
-                      />
-                    </Link>
-                  </div>
-                ))
-              ) : (
-                <section
-                  style={{
-                    width: '100%',
-                  }}
-                >
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      margin: '2rem',
-                    }}
-                  >
-                    <h1>No hay data</h1>
-                  </div>
-                </section>
-              )
-            ) : (
-              <section
+        </div>
+        <div className={classes.wrapper__filters__search}>
+          <span className={classes.filter}>
+            Filtrar por
+            {' '}
+            <b>Tag</b>
+            {' '}
+            :
+          </span>
+          <Multiselect
+            className={`inputSelect ${classes.selectIn}`}
+            options={selectData} // Options to display in the dropdown
+            // selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
+            onSelect={onSelect} // Function will trigger on select event
+            onRemove={onRemove} // Function will trigger on remove event
+            displayValue='name' // Property name to display in the dropdown options
+            // selectionLimit={2}
+            placeholder=''
+          />
+
+        </div>
+      </div>
+
+      <div className={classes.grid__apis}>
+        {loadingLibraries === false && libraries ? (
+          arrApis.length > 0 ? (
+            arrApis.map((item, index) => (
+              <div key={index}>
+                <Link to={`/apiBookstores/${item.apiName}`}>
+                  <CardInformationLibrary
+                    apiName={item.apiName}
+                    title={item.title}
+                    status={item.status}
+                    version={item.version}
+                    buttons={item.tags}
+                    colorStatus={item.color_status}
+                    info='Ver Documentación'
+                    description={item.description}
+                  />
+                </Link>
+              </div>
+            ))
+          ) : (
+            <section
+              style={{
+                width: '100%',
+              }}
+            >
+              <div
                 style={{
-                  width: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  margin: '2rem',
                 }}
               >
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '2rem',
-                  }}
-                >
-                  <h1>Cargando....</h1>
-                </div>
-              </section>
-            )}
-          </div>
-        </Grid>
-      </Grid>
+                <h1>Información no disponible</h1>
+              </div>
+            </section>
+          )
+        ) : (
+          <section
+            style={{
+              width: '100%',
+            }}
+          >
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '2rem',
+              }}
+            >
+              <h1>Cargando....</h1>
+            </div>
+          </section>
+        )}
+      </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginTop: '1.875rem' }}>
         <div>
           {apisSkip > 0 ? (

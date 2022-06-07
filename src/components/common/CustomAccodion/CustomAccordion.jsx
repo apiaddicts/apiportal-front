@@ -42,8 +42,6 @@ function CustomAccordion({ items, subItem, setSubItem }) {
     return x.properties.value;
   }) : [];
 
-  console.log(jsonOpenApi);
-
   return (
     <div>
       { items && Object.keys(items).length > 0 ? (

@@ -15,6 +15,8 @@ import { getApi, resetApiDetailed } from '../../redux/actions/libraryAction';
 import CustomAccordion from '../../components/common/CustomAccodion/CustomAccordion';
 import Icon from '../../components/MdIcon/Icon';
 
+import classes from './apidetailed.module.scss';
+
 function ApiDetails(props) {
   const { api } = useSelector((state) => state.library);
 
@@ -47,28 +49,40 @@ function ApiDetails(props) {
   }, []);
 
   return (
-    <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>
-      {api && Object.keys(api).length > 0 ? (
-        <div>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <Title text={api.properties.displayName ? api.properties.displayName : 'Demo API'} />
-            <Link to={`/apiBookstores/try/${api.name}`} style={{ background: '#E3E829', borderRadius: '100px', padding: '12px 1rem', width: '97px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontWeight: '700', fontSize: '1rem', letterSpacing: '0.8px', color: '#0033A0' }}>
-              <span>Try it</span>
-              <Icon id='MdChevronRight' />
-            </Link>
-          </Box>
-          <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 4fr', gap: '3rem', alignItems: 'baseline' }}>
+    <>
+      <div className={classes.back__btn}>
+        <Link to={-1}>
+          <div className={classes.return}>
             <div>
-              <AccordionFilter items={infoApi} clicked={clicked} setClicked={setClicked} subItem={subItem} setSubItem={setSubItem} />
-              {/* <AccordionFilter items={endPoints} clicked={clicked} setClicked={setClicked} /> */}
+              <Icon id='MdKeyboardBackspace' />
             </div>
-            <div>
-              <CustomAccordion items={api} subItem={subItem} setSubItem={setSubItem} />
-            </div>
-          </Box>
-        </div>
-      ) : (<SkeletonComponent />)}
-    </Container>
+            <span>VOLVER</span>
+          </div>
+        </Link>
+      </div>
+      <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>
+        {api && Object.keys(api).length > 0 ? (
+          <div>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Title text={api.properties.displayName ? api.properties.displayName : 'Demo API'} />
+              <Link to={`/apiBookstores/try/${api.name}`} style={{ background: '#E3E829', borderRadius: '100px', padding: '12px 1rem', width: '97px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontWeight: '700', fontSize: '1rem', letterSpacing: '0.8px', color: '#0033A0' }}>
+                <span>Try it</span>
+                <Icon id='MdChevronRight' />
+              </Link>
+            </Box>
+            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 4fr', gap: '3rem', alignItems: 'baseline' }}>
+              <div>
+                <AccordionFilter items={infoApi} clicked={clicked} setClicked={setClicked} subItem={subItem} setSubItem={setSubItem} />
+                {/* <AccordionFilter items={endPoints} clicked={clicked} setClicked={setClicked} /> */}
+              </div>
+              <div>
+                <CustomAccordion items={api} subItem={subItem} setSubItem={setSubItem} />
+              </div>
+            </Box>
+          </div>
+        ) : (<SkeletonComponent />)}
+      </Container>
+    </>
   );
 }
 
