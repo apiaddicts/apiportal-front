@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import userConstants from '../../../redux/constants/userConstats';
 import Input from '../../Input';
 import Button from '../../Buttons/Button';
 import styles from './login.module.scss';
@@ -6,14 +8,16 @@ import Alert from '../../Alert';
 
 function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin }) {
 
+  const dispatch = useDispatch();
+
   return (
     <form className='w-full px-8' onSubmit={formik.handleSubmit}>
       <Alert
         key={Math.floor(Math.random() * 100) + 1}
         css_styles={{ custom_padding: 'p-4', custom_margin: 'mt-4' }}
         alert_type='alert__danger'
-        title='Error on login'
-        msg={['La información ingresada no es correcta, intenta cambiar la contraseña, si no la recuerdas puedes ir a', <a href='#'>olvidaste tu contraseña</a>]}
+        title='Error al iniciar sesión'
+        msg={['La información ingresada no es correcta, intenta cambiar la contraseña, si no la recuerdas puedes ir a ', <a href='#' key={Math.floor(Math.random() * 100) + 1}>olvidaste tu contraseña</a>]}
       />
       <div className='my-5 w-full'>
         {
@@ -46,6 +50,9 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin }) {
           onClick={() => {
             setShowResetForm(true);
             setShowForm(false);
+            dispatch({
+              type: userConstants.RESET_ALERT,
+            });
           }}
           className='text__secondary font-weight-bold caption cpointer'
         >

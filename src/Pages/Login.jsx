@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Form from '../components/Forms/LoginForm';
 import Modal from '../components/Modal';
 import Icon from '../components/MdIcon/Icon';
-import AlertFeedbock from '../components/AlertFeedback';
+//import AlertFeedbock from '../components/AlertFeedback';
 import ResetPassword from '../components/Forms/ResetPassword';
 import { fieldsLogin } from '../components/Forms/fields';
 
@@ -16,7 +16,7 @@ import useLoginConfig from '../hooks/useLogin';
 
 function Login({ setIsOpen, setPrivateSession }) {
   const { token } = useSelector((state) => state.user);
-  const [showAlert, setShowAlert] = useState(false);
+  //const [showAlert, setShowAlert] = useState(false);
   const [showForm, setShowForm] = useState(true);
   const [showResetForm, setShowResetForm] = useState(false);
 
@@ -47,7 +47,7 @@ function Login({ setIsOpen, setPrivateSession }) {
       </button>
       <div className={classes.login__wrapper}>
         <h1 className={classes.login__title}>{showForm ? 'Iniciar sesión' : 'Recuperar contraseña'}</h1>
-        {showAlert && <AlertFeedbock setShowAlert={setShowAlert} success />}
+        {/*showAlert && <AlertFeedbock setShowAlert={setShowAlert} success />*/}
         {showForm && (
           <Form
             handleSubmit={handleSubmit}

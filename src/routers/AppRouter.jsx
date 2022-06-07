@@ -31,6 +31,7 @@ import Swagger from '../Pages/ejemplos/Swagger';
 import { getUser } from '../redux/actions/userAction';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
 import ResetPassword from '../Pages/ResetPassword';
+import ConfirmAccount from '../Pages/ConfirmAccount';
 
 function AppRouter() {
   const { id, token, user } = useSelector((state) => state.user);
@@ -65,6 +66,7 @@ function AppRouter() {
         <>
           {
             location.pathname !== '/confirmPassword' &&
+            location.pathname !== '/confirmAccount' &&
             <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} privateSession={privateSession} />
           }
           <Routes>
@@ -76,10 +78,12 @@ function AppRouter() {
             <Route path='/blog/:id' exact element={<BlogDetails setIsOpen={setIsOpen} />} />
             <Route path='/componentes' exact element={<Components />} />
             <Route path='/confirmPassword' exact element={<ResetPassword />} />
+            <Route path='/confirmAccount' exact element={<ConfirmAccount setIsOpen={setIsOpen} />} />
             <Route path='*' element={<Navigate to='/' replace />} />
           </Routes>
           {
             location.pathname !== '/confirmPassword' &&
+            location.pathname !== '/confirmAccount' &&
             <Footer />
           }
         </>
