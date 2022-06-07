@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import Icon from '../../MdIcon/Icon';
 
+import subscriptionsConstants from '../../../redux/constants/subscriptionsConstants';
 import subscriptionsService from '../../../services/subscriptionsService';
 
 import './passwordGenerate.scss';
 
 function PasswordGenerate({ idSuscripcion, user, version }) {
 
+  const dispatch = useDispatch();
   const [hidden, setHidden] = useState(false);
   const [primaryKey, setPrimaryKey] = useState('');
 
@@ -37,6 +40,7 @@ function PasswordGenerate({ idSuscripcion, user, version }) {
   }, []);
 
   const handleReloadRegerateSubscription = () => {
+    dispatch({ type: subscriptionsConstants.REGENERATE_SUBSCRIPTIONS_REQUEST });
     if (version === 1) {
       subscriptionsService.regenerateSubscription(user.name, idSuscripcion, 'regeneratePrimaryKey').then((response) => {
         handleRegenerateSubscriptions();
@@ -50,6 +54,9 @@ function PasswordGenerate({ idSuscripcion, user, version }) {
         console.log(err);
       });
     }
+    setTimeout(() => {
+      dispatch({ type: subscriptionsConstants.REGENERATE_SUBSCRIPTIONS_SUCCESS });
+    }, 1000);
   };
 
   return (
@@ -60,14 +67,14 @@ function PasswordGenerate({ idSuscripcion, user, version }) {
         </span>
       ) : (
         <span className='text'>
-          xxxxxxxxxxxxxxxx
+          xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         </span>
       )}
 
       <button onClick={handleClickHidden} className='btn-input' type='button'>
         <Icon id='MdOutlineRemoveRedEye' />
       </button>
-      <button onClick={handleReloadRegerateSubscription} className='btn-input' type='button'>
+      <button onClick={() => handleReloadRegerateSubscription()} className='btn-input' type='button'>
         <Icon id='MdAutorenew' />
       </button>
     </div>

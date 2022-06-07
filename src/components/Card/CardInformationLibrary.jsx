@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useState } from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 import { MdEast } from 'react-icons/md';
 import Chip from '../Chip/Chip';
@@ -10,13 +10,12 @@ import './cards.scss';
 
 import libraryService from '../../services/libraryService';
 
-function CardInformationLibrary({ apiName, img, title, description, reading, info, maxWidth, version, status, colorStatus, theme, blog, modal, link, css_styles, blogTitle }) {
+function CardInformationLibrary({ apiName, img, title, description, reading, info, maxWidth, version, status, colorStatus, theme, blog, modal, link, css_styles, blogTitle, redirectTo }) {
   const { custom_title_size, custom_status_size, custom_margin_top } = css_styles;
   const navigate = useNavigate();
   const blogClasses = {
     paddingTop: blog ? '51px' : '',
     paddingBottom: blog ? '35px' : '',
-    cursor: 'pointer',
   };
   const blogTitleStyles = {
     paddingBottom: blog ? '25px' : '',
@@ -91,9 +90,11 @@ function CardInformationLibrary({ apiName, img, title, description, reading, inf
               </div>
             ) : info ? (
               <div className='card_chip_info mt-7'>
-                <span>{info}</span>
-                {' '}
-                <MdEast className='svg' />
+                <Link to={redirectTo}>
+                  <span>{info}</span>
+                  {' '}
+                  <MdEast className='svg' />
+                </Link>
               </div>
             ) : (null)}
           </div>
@@ -132,9 +133,11 @@ function CardInformationLibrary({ apiName, img, title, description, reading, inf
 
             {info && (
               <div className='card_chip_info mt-7'>
-                <span>{info}</span>
-                {' '}
-                <MdEast className='svg' />
+                <Link to={redirectTo}>
+                  <span>{info}</span>
+                  {' '}
+                  <MdEast className='svg' />
+                </Link>
               </div>
             )}
           </div>

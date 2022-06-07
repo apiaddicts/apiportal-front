@@ -202,7 +202,6 @@ export const resetPasswordWithTicket = (queryParams, data, password) => (dispatc
           }
         } else {
           dispatch(logout());
-          window.location = '/';
         }
       }
     },

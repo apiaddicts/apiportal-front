@@ -1,22 +1,28 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container } from '@mui/material';
-
+import { listUserSubscriptions } from '../../redux/actions/subscriptionsAction';
 import Input from '../../components/Input';
 import useFormUserConfig from '../../hooks/useFormUser';
 import classes from './style.module.scss';
 import Button from '../../components/Buttons/Button';
 import Title from '../../components/Title/Title';
 import { updateUser } from '../../redux/actions/userAction';
-import Suscriptions from './containers/Suscriptions';
+import Suscriptions from '../../components/Suscriptions';
 import RestorePassword from './containers/RestorePassword';
 
 function Admin() {
+  const dispatch = useDispatch();
   const { user, loadingUser } = useSelector((state) => state.user);
   const [displayRestorePassword, setDisplayRestorePassword] = useState(false);
+  const { suscripcionsUser } = useSelector((state) => state.suscripcions);
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    if (suscripcionsUser && Object.keys(user).length > 0 && Object.keys(suscripcionsUser).length === 0) {
+      dispatch(listUserSubscriptions(user.name));
+    }
+  }, [suscripcionsUser]);
 
   const handleSubmit = async (values) => {
     const data = {
@@ -124,7 +130,7 @@ function Admin() {
 
         </div>
         <div className={classes.main__suscription}>
-          <Suscriptions user={user} />
+          <Suscriptions user={user} suscriptions={suscripcionsUser} title='Suscripciones' />
         </div>
       </Container>
 

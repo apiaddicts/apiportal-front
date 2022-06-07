@@ -105,7 +105,7 @@ export const fieldsLogin = [
     type: 'checkbox',
     name: 'remember',
     label: 'Recordar datos',
-    initialValue: false,
+    initialValue: localStorage.getItem('email') !== null && localStorage.getItem('password') !== null,
   },
 ];
 export const fieldsContact = [
