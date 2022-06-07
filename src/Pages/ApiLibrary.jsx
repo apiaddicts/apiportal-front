@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Link } from 'react-router-dom';
-
 import { Container, Grid } from '@mui/material';
 
 import Multiselect from 'multiselect-react-dropdown';
@@ -173,18 +171,17 @@ function AppLibrary(props) {
               arrApis.length > 0 ? (
                 arrApis.map((item, index) => (
                   <div key={index}>
-                    <Link to={`/apiBookstores/${item.apiName}`}>
-                      <CardInformationLibrary
-                        apiName={item.apiName}
-                        title={item.title}
-                        status={item.status}
-                        version={item.version}
-                        buttons={item.tags}
-                        colorStatus={item.color_status}
-                        info='Documentación'
-                        description={item.description}
-                      />
-                    </Link>
+                    <CardInformationLibrary
+                      apiName={item.apiName}
+                      title={item.title}
+                      status={item.status}
+                      version={item.version}
+                      buttons={item.tags}
+                      colorStatus={item.color_status}
+                      info='Documentación'
+                      description={item.description}
+                      redirectTo={`/apiBookstores/${item.apiName}`}
+                    />
                   </div>
                 ))
               ) : (
