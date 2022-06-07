@@ -14,13 +14,13 @@ const validationSchema = Yup.object().shape({
   // industry: string().required('El sector es obligatorio'),
   email: string().email('Please provide a valid email').required('El email es obligatorio'),
   password: string()
-    .matches(new RegExp(/(?=.*[a-z])/), 'Must contain lowercase a-z characters')
-    .matches(new RegExp(/(?=.*[A-Z])/), 'Must contain uppercase A-Z characters')
-    .matches(new RegExp(/(?=.*[0-9])/), 'Must contain at least one number')
-    .matches(
-      new RegExp(/(?=.*[!@#$%^&*])/),
-      'Must contain at least one !@#$%^&* special character',
-    )
+    // .matches(new RegExp(/(?=.*[a-z])/), 'Must contain lowercase a-z characters')
+    // .matches(new RegExp(/(?=.*[A-Z])/), 'Must contain uppercase A-Z characters')
+    // .matches(new RegExp(/(?=.*[0-9])/), 'Must contain at least one number')
+    // .matches(
+    //   new RegExp(/(?=.*[!@#$%^&*])/),
+    //   'Must contain at least one !@#$%^&* special character',
+    // )
     .min(8, 'Must be at least 8 characters long')
     .trim('Spaces are not allowed')
     .strict()
