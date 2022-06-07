@@ -4,21 +4,19 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Container, TableHead, TableRow, TableCell, Table, TableContainer, TableBody, Chip } from '@mui/material';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import moment from 'moment';
-import PasswordGenerate from '../../../../components/common/InputMUI/passwordGenerate';
-import ProductName from '../Product';
+import PasswordGenerate from '../common/InputMUI/passwordGenerate';
+import ProductName from '../../PrivatePages/ProfileAdmin/containers/Product';
 import {
-  listUserSubscriptions,
   resetSubscriptionsUser,
   renameSubscription,
-  cancelSubscription } from '../../../../redux/actions/subscriptionsAction';
+  cancelSubscription } from '../../redux/actions/subscriptionsAction';
 import 'moment/locale/es';
-import MenuOptions from '../../../../components/MenuOptions';
+import MenuOptions from '../MenuOptions';
 import classes from './Suscriptions.module.scss';
 
 moment.locale('es');
-function Suscriptions({ user }) {
-
-  const { suscripcionsUser, renameSubscriptionResponse, cancelSubscriptionResponse } = useSelector((state) => state.suscripcions);
+function Suscriptions({ user, suscriptions }) {
+  const { renameSubscriptionResponse, cancelSubscriptionResponse } = useSelector((state) => state.suscripcions);
   const [edit, setEdit] = useState('');
   const dispatch = useDispatch();
   const handleRename = (rowRename) => {
@@ -61,11 +59,11 @@ function Suscriptions({ user }) {
     }
   }, [renameSubscriptionResponse]);
 
-  useEffect(() => {
-    if (suscripcionsUser && Object.keys(user).length > 0 && Object.keys(suscripcionsUser).length === 0) {
-      dispatch(listUserSubscriptions(user.name));
-    }
-  }, [suscripcionsUser]);
+  // useEffect(() => {
+  //   if (suscriptionUser && Object.keys(user).length > 0 && Object.keys(suscriptionUser).length === 0) {
+  //     dispatch(listUserSubscriptions(user.name));
+  //   }
+  // }, [suscriptionUser]);
 
   useEffect(() => {
     return () => {
@@ -78,7 +76,7 @@ function Suscriptions({ user }) {
       <div className={classes.wrapper}>
         <div className='w-full'>
           <div className='font-fs-joey fs__36 font-weight-bold text__primary'>Suscripciones</div>
-          {suscripcionsUser && Object.keys(suscripcionsUser).length > 0 && suscripcionsUser.value.length > 0 ? (
+          {suscriptions && Object.keys(suscriptions).length > 0 && suscriptions.value.length > 0 ? (
             <TableContainer>
               <Table sx={{ minWidth: 650 }} aria-label='simple table'>
                 <TableHead>
@@ -107,9 +105,9 @@ function Suscriptions({ user }) {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {suscripcionsUser.value && suscripcionsUser.value.length > 0 ? (
+                  {suscriptions.value && suscriptions.value.length > 0 ? (
                     <>
-                      {suscripcionsUser.value.map((row, i) => (
+                      {suscriptions.value.map((row, i) => (
                         <TableRow
                           key={i}
                           sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer', zIndex: 6 }}

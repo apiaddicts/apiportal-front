@@ -1,9 +1,11 @@
+
+/* eslint-disable */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/no-unstable-nested-components */
 import React, { useEffect, useState } from 'react';
 
-import { Container, Card, Grid, Box, TableHead, TableRow, TableCell, Table, TableContainer, TableBody, Chip } from '@mui/material';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import { Container, Card, Grid, Box, TableHead, TableRow, TableCell, Table, TableContainer, TableBody, /*Chip*/ } from '@mui/material';
+// import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import { Link, useParams } from 'react-router-dom';
 
 import moment from 'moment';
@@ -12,16 +14,17 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Title from '../../components/Title/Title';
 import Btn from '../../components/Buttons/Button';
-import ProductName from '../ProfileAdmin/containers/Product';
-import MenuOptions from '../../components/MenuOptions';
+import Suscriptions from '../../components/Suscriptions'
+// import ProductName from '../ProfileAdmin/containers/Product';
+// import MenuOptions from '../../components/MenuOptions';
 
 import Spinner from '../../components/Spinner';
 import Icon from '../../components/MdIcon/Icon';
 import InputResponse from '../../components/Input/InputUI/InputResponse';
-import PasswordGenerate from '../../components/common/InputMUI/passwordGenerate';
+// import PasswordGenerate from '../../components/common/InputMUI/passwordGenerate';
 
 import { getProductDetail, resetProduct, filterProductAPIsByName, filterProductAPIsByDescription, getProductApis, getProductApiNext, getProductApiPrevious } from '../../redux/actions/productsAction';
-import { subscribeToAProduct, resetSubscriptionsUser, renameSubscription, cancelSubscription } from '../../redux/actions/subscriptionsAction';
+import { subscribeToAProduct /*resetSubscriptionsUser, renameSubscription, cancelSubscription*/ } from '../../redux/actions/subscriptionsAction';
 
 import useSearch from '../../hooks/useSearch';
 
@@ -32,7 +35,7 @@ import classes from './detail.module.scss';
 moment.locale('es');
 function AppsDetail(props) {
   const { product, productApis, productSubscriptions, spinnerApis, productsApisSkip } = useSelector((state) => state.products);
-  const { renameSubscriptionResponse, cancelSubscriptionResponse } = useSelector((state) => state.suscripcions);
+  // const { renameSubscriptionResponse, cancelSubscriptionResponse } = useSelector((state) => state.suscripcions);
   const { user } = useSelector((state) => state.user);
   const { loadingCreateSubscription } = useSelector((state) => state.suscripcions);
 
@@ -49,7 +52,7 @@ function AppsDetail(props) {
     },
   });
 
-  const [edit, setEdit] = useState('');
+  // const [edit, setEdit] = useState('');
 
   useEffect(() => {
 
@@ -111,46 +114,45 @@ function AppsDetail(props) {
       dispatch(subscribeToAProduct(data, user.name, params.id));
     }
   };
+  // const handleRename = (rowRename) => {
+  //   setEdit(rowRename.id);
+  // };
 
-  const handleRename = (rowRename) => {
-    setEdit(rowRename.id);
-  };
+  // const handleCancel = (rowCancel) => {
+  //   const data = {
+  //     'properties': {
+  //       'state': 'Cancelled',
+  //     },
+  //   };
+  //   dispatch(cancelSubscription(user.name, rowCancel.name, data));
+  // };
 
-  const handleCancel = (rowCancel) => {
-    const data = {
-      'properties': {
-        'state': 'Cancelled',
-      },
-    };
-    dispatch(cancelSubscription(user.name, rowCancel.name, data));
-  };
+  // const handleKeyDown = (row, e) => {
+  //   if (e.key === 'Enter') {
+  //     const data = {
+  //       'properties': {
+  //         'name': e.target.value,
+  //       },
+  //     };
+  //     dispatch(renameSubscription(user.name, row.name, data));
+  //   } else if (e.key === 'Escape') {
+  //     setEdit('');
+  //   }
+  // };
 
-  const handleKeyDown = (row, e) => {
-    if (e.key === 'Enter') {
-      const data = {
-        'properties': {
-          'name': e.target.value,
-        },
-      };
-      dispatch(renameSubscription(user.name, row.name, data));
-    } else if (e.key === 'Escape') {
-      setEdit('');
-    }
-  };
+  // useEffect(() => {
+  //   if (Object.keys(cancelSubscriptionResponse).length > 0 && Object.prototype.hasOwnProperty.call(cancelSubscriptionResponse, 'status')) {
+  //     dispatch(resetSubscriptionsUser());
+  //     setEdit('');
+  //   }
+  // }, [cancelSubscriptionResponse]);
 
-  useEffect(() => {
-    if (Object.keys(cancelSubscriptionResponse).length > 0 && Object.prototype.hasOwnProperty.call(cancelSubscriptionResponse, 'status')) {
-      dispatch(resetSubscriptionsUser());
-      setEdit('');
-    }
-  }, [cancelSubscriptionResponse]);
-
-  useEffect(() => {
-    if (Object.keys(renameSubscriptionResponse).length > 0 && Object.prototype.hasOwnProperty.call(renameSubscriptionResponse, 'status')) {
-      dispatch(resetSubscriptionsUser());
-      setEdit('');
-    }
-  }, [renameSubscriptionResponse]);
+  // useEffect(() => {
+  //   if (Object.keys(renameSubscriptionResponse).length > 0 && Object.prototype.hasOwnProperty.call(renameSubscriptionResponse, 'status')) {
+  //     dispatch(resetSubscriptionsUser());
+  //     setEdit('');
+  //   }
+  // }, [renameSubscriptionResponse]);
 
   return (
     <Container className='py-10 table-left'>
@@ -186,7 +188,22 @@ function AppsDetail(props) {
             </Grid>
           </Card>
 
-          <Card sx={{ borderRadius: '20px', marginTop: '33px', padding: '35px 47px 43px 41px', marginBottom: '15px' }}>
+          <Suscriptions user={user} suscriptions={productSubscriptions} />
+          {/* <div className={classes.form_suscriptione} style={{ height: '36px' }}>
+            <div className={classes.form_suscriptione__input}>
+              <InputResponse
+                name='suscription'
+                type='text'
+                label='Nombre de la suscripción a este producto'
+                onChange={formik.handleChange}
+                value={formik.values.suscription}
+              />
+            </div>
+            <div className={classes.form_suscriptione____btn}>
+              <Btn size='responsive' onClick={handleSubmitSuscription} styles={searchSuscription.length > 0 ? 'primary' : 'greey-primary'}>SUSCRIBIRME</Btn>
+            </div>
+          </div> */}
+          {/* <Card sx={{ borderRadius: '20px', marginTop: '33px', padding: '35px 47px 43px 41px', marginBottom: '15px' }}>
             <Title text='Suscripción' divider={false} />
             {productSubscriptions && Object.keys(productSubscriptions).length > 0 && productSubscriptions.count > 0 ? (
               <Box sx={{ height: '100%' }}>
@@ -306,7 +323,7 @@ function AppsDetail(props) {
                 )}
               </Box>
             )}
-          </Card>
+          </Card> */}
           {/* APis del producto */}
           <Card sx={{ borderRadius: '20px', marginTop: '33px', padding: '35px 47px 43px 41px', marginBottom: '15px' }}>
             <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
