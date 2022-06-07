@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 import { Container } from '@mui/material';
 
@@ -165,24 +165,22 @@ function AppLibrary(props) {
 
         </div>
       </div>
-
       <div className={classes.grid__apis}>
         {loadingLibraries === false && libraries ? (
           arrApis.length > 0 ? (
             arrApis.map((item, index) => (
               <div key={index}>
-                <Link to={`/apiBookstores/${item.apiName}`}>
-                  <CardInformationLibrary
-                    apiName={item.apiName}
-                    title={item.title}
-                    status={item.status}
-                    version={item.version}
-                    buttons={item.tags}
-                    colorStatus={item.color_status}
-                    info='Ver Documentación'
-                    description={item.description}
-                  />
-                </Link>
+                <CardInformationLibrary
+                  apiName={item.apiName}
+                  title={item.title}
+                  status={item.status}
+                  version={item.version}
+                  buttons={item.tags}
+                  colorStatus={item.color_status}
+                  info='Documentación'
+                  description={item.description}
+                  redirectTo={`/apiBookstores/${item.apiName}`}
+                />
               </div>
             ))
           ) : (
@@ -222,6 +220,7 @@ function AppLibrary(props) {
           </section>
         )}
       </div>
+
       <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginTop: '1.875rem' }}>
         <div>
           {apisSkip > 0 ? (

@@ -32,6 +32,7 @@ export const resetSubscriptionsUser = () => (dispatch) => {
 };
 
 export const renameSubscription = (userId, subscriptionId, data) => (dispatch) => {
+  dispatch({ type: subscriptionsConstants.RENAME_SUBSCRIPTIONS_REQUEST });
   subscriptionsService.renameSubscription(userId, subscriptionId, data)
     .then((response) => {
       dispatch({ type: subscriptionsConstants.RENAME_SUBSCRIPTIONS_SUCCESS, response });

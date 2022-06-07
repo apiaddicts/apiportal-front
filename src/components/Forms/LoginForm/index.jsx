@@ -1,4 +1,6 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import userConstants from '../../../redux/constants/userConstats';
 import Input from '../../Input';
 import Button from '../../Buttons/Button';
 import styles from './login.module.scss';
@@ -6,15 +8,31 @@ import Alert from '../../Alert';
 
 function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin }) {
 
+  const { signUpData, responseError } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   return (
     <form className='w-full px-8' onSubmit={formik.handleSubmit}>
-      <Alert
-        key={Math.floor(Math.random() * 100) + 1}
-        css_styles={{ custom_padding: 'p-4', custom_margin: 'mt-4' }}
-        alert_type='alert__danger'
-        title='Error on login'
-        msg={['La información ingresada no es correcta, intenta cambiar la contraseña, si no la recuerdas puedes ir a', <a href='#'>olvidaste tu contraseña</a>]}
-      />
+      {
+        Object.keys(signUpData).length > 0 && Object.keys(responseError).length === 0 ?
+          (
+            <Alert
+              key={Math.floor(Math.random() * 100) + 1}
+              css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
+              alert_type='alert__success'
+              title='Revisa tu cuenta de correo'
+              msg='Para completar el registro, es necesario confirmar tu cuenta de correo'
+              display={true}
+            />
+          ) : (
+            <Alert
+              key={Math.floor(Math.random() * 100) + 1}
+              css_styles={{ custom_padding: 'p-4', custom_margin: 'mt-4' }}
+              alert_type='alert__danger'
+              title='Error al iniciar sesión'
+              msg={['La información ingresada no es correcta, intenta cambiar la contraseña, si no la recuerdas puedes ir a ', <a href='#' key={Math.floor(Math.random() * 100) + 1}>olvidaste tu contraseña</a>]}
+            />
+          )
+      }
       <div className='my-5 w-full'>
         {
           fieldsLogin.filter((field) => field.type === 'email' || field.type === 'password')
@@ -46,6 +64,9 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin }) {
           onClick={() => {
             setShowResetForm(true);
             setShowForm(false);
+            dispatch({
+              type: userConstants.RESET_ALERT,
+            });
           }}
           className='text__secondary font-weight-bold caption cpointer'
         >

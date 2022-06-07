@@ -24,7 +24,7 @@ export const login = (data) => (dispatch) => {
         }
         localStorage.setItem('token', JSON.stringify(response));
         dispatch(getUser(response));
-        dispatch(getUserEntityTag(data, response));
+        dispatch(getUserEntityTag(response));
         dispatch({ type: userConstants.RESET_ALERT });
       }
     }
@@ -32,6 +32,37 @@ export const login = (data) => (dispatch) => {
     console.error('error', error);
   });
 
+};
+
+export const confirmAccount = (queryParams, setIsOpen) => (dispatch) => {
+  dispatch({
+    type: userConstants.CONFIRM_ACCOUNT_REQUEST,
+  });
+  userService.confirmAccount(queryParams).then(
+    (response) => {
+      console.log(response, store.getState().user.accountVerificationSent);
+      if (response.status === 204) {
+        dispatch({
+          type: userConstants.CONFIRM_ACCOUNT_SUCCESS,
+        });
+        setTimeout(() => {
+          dispatch(getUser(response));
+          dispatch(getUserEntityTag(response));
+          dispatch({ type: userConstants.RESET_ALERT });
+        }, 3000);
+      } else {
+        dispatch({
+          type: userConstants.CONFIRM_ACCOUNT_FAILURE,
+          error: response,
+        });
+        dispatch(logout());
+        window.location = '/';
+      }
+    },
+    (error) => {
+      console.log('Confirm account error', error);
+    },
+  );
 };
 
 export const logout = () => (dispatch) => {
@@ -83,7 +114,7 @@ export const getUser = (tokens) => (dispatch) => {
   );
 };
 
-export const getUserEntityTag = (properties, tokens) => (dispatch) => {
+export const getUserEntityTag = (tokens) => (dispatch) => {
 
   userService.getUserEntityTag(tokens.token, tokens.id).then(
     (response) => {
@@ -125,7 +156,7 @@ export const verifyOldPassword = (data) => (dispatch) => {
             });
           }
         } else {
-          dispatch(getUserEntityTag(data, response));
+          dispatch(getUserEntityTag(response));
           dispatch(changePassword(data.new_password));
         }
       }
@@ -170,7 +201,6 @@ export const resetPasswordWithTicket = (queryParams, data, password) => (dispatc
           }
         } else {
           dispatch(logout());
-          window.location = '/';
         }
       }
     },
