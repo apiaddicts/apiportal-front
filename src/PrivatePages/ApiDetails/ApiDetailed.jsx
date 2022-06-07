@@ -49,7 +49,7 @@ function ApiDetails(props) {
   return (
     <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>
       {api && Object.keys(api).length > 0 ? (
-        <div>
+        <div id='detailApi'>
           <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <Title text={api.properties.displayName ? api.properties.displayName : 'Demo API'} />
             <Link to={`/apiBookstores/try/${api.name}`} style={{ background: '#E3E829', borderRadius: '100px', padding: '12px 1rem', width: '97px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontWeight: '700', fontSize: '1rem', letterSpacing: '0.8px', color: '#0033A0' }}>
