@@ -134,6 +134,7 @@ export default function userReducer(state = initialState, action) {
         responseRestoreError: {},
         responseResetSignup: {},
         responseResetPwdError: {},
+        signUpData: {},
       };
     case userConstants.LOGOUT_USER:
       return {

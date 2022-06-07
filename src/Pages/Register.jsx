@@ -37,11 +37,23 @@ function Register({ setOpenForm, setIsOpen }) {
           </button>
           <div className={classes.login__wrapper}>
             <h1 className={classes.login__title}>Crea tu Cuenta</h1>
-            <Alert
-              css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
-              alert_type='alert__danger'
-              title='Error al registrarte'
-            />
+            {
+              Object.keys(signUpData).length > 0 ?
+                (
+                  <Alert
+                    css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
+                    alert_type='alert__success'
+                    title='Revisa tu cuenta de correo'
+                    msg='Para completar el registro, es necesario confirmar tu cuenta de correo'
+                  />
+                ) : (
+                  <Alert
+                    css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
+                    alert_type='alert__danger'
+                    title='Error al registrarte'
+                  />
+                )
+            }
             <CreateAccount />
           </div>
         </>
