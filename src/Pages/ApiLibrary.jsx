@@ -129,10 +129,10 @@ function AppLibrary(props) {
   };
 
   return (
-    <Container fixed className={`${classes.margin_left} py-10 mt-10 `}>
-      <Title stylesTitle={{ fontSize: '48px' }} className='mb-18' text='Biblioteca de Apis' />
-      <Grid style={{ marginTop: '20px' }} container spacing={10}>
-        <Grid item xs={6}>
+    <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important' }}>
+      <Title stylesTitle={{ fontSize: '48px' }} text='Biblioteca de Apis' />
+      <Grid style={{ marginTop: '1rem' }} container spacing={1}>
+        <Grid item xs={3}>
           <SearchInput
             icon
             name='search'
@@ -144,7 +144,7 @@ function AppLibrary(props) {
             borderRadius='20px'
           />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={9}>
           <div className='display_flex justify_content__between align_items__center'>
             <span className={classes.filter}>
               Filtrar por
@@ -168,11 +168,11 @@ function AppLibrary(props) {
       </Grid>
       <Grid style={{ marginTop: '10px' }} container spacing={2}>
         <Grid item xs={12}>
-          <div className='row'>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', alignItems: 'center', justifyContent: 'center', columnGap: '3.563rem', rowGap: '1.875rem' }}>
             {loadingLibraries === false && libraries ? (
               arrApis.length > 0 ? (
                 arrApis.map((item, index) => (
-                  <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
+                  <div key={index}>
                     <Link to={`/apiBookstores/${item.apiName}`}>
                       <CardInformationLibrary
                         apiName={item.apiName}
@@ -226,28 +226,30 @@ function AppLibrary(props) {
           </div>
         </Grid>
       </Grid>
-      <Grid item xs={12}>
-        <Grid container spacing={4} direction='row' justifyContent='space-between'>
-          <Grid item xs={3}>
-            {apisSkip > 0 ? (
-              <div onClick={() => handlePreviousLibrary()} className={classes.pagination}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginTop: '1.875rem' }}>
+        <div>
+          {apisSkip > 0 ? (
+            <div onClick={() => handlePreviousLibrary()} className={classes.pagination}>
+              <div className={classes.pagination__icon}>
                 <Icon id='MdNavigateBefore' />
-                <p>Anterior</p>
               </div>
+              <p>Anterior</p>
+            </div>
 
-            ) : (null)}
-          </Grid>
-          <Grid item xs={1}>
-            {apis.nextLink !== undefined ? (
-              <div onClick={() => handleNextLibrary()} className={classes.pagination}>
-                <p>Siguiente</p>
+          ) : (null)}
+        </div>
+        <div>
+          {apis.nextLink !== undefined ? (
+            <div onClick={() => handleNextLibrary()} className={classes.pagination}>
+              <p className={classes.next}>Siguiente</p>
+              <div className={classes.pagination__icon}>
                 <Icon id='MdNavigateNext' />
               </div>
+            </div>
 
-            ) : (null)}
-          </Grid>
-        </Grid>
-      </Grid>
+          ) : (null)}
+        </div>
+      </div>
     </Container>
   );
 }

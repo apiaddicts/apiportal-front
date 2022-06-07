@@ -24,7 +24,7 @@ function Swagger() {
   }, [dispatch]);
 
   return (
-    <Container fixed>
+    <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>
       <SwaggerUI
         spec={jsonOpenApi}
       />

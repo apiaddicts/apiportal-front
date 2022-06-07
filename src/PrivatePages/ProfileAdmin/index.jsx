@@ -36,7 +36,7 @@ function Admin() {
       id: 'first_name',
       initialValue: name,
       placeholder: 'John',
-      label: 'First name',
+      label: 'Nombre',
       validate: 'first_name',
       required: true,
       type: 'text',
@@ -45,7 +45,7 @@ function Admin() {
       id: 'last_name',
       initialValue: lastName,
       placeholder: 'Doe',
-      label: 'Last name',
+      label: 'Apellido',
       validate: 'last_name',
       required: true,
       type: 'text',
@@ -54,7 +54,7 @@ function Admin() {
       id: 'email',
       initialValue: email,
       placeholder: 'youremail@domain.com',
-      label: 'Email',
+      label: 'Correo electrónico',
       validate: 'email',
       required: true,
       type: 'email',
@@ -65,12 +65,12 @@ function Admin() {
   const formConfig = useFormUserConfig(labelsUser, handleSubmit);
 
   return (
-    <div className={`w-full ${classes.margin_left}`}>
-      <Container fixed className='my-10 py-10' maxWidth='xl'>
+    <>
+      <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important' }}>
         <div className={classes.main__admin}>
           {user && Object.keys(user).length > 0 && loadingUser === false ? (
             <div className={classes.admin}>
-              <div className='w-full my-9'>
+              <div className='w-full mb-5'>
                 <Title text='Mi perfil' />
               </div>
               <div className={classes.admin__form}>
@@ -94,7 +94,7 @@ function Admin() {
                       <div className='flex-lg-6 flex-sm-12'>
                         {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
                         <div
-                          className='fs__16 text__gray__gray_darken ls_05 text-uppercase font-weight-bold ml-3 cpointer'
+                          className='fs__16 text__primary ls_05 text-uppercase font-weight-bold ml-3 cpointer'
                           onClick={() => setDisplayRestorePassword(!displayRestorePassword)}
                         >
                           Restablecer password
@@ -123,11 +123,15 @@ function Admin() {
           ) : (null)}
 
         </div>
+        <div className={classes.main__suscription}>
+          <Suscriptions user={user} />
+        </div>
       </Container>
-      <div className={classes.main__admin}>
-        <Suscriptions user={user} />
-      </div>
-    </div>
+
+      {/* <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important' }}>
+
+      </Container> */}
+    </>
   );
 }
 

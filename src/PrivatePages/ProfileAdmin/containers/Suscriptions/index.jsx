@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Container, TableHead, TableRow, TableCell, Table, TableContainer, TableBody, Chip } from '@mui/material';
+import { TableHead, TableRow, TableCell, Table, TableContainer, TableBody, Chip, Container } from '@mui/material';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import moment from 'moment';
 import PasswordGenerate from '../../../../components/common/InputMUI/passwordGenerate';
@@ -74,9 +74,9 @@ function Suscriptions({ user }) {
   }, []);
 
   return (
-    <Container className='my-10' maxWidth='xl'>
+    <div>
       <div className={classes.wrapper}>
-        <div className='w-full'>
+        <Container>
           <div className='font-fs-joey fs__36 font-weight-bold text__primary'>Suscripciones</div>
           {suscripcionsUser && Object.keys(suscripcionsUser).length > 0 && suscripcionsUser.value.length > 0 ? (
             <TableContainer>
@@ -173,11 +173,11 @@ function Suscriptions({ user }) {
               </Table>
             </TableContainer>
           ) : (
-            <h3 styles={{ width: '100%', textAlign: 'center' }}>No hay datos</h3>
+            <h3 style={{ width: '100%', textAlign: 'center', color: '#53565A', fontSize: '1rem' }}>Informacion no disponible</h3>
           )}
-        </div>
+        </Container>
       </div>
-    </Container>
+    </div>
   );
 }
 

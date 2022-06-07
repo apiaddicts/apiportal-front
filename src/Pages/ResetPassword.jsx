@@ -71,7 +71,6 @@ function ResetPassword(props) {
               <div className='row'>
                 <div className='flex-sm-12 flex-md-12'>
                   <h1>Ingresa tu nueva contraseña</h1>
-                  <p>Tu nueva contraseña debe ser diferente a la anterior</p>
                   {
                     hasErrors &&
                     // eslint-disable-next-line react/jsx-wrap-multilines
