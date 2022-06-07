@@ -96,25 +96,6 @@ function Apps(props) {
           />
         </div>
       </div>
-      {/* <Grid spacing={2} alignItems='center'>
-        <Grid xs={6}>
-          <Title text='Productos' />
-        </Grid>
-        <Grid xs={6}>
-          <SearchInput
-            name='search'
-            type='text'
-            placeholder='Buscar'
-            icon
-            onChange={(e) => {
-              formik.handleChange(e);
-              formik.setFieldValue('description', '');
-              formik.setFieldValue('name', '');
-            }}
-            value={formik.values.search}
-          />
-        </Grid>
-      </Grid> */}
       { spinner ? (
         <Spinner styles={{ height: '500px' }} title='Cargando...' />
       ) : (
