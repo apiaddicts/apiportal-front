@@ -79,6 +79,14 @@ export const fieldsRegister = [
     required: true,
     type: 'password',
   },
+  {
+    id: 'terms',
+    type: 'checkbox',
+    name: 'terms',
+    label: 'Acepto recibir correos de acuerdo con los siguientes <b>terminos y condiciones</b>',
+    initialValue: false,
+    required: true,
+  },
 ];
 
 export const fieldsLogin = [

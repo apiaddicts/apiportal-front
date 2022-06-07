@@ -71,7 +71,7 @@ function Suscriptions({ user, suscriptions, title }) {
       <div className={classes.wrapper}>
         <Container>
           { spinner ? (
-            <Spinner styles={{ height: '500px' }} title='Cargando...' />
+            <Spinner title='Cargando...' />
           ) : (
             <>
               <div className='font-fs-joey fs__36 font-weight-bold text__primary'>{ title }</div>
