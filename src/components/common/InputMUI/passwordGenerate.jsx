@@ -68,7 +68,7 @@ function PasswordGenerate({ idSuscripcion, user, version }) {
         </span>
       ) : (
         <span className='text'>
-          xxxxxxxxxxxxxxxx
+          xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         </span>
       )}
 

@@ -79,18 +79,18 @@ function Suscriptions({ user, suscriptions, title }) {
                 suscriptions && Object.keys(suscriptions).length > 0 && suscriptions.value.length > 0 ? (
                   <TableContainer>
                     <Table sx={{ minWidth: 650 }} aria-label='simple table'>
-                      <TableHead>
+                      <TableHead className={classes.table_head}>
                         <TableRow>
-                          <TableCell style={{ width: '325px' }}>
+                          <TableCell style={{ width: '210px' }}>
                             Nombre
                           </TableCell>
                           <TableCell style={{ width: '70px' }}>
                             Solicitud
                           </TableCell>
-                          <TableCell>
+                          <TableCell style={{ width: '255px' }}>
                             Primary key
                           </TableCell>
-                          <TableCell>
+                          <TableCell style={{ width: '255px' }}>
                             Secundary key
                           </TableCell>
                           <TableCell>
