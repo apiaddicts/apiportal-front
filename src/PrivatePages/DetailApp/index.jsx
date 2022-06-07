@@ -5,9 +5,12 @@
 import React, { useEffect, useState } from 'react';
 
 import { Container, Card, Grid, Box, TableHead, TableRow, TableCell, Table, TableContainer, TableBody } from '@mui/material';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import moment from 'moment';
+
+
+import { HashLink } from 'react-router-hash-link';
 
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -36,7 +39,6 @@ function AppsDetail(props) {
 
   const dispatch = useDispatch();
   const params = useParams();
-  const navigate = useNavigate();
 
   const [searchSuscription, setSearchSuscription] = useState('');
 
@@ -86,10 +88,6 @@ function AppsDetail(props) {
       dispatch(resetProduct());
     };
   }, []);
-
-  const handleClickRow = (id) => {
-    navigate(`/apiBookstores/${id}`);
-  };
 
   const handleNextProductApi = (url) => {
     dispatch(getProductApiNext(url, params.id));
@@ -181,7 +179,7 @@ function AppsDetail(props) {
                 </Grid>
               </Grid>
               <TableContainer>
-                <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+                <Table sx={{ minWidth: 650, marginBottom: '20px', }} aria-label='simple table'>
                   <TableHead>
                     <TableRow>
                       <TableCell>
@@ -234,15 +232,18 @@ function AppsDetail(props) {
                           <TableRow
                             key={row.name}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer', zIndex: 6 }}
-                            onClick={() => handleClickRow(row.name)}
                           >
                             <TableCell component='th' scope='row'>
-                              <p className={classes.cell_name}>{row.name}</p>
+                              <HashLink smooth to={`/apiBookstores/${row.name}#detailApi`}>
+                                <p className={classes.cell_name}>{row.name}</p>
+                              </HashLink>
                             </TableCell>
                             <TableCell>
-                              <p className={classes.cell_description}>
-                                {row.properties.description}
-                              </p>
+                              <HashLink smooth to={`/apiBookstores/${row.name}#detailApi`}>
+                                <p className={classes.cell_description}>
+                                  {row.properties.description}
+                                </p>
+                              </HashLink>
                             </TableCell>
                           </TableRow>
                         ))}
@@ -258,7 +259,7 @@ function AppsDetail(props) {
                   </TableBody>
                 </Table>
               </TableContainer>
-              <Grid item xs={12}>
+              <Grid item sx={{ marginTop: '10px' }} xs={12}>
                 <Grid container spacing={4} direction='row' justifyContent='space-between'>
                   <Grid item xs={3}>
                     {productsApisSkip > 0 ? (
