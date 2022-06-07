@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import Icon from '../../MdIcon/Icon';
@@ -41,7 +40,7 @@ function PasswordGenerate({ idSuscripcion, user, version }) {
   }, []);
 
   const handleReloadRegerateSubscription = () => {
-     dispatch({ type: subscriptionsConstants.REGENERATE_SUBSCRIPTIONS_REQUEST });
+    dispatch({ type: subscriptionsConstants.REGENERATE_SUBSCRIPTIONS_REQUEST });
     if (version === 1) {
       subscriptionsService.regenerateSubscription(user.name, idSuscripcion, 'regeneratePrimaryKey').then((response) => {
         handleRegenerateSubscriptions();
@@ -55,7 +54,7 @@ function PasswordGenerate({ idSuscripcion, user, version }) {
         console.log(err);
       });
     }
-    setTimeout( () => {
+    setTimeout(() => {
       dispatch({ type: subscriptionsConstants.REGENERATE_SUBSCRIPTIONS_SUCCESS });
     }, 1000);
   };
