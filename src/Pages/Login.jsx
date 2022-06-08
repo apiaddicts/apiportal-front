@@ -8,7 +8,7 @@ import Icon from '../components/MdIcon/Icon';
 import ResetPassword from '../components/Forms/ResetPassword';
 import { fieldsLogin } from '../components/Forms/fields';
 
-import { login } from '../redux/actions/userAction';
+import { login, resetAlert } from '../redux/actions/userAction';
 
 import classes from '../styles/pages/login.module.scss';
 
@@ -40,6 +40,7 @@ function Login({ setIsOpen, setPrivateSession }) {
         className={classes.login__close}
         type='button'
         onClick={() => {
+          dispatch(resetAlert());
           setIsOpen(false);
         }}
       >

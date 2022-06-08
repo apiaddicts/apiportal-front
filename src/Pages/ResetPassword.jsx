@@ -82,7 +82,7 @@ function ResetPassword(props) {
                     hasErrors &&
                     // eslint-disable-next-line react/jsx-wrap-multilines
                     <Alert severity='error'>
-                      <p>{responseResetPwdError?.error?.statusText}</p>
+                      <p>Es posible que el enlace para actualizar tu contraseña haya expirado o tu cuenta de correo aún no se encuentre confirmada </p>
                     </Alert>
                   }
                   {

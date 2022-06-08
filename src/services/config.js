@@ -26,6 +26,9 @@ const config = {
   apiVersion: '2021-08-01',
   hmacAuthHeader: createSharedAccessToken('integration', process.env.REACT_APP_PRIMARY_KEY, 14),
   rememberkey: process.env.REACT_APP_REMEMBER_KEY,
+  topProduct: process.env.REACT_APP_LIST_PRODUCT_TOP,
+  topDetail: process.env.REACT_APP_LIST_PRODUCT_DETAIL_TOP,
+  topApi: process.env.REACT_APP_LIST_API_TOP,
   url: createURLSura(),
 };
 

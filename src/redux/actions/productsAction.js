@@ -1,12 +1,13 @@
 import productsConstants from '../constants/productsConstants';
 import productsService from '../../services/productsService';
+import config from '../../services/config';
 
 import store from '../store';
 
 import { logout } from './userAction';
 
 // eslint-disable-next-line import/prefer-default-export
-export const listProducts = (top = 2, skip = 0) => (dispatch) => {
+export const listProducts = (top = config.topProduct, skip = 0) => (dispatch) => {
   dispatch({ type: productsConstants.GET_PRODUCTS_REQUEST });
 
   productsService.listProducts(top, skip).then(
@@ -68,7 +69,7 @@ export const filterProductsByDescription = (search, top = 1, skip = 0) => (dispa
   );
 };
 
-export const filterProductAPIsByName = (productName, search, top = 1, skip = 0) => (dispatch) => {
+export const filterProductAPIsByName = (productName, search, top = config.topData, skip = 0) => (dispatch) => {
   dispatch({ type: productsConstants.GET_PRODUCT_API_REQUEST });
   productsService.filterProductAPIsByName(productName, search, top, skip).then((response) => {
     dispatch({ type: productsConstants.GET_PRODUCT_API_SUCCESS, response });
@@ -77,7 +78,7 @@ export const filterProductAPIsByName = (productName, search, top = 1, skip = 0) 
   });
 };
 
-export const filterProductAPIsByDescription = (productName, search, top = 1, skip = 0) => (dispatch) => {
+export const filterProductAPIsByDescription = (productName, search, top = config.topData, skip = 0) => (dispatch) => {
   dispatch({ type: productsConstants.GET_PRODUCT_API_REQUEST });
   productsService.filterProductAPIsByDescription(productName, search, top, skip).then((response) => {
     dispatch({ type: productsConstants.GET_PRODUCT_API_SUCCESS, response });
@@ -111,9 +112,9 @@ export const getProductDetail = (productName) => (dispatch) => {
   dispatch({ type: productsConstants.GET_PRODUCT_REQUEST });
   productsService.getProductDetail(productName).then((response) => {
     if (Object.keys(response).length > 0) {
-      dispatch({ type: productsConstants.GET_PRODUCT_SUCCESS, response });
       dispatch(getProductSuscripcion(response.name));
       dispatch(getProductApis(response.name));
+      dispatch({ type: productsConstants.GET_PRODUCT_SUCCESS, response });
     } else {
       dispatch(logout());
     }
@@ -124,17 +125,17 @@ export const getProductDetail = (productName) => (dispatch) => {
 
 export const getProductosNext = (url) => (dispatch) => {
   const { productsSkip } = store.getState().products;
-  const skip = productsSkip + 2;
+  const skip = productsSkip + config.topProduct;
 
-  dispatch(listProducts(2, skip));
+  dispatch(listProducts(config.topProduct, skip));
   dispatch({ type: productsConstants.GET_PRODUCTS_SKIP, skip });
 };
 
 export const getProductPrevious = () => (dispatch) => {
   const { productsSkip } = store.getState().products;
-  const skip = productsSkip - 2;
+  const skip = productsSkip - config.topProduct;
 
-  dispatch(listProducts(2, skip));
+  dispatch(listProducts(config.topProduct, skip));
   dispatch({ type: productsConstants.GET_PRODUCTS_SKIP, skip });
 };
 

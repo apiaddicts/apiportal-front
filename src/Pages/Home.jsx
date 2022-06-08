@@ -44,7 +44,7 @@ function Home({ setIsOpen }) {
     if (blogs && blogs.length === 0) {
       dispatch(getBlogs());
     }
-  }, [dispatch, blogs]);
+  }, [blogs]);
 
   useEffect(() => {
     if (libraries && libraries.length === 0) {
@@ -363,6 +363,7 @@ function Home({ setIsOpen }) {
         <SkeletonComponent />
       )}
     </div>
+
   );
 }
 

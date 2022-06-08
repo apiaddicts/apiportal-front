@@ -12,6 +12,7 @@ const initialState = token && etag ? {
   user: {},
   loadingUser: false,
   responseError: {},
+  responseErrorLogin: {},
   responseRestoreError: {},
   responseResetSignup: {},
   responseResetPwd: {},
@@ -27,6 +28,7 @@ const initialState = token && etag ? {
   loadingSignUp: false,
   signUpData: {},
   responseError: {},
+  responseErrorLogin: {},
   responseRestoreError: {},
   responseResetSignup: {},
   responseResetPwd: {},
@@ -114,7 +116,7 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         loadingSignUp: false,
-        responseError: action.error,
+        responseErrorLogin: action.error,
       };
     // save entity tag
     case userConstants.HEAD_ETAG_SUCCESS:
@@ -139,6 +141,7 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         responseError: {},
+        responseErrorLogin: {},
         responseRestoreError: {},
         responseResetSignup: {},
         ResponseResetPwd: {},

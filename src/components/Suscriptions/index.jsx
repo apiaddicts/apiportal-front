@@ -16,7 +16,7 @@ import Spinner from '../Spinner';
 import classes from './Suscriptions.module.scss';
 
 moment.locale('es');
-function Suscriptions({ user, suscriptions, title }) {
+function Suscriptions({ user, suscriptions, title, productId = '' }) {
   const { renameSubscriptionResponse, cancelSubscriptionResponse, spinner } = useSelector((state) => state.suscripcions);
   const [edit, setEdit] = useState('');
   const dispatch = useDispatch();
@@ -30,6 +30,9 @@ function Suscriptions({ user, suscriptions, title }) {
         'state': 'Cancelled',
       },
     };
+    if (productId !== '') {
+      dispatch(cancelSubscription(user.name, rowCancel.name, data, productId));
+    }
     dispatch(cancelSubscription(user.name, rowCancel.name, data));
   };
 
@@ -40,10 +43,26 @@ function Suscriptions({ user, suscriptions, title }) {
           'name': e.target.value,
         },
       };
+      if (productId !== '') {
+        dispatch(renameSubscription(user.name, row.name, data, productId));
+      }
       dispatch(renameSubscription(user.name, row.name, data));
     } else if (e.key === 'Escape') {
       setEdit('');
     }
+  };
+
+  const handleBLur = (row, e) => {
+    const data = {
+      'properties': {
+        'name': e.target.value,
+      },
+    };
+
+    if (productId !== '') {
+      dispatch(renameSubscription(user.name, row.name, data, productId));
+    }
+    dispatch(renameSubscription(user.name, row.name, data));
   };
 
   useEffect(() => {
@@ -121,6 +140,7 @@ function Suscriptions({ user, suscriptions, title }) {
                                         placeholder='Nuevo nombre'
                                         defaultValue={row.properties.displayName}
                                         onKeyDown={(e) => handleKeyDown(row, e)}
+                                        onBlur={(e) => handleBLur(row, e)}
                                         className={classes.input}
                                       />
                                     ) :
@@ -133,7 +153,7 @@ function Suscriptions({ user, suscriptions, title }) {
                                   </p>
                                 </TableCell>
                                 <TableCell>
-                                  <PasswordGenerate idSuscripcion={row.name} user={user} version={1} />
+                                  <PasswordGenerate idSuscripcion={row.name} user={user} version={1} status={row.properties.state} />
                                 </TableCell>
                                 <TableCell>
                                   <PasswordGenerate idSuscripcion={row.name} user={user} version={2} status={row.properties.state} />
@@ -160,7 +180,9 @@ function Suscriptions({ user, suscriptions, title }) {
                                   />
                                 </TableCell>
                                 <TableCell>
-                                  <MenuOptions row={row} handleRename={handleRename} handleCancel={handleCancel} />
+                                  {row.properties.state && row.properties.state !== 'cancelled' ? (
+                                    <MenuOptions row={row} handleRename={handleRename} handleCancel={handleCancel} />
+                                  ) : (null)}
                                 </TableCell>
                               </TableRow>
                             ))}
