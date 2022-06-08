@@ -191,9 +191,17 @@ $width-container-xl: 130rem;
   width: $width-container-sm;
   margin: 0 auto;
   position: relative;
+  @include breakpoint(xs) {
+    .MuiContainer-root{
+      padding: 0 !important;
+    }
+  }
   @include breakpoint(md) {
     width: 90%;
     max-width: 1168px;
+    .MuiContainer-root{
+      padding: 0 !important;
+    }
   }
   @include breakpoint(lg) {
     max-width: 1168px;

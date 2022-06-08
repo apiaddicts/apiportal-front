@@ -169,19 +169,17 @@ function AppLibrary(props) {
         {loadingLibraries === false && libraries ? (
           arrApis.length > 0 ? (
             arrApis.map((item, index) => (
-              <div key={index}>
-                <CardInformationLibrary
-                  apiName={item.apiName}
-                  title={item.title}
-                  status={item.status}
-                  version={item.version}
-                  buttons={item.tags}
-                  colorStatus={item.color_status}
-                  info='Documentación'
-                  description={item.description}
-                  redirectTo={`/apiBookstores/${item.apiName}`}
-                />
-              </div>
+              <CardInformationLibrary
+                apiName={item.apiName}
+                title={item.title}
+                status={item.status}
+                version={item.version}
+                buttons={item.tags}
+                colorStatus={item.color_status}
+                info='Documentación'
+                description={item.description}
+                redirectTo={`/apiBookstores/${item.apiName}`}
+              />
             ))
           ) : (
             <section
