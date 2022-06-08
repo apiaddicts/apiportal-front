@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import SwaggerUI from 'swagger-ui-react';
 import 'swagger-ui-react/swagger-ui.css';
@@ -7,6 +7,8 @@ import 'swagger-ui-react/swagger-ui.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from '@mui/material';
 import { getApiOpenAPI } from '../../redux/actions/libraryAction';
+import Icon from '../../components/MdIcon/Icon';
+import classes from './swagger.module.scss';
 
 function Swagger() {
 
@@ -24,11 +26,23 @@ function Swagger() {
   }, [dispatch]);
 
   return (
-    <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>
-      <SwaggerUI
-        spec={jsonOpenApi}
-      />
-    </Container>
+    <>
+      <div className={classes.back__btn}>
+        <Link to={-1}>
+          <div className={classes.return}>
+            <div>
+              <Icon id='MdKeyboardBackspace' />
+            </div>
+            <span>VOLVER</span>
+          </div>
+        </Link>
+      </div>
+      <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>
+        <SwaggerUI
+          spec={jsonOpenApi}
+        />
+      </Container>
+    </>
   );
 };
 

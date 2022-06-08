@@ -5,7 +5,6 @@ import userConstants from '../../redux/constants/userConstats';
 import classes from './Alert.module.scss';
 
 function Alert({ alert_type, title, msg, css_styles, display }) {
-  console.log('title', title);
   const dispatch = useDispatch();
   const { responseError, responseRestoreError, responseResetSignup } = useSelector((state) => state.user);
   const { custom_padding, custom_margin } = css_styles;

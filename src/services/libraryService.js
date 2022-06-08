@@ -43,9 +43,11 @@ function getApis(top, skip) {
 }
 
 function getAPi(id) {
+  const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    // headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
   const url = `${config.url}/apis/${id}?api-version=${config.apiVersion}`;
@@ -57,9 +59,10 @@ function getAPi(id) {
 }
 
 function getApiOpenAPI(id) {
+  const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Accept': 'application/vnd.oai.openapi+json; charset=utf-8' },
+    headers: { 'Accept': 'application/vnd.oai.openapi+json; charset=utf-8', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
   const url = `${config.url}/apis/${id}?api-version=${config.apiVersion}`;

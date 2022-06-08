@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import userConstants from '../../../redux/constants/userConstats';
 import Input from '../../Input';
@@ -10,6 +10,14 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin }) {
 
   const { signUpData, responseError } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (!formik.values.remember) {
+      localStorage.removeItem('email');
+      localStorage.removeItem('password');
+    }
+
+    console.log('cambio', formik.values.remember);
+  }, [formik.values.remember]);
   return (
     <form className='w-full px-8' onSubmit={formik.handleSubmit}>
       {

@@ -13,8 +13,9 @@ import { resetPasswordWithTicket } from '../redux/actions/userAction';
 
 function ResetPassword(props) {
 
-  const { responseResetPwdError } = useSelector((state) => state.user);
+  const { responseResetPwd, responseResetPwdError } = useSelector((state) => state.user);
   const [hasErrors, setHasErrors] = useState(false);
+  const [hasSuccess, setHasSuccess] = useState(false);
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const queryParams = {
@@ -28,6 +29,12 @@ function ResetPassword(props) {
       setHasErrors(true);
     }
   }, [responseResetPwdError]);
+
+  useEffect(() => {
+    if (Object.keys(responseResetPwd).length > 0) {
+      setHasSuccess(true);
+    }
+  }, [responseResetPwd]);
 
   const formik = useFormik({
     initialValues: {
@@ -76,6 +83,13 @@ function ResetPassword(props) {
                     // eslint-disable-next-line react/jsx-wrap-multilines
                     <Alert severity='error'>
                       <p>{responseResetPwdError?.error?.statusText}</p>
+                    </Alert>
+                  }
+                  {
+                    hasSuccess &&
+                    // eslint-disable-next-line react/jsx-wrap-multilines
+                    <Alert severity='success'>
+                      Tu contraseña ha sido cambiada
                     </Alert>
                   }
                 </div>
