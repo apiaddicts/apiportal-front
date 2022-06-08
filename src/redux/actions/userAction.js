@@ -200,7 +200,12 @@ export const resetPasswordWithTicket = (queryParams, data, password) => (dispatc
             dispatch({ type: userConstants.RESET_PASSWORD_TICKET_FAILURE, response });
           }
         } else {
+          dispatch({ type: userConstants.RESET_PASSWORD_TICKET_SUCCESS, response });
           dispatch(logout());
+          setTimeout(() => {
+            console.log('redireccionar');
+            window.location = '/';
+          }, 1500);
         }
       }
     },
