@@ -71,6 +71,7 @@ export const logout = () => (dispatch) => {
   dispatch({
     type: userConstants.LOGOUT_USER,
   });
+  window.location = '/';
 };
 
 export const signUp = (data) => (dispatch) => {
@@ -169,7 +170,10 @@ export const verifyOldPassword = (data) => (dispatch) => {
 export const changePassword = (newPassword) => (dispatch) => {
   userService.changePassword(newPassword).then(
     (response) => {
-      dispatch(logout());
+      const passwordEncrypted = btoa(newPassword);
+      const secureKeyEncrypted = btoa(`${passwordEncrypted}:${config.rememberkey}`);
+      localStorage.setItem('password', secureKeyEncrypted);
+      // dispatch(logout());
     },
     (error) => {
       console.log('Update password error', error);
