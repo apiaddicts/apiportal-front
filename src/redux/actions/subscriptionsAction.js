@@ -31,20 +31,30 @@ export const resetSubscriptionsUser = () => (dispatch) => {
   dispatch({ type: subscriptionsConstants.RESET_SUBSCRIPTIONS_USER });
 };
 
-export const renameSubscription = (userId, subscriptionId, data) => (dispatch) => {
+export const renameSubscription = (userId, subscriptionId, data, productName = '') => (dispatch) => {
   dispatch({ type: subscriptionsConstants.RENAME_SUBSCRIPTIONS_REQUEST });
   subscriptionsService.renameSubscription(userId, subscriptionId, data)
     .then((response) => {
       dispatch({ type: subscriptionsConstants.RENAME_SUBSCRIPTIONS_SUCCESS, response });
+      if (productName !== '') {
+        dispatch(getProductDetail(productName));
+      } else {
+        dispatch(listUserSubscriptions(userId));
+      }
     }, (error) => {
       dispatch({ type: subscriptionsConstants.RENAME_SUBSCRIPTIONS_FAILURE, error });
     });
 };
 
-export const cancelSubscription = (userId, subscriptionId, data) => (dispatch) => {
+export const cancelSubscription = (userId, subscriptionId, data, productName = '') => (dispatch) => {
   subscriptionsService.cancelSubscription(userId, subscriptionId, data)
     .then((response) => {
       dispatch({ type: subscriptionsConstants.CANCEL_SUBSCRIPTIONS_SUCCESS, response });
+      if (productName !== '') {
+        dispatch(getProductDetail(productName));
+      } else {
+        dispatch(listUserSubscriptions(userId));
+      }
     }, (error) => {
       dispatch({ type: subscriptionsConstants.CANCEL_SUBSCRIPTIONS_FAILURE, error });
     });

@@ -33,7 +33,7 @@ import classes from './detail.module.scss';
 
 moment.locale('es');
 function AppsDetail(props) {
-  const { product, productApis, productSubscriptions, spinnerApis, productsApisSkip } = useSelector((state) => state.products);
+  const { product, productApis, productSubscriptions, spinnerApis, productsApisSkip, spinnerSubscriptions } = useSelector((state) => state.products);
   const { user } = useSelector((state) => state.user);
   const { loadingCreateSubscription } = useSelector((state) => state.suscripcions);
 
@@ -130,7 +130,7 @@ function AppsDetail(props) {
       )}
       <Container sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>
         {product && Object.keys(product).length === 0 ? (
-          <Spinner title='Cargando...' />
+          <Spinner styles={{ height: '200px' }} title='Cargando...' />
         ) : (
 
           <div>
@@ -154,7 +154,15 @@ function AppsDetail(props) {
             </Card>
 
             {productSubscriptions && Object.keys(productSubscriptions).length > 0 && productSubscriptions.count > 0 ? (
-                <Suscriptions user={user} suscriptions={productSubscriptions} title='Suscripcion' />
+                <Suscriptions user={user} suscriptions={productSubscriptions} title='Suscripcion' productId={params.id}/>
+                // <>
+                //   { spinnerSubscriptions ? (
+                //       <Spinner styles={{ height: '100px' }} title='Cargando...' />
+                //   ) : (
+                //     <Suscriptions user={user} suscriptions={productSubscriptions} title='Suscripcion' productId={params.id}/>
+
+                //   )}
+                // </>
             ) : (
               null
             ) }
@@ -164,6 +172,9 @@ function AppsDetail(props) {
                   {suscriptionValidate.length === 0 && productSubscriptions.count === 0 ? (
                     <Title text='Suscripción' divider={false} stylesTitle={{ fontSize: '2.25rem' }} />
                   ) : (null)} 
+                  {loadingCreateSubscription ? (
+                    <Spinner styles={{ height: '100px' }} title='Cargando...' />
+                  ) : (
                     <div className={classes.form_suscriptione} style={{ height: '36px' }}>
                       <div className={classes.form_suscriptione__input}>
                         <InputResponse
@@ -178,6 +189,8 @@ function AppsDetail(props) {
                         <Btn size='responsive' onClick={handleSubmitSuscription} styles={searchSuscription.length > 0 ? 'primary' : 'greey-primary'}>SUSCRIBIRME</Btn>
                       </div>
                     </div>
+
+                  )}
                   </Card>
             ) : (null)}
 

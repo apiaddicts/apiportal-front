@@ -153,9 +153,9 @@ function Apps(props) {
                   <TableBody>
                     {products && Object.keys(products).length > 0 ? (
                       <>
-                        {products.value.map((row) => (
+                        {products.value.map((row, i) => (
                           <TableRow
-                            key={row.name}
+                            key={i}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer', zIndex: 6 }}
                             onClick={() => handleClickRow(row.name)}
                           >

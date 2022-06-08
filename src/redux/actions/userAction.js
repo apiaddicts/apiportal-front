@@ -218,3 +218,7 @@ export const resetPasswordWithTicket = (queryParams, data, password) => (dispatc
     },
   );
 };
+
+export const resetAlert = () => (dispatch) => {
+  dispatch({ type: userConstants.RESET_ALERT });
+};
