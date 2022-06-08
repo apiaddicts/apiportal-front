@@ -111,8 +111,8 @@ function AppsDetail(props) {
   };
 
 
-  console.log('PRODUCTOS', product);
-  console.log('SUSCRIPCIONES', productSubscriptions)
+  const suscriptionValidate = Object.keys(productSubscriptions).length > 0 && productSubscriptions.value.length > 0 ? productSubscriptions.value.filter((item) => item.properties.state !== 'cancelled') : [];
+  const limits = product.properties && Object.keys(product.properties).length > 0 ? product.properties.subscriptionsLimit : 0;
 
   return (
     <div>
@@ -154,26 +154,32 @@ function AppsDetail(props) {
             </Card>
 
             {productSubscriptions && Object.keys(productSubscriptions).length > 0 && productSubscriptions.count > 0 ? (
-              <Suscriptions user={user} suscriptions={productSubscriptions} title='Suscripcion' />
+                <Suscriptions user={user} suscriptions={productSubscriptions} title='Suscripcion' />
             ) : (
-              <Card sx={{ borderRadius: '20px', marginTop: '33px', padding: '35px 47px 43px 41px', marginBottom: '40px', boxShadow: '0px 4px 28px rgba(169, 177, 209, 0.12)' }}>
-                <Title text='Suscripción' divider={false} stylesTitle={{ fontSize: '2.25rem' }} />
-                <div className={classes.form_suscriptione} style={{ height: '36px' }}>
-                  <div className={classes.form_suscriptione__input}>
-                    <InputResponse
-                      name='suscription'
-                      type='text'
-                      label='Nombre de la suscripción a este producto'
-                      onChange={formik.handleChange}
-                      value={formik.values.suscription}
-                    />
-                  </div>
-                  <div className={classes.form_suscriptione____btn}>
-                    <Btn size='responsive' onClick={handleSubmitSuscription} styles={searchSuscription.length > 0 ? 'primary' : 'greey-primary'}>SUSCRIBIRME</Btn>
-                  </div>
-                </div>
-              </Card>
-            )}
+              null
+            ) }
+
+            {limits === null || suscriptionValidate.length < limits ? (
+                <Card sx={{ borderRadius: '20px', marginTop: '33px', padding: '35px 47px 43px 41px', marginBottom: '40px', boxShadow: '0px 4px 28px rgba(169, 177, 209, 0.12)' }}>
+                  {suscriptionValidate.length === 0 && productSubscriptions.count === 0 ? (
+                    <Title text='Suscripción' divider={false} stylesTitle={{ fontSize: '2.25rem' }} />
+                  ) : (null)} 
+                    <div className={classes.form_suscriptione} style={{ height: '36px' }}>
+                      <div className={classes.form_suscriptione__input}>
+                        <InputResponse
+                          name='suscription'
+                          type='text'
+                          label='Nombre de la suscripción a este producto'
+                          onChange={formik.handleChange}
+                          value={formik.values.suscription}
+                        />
+                      </div>
+                      <div className={classes.form_suscriptione____btn}>
+                        <Btn size='responsive' onClick={handleSubmitSuscription} styles={searchSuscription.length > 0 ? 'primary' : 'greey-primary'}>SUSCRIBIRME</Btn>
+                      </div>
+                    </div>
+                  </Card>
+            ) : (null)}
 
             {/* APis del producto */}
             <Card sx={{ borderRadius: '20px', marginTop: '33px', padding: '35px 47px 43px 41px', marginBottom: '15px', boxShadow: '0px 4px 28px rgba(169, 177, 209, 0.12)' }}>

@@ -16,7 +16,7 @@ function Admin() {
     if (suscripcionsUser && Object.keys(user).length > 0 && Object.keys(suscripcionsUser).length === 0) {
       dispatch(listUserSubscriptions(user.name));
     }
-  }, [suscripcionsUser]);
+  }, []);
 
   return (
     <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>

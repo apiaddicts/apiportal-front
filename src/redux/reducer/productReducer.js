@@ -128,6 +128,7 @@ export default function productReducer(state = initialState, action) {
         spinnerProduct: false,
         product: {},
         errorProduct: {},
+        productSubscriptions: {},
       };
     default:
       return state;
