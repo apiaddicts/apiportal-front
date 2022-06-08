@@ -7,7 +7,7 @@
   } 
   @if $point == lg {
     // 992px
-    @media only screen and (min-width: 889px) {
+    @media only screen and (min-width: 992px) {
       @content;
     }
   }
@@ -125,4 +125,9 @@
 @mixin grid($number) {
   flex: 0 0 percentage((100 / $number) / 100);
   max-width: percentage((100 / $number) / 100);
+}
+
+@mixin background-opacity($color, $opacity: 0.3) {
+  background: $color; /* The Fallback */
+  background: rgba($color, $opacity);
 }

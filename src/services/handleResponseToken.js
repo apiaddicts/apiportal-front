@@ -33,7 +33,7 @@ function handleResponseToken(response) {
 
   return response.text().then((text) => {
     const token = response.headers.get('ocp-apim-sas-token');
-    const data = text && JSON.parse(text);
+    const data = (text && text.length) ? JSON.parse(text) : {};
     Object.assign(data, { token });
     switch (response.status) {
       case statusCode.HTTP_200_OK:
@@ -41,11 +41,16 @@ function handleResponseToken(response) {
       case statusCode.HTTP_201_CREATED:
         return data;
       case statusCode.HTTP_204_NO_CONTENT:
-        return data;
+        return { ...data, status: response.status, statusText: response.statusText };
       case statusCode.HTTP_304_NOT_MODIFIED:
         return 'Not_Modified';
       case statusCode.HTTP_401_UNAUTHORIZED:
-        return {};
+        return {
+          error: {
+            status: response.status,
+            statusText: response.statusText,
+          },
+        };
       default:
         return Promise.reject(data);
     }

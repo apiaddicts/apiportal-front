@@ -5,11 +5,11 @@ import Icon from '../components/MdIcon/Icon';
 import classes from '../styles/pages/login.module.scss';
 import CreateAccount from '../components/Forms/CreateAccount';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
+import Alert from '../components/Alert';
 
 function Register({ setOpenForm, setIsOpen }) {
 
   const { loadingSignUp, signUpData } = useSelector((state) => state.user);
-
   useEffect(() => {
     if (signUpData && Object.keys(signUpData).length > 0) {
       setIsOpen(true);
@@ -28,16 +28,37 @@ function Register({ setOpenForm, setIsOpen }) {
               setOpenForm(false);
             }}
           >
-            <Icon id='MdClose' />
+            <Icon
+              id='MdClose'
+              css_styles={{
+                custom_icon_styles: 'fs__20 text__gray__gray_darken',
+              }}
+            />
           </button>
           <div className={classes.login__wrapper}>
             <h1 className={classes.login__title}>Crea tu Cuenta</h1>
+            {
+              Object.keys(signUpData).length > 0 ?
+                (
+                  <Alert
+                    css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
+                    alert_type='alert__success'
+                    title='Revisa tu cuenta de correo'
+                    msg='Para completar el registro, es necesario confirmar tu cuenta de correo'
+                  />
+                ) : (
+                  <Alert
+                    css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
+                    alert_type='alert__danger'
+                    title='Error al registrarte'
+                  />
+                )
+            }
             <CreateAccount />
           </div>
         </>
       ) : (
         <SkeletonComponent />
-
       )}
     </Modal>
   );

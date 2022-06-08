@@ -1,23 +1,68 @@
 /* eslint-disable no-use-before-define */
 import userConstants from '../constants/userConstats';
 import userService from '../../services/userService';
+import config from '../../services/config';
 
 import store from '../store';
 
 // eslint-disable-next-line import/prefer-default-export
 export const login = (data) => (dispatch) => {
   dispatch({ type: userConstants.LOGIN_REQUEST });
-
   userService.login(data.email, data.password).then((response) => {
     if (response && Object.keys(response).length > 0) {
-      localStorage.setItem('token', JSON.stringify(response));
-      dispatch(getUser(response));
-      dispatch(getUserEntityTag(data, response));
+      if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+        dispatch({
+          type: userConstants.LOGIN_FAILURE,
+          error: response,
+        });
+      } else {
+        if (data.remember) {
+          const passwordEncrypted = btoa(data.password);
+          const secureKeyEncrypted = btoa(`${passwordEncrypted}:${config.rememberkey}`);
+          localStorage.setItem('email', data.email);
+          localStorage.setItem('password', secureKeyEncrypted);
+        }
+        localStorage.setItem('token', JSON.stringify(response));
+        dispatch(getUser(response));
+        dispatch(getUserEntityTag(response));
+        dispatch({ type: userConstants.RESET_ALERT });
+      }
     }
   }, (error) => {
-    console.error(error);
+    console.error('error', error);
   });
 
+};
+
+export const confirmAccount = (queryParams, setIsOpen) => (dispatch) => {
+  dispatch({
+    type: userConstants.CONFIRM_ACCOUNT_REQUEST,
+  });
+  userService.confirmAccount(queryParams).then(
+    (response) => {
+      console.log(response, store.getState().user.accountVerificationSent);
+      if (response.status === 204) {
+        dispatch({
+          type: userConstants.CONFIRM_ACCOUNT_SUCCESS,
+        });
+        setTimeout(() => {
+          dispatch(getUser(response));
+          dispatch(getUserEntityTag(response));
+          dispatch({ type: userConstants.RESET_ALERT });
+        }, 3000);
+      } else {
+        dispatch({
+          type: userConstants.CONFIRM_ACCOUNT_FAILURE,
+          error: response,
+        });
+        dispatch(logout());
+        window.location = '/';
+      }
+    },
+    (error) => {
+      console.log('Confirm account error', error);
+    },
+  );
 };
 
 export const logout = () => (dispatch) => {
@@ -26,10 +71,11 @@ export const logout = () => (dispatch) => {
   dispatch({
     type: userConstants.LOGOUT_USER,
   });
+  window.location = '/';
 };
 
 export const signUp = (data) => (dispatch) => {
-  dispatch({ type: userConstants.SIGNUP_REQUEST });
+  // dispatch({ type: userConstants.SIGNUP_REQUEST });
   userService.signUp(data).then(
     (response) => {
       dispatch({
@@ -38,7 +84,10 @@ export const signUp = (data) => (dispatch) => {
       });
     },
     (error) => {
-      console.log(error);
+      dispatch({
+        type: userConstants.SIGNUP_FAILURE,
+        error,
+      });
     },
   );
 };
@@ -66,7 +115,7 @@ export const getUser = (tokens) => (dispatch) => {
   );
 };
 
-export const getUserEntityTag = (properties, tokens) => (dispatch) => {
+export const getUserEntityTag = (tokens) => (dispatch) => {
 
   userService.getUserEntityTag(tokens.token, tokens.id).then(
     (response) => {
@@ -93,6 +142,79 @@ export const updateUser = (data) => (dispatch) => {
     },
     (error) => {
       console.log(error);
+    },
+  );
+};
+export const verifyOldPassword = (data) => (dispatch) => {
+  userService.verifyOldPassword(data).then(
+    (response) => {
+      if (response && Object.keys(response).length > 0) {
+        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+          if (response?.error?.status === 401) {
+            dispatch({
+              type: userConstants.RESTORE_SIGNUP_FAILURE,
+              response,
+            });
+          }
+        } else {
+          dispatch(getUserEntityTag(response));
+          dispatch(changePassword(data.new_password));
+        }
+      }
+    },
+    (error) => {
+      console.log(error);
+    },
+  );
+};
+export const changePassword = (newPassword) => (dispatch) => {
+  userService.changePassword(newPassword).then(
+    (response) => {
+      const passwordEncrypted = btoa(newPassword);
+      const secureKeyEncrypted = btoa(`${passwordEncrypted}:${config.rememberkey}`);
+      localStorage.setItem('password', secureKeyEncrypted);
+      // dispatch(logout());
+    },
+    (error) => {
+      console.log('Update password error', error);
+    },
+  );
+};
+export const resetPassword = (data) => (dispatch) => {
+  userService.resetPassword(data).then(
+    (response) => {
+      if (response.status === 204) {
+        dispatch({
+          type: userConstants.RESET_SIGNUP,
+          response,
+        });
+      }
+    },
+    (error) => {
+      console.log('Update password error', error);
+    },
+  );
+};
+export const resetPasswordWithTicket = (queryParams, data, password) => (dispatch) => {
+  userService.resetPasswordWithTicket(queryParams, data, password).then(
+    (response) => {
+      if (response && Object.keys(response).length > 0) {
+        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+          if (response?.error?.status === 401) {
+            dispatch({ type: userConstants.RESET_PASSWORD_TICKET_FAILURE, response });
+          }
+        } else {
+          dispatch({ type: userConstants.RESET_PASSWORD_TICKET_SUCCESS, response });
+          dispatch(logout());
+          setTimeout(() => {
+            console.log('redireccionar');
+            window.location = '/';
+          }, 1500);
+        }
+      }
+    },
+    (error) => {
+      console.log('Reset password error', error);
     },
   );
 };

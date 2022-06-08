@@ -20,10 +20,10 @@ function InputSelect({ label, children, handleSelect }) {
             () => { setShowFilteer(!showFilteer); }
           }
         >
-          <p>
+          <p className='fs__14'>
             Ordenar por:
             {' '}
-            <span>{filter}</span>
+            <span className='fs__13'>{filter}</span>
           </p>
         </div>
         {showFilteer && (

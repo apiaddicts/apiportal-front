@@ -66,7 +66,7 @@ function AddApp(props) {
   return (
     <div className={styles.container__add__app}>
       <div className='container mt-10 pt-10'>
-        <Title text='Nueva App' />
+        <Title stylesTitle={{ fontSize: '48px' }} text='Nueva App' />
       </div>
       <div className={styles.container__stepper}>
         <HorizontalStepper
@@ -100,7 +100,7 @@ function AddApp(props) {
                   <Btn styles='primary' onClick={handleComplete}>
                     {completedSteps() === totalSteps() - 1 ?
                       'Finish' :
-                      'Siguinte'}
+                      'Siguiente'}
                   </Btn>
                 ))}
             </div>

@@ -1,3 +1,11 @@
+const email = localStorage.getItem('email') === null ? '' : localStorage.getItem('email');
+let password = '';
+if (localStorage.getItem('password') !== null) {
+  const decryptedKey = atob(localStorage.getItem('password'));
+  const data = decryptedKey.split(':');
+  password = atob(data[0]);
+}
+
 export const fieldsRegister = [
   {
     id: 'first_name',
@@ -71,12 +79,20 @@ export const fieldsRegister = [
     required: true,
     type: 'password',
   },
+  {
+    id: 'terms',
+    type: 'checkbox',
+    name: 'terms',
+    label: 'Acepto recibir correos de acuerdo con los siguientes <b>terminos y condiciones</b>',
+    initialValue: false,
+    required: true,
+  },
 ];
 
 export const fieldsLogin = [
   {
     id: 'email',
-    initialValue: '',
+    initialValue: email,
     placeholder: 'Email',
     validate: 'email',
     required: true,
@@ -84,13 +100,20 @@ export const fieldsLogin = [
   },
   {
     id: 'password',
-    initialValue: '',
+    initialValue: password,
     placeholder: 'Password',
     validate: 'password',
     required: true,
     type: 'password',
     icon: true,
     iconName: 'MdOutlineRemoveRedEye',
+  },
+  {
+    id: 'remember',
+    type: 'checkbox',
+    name: 'remember',
+    label: 'Recordar datos',
+    initialValue: localStorage.getItem('email') !== null && localStorage.getItem('password') !== null,
   },
 ];
 export const fieldsContact = [
@@ -174,5 +197,15 @@ export const fieldsContactExtend = [
     validate: 'message',
     required: true,
     type: 'textarea',
+  },
+];
+export const fieldsForgotPassword = [
+  {
+    id: 'email',
+    initialValue: '',
+    placeholder: 'Email',
+    validate: 'email',
+    required: true,
+    type: 'email',
   },
 ];

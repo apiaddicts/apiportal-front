@@ -5,16 +5,16 @@ import classes from './inputui.module.scss';
 
 function SelectUI({ label, options = [] }) {
   const [isActive, setIsActive] = useState(false);
-  const [value, setValue] = useState('');
-  console.log(value);
+  // const [value, setValue] = useState('');
   function handleSelect(value) {
-    setValue(value);
+    // setValue(value);
     if (value !== '') {
       setIsActive(true);
     } else {
       setIsActive(false);
     }
   };
+
   return (
     <div className={classes.wrapper__input}>
       <select placeholder='Temas' onChange={(e) => handleSelect(e.target.value.length)}>

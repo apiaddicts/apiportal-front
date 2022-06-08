@@ -1,17 +1,48 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 
 import SwaggerUI from 'swagger-ui-react';
 import 'swagger-ui-react/swagger-ui.css';
 
+import { useDispatch, useSelector } from 'react-redux';
+import { Container } from '@mui/material';
+import { getApiOpenAPI } from '../../redux/actions/libraryAction';
+import Icon from '../../components/MdIcon/Icon';
+import classes from './swagger.module.scss';
+
 function Swagger() {
+
+  const { jsonOpenApi } = useSelector((state) => state.library);
+
+  const params = useParams();
+  console.log(params.id);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (jsonOpenApi) {
+      dispatch(getApiOpenAPI(params.id));
+    }
+  }, [dispatch]);
+
   return (
-    <div style={{ marginTop: '50px' }}>
-      <SwaggerUI
-        // url='https://petstore.swagger.io/v2/swagger.json'
-        // url='https://raw.githubusercontent.com/ErikWittern/openapi-snippet/main/test/petstore_oas.json'
-        url='https://api.apis.guru/v2/specs/instagram.com/1.0.0/swagger.yaml'
-      />
-    </div>
+    <>
+      <div className={classes.back__btn}>
+        <Link to={-1}>
+          <div className={classes.return}>
+            <div>
+              <Icon id='MdKeyboardBackspace' />
+            </div>
+            <span>VOLVER</span>
+          </div>
+        </Link>
+      </div>
+      <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>
+        <SwaggerUI
+          spec={jsonOpenApi}
+        />
+      </Container>
+    </>
   );
 };
 

@@ -19,11 +19,12 @@ function Input({ field, formik, footer, styleInput }) {
       <input
         className={touched[field.id] && !!errors[field.id] ? classes.input__error : `${classes.input} ${styleInput}`}
         id={field.id}
-        type={touched[field.id] && type ? 'text' : field.type}
+        type={type ? 'text' : field.type}
         onChange={handleChange}
         onBlur={handleBlur}
         placeholder={field.placeholder}
         value={values[field.id]}
+        disabled={field.disabled}
       />
       <div
         onClick={() => {

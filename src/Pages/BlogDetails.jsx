@@ -1,5 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import moment from 'moment';
+import _ from 'underscore';
+
 import { useParams } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 
@@ -8,49 +11,10 @@ import BlogDetailsInfo from '../components/BlogDetails';
 import Slick from '../components/SlickSlider/Slick';
 import Contact from '../components/Contact';
 import FooterAuthor from '../components/FooterAuthor';
-import { getBlog, resetGetBlog } from '../redux/actions/blogAction';
+import { getBlog, resetGetBlog, getBlogs } from '../redux/actions/blogAction';
 import styles from '../styles/pages/blogDetails.module.scss';
 import classes from '../styles/pages/home.module.scss';
 import Icon from '../components/MdIcon/Icon';
-
-const slidesNew = [
-  {
-    img: 'https://picsum.photos/id/0/370/240',
-    title: 'Lorem ipsum',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1/370/240',
-    title: 'Lorem ipsum',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1031/370/240',
-    title: 'Lorem ipsum',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1066/370/240',
-    title: 'Lorem ipsum',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1078/370/240',
-    title: 'Lorem ipsum',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1079/370/240',
-    title: 'Lorem ipsum',
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.  standard dummy text ever.',
-    linkText: 'Conoce más',
-  },
-];
 
 const stylesPerso = {
   height: '345px',
@@ -62,22 +26,51 @@ const stylesBannerTitle = {
   marginTop: '101px',
 };
 
+moment.locale('es');
+
 function BlogDetails({ setIsOpen }) {
   const dispatch = useDispatch();
 
   const params = useParams();
-  const { blog } = useSelector((state) => state.blog);
+  const { blog, blogs } = useSelector((state) => state.blog);
+
   useEffect(() => {
-    if (params.id && Object.keys(blog).length === 0) {
+    if (params.id) {
       dispatch(getBlog(params.id));
     }
+
+  }, [params.id]);
+
+  useEffect(() => {
+
     return () => {
       dispatch(resetGetBlog());
     };
   }, []);
 
+  useEffect(() => {
+    if (blogs && blogs.length === 0) {
+      dispatch(getBlogs());
+    }
+  }, [dispatch, blogs]);
+
+  const datanews = blogs.length > 0 ? _.sortBy(blogs, (m) => {
+    return moment(m.created_at).toDate().getTime();
+  }) : [];
+
+  const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
+    const itemData = {
+      img: item.image[0].url,
+      title: item.title,
+      description: item.description,
+      linkText: 'Conoce más',
+      route: `/blog/${item.id}#blogDetail`,
+    };
+    return itemData;
+  }) : [];
+
   return (
-    <div>
+    <div id='blogDetail'>
       {Object.keys(blog).length > 0 ? (
         <>
           <BannerStatic
@@ -108,7 +101,7 @@ function BlogDetails({ setIsOpen }) {
 
                   <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
                     <p className='body-1'>
-                      Conoce todas las novedades sobre tecnología, APIs y transformación digital
+                      Conocs todas las novedades sobre tecnología, APIs y transformación digital
                     </p>
                   </div>
                 </div>
@@ -116,7 +109,7 @@ function BlogDetails({ setIsOpen }) {
               <div className='container'>
                 <div className='row'>
                   <div className='flex-md-12 flex-sm-12'>
-                    <Slick slides={slidesNew} setIsOpen={setIsOpen} />
+                    <Slick slides={slidesNew} />
                   </div>
                 </div>
               </div>

@@ -9,10 +9,14 @@
   @include breakpoint(xs) {
     height: 700px;
   }
+
   &__slider {
     display: flex;
     flex-wrap: nowrap;
     @include breakpoint(xs) {
+      height: 100%;
+    }
+    @include breakpoint(sm) {
       height: 100%;
     }
 
@@ -20,10 +24,20 @@
       min-width: 100%;
       overflow: hidden;
       transition: 0.3s ease all;
-      max-height: 588px;
+      // max-height: 588px;
       position: relative;
 
       @include breakpoint(xs) {
+        max-height: 100%;
+      }
+
+      @include breakpoint(sm){
+        min-height: 600px;
+        max-height: 100%;
+      }
+
+      @include breakpoint(md) {
+        min-height: 700px;
         max-height: 100%;
       }
 
@@ -31,8 +45,13 @@
         min-width: 100%;
         overflow: hidden;
         transition: 0.3s ease all;
-        max-height: 588px;
+        min-height: 588px;
+        max-height: 100%;
         position: relative;
+      }
+
+      @include breakpoint(xl) {
+        max-height: 588px;
       }
 
       img {

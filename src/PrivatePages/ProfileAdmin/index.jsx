@@ -1,43 +1,28 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
-// import { MenuItem } from '@mui/material';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-
-import TextField from '../../components/common/InputMUI';
-// import { adminFields } from './adminField';
+import { Container } from '@mui/material';
+import { listUserSubscriptions } from '../../redux/actions/subscriptionsAction';
+import Input from '../../components/Input';
 import useFormUserConfig from '../../hooks/useFormUser';
 import classes from './style.module.scss';
-// import TextAreaUI from '../../components/common/TextAreaUI';
-// import InptSelectUI from '../../components/common/InputMUI/InptSelectUI';
-import TypographyUI from '../../components/common/TypographyMUI';
-// import Icon from '../../components/MdIcon/Icon';
 import Button from '../../components/Buttons/Button';
 import Title from '../../components/Title/Title';
 import { updateUser } from '../../redux/actions/userAction';
-
-// const cargo = [
-//   {
-//     value: 'ceo',
-//     label: 'CEO',
-//   },
-//   {
-//     value: 'cfo',
-//     label: 'CFO',
-//   },
-//   {
-//     value: 'cto',
-//     label: 'CTO',
-//   },
-//   {
-//     value: 'cmo',
-//     label: 'CMO',
-//   },
-// ];
+import Suscriptions from '../../components/Suscriptions';
+import RestorePassword from './containers/RestorePassword';
 
 function Admin() {
-  const { user, loadingUser } = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
+  const { user, loadingUser } = useSelector((state) => state.user);
+  const [displayRestorePassword, setDisplayRestorePassword] = useState(false);
+  const { suscripcionsUser } = useSelector((state) => state.suscripcions);
+
+  useEffect(() => {
+    if (suscripcionsUser && Object.keys(user).length > 0 && Object.keys(suscripcionsUser).length === 0) {
+      dispatch(listUserSubscriptions(user.name));
+    }
+  }, [suscripcionsUser]);
 
   const handleSubmit = async (values) => {
     const data = {
@@ -48,7 +33,6 @@ function Admin() {
     };
     dispatch(updateUser(data));
   };
-
   const name = user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? user.properties.firstName : '';
   const lastName = user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? user.properties.lastName : '';
   const email = user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? user.properties.email : '';
@@ -58,7 +42,7 @@ function Admin() {
       id: 'first_name',
       initialValue: name,
       placeholder: 'John',
-      label: 'First name',
+      label: 'Nombre',
       validate: 'first_name',
       required: true,
       type: 'text',
@@ -67,7 +51,7 @@ function Admin() {
       id: 'last_name',
       initialValue: lastName,
       placeholder: 'Doe',
-      label: 'Last name',
+      label: 'Apellido',
       validate: 'last_name',
       required: true,
       type: 'text',
@@ -76,7 +60,7 @@ function Admin() {
       id: 'email',
       initialValue: email,
       placeholder: 'youremail@domain.com',
-      label: 'Email',
+      label: 'Correo electrónico',
       validate: 'email',
       required: true,
       type: 'email',
@@ -85,95 +69,71 @@ function Admin() {
   ];
 
   const formConfig = useFormUserConfig(labelsUser, handleSubmit);
-  return (
-    <div className={classes.main__admin}>
-      {user && Object.keys(user).length > 0 && loadingUser === false ? (
-        <div className={classes.admin}>
-          <div className='w-full my-9'>
-            <Title text='Mi perfil' />
-          </div>
-          <form onSubmit={formConfig.handleSubmit}>
-            <div className={classes.admin__form}>
-              <div className={classes.admin__form__container}>
-                <div className={classes.admin__form__container__header}>
-                  <TypographyUI title='Datos personales' />
-                  {/* <label htmlFor='contained-button-file'>
-                  <div className={classes.admin__form__container__header__avatar}>
-                    <Input
-                      name='avatar'
-                      accept='image/*'
-                      type='file'
-                      id='contained-button-file'
-                      className={classes.admin__form__container__header__avatar__input}
-                      onChange={formConfig.handleChange}
-                    />
-                    <Avatar
-                      alt='Remy Sharp'
-                      src='https://api.lorem.space/image/face?w=150&h=150'
-                      sx={{ width: 74, height: 74 }}
-                    />
-                    <div className={classes.admin__form__container__header__avatar__icon}>
-                      <Icon id='MdOutlineCameraAlt' />
-                    </div>
-                  </div>
-                </label> */}
-                </div>
-                <div className='row'>
-                  {labelsUser.map((field, i) => (
-                    <div className='flex-lg-6 flex-sm-12'>
-                      <TextField key={i} field={field} formik={formConfig} />
-                    </div>
-                  ))}
-                  {/* <div className='w-full'>
-                  <div className='flex-lg-6 flex-sm-12'>
-                    <InptSelectUI
-                      fullWidth
-                      select
-                      label='Cargo'
-                      value={cargoOrg}
-                      onChange={handleChange}
-                    >
-                      {cargo.map((option, index) => (
-                        <MenuItem key={option.value} value={option.value}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                    </InptSelectUI>
-                  </div>
-                </div> */}
-                </div>
-              </div>
-              {/* <div className={classes.admin__form__container}>
-              <TypographyUI title='Datos Organización' />
-              <div className='row'>
-                {adminFieldsOrg.map((field) => (
-                  <div className={`${field.id === 'nom_comercial' ? 'flex-lg-12 flex-sm-12' : 'flex-lg-6 flex-sm-12'}`}>
-                    <TextField key={field.id} field={field} formik={formConfig} />
-                  </div>
-                ))}
-                <div className='flex-lg-12 flex-sm-12'>
-                  <TextAreaUI
-                    minRows={3}
-                    placeholder='Descripción'
-                  />
-                </div>
-              </div>
-            </div> */}
-            </div>
-            <div className={classes.admin__form__container__button}>
-              <div className='row'>
-                <div className='flex-lg-3 flex-sm-12'>
-                  <Button type='submit' styles='primary'>
-                    Guardar
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-      ) : (null)}
 
-    </div>
+  return (
+    <>
+      <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important' }}>
+        <div className={classes.main__admin}>
+          {user && Object.keys(user).length > 0 && loadingUser === false ? (
+            <div className={classes.admin}>
+              <div className='w-full mb-5'>
+                <Title text='Mi perfil' />
+              </div>
+              <div className={classes.admin__form}>
+                <form onSubmit={formConfig.handleSubmit}>
+                  <div className={classes.admin__form__container}>
+                    <div className={classes.admin__form__container__header}>
+                      <div className='font-fs-joey fs__36 font-weight-bold text__primary'>Datos personales</div>
+                      <div className='fs__16 text__gray__gray_darken ls_05'>
+                        <span className='text-uppercase font-weight-semi-bold'>Fecha de registro:</span>
+                        <span className='fs'>12/05/2022</span>
+                      </div>
+                    </div>
+                    <div className='row'>
+                      {labelsUser.map((field) => (
+                        <div className='flex-lg-6 flex-sm-12'>
+                          <Input key={field.id} field={field} formik={formConfig} />
+                        </div>
+                      ))}
+                      <div className='flex-lg-3 flex-sm-12 display_flex align_items__bottom justify_content__end ml-auto mb-2'>
+                        <Button
+                          type='submit'
+                          styles='primary'
+                        >
+                          Guardar
+                        </Button>
+                      </div>
+                    </div>
+                    <div className='row align_items__center mt-4 justify_content__between'>
+                      <div className='flex-lg-6 flex-sm-12'>
+                        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+                        <div
+                          className='fs__16 text__primary ls_05 text-uppercase font-weight-bold ml-3 cpointer'
+                          onClick={() => setDisplayRestorePassword(!displayRestorePassword)}
+                        >
+                          Restablecer password
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <div className={classes.admin__form__container}>
+                  <RestorePassword userEmail={user?.properties?.email} display={displayRestorePassword} />
+                </div>
+              </div>
+            </div>
+          ) : (null)}
+
+        </div>
+        <div className={classes.main__suscription}>
+          <Suscriptions user={user} suscriptions={suscripcionsUser} title='Suscripciones' />
+        </div>
+      </Container>
+
+      {/* <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important' }}>
+
+      </Container> */}
+    </>
   );
 }
 

@@ -1,170 +1,212 @@
-/* eslint-disable consistent-return */
-/* eslint-disable react/no-unstable-nested-components */
-import React from 'react';
-import { Container, IconButton, Chip, Menu, MenuItem, ListItemText, ListItemIcon } from '@mui/material';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+import React, { useEffect } from 'react';
+
+import { Container, TableHead, TableRow, TableCell, Table, TableContainer, TableBody, Card, Grid } from '@mui/material';
+
+import { useDispatch, useSelector } from 'react-redux';
+
 import { useNavigate } from 'react-router-dom';
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
-import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
-import RemoveRedEyeSharpIcon from '@mui/icons-material/RemoveRedEyeSharp';
-import EditSharpIcon from '@mui/icons-material/EditSharp';
-import DeleteOutlineSharpIcon from '@mui/icons-material/DeleteOutlineSharp';
-import DataGridMUI from '../components/common/DataGridMUI/DataGridMUI';
+
 import Title from '../components/Title/Title';
-import jsonApis from '../data-table.json';
+import Spinner from '../components/Spinner';
+import SearchInput from '../components/Input/SearchInput';
+import InputResponse from '../components/Input/InputUI/InputResponse';
+import Icon from '../components/MdIcon/Icon';
+
+import useSearch from '../hooks/useSearch';
+
+import { filterProductsByDescription, filterProductsByName, listProducts, searchProducts, getProductosNext, getProductPrevious, resetProduct } from '../redux/actions/productsAction';
+
+import classes from '../styles/pages/app.module.scss';
 
 function Apps(props) {
+  const { products, spinner, productsSkip } = useSelector((state) => state.products);
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const headers = [
-    {
-      name: 'APP',
-      selector: (row) => row.app,
-      sortable: true,
+
+  const { formik } = useSearch({
+    initialState: {
+      search: '',
+      name: '',
+      description: '',
     },
-    {
-      name: 'ENTORNOS',
-      selector: (row) => row.enviroment,
-      sortable: true,
-    },
-    {
-      name: 'APIS',
-      selector: (row) => row.apis,
-      sortable: true,
-    },
-    {
-      name: 'TRÁFICO 24H',
-      selector: (row) => row.traffic,
-      sortable: true,
-    },
-    {
-      name: 'ORGANIZACIÓN',
-      selector: (row) => row.company,
-      sortable: true,
-    },
-    {
-      name: 'FECHA DE CREACIÓN',
-      selector: (row) => row.creationDate,
-      sortable: true,
-    },
-    {
-      name: 'ÚLTIMA MODIFICACIÓN',
-      selector: (row) => row.lastModification,
-      sortable: true,
-    },
-    {
-      name: 'ESTADO',
-      selector: (row) => row.status,
-      sortable: true,
-      cell: (row) => {
-        if (row.status.toUpperCase() === 'SOLICITADO') {
-          return (
-            <Chip
-              color='secondary'
-              icon={<FiberManualRecordIcon sx={{ fontSize: '16px' }} />}
-              label={row.status.toUpperCase()}
-              sx={{
-                background: 'rgba(241, 180, 52, 0.10)',
-                color: '#F1B434',
-                fontWeight: '700',
-                fontSize: '0.625rem',
-                letterSpacing: '0.8 px',
-              }}
-            />
-          );
-        } if (row.status.toUpperCase() === 'APROBADO') {
-          return (
-            <Chip
-              color='primary'
-              icon={<FiberManualRecordIcon sx={{ fontSize: '16px' }} />}
-              label={row.status.toUpperCase()}
-              sx={{
-                background: 'rgba(152, 215, 0, 0.10)',
-                color: '#97D700',
-                fontWeight: '700',
-                fontSize: '0.625rem',
-                letterSpacing: '0.8 px',
-              }}
-            />
-          );
-        }
-      },
-    },
-    {
-      cell: (row) => {
-        const [anchorEl, setAnchorEl] = React.useState(null);
-        const open = Boolean(anchorEl);
-        const handleClick = (event) => {
-          setAnchorEl(event.currentTarget);
-        };
-        const handleClose = () => {
-          setAnchorEl(null);
-          navigate(`/apps/${row.id}`);
-          localStorage.setItem('id', row.id);
-        };
-        return (
-          <>
-            <IconButton
-              sx={{
-                borderRadius: '6px',
-                padding: '1px',
-                background: '#ECF0F1',
-              }}
-              onClick={handleClick}
-            >
-              <MoreHorizIcon />
-            </IconButton>
-            <Menu
-              id='basic-menu'
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                'aria-labelledby': 'demo-customized-button',
-              }}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-            >
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <RemoveRedEyeSharpIcon />
-                </ListItemIcon>
-                <ListItemText>
-                  Ver App
-                </ListItemText>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <EditSharpIcon />
-                </ListItemIcon>
-                <ListItemText>
-                  Editar App
-                </ListItemText>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <ListItemIcon>
-                  <DeleteOutlineSharpIcon />
-                </ListItemIcon>
-                <ListItemText>
-                  Eliminar App
-                </ListItemText>
-              </MenuItem>
-            </Menu>
-          </>
-        );
-      },
-    },
-  ];
-  const data = jsonApis;
+  });
+
+  useEffect(() => {
+    if (formik.values.search.trim().length >= 3) {
+      dispatch(searchProducts(formik.values.search));
+    }
+    if (formik.values.name.trim().length >= 3) {
+      dispatch(filterProductsByName(formik.values.name));
+    }
+
+    if (formik.values.description.trim().length >= 3) {
+      dispatch(filterProductsByDescription(formik.values.description));
+    }
+
+    if (formik.values.search.trim().length === 0 && formik.values.name.trim().length === 0 && formik.values.description.trim().length === 0) {
+      dispatch(listProducts());
+    }
+  }, [formik.values.search, formik.values.name, formik.values.description]);
+
+  useEffect(() => {
+    if (products && Object.keys(products).length === 0 && productsSkip === 0) {
+      dispatch(listProducts());
+    }
+
+  }, [dispatch, products]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetProduct());
+    };
+  }, []);
+
+  const handleClickRow = (id) => {
+    navigate(`/products/${id}`);
+  };
+
+  const handleNextProduct = (url) => {
+    dispatch(getProductosNext(url));
+  };
+
+  const handlePreviousProduct = () => {
+    dispatch(getProductPrevious());
+  };
+
   return (
-    <Container fixed className='my-10 py-10'>
-      <Title text='Apps' />
-      <DataGridMUI headers={headers} data={data} paginationPerPage={20} />
+    <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 2fr))', alignItems: 'center' }}>
+        <div>
+          <Title text='Productos' />
+        </div>
+        <div>
+          <SearchInput
+            name='search'
+            type='text'
+            placeholder='Buscar'
+            icon
+            onChange={(e) => {
+              formik.handleChange(e);
+              formik.setFieldValue('description', '');
+              formik.setFieldValue('name', '');
+            }}
+            value={formik.values.search}
+          />
+        </div>
+      </div>
+      { spinner ? (
+        <Spinner styles={{ height: '500px' }} title='Cargando...' />
+      ) : (
+        <div>
+          <Card sx={{ borderRadius: '20px', marginTop: '20px', padding: '35px 47px 43px 41px', marginBottom: '15px', width: '100%' }}>
+            <Grid item sx={{ marginBottom: '31px' }} xs={12}>
+              <TableContainer>
+                <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell style={{ width: '100px' }} size='small'>
+                        <>
+                          <div className={classes.cell_title}>
+                            <h2>Nombre</h2>
+                            <Icon id='MdExpandMore' />
+                          </div>
+                          <div style={{ height: '36px', marginTop: '14px' }}>
+                            <InputResponse
+                              name='name'
+                              type='text'
+                              label='Buscar Nombre'
+                              onChange={(e) => {
+                                formik.handleChange(e);
+                                formik.setFieldValue('description', '');
+                                formik.setFieldValue('search', '');
+                              }}
+                              value={formik.values.name}
+                            />
+                          </div>
+                        </>
+                      </TableCell>
+                      <TableCell>
+                        <>
+                          <div className={classes.cell_title}>
+                            <h2>Descripcion</h2>
+                            <Icon id='MdExpandMore' />
+                          </div>
+                          <div style={{ height: '36px', marginTop: '14px' }}>
+                            <InputResponse
+                              name='description'
+                              type='text'
+                              label='Buscar Descripcion'
+                              onChange={(e) => {
+                                formik.handleChange(e);
+                                formik.setFieldValue('name', '');
+                                formik.setFieldValue('search', '');
+                              }}
+                              value={formik.values.description}
+                            />
+                          </div>
+                        </>
+                      </TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {products && Object.keys(products).length > 0 ? (
+                      <>
+                        {products.value.map((row) => (
+                          <TableRow
+                            key={row.name}
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer', zIndex: 6 }}
+                            onClick={() => handleClickRow(row.name)}
+                          >
+                            <TableCell component='th' scope='row'>
+                              <p className={classes.cell_name}>{row.name}</p>
+                            </TableCell>
+                            <TableCell>
+                              <p className={classes.cell_description}>
+                                {row.properties.description}
+                              </p>
+                            </TableCell>
+                          </TableRow>
+                        ))}
+                      </>
+                    ) : (null)}
+
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </Grid>
+            <Grid item xs={12}>
+              <Grid container direction='row' justifyContent='space-between'>
+                <Grid xs={3}>
+                  {productsSkip > 0 ? (
+                    <div onClick={() => handlePreviousProduct()} className={classes.pagination}>
+                      <div className={classes.pagination__icon}>
+                        <Icon id='MdNavigateBefore' />
+                      </div>
+                      <p>Anterior</p>
+                    </div>
+
+                  ) : (null)}
+                </Grid>
+                <Grid xs={1}>
+                  {products.nextLink !== undefined ? (
+                    <div onClick={() => handleNextProduct(products.nextLink)} className={classes.pagination}>
+                      <p className={classes.next}>Siguiente</p>
+                      <div className={classes.pagination__icon}>
+                        <Icon id='MdNavigateNext' />
+                      </div>
+                    </div>
+
+                  ) : (null)}
+                </Grid>
+              </Grid>
+            </Grid>
+
+          </Card>
+        </div>
+      )}
+
     </Container>
   );
 }

@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { HashLink } from 'react-router-hash-link';
 
+import moment from 'moment';
+
+import _ from 'underscore';
+
 import Item from '../components/Item/Item';
 import classes from '../styles/pages/home.module.scss';
 import Icon from '../components/MdIcon/Icon';
@@ -12,23 +16,41 @@ import CardSlider from '../components/Card/CardSlider';
 import BannerCentered from '../components/Banner/BannerCentered';
 import Tabs from '../components/Tabs/Tabs';
 import Button from '../components/Buttons/Button';
-// import Carousel from '../components/Carousel/Carousel';
 import Slider from '../components/Slider/Slider';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
 import textureCircles from '../static/img/texture_circles.svg';
 import textureCirclesAlt from '../static/img/texture_circles_alt.svg';
 import { getHome } from '../redux/actions/homeAction';
+import { getBlogs } from '../redux/actions/blogAction';
+import { getLibraries } from '../redux/actions/libraryAction';
+
 import Slick from '../components/SlickSlider/Slick';
+
+moment.locale('es');
 
 function Home({ setIsOpen }) {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.demo);
+  const { blogs } = useSelector((state) => state.blog);
+  const { libraries } = useSelector((state) => state.library);
 
   useEffect(() => {
     if (data && Object.keys(data).length === 0) {
       dispatch(getHome());
     }
   }, []);
+
+  useEffect(() => {
+    if (blogs && blogs.length === 0) {
+      dispatch(getBlogs());
+    }
+  }, [dispatch, blogs]);
+
+  useEffect(() => {
+    if (libraries && libraries.length === 0) {
+      dispatch(getLibraries());
+    }
+  }, [libraries]);
 
   // Load Slider
   const filterSlider = data && data.contentSections ? data.contentSections.filter((item) => item.__component === 'sura.carousel') : [];
@@ -77,55 +99,26 @@ function Home({ setIsOpen }) {
   const filterHomeBannerNameButtom = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].buttons ? filterHomeBanner[0].buttons[0].name : '';
   const filterHomeBannerNameType = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].buttons ? filterHomeBanner[0].buttons[0].type : '';
 
-  // TODO: Reemplazar DataFake
-  const slidesNew = [
-    {
-      img: 'https://picsum.photos/id/0/370/240',
-      title: 'tenetur magnam illo',
-      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-      linkText: 'Conoce más',
-      route: '/apis',
-    },
-    {
-      img: 'https://picsum.photos/id/1/370/240',
-      title: 'tenetur magnam illo',
-      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-      linkText: 'Conoce más',
-      route: '/apis',
-    },
-    {
-      img: 'https://picsum.photos/id/1031/370/240',
-      title: 'tenetur magnam illo',
-      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-      linkText: 'Conoce más',
-      route: '/apis',
-    },
-    {
-      img: 'https://picsum.photos/id/1066/370/240',
-      title: 'tenetur magnam illo',
-      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-      linkText: 'Conoce más',
-      route: '/apis',
-    },
-    {
-      img: 'https://picsum.photos/id/1078/370/240',
-      title: 'tenetur magnam illo',
-      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-      linkText: 'Conoce más',
-      route: '/apis',
-    },
-    {
-      img: 'https://picsum.photos/id/1079/370/240',
-      title: 'tenetur magnam illo',
-      description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-      linkText: 'Conoce más',
-      route: '/apis',
-    },
-  ];
+  const datanews = blogs.length > 0 ? _.sortBy(blogs, (m) => {
+    return moment(m.created_at).toDate().getTime();
+  }) : [];
 
-  const handleOpenModal = () => {
-    setIsOpen(true);
-  };
+  const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
+    const itemData = {
+      img: item.image[0].url,
+      title: item.title,
+      description: item.description,
+      linkText: 'Conoce más',
+      route: `/blog/${item.id}#blogDetail`,
+    };
+    return itemData;
+  }) : [];
+
+  const random = Math.floor(Math.random() * libraries.length);
+  const random2 = Math.floor(Math.random() * libraries.length);
+  const random3 = Math.floor(Math.random() * libraries.length);
+
+  const apisNews = libraries.length > 0 ? [libraries[random], libraries[random2], libraries[random3]] : [];
 
   return (
     <div style={{ paddingTop: '114px' }}>
@@ -243,10 +236,10 @@ function Home({ setIsOpen }) {
             </div>
             <div className='row d-xs-none'>
               {
-                filterDiscover && filterDiscover[0].useCaseList && filterDiscover[0].useCaseList.length > 0 ? (
-                  filterDiscover[0].useCaseList.map((card, i) => (
+                apisNews && apisNews.length > 0 ? (
+                  apisNews.map((card, i) => (
                     <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
-                      <CardBasic chipTitle={card.statusText} title={card.title} description={card.description} info={card.linkText} route={handleOpenModal} />
+                      <CardBasic chipTitle={card.status && card.status === 'Publicado' ? 'GET' : 'POST'} title={card.title} description={card.description} info='MÁS INFORMACIÓN' url={`/api/${card.id}#api`} />
                     </div>
                   ))
                 ) : (null)
@@ -350,14 +343,14 @@ function Home({ setIsOpen }) {
             <div className='container'>
               <div className='row'>
                 <div className='flex-md-12 flex-sm-12'>
-                  <Slick slides={slidesNew} setIsOpen={setIsOpen} />
+                  <Slick slides={slidesNew} />
                 </div>
               </div>
             </div>
             <div className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
                 <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
-                  <HashLink smooth to='/apis#apiHome'>
+                  <HashLink smooth to='/blog#blogIndex'>
                     <div>Ver Más</div>
                   </HashLink>
                 </div>

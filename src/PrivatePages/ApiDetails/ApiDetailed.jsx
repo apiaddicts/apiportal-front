@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import React, { useState, useEffect } from 'react';
 
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -9,93 +9,80 @@ import { Box, Container } from '@mui/material';
 
 import Title from '../../components/Title/Title';
 import AccordionFilter from '../../components/Accordion/AccordionFilter';
-import Accordion from '../../components/Accordion/Accordion';
+import SkeletonComponent from '../../components/SkeletonComponent/SkeletonComponent';
 
-import { getLibrary, resetGetLibrary } from '../../redux/actions/libraryAction';
+import { getApi, resetApiDetailed } from '../../redux/actions/libraryAction';
+import CustomAccordion from '../../components/common/CustomAccodion/CustomAccordion';
+import Icon from '../../components/MdIcon/Icon';
+
+import classes from './apidetailed.module.scss';
 
 function ApiDetails(props) {
-  const { library } = useSelector((state) => state.library);
+  const { api } = useSelector((state) => state.library);
 
   const params = useParams();
   const dispatch = useDispatch();
 
-  const [active, setActive] = useState({ filter: false, item: null, status: false });
-  const [endpoint, setEndpoint] = useState({ filter: false, item: null, status: false });
-  const infoApi = [
-    {
-      title: 'Información API',
-      questions: ['Información', 'Descripción', 'Versiones', 'Condiciones de Uso', 'Sandbox', 'Autenticación'],
-    },
-  ];
-  const endPoints = [
-    {
-      title: 'Endpoints',
-      questions: [
-        { method: 'GET', subtitle: 'rerum laudantium rerum' },
-        { method: 'POST', subtitle: 'dolorum est sequi' },
-        { method: 'PUSH', subtitle: 'velit voluptatem fugit' },
-        { method: 'DEL', subtitle: 'rerum nam aut' },
-      ],
-    },
-  ];
+  const [clicked, setClicked] = useState(0);
+  const [subItem, setSubItem] = useState(0);
+
+  const infoApi = [{
+    title: 'Información API',
+    questions: [
+      'Información',
+      'Descripción',
+      'Versiones',
+      'Autenticación',
+    ],
+  }];
 
   useEffect(() => {
-
-    if (params.id && library && Object.keys(library).length === 0) {
-      dispatch(getLibrary(params.id));
+    if (params.id && api && Object.keys(api).length === 0) {
+      dispatch(getApi(params.id));
     }
+  }, [dispatch, api]);
 
+  useEffect(() => {
     return () => {
-      dispatch(resetGetLibrary());
+      dispatch(resetApiDetailed());
     };
   }, []);
 
   return (
-    <Container fixed className='my-10 py-10'>
-      <Title text={library.title ? library.title : ''} />
-      <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 4fr', gap: '3rem', alignItems: 'baseline' }}>
-        <div>
-          <AccordionFilter items={infoApi} active={active} setActive={setActive} />
-          <AccordionFilter items={endPoints} active={endpoint} setActive={setEndpoint} />
-        </div>
-        <div>
-          {
-            !endpoint.status && (
-              infoApi.map((item, index) => (
-                <div key={index}>
-                  {
-                    item.questions.map((subTitle, subindex) => (
-                      <Accordion key={subindex} title={subTitle} active={active} setActive={setActive} />
-                    ))
-                  }
-                </div>
-              ))
-            )
-          }
-          {
-            endpoint.status && (
-              endPoints.map((item, index) => (
-                <div key={index}>
-                  {
-                    item.questions.map((subTitle, subindex) => {
-                      if (Object.hasOwn(subTitle, 'method')) {
-                        return (
-                          <Accordion key={subindex} title={subTitle.subtitle} active={endpoint} setActive={setEndpoint} />
-                        );
-                      } if (!Object.hasOwn(subTitle, 'method')) {
-                        return (
-                          <Accordion key={subindex} title={subTitle} active={endpoint} setActive={setEndpoint} />
-                        );
-                      }
-                    })
-                  }
-                </div>
-              ))
-            )
-          }
-        </div>
-      </Box>
-    </Container>
+    <>
+      <div className={classes.back__btn}>
+        <Link to={-1}>
+          <div className={classes.return}>
+            <div>
+              <Icon id='MdKeyboardBackspace' />
+            </div>
+            <span>VOLVER</span>
+          </div>
+        </Link>
+      </div>
+      <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>
+        {api && Object.keys(api).length > 0 ? (
+          <div>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+              <Title text={api.properties.displayName ? api.properties.displayName : 'Demo API'} />
+              <Link to={`/apiBookstores/try/${api.name}`} style={{ background: '#E3E829', borderRadius: '100px', padding: '12px 1rem', width: '97px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontWeight: '700', fontSize: '1rem', letterSpacing: '0.8px', color: '#0033A0' }}>
+                <span>Try it</span>
+                <Icon id='MdChevronRight' />
+              </Link>
+            </Box>
+            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 4fr', gap: '3rem', alignItems: 'baseline' }}>
+              <div>
+                <AccordionFilter items={infoApi} clicked={clicked} setClicked={setClicked} subItem={subItem} setSubItem={setSubItem} />
+                {/* <AccordionFilter items={endPoints} clicked={clicked} setClicked={setClicked} /> */}
+              </div>
+              <div>
+                <CustomAccordion items={api} subItem={subItem} setSubItem={setSubItem} />
+              </div>
+            </Box>
+          </div>
+        ) : (<SkeletonComponent />)}
+      </Container>
+    </>
   );
 }
 

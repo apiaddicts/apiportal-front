@@ -16,7 +16,6 @@ import { AppBar, Box, Button, Menu, MenuItem, Toolbar } from '@mui/material';
 import { ChevronLeft } from '@mui/icons-material';
 import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSharp';
-import SearchIcon from '@mui/icons-material/Search';
 import LogoutIcon from '@mui/icons-material/Logout';
 import classes from './sliderdrawer.module.scss';
 import SuraLogoAlt from '../../static/img/sura_logo_alt.svg';
@@ -25,9 +24,9 @@ import { logout } from '../../redux/actions/userAction';
 
 function SidebarDrawer({ children, user }) {
   const listItems = [
-    { route: '/apps', text: 'Apps', icon: <Terminal /> },
-    { route: '/newApp', text: 'Nueva App', icon: <Terminal /> },
-    { route: '/ApiLibrary', text: 'Biblioteca de APIs', icon: <Settings /> },
+    { route: '/products', text: 'Productos', icon: <Terminal /> },
+    { route: '/apiBookstores', text: 'Biblioteca de APIs', icon: <Settings /> },
+    { route: '/subscriptions', text: 'Suscripciones', icon: <Terminal /> },
   ];
 
   const dispatch = useDispatch();
@@ -52,6 +51,7 @@ function SidebarDrawer({ children, user }) {
 
   return (
     <div className={classes.backgroundSidebar}>
+      {/* <CssBaseline /> */}
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position='fixed' elevation={0} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: '#0033a0', padding: '0 100px' }}>
           <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -107,7 +107,6 @@ function SidebarDrawer({ children, user }) {
                   </ListItemText>
                 </MenuItem>
               </Menu>
-              <SearchIcon />
             </Box>
           </Toolbar>
         </AppBar>
@@ -115,8 +114,9 @@ function SidebarDrawer({ children, user }) {
       <Drawer
         variant='permanent'
         sx={{
-          width: '388px',
+          width: '300px',
         }}
+
       >
         <List
           sx={{ paddingRight: '80px' }}
@@ -208,7 +208,7 @@ function SidebarDrawer({ children, user }) {
   );
 }
 function MyNavLink(props) {
-  return <NavLink {...props} activeclassname='active' />;
+  return <NavLink {...props} activeClassName='active' />;
 }
 
 export default SidebarDrawer;

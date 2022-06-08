@@ -6,7 +6,6 @@ import Input from '../../Input';
 import useFormConfig from '../../../hooks/useForm';
 import Button from '../../Buttons/Button';
 import { fieldsRegister } from '../fields';
-
 import { signUp } from '../../../redux/actions/userAction';
 
 import './index.scss';
@@ -20,10 +19,10 @@ function CreateAccount() {
         email: values.email,
         firstName: values.first_name,
         lastName: values.last_name,
-        appType: 'portal',
+        appType: 'developerPortal',
         confirmation: 'signup',
         password: values.password,
-        notify: true,
+        state: 'pending',
       },
     };
 
@@ -37,19 +36,31 @@ function CreateAccount() {
       className='create-account'
       onSubmit={formConfig.handleSubmit}
     >
-      {fieldsRegister.map((field) => (
-        <div className='mb-2'>
-          <Input footer key={field.id} field={field} formik={formConfig} />
+      {fieldsRegister.filter((item) => item.type !== 'checkbox').map((field, index) => (
+        <div className='mb-2' key={index}>
+          <Input key={field.id} field={field} formik={formConfig} />
         </div>
       ))}
       {/* checkbox */}
       <div className='container create-account__checkbox'>
-        <input type='checkbox' id='checkbox' />
-        <span>
+        {
+          fieldsRegister.filter((field) => field.type === 'checkbox')
+            .map((field, index) => (
+              <input
+                key={index}
+                type={field.type}
+                id={field.id}
+                name={field.name}
+                value={field.value}
+                checked={formConfig.values.remember}
+                onChange={formConfig.handleChange}
+              />
+            ))
+        }
+        <span className={`ml-2 ${formConfig.errors.terms ? 'text__error' : ''}`}>
           Acepto recibir correos de acuerdo con los siguientes
           {' '}
-          <span className='text-bold'>términos y condiciones</span>
-          .
+          <b>términos y condiciones.</b>
         </span>
       </div>
       <div className='end-create-btn'>

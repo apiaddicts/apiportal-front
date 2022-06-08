@@ -7,10 +7,17 @@ const initialState = token && etag ? {
   id: token.id,
   token: token.token,
   etag: etag.etag,
-  loadinSignUp: false,
+  loadingSignUp: false,
   signUpData: {},
   user: {},
   loadingUser: false,
+  responseError: {},
+  responseRestoreError: {},
+  responseResetSignup: {},
+  responseResetPwd: {},
+  responseResetPwdError: {},
+  accountVerificationSent: false,
+  accountVerified: false,
 } : {
   user: {},
   loadingUser: false,
@@ -19,6 +26,13 @@ const initialState = token && etag ? {
   etag: '',
   loadingSignUp: false,
   signUpData: {},
+  responseError: {},
+  responseRestoreError: {},
+  responseResetSignup: {},
+  responseResetPwd: {},
+  responseResetPwdError: {},
+  accountVerificationSent: false,
+  accountVerified: false,
 };
 
 // eslint-disable-next-line default-param-last
@@ -44,6 +58,40 @@ export default function userReducer(state = initialState, action) {
         loadingSignUp: false,
         signUpData: action.response,
       };
+    case userConstants.SIGNUP_FAILURE:
+      return {
+        ...state,
+        loadingSignUp: false,
+        responseError: action.error,
+      };
+    case userConstants.RESTORE_SIGNUP_FAILURE:
+      return {
+        ...state,
+        loadingSignUp: false,
+        responseRestoreError: action.response,
+      };
+    case userConstants.RESET_SIGNUP:
+      return {
+        ...state,
+        loadingSignUp: false,
+        responseResetSignup: action.response,
+      };
+    case userConstants.CONFIRM_ACCOUNT_REQUEST:
+      return {
+        ...state,
+        accountVerificationSent: true,
+      };
+    case userConstants.CONFIRM_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        accountVerified: true,
+      };
+    case userConstants.CONFIRM_ACCOUNT_FAILURE:
+      return {
+        ...state,
+        accountVerified: false,
+        error: action.error,
+      };
     // login user
     case userConstants.GET_USER_REQUEST:
       return {
@@ -62,13 +110,41 @@ export default function userReducer(state = initialState, action) {
         id: action.id,
         token: action.token,
       };
+    case userConstants.LOGIN_FAILURE:
+      return {
+        ...state,
+        loadingSignUp: false,
+        responseError: action.error,
+      };
     // save entity tag
     case userConstants.HEAD_ETAG_SUCCESS:
       return {
         ...state,
         etag: action.response.etag,
       };
-      // logout
+    case userConstants.RESET_PASSWORD_TICKET_SUCCESS:
+      return {
+        ...state,
+        loadingSignUp: false,
+        responseResetPwd: action.response,
+      };
+    case userConstants.RESET_PASSWORD_TICKET_FAILURE:
+      return {
+        ...state,
+        loadingSignUp: false,
+        responseResetPwdError: action.response,
+      };
+    // logout
+    case userConstants.RESET_ALERT:
+      return {
+        ...state,
+        responseError: {},
+        responseRestoreError: {},
+        responseResetSignup: {},
+        ResponseResetPwd: {},
+        responseResetPwdError: {},
+        signUpData: {},
+      };
     case userConstants.LOGOUT_USER:
       return {
         ...state,
@@ -76,6 +152,12 @@ export default function userReducer(state = initialState, action) {
         token: '',
         etag: '',
         user: {},
+        signUpData: {},
+        responseError: {},
+        responseRestoreError: {},
+        responseResetSignup: {},
+        ResponseResetPwd: {},
+        responseResetPwdError: {},
       };
     default:
       return state;
