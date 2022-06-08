@@ -81,7 +81,7 @@ function Apps(props) {
         <div>
           <Title text='Productos' />
         </div>
-        <div>
+        <div className='margin_top'>
           <SearchInput
             name='search'
             type='text'
