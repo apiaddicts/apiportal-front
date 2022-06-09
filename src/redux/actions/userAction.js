@@ -40,16 +40,13 @@ export const confirmAccount = (queryParams, setIsOpen) => (dispatch) => {
   });
   userService.confirmAccount(queryParams).then(
     (response) => {
-      console.log(response, store.getState().user.accountVerificationSent);
       if (response.status === 204) {
         dispatch({
           type: userConstants.CONFIRM_ACCOUNT_SUCCESS,
         });
-        setTimeout(() => {
-          dispatch(getUser(response));
-          dispatch(getUserEntityTag(response));
-          dispatch({ type: userConstants.RESET_ALERT });
-        }, 3000);
+        dispatch(getUser(response));
+        dispatch(getUserEntityTag(response));
+        dispatch({ type: userConstants.RESET_ALERT });
       } else {
         dispatch({
           type: userConstants.CONFIRM_ACCOUNT_FAILURE,
