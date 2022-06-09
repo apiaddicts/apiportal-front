@@ -304,7 +304,7 @@ function Blog({ setIsOpen }) {
                 <div className={`container ${classes.section__news__showmore}`}>
                   <div className='row justify-center'>
                     <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center'>
-                      <HashLink smooth to='/apis#apiHome'>
+                      <HashLink smooth to='/blog#blogIndex'>
                         <div>Ver más</div>
                       </HashLink>
                     </div>

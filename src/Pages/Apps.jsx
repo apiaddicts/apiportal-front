@@ -64,7 +64,7 @@ function Apps(props) {
   }, []);
 
   const handleClickRow = (id) => {
-    navigate(`/products/${id}`);
+    navigate(`/dashboard/products/${id}`);
   };
 
   const handleNextProduct = (url) => {

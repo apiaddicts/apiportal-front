@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import { HashLink } from 'react-router-hash-link';
+
 import moment from 'moment';
 
 import _ from 'underscore';
@@ -72,7 +74,7 @@ function ApiDetails({ setIsOpen }) {
     const data = {
       label: item.name,
       class: item.class,
-      link: item.link !== '' ? `/api/${params.id}#contact` : '',
+      link: item.link !== '' ? `/api-detail/${params.id}#contact` : '',
     };
 
     return data;
@@ -123,7 +125,7 @@ function ApiDetails({ setIsOpen }) {
               buttons={buttonsLbls}
               setIsOpen={setIsOpen}
               css_styles={{ 'image_display': 'banner_custom__img--dnone', 'apiindividual_height': 'banner_apiindividual__layout--height', 'custom_line_height': 'line-height-1' }}
-              redirect='/apis'
+              redirect='/api-collection'
               description='In egestas blandit felis id porttitor. Mauris vel nibh ex. Integer iaculis placerat nunc, in ultricies nunc dignissim eu. '
             />
           </section>
@@ -235,7 +237,7 @@ function ApiDetails({ setIsOpen }) {
                         title={card.title}
                         description={card.description}
                         info='MÁS INFORMACIÓN'
-                        url={`/api/${card.id}#api`}
+                        url={`/api-detail/${card.id}#api`}
                         route={() => handleClickPage(card.id)}
                       />
                     </div>
@@ -247,7 +249,9 @@ function ApiDetails({ setIsOpen }) {
               <div className='flex-md-12 flex-sm-12'>
                 <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
                   <div className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
-                    <span className='mr-1'>ver todas</span>
+                    <HashLink smooth to='/api-collection#apiHome'>
+                      <span className='mr-1'>ver todas</span>
+                    </HashLink>
                     <Icon id='MdOutlineEast' />
                   </div>
                   <div className={`d-sm-none ${classes.section__discover__showmore__button}`}>
@@ -290,7 +294,9 @@ function ApiDetails({ setIsOpen }) {
             <div id='contact' className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
                 <div className={`flex-lg-2 flex-md-6 flex-sm-12 text-center ${classes.custom_top}`}>
-                  <div className='text__secondary'>Ver más</div>
+                  <HashLink smooth to='/blog#blogIndex'>
+                    <div className='text__secondary'>Ver más</div>
+                  </HashLink>
                 </div>
               </div>
             </div>

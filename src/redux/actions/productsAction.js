@@ -87,9 +87,9 @@ export const filterProductAPIsByDescription = (productName, search, top = config
   });
 };
 
-export const getProductSuscripcion = (productName) => (dispatch) => {
+export const getProductSuscripcion = (productName, top = config.topSubscriptions, skip = 0) => (dispatch) => {
   dispatch({ type: productsConstants.GET_PRODUCT_SUSCRIPCION_REQUEST });
-  productsService.getProductSuscripcion(productName).then((response) => {
+  productsService.getProductSuscripcion(productName, top, skip).then((response) => {
     if (Object.keys(response).length > 0) {
       dispatch({ type: productsConstants.GET_PRODUCT_SUSCRIPCION_SUCCESS, response });
     }

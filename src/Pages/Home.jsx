@@ -194,7 +194,7 @@ function Home({ setIsOpen }) {
                   filterButtonSection[0].header.map((button, i) => (
                     <div key={i} className='mb-4'>
                       {button.isKeywordInverted ? (
-                        <HashLink smooth to='/apis#apiHome'>
+                        <HashLink smooth to='/api-collection#apiHome'>
                           <Button styles={button.keyword}>
                             {button.title}
                           </Button>

@@ -155,14 +155,6 @@ function AppsDetail(props) {
 
             {productSubscriptions && Object.keys(productSubscriptions).length > 0 && productSubscriptions.count > 0 ? (
                 <Suscriptions user={user} suscriptions={productSubscriptions} title='Suscripcion' productId={params.id}/>
-                // <>
-                //   { spinnerSubscriptions ? (
-                //       <Spinner styles={{ height: '100px' }} title='Cargando...' />
-                //   ) : (
-                //     <Suscriptions user={user} suscriptions={productSubscriptions} title='Suscripcion' productId={params.id}/>
-
-                //   )}
-                // </>
             ) : (
               null
             ) }

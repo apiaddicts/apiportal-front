@@ -3,14 +3,14 @@ import config from './config';
 
 import store from '../redux/store';
 
-function listUserSubscriptions(userId) {
+function listUserSubscriptions(userId, top = 5, skip = 0) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.url}/users/${userId}/subscriptions?api-version=${config.apiVersion}`;
+  const url = `${config.url}/users/${userId}/subscriptions?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)

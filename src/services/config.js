@@ -29,6 +29,7 @@ const config = {
   topProduct: process.env.REACT_APP_LIST_PRODUCT_TOP,
   topDetail: process.env.REACT_APP_LIST_PRODUCT_DETAIL_TOP,
   topApi: process.env.REACT_APP_LIST_API_TOP,
+  topSubscriptions: process.env.REACT_APP_LIST_SUBSCRIPTIONS,
   url: createURLSura(),
 };
 
