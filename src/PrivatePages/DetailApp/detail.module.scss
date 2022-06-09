@@ -109,14 +109,30 @@
 .form_suscriptione {
   display: flex;
   // justify-content:space-between;
+  @include breakpoint(xsl) {
+    flex-direction: column;
+  }
 
   &__input {
     width: 600px;
     margin-right: 28px;
+    height: 36px;
+    @include breakpoint(xsl) {
+      width: 100%;
+      margin-right: 0;
+      div {
+        min-width: 100%;
+      }
+    }
   }
 
   &__btn {
     width: 167px;
+    height: 36px;
+    @include breakpoint(xsl) {
+      margin-top: 15px;
+      width: 100%;
+    }
   }
 }
 

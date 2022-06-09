@@ -153,7 +153,6 @@ function AppsDetail(props) {
                 </Grid>
               </Grid>
             </Card>
-
             {productSubscriptions && Object.keys(productSubscriptions).length > 0 && productSubscriptions.count > 0 ? (
               <>
                 <div className={classes.wrapper_subscriptions__wide__display}>
@@ -175,7 +174,7 @@ function AppsDetail(props) {
                   {loadingCreateSubscription ? (
                     <Spinner styles={{ height: '100px' }} title='Cargando...' />
                   ) : (
-                    <div className={classes.form_suscriptione} style={{ height: '36px' }}>
+                    <div className={classes.form_suscriptione}>
                       <div className={classes.form_suscriptione__input}>
                         <InputResponse
                           name='suscription'
@@ -185,7 +184,7 @@ function AppsDetail(props) {
                           value={formik.values.suscription}
                         />
                       </div>
-                      <div className={classes.form_suscriptione____btn}>
+                      <div className={classes.form_suscriptione__btn}>
                         <Btn size='responsive' onClick={handleSubmitSuscription} styles={searchSuscription.length > 0 ? 'primary' : 'greey-primary'}>SUSCRIBIRME</Btn>
                       </div>
                     </div>
