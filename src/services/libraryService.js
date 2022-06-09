@@ -65,7 +65,7 @@ function getApiOpenAPI(id) {
     headers: { 'Accept': 'application/vnd.oai.openapi+json; charset=utf-8', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.url}/apis/${id}?api-version=${config.apiVersion}`;
+  const url = `${config.url}/apis/${id}?api-version=${config.apiVersion}&export=true&format=swagger`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
