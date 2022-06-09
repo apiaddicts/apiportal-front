@@ -1,5 +1,6 @@
 import libraryConstants from '../constants/libraryConstants';
 import libraryService from '../../services/libraryService';
+import config from '../../services/config';
 
 import store from '../store';
 
@@ -41,7 +42,7 @@ export const getLibrary = (id) => (dispatch) => {
   );
 };
 
-export const listApis = (top = 4, skip = 0) => (dispatch) => {
+export const listApis = (top = config.topApi, skip = 0) => (dispatch) => {
   libraryService.getApis(top, skip).then(
     (res) => {
       dispatch({
@@ -146,7 +147,7 @@ export const sortApiCollection = (sort) => (dispatch) => {
   });
 };
 
-export const searchApis = (search, top = 2, skip = 0) => (dispatch) => {
+export const searchApis = (search, top = config.topApi, skip = 0) => (dispatch) => {
   libraryService.searchApis(search, top, skip).then(
     (res) => {
       console.log(res);
@@ -248,17 +249,17 @@ export const getLibraryApiPreviosSearch = (search) => (dispatch) => {
 
 export const getLibraryApiNext = () => (dispatch) => {
   const { apisSkip } = store.getState().library;
-  const skip = apisSkip + 4;
+  const skip = apisSkip + config.topApi;
 
-  dispatch(listApis(4, skip));
+  dispatch(listApis(config.topApi, skip));
   dispatch({ type: libraryConstants.GET_LIBRARY_SKIP, skip });
 };
 
 export const getLibraryApiPrevios = () => (dispatch) => {
   const { apisSkip } = store.getState().library;
-  const skip = apisSkip - 4;
+  const skip = apisSkip - config.topApi;
 
-  dispatch(listApis(4, skip));
+  dispatch(listApis(config.topApi, skip));
   dispatch({ type: libraryConstants.GET_LIBRARY_SKIP, skip });
 };
 

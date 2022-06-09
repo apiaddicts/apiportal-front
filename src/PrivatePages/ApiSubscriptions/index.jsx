@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Container } from '@mui/material';
 import { listUserSubscriptions } from '../../redux/actions/subscriptionsAction';
 import Suscriptions from '../../components/Suscriptions';
+import SuscriptionsVertical from '../../components/SuscriptionsVertical';
 import Title from '../../components/Title/Title';
 import classes from './ApiSubscriptions.module.scss';
 
@@ -16,7 +17,7 @@ function Admin() {
     if (suscripcionsUser && Object.keys(user).length > 0 && Object.keys(suscripcionsUser).length === 0) {
       dispatch(listUserSubscriptions(user.name));
     }
-  }, [suscripcionsUser]);
+  }, []);
 
   return (
     <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>
@@ -25,7 +26,12 @@ function Admin() {
           <Title text='Suscripciones' />
         </div>
       </div>
-      <Suscriptions user={user} suscriptions={suscripcionsUser} title='' />
+      <div className={classes.wrapper_subscriptions__wide__display}>
+        <Suscriptions user={user} suscriptions={suscripcionsUser} title='' />
+      </div>
+      <div className={classes.wrapper_subscriptions__small__display}>
+        <SuscriptionsVertical user={user} suscriptions={suscripcionsUser} title='' />
+      </div>
     </Container>
   );
 }

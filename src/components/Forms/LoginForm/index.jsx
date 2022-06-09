@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import userConstants from '../../../redux/constants/userConstats';
 import Input from '../../Input';
@@ -8,12 +8,19 @@ import Alert from '../../Alert';
 
 function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin }) {
 
-  const { signUpData, responseError } = useSelector((state) => state.user);
+  const { signUpData, responseErrorLogin } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (!formik.values.remember) {
+      localStorage.removeItem('email');
+      localStorage.removeItem('password');
+    }
+  }, [formik.values.remember]);
+
   return (
     <form className='w-full px-8' onSubmit={formik.handleSubmit}>
       {
-        Object.keys(signUpData).length > 0 && Object.keys(responseError).length === 0 ?
+        Object.keys(signUpData).length > 0 && Object.keys(responseErrorLogin).length === 0 ?
           (
             <Alert
               key={Math.floor(Math.random() * 100) + 1}
@@ -23,15 +30,16 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin }) {
               msg='Para completar el registro, es necesario confirmar tu cuenta de correo'
               display={true}
             />
-          ) : (
+          ) : Object.keys(signUpData).length === 0 && Object.keys(responseErrorLogin).length > 0 ? (
             <Alert
               key={Math.floor(Math.random() * 100) + 1}
               css_styles={{ custom_padding: 'p-4', custom_margin: 'mt-4' }}
               alert_type='alert__danger'
               title='Error al iniciar sesión'
-              msg={['La información ingresada no es correcta, intenta cambiar la contraseña, si no la recuerdas puedes ir a ', <a href='#' key={Math.floor(Math.random() * 100) + 1}>olvidaste tu contraseña</a>]}
+              msg={['La información ingresada no es correcta, intenta cambiar la contraseña, si no la recuerdas puedes ir a ', <b key={Math.floor(Math.random() * 100) + 1}>olvidaste tu contraseña</b>]}
+              display={true}
             />
-          )
+          ) : (null)
       }
       <div className='my-5 w-full'>
         {

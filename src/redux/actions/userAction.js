@@ -71,6 +71,7 @@ export const logout = () => (dispatch) => {
   dispatch({
     type: userConstants.LOGOUT_USER,
   });
+  window.location = '/';
 };
 
 export const signUp = (data) => (dispatch) => {
@@ -169,7 +170,10 @@ export const verifyOldPassword = (data) => (dispatch) => {
 export const changePassword = (newPassword) => (dispatch) => {
   userService.changePassword(newPassword).then(
     (response) => {
-      dispatch(logout());
+      const passwordEncrypted = btoa(newPassword);
+      const secureKeyEncrypted = btoa(`${passwordEncrypted}:${config.rememberkey}`);
+      localStorage.setItem('password', secureKeyEncrypted);
+      // dispatch(logout());
     },
     (error) => {
       console.log('Update password error', error);
@@ -200,7 +204,12 @@ export const resetPasswordWithTicket = (queryParams, data, password) => (dispatc
             dispatch({ type: userConstants.RESET_PASSWORD_TICKET_FAILURE, response });
           }
         } else {
+          dispatch({ type: userConstants.RESET_PASSWORD_TICKET_SUCCESS, response });
           dispatch(logout());
+          setTimeout(() => {
+            console.log('redireccionar');
+            window.location = '/';
+          }, 1500);
         }
       }
     },
@@ -208,4 +217,8 @@ export const resetPasswordWithTicket = (queryParams, data, password) => (dispatc
       console.log('Reset password error', error);
     },
   );
+};
+
+export const resetAlert = () => (dispatch) => {
+  dispatch({ type: userConstants.RESET_ALERT });
 };

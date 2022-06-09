@@ -124,7 +124,6 @@ function SidebarDrawer({ children, user }) {
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(1, 3),
-    // necessary for content to be below app bar
     ...theme.mixins.toolbar,
     justifyContent: 'space-between',
   }));
@@ -357,6 +356,7 @@ function SidebarDrawer({ children, user }) {
                 fill: '#0033a0',
               },
             },
+            paddingTop: `${!toggleMenu ? '180px' : '8px'}`,
           }}
         >
           {
@@ -365,7 +365,7 @@ function SidebarDrawer({ children, user }) {
                 <ListItemIcon>
                   {item.icon}
                 </ListItemIcon>
-                <ListItemText primary={item.text} />
+                {toggleMenu && (<ListItemText primary={item.text} />)}
               </ListItem>
             ))
           }
@@ -379,7 +379,7 @@ function SidebarDrawer({ children, user }) {
             <ListItemIcon>
               <ChevronLeft />
             </ListItemIcon>
-            <ListItemText primary='Ocultar menú' />
+            {toggleMenu && (<ListItemText primary='Ocultar menú' />)}
           </ListItem>
         </List>
       </Drawer>

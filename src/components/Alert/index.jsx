@@ -5,7 +5,6 @@ import userConstants from '../../redux/constants/userConstats';
 import classes from './Alert.module.scss';
 
 function Alert({ alert_type, title, msg, css_styles, display }) {
-  console.log('title', title);
   const dispatch = useDispatch();
   const { responseError, responseRestoreError, responseResetSignup } = useSelector((state) => state.user);
   const { custom_padding, custom_margin } = css_styles;
@@ -21,7 +20,8 @@ function Alert({ alert_type, title, msg, css_styles, display }) {
     } else if (Object.keys(responseError).length > 0) {
       setShowAlert('d-block');
       if (Object.prototype.hasOwnProperty.call(responseError?.error, 'details')) {
-        setMessage(responseError?.error?.details[0]?.message);
+        // setMessage(responseError?.error?.details[0]?.message);
+        setMessage(msg);
       } else {
         setMessage(msg);
       }

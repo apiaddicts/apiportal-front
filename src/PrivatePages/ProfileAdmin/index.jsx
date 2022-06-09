@@ -10,6 +10,7 @@ import Button from '../../components/Buttons/Button';
 import Title from '../../components/Title/Title';
 import { updateUser } from '../../redux/actions/userAction';
 import Suscriptions from '../../components/Suscriptions';
+import SuscriptionsVertical from '../../components/SuscriptionsVertical';
 import RestorePassword from './containers/RestorePassword';
 
 function Admin() {
@@ -84,10 +85,10 @@ function Admin() {
                   <div className={classes.admin__form__container}>
                     <div className={classes.admin__form__container__header}>
                       <div className='font-fs-joey fs__36 font-weight-bold text__primary'>Datos personales</div>
-                      <div className='fs__16 text__gray__gray_darken ls_05'>
+                      {/* <div className='fs__16 text__gray__gray_darken ls_05'>
                         <span className='text-uppercase font-weight-semi-bold'>Fecha de registro:</span>
                         <span className='fs'>12/05/2022</span>
-                      </div>
+                      </div> */}
                     </div>
                     <div className='row'>
                       {labelsUser.map((field) => (
@@ -117,7 +118,7 @@ function Admin() {
                     </div>
                   </div>
                 </form>
-                <div className={classes.admin__form__container}>
+                <div className={`${classes.admin__form__container} margin_top`}>
                   <RestorePassword userEmail={user?.properties?.email} display={displayRestorePassword} />
                 </div>
               </div>
@@ -126,7 +127,12 @@ function Admin() {
 
         </div>
         <div className={classes.main__suscription}>
-          <Suscriptions user={user} suscriptions={suscripcionsUser} title='Suscripciones' />
+          <div className={classes.wrapper_subscriptions__wide__display}>
+            <Suscriptions user={user} suscriptions={suscripcionsUser} title='Suscripciones' />
+          </div>
+          <div className={classes.wrapper_subscriptions__small__display}>
+            <SuscriptionsVertical user={user} suscriptions={suscripcionsUser} title='Suscripciones' />
+          </div>
         </div>
       </Container>
 

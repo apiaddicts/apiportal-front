@@ -29,7 +29,7 @@ const statusCode = {
   HTTP_502_BAD_GATEWAY: 502,
 };
 
-function handleResponse(response) {
+function handleResponseResetPwd(response) {
   return response.text().then((text) => {
     const data = text && JSON.parse(text);
     switch (response.status) {
@@ -54,4 +54,4 @@ function handleResponse(response) {
   });
 }
 
-export default handleResponse;
+export default handleResponseResetPwd;

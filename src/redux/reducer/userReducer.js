@@ -12,8 +12,10 @@ const initialState = token && etag ? {
   user: {},
   loadingUser: false,
   responseError: {},
+  responseErrorLogin: {},
   responseRestoreError: {},
   responseResetSignup: {},
+  responseResetPwd: {},
   responseResetPwdError: {},
   accountVerificationSent: false,
   accountVerified: false,
@@ -26,8 +28,10 @@ const initialState = token && etag ? {
   loadingSignUp: false,
   signUpData: {},
   responseError: {},
+  responseErrorLogin: {},
   responseRestoreError: {},
   responseResetSignup: {},
+  responseResetPwd: {},
   responseResetPwdError: {},
   accountVerificationSent: false,
   accountVerified: false,
@@ -112,13 +116,19 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         loadingSignUp: false,
-        responseError: action.error,
+        responseErrorLogin: action.error,
       };
     // save entity tag
     case userConstants.HEAD_ETAG_SUCCESS:
       return {
         ...state,
         etag: action.response.etag,
+      };
+    case userConstants.RESET_PASSWORD_TICKET_SUCCESS:
+      return {
+        ...state,
+        loadingSignUp: false,
+        responseResetPwd: action.response,
       };
     case userConstants.RESET_PASSWORD_TICKET_FAILURE:
       return {
@@ -131,8 +141,10 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         responseError: {},
+        responseErrorLogin: {},
         responseRestoreError: {},
         responseResetSignup: {},
+        ResponseResetPwd: {},
         responseResetPwdError: {},
         signUpData: {},
       };
@@ -147,6 +159,7 @@ export default function userReducer(state = initialState, action) {
         responseError: {},
         responseRestoreError: {},
         responseResetSignup: {},
+        ResponseResetPwd: {},
         responseResetPwdError: {},
       };
     default:
