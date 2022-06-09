@@ -1,4 +1,5 @@
 @import "../../styles/variables.scss";
+@import '../../styles/mixins/mixin.scss';
 
 .title {
   font-size: 48px;
@@ -163,4 +164,27 @@
   position: absolute;
   top: -42px;
   left: 30px;
+}
+
+
+.wrapper_subscriptions__wide {
+  &__display{
+    display: block;
+  }
+  @include breakpoint(xsl) {
+    &__display{
+      display: none;
+    }
+  }
+}
+
+.wrapper_subscriptions__small {
+  &__display{
+    display: none;
+  }
+  @include breakpoint(xsl) {
+    &__display{
+      display: block;
+    }
+  }
 }

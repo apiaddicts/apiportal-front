@@ -16,7 +16,8 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import Title from '../../components/Title/Title';
 import Btn from '../../components/Buttons/Button';
-import Suscriptions from '../../components/Suscriptions'
+import Suscriptions from '../../components/Suscriptions';
+import SuscriptionsVertical from '../../components/SuscriptionsVertical';
 
 import Spinner from '../../components/Spinner';
 import Icon from '../../components/MdIcon/Icon';
@@ -154,15 +155,14 @@ function AppsDetail(props) {
             </Card>
 
             {productSubscriptions && Object.keys(productSubscriptions).length > 0 && productSubscriptions.count > 0 ? (
-                <Suscriptions user={user} suscriptions={productSubscriptions} title='Suscripcion' productId={params.id}/>
-                // <>
-                //   { spinnerSubscriptions ? (
-                //       <Spinner styles={{ height: '100px' }} title='Cargando...' />
-                //   ) : (
-                //     <Suscriptions user={user} suscriptions={productSubscriptions} title='Suscripcion' productId={params.id}/>
-
-                //   )}
-                // </>
+              <>
+                <div className={classes.wrapper_subscriptions__wide__display}>
+                  <Suscriptions user={user} suscriptions={productSubscriptions} title='Suscripcion' productId={params.id}/>
+                </div>
+                <div className={classes.wrapper_subscriptions__small__display}>
+                  <SuscriptionsVertical user={user} suscriptions={productSubscriptions} title='Suscripcion' productId={params.id}/>
+                </div>
+              </>
             ) : (
               null
             ) }
