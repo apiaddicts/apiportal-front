@@ -102,79 +102,98 @@ function Apps(props) {
         <div>
           <Card sx={{ borderRadius: '20px', marginTop: '20px', padding: '35px 47px 43px 41px', marginBottom: '15px', width: '100%' }}>
             <Grid item sx={{ marginBottom: '31px' }} xs={12}>
-              <TableContainer>
-                <Table sx={{ minWidth: 650 }} aria-label='simple table'>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell style={{ width: '100px' }} size='small'>
+              <div className={classes.wrapper_apps__wide__display}>
+                <TableContainer>
+                  <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+                    <TableHead>
+                      <TableRow>
+                        <TableCell style={{ width: '100px' }} size='small'>
+                          <>
+                            <div className={classes.cell_title}>
+                              <h2>Nombre</h2>
+                              <Icon id='MdExpandMore' />
+                            </div>
+                            <div style={{ height: '36px', marginTop: '14px' }}>
+                              <InputResponse
+                                name='name'
+                                type='text'
+                                label='Buscar Nombre'
+                                onChange={(e) => {
+                                  formik.handleChange(e);
+                                  formik.setFieldValue('description', '');
+                                  formik.setFieldValue('search', '');
+                                }}
+                                value={formik.values.name}
+                              />
+                            </div>
+                          </>
+                        </TableCell>
+                        <TableCell>
+                          <>
+                            <div className={classes.cell_title}>
+                              <h2>Descripcion</h2>
+                              <Icon id='MdExpandMore' />
+                            </div>
+                            <div style={{ height: '36px', marginTop: '14px' }}>
+                              <InputResponse
+                                name='description'
+                                type='text'
+                                label='Buscar Descripcion'
+                                onChange={(e) => {
+                                  formik.handleChange(e);
+                                  formik.setFieldValue('name', '');
+                                  formik.setFieldValue('search', '');
+                                }}
+                                value={formik.values.description}
+                              />
+                            </div>
+                          </>
+                        </TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {products && Object.keys(products).length > 0 ? (
                         <>
-                          <div className={classes.cell_title}>
-                            <h2>Nombre</h2>
-                            <Icon id='MdExpandMore' />
-                          </div>
-                          <div style={{ height: '36px', marginTop: '14px' }}>
-                            <InputResponse
-                              name='name'
-                              type='text'
-                              label='Buscar Nombre'
-                              onChange={(e) => {
-                                formik.handleChange(e);
-                                formik.setFieldValue('description', '');
-                                formik.setFieldValue('search', '');
-                              }}
-                              value={formik.values.name}
-                            />
-                          </div>
+                          {products.value.map((row, i) => (
+                            <TableRow
+                              key={i}
+                              sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer', zIndex: 6 }}
+                              onClick={() => handleClickRow(row.name)}
+                            >
+                              <TableCell component='th' scope='row'>
+                                <p className={classes.cell_name}>{row.name}</p>
+                              </TableCell>
+                              <TableCell>
+                                <p className={classes.cell_description}>
+                                  {row.properties.description}
+                                </p>
+                              </TableCell>
+                            </TableRow>
+                          ))}
                         </>
-                      </TableCell>
-                      <TableCell>
-                        <>
-                          <div className={classes.cell_title}>
-                            <h2>Descripcion</h2>
-                            <Icon id='MdExpandMore' />
-                          </div>
-                          <div style={{ height: '36px', marginTop: '14px' }}>
-                            <InputResponse
-                              name='description'
-                              type='text'
-                              label='Buscar Descripcion'
-                              onChange={(e) => {
-                                formik.handleChange(e);
-                                formik.setFieldValue('name', '');
-                                formik.setFieldValue('search', '');
-                              }}
-                              value={formik.values.description}
-                            />
-                          </div>
-                        </>
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {products && Object.keys(products).length > 0 ? (
-                      <>
-                        {products.value.map((row, i) => (
-                          <TableRow
-                            key={i}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer', zIndex: 6 }}
-                            onClick={() => handleClickRow(row.name)}
-                          >
-                            <TableCell component='th' scope='row'>
-                              <p className={classes.cell_name}>{row.name}</p>
-                            </TableCell>
-                            <TableCell>
-                              <p className={classes.cell_description}>
-                                {row.properties.description}
-                              </p>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </>
-                    ) : (null)}
+                      ) : (null)}
 
-                  </TableBody>
-                </Table>
-              </TableContainer>
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </div>
+              <div className={classes.wrapper_apps__small__display}>
+                {products && Object.keys(products).length > 0 ? (
+                  <>
+                    {products.value.map((row, i) => (
+                      <div className={`w-full py-3 ${classes.border__bottom}`} key={row.id}>
+                        <div
+                          className='fs__12 text__secondary ls__02 cpointer'
+                          onClick={() => handleClickRow(row.name)}
+                        >
+                          {row.name}
+                        </div>
+                        <div className='fs__12 text__gray__gray_darken mt-2'>{row.properties.description}</div>
+                      </div>
+                    ))}
+                  </>
+                ) : (null)}
+              </div>
             </Grid>
             <Grid item xs={12}>
               <Grid container direction='row' justifyContent='space-between'>
@@ -197,7 +216,6 @@ function Apps(props) {
                         <Icon id='MdNavigateNext' />
                       </div>
                     </div>
-
                   ) : (null)}
                 </Grid>
               </Grid>

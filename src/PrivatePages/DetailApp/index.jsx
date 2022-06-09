@@ -153,7 +153,6 @@ function AppsDetail(props) {
                 </Grid>
               </Grid>
             </Card>
-
             {productSubscriptions && Object.keys(productSubscriptions).length > 0 && productSubscriptions.count > 0 ? (
               <>
                 <div className={classes.wrapper_subscriptions__wide__display}>
@@ -175,7 +174,7 @@ function AppsDetail(props) {
                   {loadingCreateSubscription ? (
                     <Spinner styles={{ height: '100px' }} title='Cargando...' />
                   ) : (
-                    <div className={classes.form_suscriptione} style={{ height: '36px' }}>
+                    <div className={classes.form_suscriptione}>
                       <div className={classes.form_suscriptione__input}>
                         <InputResponse
                           name='suscription'
@@ -185,7 +184,7 @@ function AppsDetail(props) {
                           value={formik.values.suscription}
                         />
                       </div>
-                      <div className={classes.form_suscriptione____btn}>
+                      <div className={classes.form_suscriptione__btn}>
                         <Btn size='responsive' onClick={handleSubmitSuscription} styles={searchSuscription.length > 0 ? 'primary' : 'greey-primary'}>SUSCRIBIRME</Btn>
                       </div>
                     </div>
@@ -201,112 +200,129 @@ function AppsDetail(props) {
                   <Title text='APIs del producto' divider={false} stylesTitle={{ fontSize: '2.25rem' }} />
                 </Grid>
               </Grid>
-              <TableContainer>
-                <Table sx={{ minWidth: 650, marginBottom: '20px', }} aria-label='simple table'>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>
-                        <>
-                          <div className={classes.cell_title}>
-                            <h2>Nombre</h2>
-                            <Icon id='MdExpandMore' />
-                          </div>
-                          <div style={{ height: '36px', marginTop: '14px' }}>
-                            <InputResponse
-                              name='name'
-                              type='text'
-                              label='Buscar Nombre'
-                              onChange={(e) => {
-                                formik.handleChange(e);
-                                formik.setFieldValue('description', '');
-                              }}
-                              value={formik.values.name}
-                            />
-                          </div>
-                        </>
-                      </TableCell>
-                      <TableCell>
-                        <>
-
-                          <div className={classes.cell_title}>
-                            <h2>Descripcion</h2>
-                            <Icon id='MdExpandMore' />
-                          </div>
-                          <div style={{ height: '36px', marginTop: '14px' }}>
-                            <InputResponse
-                              name='description'
-                              type='text'
-                              label='Buscar Descripcion'
-                              onChange={(e) => {
-                                formik.handleChange(e);
-                                formik.setFieldValue('name', '');
-                              }}
-                              value={formik.values.description}
-                            />
-                          </div>
-                        </>
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {productApis && Object.keys(productApis).length > 0 && spinnerApis !== true ? (
-                      <>
-                        {productApis.value.map((row) => (
-                          <TableRow
-                            key={row.name}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer', zIndex: 6 }}
-                          >
-                            <TableCell component='th' scope='row'>
-                              <HashLink smooth to={`/apiBookstores/${row.name}#detailApi`}>
-                                <p className={classes.cell_name}>{row.name}</p>
-                              </HashLink>
-                            </TableCell>
-                            <TableCell>
-                              <HashLink smooth to={`/apiBookstores/${row.name}#detailApi`}>
-                                <p className={classes.cell_description}>
-                                  {row.properties.description}
-                                </p>
-                              </HashLink>
-                            </TableCell>
-                          </TableRow>
-                        ))}
-                      </>
-                    ) : (
+              <div className={classes.wrapper_apps__wide__display}>
+                <TableContainer>
+                  <Table sx={{ minWidth: 650, marginBottom: '20px', }} aria-label='simple table'>
+                    <TableHead>
                       <TableRow>
-                        <TableCell colSpan={2}>
-                          <Spinner styles={{ height: '200px' }} title='Cargando...' />
+                        <TableCell>
+                          <>
+                            <div className={classes.cell_title}>
+                              <h2>Nombre</h2>
+                              <Icon id='MdExpandMore' />
+                            </div>
+                            <div style={{ height: '36px', marginTop: '14px' }}>
+                              <InputResponse
+                                name='name'
+                                type='text'
+                                label='Buscar Nombre'
+                                onChange={(e) => {
+                                  formik.handleChange(e);
+                                  formik.setFieldValue('description', '');
+                                }}
+                                value={formik.values.name}
+                              />
+                            </div>
+                          </>
+                        </TableCell>
+                        <TableCell>
+                          <>
+
+                            <div className={classes.cell_title}>
+                              <h2>Descripcion</h2>
+                              <Icon id='MdExpandMore' />
+                            </div>
+                            <div style={{ height: '36px', marginTop: '14px' }}>
+                              <InputResponse
+                                name='description'
+                                type='text'
+                                label='Buscar Descripcion'
+                                onChange={(e) => {
+                                  formik.handleChange(e);
+                                  formik.setFieldValue('name', '');
+                                }}
+                                value={formik.values.description}
+                              />
+                            </div>
+                          </>
                         </TableCell>
                       </TableRow>
-                    )}
+                    </TableHead>
+                    <TableBody>
+                      {productApis && Object.keys(productApis).length > 0 && spinnerApis !== true ? (
+                        <>
+                          {productApis.value.map((row) => (
+                            <TableRow
+                              key={row.name}
+                              sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer', zIndex: 6 }}
+                            >
+                              <TableCell component='th' scope='row'>
+                                <HashLink smooth to={`/apiBookstores/${row.name}#detailApi`}>
+                                  <p className={classes.cell_name}>{row.name}</p>
+                                </HashLink>
+                              </TableCell>
+                              <TableCell>
+                                <HashLink smooth to={`/apiBookstores/${row.name}#detailApi`}>
+                                  <p className={classes.cell_description}>
+                                    {row.properties.description}
+                                  </p>
+                                </HashLink>
+                              </TableCell>
+                            </TableRow>
+                          ))}
+                        </>
+                      ) : (
+                        <TableRow>
+                          <TableCell colSpan={2}>
+                            <Spinner styles={{ height: '200px' }} title='Cargando...' />
+                          </TableCell>
+                        </TableRow>
+                      )}
 
-                  </TableBody>
-                </Table>
-              </TableContainer>
-              <Grid item sx={{ marginTop: '10px' }} xs={12}>
-                <Grid container spacing={4} direction='row' justifyContent='space-between'>
-                  <Grid item xs={3}>
-                    {productsApisSkip > 0 ? (
-                      <div onClick={() => handlePreviousProductApi()} className={classes.pagination}>
-                        <div className={classes.pagination__icon}>
-                          <Icon id='MdNavigateBefore' />
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </div>
+              <div className={classes.wrapper_apps__small__display}>
+                {productApis && Object.keys(productApis).length > 0 ? (
+                  <>
+                    {productApis.value.map((row, i) => (
+                      <div className={`w-full py-3 ${classes.border__bottom}`} key={row.id}>
+                        <div
+                          className='fs__12 text__secondary ls__02 cpointer'
+                          onClick={() => handleClickRow(row.name)}
+                        >
+                          {row.name}
                         </div>
-                        <p>Anterior</p>
+                        <div className='fs__12 text__gray__gray_darken mt-2'>{row.properties.description}</div>
                       </div>
-                    ) : (null)}
-
-                  </Grid>
-                  <Grid item xs={1}>
-                    {productApis.nextLink !== undefined ? (
-                      <div onClick={() => handleNextProductApi()} className={classes.pagination}>
-                        <p className={classes.next}>Siguiente</p>
-                        <div className={classes.pagination__icon}>
-                          <Icon id='MdNavigateNext' />
-                        </div>
+                    ))}
+                  </>
+                ) : (null)}
+              </div>
+              
+              <div className='display_flex justify_content__between mt-2'>
+                <div>
+                  {productsApisSkip > 0 ? (
+                    <div onClick={() => handlePreviousProductApi()} className={classes.pagination}>
+                      <div className={classes.pagination__icon}>
+                        <Icon id='MdNavigateBefore' />
                       </div>
-                    ) : (null)}
-                  </Grid>
-                </Grid>
-              </Grid>
+                      <p>Anterior</p>
+                    </div>
+                  ) : (null)}
+                </div>
+                <div>
+                  {productApis.nextLink !== undefined ? (
+                    <div onClick={() => handleNextProductApi()} className={classes.pagination}>
+                      <p className={classes.next}>Siguiente</p>
+                      <div className={classes.pagination__icon}>
+                        <Icon id='MdNavigateNext' />
+                      </div>
+                    </div>
+                  ) : (null)}
+                </div>
+              </div>
             </Card>
           </div>
 
