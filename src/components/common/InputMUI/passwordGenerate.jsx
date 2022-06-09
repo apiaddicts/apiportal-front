@@ -60,7 +60,7 @@ function PasswordGenerate({ idSuscripcion, user, version, status }) {
   };
 
   return (
-    <div className='input-data'>
+    <div className='input-data display_flex justify_content__between'>
       {hidden ? (
         <span className='text'>
           {primaryKey}
@@ -71,13 +71,13 @@ function PasswordGenerate({ idSuscripcion, user, version, status }) {
         </span>
       )}
 
-      <button onClick={handleClickHidden} className='btn-input' type='button'>
-        <Icon id='MdOutlineRemoveRedEye' />
+      <button onClick={handleClickHidden} className='btn-input ml-auto' type='button'>
+        <Icon id='MdOutlineRemoveRedEye' css_styles={{ 'custom_icon_styles': 'text__gray__gray_lighten-2' }} />
       </button>
       {
         status && status !== 'cancelled' ? (
           <button onClick={() => handleReloadRegerateSubscription()} className='btn-input' type='button'>
-            <Icon id='MdAutorenew' />
+            <Icon id='MdAutorenew' css_styles={{ 'custom_icon_styles': 'text__gray__gray_lighten-2' }} />
           </button>
         ) : (null)
       }

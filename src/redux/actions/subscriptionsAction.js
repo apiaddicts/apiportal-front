@@ -36,6 +36,7 @@ export const renameSubscription = (userId, subscriptionId, data, productName = '
   subscriptionsService.renameSubscription(userId, subscriptionId, data)
     .then((response) => {
       dispatch({ type: subscriptionsConstants.RENAME_SUBSCRIPTIONS_SUCCESS, response });
+      dispatch({ type: subscriptionsConstants.RESET_SUBSCRIPTIONS_USER });
       if (productName !== '') {
         dispatch(getProductDetail(productName));
       } else {
@@ -50,6 +51,7 @@ export const cancelSubscription = (userId, subscriptionId, data, productName = '
   subscriptionsService.cancelSubscription(userId, subscriptionId, data)
     .then((response) => {
       dispatch({ type: subscriptionsConstants.CANCEL_SUBSCRIPTIONS_SUCCESS, response });
+      dispatch({ type: subscriptionsConstants.RESET_SUBSCRIPTIONS_USER });
       if (productName !== '') {
         dispatch(getProductDetail(productName));
       } else {

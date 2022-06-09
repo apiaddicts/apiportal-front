@@ -10,6 +10,7 @@ import Button from '../../components/Buttons/Button';
 import Title from '../../components/Title/Title';
 import { updateUser } from '../../redux/actions/userAction';
 import Suscriptions from '../../components/Suscriptions';
+import SuscriptionsVertical from '../../components/SuscriptionsVertical';
 import RestorePassword from './containers/RestorePassword';
 
 function Admin() {
@@ -126,7 +127,12 @@ function Admin() {
 
         </div>
         <div className={classes.main__suscription}>
-          <Suscriptions user={user} suscriptions={suscripcionsUser} title='Suscripciones' />
+          <div className={classes.wrapper_subscriptions__wide__display}>
+            <Suscriptions user={user} suscriptions={suscripcionsUser} title='Suscripciones' />
+          </div>
+          <div className={classes.wrapper_subscriptions__small__display}>
+            <SuscriptionsVertical user={user} suscriptions={suscripcionsUser} title='Suscripciones' />
+          </div>
         </div>
       </Container>
 

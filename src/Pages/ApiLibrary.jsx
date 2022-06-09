@@ -195,7 +195,7 @@ function AppLibrary(props) {
                   margin: '2rem',
                 }}
               >
-                <h1>Información no disponible</h1>
+                <h1 className='align-center'>Información no disponible</h1>
               </div>
             </section>
           )
