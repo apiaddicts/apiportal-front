@@ -17,9 +17,15 @@ variables:
   azImage: $(dockerRegistry)/$(gitlabRepository):$(Build.SourceVersion)
   dockerRegistry: registry.gitlab.com
   dockerRegistryConnection: Cloudappi-GitlabRegistry
-  ${{ if eq(variables['Build.SourceBranchName'], 'develop') }}:
-    openshiftServiceConnection: "ARO-Dev"
+  ${{ if eq(variables['Build.SourceBranchName'], 'main')}}:
+    environment: prod
+    openshiftServiceConnection: ARO-Pro
+  ${{ if eq(variables['Build.SourceBranchName'], 'pre')}}:
+    environment: pre
+    openshiftServiceConnection: ARO-Pre
+  ${{ if eq(variables['Build.SourceBranchName'], 'develop')}}:
     environment: dev
+    openshiftServiceConnection: ARO-Dev
 
 stages:
   - stage: Build
