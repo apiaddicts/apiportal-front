@@ -46,7 +46,8 @@ stages:
               repository: $(gitlabRepository)
               Dockerfile: Dockerfile
               buildContext: .
-              arguments: --build-arg REACT_APP_RESOURCE_GROUP_NAME --build-arg REACT_APP_SERVICE_NAME --build-arg REACT_APP_STRAPI_URL --build-arg REACT_APP_SUBSCRIPTION_ID --build-arg REACT_APP_SURA_URL
+              arguments: --build-arg REACT_APP_STRAPI_URL=$(REACT_APP_STRAPI_URL) --build-arg REACT_APP_SURA_URL=$(REACT_APP_SURA_URL) --build-arg REACT_APP_SUBSCRIPTION_ID=$(REACT_APP_SUBSCRIPTION_ID) --build-arg REACT_APP_RESOURCE_GROUP_NAME=$(REACT_APP_RESOURCE_GROUP_NAME) --build-arg REACT_APP_SERVICE_NAME=$(REACT_APP_SERVICE_NAME) --build-arg REACT_APP_API_VERSION=$(REACT_APP_API_VERSION) --build-arg REACT_APP_REMEMBER_KEY=$(REACT_APP_REMEMBER_KEY) --build-arg REACT_APP_PRIMARY_KEY=$(REACT_APP_PRIMARY_KEY) --build-arg REACT_APP_APIM_UID=$(REACT_APP_APIM_UID) --build-arg REACT_APP_TOKEN_VALID_DAYS=$(REACT_APP_TOKEN_VALID_DAYS) --build-arg REACT_APP_LIST_API_TOP=$(REACT_APP_LIST_API_TOP) --build-arg REACT_APP_LIST_PRODUCT_APIS_TOP=$(REACT_APP_LIST_PRODUCT_APIS_TOP) --build-arg REACT_APP_LIST_PRODUCT_TOP=$(REACT_APP_LIST_PRODUCT_TOP)
+
               tags: |
                 $(Build.SourceBranchName)
                 $(Build.SourceVersion)
