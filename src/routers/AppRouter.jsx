@@ -56,7 +56,7 @@ function AppRouter() {
   return (
     <>
       {isOpen && (
-        <Login setIsOpen={setIsOpen} />
+        <Login setOpenForm={setOpenForm} setIsOpen={setIsOpen} />
       )}
       {openForm && (
         <Register setOpenForm={setOpenForm} setIsOpen={setIsOpen} />

@@ -11,7 +11,6 @@ import { resetAlert } from '../redux/actions/userAction';
 import Alert from '../components/Alert';
 
 function Register({ setOpenForm, setIsOpen }) {
-
   const { loadingSignUp, signUpData, responseError } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
