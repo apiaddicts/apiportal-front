@@ -2,6 +2,12 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
+import { HashLink } from 'react-router-hash-link';
+
+import moment from 'moment';
+
+import _ from 'underscore';
+
 import BannerCentered from '../components/Banner/BannerCentered';
 import Button from '../components/Buttons/Button';
 import CardBasic from '../components/Card/CardBasic';
@@ -9,60 +15,23 @@ import Item from '../components/Item/Item';
 import Tabs from '../components/Tabs/Tabs';
 import classes from '../styles/pages/home.module.scss';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
-// import textureCircles from '../static/img/texture_circles.svg';
+
 import codeSnipet from '../static/img/code-snippet.png';
 import BannerImage from '../components/Banner/BannerImage';
 import Slick from '../components/SlickSlider/Slick';
 
 import { getHome } from '../redux/actions/homeAction';
-import { getLibrary, resetGetLibrary } from '../redux/actions/libraryAction';
+import { getLibrary, getLibraries, resetGetLibrary } from '../redux/actions/libraryAction';
+import { getBlogs } from '../redux/actions/blogAction';
 import Icon from '../components/MdIcon/Icon';
-
-const slidesNew = [
-  {
-    img: 'https://picsum.photos/id/0/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1031/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1066/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1078/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-    linkText: 'Conoce más',
-  },
-  {
-    img: 'https://picsum.photos/id/1079/370/240',
-    title: 'tenetur magnam illo',
-    description: 'Eum eum laudantium sed consequatur sit. Sit sit aut eum omnis. Aut sit ut veritatis non omnis et temporibus iste. Error ut magnam eius nostrum nesciunt qui asperiores mollitia. Ut distinctio autem eos sit quia tempora accusamus similique. Aut iusto est hic eum dolores.',
-    linkText: 'Conoce más',
-  },
-];
 
 function ApiDetails({ setIsOpen }) {
 
   const dispatch = useDispatch();
   const params = useParams();
   const { data } = useSelector((state) => state.demo);
-  const { library } = useSelector((state) => state.library);
+  const { library, libraries } = useSelector((state) => state.library);
+  const { blogs } = useSelector((state) => state.blog);
 
   useEffect(() => {
     if (data && Object.keys(data).length === 0) {
@@ -73,10 +42,25 @@ function ApiDetails({ setIsOpen }) {
       dispatch(getLibrary(params.id));
     }
 
+  }, []);
+
+  useEffect(() => {
     return () => {
       dispatch(resetGetLibrary());
     };
   }, []);
+
+  useEffect(() => {
+    if (blogs && blogs.length === 0) {
+      dispatch(getBlogs());
+    }
+  }, [dispatch, blogs]);
+
+  useEffect(() => {
+    if (libraries && libraries.length === 0) {
+      dispatch(getLibraries());
+    }
+  }, [libraries]);
 
   // Load discover section
   const filterDiscoverTab = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'home.discover-section') : [];
@@ -84,13 +68,13 @@ function ApiDetails({ setIsOpen }) {
   // Load buttons sections
   const filterButtonSection = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sections.button-hero') : [];
 
-  const filterDiscover = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sections.section-use-case') : [];
+  // const filterDiscover = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sections.section-use-case') : [];
 
   const buttonsLbls = library && library.buttons && library.buttons.length > 0 ? library.buttons.map((item) => {
     const data = {
       label: item.name,
       class: item.class,
-      link: item.link !== '' ? `/api/${params.id}#contact` : '',
+      link: item.link !== '' ? `/api-detail/${params.id}#contact` : '',
     };
 
     return data;
@@ -105,8 +89,33 @@ function ApiDetails({ setIsOpen }) {
     },
   ];
 
+  const datanews = blogs.length > 0 ? _.sortBy(blogs, (m) => {
+    return moment(m.created_at).toDate().getTime();
+  }) : [];
+
+  const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
+    const itemData = {
+      img: item.image[0].url,
+      title: item.title,
+      description: item.description,
+      linkText: 'Conoce más',
+      route: `/blog/${item.id}#blogDetail`,
+    };
+    return itemData;
+  }) : [];
+
+  const random = Math.floor(Math.random() * libraries.length);
+  const random2 = Math.floor(Math.random() * libraries.length);
+  const random3 = Math.floor(Math.random() * libraries.length);
+
+  const apisNews = libraries.length > 0 ? [libraries[random], libraries[random2], libraries[random3]] : [];
+
+  const handleClickPage = (id) => {
+    dispatch(getLibrary(id));
+  };
+
   return (
-    <div style={{ paddingTop: '114px' }}>
+    <div id='api' style={{ paddingTop: '114px' }}>
       {Object.keys(data).length > 0 && Object.keys(library).length > 0 ? (
         <>
           <section>
@@ -116,7 +125,7 @@ function ApiDetails({ setIsOpen }) {
               buttons={buttonsLbls}
               setIsOpen={setIsOpen}
               css_styles={{ 'image_display': 'banner_custom__img--dnone', 'apiindividual_height': 'banner_apiindividual__layout--height', 'custom_line_height': 'line-height-1' }}
-              redirect='/apis'
+              redirect='/api-collection'
               description='In egestas blandit felis id porttitor. Mauris vel nibh ex. Integer iaculis placerat nunc, in ultricies nunc dignissim eu. '
             />
           </section>
@@ -220,10 +229,17 @@ function ApiDetails({ setIsOpen }) {
             </div>
             <div className='row'>
               {
-                filterDiscover && filterDiscover[0].useCaseList && filterDiscover[0].useCaseList.length > 0 ? (
-                  filterDiscover[0].useCaseList.map((card, i) => (
+                apisNews && apisNews.length > 0 ? (
+                  apisNews.map((card, i) => (
                     <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
-                      <CardBasic chipTitle={card.statusText} title={card.title} description={card.description} info={card.linkText} />
+                      <CardBasic
+                        chipTitle={card.status && card.status === 'Publicado' ? 'GET' : 'POST'}
+                        title={card.title}
+                        description={card.description}
+                        info='MÁS INFORMACIÓN'
+                        url={`/api-detail/${card.id}#api`}
+                        route={() => handleClickPage(card.id)}
+                      />
                     </div>
                   ))
                 ) : (null)
@@ -233,7 +249,9 @@ function ApiDetails({ setIsOpen }) {
               <div className='flex-md-12 flex-sm-12'>
                 <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
                   <div className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
-                    <span className='mr-1'>ver todas</span>
+                    <HashLink smooth to='/api-collection#apiHome'>
+                      <span className='mr-1'>ver todas</span>
+                    </HashLink>
                     <Icon id='MdOutlineEast' />
                   </div>
                   <div className={`d-sm-none ${classes.section__discover__showmore__button}`}>
@@ -276,7 +294,9 @@ function ApiDetails({ setIsOpen }) {
             <div id='contact' className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
                 <div className={`flex-lg-2 flex-md-6 flex-sm-12 text-center ${classes.custom_top}`}>
-                  <div className='text__secondary'>Ver más</div>
+                  <HashLink smooth to='/blog#blogIndex'>
+                    <div className='text__secondary'>Ver más</div>
+                  </HashLink>
                 </div>
               </div>
             </div>

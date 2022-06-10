@@ -38,7 +38,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
   };
 
   const listOptions = [
-    { icon: '', name: 'APIs', route: '/apis' },
+    { icon: '', name: 'APIs', route: '/api-collection' },
     // { icon: 'MdArrowDropDown', name: 'Documentación', route: '/documentacion' },
     { icon: '', name: 'Blog', route: '/blog' },
     { icon: '', name: 'FAQs', route: '/faqs' },
@@ -48,14 +48,12 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
     <div style={{ position: 'fixed', top: '0', width: '100%', zIndex: '5000' }}>
       <header className={classes.header}>
         <div className={`container ${classes.header__content}`}>
-          <NavLink to='/'>
-            <a className={classes.header__content__logo}>
-              <img
-                src={SuraLogo}
-                alt=''
-                className={classes.header__content__logo__img}
-              />
-            </a>
+          <NavLink to='/' className={classes.header__content__logo}>
+            <img
+              src={SuraLogo}
+              alt=''
+              className={classes.header__content__logo__img}
+            />
           </NavLink>
           <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
 
@@ -169,7 +167,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
           <div className={classes.buttom__nav__options}>
             <ul>
               <li>
-                <Link to='/apis'>APIs</Link>
+                <Link to='/api-collection'>APIs</Link>
               </li>
               <li>
                 <Link to='/blog'>BLOG</Link>

@@ -12,10 +12,7 @@ function login(email, password) {
     headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${btoa(`${email}:${password}`)}` },
   };
 
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/identity?api-version=${config.apiVersion}`;
+  const url = `${config.url}/identity?api-version=${config.apiVersion}`;
 
   return fetch(
     url,
@@ -26,16 +23,27 @@ function login(email, password) {
     });
 }
 
+function confirmAccount(queryParams) {
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `Ticket id="${queryParams.ticketId}",ticket="${queryParams.ticket}"` },
+  };
+
+  const url = `${config.url}/users/${queryParams.userId}/identities/Basic/${queryParams.identity}?api-version=${config.apiVersion}`;
+  return fetch(url, requestOptions)
+    .then(handleResponseToken)
+    .then((response) => {
+      return { ...response, id: queryParams.userId };
+    });
+}
+
 function getUserDetails(token, id) {
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/users/${id}?api-version=${config.apiVersion}`;
+  const url = `${config.url}/users/${id}?api-version=${config.apiVersion}`;
   return fetch(
     url,
     requestOptions,
@@ -52,7 +60,7 @@ function getUserSuscriptions(subscriptionId, resourceGroupName, serviceName, api
   };
 
   return fetch(
-    `${config.suraUrl}/subscriptions/${subscriptionId}/resourceGroups/${resourceGroupName}/providers/Microsoft.ApiManagement/service/${serviceName}/users/:userId/subscriptions?api-version=${apiVersion}`,
+    `${config.url}/users/:userId/subscriptions?api-version=${apiVersion}`,
     requestOptions,
   ).then(handleResponse)
     .then((response) => {
@@ -66,10 +74,7 @@ function getUserEntityTag(token, id) {
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/users/${id}?api-version=${config.apiVersion}`;
+  const url = `${config.url}/users/${id}?api-version=${config.apiVersion}`;
   return fetch(url, requestOptions)
     .then((response) => response.text().then((text) => {
       const etag = response.headers.get('ETag');
@@ -92,10 +97,7 @@ function updateUser(data) {
     body: JSON.stringify(data),
   };
 
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/users/${id}?api-version=${config.apiVersion}`;
+  const url = `${config.url}/users/${id}?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -111,10 +113,8 @@ function signUp(data) {
     body: JSON.stringify(data),
   };
   const uuid = crypto.randomUUID();
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/users/${uuid}?api-version=${config.apiVersion}`;
+
+  const url = `${config.url}/users/${uuid}?api-version=${config.apiVersion}`;
   return fetch(
     url,
     requestOptions,
@@ -129,10 +129,8 @@ function verifyOldPassword(data) {
     method: 'GET',
     headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `Basic ${btoa(`${data.email}:${data.password}`)}` },
   };
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/identity?api-version=${config.apiVersion}`;
+
+  const url = `${config.url}/identity?api-version=${config.apiVersion}`;
   return fetch(
     url,
     requestOptions,
@@ -154,10 +152,8 @@ function changePassword(newPassword) {
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}`, 'If-Match': `${etag}` },
     body: JSON.stringify(data),
   };
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/users/${id}?api-version=${config.apiVersion}`;
+
+  const url = `${config.url}/users/${id}?api-version=${config.apiVersion}`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
@@ -171,10 +167,8 @@ function resetPassword(data) {
     headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `${config.hmacAuthHeader}` },
     body: JSON.stringify(data),
   };
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/confirmations/password?api-version=${config.apiVersion}`;
+
+  const url = `${config.url}/confirmations/password?api-version=${config.apiVersion}`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
@@ -188,10 +182,8 @@ function resetPasswordWithTicket(queryParams, data) {
     headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `Ticket id="${queryParams.ticketid}",ticket="${queryParams.ticket}"` },
     body: JSON.stringify(data),
   };
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/users/${queryParams.id}?api-version=${config.apiVersion}`;
+
+  const url = `${config.url}/users/${queryParams.id}?api-version=${config.apiVersion}`;
   return fetch(url, requestOptions)
     .then(handleResponseResetPwd)
     .then((response) => {
@@ -201,6 +193,7 @@ function resetPasswordWithTicket(queryParams, data) {
 
 const userService = {
   login,
+  confirmAccount,
   getUserDetails,
   getUserSuscriptions,
   getUserEntityTag,

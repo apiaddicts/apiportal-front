@@ -7,6 +7,11 @@
     display: flex;
     color: $primary;
     font-size: 20px;
+    align-items: center;
+
+    &__icon {
+        color: $secondary;
+    }
     
     p {
         font-family: $barlow;
@@ -38,4 +43,51 @@
 
 .margin_left {
     margin-left: 5% !important;
+}
+
+.wrapper__filters {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 2fr 3fr;
+    align-content: center;
+    margin-top: 1.25rem;
+    &__search {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+    }
+    @include breakpoint(xs) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    @include breakpoint(md) {
+        grid-template-columns: repeat(1, 2fr);
+    }
+    @include breakpoint(lg) {
+        grid-template-columns: repeat(2, 3fr);
+    }
+    @include breakpoint(xl) {
+        grid-template-columns: repeat(2, 3fr);
+    }
+}
+
+// style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', alignItems: 'center', justifyContent: 'center', columnGap: '3.563rem', rowGap: '1.875rem' }}
+.grid__apis{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    column-gap: 3.563rem;
+    row-gap: 1.875rem;
+    margin-top: 3rem;
+    @include breakpoint(xs) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    @include breakpoint(md) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    @include breakpoint(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @include breakpoint(xl) {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

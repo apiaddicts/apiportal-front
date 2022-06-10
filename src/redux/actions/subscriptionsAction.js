@@ -2,11 +2,15 @@
 import subscriptionsConstants from '../constants/subscriptionsConstants';
 import subscriptionsService from '../../services/subscriptionsService';
 
-import { getProductDetail } from './productsAction';
+import store from '../store';
 
-export const listUserSubscriptions = (userId) => (dispatch) => {
+import { getProductDetail, getProductSuscripcion } from './productsAction';
+
+import config from '../../services/config';
+
+export const listUserSubscriptions = (userId, top = config.topSubscriptions, skip = 0) => (dispatch) => {
   dispatch({ type: subscriptionsConstants.GET_ALL_SUBSCRIPTIONS_USER_REQUEST });
-  subscriptionsService.listUserSubscriptions(userId)
+  subscriptionsService.listUserSubscriptions(userId, top, skip)
     .then((response) => {
       dispatch({ type: subscriptionsConstants.GET_ALL_SUBSCRIPTIONS_USER_SUCCESS, response });
     }, (error) => {
@@ -31,20 +35,67 @@ export const resetSubscriptionsUser = () => (dispatch) => {
   dispatch({ type: subscriptionsConstants.RESET_SUBSCRIPTIONS_USER });
 };
 
-export const renameSubscription = (userId, subscriptionId, data) => (dispatch) => {
+export const renameSubscription = (userId, subscriptionId, data, productName = '') => (dispatch) => {
+  dispatch({ type: subscriptionsConstants.RENAME_SUBSCRIPTIONS_REQUEST });
   subscriptionsService.renameSubscription(userId, subscriptionId, data)
     .then((response) => {
       dispatch({ type: subscriptionsConstants.RENAME_SUBSCRIPTIONS_SUCCESS, response });
+      if (productName !== '') {
+        dispatch(getProductDetail(productName));
+      } else {
+        dispatch(listUserSubscriptions(userId));
+      }
     }, (error) => {
       dispatch({ type: subscriptionsConstants.RENAME_SUBSCRIPTIONS_FAILURE, error });
     });
 };
 
-export const cancelSubscription = (userId, subscriptionId, data) => (dispatch) => {
+export const cancelSubscription = (userId, subscriptionId, data, productName = '') => (dispatch) => {
   subscriptionsService.cancelSubscription(userId, subscriptionId, data)
     .then((response) => {
       dispatch({ type: subscriptionsConstants.CANCEL_SUBSCRIPTIONS_SUCCESS, response });
+      if (productName !== '') {
+        dispatch(getProductDetail(productName));
+      } else {
+        dispatch(listUserSubscriptions(userId));
+      }
     }, (error) => {
       dispatch({ type: subscriptionsConstants.CANCEL_SUBSCRIPTIONS_FAILURE, error });
     });
+};
+
+export const getlistUserSubscriptionsNext = (userId) => (dispatch) => {
+  const { subscriptionsSkip } = store.getState().suscripcions;
+
+  const skip = subscriptionsSkip + config.topSubscriptions;
+
+  dispatch(listUserSubscriptions(userId, config.topSubscriptions, skip));
+  dispatch({ type: subscriptionsConstants.GET_SUBSCRIPTIONS_SKIP, skip });
+};
+
+export const getlistUserSubscriptionsPrevious = (userId) => (dispatch) => {
+  const { subscriptionsSkip } = store.getState().suscripcions;
+
+  const skip = subscriptionsSkip - config.topSubscriptions;
+
+  dispatch(listUserSubscriptions(userId, config.topSubscriptions, skip));
+  dispatch({ type: subscriptionsConstants.GET_SUBSCRIPTIONS_SKIP, skip });
+};
+
+export const getDetailListUserSubscriptionsNext = (productName) => (dispatch) => {
+  const { detailSubscriptionsSkip } = store.getState().suscripcions;
+
+  const skip = detailSubscriptionsSkip + config.topSubscriptions;
+
+  dispatch(getProductSuscripcion(productName, config.topSubscriptions, skip));
+  dispatch({ type: subscriptionsConstants.GET_DETAIL_SUBSCRIPTIONS_SKIP, skip });
+};
+
+export const getDetailListUserSubscriptionsPrevious = (productName) => (dispatch) => {
+  const { detailSubscriptionsSkip } = store.getState().suscripcions;
+
+  const skip = detailSubscriptionsSkip - config.topSubscriptions;
+
+  dispatch(getProductSuscripcion(productName, config.topSubscriptions, skip));
+  dispatch({ type: subscriptionsConstants.GET_DETAIL_SUBSCRIPTIONS_SKIP, skip });
 };

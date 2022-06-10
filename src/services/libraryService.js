@@ -34,10 +34,7 @@ function getApis(top, skip) {
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/apis?api-version=${config.apiVersion}&expandApiVersionSet=true&$top=${top}&$skip=${skip}&$filter=isCurrent`;
+  const url = `${config.url}/apis?api-version=${config.apiVersion}&expandApiVersionSet=true&$top=${top}&$skip=${skip}&$filter=isCurrent`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
@@ -46,15 +43,14 @@ function getApis(top, skip) {
 }
 
 function getAPi(id) {
+  const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    // headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/apis/${id}?api-version=${config.apiVersion}`;
+  const url = `${config.url}/apis/${id}?api-version=${config.apiVersion}`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
@@ -63,16 +59,14 @@ function getAPi(id) {
 }
 
 function getApiOpenAPI(id) {
+  const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Accept': 'application/vnd.oai.openapi+json; charset=utf-8' },
+    headers: { 'Accept': 'application/vnd.oai.openapi+json; charset=utf-8', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/apis/${id}?api-version=${config.apiVersion}`;
-  console.log(url);
+  const url = `${config.url}/apis/${id}?api-version=${config.apiVersion}`;
+
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
@@ -87,10 +81,7 @@ function getListTags() {
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/tags?api-version=${config.apiVersion}&scope=apis`;
+  const url = `${config.url}/tags?api-version=${config.apiVersion}&scope=apis`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -106,10 +97,7 @@ function getListTagsByApi(apiName) {
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/apis/${apiName}/tags?api-version=${config.apiVersion}`;
+  const url = `${config.url}/apis/${apiName}/tags?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -126,10 +114,7 @@ function filterAPIsByTags(search, filter = 'isCurrent', top = 4, skip = 0, inclu
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/apis?api-version=${config.apiVersion}&expandApiVersionSet=${true}&$top=${top}&$skip=${skip}&$filter=${filter}&includeNotTaggedApis=${includeNotTaggedApis}&${search}`;
+  const url = `${config.url}/apis?api-version=${config.apiVersion}&expandApiVersionSet=${true}&$top=${top}&$skip=${skip}&$filter=${filter}&includeNotTaggedApis=${includeNotTaggedApis}&${search}`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
@@ -144,10 +129,7 @@ function searchApis(search, top, skip) {
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}')) or (contains(properties/description,'${search}'))`;
+  const url = `${config.url}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}')) or (contains(properties/description,'${search}'))`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -163,10 +145,7 @@ function getApiHostnames(apiName) {
     headers: { 'Content-Type': 'application/json' },
   };
 
-  const urlPrincipal = `${config.suraUrl}/subscriptions/${config.subscriptionId}`;
-  const urlResourceGroups = `${urlPrincipal}/resourceGroups/${config.resourceGroupName}`;
-  const urlService = `${urlResourceGroups}/providers/Microsoft.ApiManagement/service/${config.serviceName}`;
-  const url = `${urlService}/apis/${apiName}/hostnames?api-version=${config.apiVersion}`;
+  const url = `${config.url}/apis/${apiName}/hostnames?api-version=${config.apiVersion}`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {

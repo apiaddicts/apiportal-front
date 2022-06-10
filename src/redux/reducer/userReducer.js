@@ -7,14 +7,18 @@ const initialState = token && etag ? {
   id: token.id,
   token: token.token,
   etag: etag.etag,
-  loadinSignUp: false,
+  loadingSignUp: false,
   signUpData: {},
   user: {},
   loadingUser: false,
   responseError: {},
+  responseErrorLogin: {},
   responseRestoreError: {},
   responseResetSignup: {},
+  responseResetPwd: {},
   responseResetPwdError: {},
+  accountVerificationSent: false,
+  accountVerified: false,
 } : {
   user: {},
   loadingUser: false,
@@ -24,9 +28,13 @@ const initialState = token && etag ? {
   loadingSignUp: false,
   signUpData: {},
   responseError: {},
+  responseErrorLogin: {},
   responseRestoreError: {},
   responseResetSignup: {},
+  responseResetPwd: {},
   responseResetPwdError: {},
+  accountVerificationSent: false,
+  accountVerified: false,
 };
 
 // eslint-disable-next-line default-param-last
@@ -70,6 +78,22 @@ export default function userReducer(state = initialState, action) {
         loadingSignUp: false,
         responseResetSignup: action.response,
       };
+    case userConstants.CONFIRM_ACCOUNT_REQUEST:
+      return {
+        ...state,
+        accountVerificationSent: true,
+      };
+    case userConstants.CONFIRM_ACCOUNT_SUCCESS:
+      return {
+        ...state,
+        accountVerified: true,
+      };
+    case userConstants.CONFIRM_ACCOUNT_FAILURE:
+      return {
+        ...state,
+        accountVerified: false,
+        error: action.error,
+      };
     // login user
     case userConstants.GET_USER_REQUEST:
       return {
@@ -92,13 +116,19 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         loadingSignUp: false,
-        responseError: action.error,
+        responseErrorLogin: action.error,
       };
     // save entity tag
     case userConstants.HEAD_ETAG_SUCCESS:
       return {
         ...state,
         etag: action.response.etag,
+      };
+    case userConstants.RESET_PASSWORD_TICKET_SUCCESS:
+      return {
+        ...state,
+        loadingSignUp: false,
+        responseResetPwd: action.response,
       };
     case userConstants.RESET_PASSWORD_TICKET_FAILURE:
       return {
@@ -111,9 +141,12 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         responseError: {},
+        responseErrorLogin: {},
         responseRestoreError: {},
         responseResetSignup: {},
+        ResponseResetPwd: {},
         responseResetPwdError: {},
+        signUpData: {},
       };
     case userConstants.LOGOUT_USER:
       return {
@@ -126,6 +159,7 @@ export default function userReducer(state = initialState, action) {
         responseError: {},
         responseRestoreError: {},
         responseResetSignup: {},
+        ResponseResetPwd: {},
         responseResetPwdError: {},
       };
     default:

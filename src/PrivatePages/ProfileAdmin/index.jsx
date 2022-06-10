@@ -1,22 +1,28 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container } from '@mui/material';
-
+import { listUserSubscriptions } from '../../redux/actions/subscriptionsAction';
 import Input from '../../components/Input';
 import useFormUserConfig from '../../hooks/useFormUser';
 import classes from './style.module.scss';
 import Button from '../../components/Buttons/Button';
 import Title from '../../components/Title/Title';
 import { updateUser } from '../../redux/actions/userAction';
-import Suscriptions from './containers/Suscriptions';
+import Suscriptions from '../../components/Suscriptions';
 import RestorePassword from './containers/RestorePassword';
 
 function Admin() {
+  const dispatch = useDispatch();
   const { user, loadingUser } = useSelector((state) => state.user);
   const [displayRestorePassword, setDisplayRestorePassword] = useState(false);
+  const { suscripcionsUser } = useSelector((state) => state.suscripcions);
 
-  const dispatch = useDispatch();
+  useEffect(() => {
+    if (suscripcionsUser && Object.keys(user).length > 0 && Object.keys(suscripcionsUser).length === 0) {
+      dispatch(listUserSubscriptions(user.name));
+    }
+  }, [suscripcionsUser]);
 
   const handleSubmit = async (values) => {
     const data = {
@@ -36,7 +42,7 @@ function Admin() {
       id: 'first_name',
       initialValue: name,
       placeholder: 'John',
-      label: 'First name',
+      label: 'Nombre',
       validate: 'first_name',
       required: true,
       type: 'text',
@@ -45,7 +51,7 @@ function Admin() {
       id: 'last_name',
       initialValue: lastName,
       placeholder: 'Doe',
-      label: 'Last name',
+      label: 'Apellido',
       validate: 'last_name',
       required: true,
       type: 'text',
@@ -54,7 +60,7 @@ function Admin() {
       id: 'email',
       initialValue: email,
       placeholder: 'youremail@domain.com',
-      label: 'Email',
+      label: 'Correo electrónico',
       validate: 'email',
       required: true,
       type: 'email',
@@ -65,12 +71,12 @@ function Admin() {
   const formConfig = useFormUserConfig(labelsUser, handleSubmit);
 
   return (
-    <div className={`w-full ${classes.margin_left}`}>
-      <Container fixed className='my-10 py-10' maxWidth='xl'>
+    <>
+      <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important' }}>
         <div className={classes.main__admin}>
           {user && Object.keys(user).length > 0 && loadingUser === false ? (
             <div className={classes.admin}>
-              <div className='w-full my-9'>
+              <div className='w-full mb-5'>
                 <Title text='Mi perfil' />
               </div>
               <div className={classes.admin__form}>
@@ -78,10 +84,10 @@ function Admin() {
                   <div className={classes.admin__form__container}>
                     <div className={classes.admin__form__container__header}>
                       <div className='font-fs-joey fs__36 font-weight-bold text__primary'>Datos personales</div>
-                      <div className='fs__16 text__gray__gray_darken ls_05'>
+                      {/* <div className='fs__16 text__gray__gray_darken ls_05'>
                         <span className='text-uppercase font-weight-semi-bold'>Fecha de registro:</span>
                         <span className='fs'>12/05/2022</span>
-                      </div>
+                      </div> */}
                     </div>
                     <div className='row'>
                       {labelsUser.map((field) => (
@@ -89,33 +95,29 @@ function Admin() {
                           <Input key={field.id} field={field} formik={formConfig} />
                         </div>
                       ))}
+                      <div className='flex-lg-3 flex-sm-12 display_flex align_items__bottom justify_content__end ml-auto mb-2'>
+                        <Button
+                          type='submit'
+                          styles='primary'
+                        >
+                          Guardar
+                        </Button>
+                      </div>
                     </div>
                     <div className='row align_items__center mt-4 justify_content__between'>
                       <div className='flex-lg-6 flex-sm-12'>
                         {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
                         <div
-                          className='fs__16 text__gray__gray_darken ls_05 text-uppercase font-weight-bold ml-3 cpointer'
+                          className='fs__16 text__primary ls_05 text-uppercase font-weight-bold ml-3 cpointer'
                           onClick={() => setDisplayRestorePassword(!displayRestorePassword)}
                         >
                           Restablecer password
                         </div>
                       </div>
-                      {
-                        !displayRestorePassword && (
-                          <div className='flex-lg-3 flex-sm-12'>
-                            <Button
-                              type='submit'
-                              styles='primary'
-                            >
-                              Guardar
-                            </Button>
-                          </div>
-                        )
-                      }
                     </div>
                   </div>
                 </form>
-                <div className={classes.admin__form__container}>
+                <div className={`${classes.admin__form__container} margin_top`}>
                   <RestorePassword userEmail={user?.properties?.email} display={displayRestorePassword} />
                 </div>
               </div>
@@ -123,11 +125,15 @@ function Admin() {
           ) : (null)}
 
         </div>
+        <div className={classes.main__suscription}>
+          <Suscriptions user={user} suscriptions={suscripcionsUser} title='Suscripciones' />
+        </div>
       </Container>
-      <div className={classes.main__admin}>
-        <Suscriptions user={user} />
-      </div>
-    </div>
+
+      {/* <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important' }}>
+
+      </Container> */}
+    </>
   );
 }
 

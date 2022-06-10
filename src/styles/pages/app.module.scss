@@ -1,3 +1,5 @@
+@import '../variables.scss';
+
 .table-left {
     margin-left: 5%;
 }
@@ -51,6 +53,11 @@
     display: flex;
     color: #0033A0;
     font-size: 20px;
+    align-items: center;
+
+    &__icon {
+        color: $secondary;
+    }
     
     p {
         font-family: 'Barlow';

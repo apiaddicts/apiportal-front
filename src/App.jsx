@@ -2,16 +2,14 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import store from './redux/store';
-import AppRouter from './routers/AppRouter';
-// import ExternalRouter from './routers/ExternalRouter';
+import AppNewRoute from './routers/routers/AppNewRoute';
 
 function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <AppRouter />
+        <AppNewRoute />
       </BrowserRouter>
-      {/* <ExternalRouter /> */}
     </Provider>
   );
 }

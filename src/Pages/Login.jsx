@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import Form from '../components/Forms/LoginForm';
 import Modal from '../components/Modal';
 import Icon from '../components/MdIcon/Icon';
-import AlertFeedbock from '../components/AlertFeedback';
+//import AlertFeedbock from '../components/AlertFeedback';
 import ResetPassword from '../components/Forms/ResetPassword';
 import { fieldsLogin } from '../components/Forms/fields';
 
-import { login } from '../redux/actions/userAction';
+import { login, resetAlert } from '../redux/actions/userAction';
 
 import classes from '../styles/pages/login.module.scss';
 
@@ -16,9 +17,11 @@ import useLoginConfig from '../hooks/useLogin';
 
 function Login({ setIsOpen, setPrivateSession }) {
   const { token } = useSelector((state) => state.user);
-  const [showAlert, setShowAlert] = useState(false);
+  //const [showAlert, setShowAlert] = useState(false);
   const [showForm, setShowForm] = useState(true);
   const [showResetForm, setShowResetForm] = useState(false);
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -30,6 +33,7 @@ function Login({ setIsOpen, setPrivateSession }) {
   useEffect(() => {
     if (token.length > 0) {
       setIsOpen(false);
+      navigate('/dashboard/user');
     }
   }, [token]);
 
@@ -40,6 +44,7 @@ function Login({ setIsOpen, setPrivateSession }) {
         className={classes.login__close}
         type='button'
         onClick={() => {
+          dispatch(resetAlert());
           setIsOpen(false);
         }}
       >
@@ -47,7 +52,7 @@ function Login({ setIsOpen, setPrivateSession }) {
       </button>
       <div className={classes.login__wrapper}>
         <h1 className={classes.login__title}>{showForm ? 'Iniciar sesión' : 'Recuperar contraseña'}</h1>
-        {showAlert && <AlertFeedbock setShowAlert={setShowAlert} success />}
+        {/*showAlert && <AlertFeedbock setShowAlert={setShowAlert} success />*/}
         {showForm && (
           <Form
             handleSubmit={handleSubmit}

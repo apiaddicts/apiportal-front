@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@mui/material';
 
@@ -245,7 +244,7 @@ function Apis({ setIsOpen }) {
                           colorStatus={item.color_status}
                           info='Ver Documentación'
                           description={item.description}
-                          link={`/api/${item.id}`}
+                          link={`/api-detail/${item.id}#api`}
                           modal={setIsOpen}
                           css_styles={{ 'custom_title_size': 'fs__22', 'custom_status_size': 'fs__10' }}
                         />

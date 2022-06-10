@@ -16,13 +16,13 @@ import CardSlider from '../components/Card/CardSlider';
 import BannerCentered from '../components/Banner/BannerCentered';
 import Tabs from '../components/Tabs/Tabs';
 import Button from '../components/Buttons/Button';
-// import Carousel from '../components/Carousel/Carousel';
 import Slider from '../components/Slider/Slider';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
 import textureCircles from '../static/img/texture_circles.svg';
 import textureCirclesAlt from '../static/img/texture_circles_alt.svg';
 import { getHome } from '../redux/actions/homeAction';
 import { getBlogs } from '../redux/actions/blogAction';
+import { getLibraries } from '../redux/actions/libraryAction';
 
 import Slick from '../components/SlickSlider/Slick';
 
@@ -32,6 +32,7 @@ function Home({ setIsOpen }) {
   const dispatch = useDispatch();
   const { data } = useSelector((state) => state.demo);
   const { blogs } = useSelector((state) => state.blog);
+  const { libraries } = useSelector((state) => state.library);
 
   useEffect(() => {
     if (data && Object.keys(data).length === 0) {
@@ -43,7 +44,13 @@ function Home({ setIsOpen }) {
     if (blogs && blogs.length === 0) {
       dispatch(getBlogs());
     }
-  }, [dispatch, blogs]);
+  }, [blogs]);
+
+  useEffect(() => {
+    if (libraries && libraries.length === 0) {
+      dispatch(getLibraries());
+    }
+  }, [libraries]);
 
   // Load Slider
   const filterSlider = data && data.contentSections ? data.contentSections.filter((item) => item.__component === 'sura.carousel') : [];
@@ -92,10 +99,6 @@ function Home({ setIsOpen }) {
   const filterHomeBannerNameButtom = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].buttons ? filterHomeBanner[0].buttons[0].name : '';
   const filterHomeBannerNameType = filterHomeBanner.length > 0 && filterHomeBanner.length === 1 && filterHomeBanner[0].buttons ? filterHomeBanner[0].buttons[0].type : '';
 
-  const handleOpenModal = () => {
-    setIsOpen(true);
-  };
-
   const datanews = blogs.length > 0 ? _.sortBy(blogs, (m) => {
     return moment(m.created_at).toDate().getTime();
   }) : [];
@@ -110,6 +113,12 @@ function Home({ setIsOpen }) {
     };
     return itemData;
   }) : [];
+
+  const random = Math.floor(Math.random() * libraries.length);
+  const random2 = Math.floor(Math.random() * libraries.length);
+  const random3 = Math.floor(Math.random() * libraries.length);
+
+  const apisNews = libraries.length > 0 ? [libraries[random], libraries[random2], libraries[random3]] : [];
 
   return (
     <div style={{ paddingTop: '114px' }}>
@@ -185,7 +194,7 @@ function Home({ setIsOpen }) {
                   filterButtonSection[0].header.map((button, i) => (
                     <div key={i} className='mb-4'>
                       {button.isKeywordInverted ? (
-                        <HashLink smooth to='/apis#apiHome'>
+                        <HashLink smooth to='/api-collection#apiHome'>
                           <Button styles={button.keyword}>
                             {button.title}
                           </Button>
@@ -227,10 +236,10 @@ function Home({ setIsOpen }) {
             </div>
             <div className='row d-xs-none'>
               {
-                filterDiscover && filterDiscover[0].useCaseList && filterDiscover[0].useCaseList.length > 0 ? (
-                  filterDiscover[0].useCaseList.map((card, i) => (
+                apisNews && apisNews.length > 0 ? (
+                  apisNews.map((card, i) => (
                     <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
-                      <CardBasic chipTitle={card.statusText} title={card.title} description={card.description} info={card.linkText} route={handleOpenModal} />
+                      <CardBasic chipTitle={card.status && card.status === 'Publicado' ? 'GET' : 'POST'} title={card.title} description={card.description} info='MÁS INFORMACIÓN' url={`/api/${card.id}#api`} />
                     </div>
                   ))
                 ) : (null)
@@ -354,6 +363,7 @@ function Home({ setIsOpen }) {
         <SkeletonComponent />
       )}
     </div>
+
   );
 }
 
