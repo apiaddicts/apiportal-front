@@ -220,7 +220,7 @@ function SidebarDrawer({ children, user }) {
         onOpen={toggleMenuTemporary}
         anchor='left'
         ref={drawerTemp}
-        sx={{ zIndex: 3000, '& .MuiDrawer-paper': { width: '80%' } }}
+        sx={{ zIndex: 3000, '& .MuiDrawer-paper': { width: '317px' } }}
 
       >
         <DrawerHeader>
@@ -228,7 +228,15 @@ function SidebarDrawer({ children, user }) {
             <img src={SuraLogoAlt} alt='' />
           </div>
           <div className='text__secondary'>
-            <CloseIcon />
+            <IconButton
+              size='large'
+              edge='start'
+              color='inherit'
+              aria-label='menu'
+              onClick={handleMenuTemporary}
+            >
+              <CloseIcon />
+            </IconButton>
           </div>
         </DrawerHeader>
         <List>
