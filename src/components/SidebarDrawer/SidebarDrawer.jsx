@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 import { useDispatch } from 'react-redux';
 
@@ -20,15 +20,19 @@ import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSha
 import LogoutIcon from '@mui/icons-material/Logout';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import classes from './sliderdrawer.module.scss';
 import SuraLogoAlt from '../../static/img/sura_logo_alt.svg';
 import { logout } from '../../redux/actions/userAction';
-// import { width } from '@mui/system';
 
 function SidebarDrawer({ children, user }) {
   const theme = useTheme();
   const [isPermanent, setPermanent] = useState(true);
   const [toggleMenu, setToggleMenu] = useState(false);
+  const [toggleMenuTemporary, setToggleMenuTemporary] = useState(false);
+
+  const drawerTemp = useRef();
+  const drawerPerm = useRef();
 
   function handleWindowWithChange() {
     const windowWidth = window.innerWidth;
@@ -80,6 +84,10 @@ function SidebarDrawer({ children, user }) {
     setToggleMenu(!toggleMenu);
   };
 
+  const handleMenuTemporary = () => {
+    setToggleMenuTemporary(!toggleMenuTemporary);
+  };
+
   const drawerWidth = 300;
   const openMenu = (theme) => ({
     width: drawerWidth,
@@ -118,6 +126,7 @@ function SidebarDrawer({ children, user }) {
       }),
     }),
   );
+
   const DrawerHeader = styled('div')(({ theme }) => ({
     width: '100%',
     background: '#0033A0',
@@ -132,7 +141,7 @@ function SidebarDrawer({ children, user }) {
     <div className={classes.backgroundSidebar}>
       {/* <CssBaseline /> */}
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position='fixed' elevation={0} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: '#0033a0', padding: '0 100px' }}>
+        <AppBar position='fixed' elevation={0} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: '#0033a0', padding: { xs: '0 1rem', sm: '0 100px' } }}>
           <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <img src={SuraLogoAlt} alt='Sura Logo' />
             {isPermanent && (
@@ -196,8 +205,7 @@ function SidebarDrawer({ children, user }) {
                   edge='start'
                   color='inherit'
                   aria-label='menu'
-                  sx={{ mr: 2 }}
-                  onClick={handleMenu}
+                  onClick={handleMenuTemporary}
                 >
                   <MenuIcon />
                 </IconButton>
@@ -206,18 +214,29 @@ function SidebarDrawer({ children, user }) {
           </Toolbar>
         </AppBar>
       </Box>
-      <Drawer
-        variant='temporary'
-        open={toggleMenu}
-        onClose={handleMenu}
-        anchor='right'
+      <SwipeableDrawer
+        open={toggleMenuTemporary}
+        onClose={handleMenuTemporary}
+        onOpen={toggleMenuTemporary}
+        anchor='left'
+        ref={drawerTemp}
+        sx={{ zIndex: 3000, '& .MuiDrawer-paper': { width: '317px' } }}
+
       >
         <DrawerHeader>
           <div>
             <img src={SuraLogoAlt} alt='' />
           </div>
           <div className='text__secondary'>
-            <CloseIcon />
+            <IconButton
+              size='large'
+              edge='start'
+              color='inherit'
+              aria-label='menu'
+              onClick={handleMenuTemporary}
+            >
+              <CloseIcon />
+            </IconButton>
           </div>
         </DrawerHeader>
         <List>
@@ -258,8 +277,8 @@ function SidebarDrawer({ children, user }) {
         >
           {
             listItems.map((item, index) => (
-              <ListItem button key={index} sx={{ color: '#53565A' }} component={MyNavLink} to={item.route}>
-                <ListItemIcon>
+              <ListItem button key={index} sx={{ color: '#0033A0', fontWeight: 500 }} component={MyNavLink} to={item.route}>
+                <ListItemIcon sx={{ color: '#0033A0' }}>
                   {item.icon}
                 </ListItemIcon>
                 <ListItemText primary={item.text} />
@@ -302,13 +321,21 @@ function SidebarDrawer({ children, user }) {
             <ListItemText>Salir</ListItemText>
           </ListItem>
         </List>
-      </Drawer>
+      </SwipeableDrawer>
+
+      <div id='test' />
+
       <Drawer
         variant='permanent'
         sx={{
           display: { xs: 'none', md: 'block' },
         }}
         open={toggleMenu}
+        ref={drawerPerm}
+        ModalProps={{
+          container: document.getElementById('test'),
+          style: { position: 'absolute' },
+        }}
       >
         {toggleMenu && (
           <List
