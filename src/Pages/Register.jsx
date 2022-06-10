@@ -61,7 +61,7 @@ function Register({ setOpenForm, setIsOpen }) {
                   />
                 ) : (null)
             }
-            <CreateAccount />
+            <CreateAccount setOpenForm={setOpenForm} setIsOpen={setIsOpen} />
           </div>
         </>
       ) : (

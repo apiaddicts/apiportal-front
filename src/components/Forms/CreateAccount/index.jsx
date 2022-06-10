@@ -10,7 +10,7 @@ import { signUp } from '../../../redux/actions/userAction';
 
 import './index.scss';
 
-function CreateAccount() {
+function CreateAccount({ setOpenForm, setIsOpen }) {
   const dispatch = useDispatch();
 
   const handleSubmit = async (values) => {
@@ -63,20 +63,23 @@ function CreateAccount() {
           <b>términos y condiciones.</b>
         </span>
       </div>
-      <div className='end-create-btn'>
-        <div className='end-create-btn-input'>
-          <Button
-            style={{ width: '100%' }}
-            styles='primary-blue'
-            type='submit'
-            disabled={
-              !formConfig.dirty || !formConfig.isValid || formConfig.isSubmitting
-            }
-            opacity={!formConfig.dirty || !formConfig.isValid || formConfig.isSubmitting ? 0.5 : 1}
-          >
-            Registrarme
-          </Button>
-        </div>
+      <div className='register__btn'>
+        <Button
+          styles='secundary-white'
+          type='button'
+          onClick={() => {
+            setOpenForm(false);
+            setIsOpen(true);
+          }}
+        >
+          Iniciar Sesión
+        </Button>
+        <Button
+          styles='primary-blue'
+          type='submit'
+        >
+          Registrarme
+        </Button>
       </div>
     </form>
   );

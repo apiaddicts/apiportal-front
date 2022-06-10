@@ -71,33 +71,31 @@
     grid-column: 5/9;
 }
 
-.end-create-btn {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    width: 100% !important;
-    justify-content: center;
-}
-
-.end-create-btn-input{
-    width: 100% !important;
-    grid-column: 5/9;
-    button {
-        height: 57px;
-    }
-    @include breakpoint(xs) {
-        grid-column: 1/13;
-        button {
-            height: 47px;
+.register {
+    &__btn{
+        width: 100% !important; 
+        display: flex; 
+        justify-content: center;
+        align-items: center;
+        @include breakpoint(xsl) {
+            flex-direction: column-reverse;
+            align-items: center;
+            justify-content: center;
         }
-    }
-
-    @include breakpoint(sm) {
-        grid-column: 4/8;
-    }
-    @include breakpoint(md) {
-        grid-column: 4/9;
-    }
-    @include breakpoint(lg) {
-        grid-column: 5/9;
+        .btn-secundary-white{
+            padding: 0 !important;
+        }
+        button {
+            width: 200px;
+            margin-right: 10px;
+            div{
+                width:100% !important;
+                min-width: 200px;
+            }
+            @include breakpoint(xsl) {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+        }
     }
 }
