@@ -12,7 +12,7 @@ RUN python3 -m ensurepip
 RUN pip3 install --no-cache --upgrade pip setuptools
 
 COPY package*.json /usr/src/app/
-
+RUN npm install
 # USER node
 ARG REACT_APP_STRAPI_URL
 ARG REACT_APP_SURA_URL
