@@ -234,16 +234,16 @@ export const filterCheck = (label, checked, name) => (dispatch) => {
 export const getLibraryApiNextSearch = (search) => (dispatch) => {
   const { apisSkip } = store.getState().library;
 
-  const skip = apisSkip + 2;
-  dispatch(searchApis(search, 2, skip));
+  const skip = apisSkip + config.topApi;
+  dispatch(searchApis(search, config.topApi, skip));
   dispatch({ type: libraryConstants.GET_LIBRARY_SKIP, skip });
 };
 
 export const getLibraryApiPreviosSearch = (search) => (dispatch) => {
   const { apisSkip } = store.getState().library;
 
-  const skip = apisSkip - 2;
-  dispatch(searchApis(search, 2, skip));
+  const skip = apisSkip - config.topApi;
+  dispatch(searchApis(search, config.topApi, skip));
   dispatch({ type: libraryConstants.GET_LIBRARY_SKIP, skip });
 };
 

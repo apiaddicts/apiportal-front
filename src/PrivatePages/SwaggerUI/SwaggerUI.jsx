@@ -30,7 +30,7 @@ function SwaggerUI() {
       dom_id: '#swaggerContainer',
       spec: jsonOpenApi,
       presets: SwaggerUi.presets.apis,
-      oauth2RedirectUrl: `${window.location.protocol}//${window.location.host}/apis/swagger-ui/oauth-redirect`,
+      oauth2RedirectUrl: `${window.location.protocol}//${window.location.host}/dashboard/apis/swagger-ui/oauth-redirect`,
       persistAuthorization: true,
     });
   }, []);

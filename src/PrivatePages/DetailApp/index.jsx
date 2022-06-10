@@ -257,12 +257,12 @@ function AppsDetail(props) {
                               sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer', zIndex: 6 }}
                             >
                               <TableCell component='th' scope='row'>
-                                <HashLink smooth to={`/apiBookstores/${row.name}#detailApi`}>
+                                <HashLink smooth to={`/dashboard/apis/${row.name}#detailApi`}>
                                   <p className={classes.cell_name}>{row.name}</p>
                                 </HashLink>
                               </TableCell>
                               <TableCell>
-                                <HashLink smooth to={`/apiBookstores/${row.name}#detailApi`}>
+                                <HashLink smooth to={`/dashboard/apis/${row.name}#detailApi`}>
                                   <p className={classes.cell_description}>
                                     {row.properties.description}
                                   </p>

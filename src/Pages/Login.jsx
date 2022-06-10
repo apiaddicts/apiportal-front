@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import Form from '../components/Forms/LoginForm';
 import Modal from '../components/Modal';
@@ -20,6 +21,8 @@ function Login({ setIsOpen, setPrivateSession }) {
   const [showForm, setShowForm] = useState(true);
   const [showResetForm, setShowResetForm] = useState(false);
 
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   // This function is responsible for sending the user to local storage
@@ -30,6 +33,7 @@ function Login({ setIsOpen, setPrivateSession }) {
   useEffect(() => {
     if (token.length > 0) {
       setIsOpen(false);
+      navigate('/dashboard/user');
     }
   }, [token]);
 

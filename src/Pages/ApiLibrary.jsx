@@ -178,7 +178,7 @@ function AppLibrary(props) {
                 colorStatus={item.color_status}
                 info='Documentación'
                 description={item.description}
-                redirectTo={`/apiBookstores/${item.apiName}`}
+                redirectTo={`/dashboard/apis/${item.apiName}`}
               />
             ))
           ) : (

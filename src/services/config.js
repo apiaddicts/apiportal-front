@@ -27,8 +27,9 @@ const config = {
   hmacAuthHeader: createSharedAccessToken('integration', process.env.REACT_APP_PRIMARY_KEY, 14),
   rememberkey: process.env.REACT_APP_REMEMBER_KEY,
   topProduct: process.env.REACT_APP_LIST_PRODUCT_TOP,
-  topDetail: process.env.REACT_APP_LIST_PRODUCT_DETAIL_TOP,
+  topDetail: process.env.REACT_APP_LIST_PRODUCT_APIS_TOP,
   topApi: process.env.REACT_APP_LIST_API_TOP,
+  topSubscriptions: process.env.REACT_APP_LIST_SUBSCRIPTIONS,
   url: createURLSura(),
 };
 
