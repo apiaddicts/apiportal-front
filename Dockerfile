@@ -12,7 +12,6 @@ RUN python3 -m ensurepip
 RUN pip3 install --no-cache --upgrade pip setuptools
 
 COPY package*.json /usr/src/app/
-RUN npm install
 # USER node
 ARG REACT_APP_STRAPI_URL
 ARG REACT_APP_SURA_URL
@@ -27,7 +26,7 @@ ARG REACT_APP_TOKEN_VALID_DAYS
 ARG REACT_APP_LIST_API_TOP
 ARG REACT_APP_LIST_PRODUCT_APIS_TOP
 ARG REACT_APP_LIST_PRODUCT_TOP
-
+RUN npm install
 
 COPY . /usr/src/app/
 RUN npm run build
