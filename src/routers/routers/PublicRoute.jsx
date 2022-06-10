@@ -23,7 +23,7 @@ function PublicRoute() {
   return (
     <>
       {isOpen && (
-        <Login setIsOpen={setIsOpen} />
+        <Login setIsOpen={setIsOpen} setOpenForm={setOpenForm} />
       )}
       {openForm && (
         <Register setOpenForm={setOpenForm} setIsOpen={setIsOpen} />

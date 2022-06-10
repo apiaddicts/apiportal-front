@@ -15,7 +15,7 @@ import classes from '../styles/pages/login.module.scss';
 
 import useLoginConfig from '../hooks/useLogin';
 
-function Login({ setIsOpen, setPrivateSession }) {
+function Login({ setOpenForm, setIsOpen, setPrivateSession }) {
   const { token } = useSelector((state) => state.user);
   //const [showAlert, setShowAlert] = useState(false);
   const [showForm, setShowForm] = useState(true);
@@ -61,6 +61,8 @@ function Login({ setIsOpen, setPrivateSession }) {
             setShowResetForm={setShowResetForm}
             formik={formConfig}
             fieldsLogin={fieldsLogin}
+            setOpenForm={setOpenForm}
+            setIsOpen={setIsOpen}
           />
         )}
         {showResetForm && <ResetPassword handleSubmit={handleSubmit} />}
