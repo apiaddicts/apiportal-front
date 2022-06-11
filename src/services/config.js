@@ -24,12 +24,15 @@ const config = {
   resourceGroupName: process.env.REACT_APP_RESOURCE_GROUP_NAME,
   serviceName: process.env.REACT_APP_SERVICE_NAME,
   apiVersion: '2021-08-01',
-  hmacAuthHeader: createSharedAccessToken('integration', process.env.REACT_APP_PRIMARY_KEY, 14),
+  hmacAuthHeader: createSharedAccessToken('integration', 'Rhb6U3/++R5OuPUehVcWQ+WhjM/PxMRTXvvVRlrxYxRuc3ieYz70hNr8tpWTdix2NvX6+BrJNNjW1hVQheLQKg==', 14),
   rememberkey: process.env.REACT_APP_REMEMBER_KEY,
   topProduct: process.env.REACT_APP_LIST_PRODUCT_TOP,
-  topDetail: process.env.REACT_APP_LIST_PRODUCT_DETAIL_TOP,
+  topDetail: process.env.REACT_APP_LIST_PRODUCT_APIS_TOP,
   topApi: process.env.REACT_APP_LIST_API_TOP,
+  topSubscriptions: process.env.REACT_APP_LIST_SUBSCRIPTIONS,
   url: createURLSura(),
 };
+
+console.log(config, process.env);
 
 export default config;

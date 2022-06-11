@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import Form from '../components/Forms/LoginForm';
 import Modal from '../components/Modal';
@@ -14,11 +15,13 @@ import classes from '../styles/pages/login.module.scss';
 
 import useLoginConfig from '../hooks/useLogin';
 
-function Login({ setIsOpen, setPrivateSession }) {
+function Login({ setOpenForm, setIsOpen, setPrivateSession }) {
   const { token } = useSelector((state) => state.user);
   //const [showAlert, setShowAlert] = useState(false);
   const [showForm, setShowForm] = useState(true);
   const [showResetForm, setShowResetForm] = useState(false);
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
@@ -30,6 +33,7 @@ function Login({ setIsOpen, setPrivateSession }) {
   useEffect(() => {
     if (token.length > 0) {
       setIsOpen(false);
+      navigate('/dashboard/user');
     }
   }, [token]);
 
@@ -57,6 +61,8 @@ function Login({ setIsOpen, setPrivateSession }) {
             setShowResetForm={setShowResetForm}
             formik={formConfig}
             fieldsLogin={fieldsLogin}
+            setOpenForm={setOpenForm}
+            setIsOpen={setIsOpen}
           />
         )}
         {showResetForm && <ResetPassword handleSubmit={handleSubmit} />}

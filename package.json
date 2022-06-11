@@ -36,7 +36,7 @@
     "sass": "^1.49.9",
     "slick-carousel": "^1.8.1",
     "styled-components": "^5.3.5",
-    "swagger-ui-react": "^4.11.0",
+    "swagger-ui": "^4.12.0",
     "underscore": "^1.13.4",
     "web-vitals": "^2.1.4",
     "yup": "^0.32.11"

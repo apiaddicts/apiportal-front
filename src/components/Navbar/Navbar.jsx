@@ -38,7 +38,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
   };
 
   const listOptions = [
-    { icon: '', name: 'APIs', route: '/apis' },
+    { icon: '', name: 'APIs', route: '/api-collection' },
     // { icon: 'MdArrowDropDown', name: 'Documentación', route: '/documentacion' },
     { icon: '', name: 'Blog', route: '/blog' },
     { icon: '', name: 'FAQs', route: '/faqs' },
@@ -57,7 +57,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
           </NavLink>
           <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
 
-            <ul className='d-xs-none'>
+            <ul className={classes.show__lg__up}>
               <li className='pr-2'>
                 <Button type='button' styles='ghost-variant' preIcon='MdOutlinePersonOutline' size='small' style={{ width: '200px', height: '32px' }} onClick={() => { setIsOpen(true); }}>
                   Iniciar sesión
@@ -70,7 +70,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
               </li>
             </ul>
 
-            <div className={`d-xs-only ${classes.navbar__xs}`}>
+            <div className={classes.navbar__xs}>
 
               <div className={classes.navbar__xs__header}>
                 <div className={classes.navbar__xs__header__logo}>
@@ -83,7 +83,6 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
               <div className={classes.navbar__xs__section}>
                 <NavLink to='/' className={classes.navbar__xs__section__logo} onClick={menuToggleHandler}>SEGUROS</NavLink>
               </div>
-
               <ul>
                 {
                   listOptions.map((item, index) => (
@@ -147,9 +146,9 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
 
             </div>
 
-            <div className={`d-xs-none ${classes.header__content__divider}`} />
+            <div className={`${classes.show__lg__up} ${classes.header__content__divider}`} />
 
-            <div className={`d-xs-none ${classes.header__content__search}`}>
+            <div className={`${classes.show__lg__up} ${classes.header__content__search}`}>
               <MdSearch />
             </div>
           </nav>
@@ -167,7 +166,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
           <div className={classes.buttom__nav__options}>
             <ul>
               <li>
-                <Link to='/apis'>APIs</Link>
+                <Link to='/api-collection'>APIs</Link>
               </li>
               <li>
                 <Link to='/blog'>BLOG</Link>

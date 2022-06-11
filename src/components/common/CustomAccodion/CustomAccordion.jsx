@@ -5,7 +5,7 @@ import classes from './customaccordion.module.scss';
 import { listApis, getApiHostnames, getApiOpenAPI } from '../../../redux/actions/libraryAction';
 
 function CustomAccordion({ items, subItem, setSubItem }) {
-  const { apis, hostnames, jsonOpenApi } = useSelector((state) => state.library);
+  const { apis, hostnames, jsonOpenApi, openApiFormat } = useSelector((state) => state.library);
   const dispatch = useDispatch();
   const toggleItem = (index) => {
     if (subItem === index) {
@@ -128,24 +128,25 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                       ) : subItem === 3 ? (
                         <div>
                           {
-                            jsonOpenApi.components && jsonOpenApi.components.securitySchemes && (
-                              Object.keys(jsonOpenApi.components.securitySchemes).map((key, index) => {
+                            ((jsonOpenApi.components && jsonOpenApi.components.securitySchemes) || jsonOpenApi.securityDefinitions) && (
+                              Object.keys((openApiFormat === 'swagger') ? jsonOpenApi.securityDefinitions : jsonOpenApi.components.securitySchemes).map((key, index) => {
                                 return (
                                   <div key={index}>
                                     <div className={classes.accordion__title}>
                                       <h1>{key}</h1>
                                     </div>
-                                    {jsonOpenApi.components.securitySchemes[key]?.description && (
+                                    {((openApiFormat === 'openapi' && jsonOpenApi.components.securitySchemes[key].description) || (openApiFormat === 'swagger' && jsonOpenApi.securityDefinitions[key].description)) && (
                                       <div className={classes.accordion__body__description}>
-                                        <p>{jsonOpenApi.components.securitySchemes[key].description}</p>
+                                        <p>{openApiFormat === 'swagger' ? jsonOpenApi.securityDefinitions[key].description : jsonOpenApi.components.securitySchemes[key].description}</p>
                                       </div>
                                     )}
                                     <div>
                                       <div className={classes.accordion__body__title}>
                                         <h1>Esquema de seguridad: </h1>
                                         {(() => {
-                                          switch (jsonOpenApi.components.securitySchemes[key].type.toLowerCase()) {
+                                          switch (openApiFormat === 'swagger' ? jsonOpenApi.securityDefinitions[key].type.toLowerCase() : jsonOpenApi.components.securitySchemes[key].type.toLowerCase()) {
                                             case 'http':
+                                            case 'basic':
                                               return <p>HTTP</p>;
                                             case 'apikey':
                                               return <p>API Key</p>;
@@ -156,60 +157,66 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                                           }
                                         })()}
                                       </div>
-                                      {jsonOpenApi.components.securitySchemes[key].type.toLowerCase() === 'http' && jsonOpenApi.components.securitySchemes[key]?.scheme && (
+                                      {((openApiFormat === 'openapi' && jsonOpenApi.components.securitySchemes[key].type.toLowerCase() === 'http' && jsonOpenApi.components.securitySchemes[key].scheme) ||
+                                        (openApiFormat === 'swagger' && jsonOpenApi.securityDefinitions[key].type.toLowerCase() === 'basic')) && (
                                         <div className={classes.accordion__body__title}>
                                           <h1>Autorización HTTP: </h1>
-                                          <p>{jsonOpenApi.components.securitySchemes[key].scheme}</p>
+                                          <p>{openApiFormat === 'swagger' ? jsonOpenApi.securityDefinitions[key].type : jsonOpenApi.components.securitySchemes[key].scheme}</p>
                                         </div>
                                       )}
-                                      {jsonOpenApi.components.securitySchemes[key].type.toLowerCase() === 'http' && jsonOpenApi.components.securitySchemes[key]?.scheme &&
-                                        jsonOpenApi.components.securitySchemes[key].scheme === 'bearer' && jsonOpenApi.components.securitySchemes[key]?.bearerFormat && (
+                                      {openApiFormat === 'openapi' && jsonOpenApi.components.securitySchemes[key].type.toLowerCase() === 'http' && jsonOpenApi.components.securitySchemes[key].scheme &&
+                                        jsonOpenApi.components.securitySchemes[key].scheme === 'bearer' && jsonOpenApi.components.securitySchemes[key].bearerFormat && (
                                         <div className={classes.accordion__body__title}>
                                           <h1>Formato: </h1>
                                           <p>{jsonOpenApi.components.securitySchemes[key].bearerFormat}</p>
                                         </div>
                                       )}
-                                      {jsonOpenApi.components.securitySchemes[key].type.toLowerCase() === 'apikey' && jsonOpenApi.components.securitySchemes[key]?.in && (
+                                      {((openApiFormat === 'openapi' && jsonOpenApi.components.securitySchemes[key].type.toLowerCase() === 'apikey' && jsonOpenApi.components.securitySchemes[key].in) ||
+                                        (openApiFormat === 'swagger' && jsonOpenApi.securityDefinitions[key].type.toLowerCase() === 'apikey' && jsonOpenApi.securityDefinitions[key].in)) && (
                                         <div className={classes.accordion__body__title}>
-                                          <h1>{`Parámetro (${jsonOpenApi.components.securitySchemes[key].in}): `}</h1>
-                                          <p>{jsonOpenApi.components.securitySchemes[key].name}</p>
+                                          <h1>{`Parámetro (${openApiFormat === 'swagger' ? jsonOpenApi.securityDefinitions[key].in : jsonOpenApi.components.securitySchemes[key].in}): `}</h1>
+                                          <p>{openApiFormat === 'swagger' ? jsonOpenApi.securityDefinitions[key].name : jsonOpenApi.components.securitySchemes[key].name}</p>
                                         </div>
                                       )}
-                                      {jsonOpenApi.components.securitySchemes[key].type.toLowerCase() === 'oauth2' && jsonOpenApi.components.securitySchemes[key]?.flows && (
-                                        Object.keys(jsonOpenApi.components.securitySchemes[key].flows).map((flow, index) => {
+                                      {((openApiFormat === 'openapi' && jsonOpenApi.components.securitySchemes[key].type.toLowerCase() === 'oauth2' && jsonOpenApi.components.securitySchemes[key].flows) ||
+                                        (openApiFormat === 'swagger' && jsonOpenApi.securityDefinitions[key].type.toLowerCase() === 'oauth2' && jsonOpenApi.securityDefinitions[key].flow)) && (
+                                        Object.keys(openApiFormat === 'openapi' ? jsonOpenApi.components.securitySchemes[key].flows : { [jsonOpenApi.securityDefinitions[key].flow]: jsonOpenApi.securityDefinitions[key] }).map((flow, index) => {
                                           return (
                                             <div key={index}>
                                               <div className={classes.accordion__title}>
                                                 <p>{`Flujo ${flow}`}</p>
                                               </div>
-                                              {jsonOpenApi.components.securitySchemes[key].flows[flow]?.authorizationUrl && (
+                                              {((openApiFormat === 'openapi' && jsonOpenApi.components.securitySchemes[key].flows[flow].authorizationUrl) ||
+                                                (openApiFormat === 'swagger' && jsonOpenApi.securityDefinitions[key].authorizationUrl)) && (
                                                 <div className={classes.accordion__body__title}>
                                                   <h1>URL de Autorización: </h1>
-                                                  <code className={classes.scopes__code}>{jsonOpenApi.components.securitySchemes[key].flows[flow].authorizationUrl}</code>
+                                                  <code className={classes.scopes__code}>{openApiFormat === 'openapi' ? jsonOpenApi.components.securitySchemes[key].flows[flow].authorizationUrl : jsonOpenApi.securityDefinitions[key].authorizationUrl}</code>
                                                 </div>
                                               )}
-                                              {jsonOpenApi.components.securitySchemes[key].flows[flow]?.tokenUrl && (
+                                              {((openApiFormat === 'openapi' && jsonOpenApi.components.securitySchemes[key].flows[flow].tokenUrl) ||
+                                                (openApiFormat === 'swagger' && jsonOpenApi.securityDefinitions[key].tokenUrl)) && (
                                                 <div className={classes.accordion__body__title}>
                                                   <h1>URL de Token: </h1>
-                                                  <code className={classes.scopes__code}>{jsonOpenApi.components.securitySchemes[key].flows[flow].tokenUrl}</code>
+                                                  <code className={classes.scopes__code}>{openApiFormat === 'openapi' ? jsonOpenApi.components.securitySchemes[key].flows[flow].tokenUrl : jsonOpenApi.securityDefinitions[key].tokenUrl}</code>
                                                 </div>
                                               )}
-                                              {jsonOpenApi.components.securitySchemes[key].flows[flow]?.refreshUrl && (
+                                              {openApiFormat === 'openapi' && jsonOpenApi.components.securitySchemes[key].flows[flow].refreshUrl && (
                                                 <div className={classes.accordion__body__title}>
                                                   <h1>URL de Refresco: </h1>
                                                   <code className={classes.scopes__code}>{jsonOpenApi.components.securitySchemes[key].flows[flow].refreshUrl}</code>
                                                 </div>
                                               )}
-                                              {jsonOpenApi.components.securitySchemes[key].flows[flow]?.scopes && (
+                                              {((openApiFormat === 'openapi' && jsonOpenApi.components.securitySchemes[key].flows[flow].scopes) ||
+                                                (openApiFormat === 'swagger' && jsonOpenApi.securityDefinitions[key].scopes)) && (
                                                 <div className={classes.accordion__body__title}>
                                                   <h1>Scopes: </h1>
                                                   <div>
                                                     <ul className={classes.scopes}>
-                                                      {Object.keys(jsonOpenApi.components.securitySchemes[key].flows[flow].scopes).map((scope, index) => {
+                                                      {Object.keys(openApiFormat === 'openapi' ? jsonOpenApi.components.securitySchemes[key].flows[flow].scopes : jsonOpenApi.securityDefinitions[key].scopes).map((scope, index) => {
                                                         return (
                                                           <li key={index}>
                                                             <code className={classes.wrapper__auth__content__code}>{scope}</code>
-                                                            <span>{jsonOpenApi.components.securitySchemes[key].flows[flow].scopes[scope]}</span>
+                                                            <span>{openApiFormat === 'openapi' ? jsonOpenApi.components.securitySchemes[key].flows[flow].scopes[scope] : jsonOpenApi.securityDefinitions[key].scopes[scope]}</span>
                                                           </li>
                                                         );
                                                       })}

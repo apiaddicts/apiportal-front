@@ -20,22 +20,20 @@
 
     &__btn{
         width: 100%; 
-        display: grid; 
-        grid-template-columns: repeat(12, 1fr);
-        &__button {
-            grid-column: 5/9;
-            @include breakpoint(xs) {
-                grid-column: 1/13;
-            }
-
-            @include breakpoint(sm) {
-                grid-column: 4/8;
-            }
-            @include breakpoint(md) {
-                grid-column: 3/8;
-            }
-            @include breakpoint(lg) {
-                grid-column: 5/9;
+        display: flex; 
+        justify-content: center;
+        align-items: center;
+        @include breakpoint(xsl) {
+            flex-direction: column-reverse;
+            align-items: center;
+            justify-content: center;
+        }
+        button {
+            width: 185px;
+            margin-right: 10px;
+            @include breakpoint(xsl) {
+                width: 100%;
+                margin-bottom: 10px;
             }
         }
     }

@@ -1,3 +1,4 @@
+/* eslint-disable */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useState } from 'react';
 
@@ -178,44 +179,20 @@ function AppLibrary(props) {
                 colorStatus={item.color_status}
                 info='ver Documentación'
                 description={item.description}
-                redirectTo={`/apiBookstores/${item.apiName}`}
+                redirectTo={`/dashboard/apis/${item.apiName}`}
               />
             ))
-          ) : (
-            <section
-              style={{
-                width: '100%',
-              }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  margin: '2rem',
-                }}
-              >
-                <h1 className='align-center'>Información no disponible</h1>
-              </div>
-            </section>
-          )
+          ) : (null)
+        ) : (null)}
+      </div>
+
+      <div className='display_flex justify_content__center mt-4'>
+        {loadingLibraries === false && libraries ? (
+          arrApis.length == 0 ? (
+            <h1 className='text-center'>Información no disponible</h1>
+          ) : (null)
         ) : (
-          <section
-            style={{
-              width: '100%',
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                margin: '2rem',
-              }}
-            >
-              <h1>Cargando....</h1>
-            </div>
-          </section>
+          <h1>Cargando....</h1>
         )}
       </div>
 

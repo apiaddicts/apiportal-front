@@ -17,6 +17,7 @@ const initialState = {
   api: {},
   errorApi: {},
   jsonOpenApi: {},
+  openApiFormat: '',
   errorJsonOpenApi: {},
 
   loadingTags: false,
@@ -156,6 +157,7 @@ export default function libraryReducer(state = initialState, action) {
       return {
         ...state,
         jsonOpenApi: action.payload,
+        openApiFormat: ('swagger' in action.payload) ? 'swagger' : 'openapi',
         errorJsonOpenApi: {},
       };
     case libraryConstants.GET_API_OPENAPI_FAILURE:

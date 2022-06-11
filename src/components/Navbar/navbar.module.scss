@@ -59,7 +59,6 @@
       position: fixed;
       display: flex;
       flex-direction: column;
-      // justify-content: center;
       text-align: center;
       background: $secondary_white;
       transform: translate(0);
@@ -252,9 +251,28 @@
     height: 42px;
   }
 }
+.show__lg__up {
+  display: none !important;
+  @include breakpoint(sm) {
+    display: none !important;
+  }
+  @include breakpoint(md) {
+    display: flex !important;
+  }
+}
 
 .navbar {
   &__xs {
+    display: none !important;
+    @include breakpoint(xs) {
+      display: block !important;
+    }    
+    @include breakpoint(sm) {
+      display: block !important;
+    }
+    @include breakpoint(md) {
+      display: none !important;
+    }
     &__header {
       display: flex;
       justify-content: space-between;
