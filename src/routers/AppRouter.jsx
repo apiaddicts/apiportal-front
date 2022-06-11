@@ -25,13 +25,12 @@ import ApiDetailed from '../PrivatePages/ApiDetails/ApiDetailed';
 // import ChooseApi from '../PrivatePages/ChooseApi';
 import CustomFooter from '../components/common/CustomFooter/CustomFooter';
 import ApiSubscriptions from '../PrivatePages/ApiSubscriptions';
-
-import Swagger from '../Pages/ejemplos/Swagger';
-
 import { getUser } from '../redux/actions/userAction';
 import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent';
 import ResetPassword from '../Pages/ResetPassword';
 import ConfirmAccount from '../Pages/ConfirmAccount';
+import SwaggerUI from '../PrivatePages/SwaggerUI/SwaggerUI';
+import OAuthRedirect from '../PrivatePages/SwaggerUI/OAuthRedirect';
 
 function AppRouter() {
   const { id, token, user } = useSelector((state) => state.user);
@@ -57,7 +56,7 @@ function AppRouter() {
   return (
     <>
       {isOpen && (
-        <Login setIsOpen={setIsOpen} />
+        <Login setOpenForm={setOpenForm} setIsOpen={setIsOpen} />
       )}
       {openForm && (
         <Register setOpenForm={setOpenForm} setIsOpen={setIsOpen} />
@@ -101,7 +100,8 @@ function AppRouter() {
                     <Route path='/products/:id' exact element={<AppsDetail />} />
                     <Route path='/apiBookstores' exact element={<ApiLibrary />} />
                     <Route path='/apiBookstores/:id' exact element={<ApiDetailed />} />
-                    <Route path='/apiBookstores/try/:id' exact element={<Swagger />} />
+                    <Route path='/apis/:id/swagger-ui' exact element={<SwaggerUI />} />
+                    <Route path='/apis/swagger-ui/oauth-redirect' exact element={<OAuthRedirect />} />
                     {/* <Route path='/apps/apis' exact element={<ChooseApi />} /> */}
                     <Route path='/subscriptions' exact element={<ApiSubscriptions />} />
                     <Route path='*' element={<Navigate to='/products' replace />} />

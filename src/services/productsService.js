@@ -115,14 +115,14 @@ function getProductDetail(productName) {
     });
 }
 
-function getProductSuscripcion(productName) {
+function getProductSuscripcion(productName, top, skip) {
   const { token, id } = store.getState().user;
   const requestOptions = {
     method: 'GET',
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.url}/users/${id}/subscriptions?api-version=${config.apiVersion}&$filter=(properties/scope eq '/products/${productName}')`;
+  const url = `${config.url}/users/${id}/subscriptions?api-version=${config.apiVersion}&$filter=(properties/scope eq '/products/${productName}')&$top=${top}&$skip=${skip}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)

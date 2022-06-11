@@ -65,7 +65,7 @@ function getApiOpenAPI(id) {
     headers: { 'Accept': 'application/vnd.oai.openapi+json; charset=utf-8', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.url}/apis/${id}?api-version=${config.apiVersion}`;
+  const url = `${config.url}/apis/${id}?api-version=${config.apiVersion}&export=true&format=swagger`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -106,7 +106,7 @@ function getListTagsByApi(apiName) {
     });
 }
 
-function filterAPIsByTags(search, filter = 'isCurrent', top = 4, skip = 0, includeNotTaggedApis = false) {
+function filterAPIsByTags(search, filter = 'isCurrent', top = config.topApi, skip = 0, includeNotTaggedApis = false) {
   const { token } = store.getState().user;
 
   const requestOptions = {

@@ -24,7 +24,7 @@ export const listProducts = (top = config.topProduct, skip = 0) => (dispatch) =>
   );
 };
 
-export const searchProducts = (search, top = 2, skip = 0) => (dispatch) => {
+export const searchProducts = (search, top = config.topProduct, skip = 0) => (dispatch) => {
   dispatch({ type: productsConstants.GET_PRODUCTS_REQUEST });
 
   productsService.searchProducts(search, top, skip).then(
@@ -41,7 +41,7 @@ export const searchProducts = (search, top = 2, skip = 0) => (dispatch) => {
   );
 };
 
-export const filterProductsByName = (search, top = 1, skip = 0) => (dispatch) => {
+export const filterProductsByName = (search, top = config.topProduct, skip = 0) => (dispatch) => {
 
   productsService.filterProductsByName(search, top, skip).then(
     (response) => {
@@ -57,7 +57,7 @@ export const filterProductsByName = (search, top = 1, skip = 0) => (dispatch) =>
   );
 };
 
-export const filterProductsByDescription = (search, top = 1, skip = 0) => (dispatch) => {
+export const filterProductsByDescription = (search, top = config.topProduct, skip = 0) => (dispatch) => {
 
   productsService.filterProductsByDescription(search, top, skip).then(
     (response) => {
@@ -69,7 +69,7 @@ export const filterProductsByDescription = (search, top = 1, skip = 0) => (dispa
   );
 };
 
-export const filterProductAPIsByName = (productName, search, top = config.topData, skip = 0) => (dispatch) => {
+export const filterProductAPIsByName = (productName, search, top = config.topApi, skip = 0) => (dispatch) => {
   dispatch({ type: productsConstants.GET_PRODUCT_API_REQUEST });
   productsService.filterProductAPIsByName(productName, search, top, skip).then((response) => {
     dispatch({ type: productsConstants.GET_PRODUCT_API_SUCCESS, response });
@@ -78,7 +78,7 @@ export const filterProductAPIsByName = (productName, search, top = config.topDat
   });
 };
 
-export const filterProductAPIsByDescription = (productName, search, top = config.topData, skip = 0) => (dispatch) => {
+export const filterProductAPIsByDescription = (productName, search, top = config.topApi, skip = 0) => (dispatch) => {
   dispatch({ type: productsConstants.GET_PRODUCT_API_REQUEST });
   productsService.filterProductAPIsByDescription(productName, search, top, skip).then((response) => {
     dispatch({ type: productsConstants.GET_PRODUCT_API_SUCCESS, response });
@@ -87,9 +87,9 @@ export const filterProductAPIsByDescription = (productName, search, top = config
   });
 };
 
-export const getProductSuscripcion = (productName) => (dispatch) => {
+export const getProductSuscripcion = (productName, top = config.topSubscriptions, skip = 0) => (dispatch) => {
   dispatch({ type: productsConstants.GET_PRODUCT_SUSCRIPCION_REQUEST });
-  productsService.getProductSuscripcion(productName).then((response) => {
+  productsService.getProductSuscripcion(productName, top, skip).then((response) => {
     if (Object.keys(response).length > 0) {
       dispatch({ type: productsConstants.GET_PRODUCT_SUSCRIPCION_SUCCESS, response });
     }
@@ -141,17 +141,17 @@ export const getProductPrevious = () => (dispatch) => {
 
 export const getProductApiNext = (url, productName) => (dispatch) => {
   const { productsApisSkip } = store.getState().products;
-  const skip = productsApisSkip + 1;
+  const skip = productsApisSkip + config.topApi;
 
-  dispatch(getProductApis(productName, 1, skip));
+  dispatch(getProductApis(productName, config.topApi, skip));
   dispatch({ type: productsConstants.GET_PRODUCT_API_SKIP, skip });
 };
 
 export const getProductApiPrevious = (productName) => (dispatch) => {
   const { productsApisSkip } = store.getState().products;
-  const skip = productsApisSkip - 1;
+  const skip = productsApisSkip - config.topApi;
 
-  dispatch(getProductApis(productName, 1, skip));
+  dispatch(getProductApis(productName, config.topApi, skip));
   dispatch({ type: productsConstants.GET_PRODUCT_API_SKIP, skip });
 };
 

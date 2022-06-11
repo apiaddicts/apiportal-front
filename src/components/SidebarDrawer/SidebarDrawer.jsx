@@ -55,9 +55,9 @@ function SidebarDrawer({ children, user }) {
   });
 
   const listItems = [
-    { route: '/products', text: 'Productos', icon: <Terminal /> },
-    { route: '/apiBookstores', text: 'Biblioteca de APIs', icon: <Settings /> },
-    { route: '/subscriptions', text: 'Suscripciones', icon: <Terminal /> },
+    { route: '/dashboard/products', text: 'Productos', icon: <Terminal /> },
+    { route: '/dashboard/apis', text: 'Biblioteca de APIs', icon: <Settings /> },
+    { route: '/dashboard/subscriptions', text: 'Suscripciones', icon: <Terminal /> },
   ];
 
   const dispatch = useDispatch();
@@ -73,7 +73,7 @@ function SidebarDrawer({ children, user }) {
   };
 
   const handleUser = () => {
-    navigate('/user');
+    navigate('/dashboard/user');
   };
 
   const handleLogout = () => {

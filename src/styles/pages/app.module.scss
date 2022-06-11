@@ -75,3 +75,28 @@
         }
     }
 }
+
+.wrapper_apps__wide {
+    &__display{
+      display: block;
+    }
+    @include breakpoint(xsl) {
+      &__display{
+        display: none;
+      }
+    }
+  }
+  
+  .wrapper_apps__small {
+    &__display{
+      display: none;
+    }
+    @include breakpoint(xsl) {
+      &__display{
+        display: block;
+        .border__bottom{
+            border-bottom: 1px solid #ECF0F1;
+        }
+      }
+    }
+  }

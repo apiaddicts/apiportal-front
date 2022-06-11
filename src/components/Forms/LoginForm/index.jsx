@@ -6,7 +6,7 @@ import Button from '../../Buttons/Button';
 import styles from './login.module.scss';
 import Alert from '../../Alert';
 
-function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin }) {
+function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin, setOpenForm, setIsOpen }) {
 
   const { signUpData, responseErrorLogin } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -82,11 +82,19 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin }) {
         </p>
       </div>
       <div className={styles.login__btn}>
-        <div className={styles.login__btn__button}>
-          <Button styles='primary-blue' type='submit'>
-            Iniciar sesión
-          </Button>
-        </div>
+        <Button
+          styles='secundary-white'
+          type='button'
+          onClick={() => {
+            setIsOpen(false);
+            setOpenForm(true);
+          }}
+        >
+          Registrarme
+        </Button>
+        <Button styles='primary-blue' type='submit'>
+          Iniciar sesión
+        </Button>
       </div>
     </form>
   );

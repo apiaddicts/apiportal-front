@@ -109,14 +109,30 @@
 .form_suscriptione {
   display: flex;
   // justify-content:space-between;
+  @include breakpoint(xsl) {
+    flex-direction: column;
+  }
 
   &__input {
     width: 600px;
     margin-right: 28px;
+    height: 36px;
+    @include breakpoint(xsl) {
+      width: 100%;
+      margin-right: 0;
+      div {
+        min-width: 100%;
+      }
+    }
   }
 
   &__btn {
     width: 167px;
+    height: 36px;
+    @include breakpoint(xsl) {
+      margin-top: 15px;
+      width: 100%;
+    }
   }
 }
 
@@ -185,6 +201,31 @@
   @include breakpoint(xsl) {
     &__display{
       display: block;
+    }
+  }
+}
+
+.wrapper_apps__wide {
+  &__display{
+    display: block;
+  }
+  @include breakpoint(xsl) {
+    &__display{
+      display: none;
+    }
+  }
+}
+
+.wrapper_apps__small {
+  &__display{
+    display: none;
+  }
+  @include breakpoint(xsl) {
+    &__display{
+      display: block;
+      .border__bottom{
+          border-bottom: 1px solid #ECF0F1;
+      }
     }
   }
 }
