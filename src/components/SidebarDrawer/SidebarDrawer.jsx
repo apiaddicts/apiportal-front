@@ -28,7 +28,7 @@ import { logout } from '../../redux/actions/userAction';
 function SidebarDrawer({ children, user }) {
   const theme = useTheme();
   const [isPermanent, setPermanent] = useState(true);
-  const [toggleMenu, setToggleMenu] = useState(false);
+  const [toggleMenu, setToggleMenu] = useState(true);
   const [toggleMenuTemporary, setToggleMenuTemporary] = useState(false);
 
   const drawerTemp = useRef();
