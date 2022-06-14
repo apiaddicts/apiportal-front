@@ -96,12 +96,12 @@ function BlogDetails({ setIsOpen }) {
               <div className='container'>
                 <div className='row'>
                   <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
-                    <h1 className='h2 text__primary'>También te puede interesar</h1>
+                    <h1 className='fs__32 font-weight-bold text__primary fs__joey'>Novedades</h1>
                   </div>
 
                   <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
                     <p className='body-1'>
-                      Conocs todas las novedades sobre tecnología, APIs y transformación digital
+                      Conoce todas las novedades sobre tecnología, APIs y transformación digital
                     </p>
                   </div>
                 </div>

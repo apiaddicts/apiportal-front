@@ -11,9 +11,8 @@ import Base from './Base';
 import './cards.scss';
 
 function CardBasicLink({ chipTitle, title, img, description, info, route, maxWidth, tabCard, footerTabCard }) {
-
   return (
-    <Base maxWidth={maxWidth}>
+    <Base maxWidth={maxWidth} css_styles={{ override_card_height: 'custom_card__height' }}>
 
       {
         tabCard ? (
@@ -46,7 +45,7 @@ function CardBasicLink({ chipTitle, title, img, description, info, route, maxWid
                     <h1 className='chip_title'>{title}</h1>
                   </>
                 ) : (
-                  <h1 className='h4 font-weight-bold px-8 pt-5 text__primary'>{title}</h1>
+                  <h1 className='fs__26 font-weight-bold px-8 pt-5 text__primary'>{title}</h1>
                 )}
               </div>
               <div className='card_chip_desciption'>

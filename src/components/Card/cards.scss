@@ -2,6 +2,7 @@
 .card_img {
     width: 100%;
     border-radius: 10px 10px 0px 0px;
+    height: 240px;
     z-index: 5;
 }
 
@@ -227,7 +228,7 @@
 }
 
 .custom_card__height{
-    height: 361px !important;
+    height: 461px !important;
     @include breakpoint(xs) {
         height: 395px !important;
     }
