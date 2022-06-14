@@ -31,13 +31,13 @@ function CardBasicLink({ chipTitle, title, img, description, info, route, maxWid
             </div>
           </div>
         ) : (
-          <div>
+          <div className='card_container'>
             {img ? (
               <picture>
                 <img className='card_img' src={img} alt={img} />
               </picture>
             ) : (null, null)}
-            <section className='card_container'>
+            <section className='card_container__body'>
               <div className='card_chip_title'>
                 {chipTitle ? (
                   <>

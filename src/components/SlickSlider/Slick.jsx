@@ -59,7 +59,7 @@ export default function SimpleSlider({ slides, tabCard, footerTabCard, setIsOpen
     ],
   };
   return (
-    <div style={{ minHeight: '500px' }}>
+    <div style={{ height: '530px' }}>
       { typeof setIsOpen === 'function' ? (
         <Slider {...settings}>
           {slides.map((slide, i) => (
