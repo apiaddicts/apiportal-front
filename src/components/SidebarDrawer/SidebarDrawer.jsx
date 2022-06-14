@@ -14,7 +14,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Terminal from '@mui/icons-material/Terminal';
 import Settings from '@mui/icons-material/Settings';
 import { AppBar, Box, Button, IconButton, Menu, MenuItem, Toolbar } from '@mui/material';
-import { ChevronLeft } from '@mui/icons-material';
+import { ChevronLeft, ChevronRight } from '@mui/icons-material';
 import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSharp';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -323,8 +323,6 @@ function SidebarDrawer({ children, user }) {
         </List>
       </SwipeableDrawer>
 
-      <div id='test' />
-
       <Drawer
         variant='permanent'
         sx={{
@@ -332,10 +330,6 @@ function SidebarDrawer({ children, user }) {
         }}
         open={toggleMenu}
         ref={drawerPerm}
-        ModalProps={{
-          container: document.getElementById('test'),
-          style: { position: 'absolute' },
-        }}
       >
         {toggleMenu && (
           <List
@@ -404,7 +398,9 @@ function SidebarDrawer({ children, user }) {
             sx={{ paddingLeft: '97px' }}
           >
             <ListItemIcon>
-              <ChevronLeft />
+              {
+                toggleMenu ? (<ChevronLeft />) : (<ChevronRight />)
+              }
             </ListItemIcon>
             {toggleMenu && (<ListItemText primary='Ocultar menú' />)}
           </ListItem>
