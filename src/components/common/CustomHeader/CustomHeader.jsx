@@ -22,7 +22,7 @@ function CustomHeader({ user }) {
   const navigate = useNavigate();
 
   const handleUser = () => {
-    navigate('/user');
+    navigate('/dashboard/profile');
   };
 
   const handleLogout = () => {

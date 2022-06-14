@@ -73,7 +73,7 @@ function SidebarDrawer({ children, user }) {
   };
 
   const handleUser = () => {
-    navigate('/dashboard/user');
+    navigate('/dashboard/profile');
   };
 
   const handleLogout = () => {

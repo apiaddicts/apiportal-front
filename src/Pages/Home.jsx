@@ -194,7 +194,7 @@ function Home({ setIsOpen }) {
                   filterButtonSection[0].header.map((button, i) => (
                     <div key={i} className='mb-4'>
                       {button.isKeywordInverted ? (
-                        <HashLink smooth to='/api-collection#apiHome'>
+                        <HashLink smooth to='/apis#apiHome'>
                           <Button styles={button.keyword}>
                             {button.title}
                           </Button>
@@ -239,7 +239,7 @@ function Home({ setIsOpen }) {
                 apisNews && apisNews.length > 0 ? (
                   apisNews.map((card, i) => (
                     <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
-                      <CardBasic chipTitle={card.status && card.status === 'Publicado' ? 'GET' : 'POST'} title={card.title} description={card.description} info='MÁS INFORMACIÓN' url={`/api/${card.id}#api`} />
+                      <CardBasic chipTitle={card.status && card.status === 'Publicado' ? 'GET' : 'POST'} title={card.title} description={card.description} info='MÁS INFORMACIÓN' url={`/apis/${card.id}#api`} />
                     </div>
                   ))
                 ) : (null)

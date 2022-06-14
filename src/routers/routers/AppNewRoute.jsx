@@ -28,8 +28,6 @@ function AppNewRoute() {
           </PrivateRoute>
         )}
       />
-      {/* <Route path='confirmPassword' exact element={<ResetPassword />} />
-        <Route path='confirmAccount' exact element={<ConfirmAccount />} /> */}
 
     </Routes>
 

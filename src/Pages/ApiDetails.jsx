@@ -74,7 +74,7 @@ function ApiDetails({ setIsOpen }) {
     const data = {
       label: item.name,
       class: item.class,
-      link: item.link !== '' ? `/api-detail/${params.id}#contact` : '',
+      link: item.link !== '' ? `/apis/${params.id}#contact` : '',
     };
 
     return data;
@@ -125,7 +125,7 @@ function ApiDetails({ setIsOpen }) {
               buttons={buttonsLbls}
               setIsOpen={setIsOpen}
               css_styles={{ 'image_display': 'banner_custom__img--dnone', 'apiindividual_height': 'banner_apiindividual__layout--height', 'custom_line_height': 'line-height-1' }}
-              redirect='/api-collection'
+              redirect='/apis'
               description='In egestas blandit felis id porttitor. Mauris vel nibh ex. Integer iaculis placerat nunc, in ultricies nunc dignissim eu. '
             />
           </section>
@@ -237,7 +237,7 @@ function ApiDetails({ setIsOpen }) {
                         title={card.title}
                         description={card.description}
                         info='MÁS INFORMACIÓN'
-                        url={`/api-detail/${card.id}#api`}
+                        url={`/apis/${card.id}#api`}
                         route={() => handleClickPage(card.id)}
                       />
                     </div>
@@ -249,7 +249,7 @@ function ApiDetails({ setIsOpen }) {
               <div className='flex-md-12 flex-sm-12'>
                 <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
                   <div className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
-                    <HashLink smooth to='/api-collection#apiHome'>
+                    <HashLink smooth to='/apis#apiHome'>
                       <span className='mr-1'>ver todas</span>
                     </HashLink>
                     <Icon id='MdOutlineEast' />

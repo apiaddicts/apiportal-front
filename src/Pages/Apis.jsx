@@ -244,7 +244,7 @@ function Apis({ setIsOpen }) {
                           colorStatus={item.color_status}
                           info='Ver Documentación'
                           description={item.description}
-                          link={`/api-detail/${item.id}#api`}
+                          link={`/apis/${item.id}#api`}
                           modal={setIsOpen}
                           css_styles={{ 'custom_title_size': 'fs__22', 'custom_status_size': 'fs__10' }}
                         />

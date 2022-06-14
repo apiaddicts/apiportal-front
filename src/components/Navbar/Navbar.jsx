@@ -38,7 +38,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
   };
 
   const listOptions = [
-    { icon: '', name: 'APIs', route: '/api-collection' },
+    { icon: '', name: 'APIs', route: '/apis' },
     // { icon: 'MdArrowDropDown', name: 'Documentación', route: '/documentacion' },
     { icon: '', name: 'Blog', route: '/blog' },
     { icon: '', name: 'FAQs', route: '/faqs' },
@@ -166,7 +166,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
           <div className={classes.buttom__nav__options}>
             <ul>
               <li>
-                <Link to='/api-collection'>APIs</Link>
+                <Link to='/apis'>APIs</Link>
               </li>
               <li>
                 <Link to='/blog'>BLOG</Link>
