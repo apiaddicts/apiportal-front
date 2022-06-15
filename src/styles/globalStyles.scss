@@ -1201,11 +1201,6 @@ a {
   background-color: #53565A;
 }
 
-// .css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
-//   background: #ECF0F1 !important;
-//   width: 100px !important;
-// }
-
 .margin_top {
   margin-top: 0;
   @include breakpoint(xs) {
@@ -1213,10 +1208,6 @@ a {
   }
 }
 
-// .multiSelectContainer
-// {
-//   input {
-//     display: none;
-//   }
-
-// } 
+.fs__joey{
+  font-family: $fs-joey;
+}

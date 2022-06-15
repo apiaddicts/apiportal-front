@@ -1,3 +1,6 @@
+@import "../../styles/mixins/mixin.scss";
+@import "../../styles/variables.scss";
+
 .footer__author {
     width: 100%;
     display: flex;
@@ -5,4 +8,17 @@
     align-items: center;
     border-top: 1px solid #bbbaba;
     border-bottom: 1px solid #bbbaba;
+    position: relative;
+    .border_bottom__line{
+        display: none;
+        @include breakpoint(xs) {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background: $secondary;
+            position: absolute;
+            bottom: -2px;
+            left: 90px;
+          }
+    }
 }

@@ -34,7 +34,7 @@
 
 .prevArrow {
   position: absolute;
-  bottom: 0%;
+  bottom: -8%;
   left: 39%;
   z-index: 100;
   cursor: pointer;
@@ -58,7 +58,7 @@
 
 .nextArrow {
   position: absolute;
-  bottom: 0%;
+  bottom: -8%;
   right: 39%;
   z-index: 100;
   cursor: pointer;
@@ -82,7 +82,7 @@
 
 .slick-dots {
   position: absolute;
-  bottom: 12px !important;
+  bottom: -30px !important;
 
   @include breakpoint(xs) {
     bottom: 30px !important;
