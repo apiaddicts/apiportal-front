@@ -1,101 +1,117 @@
 @import "./../../../styles/variables.scss";
-@import '../../../styles/mixins/mixin.scss';
+@import "../../../styles/mixins/mixin.scss";
 
 .create-account {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 
-    div {
-        width: 50%;
-        padding: 0 10px;
-    }
+  div {
+    width: 50%;
+    padding: 0 10px;
+  }
 
-    button {
-        width: 50%;
-        margin: 10px auto;
-    }
+  button {
+    width: 50%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }
 
 @media (max-width: 768px) {
-    .create-account {
-        grid-template-columns: repeat(1, 1fr);
-        width: 100%;
-        height: 70vh;
-        overflow: auto;
+  .create-account {
+    grid-template-columns: repeat(1, 1fr);
+    width: 100%;
+    height: 70vh;
+    overflow: auto;
 
-        div {
-            width: 100%;
-            padding: 0 10px;
-            margin: 8px 0;
-        }
+    div {
+      width: 100%;
+      padding: 0 10px;
+      margin: 8px 0;
     }
+  }
 }
 
 .create-account__checkbox {
-    width: 100% !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 15px;
-    margin: 20px 0;
-    color: $primary;
+  width: 100% !important;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  margin-top: 20px !important;
+  color: $primary;
 
-    input {
-        margin-right: 10px;
+  input[type="checkbox"] + span {
+    font-weight: 400;
+    font-size: 0.938rem;
+  }
 
-        @media (max-width: 715px) {
-            margin-right: 9px;
-            margin-bottom: 16px;
-        }
-    }
+  input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    border: 2px solid $primary;
+    border-radius: 3px;
+  }  
+  input[type="checkbox"]:checked {
+    background-color: $primary;
+  }
 
-    @media (max-width: 768px) {
-        text-align: center;
-    }
+  // input {
+  //     margin-right: 10px;
+
+  //     @media (max-width: 715px) {
+  //         margin-right: 9px;
+  //         margin-bottom: 16px;
+  //     }
+  // }
+
+  // @media (max-width: 768px) {
+  //     text-align: center;
+  // }
 }
 
 .text-bold {
-    font-weight: bold;
-    text-decoration-line: underline;
-
+  font-weight: bold;
+  text-decoration-line: underline;
 }
 
 .footer-register {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr); 
-    width: 100%;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  width: 100%;
 }
 
 .footer-register-button {
-    grid-column: 5/9;
+  grid-column: 5/9;
 }
 
 .register {
-    &__btn{
-        width: 100% !important; 
-        display: flex; 
-        justify-content: center;
-        align-items: center;
-        @include breakpoint(xsl) {
-            flex-direction: column-reverse;
-            align-items: center;
-            justify-content: center;
-        }
-        .btn-secundary-white{
-            padding: 0 !important;
-        }
-        button {
-            width: 200px;
-            margin-right: 10px;
-            div{
-                width:100% !important;
-                min-width: 200px;
-            }
-            @include breakpoint(xsl) {
-                width: 100%;
-                margin-bottom: 10px;
-            }
-        }
+  &__btn {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    @include breakpoint(xsl) {
+      flex-direction: column-reverse;
+      align-items: center;
+      justify-content: center;
     }
+    .btn-secundary-white {
+      padding: 0 !important;
+    }
+    button {
+      width: 200px;
+      margin-right: 10px;
+      div {
+        width: 100% !important;
+        min-width: 200px;
+      }
+      @include breakpoint(xsl) {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+    }
+  }
 }

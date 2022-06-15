@@ -36,9 +36,28 @@ function ResetPassword() {
             <Input key={field.id} field={field} formik={formConfig} />
           ))}
         </div>
-        <div className='py-4 container__button'>
+        <div className='container pt-5'>
+          <div className='row justify-center'>
+            <div className='flex-sm-12 flex-md-10 flex-lg-10'>
+              <Button
+                styles='primary-blue'
+                onClick={() => {
+                  handleSubmit();
+                }}
+                type='submit'
+                disabled={
+                  !formConfig.dirty || !formConfig.isValid || formConfig.isSubmitting
+                }
+                opacity={!formConfig.dirty || !formConfig.isValid || formConfig.isSubmitting ? 0.5 : 1}
+              >
+                Recuperar Contraseña
+              </Button>
+            </div>
+          </div>
+        </div>
+        {/* <div className='py-4 container__button'>
           <Button
-            styles='secundary'
+            styles='primary-blue'
             onClick={() => {
               handleSubmit();
             }}
@@ -50,7 +69,7 @@ function ResetPassword() {
           >
             Recuperar Contraseña
           </Button>
-        </div>
+        </div> */}
       </form>
     </div>
   );

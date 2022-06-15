@@ -5,6 +5,7 @@
     &__checkbox {
         display: flex;
         align-items: center;
+        justify-content: center;
         input[type="checkbox"] + span {
             font-weight: 400;
             font-size: 1rem;
@@ -18,10 +19,19 @@
         }
     }
 
+    &__footer {
+        @include breakpoint(xs) {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column-reverse;
+        }
+    }
+
     &__btn{
         width: 100%; 
         display: flex; 
-        justify-content: center;
+        justify-content: space-around;
         align-items: center;
         @include breakpoint(xsl) {
             flex-direction: column-reverse;
