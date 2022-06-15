@@ -252,12 +252,22 @@
   }
 }
 .show__lg__up {
-  display: none !important;
-  @include breakpoint(sm) {
+  display: flex !important;
+  @include breakpoint(xs) {
     display: none !important;
   }
   @include breakpoint(md) {
     display: flex !important;
+  }
+  @include breakpoint(lg) {
+    display: flex !important;
+  }
+
+  &__buttons {
+    display: none !important;
+    @include breakpoint(md) {
+      display:  flex !important;
+    }
   }
 }
 
