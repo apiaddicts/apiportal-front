@@ -55,7 +55,7 @@
         margin-bottom: 10px;
         
         @media (max-width: 768px) {
-            flex-direction: column;
+            flex-direction: column-reverse;
         
             p {
                 text-align: center;
