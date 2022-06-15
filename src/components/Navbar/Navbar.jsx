@@ -11,8 +11,8 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [size, setSize] = useState({
-    width: undefined,
-    height: undefined,
+    width: 0,
+    height: 0,
   });
 
   useEffect(() => {
@@ -28,8 +28,8 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
   }, []);
 
   useEffect(() => {
-    if (size.width > 768 && menuOpen) {
-      setMenuOpen(false);
+    if (size.width < 768 && menuOpen) {
+      setMenuOpen(true);
     }
   }, [size.width, menuOpen]);
 
@@ -57,7 +57,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
           </NavLink>
           <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
 
-            <ul className={classes.show__lg__up}>
+            <ul className={classes.show__lg__up__buttons}>
               <li className='pr-2'>
                 <Button type='button' styles='ghost-variant' preIcon='MdOutlinePersonOutline' size='small' style={{ width: '200px', height: '32px' }} onClick={() => { setIsOpen(true); }}>
                   Iniciar sesión

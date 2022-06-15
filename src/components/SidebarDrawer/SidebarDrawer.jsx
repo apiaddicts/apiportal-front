@@ -28,7 +28,7 @@ import { logout } from '../../redux/actions/userAction';
 function SidebarDrawer({ children, user }) {
   const theme = useTheme();
   const [isPermanent, setPermanent] = useState(true);
-  const [toggleMenu, setToggleMenu] = useState(false);
+  const [toggleMenu, setToggleMenu] = useState(true);
   const [toggleMenuTemporary, setToggleMenuTemporary] = useState(false);
 
   const drawerTemp = useRef();
@@ -104,9 +104,9 @@ function SidebarDrawer({ children, user }) {
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: '146px',
+    width: '120px',
     [theme.breakpoints.up('sm')]: {
-      width: '146px',
+      width: '120px',
     },
   });
 
@@ -382,7 +382,7 @@ function SidebarDrawer({ children, user }) {
         >
           {
             listItems.map((item, index) => (
-              <ListItem button key={index} sx={{ color: '#53565A', paddingLeft: '97px', paddingRight: 0 }} component={MyNavLink} to={item.route} exact>
+              <ListItem button key={index} sx={{ color: '#53565A', paddingLeft: toggleMenu ? '97px' : '70px', paddingRight: 0 }} component={MyNavLink} to={item.route} exact>
                 <ListItemIcon>
                   {item.icon}
                 </ListItemIcon>
@@ -395,7 +395,7 @@ function SidebarDrawer({ children, user }) {
           <ListItem
             button
             onClick={handleMenu}
-            sx={{ paddingLeft: '97px' }}
+            sx={{ paddingLeft: toggleMenu ? '97px' : '70px' }}
           >
             <ListItemIcon>
               {
