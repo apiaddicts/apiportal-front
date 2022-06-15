@@ -9,18 +9,14 @@ import InputSelect from '../components/Input/InputSelect';
 import classes from '../styles/pages/api.module.scss';
 import CheckboxWrapper from '../components/common/Check';
 import CustomizedAccordions from '../components/common/AccordionMUI';
-import CardInformation from '../components/Card/CardInformation';
-// import ButtonCutom from '../components/common/ButtonMUI';
 import ButtonGroupMUI from '../components/common/ButtonGroup';
 
 import { getLibraries, filterCheck, sortApiCollection } from '../redux/actions/libraryAction';
 import CheckboxLabels from '../components/common/CustomCheck';
 import Icon from '../components/MdIcon/Icon';
-import PaginacionApis from '../components/PaginacionApis';
+import ApisPaginated from '../components/ApisPaginated';
 
 function Apis({ setIsOpen }) {
-  const [activeTab, setActiveTab] = useState('');
-
   const { libraries, filters, backUpLibreries, loadingLibraries } = useSelector((state) => state.library);
   const [filtersSelect, setFiltersSelect] = useState([]);
 
@@ -42,11 +38,6 @@ function Apis({ setIsOpen }) {
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
   const handleChangeVersions = (name, label, checked) => {
-    if (name === label && checked) {
-      setActiveTab(label);
-    } else {
-      setActiveTab('');
-    }
     dispatch(filterCheck(label, checked, 'version'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
@@ -165,7 +156,6 @@ function Apis({ setIsOpen }) {
               <ButtonGroupMUI sx={{ marginBottom: '15px' }}>
                 {versions.map((item, index) => (
                   <CheckboxLabels
-                    activeTab={activeTab}
                     key={index}
                     label={item}
                     name={item}
@@ -197,7 +187,7 @@ function Apis({ setIsOpen }) {
                     handleChangeSelect={handleChangFilterTags}
                     checked={filtersSelect[item.label] !== undefined ? filtersSelect[item.label] : false}
                   />
-                  <p className={classes.wrapper__checkbox__counter}>{item.count}</p>
+                  <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{item.count}</p>
                 </div>
               ))}
             </CustomizedAccordions>
@@ -209,7 +199,7 @@ function Apis({ setIsOpen }) {
           <section className={classes.wrapper__right}>
             <div className='w-full'>
               <div className='row'>
-                <div className='flex-sm-12 flex-md-8'>
+                <div className={`flex-sm-12 flex-md-7 flex-lg-7 ${classes.wrapper__right__control_container}`}>
                   <SearchInput
                     icon
                     name='search'
@@ -221,9 +211,8 @@ function Apis({ setIsOpen }) {
                     borderRadius='20px'
                   />
                 </div>
-                <div className='flex-sm-12 flex-md-4 pl-0'>
+                <div className={`flex-sm-12 flex-md-5 flex-lg-5 ${classes.wrapper__right__control_container}`}>
                   <InputSelect handleSelect={(e) => {
-                    console.log(e);
                     handleSort(e);
                   }}
                   />
@@ -234,22 +223,10 @@ function Apis({ setIsOpen }) {
               <div className='row'>
                 {loadingLibraries === false && libraries ? (
                   libraries.length > 0 ? (
-                    libraries.map((item, index) => (
-                      <div key={index} className='flex-sm-12 flex-md-6 mt-8'>
-                        <CardInformation
-                          title={item.title}
-                          status={item.status}
-                          version={item.version}
-                          buttons={item.tags}
-                          colorStatus={item.color_status}
-                          info='Ver Documentación'
-                          description={item.description}
-                          link={`/apis/${item.id}#api`}
-                          modal={setIsOpen}
-                          css_styles={{ 'custom_title_size': 'fs__22', 'custom_status_size': 'fs__10' }}
-                        />
-                      </div>
-                    ))
+                    <ApisPaginated
+                      apis={libraries}
+                      itemsPerPage={8}
+                    />
                   ) : (
                     <section
                       style={{
@@ -264,7 +241,7 @@ function Apis({ setIsOpen }) {
                           margin: '2rem',
                         }}
                       >
-                        <h1>No hay data</h1>
+                        <h1>Información no disponible</h1>
                       </div>
                     </section>
                   )
@@ -288,7 +265,6 @@ function Apis({ setIsOpen }) {
                 )}
               </div>
             </div>
-            <PaginacionApis css_styles={{ 'custom_margin': 'mt-10' }} />
           </section>
         </section>
       </div>

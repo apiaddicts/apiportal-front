@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
-// import { FiAlertCircle } from 'react-icons/fi';
 import Icon from '../MdIcon/Icon';
 import classes from './input.module.scss';
 

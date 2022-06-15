@@ -14,7 +14,6 @@ import ApiDetails from '../../Pages/ApiDetails';
 import Faqs from '../../Pages/Faqs';
 import Blog from '../../Pages/Blog';
 import BlogDetails from '../../Pages/BlogDetails';
-import Components from '../../Pages/Components';
 
 function PublicRoute() {
   const [isOpen, setIsOpen] = useState(false);

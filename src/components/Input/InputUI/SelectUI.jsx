@@ -3,13 +3,14 @@
 import React, { useState } from 'react';
 import classes from './inputui.module.scss';
 
-function SelectUI({ label, options = [] }) {
-  const [isActive, setIsActive] = useState(false);
-  // const [value, setValue] = useState('');
-  function handleSelect(value) {
-    // setValue(value);
-    if (value !== '') {
+function SelectUI({ label, defaultValue, options = [] }) {
+  const [isActive, setIsActive] = useState(defaultValue && defaultValue.length);
+  const [currentValue, setValue] = useState(defaultValue);
+
+  const handleSelect = (e) => {
+    if (e.target.value !== '') {
       setIsActive(true);
+      setValue(e.target.value);
     } else {
       setIsActive(false);
     }
@@ -17,13 +18,12 @@ function SelectUI({ label, options = [] }) {
 
   return (
     <div className={classes.wrapper__input}>
-      <select placeholder='Temas' onChange={(e) => handleSelect(e.target.value.length)}>
-        <option selected />
+      <select placeholder='Temas' value={currentValue} onChange={handleSelect}>
         {
           options.length > 0 ? (
             options.map((opt, i) => {
               return (
-                <option value={opt.value}>{opt.text}</option>
+                <option key={i} value={opt.value}>{opt.text}</option>
               );
             })
           ) : (<option value='0'>Sin opciones por mostrar</option>)
