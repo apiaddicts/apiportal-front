@@ -48,7 +48,7 @@ function Login({ setOpenForm, setIsOpen, setPrivateSession }) {
           setIsOpen(false);
         }}
       >
-        <Icon id='MdClose' css_styles={{ 'custom_icon_styles': 'fs__20 text_gray__gray_darken' }} />
+        <Icon id='MdClose' css_styles={{ 'custom_icon_styles': 'fs__26 text_gray__gray_darken' }} />
       </button>
       <div className={classes.login__wrapper}>
         <h1 className={classes.login__title}>{showForm ? 'Iniciar sesión' : 'Recuperar contraseña'}</h1>
