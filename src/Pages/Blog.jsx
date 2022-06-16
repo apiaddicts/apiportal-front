@@ -56,8 +56,6 @@ function Blog({ setIsOpen }) {
     }
   }, [dispatch, blogs, data]);
 
-  console.log(blogs, data);
-
   // load slider
   const BannerFilter = Object.keys(data).length > 0 && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
   const bannerTitle = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0].title ? BannerFilter[0].title : '';

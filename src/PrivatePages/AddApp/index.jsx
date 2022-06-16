@@ -58,11 +58,6 @@ function AddApp(props) {
     setCompleted({});
   };
 
-  useEffect(() => {
-    // activeStep === 0 && setCompleted({});
-    console.log(activeStep);
-  }, []);
-
   return (
     <div className={styles.container__add__app}>
       <div className='container mt-10 pt-10'>

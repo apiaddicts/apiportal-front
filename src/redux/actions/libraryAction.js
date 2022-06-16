@@ -150,7 +150,6 @@ export const sortApiCollection = (sort) => (dispatch) => {
 export const searchApis = (search, top = config.topApi, skip = 0) => (dispatch) => {
   libraryService.searchApis(search, top, skip).then(
     (res) => {
-      console.log(res);
       dispatch({
         type: libraryConstants.GET_APIS_SUCCESS,
         payload: res,
