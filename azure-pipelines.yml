@@ -14,9 +14,9 @@ variables:
   gitlabRepository: cloudappi/sura/dev-portal-sura-frontend
   azPort: 3000
   azPortName: http
-  azImage: $(dockerRegistry)/$(gitlabRepository):$(Build.SourceVersion)
+  azImage: $(azName):$(Build.SourceVersion)
   dockerRegistry: registry.gitlab.com
-  dockerRegistryConnection: Cloudappi-GitlabRegistry
+  dockerRegistryConnection: AzRegistryContainerDev
   ${{ if eq(variables['Build.SourceBranchName'], 'main')}}:
     environment: prod
     openshiftServiceConnection: ARO-Pro
