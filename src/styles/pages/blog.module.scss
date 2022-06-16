@@ -247,32 +247,23 @@
     grid-template-columns: 2fr 1fr;
     grid-template-areas: "cards suggestions"
                          "footer footer";
-    gap: 3rem;
+    gap: 2rem;
 
     @include breakpoint(xs) {
       grid-template-columns: 1fr;
-      grid-template-areas: "cards" 
-                           "contact"
-                           "suggestions" 
-                           "footer";
+      grid-template-areas: "cards";
     }
 
     @include breakpoint(sm) {
       grid-template-columns: 1fr;
-      grid-template-areas: "cards" 
-                           "contact"
-                           "suggestions" 
-                           "footer";
+      grid-template-areas: "cards"
+                           "suggestions";
     }
 
     @include breakpoint(lg) {
       grid-template-columns: 2fr 1fr;
-      grid-template-areas: "cards suggestions"
-                           "cards contact"
-                           "cards contact"
-                           "cards contact"
-                           "footer footer";
-      gap: 3rem;
+      grid-template-areas: "cards suggestions";
+      gap: 2rem;
     }
 
     

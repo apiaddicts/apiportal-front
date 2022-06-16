@@ -37,7 +37,7 @@ function Register({ setOpenForm, setIsOpen }) {
             <Icon
               id='MdClose'
               css_styles={{
-                custom_icon_styles: 'fs__20 text__gray__gray_darken',
+                custom_icon_styles: 'fs__26 text__gray__gray_darken',
               }}
             />
           </button>

@@ -11,9 +11,8 @@ import Base from './Base';
 import './cards.scss';
 
 function CardBasicLink({ chipTitle, title, img, description, info, route, maxWidth, tabCard, footerTabCard }) {
-
   return (
-    <Base maxWidth={maxWidth}>
+    <Base maxWidth={maxWidth} css_styles={{ override_card_height: 'custom_card__height' }}>
 
       {
         tabCard ? (
@@ -32,21 +31,33 @@ function CardBasicLink({ chipTitle, title, img, description, info, route, maxWid
             </div>
           </div>
         ) : (
-          <div>
-            {img ? (
+          <div className='card_container'>
+            {img && (
               <picture>
                 <img className='card_img' src={img} alt={img} />
               </picture>
-            ) : (null, null)}
-            <section className='card_container'>
+            )}
+            <section className='card_container__body'>
               <div className='card_chip_title'>
                 {chipTitle ? (
                   <>
                     <Chip title={chipTitle} className={`${chipTitle.toLowerCase()} chip_tag_rounded`} />
-                    <h1 className='chip_title'>{title}</h1>
+                    <h1 className='chip_title'>
+                      {title}
+                    </h1>
                   </>
                 ) : (
-                  <h1 className='h4 font-weight-bold px-8 pt-5 text__primary'>{title}</h1>
+                  <h1
+                    className='fs__26 font-weight-bold px-8 pt-5 text__primary'
+                    style={{
+                      'margin': 0,
+                      'textOverflow': 'ellipsis',
+                      'whiteSpace': 'nowrap',
+                      'overflow': 'hidden',
+                    }}
+                  >
+                    {title}
+                  </h1>
                 )}
               </div>
               <div className='card_chip_desciption'>

@@ -11,6 +11,7 @@ function FooterAuthor({ data }) {
         title={data.nameUser ? data.nameUser : ''}
         paragraph={data.jobUser ? data.jobUser : ''}
       />
+      <div className={classes.border_bottom__line}>&nbsp;</div>
     </div>
   );
 };

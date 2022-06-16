@@ -102,6 +102,11 @@
       margin-top: 50px;
       padding-left: 0px;
     }
+
+    @media only screen and (min-width: 992) and (max-width: 1080px) {
+      max-width: 400px;
+    }
+
   }
 
   &__img {
@@ -110,45 +115,37 @@
     width: 593px;
     z-index: 2;
     top: 71px;
-    right: 20%;
+    right: 0%;
     border-radius: 0 0 50px 0;
 
     @include breakpoint(xs) {
-      height: 170px;
+      height: 150px;
       width: 260px;
-      top: 154px;
-      right: 0%;
+      top: 194px;
     }
 
     @include breakpoint(sm) {
-      height: 232px;
-      width: 393px;
-      top: 200px;
-      right: 0%;
+      height: 187px;
+      width: 325px;
+      top: 225px;
     }
 
     @include breakpoint(md) {
-      height: 332px;
+      height: 226px;
       width: 393px;
-      top: 130px;
-      right: 17%;
+      top: 186px;
     }
 
     @include breakpoint(lg) {
-      display: block;
-      height: 332px;
-      width: 493px;
-      z-index: 2;
-      top: 71px;
-      right: 0%;
+      height: 253px;
+      width: 440px;
+      top: 159px;
     }
 
     @include breakpoint(xl) {
       height: 341px;
       width: 593px;
-      z-index: 2;
       top: 71px;
-      right: 0%;
     }
   }
 

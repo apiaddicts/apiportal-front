@@ -1,16 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ItemAvatar from '../Item/ItemAvatar';
-// import Contact from '../Contact';
-import jsonData from '../../data-fake.json';
-// import stylesBlog from '../../styles/pages/blog.module.scss';
 
-function Novedades() {
+function Novedades({ data }) {
+  console.log(data);
   return (
     <div>
       {
-        jsonData.length === 0 ? <p>No hay resultados</p> :
-          jsonData.map((result, index) => (
-            <ItemAvatar key={index} title={result.title} paragraph={result.description} img={result.image} border={true} css_styles={{ 'custom_title': 'fs__10', 'custom_paragraph': 'fs__16' }} />
+        data.length === 0 ? <p>Información no disponible</p> :
+          data.sort(() => 0.5 - Math.random()).slice(0, 4).map((result, index) => (
+            <Link key={index} to={`/blog/${result.id}`}>
+              <ItemAvatar title={result.title} paragraph={result.description} img={result.image ? result.image[0].url : ''} border={true} css_styles={{ 'custom_title': 'fs__10', 'custom_paragraph': 'fs__16' }} />
+            </Link>
           ))
       }
     </div>
