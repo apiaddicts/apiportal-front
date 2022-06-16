@@ -15,7 +15,6 @@ function SwaggerUI() {
   const { jsonOpenApi } = useSelector((state) => state.library);
 
   const params = useParams();
-  console.log(params.id);
 
   const dispatch = useDispatch();
 

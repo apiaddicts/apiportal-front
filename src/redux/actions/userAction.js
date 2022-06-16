@@ -57,7 +57,7 @@ export const confirmAccount = (queryParams, setIsOpen) => (dispatch) => {
       }
     },
     (error) => {
-      console.log('Confirm account error', error);
+      console.error('Confirm account error', error);
     },
   );
 };
@@ -107,7 +107,7 @@ export const getUser = (tokens) => (dispatch) => {
       }
     },
     (error) => {
-      console.log(error);
+      console.error(error);
     },
   );
 };
@@ -120,7 +120,7 @@ export const getUserEntityTag = (tokens) => (dispatch) => {
       dispatch({ type: userConstants.HEAD_ETAG_SUCCESS, response });
     },
     (error) => {
-      console.log(error);
+      console.error(error);
     },
   );
 };
@@ -138,7 +138,7 @@ export const updateUser = (data) => (dispatch) => {
       }
     },
     (error) => {
-      console.log(error);
+      console.error(error);
     },
   );
 };
@@ -160,7 +160,7 @@ export const verifyOldPassword = (data) => (dispatch) => {
       }
     },
     (error) => {
-      console.log(error);
+      console.error(error);
     },
   );
 };
@@ -173,7 +173,7 @@ export const changePassword = (newPassword) => (dispatch) => {
       // dispatch(logout());
     },
     (error) => {
-      console.log('Update password error', error);
+      console.error('Update password error', error);
     },
   );
 };
@@ -188,7 +188,7 @@ export const resetPassword = (data) => (dispatch) => {
       }
     },
     (error) => {
-      console.log('Update password error', error);
+      console.error('Update password error', error);
     },
   );
 };
@@ -204,14 +204,14 @@ export const resetPasswordWithTicket = (queryParams, data, password) => (dispatc
           dispatch({ type: userConstants.RESET_PASSWORD_TICKET_SUCCESS, response });
           dispatch(logout());
           setTimeout(() => {
-            console.log('redireccionar');
+            console.error('redireccionar');
             window.location = '/';
           }, 1500);
         }
       }
     },
     (error) => {
-      console.log('Reset password error', error);
+      console.error('Reset password error', error);
     },
   );
 };

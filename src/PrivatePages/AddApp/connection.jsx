@@ -10,9 +10,7 @@ import CheckboxWrapper from '../../components/common/Check';
 function Connection() {
   const [showAlert, setShowAlert] = useState(false);
 
-  const handleSubmit = async (dataForm) => {
-    console.log(dataForm);
-  };
+  const handleSubmit = async (dataForm) => {};
 
   const handleChangeSelect = (name, label, value) => {
     setShowAlert(value);
