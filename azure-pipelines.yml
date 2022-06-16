@@ -14,7 +14,8 @@ variables:
   azName: devportal-front
   azPort: 3000
   azPortName: http
-  azImage: $(azName):$(Build.SourceVersion)
+  azImage: $(dockerRegistry)/$(azName):$(Build.SourceVersion)
+  dockerRegistry: azurecontainerregistrysuradev.azurecr.io
   dockerRegistryConnection: AzRegistryContainerDev
   ${{ if eq(variables['Build.SourceBranchName'], 'main')}}:
     environment: prod
