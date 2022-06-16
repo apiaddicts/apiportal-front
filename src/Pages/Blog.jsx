@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
 import _ from 'underscore';
@@ -7,7 +6,6 @@ import _ from 'underscore';
 import moment from 'moment';
 
 import { HashLink } from 'react-router-hash-link';
-
 import stylesBlog from '../styles/pages/blog.module.scss';
 import classes from '../styles/pages/home.module.scss';
 
@@ -20,8 +18,8 @@ import SkeletonComponent from '../components/SkeletonComponent/SkeletonComponent
 import Slick from '../components/SlickSlider/Slick';
 
 import useSearch from '../hooks/useSearch';
-import Icon from '../components/MdIcon/Icon';
 import { getBlogData, getBlogs } from '../redux/actions/blogAction';
+import BlogPostsPaginated from '../components/BlogPostsPaginated';
 
 moment.locale('es');
 function Blog({ setIsOpen }) {
@@ -58,6 +56,8 @@ function Blog({ setIsOpen }) {
     }
   }, [dispatch, blogs, data]);
 
+  console.log(blogs, data);
+
   // load slider
   const BannerFilter = Object.keys(data).length > 0 && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
   const bannerTitle = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0].title ? BannerFilter[0].title : '';
@@ -78,8 +78,6 @@ function Blog({ setIsOpen }) {
     }
 
   };
-
-  let cardCounter = 0;
 
   const datanews = blogs.length > 0 ? _.sortBy(blogs, (m) => {
     return moment(m.created_at).toDate().getTime();
@@ -144,72 +142,27 @@ function Blog({ setIsOpen }) {
                                 />
                               </div>
                             </div>
-
                             <div className={stylesBlog.apis__library}>
-                              <div id='Cards' className={stylesBlog.apis__library__cards}>
+                              <div id='Cards'>
                                 {
                                   resultsData.length === 0 ? (
-                                    <span>Sin resultados disponibles</span>
+                                    <span>Información no disponible</span>
                                   ) : (
-                                    resultsData.map((results, index) => {
-                                      cardCounter++;
-                                      return (
-                                        <>
-                                          <Link to={`/blog/${results.id}`} key={index}>
-                                            <CardInformation
-                                              img={results.image ? results.image[0].url : ''}
-                                              description={results.description}
-                                              title={results.title}
-                                              buttons={results.tags && results.tags.length > 0 ? results.tags : []}
-                                              css_styles={{ 'override_card_height': 'custom_card__height' }}
-                                              theme='primary'
-                                              info='Conoce más'
-                                              blogTitle={true}
-                                            />
-                                          </Link>
-                                          {cardCounter === 3 && <Contact pathname='/blog' css_styles={{ 'display_contact': 'd-xs-only' }} /> }
-                                        </>
-                                      );
-                                    })
+                                    <BlogPostsPaginated
+                                      posts={resultsData}
+                                      itemsPerPage={6}
+                                    />
                                   )
                                 }
                               </div>
                               <div id='Suggestions' className={`d-xs-none ${stylesBlog.apis__library__suggestions}`}>
                                 <div className={stylesBlog.apis__library__suggestions__content}>
                                   <h1 className={`${stylesBlog.apis__library__suggestions__content__title} fs__16 text-uppercase text__gray__gray_darken`}>Lo más reciente</h1>
-                                  <Novedades />
+                                  <Novedades data={resultsData} />
                                   <Contact pathname='/blog' />
                                 </div>
                               </div>
-
-                              <div id='Footer' className={stylesBlog.apis__library__footer}>
-                                <div className={stylesBlog.section__result__content__pagination}>
-                                  <div
-                                    className={
-                                      stylesBlog.section__result__content__pagination__buttons__before
-                                    }
-                                  >
-                                    <Icon id='MdNavigateBefore' />
-                                    <p>Anterior</p>
-                                  </div>
-                                  <div className={stylesBlog.section__result__content__pagination__number}>
-                                    <p>01</p>
-                                    <p>02</p>
-                                    <p>...</p>
-                                    <p>10</p>
-                                  </div>
-                                  <div
-                                    className={
-                                      stylesBlog.section__result__content__pagination__buttons__next
-                                    }
-                                  >
-                                    <p>Siguente</p>
-                                    <Icon id='MdNavigateNext' />
-                                  </div>
-                                </div>
-                              </div>
                             </div>
-
                           </div>
                         ))
                       ) : (null)}
@@ -219,68 +172,21 @@ function Blog({ setIsOpen }) {
               </section>
             ) : (
               <section className='container py-10'>
-                <div style={{
-                  display: 'grid',
-                  gridTemplateColumns: 'repeat(3, 1fr)',
-                  gridGap: '1rem',
-                }}
-                >
-                  {resultsSearch.length === 0 ? (
-                    <p>Sin Resltados</p>
-                  ) : (
-
-                    resultsSearch.map((results, index) => (
-                      <Link to={`/blog/${results.id}`} key={index}>
-                        <CardInformation
-                          img={results.image ? results.image[0].url : ''}
-                          description={results.description}
-                          title={results.title}
-                          buttons={results.tags && results.tags.length > 0 ? results.tags : []}
-                          css_styles={{ 'override_card_height': 'custom_card__height' }}
-                          theme='primary'
-                          info='Conoce más'
-                          blogTitle={true}
-                        />
-                      </Link>
-                    ))
-                  )}
-                </div>
-                <br />
-                {resultsSearch.length === 0 ? (null) : (
-                  <div id='Footer' className={stylesBlog.apis__library__footer}>
-                    <div className={stylesBlog.section__result__content__pagination}>
-                      <div
-                        className={
-                          stylesBlog.section__result__content__pagination__buttons__before
-                        }
-                      >
-                        <Icon id='MdNavigateBefore' />
-                        <p>Anterior</p>
-                      </div>
-                      <div className={stylesBlog.section__result__content__pagination__number}>
-                        <p>01</p>
-                        <p>02</p>
-                        <p>...</p>
-                        <p>10</p>
-                      </div>
-                      <div
-                        className={
-                          stylesBlog.section__result__content__pagination__buttons__next
-                        }
-                      >
-                        <p>Siguente</p>
-                        <Icon id='MdNavigateNext' />
-                      </div>
-                    </div>
-                  </div>
+                {resultsSearch.length === 0 ? (
+                  <p>Información no disponible</p>
+                ) : (
+                  <BlogPostsPaginated
+                    posts={resultsData}
+                    itemsPerPage={6}
+                    parentContainerClass='full_blog_list'
+                  />
                 )}
               </section>
             )
-
           }
           {
             resultsSearch.length === 0 ? (
-              <section style={{ marginTop: '-50px' }} className={`${classes.section__news} ${classes.section__news_toppadding} d-xs-none`}>
+              <section className={`${classes.section__news} ${classes.section__news_toppadding} d-xs-none`}>
                 <div className='container'>
                   <div className='row'>
                     <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>

@@ -1,7 +1,7 @@
 @import "./../../styles/variables.scss";
 @import "./../../styles/mixins/mixin.scss";
 
-.api_list {
+.blog_list {
   display: grid;
   overflow: hidden;
   grid-template-columns: repeat(1, 1fr);
@@ -16,14 +16,33 @@
   }
 }
 
+.full_blog_list {
+  grid-template-columns: repeat(1, 1fr);
+
+  @include breakpoint(sm) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include breakpoint(md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.separator {
+  display: block; height: 1px;
+  border: 0; border-top: 1px solid #ecf0f1;
+  margin: 30px 1.5rem;
+  padding: 0;
+}
+
 .pagination {
   width: 100%;
-  margin: 1.5rem;
   display: flex;
-  padding-left: 0;
   list-style: none;
   align-content: space-between;
   justify-content: space-between;
+  padding: 0 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .previous {

@@ -23,7 +23,8 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
     modal(true);
   };
   return (
-    <div>
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>
       {link !== undefined ? (
         <Base maxWidth={maxWidth} css_styles={css_styles}>
           {img && (
@@ -122,8 +123,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
           </div>
         </Base>
       )}
-    </div>
-
+    </>
   );
 };
 

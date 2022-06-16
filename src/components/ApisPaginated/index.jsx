@@ -26,7 +26,7 @@ function Apis({ currentItems }) {
   );
 }
 
-function PaginatedItems({ apis, itemsPerPage }) {
+function ApisPaginated({ apis, itemsPerPage }) {
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -70,4 +70,4 @@ function PaginatedItems({ apis, itemsPerPage }) {
   );
 }
 
-export default PaginatedItems;
+export default ApisPaginated;

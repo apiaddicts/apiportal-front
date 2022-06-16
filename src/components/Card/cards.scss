@@ -222,6 +222,10 @@
 
 .card__title_blog {
     font-size: 28px !important;
+    margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .tags-flex-wrap {

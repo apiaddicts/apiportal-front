@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import _ from 'underscore';
@@ -14,7 +15,6 @@ import FooterAuthor from '../components/FooterAuthor';
 import { getBlog, resetGetBlog, getBlogs } from '../redux/actions/blogAction';
 import styles from '../styles/pages/blogDetails.module.scss';
 import classes from '../styles/pages/home.module.scss';
-import Icon from '../components/MdIcon/Icon';
 
 const stylesPerso = {
   height: '345px',
@@ -71,6 +71,19 @@ function BlogDetails({ setIsOpen }) {
 
   return (
     <div id='blogDetail'>
+      <Helmet>
+        <title>{blog.title ? blog.title : ''}</title>
+        <meta charset='utf-8' />
+        <meta name='author' content={blog.nameUser ? blog.nameUser : ''} />
+        <meta
+          name='description'
+          content={blog.description ? blog.description : ''}
+        />
+        <meta property='og:title' content={blog.title ? blog.title : ''} />
+        <meta property='og:image' content={blog.image ? blog.image[0].url : ''} />
+        <meta property='og:description' content={blog.description ? blog.description : ''} />
+        <meta property='og:url' content={`${window.location.protocol}//${window.location.hostname}/blogs/${blog.id}`} />
+      </Helmet>
       {Object.keys(blog).length > 0 ? (
         <>
           <BannerStatic
@@ -82,23 +95,12 @@ function BlogDetails({ setIsOpen }) {
           <section className='container mt-10 py-5'>
             <BlogDetailsInfo styles={styles} data={blog} />
             <FooterAuthor data={blog} />
-            <section className={styles.container_arrows}>
-              <div className={styles.container_arrows__left}>
-                <span className='fs__24 text__secondary'><Icon id='MdChevronLeft' /></span>
-                <span>Anterior</span>
-              </div>
-              <div className={styles.container_arrows__right}>
-                <span>Siguiente</span>
-                <span className='fs__24 text__secondary'><Icon id='MdChevronRight' /></span>
-              </div>
-            </section>
             <section className={classes.section__news}>
               <div className='container'>
                 <div className='row'>
                   <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
                     <h1 className='fs__32 font-weight-bold text__primary fs__joey'>Novedades</h1>
                   </div>
-
                   <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
                     <p className='body-1'>
                       Conoce todas las novedades sobre tecnología, APIs y transformación digital
