@@ -2,6 +2,7 @@ trigger:
   branches:
     include:
       - develop
+      - qa
       #  - main
       #  - pre
 
@@ -13,11 +14,15 @@ variables:
   azName: devportal-front
   azPort: 3000
   azPortName: http
-  azImage: $(azName):$(Build.SourceVersion)
+  azImage: $(dockerRegistry)/$(azName):$(Build.SourceVersion)
+  dockerRegistry: azurecontainerregistrysuradev.azurecr.io
   dockerRegistryConnection: AzRegistryContainerDev
   ${{ if eq(variables['Build.SourceBranchName'], 'main')}}:
     environment: prod
     openshiftServiceConnection: ARO-Pro
+  ${{ if eq(variables['Build.SourceBranchName'], 'qa')}}:
+    environment: prod
+    openshiftServiceConnection: ARO-QA
   ${{ if eq(variables['Build.SourceBranchName'], 'pre')}}:
     environment: pre
     openshiftServiceConnection: ARO-Pre
@@ -52,7 +57,7 @@ stages:
             displayName: Push
             inputs:
               command: push
-              repository: $(gitlabRepository)
+              repository: $(azName)
               tags: |
                 $(Build.SourceBranchName)
                 $(Build.SourceVersion)
