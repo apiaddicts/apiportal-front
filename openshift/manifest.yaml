@@ -27,7 +27,7 @@ spec:
               memory: "2Gi"
       imagePullpolicy: Always
       imagePullSecrets:
-        - name: gitlab-cloudappi
+        - name: acrdev-sura
 
 ---
 apiVersion: v1

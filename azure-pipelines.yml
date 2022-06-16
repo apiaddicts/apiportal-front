@@ -2,6 +2,7 @@ trigger:
   branches:
     include:
       - develop
+      - qa
       #  - main
       #  - pre
 
@@ -18,6 +19,9 @@ variables:
   ${{ if eq(variables['Build.SourceBranchName'], 'main')}}:
     environment: prod
     openshiftServiceConnection: ARO-Pro
+  ${{ if eq(variables['Build.SourceBranchName'], 'qa')}}:
+    environment: prod
+    openshiftServiceConnection: ARO-QA
   ${{ if eq(variables['Build.SourceBranchName'], 'pre')}}:
     environment: pre
     openshiftServiceConnection: ARO-Pre
