@@ -15,7 +15,7 @@ function BlogDetailsInfo({ styles, data }) {
     textTransform: 'capitalize',
   };
 
-  const url = `${window.location.protocol}//${window.location.hostname}/blogs/${data.id}`;
+  const url = `${window.location.protocol}//${window.location.hostname}/blog/${data.id}`;
 
   return (
     <>

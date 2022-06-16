@@ -29,6 +29,9 @@ const stylesBannerTitle = {
 moment.locale('es');
 
 function BlogDetails({ setIsOpen }) {
+
+  const url = `${window.location.protocol}//${window.location.hostname}/blog/${data.id}`;
+
   const dispatch = useDispatch();
 
   const params = useParams();
@@ -82,7 +85,15 @@ function BlogDetails({ setIsOpen }) {
         <meta property='og:title' content={blog.title ? blog.title : ''} />
         <meta property='og:image' content={blog.image ? blog.image[0].url : ''} />
         <meta property='og:description' content={blog.description ? blog.description : ''} />
-        <meta property='og:url' content={`${window.location.protocol}//${window.location.hostname}/blogs/${blog.id}`} />
+        <meta property='og:url' content={url} />
+        <meta property='og:locale' content='es_MX' />
+        <meta property='og:type' content='article' />
+        <meta property='og:site_name' content='Seguros Sura API Market' />
+        <meta name='twitter:card' content='summary' />
+        <meta name='twitter:site' content='Seguros Sura API Market' />
+        <meta name='twitter:title' content={blog.title ? blog.title : ''} />
+        <meta name='twitter:description' content={blog.description ? blog.description : ''} />
+        <meta name='twitter:image' content={blog.image ? blog.image[0].url : ''} />
       </Helmet>
       {Object.keys(blog).length > 0 ? (
         <>
