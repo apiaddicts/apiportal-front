@@ -15,7 +15,6 @@ function Contact({ css_styles, pathname }) {
   // const { pathname } = location;
 
   const handleSubmit = async (values) => {
-    console.log(values);
   };
 
   const formConfig = useLoginConfig(fieldsContact, handleSubmit);

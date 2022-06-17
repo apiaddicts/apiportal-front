@@ -8,10 +8,7 @@ import classes from './footer.module.scss';
 import Icon from '../MdIcon/Icon';
 import SuraLogo from '../../static/img/sura_logo.svg';
 import Button from '../Buttons/Button';
-// import Input from '../Input';
 import InputUI from '../Input/InputUI/InputUI';
-// import { fieldsContactExtend } from '../Forms/fields';
-// import useFormConfig from '../../hooks/useForm';
 import TextAreaUI from '../Input/InputUI/TextAreaUI';
 import SelectUI from '../Input/InputUI/SelectUI';
 
@@ -19,11 +16,6 @@ function Footer({ isPrivate }) {
   const img = 'https://picsum.photos/1920/300';
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
-  // const handleSubmit = async (values) => {
-  //   console.log(values);
-  // };
-
-  // const formConfig = useFormConfig(fieldsContactExtend, handleSubmit);
   const socialLinks = [
     { link: 'https://www.facebook.com/SegurosSURAMexico/', icon: <FaFacebookF /> },
     { link: 'https://twitter.com/SegurosSURA_MX', icon: <FaTwitter /> },
@@ -42,7 +34,7 @@ function Footer({ isPrivate }) {
             <p style={{ fontWeight: 400 }} className='h5 text__secondary__white mb-10'>Contáctanos por medio de este formulario</p>
           </div>
           <div className={classes.button__fab}>
-            <button type='submit' onClick={() => { setContactForm(!contactForm); }}>
+            <button type='button' onClick={() => { setContactForm(!contactForm); }}>
               {contactForm ? <Icon style={{ fontSize: '44px' }} id='MdClose' /> : <GoMail style={{ fontSize: '44px' }} />}
             </button>
           </div>
@@ -56,9 +48,6 @@ function Footer({ isPrivate }) {
               <div className='row justify-center'>
                 <div className='container'>
                   <div className='row justify-center'>
-                    {/* {fieldsContactExtend.map((field) => (
-                      <Input footer key={field.id} field={field} formik={formConfig} />
-                    ))} */}
                     <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
                       <InputUI type='text' label='Nombre*' required={true} />
                     </div>
@@ -76,7 +65,7 @@ function Footer({ isPrivate }) {
                   </div>
                   <div className='row justify-center'>
                     <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
-                      <SelectUI label='Temas' required={true} options={[{ value: 'Sup', text: 'Soporte' }, { value: 'Com', text: 'Comercial' }, { value: 'Admin', text: 'Administración' }]} />
+                      <SelectUI defaultValue='Sup' label='Temas' required={true} options={[{ value: 'Sup', text: 'Soporte' }, { value: 'Com', text: 'Comercial' }, { value: 'Admin', text: 'Administración' }]} />
                     </div>
                     <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
                       <InputUI type='text' label='Asunto*' required={true} />

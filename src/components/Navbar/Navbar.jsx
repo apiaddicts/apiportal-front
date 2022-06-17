@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MdSearch, MdClose, MdMenu } from 'react-icons/md';
+import { MdClose, MdMenu } from 'react-icons/md';
 import { Link, NavLink } from 'react-router-dom';
 
 import classes from './navbar.module.scss';
@@ -38,7 +38,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
   };
 
   const listOptions = [
-    { icon: '', name: 'APIs', route: '/api-collection' },
+    { icon: '', name: 'APIs', route: '/apis' },
     // { icon: 'MdArrowDropDown', name: 'Documentación', route: '/documentacion' },
     { icon: '', name: 'Blog', route: '/blog' },
     { icon: '', name: 'FAQs', route: '/faqs' },
@@ -134,23 +134,11 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
                     Registrarte
                   </div>
                 </li>
-                <div className={classes.navbar__xs__search}>
-                  <div className={classes.navbar__xs__icon}>
-                    <Icon id='MdSearch' />
-                  </div>
-                  <div>
-                    Buscar
-                  </div>
-                </div>
               </ul>
 
             </div>
 
             <div className={`${classes.show__lg__up} ${classes.header__content__divider}`} />
-
-            <div className={`${classes.show__lg__up} ${classes.header__content__search}`}>
-              <MdSearch />
-            </div>
           </nav>
 
           <div className={classes.header__content__toggle}>
@@ -166,7 +154,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
           <div className={classes.buttom__nav__options}>
             <ul>
               <li>
-                <Link to='/api-collection'>APIs</Link>
+                <Link to='/apis'>APIs</Link>
               </li>
               <li>
                 <Link to='/blog'>BLOG</Link>

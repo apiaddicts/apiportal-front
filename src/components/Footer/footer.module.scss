@@ -177,8 +177,10 @@
   margin-right: auto;
   right: 0;
   left: 0;
-  transform: translateY(-50%);
   button {
+    position: relative;
+    z-index: 1;
+    top: -50px;
     background: #b7b09c;
     border: none;
     border-radius: 50%;

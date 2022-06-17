@@ -47,13 +47,13 @@ function DashboardRoutes() {
             </div>
             <div className={`container ${classes.wrapper}`}>
               <Routes>
-                <Route path='user' element={<Admin />} />
+                <Route path='profile' element={<Admin />} />
                 <Route path='products' exact element={<Apps />} />
                 <Route path='products/:id' exact element={<AppsDetail />} />
                 <Route path='apis' exact element={<ApiLibrary />} />
                 <Route path='apis/:id' exact element={<ApiDetailed />} />
-                <Route path='/apis/:id/swagger-ui' exact element={<SwaggerUI />} />
-                <Route path='/apis/swagger-ui/oauth-redirect' exact element={<OAuthRedirect />} />
+                <Route path='apis/:id/swagger-ui' exact element={<SwaggerUI />} />
+                <Route path='apis/swagger-ui/oauth-redirect' exact element={<OAuthRedirect />} />
                 <Route path='subscriptions' exact element={<ApiSubscriptions />} />
                 <Route path='*' element={<Navigate to='/' replace />} />
               </Routes>

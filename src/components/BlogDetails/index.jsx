@@ -15,6 +15,8 @@ function BlogDetailsInfo({ styles, data }) {
     textTransform: 'capitalize',
   };
 
+  const url = `${window.location.protocol}//${window.location.hostname}/blog/${data.id}`;
+
   return (
     <>
       <div className={styles.blog__details__header}>
@@ -37,16 +39,24 @@ function BlogDetailsInfo({ styles, data }) {
         <div className={styles.blog__details__header__icons}>
           <div className={styles.blog__details__social__icons}>
             <div className={styles.blog__details__social__icon__content}>
-              <FaFacebookF />
+              <a href={`https://www.facebook.com/sharer/sharer.php?u=${url}`} target='_blank' rel='noreferrer'>
+                <FaFacebookF />
+              </a>
             </div>
             <div className={styles.blog__details__social__icon__content}>
-              <FaLinkedinIn />
+              <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${url}`} target='_blank' rel='noreferrer'>
+                <FaLinkedinIn />
+              </a>
             </div>
             <div className={styles.blog__details__social__icon__content}>
-              <FaTwitter />
+              <a href={`https://twitter.com/share?text=${data.title}&url=${url}`} target='_blank' rel='noreferrer'>
+                <FaTwitter />
+              </a>
             </div>
             <div className={styles.blog__details__social__icon__content}>
-              <FaTelegramPlane />
+              <a href={`https://telegram.me/share/url?text=${data.title}&url=${url}`} target='_blank' rel='noreferrer'>
+                <FaTelegramPlane />
+              </a>
             </div>
           </div>
         </div>
@@ -83,14 +93,14 @@ function BlogDetailsInfo({ styles, data }) {
             <p className={styles.blog__details__title__text}>
               {question.description ? question.description : ''}
             </p>
-            <p className={styles.blog__details__ul__list}>
+            <div className={styles.blog__details__ul__list}>
               <ul>
                 <li>In egestas blandit felis id porttitor. </li>
                 <li>Felis id porttitor.</li>
                 <li>Luctus posuere lacus.</li>
                 <li>Proin eros elit, aliquet nec magna ornare</li>
               </ul>
-            </p>
+            </div>
           </div>
         )
       )) : (null)}
@@ -100,16 +110,24 @@ function BlogDetailsInfo({ styles, data }) {
           <p>COMPARTIR:</p>
           <div className={styles.blog__details__social__icons}>
             <div className={styles.blog__details__social__icon__content}>
-              <FaFacebookF />
+              <a href={`https://www.facebook.com/sharer/sharer.php?u=${url}`} target='_blank' rel='noreferrer'>
+                <FaFacebookF />
+              </a>
             </div>
             <div className={styles.blog__details__social__icon__content}>
-              <FaLinkedinIn />
+              <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${url}`} target='_blank' rel='noreferrer'>
+                <FaLinkedinIn />
+              </a>
             </div>
             <div className={styles.blog__details__social__icon__content}>
-              <FaTwitter />
+              <a href={`https://twitter.com/share?text=${data.title}&url=${url}`} target='_blank' rel='noreferrer'>
+                <FaTwitter />
+              </a>
             </div>
             <div className={styles.blog__details__social__icon__content}>
-              <FaTelegramPlane />
+              <a href={`https://telegram.me/share/url?text=${data.title}&url=${url}`} target='_blank' rel='noreferrer'>
+                <FaTelegramPlane />
+              </a>
             </div>
           </div>
         </div>

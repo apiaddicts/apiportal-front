@@ -34,11 +34,10 @@ function useFormForgotPassword(
       try {
         setFormStatus({ status: 'loading' });
         const submitResponse = await customHandleSubmit(values);
-        console.log('submitResponse', submitResponse);
         setFormStatus(submitResponse);
         submitResponse.status === 'success' && resetForm();
       } catch (error) {
-        console.log('Error', error);
+        console.error('Error', error);
       }
     },
     validationSchema,

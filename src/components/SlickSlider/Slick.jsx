@@ -16,7 +16,7 @@ export default function SimpleSlider({ slides, tabCard, footerTabCard, setIsOpen
     setIsOpen(true);
   };
   const settings = {
-    className: 'center mt-10 mb-10',
+    className: 'center mt-5 mb-10',
     centerMode: true,
     centerPadding: '0',
     dots: true,
@@ -59,7 +59,7 @@ export default function SimpleSlider({ slides, tabCard, footerTabCard, setIsOpen
     ],
   };
   return (
-    <div>
+    <div style={{ height: '530px' }}>
       { typeof setIsOpen === 'function' ? (
         <Slider {...settings}>
           {slides.map((slide, i) => (

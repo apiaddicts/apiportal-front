@@ -13,7 +13,7 @@ function ProductName({ scope }) {
           setName(response.properties.displayName);
         }
       }, (err) => {
-        console.log(err);
+        console.error(err);
       });
     }
   }, [scope]);

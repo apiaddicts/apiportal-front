@@ -9,7 +9,6 @@ function TextAreaUI({ label, rows = 3, counter = 10, required = false }) {
 
   function handleTextChange(text, length) {
     setCount(length);
-    console.log(count);
     setValue(text);
     if (text !== '') {
       setIsActive(true);

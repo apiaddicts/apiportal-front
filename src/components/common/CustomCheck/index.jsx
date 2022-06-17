@@ -12,20 +12,20 @@ export default function CheckboxLabels({ name,
   const [check, setCheck] = useState(false);
 
   const handleChange = (e) => {
-    handleChangeSelect(name, label, e.target.checked);
     setCheck(e.target.checked);
-
+    handleChangeSelect(name, label, e.target.checked);
   };
 
   const configCheckbox = {
     onChange: handleChange,
     ...otherProps,
   };
+
   return (
     <FormControlMain>
       <FormGroup>
         <CustomFormControl
-          active={!!((check && activeTab))}
+          active={check ? 'active' : undefined}
           control={<CustomCheck {...configCheckbox} />}
           label={label}
         />
