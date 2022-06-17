@@ -223,7 +223,7 @@ function SidebarDrawer({ children, user }) {
       <SwipeableDrawer
         open={toggleMenuTemporary}
         onClose={handleMenuTemporary}
-        onOpen={toggleMenuTemporary}
+        onOpen={handleMenuTemporary}
         anchor='left'
         ref={drawerTemp}
         sx={{ zIndex: 3000, '& .MuiDrawer-paper': { width: '317px' } }}
@@ -387,7 +387,7 @@ function SidebarDrawer({ children, user }) {
           )}
           {
             listItems.map((item, index) => (
-              <ListItem button key={index} sx={{ color: '#53565A', paddingLeft: toggleMenu ? '80px' : '54px', paddingRight: 0 }} component={MyNavLink} to={item.route} exact>
+              <ListItem button key={index} sx={{ color: '#53565A', paddingLeft: toggleMenu ? '80px' : '54px', paddingRight: 0 }} component={MyNavLink} to={item.route} exact='true'>
                 <ListItemIcon sx={{ justifyContent: 'center' }}>
                   {item.icon}
                 </ListItemIcon>
@@ -415,7 +415,7 @@ function SidebarDrawer({ children, user }) {
   );
 }
 function MyNavLink(props) {
-  return <NavLink {...props} activeClassName='active' />;
+  return <NavLink {...props} activeclassname='active' />;
 }
 
 export default SidebarDrawer;

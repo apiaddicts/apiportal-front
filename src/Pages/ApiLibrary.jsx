@@ -87,13 +87,13 @@ function AppLibrary(props) {
       dispatch(listApis());
     }
 
-  }, [dispatch, apis]);
+  }, []);
 
   useEffect(() => {
     if (tagsList && Object.keys(tagsList).length === 0) {
       dispatch(getListTags());
     };
-  }, [tagsList]);
+  }, []);
 
   useEffect(() => {
     return () => {

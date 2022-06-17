@@ -7,8 +7,8 @@ import ConfirmAccount from '../../Pages/ConfirmAccount';
 function NoNavRoutes() {
   return (
     <Routes>
-      <Route path='/confirm-password' exact element={<ResetPassword />} />
-      <Route path='/confirm-account' exact element={<ConfirmAccount />} />
+      <Route path='/confirm-password' exact='true' element={<ResetPassword />} />
+      <Route path='/confirm-account' exact='true' element={<ConfirmAccount />} />
     </Routes>
   );
 
