@@ -19,11 +19,20 @@ variables:
     - docker build
       --build-arg BUILDKIT_INLINE_CACHE=1
       --build-arg BUILDKIT_INLINE_CACHE=1
-      --build-arg REACT_APP_STRAPI_URL=$REACT_APP_STRAPI_URL --build-arg REACT_APP_SURA_URL=$REACT_APP_SURA_URL --build-arg REACT_APP_SUBSCRIPTION_ID=$REACT_APP_SUBSCRIPTION_ID
-      --build-arg REACT_APP_RESOURCE_GROUP_NAME=$REACT_APP_RESOURCE_GROUP_NAME --build-arg REACT_APP_SERVICE_NAME=$REACT_APP_SERVICE_NAME --build-arg REACT_APP_API_VERSION=$REACT_APP_API_VERSION
-      --build-arg REACT_APP_REMEMBER_KEY=$REACT_APP_REMEMBER_KEY --build-arg REACT_APP_PRIMARY_KEY=$REACT_APP_PRIMARY_KEY --build-arg REACT_APP_APIM_UID=$REACT_APP_APIM_UID
-      --build-arg REACT_APP_TOKEN_VALID_DAYS=$REACT_APP_TOKEN_VALID_DAYS --build-arg REACT_APP_LIST_API_TOP=$REACT_APP_LIST_API_TOP --build-arg REACT_APP_LIST_PRODUCT_APIS_TOP=$REACT_APP_LIST_PRODUCT_APIS_TOP
-      --build-arg REACT_APP_LIST_PRODUCT_TOP=$REACT_APP_LIST_PRODUCT_TOP --build-arg REACT_APP_LIST_SUBSCRIPTIONS=$REACT_APP_LIST_SUBSCRIPTIONS
+      --build-arg REACT_APP_STRAPI_URL=$REACT_APP_STRAPI_URL
+      --build-arg REACT_APP_SURA_URL=$REACT_APP_SURA_URL
+      --build-arg REACT_APP_SUBSCRIPTION_ID=$REACT_APP_SUBSCRIPTION_ID
+      --build-arg REACT_APP_RESOURCE_GROUP_NAME=$REACT_APP_RESOURCE_GROUP_NAME
+      --build-arg REACT_APP_SERVICE_NAME=$REACT_APP_SERVICE_NAME
+      --build-arg REACT_APP_API_VERSION=$REACT_APP_API_VERSION
+      --build-arg REACT_APP_REMEMBER_KEY=$REACT_APP_REMEMBER_KEY
+      --build-arg REACT_APP_PRIMARY_KEY=$REACT_APP_PRIMARY_KEY
+      --build-arg REACT_APP_APIM_UID=$REACT_APP_APIM_UID
+      --build-arg REACT_APP_TOKEN_VALID_DAYS=$REACT_APP_TOKEN_VALID_DAYS
+      --build-arg REACT_APP_LIST_API_TOP=$REACT_APP_LIST_API_TOP
+      --build-arg REACT_APP_LIST_PRODUCT_APIS_TOP=$REACT_APP_LIST_PRODUCT_APIS_TOP
+      --build-arg REACT_APP_LIST_PRODUCT_TOP=$REACT_APP_LIST_PRODUCT_TOP
+      --build-arg REACT_APP_LIST_SUBSCRIPTIONS=$REACT_APP_LIST_SUBSCRIPTIONS
       --cache-from "${DOCKER_IMAGE_PATH}:$TAG"
       -t "${DOCKER_IMAGE_PATH}:$CI_TAG" -t "${DOCKER_IMAGE_PATH}:$TAG" .
     - docker push $DOCKER_IMAGE_PATH:$TAG
@@ -35,7 +44,7 @@ variables:
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - echo "$PRIVATE_RSA_KEY" | tr -d '\r' > ssh-auth
     - chmod 600 ssh-auth
-    - sed -i "s|_VERSION|$CI_COMMIT_SHA|g;" docker-compose.yaml
+    - sed -i "s|IMAGE_VERSION|$CI_COMMIT_SHA|g;" docker-compose.yaml
     - scp -i ssh-auth docker-compose.yaml $SSH_LOGIN:$REMOTE_PATH/docker-compose.yaml
     - ssh -i ssh-auth $SSH_LOGIN "cd $REMOTE_PATH && docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com && docker-compose down && docker-compose up -d "
 
