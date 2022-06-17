@@ -938,6 +938,9 @@ a {
 .text-uppercase {
   text-transform: uppercase !important;
 }
+.text-capitalize {
+  text-transform: capitalize !important;
+}
 
 .justify-center {
   justify-content: center;
@@ -1110,10 +1113,10 @@ a {
 }
 
 .ls{
-  &_02{ letter-spacing: 0.2; }
-  &_05{ letter-spacing: 0.5; }
-  &_1{ letter-spacing: 1; }
-  &_1_5{ letter-spacing: 1.5; }
+  &_02{ letter-spacing: 0.2 !important; }
+  &_05{ letter-spacing: 0.5 !important; }
+  &_1{ letter-spacing: 1 !important; }
+  &_1_5{ letter-spacing: 1.5px !important; }
 }
 
 .display_flex{

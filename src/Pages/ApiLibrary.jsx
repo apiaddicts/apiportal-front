@@ -177,6 +177,7 @@ function AppLibrary(props) {
                 version={item.version}
                 buttons={item.tags}
                 colorStatus={item.color_status}
+                theme='dark'
                 info='ver Documentación'
                 description={item.description}
                 redirectTo={`/dashboard/apis/${item.apiName}`}

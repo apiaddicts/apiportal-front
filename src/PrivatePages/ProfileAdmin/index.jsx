@@ -96,14 +96,6 @@ function Admin() {
                           <Input key={field.id} field={field} formik={formConfig} />
                         </div>
                       ))}
-                      <div className='flex-lg-3 flex-sm-12 display_flex align_items__bottom justify_content__end ml-auto mb-2'>
-                        <Button
-                          type='submit'
-                          styles='primary'
-                        >
-                          Guardar
-                        </Button>
-                      </div>
                     </div>
                     <div className='row align_items__center mt-4 justify_content__between'>
                       <div className='flex-lg-6 flex-sm-12'>
@@ -114,6 +106,14 @@ function Admin() {
                         >
                           Restablecer password
                         </div>
+                      </div>
+                      <div className='flex-lg-3 flex-sm-12 display_flex align_items__bottom justify_content__end ml-auto mb-2'>
+                        <Button
+                          type='submit'
+                          styles='primary'
+                        >
+                          Guardar
+                        </Button>
                       </div>
                     </div>
                   </div>
