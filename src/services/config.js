@@ -33,6 +33,4 @@ const config = {
   url: createURLSura(),
 };
 
-console.log(config, process.env);
-
 export default config;
