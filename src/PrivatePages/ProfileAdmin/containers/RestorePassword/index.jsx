@@ -24,6 +24,7 @@ function RestorePassword({ userEmail, display }) {
     <form onSubmit={formConfig.handleSubmit}>
       <div className={displayClass}>
         <Alert
+          key={Math.floor(Math.random() * 100) + 1}
           css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
           alert_type='alert__danger'
           title='Error with password'

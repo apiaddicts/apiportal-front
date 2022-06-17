@@ -46,6 +46,11 @@ function SidebarDrawer({ children, user }) {
     }
   }
 
+  const splitStr = (value) => {
+    const str = value.split(' ');
+    return str[0];
+  };
+
   useEffect(() => {
     window.addEventListener('resize', handleWindowWithChange);
     handleWindowWithChange();
@@ -154,12 +159,13 @@ function SidebarDrawer({ children, user }) {
                     borderRadius: '20px',
                     border: '1px solid #00AEC7',
                     color: '#fff',
-                    marginRight: '1rem',
                   }}
                   onClick={handleClick}
                 >
                   {user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? (
-                    user.properties.firstName
+                    <span className='text-capitalize' style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {`${splitStr(user.properties.firstName)} ${splitStr(user.properties.lastName)}`}
+                    </span>
                   ) : ('')}
                 </Button>
                 <Menu
@@ -179,7 +185,7 @@ function SidebarDrawer({ children, user }) {
                     horizontal: 'right',
                   }}
                 >
-                  <MenuItem onClick={handleUser}>
+                  <MenuItem onClick={() => { handleUser(); handleClose(); }}>
                     <ListItemIcon>
                       <PersonSharpIcon />
                     </ListItemIcon>
@@ -187,7 +193,7 @@ function SidebarDrawer({ children, user }) {
                       Mi perfil
                     </ListItemText>
                   </MenuItem>
-                  <MenuItem onClick={handleLogout}>
+                  <MenuItem onClick={() => { handleLogout(); handleClose(); }}>
                     <ListItemIcon>
                       <LogoutIcon />
                     </ListItemIcon>
@@ -327,18 +333,17 @@ function SidebarDrawer({ children, user }) {
         variant='permanent'
         sx={{
           display: { xs: 'none', md: 'block' },
+          '& .MuiDrawer-paper': { background: '#ECF0F1' },
         }}
         open={toggleMenu}
         ref={drawerPerm}
       >
         {toggleMenu && (
-          <List
-            sx={{ paddingRight: '80px' }}
-          >
+          <List>
             <ListItem
               sx={{
                 paddingLeft: '97px',
-                paddingTop: '80px',
+                paddingTop: '110px',
               }}
             >
               <ListItemText>
@@ -346,21 +351,12 @@ function SidebarDrawer({ children, user }) {
                 <h1 className={`font-weight-bold text__primary ${classes.title__name}`}>
                   {
                     user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? (
-                      <>
-                        {user.properties.firstName}
-                        <br />
-                        {user.properties.lastName }
-                      </>
+                      <span>
+                        {`${splitStr(user.properties.firstName)} ${splitStr(user.properties.lastName)}`}
+                      </span>
                     ) : ('')
                   }
                 </h1>
-              </ListItemText>
-            </ListItem>
-            <ListItem
-              sx={{ paddingLeft: '97px' }}
-            >
-              <ListItemText>
-                <h1 className={classes.title__developer}>developer portal</h1>
               </ListItemText>
             </ListItem>
           </List>
@@ -380,10 +376,19 @@ function SidebarDrawer({ children, user }) {
             paddingTop: `${!toggleMenu ? '180px' : '8px'}`,
           }}
         >
+          {toggleMenu && (
+            <ListItem
+              sx={{ paddingLeft: '97px' }}
+            >
+              <ListItemText>
+                <h1 className={classes.title__developer}>developer portal</h1>
+              </ListItemText>
+            </ListItem>
+          )}
           {
             listItems.map((item, index) => (
-              <ListItem button key={index} sx={{ color: '#53565A', paddingLeft: toggleMenu ? '97px' : '70px', paddingRight: 0 }} component={MyNavLink} to={item.route} exact>
-                <ListItemIcon>
+              <ListItem button key={index} sx={{ color: '#53565A', paddingLeft: toggleMenu ? '80px' : '54px', paddingRight: 0 }} component={MyNavLink} to={item.route} exact>
+                <ListItemIcon sx={{ justifyContent: 'center' }}>
                   {item.icon}
                 </ListItemIcon>
                 {toggleMenu && (<ListItemText primary={item.text} />)}
@@ -395,9 +400,9 @@ function SidebarDrawer({ children, user }) {
           <ListItem
             button
             onClick={handleMenu}
-            sx={{ paddingLeft: toggleMenu ? '97px' : '70px' }}
+            sx={{ paddingLeft: toggleMenu ? '80px' : '54px' }}
           >
-            <ListItemIcon>
+            <ListItemIcon sx={{ justifyContent: 'center' }}>
               {
                 toggleMenu ? (<ChevronLeft />) : (<ChevronRight />)
               }

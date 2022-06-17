@@ -17,13 +17,14 @@ import Admin from '../../PrivatePages/ProfileAdmin';
 import AppsDetail from '../../PrivatePages/DetailApp';
 import ApiDetailed from '../../PrivatePages/ApiDetails/ApiDetailed';
 import ApiSubscriptions from '../../PrivatePages/ApiSubscriptions';
+import CicleTexture from '../../static/img/texture_circles_private.svg';
 
 import { getUser } from '../../redux/actions/userAction';
+import classes from '../../styles/pages/dashboard.module.scss';
 
 function DashboardRoutes() {
 
   const { id, token, user } = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,7 +42,10 @@ function DashboardRoutes() {
         <Box>
           <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#fbfbfb', minHeight: '100vh' }}>
             <SidebarDrawer user={user} />
-            <div className='container' style={{ marginTop: '152px', marginBottom: '87px' }}>
+            <div className={classes.texture}>
+              <img src={CicleTexture} alt={CicleTexture} />
+            </div>
+            <div className={`container ${classes.wrapper}`}>
               <Routes>
                 <Route path='user' element={<Admin />} />
                 <Route path='products' exact element={<Apps />} />

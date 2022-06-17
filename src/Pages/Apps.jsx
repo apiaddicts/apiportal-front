@@ -85,8 +85,9 @@ function Apps(props) {
           <SearchInput
             name='search'
             type='text'
-            placeholder='Buscar'
+            placeholder='Buscar Producto'
             icon
+            borderRadius={50}
             onChange={(e) => {
               formik.handleChange(e);
               formik.setFieldValue('description', '');
@@ -110,7 +111,7 @@ function Apps(props) {
                         <TableCell style={{ width: '100px' }} size='small'>
                           <>
                             <div className={classes.cell_title}>
-                              <h2>Nombre</h2>
+                              <h2 className='text-uppercase'>Nombre</h2>
                               <Icon id='MdExpandMore' />
                             </div>
                             <div style={{ height: '36px', marginTop: '14px' }}>
@@ -131,7 +132,7 @@ function Apps(props) {
                         <TableCell>
                           <>
                             <div className={classes.cell_title}>
-                              <h2>Descripcion</h2>
+                              <h2 className='text-uppercase'>Descripcion</h2>
                               <Icon id='MdExpandMore' />
                             </div>
                             <div style={{ height: '36px', marginTop: '14px' }}>

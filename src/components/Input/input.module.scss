@@ -72,12 +72,13 @@
     border: 1px solid #ccc;
   }
   &__icon {
+    color: $gray_darken;
+    height: 20px;
     position: absolute;
-    font-size: 24px;
-    left: 9px;
+    left: 10px;
     top: 50%;
     transform: translateY(-50%);
-    color: $gray_darken;
+    width: 20px;
   }
 
   &__icon__right{

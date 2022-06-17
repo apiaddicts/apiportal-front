@@ -36,7 +36,7 @@ function Input({ field, formik, footer, styleInput }) {
       </div>
       {touched[field.id] && !!errors[field.id] ? (
         <p className={`${classes.wrapper__input__required}`}>{errors[field.id]}</p>
-      ) : (field.label && <p className={`${classes.wrapper__input__required}`}>Requerido *</p>)}
+      ) : !values[field.id] ? (field.label && <p className={`${classes.wrapper__input__required}`}>Requerido *</p>) : null }
     </div>
   );
 }
