@@ -30,11 +30,11 @@ function PublicRoute() {
       <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} />
       <Routes>
         <Route path='/' element={<Home setIsOpen={setIsOpen} />} />
-        <Route path='/apis' exact element={<Apis setIsOpen={setIsOpen} />} />
-        <Route path='/apis/:id' exact element={<ApiDetails setIsOpen={setOpenForm} />} />
-        <Route path='/faqs' exact element={<Faqs />} />
-        <Route path='/blog' exact element={<Blog setIsOpen={setIsOpen} />} />
-        <Route path='/blog/:id' exact element={<BlogDetails setIsOpen={setIsOpen} />} />
+        <Route path='/apis' exact='true' element={<Apis setIsOpen={setIsOpen} />} />
+        <Route path='/apis/:id' exact='true' element={<ApiDetails setIsOpen={setOpenForm} />} />
+        <Route path='/faqs' exact='true' element={<Faqs />} />
+        <Route path='/blog' exact='true' element={<Blog setIsOpen={setIsOpen} />} />
+        <Route path='/blog/:id' exact='true' element={<BlogDetails setIsOpen={setIsOpen} />} />
       </Routes>
       <Footer />
     </>

@@ -44,13 +44,13 @@ function Home({ setIsOpen }) {
     if (blogs && blogs.length === 0) {
       dispatch(getBlogs());
     }
-  }, [blogs]);
+  }, []);
 
   useEffect(() => {
     if (libraries && libraries.length === 0) {
       dispatch(getLibraries());
     }
-  }, [libraries]);
+  }, []);
 
   // Load Slider
   const filterSlider = data && data.contentSections ? data.contentSections.filter((item) => item.__component === 'sura.carousel') : [];

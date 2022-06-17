@@ -68,7 +68,7 @@ function BlogPostsPaginated({ posts, itemsPerPage, parentContainerClass }) {
         containerClassName={`${classes.pagination}`}
         breakClassName={`${classes.number_page}`}
         pageClassName={`${classes.number_page}`}
-        activeClassName={`${classes.number_page_active}`}
+        activeclasscame={`${classes.number_page_active}`}
       />
     </>
   );

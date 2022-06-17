@@ -55,7 +55,7 @@ function Apps(props) {
       dispatch(listProducts());
     }
 
-  }, [dispatch, products]);
+  }, []);
 
   useEffect(() => {
     return () => {

@@ -40,7 +40,7 @@ function ApiDetails(props) {
     if (params.id && api && Object.keys(api).length === 0) {
       dispatch(getApi(params.id));
     }
-  }, [dispatch, api]);
+  }, []);
 
   useEffect(() => {
     return () => {
