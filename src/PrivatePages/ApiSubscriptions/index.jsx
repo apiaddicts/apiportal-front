@@ -20,7 +20,7 @@ function Admin() {
   }, []);
 
   return (
-    <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>
+    <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
       <div className={classes.wrapper_subscriptions}>
         <div className='mb-5'>
           <Title text='Suscripciones' />

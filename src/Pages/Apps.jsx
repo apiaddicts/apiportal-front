@@ -76,7 +76,7 @@ function Apps(props) {
   };
 
   return (
-    <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important' }}>
+    <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: ' 0px', md: '97px !important' } }}>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 2fr))', alignItems: 'center' }}>
         <div>
           <Title text='Productos' />

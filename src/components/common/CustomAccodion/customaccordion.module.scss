@@ -203,6 +203,7 @@
     }
   }
   &__code {
+    display: inline-block;
     max-width: 600px;
     word-break: break-all;
     color: $primary;
