@@ -129,7 +129,7 @@ function AppsDetail(props) {
           </Link>
         </div>
       )}
-      <Container sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>
+      <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
         {product && Object.keys(product).length === 0 ? (
           <Spinner styles={{ height: '200px' }} title='Cargando...' />
         ) : (
@@ -140,7 +140,7 @@ function AppsDetail(props) {
             <Card sx={{ borderRadius: '20px', marginTop: '1rem', paddingTop: '3px', paddingLeft: '41px', paddingRight: '45px', paddingBottom: '40px', marginBottom: '40px', boxShadow: '0px 4px 28px rgba(169, 177, 209, 0.12)' }}>
               <Grid style={{ marginTop: '0px' }} container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 <Grid item xs={6}>
-                  <span className='subtitle-2 text__gray__gray_darken font-weigth-semi-bold'>
+                  <span className='subtitle-2 text__gray__gray_darken font-weigth-semi-bold text-uppercase'>
                     <b>Descripción</b>
                   </span>
                 </Grid>
