@@ -64,6 +64,9 @@
             justify-content: flex-start;
             align-items: flex-start;
         }
+        @include breakpoint(md) {
+            justify-content: flex-start;
+        }
     }
     @include breakpoint(xs) {
         grid-template-columns: repeat(1, 1fr);
@@ -90,7 +93,7 @@
     @include breakpoint(xs) {
         grid-template-columns: repeat(1, 1fr);
     }
-    @include breakpoint(md) {
+    @include breakpoint(sm) {
         grid-template-columns: repeat(1, 1fr);
     }
     @include breakpoint(lg) {

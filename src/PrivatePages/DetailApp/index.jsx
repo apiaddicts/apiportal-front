@@ -129,7 +129,7 @@ function AppsDetail(props) {
           </Link>
         </div>
       )}
-      <Container sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>
+      <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
         {product && Object.keys(product).length === 0 ? (
           <Spinner styles={{ height: '200px' }} title='Cargando...' />
         ) : (

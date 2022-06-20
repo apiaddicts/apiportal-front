@@ -27,4 +27,16 @@
   position: absolute;
   top: -42px;
   left: 30px;
+  
+  @include breakpoint(xs) {
+    left: 0;
+  }
+  
+  @include breakpoint(sm) {
+    left: 0;
+  }
+
+  @include breakpoint(lg) {
+    left: 30px;
+  }
 }
