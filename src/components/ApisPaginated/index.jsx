@@ -64,7 +64,7 @@ function ApisPaginated({ apis, itemsPerPage }) {
         containerClassName={`${classes.pagination}`}
         breakClassName={`${classes.number_page}`}
         pageClassName={`${classes.number_page}`}
-        activeClassName={`${classes.number_page_active}`}
+        activeclassname={`${classes.number_page_active}`}
       />
     </>
   );

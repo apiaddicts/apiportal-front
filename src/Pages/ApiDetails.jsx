@@ -54,13 +54,13 @@ function ApiDetails({ setIsOpen }) {
     if (blogs && blogs.length === 0) {
       dispatch(getBlogs());
     }
-  }, [dispatch, blogs]);
+  }, []);
 
   useEffect(() => {
     if (libraries && libraries.length === 0) {
       dispatch(getLibraries());
     }
-  }, [libraries]);
+  }, []);
 
   // Load discover section
   const filterDiscoverTab = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'home.discover-section') : [];

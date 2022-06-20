@@ -73,7 +73,7 @@ function Admin() {
 
   return (
     <>
-      <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important' }}>
+      <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
         <div className={classes.main__admin}>
           {user && Object.keys(user).length > 0 && loadingUser === false ? (
             <div className={classes.admin}>
@@ -96,6 +96,17 @@ function Admin() {
                           <Input key={field.id} field={field} formik={formConfig} />
                         </div>
                       ))}
+                    </div>
+                    <div className='row align_items__center mt-4 justify_content__between'>
+                      <div className='flex-lg-6 flex-sm-12'>
+                        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+                        <div
+                          className='fs__16 text__primary ls_05 text-uppercase font-weight-bold ml-3 mb-2 cpointer'
+                          onClick={() => setDisplayRestorePassword(!displayRestorePassword)}
+                        >
+                          Restablecer password
+                        </div>
+                      </div>
                       <div className='flex-lg-3 flex-sm-12 display_flex align_items__bottom justify_content__end ml-auto mb-2'>
                         <Button
                           type='submit'
@@ -103,17 +114,6 @@ function Admin() {
                         >
                           Guardar
                         </Button>
-                      </div>
-                    </div>
-                    <div className='row align_items__center mt-4 justify_content__between'>
-                      <div className='flex-lg-6 flex-sm-12'>
-                        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-                        <div
-                          className='fs__16 text__primary ls_05 text-uppercase font-weight-bold ml-3 cpointer'
-                          onClick={() => setDisplayRestorePassword(!displayRestorePassword)}
-                        >
-                          Restablecer password
-                        </div>
                       </div>
                     </div>
                   </div>
