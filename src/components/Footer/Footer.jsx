@@ -16,6 +16,12 @@ function Footer({ isPrivate }) {
   const img = 'https://picsum.photos/1920/300';
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
+  const socialLinks = [
+    { link: 'https://www.facebook.com/SegurosSURAMexico/', icon: <FaFacebookF /> },
+    { link: 'https://twitter.com/SegurosSURA_MX', icon: <FaTwitter /> },
+    { link: 'https://www.youtube.com/channel/UCXm_a8qOYWL4oYnzHcoeWlw', icon: <FaYoutube /> },
+    { link: 'https://www.instagram.com/segurossuramx/', icon: <RiInstagramFill /> },
+  ];
   const [contactForm, setContactForm] = useState(false);
 
   return (
@@ -125,10 +131,13 @@ function Footer({ isPrivate }) {
           </p>
         </div>
         <div className={classes.footer__social__icons}>
-          <FaFacebookF />
-          <FaTwitter />
-          <FaYoutube />
-          <RiInstagramFill />
+          {
+            socialLinks.map((socialLink, index) => (
+              <a href={socialLink.link} key={index} target='_blank' rel='noreferrer'>
+                {socialLink.icon}
+              </a>
+            ))
+          }
         </div>
       </div>
 

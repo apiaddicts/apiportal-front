@@ -215,7 +215,7 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                                                       {Object.keys(openApiFormat === 'openapi' ? jsonOpenApi.components.securitySchemes[key].flows[flow].scopes : jsonOpenApi.securityDefinitions[key].scopes).map((scope, index) => {
                                                         return (
                                                           <li key={index}>
-                                                            <code className={classes.wrapper__auth__content__code}>{scope}</code>
+                                                            <code className={classes.scopes__code}>{scope}</code>
                                                             <span>{openApiFormat === 'openapi' ? jsonOpenApi.components.securitySchemes[key].flows[flow].scopes[scope] : jsonOpenApi.securityDefinitions[key].scopes[scope]}</span>
                                                           </li>
                                                         );
