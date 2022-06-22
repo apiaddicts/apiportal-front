@@ -1211,3 +1211,11 @@ a {
 .fs__joey{
   font-family: $fs-joey;
 }
+
+.markdown__content{ 
+  width: 100%; 
+  overflow: hidden;
+}
+
+img[src*='#center']{ display: block; margin: 0 auto; }
+img[src*='#right']{ display: block; margin-left: auto; }

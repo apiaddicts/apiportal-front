@@ -3,6 +3,7 @@ import { FaFacebookF, FaTwitter, FaLinkedinIn, FaTelegramPlane } from 'react-ico
 import moment from 'moment';
 import 'moment/locale/es';
 import Chip from '../Chip/Chip';
+import CustomMarkdown from '../CustomMarkdown';
 
 moment.locale('es');
 
@@ -62,48 +63,9 @@ function BlogDetailsInfo({ styles, data }) {
         </div>
       </div>
       {/* TODO: Change all section with only Markdown that receives from Strapi */}
-      {data.questions.length > 0 ? data.questions.map((question, i) => (
-        question.seccion === 'Normal' ? (
-          <div key={i} className={styles.blog__details}>
-            <div className={styles.blog__details__content__description}>
-              <p className={styles.blog__details__title}>{question.question ? question.question : ''}</p>
-              <p className={styles.blog__details__title__text}>
-                {question.description ? question.description : '' }
-              </p>
-            </div>
-            <div className={styles.blog__details__image__container}>
-              <img src={question.img && question.img.length > 0 ? question.img[0].url : 'https://picsum.photos/500/300'} alt='' srcSet='' />
-            </div>
-          </div>
-        ) : question.seccion === 'Reverse' ? (
-          <div key={i} className={styles.blog__details__row__reverse}>
-            <div className={styles.blog__details__content__description}>
-              <p className={styles.blog__details__title}>{question.question ? question.question : ''}</p>
-              <p className={styles.blog__details__title__text}>
-                {question.description ? question.description : '' }
-              </p>
-            </div>
-            <div className={styles.blog__details__image__container}>
-              <img src={question.img && question.img.length > 0 ? question.img[0].url : 'https://picsum.photos/500/300'} alt='' srcSet='' />
-            </div>
-          </div>
-        ) : (
-          <div key={i} className={styles.blog__details__content__description__footer}>
-            <p className={styles.blog__details__title}>{question.question ? question.question : ''}</p>
-            <p className={styles.blog__details__title__text}>
-              {question.description ? question.description : ''}
-            </p>
-            <div className={styles.blog__details__ul__list}>
-              <ul>
-                <li>In egestas blandit felis id porttitor. </li>
-                <li>Felis id porttitor.</li>
-                <li>Luctus posuere lacus.</li>
-                <li>Proin eros elit, aliquet nec magna ornare</li>
-              </ul>
-            </div>
-          </div>
-        )
-      )) : (null)}
+      <div className='markdown__content'>
+        <CustomMarkdown content={data?.content} />
+      </div>
 
       <div className={styles.blog__details__list__content}>
         <div className={styles.blog__details__social__content}>
