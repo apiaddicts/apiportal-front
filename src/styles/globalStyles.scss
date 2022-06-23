@@ -1196,12 +1196,12 @@ a {
 
 .multiSelectContainer {
   li {
-    color: #53565A;
+    color: $gray_darken;
   }
 }
 
 .closeIcon{
-  background-color: #53565A;
+  background-color: $gray_darken;
 }
 
 .margin_top {
@@ -1214,3 +1214,19 @@ a {
 .fs__joey{
   font-family: $fs-joey;
 }
+
+.markdown__content{ 
+  width: 100%; 
+  overflow: hidden;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  color: $gray_darken;
+  font-family: $barlow;
+  p{
+    margin: 10px 0;
+  }
+}
+
+img[src*='#center']{ display: block; margin: 0 auto; }
+img[src*='#right']{ display: block; margin-left: auto; }
