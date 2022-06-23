@@ -171,6 +171,7 @@ function AppLibrary(props) {
           arrApis.length > 0 ? (
             arrApis.map((item, index) => (
               <CardInformationLibrary
+                key={index}
                 apiName={item.apiName}
                 title={item.title}
                 status={item.status}

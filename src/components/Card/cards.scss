@@ -99,6 +99,8 @@
 .card_slider_container {
     position: relative;
     overflow: hidden;
+    background: $secondary_white;
+    border-radius: 20px;
         &_slider {
             display: flex;
             flex-wrap: nowrap;
@@ -252,7 +254,7 @@
 .custom_card__height{
     height: 461px !important;
     @include breakpoint(xs) {
-        height: 395px !important;
+        height: 100% !important;
     }
     .card-header{
         height: 133px;
