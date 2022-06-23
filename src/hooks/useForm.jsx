@@ -7,26 +7,14 @@ import * as Yup from 'yup';
 const validationSchema = Yup.object().shape({
   first_name: string().required('El nombre es obligatorio'),
   last_name: string().required('El apellido es obligatorio'),
-  // phone: string()
-  //   .matches(new RegExp(/(^[0-9]+$)/), 'Must contain only numbers')
-  //   .min(10, 'Must be at least 10 characters long').required('El número es obligatorio'),
-  // company: string().required('El nombre de la empresa es obligatorio'),
-  // industry: string().required('El sector es obligatorio'),
-  email: string().email('Please provide a valid email').required('El email es obligatorio'),
-  terms: bool().oneOf([true], 'Debes aceptar los terminos y coniciones'),
+  email: string().email('Por favor proporcione un correo electrónico válido').required('El email es obligatorio'),
+  terms: bool().oneOf([true], 'Debes aceptar los terminos y condiciones'),
   password: string()
-    // .matches(new RegExp(/(?=.*[a-z])/), 'Must contain lowercase a-z characters')
-    // .matches(new RegExp(/(?=.*[A-Z])/), 'Must contain uppercase A-Z characters')
-    // .matches(new RegExp(/(?=.*[0-9])/), 'Must contain at least one number')
-    // .matches(
-    //   new RegExp(/(?=.*[!@#$%^&*])/),
-    //   'Must contain at least one !@#$%^&* special character',
-    // )
-    .min(8, 'Must be at least 8 characters long')
-    .trim('Spaces are not allowed')
+    .min(8, 'La contraseña debe tener al menos 8 caracteres de longitud')
+    .trim('Los espacios no estan permitidos')
     .strict()
     .required('La contraseña es obligatoria'),
-  password_confirmation: string().oneOf([Yup.ref('password')], 'Passwords must match').required('La contraseña de confirmación es obligatoria'),
+  password_confirmation: string().oneOf([Yup.ref('password')], 'La contraseñas y la confirmación de contraseña deben coincidir').required('La confirmación de contraseña es obligatoria'),
 });
 
 const objectFromArray = (fields, key) => {

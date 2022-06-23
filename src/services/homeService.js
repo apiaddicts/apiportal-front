@@ -11,6 +11,8 @@ function getHome() {
     .then(handleResponse)
     .then((home) => {
       return home;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 

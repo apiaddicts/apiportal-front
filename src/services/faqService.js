@@ -11,6 +11,8 @@ function getFaq() {
     .then(handleResponse)
     .then((faq) => {
       return faq;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 

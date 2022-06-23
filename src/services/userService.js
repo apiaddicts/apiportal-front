@@ -20,6 +20,8 @@ function login(email, password) {
   ).then(handleResponseToken)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -34,6 +36,8 @@ function confirmAccount(queryParams) {
     .then(handleResponseToken)
     .then((response) => {
       return { ...response, id: queryParams.userId };
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -50,21 +54,8 @@ function getUserDetails(token, id) {
   ).then(handleResponse)
     .then((response) => {
       return response;
-    });
-}
-
-function getUserSuscriptions(subscriptionId, resourceGroupName, serviceName, apiVersion) {
-  const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `${userToken}` },
-  };
-
-  return fetch(
-    `${config.url}/users/:userId/subscriptions?api-version=${apiVersion}`,
-    requestOptions,
-  ).then(handleResponse)
-    .then((response) => {
-      return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -86,7 +77,12 @@ function getUserEntityTag(token, id) {
           return Promise.reject(data);
       }
     }))
-    .then((result) => result);
+    .then((result) => result).catch((error) => {
+      console.error(error);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 function updateUser(data) {
@@ -103,6 +99,8 @@ function updateUser(data) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -121,6 +119,8 @@ function signUp(data) {
   ).then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -137,6 +137,8 @@ function verifyOldPassword(data) {
   ).then(handleResponseRestore)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -158,6 +160,8 @@ function changePassword(newPassword) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -173,6 +177,8 @@ function resetPassword(data) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -188,6 +194,8 @@ function resetPasswordWithTicket(queryParams, data) {
     .then(handleResponseResetPwd)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -195,7 +203,6 @@ const userService = {
   login,
   confirmAccount,
   getUserDetails,
-  getUserSuscriptions,
   getUserEntityTag,
   signUp,
   updateUser,

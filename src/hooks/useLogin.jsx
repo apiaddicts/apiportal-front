@@ -4,21 +4,7 @@ import { useState } from 'react';
 // import { string } from 'yup';
 import * as Yup from 'yup';
 
-const validationSchema = Yup.object().shape({
-  // email: string().email('Please provide a valid email').required('El email es obligatorio'),
-  // password: string()
-  //   .matches(new RegExp(/(?=.*[a-z])/), 'Must contain lowercase a-z characters')
-  //   .matches(new RegExp(/(?=.*[A-Z])/), 'Must contain uppercase A-Z characters')
-  //   .matches(new RegExp(/(?=.*[0-9])/), 'Must contain at least one number')
-  //   .matches(
-  //     new RegExp(/(?=.*[!@#$%^&*])/),
-  //     'Must contain at least one !@#$%^&* special character',
-  //   )
-  //   .min(8, 'Must be at least 8 characters long')
-  //   .trim('Spaces are not allowed')
-  //   .strict()
-  //   .required('La contraseña es obligatoria'),
-});
+const validationSchema = Yup.object().shape({});
 
 const objectFromArray = (fields, key) => {
   const mappedProps = fields.map((field) => {

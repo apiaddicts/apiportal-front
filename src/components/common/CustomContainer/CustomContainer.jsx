@@ -2,8 +2,6 @@ import { ChevronLeft, Settings, Terminal } from '@mui/icons-material';
 import { CssBaseline, Drawer, List, ListItem, listItemClasses, ListItemIcon, ListItemText } from '@mui/material';
 import { NavLink } from 'react-router-dom';
 import React from 'react';
-// import SidebarDrawer from '../../SidebarDrawer/SidebarDrawer';
-// import CustomFooter from '../CustomFooter/CustomFooter';
 import CustomHeader from '../CustomHeader/CustomHeader';
 import classes from './customcontainer.module.scss';
 

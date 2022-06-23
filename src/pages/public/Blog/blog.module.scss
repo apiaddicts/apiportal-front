@@ -1,0 +1,274 @@
+@import "../../../styles/variables.scss";
+
+.section__experiences {
+  background: $gray_lighten-1;
+  padding-top: 75px;
+
+  @include breakpoint(xs) {
+    padding-top: 45px;
+  }
+
+  &__tabs {
+    margin-bottom: 150px;
+    margin-top: 30px;
+  }
+
+  &__content {
+    position: relative;
+    margin-top: 40px;
+    height: 100%;
+    padding-bottom: 100px;
+    @include breakpoint(xs) {
+      height: 0%;
+    }
+
+    &__img {
+      position: relative;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 20px;
+        @include breakpoint(xs) {
+          display: none;
+        }
+        @include breakpoint(sm) {
+          display: none;
+        }
+        @include breakpoint(lg) {
+          display: block;
+        }
+        }
+        
+        &__overlay {
+        width: 50%;
+        height: 390px;
+        
+        @include breakpoint(xs) {
+          display: none;
+        }
+        
+        @include breakpoint(sm) {
+          display: none;
+        }
+        
+        @include breakpoint(lg) {
+          display: block;
+        }
+      }
+    }
+
+    &__card {
+      height: 100%;
+      position: absolute;
+      border-radius: 20px;
+      box-shadow: 0px 3px 12px -2px rgba(0, 0, 0, 0.1);
+      background: $secondary_white;
+      top: 0;
+      left: 439px;
+      max-height: 390px;
+      max-width: 738px;
+      display: flex;
+      align-items: center;
+
+      @include breakpoint(xs) {
+        position: relative;
+        top: 0;
+        left: 0;
+        max-height: 500px;
+      }
+      @include breakpoint(sm) {
+        position: relative;
+        top: 0;
+        left: 0;
+        max-width: 700px;
+      }
+      @include breakpoint(md) {
+        position: relative;
+        top: 0%;
+        left: 0%;
+        max-width: 700px;
+      }
+      @include breakpoint(lg) {
+        position: absolute;
+        top: 10%;
+        left: 36%;
+        max-width: 65%;
+      }
+    }
+
+    &__items {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      max-width: 100%;
+      height: 100%;
+    }
+  }
+}
+.section__result__content {
+  width: 100%;
+  margin: auto;
+  display: flex;
+  margin-top: 120px;
+
+  @include breakpoint(xs) {
+    margin-top: 10px;
+  }
+
+  &__result {
+    width: 60%;
+    padding: 2rem 0;
+    margin-top: 30px;
+  }
+
+  &__grid__container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+  }
+  &__result__description {
+    line-height: 25px;
+    font-weight: 100;
+    font-family: $barlow;
+  }
+  &__pagination {
+    border-top: 1px solid $gray_lighten-1;
+    padding-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: $primary;
+
+    &__buttons__before {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:first-child {
+        color: $secondary;
+        font-size: 30px;
+      }
+      p {
+        color: $primary;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 32px;
+        margin-bottom: 2px;
+      }
+    }
+
+    &__number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 100;
+      font-family: $barlow;
+
+      p {
+        margin-left: 10px;
+
+        &:first-child {
+          color: $secondary;
+        }
+      }
+    }
+
+    &__buttons__next {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+
+      &:last-child {
+        color: $secondary;
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 400;
+      }
+
+      p {
+        color: $primary;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 18px;
+        line-height: 32px;
+        margin-bottom: 2px;
+      }
+    }
+  }
+}
+
+.apis {
+  &__library {
+    margin-top: 40px;
+    align-items: flex-start;
+    &__cards {
+      // grid-area: cards;
+      display: grid;
+      grid-template-columns: repeat(2, 2fr);
+      gap: 2rem;
+      @include breakpoint(xs) {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        max-height: 100% !important;
+      }      
+      @include breakpoint(sm) {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        max-height: 100% !important;
+      }      
+      @include breakpoint(lg) {
+        grid-template-columns: repeat(2, 2fr);
+        gap: 2rem;
+      }
+      a {
+        max-height: 500px;
+      }
+    }
+    &__suggestions {
+      grid-area: suggestions;
+      &__content {
+        &__title {
+          padding-left: 20px;
+        }
+      }
+    }
+    &__contact {
+      grid-area: contact;
+    }
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: "cards suggestions"
+                         "footer footer";
+    gap: 2rem;
+
+    @include breakpoint(xs) {
+      grid-template-columns: 1fr;
+      grid-template-areas: "cards";
+    }
+
+    @include breakpoint(sm) {
+      grid-template-columns: 1fr;
+      grid-template-areas: "cards"
+                           "suggestions";
+    }
+
+    @include breakpoint(lg) {
+      grid-template-columns: 2fr 1fr;
+      grid-template-areas: "cards suggestions";
+      gap: 2rem;
+    }
+
+    
+
+
+
+  }
+}

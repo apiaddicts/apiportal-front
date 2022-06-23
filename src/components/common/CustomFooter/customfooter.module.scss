@@ -51,21 +51,43 @@
     padding-left: 0;
     padding-right: 0;
 
-    @include breakpoint(lg) {
-      grid-template-columns: 3fr 1fr 190px;
-      grid-template-areas: "logo email policies";
+    @include breakpoint(sm) {
+      grid-template-columns: 2fr;
+      grid-template-areas: "logo logo" "email policies";
+      gap: 2rem;
+      .logo {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .email {
+        text-align: left !important;
+      }
+      .policies {
+        text-align: right !important;
+      }
     }
 
-    @include breakpoint(md) {
-      grid-template-columns: 3fr 1fr 1fr;
+    @media only screen and (min-width: 860px) {
+      grid-template-columns: 2fr 1fr 200px;
       grid-template-areas: "logo email policies";
+      .logo {
+        margin: 0;
+      }
+    }
+
+    @include breakpoint(lg) {
+      grid-template-columns: 3fr 1fr 200px;
+      grid-template-areas: "logo email policies";
+      .logo {
+        margin: 0;
+      }
     }
 
     @include breakpoint(xs) {
       grid-template-columns: 1fr;
       grid-template-areas: "logo" "email" "policies";
       gap: 2rem;
-      padding-top: 4rem;
+      padding-top: 2rem;
       padding-bottom: 2rem;
       align-content: center;
       text-align: center;

@@ -1,3 +1,4 @@
+import store from '../redux/store';
 import { logout } from '../redux/actions/userAction';
 
 const statusCode = {
@@ -42,14 +43,11 @@ function handleResponse(response) {
         return data;
       case statusCode.HTTP_204_NO_CONTENT:
         return { status: response.status, statusText: response.statusText };
-      case statusCode.HTTP_304_NOT_MODIFIED:
-        return 'Not_Modified';
       case statusCode.HTTP_401_UNAUTHORIZED:
-        return (dispatch) => {
-          dispatch(logout());
-        };
+        store.dispatch(logout());
+        throw new Error(response.status);
       default:
-        return Promise.reject(data);
+        throw new Error(response.status);
     }
   });
 }
