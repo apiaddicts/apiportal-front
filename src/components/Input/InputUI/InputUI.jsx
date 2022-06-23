@@ -2,11 +2,10 @@
 import React, { useRef, useState } from 'react';
 import classes from './inputui.module.scss';
 
-function InputUI({ type = 'text', label, required = false, onChange, ...rest }) {
+function InputUI({ type = 'text', label, errors, required = false, onChange, ...rest }) {
   const [isActive, setIsActive] = useState(false);
   const [value, setValue] = useState('');
   const inputRef = useRef();
-
   const handleChange = (e) => {
     if (onChange) onChange(e);
   };
@@ -21,10 +20,11 @@ function InputUI({ type = 'text', label, required = false, onChange, ...rest }) 
   }
 
   return (
-    <div className={classes.wrapper__input}>
-      <input type={type} required={required ? 'required' : ''} value={value} ref={inputRef} onKeyPress={(e) => handleTextChange(e.target.value)} onChange={handleChange} {...rest} />
+    <div className={`${classes.wrapper__input} ${errors === undefined ? '' : `${classes.error}`}`}>
+      <input type={type} required={required ? 'required' : ''} value={value} autoComplete='off' ref={inputRef} onKeyDown={(e) => handleTextChange(e.target.value)} onChange={handleChange} {...rest} />
       <label className={isActive ? `${classes.active}` : ''} onClick={() => { setIsActive(true); inputRef.current.focus(); }}>{label}</label>
       { required && (<span className={classes.required}>{isActive}</span>)}
+      { errors === undefined ? null : (<p>{errors}</p>)}
     </div>
   );
 }

@@ -21,7 +21,7 @@ function Admin() {
 
   return (
     <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
-      <div className={classes.wrapper_subscriptions}>
+      <div className={classes.wrapper_subscriptions} key={Math.floor(Math.random() * 100) + 1}>
         <div className='mb-5'>
           <Title text='Suscripciones' />
         </div>

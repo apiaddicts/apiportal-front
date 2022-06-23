@@ -115,7 +115,7 @@ function Apis({ setIsOpen }) {
     if (libraries && libraries.length === 0 && Object.keys(filters).length === 0) {
       dispatch(getLibraries());
     }
-  }, []);
+  }, [libraries]);
 
   return (
     <div id='apiHome' style={{ paddingTop: '114px' }}>
