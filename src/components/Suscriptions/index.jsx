@@ -216,7 +216,7 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
                         </TableBody>
                       </Table>
                     </TableContainer>
-                    <Grid item xs={12}>
+                    <Grid item={true} xs={12}>
                       <Grid container direction='row' justifyContent='space-between'>
                         <Grid xs={3}>
                           {subscriptionsSkip > 0 || detailSubscriptionsSkip > 0 ? (

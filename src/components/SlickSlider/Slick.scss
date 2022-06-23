@@ -42,7 +42,7 @@
   color: $gray_lighten-3;
   @include breakpoint(xs) {
     left: 1%;
-    bottom: 20px;
+    bottom: 1px;
   }
   @include breakpoint(sm) {
     left: 1%;
@@ -66,7 +66,7 @@
   color: $gray_lighten-3;
   @include breakpoint(xs) {
     right: 1%;
-    bottom: 20px;
+    bottom: 1px;
   }
   @include breakpoint(sm) {
     right: 0%;
@@ -85,7 +85,7 @@
   bottom: -30px !important;
 
   @include breakpoint(xs) {
-    bottom: 30px !important;
+    bottom: 10px !important;
   }
 }
 
@@ -95,4 +95,11 @@
 .slick-dots li.slick-active button:before {
   color: $secondary;
   mix-blend-mode: normal;
+}
+
+.wrapper__slider {
+  height: 530px;
+  @include breakpoint(xs) {
+    height: 100%;
+  }
 }
