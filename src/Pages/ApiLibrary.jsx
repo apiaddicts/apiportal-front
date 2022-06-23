@@ -87,13 +87,13 @@ function AppLibrary(props) {
       dispatch(listApis());
     }
 
-  }, [dispatch, apis]);
+  }, []);
 
   useEffect(() => {
     if (tagsList && Object.keys(tagsList).length === 0) {
       dispatch(getListTags());
     };
-  }, [tagsList]);
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -130,7 +130,7 @@ function AppLibrary(props) {
   };
 
   return (
-    <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important' }}>
+    <Container fixed sx={{ paddingLeft: {xs: '0px', md: '59px !important'}, paddingRight: {xs:' 0px', md: '97px !important'} }}>
       <Title stylesTitle={{ fontSize: '48px' }} text='Biblioteca de Apis' />
       <div className={classes.wrapper__filters}>
         <div>
@@ -177,6 +177,7 @@ function AppLibrary(props) {
                 version={item.version}
                 buttons={item.tags}
                 colorStatus={item.color_status}
+                theme='dark'
                 info='ver Documentación'
                 description={item.description}
                 redirectTo={`/dashboard/apis/${item.apiName}`}

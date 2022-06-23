@@ -55,7 +55,7 @@ function Apps(props) {
       dispatch(listProducts());
     }
 
-  }, [dispatch, products]);
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -76,7 +76,7 @@ function Apps(props) {
   };
 
   return (
-    <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important' }}>
+    <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: ' 0px', md: '97px !important' } }}>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 2fr))', alignItems: 'center' }}>
         <div>
           <Title text='Productos' />
@@ -85,8 +85,9 @@ function Apps(props) {
           <SearchInput
             name='search'
             type='text'
-            placeholder='Buscar'
+            placeholder='Buscar Producto'
             icon
+            borderRadius={50}
             onChange={(e) => {
               formik.handleChange(e);
               formik.setFieldValue('description', '');
@@ -110,7 +111,7 @@ function Apps(props) {
                         <TableCell style={{ width: '100px' }} size='small'>
                           <>
                             <div className={classes.cell_title}>
-                              <h2>Nombre</h2>
+                              <h2 className='text-uppercase'>Nombre</h2>
                               <Icon id='MdExpandMore' />
                             </div>
                             <div style={{ height: '36px', marginTop: '14px' }}>
@@ -131,7 +132,7 @@ function Apps(props) {
                         <TableCell>
                           <>
                             <div className={classes.cell_title}>
-                              <h2>Descripcion</h2>
+                              <h2 className='text-uppercase'>Descripcion</h2>
                               <Icon id='MdExpandMore' />
                             </div>
                             <div style={{ height: '36px', marginTop: '14px' }}>

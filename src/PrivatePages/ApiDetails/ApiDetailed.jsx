@@ -40,7 +40,7 @@ function ApiDetails(props) {
     if (params.id && api && Object.keys(api).length === 0) {
       dispatch(getApi(params.id));
     }
-  }, [dispatch, api]);
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -60,22 +60,22 @@ function ApiDetails(props) {
           </div>
         </Link>
       </div>
-      <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>
+      <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
         {api && Object.keys(api).length > 0 ? (
           <div>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className={classes.box__title}>
               <Title text={api.properties.displayName ? api.properties.displayName : 'Demo API'} />
-              <Link to={`/dashboard/apis/${api.name}/swagger-ui`} style={{ background: '#E3E829', borderRadius: '100px', padding: '12px 1rem', width: '97px', display: 'flex', justifyContent: 'space-around', alignItems: 'center', fontWeight: '700', fontSize: '1rem', letterSpacing: '0.8px', color: '#0033A0' }}>
+              <Link to={`/dashboard/apis/${api.name}/swagger-ui`} className={classes.wrapper__btn}>
                 <span>Probar</span>
                 <Icon id='MdChevronRight' />
               </Link>
             </Box>
-            <Box sx={{ display: 'grid', gridTemplateColumns: '1fr 4fr', gap: '3rem', alignItems: 'baseline' }}>
-              <div>
+            <Box className={classes.grid__apidetail}>
+              <div className={classes.grid__apidetail__accordionfilter}>
                 <AccordionFilter items={infoApi} clicked={clicked} setClicked={setClicked} subItem={subItem} setSubItem={setSubItem} />
                 {/* <AccordionFilter items={endPoints} clicked={clicked} setClicked={setClicked} /> */}
               </div>
-              <div>
+              <div className={classes.grid__apidetail__customaccordion}>
                 <CustomAccordion items={api} subItem={subItem} setSubItem={setSubItem} />
               </div>
             </Box>

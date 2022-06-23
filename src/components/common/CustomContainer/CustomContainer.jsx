@@ -76,7 +76,7 @@ function CustomContainer({ children, user }) {
             </ListItem>
             {
               listItems.map((item, index) => (
-                <ListItem button key={index} sx={{ color: '#53565A', paddingLeft: '97px' }} component={MyNavLink} to={item.route} exact>
+                <ListItem button key={index} sx={{ color: '#53565A', paddingLeft: '97px' }} component={MyNavLink} to={item.route} exact='true'>
                   <ListItemIcon>
                     {item.icon}
                   </ListItemIcon>

@@ -46,7 +46,7 @@ function SwaggerUI() {
           </div>
         </Link>
       </div>
-      <Container fixed sx={{ paddingLeft: '59px !important', paddingRight: '97px !important', height: '100%' }}>
+      <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
         <div id='swaggerContainer' />
       </Container>
     </>

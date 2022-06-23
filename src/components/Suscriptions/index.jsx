@@ -6,7 +6,7 @@ import { TableHead, TableRow, TableCell, Table, TableContainer, TableBody, Chip,
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import moment from 'moment';
 import PasswordGenerate from '../common/InputMUI/passwordGenerate';
-import ProductName from '../../PrivatePages/ProfileAdmin/containers/Product';
+// import ProductName from '../../PrivatePages/ProfileAdmin/containers/Product';
 import {
   resetSubscriptionsUser,
   renameSubscription,
@@ -134,11 +134,11 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
                               Primary key
                             </TableCell>
                             <TableCell style={{ width: '255px' }}>
-                              Secundary key
+                              Secondary key
                             </TableCell>
-                            <TableCell>
+                            {/* <TableCell>
                               Producto
-                            </TableCell>
+                            </TableCell> */}
                             <TableCell style={{ width: '90px' }}>
                               Estado
                             </TableCell>
@@ -182,9 +182,9 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
                                   <TableCell>
                                     <PasswordGenerate idSuscripcion={row.name} user={user} version={2} status={row.properties.state} />
                                   </TableCell>
-                                  <TableCell>
+                                  {/* <TableCell>
                                     <ProductName scope={row.properties.scope} />
-                                  </TableCell>
+                                  </TableCell> */}
                                   <TableCell>
                                     <Chip
                                       color='secondary'

@@ -94,6 +94,13 @@
       font-size: 25px;
       display: flex;
       justify-content: space-between;
+      a {
+        text-decoration: none;
+        color: $gray_lighten-3;
+      }
+      a:hover {
+        color: $gray_lighten-4;
+      }
     }
     @include breakpoint(xs) {
       grid-template-columns: 1fr;

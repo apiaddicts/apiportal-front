@@ -938,6 +938,9 @@ a {
 .text-uppercase {
   text-transform: uppercase !important;
 }
+.text-capitalize {
+  text-transform: capitalize !important;
+}
 
 .justify-center {
   justify-content: center;
@@ -1110,10 +1113,10 @@ a {
 }
 
 .ls{
-  &_02{ letter-spacing: 0.2; }
-  &_05{ letter-spacing: 0.5; }
-  &_1{ letter-spacing: 1; }
-  &_1_5{ letter-spacing: 1.5; }
+  &_02{ letter-spacing: 0.2 !important; }
+  &_05{ letter-spacing: 0.5 !important; }
+  &_1{ letter-spacing: 1 !important; }
+  &_1_5{ letter-spacing: 1.5px !important; }
 }
 
 .display_flex{
@@ -1193,12 +1196,12 @@ a {
 
 .multiSelectContainer {
   li {
-    color: #53565A;
+    color: $gray_darken;
   }
 }
 
 .closeIcon{
-  background-color: #53565A;
+  background-color: $gray_darken;
 }
 
 .margin_top {
@@ -1211,3 +1214,19 @@ a {
 .fs__joey{
   font-family: $fs-joey;
 }
+
+.markdown__content{ 
+  width: 100%; 
+  overflow: hidden;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  color: $gray_darken;
+  font-family: $barlow;
+  p{
+    margin: 10px 0;
+  }
+}
+
+img[src*='#center']{ display: block; margin: 0 auto; }
+img[src*='#right']{ display: block; margin-left: auto; }
