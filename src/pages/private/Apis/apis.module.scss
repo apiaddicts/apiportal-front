@@ -1,0 +1,105 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/mixins/mixin.scss";
+
+
+.pagination {
+    cursor: pointer;
+    display: flex;
+    color: $primary;
+    font-size: 20px;
+    align-items: center;
+
+    &__icon {
+        color: $secondary;
+    }
+    
+    p {
+        font-family: $barlow;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 32px;
+    }
+}
+
+.filter {
+    margin-right: 15px;
+    font-family: $barlow;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: 0.4px;
+    color: #53565A;
+}
+
+.filter + div {
+    width: 75% !important;
+    @include breakpoint(xs) {
+        width: 100% !important;
+        margin-top: 15px;
+    }
+}
+
+.selectIn {
+    width: 100%;
+}
+
+.margin_left {
+    margin-left: 5% !important;
+}
+
+.wrapper__filters {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: 2fr 3fr;
+    align-content: center;
+    margin-top: 1.25rem;
+    &__search {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        @include breakpoint(xs) {
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+        @include breakpoint(md) {
+            justify-content: flex-start;
+        }
+    }
+    @include breakpoint(xs) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    @include breakpoint(md) {
+        grid-template-columns: repeat(1, 2fr);
+    }
+    @include breakpoint(lg) {
+        grid-template-columns: repeat(2, 3fr);
+    }
+    @include breakpoint(xl) {
+        grid-template-columns: repeat(2, 3fr);
+    }
+}
+
+// style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', alignItems: 'center', justifyContent: 'center', columnGap: '3.563rem', rowGap: '1.875rem' }}
+.grid__apis{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    column-gap: 3.563rem;
+    row-gap: 1.875rem;
+    margin-top: 3rem;
+    @include breakpoint(xs) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    @include breakpoint(sm) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    @include breakpoint(lg) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @include breakpoint(xl) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

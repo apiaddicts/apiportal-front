@@ -1,0 +1,41 @@
+@import '../../styles/variables.scss';
+@import '../../styles/mixins/mixin.scss';
+
+.wrapper {
+    margin-top: 152px !important;
+    margin-bottom: 87px !important;
+    padding-left: 59px;
+    padding-right: 97px;   
+
+    @include breakpoint(xs) {
+        // margin-top: 80px !important;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    @include breakpoint(sm) {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+.texture {
+    position: absolute;
+    width: 100vw;
+    max-width: 100%;
+    left: 0;
+    right: 0;
+    top: 136px;
+    transform: translateY(50%);
+    display: flex;
+    justify-content: flex-end;
+    z-index: 0;
+    
+    img {
+        @include breakpoint(xs) {
+            object-fit: cover;
+            object-position: -31% 0;
+            width: 276px;
+            height: 98px;
+        }
+    }
+}

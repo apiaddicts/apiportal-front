@@ -38,7 +38,7 @@ function Footer({ isPrivate }) {
     },
     onSubmit: (values) => {
       //Handle envio de correo de contacto
-      console.log(values);
+      //TODO:Implementar envio de correo
     },
     validate: (values) => {
       const errors = {};

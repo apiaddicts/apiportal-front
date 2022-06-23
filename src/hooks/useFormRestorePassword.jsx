@@ -5,9 +5,9 @@ import { string } from 'yup';
 import * as Yup from 'yup';
 
 const validationSchema = Yup.object().shape({
-  password: string().required('La contraseña actual es obligatoria'),
-  new_password: string().required('La nueva contraseña es obligatoria'),
-  confirm_password: string().oneOf([Yup.ref('new_password'), null], 'Las contraseñas deben coincidir'),
+  password: string().min(8, 'La contraseña actual debe tener al menos 8 caracteres de longitud').required('La contraseña actual es obligatoria'),
+  new_password: string().min(8, 'La nueva contraseña debe tener al menos 8 caracteres de longitud').required('La nueva contraseña es obligatoria').trim('Los espacios no estan permitidos'),
+  confirm_password: string().required('La confirmación de contraseña es obligatoria').oneOf([Yup.ref('new_password'), null], 'La nueva contraseña y la confirmación de contraseña deben coincidir'),
 });
 
 const objectFromArray = (fields, key) => {
@@ -36,11 +36,10 @@ function useFormRestorePassword(
       try {
         setFormStatus({ status: 'loading' });
         const submitResponse = await customHandleSubmit(values);
-        console.log('submitResponse', submitResponse);
         setFormStatus(submitResponse);
         submitResponse.status === 'success' && resetForm();
       } catch (error) {
-        console.log('Error', error);
+        console.error('Error', error);
       }
     },
     validationSchema,

@@ -178,7 +178,6 @@ function getApiHostnames(apiName) {
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      console.log(response);
       return response;
     }).catch((error) => {
       console.error(error);
