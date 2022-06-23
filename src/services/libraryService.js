@@ -12,6 +12,8 @@ function getApiBookStores() {
     .then(handleResponse)
     .then((libraries) => {
       return libraries;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -24,21 +26,27 @@ function getApiBookStore(id) {
     .then(handleResponse)
     .then((library) => {
       return library;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
-function getApis(top, skip) {
+function getApis(top, skip, filter) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.url}/apis?api-version=${config.apiVersion}&expandApiVersionSet=true&$top=${top}&$skip=${skip}&$filter=isCurrent`;
+  let url = `${config.url}/apis?api-version=${config.apiVersion}&expandApiVersionSet=true&$skip=${skip}`;
+  url += top !== undefined && top !== null && top !== 0 ? `&$top=${top}` : '';
+  url += filter !== undefined && filter !== null && filter.length > 0 ? `&$filter=${filter}` : '&$filter=isCurrent';
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -46,7 +54,6 @@ function getAPi(id) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    // headers: { 'Content-Type': 'application/json' },
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
@@ -55,6 +62,8 @@ function getAPi(id) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -70,7 +79,19 @@ function getApiOpenAPI(id) {
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
+      if (response.components && response.components.securitySchemes) {
+        delete response.components.securitySchemes['apiKeyQuery'];
+        /*response.components.securitySchemes['API Key Header'] = { ...response.components.securitySchemes['apiKeyHeader'] };
+        delete response.components.securitySchemes['apiKeyHeader'];*/
+      }
+      if (response.securityDefinitions) {
+        delete response.securityDefinitions['apiKeyQuery'];
+        /*response.securityDefinitions['API Key Header'] = { ...response.securityDefinitions['apiKeyHeader'] };
+        delete response.securityDefinitions['apiKeyHeader'];*/
+      }
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -87,6 +108,8 @@ function getListTags() {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -103,6 +126,8 @@ function getListTagsByApi(apiName) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -119,6 +144,8 @@ function filterAPIsByTags(search, filter = 'isCurrent', top = config.topApi, ski
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -135,21 +162,26 @@ function searchApis(search, top, skip) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
 function getApiHostnames(apiName) {
-
+  const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
   const url = `${config.url}/apis/${apiName}/hostnames?api-version=${config.apiVersion}`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
+      console.log(response);
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 

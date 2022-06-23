@@ -35,7 +35,7 @@ function CardInformationLibrary({ apiName, img, title, description, reading, inf
           setButtons(values);
         }
       }, (err) => {
-        console.log(err);
+        console.error(err);
       });
     }
   }, [apiName]);

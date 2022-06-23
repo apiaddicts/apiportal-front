@@ -4,33 +4,24 @@ import { Link, useParams } from 'react-router-dom';
 import SwaggerUi from 'swagger-ui';
 import 'swagger-ui/dist/swagger-ui.css';
 
-import { useDispatch, useSelector } from 'react-redux';
 import { Container } from '@mui/material';
-import { getApiOpenAPI } from '../../redux/actions/libraryAction';
 import Icon from '../../components/MdIcon/Icon';
 import classes from './swagger.module.scss';
+import libraryService from '../../services/libraryService';
 
 function SwaggerUI() {
 
-  const { jsonOpenApi } = useSelector((state) => state.library);
-
   const params = useParams();
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    if (jsonOpenApi) {
-      dispatch(getApiOpenAPI(params.id));
-    }
-  }, [dispatch]);
-
-  useEffect(() => {
-    SwaggerUi({
-      dom_id: '#swaggerContainer',
-      spec: jsonOpenApi,
-      presets: SwaggerUi.presets.apis,
-      oauth2RedirectUrl: `${window.location.protocol}//${window.location.host}/dashboard/apis/swagger-ui/oauth-redirect`,
-      persistAuthorization: true,
+    libraryService.getApiOpenAPI(params.id).then((jsonOpenApi) => {
+      SwaggerUi({
+        dom_id: '#swaggerContainer',
+        spec: jsonOpenApi,
+        presets: SwaggerUi.presets.apis,
+        oauth2RedirectUrl: `${window.location.protocol}//${window.location.host}/developer/apis/swagger-ui/oauth-redirect`,
+        persistAuthorization: true,
+      });
     });
   }, []);
 

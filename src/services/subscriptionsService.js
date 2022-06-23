@@ -16,6 +16,8 @@ function listUserSubscriptions(userId, top = config.topSubscriptions, skip = 0) 
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -34,6 +36,8 @@ function subscribeToAProduct(data, userId) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -50,6 +54,8 @@ function getName(urlValidate) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -67,6 +73,8 @@ function regenerateSubscription(userId, subscriptionId, fragmentUrl) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -84,6 +92,8 @@ function listSubscriptionSecrets(userId, subscriptionId) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -101,6 +111,8 @@ function renameSubscription(userId, subscriptionId, data) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -118,6 +130,8 @@ function cancelSubscription(userId, subscriptionId, data) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 

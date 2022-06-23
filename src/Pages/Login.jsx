@@ -33,7 +33,7 @@ function Login({ setOpenForm, setIsOpen, setPrivateSession }) {
   useEffect(() => {
     if (token.length > 0) {
       setIsOpen(false);
-      navigate('/dashboard/profile');
+      navigate('/developer/profile');
     }
   }, [token]);
 

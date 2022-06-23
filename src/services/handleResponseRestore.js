@@ -52,7 +52,7 @@ function handleResponseRestore(response) {
           },
         };
       default:
-        return Promise.reject(data);
+        throw new Error(response.status);
     }
   });
 }

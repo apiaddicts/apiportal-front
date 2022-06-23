@@ -65,7 +65,7 @@ function ApiDetails(props) {
           <div>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className={classes.box__title}>
               <Title text={api.properties.displayName ? api.properties.displayName : 'Demo API'} />
-              <Link to={`/dashboard/apis/${api.name}/swagger-ui`} className={classes.wrapper__btn}>
+              <Link to={`/developer/apis/${api.name}/swagger-ui`} className={classes.wrapper__btn}>
                 <span>Probar</span>
                 <Icon id='MdChevronRight' />
               </Link>

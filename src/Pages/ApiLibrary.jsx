@@ -180,7 +180,7 @@ function AppLibrary(props) {
                 theme='dark'
                 info='ver Documentación'
                 description={item.description}
-                redirectTo={`/dashboard/apis/${item.apiName}`}
+                redirectTo={`/developer/apis/${item.apiName}`}
               />
             ))
           ) : (null)

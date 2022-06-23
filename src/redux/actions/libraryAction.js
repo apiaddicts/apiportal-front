@@ -42,8 +42,8 @@ export const getLibrary = (id) => (dispatch) => {
   );
 };
 
-export const listApis = (top = config.topApi, skip = 0) => (dispatch) => {
-  libraryService.getApis(top, skip).then(
+export const listApis = (top = config.topApi, skip = 0, filter = '') => (dispatch) => {
+  libraryService.getApis(top, skip, filter).then(
     (res) => {
       dispatch({
         type: libraryConstants.GET_APIS_SUCCESS,
