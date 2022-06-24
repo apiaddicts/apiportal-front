@@ -1,0 +1,102 @@
+@import "../../../styles/variables.scss";
+
+.table-left {
+    margin-left: 5%;
+}
+
+.cell_title {
+    display: flex;
+    font-size: 20px;
+    color: #8189A9;
+
+    h2 {
+        font-family: 'Barlow';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 12px;
+        line-height: 20px;
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.2px;
+        color: #53565A;
+    }
+}
+
+.cell_name {
+    font-family: 'Barlow';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 20px;
+
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.2px;
+
+    color: #00AEC7;
+}
+
+.cell_description {
+    font-family: 'Barlow';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.2px;
+    color: #53565A;
+}
+
+.pagination {
+    cursor: pointer;
+    display: flex;
+    color: #0033A0;
+    font-size: 20px;
+    align-items: center;
+
+    &__icon {
+        color: $secondary;
+    }
+    
+    p {
+        font-family: 'Barlow';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 32px;
+    }
+
+    .next {
+        margin-left: -30px;
+
+        @media (min-width: 1440px) {
+            margin-left: -10px;
+        }
+    }
+}
+
+.wrapper_apps__wide {
+    &__display{
+      display: block;
+    }
+    @include breakpoint(xsl) {
+      &__display{
+        display: none;
+      }
+    }
+  }
+  
+  .wrapper_apps__small {
+    &__display{
+      display: none;
+    }
+    @include breakpoint(xsl) {
+      &__display{
+        display: block;
+        .border__bottom{
+            border-bottom: 1px solid #ECF0F1;
+        }
+      }
+    }
+  }

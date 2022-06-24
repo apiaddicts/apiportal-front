@@ -16,6 +16,8 @@ function listProducts(top, skip) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -32,6 +34,8 @@ function searchProducts(search, top, skip) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -48,6 +52,8 @@ function filterProductsByName(search, top, skip) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -64,6 +70,8 @@ function filterProductsByDescription(search, top, skip) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -80,6 +88,8 @@ function filterProductAPIsByName(productName, search, top, skip) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -96,6 +106,8 @@ function filterProductAPIsByDescription(productName, search, top, skip) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -112,6 +124,8 @@ function getProductDetail(productName) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -128,6 +142,8 @@ function getProductSuscripcion(productName, top, skip) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -144,6 +160,8 @@ function getProductApis(productName, top, skip) {
     .then(handleResponse)
     .then((response) => {
       return response;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 

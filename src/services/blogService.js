@@ -10,6 +10,8 @@ function getPageBlog() {
     .then(handleResponse)
     .then((dataBlog) => {
       return dataBlog;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -23,6 +25,8 @@ function getBlogs() {
     .then(handleResponse)
     .then((blogs) => {
       return blogs;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 
@@ -36,6 +40,8 @@ function getBlog(id) {
     .then(handleResponse)
     .then((blog) => {
       return blog;
+    }).catch((error) => {
+      console.error(error);
     });
 }
 

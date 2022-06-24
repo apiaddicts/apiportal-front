@@ -7,7 +7,7 @@ import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 import Collapse from '../Collapse';
 import Spinner from '../Spinner';
 import PasswordGenerate from '../common/InputMUI/passwordGenerate';
-import ProductName from '../../PrivatePages/ProfileAdmin/containers/Product';
+import ProductName from '../ProductName';
 import classes from './SuscriptionsVertical.module.scss';
 
 moment.locale('es');

@@ -38,7 +38,7 @@ function Footer({ isPrivate }) {
     },
     onSubmit: (values) => {
       //Handle envio de correo de contacto
-      console.log(values);
+      //TODO:Implementar envio de correo
     },
     validate: (values) => {
       const errors = {};
@@ -199,7 +199,7 @@ function Footer({ isPrivate }) {
         </div>
         <div className={classes.email}>
           <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3 mb-2'>Correo electronico</h1>
-          <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>mxEmpresasSura@segurossura.com.mex</p>
+          <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>mxEmpresasSura@segurossura.com.mx</p>
         </div>
         <div className={classes.policies}>
           <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3 mb-2'>Política de</h1>

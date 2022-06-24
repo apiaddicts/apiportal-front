@@ -24,7 +24,7 @@ function CustomAccordion({ items, subItem, setSubItem }) {
 
   useEffect(() => {
     if (apis && Object.keys(apis).length === 0) {
-      dispatch(listApis(6, 0));
+      dispatch(listApis());
     }
     if (hostnames && Object.keys(hostnames).length === 0) {
       dispatch(getApiHostnames(items.name));
@@ -36,7 +36,7 @@ function CustomAccordion({ items, subItem, setSubItem }) {
 
   const mApis = apis && Object.keys(apis).length > 0 ? apis.value.map((f) => {
     return f;
-  }).filter((n) => n.properties.displayName === items.properties.displayName) : [];
+  }).filter((n) => n.properties.apiVersionSetId === items.properties.apiVersionSetId) : [];
 
   const hostname = hostnames && Object.keys(hostnames).length > 0 ? hostnames.value.map((x) => {
     return x.properties.value;

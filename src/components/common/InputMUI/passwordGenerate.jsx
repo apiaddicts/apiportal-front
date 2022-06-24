@@ -29,7 +29,7 @@ function PasswordGenerate({ idSuscripcion, user, version, status }) {
         setPrimaryKey(response.secondaryKey);
       }
     }, (err) => {
-      console.log(err);
+      console.error(err);
     });
   };
 
@@ -45,13 +45,13 @@ function PasswordGenerate({ idSuscripcion, user, version, status }) {
       subscriptionsService.regenerateSubscription(user.name, idSuscripcion, 'regeneratePrimaryKey').then((response) => {
         handleRegenerateSubscriptions();
       }, (err) => {
-        console.log(err);
+        console.error(err);
       });
     } else {
       subscriptionsService.regenerateSubscription(user.name, idSuscripcion, 'regenerateSecondaryKey').then((response) => {
         handleRegenerateSubscriptions();
       }, (err) => {
-        console.log(err);
+        console.error(err);
       });
     }
     setTimeout(() => {

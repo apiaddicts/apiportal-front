@@ -1,0 +1,74 @@
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { Box } from '@mui/material';
+
+import SidebarDrawer from '../../components/SidebarDrawer/SidebarDrawer';
+import CustomFooter from '../../components/common/CustomFooter/CustomFooter';
+import SkeletonComponent from '../../components/SkeletonComponent/SkeletonComponent';
+
+import Profile from '../../pages/private/Profile';
+import Products from '../../pages/private/Products';
+import ProductDetail from '../../pages/private/ProductDetail';
+import Apis from '../../pages/private/Apis';
+import ApiDetail from '../../pages/private/ApiDetail';
+import SwaggerUI from '../../pages/private/SwaggerUI';
+import OAuthRedirect from '../../pages/private/OAuthRedirect';
+import Subscriptions from '../../pages/private/Subscriptions';
+import CicleTexture from '../../static/img/texture_circles_private.svg';
+
+import { getUser } from '../../redux/actions/userAction';
+import classes from './private-router.module.scss';
+
+function PrivateRouter({ children }) {
+
+  const { id, token, user } = useSelector((state) => state.user);
+  const privateSession = id !== '' && token !== '';
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (id !== '' && token !== '' && user && Object.keys(user).length === 0) {
+      const tokens = {
+        id,
+        token,
+      };
+      dispatch(getUser(tokens));
+    }
+  }, []);
+
+  return privateSession ? (
+    <Box>
+      {user && Object.keys(user).length > 0 ? (
+        <Box>
+          <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#fbfbfb', minHeight: '100vh' }}>
+            <SidebarDrawer user={user} />
+            <div className={classes.texture}>
+              <img src={CicleTexture} alt={CicleTexture} />
+            </div>
+            <div className={`container ${classes.wrapper}`}>
+              <Routes>
+                <Route path='profile' element={<Profile />} />
+                <Route path='products' exact='true' element={<Products />} />
+                <Route path='products/:id' exact='true' element={<ProductDetail />} />
+                <Route path='apis' exact='true' element={<Apis />} />
+                <Route path='apis/:id' exact='true' element={<ApiDetail />} />
+                <Route path='apis/:id/swagger-ui' exact='true' element={<SwaggerUI />} />
+                <Route path='apis/swagger-ui/oauth-redirect' exact='true' element={<OAuthRedirect />} />
+                <Route path='subscriptions' exact='true' element={<Subscriptions />} />
+                <Route path='*' element={<Navigate to='/' replace />} />
+              </Routes>
+            </div>
+          </Box>
+          <Box sx={{ zIndex: 1300, position: 'absolute', background: '#fff' }}>
+            <CustomFooter />
+          </Box>
+
+        </Box>
+      ) : (<SkeletonComponent />)}
+
+    </Box>
+  ) : <Navigate to='/' />;
+
+}
+
+export default PrivateRouter;

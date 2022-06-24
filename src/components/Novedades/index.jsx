@@ -2,8 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import ItemAvatar from '../Item/ItemAvatar';
 
+const shuffle = (array) => {
+  let currentIndex = array.length,
+    randomIndex;
+
+  while (currentIndex !== 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+    // eslint-disable-next-line no-param-reassign
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+};
+
 function Novedades({ data }) {
-  const items = data.sort(() => 0.5 - Math.random());
+  const items = shuffle(data);
   return (
     <div>
       {
