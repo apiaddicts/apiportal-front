@@ -182,7 +182,7 @@ function Apis({ setIsOpen }) {
               { tags.map((item, index) => (
                 <div className={classes.wrapper__checkbox} key={index}>
                   <CheckboxWrapper
-                    name={item.label}
+                    name={item}
                     label={item.label}
                     handleChangeSelect={handleChangFilterTags}
                     checked={filtersSelect[item.label] !== undefined ? filtersSelect[item.label] : false}

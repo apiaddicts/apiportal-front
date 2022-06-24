@@ -15,6 +15,7 @@ function Contact({ css_styles, pathname }) {
   // const { pathname } = location;
 
   const handleSubmit = async (values) => {
+    console.log(values);
   };
 
   const formConfig = useLoginConfig(fieldsContact, handleSubmit);
@@ -38,12 +39,12 @@ function Contact({ css_styles, pathname }) {
           </div>
         </div>
         <div className={pathname !== '/blog' ? classes.contact__container__alternative__form : classes.contact__container__form}>
-          <form className={pathname !== '/blog' ? classes.contact__alternative__form : classes.contact__form}>
+          <form onSubmit={handleSubmit} className={pathname !== '/blog' ? classes.contact__alternative__form : classes.contact__form}>
             {fieldsContact.map((field) => (
               <Input styleInput={classes.contact__form__new} key={field.id} field={field} formik={formConfig} />
             ))}
             <div className={classes.contact__form__button}>
-              <Button styles='secundary'>
+              <Button styles='secundary' type='submit'>
                 SUSCRÍBETE
               </Button>
             </div>
