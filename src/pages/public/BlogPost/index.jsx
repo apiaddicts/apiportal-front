@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import _ from 'underscore';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import BannerStatic from '../../../components/Banner/BannerStatic';
 import BlogDetailsInfo from '../../../components/BlogDetails';
@@ -13,6 +13,7 @@ import FooterAuthor from '../../../components/FooterAuthor';
 import { getBlog, resetGetBlog, getBlogs } from '../../../redux/actions/blogAction';
 import styles from './blog-post.module.scss';
 import classes from './home.module.scss';
+import Icon from '../../../components/MdIcon/Icon';
 
 const stylesPerso = {
   height: '345px',
@@ -100,6 +101,18 @@ function BlogDetails({ setIsOpen }) {
             stylesTitle={stylesBannerTitle}
           />
           <section className='container mt-10 py-5'>
+            <div
+              className={classes.backTo}
+            >
+              <Link to={-1} className={classes.backTo__btn}>
+                <div>
+                  <Icon id='MdKeyboardBackspace' />
+                </div>
+                <div className={classes.backTo__label}>
+                  <span>Volver</span>
+                </div>
+              </Link>
+            </div>
             <BlogDetailsInfo styles={styles} data={blog} />
             <FooterAuthor data={blog} />
             <section className={classes.section__news}>

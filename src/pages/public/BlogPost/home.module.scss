@@ -413,3 +413,21 @@
     margin: 2rem 0 !important;
   }
 }
+
+.backTo {
+  width: 100%;
+  margin-bottom: 1rem;
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    color: $primary;
+  }
+  &__label {
+    padding: 0 0.5rem;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 1.33px;
+    text-transform: uppercase;
+  }
+}
