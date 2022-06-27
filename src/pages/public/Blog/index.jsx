@@ -32,7 +32,7 @@ function Blog({ setIsOpen }) {
   });
 
   const results = blogs.filter((item) => {
-    return formik.values.search === '' ? null : item.description.toLowerCase().includes(value.toLowerCase());
+    return formik.values.search === '' ? null : item.title.toLowerCase().includes(value.toLowerCase());
   });
 
   useEffect(() => {

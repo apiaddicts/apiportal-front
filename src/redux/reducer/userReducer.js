@@ -64,7 +64,7 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         loadingSignUp: false,
-        responseError: action.error,
+        responseError: action.response,
       };
     case userConstants.RESTORE_SIGNUP_FAILURE:
       return {

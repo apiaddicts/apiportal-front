@@ -32,37 +32,21 @@ function Footer({ isPrivate }) {
       lastname: '',
       email: '',
       phone: '',
-      topic: '',
       subject: '',
-      message: '',
-    },
-    onSubmit: (values) => {
-      //Handle envio de correo de contacto
-      //TODO:Implementar envio de correo
-    },
-    validate: (values) => {
-      const errors = {};
-      // if (!values.name) {
-      //   errors.name = 'Campo obligatorio';
-      // }
-      // if (!values.email) {
-      //   errors.email = 'Campo obligatorio';
-      // } else if (
-      //   !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-      // ) {
-      //   errors.email = 'Correo electrónico invalido';
-      // }
-      return errors;
     },
     validationSchema: Yup.object({
       name: Yup.string().required('Campo requerido'),
       lastname: Yup.string().required('Campo requerido'),
       email: Yup.string().email('Correo electrónico invalido').required('Campo requerido'),
       phone: Yup.number().required('Campo requerido'),
-      topic: Yup.string().required('Campo requerido'),
+      // topic: Yup.string().required('Campo requerido'),
       subject: Yup.string().required('Campo requerido'),
-      message: Yup.string().length(50, 'Limite de caracteres 50').required('Campo requerido'),
+      // message: Yup.string().length(50, 'Limite de caracteres 50').required('Campo requerido'),
     }),
+    onSubmit: (values) => {
+      //Handle envio de correo de contacto
+      //TODO:Implementar envio de correo
+    },
   });
 
   return (

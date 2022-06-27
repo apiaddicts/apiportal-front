@@ -10,7 +10,6 @@ import classes from './register.module.scss';
 
 function Register({ setOpenForm, setIsOpen }) {
   const { loadingSignUp, signUpData, responseError } = useSelector((state) => state.user);
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,7 +18,6 @@ function Register({ setOpenForm, setIsOpen }) {
       setOpenForm(false);
     }
   }, [signUpData]);
-
   return (
     <Modal>
       {loadingSignUp === false ? (
@@ -42,7 +40,7 @@ function Register({ setOpenForm, setIsOpen }) {
           <div className={classes.login__wrapper}>
             <h1 className={classes.login__title}>Crea tu Cuenta</h1>
             {
-              Object.keys(signUpData).length > 0 ?
+              Object.keys(signUpData).length > 0 && Object.keys(responseError).length === 0 ?
                 (
                   <Alert
                     css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
@@ -50,7 +48,7 @@ function Register({ setOpenForm, setIsOpen }) {
                     title='Revisa tu cuenta de correo'
                     msg='Para completar el registro, es necesario confirmar tu cuenta de correo'
                   />
-                ) : Object.keys(responseError).length > 0 ? (
+                ) : Object.keys(signUpData).length === 0 && Object.keys(responseError).length > 0 ? (
                   <Alert
                     css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
                     alert_type='alert__danger'
