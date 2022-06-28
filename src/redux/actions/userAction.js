@@ -72,19 +72,25 @@ export const logout = () => (dispatch) => {
 };
 
 export const signUp = (data) => (dispatch) => {
-  // dispatch({ type: userConstants.SIGNUP_REQUEST });
+  dispatch({ type: userConstants.SIGNUP_REQUEST });
   userService.signUp(data).then(
     (response) => {
-      dispatch({
-        type: userConstants.SIGNUP_SUCCESS,
-        response,
-      });
+      if (response && Object.keys(response).length > 0) {
+        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+          dispatch({
+            type: userConstants.SIGNUP_FAILURE,
+            response,
+          });
+        } else {
+          dispatch({
+            type: userConstants.SIGNUP_SUCCESS,
+            response,
+          });
+        }
+      }
     },
     (error) => {
-      dispatch({
-        type: userConstants.SIGNUP_FAILURE,
-        error,
-      });
+      console.log(error);
     },
   );
 };

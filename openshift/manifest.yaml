@@ -1,23 +1,52 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: $AZNAME
+  name: $APP_NAME
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: $AZNAME
+      app: $APP_NAME
   template:
     metadata:
       labels:
-        app: $AZNAME
+        app: $APP_NAME
     spec:
       containers:
-        - name: $AZNAME
-          image: $AZIMAGE
+        - name: $APP_NAME
+          image: $ACR_IMAGE
           ports:
-            - containerPort: $AZPORT
-              name: $AZPORTNAME
+            - containerPort: $APP_PORT
+              name: $APP_PORT_NAME
+          env:
+            - name: REACT_APP_STRAPI_URL
+              value: "$REACT_APP_STRAPI_URL"
+            - name: REACT_APP_SURA_URL
+              value: "$REACT_APP_SURA_URL"
+            - name: REACT_APP_SUBSCRIPTION_ID
+              value: "$REACT_APP_SUBSCRIPTION_ID"
+            - name: REACT_APP_RESOURCE_GROUP_NAME
+              value: "$REACT_APP_RESOURCE_GROUP_NAME"
+            - name: REACT_APP_SERVICE_NAME
+              value: "$REACT_APP_SERVICE_NAME"
+            - name: REACT_APP_API_VERSION
+              value: "$REACT_APP_API_VERSION"
+            - name: REACT_APP_REMEMBER_KEY
+              value: "$REACT_APP_REMEMBER_KEY"
+            - name: REACT_APP_PRIMARY_KEY
+              value: "$REACT_APP_PRIMARY_KEY"
+            - name: REACT_APP_APIM_UID
+              value: "$REACT_APP_APIM_UID"
+            - name: REACT_APP_TOKEN_VALID_DAYS
+              value: "$REACT_APP_TOKEN_VALID_DAYS"
+            - name: REACT_APP_LIST_API_TOP
+              value: "$REACT_APP_LIST_API_TOP"
+            - name: REACT_APP_LIST_PRODUCT_APIS_TOP
+              value: "$REACT_APP_LIST_PRODUCT_APIS_TOP"
+            - name: REACT_APP_LIST_PRODUCT_TOP
+              value: "$REACT_APP_LIST_PRODUCT_TOP"
+            - name: REACT_APP_LIST_SUBSCRIPTIONS
+              value: "$REACT_APP_LIST_SUBSCRIPTIONS"
           resources:
             requests:
               cpu: "500m"
@@ -27,37 +56,37 @@ spec:
               memory: "2Gi"
       imagePullpolicy: Always
       imagePullSecrets:
-        - name: acrdev-sura
+        - name: $ACR_SECRET_IMAGE_PULL
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: $AZNAME
+  name: $APP_NAME
 spec:
   selector:
-    app: $AZNAME
+    app: $APP_NAME
   ports:
-    - name: ${AZPORTNAME}-svc
+    - name: ${APP_PORT_NAME}-svc
       nodePort: 0
       port: 80
       protocol: TCP
-      targetPort: $AZPORTNAME
+      targetPort: $APP_PORT_NAME
 
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: $AZNAME
+  name: $APP_NAME
   annotations:
     haproxy.router.openshift.io/hsts_header: max-age=31536000;includeSubDomains;preload
 spec:
   host: $HTTP_HOST
   port:
-    targetPort: ${AZPORTNAME}-svc
+    targetPort: ${APP_PORT_NAME}-svc
   to:
     kind: Service
-    name: $AZNAME
+    name: $APP_NAME
   tls:
     termination: edge
     certificate: |-

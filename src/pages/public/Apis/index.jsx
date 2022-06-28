@@ -45,7 +45,7 @@ function Apis({ setIsOpen }) {
   };
   const handleChangFilterTags = (name, label, checked) => {
     dispatch(filterCheck(label, checked, 'tag'));
-    setFiltersSelect({ ...filtersSelect, [name]: label });
+    setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
   const handleChangeSearchFilter = (text) => {
     dispatch(filterCheck(text, null, 'search'));
@@ -95,7 +95,7 @@ function Apis({ setIsOpen }) {
 
   const tags = Object.keys(countRepeatedTags).map((key) => {
     return {
-      label: key,
+      title: key,
       count: countRepeatedTags[key],
     };
   });
@@ -179,10 +179,10 @@ function Apis({ setIsOpen }) {
               { tags.map((item, index) => (
                 <div className={classes.wrapper__checkbox} key={index}>
                   <CheckboxWrapper
-                    name={item.label}
-                    label={item.label}
+                    name={item.title}
+                    label={item.title}
                     handleChangeSelect={handleChangFilterTags}
-                    checked={filtersSelect[item.label] !== undefined ? filtersSelect[item.label] : false}
+                    checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
                   />
                   <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{item.count}</p>
                 </div>
