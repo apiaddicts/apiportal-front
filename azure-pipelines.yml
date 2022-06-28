@@ -3,90 +3,91 @@ trigger:
     include:
       - develop
       - qa
-      #  - main
-      #  - pre
+      - main
 
 pool:
   name: Azure Pipelines
   vmImage: ubuntu-20.04
 
 variables:
-  azName: devportal-front
-  azPort: 3000
-  azPortName: http
-  azImage: $(dockerRegistry)/$(azName):$(Build.SourceVersion)
-  dockerRegistry: azurecontainerregistrysuradev.azurecr.io
-  dockerRegistryConnection: AzRegistryContainerDev
+  APP_NAME: devportal-front
+  APP_PORT: 3000
+  APP_PORT_NAME: http
+  ACR_IMAGE: $(ACR_HOST)/$(APP_NAME):$(ENV)
   ${{ if eq(variables['Build.SourceBranchName'], 'main')}}:
-    environment: prod
-    openshiftServiceConnection: ARO-Pro
-  ${{ if eq(variables['Build.SourceBranchName'], 'qa')}}:
-    environment: prod
-    openshiftServiceConnection: ARO-QA
-  ${{ if eq(variables['Build.SourceBranchName'], 'pre')}}:
-    environment: pre
-    openshiftServiceConnection: ARO-Pre
+    ENV: prod
+    ACR_CONNECTION: AzRegistryContainerPro
+    ACR_HOST: azurecontainerregistrysura.azurecr.io
+    ACR_SECRET_IMAGE_PULL: acrpro-sura
+    OC_CONNECTION: ARO-Pro
   ${{ if eq(variables['Build.SourceBranchName'], 'develop')}}:
-    environment: dev
-    openshiftServiceConnection: ARO-Dev
+    ENV: dev
+    ACR_CONNECTION: AzRegistryContainerDev
+    ACR_HOST: azurecontainerregistrysuradev.azurecr.io
+    ACR_SECRET_IMAGE_PULL: acrdev-sura
+    OC_CONNECTION: ARO-Dev
+  ${{ if eq(variables['Build.SourceBranchName'], 'qa')}}:
+    ENV: qa
+    ACR_CONNECTION: AzRegistryContainerDev
+    ACR_HOST: azurecontainerregistrysuradev.azurecr.io
+    ACR_SECRET_IMAGE_PULL: acrdev-sura
+    OC_CONNECTION: ARO-qa
 
 stages:
   - stage: Build
     jobs:
       - job: Build
-        variables:
-          - group: frontend-variables-${{variables.environment}}
+        # variables:
+        #   - group: frontend-variables-${{variables.environment}}
         steps:
           - task: Docker@2
             displayName: Login to ACR
             inputs:
               command: login
-              containerRegistry: $(dockerRegistryConnection)
+              containerRegistry: $(ACR_CONNECTION)
           - task: Docker@2
-            displayName: Build
+            displayName: Build and Push
             inputs:
-              command: build
-              repository: $(azName)
+              command: buildAndPush
+              repository: $(APP_NAME)
               Dockerfile: Dockerfile
               buildContext: .
-              arguments: --build-arg REACT_APP_STRAPI_URL=$(REACT_APP_STRAPI_URL) --build-arg REACT_APP_SURA_URL=$(REACT_APP_SURA_URL) --build-arg REACT_APP_SUBSCRIPTION_ID=$(REACT_APP_SUBSCRIPTION_ID) --build-arg REACT_APP_RESOURCE_GROUP_NAME=$(REACT_APP_RESOURCE_GROUP_NAME) --build-arg REACT_APP_SERVICE_NAME=$(REACT_APP_SERVICE_NAME) --build-arg REACT_APP_API_VERSION=$(REACT_APP_API_VERSION) --build-arg REACT_APP_REMEMBER_KEY=$(REACT_APP_REMEMBER_KEY) --build-arg REACT_APP_PRIMARY_KEY=$(REACT_APP_PRIMARY_KEY) --build-arg REACT_APP_APIM_UID=$(REACT_APP_APIM_UID) --build-arg REACT_APP_TOKEN_VALID_DAYS=$(REACT_APP_TOKEN_VALID_DAYS) --build-arg REACT_APP_LIST_API_TOP=$(REACT_APP_LIST_API_TOP) --build-arg REACT_APP_LIST_PRODUCT_APIS_TOP=$(REACT_APP_LIST_PRODUCT_APIS_TOP) --build-arg REACT_APP_LIST_SUBSCRIPTIONS=$(REACT_APP_LIST_SUBSCRIPTIONS) --build-arg REACT_APP_LIST_PRODUCT_TOP=$(REACT_APP_LIST_PRODUCT_TOP)
+              #tags: latest
               tags: |
-                $(Build.SourceBranchName)
-                $(Build.SourceVersion)
-          - task: Docker@2
-            displayName: Push
-            inputs:
-              command: push
-              repository: $(azName)
-              tags: |
-                $(Build.SourceBranchName)
-                $(Build.SourceVersion)
+                $(ENV)
+                latest
   - stage: Deploy
     jobs:
       - deployment: Deploy
         variables:
-          - group: frontend-variables-${{variables.environment}}
+          - group: frontend-variables-${{ variables.ENV }}
             #ENVIRONMENT: 'Development'
-        displayName: "Deploy to Dev"
-        environment: $(environment)
+        displayName: "Deploy to ${{ variables.ENV }}"
+        environment: ${{ variables.ENV }}
         strategy:
           runOnce:
             deploy:
               steps:
                 - checkout: self
                   submodules: true
+                - script: |
+                    for file in $(ls openshift)
+                    do
+                      envsubst < openshift/$file | tee openshift/$file
+                    done
+                  displayName: Replace variables in manifests
                 # Install oc so that it can be used within a 'script' or bash 'task'
                 - task: oc-setup@2
                   displayName: Setup oc
                   inputs:
-                    openshiftService: $(openshiftServiceConnection)
+                    openshiftService: $(OC_CONNECTION)
                 # A script task making use of 'oc'
                 - script: |
-                    envsubst < openshift/manifest.yaml | oc apply -n api-cloud-dev -f -
+                    oc apply -f openshift/ -n api-cloud-${{ variables.env }}
                   displayName: Apply deployment
                 # Single shot 'oc' command
                 - task: oc-cmd@2
                   displayName: Wait for deployment
                   inputs:
-                    openshiftService: $(openshiftServiceConnection)
-                    cmd: "rollout status -w deployment/$(azName)"
+                    openshiftService: $(OC_CONNECTION)
+                    cmd: "rollout status -w deployment/$(APP_NAME)"
