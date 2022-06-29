@@ -47,6 +47,8 @@ spec:
               value: "$REACT_APP_LIST_PRODUCT_TOP"
             - name: REACT_APP_LIST_SUBSCRIPTIONS
               value: "$REACT_APP_LIST_SUBSCRIPTIONS"
+            - name: WDS_SOCKET_PORT
+              value: "$WDS_SOCKET_PORT"
           resources:
             requests:
               cpu: "500m"
