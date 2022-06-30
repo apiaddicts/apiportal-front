@@ -13,7 +13,7 @@ variables:
   APP_NAME: devportal-front
   APP_PORT: 3000
   APP_PORT_NAME: http
-  ACR_IMAGE: $(ACR_HOST)/$(APP_NAME):$(ENV)
+  ACR_IMAGE: $(ACR_HOST)/$(APP_NAME):$(Build.SourceVersion)
   ${{ if eq(variables['Build.SourceBranchName'], 'main')}}:
     ENV: prod
     ACR_CONNECTION: AzRegistryContainerPro
@@ -54,6 +54,7 @@ stages:
               buildContext: .
               #tags: latest
               tags: |
+                $(Build.SourceVersion)
                 $(ENV)
                 latest
   - stage: Deploy
