@@ -48,7 +48,7 @@ export default function blogReducer(state = initialState, action) {
     case blogConstants.GET_BLOG_DATA_ALL_SUCCESS:
       return {
         ...state,
-        data: action.payload,
+        data: action.payload[0],
         error: {},
       };
     case blogConstants.GET_BLOG_DATA_ALL_FAILURE:

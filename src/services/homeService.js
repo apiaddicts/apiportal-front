@@ -7,7 +7,7 @@ function getHome() {
     headers: { 'Content-Type': 'application/json' },
   };
 
-  return fetch(`${config.apiUrl}/pages/85`, requestOptions)
+  return fetch(`${config.apiUrl}/pages?_where[slug]=HomeSu-es&_locale=es`, requestOptions)
     .then(handleResponse)
     .then((home) => {
       return home;

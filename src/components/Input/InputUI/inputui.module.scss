@@ -102,8 +102,20 @@
   }
 }
 
+.success {
+  color: #48D2A0;
+}
+
 .required {
   font-size: 12px;
   color: $gray_lighten-2;
   margin: 0.5rem 1rem 0;
 }
+
+.wrapper__icon {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  font-size: 25px;
+}
+

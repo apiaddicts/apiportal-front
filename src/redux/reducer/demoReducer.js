@@ -13,7 +13,7 @@ export default function demoReducer(state = initialState, action) {
     case homeConstants.GET_ALL_HOME_SUCCESS:
       return {
         ...state,
-        data: action.payload,
+        data: action.payload[0],
       };
     case homeConstants.GET_ALL_HOME_FAILURE:
       return {

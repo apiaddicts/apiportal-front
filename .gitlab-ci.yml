@@ -16,7 +16,7 @@ variables:
     - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
   script:
     - echo version:$CI_TAG
-    - docker build
+    - docker build -f Dockerfile-int 
       --build-arg BUILDKIT_INLINE_CACHE=1
       --build-arg BUILDKIT_INLINE_CACHE=1
       --build-arg REACT_APP_STRAPI_URL=$REACT_APP_STRAPI_URL
@@ -33,6 +33,7 @@ variables:
       --build-arg REACT_APP_LIST_PRODUCT_APIS_TOP=$REACT_APP_LIST_PRODUCT_APIS_TOP
       --build-arg REACT_APP_LIST_PRODUCT_TOP=$REACT_APP_LIST_PRODUCT_TOP
       --build-arg REACT_APP_LIST_SUBSCRIPTIONS=$REACT_APP_LIST_SUBSCRIPTIONS
+      --build-arg WDS_SOCKET_PORT=$WDS_SOCKET_PORT      
       --cache-from "${DOCKER_IMAGE_PATH}:$TAG"
       -t "${DOCKER_IMAGE_PATH}:$CI_TAG" -t "${DOCKER_IMAGE_PATH}:$TAG" .
     - docker push $DOCKER_IMAGE_PATH:$TAG
