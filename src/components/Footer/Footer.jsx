@@ -33,6 +33,7 @@ function Footer({ isPrivate }) {
       email: '',
       phone: '',
       subject: '',
+      sendMailTerms: false,
     },
     validationSchema: Yup.object({
       name: Yup.string().required('Campo requerido'),
@@ -42,12 +43,16 @@ function Footer({ isPrivate }) {
       // topic: Yup.string().required('Campo requerido'),
       subject: Yup.string().required('Campo requerido'),
       // message: Yup.string().length(50, 'Limite de caracteres 50').required('Campo requerido'),
+      sendMailTerms: Yup.bool().oneOf([true], 'Debes aceptar los terminos y condiciones'),
     }),
     onSubmit: (values) => {
       //Handle envio de correo de contacto
       //TODO:Implementar envio de correo
+      console.log('Enviar datos', values);
     },
   });
+
+  console.log('errores', formik.errors);
 
   return (
     <div>
@@ -80,10 +85,11 @@ function Footer({ isPrivate }) {
                           id='name'
                           type='text'
                           label='Nombre*'
+                          touched={formik.touched.name}
                           errors={formik.errors.name}
                           onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
                           value={formik.values.name}
-                          required={true}
                         />
                       </div>
                       <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
@@ -92,10 +98,11 @@ function Footer({ isPrivate }) {
                           id='lastname'
                           type='text'
                           label='Apellidos*'
+                          touched={formik.touched.lastname}
                           errors={formik.errors.lastname}
                           onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
                           value={formik.values.lastname}
-                          required={true}
                         />
                       </div>
                     </div>
@@ -106,10 +113,11 @@ function Footer({ isPrivate }) {
                           id='email'
                           type='email'
                           label='Correo electrónico*'
+                          touched={formik.touched.email}
                           errors={formik.errors.email}
                           onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
                           value={formik.values.email}
-                          required={true}
                         />
                       </div>
                       <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
@@ -118,10 +126,11 @@ function Footer({ isPrivate }) {
                           id='phone'
                           type='tel'
                           label='Celular*'
+                          touched={formik.touched.phone}
                           errors={formik.errors.phone}
                           onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
                           value={formik.values.phone}
-                          required={true}
                         />
                       </div>
                     </div>
@@ -135,10 +144,11 @@ function Footer({ isPrivate }) {
                           id='subject'
                           type='text'
                           label='Asunto*'
+                          touched={formik.touched.subject}
                           errors={formik.errors.subject}
                           onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
                           value={formik.values.subject}
-                          required={true}
                         />
                       </div>
                     </div>
@@ -154,8 +164,13 @@ function Footer({ isPrivate }) {
                 <div className='container'>
                   <div className='row justify-center'>
                     <div className={`flex-sm-12 flex-md-8 flex-sm-8 ${classes.footer__section__contact__terms}`}>
-                      <input type='checkbox' id='checkbox' />
-                      <span>
+                      <input
+                        type='checkbox'
+                        id='sendMailTerms'
+                        name='sendMailTerms'
+                        onChange={formik.handleChange}
+                      />
+                      <span className={`ml-2 ${formik.errors.sendMailTerms ? 'text__error' : ''}`}>
                         {' '}
                         Acepto recibir correos de acuerdo con los siguientes
                         {' '}
