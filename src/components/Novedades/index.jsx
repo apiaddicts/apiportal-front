@@ -24,8 +24,8 @@ function Novedades({ data }) {
       {
         data.length === 0 ? <p>Información no disponible</p> :
           items.slice(0, 4).map((result, index) => (
-            <Link key={index} to={`/blog/${result.id}`}>
-              <ItemAvatar title={result.title} paragraph={result.description} img={result.image ? result.image[0].url : ''} border={true} css_styles={{ 'custom_title': 'fs__10', 'custom_paragraph': 'fs__16' }} />
+            <Link key={index} to={`/blog/${result?.id}`}>
+              <ItemAvatar title={result?.title} paragraph={result?.description} img={result?.image ? result?.image?.[0]?.url : ''} border={true} css_styles={{ 'custom_title': 'fs__10', 'custom_paragraph': 'fs__16' }} />
             </Link>
           ))
       }

@@ -33,7 +33,7 @@ function ApiDetail({ setIsOpen }) {
     }
 
     if (params.id && library && Object.keys(library).length === 0) {
-      dispatch(getLibrary(params.id));
+      dispatch(getLibrary(params?.id));
     }
 
   }, []);
@@ -57,18 +57,18 @@ function ApiDetail({ setIsOpen }) {
   }, []);
 
   // Load discover section
-  const filterDiscoverTab = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'home.discover-section') : [];
+  const filterDiscoverTab = data && data?.contentSections && data?.contentSections?.length > 0 ? data?.contentSections?.filter((item) => item.__component === 'home.discover-section') : [];
 
   // Load buttons sections
-  const filterButtonSection = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sections.button-hero') : [];
+  const filterButtonSection = data && data?.contentSections && data?.contentSections?.length > 0 ? data?.contentSections?.filter((item) => item.__component === 'sections.button-hero') : [];
 
   // const filterDiscover = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sections.section-use-case') : [];
 
-  const buttonsLbls = library && library.buttons && library.buttons.length > 0 ? library.buttons.map((item) => {
+  const buttonsLbls = library && library?.buttons && library?.buttons?.length > 0 ? library?.buttons?.map((item) => {
     const data = {
-      label: item.name,
-      class: item.class,
-      link: item.link !== '' ? `/apis/${params.id}#contact` : '',
+      label: item?.name,
+      class: item?.class,
+      link: item?.link !== '' ? `/apis/${params?.id}#contact` : '',
     };
 
     return data;
@@ -83,17 +83,17 @@ function ApiDetail({ setIsOpen }) {
     },
   ];
 
-  const datanews = blogs.length > 0 ? _.sortBy(blogs, (m) => {
+  const datanews = blogs?.length > 0 ? _.sortBy(blogs, (m) => {
     return moment(m.created_at).toDate().getTime();
   }) : [];
 
-  const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
+  const slidesNew = datanews?.length > 0 ? datanews?.reverse().slice(0, 6).map((item, i) => {
     const itemData = {
-      img: item.image[0].url,
-      title: item.title,
-      description: item.description,
+      img: item?.image?.[0]?.url,
+      title: item?.title,
+      description: item?.description,
       linkText: 'Conoce más',
-      route: `/blog/${item.id}#blogDetail`,
+      route: `/blog/${item?.id}#blogDetail`,
     };
     return itemData;
   }) : [];
@@ -102,7 +102,7 @@ function ApiDetail({ setIsOpen }) {
   const random2 = Math.floor(Math.random() * libraries.length);
   const random3 = Math.floor(Math.random() * libraries.length);
 
-  const apisNews = libraries.length > 0 ? [libraries[random], libraries[random2], libraries[random3]] : [];
+  const apisNews = libraries?.length > 0 ? [libraries[random], libraries[random2], libraries[random3]] : [];
 
   const handleClickPage = (id) => {
     dispatch(getLibrary(id));
@@ -114,8 +114,8 @@ function ApiDetail({ setIsOpen }) {
         <>
           <section>
             <BannerImage
-              title={library.title}
-              img={library.image.length > 0 && library.image.length === 1 ? library.image[0].url : ''}
+              title={library?.title}
+              img={library?.image?.length > 0 && library?.image?.length === 1 ? library?.image?.[0]?.url : ''}
               buttons={buttonsLbls}
               setIsOpen={setIsOpen}
               css_styles={{ 'image_display': 'banner_custom__img--dnone', 'apiindividual_height': 'banner_apiindividual__layout--height', 'custom_line_height': 'line-height-1' }}
@@ -128,24 +128,24 @@ function ApiDetail({ setIsOpen }) {
             <div className='row'>
               <div className={`flex-md-12 flex-sm-12 -ml-23 ${classes.section__content__title}`}>
                 <h1 className='h2 text__primary font-weight-bold mb-10 -ml-23 text-center-sm'>
-                  {library.benefits && library.benefits.length > 0 && library.benefits.length === 1 ?
-                    library.benefits[0].title :
+                  {library?.benefits && library?.benefits?.length > 0 && library?.benefits?.length === 1 ?
+                    library?.benefits?.[0]?.title :
                     'Benificios principales'}
                 </h1>
               </div>
               <div className='row px-5'>
                 <div className={`flex-sm-12 flex-md-6 flex-lg-6 ${classes.section__content__img}`}>
-                  <img src={library.benefits && library.benefits.length > 0 && library.benefits.length === 1 && library.benefits[0].background ? library.benefits[0].background.url : codeSnipet} alt='Benefits' className='w-full' />
+                  <img src={library?.benefits && library?.benefits?.length > 0 && library?.benefits?.length === 1 && library?.benefits?.[0]?.background ? library?.benefits?.[0]?.background.url : codeSnipet} alt='Benefits' className='w-full' />
                 </div>
                 <div className='flex-sm-12 flex-md-6 flex-lg-6 container' style={{ display: 'flex', alignItems: 'center', padding: '0 4rem' }}>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem', alignContent: 'center' }}>
-                    {library.benefits && library.benefits.length > 0 && library.benefits.length === 1 && library.benefits[0].Steps.length > 0 ? (
-                      library.benefits[0].Steps.map((item, i) => (
+                    {library?.benefits && library?.benefits?.length > 0 && library?.benefits?.length === 1 && library?.benefits?.[0]?.Steps?.length > 0 ? (
+                      library?.benefits?.[0]?.Steps.map((item, i) => (
                         <div>
                           <Item
                             key={i}
-                            title={item.title}
-                            icon={item.number}
+                            title={item?.title}
+                            icon={item?.number}
                             titleStyles={{ fontSize: '18px', fontWeight: '500', color: '#53565A' }}
                             iconStyle={{ width: '50px', height: '50px' }}
                           />
@@ -169,15 +169,15 @@ function ApiDetail({ setIsOpen }) {
               </div>
               <Tabs direction='center' colorTab='white' activeColor='yellow'>
                 {filterDiscoverTab.map((item, i) => (
-                  <div label={item.title} key={i} preIcon={item.smallText}>
+                  <div label={item?.title} key={i} preIcon={item?.smallText}>
                     <div className='row'>
                       {item.Products.map((data, x) => (
                         <div key={x} className='flex-lg-4 flex-md-12 flex-sm-12 py-6'>
                           <Item
-                            number={data.num}
-                            title={data.title}
-                            description={data.subtitle}
-                            icon={data.icon}
+                            number={data?.num}
+                            title={data?.title}
+                            description={data?.subtitle}
+                            icon={data?.icon}
                             type='title'
                             textColor='#d4d9db'
                           />
@@ -189,10 +189,10 @@ function ApiDetail({ setIsOpen }) {
               </Tabs>
               <div className='mt-10 justify-center' style={{ display: 'grid', gap: '2rem', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 210px))' }}>
                 {filterButtonSection && filterButtonSection.length > 0 ? (
-                  filterButtonSection[0].header.map((button, i) => (
+                  filterButtonSection?.[0]?.header.map((button, i) => (
                     <div key={i} className='mb-4'>
-                      <Button styles={button.keyword}>
-                        {button.title}
+                      <Button styles={button?.keyword}>
+                        {button?.title}
                       </Button>
                     </div>
                   ))
@@ -227,12 +227,12 @@ function ApiDetail({ setIsOpen }) {
                   apisNews.map((card, i) => (
                     <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
                       <CardBasic
-                        chipTitle={card.status && card.status === 'Publicado' ? 'GET' : 'POST'}
-                        title={card.title}
-                        description={card.description}
+                        chipTitle={card?.status && card?.status === 'Publicado' ? 'GET' : 'POST'}
+                        title={card?.title}
+                        description={card?.description}
                         info='MÁS INFORMACIÓN'
-                        url={`/apis/${card.id}#api`}
-                        route={() => handleClickPage(card.id)}
+                        url={`/apis/${card?.id}#api`}
+                        route={() => handleClickPage(card?.id)}
                       />
                     </div>
                   ))

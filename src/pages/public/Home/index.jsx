@@ -100,11 +100,11 @@ function Home({ setIsOpen }) {
 
   const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
     const itemData = {
-      img: item.image[0].url,
-      title: item.title,
-      description: item.description,
+      img: item?.image?.[0]?.url,
+      title: item?.title,
+      description: item?.description,
       linkText: 'Conoce más',
-      route: `/blog/${item.id}#blogDetail`,
+      route: `/blog/${item?.id}#blogDetail`,
     };
     return itemData;
   }) : [];

@@ -5,7 +5,7 @@ import './tabs.scss';
 
 function Tabs({ children, line = false, direction = 'left', activeColor = 'primary', colorTab = 'primary', deTbas }) {
 
-  const [activeTab, setActiveTab] = useState(children[0].props.label);
+  const [activeTab, setActiveTab] = useState(children?.[0]?.props?.label);
 
   const onClickTabItem = (tab) => {
     setActiveTab(tab);
@@ -34,9 +34,9 @@ function Tabs({ children, line = false, direction = 'left', activeColor = 'prima
         })}
       </ol>
       <div className='tab-content'>
-        {children.map((child) => {
-          if (child.props.label !== activeTab) return undefined;
-          return child.props.children;
+        {children?.map((child) => {
+          if (child?.props?.label !== activeTab) return undefined;
+          return child?.props?.children;
         })}
       </div>
     </div>
