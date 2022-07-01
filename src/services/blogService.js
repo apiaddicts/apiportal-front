@@ -6,7 +6,7 @@ function getPageBlog() {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
-  return fetch(`${config.apiUrl}/pages/86`, requestOptions)
+  return fetch(`${config.apiUrl}/pages?_where[slug]=BlogSu-es`, requestOptions)
     .then(handleResponse)
     .then((dataBlog) => {
       return dataBlog;
