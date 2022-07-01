@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaTelegramPlane } from 'react-icons/fa';
 import moment from 'moment';
