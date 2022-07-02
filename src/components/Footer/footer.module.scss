@@ -38,6 +38,7 @@
 
     display: grid;
     grid-template-areas: "logo" "email" "policies";
+    grid-template-columns: 3fr 1fr 1fr;
     align-items: center;
     gap: 4rem;
     border-bottom: 1px solid #e6e7ee;
@@ -45,16 +46,6 @@
     padding-bottom: 16px;
     padding-left: 0;
     padding-right: 0;
-
-    @include breakpoint(lg) {
-      grid-template-columns: 3fr 1fr 190px;
-      grid-template-areas: "logo email policies";
-    }
-
-    @include breakpoint(md) {
-      grid-template-columns: 3fr 1fr 1fr;
-      grid-template-areas: "logo email policies";
-    }
 
     @include breakpoint(xs) {
       grid-template-columns: 1fr;
@@ -72,6 +63,43 @@
       .policies {
         text-align: center !important;
       }
+    }
+
+    @include breakpoint(sm) {
+      grid-template-columns: 1fr;
+      grid-template-areas: "logo" "email" "policies";
+      gap: 2rem;
+      align-content: center;
+      padding-top: 4rem;
+      padding-bottom: 2rem;
+      .logo {
+        margin: 0 auto;
+      }
+      .email, .policies {
+        text-align: center !important;
+      }
+    }
+
+    @include breakpoint(md) {
+      grid-template-columns: 3fr 1fr 1fr;
+      grid-template-areas: "logo email policies";
+      gap: 4rem;
+      align-items: center;
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: 5rem;
+      padding-bottom: 16px;
+      .email, .policies {
+        text-align: right !important;
+      }
+      .logo {
+        margin: 0;
+      }
+    }
+
+    @include breakpoint(lg) {
+      grid-template-columns: 3fr 1fr 190px;
+      grid-template-areas: "logo email policies";
     }
   }
   &__social {
@@ -109,6 +137,36 @@
         justify-content: space-around;
         padding-bottom: 2rem;
         border-bottom: 1px solid #e6e7ee;
+      }
+    }
+
+    @include breakpoint(sm) {
+      grid-template-columns: 1fr;
+      grid-template-areas: "icons" "copyright";
+      gap: 2rem;
+      padding-top: 2rem;
+      &__copyright {
+        text-align: center;
+      }
+      &__icons {
+        justify-content: space-around;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #e6e7ee;
+      }
+    }
+
+    @include breakpoint(md) {
+      grid-template-columns: 8fr 1fr;
+      grid-template-areas: "copyright icons";
+      align-items: center;
+      padding: 30px 5px;
+      &__copyright {
+        text-align: left;
+      }
+      &__icons {
+        justify-content: space-between;
+        padding-bottom: 0;
+        border-bottom: none;
       }
     }
   }

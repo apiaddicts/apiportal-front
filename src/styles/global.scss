@@ -874,7 +874,10 @@ a {
     font-size: 154px;
   }
   &__error {
-    color: #FF0000;
+    color: #FF0000 !important;
+    a {
+      color: #FF0000 !important;
+    }
   }
 }
 

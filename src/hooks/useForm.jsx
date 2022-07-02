@@ -8,9 +8,9 @@ const validationSchema = Yup.object().shape({
   first_name: string().required('El nombre es obligatorio'),
   last_name: string().required('El apellido es obligatorio'),
   email: string().email('Por favor proporcione un correo electrónico válido').required('El email es obligatorio'),
-  terms: bool().oneOf([true], 'Debes aceptar los terminos y condiciones'),
+  terms: bool().oneOf([true], 'Debes aceptar los términos y condiciones'),
   password: string()
-    .min(8, 'La contraseña debe tener al menos 8 caracteres de longitud')
+    .min(8, 'La contraseña debe tener al menos 8 carácteres de longitud')
     .trim('Los espacios no estan permitidos')
     .strict()
     .required('La contraseña es obligatoria'),

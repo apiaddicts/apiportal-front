@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { FaFacebookF, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { Alert } from '@mui/material';
 import { GoMail } from 'react-icons/go';
 import { RiInstagramFill } from 'react-icons/ri';
 import { useFormik } from 'formik';
@@ -25,6 +26,7 @@ function Footer({ isPrivate }) {
     { link: 'https://www.instagram.com/segurossuramx/', icon: <RiInstagramFill /> },
   ];
   const [contactForm, setContactForm] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -33,7 +35,9 @@ function Footer({ isPrivate }) {
       email: '',
       phone: '',
       subject: '',
+      sendMailTerms: false,
     },
+    validateOnChange: true,
     validationSchema: Yup.object({
       name: Yup.string().required('Campo requerido'),
       lastname: Yup.string().required('Campo requerido'),
@@ -42,10 +46,13 @@ function Footer({ isPrivate }) {
       // topic: Yup.string().required('Campo requerido'),
       subject: Yup.string().required('Campo requerido'),
       // message: Yup.string().length(50, 'Limite de caracteres 50').required('Campo requerido'),
+      sendMailTerms: Yup.bool().oneOf([true], 'Debes aceptar los terminos y condiciones'),
     }),
     onSubmit: (values) => {
       //Handle envio de correo de contacto
       //TODO:Implementar envio de correo
+      setSuccess(true);
+      console.log('Enviar datos', values);
     },
   });
 
@@ -55,11 +62,11 @@ function Footer({ isPrivate }) {
         <Base img={img}>
           <div className={`container ${classes.footer__container}`}>
             <div className={`${classes.divider} mb-4`} />
-            <h1 className='h2 text__secondary__white mb-3'>Dejanos tus datos para asesorarte</h1>
-            <p style={{ fontWeight: 400 }} className='h5 text__secondary__white mb-10'>Contáctanos por medio de este formulario</p>
+            <h1 className='h2 text__secondary__white mb-3'>¿Conversamos?</h1>
+            <p style={{ fontWeight: 400 }} className='h5 text__secondary__white mb-10'>Déjanos tus datos para que nuestros expertos conecten contigo.</p>
           </div>
           <div className={classes.button__fab}>
-            <button type='button' onClick={() => { setContactForm(!contactForm); }}>
+            <button type='button' onClick={() => { setContactForm(!contactForm); formik.resetForm(); }}>
               {contactForm ? <Icon style={{ fontSize: '44px' }} id='MdClose' /> : <GoMail style={{ fontSize: '44px' }} />}
             </button>
           </div>
@@ -73,6 +80,15 @@ function Footer({ isPrivate }) {
               <div className='mb-5'>
                 <div className='row justify-center'>
                   <div className='container'>
+                    {
+                      success && (
+                        <div className='row justify-center'>
+                          <div className='flex-sm-12 flex-md-8 flex-lg-8 pb-5'>
+                            <Alert severity='success' className='mb-5'>Datos enviados correctamente</Alert>
+                          </div>
+                        </div>
+                      )
+                    }
                     <div className='row justify-center'>
                       <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
                         <InputUI
@@ -80,10 +96,11 @@ function Footer({ isPrivate }) {
                           id='name'
                           type='text'
                           label='Nombre*'
+                          touched={formik.touched.name}
                           errors={formik.errors.name}
                           onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
                           value={formik.values.name}
-                          required={true}
                         />
                       </div>
                       <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
@@ -92,10 +109,11 @@ function Footer({ isPrivate }) {
                           id='lastname'
                           type='text'
                           label='Apellidos*'
+                          touched={formik.touched.lastname}
                           errors={formik.errors.lastname}
                           onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
                           value={formik.values.lastname}
-                          required={true}
                         />
                       </div>
                     </div>
@@ -106,10 +124,11 @@ function Footer({ isPrivate }) {
                           id='email'
                           type='email'
                           label='Correo electrónico*'
+                          touched={formik.touched.email}
                           errors={formik.errors.email}
                           onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
                           value={formik.values.email}
-                          required={true}
                         />
                       </div>
                       <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
@@ -118,10 +137,11 @@ function Footer({ isPrivate }) {
                           id='phone'
                           type='tel'
                           label='Celular*'
+                          touched={formik.touched.phone}
                           errors={formik.errors.phone}
                           onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
                           value={formik.values.phone}
-                          required={true}
                         />
                       </div>
                     </div>
@@ -135,10 +155,11 @@ function Footer({ isPrivate }) {
                           id='subject'
                           type='text'
                           label='Asunto*'
+                          touched={formik.touched.subject}
                           errors={formik.errors.subject}
                           onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
                           value={formik.values.subject}
-                          required={true}
                         />
                       </div>
                     </div>
@@ -154,8 +175,13 @@ function Footer({ isPrivate }) {
                 <div className='container'>
                   <div className='row justify-center'>
                     <div className={`flex-sm-12 flex-md-8 flex-sm-8 ${classes.footer__section__contact__terms}`}>
-                      <input type='checkbox' id='checkbox' />
-                      <span>
+                      <input
+                        type='checkbox'
+                        id='sendMailTerms'
+                        name='sendMailTerms'
+                        onChange={formik.handleChange}
+                      />
+                      <span className={`ml-2 ${formik.errors.sendMailTerms ? 'text__error' : ''}`}>
                         {' '}
                         Acepto recibir correos de acuerdo con los siguientes
                         {' '}
