@@ -32,7 +32,7 @@ function Blog({ setIsOpen }) {
   });
 
   const results = blogs.filter((item) => {
-    return formik.values.search === '' ? null : item.title.toLowerCase().includes(value.toLowerCase());
+    return formik.values.search === '' ? null : item?.title?.toLowerCase().includes(value.toLowerCase());
   });
 
   useEffect(() => {
@@ -60,29 +60,29 @@ function Blog({ setIsOpen }) {
   const TabsFilter = Object.keys(data).length > 0 && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sura.tab-card') : [];
 
   const deTbas = (tab) => {
-    const label = TabsFilter.find((label) => label.name.toLowerCase().includes(tab.toLowerCase()));
-    if (label.tab.toLowerCase().includes('zero')) {
+    const label = TabsFilter.find((label) => label?.name?.toLowerCase().includes(tab?.toLowerCase()));
+    if (label?.tab?.toLowerCase().includes('zero')) {
       setResultsData(blogs);
     } else {
-      const results = blogs.filter((item) => {
-        return item.tags.map((tag) => tag.tab.toLowerCase()).includes(label.tab.toLowerCase());
+      const results = blogs?.filter((item) => {
+        return item?.tags?.map((tag) => tag?.tab?.toLowerCase()).includes(label?.tab?.toLowerCase());
       });
       setResultsData(results);
     }
 
   };
 
-  const datanews = blogs.length > 0 ? _.sortBy(blogs, (m) => {
+  const datanews = blogs?.length > 0 ? _.sortBy(blogs, (m) => {
     return moment(m.created_at).toDate().getTime();
   }) : [];
 
-  const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
+  const slidesNew = datanews?.length > 0 ? datanews?.reverse().slice(0, 6).map((item, i) => {
     const itemData = {
-      img: item.image[0].url,
-      title: item.title,
-      description: item.description,
+      img: item?.image?.[0]?.url,
+      title: item?.title,
+      description: item?.description,
       linkText: 'Conoce más',
-      route: `/blog/${item.id}#blogDetail`,
+      route: `/blog/${item?.id}#blogDetail`,
     };
     return itemData;
   }) : [];
@@ -120,15 +120,15 @@ function Blog({ setIsOpen }) {
                             <div className={`d-xs-none ${stylesBlog.section__experiences__content}`}>
                               <div className={stylesBlog.section__experiences__content__img}>
                                 <div className={stylesBlog.section__experiences__content__img__overlay}>
-                                  <img src={tab.img && tab.img.length > 0 ? tab.img[0].url : 'https://picsum.photos/500/350'} alt='' />
+                                  <img src={tab?.img && tab?.img?.length > 0 ? tab?.img?.[0]?.url : 'https://picsum.photos/500/350'} alt='' />
                                 </div>
                               </div>
                               <div className={stylesBlog.section__experiences__content__card}>
                                 <CardInformation
-                                  title={tab.cards && tab.cards[0].title}
-                                  buttons={tab.cards && tab.cards[0].steps}
-                                  description={tab.cards && tab.cards[0].description}
-                                  reading={tab.cards && tab.cards[0].timeRead}
+                                  title={tab?.cards && tab?.cards?.[0]?.title}
+                                  buttons={tab?.cards && tab?.cards?.[0]?.steps}
+                                  description={tab?.cards && tab?.cards?.[0]?.description}
+                                  reading={tab?.cards && tab?.cards?.[0]?.timeRead}
                                   theme='primary'
                                   css_styles={{ 'override_card_style': 'no__shadow', 'custom_margin_top': 'mt-4' }}
                                   blog={true}

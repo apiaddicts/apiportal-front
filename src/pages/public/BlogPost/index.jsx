@@ -35,11 +35,11 @@ function BlogDetails({ setIsOpen }) {
   const { blog, blogs } = useSelector((state) => state.blog);
 
   useEffect(() => {
-    if (params.id) {
-      dispatch(getBlog(params.id));
+    if (params?.id) {
+      dispatch(getBlog(params?.id));
     }
 
-  }, [params.id]);
+  }, [params?.id]);
 
   useEffect(() => {
 
@@ -60,11 +60,11 @@ function BlogDetails({ setIsOpen }) {
 
   const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
     const itemData = {
-      img: item.image[0].url,
-      title: item.title,
-      description: item.description,
+      img: item?.image?.[0]?.url,
+      title: item?.title,
+      description: item?.description,
       linkText: 'Conoce más',
-      route: `/blog/${item.id}#blogDetail`,
+      route: `/blog/${item?.id}#blogDetail`,
     };
     return itemData;
   }) : [];
@@ -72,31 +72,31 @@ function BlogDetails({ setIsOpen }) {
   return (
     <div id='blogDetail'>
       <Helmet>
-        <title>{blog.title ? blog.title : ''}</title>
+        <title>{blog?.title ? blog?.title : ''}</title>
         <meta charset='utf-8' />
-        <meta name='author' content={blog.nameUser ? blog.nameUser : ''} />
+        <meta name='author' content={blog?.nameUser ? blog?.nameUser : ''} />
         <meta
           name='description'
-          content={blog.description ? blog.description : ''}
+          content={blog?.description ? blog?.description : ''}
         />
-        <meta property='og:title' content={blog.title ? blog.title : ''} />
-        <meta property='og:image' content={blog.image ? blog.image[0].url : ''} />
-        <meta property='og:description' content={blog.description ? blog.description : ''} />
-        <meta property='og:url' content={`${window.location.protocol}//${window.location.hostname}/blog/${blog.id}`} />
+        <meta property='og:title' content={blog?.title ? blog?.title : ''} />
+        <meta property='og:image' content={blog?.image ? blog?.image?.[0]?.url : ''} />
+        <meta property='og:description' content={blog?.description ? blog?.description : ''} />
+        <meta property='og:url' content={`${window.location.protocol}//${window.location.hostname}/blog/${blog?.id}`} />
         <meta property='og:locale' content='es_MX' />
         <meta property='og:type' content='article' />
         <meta property='og:site_name' content='Seguros Sura API Market' />
         <meta name='twitter:card' content='summary' />
         <meta name='twitter:site' content='Seguros Sura API Market' />
-        <meta name='twitter:title' content={blog.title ? blog.title : ''} />
-        <meta name='twitter:description' content={blog.description ? blog.description : ''} />
-        <meta name='twitter:image' content={blog.image ? blog.image[0].url : ''} />
+        <meta name='twitter:title' content={blog?.title ? blog?.title : ''} />
+        <meta name='twitter:description' content={blog?.description ? blog?.description : ''} />
+        <meta name='twitter:image' content={blog?.image ? blog?.image?.[0]?.url : ''} />
       </Helmet>
       {Object.keys(blog).length > 0 ? (
         <>
           <BannerStatic
-            title={blog.title ? blog.title : 'Descubre las novedades de SURA'}
-            img={blog.image ? blog.image[0].url : 'https://picsum.photos/1920/300'}
+            title={blog?.title ? blog?.title : 'Descubre las novedades de SURA'}
+            img={blog?.image ? blog?.image?.[0]?.url : 'https://picsum.photos/1920/300'}
             styles={stylesPerso}
             stylesTitle={stylesBannerTitle}
           />
