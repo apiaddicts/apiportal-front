@@ -23,7 +23,6 @@ function InputUI({ type = 'text', label, touched, errors, required = false, onCh
     <div className={`${classes.wrapper__input} ${errors === undefined ? '' : `${classes.error}`}`}>
       <input
         type={type}
-        required={required ? 'required' : ''}
         value={value}
         autoComplete='off'
         ref={inputRef}

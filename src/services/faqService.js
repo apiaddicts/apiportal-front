@@ -7,7 +7,7 @@ function getFaq() {
     headers: { 'Content-Type': 'application/json' },
   };
 
-  return fetch(`${config.apiUrl}/pages?_where[slug]=faqsSu-es&_locale=es`, requestOptions)
+  return fetch(`${config.apiUrl}/pages?_where[slug]=faq&_locale=es`, requestOptions)
     .then(handleResponse)
     .then((faq) => {
       return faq;
