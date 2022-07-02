@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import { FaFacebookF, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { Alert } from '@mui/material';
 import { GoMail } from 'react-icons/go';
 import { RiInstagramFill } from 'react-icons/ri';
 import { useFormik } from 'formik';
@@ -25,6 +26,7 @@ function Footer({ isPrivate }) {
     { link: 'https://www.instagram.com/segurossuramx/', icon: <RiInstagramFill /> },
   ];
   const [contactForm, setContactForm] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -48,11 +50,10 @@ function Footer({ isPrivate }) {
     onSubmit: (values) => {
       //Handle envio de correo de contacto
       //TODO:Implementar envio de correo
+      setSuccess(true);
       console.log('Enviar datos', values);
     },
   });
-
-  console.log('errores', formik.errors);
 
   return (
     <div>
@@ -60,7 +61,7 @@ function Footer({ isPrivate }) {
         <Base img={img}>
           <div className={`container ${classes.footer__container}`}>
             <div className={`${classes.divider} mb-4`} />
-            <h1 className='h2 text__secondary__white mb-3'>Dejanos tus datos para asesorarte</h1>
+            <h1 className='h2 text__secondary__white mb-3'>¿Conversamos? Dejanos tus datos para asesorarte</h1>
             <p style={{ fontWeight: 400 }} className='h5 text__secondary__white mb-10'>Contáctanos por medio de este formulario</p>
           </div>
           <div className={classes.button__fab}>
@@ -78,6 +79,15 @@ function Footer({ isPrivate }) {
               <div className='mb-5'>
                 <div className='row justify-center'>
                   <div className='container'>
+                    {
+                      success && (
+                        <div className='row justify-center'>
+                          <div className='flex-sm-12 flex-md-8 flex-lg-8 pb-5'>
+                            <Alert severity='success' className='mb-5'>Datos enviados correctamente</Alert>
+                          </div>
+                        </div>
+                      )
+                    }
                     <div className='row justify-center'>
                       <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
                         <InputUI

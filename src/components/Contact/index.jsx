@@ -31,7 +31,7 @@ function Contact({ css_styles, pathname }) {
     },
     validationSchema: Yup.object({
       name: Yup.string().required('Campo requerido'),
-      email: Yup.string().email('Correo electrónico invalido').required('Campo requerido'),
+      email: Yup.string().email('Correo electrónico inválido').required('Campo requerido'),
     }),
     onSubmit: (values) => {
       console.log(values);
