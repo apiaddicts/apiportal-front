@@ -53,8 +53,6 @@ function Footer({ isPrivate }) {
     },
   });
 
-  console.log('errores', formik.errors);
-
   return (
     <div>
       {!isPrivate && (
