@@ -37,6 +37,7 @@ function Footer({ isPrivate }) {
       subject: '',
       sendMailTerms: false,
     },
+    validateOnChange: true,
     validationSchema: Yup.object({
       name: Yup.string().required('Campo requerido'),
       lastname: Yup.string().required('Campo requerido'),
@@ -61,11 +62,11 @@ function Footer({ isPrivate }) {
         <Base img={img}>
           <div className={`container ${classes.footer__container}`}>
             <div className={`${classes.divider} mb-4`} />
-            <h1 className='h2 text__secondary__white mb-3'>¿Conversamos? Dejanos tus datos para asesorarte</h1>
-            <p style={{ fontWeight: 400 }} className='h5 text__secondary__white mb-10'>Contáctanos por medio de este formulario</p>
+            <h1 className='h2 text__secondary__white mb-3'>¿Conversamos?</h1>
+            <p style={{ fontWeight: 400 }} className='h5 text__secondary__white mb-10'>Déjanos tus datos para que nuestros expertos conecten contigo.</p>
           </div>
           <div className={classes.button__fab}>
-            <button type='button' onClick={() => { setContactForm(!contactForm); }}>
+            <button type='button' onClick={() => { setContactForm(!contactForm); formik.resetForm(); }}>
               {contactForm ? <Icon style={{ fontSize: '44px' }} id='MdClose' /> : <GoMail style={{ fontSize: '44px' }} />}
             </button>
           </div>

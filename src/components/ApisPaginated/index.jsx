@@ -27,14 +27,26 @@ function Apis({ currentItems }) {
 }
 
 function ApisPaginated({ apis, itemsPerPage }) {
-  const [currentItems, setCurrentItems] = useState(null);
+  const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
 
   useEffect(() => {
     if (apis.length > 0) {
-      const endOffset = itemOffset + itemsPerPage;
-      setCurrentItems(apis.slice(itemOffset, endOffset));
+      // const endOffset = itemOffset + itemsPerPage;
+      // const items = apis.slice(itemOffset, endOffset);
+      const items = apis.filter((api, id) => id <= 8);
+      console.log('ITEMS', items);
+      items.sort((a, b) => {
+        if (a.title > b.title) {
+          return 1;
+        }
+        if (a.title < b.title) {
+          return -1;
+        }
+        return 0;
+      });
+      setCurrentItems(items);
       setPageCount(Math.ceil(apis.length / itemsPerPage));
     }
   }, [apis, itemOffset, itemsPerPage]);
@@ -44,6 +56,7 @@ function ApisPaginated({ apis, itemsPerPage }) {
     setItemOffset(newOffset);
   };
 
+  console.log(apis, currentItems);
   return (
     <>
       <Apis currentItems={currentItems} />

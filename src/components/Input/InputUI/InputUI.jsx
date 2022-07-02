@@ -7,10 +7,6 @@ function InputUI({ type = 'text', label, touched, errors, required = false, onCh
   const [isActive, setIsActive] = useState(false);
   const [value, setValue] = useState('');
   const inputRef = useRef();
-  const handleChange = (e) => {
-    if (onChange) onChange(e);
-  };
-
   function handleTextChange(text) {
     setValue(text);
     if (text !== '') {
@@ -19,6 +15,11 @@ function InputUI({ type = 'text', label, touched, errors, required = false, onCh
       setIsActive(false);
     }
   }
+  const handleChange = (e) => {
+    if (onChange) onChange(e);
+    handleTextChange(e.target.value);
+  };
+
   return (
     <div className={`${classes.wrapper__input} ${errors === undefined ? '' : `${classes.error}`}`}>
       <input
@@ -26,7 +27,6 @@ function InputUI({ type = 'text', label, touched, errors, required = false, onCh
         value={value}
         autoComplete='off'
         ref={inputRef}
-        onKeyDown={(e) => handleTextChange(e.target.value)}
         onChange={handleChange}
         onBlur={onBlur}
         {...rest}
@@ -39,7 +39,7 @@ function InputUI({ type = 'text', label, touched, errors, required = false, onCh
               <Icon id='MdOutlineCheck' />
             </div>
           ) :
-            errors !== undefined ? (
+            errors !== undefined && touched !== undefined ? (
               <div className={classes.wrapper__icon}>
                 <Icon id='MdErrorOutline' />
               </div>

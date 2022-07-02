@@ -59,7 +59,7 @@ function PrivateRouter({ children }) {
               </Routes>
             </div>
           </Box>
-          <Box sx={{ zIndex: 1300, position: 'absolute', background: '#fff' }}>
+          <Box sx={{ zIndex: 1300, position: 'absolute', background: '#fff', width: '100%' }}>
             <CustomFooter />
           </Box>
 
