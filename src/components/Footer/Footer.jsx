@@ -52,15 +52,13 @@ function Footer({ isPrivate }) {
     },
   });
 
-  console.log('errores', formik.errors);
-
   return (
     <div>
       {!isPrivate && (
         <Base img={img}>
           <div className={`container ${classes.footer__container}`}>
             <div className={`${classes.divider} mb-4`} />
-            <h1 className='h2 text__secondary__white mb-3'>Dejanos tus datos para asesorarte</h1>
+            <h1 className='h2 text__secondary__white mb-3'>¿Conversamos? Dejanos tus datos para asesorarte</h1>
             <p style={{ fontWeight: 400 }} className='h5 text__secondary__white mb-10'>Contáctanos por medio de este formulario</p>
           </div>
           <div className={classes.button__fab}>

@@ -7,7 +7,7 @@ function FooterAuthor({ data }) {
     <div className={classes.footer__author}>
       <ItemAvatar
         divider
-        img={data.photoUser && data.photoUser.length > 0 ? data.photoUser[0].url : 'https://api.lorem.space/image/face?w=150&h=150'}
+        img={data.photoUser && data.photoUser.length > 0 ? data.photoUser[0].url : '/user_notfound.png'}
         title={data.nameUser ? data.nameUser : ''}
         paragraph={data.jobUser ? data.jobUser : ''}
       />
