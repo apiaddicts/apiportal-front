@@ -65,7 +65,7 @@ function Navbar({ setIsOpen, setOpenForm, privateSession }) {
               </li>
               <li>
                 <Button type='button' styles='secundary' size='small' style={{ width: '140px', height: '32px' }} onClick={() => { setOpenForm(true); }}>
-                  registrate
+                  regístrate
                 </Button>
               </li>
             </ul>

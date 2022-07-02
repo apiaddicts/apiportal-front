@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import Input from '../../Input';
+import InputUI from '../../Input/InputUI/InputUI';
 import useFormConfig from '../../../hooks/useForm';
 import Button from '../../Buttons/Button';
 import { fieldsRegister } from '../fields';
@@ -31,14 +31,26 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
 
   const formConfig = useFormConfig(fieldsRegister, handleSubmit);
 
+  console.log('Errores', formConfig.errors);
+
   return (
     <form
       className='create-account'
       onSubmit={formConfig.handleSubmit}
     >
       {fieldsRegister.filter((item) => item.type !== 'checkbox').map((field, index) => (
-        <div className='mb-2' key={index}>
-          <Input key={field.id} field={field} formik={formConfig} />
+        <div className='input_field'>
+          <InputUI
+            id={field.id}
+            name={field.name}
+            type={field.type}
+            label={field.label}
+            touched={formConfig.touched[field.id]}
+            errors={formConfig.errors[field.id]}
+            onChange={formConfig.handleChange}
+            onBlur={formConfig.handleBlur}
+            value={formConfig.values.name}
+          />
         </div>
       ))}
       {/* checkbox */}
