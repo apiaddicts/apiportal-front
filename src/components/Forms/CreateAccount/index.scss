@@ -4,11 +4,14 @@
 .create-account {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
+  box-sizing: border-box;
 
-  div {
-    width: 50%;
+  .input_field {
+    width: 48%;
     padding: 0 10px;
+    margin-top: 20px;
   }
 
   button {
