@@ -20,6 +20,8 @@ function Faqs(props) {
     }
   }, []);
 
+  console.log(dataFaq);
+
   const filterFaqs = dataFaq && dataFaq?.contentSections?.length > 0 ? dataFaq?.contentSections?.filter((item) => item.__component === 'sura.list-filter') : [];
 
   const faqs = filterFaqs.length > 0 ? filterFaqs.map((i) => {
