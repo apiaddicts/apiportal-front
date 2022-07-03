@@ -16,7 +16,7 @@ import TextAreaUI from '../Input/InputUI/TextAreaUI';
 import SelectUI from '../Input/InputUI/SelectUI';
 
 function Footer({ isPrivate }) {
-  const img = 'https://picsum.photos/1920/300';
+  const img = '';
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
   const socialLinks = [
@@ -52,7 +52,6 @@ function Footer({ isPrivate }) {
       //Handle envio de correo de contacto
       //TODO:Implementar envio de correo
       setSuccess(true);
-      console.log('Enviar datos', values);
     },
   });
 

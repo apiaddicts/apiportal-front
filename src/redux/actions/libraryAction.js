@@ -118,9 +118,6 @@ const sortCollection = (data, sort) => {
     const fa = a.title.toLowerCase(),
       fb = b.title.toLowerCase();
 
-    console.log(fa);
-    console.log(fb);
-
     if (fa < fb) {
       return -1;
     }
@@ -166,7 +163,6 @@ const sortingValues = (key, order = 'asc') => {
 export const sortApiCollection = (sort) => (dispatch) => {
   const { libraries } = store.getState().library;
   const data = libraries.sort(sortingValues('title', sort));
-  // console.log(data);
   dispatch({
     type: libraryConstants.FILTER_ALL_LIBRARY,
     data,

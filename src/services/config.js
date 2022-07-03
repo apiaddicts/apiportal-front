@@ -31,6 +31,11 @@ const config = {
   topApi: process.env.REACT_APP_LIST_API_TOP,
   topSubscriptions: process.env.REACT_APP_LIST_SUBSCRIPTIONS,
   url: createURLSura(),
+  homePageSlug: process.env.REACT_APP_HOME_PAGE_SLUG,
+  blogPageSlug: process.env.REACT_APP_BLOG_PAGE_SLUG,
+  faqPageSlug: process.env.REACT_APP_FAQ_PAGE_SLUG,
+  apisPageSlug: process.env.REACT_APP_APIS_PAGE_SLUG,
+  locale: 'es',
 };
 
 export default config;

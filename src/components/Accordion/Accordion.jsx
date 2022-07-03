@@ -14,7 +14,7 @@ function Accordion({ subItem, setSubItem, items, arrItems, clicked }) {
 
   return (
     <div>
-      { items.length > 0 ? (
+      { items && items?.length > 0 ? (
         <div>
           {
             items.map((item, index) => {
@@ -29,7 +29,7 @@ function Accordion({ subItem, setSubItem, items, arrItems, clicked }) {
                     tabIndex='0'
                   >
                     <div className={classes.accordion__head__title}>
-                      <p>{item.title}</p>
+                      <p>{item?.title}</p>
                     </div>
                     <div className={classes.accordion__head__title__actionbutton}>
                       {subItem === index ? <Icon id='MdArrowDropUp' /> : <Icon id='MdArrowDropDown' />}
