@@ -6,6 +6,8 @@ const initialState = {
   error: {},
   // Blogs constants
   blogs: [],
+  filteredBlogs: [],
+  filters: [],
   errorBlogs: {},
   loading: false,
   // Blog constant
@@ -23,6 +25,7 @@ export default function blogReducer(state = initialState, action) {
       return {
         ...state,
         blogs: action.payload,
+        filteredBlogs: action.payload,
         errorBlogs: {},
       };
     case blogConstants.GET_ALL_BLOG_FAILURE:
@@ -30,6 +33,11 @@ export default function blogReducer(state = initialState, action) {
         ...state,
         blogs: [],
         errorBlogs: action.payload,
+      };
+    case blogConstants.FILTER_BLOGS:
+      return {
+        ...state,
+        filteredBlogs: action.filteredBlogs,
       };
     // Assignment of the load value of blog
     case blogConstants.GET_BLOG_SUCCESS:

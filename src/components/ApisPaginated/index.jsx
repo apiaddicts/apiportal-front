@@ -33,17 +33,8 @@ function ApisPaginated({ apis, itemsPerPage }) {
 
   useEffect(() => {
     if (apis.length > 0) {
-      const items = apis.filter((api, id) => id <= 8);
-      items.sort((a, b) => {
-        if (a.title > b.title) {
-          return 1;
-        }
-        if (a.title < b.title) {
-          return -1;
-        }
-        return 0;
-      });
-      setCurrentItems(items);
+      const endOffset = itemOffset + itemsPerPage;
+      setCurrentItems(apis.slice(itemOffset, endOffset));
       setPageCount(Math.ceil(apis.length / itemsPerPage));
     }
   }, [apis, itemOffset, itemsPerPage]);

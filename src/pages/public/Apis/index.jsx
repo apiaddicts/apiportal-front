@@ -17,6 +17,7 @@ import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonCom
 function Apis({ setIsOpen }) {
   const { libraries, filters, backUpLibreries, loadingLibraries } = useSelector((state) => state.library);
   const [filtersSelect, setFiltersSelect] = useState([]);
+  const [searchApiInputValue, setSearchApiInputValue] = useState('');
   const dispatch = useDispatch();
 
   // remove all filters
@@ -25,6 +26,7 @@ function Apis({ setIsOpen }) {
     dispatch({
       type: 'RESET_LIBRARY',
     });
+    setSearchApiInputValue('');
     setFiltersSelect([]);
   };
 
@@ -32,6 +34,7 @@ function Apis({ setIsOpen }) {
     dispatch(filterCheck(label, checked, 'status'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
+
   const handleChangeVersions = (name, label, checked) => {
     dispatch(filterCheck(label, checked, 'version'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
@@ -41,11 +44,14 @@ function Apis({ setIsOpen }) {
     dispatch(filterCheck(label, checked, 'solution'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
+
   const handleChangFilterTags = (name, label, checked) => {
     dispatch(filterCheck(label, checked, 'tag'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
+
   const handleChangeSearchFilter = (text) => {
+    setSearchApiInputValue(text);
     dispatch(filterCheck(text, null, 'search'));
   };
 
@@ -204,6 +210,7 @@ function Apis({ setIsOpen }) {
                     }}
                     placeholder='Buscar APIs...'
                     borderRadius='20px'
+                    value={searchApiInputValue}
                   />
                 </div>
                 <div className={`flex-sm-12 flex-md-5 flex-lg-5 ${classes.wrapper__right__control_container}`}>
@@ -240,7 +247,18 @@ function Apis({ setIsOpen }) {
                       </div>
                     </section>
                   )
-                ) : <SkeletonComponent />}
+                ) : (
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      width: '100%',
+                    }}
+                  >
+                    <SkeletonComponent />
+                  </div>
+                ) }
               </div>
             </div>
           </section>
