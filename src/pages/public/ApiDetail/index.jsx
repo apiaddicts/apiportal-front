@@ -13,7 +13,7 @@ import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonCom
 import BannerImage from '../../../components/Banner/BannerImage';
 import Slick from '../../../components/SlickSlider/Slick';
 import Icon from '../../../components/MdIcon/Icon';
-import { getHome } from '../../../redux/actions/homeAction';
+import { getHomeContent } from '../../../redux/actions/homeAction';
 import { getLibrary, getLibraries, resetGetLibrary } from '../../../redux/actions/libraryAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
 import codeSnipet from '../../../static/img/code-snippet.png';
@@ -23,46 +23,35 @@ function ApiDetail({ setIsOpen }) {
 
   const dispatch = useDispatch();
   const params = useParams();
-  const { data } = useSelector((state) => state.demo);
+  const { homePage } = useSelector((state) => state.home);
   const { library, libraries } = useSelector((state) => state.library);
   const { blogs } = useSelector((state) => state.blog);
 
   useEffect(() => {
-    if (data && Object.keys(data).length === 0) {
-      dispatch(getHome());
+    if (homePage && Object.keys(homePage).length === 0) {
+      dispatch(getHomeContent());
     }
 
     if (params.id && library && Object.keys(library).length === 0) {
       dispatch(getLibrary(params?.id));
     }
 
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      dispatch(resetGetLibrary());
-    };
-  }, []);
-
-  useEffect(() => {
     if (blogs && blogs.length === 0) {
       dispatch(getBlogs());
     }
-  }, []);
 
-  useEffect(() => {
     if (libraries && libraries.length === 0) {
       dispatch(getLibraries());
     }
+
+    dispatch(resetGetLibrary());
   }, []);
 
   // Load discover section
-  const filterDiscoverTab = data && data?.contentSections && data?.contentSections?.length > 0 ? data?.contentSections?.filter((item) => item.__component === 'home.discover-section') : [];
+  const filterDiscoverTab = homePage && homePage?.contentSections && homePage?.contentSections?.length > 0 ? homePage?.contentSections?.filter((item) => item.__component === 'home.discover-section') : [];
 
   // Load buttons sections
-  const filterButtonSection = data && data?.contentSections && data?.contentSections?.length > 0 ? data?.contentSections?.filter((item) => item.__component === 'sections.button-hero') : [];
-
-  // const filterDiscover = data && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sections.section-use-case') : [];
+  const filterButtonSection = homePage && homePage?.contentSections && homePage?.contentSections?.length > 0 ? homePage?.contentSections?.filter((item) => item.__component === 'sections.button-hero') : [];
 
   const buttonsLbls = library && library?.buttons && library?.buttons?.length > 0 ? library?.buttons?.map((item) => {
     const data = {
@@ -87,7 +76,7 @@ function ApiDetail({ setIsOpen }) {
     return moment(m.created_at).toDate().getTime();
   }) : [];
 
-  const slidesNew = datanews?.length > 0 ? datanews?.reverse().slice(0, 6).map((item, i) => {
+  const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
     const itemData = {
       img: item?.image?.[0]?.url,
       title: item?.title,
@@ -110,7 +99,7 @@ function ApiDetail({ setIsOpen }) {
 
   return (
     <div id='api' style={{ paddingTop: '114px' }}>
-      {Object.keys(data).length > 0 && Object.keys(library).length > 0 ? (
+      {Object.keys(homePage).length > 0 && Object.keys(library).length > 0 ? (
         <>
           <section>
             <BannerImage
@@ -258,8 +247,8 @@ function ApiDetail({ setIsOpen }) {
           <section id='Banner'>
             <BannerCentered
               title='Integra tus sistemas con las APIs de SURA'
-              subtitle='Quisque rutrum. Sed augue ipsum.'
-              img='https://picsum.photos/1920/300'
+              subtitle='...'
+              img=''
               buttonType='primary'
               buttonLabel='empezar ahora'
             />

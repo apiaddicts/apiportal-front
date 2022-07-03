@@ -81,8 +81,8 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
           </div>
           <img
             className={`${classes.banner_img__img} ${classes[image_display]}`}
-            src={img !== '' ? img : 'https://picsum.photos/500/200'}
-            alt='lorem'
+            src={img !== '' ? img : ''}
+            alt=''
           />
         </div>
         <div className={classes.banner_img__footer} />

@@ -2,7 +2,7 @@ import blogConstants from '../constants/blogConstants';
 
 const initialState = {
   // Data page blogs
-  data: {},
+  blogPage: {},
   error: {},
   // Blogs constants
   blogs: [],
@@ -44,20 +44,20 @@ export default function blogReducer(state = initialState, action) {
         blog: {},
         errorBlog: action.payload,
       };
-    // Assignment of the load data to page blog
+    // Assignment of the load blogPage to page blog
     case blogConstants.GET_BLOG_DATA_ALL_SUCCESS:
       return {
         ...state,
-        data: action.payload[0],
+        blogPage: action.payload,
         error: {},
       };
     case blogConstants.GET_BLOG_DATA_ALL_FAILURE:
       return {
         ...state,
-        data: {},
+        blogPage: {},
         error: action.payload,
       };
-    // Reset data of the blog
+    // Reset blogPage of the blog
     case blogConstants.RESET_BLOG:
       return {
         ...state,

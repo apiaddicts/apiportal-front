@@ -38,21 +38,15 @@ function BlogDetails({ setIsOpen }) {
     if (params?.id) {
       dispatch(getBlog(params?.id));
     }
-
   }, [params?.id]);
-
-  useEffect(() => {
-
-    return () => {
-      dispatch(resetGetBlog());
-    };
-  }, []);
 
   useEffect(() => {
     if (blogs && blogs.length === 0) {
       dispatch(getBlogs());
     }
-  }, [dispatch, blogs]);
+
+    dispatch(resetGetBlog());
+  }, []);
 
   const datanews = blogs.length > 0 ? _.sortBy(blogs, (m) => {
     return moment(m.created_at).toDate().getTime();
@@ -73,7 +67,6 @@ function BlogDetails({ setIsOpen }) {
     <div id='blogDetail'>
       <Helmet>
         <title>{blog?.title ? blog?.title : ''}</title>
-        <meta charset='utf-8' />
         <meta name='author' content={blog?.nameUser ? blog?.nameUser : ''} />
         <meta
           name='description'
@@ -92,11 +85,11 @@ function BlogDetails({ setIsOpen }) {
         <meta name='twitter:description' content={blog?.description ? blog?.description : ''} />
         <meta name='twitter:image' content={blog?.image ? blog?.image?.[0]?.url : ''} />
       </Helmet>
-      {Object.keys(blog).length > 0 ? (
+      {blog && Object.keys(blog).length > 0 ? (
         <>
           <BannerStatic
             title={blog?.title ? blog?.title : 'Descubre las novedades de SURA'}
-            img={blog?.image ? blog?.image?.[0]?.url : 'https://picsum.photos/1920/300'}
+            img={blog?.image ? blog?.image?.[0]?.url : ''}
             styles={stylesPerso}
             stylesTitle={stylesBannerTitle}
           />

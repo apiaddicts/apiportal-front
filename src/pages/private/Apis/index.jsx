@@ -13,7 +13,7 @@ import classes from './apis.module.scss';
 
 function Apis(props) {
 
-  const { libraries, loadingLibraries, apis, tagsList, apisSkip } = useSelector((state) => state.library);
+  const { loadingLibraries, apis, tagsList, apisSkip } = useSelector((state) => state.library);
 
   const dispatch = useDispatch();
 
@@ -160,7 +160,7 @@ function Apis(props) {
         </div>
       </div>
       <div className={classes.grid__apis}>
-        {loadingLibraries === false && libraries ? (
+        {loadingLibraries === false && apis ? (
           arrApis.length > 0 ? (
             arrApis.map((item, index) => (
               <CardInformationLibrary
@@ -182,7 +182,7 @@ function Apis(props) {
       </div>
 
       <div className='display_flex justify_content__center mt-4'>
-        {loadingLibraries === false && libraries ? (
+        {loadingLibraries === false && apis ? (
           arrApis.length == 0 ? (
             <h1 className='text-center'>Información no disponible</h1>
           ) : (null)

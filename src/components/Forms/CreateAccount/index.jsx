@@ -31,8 +31,6 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
 
   const formConfig = useFormConfig(fieldsRegister, handleSubmit);
 
-  console.log('Errores', formConfig.errors);
-
   return (
     <form
       className='create-account'

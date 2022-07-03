@@ -90,7 +90,7 @@ export const signUp = (data) => (dispatch) => {
       }
     },
     (error) => {
-      console.log(error);
+      console.error(error);
     },
   );
 };

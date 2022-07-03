@@ -17,12 +17,6 @@ function Contact({ css_styles, pathname }) {
 
   const { display_contact, display_detail_description, border_radius } = css_styles;
   const [success, setSuccess] = useState(false);
-  // const location = useLocation();
-  // const { pathname } = location;
-
-  // const handleSubmit = async (values) => {
-  //   console.log(values);
-  // };
 
   const formik = useFormik({
     initialValues: {
@@ -34,7 +28,6 @@ function Contact({ css_styles, pathname }) {
       email: Yup.string().email('Correo electrónico inválido').required('Campo requerido'),
     }),
     onSubmit: (values) => {
-      console.log(values);
       setSuccess(true);
     },
   });

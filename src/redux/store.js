@@ -2,7 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 
 import thunk from 'redux-thunk';
 
-import demoReducer from './reducer/demoReducer';
+import homeReducer from './reducer/homeReducer';
 import faqReducer from './reducer/faqReducer';
 import blogReducer from './reducer/blogReducer';
 import libraryReducer from './reducer/libraryReducer';
@@ -13,7 +13,7 @@ import subscriptionsReducer from './reducer/subscriptionsReducer';
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 const reducers = combineReducers({
-  demo: demoReducer,
+  home: homeReducer,
   faq: faqReducer,
   blog: blogReducer,
   library: libraryReducer,
