@@ -19,6 +19,7 @@ const initialState = token && etag ? {
   responseResetPwdError: {},
   accountVerificationSent: false,
   accountVerified: false,
+  openModal: false,
 } : {
   user: {},
   loadingUser: false,
@@ -35,6 +36,7 @@ const initialState = token && etag ? {
   responseResetPwdError: {},
   accountVerificationSent: false,
   accountVerified: false,
+  openModal: false,
 };
 
 // eslint-disable-next-line default-param-last
@@ -161,6 +163,11 @@ export default function userReducer(state = initialState, action) {
         responseResetSignup: {},
         ResponseResetPwd: {},
         responseResetPwdError: {},
+      };
+    case userConstants.SESSION_TIMEOUT:
+      return {
+        ...state,
+        openModal: true,
       };
     default:
       return state;

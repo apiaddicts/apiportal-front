@@ -222,6 +222,12 @@ export const resetPasswordWithTicket = (queryParams, data, password) => (dispatc
   );
 };
 
+export const sessionTimeout = () => (dispatch) => {
+  dispatch({
+    type: userConstants.SESSION_TIMEOUT,
+  });
+};
+
 export const resetAlert = () => (dispatch) => {
   dispatch({ type: userConstants.RESET_ALERT });
 };
