@@ -5,16 +5,38 @@ import config from '../../services/config';
 
 import store from '../store';
 
+const sortingValues = (key, order = 'asc') => {
+  return function innerSort(a, b) {
+    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+      return 0;
+    }
+
+    const varA = (typeof a[key] === 'string') ? a[key].toUpperCase() : a[key];
+    const varB = (typeof b[key] === 'string') ? b[key].toUpperCase() : b[key];
+
+    let comparison = 0;
+    if (varA > varB) {
+      comparison = 1;
+    } else if (varA < varB) {
+      comparison = -1;
+    }
+    return (
+      (order === 'desc') ? (comparison * -1) : comparison
+    );
+  };
+};
+
 // eslint-disable-next-line import/prefer-default-export
 export const getLibraries = () => (dispatch) => {
   dispatch({
     type: libraryConstants.GET_ALL_LIBRARY_REQUEST,
   });
+  const { sort } = store.getState().library;
   libraryService.getApiBookStores().then(
     (response) => {
       dispatch({
         type: libraryConstants.GET_ALL_LIBRARY_SUCCESS,
-        payload: response,
+        payload: response.sort(sortingValues('title', sort)),
       });
     },
     (error) => {
@@ -112,62 +134,68 @@ export const getApiOpenAPI = (id) => (dispatch) => {
   );
 };
 
-const sortCollection = (data, sort) => {
-  return (sort === 'asc') ? data.sort((a, b) => {
-
-    const fa = a.title.toLowerCase(),
-      fb = b.title.toLowerCase();
-
-    if (fa < fb) {
-      return -1;
-    }
-    if (fa > fb) {
-      return 1;
-    }
-    return 0;
-  }) : data.sort((a, b) => {
-    const fa = a.title.toLowerCase(),
-      fb = b.title.toLowerCase();
-
-    if (fa > fb) {
-      return -1;
-    }
-    if (fa < fb) {
-      return 1;
-    }
-    return 0;
-  });
-};
-
-const sortingValues = (key, order = 'asc') => {
-  return function innerSort(a, b) {
-    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
-      return 0;
-    }
-
-    const varA = (typeof a[key] === 'string') ? a[key].toUpperCase() : a[key];
-    const varB = (typeof b[key] === 'string') ? b[key].toUpperCase() : b[key];
-
-    let comparison = 0;
-    if (varA > varB) {
-      comparison = 1;
-    } else if (varA < varB) {
-      comparison = -1;
-    }
-    return (
-      (order === 'desc') ? (comparison * -1) : comparison
-    );
-  };
-};
-
 export const sortApiCollection = (sort) => (dispatch) => {
+  dispatch({
+    type: libraryConstants.GET_ALL_LIBRARY_REQUEST,
+  });
+
   const { libraries } = store.getState().library;
   const data = libraries.sort(sortingValues('title', sort));
   dispatch({
     type: libraryConstants.FILTER_ALL_LIBRARY,
-    data,
+    data: [...data],
     sort,
   });
+};
+
+export const filterCheck = (label, checked, name) => (dispatch) => {
+  dispatch({
+    type: libraryConstants.GET_ALL_LIBRARY_REQUEST,
+  });
+
+  const { filters, backUpLibreries, sort } = store.getState().library;
+  const newFilters = { ...filters };
+
+  if (checked == null) {
+    newFilters[name] = label.toLowerCase().trim();
+  } else if (checked) {
+    newFilters[name] = (name in newFilters) ? [...newFilters[name], label.toLowerCase()] : [label.toLowerCase()];
+  } else {
+    if (name in newFilters) newFilters[name] = newFilters[name].filter((item) => item !== label.toLowerCase());
+  }
+
+  let data = backUpLibreries.filter((item) => {
+    const conditions = [];
+    Object.keys(newFilters).forEach((key) => {
+      if (key === 'status') {
+        conditions.push((newFilters['status'].length) ? newFilters['status'].includes(item['status'].toLowerCase()) : true);
+      }
+      if (key === 'solution') {
+        conditions.push((newFilters['solution'].length) ? newFilters['solution'].includes(item['title'].toLowerCase()) : true);
+      }
+      if (key === 'tag') {
+        conditions.push((newFilters['tag'].length) ? newFilters['tag'].some((filteredTag) => {
+          return (item['tags'].map((tag) => tag.label.toLowerCase())).includes(filteredTag);
+        }) : true);
+      }
+      if (key === 'version') {
+        conditions.push((newFilters['version'].length) ? newFilters['version'].includes(item['version'].toLowerCase()) : true);
+      }
+      if (key === 'search') {
+        conditions.push((newFilters['search'].length) ? item['title'].toLowerCase().includes(newFilters['search']) : true);
+      }
+    });
+    return conditions.every((v) => v === true);
+  });
+  data = data.sort(sortingValues('title', sort));
+
+  dispatch({
+    type: libraryConstants.FILTER_ALL_LIBRARY,
+    data: [...data],
+    newFilters,
+    sort,
+  });
+
 };
 
 export const searchApis = (search, top = config.topApi, skip = 0) => (dispatch) => {
@@ -202,55 +230,6 @@ export const filterAPIsByTags = (search) => (dispatch) => {
       });
     },
   );
-};
-
-export const filterCheck = (label, checked, name) => (dispatch) => {
-  dispatch({
-    type: libraryConstants.GET_ALL_LIBRARY_REQUEST,
-  });
-
-  const { filters, backUpLibreries, sort } = store.getState().library;
-  const newFilters = { ...filters };
-
-  if (checked == null) {
-    newFilters[name] = label.toLowerCase().trim();
-  } else if (checked) {
-    newFilters[name] = (name in newFilters) ? [...newFilters[name], label.toLowerCase()] : [label.toLowerCase()];
-  } else {
-    if (name in newFilters) newFilters[name] = newFilters[name].filter((item) => item !== label.toLowerCase());
-  }
-
-  const data = backUpLibreries.filter((item) => {
-    const conditions = [];
-    Object.keys(newFilters).forEach((key) => {
-      if (key === 'status') {
-        conditions.push((newFilters['status'].length) ? newFilters['status'].includes(item['status'].toLowerCase()) : true);
-      }
-      if (key === 'solution') {
-        conditions.push((newFilters['solution'].length) ? newFilters['solution'].includes(item['title'].toLowerCase()) : true);
-      }
-      if (key === 'tag') {
-        conditions.push((newFilters['tag'].length) ? newFilters['tag'].some((filteredTag) => {
-          return (item['tags'].map((tag) => tag.label.toLowerCase())).includes(filteredTag);
-        }) : true);
-      }
-      if (key === 'version') {
-        conditions.push((newFilters['version'].length) ? newFilters['version'].includes(item['version'].toLowerCase()) : true);
-      }
-      if (key === 'search') {
-        conditions.push((newFilters['search'].length) ? item['title'].toLowerCase().includes(newFilters['search']) : true);
-      }
-    });
-    return conditions.every((v) => v === true);
-  });
-
-  dispatch({
-    type: libraryConstants.FILTER_ALL_LIBRARY,
-    data: sortCollection(data, sort),
-    newFilters,
-    sort,
-  });
-
 };
 
 export const getLibraryApiNextSearch = (search) => (dispatch) => {

@@ -1,6 +1,8 @@
 import blogConstants from '../constants/blogConstants';
 import blogService from '../../services/blogService';
 
+import store from '../store';
+
 // eslint-disable-next-line import/prefer-default-export
 export const getBlogs = () => (dispatch) => {
   blogService.getBlogs().then(
@@ -59,3 +61,25 @@ export const resetGetBlog = () => (dispatch) => {
   });
 };
 
+export const filterPosts = (category, title) => (dispatch) => {
+  dispatch({
+    type: blogConstants.GET_ALL_BLOG_REQUEST,
+  });
+
+  const { blogs } = store.getState().blog;
+
+  let categorizedBlogs = (category.toLowerCase().includes('todos')) ? blogs : blogs.filter((blog) => {
+    return blog?.tags?.map((tag) => tag?.label?.toLowerCase()).includes(category?.toLowerCase());
+  });
+
+  if (title.length > 0) {
+    categorizedBlogs = categorizedBlogs.filter((blog) => {
+      return blog.title.toLowerCase().includes(title.toLowerCase());
+    });
+  }
+
+  dispatch({
+    type: blogConstants.FILTER_BLOGS,
+    filteredBlogs: categorizedBlogs,
+  });
+};

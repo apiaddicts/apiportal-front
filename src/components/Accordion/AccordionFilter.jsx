@@ -1,23 +1,21 @@
-/* eslint-disable array-callback-return */
 import React from 'react';
 import Icon from '../MdIcon/Icon';
 import classes from './accordion.module.scss';
 
 function AccordionFilter({ items, clicked, setClicked, subItem, setSubItem }) {
   const toggle = (index) => {
+    setSubItem(0);
     if (clicked === index) {
-      setSubItem(0);
       return setClicked(null);
     }
-    setSubItem(0);
-    setClicked(index);
+    return setClicked(index);
   };
 
   const toggleItem = (subindex) => {
     if (subItem === subindex) {
       return setSubItem(null);
     }
-    setSubItem(subindex);
+    return setSubItem(subindex);
   };
 
   return (

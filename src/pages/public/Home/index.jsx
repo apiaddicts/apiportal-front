@@ -10,7 +10,8 @@ import { getLibraries } from '../../../redux/actions/libraryAction';
 import Item from '../../../components/Item/Item';
 import Icon from '../../../components/MdIcon/Icon';
 import CardBasic from '../../../components/Card/CardBasic';
-import CardSlider from '../../../components/Card/CardSlider';
+//Enable when alliances exist
+//import CardSlider from '../../../components/Card/CardSlider';
 import BannerCentered from '../../../components/Banner/BannerCentered';
 import Tabs from '../../../components/Tabs/Tabs';
 import Button from '../../../components/Buttons/Button';
@@ -79,7 +80,8 @@ function Home({ setIsOpen }) {
   const filterDiscoverSubtitle = filterDiscover.length > 0 && filterDiscover[0]?.subtitle ? filterDiscover[0]?.subtitle : '';
 
   // Load tab cards
-  const filterTabCard = homePage && homePage.contentSections && homePage.contentSections?.length > 0 ? homePage.contentSections.filter((item) => item.__component === 'sura.tab-card') : [];
+  //Enable when alliances exist
+  //const filterTabCard = homePage && homePage.contentSections && homePage.contentSections?.length > 0 ? homePage.contentSections.filter((item) => item.__component === 'sura.tab-card') : [];
 
   const filterHomeBanner = homePage && homePage.contentSections && homePage.contentSections?.length > 0 ? homePage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
   const filterHomeBannerTitle = filterHomeBanner.length > 0 && filterHomeBanner[0]?.title ? filterHomeBanner[0]?.title : '';
@@ -255,7 +257,8 @@ function Home({ setIsOpen }) {
             </div>
           </section>
           {/* Nuestras Experiencias */}
-          <section className={classes.section__experiences}>
+          {/* Enable when alliances exist */}
+          {/* <section className={classes.section__experiences}>
             <div className='container'>
               <div className={classes.section__experiences__title}>
                 <h1 className='h2 text__primary mb-2'>
@@ -303,7 +306,7 @@ function Home({ setIsOpen }) {
                 </div>
               </div>
             </div>
-          </section>
+          </section> */}
           {/* Integra */}
           <section id='Banner'>
             <BannerCentered
