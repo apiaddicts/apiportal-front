@@ -10,7 +10,7 @@ function getPageBlog() {
   return fetch(`${config.apiUrl}/pages?_where[slug]=${config.blogPageSlug}&_locale=${config.locale}`, requestOptions)
     .then(handleResponse)
     .then((dataBlog) => {
-      return dataBlog;
+      return dataBlog[0];
     }).catch((error) => {
       console.error(error);
     });
