@@ -8,7 +8,7 @@ function Posts({ currentItems, additionalClasses }) {
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <div className={additionalClasses ? `${classes.blog_list} ${classes[additionalClasses]}` : `${classes.blog_list}`}>
-      {currentItems &&
+      {currentItems && currentItems?.length > 0 &&
         currentItems?.map((item, index) => {
           return (
             <Link to={`/blog/${item?.id}`} key={index} style={{ 'overflow': 'hidden', 'boxShadow': '0px 3px 12px -2px rgba(0, 0, 0, 0.1)' }}>
@@ -35,7 +35,7 @@ function BlogPostsPaginated({ posts, itemsPerPage, parentContainerClass }) {
   const [itemOffset, setItemOffset] = useState(0);
 
   useEffect(() => {
-    if (posts?.length > 0) {
+    if (posts && posts.length > 0) {
       const endOffset = itemOffset + itemsPerPage;
       setCurrentItems(posts?.slice(itemOffset, endOffset));
       setPageCount(Math.ceil(posts.length / itemsPerPage));

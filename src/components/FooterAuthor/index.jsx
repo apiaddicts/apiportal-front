@@ -7,9 +7,9 @@ function FooterAuthor({ data }) {
     <div className={classes.footer__author}>
       <ItemAvatar
         divider
-        img={data.photoUser && data.photoUser.length > 0 ? data.photoUser[0].url : '/user_notfound.png'}
-        title={data.nameUser ? data.nameUser : ''}
-        paragraph={data.jobUser ? data.jobUser : ''}
+        img={data?.photoUser && data?.photoUser?.length > 0 ? data?.photoUser?.[0]?.url : ''}
+        title={data?.nameUser ? data?.nameUser : ''}
+        paragraph={data?.jobUser ? data?.jobUser : ''}
       />
       <div className={classes.border_bottom__line}>&nbsp;</div>
     </div>

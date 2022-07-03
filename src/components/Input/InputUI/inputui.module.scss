@@ -93,7 +93,7 @@
 .error {
   font-size: 0.75rem;
   color: #e4002b;
-  input:invalid {
+  input:is(:invalid, :focus) {
     border: 2px solid #e4002b;
     color: #e4002b;
   }

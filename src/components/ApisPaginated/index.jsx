@@ -11,14 +11,14 @@ function Apis({ currentItems }) {
         currentItems.map((item, index) => (
           <CardInformation
             key={index}
-            title={item.title}
-            status={item.status}
-            version={item.version}
-            buttons={item.tags}
-            colorStatus={item.color_status}
+            title={item?.title || ''}
+            status={item?.status || ''}
+            version={item?.version || ''}
+            buttons={item?.tags || ''}
+            colorStatus={item?.color_status || ''}
             info='Ver Documentación'
-            description={item.description}
-            link={`/apis/${item.id}#api`}
+            description={item?.description || ''}
+            link={`/apis/${item?.id}#api`}
             css_styles={{ 'custom_title_size': 'fs__22', 'custom_status_size': 'fs__10' }}
           />
         ))}
@@ -33,10 +33,7 @@ function ApisPaginated({ apis, itemsPerPage }) {
 
   useEffect(() => {
     if (apis.length > 0) {
-      // const endOffset = itemOffset + itemsPerPage;
-      // const items = apis.slice(itemOffset, endOffset);
       const items = apis.filter((api, id) => id <= 8);
-      console.log('ITEMS', items);
       items.sort((a, b) => {
         if (a.title > b.title) {
           return 1;
@@ -56,7 +53,6 @@ function ApisPaginated({ apis, itemsPerPage }) {
     setItemOffset(newOffset);
   };
 
-  console.log(apis, currentItems);
   return (
     <>
       <Apis currentItems={currentItems} />

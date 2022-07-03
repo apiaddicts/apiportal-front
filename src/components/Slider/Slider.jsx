@@ -71,9 +71,9 @@ function Slider({ slides }) {
   return (
     <div className={classes.content}>
       <div className={classes.content__slider} ref={slider}>
-        {slides.map((x, i) => (
+        {slides && slides.length > 0 ? slides.map((x, i) => (
           <div key={i} className={classes.content__slider__slide}>
-            <img src={x.imgSrc} alt='banner Slider' />
+            <img src={x?.imgSrc} alt='' />
             <div className={classes.content__slider__slide__text}>
               <div className='container align-center'>
                 <div className='row'>
@@ -82,24 +82,24 @@ function Slider({ slides }) {
                   </div>
 
                   <div className='flex-md-6 flex-lg-8 flex-xl-6 flex-sm-12'>
-                    <h1 className='h1 text__secondary__white'>{x.title}</h1>
+                    <h1 className='h1 text__secondary__white'>{x?.title}</h1>
                   </div>
 
                   <div className='flex-md-12 flex-sm-12 mt-5'>
                     <div className='button__group mt-10'>
                       {
-                        x.actionButtons !== null ? (
-                          x.actionButtons.map((i, index) => (
+                        x?.actionButtons && x?.actionButtons?.length ? (
+                          x?.actionButtons.map((i, index) => (
                             <div key={index + i} className='pr-2 mb-4 justify-start'>
-                              {i.route !== '' ? (
-                                <Button styles={i.type} onClick={() => handleClick(i.route)}>
-                                  {i.label}
+                              {i?.route !== '' ? (
+                                <Button styles={i?.type} onClick={() => handleClick(i?.route)}>
+                                  {i?.label}
                                 </Button>
 
                               ) : (
                                 <HashLink smooth to='/#data'>
-                                  <Button styles={i.type} onClick={() => handleClick(i.route)}>
-                                    {i.label}
+                                  <Button styles={i?.type} onClick={() => handleClick(i?.route)}>
+                                    {i?.label}
                                   </Button>
                                 </HashLink>
                               )}
@@ -115,7 +115,12 @@ function Slider({ slides }) {
 
             </div>
           </div>
-        ))}
+        )) : (
+          <div className={classes.content__slider__slide}>
+            <img alt='' />
+            <div className={classes.content__slider__slide__text} />
+          </div>
+        )}
       </div>
       <div className={classes.controls}>
         <button type='submit' className={classes.controls__left} onClick={previousSlide}>

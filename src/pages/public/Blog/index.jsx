@@ -18,10 +18,10 @@ import classes from './home.module.scss';
 
 moment.locale('es');
 function Blog({ setIsOpen }) {
-  const { blogs, data } = useSelector((state) => state.blog);
+  const { blogs, blogPage } = useSelector((state) => state.blog);
   // eslint-disable-next-line no-unused-vars
   const [resultsSearch, setResultsSearch] = useState([]);
-  const [resultsData, setResultsData] = useState(blogs);
+  const [resultsData, setResultsData] = useState(blogs || []);
 
   const dispatch = useDispatch();
 
@@ -31,33 +31,34 @@ function Blog({ setIsOpen }) {
     },
   });
 
-  const results = blogs.filter((item) => {
-    return formik.values.search === '' ? null : item?.title?.toLowerCase().includes(value.toLowerCase());
+  const results = blogs && blogs?.filter((item) => {
+    return formik.values.search === '' ? null : item.title.toLowerCase().includes(value.toLowerCase());
   });
 
   useEffect(() => {
     setValue(formik.values.search);
-    setResultsSearch(results);
+    setResultsSearch(results || []);
   }, [formik.values.search]);
 
   useEffect(() => {
+    if (blogPage && Object.keys(blogPage).length === 0) {
+      dispatch(getBlogData());
+    }
+
     if (blogs && blogs.length === 0) {
       dispatch(getBlogs());
     }
-    setResultsData(blogs);
 
-    if (data && Object.keys(data).length === 0) {
-      dispatch(getBlogData());
-    }
-  }, [blogs]);
+    setResultsData(blogs);
+  }, []);
 
   // load slider
-  const BannerFilter = Object.keys(data).length > 0 && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
-  const bannerTitle = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0].title ? BannerFilter[0].title : '';
-  const bannerImage = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0].background ? BannerFilter[0].background.url : '';
-  const bannerSearch = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0].search ? BannerFilter[0].search : '';
+  const BannerFilter = blogPage && Object.keys(blogPage).length > 0 && blogPage.contentSections && blogPage.contentSections.length > 0 ? blogPage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
+  const bannerTitle = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0]?.title ? BannerFilter[0]?.title : 'Descubre las novedades de SURA';
+  const bannerImage = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0]?.background ? BannerFilter[0]?.background?.url : '';
+  const bannerSearch = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0]?.search ? BannerFilter[0]?.search : '';
 
-  const TabsFilter = Object.keys(data).length > 0 && data.contentSections && data.contentSections.length > 0 ? data.contentSections.filter((item) => item.__component === 'sura.tab-card') : [];
+  const TabsFilter = blogPage && Object.keys(blogPage).length > 0 && blogPage.contentSections && blogPage.contentSections.length > 0 ? blogPage.contentSections.filter((item) => item.__component === 'sura.tab-card') : [];
 
   const deTbas = (tab) => {
     const label = TabsFilter.find((label) => label?.name?.toLowerCase().includes(tab?.toLowerCase()));
@@ -72,11 +73,11 @@ function Blog({ setIsOpen }) {
 
   };
 
-  const datanews = blogs?.length > 0 ? _.sortBy(blogs, (m) => {
+  const datanews = blogs && blogs?.length > 0 ? _.sortBy(blogs, (m) => {
     return moment(m.created_at).toDate().getTime();
   }) : [];
 
-  const slidesNew = datanews?.length > 0 ? datanews?.reverse().slice(0, 6).map((item, i) => {
+  const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
     const itemData = {
       img: item?.image?.[0]?.url,
       title: item?.title,
@@ -89,14 +90,14 @@ function Blog({ setIsOpen }) {
 
   return (
     <div id='blogIndex' style={{ paddingTop: '114px' }}>
-      {blogs.length > 0 && Object.keys(data).length > 0 ? (
+      {blogPage && Object.keys(blogPage).length > 0 ? (
         <div>
           <section>
             {
               bannerSearch !== '' ? (
                 <BannerStatic
-                  title={bannerTitle !== '' ? bannerTitle : 'Descubre las novedades de SURA'}
-                  img={bannerImage !== '' ? bannerImage : 'https://picsum.photos/1920/300'}
+                  title={bannerTitle}
+                  img={bannerImage}
                   isSearch
                   onChange={formik.handleChange}
                   value={formik.values.search}
@@ -106,21 +107,21 @@ function Blog({ setIsOpen }) {
             }
           </section>
           {
-            resultsSearch.length === 0 && formik.values.search === '' ? (
+            resultsSearch && resultsSearch.length === 0 && formik.values.search === '' ? (
               <section className='container px-3'>
                 <div className='row'>
                   <div className='flex-md-12 flex-sm-12 mt-9'>
-                    <Tabs
-                      line={true}
-                      deTbas={deTbas}
-                    >
-                      {TabsFilter.length > 0 ? (
-                        TabsFilter.map((tab, i) => (
-                          <div label={tab.name} key={i}>
+                    {TabsFilter && TabsFilter?.length > 0 && (
+                      <Tabs
+                        line={true}
+                        deTbas={deTbas}
+                      >
+                        {TabsFilter.map((tab, i) => (
+                          <div label={tab?.name} key={i}>
                             <div className={`d-xs-none ${stylesBlog.section__experiences__content}`}>
                               <div className={stylesBlog.section__experiences__content__img}>
                                 <div className={stylesBlog.section__experiences__content__img__overlay}>
-                                  <img src={tab?.img && tab?.img?.length > 0 ? tab?.img?.[0]?.url : 'https://picsum.photos/500/350'} alt='' />
+                                  <img src={tab?.img && tab?.img?.length > 0 ? tab?.img?.[0]?.url : ''} alt='' />
                                 </div>
                               </div>
                               <div className={stylesBlog.section__experiences__content__card}>
@@ -135,37 +136,37 @@ function Blog({ setIsOpen }) {
                                 />
                               </div>
                             </div>
-                            <div className={stylesBlog.apis__library}>
-                              <div id='Cards'>
-                                {
-                                  resultsData.length === 0 ? (
-                                    <span>Información no disponible</span>
-                                  ) : (
-                                    <BlogPostsPaginated
-                                      posts={resultsData}
-                                      itemsPerPage={6}
-                                    />
-                                  )
-                                }
-                              </div>
-                              <div id='Suggestions' className={`d-xs-none ${stylesBlog.apis__library__suggestions}`}>
-                                <div className={stylesBlog.apis__library__suggestions__content}>
-                                  <h1 className={`${stylesBlog.apis__library__suggestions__content__title} fs__16 text-uppercase text__gray__gray_darken`}>Lo más reciente</h1>
-                                  <Novedades data={resultsData} />
-                                  <Contact pathname='/blog' />
-                                </div>
-                              </div>
-                            </div>
                           </div>
-                        ))
-                      ) : (null)}
-                    </Tabs>
+                        ))}
+                      </Tabs>
+                    )}
+                    <div className={stylesBlog.apis__library}>
+                      <div id='Cards'>
+                        {
+                          resultsData && resultsData.length === 0 ? (
+                            <span>Información no disponible</span>
+                          ) : (
+                            <BlogPostsPaginated
+                              posts={resultsData}
+                              itemsPerPage={6}
+                            />
+                          )
+                        }
+                      </div>
+                      <div id='Suggestions' className={`d-xs-none ${stylesBlog.apis__library__suggestions}`}>
+                        <div className={stylesBlog.apis__library__suggestions__content}>
+                          <h1 className={`${stylesBlog.apis__library__suggestions__content__title} fs__16 text-uppercase text__gray__gray_darken`}>Lo más reciente</h1>
+                          <Novedades data={datanews?.reverse().slice(0, 6)} />
+                          <Contact pathname='/blog' />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </section>
             ) : (
               <section className='container py-10'>
-                {resultsSearch.length === 0 ? (
+                {resultsSearch && resultsSearch.length === 0 ? (
                   <p>Información no disponible</p>
                 ) : (
                   <BlogPostsPaginated

@@ -6,10 +6,11 @@ function getPageBlog() {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
-  return fetch(`${config.apiUrl}/pages?_where[slug]=BlogSu-es`, requestOptions)
+
+  return fetch(`${config.apiUrl}/pages?_where[slug]=${config.blogPageSlug}&_locale=${config.locale}`, requestOptions)
     .then(handleResponse)
     .then((dataBlog) => {
-      return dataBlog;
+      return dataBlog[0];
     }).catch((error) => {
       console.error(error);
     });

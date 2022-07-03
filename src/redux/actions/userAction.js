@@ -90,7 +90,7 @@ export const signUp = (data) => (dispatch) => {
       }
     },
     (error) => {
-      console.log(error);
+      console.error(error);
     },
   );
 };
@@ -220,6 +220,12 @@ export const resetPasswordWithTicket = (queryParams, data, password) => (dispatc
       console.error('Reset password error', error);
     },
   );
+};
+
+export const sessionTimeout = () => (dispatch) => {
+  dispatch({
+    type: userConstants.SESSION_TIMEOUT,
+  });
 };
 
 export const resetAlert = () => (dispatch) => {

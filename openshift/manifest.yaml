@@ -49,6 +49,14 @@ spec:
               value: "$REACT_APP_LIST_SUBSCRIPTIONS"
             - name: WDS_SOCKET_PORT
               value: "$WDS_SOCKET_PORT"
+            - name: REACT_APP_HOME_PAGE_SLUG
+              value: "$REACT_APP_HOME_PAGE_SLUG"
+            - name: REACT_APP_BLOG_PAGE_SLUG
+              value: "$REACT_APP_BLOG_PAGE_SLUG"
+            - name: REACT_APP_FAQ_PAGE_SLUG
+              value: "$REACT_APP_FAQ_PAGE_SLUG"
+            - name: REACT_APP_APIS_PAGE_SLUG
+              value: "$REACT_APP_APIS_PAGE_SLUG"
           resources:
             requests:
               cpu: "500m"
