@@ -46,6 +46,8 @@ function handleResponse(response) {
       case statusCode.HTTP_401_UNAUTHORIZED:
         store.dispatch(logout());
         throw new Error(response.status);
+      case statusCode.HTTP_400_BAD_REQUEST:
+        return data;
       default:
         throw new Error(response.status);
     }

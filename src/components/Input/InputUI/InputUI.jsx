@@ -1,15 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useRef, useState } from 'react';
 import classes from './inputui.module.scss';
+import Icon from '../../MdIcon/Icon';
 
-function InputUI({ type = 'text', label, errors, required = false, onChange, ...rest }) {
+function InputUI({ type = 'text', label, touched, errors, required = false, onChange, onBlur, ...rest }) {
   const [isActive, setIsActive] = useState(false);
   const [value, setValue] = useState('');
   const inputRef = useRef();
-  const handleChange = (e) => {
-    if (onChange) onChange(e);
-  };
-
   function handleTextChange(text) {
     setValue(text);
     if (text !== '') {
@@ -18,13 +15,38 @@ function InputUI({ type = 'text', label, errors, required = false, onChange, ...
       setIsActive(false);
     }
   }
+  const handleChange = (e) => {
+    if (onChange) onChange(e);
+    handleTextChange(e.target.value);
+  };
 
   return (
     <div className={`${classes.wrapper__input} ${errors === undefined ? '' : `${classes.error}`}`}>
-      <input type={type} required={required ? 'required' : ''} value={value} autoComplete='off' ref={inputRef} onKeyDown={(e) => handleTextChange(e.target.value)} onChange={handleChange} {...rest} />
+      <input
+        type={type}
+        value={value}
+        autoComplete='off'
+        ref={inputRef}
+        onChange={handleChange}
+        onBlur={onBlur}
+        {...rest}
+      />
       <label className={isActive ? `${classes.active}` : ''} onClick={() => { setIsActive(true); inputRef.current.focus(); }}>{label}</label>
+      {
+        errors === undefined && value.length < 0 ? null :
+          errors === undefined && value.length > 0 ? (
+            <div className={`${classes.wrapper__icon} ${classes.success}`}>
+              <Icon id='MdOutlineCheck' />
+            </div>
+          ) :
+            errors !== undefined && touched !== undefined ? (
+              <div className={classes.wrapper__icon}>
+                <Icon id='MdErrorOutline' />
+              </div>
+            ) : null
+      }
       { required && (<span className={classes.required}>{isActive}</span>)}
-      { errors === undefined ? null : (<p>{errors}</p>)}
+      { errors && touched === undefined ? null : (<p>{errors}</p>)}
     </div>
   );
 }

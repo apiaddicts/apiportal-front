@@ -12,11 +12,11 @@ import CheckboxLabels from '../../../components/common/CustomCheck';
 import ApisPaginated from '../../../components/ApisPaginated';
 import Icon from '../../../components/MdIcon/Icon';
 import classes from './apis.module.scss';
+import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 
 function Apis({ setIsOpen }) {
   const { libraries, filters, backUpLibreries, loadingLibraries } = useSelector((state) => state.library);
   const [filtersSelect, setFiltersSelect] = useState([]);
-
   const dispatch = useDispatch();
 
   // remove all filters
@@ -26,8 +26,6 @@ function Apis({ setIsOpen }) {
       type: 'RESET_LIBRARY',
     });
     setFiltersSelect([]);
-    setActiveTab('');
-
   };
 
   const handleChangeStatus = (name, label, checked) => {
@@ -45,7 +43,7 @@ function Apis({ setIsOpen }) {
   };
   const handleChangFilterTags = (name, label, checked) => {
     dispatch(filterCheck(label, checked, 'tag'));
-    setFiltersSelect({ ...filtersSelect, [name]: label });
+    setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
   const handleChangeSearchFilter = (text) => {
     dispatch(filterCheck(text, null, 'search'));
@@ -55,16 +53,16 @@ function Apis({ setIsOpen }) {
     dispatch(sortApiCollection(sort));
   };
   // Filters titles array
-  const titleRepeated = backUpLibreries.map((element) => {
+  const titleRepeated = backUpLibreries && backUpLibreries.map((element) => {
     return element.title;
   });
   // count items repeated
-  const countRepeated = titleRepeated.reduce((acc, cur) => {
+  const countRepeated = titleRepeated && titleRepeated.reduce((acc, cur) => {
     acc[cur] = (acc[cur] || 0) + 1;
     return acc;
   }, {});
 
-  const items = Object.keys(countRepeated).map((key) => {
+  const items = countRepeated && Object.keys(countRepeated).map((key) => {
     return {
       title: key,
       count: countRepeated[key],
@@ -72,19 +70,19 @@ function Apis({ setIsOpen }) {
   });
 
   // Filters status array
-  const stateRepeated = backUpLibreries.map((element) => {
+  const stateRepeated = backUpLibreries && backUpLibreries.map((element) => {
     return element.status;
   });
-  const stateArr = new Set(stateRepeated);
-  const state = [...stateArr];
+  const stateArr = stateRepeated && new Set(stateRepeated);
+  const state = stateArr ? [...stateArr] : [];
 
   // Filters tags array
-  const arrayTagsRepeated = backUpLibreries.map((element) => {
+  const arrayTagsRepeated = backUpLibreries && backUpLibreries.map((element) => {
     return element.tags;
   });
-  const tagsBtns = arrayTagsRepeated.flat();
-  const tagsArr = new Set(tagsBtns);
-  const tagsArrUnique = [...tagsArr];
+  const tagsBtns = arrayTagsRepeated && arrayTagsRepeated.flat();
+  const tagsArr = tagsBtns && new Set(tagsBtns);
+  const tagsArrUnique = tagsArr ? [...tagsArr] : [];
   const labelsTags = tagsArrUnique.map((item) => { return item.label; });
 
   // count labelsTags repeated
@@ -95,13 +93,13 @@ function Apis({ setIsOpen }) {
 
   const tags = Object.keys(countRepeatedTags).map((key) => {
     return {
-      label: key,
+      title: key,
       count: countRepeatedTags[key],
     };
   });
 
   // Filters version array
-  const versionRepeated = backUpLibreries.map((element) => {
+  const versionRepeated = backUpLibreries && backUpLibreries.map((element) => {
     return element.version;
   });
 
@@ -112,7 +110,7 @@ function Apis({ setIsOpen }) {
     if (libraries && libraries.length === 0 && Object.keys(filters).length === 0) {
       dispatch(getLibraries());
     }
-  }, [libraries]);
+  }, []);
 
   return (
     <div id='apiHome' style={{ paddingTop: '114px' }}>
@@ -163,7 +161,7 @@ function Apis({ setIsOpen }) {
               </ButtonGroupMUI>
             </div>
             <CustomizedAccordions title='Solution'>
-              { items.map((item, index) => (
+              { items && items.map((item, index) => (
                 <div key={index} className={classes.wrapper__checkbox}>
                   <CheckboxWrapper
                     name={item.title}
@@ -179,10 +177,10 @@ function Apis({ setIsOpen }) {
               { tags.map((item, index) => (
                 <div className={classes.wrapper__checkbox} key={index}>
                   <CheckboxWrapper
-                    name={item.label}
-                    label={item.label}
+                    name={item.title}
+                    label={item.title}
                     handleChangeSelect={handleChangFilterTags}
-                    checked={filtersSelect[item.label] !== undefined ? filtersSelect[item.label] : false}
+                    checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
                   />
                   <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{item.count}</p>
                 </div>
@@ -242,24 +240,7 @@ function Apis({ setIsOpen }) {
                       </div>
                     </section>
                   )
-                ) : (
-                  <section
-                    style={{
-                      width: '100%',
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        margin: '2rem',
-                      }}
-                    >
-                      <h1>Cargando....</h1>
-                    </div>
-                  </section>
-                )}
+                ) : <SkeletonComponent />}
               </div>
             </div>
           </section>

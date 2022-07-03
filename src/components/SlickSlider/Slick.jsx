@@ -62,17 +62,17 @@ export default function SimpleSlider({ slides, tabCard, footerTabCard, setIsOpen
     <div className='wrapper__slider'>
       { typeof setIsOpen === 'function' ? (
         <Slider {...settings}>
-          {slides.map((slide, i) => (
+          {slides && slides?.lenght > 0 && slides.map((slide, i) => (
             <div key={i} className={i === slideIndex ? 'activeSlide' : 'slide'} style={{ padding: '15px' }}>
-              <CardBasic chipTitle={slide.statusText ? slide.statusText : ''} info={slide.linkText} img={slide.img ? slide.img : ''} title={slide.title} description={slide.description} route={handleRoute} tabCard={tabCard} footerTabCard={footerTabCard} />
+              <CardBasic chipTitle={slide?.statusText ? slide?.statusText : ''} info={slide?.linkText} img={slide?.img ? slide?.img : ''} title={slide?.title} description={slide?.description} route={handleRoute} tabCard={tabCard} footerTabCard={footerTabCard} />
             </div>
           ))}
         </Slider>
       ) : (
         <Slider {...settings}>
-          {slides.map((slide, i) => (
+          {slides && slides.map((slide, i) => (
             <div key={i} className={i === slideIndex ? 'activeSlide' : 'slide'} style={{ padding: '15px' }}>
-              <CardBasicLink chipTitle={slide.statusText ? slide.statusText : ''} info={slide.linkText} img={slide.img ? slide.img : ''} title={slide.title} description={slide.description} route={slide.route} tabCard={tabCard} footerTabCard={footerTabCard} />
+              <CardBasicLink chipTitle={slide?.statusText ? slide?.statusText : ''} info={slide?.linkText} img={slide?.img ? slide?.img : ''} title={slide?.title} description={slide?.description} route={slide?.route} tabCard={tabCard} footerTabCard={footerTabCard} />
             </div>
           ))}
         </Slider>

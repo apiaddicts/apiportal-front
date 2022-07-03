@@ -18,14 +18,14 @@ const shuffle = (array) => {
 };
 
 function Novedades({ data }) {
-  const items = shuffle(data);
+  const items = data ? shuffle(data) : [];
   return (
     <div>
       {
-        data.length === 0 ? <p>Información no disponible</p> :
+        items.length === 0 ? <p>Información no disponible</p> :
           items.slice(0, 4).map((result, index) => (
-            <Link key={index} to={`/blog/${result.id}`}>
-              <ItemAvatar title={result.title} paragraph={result.description} img={result.image ? result.image[0].url : ''} border={true} css_styles={{ 'custom_title': 'fs__10', 'custom_paragraph': 'fs__16' }} />
+            <Link key={index} to={`/blog/${result?.id}`}>
+              <ItemAvatar title={result?.title} paragraph={result?.description} img={result?.image ? result?.image?.[0]?.url : ''} border={true} css_styles={{ 'custom_title': 'fs__10', 'custom_paragraph': 'fs__16' }} />
             </Link>
           ))
       }

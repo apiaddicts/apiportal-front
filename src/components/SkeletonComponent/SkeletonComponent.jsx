@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { CircleSpinner } from 'react-spinners-kit';
 import classes from './skeleton.module.scss';
+import { ReactComponent as Loader } from '../../static/img/LoadSURA_b.svg';
 
 function SkeletonComponent() {
   return (
@@ -9,8 +9,9 @@ function SkeletonComponent() {
 
       <div className={classes.leftSide}>
         <div className={classes.displayTitle}>
-          <CircleSpinner size={50} color='#0033a0' loading={true} />
-          <h1>Cargando....</h1>
+          <div className={classes.wrapper__loader}>
+            <Loader />
+          </div>
         </div>
       </div>
     </section>

@@ -8,15 +8,15 @@ function Posts({ currentItems, additionalClasses }) {
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <div className={additionalClasses ? `${classes.blog_list} ${classes[additionalClasses]}` : `${classes.blog_list}`}>
-      {currentItems &&
-        currentItems.map((item, index) => {
+      {currentItems && currentItems?.length > 0 &&
+        currentItems?.map((item, index) => {
           return (
-            <Link to={`/blog/${item.id}`} key={index} style={{ 'overflow': 'hidden', 'boxShadow': '0px 3px 12px -2px rgba(0, 0, 0, 0.1)' }}>
+            <Link to={`/blog/${item?.id}`} key={index} style={{ 'overflow': 'hidden', 'boxShadow': '0px 3px 12px -2px rgba(0, 0, 0, 0.1)' }}>
               <CardInformation
-                img={item.image ? item.image[0].url : ''}
-                description={item.description}
-                title={item.title}
-                buttons={item.tags && item.tags.length > 0 ? item.tags : []}
+                img={item?.image ? item?.image?.[0]?.url : ''}
+                description={item?.description}
+                title={item?.title}
+                buttons={item?.tags && item?.tags?.length > 0 ? item?.tags : []}
                 css_styles={{ 'override_card_height': 'custom_card__height' }}
                 theme='primary'
                 info='Conoce más'
@@ -35,9 +35,9 @@ function BlogPostsPaginated({ posts, itemsPerPage, parentContainerClass }) {
   const [itemOffset, setItemOffset] = useState(0);
 
   useEffect(() => {
-    if (posts.length > 0) {
+    if (posts && posts.length > 0) {
       const endOffset = itemOffset + itemsPerPage;
-      setCurrentItems(posts.slice(itemOffset, endOffset));
+      setCurrentItems(posts?.slice(itemOffset, endOffset));
       setPageCount(Math.ceil(posts.length / itemsPerPage));
     }
   }, [posts, itemOffset, itemsPerPage]);

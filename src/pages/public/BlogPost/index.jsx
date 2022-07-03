@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet';
 import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import _ from 'underscore';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import BannerStatic from '../../../components/Banner/BannerStatic';
 import BlogDetailsInfo from '../../../components/BlogDetails';
@@ -13,6 +13,7 @@ import FooterAuthor from '../../../components/FooterAuthor';
 import { getBlog, resetGetBlog, getBlogs } from '../../../redux/actions/blogAction';
 import styles from './blog-post.module.scss';
 import classes from './home.module.scss';
+import Icon from '../../../components/MdIcon/Icon';
 
 const stylesPerso = {
   height: '345px',
@@ -34,24 +35,18 @@ function BlogDetails({ setIsOpen }) {
   const { blog, blogs } = useSelector((state) => state.blog);
 
   useEffect(() => {
-    if (params.id) {
-      dispatch(getBlog(params.id));
+    if (params?.id) {
+      dispatch(getBlog(params?.id));
     }
-
-  }, [params.id]);
-
-  useEffect(() => {
-
-    return () => {
-      dispatch(resetGetBlog());
-    };
-  }, []);
+  }, [params?.id]);
 
   useEffect(() => {
     if (blogs && blogs.length === 0) {
       dispatch(getBlogs());
     }
-  }, [dispatch, blogs]);
+
+    dispatch(resetGetBlog());
+  }, []);
 
   const datanews = blogs.length > 0 ? _.sortBy(blogs, (m) => {
     return moment(m.created_at).toDate().getTime();
@@ -59,11 +54,11 @@ function BlogDetails({ setIsOpen }) {
 
   const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
     const itemData = {
-      img: item.image[0].url,
-      title: item.title,
-      description: item.description,
+      img: item?.image?.[0]?.url,
+      title: item?.title,
+      description: item?.description,
       linkText: 'Conoce más',
-      route: `/blog/${item.id}#blogDetail`,
+      route: `/blog/${item?.id}#blogDetail`,
     };
     return itemData;
   }) : [];
@@ -71,35 +66,46 @@ function BlogDetails({ setIsOpen }) {
   return (
     <div id='blogDetail'>
       <Helmet>
-        <title>{blog.title ? blog.title : ''}</title>
-        <meta charset='utf-8' />
-        <meta name='author' content={blog.nameUser ? blog.nameUser : ''} />
+        <title>{blog?.title ? blog?.title : ''}</title>
+        <meta name='author' content={blog?.nameUser ? blog?.nameUser : ''} />
         <meta
           name='description'
-          content={blog.description ? blog.description : ''}
+          content={blog?.description ? blog?.description : ''}
         />
-        <meta property='og:title' content={blog.title ? blog.title : ''} />
-        <meta property='og:image' content={blog.image ? blog.image[0].url : ''} />
-        <meta property='og:description' content={blog.description ? blog.description : ''} />
-        <meta property='og:url' content={`${window.location.protocol}//${window.location.hostname}/blog/${blog.id}`} />
+        <meta property='og:title' content={blog?.title ? blog?.title : ''} />
+        <meta property='og:image' content={blog?.image ? blog?.image?.[0]?.url : ''} />
+        <meta property='og:description' content={blog?.description ? blog?.description : ''} />
+        <meta property='og:url' content={`${window.location.protocol}//${window.location.hostname}/blog/${blog?.id}`} />
         <meta property='og:locale' content='es_MX' />
         <meta property='og:type' content='article' />
         <meta property='og:site_name' content='Seguros Sura API Market' />
         <meta name='twitter:card' content='summary' />
         <meta name='twitter:site' content='Seguros Sura API Market' />
-        <meta name='twitter:title' content={blog.title ? blog.title : ''} />
-        <meta name='twitter:description' content={blog.description ? blog.description : ''} />
-        <meta name='twitter:image' content={blog.image ? blog.image[0].url : ''} />
+        <meta name='twitter:title' content={blog?.title ? blog?.title : ''} />
+        <meta name='twitter:description' content={blog?.description ? blog?.description : ''} />
+        <meta name='twitter:image' content={blog?.image ? blog?.image?.[0]?.url : ''} />
       </Helmet>
-      {Object.keys(blog).length > 0 ? (
+      {blog && Object.keys(blog).length > 0 ? (
         <>
           <BannerStatic
-            title={blog.title ? blog.title : 'Descubre las novedades de SURA'}
-            img={blog.image ? blog.image[0].url : 'https://picsum.photos/1920/300'}
+            title={blog?.title ? blog?.title : 'Descubre las novedades de SURA'}
+            img={blog?.image ? blog?.image?.[0]?.url : ''}
             styles={stylesPerso}
             stylesTitle={stylesBannerTitle}
           />
           <section className='container mt-10 py-5'>
+            <div
+              className={classes.backTo}
+            >
+              <Link to={-1} className={classes.backTo__btn}>
+                <div>
+                  <Icon id='MdKeyboardBackspace' />
+                </div>
+                <div className={classes.backTo__label}>
+                  <span>Volver</span>
+                </div>
+              </Link>
+            </div>
             <BlogDetailsInfo styles={styles} data={blog} />
             <FooterAuthor data={blog} />
             <section className={classes.section__news}>

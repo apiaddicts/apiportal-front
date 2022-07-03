@@ -4,6 +4,7 @@ import { getFaq } from '../../../redux/actions/faqAction';
 import Accordion from '../../../components/Accordion/Accordion';
 import AccordionFilter from '../../../components/Accordion/AccordionFilter';
 import BannerStatic from '../../../components/Banner/BannerStatic';
+import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 import classes from './faqs.module.scss';
 
 function Faqs(props) {
@@ -19,16 +20,16 @@ function Faqs(props) {
     }
   }, []);
 
-  const filterFaqs = dataFaq && dataFaq.contentSections ? dataFaq.contentSections.filter((item) => item.__component === 'sura.list-filter') : [];
+  const filterFaqs = dataFaq && dataFaq?.contentSections?.length > 0 ? dataFaq?.contentSections?.filter((item) => item.__component === 'sura.list-filter') : [];
 
-  const faqs = filterFaqs.length > 0 ? filterFaqs.map((i, index) => {
+  const faqs = filterFaqs.length > 0 ? filterFaqs.map((i) => {
     return {
       question: i.Title,
       data: i.items,
     };
   }) : [];
 
-  const fFaqs = filterFaqs.length > 0 ? filterFaqs.map((i, index) => {
+  const fFaqs = filterFaqs.length > 0 ? filterFaqs.map((i) => {
     const arrQa = i.items.map(({ title }) => title);
     return {
       title: i.Title,
@@ -37,13 +38,12 @@ function Faqs(props) {
   }) : [];
   return (
     <div style={{ paddingTop: '114px' }}>
-      {Object.keys(dataFaq).length > 0 ? (
+      {dataFaq && Object.keys(dataFaq).length > 0 ? (
         <div>
           <BannerStatic
-            title={dataFaq.contentSections[0].title}
-            img={dataFaq.contentSections[0].background.url}
+            title={dataFaq?.contentSections?.[0]?.title}
+            img={dataFaq.contentSections?.[0]?.background?.url}
           />
-
           <section className={`container ${classes.faq}`}>
             <div className={classes.faq__content}>
               <div className={`d-xs-none ${classes.faq__content__filter}`}>
@@ -54,8 +54,8 @@ function Faqs(props) {
                   faqs.map((item, i) => {
                     return (
                       <div key={i}>
-                        <h1 className='h3 text__primary mb-5 mt-5'>{item.question}</h1>
-                        <Accordion items={item.data} arrItems={faqs} subItem={subItem} setSubItem={setSubItem} clicked={clicked} setClicked={setClicked} />
+                        <h1 className='h3 text__primary mb-5 mt-5'>{item?.question}</h1>
+                        <Accordion items={item?.data} arrItems={faqs} subItem={subItem} setSubItem={setSubItem} clicked={clicked} setClicked={setClicked} />
                       </div>
                     );
                   })
@@ -81,7 +81,7 @@ function Faqs(props) {
           </section>
         </div>
       ) : (
-        <h2>Cargando....</h2>
+        <SkeletonComponent />
       )}
     </div>
   );

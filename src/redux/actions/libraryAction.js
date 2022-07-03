@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 import libraryConstants from '../constants/libraryConstants';
 import libraryService from '../../services/libraryService';
 import config from '../../services/config';
@@ -113,6 +114,7 @@ export const getApiOpenAPI = (id) => (dispatch) => {
 
 const sortCollection = (data, sort) => {
   return (sort === 'asc') ? data.sort((a, b) => {
+
     const fa = a.title.toLowerCase(),
       fb = b.title.toLowerCase();
 
@@ -137,9 +139,30 @@ const sortCollection = (data, sort) => {
   });
 };
 
+const sortingValues = (key, order = 'asc') => {
+  return function innerSort(a, b) {
+    if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+      return 0;
+    }
+
+    const varA = (typeof a[key] === 'string') ? a[key].toUpperCase() : a[key];
+    const varB = (typeof b[key] === 'string') ? b[key].toUpperCase() : b[key];
+
+    let comparison = 0;
+    if (varA > varB) {
+      comparison = 1;
+    } else if (varA < varB) {
+      comparison = -1;
+    }
+    return (
+      (order === 'desc') ? (comparison * -1) : comparison
+    );
+  };
+};
+
 export const sortApiCollection = (sort) => (dispatch) => {
   const { libraries } = store.getState().library;
-  const data = sortCollection(libraries, sort);
+  const data = libraries.sort(sortingValues('title', sort));
   dispatch({
     type: libraryConstants.FILTER_ALL_LIBRARY,
     data,

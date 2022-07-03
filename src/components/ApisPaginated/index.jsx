@@ -11,14 +11,14 @@ function Apis({ currentItems }) {
         currentItems.map((item, index) => (
           <CardInformation
             key={index}
-            title={item.title}
-            status={item.status}
-            version={item.version}
-            buttons={item.tags}
-            colorStatus={item.color_status}
+            title={item?.title || ''}
+            status={item?.status || ''}
+            version={item?.version || ''}
+            buttons={item?.tags || ''}
+            colorStatus={item?.color_status || ''}
             info='Ver Documentación'
-            description={item.description}
-            link={`/apis/${item.id}#api`}
+            description={item?.description || ''}
+            link={`/apis/${item?.id}#api`}
             css_styles={{ 'custom_title_size': 'fs__22', 'custom_status_size': 'fs__10' }}
           />
         ))}
@@ -27,14 +27,23 @@ function Apis({ currentItems }) {
 }
 
 function ApisPaginated({ apis, itemsPerPage }) {
-  const [currentItems, setCurrentItems] = useState(null);
+  const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
 
   useEffect(() => {
     if (apis.length > 0) {
-      const endOffset = itemOffset + itemsPerPage;
-      setCurrentItems(apis.slice(itemOffset, endOffset));
+      const items = apis.filter((api, id) => id <= 8);
+      items.sort((a, b) => {
+        if (a.title > b.title) {
+          return 1;
+        }
+        if (a.title < b.title) {
+          return -1;
+        }
+        return 0;
+      });
+      setCurrentItems(items);
       setPageCount(Math.ceil(apis.length / itemsPerPage));
     }
   }, [apis, itemOffset, itemsPerPage]);
