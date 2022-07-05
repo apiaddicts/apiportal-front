@@ -4,7 +4,7 @@ import _ from 'underscore';
 import moment from 'moment';
 import { HashLink } from 'react-router-hash-link';
 import useSearch from '../../../hooks/useSearch';
-import { getBlogData, getBlogs } from '../../../redux/actions/blogAction';
+import { filterPosts, getBlogData, getBlogs } from '../../../redux/actions/blogAction';
 import BannerStatic from '../../../components/Banner/BannerStatic';
 import Tabs from '../../../components/Tabs/Tabs';
 import CardInformation from '../../../components/Card/CardInformation';
@@ -18,27 +18,24 @@ import classes from './home.module.scss';
 
 moment.locale('es');
 function Blog({ setIsOpen }) {
-  const { blogs, blogPage } = useSelector((state) => state.blog);
+  const { blogs, blogPage, filteredBlogs /*filters*/ } = useSelector((state) => state.blog);
   // eslint-disable-next-line no-unused-vars
-  const [resultsSearch, setResultsSearch] = useState([]);
-  const [resultsData, setResultsData] = useState(blogs || []);
+  //const [resultsSearch, setResultsSearch] = useState([]);
+  //const [resultsData, setResultsData] = useState(blogs || []);
+  const [activeTab, setActiveTab] = useState('zero');
 
   const dispatch = useDispatch();
 
-  const { value, setValue, formik } = useSearch({
+  const { setValue, formik } = useSearch({
     initialState: {
       search: '',
     },
   });
 
-  const results = blogs && blogs?.filter((item) => {
-    return formik.values.search === '' ? null : item.title.toLowerCase().includes(value.toLowerCase());
-  });
-
   useEffect(() => {
     setValue(formik.values.search);
-    setResultsSearch(results || []);
-  }, [formik.values.search]);
+    dispatch(filterPosts(activeTab, formik.values.search));
+  }, [formik.values.search, activeTab]);
 
   useEffect(() => {
     if (blogPage && Object.keys(blogPage).length === 0) {
@@ -49,7 +46,7 @@ function Blog({ setIsOpen }) {
       dispatch(getBlogs());
     }
 
-    setResultsData(blogs);
+    //setResultsData(blogs);
   }, []);
 
   // load slider
@@ -62,15 +59,7 @@ function Blog({ setIsOpen }) {
 
   const deTbas = (tab) => {
     const label = TabsFilter.find((label) => label?.name?.toLowerCase().includes(tab?.toLowerCase()));
-    if (label?.tab?.toLowerCase().includes('zero')) {
-      setResultsData(blogs);
-    } else {
-      const results = blogs?.filter((item) => {
-        return item?.tags?.map((tag) => tag?.tab?.toLowerCase()).includes(label?.tab?.toLowerCase());
-      });
-      setResultsData(results);
-    }
-
+    setActiveTab(label.name.toLowerCase());
   };
 
   const datanews = blogs && blogs?.length > 0 ? _.sortBy(blogs, (m) => {
@@ -106,48 +95,54 @@ function Blog({ setIsOpen }) {
               ) : (null)
             }
           </section>
+          <section className='container px-3'>
+            <div className='row'>
+              <div className='flex-md-12 flex-sm-12 mt-9'>
+                {TabsFilter && TabsFilter?.length > 0 && (
+                  <Tabs
+                    line={true}
+                    deTbas={deTbas}
+                  >
+                    {TabsFilter.map((tab, i) => (
+                      <div label={tab?.name} key={i}>
+                        {formik.values.search === '' && (
+                          <div className={`d-xs-none ${stylesBlog.section__experiences__content}`}>
+                            <div className={stylesBlog.section__experiences__content__img}>
+                              <div className={stylesBlog.section__experiences__content__img__overlay}>
+                                <img src={tab?.img && tab?.img?.length > 0 ? tab?.img?.[0]?.url : ''} alt='' />
+                              </div>
+                            </div>
+                            <div className={stylesBlog.section__experiences__content__card}>
+                              <CardInformation
+                                title={tab?.cards && tab?.cards?.[0]?.title}
+                                description={tab?.cards && tab?.cards?.[0]?.description}
+                                theme='primary'
+                                css_styles={{ 'override_card_style': 'no__shadow', 'custom_margin_top': 'mt-4' }}
+                                blog={true}
+                              />
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </Tabs>
+                )}
+              </div>
+            </div>
+          </section>
           {
-            resultsSearch && resultsSearch.length === 0 && formik.values.search === '' ? (
+            formik.values.search === '' ? (
               <section className='container px-3'>
                 <div className='row'>
                   <div className='flex-md-12 flex-sm-12 mt-9'>
-                    {TabsFilter && TabsFilter?.length > 0 && (
-                      <Tabs
-                        line={true}
-                        deTbas={deTbas}
-                      >
-                        {TabsFilter.map((tab, i) => (
-                          <div label={tab?.name} key={i}>
-                            <div className={`d-xs-none ${stylesBlog.section__experiences__content}`}>
-                              <div className={stylesBlog.section__experiences__content__img}>
-                                <div className={stylesBlog.section__experiences__content__img__overlay}>
-                                  <img src={tab?.img && tab?.img?.length > 0 ? tab?.img?.[0]?.url : ''} alt='' />
-                                </div>
-                              </div>
-                              <div className={stylesBlog.section__experiences__content__card}>
-                                <CardInformation
-                                  title={tab?.cards && tab?.cards?.[0]?.title}
-                                  buttons={tab?.cards && tab?.cards?.[0]?.steps}
-                                  description={tab?.cards && tab?.cards?.[0]?.description}
-                                  reading={tab?.cards && tab?.cards?.[0]?.timeRead}
-                                  theme='primary'
-                                  css_styles={{ 'override_card_style': 'no__shadow', 'custom_margin_top': 'mt-4' }}
-                                  blog={true}
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </Tabs>
-                    )}
                     <div className={stylesBlog.apis__library}>
                       <div id='Cards'>
                         {
-                          resultsData && resultsData.length === 0 ? (
+                          filteredBlogs && filteredBlogs.length === 0 ? (
                             <span>Información no disponible</span>
                           ) : (
                             <BlogPostsPaginated
-                              posts={resultsData}
+                              posts={filteredBlogs}
                               itemsPerPage={6}
                             />
                           )
@@ -156,7 +151,7 @@ function Blog({ setIsOpen }) {
                       <div id='Suggestions' className={`d-xs-none ${stylesBlog.apis__library__suggestions}`}>
                         <div className={stylesBlog.apis__library__suggestions__content}>
                           <h1 className={`${stylesBlog.apis__library__suggestions__content__title} fs__16 text-uppercase text__gray__gray_darken`}>Lo más reciente</h1>
-                          <Novedades data={datanews?.reverse().slice(0, 6)} />
+                          <Novedades data={datanews?.reverse().slice(0, 4)} />
                           <Contact pathname='/blog' />
                         </div>
                       </div>
@@ -166,11 +161,11 @@ function Blog({ setIsOpen }) {
               </section>
             ) : (
               <section className='container py-10'>
-                {resultsSearch && resultsSearch.length === 0 ? (
+                {filteredBlogs && filteredBlogs.length === 0 ? (
                   <p>Información no disponible</p>
                 ) : (
                   <BlogPostsPaginated
-                    posts={resultsData}
+                    posts={filteredBlogs}
                     itemsPerPage={6}
                     parentContainerClass='full_blog_list'
                   />
@@ -179,14 +174,13 @@ function Blog({ setIsOpen }) {
             )
           }
           {
-            resultsSearch.length === 0 ? (
+            formik.values.search === '' ? (
               <section className={`${classes.section__news} ${classes.section__news_toppadding} d-xs-none`}>
                 <div className='container'>
                   <div className='row'>
                     <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
                       <h1 className='h2 text__primary'>También te puede interesar</h1>
                     </div>
-
                     <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
                       <p className='body-1 text__gray__gray_darken'>
                         Conoce todas las novedades sobre tecnología, APIs y transformación digital

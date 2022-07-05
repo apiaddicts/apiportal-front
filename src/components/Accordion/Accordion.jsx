@@ -1,15 +1,16 @@
-/* eslint-disable no-restricted-syntax */
 import React from 'react';
+import CustomMarkdown from '../CustomMarkdown';
 import Icon from '../MdIcon/Icon';
 import classes from './accordion.module.scss';
 
-function Accordion({ subItem, setSubItem, items, arrItems, clicked }) {
+function Accordion({ subItem, setSubItem, items, parent, clicked, setClicked }) {
   const toggleItem = (index) => {
-    if (subItem === index) {
+    if (subItem === index && parent === clicked) {
+      setClicked(null);
       return setSubItem(null);
     }
+    setClicked(parent);
     return setSubItem(index);
-
   };
 
   return (
@@ -19,9 +20,9 @@ function Accordion({ subItem, setSubItem, items, arrItems, clicked }) {
           {
             items.map((item, index) => {
               return (
-                <div className={classes.accordion} key={index}>
+                <div className={classes.accordion} key={`${clicked}-${index}`}>
                   <div
-                    className={subItem === index ? `${classes.accordion__head} ${classes.active}` : `${classes.accordion__head}`}
+                    className={parent === clicked && subItem === index ? `${classes.accordion__head} ${classes.active}` : `${classes.accordion__head}`}
                     onClick={() => {
                       toggleItem(index);
                     }}
@@ -36,9 +37,11 @@ function Accordion({ subItem, setSubItem, items, arrItems, clicked }) {
                     </div>
                   </div>
                   {
-                    subItem === index ? (
+                    parent === clicked && subItem === index ? (
                       <div className={`body-1 text__gray__gray_darken ${classes.accordion__body}`}>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum enim consequatur officia corrupti earum at molestiae impedit. Quis harum adipisci quas facilis perspiciatis sed amet quidem voluptates placeat enim nihil vitae, rem totam saepe omnis animi facere assumenda repellat iste repellendus porro earum deleniti? Delectus dicta quae nesciunt illo incidunt?</p>
+                        {
+                          item?.content ? <CustomMarkdown content={item?.content} /> : <p>Missing content</p>
+                        }
                       </div>
                     ) : null
                   }
