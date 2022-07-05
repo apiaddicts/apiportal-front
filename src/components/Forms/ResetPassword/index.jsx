@@ -30,7 +30,7 @@ function ResetPassword() {
         alert_type='alert__success'
         title='Solicitud enviada'
       />
-      <form onSubmit={formConfig.handleSubmit}>
+      <form onSubmit={formConfig.handleSubmit} noValidate>
         <div className='py-4'>
           {fieldsForgotPassword.map((field) => (
             <Input key={field.id} field={field} formik={formConfig} />

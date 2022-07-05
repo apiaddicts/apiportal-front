@@ -109,7 +109,7 @@ function ResetPassword(props) {
             </div>
           </div>
           <div className='container'>
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formik.handleSubmit} noValidate>
               <div className='row justify-center'>
                 <div className='flex-sm-12 flex-md-12 py-10'>
                   <InputUI
