@@ -1,23 +1,22 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FormGroup from '@mui/material/FormGroup';
 import { CustomFormControl, CustomCheck, FormControlMain } from './stye';
 
-export default function CheckboxLabels({ name,
+function CheckboxLabels({ name,
   label,
   legend,
   activeTab,
+  checked,
   handleChangeSelect,
   ...otherProps
 }) {
-  const [check, setCheck] = useState(false);
-
   const handleChange = (e) => {
-    setCheck(e.target.checked);
     handleChangeSelect(name, label, e.target.checked);
   };
 
   const configCheckbox = {
     onChange: handleChange,
+    checked,
     ...otherProps,
   };
 
@@ -25,7 +24,7 @@ export default function CheckboxLabels({ name,
     <FormControlMain>
       <FormGroup>
         <CustomFormControl
-          active={check ? 'active' : undefined}
+          active={checked ? 'active' : undefined}
           control={<CustomCheck {...configCheckbox} />}
           label={label}
         />
@@ -34,3 +33,4 @@ export default function CheckboxLabels({ name,
   );
 }
 
+export default CheckboxLabels;

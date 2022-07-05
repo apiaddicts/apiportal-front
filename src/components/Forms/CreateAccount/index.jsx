@@ -35,6 +35,7 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
     <form
       className='create-account'
       onSubmit={formConfig.handleSubmit}
+      noValidate
     >
       {fieldsRegister.filter((item) => item.type !== 'checkbox').map((field, index) => (
         <div className='input_field'>

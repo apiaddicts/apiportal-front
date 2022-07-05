@@ -13,10 +13,7 @@ function Form({ handleSubmit }) {
   };
 
   return (
-    <form onSubmit={(e) => {
-      handleSubmit(e, dataForm);
-    }}
-    >
+    <form onSubmit={(e) => { handleSubmit(e, dataForm); }} noValidate>
       <div className='my-2 w-full'>
         <Input
           placeholder='Email'
