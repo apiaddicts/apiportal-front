@@ -15,8 +15,13 @@
     border: 1px solid #ecf0f1;
     box-shadow: 0px 2px 20px #ecf0f1;
     border-radius: 100px;
+    &:focus{
+      border: 2px solid #00AEC7 !important;
+    }
+    &:focus + .wrapper__icon{
+      color: #00AEC7 !important;
+    }
   }
-
   // input:invalid{
   //   border: 2px solid #e4002b;
   // }
@@ -118,4 +123,3 @@
   top: 1rem;
   font-size: 25px;
 }
-

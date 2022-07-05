@@ -50,7 +50,7 @@ function RestorePasswordForm({ userEmail, display }) {
   const formConfig = useFormRestorePassword(restorePasswordFields, handleSubmit);
   const displayClass = display ? 'd-block' : 'd-none';
   return (
-    <form onSubmit={formConfig.handleSubmit}>
+    <form onSubmit={formConfig.handleSubmit} noValidate>
       <div className={displayClass}>
         <Alert
           key={Math.floor(Math.random() * 100) + 1}

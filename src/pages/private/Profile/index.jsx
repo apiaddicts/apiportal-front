@@ -80,7 +80,7 @@ function Profile() {
               <Title text='Mi perfil' />
             </div>
             <div className={classes.admin__form}>
-              <form onSubmit={formConfig.handleSubmit}>
+              <form onSubmit={formConfig.handleSubmit} noValidate>
                 <div className={classes.admin__form__container}>
                   <div className={classes.admin__form__container__header}>
                     <div className='font-fs-joey fs__36 font-weight-bold text__primary'>Datos personales</div>
