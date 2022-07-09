@@ -16,13 +16,14 @@ import SwaggerUI from '../../pages/private/SwaggerUI';
 import OAuthRedirect from '../../pages/private/OAuthRedirect';
 import Subscriptions from '../../pages/private/Subscriptions';
 import CicleTexture from '../../static/img/texture_circles_private.svg';
+import Logout from '../../pages/private/Logout/Logout';
 
 import { getUser } from '../../redux/actions/userAction';
 import classes from './private-router.module.scss';
 
 function PrivateRouter({ children }) {
-
-  const { id, token, user } = useSelector((state) => state.user);
+  // const [showModal, setShowModal] = useState(false);
+  const { id, token, user, openModal } = useSelector((state) => state.user);
   const privateSession = id !== '' && token !== '';
   const dispatch = useDispatch();
 
@@ -38,6 +39,9 @@ function PrivateRouter({ children }) {
 
   return privateSession ? (
     <Box>
+      {
+        openModal && (<Logout showModal={openModal} setShowModal={openModal} />)
+      }
       {user && Object.keys(user).length > 0 ? (
         <Box>
           <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#fbfbfb', minHeight: '100vh' }}>

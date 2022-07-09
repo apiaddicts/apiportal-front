@@ -27,6 +27,8 @@ const userConstants = {
 
   HEAD_ETAG_SUCCESS: 'HEAD_ETAG_SUCCESS',
   HEAD_ETAG_FAILURE: 'HEAD_ETAG_FAILURE',
+
+  SESSION_TIMEOUT: 'SESSION_TIMEOUT',
 };
 
 export default userConstants;

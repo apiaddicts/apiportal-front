@@ -18,7 +18,7 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin, set
   }, [formik.values.remember]);
 
   return (
-    <form className='w-full px-8' onSubmit={formik.handleSubmit}>
+    <form className='w-full px-8' onSubmit={formik.handleSubmit} noValidate>
       {
         Object.keys(signUpData).length > 0 && Object.keys(responseErrorLogin).length === 0 ?
           (
