@@ -1,5 +1,5 @@
 import store from '../redux/store';
-import { logout } from '../redux/actions/userAction';
+import { sessionTimeout } from '../redux/actions/userAction';
 
 const statusCode = {
   HTTP_200_OK: 200,
@@ -44,7 +44,7 @@ function handleResponse(response) {
       case statusCode.HTTP_204_NO_CONTENT:
         return { status: response.status, statusText: response.statusText };
       case statusCode.HTTP_401_UNAUTHORIZED:
-        store.dispatch(logout());
+        store.dispatch(sessionTimeout());
         throw new Error(response.status);
       case statusCode.HTTP_400_BAD_REQUEST:
         return data;

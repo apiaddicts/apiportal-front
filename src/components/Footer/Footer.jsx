@@ -73,7 +73,7 @@ function Footer({ isPrivate }) {
       )}
 
       {contactForm && (
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} noValidate>
           <div className={classes.footer__section}>
             <div className={`container ${classes.footer__section__contact}`}>
               <div className='mb-5'>

@@ -58,7 +58,7 @@ function Contact({ css_styles, pathname }) {
           }
         </div>
         <div className={pathname !== '/blog' ? classes.contact__container__alternative__form : classes.contact__container__form}>
-          <form onSubmit={formik.handleSubmit} className={pathname !== '/blog' ? classes.contact__alternative__form : classes.contact__form}>
+          <form onSubmit={formik.handleSubmit} className={pathname !== '/blog' ? classes.contact__alternative__form : classes.contact__form} noValidate>
             {/* {fieldsContact.map((field) => (
               <Input styleInput={classes.contact__form__new} key={field.id} field={field} formik={formConfig} />
             ))} */}

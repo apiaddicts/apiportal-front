@@ -15,8 +15,13 @@
     border: 1px solid #ecf0f1;
     box-shadow: 0px 2px 20px #ecf0f1;
     border-radius: 100px;
+    &:focus{
+      border: 2px solid #00AEC7 !important;
+    }
+    &:focus + .wrapper__icon{
+      color: #00AEC7 !important;
+    }
   }
-
   // input:invalid{
   //   border: 2px solid #e4002b;
   // }
@@ -80,6 +85,9 @@
       font-weight: 500;
       font-size: 1rem;
     }
+    input {
+      border: 2px solid $secondary;
+    }
   }
 }
 
@@ -93,9 +101,10 @@
 .error {
   font-size: 0.75rem;
   color: #e4002b;
-  input:invalid {
-    border: 2px solid #e4002b;
-    color: #e4002b;
+  &__input__error {
+    input {
+      border: 2px solid #e4002b;
+    }
   }
   p {
     margin: 0rem 1rem 0;
@@ -118,4 +127,3 @@
   top: 1rem;
   font-size: 25px;
 }
-
