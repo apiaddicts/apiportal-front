@@ -9,6 +9,7 @@ import libraryReducer from './reducer/libraryReducer';
 import userReducer from './reducer/userReducer';
 import productReducer from './reducer/productReducer';
 import subscriptionsReducer from './reducer/subscriptionsReducer';
+import apiReducer from './reducer/apiReducer';
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
@@ -20,6 +21,7 @@ const reducers = combineReducers({
   user: userReducer,
   products: productReducer,
   suscripcions: subscriptionsReducer,
+  api: apiReducer,
 });
 
 const store = createStore(

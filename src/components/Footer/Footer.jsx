@@ -6,6 +6,7 @@ import { GoMail } from 'react-icons/go';
 import { RiInstagramFill } from 'react-icons/ri';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import 'yup-phone';
 import Base from './Base';
 import classes from './footer.module.scss';
 import Icon from '../MdIcon/Icon';
@@ -39,12 +40,12 @@ function Footer({ isPrivate }) {
     },
     validateOnChange: true,
     validationSchema: Yup.object({
-      name: Yup.string().required('Campo requerido'),
-      lastname: Yup.string().required('Campo requerido'),
+      name: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos'),
+      lastname: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos'),
       email: Yup.string().email('Correo electrónico invalido').required('Campo requerido'),
-      phone: Yup.number().required('Campo requerido'),
+      phone: Yup.string().phone('MX', true, 'Debe ingresar un número telefonico valido').required('Campo requerido'),
       // topic: Yup.string().required('Campo requerido'),
-      subject: Yup.string().required('Campo requerido'),
+      subject: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos'),
       // message: Yup.string().length(50, 'Limite de caracteres 50').required('Campo requerido'),
       sendMailTerms: Yup.bool().oneOf([true], 'Debes aceptar los terminos y condiciones'),
     }),

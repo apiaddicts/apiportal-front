@@ -66,18 +66,21 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
             </HashLink>
 
             {info && modal !== undefined ? (
-
-              <div onClick={clickModal} className='card_chip_info mt-7'>
-                <span>{info}</span>
-                {' '}
-                <MdEast className='svg' />
-              </div>
+              <HashLink smooth to={link}>
+                <div onClick={clickModal} className='card_chip_info mt-7'>
+                  <span>{info}</span>
+                  {' '}
+                  <MdEast className='svg' />
+                </div>
+              </HashLink>
             ) : info ? (
-              <div className='card_chip_info mt-7'>
-                <span>{info}</span>
-                {' '}
-                <MdEast className='svg' />
-              </div>
+              <HashLink smooth to={link}>
+                <div className='card_chip_info mt-7'>
+                  <span>{info}</span>
+                  {' '}
+                  <MdEast className='svg' />
+                </div>
+              </HashLink>
             ) : (null)}
           </div>
         </Base>
@@ -114,11 +117,13 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
             </p>
 
             {info && (
-              <div className='card_chip_info mt-7'>
-                <span>{info}</span>
-                {' '}
-                <MdEast className='svg' />
-              </div>
+              <HashLink smooth to={link}>
+                <div className='card_chip_info mt-7'>
+                  <span>{info}</span>
+                  {' '}
+                  <MdEast className='svg' />
+                </div>
+              </HashLink>
             )}
           </div>
         </Base>
