@@ -21,7 +21,7 @@ function InputUI({ type = 'text', label, touched, errors, required = false, onCh
   };
 
   return (
-    <div className={`${classes.wrapper__input} ${errors === undefined && touched === undefined ? '' : touched ? `${classes.error} ${classes.error__input__error}` : ''}`}>
+    <div className={`${classes.wrapper__input} ${errors === undefined && value.length > 0 ? '' : touched ? `${classes.error} ${classes.error__input__error}` : ''}`}>
       <input
         type={type}
         value={value}
