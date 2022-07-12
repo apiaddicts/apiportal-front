@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Typography } from '@mui/material';
+import { getApiContent } from '../../../redux/actions/apiAction';
 import { getLibraries, filterCheck, sortApiCollection } from '../../../redux/actions/libraryAction';
 import BannerImage from '../../../components/Banner/BannerImage';
 import SearchInput from '../../../components/Input/SearchInput';
@@ -19,6 +20,15 @@ function Apis({ setIsOpen }) {
   const [filtersSelect, setFiltersSelect] = useState([]);
   const [searchApiInputValue, setSearchApiInputValue] = useState('');
   const dispatch = useDispatch();
+  const { apiPage } = useSelector((state) => state.api);
+
+  useEffect(() => {
+    if (apiPage && Object.keys(apiPage).length === 0) {
+      dispatch(getApiContent());
+    }
+  }, []);
+
+  const filterApiBanner = apiPage && apiPage.contentSections && apiPage.contentSections?.length > 0 ? apiPage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
 
   // remove all filters
   const resetFilters = () => {
@@ -120,7 +130,11 @@ function Apis({ setIsOpen }) {
 
   return (
     <div id='apiHome' style={{ paddingTop: '114px' }}>
-      <BannerImage css_styles={{ 'layout_height': 'banner_custom__layout--height' }} />
+      <BannerImage
+        title={filterApiBanner?.[0]?.title}
+        img={filterApiBanner?.[0]?.background?.url}
+        css_styles={{ 'layout_height': 'banner_custom__layout--height' }}
+      />
       <div className='container'>
         <section className={classes.wrapper}>
           <article className={classes.wrapper__left}>

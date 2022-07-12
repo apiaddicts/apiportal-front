@@ -1,0 +1,7 @@
+const apiConstants = {
+  GET_ALL_API_REQUEST: 'GET_ALL_API_REQUEST',
+  GET_ALL_API_SUCCESS: 'GET_ALL_API_SUCCESS',
+  GET_ALL_API_FAILURE: 'GET_ALL_API_FAILURE',
+};
+
+export default apiConstants;
