@@ -166,7 +166,7 @@ function Apis({ setIsOpen }) {
                   marginBottom: '15px',
                 }}
               >
-                Version
+                Versión
               </Typography>
               <ButtonGroupMUI sx={{ marginBottom: '15px' }}>
                 {versions.map((item, index) => (
@@ -180,7 +180,7 @@ function Apis({ setIsOpen }) {
                 ))}
               </ButtonGroupMUI>
             </div>
-            <CustomizedAccordions title='Solution'>
+            <CustomizedAccordions title='Solución'>
               { items && items.map((item, index) => (
                 <div key={index} className={classes.wrapper__checkbox}>
                   <CheckboxWrapper
@@ -193,7 +193,7 @@ function Apis({ setIsOpen }) {
                 </div>
               ))}
             </CustomizedAccordions>
-            <CustomizedAccordions title='Tags'>
+            <CustomizedAccordions title='Etiquetas'>
               { tags.map((item, index) => (
                 <div className={classes.wrapper__checkbox} key={index}>
                   <CheckboxWrapper
