@@ -22,7 +22,7 @@ function Blog({ setIsOpen }) {
   // eslint-disable-next-line no-unused-vars
   //const [resultsSearch, setResultsSearch] = useState([]);
   //const [resultsData, setResultsData] = useState(blogs || []);
-  const [activeTab, setActiveTab] = useState('zero');
+  const [activeTab, setActiveTab] = useState('todos');
 
   const dispatch = useDispatch();
 

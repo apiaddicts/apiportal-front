@@ -74,7 +74,7 @@ export const filterPosts = (category, title) => (dispatch) => {
 
   if (title.length > 0) {
     categorizedBlogs = categorizedBlogs.filter((blog) => {
-      return blog.title.toLowerCase().includes(title.toLowerCase());
+      return blog.title.toLowerCase().includes(title.toLowerCase()) || blog.description.toLowerCase().includes(title.toLowerCase());
     });
   }
 
