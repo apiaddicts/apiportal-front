@@ -33,64 +33,72 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
 
   return (
     <form
-      className='create-account'
+      className='container'
       onSubmit={formConfig.handleSubmit}
       noValidate
     >
-      {fieldsRegister.filter((item) => item.type !== 'checkbox').map((field, index) => (
-        <div className='input_field'>
-          <InputUI
-            id={field.id}
-            name={field.name}
-            type={field.type}
-            label={field.label}
-            touched={formConfig.touched[field.id]}
-            errors={formConfig.errors[field.id]}
-            onChange={formConfig.handleChange}
-            onBlur={formConfig.handleBlur}
-            value={formConfig.values.name}
-          />
-        </div>
-      ))}
-      {/* checkbox */}
-      <div className='container create-account__checkbox'>
-        {
-          fieldsRegister.filter((field) => field.type === 'checkbox')
-            .map((field, index) => (
-              <input
-                key={index}
-                type={field.type}
-                id={field.id}
-                name={field.name}
-                value={field.value}
-                checked={formConfig.values.remember}
-                onChange={formConfig.handleChange}
-              />
-            ))
-        }
-        <span className={`ml-2 ${formConfig.errors.terms ? 'text__error' : ''}`}>
-          Acepto recibir correos de acuerdo con los siguientes
-          {' '}
-          <b>términos y condiciones.</b>
-        </span>
+      <div className='row'>
+        {fieldsRegister.filter((item) => item.type !== 'checkbox').map((field, index) => (
+          <div className='flex-sm-12 flex-md-6 flex-lg-6 py-4'>
+            <InputUI
+              id={field.id}
+              name={field.name}
+              type={field.type}
+              label={field.label}
+              touched={formConfig.touched[field.id]}
+              errors={formConfig.errors[field.id]}
+              onChange={formConfig.handleChange}
+              onBlur={formConfig.handleBlur}
+              value={formConfig.values.name}
+            />
+          </div>
+        ))}
       </div>
-      <div className='register__btn'>
-        <Button
-          styles='secundary-white'
-          type='button'
-          onClick={() => {
-            setOpenForm(false);
-            setIsOpen(true);
-          }}
-        >
-          Iniciar Sesión
-        </Button>
-        <Button
-          styles='primary-blue'
-          type='submit'
-        >
-          Registrarme
-        </Button>
+      {/* checkbox */}
+      <div className='row create-account__checkbox'>
+        <div className='flex-sm-12 flex-md-12'>
+          {
+            fieldsRegister.filter((field) => field.type === 'checkbox')
+              .map((field, index) => (
+                <input
+                  key={index}
+                  type={field.type}
+                  id={field.id}
+                  name={field.name}
+                  value={field.value}
+                  checked={formConfig.values.remember}
+                  onChange={formConfig.handleChange}
+                />
+              ))
+          }
+          <span className={`ml-2 ${formConfig.errors.terms ? 'text__error' : ''}`}>
+            Acepto recibir correos de acuerdo con los siguientes
+            {' '}
+            <b>términos y condiciones.</b>
+          </span>
+        </div>
+      </div>
+      <div className='row my-4 register__btn'>
+        <div className='flex-sm-12 flex-md-5'>
+          <Button
+            styles='secundary-white'
+            type='button'
+            onClick={() => {
+              setOpenForm(false);
+              setIsOpen(true);
+            }}
+          >
+            Iniciar Sesión
+          </Button>
+        </div>
+        <div className='flex-sm-12 flex-md-5'>
+          <Button
+            styles='primary-blue'
+            type='submit'
+          >
+            Registrarme
+          </Button>
+        </div>
       </div>
     </form>
   );
