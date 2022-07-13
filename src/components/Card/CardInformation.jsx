@@ -8,7 +8,7 @@ import Chip from '../Chip/Chip';
 import Base from './Base';
 import './cards.scss';
 
-function CardInformation({ img, buttons, title, description, reading, info, maxWidth, version, status, colorStatus, theme, blog, modal, link, css_styles, blogTitle }) {
+function CardInformation({ img, buttons, title, description, reading, info, maxWidth, version, status, colorStatus, theme, blog, modal, link, css_styles, blogTitle, id }) {
   const { custom_title_size, custom_status_size, custom_margin_top } = css_styles;
   const blogClasses = {
     paddingTop: blog ? '51px' : '',
@@ -22,6 +22,9 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
   const clickModal = () => {
     modal(true);
   };
+
+  console.log(version, status);
+
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>
@@ -100,7 +103,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
               <Chip title={version} className='version text-uppercase font-weight-medium' />
             </div>
           )}
-          <div className={`pr-8 pl-8 pb-8 pt-2 ${reading ? 'py-2' : null}`} style={blogClasses}>
+          <div className={`pr-8 pl-8 pb-8 pt-2 ${reading ? 'py-2' : null}`}>
             <p className={`${blogTitle ? 'card__title_blog' : 'h3'} w-full font-weight-semi-bold ${reading ? 'px-8' : null}  ${theme === 'primary' ? 'text__primary' : ''} `}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
             <div className='card__information hidden__tags' style={blogTitleStyles}>
               <div className={`card__information__tags ${buttons?.length >= 3 ? 'tags-flex-wrap' : null} ${reading ? 'px-8' : null}`}>
@@ -117,13 +120,23 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
             </p>
 
             {info && (
-              <HashLink smooth to={link}>
-                <div className='card_chip_info mt-7'>
-                  <span>{info}</span>
-                  {' '}
-                  <MdEast className='svg' />
-                </div>
-              </HashLink>
+              link ? (
+                <HashLink smooth to={link}>
+                  <div className='card_chip_info mt-7'>
+                    <span>{info}</span>
+                    {' '}
+                    <MdEast className='svg' />
+                  </div>
+                </HashLink>
+              ) : (
+                <HashLink smooth to={`/blog/${id}#blogDetail`}>
+                  <div className='card_chip_info mt-7'>
+                    <span>{info}</span>
+                    {' '}
+                    <MdEast className='svg' />
+                  </div>
+                </HashLink>
+              )
             )}
           </div>
         </Base>
