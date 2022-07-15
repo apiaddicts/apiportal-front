@@ -42,8 +42,8 @@ function Footer({ isPrivate }) {
     validationSchema: Yup.object({
       name: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos'),
       lastname: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos'),
-      email: Yup.string().email('Correo electrónico invalido').required('Campo requerido'),
-      phone: Yup.string().phone('MX', true, 'Debe ingresar un número telefonico valido').required('Campo requerido'),
+      email: Yup.string().email('Correo electrónico inválido').required('Campo requerido'),
+      phone: Yup.string().phone('MX', true, 'Debe ingresar un número telefonico vaálido').required('Campo requerido'),
       // topic: Yup.string().required('Campo requerido'),
       subject: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos'),
       // message: Yup.string().length(50, 'Limite de caracteres 50').required('Campo requerido'),
