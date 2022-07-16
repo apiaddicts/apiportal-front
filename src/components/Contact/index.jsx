@@ -4,14 +4,9 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Alert } from '@mui/material';
 import classes from './contact.module.scss';
-// import Icon from '../MdIcon/Icon';
-// import Input from '../Input';
 import Button from '../Buttons/Button';
 import icons from '../../static/icons-sura';
 import InputUI from '../Input/InputUI/InputUI';
-
-// import { fieldsContact } from '../Forms/fields';
-// import useLoginConfig from '../../hooks/useLogin';
 
 function Contact({ css_styles, pathname }) {
 
@@ -24,15 +19,13 @@ function Contact({ css_styles, pathname }) {
       email: '',
     },
     validationSchema: Yup.object({
-      name: Yup.string().required('Campo requerido'),
-      email: Yup.string().email('Correo electrónico inválido').required('Campo requerido'),
+      name: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos'),
+      email: Yup.string().email('Correo electrónico invalido').required('Campo requerido'),
     }),
     onSubmit: (values) => {
       setSuccess(true);
     },
   });
-
-  // const formConfig = useLoginConfig(fieldsContact, handleSubmit);
 
   return (
     <div className={`${classes.contact} ${display_contact} ${classes[border_radius]}`}>
@@ -58,7 +51,7 @@ function Contact({ css_styles, pathname }) {
           }
         </div>
         <div className={pathname !== '/blog' ? classes.contact__container__alternative__form : classes.contact__container__form}>
-          <form onSubmit={formik.handleSubmit} className={pathname !== '/blog' ? classes.contact__alternative__form : classes.contact__form} noValidate>
+          <form onSubmit={formik.handleSubmit} noValidate className={pathname !== '/blog' ? classes.contact__alternative__form : classes.contact__form}>
             {/* {fieldsContact.map((field) => (
               <Input styleInput={classes.contact__form__new} key={field.id} field={field} formik={formConfig} />
             ))} */}
@@ -70,10 +63,11 @@ function Contact({ css_styles, pathname }) {
                     id='name'
                     type='text'
                     label='Nombre'
+                    touched={formik.touched.name}
                     errors={formik.errors.name}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     value={formik.values.name}
-                    required={true}
                   />
                 </div>
                 <div className={pathname === '/blog' ? 'flex-sm-12 flex-md-12' : 'flex-sm-12 flex-md-6 flex-lg-6'}>
@@ -82,10 +76,11 @@ function Contact({ css_styles, pathname }) {
                     id='email'
                     type='email'
                     label='E-mail'
+                    touched={formik.touched.email}
                     errors={formik.errors.email}
                     onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
                     value={formik.values.email}
-                    required={true}
                   />
                 </div>
               </div>

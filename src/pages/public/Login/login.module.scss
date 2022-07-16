@@ -35,6 +35,10 @@
         flex-direction: column;
         background: #fff;
         transition: all 0.2s ease;
+        padding-bottom: 1rem;
+        @include breakpoint(xs) {
+            padding-bottom: 0.125rem;
+        }
     }
 
     &__title {
