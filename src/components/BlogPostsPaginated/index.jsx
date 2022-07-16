@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
-import { Link } from 'react-router-dom';
 import CardInformation from '../Card/CardInformation';
 import classes from './blog-posts-paginated.module.scss';
 
@@ -11,18 +10,17 @@ function Posts({ currentItems, additionalClasses }) {
       {currentItems && currentItems?.length > 0 &&
         currentItems?.map((item, index) => {
           return (
-            <Link to={`/blog/${item?.id}`} key={index} style={{ 'overflow': 'hidden', 'boxShadow': '0px 3px 12px -2px rgba(0, 0, 0, 0.1)' }}>
-              <CardInformation
-                img={item?.image ? item?.image?.[0]?.url : ''}
-                description={item?.description}
-                title={item?.title}
-                buttons={item?.tags && item?.tags?.length > 0 ? item?.tags : []}
-                css_styles={{ 'override_card_height': 'custom_card__height' }}
-                theme='primary'
-                info='Conoce más'
-                blogTitle={true}
-              />
-            </Link>
+            <CardInformation
+              id={item?.id}
+              img={item?.image ? item?.image?.[0]?.url : ''}
+              description={item?.description}
+              title={item?.title}
+              buttons={item?.tags && item?.tags?.length > 0 ? item?.tags : []}
+              css_styles={{ 'override_card_height': 'custom_card__height' }}
+              theme='primary'
+              info='Conoce más'
+              blogTitle={true}
+            />
           );
         })}
     </div>

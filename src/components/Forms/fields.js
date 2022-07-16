@@ -93,7 +93,7 @@ export const fieldsLogin = [
   {
     id: 'email',
     initialValue: email,
-    placeholder: 'Email',
+    placeholder: 'Correo electrónico',
     validate: 'email',
     required: true,
     type: 'email',
@@ -101,7 +101,7 @@ export const fieldsLogin = [
   {
     id: 'password',
     initialValue: password,
-    placeholder: 'Password',
+    placeholder: 'Contraseña',
     validate: 'password',
     required: true,
     type: 'password',

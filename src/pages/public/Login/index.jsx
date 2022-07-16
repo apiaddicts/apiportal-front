@@ -3,10 +3,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Form from '../../../components/Forms/LoginForm';
 import Modal from '../../../components/Modal';
-import Icon from '../../../components/MdIcon/Icon';
+// import Icon from '../../../components/MdIcon/Icon';
 import ResetPassword from '../../../components/Forms/ResetPassword';
 import { fieldsLogin } from '../../../components/Forms/fields';
-import { login, resetAlert } from '../../../redux/actions/userAction';
+import { login } from '../../../redux/actions/userAction';
 import useLoginConfig from '../../../hooks/useLogin';
 import classes from './login.module.scss';
 
@@ -33,17 +33,7 @@ function Login({ setOpenForm, setIsOpen, setPrivateSession }) {
 
   const formConfig = useLoginConfig(fieldsLogin, handleSubmit);
   return (
-    <Modal>
-      <button
-        className={classes.login__close}
-        type='button'
-        onClick={() => {
-          dispatch(resetAlert());
-          setIsOpen(false);
-        }}
-      >
-        <Icon id='MdClose' css_styles={{ 'custom_icon_styles': 'fs__26 text_gray__gray_darken' }} />
-      </button>
+    <Modal setOpen={setIsOpen}>
       <div className={classes.login__wrapper}>
         <h1 className={classes.login__title}>{showForm ? 'Iniciar sesión' : 'Recuperar contraseña'}</h1>
         {/*showAlert && <AlertFeedbock setShowAlert={setShowAlert} success />*/}
