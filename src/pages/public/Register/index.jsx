@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { resetAlert } from '../../../redux/actions/userAction';
+import { useSelector } from 'react-redux';
+// import { resetAlert } from '../../../redux/actions/userAction';
 import Modal from '../../../components/Modal';
-import Icon from '../../../components/MdIcon/Icon';
+// import Icon from '../../../components/MdIcon/Icon';
 import CreateAccount from '../../../components/Forms/CreateAccount';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 import Alert from '../../../components/Alert';
@@ -10,7 +10,7 @@ import classes from './register.module.scss';
 
 function Register({ setOpenForm, setIsOpen }) {
   const { loadingSignUp, signUpData, responseError } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   useEffect(() => {
     if (signUpData && Object.keys(signUpData).length > 0) {
@@ -19,10 +19,10 @@ function Register({ setOpenForm, setIsOpen }) {
     }
   }, [signUpData]);
   return (
-    <Modal>
+    <Modal setOpen={setOpenForm} maxWidth='md'>
       {loadingSignUp === false ? (
         <>
-          <button
+          {/* <button
             className={classes.login__close}
             type='button'
             onClick={() => {
@@ -36,7 +36,7 @@ function Register({ setOpenForm, setIsOpen }) {
                 custom_icon_styles: 'fs__26 text__gray__gray_darken',
               }}
             />
-          </button>
+          </button> */}
           <div className={classes.login__wrapper}>
             <h1 className={classes.login__title}>Crea tu Cuenta</h1>
             {

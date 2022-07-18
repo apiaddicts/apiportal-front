@@ -83,3 +83,7 @@
     }
 
 }
+
+.MuiModal-root, .MuiDialog-root, div[role=presentation] {
+    z-index: 6000 !important;
+}
