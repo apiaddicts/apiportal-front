@@ -109,7 +109,7 @@ function ApiDetail({ setIsOpen }) {
               setIsOpen={setIsOpen}
               css_styles={{ 'image_display': 'banner_custom__img--dnone', 'apiindividual_height': 'banner_apiindividual__layout--height', 'custom_line_height': 'line-height-1' }}
               redirect='/apis'
-              description='In egestas blandit felis id porttitor. Mauris vel nibh ex. Integer iaculis placerat nunc, in ultricies nunc dignissim eu. '
+              description={library?.description?.length > 0 && library?.description ? library?.description : ''}
             />
           </section>
           <section className={`container ${classes.section__content} pb-9`}>&nbsp;</section>
