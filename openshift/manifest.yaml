@@ -57,6 +57,16 @@ spec:
               value: "$REACT_APP_FAQ_PAGE_SLUG"
             - name: REACT_APP_APIS_PAGE_SLUG
               value: "$REACT_APP_APIS_PAGE_SLUG"
+            - name: REACT_APP_EMAIL_ENDPOINT
+              value: "$REACT_APP_EMAIL_ENDPOINT"
+            - name: REACT_APP_API_KEY_SEND_GRID
+              value: "$REACT_APP_API_KEY_SEND_GRID"
+            - name: REACT_APP_EMAIL_SUBSCRIPTION_KEY
+              value: "$REACT_APP_EMAIL_SUBSCRIPTION_KEY"
+            - name: REACT_APP_EMAIL_FROM
+              value: "$REACT_APP_EMAIL_FROM"
+            - name: REACT_APP_EMAIL_TEMPLATE_ID
+              value: "$REACT_APP_EMAIL_TEMPLATE_ID"
           resources:
             requests:
               cpu: "500m"
