@@ -1,11 +1,13 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { FaFacebookF, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { Alert } from '@mui/material';
 import { GoMail } from 'react-icons/go';
 import { RiInstagramFill } from 'react-icons/ri';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { sendContactMail } from '../../redux/actions/mailAction';
 import 'yup-phone';
 import Base from './Base';
 import classes from './footer.module.scss';
@@ -17,6 +19,9 @@ import TextAreaUI from '../Input/InputUI/TextAreaUI';
 import SelectUI from '../Input/InputUI/SelectUI';
 
 function Footer({ isPrivate }) {
+
+  const dispatch = useDispatch();
+  const mail = useSelector((state) => state.mail);
   const img = '';
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
@@ -28,6 +33,7 @@ function Footer({ isPrivate }) {
   ];
   const [contactForm, setContactForm] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -52,9 +58,17 @@ function Footer({ isPrivate }) {
     onSubmit: (values) => {
       //Handle envio de correo de contacto
       //TODO:Implementar envio de correo
-      setSuccess(true);
+      dispatch(sendContactMail(values));
     },
   });
+
+  useEffect(() => {
+    if (mail?.error?.ok === false) {
+      setError(true);
+    } else if (mail?.mailContact?.ok) {
+      setSuccess(true);
+    }
+  }, [mail]);
 
   return (
     <div>
@@ -85,6 +99,16 @@ function Footer({ isPrivate }) {
                         <div className='row justify-center'>
                           <div className='flex-sm-12 flex-md-8 flex-lg-8 pb-5'>
                             <Alert severity='success' className='mb-5'>Datos enviados correctamente</Alert>
+                          </div>
+                        </div>
+                      )
+                    }
+
+                    {
+                      error && (
+                        <div className='row justify-center'>
+                          <div className='flex-sm-12 flex-md-8 flex-lg-8 pb-5'>
+                            <Alert severity='error' className='mb-5'>Ups!! Ocurrio un error, vuelve a intentarlo</Alert>
                           </div>
                         </div>
                       )

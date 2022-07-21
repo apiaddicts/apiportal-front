@@ -1,0 +1,7 @@
+const mailConstants = {
+  GET_ALL_MAIL_REQUEST: 'GET_ALL_MAIL_REQUEST',
+  GET_ALL_MAIL_SUCCESS: 'GET_ALL_MAIL_SUCCESS',
+  GET_ALL_MAIL_FAILURE: 'GET_ALL_MAIL_FAILURE',
+};
+
+export default mailConstants;
