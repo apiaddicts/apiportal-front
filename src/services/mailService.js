@@ -6,10 +6,9 @@ function sendContactMail(values) {
     'from': config.emailFrom,
     'templateId': config.emailTemplateId,
     'dynamicTemplateData': {
-      'name': values.name,
-      'lastname': values.lastname,
-      'phone': values.phone,
-      'subject': values.subject,
+      'SUBJECT': values.subject,
+      'NOMBRE_COMPLETO': `${values.name} ${values.lastname}`,
+      'PHONE': values.phone,
     },
   };
   const requestOptions = {
