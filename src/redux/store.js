@@ -10,6 +10,7 @@ import userReducer from './reducer/userReducer';
 import productReducer from './reducer/productReducer';
 import subscriptionsReducer from './reducer/subscriptionsReducer';
 import apiReducer from './reducer/apiReducer';
+import mailReducer from './reducer/mailReducer';
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
@@ -22,6 +23,7 @@ const reducers = combineReducers({
   products: productReducer,
   suscripcions: subscriptionsReducer,
   api: apiReducer,
+  mail: mailReducer,
 });
 
 const store = createStore(
