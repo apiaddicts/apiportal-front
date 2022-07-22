@@ -115,7 +115,9 @@ function Blog({ setIsOpen }) {
                             <div className={stylesBlog.section__experiences__content__card}>
                               <CardInformation
                                 title={tab?.cards && tab?.cards?.[0]?.title}
+                                buttons={tab?.cards && tab?.cards?.[0]?.steps}
                                 description={tab?.cards && tab?.cards?.[0]?.description}
+                                reading={tab?.cards && tab?.cards?.[0]?.timeRead}
                                 theme='primary'
                                 css_styles={{ 'override_card_style': 'no__shadow', 'custom_margin_top': 'mt-4' }}
                                 blog={true}

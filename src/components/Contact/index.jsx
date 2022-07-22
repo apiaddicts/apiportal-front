@@ -20,7 +20,7 @@ function Contact({ css_styles, pathname }) {
     },
     validationSchema: Yup.object({
       name: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos'),
-      email: Yup.string().email('Correo electrónico invalido').required('Campo requerido'),
+      email: Yup.string().email('Correo electrónico inválido').required('Campo requerido'),
     }),
     onSubmit: (values) => {
       setSuccess(true);
@@ -62,7 +62,7 @@ function Contact({ css_styles, pathname }) {
                     name='name'
                     id='name'
                     type='text'
-                    label='Nombre'
+                    label='Nombre*'
                     touched={formik.touched.name}
                     errors={formik.errors.name}
                     onChange={formik.handleChange}
@@ -75,7 +75,7 @@ function Contact({ css_styles, pathname }) {
                     name='email'
                     id='email'
                     type='email'
-                    label='E-mail'
+                    label='E-mail*'
                     touched={formik.touched.email}
                     errors={formik.errors.email}
                     onChange={formik.handleChange}

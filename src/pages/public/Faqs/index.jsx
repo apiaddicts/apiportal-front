@@ -33,8 +33,6 @@ function Faqs(props) {
     };
   }) : [];
 
-  console.log(faqs);
-
   const fFaqs = filterFaqs.length > 0 ? filterFaqs.map((i) => {
     const arrQa = i.items.map(({ title }) => title);
     return {
