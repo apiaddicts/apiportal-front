@@ -31,10 +31,12 @@ function Contact({ css_styles, pathname }) {
     <div className={`${classes.contact} ${display_contact} ${classes[border_radius]}`}>
       <div className={pathname !== '/blog' ? classes.contact__container__alternative : classes.contact__container}>
         <div className={pathname !== '/blog' ? classes.contact__alternative__header : classes.contact__header}>
-          <div className={classes.contact__header__icon}>
-            {icons('email')}
+          <div className={classes.contact__alternative__header_icons}>
+            <div className={classes.contact__header__icon}>
+              {icons('email')}
+            </div>
+            <p className={pathname !== '/blog' ? classes.contact__alternative__title : classes.contact__header__title}>Sigamos conectados</p>
           </div>
-          <p className={pathname !== '/blog' ? classes.contact__alternative__title : classes.contact__header__title}>Sigamos conectados</p>
           <p className={`pt-5 pb-2 pl-2 d-none text__primary fs__22 m-0 ${display_detail_description} d-xs-none`}>¡Entérate de lo último! Escoge una o varias capacidades y sé el primero en enterarte.</p>
         </div>
         <div className={pathname !== '/blog' ? classes.contact__header__title__alternative : classes.contact__header__title}>
