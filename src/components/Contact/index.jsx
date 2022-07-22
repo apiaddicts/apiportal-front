@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import { useLocation } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Alert } from '@mui/material';
+import { sendContactMail } from '../../redux/actions/mailAction';
 import classes from './contact.module.scss';
 import Button from '../Buttons/Button';
 import icons from '../../static/icons-sura';
@@ -10,8 +12,11 @@ import InputUI from '../Input/InputUI/InputUI';
 
 function Contact({ css_styles, pathname }) {
 
+  const dispatch = useDispatch();
+  const mail = useSelector((state) => state.mail);
   const { display_contact, display_detail_description, border_radius } = css_styles;
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(false);
 
   const formik = useFormik({
     initialValues: {
@@ -23,9 +28,20 @@ function Contact({ css_styles, pathname }) {
       email: Yup.string().email('Correo electrónico inválido').required('Campo requerido'),
     }),
     onSubmit: (values) => {
+      dispatch(sendContactMail(values));
       setSuccess(true);
     },
   });
+
+  useEffect(() => {
+    if (mail?.mailContactError?.ok === false) {
+      setError(true);
+      setTimeout(() => { setError(false); }, 2000);
+    } else if (mail?.mailContact?.ok) {
+      setSuccess(true);
+      setTimeout(() => { setSuccess(false); }, 2000);
+    }
+  }, [mail]);
 
   return (
     <div className={`${classes.contact} ${display_contact} ${classes[border_radius]}`}>
@@ -43,6 +59,15 @@ function Contact({ css_styles, pathname }) {
           <div className={pathname !== '/blog' ? classes.contact__alternative__description : classes.contact__description}>
             <p className='pt-5 pb-2'>¡Entérate de lo último! </p>
           </div>
+          {
+            error && (
+              <div className='row justify-center'>
+                <div className='flex-sm-12 flex-md-8 flex-lg-8 pb-5'>
+                  <Alert severity='error' className='mb-5'>Ups!! Ocurrio un error, vuelve a intentarlo</Alert>
+                </div>
+              </div>
+            )
+          }
           {
             success ? (<Alert severity='success' className='mb-5'>Datos enviados correctamente</Alert>) :
               (
