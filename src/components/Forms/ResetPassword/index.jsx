@@ -33,7 +33,6 @@ function ResetPassword() {
       <form onSubmit={formConfig.handleSubmit} noValidate>
         <div className='py-4'>
           {fieldsForgotPassword.map((field) => {
-            console.log(formConfig);
             return (
               <div className='row' key={field.id}>
                 <div className='flex-sm-12 flex-md-12 flex-lg-12'>

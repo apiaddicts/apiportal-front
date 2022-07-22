@@ -14,7 +14,7 @@ import BannerImage from '../../../components/Banner/BannerImage';
 import Slick from '../../../components/SlickSlider/Slick';
 import Icon from '../../../components/MdIcon/Icon';
 import { getHomeContent } from '../../../redux/actions/homeAction';
-import { getLibrary, getLibraries, resetGetLibrary } from '../../../redux/actions/libraryAction';
+import { getLibrary, getLibraries } from '../../../redux/actions/libraryAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
 import codeSnipet from '../../../static/img/code-snippet.png';
 import classes from './api-detail.module.scss';
@@ -28,13 +28,19 @@ function ApiDetail({ setIsOpen }) {
   const { blogs } = useSelector((state) => state.blog);
 
   useEffect(() => {
+    if (params?.id) {
+      dispatch(getLibrary(params?.id));
+    }
+  }, [params?.id]);
+
+  useEffect(() => {
     if (homePage && Object.keys(homePage).length === 0) {
       dispatch(getHomeContent());
     }
 
-    if (params.id && library && Object.keys(library).length === 0) {
-      dispatch(getLibrary(params?.id));
-    }
+    //if (params.id && library && Object.keys(library).length === 0) {
+    //  dispatch(getLibrary(params?.id));
+    //}
 
     if (blogs && blogs.length === 0) {
       dispatch(getBlogs());
@@ -44,8 +50,16 @@ function ApiDetail({ setIsOpen }) {
       dispatch(getLibraries());
     }
 
-    dispatch(resetGetLibrary());
+    //dispatch(resetGetLibrary());
   }, []);
+
+  // Load Banner Section
+  const filterHomeBanner = homePage && homePage.contentSections && homePage.contentSections?.length > 0 ? homePage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
+  const filterHomeBannerTitle = filterHomeBanner.length > 0 && filterHomeBanner[0]?.title ? filterHomeBanner[0]?.title : '';
+  const filterHomeBannerSubtitle = filterHomeBanner.length > 0 && filterHomeBanner[0]?.subtitle ? filterHomeBanner[0]?.subtitle : '';
+  const filterHomeBannerImage = filterHomeBanner.length > 0 && filterHomeBanner[0]?.background ? filterHomeBanner[0]?.background?.url : '';
+  const filterHomeBannerNameButtom = filterHomeBanner.length > 0 && filterHomeBanner[0]?.buttons.length > 0 ? filterHomeBanner[0]?.buttons?.[0]?.name : '';
+  const filterHomeBannerNameType = filterHomeBanner.length > 0 && filterHomeBanner[0]?.buttons.length > 0 ? filterHomeBanner[0]?.buttons?.[0]?.type : '';
 
   // Load discover section
   const filterDiscoverTab = homePage && homePage?.contentSections && homePage?.contentSections?.length > 0 ? homePage?.contentSections?.filter((item) => item.__component === 'home.discover-section') : [];
@@ -166,7 +180,7 @@ function ApiDetail({ setIsOpen }) {
                             number={data?.num}
                             title={data?.title}
                             description={data?.subtitle}
-                            icon={data?.icon}
+                            icon={data?.iconText}
                             type='title'
                             textColor='#d4d9db'
                           />
@@ -180,9 +194,19 @@ function ApiDetail({ setIsOpen }) {
                 {filterButtonSection && filterButtonSection.length > 0 ? (
                   filterButtonSection?.[0]?.header.map((button, i) => (
                     <div key={i} className='mb-4'>
-                      <Button styles={button?.keyword}>
-                        {button?.title}
-                      </Button>
+                      {button?.isKeywordInverted ? (
+                        <HashLink smooth to='/apis#apiHome'>
+                          <Button styles={button?.keyword}>
+                            {button?.title}
+                          </Button>
+                        </HashLink>
+                      ) : (
+                        <HashLink smooth to={`/apis/${params?.id}#contact`}>
+                          <Button styles={button?.keyword}>
+                            {button?.title}
+                          </Button>
+                        </HashLink>
+                      )}
                     </div>
                   ))
                 ) : (null)}
@@ -246,11 +270,12 @@ function ApiDetail({ setIsOpen }) {
           </section>
           <section id='Banner'>
             <BannerCentered
-              title='Integra tus sistemas con las APIs de SURA'
-              subtitle='...'
-              img=''
+              title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : 'Integras tus sistemas con las APIs de SURA'}
+              subtitle={filterHomeBannerSubtitle !== '' ? filterHomeBannerSubtitle : ''}
+              img={filterHomeBannerImage !== '' ? filterHomeBannerImage : ''}
               buttonType='primary'
-              buttonLabel='empezar ahora'
+              buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : 'empezar ahora'}
+              redirect={filterHomeBannerNameType}
             />
           </section>
           <section className={classes.section__news}>
