@@ -20,7 +20,7 @@ function Contact({ css_styles, pathname }) {
     },
     validationSchema: Yup.object({
       name: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos'),
-      email: Yup.string().email('Correo electrónico invalido').required('Campo requerido'),
+      email: Yup.string().email('Correo electrónico inválido').required('Campo requerido'),
     }),
     onSubmit: (values) => {
       setSuccess(true);
