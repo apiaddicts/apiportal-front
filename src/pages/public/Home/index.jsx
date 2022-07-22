@@ -188,7 +188,6 @@ function Home({ setIsOpen }) {
                           <Button styles={button?.keyword}>
                             {button?.title}
                           </Button>
-
                         </HashLink>
                       ) : (
                         <HashLink smooth to='/#data'>

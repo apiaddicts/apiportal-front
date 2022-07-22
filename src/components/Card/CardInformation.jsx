@@ -23,8 +23,6 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
     modal(true);
   };
 
-  console.log(version, status);
-
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <>

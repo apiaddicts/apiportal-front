@@ -120,7 +120,7 @@ function Apis({ setIsOpen }) {
   });
 
   const versionArr = new Set(versionRepeated);
-  const versions = [...versionArr];
+  const versions = [...versionArr].sort();
 
   useEffect(() => {
     if (libraries && libraries.length === 0 && Object.keys(filters).length === 0) {
