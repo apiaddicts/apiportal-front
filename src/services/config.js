@@ -39,7 +39,8 @@ const config = {
   apiKeySendGrid: process.env.REACT_APP_API_KEY_SEND_GRID,
   subscriptionKey: process.env.REACT_APP_EMAIL_SUBSCRIPTION_KEY,
   emailFrom: process.env.REACT_APP_EMAIL_FROM,
-  emailTemplateId: process.env.REACT_APP_EMAIL_TEMPLATE_ID,
+  emailConversationTemplateId: process.env.REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID,
+  emailContactTemplateId: process.env.REACT_APP_EMAIL_CONTACT_TEMPLATE_ID,
   locale: 'es',
 };
 
