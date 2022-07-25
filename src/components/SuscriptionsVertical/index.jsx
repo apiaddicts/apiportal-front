@@ -39,11 +39,11 @@ function SuscriptionsVertical({ user, suscriptions, title, productId = '' }) {
                             <div className='text__gray__gray_darken'>{moment(row.properties.createdDate).format('DD/MM/YYYY')}</div>
                           </div>
                           <div className='w-full mt-2'>
-                            <div className='text__gray__gray_darken font-weight-bold ls_02 text-uppercase'>PRIMARY KEY</div>
+                            <div className='text__gray__gray_darken font-weight-bold ls_02 text-uppercase'>Primary key</div>
                             <PasswordGenerate idSuscripcion={row.name} user={user} version={1} status={row.properties.state} />
                           </div>
                           <div className='w-full mt-2'>
-                            <div className='text__gray__gray_darken font-weight-bold ls_02 text-uppercase'>SECONDARY KEY</div>
+                            <div className='text__gray__gray_darken font-weight-bold ls_02 text-uppercase'>Secondary key</div>
                             <PasswordGenerate idSuscripcion={row.name} user={user} version={2} status={row.properties.state} />
                           </div>
                           <div className='display_flex justify_content__between text__gray__gray_darken mt-2'>
