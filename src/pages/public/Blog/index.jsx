@@ -119,7 +119,7 @@ function Blog({ setIsOpen }) {
                                 reading={tab?.cards && tab?.cards?.[0]?.timeRead}
                                 theme='primary'
                                 css_styles={{ 'override_card_style': 'no__shadow', 'custom_margin_top': 'mt-6' }}
-                                blog={true}
+                                blog={false}
                               />
                             </div>
                           </div>
@@ -176,7 +176,7 @@ function Blog({ setIsOpen }) {
           }
           {
             formik.values.search === '' ? (
-              <section className={`${classes.section__news} ${classes.section__news_toppadding} d-xs-none`}>
+              <section className={`${classes.section__news} ${classes.section__news_toppadding} d-xs-none mt-10`}>
                 <div className='container'>
                   <div className='row'>
                     <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
