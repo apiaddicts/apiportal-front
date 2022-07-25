@@ -12,6 +12,7 @@ function Posts({ currentItems, additionalClasses }) {
           return (
             <CardInformation
               id={item?.id}
+              key={index}
               img={item?.image ? item?.image?.[0]?.url : ''}
               description={item?.description}
               title={item?.title}
