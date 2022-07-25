@@ -1142,13 +1142,18 @@ a {
   border-radius: 8px !important;
   padding: 1px;
   .MuiFormControl-root{
-    width: 33%;
+    width: 100%;
     color: white !important;
   }
   .MuiFormControlLabel-root{
     margin: 0 !important;
     text-align: center;
   }
+}
+
+.MuiButtonGroup-root>*:nth-child(2n) {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
 
 .MuiAccordionDetails-root{

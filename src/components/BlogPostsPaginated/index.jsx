@@ -21,6 +21,7 @@ function Posts({ currentItems, additionalClasses }) {
               theme='primary'
               info='Conoce más'
               blogTitle={true}
+              blog={true}
             />
           );
         })}
