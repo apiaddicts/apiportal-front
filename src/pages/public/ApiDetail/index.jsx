@@ -59,7 +59,7 @@ function ApiDetail({ setIsOpen }) {
   const filterHomeBannerSubtitle = filterHomeBanner.length > 0 && filterHomeBanner[0]?.subtitle ? filterHomeBanner[0]?.subtitle : '';
   const filterHomeBannerImage = filterHomeBanner.length > 0 && filterHomeBanner[0]?.background ? filterHomeBanner[0]?.background?.url : '';
   const filterHomeBannerNameButtom = filterHomeBanner.length > 0 && filterHomeBanner[0]?.buttons.length > 0 ? filterHomeBanner[0]?.buttons?.[0]?.name : '';
-  const filterHomeBannerNameType = filterHomeBanner.length > 0 && filterHomeBanner[0]?.buttons.length > 0 ? filterHomeBanner[0]?.buttons?.[0]?.type : '';
+  const filterHomeBannerNameType = filterHomeBanner.length > 0 && filterHomeBanner[0]?.buttons.length > 0 ? filterHomeBanner[0]?.buttons?.[0]?.type : '/#data';
 
   // Load discover section
   const filterDiscoverTab = homePage && homePage?.contentSections && homePage?.contentSections?.length > 0 ? homePage?.contentSections?.filter((item) => item.__component === 'home.discover-section') : [];
@@ -144,11 +144,11 @@ function ApiDetail({ setIsOpen }) {
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem', alignContent: 'center' }}>
                     {library?.benefits && library?.benefits?.length > 0 && library?.benefits?.length === 1 && library?.benefits?.[0]?.Steps?.length > 0 ? (
                       library?.benefits?.[0]?.Steps.map((item, i) => (
-                        <div>
+                        <div key={i}>
                           <Item
                             key={i}
                             title={item?.title}
-                            icon={item?.number}
+                            icon={item?.number ? item?.number : 'note1'}
                             titleStyles={{ fontSize: '18px', fontWeight: '500', color: '#53565A' }}
                             iconStyle={{ width: '50px', height: '50px' }}
                           />
