@@ -168,7 +168,7 @@ function Apis({ setIsOpen }) {
               >
                 Versión
               </Typography>
-              <ButtonGroupMUI sx={{ marginBottom: '15px' }}>
+              <ButtonGroupMUI sx={{ marginBottom: '15px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(50px, 1fr))', gap: '2px', alignItems: 'center', justifyContent: 'center' }}>
                 {versions.map((item, index) => (
                   <CheckboxLabels
                     key={index}
