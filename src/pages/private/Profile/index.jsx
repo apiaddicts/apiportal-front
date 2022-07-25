@@ -100,7 +100,7 @@ function Profile() {
                     <div className='flex-lg-6 flex-sm-12'>
                       {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
                       <div
-                        className='fs__16 text__primary ls_05 text-uppercase font-weight-bold ml-3 mb-2 cpointer'
+                        className='fs__16 text__primary ls_05 font-weight-bold ml-3 mb-2 cpointer'
                         onClick={() => setDisplayRestorePassword(!displayRestorePassword)}
                       >
                         Restablecer password
