@@ -20,6 +20,7 @@ function Modal({ children, setOpen, maxWidth = 'sm' }) {
       aria-labelledby='alert-dialog-title'
       aria-describedby='alert-dialog-description'
       maxWidth={maxWidth}
+      fullWidth={true}
     >
       <DialogTitle
         sx={{ m: 0, p: 2, zIndex: 1 }}

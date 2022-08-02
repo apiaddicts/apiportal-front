@@ -7,7 +7,7 @@ import { GoMail } from 'react-icons/go';
 import { RiInstagramFill } from 'react-icons/ri';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { sendContactMail } from '../../redux/actions/mailAction';
+import { sendConversationMail } from '../../redux/actions/mailAction';
 import 'yup-phone';
 import Base from './Base';
 import classes from './footer.module.scss';
@@ -46,27 +46,28 @@ function Footer({ isPrivate }) {
     },
     validateOnChange: true,
     validationSchema: Yup.object({
-      name: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos'),
-      lastname: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos'),
+      name: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
+      lastname: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
       email: Yup.string().email('Correo electrónico inválido').required('Campo requerido'),
       phone: Yup.string().phone('MX', true, 'Debe ingresar un número telefonico válido').required('Campo requerido'),
       // topic: Yup.string().required('Campo requerido'),
-      subject: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos'),
+      subject: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(70, 'Se ha excedido el número de caracteres permitidos'),
       // message: Yup.string().length(50, 'Limite de caracteres 50').required('Campo requerido'),
       sendMailTerms: Yup.bool().oneOf([true], 'Debes aceptar los terminos y condiciones'),
     }),
     onSubmit: (values) => {
       //Handle envio de correo de contacto
-      //TODO:Implementar envio de correo
-      dispatch(sendContactMail(values));
+      dispatch(sendConversationMail(values));
     },
   });
 
   useEffect(() => {
-    if (mail?.error?.ok === false) {
+    if (mail?.mailConversationtError?.ok === false) {
       setError(true);
-    } else if (mail?.mailContact?.ok) {
+      setTimeout(() => { setError(false); }, 2000);
+    } else if (mail?.mailConversation?.ok) {
       setSuccess(true);
+      setTimeout(() => { setSuccess(false); }, 2000);
     }
   }, [mail]);
 

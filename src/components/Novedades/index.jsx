@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import ItemAvatar from '../Item/ItemAvatar';
 import classes from './styles.module.scss';
 
-console.log(classes);
-
 const shuffle = (array) => {
   let currentIndex = array.length,
     randomIndex;

@@ -120,7 +120,7 @@ function Apis({ setIsOpen }) {
   });
 
   const versionArr = new Set(versionRepeated);
-  const versions = [...versionArr];
+  const versions = [...versionArr].sort();
 
   useEffect(() => {
     if (libraries && libraries.length === 0 && Object.keys(filters).length === 0) {
@@ -168,7 +168,7 @@ function Apis({ setIsOpen }) {
               >
                 Versión
               </Typography>
-              <ButtonGroupMUI sx={{ marginBottom: '15px' }}>
+              <ButtonGroupMUI sx={{ marginBottom: '15px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(50px, 1fr))', gap: '2px', alignItems: 'center', justifyContent: 'center' }}>
                 {versions.map((item, index) => (
                   <CheckboxLabels
                     key={index}

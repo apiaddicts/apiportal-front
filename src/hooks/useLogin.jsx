@@ -1,10 +1,18 @@
 /* eslint-disable prefer-regex-literals */
 import { useFormik } from 'formik';
 import { useState } from 'react';
-// import { string } from 'yup';
+import { string } from 'yup';
 import * as Yup from 'yup';
 
-const validationSchema = Yup.object().shape({});
+const validationSchema = Yup.object().shape({
+  email: string().email('Correo electrónico inválido').required('Campo requerido'),
+  password: string()
+    .min(8, 'La contraseña debe tener al menos 8 carácteres de longitud')
+    .max(16, 'Se ha excedido el número de caracteres permitidos')
+    .trim('Los espacios no estan permitidos')
+    .strict()
+    .required('Campo obligatorio'),
+});
 
 const objectFromArray = (fields, key) => {
   const mappedProps = fields.map((field) => {

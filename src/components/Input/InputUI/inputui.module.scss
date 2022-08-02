@@ -2,29 +2,18 @@
 .wrapper__input {
   display: flex;
   flex-direction: column;
-  // min-width: 350px;
   position: relative;
-  // margin: 0.5rem auto;
 
   input {
     width: 100%;
     height: 56px;
-    padding: 0 1rem;
+    padding: 0 2.75rem 0 1rem;
     outline: 0;
     font-size: 1rem;
     border: 1px solid #ecf0f1;
     box-shadow: 0px 2px 20px #ecf0f1;
     border-radius: 100px;
-    // &:focus{
-    //   border: 2px solid #00AEC7 !important;
-    // }
-    // &:focus + .wrapper__icon{
-    //   color: #00AEC7 !important;
-    // }
   }
-  // input:invalid{
-  //   border: 2px solid #e4002b;
-  // }
 
   textarea {
     width: 100%;
@@ -100,7 +89,7 @@
 
 .error {
   font-size: 0.75rem;
-  color: #e4002b;
+  color: #e4002b !important;
   &__input__error {
     input {
       border: 2px solid #e4002b;
@@ -112,7 +101,7 @@
 }
 
 .success {
-  color: #48D2A0;
+  color: #48D2A0 !important;
 }
 
 .required {
@@ -126,4 +115,8 @@
   right: 1rem;
   top: 1rem;
   font-size: 25px;
+  color: rgba(0, 0, 0, 0.38);
+  &__error {
+    color: #e4002b;
+  }
 }
