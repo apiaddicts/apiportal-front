@@ -24,7 +24,7 @@ function Contact({ css_styles, pathname }) {
       email: '',
     },
     validationSchema: Yup.object({
-      name: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos'),
+      name: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
       email: Yup.string().email('Correo electrónico inválido').required('Campo requerido'),
     }),
     onSubmit: (values) => {
@@ -84,7 +84,7 @@ function Contact({ css_styles, pathname }) {
             ))} */}
             <div className='container'>
               <div className='row'>
-                <div className={pathname === '/blog' ? 'flex-sm-12 flex-md-12 pb-6 mt-2' : 'flex-sm-12 flex-md-6 flex-lg-6'}>
+                <div className={pathname === '/blog' ? 'flex-sm-12 flex-md-12 pb-8 mt-2' : 'flex-sm-12 flex-md-6 flex-lg-6'}>
                   <InputUI
                     name='name'
                     id='name'

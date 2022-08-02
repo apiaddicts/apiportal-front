@@ -2,9 +2,9 @@ import handleResponse from './handleResponse';
 import handleResponseToken from './handleResponseToken';
 import handleResponseRestore from './handleResponseRestore';
 import handleResponseResetPwd from './handleResponseResetPwd';
-import config from './config';
-
 import store from '../redux/store';
+
+import config from './config';
 
 function login(email, password) {
   const requestOptions = {
