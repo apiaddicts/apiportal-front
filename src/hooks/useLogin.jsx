@@ -9,10 +9,9 @@ const validationSchema = Yup.object().shape({
   password: string()
     .min(8, 'La contraseña debe tener al menos 8 carácteres de longitud')
     .max(16, 'Se ha excedido el número de caracteres permitidos')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/, 'Su contraseña debe tener al menos 1 letra mayúscula, 1 letra minuscula, 1 número y 1 caracter')
     .trim('Los espacios no estan permitidos')
     .strict()
-    .required('Campo obligatorio'),
+    .required('Campo requerido'),
 });
 
 const objectFromArray = (fields, key) => {

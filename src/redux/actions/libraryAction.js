@@ -235,32 +235,31 @@ export const filterAPIsByTags = (search) => (dispatch) => {
 export const getLibraryApiNextSearch = (search) => (dispatch) => {
   const { apisSkip } = store.getState().library;
 
-  const skip = apisSkip + config.topApi;
-  dispatch(searchApis(search, config.topApi, skip));
+  const skip = apisSkip + parseInt(config.topApi, 10);
+  dispatch(searchApis(search, parseInt(config.topApi, 10), skip));
   dispatch({ type: libraryConstants.GET_LIBRARY_SKIP, skip });
 };
 
 export const getLibraryApiPreviosSearch = (search) => (dispatch) => {
   const { apisSkip } = store.getState().library;
 
-  const skip = apisSkip - config.topApi;
-  dispatch(searchApis(search, config.topApi, skip));
+  const skip = apisSkip - parseInt(config.topApi, 10);
+  dispatch(searchApis(search, parseInt(config.topApi, 10), skip));
   dispatch({ type: libraryConstants.GET_LIBRARY_SKIP, skip });
 };
 
 export const getLibraryApiNext = () => (dispatch) => {
   const { apisSkip } = store.getState().library;
-  const skip = apisSkip + config.topApi;
-
-  dispatch(listApis(config.topApi, skip));
+  const skip = apisSkip + parseInt(config.topApi, 10);
+  dispatch(listApis(parseInt(config.topApi, 10), skip));
   dispatch({ type: libraryConstants.GET_LIBRARY_SKIP, skip });
 };
 
 export const getLibraryApiPrevios = () => (dispatch) => {
   const { apisSkip } = store.getState().library;
-  const skip = apisSkip - config.topApi;
+  const skip = apisSkip - parseInt(config.topApi, 10);
 
-  dispatch(listApis(config.topApi, skip));
+  dispatch(listApis(parseInt(config.topApi, 10), skip));
   dispatch({ type: libraryConstants.GET_LIBRARY_SKIP, skip });
 };
 
