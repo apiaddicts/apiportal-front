@@ -5,7 +5,7 @@ import { string } from 'yup';
 import * as Yup from 'yup';
 
 const validationSchema = Yup.object().shape({
-  email: string().email('Ingresa una cuenta de correo electrónico valida').required('El email es obligatorio'),
+  email: string().email('Correo electrónico inválido').required('Campo requerido'),
 });
 
 const objectFromArray = (fields, key) => {

@@ -5,9 +5,9 @@ import { string, bool } from 'yup';
 import * as Yup from 'yup';
 
 const validationSchema = Yup.object().shape({
-  first_name: string().required('Campo obligatorio').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
-  last_name: string().required('Campo obligatorio').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
-  email: string().email('Correo electrónico inválido').required('Campo obligatorio'),
+  first_name: string().required('Campo requeridp').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
+  last_name: string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
+  email: string().email('Correo electrónico inválido').required('Campo requerido'),
   terms: bool().oneOf([true], 'Debes aceptar los términos y condiciones'),
   password: string()
     .min(8, 'La contraseña debe tener al menos 8 carácteres de longitud')
@@ -15,8 +15,8 @@ const validationSchema = Yup.object().shape({
     .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/, 'Su contraseña debe tener al menos 1 letra mayúscula, 1 letra minuscula, 1 número y 1 caracter')
     .trim('Los espacios no estan permitidos')
     .strict()
-    .required('Campo obligatorio'),
-  password_confirmation: string().oneOf([Yup.ref('password')], 'La contraseñas y la confirmación de contraseña deben coincidir').required('Campo oligatorio').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/, 'Su contraseña debe tener al menos 1 letra mayúscula, 1 letra minuscula, 1 número y 1 caracter'),
+    .required('Campo requerido'),
+  password_confirmation: string().oneOf([Yup.ref('password')], 'La contraseñas y la confirmación de contraseña deben coincidir').required('Campo requerido').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/, 'Su contraseña debe tener al menos 1 letra mayúscula, 1 letra minuscula, 1 número y 1 caracter'),
 });
 
 const objectFromArray = (fields, key) => {
