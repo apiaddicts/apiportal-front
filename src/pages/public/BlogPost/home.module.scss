@@ -220,7 +220,7 @@
     width: 100%;
     &__button {
       display: flex;
-      justify-content: end;
+      justify-content: flex-end;
       @include breakpoint(xs) {
         justify-content: center;
         color: $secondary;
