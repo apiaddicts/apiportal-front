@@ -10,7 +10,6 @@ import classes from './register.module.scss';
 
 function Register({ setOpenForm, setIsOpen }) {
   const { loadingSignUp, signUpData, responseError } = useSelector((state) => state.user);
-  // const dispatch = useDispatch();
 
   useEffect(() => {
     if (signUpData && Object.keys(signUpData).length > 0) {
@@ -21,7 +20,7 @@ function Register({ setOpenForm, setIsOpen }) {
   return (
     <Modal setOpen={setOpenForm} maxWidth='md'>
       {loadingSignUp === false ? (
-        <div className={classes.login__wrapper}>
+        <div>
           <h1 className={classes.login__title}>Crea tu Cuenta</h1>
           <div className='container'>
             <div className='row'>
