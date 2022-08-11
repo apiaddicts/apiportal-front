@@ -32,75 +32,78 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
   const formConfig = useFormConfig(fieldsRegister, handleSubmit);
 
   return (
-    <form
-      className='container'
-      onSubmit={formConfig.handleSubmit}
-      noValidate
-    >
-      <div className='row'>
-        {fieldsRegister.filter((item) => item.type !== 'checkbox').map((field, index) => (
-          <div className='flex-sm-12 flex-md-6 flex-lg-6 py-4'>
-            <InputUI
-              id={field.id}
-              name={field.name}
-              type={field.type}
-              label={field.label}
-              touched={formConfig.touched[field.id]}
-              errors={formConfig.errors[field.id]}
-              onChange={formConfig.handleChange}
-              onBlur={formConfig.handleBlur}
-              value={formConfig.values.name}
-            />
+    <div className='wrapper__register'>
+      <form
+        onSubmit={formConfig.handleSubmit}
+        noValidate
+      >
+        <div className='row'>
+          {fieldsRegister.filter((item) => item.type !== 'checkbox').map((field, index) => (
+            <div className='flex-sm-12 flex-md-6 flex-lg-6 py-4'>
+              <InputUI
+                id={field.id}
+                name={field.name}
+                type={field.type}
+                label={field.label}
+                touched={formConfig.touched[field.id]}
+                errors={formConfig.errors[field.id]}
+                onChange={formConfig.handleChange}
+                onBlur={formConfig.handleBlur}
+                value={formConfig.values.name}
+              />
+            </div>
+          ))}
+        </div>
+        {/* checkbox */}
+        <div className='row'>
+          <div className='flex-sm-12 flex-md-12'>
+            <div className='input__checkbox'>
+              {
+                fieldsRegister.filter((field) => field.type === 'checkbox')
+                  .map((field, index) => (
+                    <input
+                      key={index}
+                      type={field.type}
+                      id={field.id}
+                      name={field.name}
+                      value={field.value}
+                      checked={formConfig.values.remember}
+                      onChange={formConfig.handleChange}
+                    />
+                  ))
+              }
+              <p className={` ${formConfig.errors.terms ? 'text__error' : ''}`}>
+                Acepto recibir correos de acuerdo con los siguientes
+                {' '}
+                <span>términos y condiciones.</span>
+              </p>
+            </div>
           </div>
-        ))}
-      </div>
-      {/* checkbox */}
-      <div className='row create-account__checkbox'>
-        <div className='flex-sm-12 flex-md-12'>
-          {
-            fieldsRegister.filter((field) => field.type === 'checkbox')
-              .map((field, index) => (
-                <input
-                  key={index}
-                  type={field.type}
-                  id={field.id}
-                  name={field.name}
-                  value={field.value}
-                  checked={formConfig.values.remember}
-                  onChange={formConfig.handleChange}
-                />
-              ))
-          }
-          <span className={`ml-2 ${formConfig.errors.terms ? 'text__error' : ''}`}>
-            Acepto recibir correos de acuerdo con los siguientes
-            {' '}
-            <b>términos y condiciones.</b>
-          </span>
         </div>
-      </div>
-      <div className='row my-4 register__btn'>
-        <div className='flex-sm-12 flex-md-5'>
-          <Button
-            styles='secundary-white'
-            type='button'
-            onClick={() => {
-              setOpenForm(false);
-              setIsOpen(true);
-            }}
-          >
-            Iniciar Sesión
-          </Button>
+        <div className='row my-4 register__btn'>
+          <div className='flex-sm-12 flex-md-5'>
+            <Button
+              styles='secundary-white'
+              type='button'
+              onClick={() => {
+                setOpenForm(false);
+                setIsOpen(true);
+              }}
+            >
+              Iniciar Sesión
+            </Button>
+          </div>
+          <div className='flex-sm-12 flex-md-5'>
+            <Button
+              styles='primary-blue'
+              type='submit'
+            >
+              Registrarme
+            </Button>
+          </div>
         </div>
-        <div className='flex-sm-12 flex-md-5'>
-          <Button
-            styles='primary-blue'
-            type='submit'
-          >
-            Registrarme
-          </Button>
-        </div>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }
 

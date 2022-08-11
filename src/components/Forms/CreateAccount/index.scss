@@ -118,3 +118,29 @@
     // }
   }
 }
+
+.input__checkbox {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  p{
+    @include breakpoint(xs) {
+      font-size: 13px;
+    }
+    letter-spacing: 0.25px;
+    font-weight: 400;
+    color: $primary;
+    span {
+      font-weight: 700;
+      text-decoration: underline;
+    }
+  }
+}
+
+.wrapper__register {
+  @include breakpoint(sm) {
+    width: 90%;
+    margin: 0 auto;
+    position: relative;
+  }
+}
