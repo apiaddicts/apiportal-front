@@ -8,15 +8,17 @@ function Button({ children, styles, opacity, size = 'regular', preIcon, ...rest 
 
   const btnStyled = (size, opacity) => {
     const height = size.toLowerCase();
+    const style = (opacity) ? { opacity } : {};
     if (height === 'regular') {
-      return { height: '47px', opacity };
+      style[height] = '47px';
     } if (height === 'small') {
-      return { height: '32px', opacity };
+      style[height] = '32px';
     } if (height === 'large') {
-      return { height: '50px', opacity };
+      style[height] = '50px';
     } if (height === 'responsive') {
-      return { height: '100%', opacity };
+      style[height] = '100%';
     }
+    return style;
   };
 
   return (
