@@ -46,9 +46,9 @@ stages:
               command: login
               containerRegistry: $(ACR_CONNECTION)
           - task: Docker@2
-            displayName: Build and Push
+            displayName: Build
             inputs:
-              command: buildAndPush
+              command: build
               repository: $(APP_NAME)
               Dockerfile: Dockerfile
               buildContext: .
@@ -79,6 +79,15 @@ stages:
                           --build-arg REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID=$(REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID) 
                           --build-arg REACT_APP_EMAIL_CONTACT_TEMPLATE_ID=$(REACT_APP_EMAIL_CONTACT_TEMPLATE_ID) 
               #tags: latest
+              tags: |
+                $(Build.SourceVersion)
+                $(ENV)
+                latest
+          - task: Docker@2
+            displayName: Push
+            inputs:
+              command: push
+              repository: $(APP_NAME)
               tags: |
                 $(Build.SourceVersion)
                 $(ENV)
