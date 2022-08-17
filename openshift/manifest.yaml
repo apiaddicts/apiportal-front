@@ -69,6 +69,10 @@ spec:
               value: "$REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID"
             - name: REACT_APP_EMAIL_CONTACT_TEMPLATE_ID
               value: "$REACT_APP_EMAIL_CONTACT_TEMPLATE_ID"
+            - name: PGID
+              value: 1000
+            - name: PUID
+              value: 1000
           resources:
             requests:
               cpu: "500m"
@@ -91,7 +95,7 @@ spec:
   ports:
     - name: ${APP_PORT_NAME}-svc
       nodePort: 0
-      port: 80
+      port: 8080
       protocol: TCP
       targetPort: $APP_PORT_NAME
 
