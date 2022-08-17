@@ -95,7 +95,7 @@ spec:
   ports:
     - name: ${APP_PORT_NAME}-svc
       nodePort: 0
-      port: 8080
+      port: 80
       protocol: TCP
       targetPort: $APP_PORT_NAME
 
