@@ -70,9 +70,9 @@ spec:
             - name: REACT_APP_EMAIL_CONTACT_TEMPLATE_ID
               value: "$REACT_APP_EMAIL_CONTACT_TEMPLATE_ID"
             - name: PGID
-              value: 1000
+              value: "1000"
             - name: PUID
-              value: 1000
+              value: "1000"
           resources:
             requests:
               cpu: "500m"
