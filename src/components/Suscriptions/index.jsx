@@ -192,14 +192,14 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
                                       icon={<FiberManualRecordIcon sx={{ fontSize: '8px' }} />}
                                       label={row.properties.state}
                                       sx={{
-                                        background: 'rgba(241, 180, 52, 0.10)',
-                                        color: '#F1B434',
-                                        fontWeight: '700',
-                                        fontSize: '0.625rem',
-                                        letterSpacing: '0.8 px',
-                                        padding: '2px',
-                                        height: '20px',
-                                        textTransform: 'uppercase',
+                                        background: 'rgba(241, 180, 52, 0.10) !important',
+                                        color: '#F1B434 !important',
+                                        fontWeight: '700 !important',
+                                        fontSize: '0.625rem !important',
+                                        letterSpacing: '0.8px !important',
+                                        padding: '2px !important',
+                                        height: '20px !important',
+                                        textTransform: 'uppercase !important',
                                       }}
                                     />
                                   </TableCell>
