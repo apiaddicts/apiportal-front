@@ -17,58 +17,58 @@ spec:
           image: $ACR_IMAGE
           ports:
             - containerPort: $APP_PORT
-              name: $APP_PORT_NAME
-          env:
-            - name: REACT_APP_STRAPI_URL
-              value: "$REACT_APP_STRAPI_URL"
-            - name: REACT_APP_SURA_URL
-              value: "$REACT_APP_SURA_URL"
-            - name: REACT_APP_SUBSCRIPTION_ID
-              value: "$REACT_APP_SUBSCRIPTION_ID"
-            - name: REACT_APP_RESOURCE_GROUP_NAME
-              value: "$REACT_APP_RESOURCE_GROUP_NAME"
-            - name: REACT_APP_SERVICE_NAME
-              value: "$REACT_APP_SERVICE_NAME"
-            - name: REACT_APP_API_VERSION
-              value: "$REACT_APP_API_VERSION"
-            - name: REACT_APP_REMEMBER_KEY
-              value: "$REACT_APP_REMEMBER_KEY"
-            - name: REACT_APP_PRIMARY_KEY
-              value: "$REACT_APP_PRIMARY_KEY"
-            - name: REACT_APP_APIM_UID
-              value: "$REACT_APP_APIM_UID"
-            - name: REACT_APP_TOKEN_VALID_DAYS
-              value: "$REACT_APP_TOKEN_VALID_DAYS"
-            - name: REACT_APP_LIST_API_TOP
-              value: "$REACT_APP_LIST_API_TOP"
-            - name: REACT_APP_LIST_PRODUCT_APIS_TOP
-              value: "$REACT_APP_LIST_PRODUCT_APIS_TOP"
-            - name: REACT_APP_LIST_PRODUCT_TOP
-              value: "$REACT_APP_LIST_PRODUCT_TOP"
-            - name: REACT_APP_LIST_SUBSCRIPTIONS
-              value: "$REACT_APP_LIST_SUBSCRIPTIONS"
-            - name: WDS_SOCKET_PORT
-              value: "$WDS_SOCKET_PORT"
-            - name: REACT_APP_HOME_PAGE_SLUG
-              value: "$REACT_APP_HOME_PAGE_SLUG"
-            - name: REACT_APP_BLOG_PAGE_SLUG
-              value: "$REACT_APP_BLOG_PAGE_SLUG"
-            - name: REACT_APP_FAQ_PAGE_SLUG
-              value: "$REACT_APP_FAQ_PAGE_SLUG"
-            - name: REACT_APP_APIS_PAGE_SLUG
-              value: "$REACT_APP_APIS_PAGE_SLUG"
-            - name: REACT_APP_EMAIL_ENDPOINT
-              value: "$REACT_APP_EMAIL_ENDPOINT"
-            - name: REACT_APP_API_KEY_SEND_GRID
-              value: "$REACT_APP_API_KEY_SEND_GRID"
-            - name: REACT_APP_EMAIL_SUBSCRIPTION_KEY
-              value: "$REACT_APP_EMAIL_SUBSCRIPTION_KEY"
-            - name: REACT_APP_EMAIL_FROM
-              value: "$REACT_APP_EMAIL_FROM"
-            - name: REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID
-              value: "$REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID"
-            - name: REACT_APP_EMAIL_CONTACT_TEMPLATE_ID
-              value: "$REACT_APP_EMAIL_CONTACT_TEMPLATE_ID"
+          #     name: $APP_PORT_NAME
+          # env:
+          #   - name: REACT_APP_STRAPI_URL
+          #     value: "$REACT_APP_STRAPI_URL"
+          #   - name: REACT_APP_SURA_URL
+          #     value: "$REACT_APP_SURA_URL"
+          #   - name: REACT_APP_SUBSCRIPTION_ID
+          #     value: "$REACT_APP_SUBSCRIPTION_ID"
+          #   - name: REACT_APP_RESOURCE_GROUP_NAME
+          #     value: "$REACT_APP_RESOURCE_GROUP_NAME"
+          #   - name: REACT_APP_SERVICE_NAME
+          #     value: "$REACT_APP_SERVICE_NAME"
+          #   - name: REACT_APP_API_VERSION
+          #     value: "$REACT_APP_API_VERSION"
+          #   - name: REACT_APP_REMEMBER_KEY
+          #     value: "$REACT_APP_REMEMBER_KEY"
+          #   - name: REACT_APP_PRIMARY_KEY
+          #     value: "$REACT_APP_PRIMARY_KEY"
+          #   - name: REACT_APP_APIM_UID
+          #     value: "$REACT_APP_APIM_UID"
+          #   - name: REACT_APP_TOKEN_VALID_DAYS
+          #     value: "$REACT_APP_TOKEN_VALID_DAYS"
+          #   - name: REACT_APP_LIST_API_TOP
+          #     value: "$REACT_APP_LIST_API_TOP"
+          #   - name: REACT_APP_LIST_PRODUCT_APIS_TOP
+          #     value: "$REACT_APP_LIST_PRODUCT_APIS_TOP"
+          #   - name: REACT_APP_LIST_PRODUCT_TOP
+          #     value: "$REACT_APP_LIST_PRODUCT_TOP"
+          #   - name: REACT_APP_LIST_SUBSCRIPTIONS
+          #     value: "$REACT_APP_LIST_SUBSCRIPTIONS"
+          #   - name: WDS_SOCKET_PORT
+          #     value: "$WDS_SOCKET_PORT"
+          #   - name: REACT_APP_HOME_PAGE_SLUG
+          #     value: "$REACT_APP_HOME_PAGE_SLUG"
+          #   - name: REACT_APP_BLOG_PAGE_SLUG
+          #     value: "$REACT_APP_BLOG_PAGE_SLUG"
+          #   - name: REACT_APP_FAQ_PAGE_SLUG
+          #     value: "$REACT_APP_FAQ_PAGE_SLUG"
+          #   - name: REACT_APP_APIS_PAGE_SLUG
+          #     value: "$REACT_APP_APIS_PAGE_SLUG"
+          #   - name: REACT_APP_EMAIL_ENDPOINT
+          #     value: "$REACT_APP_EMAIL_ENDPOINT"
+          #   - name: REACT_APP_API_KEY_SEND_GRID
+          #     value: "$REACT_APP_API_KEY_SEND_GRID"
+          #   - name: REACT_APP_EMAIL_SUBSCRIPTION_KEY
+          #     value: "$REACT_APP_EMAIL_SUBSCRIPTION_KEY"
+          #   - name: REACT_APP_EMAIL_FROM
+          #     value: "$REACT_APP_EMAIL_FROM"
+          #   - name: REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID
+          #     value: "$REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID"
+          #   - name: REACT_APP_EMAIL_CONTACT_TEMPLATE_ID
+          #     value: "$REACT_APP_EMAIL_CONTACT_TEMPLATE_ID"
           resources:
             requests:
               cpu: "500m"
