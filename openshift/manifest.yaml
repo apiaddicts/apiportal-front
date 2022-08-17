@@ -17,7 +17,7 @@ spec:
           image: $ACR_IMAGE
           ports:
             - containerPort: $APP_PORT
-          #     name: $APP_PORT_NAME
+              name: $APP_PORT_NAME
           # env:
           #   - name: REACT_APP_STRAPI_URL
           #     value: "$REACT_APP_STRAPI_URL"
