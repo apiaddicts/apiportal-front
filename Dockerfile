@@ -74,9 +74,8 @@ RUN npm run build
 #EXPOSE 3000
 #CMD [ "npm", "run", "start" ]
 
-FROM nginx:1.23
+FROM nginxinc/nginx-unprivileged:1.23
 COPY --from=build-stage /usr/src/app/build/ /usr/share/nginx/html
 COPY --from=build-stage /usr/src/app/nginx.conf /etc/nginx/conf.d/default.conf
-RUN chgrp -R root /var/cache/nginx /var/run /var/log/nginx && chmod -R 770 /var/cache/nginx /var/run /var/log/nginx
-EXPOSE 8081
-CMD ["nginx", "-g", "daemon off;"]
+# EXPOSE 8081
+# CMD ["nginx", "-g", "daemon off;"]
