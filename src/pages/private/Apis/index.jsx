@@ -20,9 +20,10 @@ function Apis(props) {
   const [search, setSearch] = useState('');
 
   const handleChangeSearchFilter = (text) => {
-    if (text.trim().length >= 3) {
-      dispatch(searchApis(text));
-      setSearch(text);
+    const filterText = text.replace(/[/[`&\/\\#,@|!+()$~%.'":*?<>\]{}]/g, '');
+    if (filterText.trim().length >= 3) {
+      dispatch(searchApis(filterText));
+      setSearch(filterText);
     }
 
     if (text.trim().length < 3) {

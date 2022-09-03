@@ -1,0 +1,7 @@
+const policyConstants = {
+  GET_ALL_POLICY_REQUEST: 'GET_ALL_POLICY_REQUEST',
+  GET_ALL_POLICY_SUCCESS: 'GET_ALL_POLICY_SUCCESS',
+  GET_ALL_POLICY_FAILURE: 'GET_ALL_POLICY_FAILURE',
+};
+
+export default policyConstants;
