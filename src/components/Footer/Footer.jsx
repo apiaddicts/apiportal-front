@@ -17,6 +17,7 @@ import Button from '../Buttons/Button';
 import InputUI from '../Input/InputUI/InputUI';
 import TextAreaUI from '../Input/InputUI/TextAreaUI';
 import SelectUI from '../Input/InputUI/SelectUI';
+import config from '../../services/config';
 
 function Footer({ isPrivate }) {
 
@@ -210,7 +211,7 @@ function Footer({ isPrivate }) {
                         {' '}
                         Acepto recibir correos de acuerdo con los siguientes
                         {' '}
-                        <a href=''>términos y condiciones.</a>
+                        <a href={config.termsPath}>términos y condiciones.</a>
                         {' '}
                       </span>
                     </div>
@@ -238,7 +239,9 @@ function Footer({ isPrivate }) {
         </div>
         <div className={classes.policies}>
           <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3 mb-2'>Política de</h1>
-          <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>Privacidad de datos</p>
+          <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>
+            <a href={config.policyPath} className='text__gray__gray_lighten-3'>Privacidad de datos</a>
+          </p>
         </div>
 
       </div>

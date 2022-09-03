@@ -1,3 +1,6 @@
+/* eslint-disable */
+import config from "../../services/config";
+
 const email = localStorage.getItem('email') === null ? '' : localStorage.getItem('email');
 let password = '';
 if (localStorage.getItem('password') !== null) {
@@ -83,7 +86,7 @@ export const fieldsRegister = [
     id: 'terms',
     type: 'checkbox',
     name: 'terms',
-    label: 'Acepto recibir correos de acuerdo con los siguientes <b>terminos y condiciones</b>',
+    label: `Acepto recibir correos de acuerdo con los siguientes [terminos y condiciones](${config.termsPath})`,
     initialValue: false,
     required: true,
   },
