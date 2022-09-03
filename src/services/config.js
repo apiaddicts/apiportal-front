@@ -35,13 +35,18 @@ const config = {
   blogPageSlug: process.env.REACT_APP_BLOG_PAGE_SLUG,
   faqPageSlug: process.env.REACT_APP_FAQ_PAGE_SLUG,
   apisPageSlug: process.env.REACT_APP_APIS_PAGE_SLUG,
+  termsPageSlug: process.env.REACT_APP_TERMS_PAGE_SLUG,
+  policyPageSlug: process.env.REACT_APP_POLICY_PAGE_SLUG,
   emailUrl: process.env.REACT_APP_EMAIL_ENDPOINT,
   apiKeySendGrid: process.env.REACT_APP_API_KEY_SEND_GRID,
   subscriptionKey: process.env.REACT_APP_EMAIL_SUBSCRIPTION_KEY,
   emailFrom: process.env.REACT_APP_EMAIL_FROM,
+  emailTo: process.env.REACT_APP_EMAIL_TO,
   emailConversationTemplateId: process.env.REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID,
   emailContactTemplateId: process.env.REACT_APP_EMAIL_CONTACT_TEMPLATE_ID,
   locale: 'es',
+  termsPath: '/user/terms',
+  policyPath: '/user/policy-privacy',
 };
 
 export default config;

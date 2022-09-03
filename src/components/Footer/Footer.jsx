@@ -17,6 +17,7 @@ import Button from '../Buttons/Button';
 import InputUI from '../Input/InputUI/InputUI';
 import TextAreaUI from '../Input/InputUI/TextAreaUI';
 import SelectUI from '../Input/InputUI/SelectUI';
+import config from '../../services/config';
 
 function Footer({ isPrivate }) {
 
@@ -42,6 +43,7 @@ function Footer({ isPrivate }) {
       email: '',
       phone: '',
       subject: '',
+      message: '',
       sendMailTerms: false,
     },
     validateOnChange: true,
@@ -52,7 +54,7 @@ function Footer({ isPrivate }) {
       phone: Yup.string().phone('MX', true, 'Debe ingresar un número telefonico válido').required('Campo requerido'),
       // topic: Yup.string().required('Campo requerido'),
       subject: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(70, 'Se ha excedido el número de caracteres permitidos'),
-      // message: Yup.string().length(50, 'Limite de caracteres 50').required('Campo requerido'),
+      message: Yup.string().required('Campo requerido'),
       sendMailTerms: Yup.bool().oneOf([true], 'Debes aceptar los terminos y condiciones'),
     }),
     onSubmit: (values) => {
@@ -190,7 +192,17 @@ function Footer({ isPrivate }) {
                     </div>
                     <div className='row justify-center'>
                       <div className='flex-sm-12 flex-md-8 flex-lg-8 pb-5'>
-                        <TextAreaUI label='Mensaje' counter={50} />
+                        <TextAreaUI
+                          name='message'
+                          id='message'
+                          label='Mensaje'
+                          touched={formik.touched.message}
+                          errors={formik.errors.message}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          value={formik.values.message}
+                          counter={50}
+                        />
                       </div>
                     </div>
                   </div>
@@ -210,7 +222,7 @@ function Footer({ isPrivate }) {
                         {' '}
                         Acepto recibir correos de acuerdo con los siguientes
                         {' '}
-                        <a href=''>términos y condiciones.</a>
+                        <a href={config.termsPath}>términos y condiciones.</a>
                         {' '}
                       </span>
                     </div>
@@ -238,7 +250,9 @@ function Footer({ isPrivate }) {
         </div>
         <div className={classes.policies}>
           <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3 mb-2'>Política de</h1>
-          <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>Privacidad de datos</p>
+          <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>
+            <a href={config.policyPath} className='text__gray__gray_lighten-3'>Privacidad de datos</a>
+          </p>
         </div>
 
       </div>
