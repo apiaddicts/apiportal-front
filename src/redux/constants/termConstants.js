@@ -1,0 +1,7 @@
+const termConstants = {
+  GET_ALL_TERM_REQUEST: 'GET_ALL_TERM_REQUEST',
+  GET_ALL_TERM_SUCCESS: 'GET_ALL_TERM_SUCCESS',
+  GET_ALL_TERM_FAILURE: 'GET_ALL_TERM_FAILURE',
+};
+
+export default termConstants;

@@ -7,11 +7,13 @@ import useFormConfig from '../../../hooks/useForm';
 import Button from '../../Buttons/Button';
 import { fieldsRegister } from '../fields';
 import { signUp } from '../../../redux/actions/userAction';
+import CustomMarkdown from '../../CustomMarkdown';
 
 import './index.scss';
 
 function CreateAccount({ setOpenForm, setIsOpen }) {
   const dispatch = useDispatch();
+  const checkboxTermsLabel = fieldsRegister.filter((field) => field.type === 'checkbox').map((item) => item.label)[0];
 
   const handleSubmit = async (values) => {
     const data = {
@@ -73,9 +75,7 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
                   ))
               }
               <p className={` ${formConfig.errors.terms ? 'text__error' : ''}`}>
-                Acepto recibir correos de acuerdo con los siguientes
-                {' '}
-                <span>términos y condiciones.</span>
+                <CustomMarkdown content={checkboxTermsLabel} />
               </p>
             </div>
           </div>
