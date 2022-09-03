@@ -30,15 +30,14 @@ function sendContactMail(values) {
 
 function sendConversationMail(values) {
   const data = {
-    'to': values.email,
+    'to': config.emailTo,
     'from': config.emailFrom,
     'templateId': config.emailConversationTemplateId,
-    'dynamicTemplateData': {
-      'SUBJECT': values.subject,
-      'NOMBRE_COMPLETO': `${values.name} ${values.lastname}`,
-      'PHONE': values.phone,
-    },
+    'dynamicTemplateData': values,
   };
+
+  console.log('data', data);
+
   const requestOptions = {
     method: 'POST',
     headers: {

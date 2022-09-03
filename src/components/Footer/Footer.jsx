@@ -42,6 +42,7 @@ function Footer({ isPrivate }) {
       email: '',
       phone: '',
       subject: '',
+      message: '',
       sendMailTerms: false,
     },
     validateOnChange: true,
@@ -52,7 +53,7 @@ function Footer({ isPrivate }) {
       phone: Yup.string().phone('MX', true, 'Debe ingresar un número telefonico válido').required('Campo requerido'),
       // topic: Yup.string().required('Campo requerido'),
       subject: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(70, 'Se ha excedido el número de caracteres permitidos'),
-      // message: Yup.string().length(50, 'Limite de caracteres 50').required('Campo requerido'),
+      message: Yup.string().required('Campo requerido'),
       sendMailTerms: Yup.bool().oneOf([true], 'Debes aceptar los terminos y condiciones'),
     }),
     onSubmit: (values) => {
@@ -190,7 +191,17 @@ function Footer({ isPrivate }) {
                     </div>
                     <div className='row justify-center'>
                       <div className='flex-sm-12 flex-md-8 flex-lg-8 pb-5'>
-                        <TextAreaUI label='Mensaje' counter={50} />
+                        <TextAreaUI
+                          name='message'
+                          id='message'
+                          label='Mensaje'
+                          touched={formik.touched.message}
+                          errors={formik.errors.message}
+                          onChange={formik.handleChange}
+                          onBlur={formik.handleBlur}
+                          value={formik.values.message}
+                          counter={50}
+                        />
                       </div>
                     </div>
                   </div>
