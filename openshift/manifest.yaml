@@ -69,6 +69,8 @@ spec:
           #     value: "$REACT_APP_EMAIL_SUBSCRIPTION_KEY"
           #   - name: REACT_APP_EMAIL_TO
           #     value: "$REACT_APP_EMAIL_TO"
+          #   - name: REACT_APP_EMAIL_FROM
+          #     value: "$REACT_APP_EMAIL_FROM"
           #   - name: REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID
           #     value: "$REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID"
           #   - name: REACT_APP_EMAIL_CONTACT_TEMPLATE_ID
