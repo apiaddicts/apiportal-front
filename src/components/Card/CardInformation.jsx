@@ -6,6 +6,7 @@ import { HashLink } from 'react-router-hash-link';
 import { MdEast } from 'react-icons/md';
 import Chip from '../Chip/Chip';
 import Base from './Base';
+import config from '../../services/config';
 import './cards.scss';
 
 function CardInformation({ img, buttons, title, description, reading, info, maxWidth, version, status, colorStatus, theme, blog, modal, link, css_styles, blogTitle, id }) {
@@ -30,7 +31,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
         <Base maxWidth={maxWidth} css_styles={css_styles}>
           {img && (
             <div className='card-header'>
-              <img src={img} alt='' />
+              <img src={img !== '' ? img : config.notImage} alt='' />
             </div>
           )}
           {version && status && (
@@ -89,7 +90,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
         <Base maxWidth={maxWidth} css_styles={css_styles}>
           {img && (
             <div className='card-header'>
-              <img src={img} alt='' />
+              <img src={img !== '' ? img : config.notImage} alt='' />
             </div>
           )}
           {version && status && (
