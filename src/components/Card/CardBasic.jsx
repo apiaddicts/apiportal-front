@@ -5,6 +5,7 @@ import { MdEast } from 'react-icons/md';
 import { HashLink } from 'react-router-hash-link';
 import Chip from '../Chip/Chip';
 import Icon from '../MdIcon/Icon';
+import config from '../../services/config';
 import Base from './Base';
 
 import './cards.scss';
@@ -33,7 +34,7 @@ function CardBasic({ chipTitle, title, img, description, info, route, maxWidth, 
           <div>
             {img ? (
               <picture>
-                <img className='card_img' src={img} alt={img} />
+                <img className='card_img' src={img !== '' ? img : config.notImage} alt={img} />
               </picture>
             ) : (null, null)}
             <section className='card_container'>

@@ -91,7 +91,7 @@
   font-size: 0.75rem;
   color: #e4002b !important;
   &__input__error {
-    input {
+    input, textarea {
       border: 2px solid #e4002b;
     }
   }
@@ -114,6 +114,17 @@
   position: absolute;
   right: 1rem;
   top: 1rem;
+  font-size: 25px;
+  color: rgba(0, 0, 0, 0.38);
+  &__error {
+    color: #e4002b;
+  }
+}
+
+.textarea_wrapper__icon {
+  position: absolute;
+  right: 1rem;
+  top: 2rem;
   font-size: 25px;
   color: rgba(0, 0, 0, 0.38);
   &__error {

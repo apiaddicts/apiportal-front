@@ -35,6 +35,7 @@ function Footer({ isPrivate }) {
   const [contactForm, setContactForm] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
+  const [displaySubmit, setDisplaySubmit] = useState(true);
 
   const formik = useFormik({
     initialValues: {
@@ -59,17 +60,20 @@ function Footer({ isPrivate }) {
     }),
     onSubmit: (values) => {
       //Handle envio de correo de contacto
+      setDisplaySubmit(false);
       dispatch(sendConversationMail(values));
     },
   });
 
   useEffect(() => {
-    if (mail?.mailConversationtError?.ok === false) {
+    if (mail?.mailConversationError?.ok === false) {
       setError(true);
       setTimeout(() => { setError(false); }, 2000);
+      setDisplaySubmit(true);
     } else if (mail?.mailConversation?.ok) {
       setSuccess(true);
       setTimeout(() => { setSuccess(false); }, 2000);
+      setDisplaySubmit(true);
     }
   }, [mail]);
 
@@ -231,9 +235,14 @@ function Footer({ isPrivate }) {
               </div>
               <div className='row mb-5 mt-10 justify-center'>
                 <div className='flex-md-4 flex-lg-3 flex-sm-12'>
-                  <Button styles='secundary' type='submit'>
-                    ¡Estoy interesado!
-                  </Button>
+                  {
+                    displaySubmit &&
+                    (
+                      <Button styles='secundary' type='submit'>
+                        ¡Estoy interesado!
+                      </Button>
+                    )
+                  }
                 </div>
               </div>
             </div>

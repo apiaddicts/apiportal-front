@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
-
+import config from '../../services/config';
 import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
 import classes from './banner.module.scss';
@@ -81,7 +81,7 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
           </div>
           <img
             className={`${classes.banner_img__img} ${classes[image_display]}`}
-            src={img !== '' ? img : ''}
+            src={img !== '' ? img : config.notImage}
             alt=''
           />
         </div>
