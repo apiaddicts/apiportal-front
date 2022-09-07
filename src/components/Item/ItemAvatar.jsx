@@ -1,4 +1,5 @@
 import React from 'react';
+import config from '../../services/config';
 import classes from './avatar.module.scss';
 
 function ItemAvatar({ img, title, paragraph, border, divider, css_styles }) {
@@ -8,7 +9,7 @@ function ItemAvatar({ img, title, paragraph, border, divider, css_styles }) {
   return (
     <div className={`${classes.item} ${border ? classes.item__border : null}`}>
       <div className={classes.item__avatar}>
-        <img src={img} alt='' className={classes.item__avatar__img} />
+        <img src={img !== '' ? img : config.notImage} alt='' className={classes.item__avatar__img} />
       </div>
       <div className={classes.item__content}>
         <div className={`${classes.item__content__title} ${custom_title}`}>
