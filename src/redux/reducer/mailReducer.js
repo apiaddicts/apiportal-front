@@ -30,7 +30,7 @@ export default function mailReducer(state = initialState, action) {
     case mailConstants.GET_ALL_MAIL_CONVERSATION_FAILURE:
       return {
         ...state,
-        mailConversationtError: action.payload,
+        mailConversationError: action.payload,
       };
     default:
       return state;

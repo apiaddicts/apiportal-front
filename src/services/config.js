@@ -47,6 +47,7 @@ const config = {
   locale: 'es',
   termsPath: '/user/terms',
   policyPath: '/user/policy-privacy',
+  notImage: '/notImage.svg',
 };
 
 export default config;

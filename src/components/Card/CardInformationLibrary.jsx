@@ -6,6 +6,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { MdEast } from 'react-icons/md';
 import Chip from '../Chip/Chip';
 import Base from './Base';
+import config from '../../services/config';
 import './cards.scss';
 
 import libraryService from '../../services/libraryService';
@@ -52,7 +53,7 @@ function CardInformationLibrary({ apiName, img, title, description, reading, inf
       <Base maxWidth={maxWidth} css_styles={css_styles}>
         {img && (
           <div className='card-header'>
-            <img src={img} alt='' />
+            <img src={img !== '' ? img : config.notImage} alt='' />
           </div>
         )}
         {version && status && (
@@ -102,7 +103,7 @@ function CardInformationLibrary({ apiName, img, title, description, reading, inf
       <Base maxWidth={maxWidth} css_styles={css_styles}>
         {img && (
           <div className='card-header'>
-            <img src={img} alt='' />
+            <img src={img !== '' ? img : config.notImage} alt='' />
           </div>
         )}
         {version && status && (

@@ -57,6 +57,10 @@ spec:
           #     value: "$REACT_APP_FAQ_PAGE_SLUG"
           #   - name: REACT_APP_APIS_PAGE_SLUG
           #     value: "$REACT_APP_APIS_PAGE_SLUG"
+          #   - name: REACT_APP_TERMS_PAGE_SLUG
+          #     value: "$REACT_APP_TERMS_PAGE_SLUG"
+          #   - name: REACT_APP_POLICY_PAGE_SLUG
+          #     value: "$REACT_APP_POLICY_PAGE_SLUG"
           #   - name: REACT_APP_EMAIL_ENDPOINT
           #     value: "$REACT_APP_EMAIL_ENDPOINT"
           #   - name: REACT_APP_API_KEY_SEND_GRID
@@ -65,6 +69,8 @@ spec:
           #     value: "$REACT_APP_EMAIL_SUBSCRIPTION_KEY"
           #   - name: REACT_APP_EMAIL_TO
           #     value: "$REACT_APP_EMAIL_TO"
+          #   - name: REACT_APP_EMAIL_FROM
+          #     value: "$REACT_APP_EMAIL_FROM"
           #   - name: REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID
           #     value: "$REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID"
           #   - name: REACT_APP_EMAIL_CONTACT_TEMPLATE_ID
