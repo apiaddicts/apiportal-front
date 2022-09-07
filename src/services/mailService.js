@@ -36,8 +36,6 @@ function sendConversationMail(values) {
     'dynamicTemplateData': values,
   };
 
-  console.log('data', data);
-
   const requestOptions = {
     method: 'POST',
     headers: {
