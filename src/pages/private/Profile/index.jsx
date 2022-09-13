@@ -103,7 +103,7 @@ function Profile() {
                         className='fs__16 text__primary ls_05 font-weight-bold ml-3 mb-2 cpointer'
                         onClick={() => setDisplayRestorePassword(!displayRestorePassword)}
                       >
-                        Restablecer password
+                        Restablecer contraseña
                       </div>
                     </div>
                     <div className='flex-lg-3 flex-sm-12 display_flex align_items__bottom justify_content__end ml-auto mb-2'>

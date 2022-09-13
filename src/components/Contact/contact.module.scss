@@ -10,7 +10,7 @@
     justify-content: center;
     align-items: center;
     background-color: $gray_lighten-1;
-    height: 505px;
+    min-height: 505px;
     @include breakpoint(xs) {
         height: 615px !important;
     }

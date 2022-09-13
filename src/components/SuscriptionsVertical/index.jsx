@@ -75,7 +75,7 @@ function SuscriptionsVertical({ user, suscriptions, title, productId = '' }) {
                   }
                 </>
               ) : (
-                <h3 style={{ width: '100%', textAlign: 'center', color: '#53565A', fontSize: '1rem' }}>Informacion no disponible</h3>
+                <h3 style={{ width: '100%', textAlign: 'center', color: '#53565A', fontSize: '1rem' }}>Información no disponible</h3>
               )
             }
           </>
