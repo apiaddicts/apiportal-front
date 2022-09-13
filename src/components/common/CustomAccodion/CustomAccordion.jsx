@@ -70,7 +70,7 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                       subItem === 0 ? (
                         <div>
                           <div className={classes.accordion__body__title}>
-                            <h1>Titulo</h1>
+                            <h1>Título</h1>
                             <p>
                               {items.properties.displayName}
                             </p>
@@ -84,7 +84,7 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                           </div>
 
                           <div className={classes.accordion__body__title}>
-                            <h1>Protocols</h1>
+                            <h1>Protocolo</h1>
                             <p>
                               {
                                 items.properties.protocols.map((protocol, index) => {
@@ -94,7 +94,7 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                             </p>
                           </div>
                           <div className={classes.accordion__body__title}>
-                            <h1>URI Live:</h1>
+                            <h1>URI:</h1>
                             <code className={classes.scopes__code}>{`https://${hostname}/${items.properties.path}/${items.properties.apiVersion}/`}</code>
                           </div>
                         </div>

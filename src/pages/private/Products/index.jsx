@@ -125,14 +125,14 @@ function Products(props) {
                         <TableCell>
                           <>
                             <div className={classes.cell_title}>
-                              <h2 className='text-uppercase'>Descripcion</h2>
+                              <h2 className='text-uppercase'>Descripción</h2>
                               <Icon id='MdExpandMore' />
                             </div>
                             <div style={{ height: '36px', marginTop: '14px' }}>
                               <InputResponse
                                 name='description'
                                 type='text'
-                                label='Buscar Descripcion'
+                                label='Buscar Descripción'
                                 onChange={(e) => {
                                   formik.handleChange(e);
                                   formik.setFieldValue('name', '');

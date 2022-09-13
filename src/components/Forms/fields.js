@@ -86,7 +86,7 @@ export const fieldsRegister = [
     id: 'terms',
     type: 'checkbox',
     name: 'terms',
-    label: `Acepto recibir correos de acuerdo con los siguientes [terminos y condiciones](${config.termsPath})`,
+    label: `Acepto recibir correos de acuerdo con los siguientes [términos y condiciones](${config.termsPath})`,
     initialValue: false,
     required: true,
   },
