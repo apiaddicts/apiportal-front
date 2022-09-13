@@ -22,7 +22,7 @@ function RestorePasswordForm({ userEmail, display }) {
       id: 'password',
       initialValue: '',
       placeholder: '********',
-      label: 'Password',
+      label: 'Contraseña',
       validate: 'password',
       required: true,
       type: 'password',
@@ -31,7 +31,7 @@ function RestorePasswordForm({ userEmail, display }) {
       id: 'new_password',
       initialValue: '',
       placeholder: '********',
-      label: 'Nueva Password',
+      label: 'Nueva Contraseña',
       validate: 'new_password',
       required: true,
       type: 'password',
@@ -40,7 +40,7 @@ function RestorePasswordForm({ userEmail, display }) {
       id: 'confirm_password',
       initialValue: '',
       placeholder: '********',
-      label: 'Confirmar Password',
+      label: 'Confirmar Contraseña',
       validate: 'confirm_password',
       required: true,
       type: 'password',
@@ -56,7 +56,7 @@ function RestorePasswordForm({ userEmail, display }) {
           key={Math.floor(Math.random() * 100) + 1}
           css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
           alert_type='alert__danger'
-          title='Error with password'
+          title='Error con contraseña'
         />
         <div className='row'>
           {restorePasswordFields.map((field, i) => (

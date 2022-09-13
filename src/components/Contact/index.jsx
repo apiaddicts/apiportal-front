@@ -28,6 +28,8 @@ function Contact({ css_styles, pathname }) {
       email: Yup.string().email('Correo electrónico inválido').required('Campo requerido'),
     }),
     onSubmit: (values) => {
+      setError(false);
+      setSuccess(false);
       dispatch(sendContactMail(values));
       setSuccess(true);
     },
@@ -61,11 +63,7 @@ function Contact({ css_styles, pathname }) {
           </div>
           {
             error && (
-              <div className='row justify-center'>
-                <div className='flex-sm-12 flex-md-8 flex-lg-8 pb-5'>
-                  <Alert severity='error' className='mb-5'>Ups!! Ocurrio un error, vuelve a intentarlo</Alert>
-                </div>
-              </div>
+              <Alert severity='error' className='mb-5'>Ups!! Ocurrio un error, vuelve a intentarlo</Alert>
             )
           }
           {

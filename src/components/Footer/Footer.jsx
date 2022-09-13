@@ -52,11 +52,11 @@ function Footer({ isPrivate }) {
       name: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
       lastname: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
       email: Yup.string().email('Correo electrónico inválido').required('Campo requerido'),
-      phone: Yup.string().phone('MX', true, 'Debe ingresar un número telefonico válido').required('Campo requerido'),
+      phone: Yup.string().phone('MX', true, 'Debe ingresar un número telefónico válido').required('Campo requerido'),
       // topic: Yup.string().required('Campo requerido'),
       subject: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(70, 'Se ha excedido el número de caracteres permitidos'),
       message: Yup.string().required('Campo requerido'),
-      sendMailTerms: Yup.bool().oneOf([true], 'Debes aceptar los terminos y condiciones'),
+      sendMailTerms: Yup.bool().oneOf([true], 'Debes aceptar los términos y condiciones'),
     }),
     onSubmit: (values) => {
       //Handle envio de correo de contacto
@@ -254,7 +254,7 @@ function Footer({ isPrivate }) {
           <img src={SuraLogo} alt='' />
         </div>
         <div className={classes.email}>
-          <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3 mb-2'>Correo electronico</h1>
+          <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3 mb-2'>Correo electrónico</h1>
           <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>mxEmpresasSura@segurossura.com.mx</p>
         </div>
         <div className={classes.policies}>
