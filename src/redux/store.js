@@ -13,6 +13,7 @@ import apiReducer from './reducer/apiReducer';
 import mailReducer from './reducer/mailReducer';
 import termReducer from './reducer/termReducer';
 import policyReducer from './reducer/policyReducer';
+import timeReducer from './reducer/timeReducer';
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
@@ -28,6 +29,7 @@ const reducers = combineReducers({
   mail: mailReducer,
   term: termReducer,
   policy: policyReducer,
+  timer: timeReducer,
 });
 
 const store = createStore(
