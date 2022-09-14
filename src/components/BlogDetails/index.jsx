@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaTelegramPlane } from 'react-icons/fa';
 import moment from 'moment';
@@ -25,7 +24,7 @@ function BlogDetailsInfo({ styles, data }) {
         <div className={styles.blog__details__header__content}>
           <div className={styles.blog__details__header__title}>
             <p>{data.timeRead ? data.timeRead : 'Lectura de 5 min.'}</p>
-            <p>{data.created_at ? moment(data.created_at).format('LL') : '16 febrero del 2022'}</p>
+            <p>{data.created_at ? moment(data.date).format('LL') : '16 febrero del 2022'}</p>
           </div>
           <div className={styles.blog__details__header__tags}>
             {data.tags.length > 0 ? data.tags.map((tag, index) => (

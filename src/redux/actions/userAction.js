@@ -23,6 +23,7 @@ export const login = (data) => (dispatch) => {
           localStorage.setItem('password', secureKeyEncrypted);
         }
         localStorage.setItem('token', JSON.stringify(response));
+        /* ! TODO: Asisgnar tiempo de sesion */
         dispatch(getUser(response));
         dispatch(getUserEntityTag(response));
         dispatch({ type: userConstants.RESET_ALERT });
@@ -68,7 +69,7 @@ export const logout = () => (dispatch) => {
   dispatch({
     type: userConstants.LOGOUT_USER,
   });
-  window.location = '/';
+  // window.location = '/';
 };
 
 export const signUp = (data) => (dispatch) => {

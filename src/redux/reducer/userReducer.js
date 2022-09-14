@@ -163,6 +163,7 @@ export default function userReducer(state = initialState, action) {
         responseResetSignup: {},
         ResponseResetPwd: {},
         responseResetPwdError: {},
+        openModal: false,
       };
     case userConstants.SESSION_TIMEOUT:
       return {

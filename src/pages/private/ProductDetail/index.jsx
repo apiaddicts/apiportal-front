@@ -145,10 +145,10 @@ function ProductDetail(props) {
             {productSubscriptions && Object.keys(productSubscriptions).length > 0 && productSubscriptions.count > 0 ? (
               <>
                 <div className={classes.wrapper_subscriptions__wide__display}>
-                  <Suscriptions user={user} suscriptions={productSubscriptions} title='Suscripcion' productId={params.id}/>
+                  <Suscriptions user={user} suscriptions={productSubscriptions} title='Suscripción' productId={params.id}/>
                 </div>
                 <div className={classes.wrapper_subscriptions__small__display}>
-                  <SuscriptionsVertical user={user} suscriptions={productSubscriptions} title='Suscripcion' productId={params.id}/>
+                  <SuscriptionsVertical user={user} suscriptions={productSubscriptions} title='Suscripción' productId={params.id}/>
                 </div>
               </>
             ) : (
@@ -218,14 +218,14 @@ function ProductDetail(props) {
                           <>
 
                             <div className={classes.cell_title}>
-                              <h2>Descripcion</h2>
+                              <h2>Descripción</h2>
                               <Icon id='MdExpandMore' />
                             </div>
                             <div style={{ height: '36px', marginTop: '14px' }}>
                               <InputResponse
                                 name='description'
                                 type='text'
-                                label='Buscar Descripcion'
+                                label='Buscar Descripción'
                                 onChange={(e) => {
                                   formik.handleChange(e);
                                   formik.setFieldValue('name', '');
