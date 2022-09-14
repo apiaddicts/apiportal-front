@@ -3,6 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 
+import useTimer from '../../hooks/useTimer';
+import useVerifySession from '../../hooks/useVerifySession';
+
 import SidebarDrawer from '../../components/SidebarDrawer/SidebarDrawer';
 import CustomFooter from '../../components/common/CustomFooter/CustomFooter';
 import SkeletonComponent from '../../components/SkeletonComponent/SkeletonComponent';
@@ -24,6 +27,9 @@ import classes from './private-router.module.scss';
 function PrivateRouter({ children }) {
   // const [showModal, setShowModal] = useState(false);
   const { id, token, user, openModal } = useSelector((state) => state.user);
+  const { time } = useSelector((state) => state.timer);
+  const { checkSession } = useVerifySession();
+  const { getTime } = useTimer();
   const privateSession = id !== '' && token !== '';
   const dispatch = useDispatch();
 
@@ -34,13 +40,19 @@ function PrivateRouter({ children }) {
         token,
       };
       dispatch(getUser(tokens));
+      getTime();
     }
   }, []);
+
+  useEffect(() => {
+    checkSession();
+  }, [time]);
 
   return privateSession ? (
     <Box>
       {
-        openModal && (<Logout showModal={openModal} setShowModal={openModal} />)
+        openModal &&
+        (<Logout showModal={openModal} setShowModal={openModal} />)
       }
       {user && Object.keys(user).length > 0 ? (
         <Box>
