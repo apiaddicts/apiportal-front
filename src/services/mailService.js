@@ -2,12 +2,10 @@ import config from './config';
 
 function sendContactMail(values) {
   const data = {
-    'to': values.email,
+    'to': config.emailTo,
     'from': config.emailFrom,
     'templateId': config.emailContactTemplateId,
-    'dynamicTemplateData': {
-      'NOMBRE_COMPLETO': values.name,
-    },
+    'dynamicTemplateData': values,
   };
   const requestOptions = {
     method: 'POST',
@@ -18,7 +16,6 @@ function sendContactMail(values) {
     },
     body: JSON.stringify(data),
   };
-
   return fetch(config.emailUrl, requestOptions)
     .then((response) => {
       return response;
