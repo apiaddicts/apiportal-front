@@ -1,11 +1,19 @@
 import config from './config';
 
 function sendContactMail(values) {
+  let htmlContent = '<ul>';
+  Object.keys(values).forEach((key) => {
+    if (key !== 'subject') htmlContent += `<li>${key}: ${values[key]}</li>`;
+  });
+  htmlContent += '</ul>';
   const data = {
     'to': config.emailTo,
     'from': config.emailFrom,
     'templateId': config.emailContactTemplateId,
-    'dynamicTemplateData': values,
+    'dynamicTemplateData': {
+      'SUBJECT': values.subject,
+      'CONTENIDO': htmlContent,
+    },
   };
   const requestOptions = {
     method: 'POST',
@@ -26,11 +34,19 @@ function sendContactMail(values) {
 }
 
 function sendConversationMail(values) {
+  let htmlContent = '<ul>';
+  Object.keys(values).forEach((key) => {
+    if (key !== 'subject') htmlContent += `<li>${key}: ${values[key]}</li>`;
+  });
+  htmlContent += '</ul>';
   const data = {
     'to': config.emailTo,
     'from': config.emailFrom,
     'templateId': config.emailConversationTemplateId,
-    'dynamicTemplateData': values,
+    'dynamicTemplateData': {
+      'SUBJECT': values.subject,
+      'CONTENIDO': htmlContent,
+    },
   };
 
   const requestOptions = {
