@@ -3,7 +3,7 @@ import config from './config';
 function sendContactMail(values) {
   let htmlContent = '<ul>';
   Object.keys(values).forEach((key) => {
-    if (key !== 'subject') htmlContent += `<li>${key}: ${values[key]}</li>`;
+    htmlContent += `<li>${key}: ${values[key]}</li>`;
   });
   htmlContent += '</ul>';
   const data = {
@@ -11,7 +11,7 @@ function sendContactMail(values) {
     'from': config.emailFrom,
     'templateId': config.emailContactTemplateId,
     'dynamicTemplateData': {
-      'SUBJECT': values.subject,
+      'SUBJECT': 'Sigamos conectados',
       'CONTENIDO': htmlContent,
     },
   };
@@ -36,7 +36,7 @@ function sendContactMail(values) {
 function sendConversationMail(values) {
   let htmlContent = '<ul>';
   Object.keys(values).forEach((key) => {
-    if (key !== 'subject') htmlContent += `<li>${key}: ${values[key]}</li>`;
+    htmlContent += `<li>${key}: ${values[key]}</li>`;
   });
   htmlContent += '</ul>';
   const data = {
@@ -44,7 +44,7 @@ function sendConversationMail(values) {
     'from': config.emailFrom,
     'templateId': config.emailConversationTemplateId,
     'dynamicTemplateData': {
-      'SUBJECT': values.subject,
+      'SUBJECT': '¿Conversamos?',
       'CONTENIDO': htmlContent,
     },
   };
