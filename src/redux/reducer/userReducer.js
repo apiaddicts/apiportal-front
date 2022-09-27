@@ -1,6 +1,6 @@
 import userConstants from '../constants/userConstats';
 
-const token = JSON.parse(localStorage.getItem('token'));
+const token = JSON.parse(sessionStorage.getItem('token'));
 const etag = JSON.parse(localStorage.getItem('If-Match'));
 
 const initialState = token && etag ? {
