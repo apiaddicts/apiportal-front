@@ -22,7 +22,7 @@ export const login = (data) => (dispatch) => {
           localStorage.setItem('email', data.email);
           localStorage.setItem('password', secureKeyEncrypted);
         }
-        localStorage.setItem('token', JSON.stringify(response));
+        sessionStorage.setItem('token', JSON.stringify(response));
         /* ! TODO: Asisgnar tiempo de sesion */
         dispatch(getUser(response));
         dispatch(getUserEntityTag(response));
