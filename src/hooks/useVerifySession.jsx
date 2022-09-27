@@ -7,7 +7,7 @@ const useVerifySession = () => {
   const { time } = useSelector((state) => state.timer);
 
   const getTimeSessionToken = () => {
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     if (token === undefined || token === null) { return null; };
     const sessionTime = token.split('&');
     if (sessionTime[1] !== null) {

@@ -26,6 +26,7 @@ function RestorePasswordForm({ userEmail, display }) {
       validate: 'password',
       required: true,
       type: 'password',
+      label_message: 'La contraseña actual es obligatoria',
     },
     {
       id: 'new_password',
@@ -35,6 +36,7 @@ function RestorePasswordForm({ userEmail, display }) {
       validate: 'new_password',
       required: true,
       type: 'password',
+      label_message: 'La nueva contraseña es obligatoria',
     },
     {
       id: 'confirm_password',
@@ -44,6 +46,7 @@ function RestorePasswordForm({ userEmail, display }) {
       validate: 'confirm_password',
       required: true,
       type: 'password',
+      label_message: 'La confirmación de contraseña es obligatoria',
     },
   ];
 
