@@ -855,8 +855,11 @@ a {
   &__white{
     color: #fff;
   }
+  &__gray__lighten {
+    color: $gray_lighten-4;
+  }
   &__dark__grey {
-    color: $primary_text;
+    color: $gray_darken-2;
   }
 }
 

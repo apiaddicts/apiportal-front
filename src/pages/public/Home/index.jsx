@@ -186,7 +186,7 @@ function Home({ setIsOpen }) {
                         </HashLink>
                       ) : (
                         <HashLink smooth to='/#data'>
-                          <Button styles='greey-primary'>
+                          <Button styles='primary-blue'>
                             {button?.title}
                           </Button>
                         </HashLink>
@@ -312,7 +312,7 @@ function Home({ setIsOpen }) {
               redirect={filterHomeBannerNameType}
             />
           </section>
-
+          {/* Novedades */}
           <section className={`${classes.section__news} ${classes.section__news__content}`}>
             <div className='container'>
               <div className='row'>
@@ -321,7 +321,7 @@ function Home({ setIsOpen }) {
                 </div>
 
                 <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
-                  <p className='body-1 secondary-font text__accent font-weight-bold'>{filterWorks && filterWorks.length > 2 && filterWorks[2]?.subtitle ? filterWorks[2]?.subtitle : ''}</p>
+                  <p className='body-1 secondary-font text__gray__lighten'>{filterWorks && filterWorks.length > 2 && filterWorks[2]?.subtitle ? filterWorks[2]?.subtitle : ''}</p>
                 </div>
               </div>
             </div>
