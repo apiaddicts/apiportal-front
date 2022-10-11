@@ -186,7 +186,7 @@ function Home({ setIsOpen }) {
                         </HashLink>
                       ) : (
                         <HashLink smooth to='/#data'>
-                          <Button styles={button?.keyword}>
+                          <Button styles='greey-primary'>
                             {button?.title}
                           </Button>
                         </HashLink>
@@ -213,7 +213,7 @@ function Home({ setIsOpen }) {
             </div>
             <div className='row d-xs-none'>
               <div className='flex-md-12 flex-sm-12'>
-                <p className={`subtitle-1 mb-10 text__accent secondary-font font-weight-bold ${classes.section__discover__subtitle}`}>
+                <p className={`subtitle-1 mb-10 text__dark__grey primary-font ${classes.section__discover__subtitle}`}>
                   {filterDiscoverSubtitle || ''}
                 </p>
               </div>

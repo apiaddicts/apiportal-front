@@ -63,7 +63,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
                 </Button>
               </li>
               <li>
-                <Button type='button' styles='secundary' size='small' style={{ width: '140px', height: '32px' }} onClick={() => { setOpenForm(true); }}>
+                <Button type='button' styles='primary-blue' size='small' style={{ width: '140px', height: '32px' }} onClick={() => { setOpenForm(true); }}>
                   regístrate
                 </Button>
               </li>

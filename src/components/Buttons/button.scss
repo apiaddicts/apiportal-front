@@ -44,9 +44,8 @@
   &__icon {
     font-size: 22px;
     text-align: center;
-    color: $secondary;
+    color: $primary;
   }
-
 }
 
 .btn-none {
@@ -56,7 +55,7 @@
 .btn-secundary {
   @include button-bg($secondary);
   @include letter($secondary_white);
-  @include border(#00aec7);
+  @include border($secondary);
 }
 
 .btn-primary {
@@ -85,7 +84,7 @@
 .btn-ghost-variant {
   @include button-bg($secondary_white);
   @include letter($primary);
-  @include border($secondary);
+  @include border($primary);
 }
 
 .btn-tertiary-white {

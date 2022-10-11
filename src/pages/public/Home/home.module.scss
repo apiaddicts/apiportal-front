@@ -109,7 +109,7 @@
   &__buttons {
     display: grid;
     gap: 2rem;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 210px));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 250px));
     @include breakpoint(xs) {
       gap: 0.5rem;
       grid-template-columns: repeat(auto-fit, minmax(100px, 100%));

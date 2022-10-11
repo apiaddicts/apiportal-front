@@ -855,6 +855,9 @@ a {
   &__white{
     color: #fff;
   }
+  &__dark__grey {
+    color: $primary_text;
+  }
 }
 
 .w-5 {

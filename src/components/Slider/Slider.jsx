@@ -98,7 +98,7 @@ function Slider({ slides }) {
 
                               ) : (
                                 <HashLink smooth to='/#data'>
-                                  <Button styles={i?.type} onClick={() => handleClick(i?.route)}>
+                                  <Button styles='primary-blue' onClick={() => handleClick(i?.route)}>
                                     {i?.label}
                                   </Button>
                                 </HashLink>
