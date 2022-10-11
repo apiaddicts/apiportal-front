@@ -49,7 +49,7 @@ function CardBasicLink({ chipTitle, title, img, description, info, route, maxWid
                   </>
                 ) : (
                   <h1
-                    className='fs__26 font-weight-bold px-8 pt-5 text__primary'
+                    className='fs__26 font-weight-bold px-8 pt-5 text__dark__primary'
                     style={{
                       'margin': 0,
                       'textOverflow': 'ellipsis',

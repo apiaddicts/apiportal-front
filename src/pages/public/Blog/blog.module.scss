@@ -131,7 +131,7 @@
   &__result__description {
     line-height: 25px;
     font-weight: 100;
-    font-family: $barlow;
+    font-family: $primary_font;
   }
   &__pagination {
     border-top: 1px solid $gray_lighten-1;
@@ -168,7 +168,7 @@
       align-items: center;
       justify-content: center;
       font-weight: 100;
-      font-family: $barlow;
+      font-family: $primary_font;
 
       p {
         margin-left: 10px;

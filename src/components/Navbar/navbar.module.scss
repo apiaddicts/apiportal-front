@@ -156,7 +156,7 @@
 }
 .buttom {
   overflow: hidden;
-  color: $primary;
+  color: $dark_primary;
   margin: 0 auto;
   max-width: 1920px;
   height: 100%;
@@ -167,10 +167,9 @@
   z-index: 100;
   &__nav {
     background: $secondary_white;
-    color: $secondary_white;
     padding: 0 1.5rem;
     transition: 0.3s ease all;
-    color: $primary;
+    color: $primary_text;
     width: 100%;
     @include breakpoint(md) {
       padding: 0 3rem;
@@ -178,8 +177,8 @@
     &__logo {
       font-weight: 600;
       size: 20px;
-      font-family: $barlow;
-      color: $primary;
+      font-family: $primary_font;
+      color: $primary_text;
     }
     &__options {
       top: 0;
@@ -233,7 +232,6 @@
             font-weight: map-deep-get($font-weights, "medium") !important;
 
             &:hover {
-              // color: $secondary;
               font-weight: map-deep-get($font-weights, "bold") !important;
             }
             &:active {

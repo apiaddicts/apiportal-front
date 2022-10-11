@@ -82,7 +82,7 @@ function Slider({ slides }) {
                   </div>
 
                   <div className='flex-md-6 flex-lg-8 flex-xl-6 flex-sm-12'>
-                    <h1 className='h1 text__secondary__white'>{x?.title}</h1>
+                    <h1 className='h1 text__white'>{x?.title}</h1>
                   </div>
 
                   <div className='flex-md-12 flex-sm-12 mt-5'>

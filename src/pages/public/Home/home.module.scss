@@ -78,19 +78,11 @@
     @include breakpoint(lg) {
       display: block;
     }
-
-    img {
-      border-radius: 20px;
-      width: 100%;
-      box-shadow: -19px 21px 0px 1px rgba($secondary, 0.75);
-      -webkit-box-shadow: -19px 21px 0px 1px rgba($secondary, 0.75);
-      -moz-box-shadow: -19px 21px 0px 1px rgba($secondary, 0.75);
-    }
   }
   &__items {
     display: grid;
     gap: 2rem;
-    padding-left: 6rem !important;
+    padding-left: 1rem !important;
     @include breakpoint(xs) {
       padding-left: 1rem !important;
     }
@@ -98,13 +90,13 @@
       padding-left: 0rem !important;
     }
     @include breakpoint(lg) {
-      padding-left: 6rem !important;
+      padding-left: 1rem !important;
     }
   } 
 }
 
 .section__works {
-  background: url("../../../static/img/texture_points.svg"), $primary;
+  background: url("../../../static/img/texture_points.svg"), $accent;
   background-repeat: no-repeat;
   background-size: cover;
   padding-top: 74px !important;
@@ -223,7 +215,7 @@
       justify-content: flex-end;
       @include breakpoint(xs) {
         justify-content: center;
-        color: $secondary;
+        color: $light_primary;
         text-transform: uppercase;
         font-size: 1rem;
         letter-spacing: 1.33px;
@@ -374,7 +366,7 @@
     }
     div {
       text-decoration: none;
-      color: $secondary;
+      color: $light_primary;
       text-transform: uppercase;
       font-size: 16px;
       font-weight: 700;

@@ -123,27 +123,22 @@ function Home({ setIsOpen }) {
           </div>
           {/* Beneficios principales */}
           <section className={`container ${classes.section__content}`}>
-            <div className='row'>
-              <div className={`flex-md-12 ${classes.section__content__title}`}>
-                <h1 className='h2 text__primary font-weight-bold mb-10 ml-5'>
+            <div className='row align-center'>
+              <div className={`flex-md-12 flex-md-6 flex-lg-6 flex-sm-12 ${classes.section__content__items}`}>
+                <h1 className='h3 text__dark__primary font-weight-bold mb-5'>
                   {titleSection || 'Benificios principales'}
                 </h1>
-              </div>
-              <div className={`flex-md-5 flex-lg-5 flex-sm-12 ${classes.section__content__img}`}>
-                <img src={backgroundSection || ''} alt='' className='ml-4' />
-              </div>
-              <div className={`flex-md-12 flex-md-7 flex-lg-7 flex-sm-12 ${classes.section__content__items}`}>
                 {itemsSection.map((item, i) => (
                   <Item
                     key={i}
                     title={item?.title}
                     description={item?.description}
                     icon={item?.icon}
-                    iconColor='#0033A0'
-                    background='#ECF0F1'
-                    textColor='#53565A'
                   />
                 ))}
+              </div>
+              <div className={`flex-md-5 flex-lg-5 flex-sm-12 ${classes.section__content__img}`}>
+                <img src={backgroundSection || ''} alt='' />
               </div>
             </div>
           </section>
@@ -152,7 +147,7 @@ function Home({ setIsOpen }) {
             <div className='container'>
               <div className='row'>
                 <div className='flex-md-12 flex-sm-12'>
-                  <h1 className={`h3 text__secondary__white mb-5 ${classes.section__works__title}`}>
+                  <h1 className={`h3 text__white mb-5 ${classes.section__works__title}`}>
                     {filterWorks && filterWorks.length > 0 && filterWorks[0]?.title ? filterWorks[0]?.title : '¿Cómo funciona?'}
                   </h1>
                 </div>
@@ -211,14 +206,14 @@ function Home({ setIsOpen }) {
           <section className={`container ${classes.section__discover__sc}`}>
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
-                <h1 className={`h2 text__primary font-weight-bold ${classes.section__discover__title}`}>
+                <h1 className={`h2 text__dark__primary font-weight-bold ${classes.section__discover__title}`}>
                   {filterDiscoverTitle || 'Descubre nuestras APIs'}
                 </h1>
               </div>
             </div>
             <div className='row d-xs-none'>
               <div className='flex-md-12 flex-sm-12'>
-                <p className={`subtitle-1 mb-10 text__gray__gray_lighten-4 ${classes.section__discover__subtitle}`}>
+                <p className={`subtitle-1 mb-10 text__accent secondary-font font-weight-bold ${classes.section__discover__subtitle}`}>
                   {filterDiscoverSubtitle || ''}
                 </p>
               </div>
@@ -244,7 +239,7 @@ function Home({ setIsOpen }) {
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
                 <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
-                  <HashLink smooth to='/apis#apiHome' className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
+                  <HashLink smooth to='/apis#apiHome' className={`button text d-xs-none ${classes.section__discover__showmore__button}`}>
                     <span className='mr-1'>ver todas</span>
                     <Icon id='MdOutlineEast' />
                   </HashLink>
@@ -322,11 +317,11 @@ function Home({ setIsOpen }) {
             <div className='container'>
               <div className='row'>
                 <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
-                  <h1 className='h2 text__primary'>{filterWorks && filterWorks.length > 2 && filterWorks[2]?.title ? filterWorks[2]?.title : 'Novedades'}</h1>
+                  <h1 className='h2 text__dark__primary'>{filterWorks && filterWorks.length > 2 && filterWorks[2]?.title ? filterWorks[2]?.title : 'Novedades'}</h1>
                 </div>
 
                 <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
-                  <p className='body-1'>{filterWorks && filterWorks.length > 2 && filterWorks[2]?.subtitle ? filterWorks[2]?.subtitle : ''}</p>
+                  <p className='body-1 secondary-font text__accent font-weight-bold'>{filterWorks && filterWorks.length > 2 && filterWorks[2]?.subtitle ? filterWorks[2]?.subtitle : ''}</p>
                 </div>
               </div>
             </div>
@@ -339,7 +334,7 @@ function Home({ setIsOpen }) {
             </div>
             <div className={`container ${classes.section__news__showmore}`}>
               <div className='row justify-center'>
-                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
+                <div className='flex-lg-2 flex-md-6 flex-sm-12 text__dark__primary text-center mt-8'>
                   <HashLink smooth to='/blog#blogIndex'>
                     <div>Ver Más</div>
                   </HashLink>

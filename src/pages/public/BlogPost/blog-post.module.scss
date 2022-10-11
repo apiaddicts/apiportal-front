@@ -59,7 +59,7 @@
     }
 
     &__subtitle {
-      font-family: $barlow;
+      font-family: $primary_font;
       font-style: normal;
       font-weight: 400;
       font-size: 18px;
@@ -74,7 +74,7 @@
     &__title {
       display: flex;
 
-      font-family: $barlow;
+      font-family: $primary_font;
       font-style: normal;
       font-size: 16px;
       font-weight: 700;
@@ -164,7 +164,7 @@
     justify-content: center;
     margin-bottom: 20px;
 
-    font-family: $fs-joey;
+    font-family: $secondary_font;
     font-style: normal;
     font-weight: 700;
     font-size: 33px;
@@ -184,7 +184,7 @@
       width: 100%;
       margin-bottom: 10px;
 
-      font-family: $barlow;
+      font-family: $primary_font;
       font-style: normal;
       font-weight: 400;
       font-size: 18px;
@@ -270,7 +270,7 @@
     }
 
     p {
-      font-family: $barlow;
+      font-family: $primary_font;
       font-style: normal;
       font-weight: 700;
       font-size: 16px;
