@@ -112,7 +112,7 @@ function BlogDetails({ setIsOpen }) {
               <div className='container'>
                 <div className='row'>
                   <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
-                    <h1 className='fs__32 font-weight-bold text__primary fs__joey'>Novedades</h1>
+                    <h1 className='h2 font-weight-bold text__dark__primary fs__joey'>Novedades</h1>
                   </div>
                   <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
                     <p className='body-1'>

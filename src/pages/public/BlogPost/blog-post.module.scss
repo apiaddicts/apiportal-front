@@ -78,7 +78,7 @@
       font-style: normal;
       font-size: 16px;
       font-weight: 700;
-      color: $primary;
+      color: $dark_primary;
       line-height: 19px;
       width: 450px;
       letter-spacing: 1.33333px;
@@ -290,7 +290,7 @@
     padding: 30px 5px;
 
     &__icons {
-      color: $gray_lighten-3;
+      color: $dark_primary;
       font-size: 25px;
       display: flex;
       justify-content: space-between;
@@ -311,10 +311,10 @@
       cursor: pointer;
       a {
         text-decoration: none;
-        color: $gray_lighten-3;
+        color: $dark_primary;
       }
       a:hover {
-        color: $gray_lighten-4;
+        color: $dark_primary;
       }
     }
   }
