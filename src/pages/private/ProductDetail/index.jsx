@@ -174,7 +174,7 @@ function ProductDetail(props) {
                         />
                       </div>
                       <div className={classes.form_suscriptione__btn}>
-                        <Btn size='responsive' onClick={handleSubmitSuscription} styles={searchSuscription.length > 0 ? 'primary' : 'greey-primary'}>SUSCRIBIRME</Btn>
+                        <Btn size='responsive' onClick={handleSubmitSuscription} styles={searchSuscription.length > 0 ? 'primary-blue' : 'primary-blue'}>SUSCRIBIRME</Btn>
                       </div>
                     </div>
 
