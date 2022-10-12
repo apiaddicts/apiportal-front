@@ -3,7 +3,7 @@ import { MdClose, MdMenu } from 'react-icons/md';
 import { Link, NavLink } from 'react-router-dom';
 
 import classes from './navbar.module.scss';
-import SuraLogo from '../../static/img/sura_logo.svg';
+import SuraLogo from '../../static/img/logo.svg';
 import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
 
@@ -80,7 +80,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
                 </div>
               </div>
               <div className={classes.navbar__xs__section}>
-                <NavLink to='/' className={classes.navbar__xs__section__logo} onClick={menuToggleHandler}>SEGUROS</NavLink>
+                <NavLink to='/' className={classes.navbar__xs__section__logo} onClick={menuToggleHandler}>FINTECH AS A SERVICE</NavLink>
               </div>
               <ul>
                 {
@@ -146,7 +146,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
       <div className={classes.buttom__nav}>
         <div className={`container ${classes.buttom__options}`}>
           <Link to='/' className={classes.buttom__nav__logo}>
-            SEGUROS
+            FINTECH AS A SERVICE
           </Link>
           <div className={classes.buttom__nav__options}>
             <ul>

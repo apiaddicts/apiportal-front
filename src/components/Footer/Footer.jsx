@@ -12,7 +12,7 @@ import 'yup-phone';
 import Base from './Base';
 import classes from './footer.module.scss';
 import Icon from '../MdIcon/Icon';
-import SuraLogo from '../../static/img/sura_logo.svg';
+import SuraLogo from '../../static/img/logo.svg';
 import Button from '../Buttons/Button';
 import InputUI from '../Input/InputUI/InputUI';
 import TextAreaUI from '../Input/InputUI/TextAreaUI';
@@ -255,7 +255,7 @@ function Footer({ isPrivate }) {
         </div>
         <div className={classes.email}>
           <h1 className='body-1 font-weight-medium text__gray__lighten mb-2'>Correo electrónico</h1>
-          <p className='body-1 font-weight-bold text__gray__lighten'>mxEmpresasSura@segurossura.com.mx</p>
+          <p className='body-1 font-weight-bold text__gray__lighten'>Empresas@towertech.com.co</p>
         </div>
         <div className={classes.policies}>
           <h1 className='body-1 font-weight-medium text__gray__lighten mb-2'>Política de</h1>
@@ -272,7 +272,7 @@ function Footer({ isPrivate }) {
             {' '}
             <span>{ year }</span>
             {' '}
-            SEGUROS SURA S.S DE C.V. TODOS LOS DERECHOS RESERVADOS
+            TOWERTECH. TODOS LOS DERECHOS RESERVADOS
             {' '}
           </p>
         </div>

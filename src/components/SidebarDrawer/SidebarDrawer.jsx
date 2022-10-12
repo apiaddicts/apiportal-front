@@ -22,7 +22,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import classes from './sliderdrawer.module.scss';
-import SuraLogoAlt from '../../static/img/sura_logo_alt.svg';
+import SuraLogoAlt from '../../static/img/logoAlt.svg';
 import { logout } from '../../redux/actions/userAction';
 
 function SidebarDrawer({ children, user }) {
@@ -134,7 +134,7 @@ function SidebarDrawer({ children, user }) {
 
   const DrawerHeader = styled('div')(({ theme }) => ({
     width: '100%',
-    background: '#0033A0',
+    background: '#1C2D47',
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(1, 3),
@@ -146,18 +146,18 @@ function SidebarDrawer({ children, user }) {
     <div className={classes.backgroundSidebar}>
       {/* <CssBaseline /> */}
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position='fixed' elevation={0} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: '#0033a0', padding: { xs: '0 1rem', sm: '0 100px' } }}>
+        <AppBar position='fixed' elevation={0} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: '#1C2D47', padding: { xs: '0 1rem', sm: '0 100px' } }}>
           <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <img src={SuraLogoAlt} alt='Sura Logo' />
             {isPermanent && (
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Button
                   variant='outlined'
-                  startIcon={<PersonSharpIcon sx={{ color: '#00AEC7' }} />}
+                  startIcon={<PersonSharpIcon sx={{ color: '#fff' }} />}
                   endIcon={<KeyboardArrowDownSharpIcon color='white' sx={{ color: '#fff' }} />}
                   sx={{
                     borderRadius: '20px',
-                    border: '1px solid #00AEC7',
+                    border: '1px solid #15A192',
                     color: '#fff',
                   }}
                   onClick={handleClick}
@@ -248,7 +248,7 @@ function SidebarDrawer({ children, user }) {
         <List>
           <ListItem>
             <ListItemText>
-              <h1 className={`font-weight-regular text__gray__gray_darken ${classes.title}`}>Hola,</h1>
+              <h1 className={`font-weight-regular text__secondary ${classes.title}`}>Hola,</h1>
               <h1 className={`font-weight-bold text__primary ${classes.title__name}`}>
                 {
                   user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? (
@@ -271,20 +271,20 @@ function SidebarDrawer({ children, user }) {
         <List
           sx={{
             [`& .active, & .${listItemClasses.root}:hover`]: {
-              color: '#0033a0',
+              color: '#1C2D47',
               fontWeight: '700',
               background: 'rgb(0, 174, 199, 0.1)',
               width: '100%',
               '& svg': {
-                fill: '#0033a0',
+                fill: '#1C2D47',
               },
             },
           }}
         >
           {
             listItems.map((item, index) => (
-              <ListItem button key={index} sx={{ color: '#0033A0', fontWeight: 500 }} component={MyNavLink} to={item.route}>
-                <ListItemIcon sx={{ color: '#0033A0' }}>
+              <ListItem button key={index} sx={{ color: '#1C2D47', fontWeight: 500 }} component={MyNavLink} to={item.route}>
+                <ListItemIcon sx={{ color: '#1C2D47' }}>
                   {item.icon}
                 </ListItemIcon>
                 <ListItemText primary={item.text} />
@@ -333,7 +333,7 @@ function SidebarDrawer({ children, user }) {
         variant='permanent'
         sx={{
           display: { xs: 'none', md: 'block' },
-          '& .MuiDrawer-paper': { background: '#ECF0F1' },
+          '& .MuiDrawer-paper': { background: '#ECF0F1', border: 'none' },
         }}
         open={toggleMenu}
         ref={drawerPerm}
@@ -347,8 +347,8 @@ function SidebarDrawer({ children, user }) {
               }}
             >
               <ListItemText>
-                <h1 className={`font-weight-regular text__gray__gray_darken ${classes.title}`}>Hola,</h1>
-                <h1 className={`font-weight-bold text__primary ${classes.title__name}`}>
+                <h1 className={`font-weight-regular text__secondary ${classes.title}`}>Hola,</h1>
+                <h1 className={`font-weight-bold text__dark__primary ${classes.title__name}`}>
                   {
                     user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? (
                       <span>
@@ -365,12 +365,12 @@ function SidebarDrawer({ children, user }) {
         <List
           sx={{
             [`& .active, & .${listItemClasses.root}:hover`]: {
-              color: '#0033a0',
+              color: '#1C2D47',
               fontWeight: 'bold',
-              borderRight: '2px solid #0033a0',
+              borderRight: '2px solid #1C2D47',
               width: '100%',
               '& svg': {
-                fill: '#0033a0',
+                fill: '#1C2D47',
               },
             },
             paddingTop: `${!toggleMenu ? '180px' : '8px'}`,

@@ -59,7 +59,7 @@ function Faqs(props) {
                   faqs.map((item, i) => {
                     return (
                       <div key={i}>
-                        <h1 className='h3 text__primary mb-5 mt-5'>{item?.question}</h1>
+                        <h1 className='h3 text__dark__primary mb-5 mt-5'>{item?.question}</h1>
                         <Accordion items={item?.data} subItem={subItem} setSubItem={setSubItem} parent={i} clicked={clicked} setClicked={setClicked} />
                       </div>
                     );
@@ -73,7 +73,7 @@ function Faqs(props) {
                       faqs.map((faq, index) => {
                         return (
                           <div key={index} className='flex-sm-12'>
-                            <h1 className={`${classes.faq__content__qa__xs__title} text__primary mb-5 mt-5`}>{faq.question}</h1>
+                            <h1 className={`${classes.faq__content__qa__xs__title} text__dark__primary mb-5 mt-5`}>{faq.question}</h1>
                             <Accordion items={faq?.data} subItem={subItem} setSubItem={setSubItem} parent={index} clicked={clicked} setClicked={setClicked} />
                           </div>
                         );

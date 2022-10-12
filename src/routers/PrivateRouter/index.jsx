@@ -56,7 +56,7 @@ function PrivateRouter({ children }) {
       }
       {user && Object.keys(user).length > 0 ? (
         <Box>
-          <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#fbfbfb', minHeight: '100vh' }}>
+          <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#FAFAFC', minHeight: '100vh' }}>
             <SidebarDrawer user={user} />
             <div className={classes.texture}>
               <img src={CicleTexture} alt={CicleTexture} />

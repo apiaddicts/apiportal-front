@@ -43,7 +43,7 @@
   
 .active {
   transition: 0.3s ease all;
-  background: $primary;
+  background: $dark_primary;
   color: $secondary_white;
 }
 
@@ -110,8 +110,8 @@
   margin: 15px 0;
   padding-left: 10px;
   font-weight: 700;
-  border-left: 2px solid $secondary;
-  color: $primary;          
+  border-left: 2px solid $dark_primary;
+  color: $dark_primary;          
 }
 
 

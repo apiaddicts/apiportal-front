@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import _ from 'underscore';
@@ -52,7 +51,7 @@ function Blog({ setIsOpen }) {
 
   // load slider
   const BannerFilter = blogPage && Object.keys(blogPage).length > 0 && blogPage.contentSections && blogPage.contentSections.length > 0 ? blogPage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
-  const bannerTitle = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0]?.title ? BannerFilter[0]?.title : 'Descubre las novedades de SURA';
+  const bannerTitle = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0]?.title ? BannerFilter[0]?.title : 'Descubre las novedades de Towertech';
   const bannerImage = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0]?.background ? BannerFilter[0]?.background?.url : '';
   const bannerSearch = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0]?.search ? BannerFilter[0]?.search : '';
   const TabsFilter = blogPage && Object.keys(blogPage).length > 0 && blogPage.contentSections && blogPage.contentSections.length > 0 ? blogPage.contentSections.filter((item) => item.__component === 'sura.tab-card') : [];

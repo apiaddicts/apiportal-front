@@ -83,7 +83,7 @@ function Profile() {
               <form onSubmit={formConfig.handleSubmit} noValidate>
                 <div className={classes.admin__form__container}>
                   <div className={classes.admin__form__container__header}>
-                    <div className='font-fs-joey fs__36 font-weight-bold text__primary'>Datos personales</div>
+                    <div className='font-fs-joey fs__36 font-weight-bold text__dark__primary'>Datos personales</div>
                     {/* <div className='fs__16 text__gray__gray_darken ls_05'>
                         <span className='text-uppercase font-weight-semi-bold'>Fecha de registro:</span>
                         <span className='fs'>12/05/2022</span>
@@ -100,7 +100,7 @@ function Profile() {
                     <div className='flex-lg-6 flex-sm-12'>
                       {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
                       <div
-                        className='fs__16 text__primary ls_05 font-weight-bold ml-3 mb-2 cpointer'
+                        className='fs__16 text__dark__primary ls_05 font-weight-bold ml-3 mb-2 cpointer'
                         onClick={() => setDisplayRestorePassword(!displayRestorePassword)}
                       >
                         Restablecer contraseña
@@ -109,7 +109,7 @@ function Profile() {
                     <div className='flex-lg-3 flex-sm-12 display_flex align_items__bottom justify_content__end ml-auto mb-2'>
                       <Button
                         type='submit'
-                        styles='primary'
+                        styles='primary-blue'
                       >
                         Guardar
                       </Button>
