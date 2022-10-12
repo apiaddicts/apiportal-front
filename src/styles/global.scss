@@ -804,8 +804,8 @@ a {
   color: $secondary_white;
 }
 .post {
-  background-color: $primary;
-  color: $secondary_white;
+  background-color: $dark_primary !important;
+  color: $secondary_white !important;
 }
 
 .push {

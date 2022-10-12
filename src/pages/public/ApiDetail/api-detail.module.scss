@@ -104,7 +104,8 @@
 }
 
 .section__works {
-  background: url("../../../static/img/texture_points.svg"), $primary;
+  // background: url("../../../static/img/texture_points.svg"), $primary;
+  background: $dark_primary;
   background-repeat: no-repeat;
   background-size: cover;
   padding-top: 74px !important;

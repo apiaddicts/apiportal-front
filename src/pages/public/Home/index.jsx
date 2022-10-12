@@ -306,7 +306,7 @@ function Home({ setIsOpen }) {
             <BannerCentered
               title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : 'Integras tus sistemas con las APIs de SURA'}
               subtitle={filterHomeBannerSubtitle !== '' ? filterHomeBannerSubtitle : ''}
-              img={filterHomeBannerImage !== '' ? filterHomeBannerImage : ''}
+              img={filterHomeBannerImage !== '' ? '' : ''}
               buttonType='primary'
               buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : 'empezar ahora'}
               redirect={filterHomeBannerNameType}
