@@ -28,9 +28,9 @@ function Item({ icon, title, description, type = 'basic', number, textColor = '#
             </div>
           ) : (null)}
           {type !== 'title' ? (
-            <h1 className='mb-3' style={titleStyles}>{title}</h1>
+            <h1 className='mb-3 text__secondary' style={titleStyles}>{title}</h1>
           ) : (null)}
-          <p style={color(textColor)}>{description}</p>
+          <p style={color(textColor)} className='secondary-font'>{description}</p>
         </div>
       </div>
     </div>

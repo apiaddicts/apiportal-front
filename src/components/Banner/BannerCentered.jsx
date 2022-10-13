@@ -13,13 +13,13 @@ function BannerCentered({ title, subtitle, buttonLabel, img, buttonType, redirec
       <div className={`container ${classes.banner__centered}`}>
         <div className='row justify-center text-center mb-5'>
           <div className='flex-md-12 flex-sm-12'>
-            <h1 className='h2 mb-3 text__secondary'>{title}</h1>
+            <h1 className='h2 mb-3 text'>{title}</h1>
           </div>
         </div>
 
         <div className='row justify-center text-center mb-5'>
           <div className='flex-md-12 flex-sm-12'>
-            <p className='h5 mb-5 text__secondary__white font-weight-semi-bold'>{subtitle}</p>
+            <p className='h5 mb-5 text__white font-weight-semi-bold'>{subtitle}</p>
           </div>
         </div>
 
@@ -28,7 +28,7 @@ function BannerCentered({ title, subtitle, buttonLabel, img, buttonType, redirec
 
             {redirect === null ? (
               <HashLink smooth to='/#data'>
-                <Button styles={buttonType}>
+                <Button styles='primary-blue'/*styles={buttonType}*/>
                   {buttonLabel}
                 </Button>
               </HashLink>

@@ -9,7 +9,7 @@ moment.locale('es');
 
 function BlogDetailsInfo({ styles, data }) {
   const styleChip = {
-    color: '#0033A0',
+    color: '#1C2D47',
     fontWeight: 500,
     fontSize: '14px',
     lineHeight: '16px',

@@ -82,7 +82,7 @@ function Slider({ slides }) {
                   </div>
 
                   <div className='flex-md-6 flex-lg-8 flex-xl-6 flex-sm-12'>
-                    <h1 className='h1 text__secondary__white'>{x?.title}</h1>
+                    <h1 className='h1 text__white'>{x?.title}</h1>
                   </div>
 
                   <div className='flex-md-12 flex-sm-12 mt-5'>
@@ -98,7 +98,7 @@ function Slider({ slides }) {
 
                               ) : (
                                 <HashLink smooth to='/#data'>
-                                  <Button styles={i?.type} onClick={() => handleClick(i?.route)}>
+                                  <Button styles='primary-blue' onClick={() => handleClick(i?.route)}>
                                     {i?.label}
                                   </Button>
                                 </HashLink>

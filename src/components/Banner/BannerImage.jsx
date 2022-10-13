@@ -40,7 +40,7 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
           <div
             className={classes.banner_img__title}
           >
-            <h1 className='h1 mb-3 text__primary'>
+            <h1 className='h2 mb-3 text__dark__primary'>
               {title !== '' ? title : 'Biblioteca de APIs' }
             </h1>
             <div className={`${classes.divider} mb-4 mt-3`} />
@@ -58,7 +58,7 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
                         return (
                           <div key={index} className='mr-10 pr-2'>
                             <HashLink smooth to={button.link !== undefined ? button.link : ''}>
-                              <Button styles={button.class}>
+                              <Button styles={index === 0 ? 'primary-blue' : button.class}>
                                 {button.label}
                               </Button>
                             </HashLink>

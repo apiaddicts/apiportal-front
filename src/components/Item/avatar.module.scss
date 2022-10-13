@@ -31,15 +31,15 @@
       line-height: 28px;
       font-weight: 700;
       font-style: normal;
-      font-family: $barlow;
+      font-family: $primary_font;
       margin-bottom: 8px;
-      color: $primary;
+      color: $dark_primary;
       text-transform: uppercase;
     }
     &__paragraph {
       font-size: 18px;
       font-weight: 400;
-      font-family: $barlow;
+      font-family: $primary_font;
       line-height: 24px;
       color: $gray-darken;
       width: 100%;

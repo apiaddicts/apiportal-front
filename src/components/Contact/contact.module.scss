@@ -46,7 +46,7 @@
             font-size: 30px;
             text-align: center;
             line-height: 35px;
-            color: $primary;
+            color: $dark_primary;
         }
     }
 
@@ -58,7 +58,7 @@
         margin-bottom: 1rem;
         text-align: center;
         width: 100%;
-        font-family: $barlow;
+        font-family: $primary_font;
         font-style: normal;
         font-weight: 400;
         font-size: 18px;
@@ -148,12 +148,12 @@
                 }
                 
                 &__alternative__title {
-                    font-family: $fs-joey;
+                    font-family: $secondary_font;
                     font-style: normal;
                     font-weight: 700;
-                    font-size: 30px;
+                    font-size: 46px;
                     line-height: 48px;
-                    color: $primary;
+                    color: $dark_primary;
                 
                     @media (max-width: 768px) {
                         text-align: center;
@@ -180,7 +180,7 @@
                     justify-content: center;
                     align-items: flex-start;
                     margin-bottom: 1rem;
-                    font-family: $barlow;
+                    font-family: $primary_font;
                     font-style: normal;
                     font-weight: 400;
                     font-size: 18px;
@@ -200,7 +200,7 @@
                     justify-content: center;
                     align-items: flex-start;
                     margin-bottom: 1rem;
-                    font-family: $barlow;
+                    font-family: $primary_font;
                     font-style: normal;
                     font-weight: 400;
                     font-size: 18px;

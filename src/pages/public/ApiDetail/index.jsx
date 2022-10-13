@@ -130,7 +130,7 @@ function ApiDetail({ setIsOpen }) {
           <section className='container mb-15'>
             <div className='row'>
               <div className={`flex-md-12 flex-sm-12 -ml-23 ${classes.section__content__title}`}>
-                <h1 className='h2 text__primary font-weight-bold mb-10 -ml-23 text-center-sm'>
+                <h1 className='h2 text__dark__primary font-weight-bold mb-10 -ml-23 text-center-sm'>
                   {library?.benefits && library?.benefits?.length > 0 && library?.benefits?.length === 1 ?
                     library?.benefits?.[0]?.title :
                     'Benificios principales'}
@@ -165,7 +165,7 @@ function ApiDetail({ setIsOpen }) {
             <div className='container'>
               <div className='row'>
                 <div className='flex-md-12 flex-sm-12'>
-                  <h1 className={`h3 text-center text__secondary__white mb-5 ${classes.section__works__title}`}>
+                  <h1 className={`h3 text-center text__white mb-5 ${classes.section__works__title}`}>
                     ¿Cómo funciona?
                   </h1>
                 </div>
@@ -202,7 +202,7 @@ function ApiDetail({ setIsOpen }) {
                         </HashLink>
                       ) : (
                         <HashLink smooth to={`/apis/${params?.id}#contact`}>
-                          <Button styles={button?.keyword}>
+                          <Button styles={i === 0 ? 'primary-blue' : button?.keyword}>
                             {button?.title}
                           </Button>
                         </HashLink>
@@ -219,7 +219,7 @@ function ApiDetail({ setIsOpen }) {
           <section className={`container ${classes.section__discover}`}>
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
-                <h1 className='h2 text__primary font-weight-bold mb-2 ml-1'>
+                <h1 className='h2 text__dark__primary font-weight-bold mb-2 ml-1'>
                   Otras APIs que te pueden interesar
                 </h1>
               </div>
@@ -261,9 +261,9 @@ function ApiDetail({ setIsOpen }) {
                     </HashLink>
                     <Icon id='MdOutlineEast' />
                   </div>
-                  <div className={`d-sm-none ${classes.section__discover__showmore__button}`}>
+                  {/* <div className={`d-sm-none ${classes.section__discover__showmore__button}`}>
                     Ver todas
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -272,7 +272,7 @@ function ApiDetail({ setIsOpen }) {
             <BannerCentered
               title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : 'Integras tus sistemas con las APIs de SURA'}
               subtitle={filterHomeBannerSubtitle !== '' ? filterHomeBannerSubtitle : ''}
-              img={filterHomeBannerImage !== '' ? filterHomeBannerImage : ''}
+              img={filterHomeBannerImage !== '' ? '' : ''}
               buttonType='primary'
               buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : 'empezar ahora'}
               redirect={filterHomeBannerNameType}
@@ -282,7 +282,7 @@ function ApiDetail({ setIsOpen }) {
             <div className='container'>
               <div className='row'>
                 <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
-                  <h1 className='h2 text__primary'>Novedades</h1>
+                  <h1 className='h2 text__dark__primary'>Novedades</h1>
                 </div>
 
                 <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>

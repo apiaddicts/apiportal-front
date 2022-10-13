@@ -116,7 +116,7 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
             <Spinner title='Cargando...' />
           ) : (
             <>
-              <div className='font-fs-joey fs__36 font-weight-bold text__primary'>{ title }</div>
+              <div className='font-fs-joey fs__36 font-weight-bold text__dark__primary'>{ title }</div>
               {
                 suscriptions && Object.keys(suscriptions).length > 0 && suscriptions.value.length > 0 ? (
                   <>

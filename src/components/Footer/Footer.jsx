@@ -12,7 +12,7 @@ import 'yup-phone';
 import Base from './Base';
 import classes from './footer.module.scss';
 import Icon from '../MdIcon/Icon';
-import SuraLogo from '../../static/img/sura_logo.svg';
+import SuraLogo from '../../static/img/logo.svg';
 import Button from '../Buttons/Button';
 import InputUI from '../Input/InputUI/InputUI';
 import TextAreaUI from '../Input/InputUI/TextAreaUI';
@@ -83,8 +83,8 @@ function Footer({ isPrivate }) {
         <Base img={img}>
           <div className={`container ${classes.footer__container}`}>
             <div className={`${classes.divider} mb-4`} />
-            <h1 className='h2 text__secondary__white mb-3'>¿Conversamos?</h1>
-            <p style={{ fontWeight: 400 }} className='h5 text__secondary__white mb-10'>Déjanos tus datos para que nuestros expertos conecten contigo.</p>
+            <h1 className='h2 text__white mb-3'>¿Conversamos?</h1>
+            <p style={{ fontWeight: 400 }} className='h5 text__white mb-10'>Déjanos tus datos para que nuestros expertos conecten contigo.</p>
           </div>
           <div className={classes.button__fab}>
             <button type='button' onClick={() => { setContactForm(!contactForm); formik.resetForm(); }}>
@@ -238,7 +238,7 @@ function Footer({ isPrivate }) {
                   {
                     displaySubmit &&
                     (
-                      <Button styles='secundary' type='submit'>
+                      <Button styles='primary-blue' type='submit'>
                         ¡Estoy interesado!
                       </Button>
                     )
@@ -254,25 +254,25 @@ function Footer({ isPrivate }) {
           <img src={SuraLogo} alt='' />
         </div>
         <div className={classes.email}>
-          <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3 mb-2'>Correo electrónico</h1>
-          <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>mxEmpresasSura@segurossura.com.mx</p>
+          <h1 className='body-1 font-weight-medium text__gray__lighten mb-2'>Correo electrónico</h1>
+          <p className='body-1 font-weight-bold text__gray__lighten'>Empresas@towertech.com.co</p>
         </div>
         <div className={classes.policies}>
-          <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3 mb-2'>Política de</h1>
-          <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>
-            <a href={config.policyPath} className='text__gray__gray_lighten-3'>Privacidad de datos</a>
+          <h1 className='body-1 font-weight-medium text__gray__lighten mb-2'>Política de</h1>
+          <p className='body-1 font-weight-bold'>
+            <a href={config.policyPath} className='text__gray__lighten'>Privacidad de datos</a>
           </p>
         </div>
 
       </div>
       <div className={`container ${classes.footer__social}`}>
         <div className={classes.footer__social__copyright}>
-          <p className='caption text-uppercase text__gray__gray_lighten-3 mb-3'>
+          <p className='caption text-uppercase text__gray__lighten mb-3'>
             &copy;
             {' '}
             <span>{ year }</span>
             {' '}
-            SEGUROS SURA S.S DE C.V. TODOS LOS DERECHOS RESERVADOS
+            TOWERTECH. TODOS LOS DERECHOS RESERVADOS
             {' '}
           </p>
         </div>
