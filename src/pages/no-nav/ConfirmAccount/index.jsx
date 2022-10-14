@@ -5,7 +5,7 @@ import CustomFooter from '../../../components/common/CustomFooter/CustomFooter';
 import Spinner from '../../../components/Spinner';
 import { confirmAccount } from '../../../redux/actions/userAction';
 import classes from './confirm-account.module.scss';
-import SuraLogo from '../../../static/img/sura_logo_alt.svg';
+import SuraLogo from '../../../static/img/logoAlt.svg';
 
 function ConfirmAccount({ setIsOpen }) {
 

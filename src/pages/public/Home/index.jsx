@@ -304,7 +304,7 @@ function Home({ setIsOpen }) {
           {/* Integra */}
           <section id='Banner'>
             <BannerCentered
-              title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : 'Integras tus sistemas con las APIs de SURA'}
+              title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : 'Integras tus sistemas con las APIs de Towertech'}
               subtitle={filterHomeBannerSubtitle !== '' ? filterHomeBannerSubtitle : ''}
               img={filterHomeBannerImage !== '' ? '' : ''}
               buttonType='primary'
