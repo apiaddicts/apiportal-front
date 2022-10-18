@@ -43,7 +43,7 @@ function Home({ setIsOpen }) {
   }, []);
 
   // Load Slider
-  const filterSlider = homePage && homePage.contentSections ? homePage.contentSections.filter((item) => item.__component === 'sura.carousel') : [];
+  const filterSlider = homePage && homePage.contentSections ? homePage.contentSections.filter((item) => item.__component === 'custom.carousel') : [];
   const slides = filterSlider.length > 0 ? filterSlider[0].sliderCarousel.map((i) => {
     const response = {
       imgSrc: i.imgSrc && i.imgSrc.length > 0 ? i.imgSrc[0].url : '',
