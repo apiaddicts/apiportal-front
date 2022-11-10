@@ -40,12 +40,11 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
           <div
             className={classes.banner_img__title}
           >
-            <h1 className='h2 mb-3 text__dark__primary'>
+            <h1 className='h2 mb-3 text__white'>
               {title !== '' ? title : 'Biblioteca de APIs' }
             </h1>
-            <div className={`${classes.divider} mb-4 mt-3`} />
             <div className={classes['width-text-banner']}>
-              <p className={`subtitle-1 ${custom_line_height}`}>
+              <p className={`subtitle-1 text__white ${custom_line_height}`}>
                 {description}
               </p>
             </div>
@@ -58,7 +57,7 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
                         return (
                           <div key={index} className='mr-10 pr-2'>
                             <HashLink smooth to={button.link !== undefined ? button.link : ''}>
-                              <Button styles={index === 0 ? 'primary-blue' : button.class}>
+                              <Button styles={button.class}>
                                 {button.label}
                               </Button>
                             </HashLink>
@@ -85,7 +84,6 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
             alt=''
           />
         </div>
-        <div className={classes.banner_img__footer} />
       </div>
     </div>
   );

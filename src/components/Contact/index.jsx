@@ -7,14 +7,14 @@ import { Alert } from '@mui/material';
 import { sendContactMail } from '../../redux/actions/mailAction';
 import classes from './contact.module.scss';
 import Button from '../Buttons/Button';
-import icons from '../../static/icons-sura';
+import icons from '../../static/icons';
 import InputUI from '../Input/InputUI/InputUI';
 
 function Contact({ css_styles, pathname }) {
 
   const dispatch = useDispatch();
   const mail = useSelector((state) => state.mail);
-  const { display_contact, display_detail_description, border_radius } = css_styles;
+  const { display_contact, display_detail_description, border_radius, override_margin_right } = css_styles;
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
 
@@ -53,13 +53,13 @@ function Contact({ css_styles, pathname }) {
             <div className={classes.contact__header__icon}>
               {icons('email')}
             </div>
-            <p className={pathname !== '/blog' ? classes.contact__alternative__title : classes.contact__header__title}>Sigamos conectados</p>
+            <p className={pathname !== '/blog' ? classes.contact__alternative__title : classes.contact__header__title}>¡Entérate de lo último!</p>
           </div>
-          <p className={`pt-5 pb-2 pl-2 d-none text__primary fs__22 m-0 ${display_detail_description} d-xs-none`}>¡Entérate de lo último! Escoge una o varias capacidades y sé el primero en enterarte.</p>
+          <p className={`pt-5 pb-2 pl-2 d-none text__white text-center fs__22 m-0 ${display_detail_description} d-xs-none`}>¡Sigamos conectados! Escoge una o varias capacidades y sé el primero en enterarte.</p>
         </div>
         <div className={pathname !== '/blog' ? classes.contact__header__title__alternative : classes.contact__header__title}>
           <div className={pathname !== '/blog' ? classes.contact__alternative__description : classes.contact__description}>
-            <p className='pt-5 pb-2'>¡Entérate de lo último! </p>
+            <p className='pt-5 pb-2'>¡Sigamos conectados! </p>
           </div>
           {
             error && (
@@ -80,7 +80,7 @@ function Contact({ css_styles, pathname }) {
             {/* {fieldsContact.map((field) => (
               <Input styleInput={classes.contact__form__new} key={field.id} field={field} formik={formConfig} />
             ))} */}
-            <div className='container'>
+            <div className={`container ${classes.container_padding} ${override_margin_right}`}>
               <div className='row'>
                 <div className={pathname === '/blog' ? 'flex-sm-12 flex-md-12 pb-8 mt-2' : 'flex-sm-12 flex-md-6 flex-lg-6'}>
                   <InputUI
@@ -111,7 +111,7 @@ function Contact({ css_styles, pathname }) {
               </div>
             </div>
             <div className={classes.contact__form__button}>
-              <Button styles='primary-blue' type='submit'>
+              <Button styles='secundary' type='submit'>
                 SUSCRÍBETE
               </Button>
             </div>

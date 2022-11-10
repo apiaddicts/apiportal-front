@@ -8,7 +8,7 @@ import { getHomeContent } from '../../../redux/actions/homeAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
 import { getLibraries } from '../../../redux/actions/libraryAction';
 import Item from '../../../components/Item/Item';
-import Icon from '../../../components/MdIcon/Icon';
+//import Icon from '../../../components/MdIcon/Icon';
 import CardBasic from '../../../components/Card/CardBasic';
 //Enable when alliances exist
 //import CardSlider from '../../../components/Card/CardSlider';
@@ -18,9 +18,8 @@ import Button from '../../../components/Buttons/Button';
 import Slider from '../../../components/Slider/Slider';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 import Slick from '../../../components/SlickSlider/Slick';
-import textureCircles from '../../../static/img/texture_circles.svg';
-import textureCirclesAlt from '../../../static/img/texture_circles_alt.svg';
 import classes from './home.module.scss';
+import CustomIcon from '../../../components/MdIcon/CustomIcon';
 
 moment.locale('es');
 
@@ -118,22 +117,25 @@ function Home({ setIsOpen }) {
           <section>
             <Slider slides={slides} />
           </section>
-          <div className={classes.svg__texture}>
-            <img src={textureCircles} alt='' />
-          </div>
           {/* Beneficios principales */}
           <section className={`container ${classes.section__content}`}>
-            <div className='row align-center'>
-              <div className={`flex-md-12 flex-md-6 flex-lg-6 flex-sm-12 ${classes.section__content__items}`}>
-                <h1 className='h3 text__dark__primary font-weight-bold mb-5'>
+            <div className='row'>
+              <div className='flex-md-12 flex-md-12 flex-lg-12 flex-sm-12'>
+                <h1 className='h3 text__dark__primary font-weight-bold mb-5 text-center'>
                   {titleSection || 'Benificios principales'}
                 </h1>
+              </div>
+            </div>
+            <div className='row align-center'>
+              <div className={`flex-md-12 flex-md-6 flex-lg-6 flex-sm-12 ${classes.section__content__items}`}>
                 {itemsSection.map((item, i) => (
                   <Item
                     key={i}
                     title={item?.title}
                     description={item?.description}
                     icon={item?.icon}
+                    iconColor='rgba(0,0,0,0.8)'
+                    css_styles={{ 'custom_description': 'text__gray__darken' }}
                   />
                 ))}
               </div>
@@ -166,6 +168,7 @@ function Home({ setIsOpen }) {
                               icon={data?.iconText}
                               type='title'
                               textColor='#ECF0F1'
+                              css_styles={{ 'custom_description': 'text__white' }}
                             />
                           </div>
                         ))}
@@ -186,7 +189,7 @@ function Home({ setIsOpen }) {
                         </HashLink>
                       ) : (
                         <HashLink smooth to='/#data'>
-                          <Button styles='primary-blue'>
+                          <Button styles={button?.keyword}>
                             {button?.title}
                           </Button>
                         </HashLink>
@@ -199,21 +202,18 @@ function Home({ setIsOpen }) {
             </div>
           </section>
 
-          <div className={`d-xs-none ${classes.section__discover__texture}`}>
-            <img src={textureCirclesAlt} alt='' />
-          </div>
           {/* Descubre nuestras APis */}
           <section className={`container ${classes.section__discover__sc}`}>
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
-                <h1 className={`h2 text__dark__primary font-weight-bold ${classes.section__discover__title}`}>
+                <h1 className={`h2 text__dark__primary font-weight-bold text-center ${classes.section__discover__title}`}>
                   {filterDiscoverTitle || 'Descubre nuestras APIs'}
                 </h1>
               </div>
             </div>
             <div className='row d-xs-none'>
               <div className='flex-md-12 flex-sm-12'>
-                <p className={`subtitle-1 mb-10 text__dark__grey primary-font ${classes.section__discover__subtitle}`}>
+                <p className={`subtitle-1 mb-10 text__gray__darken primary-font text-center ${classes.section__discover__subtitle}`}>
                   {filterDiscoverSubtitle || ''}
                 </p>
               </div>
@@ -241,7 +241,9 @@ function Home({ setIsOpen }) {
                 <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
                   <HashLink smooth to='/apis#apiHome' className={`button text d-xs-none ${classes.section__discover__showmore__button}`}>
                     <span className='mr-1'>ver todas</span>
-                    <Icon id='MdOutlineEast' />
+                    <div className={classes.section__discover__showmore__button__chevron}>
+                      <CustomIcon name='chevron_right' />
+                    </div>
                   </HashLink>
                   <HashLink smooth to='/apis#apiHome' className={`d-sm-none ${classes.section__discover__showmore__button}`}>
                     Ver todas

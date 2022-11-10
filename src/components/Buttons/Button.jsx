@@ -1,10 +1,11 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
+import CustomIcon from '../MdIcon/CustomIcon';
 import Icon from '../MdIcon/Icon';
 
 import './button.scss';
 
-function Button({ children, styles, opacity, size = 'regular', preIcon, ...rest }) {
+function Button({ children, styles, opacity, size = 'regular', preIcon, icon, ...rest }) {
 
   const btnStyled = (size, opacity) => {
     const height = size.toLowerCase();
@@ -39,6 +40,11 @@ function Button({ children, styles, opacity, size = 'regular', preIcon, ...rest 
       {preIcon && (
         <div className='btn__icon'>
           <Icon id={preIcon} />
+        </div>
+      )}
+      {icon && (
+        <div className='btn__icon'>
+          <CustomIcon name={icon} />
         </div>
       )}
       <div style={{ minWidth: '146px' }}>

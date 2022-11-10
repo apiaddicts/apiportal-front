@@ -26,7 +26,6 @@
       transition: 0.3s ease all;
       // max-height: 588px;
       position: relative;
-
       @include breakpoint(xs) {
         max-height: 100%;
       }
@@ -63,7 +62,8 @@
       &__text {
         width: 100%;
         height: 100%;
-        background: rgba($color: #000000, $alpha: 0.7);
+        // background: rgba($color: #000000, $alpha: 0.7);
+        background: linear-gradient(90deg, rgba(21, 161, 146, 0.7) 0%, rgba(20, 35, 75, 0.7) 100%);
         position: absolute;
         bottom: 0;
         padding-top: 139px;

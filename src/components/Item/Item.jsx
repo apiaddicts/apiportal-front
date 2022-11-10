@@ -1,21 +1,19 @@
 import React from 'react';
-import icons from '../../static/icons-sura';
+import CustomIcon from '../MdIcon/CustomIcon';
 import './item.scss';
 
-function Item({ icon, title, description, type = 'basic', number, textColor = '#000', iconColor = '#fff', background = '#00acc742', titleStyles, iconStyle }) {
+function Item({ icon, title, description, type = 'basic', number, textColor = '#000', iconColor = '#fff', background = '#00acc742', titleStyles, iconStyle, css_styles }) {
+  const { custom_description } = css_styles;
   const color = (color) => ({
     color: `${color}`,
   });
-  // const backgroundColor = (color) => ({
-  //   backgroundColor: `${color}`,
-  // });
   return (
     <div className='main_item_contain'>
       <div className='item_contenedor'>
         <div className='item_circle'>
-          <div style={iconStyle} className='circle'>
+          <div style={iconStyle} className='square__frame'>
             <span className='icon' style={color(iconColor)}>
-              {icons(icon)}
+              <CustomIcon name={icon} />
             </span>
           </div>
         </div>
@@ -28,9 +26,9 @@ function Item({ icon, title, description, type = 'basic', number, textColor = '#
             </div>
           ) : (null)}
           {type !== 'title' ? (
-            <h1 className='mb-3 text__secondary' style={titleStyles}>{title}</h1>
+            <h1 className='mb-3 text__h__primary' style={titleStyles}>{title}</h1>
           ) : (null)}
-          <p style={color(textColor)} className='secondary-font'>{description}</p>
+          <p className={custom_description}>{description}</p>
         </div>
       </div>
     </div>
@@ -38,4 +36,7 @@ function Item({ icon, title, description, type = 'basic', number, textColor = '#
   );
 }
 
+Item.defaultProps = {
+  css_styles: { 'custom_description': 'text__gray__darken' },
+};
 export default Item;

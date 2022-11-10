@@ -19,16 +19,16 @@
     font-size: 0.75rem;
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    color: $gray_darken;
+    color: $dark_primary;
   }
   &__organization {
     font-weight: 400;
     font-size: 1.25rem;
-    color: $gray_darken;
+    color: $dark_primary;
   }
   &__role {
     font-weight: 600;
     font-size: 1.25rem;
-    color: $gray_darken;
+    color: $dark_primary;
   }
 }

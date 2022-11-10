@@ -103,25 +103,26 @@
   }
   &__social {
     display: grid;
-    grid-template-columns: 8fr 1fr;
-    grid-template-areas: "copyright icons";
+    grid-template-columns: 1fr 8fr;
+    grid-template-areas: "icons copyright";
     align-items: center;
     padding: 30px 5px;
     &__copyright {
       grid-area: copyright;
+      text-align: right;
     }
     &__icons {
       grid-area: icons;
-      color: $gray_lighten-3;
+      color: $dark_primary;
       font-size: 25px;
       display: flex;
       justify-content: space-between;
       a {
         text-decoration: none;
-        color: $gray_lighten-4;
+        color: $dark_primary;
       }
       a:hover {
-        color: $gray_lighten-4;
+        color: $dark_primary;
       }
     }
     @include breakpoint(xs) {

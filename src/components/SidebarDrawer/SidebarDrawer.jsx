@@ -146,7 +146,7 @@ function SidebarDrawer({ children, user }) {
     <div className={classes.backgroundSidebar}>
       {/* <CssBaseline /> */}
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position='fixed' elevation={0} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: '#1C2D47', padding: { xs: '0 1rem', sm: '0 100px' } }}>
+        <AppBar position='fixed' elevation={0} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: 'linear-gradient(90deg, #15A192 0%, #14234B 100%)', padding: { xs: '0 1rem', sm: '0 100px' } }}>
           <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <img src={SuraLogoAlt} alt='Sura Logo' />
             {isPermanent && (
@@ -156,7 +156,7 @@ function SidebarDrawer({ children, user }) {
                   startIcon={<PersonSharpIcon sx={{ color: '#fff' }} />}
                   endIcon={<KeyboardArrowDownSharpIcon color='white' sx={{ color: '#fff' }} />}
                   sx={{
-                    borderRadius: '20px',
+                    borderRadius: '6px',
                     border: '1px solid #15A192',
                     color: '#fff',
                   }}
@@ -186,18 +186,18 @@ function SidebarDrawer({ children, user }) {
                   }}
                 >
                   <MenuItem onClick={() => { handleUser(); handleClose(); }}>
-                    <ListItemIcon>
+                    <ListItemIcon sx={{ color: '#1C2D47' }}>
                       <PersonSharpIcon />
                     </ListItemIcon>
-                    <ListItemText>
+                    <ListItemText sx={{ color: '#1C2D47' }}>
                       Mi perfil
                     </ListItemText>
                   </MenuItem>
                   <MenuItem onClick={() => { handleLogout(); handleClose(); }}>
-                    <ListItemIcon>
+                    <ListItemIcon sx={{ color: '#1C2D47' }}>
                       <LogoutIcon />
                     </ListItemIcon>
-                    <ListItemText>
+                    <ListItemText sx={{ color: '#1C2D47' }}>
                       Salir
                     </ListItemText>
                   </MenuItem>
@@ -248,7 +248,7 @@ function SidebarDrawer({ children, user }) {
         <List>
           <ListItem>
             <ListItemText>
-              <h1 className={`font-weight-regular text__secondary ${classes.title}`}>Hola,</h1>
+              <h1 className={`font-weight-regular text__gray__lighten-4 ${classes.title}`}>Hola,</h1>
               <h1 className={`font-weight-bold text__primary ${classes.title__name}`}>
                 {
                   user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? (
@@ -264,7 +264,7 @@ function SidebarDrawer({ children, user }) {
           </ListItem>
           <ListItem>
             <ListItemText>
-              <h1 className={classes.title__developer}>developer portal</h1>
+              <h1 className={`${classes.title__developer} text__gray__darken`}>developer portal</h1>
             </ListItemText>
           </ListItem>
         </List>
@@ -294,7 +294,7 @@ function SidebarDrawer({ children, user }) {
         </List>
         <List>
           <ListItem>
-            <div style={{ borderBottom: '1px solid #E3E829', width: '58px' }} />
+            <div style={{ borderBottom: '1px solid #15A192', width: '58px' }} />
           </ListItem>
           <ListItem
             button
@@ -308,13 +308,12 @@ function SidebarDrawer({ children, user }) {
                   <path fillRule='evenodd' clipRule='evenodd' d='M9.44755 0C11.516 0 13.2098 1.5889 13.2098 3.54227C13.2098 5.49565 11.516 7.08455 9.44755 7.08455C7.37915 7.08455 5.68531 5.49565 5.68531 3.54227C5.68531 1.5889 7.37915 0 9.44755 0ZM15 18V7.55685H5.92882C4.31425 7.55685 3 8.73995 3 10.2134V18H15ZM5.92882 8.78433H13.6979V16.8032H4.30205V10.2288L4.30616 10.1272C4.36611 9.38822 5.07411 8.78433 5.92882 8.78433ZM6.96869 3.54227C6.96869 2.27019 8.07275 1.23011 9.44755 1.23011C10.8224 1.23011 11.9264 2.27019 11.9264 3.54227C11.9264 4.80884 10.8118 5.85444 9.44755 5.85444C8.07275 5.85444 6.96869 4.81436 6.96869 3.54227Z' fill='white' />
                 </mask>
                 <g mask='url(#mask0_2049_231200)'>
-                  <circle cx='9' cy='9' r='9' fill='#00AEC7' />
-                  <rect width='18' height='18' fill='#00AEC7' />
+                  <circle cx='9' cy='9' r='9' fill='#15A192' />
+                  <rect width='18' height='18' fill='#15A192' />
                 </g>
               </svg>
-
             </ListItemIcon>
-            <ListItemText>
+            <ListItemText sx={{ color: '#15A192' }}>
               Mi Perfil
             </ListItemText>
           </ListItem>
@@ -343,21 +342,10 @@ function SidebarDrawer({ children, user }) {
             <ListItem
               sx={{
                 paddingLeft: '97px',
-                paddingTop: '110px',
+                paddingTop: '80px',
               }}
             >
-              <ListItemText>
-                <h1 className={`font-weight-regular text__secondary ${classes.title}`}>Hola,</h1>
-                <h1 className={`font-weight-bold text__dark__primary ${classes.title__name}`}>
-                  {
-                    user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? (
-                      <span>
-                        {`${splitStr(user.properties.firstName)} ${splitStr(user.properties.lastName)}`}
-                      </span>
-                    ) : ('')
-                  }
-                </h1>
-              </ListItemText>
+              &nbsp;
             </ListItem>
           </List>
         )}
@@ -387,8 +375,8 @@ function SidebarDrawer({ children, user }) {
           )}
           {
             listItems.map((item, index) => (
-              <ListItem button key={index} sx={{ color: '#53565A', paddingLeft: toggleMenu ? '80px' : '54px', paddingRight: 0 }} component={MyNavLink} to={item.route} exact='true'>
-                <ListItemIcon sx={{ justifyContent: 'center' }}>
+              <ListItem button key={index} sx={{ color: '#14234B', paddingLeft: toggleMenu ? '80px' : '54px', paddingRight: 0 }} component={MyNavLink} to={item.route} exact='true'>
+                <ListItemIcon sx={{ justifyContent: 'center', color: '#14234B' }}>
                   {item.icon}
                 </ListItemIcon>
                 {toggleMenu && (<ListItemText primary={item.text} />)}
@@ -402,7 +390,7 @@ function SidebarDrawer({ children, user }) {
             onClick={handleMenu}
             sx={{ paddingLeft: toggleMenu ? '80px' : '54px' }}
           >
-            <ListItemIcon sx={{ justifyContent: 'center' }}>
+            <ListItemIcon sx={{ justifyContent: 'center', color: '#14234B' }}>
               {
                 toggleMenu ? (<ChevronLeft />) : (<ChevronRight />)
               }

@@ -31,7 +31,7 @@ function CheckboxWrapper({
                   borderRadius: '10px',
                 },
                 '&.Mui-checked': {
-                  color: '#15A192',
+                  color: '#14234B',
                 },
               }}
               {...configCheckbox}

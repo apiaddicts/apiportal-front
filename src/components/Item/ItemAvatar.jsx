@@ -2,9 +2,10 @@ import React from 'react';
 import config from '../../services/config';
 import classes from './avatar.module.scss';
 
-function ItemAvatar({ img, title, paragraph, border, divider, css_styles }) {
+function ItemAvatar({ img, title, paragraph, time, border, divider, css_styles }) {
 
   const { custom_title, custom_paragraph } = css_styles;
+  const displayTitle = time === undefined ? `${title}` : `${title} - ${time}`;
 
   return (
     <div className={`${classes.item} ${border ? classes.item__border : null}`}>
@@ -13,7 +14,7 @@ function ItemAvatar({ img, title, paragraph, border, divider, css_styles }) {
       </div>
       <div className={classes.item__content}>
         <div className={`${classes.item__content__title} ${custom_title}`}>
-          <h1>{title}</h1>
+          <span>{displayTitle}</span>
         </div>
         <div className={classes.item__content__paragraph}>
           <p className={custom_paragraph}>{paragraph}</p>

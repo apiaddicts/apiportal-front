@@ -31,7 +31,12 @@
       font-size: 18px;
       font-weight: map-deep-get($font-weights, "medium") !important;
       &__img {
-        padding-right: 20px;
+        padding-right: 10px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 5px;
       }
       &__text {
         color: $secondary;
@@ -165,7 +170,7 @@
   position: relative;
   z-index: 100;
   &__nav {
-    background: $dark_primary;
+    background: linear-gradient(90deg, $secondary_text 0%, $primary 100%);;
     padding: 0 1.5rem;
     transition: 0.3s ease all;
     color: $primary;

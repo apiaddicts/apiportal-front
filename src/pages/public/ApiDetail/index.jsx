@@ -130,18 +130,15 @@ function ApiDetail({ setIsOpen }) {
           <section className='container mb-15'>
             <div className='row'>
               <div className={`flex-md-12 flex-sm-12 -ml-23 ${classes.section__content__title}`}>
-                <h1 className='h2 text__dark__primary font-weight-bold mb-10 -ml-23 text-center-sm'>
+                <h1 className='h2 text__dark__primary font-weight-bold mb-10 -ml-23 text-center'>
                   {library?.benefits && library?.benefits?.length > 0 && library?.benefits?.length === 1 ?
                     library?.benefits?.[0]?.title :
                     'Benificios principales'}
                 </h1>
               </div>
               <div className='row px-5'>
-                <div className={`flex-sm-12 flex-md-6 flex-lg-6 ${classes.section__content__img}`}>
-                  <img src={library?.benefits && library?.benefits?.length > 0 && library?.benefits?.length === 1 && library?.benefits?.[0]?.background ? library?.benefits?.[0]?.background.url : codeSnipet} alt='Benefits' className='w-full' />
-                </div>
-                <div className='flex-sm-12 flex-md-6 flex-lg-6 container' style={{ display: 'flex', alignItems: 'center', padding: '0 4rem' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '2rem', alignContent: 'center' }}>
+                <div className='flex-sm-12 flex-md-6 flex-lg-6' style={{ display: 'flex', alignItems: 'center', padding: '0 4rem' }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(1fr)', gap: '2rem', alignContent: 'center' }}>
                     {library?.benefits && library?.benefits?.length > 0 && library?.benefits?.length === 1 && library?.benefits?.[0]?.Steps?.length > 0 ? (
                       library?.benefits?.[0]?.Steps.map((item, i) => (
                         <div key={i}>
@@ -156,6 +153,64 @@ function ApiDetail({ setIsOpen }) {
                       ))
 
                     ) : (null)}
+                  </div>
+                </div>
+                <div className={`flex-sm-12 flex-md-6 flex-lg-6 container ${classes.section__content__img}`}>
+                  <img src={library?.benefits && library?.benefits?.length > 0 && library?.benefits?.length === 1 && library?.benefits?.[0]?.background ? library?.benefits?.[0]?.background.url : codeSnipet} alt='Benefits' className='w-full' />
+                </div>
+              </div>
+            </div>
+          </section>
+          <section className={classes.section__discover}>
+            <div className='container'>
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <h1 className='h2 text__dark__primary text-center font-weight-bold mb-2 ml-1'>
+                    Otras APIs que te pueden interesar
+                  </h1>
+                </div>
+              </div>
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <p className={`subtitle-1 mb-10 text__gray__gray_lighten-4 text-center ${classes.section__discover__subtitle}`}>
+                    Encuentra las mejores APIs para tu negocio.
+                    {' '}
+                    <br />
+                    Nuestras APIs son fáciles de personalizar e integrar, para comenzar a vender y gestionar los productos.
+                  </p>
+                </div>
+              </div>
+              <div className='row'>
+                {
+                  apisNews && apisNews.length > 0 ? (
+                    apisNews.map((card, i) => (
+                      <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
+                        <CardBasic
+                          chipTitle={card?.status && card?.status === 'Publicado' ? 'GET' : 'POST'}
+                          title={card?.title}
+                          description={card?.description}
+                          info='MÁS INFORMACIÓN'
+                          url={`/apis/${card?.id}#api`}
+                          css_styles={{ 'override_border__chip': 'custom_border__chip' }}
+                          route={() => handleClickPage(card?.id)}
+                        />
+                      </div>
+                    ))
+                  ) : (null)
+                }
+              </div>
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
+                    <div className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
+                      <HashLink smooth to='/apis#apiHome'>
+                        <span className='mr-1'>ver todas</span>
+                      </HashLink>
+                      <Icon id='MdOutlineEast' />
+                    </div>
+                    {/* <div className={`d-sm-none ${classes.section__discover__showmore__button}`}>
+                      Ver todas
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -183,6 +238,7 @@ function ApiDetail({ setIsOpen }) {
                             icon={data?.iconText}
                             type='title'
                             textColor='#d4d9db'
+                            css_styles={{ 'custom_description': 'text__white' }}
                           />
                         </div>
                       ))}
@@ -190,7 +246,7 @@ function ApiDetail({ setIsOpen }) {
                   </div>
                 ))}
               </Tabs>
-              <div className='mt-10 justify-center' style={{ display: 'grid', gap: '2rem', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 210px))' }}>
+              <div className='mt-10 justify-center' style={{ display: 'grid', gap: '2rem', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 230px))' }}>
                 {filterButtonSection && filterButtonSection.length > 0 ? (
                   filterButtonSection?.[0]?.header.map((button, i) => (
                     <div key={i} className='mb-4'>
@@ -202,7 +258,7 @@ function ApiDetail({ setIsOpen }) {
                         </HashLink>
                       ) : (
                         <HashLink smooth to={`/apis/${params?.id}#contact`}>
-                          <Button styles={i === 0 ? 'primary-blue' : button?.keyword}>
+                          <Button styles={button?.keyword}>
                             {button?.title}
                           </Button>
                         </HashLink>
@@ -210,61 +266,6 @@ function ApiDetail({ setIsOpen }) {
                     </div>
                   ))
                 ) : (null)}
-              </div>
-            </div>
-          </section>
-          <section className={`${classes.section__content__texture} d-xs-none`}>
-            <div className={classes.texture__image}> </div>
-          </section>
-          <section className={`container ${classes.section__discover}`}>
-            <div className='row'>
-              <div className='flex-md-12 flex-sm-12'>
-                <h1 className='h2 text__dark__primary font-weight-bold mb-2 ml-1'>
-                  Otras APIs que te pueden interesar
-                </h1>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='flex-md-12 flex-sm-12'>
-                <p className={`subtitle-1 mb-10 text__gray__gray_lighten-4 ${classes.section__discover__subtitle}`}>
-                  Encuentra las mejores APIs para tu negocio.
-                  {' '}
-                  <br />
-                  Nuestras APIs son fáciles de personalizar e integrar, para comenzar a vender y gestionar los productos.
-                </p>
-              </div>
-            </div>
-            <div className='row'>
-              {
-                apisNews && apisNews.length > 0 ? (
-                  apisNews.map((card, i) => (
-                    <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
-                      <CardBasic
-                        chipTitle={card?.status && card?.status === 'Publicado' ? 'GET' : 'POST'}
-                        title={card?.title}
-                        description={card?.description}
-                        info='MÁS INFORMACIÓN'
-                        url={`/apis/${card?.id}#api`}
-                        route={() => handleClickPage(card?.id)}
-                      />
-                    </div>
-                  ))
-                ) : (null)
-              }
-            </div>
-            <div className='row'>
-              <div className='flex-md-12 flex-sm-12'>
-                <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
-                  <div className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
-                    <HashLink smooth to='/apis#apiHome'>
-                      <span className='mr-1'>ver todas</span>
-                    </HashLink>
-                    <Icon id='MdOutlineEast' />
-                  </div>
-                  {/* <div className={`d-sm-none ${classes.section__discover__showmore__button}`}>
-                    Ver todas
-                  </div> */}
-                </div>
               </div>
             </div>
           </section>

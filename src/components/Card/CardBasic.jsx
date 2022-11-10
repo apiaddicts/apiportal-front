@@ -10,9 +10,9 @@ import Base from './Base';
 
 import './cards.scss';
 
-function CardBasic({ chipTitle, title, img, description, info, route, maxWidth, tabCard, footerTabCard, url }) {
+function CardBasic({ chipTitle, title, img, description, info, route, maxWidth, tabCard, footerTabCard, url, css_styles }) {
   return (
-    <Base maxWidth={maxWidth}>
+    <Base maxWidth={maxWidth} css_styles={css_styles}>
 
       {
         tabCard ? (
@@ -45,7 +45,7 @@ function CardBasic({ chipTitle, title, img, description, info, route, maxWidth, 
                     <h1 className='chip_title'>{title}</h1>
                   </>
                 ) : (
-                  <h1 className='h4 font-weight-bold px-8 pt-5 text__dark__grey'>{title}</h1>
+                  <h1 className='h4 font-weight-bold px-8 pt-5 text__dark__primary'>{title}</h1>
                 )}
               </div>
               <div className='card_chip_desciption'>
@@ -53,7 +53,7 @@ function CardBasic({ chipTitle, title, img, description, info, route, maxWidth, 
                   {description}
                 </p>
                 {url !== undefined && url !== '' && route && route !== undefined ? (
-                  <div className='card_chip_info mt-4' onClick={route}>
+                  <div className='card_chip_info mt-4 display_flex justify_content__end' onClick={route}>
                     <HashLink smooth to={url}>
                       <span>{info}</span>
                       {' '}
@@ -62,7 +62,7 @@ function CardBasic({ chipTitle, title, img, description, info, route, maxWidth, 
 
                   </div>
                 ) : url !== undefined && url !== '' ? (
-                  <div className='card_chip_info mt-4'>
+                  <div className='card_chip_info mt-4 display_flex justify_content__end'>
                     <HashLink smooth to={url}>
                       <span>{info}</span>
                       {' '}
@@ -71,7 +71,7 @@ function CardBasic({ chipTitle, title, img, description, info, route, maxWidth, 
 
                   </div>
                 ) : (
-                  <div className='card_chip_info mt-4' onClick={route}>
+                  <div className='card_chip_info mt-4 display_flex justify_content__end' onClick={route}>
                     <span>{info}</span>
                     {' '}
                     <MdEast className='svg' />
