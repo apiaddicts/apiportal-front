@@ -35,6 +35,11 @@
       margin-bottom: 8px;
       color: $dark_primary;
       text-transform: uppercase;
+      span {
+        font-family: $secondary_font;
+        color: #1C2D47;
+        letter-spacing: 1.5px;
+      }
     }
     &__paragraph {
       font-size: 18px;

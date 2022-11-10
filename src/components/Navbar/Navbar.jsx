@@ -3,9 +3,10 @@ import { MdClose, MdMenu } from 'react-icons/md';
 import { Link, NavLink } from 'react-router-dom';
 
 import classes from './navbar.module.scss';
-import SuraLogo from '../../static/img/logo.svg';
 import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
+import { ReactComponent as SuraLogo } from '../../static/img/logo.svg';
+import CustomIcon from '../MdIcon/CustomIcon';
 
 function Navbar({ setIsOpen, setOpenForm }) {
 
@@ -48,22 +49,22 @@ function Navbar({ setIsOpen, setOpenForm }) {
       <header className={classes.header}>
         <div className={`container ${classes.header__content}`}>
           <NavLink to='/' className={classes.header__content__logo}>
-            <img
-              src={SuraLogo}
-              alt=''
-              className={classes.header__content__logo__img}
-            />
+            <div className={classes.header__content__logo__img}>
+              <CustomIcon name='logo' />
+              <CustomIcon name='fintech' />
+            </div>
+            <CustomIcon name='apimarket' />
           </NavLink>
           <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
 
             <ul className={classes.show__lg__up__buttons}>
               <li className='pr-2'>
-                <Button type='button' styles='ghost-variant' preIcon='MdOutlinePersonOutline' size='small' style={{ width: '200px', height: '32px' }} onClick={() => { setIsOpen(true); }}>
+                <Button type='button' styles='ghost-variant' size='small' icon='account' style={{ width: '200px', height: '32px' }} onClick={() => { setIsOpen(true); }}>
                   Iniciar sesión
                 </Button>
               </li>
               <li>
-                <Button type='button' styles='primary-blue' size='small' style={{ width: '140px', height: '32px' }} onClick={() => { setOpenForm(true); }}>
+                <Button type='button' styles='secundary' size='small' style={{ width: '140px', height: '32px' }} onClick={() => { setOpenForm(true); }}>
                   regístrate
                 </Button>
               </li>

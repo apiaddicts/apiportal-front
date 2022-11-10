@@ -31,7 +31,7 @@ function Modal({ children, setOpen, maxWidth = 'sm' }) {
             position: 'absolute',
             right: 8,
             top: 8,
-            color: '#53565A',
+            color: '#14234B',
             fontSize: '20px',
           }}
         >

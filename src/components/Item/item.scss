@@ -14,7 +14,7 @@
         font-size: 36px;
         line-height: 45px;
         letter-spacing: 0.25px;
-        color: $primary;
+        color: $secondary_white;
     }
     .title {
         font-family: $primary_font;
@@ -87,10 +87,17 @@
         }
     }
     p {
-        font-family: $primary_font;
+        font-family: $secondary_font;
         font-style: normal;
         font-weight: 400;
         font-size: 16px;
         line-height: 24px;
     }
+}
+
+.square__frame {
+    width: 80px;
+    height: 80px;
+    background: rgba(21, 161, 146, 0.5);
+    padding: 10px;
 }

@@ -54,7 +54,7 @@ function Blog({ setIsOpen }) {
   const bannerTitle = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0]?.title ? BannerFilter[0]?.title : 'Descubre las novedades de Towertech';
   const bannerImage = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0]?.background ? BannerFilter[0]?.background?.url : '';
   const bannerSearch = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0]?.search ? BannerFilter[0]?.search : '';
-  const TabsFilter = blogPage && Object.keys(blogPage).length > 0 && blogPage.contentSections && blogPage.contentSections.length > 0 ? blogPage.contentSections.filter((item) => item.__component === 'sura.tab-card') : [];
+  const TabsFilter = blogPage && Object.keys(blogPage).length > 0 && blogPage.contentSections && blogPage.contentSections.length > 0 ? blogPage.contentSections.filter((item) => item.__component === 'custom.tab-card') : [];
 
   const deTbas = (tab) => {
     const label = TabsFilter.find((label) => label?.name?.toLowerCase().includes(tab?.toLowerCase()));
@@ -151,9 +151,9 @@ function Blog({ setIsOpen }) {
                       </div>
                       <div id='Suggestions' className={`d-xs-none ${stylesBlog.apis__library__suggestions}`}>
                         <div className={stylesBlog.apis__library__suggestions__content}>
-                          <h1 className={`${stylesBlog.apis__library__suggestions__content__title} fs__16 text-uppercase text__dark__grey`}>Lo más reciente</h1>
-                          <Novedades data={datanews?.reverse().slice(0, 4)} />
                           <Contact pathname='/blog' />
+                          <h1 className={`${stylesBlog.apis__library__suggestions__content__title} fs__16 text-uppercase text mt-4`}>Lo más reciente</h1>
+                          <Novedades data={datanews?.reverse().slice(0, 4)} />
                         </div>
                       </div>
                     </div>

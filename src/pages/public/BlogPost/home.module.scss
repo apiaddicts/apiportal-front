@@ -357,6 +357,7 @@
   text-align: center;
   padding-top: 94px;
   padding-bottom: 88px;
+  background: rgba(9, 178, 156, 0.1);
   @include breakpoint(xs) {
     padding-bottom: 0 !important;
   }

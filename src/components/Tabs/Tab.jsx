@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Icon from '../MdIcon/Icon';
+import CustomIcon from '../MdIcon/CustomIcon';
 
 function Tab({ activeTab, label, onClick, activeColor, colorTab, preIcon }) {
   const onClickTab = () => {
@@ -21,8 +21,10 @@ function Tab({ activeTab, label, onClick, activeColor, colorTab, preIcon }) {
           {label}
         </li>
       ) : (
-        <div style={{ display: 'flex' }} className={`px-4 ${classIcon}`}>
-          <Icon id={preIcon} />
+        <div style={{ display: 'flex', alignItems: 'center' }} className={`px-4 ${classIcon}`}>
+          <div className='pre__icon'>
+            <CustomIcon name={preIcon} />
+          </div>
           <li className={`${classNameTab}`} onClick={onClickTab}>
             {label}
           </li>

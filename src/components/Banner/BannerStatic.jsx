@@ -20,9 +20,6 @@ function BannerStatic({ title, subtitle, img, isSearch, buttons, styles, stylesT
               <p className='subtitle-1 text__secondary__white'>{subtitle}</p>
             </div>
           )}
-          <div className='flex-md-8 flex-sm-12'>
-            <div className={`${classes.divider}`} />
-          </div>
           {buttons && (
             <div className='flex-md-12 flex-sm-12'>
               <div className='button__group mt-5'>

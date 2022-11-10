@@ -22,18 +22,18 @@ function CustomFooter() {
           <img src={SuraLogo} alt='' />
         </div>
         <div className={classes.email}>
-          <h1 className='body-1 font-weight-medium text__secondary mb-2'>Correo electronico</h1>
-          <p className='body-1 font-weight-bold text__secondary'>Empresas@towertech.com.co</p>
+          <h1 className='body-1 font-weight-medium text__dark__primary  mb-2'>Correo electronico</h1>
+          <p className='body-1 font-weight-bold text__dark__primary '>Empresas@towertech.com.co</p>
         </div>
         <div className={classes.policies}>
-          <h1 className='body-1 font-weight-medium text__secondary mb-2'>Política de</h1>
-          <p className='body-1 font-weight-bold text__secondary'>Privacidad de datos</p>
+          <h1 className='body-1 font-weight-medium text__dark__primary  mb-2'>Política de</h1>
+          <p className='body-1 font-weight-bold text__dark__primary '>Privacidad de datos</p>
         </div>
 
       </div>
       <div className={classes.footer__social}>
         <div className={classes.footer__social__copyright}>
-          <p className='caption text-uppercase text__secondary mb-3'>
+          <p className='caption text-uppercase text__dark__primary  mb-3'>
             &copy;
             {' '}
             <span>{ year }</span>

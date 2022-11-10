@@ -13,7 +13,7 @@ function BannerCentered({ title, subtitle, buttonLabel, img, buttonType, redirec
       <div className={`container ${classes.banner__centered}`}>
         <div className='row justify-center text-center mb-5'>
           <div className='flex-md-12 flex-sm-12'>
-            <h1 className='h2 mb-3 text'>{title}</h1>
+            <h1 className='h2 mb-3 text__white'>{title}</h1>
           </div>
         </div>
 

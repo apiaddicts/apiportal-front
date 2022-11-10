@@ -1,21 +1,27 @@
 @import "./tools/tools.scss";
 @import "./mixins/mixin.scss";
-@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&display=swap");
-// @import url(//db.onlinewebfonts.com/c/4c418fddb193fdc55a68a0040c1414cf?family=FS+Joey);
+// @import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&display=swap");
 
 /* ------------------------------ 
     FONTS 
 ------------------------------ */
 
 @font-face {
-  font-family: "FS Joey";
-  src: url("../static/fonts/FS\ Joey\ Regular.ttf");
-  font-weight: normal;
-  font-style: normal;
+  font-family: "Century Gothic";
+  src: url("../static/fonts/century/GOTHIC.TTF") format('truetype') font-weight-normal,
+       url("../static/fonts/century/GOTHICB.TTF") format('truetype') font-weight-bold,
+       url("../static/fonts/century/GOTHICI.TTF") format('truetype') font-weight-italic,
+       url("../static/fonts/century/GOTHICBI.TTF") format('truetype') font-italic font-weight-bold;
 }
 
-$primary_font: 'Barlow', sans-serif;
-$secondary_font: 'FS Joey', serif;
+@font-face {
+  font-family: "Trebuchet MS";
+  src: url("../static/fonts/trebuchet/Trebuchet-MS.ttf") format('truetype') font-weight-normal,
+       url("../static/fonts/trebuchet/Trebuchet-MS-Italic.ttf") format('truetype') font-weight-italic;
+}
+
+$primary_font: 'Century Gothic', sans-serif;
+$secondary_font: 'Trebuchet MS', serif;
 
 /* ------------------------------ 
     COLORS 
@@ -42,6 +48,7 @@ $orange_sura: #F1B434;
 $red_sura: #F54B5E;
 $yellow_sura: #e3e829;
 $white: #FFFFFF;
+$text_h__primary: #1C7B7F;
 
 /* ------------------------------ 
     THEME COLORS 
@@ -49,13 +56,14 @@ $white: #FFFFFF;
 
 $dark_primary: #1C2D47;
 $light_primary: #BBDEFB;
-$primary: #15A192;
+$primary: #14234B;
 $text_icons: #FFFFFF;
 $accent: #2196F3;
 $primary_text: #212121;
-$secondary_text: #757575;
+$secondary_text: #00AC9A;
 $divider: #BDBDBD;
 $black: #000000;
+$secondary_dark: #1C7B7F;
 
 /* ------------------------------
     WEIGHTS 
