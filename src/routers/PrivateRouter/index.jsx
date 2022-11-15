@@ -18,7 +18,6 @@ import ApiDetail from '../../pages/private/ApiDetail';
 import SwaggerUI from '../../pages/private/SwaggerUI';
 import OAuthRedirect from '../../pages/private/OAuthRedirect';
 import Subscriptions from '../../pages/private/Subscriptions';
-import CicleTexture from '../../static/img/texture_circles_private.svg';
 import Logout from '../../pages/private/Logout/Logout';
 
 import { getUser } from '../../redux/actions/userAction';
@@ -56,11 +55,8 @@ function PrivateRouter({ children }) {
       }
       {user && Object.keys(user).length > 0 ? (
         <Box>
-          <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#fbfbfb', minHeight: '100vh' }}>
+          <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#FAFAFC', minHeight: '100vh' }}>
             <SidebarDrawer user={user} />
-            <div className={classes.texture}>
-              <img src={CicleTexture} alt={CicleTexture} />
-            </div>
             <div className={`container ${classes.wrapper}`}>
               <Routes>
                 <Route path='profile' element={<Profile />} />

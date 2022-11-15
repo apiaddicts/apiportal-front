@@ -1,7 +1,7 @@
 import React from 'react';
 
 import classes from './skeleton.module.scss';
-import { ReactComponent as Loader } from '../../static/img/LoadSURA_b.svg';
+import Loader from '../Loader';
 
 function SkeletonComponent() {
   return (

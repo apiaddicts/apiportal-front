@@ -7,11 +7,6 @@ function Title({ text, divider = true, stylesTitle }) {
       <h1 style={stylesTitle} className={classes.title}>
         {text}
       </h1>
-      {
-        divider ? (
-          <div className={classes.divider} />
-        ) : (null)
-      }
     </div>
   );
 }

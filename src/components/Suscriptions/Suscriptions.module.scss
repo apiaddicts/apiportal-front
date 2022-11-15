@@ -24,19 +24,20 @@
   table { 
     thead{
       th {
-        font-family: $barlow;
+        font-family: $primary_font;
         font-size: 12px;
         font-weight: bold;
-        color: $gray_darken;
+        color: $dark_primary;
         letter-spacing: 0.2px;
         padding: 16px 5px;
+        text-transform: uppercase;
       }
     }
     tbody {
       tr {
         cursor: default;
         td {
-          font-family: $barlow;
+          font-family: $primary_font;
           font-size: 12px;
           letter-spacing: 0.2px;
           padding: 16px 5px;

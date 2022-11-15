@@ -76,15 +76,10 @@ function Slider({ slides }) {
             <img src={x?.imgSrc} alt='' />
             <div className={classes.content__slider__slide__text}>
               <div className='container align-center'>
-                <div className='row'>
-                  <div className='flex-md-12 flex-sm-12'>
-                    <div className='divider mb-4' />
-                  </div>
-
-                  <div className='flex-md-6 flex-lg-8 flex-xl-6 flex-sm-12'>
-                    <h1 className='h1 text__secondary__white'>{x?.title}</h1>
-                  </div>
-
+                <div className='display_flex justify_content__center'>
+                  <h1 className='h1 text__white w_800 text-center'>{x?.title}</h1>
+                </div>
+                <div className='display_flex justify_content__center'>
                   <div className='flex-md-12 flex-sm-12 mt-5'>
                     <div className='button__group mt-10'>
                       {
@@ -98,7 +93,7 @@ function Slider({ slides }) {
 
                               ) : (
                                 <HashLink smooth to='/#data'>
-                                  <Button styles={i?.type} onClick={() => handleClick(i?.route)}>
+                                  <Button styles='primary-blue' onClick={() => handleClick(i?.route)}>
                                     {i?.label}
                                   </Button>
                                 </HashLink>

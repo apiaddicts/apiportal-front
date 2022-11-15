@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FaFacebookF, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { Alert } from '@mui/material';
-import { GoMail } from 'react-icons/go';
 import { RiInstagramFill } from 'react-icons/ri';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -12,12 +11,13 @@ import 'yup-phone';
 import Base from './Base';
 import classes from './footer.module.scss';
 import Icon from '../MdIcon/Icon';
-import SuraLogo from '../../static/img/sura_logo.svg';
+import { ReactComponent as LogoAlt } from '../../static/img/logoAlt.svg';
 import Button from '../Buttons/Button';
 import InputUI from '../Input/InputUI/InputUI';
 import TextAreaUI from '../Input/InputUI/TextAreaUI';
 import SelectUI from '../Input/InputUI/SelectUI';
 import config from '../../services/config';
+import CustomIcon from '../MdIcon/CustomIcon';
 
 function Footer({ isPrivate }) {
 
@@ -82,13 +82,12 @@ function Footer({ isPrivate }) {
       {!isPrivate && (
         <Base img={img}>
           <div className={`container ${classes.footer__container}`}>
-            <div className={`${classes.divider} mb-4`} />
-            <h1 className='h2 text__secondary__white mb-3'>¿Conversamos?</h1>
-            <p style={{ fontWeight: 400 }} className='h5 text__secondary__white mb-10'>Déjanos tus datos para que nuestros expertos conecten contigo.</p>
+            <h1 className='h2 text__white mb-3'>¿Hablamos?</h1>
+            <p style={{ fontWeight: 400 }} className='h5 text__white mb-10'>Déjanos tus datos para que nuestros expertos conecten contigo.</p>
           </div>
           <div className={classes.button__fab}>
             <button type='button' onClick={() => { setContactForm(!contactForm); formik.resetForm(); }}>
-              {contactForm ? <Icon style={{ fontSize: '44px' }} id='MdClose' /> : <GoMail style={{ fontSize: '44px' }} />}
+              {contactForm ? <Icon style={{ fontSize: '44px' }} id='MdExpandLess' /> : <Icon style={{ fontSize: '44px' }} id='MdExpandMore' />}
             </button>
           </div>
         </Base>
@@ -238,8 +237,8 @@ function Footer({ isPrivate }) {
                   {
                     displaySubmit &&
                     (
-                      <Button styles='secundary' type='submit'>
-                        ¡Estoy interesado!
+                      <Button styles='primary-blue' type='submit'>
+                        ¡Me interesa!
                       </Button>
                     )
                   }
@@ -249,41 +248,49 @@ function Footer({ isPrivate }) {
           </div>
         </form>
       )}
-      <div className={`container ${classes.footer__end}`}>
-        <div className={classes.logo}>
-          <img src={SuraLogo} alt='' />
-        </div>
-        <div className={classes.email}>
-          <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3 mb-2'>Correo electrónico</h1>
-          <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>mxEmpresasSura@segurossura.com.mx</p>
-        </div>
-        <div className={classes.policies}>
-          <h1 className='body-1 font-weight-medium text__gray__gray_lighten-3 mb-2'>Política de</h1>
-          <p className='body-1 font-weight-bold text__gray__gray_lighten-3'>
-            <a href={config.policyPath} className='text__gray__gray_lighten-3'>Privacidad de datos</a>
-          </p>
-        </div>
+      <div className={classes.footer}>
+        <div className={`container ${classes.footer__end}`}>
+          <div className={classes.logo}>
+            <div className={classes.logo__principal}>
+              <LogoAlt />
+              <div className={classes.logo__principal__sublogo}>
+                <CustomIcon name='fintechwhite' />
+              </div>
+            </div>
+            <CustomIcon name='apimarketwhite' />
+          </div>
+          <div className={classes.email}>
+            <h1 className='body-1 font-weight-medium text__white mb-2'>Correo electrónico</h1>
+            <p className='body-1 font-weight-bold text__white'>Empresas@towertech.com.co</p>
+          </div>
+          <div className={classes.policies}>
+            <h1 className='body-1 font-weight-medium text__white mb-2'>Política de</h1>
+            <p className='body-1 font-weight-bold'>
+              <a href={config.policyPath} className='text__white'>Privacidad de datos</a>
+            </p>
+          </div>
 
-      </div>
-      <div className={`container ${classes.footer__social}`}>
-        <div className={classes.footer__social__copyright}>
-          <p className='caption text-uppercase text__gray__gray_lighten-3 mb-3'>
-            &copy;
-            {' '}
-            <span>{ year }</span>
-            {' '}
-            SEGUROS SURA S.S DE C.V. TODOS LOS DERECHOS RESERVADOS
-            {' '}
-          </p>
         </div>
-        <div className={classes.footer__social__icons}>
-          {
-            socialLinks.map((socialLink, index) => (
-              <a href={socialLink.link} key={index} target='_blank' rel='noreferrer'>
-                {socialLink.icon}
-              </a>
-            ))
-          }
+        <div className={`container ${classes.footer__social}`}>
+          <div className={classes.footer__social__copyright}>
+            <p className='caption text-uppercase text__white mb-3'>
+              &copy;
+              {' '}
+              <span>{ year }</span>
+              {' '}
+              TOWERTECH. TODOS LOS DERECHOS RESERVADOS
+              {' '}
+            </p>
+          </div>
+          <div className={classes.footer__social__icons}>
+            {
+              socialLinks.map((socialLink, index) => (
+                <a href={socialLink.link} key={index} target='_blank' rel='noreferrer'>
+                  {socialLink.icon}
+                </a>
+              ))
+            }
+          </div>
         </div>
       </div>
 

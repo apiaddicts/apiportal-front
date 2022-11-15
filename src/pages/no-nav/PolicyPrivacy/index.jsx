@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPrivacyPolicyContent } from '../../../redux/actions/policyAction';
 import CustomMarkdown from '../../../components/CustomMarkdown';
 import classes from './policyPrivacy.module.scss';
-import SuraLogo from '../../../static/img/sura_logo_alt.svg';
+import SuraLogo from '../../../static/img/logoAlt.svg';
 
 function PolicyPrivacy() {
 

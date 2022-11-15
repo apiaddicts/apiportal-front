@@ -80,11 +80,8 @@
     }
 
     img {
-      border-radius: 20px;
+      border-radius: 0px;
       width: 100%;
-      box-shadow: -19px 21px 0px 1px rgba($secondary, 0.75);
-      -webkit-box-shadow: -19px 21px 0px 1px rgba($secondary, 0.75);
-      -moz-box-shadow: -19px 21px 0px 1px rgba($secondary, 0.75);
     }
   }
   &__items {
@@ -104,7 +101,8 @@
 }
 
 .section__works {
-  background: url("../../../static/img/texture_points.svg"), $primary;
+  // background: url("../../../static/img/texture_points.svg"), $primary;
+  background: $dark_primary;
   background-repeat: no-repeat;
   background-size: cover;
   padding-top: 74px !important;
@@ -172,7 +170,8 @@
 }
 
 .section__discover {
-  padding-top: 0px !important;
+  background: rgba(9, 178, 156, 0.1);
+  padding-top: 77px !important;
   padding-bottom: 77px !important;
   &__sc {
     padding-top: 95px;

@@ -1,6 +1,6 @@
 @import '../../styles/variables.scss';
 .card_img {
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 0px 0px 0px 0px;
     width: 100%;
     height: 200px;
     object-fit: cover;
@@ -24,7 +24,7 @@
     
         .chip_title {
             margin-left: 5.7%;
-            font-family: $barlow;
+            font-family: $primary_font;
             font-style: normal;
             font-weight: 600;
             font-size: 22px;
@@ -36,7 +36,7 @@
         }
     
         .title {
-            font-family: $barlow;
+            font-family: $primary_font;
             font-style: normal;
             font-weight: 600;
             font-size: 22px;
@@ -50,12 +50,12 @@
     }
     
     p {
-            font-family: $barlow;
+            font-family: $secondary_font;
             font-style: normal;
             font-weight: 400;
             font-size: 16px;
             line-height: 24px;
-            color: $gray_darken;
+            color: $gray_darken-1;
             margin-bottom: 7.2px;
         }
     .card_chip_desciption {
@@ -79,20 +79,20 @@
     cursor: pointer;
 
     span {
-        font-family: $barlow;
+        font-family: $primary_font;
         font-style: normal;
         font-weight: 700;
         font-size: 16px;
         line-height: 19px;
         letter-spacing: 1.33333px;
         text-transform: uppercase;
-        color: $secondary;
+        color: $dark_primary;
         margin-right: 10px;
     }
 
     .svg {
         font-size: 15px;
-        color: $secondary;
+        color: $dark_primary;
     }
 }
 
@@ -150,7 +150,7 @@
             &_text {
                 margin-top: -10px;
                 h5 {
-                    font-family: $barlow;
+                    font-family: $primary_font;
                     font-style: normal;
                     font-weight: 700;
                     font-size: 18px;
@@ -158,7 +158,7 @@
                     color: $primary;
                 }
                 span {
-                    font-family: $barlow;
+                    font-family: $primary_font;
                 }
             }
         }
@@ -250,6 +250,10 @@
 .no__shadow{
     box-shadow: none !important;
 }
+
+.custom_border__chip{
+    border-radius: 19px 0 0 0 !important;
+  }
 
 .custom_card__height{
     height: 461px !important;

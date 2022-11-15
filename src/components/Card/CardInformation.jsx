@@ -47,7 +47,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
           )}
           <div className={`pr-8 pl-8 pb-8 pt-2 ${custom_margin_top} ${reading ? 'py-2' : null}`} style={blogClasses}>
             <HashLink smooth to={link}>
-              <p className={`h3 w-full font-weight-semi-bold text__dark ${reading ? 'px-8' : null}  ${theme === 'primary' ? 'text__primary' : ''} ${custom_title_size}`} style={blogTitleStyles}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
+              <p className={`h3 w-full font-weight-semi-bold text__dark__grey ${reading ? 'px-8' : null}  ${theme === 'primary' ? 'text__dark__grey' : ''} ${custom_title_size}`} style={blogTitleStyles}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
             </HashLink>
             <HashLink smooth to={link}>
               <div className='card__information hidden__tags' style={blogTitleStyles}>
@@ -62,22 +62,21 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
               </div>
             </HashLink>
             <HashLink smooth to={link}>
-              <p className={`line-height-1 ${reading ? 'px-8' : null} text__gray__gray_darken body-2`}>
+              <p className={`line-height-1 ${reading ? 'px-8' : null} text__dark__grey body-2`}>
                 {description ?? 'Quisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.Suspendisse potenti. Integer tincidunt. Aenean commodo ligula eget dolor. Nulla consequat massa quis enimQuisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.Suspendisse potenti. Integer tincidunt. Aenean commodo ligula eget dolor. Nulla consequat massa quis enimQuisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.'}
               </p>
             </HashLink>
 
             {info && modal !== undefined ? (
               <HashLink smooth to={link}>
-                <div onClick={clickModal} className='card_chip_info mt-7'>
+                <div onClick={clickModal} className='card_chip_info mt-7 display_flex justify_content__end'>
                   <span>{info}</span>
                   {' '}
-                  <MdEast className='svg' />
                 </div>
               </HashLink>
             ) : info ? (
               <HashLink smooth to={link}>
-                <div className='card_chip_info mt-7'>
+                <div className='card_chip_info mt-7 display_flex justify_content__end'>
                   <span>{info}</span>
                   {' '}
                   <MdEast className='svg' />
@@ -102,8 +101,8 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
               <Chip title={version} className='version text-uppercase font-weight-medium' />
             </div>
           )}
-          <div className={`pr-8 pl-8 pb-8 pt-2 ${custom_margin_top} ${reading ? 'py-2' : null}`}>
-            <p className={`${blogTitle ? 'card__title_blog' : 'h3'} w-full font-weight-semi-bold ${reading ? 'px-8' : null} ${!blog ? 'mb-2' : ''}  ${theme === 'primary' ? 'text__primary' : ''} `}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
+          <div className={`pr-8 pl-8 pb-8 pt-2 ${custom_margin_top} ${reading ? 'py-4' : null}`}>
+            <p className={`${blogTitle ? 'card__title_blog' : 'h3'} w-full font-weight-semi-bold ${reading ? 'px-8' : null} ${!blog ? 'mb-2' : ''}  ${theme === 'primary' ? 'text__dark__grey' : ''} `}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
 
             {blog && (
               <div className='card__information hidden__tags' style={blogTitleStyles}>
@@ -125,7 +124,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
             {info && (
               link ? (
                 <HashLink smooth to={link}>
-                  <div className='card_chip_info mt-7'>
+                  <div className='card_chip_info mt-7 display_flex justify_content__end'>
                     <span>{info}</span>
                     {' '}
                     <MdEast className='svg' />
@@ -133,7 +132,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
                 </HashLink>
               ) : (
                 <HashLink smooth to={`/blog/${id}#blogDetail`}>
-                  <div className='card_chip_info mt-7'>
+                  <div className='card_chip_info mt-7 display_flex justify_content__end'>
                     <span>{info}</span>
                     {' '}
                     <MdEast className='svg' />

@@ -59,7 +59,7 @@
     }
 
     &__subtitle {
-      font-family: $barlow;
+      font-family: $primary_font;
       font-style: normal;
       font-weight: 400;
       font-size: 18px;
@@ -74,11 +74,11 @@
     &__title {
       display: flex;
 
-      font-family: $barlow;
+      font-family: $primary_font;
       font-style: normal;
       font-size: 16px;
       font-weight: 700;
-      color: $primary;
+      color: $dark_primary;
       line-height: 19px;
       width: 450px;
       letter-spacing: 1.33333px;
@@ -164,7 +164,7 @@
     justify-content: center;
     margin-bottom: 20px;
 
-    font-family: $fs-joey;
+    font-family: $secondary_font;
     font-style: normal;
     font-weight: 700;
     font-size: 33px;
@@ -184,7 +184,7 @@
       width: 100%;
       margin-bottom: 10px;
 
-      font-family: $barlow;
+      font-family: $primary_font;
       font-style: normal;
       font-weight: 400;
       font-size: 18px;
@@ -270,7 +270,7 @@
     }
 
     p {
-      font-family: $barlow;
+      font-family: $primary_font;
       font-style: normal;
       font-weight: 700;
       font-size: 16px;
@@ -290,7 +290,7 @@
     padding: 30px 5px;
 
     &__icons {
-      color: $gray_lighten-3;
+      color: $dark_primary;
       font-size: 25px;
       display: flex;
       justify-content: space-between;
@@ -311,10 +311,10 @@
       cursor: pointer;
       a {
         text-decoration: none;
-        color: $gray_lighten-3;
+        color: $dark_primary;
       }
       a:hover {
-        color: $gray_lighten-4;
+        color: $dark_primary;
       }
     }
   }

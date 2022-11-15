@@ -1,12 +1,12 @@
 @import "../../styles/variables.scss";
 
 .title {
-  font-family: $fs-joey;
+  font-family: $secondary_font;
   font-size: 2.5rem;
   font-weight: 400;
   letter-spacing: -0.6px;
   &__name {
-    font-family: $fs-joey;
+    font-family: $secondary_font;
     font-weight: 500;
     font-size: 2.5rem;
     width: 100%;
@@ -19,16 +19,16 @@
     font-size: 0.75rem;
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    color: $gray_darken;
+    color: $dark_primary;
   }
   &__organization {
     font-weight: 400;
     font-size: 1.25rem;
-    color: $gray_darken;
+    color: $dark_primary;
   }
   &__role {
     font-weight: 600;
     font-size: 1.25rem;
-    color: $gray_darken;
+    color: $dark_primary;
   }
 }

@@ -11,8 +11,9 @@
     transform: none;
   }
   @include breakpoint(lg) {
-    transform: translateY(10%);
-    transition: transform 300ms;
+    transform: none;
+    /*transform: translateY(10%);
+    transition: transform 300ms;*/
   }
 }
 
