@@ -8,7 +8,7 @@ function getApiBookStores() {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
-  return fetch(`${config.apiUrl}/sura-library-apis/`, requestOptions)
+  return fetch(`${config.apiUrl}/library-apis/`, requestOptions)
     .then(handleResponse)
     .then((libraries) => {
       return libraries;
@@ -22,7 +22,7 @@ function getApiBookStore(id) {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
-  return fetch(`${config.apiUrl}/sura-library-apis/${id}`, requestOptions)
+  return fetch(`${config.apiUrl}/library-apis/${id}`, requestOptions)
     .then(handleResponse)
     .then((library) => {
       return library;

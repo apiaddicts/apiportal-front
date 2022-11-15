@@ -49,7 +49,7 @@ function CardBasicLink({ chipTitle, title, img, description, info, route, maxWid
                   </>
                 ) : (
                   <h1
-                    className='fs__26 font-weight-bold px-8 pt-5 text__primary'
+                    className='fs__26 font-weight-bold px-8 pt-5 text__dark__primary'
                     style={{
                       'margin': 0,
                       'textOverflow': 'ellipsis',
@@ -66,7 +66,7 @@ function CardBasicLink({ chipTitle, title, img, description, info, route, maxWid
                   {description}
                 </p>
                 <HashLink to={route !== undefined && route.length > 0 ? route : ''}>
-                  <div className='card_chip_info mt-4'>
+                  <div className='card_chip_info mt-4 display_flex justify_content__end'>
                     <span>{info}</span>
                     {' '}
                     <MdEast className='svg' />

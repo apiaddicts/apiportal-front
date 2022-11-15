@@ -1,36 +1,43 @@
 @import "./tools/tools.scss";
 @import "./mixins/mixin.scss";
-@import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&display=swap");
-// @import url(//db.onlinewebfonts.com/c/4c418fddb193fdc55a68a0040c1414cf?family=FS+Joey);
+// @import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&display=swap");
 
 /* ------------------------------ 
     FONTS 
 ------------------------------ */
 
 @font-face {
-  font-family: "FS Joey";
-  src: url("../static/fonts/FS\ Joey\ Regular.ttf");
-  font-weight: normal;
-  font-style: normal;
+  font-family: "Century Gothic";
+  src: url("../static/fonts/century/GOTHIC.TTF") format('truetype') font-weight-normal,
+       url("../static/fonts/century/GOTHICB.TTF") format('truetype') font-weight-bold,
+       url("../static/fonts/century/GOTHICI.TTF") format('truetype') font-weight-italic,
+       url("../static/fonts/century/GOTHICBI.TTF") format('truetype') font-italic font-weight-bold;
 }
 
-$barlow: "Barlow", sans-serif;
-$fs-joey: "FS Joey";
+@font-face {
+  font-family: "Trebuchet MS";
+  src: url("../static/fonts/trebuchet/Trebuchet-MS.ttf") format('truetype') font-weight-normal,
+       url("../static/fonts/trebuchet/Trebuchet-MS-Italic.ttf") format('truetype') font-weight-italic;
+}
+
+$primary_font: 'Century Gothic', sans-serif;
+$secondary_font: 'Trebuchet MS', serif;
 
 /* ------------------------------ 
     COLORS 
 ------------------------------ */
-$primary: #0033a0;
-$secondary: #00aec7;
+$secondary: #101010;
 $secondary_white: #ffffff;
-$secondary_yellow: #e3e829;
+$secondary_yellow: #0078E6;
 $gray: #768692;
 $gray-lighten-0: #F5F6F8;
 $gray_lighten-1: #ecf0f1;
 $gray_lighten-2: #8189a9;
 $gray_lighten-3: #8b92b1;
-$gray_lighten-4: #696974;
+$gray_lighten-4: #878990;
 $gray_darken: #53565a;
+$gray_darken-1: #101010;
+$gray_darken-2: #292929;
 $success: #389e0d;
 $dark: #000;
 $error: #f54b5e;
@@ -39,6 +46,24 @@ $green_sura: #97D700;
 $blue_sura: #003C71;
 $orange_sura: #F1B434;
 $red_sura: #F54B5E;
+$yellow_sura: #e3e829;
+$white: #FFFFFF;
+$text_h__primary: #1C7B7F;
+
+/* ------------------------------ 
+    THEME COLORS 
+------------------------------ */
+
+$dark_primary: #1C2D47;
+$light_primary: #BBDEFB;
+$primary: #14234B;
+$text_icons: #FFFFFF;
+$accent: #2196F3;
+$primary_text: #212121;
+$secondary_text: #00AC9A;
+$divider: #BDBDBD;
+$black: #000000;
+$secondary_dark: #1C7B7F;
 
 /* ------------------------------
     WEIGHTS 
@@ -68,7 +93,7 @@ $heading: map-deep-merge(
       "weight": 700,
       "line-height": auto,
       "letter-spacing": -1.5px,
-      "font-family": $fs-joey,
+      "font-family": $primary_font,
       "text-transform": false,
     ),
     "h1": (
@@ -76,7 +101,7 @@ $heading: map-deep-merge(
       "weight": 700,
       "line-height": auto,
       "letter-spacing": -0.5px,
-      "font-family": $fs-joey,
+      "font-family": $primary_font,
       "text-transform": false,
     ),
     "h2": (
@@ -84,7 +109,7 @@ $heading: map-deep-merge(
       "weight": 700,
       "line-height": auto,
       "letter-spacing": auto,
-      "font-family": $fs-joey,
+      "font-family": $primary_font,
       "text-transform": false,
     ),
     "h3": (
@@ -92,7 +117,7 @@ $heading: map-deep-merge(
       "weight": 700,
       "line-height": auto,
       "letter-spacing": 0.25,
-      "font-family": $barlow,
+      "font-family": $primary_font,
       "text-transform": false,
     ),
     "h4": (
@@ -100,7 +125,7 @@ $heading: map-deep-merge(
       "weight": 600,
       "line-height": auto,
       "letter-spacing": auto,
-      "font-family": $barlow,
+      "font-family": $primary_font,
       "text-transform": false,
     ),
     "h5": (
@@ -108,7 +133,7 @@ $heading: map-deep-merge(
       "weight": 500,
       "line-height": auto,
       "letter-spacing": 0.15,
-      "font-family": $barlow,
+      "font-family": $primary_font,
       "text-transform": false,
     ),
     "subtitle-1": (
@@ -116,7 +141,7 @@ $heading: map-deep-merge(
       "weight": 400,
       "line-height": auto,
       "letter-spacing": 0.15,
-      "font-family": $barlow,
+      "font-family": $primary_font,
       "text-transform": false,
     ),
     "subtitle-2": (
@@ -124,7 +149,7 @@ $heading: map-deep-merge(
       "weight": 500,
       "line-height": auto,
       "letter-spacing": 0.1,
-      "font-family": $barlow,
+      "font-family": $primary_font,
       "text-transform": false,
     ),
     "body-1": (
@@ -132,7 +157,7 @@ $heading: map-deep-merge(
       "weight": 400,
       "line-height": auto,
       "letter-spacing": 0.5,
-      "font-family": $barlow,
+      "font-family": $primary_font,
       "text-transform": false,
     ),
     "body-2": (
@@ -140,7 +165,7 @@ $heading: map-deep-merge(
       "weight": 400,
       "line-height": auto,
       "letter-spacing": 0.25,
-      "font-family": $barlow,
+      "font-family": $primary_font,
       "text-transform": false,
     ),
     "button": (
@@ -148,7 +173,7 @@ $heading: map-deep-merge(
       "weight": 700,
       "line-height": auto,
       "letter-spacing": 1.25px,
-      "font-family": $barlow,
+      "font-family": $primary_font,
       "text-transform": uppercase,
     ),
     "caption": (
@@ -156,7 +181,7 @@ $heading: map-deep-merge(
       "weight": 400,
       "line-height": auto,
       "letter-spacing": 0.4,
-      "font-family": $barlow,
+      "font-family": $primary_font,
       "text-transform": false,
     ),
     "overline": (
@@ -164,7 +189,7 @@ $heading: map-deep-merge(
       "weight": 500,
       "line-height": auto,
       "letter-spacing": 1.5px,
-      "font-family": $barlow,
+      "font-family": $primary_font,
       "text-transform": uppercase,
     ),
   ),

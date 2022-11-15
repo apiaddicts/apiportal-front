@@ -93,7 +93,7 @@ function BlogDetails({ setIsOpen }) {
             styles={stylesPerso}
             stylesTitle={stylesBannerTitle}
           />
-          <section className='container mt-10 py-5'>
+          <section className='container mt-10 mb-10'>
             <div
               className={classes.backTo}
             >
@@ -108,40 +108,40 @@ function BlogDetails({ setIsOpen }) {
             </div>
             <BlogDetailsInfo styles={styles} data={blog} />
             <FooterAuthor data={blog} />
-            <section className={classes.section__news}>
-              <div className='container'>
-                <div className='row'>
-                  <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
-                    <h1 className='fs__32 font-weight-bold text__primary fs__joey'>Novedades</h1>
-                  </div>
-                  <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
-                    <p className='body-1'>
-                      Conoce todas las novedades sobre tecnología, APIs y transformación digital
-                    </p>
-                  </div>
+          </section>
+          <section className={classes.section__news}>
+            <div className='container'>
+              <div className='row'>
+                <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
+                  <h1 className='h2 font-weight-bold text__dark__primary fs__joey'>Novedades</h1>
+                </div>
+                <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
+                  <p className='body-1'>
+                    Conoce todas las novedades sobre tecnología, APIs y transformación digital
+                  </p>
                 </div>
               </div>
-              <div className='container'>
-                <div className='row'>
-                  <div className='flex-md-12 flex-sm-12'>
-                    <Slick slides={slidesNew} />
-                  </div>
+            </div>
+            <div className='container'>
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <Slick slides={slidesNew} />
                 </div>
               </div>
-              <div className={`container ${classes.section__news__showmore}`}>
-                <div className='row justify-center'>
-                  <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
-                    <HashLink smooth to='/blog#blogIndex'>
-                      <div className='d-xs-none'>Ver Más</div>
-                      <div className='d-xs-only'>Ver todas</div>
-                    </HashLink>
-                  </div>
+            </div>
+            <div className={`container ${classes.section__news__showmore}`}>
+              <div className='row justify-center'>
+                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
+                  <HashLink smooth to='/blog#blogIndex'>
+                    <div className='d-xs-none'>Ver Más</div>
+                    <div className='d-xs-only'>Ver todas</div>
+                  </HashLink>
                 </div>
               </div>
-            </section>
+            </div>
           </section>
           <section className={styles.container_contact__details}>
-            <Contact css_styles={{ 'display_detail_description': 'd-block', 'border_radius': 'no_border__radius' }} />
+            <Contact css_styles={{ 'display_detail_description': 'd-block', 'border_radius': 'no_border__radius', 'override_margin_right': 'custom_margin__right' }} />
           </section>
         </>
       ) : (null)}

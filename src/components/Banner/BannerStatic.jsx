@@ -6,23 +6,20 @@ import SearchInput from '../Input/SearchInput';
 
 function BannerStatic({ title, subtitle, img, isSearch, buttons, styles, stylesTitle, css_styles, ...props }) {
 
-  const { custom_padding } = css_styles;
+  const { custom_padding, custom_overlay } = css_styles;
 
   return (
     <Base style={styles} img={img}>
-      <div style={stylesTitle} className={`container ${classes.banner__content}`}>
+      <div style={stylesTitle} className={`container ${classes.banner__content} ${custom_overlay}`}>
         <div className={`row ${custom_padding}`}>
           <div className='flex-md-12 flex-sm-12'>
-            <h1 className='h1 text__secondary__white'>{ title }</h1>
+            <h1 className='h1 text__white'>{ title }</h1>
           </div>
           {subtitle && (
             <div className='flex-md-8 flex-sm-12'>
               <p className='subtitle-1 text__secondary__white'>{subtitle}</p>
             </div>
           )}
-          <div className='flex-md-8 flex-sm-12'>
-            <div className={`${classes.divider}`} />
-          </div>
           {buttons && (
             <div className='flex-md-12 flex-sm-12'>
               <div className='button__group mt-5'>

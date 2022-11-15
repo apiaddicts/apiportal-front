@@ -64,7 +64,7 @@ export const confirmAccount = (queryParams, setIsOpen) => (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
-  localStorage.removeItem('token');
+  sessionStorage.removeItem('token');
   localStorage.removeItem('If-Match');
   dispatch({
     type: userConstants.LOGOUT_USER,
@@ -108,7 +108,7 @@ export const getUser = (tokens) => (dispatch) => {
           token: tokens.token,
         });
       } else {
-        localStorage.removeItem('token');
+        sessionStorage.removeItem('token');
         localStorage.removeItem('If-Match');
         dispatch({ type: userConstants.LOGOUT_USER });
       }

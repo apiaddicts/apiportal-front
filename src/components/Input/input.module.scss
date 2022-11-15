@@ -25,7 +25,7 @@
   }
 
   p {
-    font-family: $barlow;
+    font-family: $primary_font;
     color: $primary;
     margin-bottom: 0;
     margin-left: 8px;
@@ -43,8 +43,8 @@
 }
 .input {
   width: 100%;
-  border: none;
-  border-radius: 40px;
+  border: 1px solid #ECF0F1;
+  border-radius: 6px;
   outline: none;
   padding: 1rem;
   font-size: 0.9rem;
@@ -69,10 +69,13 @@
     box-sizing: border-box;
     padding: 11px 11px 11px 35px;
     width: 100%;
-    border: 1px solid #ccc;
+    border: 1px solid $dark_primary;
+  }
+  &__search::placeholder {
+    color: $dark_primary;
   }
   &__icon {
-    color: $gray_darken;
+    color: $dark_primary;
     height: 20px;
     position: absolute;
     left: 10px;
@@ -128,9 +131,9 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0px 2px 20px #ECF0F1;
-  border-radius: 40px;
-  border: 1px solid #ECF0F1;
+  /*box-shadow: 0px 2px 20px #ECF0F1;*/
+  border-radius: 6px;
+  border: 1px solid $dark_primary;
   width: 100%;
   height: 40px;
   padding: 0 15px;
@@ -149,7 +152,7 @@
   }
   
   p {
-    color: #696974;
+    color: $dark_primary;
     font-size: 16px;
     
       @include breakpoint(lg) {
@@ -190,7 +193,7 @@
   transition: all 0.3s ease-in-out;
   font-size: 0.9rem;
   color: #696974;
-  font-family: $barlow;
+  font-family: $primary_font;
 
   &:hover {
     background-color: #dddddd;
@@ -220,7 +223,7 @@
     align-items: center;
     justify-content: center;
     padding-left: 15px;
-    color: $gray_darken;
+    color: $dark_primary;
     cursor: pointer;
     border-left: 1px solid #ddd;
 }

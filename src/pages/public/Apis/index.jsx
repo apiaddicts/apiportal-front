@@ -223,7 +223,7 @@ function Apis({ setIsOpen }) {
                       handleChangeSearchFilter(e.target.value);
                     }}
                     placeholder='Buscar APIs...'
-                    borderRadius='20px'
+                    borderRadius='6px'
                     value={searchApiInputValue}
                   />
                 </div>

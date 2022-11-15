@@ -26,8 +26,8 @@
 .btn {
   cursor: pointer;
   text-decoration: none;
-  border-radius: 40px;
-  font-family: $barlow;
+  border-radius: 6px;
+  font-family: $primary_font;
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -44,9 +44,10 @@
   &__icon {
     font-size: 22px;
     text-align: center;
-    color: $secondary;
+    color: $primary;
+    width: 22px;
+    height: 22px;
   }
-
 }
 
 .btn-none {
@@ -54,9 +55,9 @@
 }
 
 .btn-secundary {
-  @include button-bg($secondary);
+  @include button-bg($secondary_text);
   @include letter($secondary_white);
-  @include border(#00aec7);
+  @include border($secondary_text);
 }
 
 .btn-primary {
@@ -85,7 +86,7 @@
 .btn-ghost-variant {
   @include button-bg($secondary_white);
   @include letter($primary);
-  @include border($secondary);
+  @include border($primary);
 }
 
 .btn-tertiary-white {

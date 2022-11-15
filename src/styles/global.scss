@@ -8,7 +8,7 @@
 
 body {
   width: 100%;
-  font-family: $barlow;
+  font-family: $primary_font;
 }
 
 #root {
@@ -730,7 +730,7 @@ a {
 .card {
   box-shadow: 0px 3px 12px -2px rgba(0, 0, 0, 0.1);
   background-color: $secondary_white;
-  border-radius: 20px;
+  border-radius: 0;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -747,7 +747,7 @@ a {
   border-radius: 8px !important;
 
   span {
-    font-family: $barlow;
+    font-family: $primary_font;
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -771,7 +771,7 @@ a {
   align-items: center !important;
   font-size: 40px !important;
   justify-content: center !important;
-  border-radius: 20px 0px !important;
+  border-radius: 19px 0 0 0 !important;
 }
 
 .chip_tag_rounded span {
@@ -787,7 +787,7 @@ a {
 .primary {
   background-color: $gray_lighten-1 !important;
   color: $primary !important;
-  border-radius: 50px !important;
+  border-radius: 6px !important;
   font-weight: 500 !important;
   padding: 6px 10px !important;
   font-size: 10px !important;
@@ -804,8 +804,8 @@ a {
   color: $secondary_white;
 }
 .post {
-  background-color: $primary;
-  color: $secondary_white;
+  background-color: $dark_primary !important;
+  color: $secondary_white !important;
 }
 
 .push {
@@ -836,48 +836,39 @@ a {
   // }
 }
 .text {
-  color: $gray;
+  color: $primary;
   &__primary {
-    color: $primary;
+    color: $primary_text;
   }
   &__secondary {
-    color: $secondary !important;
+    color: $secondary_text !important;
   }
-  &__secondary__yellow {
-    color: $secondary_yellow;
+  &__accent {
+    color: $accent;
   }
-  &__secondary__white {
-    color: $secondary_white;
+  &__dark__primary {
+    color: $dark_primary;
   }
-  &__gray {
-    color: $gray;
+  &__light__primary {
+    color: $dark_primary;
   }
-  &__gray__gray_lighten-1 {
-    color: $gray_lighten-1;
+  &__white{
+    color: #fff;
   }
-  &__gray__gray_lighten-2 {
-    color: $gray_lighten-2;
-  }
-  &__gray__gray_lighten-3 {
-    color: $gray_lighten-3;
-  }  
-  &__gray__gray_lighten-4 {
-    color: $gray_lighten-4;
-  }
-  &__gray__gray_darken {
+  &__gray__darken {
     color: $gray_darken;
   }
-  &__dark{
-    color: $dark;
+  &__gray__lighten {
+    color: $gray_lighten-4;
   }
-  &__size-1 {
-    font-size: 154px;
+  &__dark__grey {
+    color: $gray_darken-2;
   }
-  &__error {
-    color: #FF0000 !important;
-    a {
-      color: #FF0000 !important;
-    }
+  &__gray__lighten-4 {
+    color: $gray_lighten-4;
+  }
+  &__h__primary {
+    color: $text_h__primary;
   }
 }
 
@@ -920,7 +911,7 @@ a {
 }
 
 .divider {
-  border-bottom: 4px solid $secondary_yellow;
+  border-bottom: 4px solid $dark_primary;
   width: 56px;
 }
 
@@ -1086,11 +1077,12 @@ a {
   }
 }
 
-.font-fs-joey {
-  font-family: $fs-joey !important;
+.primary-font {
+  font-family: $primary_font !important;
 }
-.font-barlow {
-  font-family: $barlow !important;
+
+.secondary-font {
+  font-family: $secondary_font !important;
 }
 
 .fs{
@@ -1158,13 +1150,13 @@ a {
 
 .MuiAccordionDetails-root{
   .MuiCheckbox-root + span{
-    color: $gray_darken;
+    color: $primary;
     font-size: 16px;
     font-weight: map-deep-get($font-weights, "light") !important;
   }
 
   .Mui-checked + span{
-    color: $gray_darken;
+    color: $primary;
     font-weight: map-deep-get($font-weights, "bold") !important;
   }
 }
@@ -1220,7 +1212,7 @@ a {
 }
 
 .fs__joey{
-  font-family: $fs-joey;
+  font-family: $secondary_font;
 }
 
 .markdown__content{ 
@@ -1230,7 +1222,7 @@ a {
   font-weight: 400;
   font-size: 18px;
   color: $gray_darken;
-  font-family: $barlow;
+  font-family: $primary_font;
   p{
     margin: 10px 0;
   }
@@ -1238,3 +1230,22 @@ a {
 
 img[src*='#center']{ display: block; margin: 0 auto; }
 img[src*='#right']{ display: block; margin-left: auto; }
+
+.w_800{ 
+  width: 800px;
+  @include breakpoint(xs) {
+    width: 100%;
+  }
+
+  @include breakpoint(sm){
+    width: 100%;
+  }
+
+  @include breakpoint(md) {
+    width: 100%;
+  } 
+}
+
+.custom_margin__right{
+  margin-right: 2.5rem !important;
+}

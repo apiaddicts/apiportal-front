@@ -8,7 +8,7 @@ import Button from '../../../components/Buttons/Button';
 import InputUI from '../../../components/Input/InputUI/InputUI';
 import CustomFooter from '../../../components/common/CustomFooter/CustomFooter';
 import { resetPasswordWithTicket } from '../../../redux/actions/userAction';
-import SuraLogo from '../../../static/img/sura_logo_alt.svg';
+import SuraLogo from '../../../static/img/logoAlt.svg';
 import classes from './confirm-password.module.scss';
 
 function ResetPassword(props) {

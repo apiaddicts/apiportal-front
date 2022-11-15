@@ -94,7 +94,7 @@ function Products(props) {
         <Spinner styles={{ height: '500px' }} title='Cargando...' />
       ) : (
         <div>
-          <Card sx={{ borderRadius: '20px', marginTop: '20px', padding: '35px 47px 43px 41px', marginBottom: '15px', width: '100%' }}>
+          <Card sx={{ borderRadius: '0px', marginTop: '20px', padding: '35px 47px 43px 41px', marginBottom: '15px', width: '100%' }}>
             <Grid item sx={{ marginBottom: '31px' }} xs={12}>
               <div className={classes.wrapper_apps__wide__display}>
                 <TableContainer>
