@@ -303,10 +303,10 @@ function Home({ setOpenForm }) {
           {/* Integra */}
           <section id='Banner'>
             <BannerCentered
-              title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : 'Integras tus sistemas con las APIs de Towertech'}
+              title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : 'Integras tus sistemas con las APIs'}
               subtitle={filterHomeBannerSubtitle !== '' ? filterHomeBannerSubtitle : ''}
               img={filterHomeBannerImage !== '' ? '' : ''}
-              buttonType='primary'
+              buttonType='btn-secundary'
               buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : 'empezar ahora'}
               redirect={filterHomeBannerNameTarget}
               setOpenForm={setOpenForm}

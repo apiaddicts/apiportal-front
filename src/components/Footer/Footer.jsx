@@ -11,7 +11,7 @@ import 'yup-phone';
 import Base from './Base';
 import classes from './footer.module.scss';
 import Icon from '../MdIcon/Icon';
-import { ReactComponent as LogoAlt } from '../../static/img/logoAlt.svg';
+/*import { ReactComponent as LogoAlt } from '../../static/img/logoAlt.svg';*/
 import Button from '../Buttons/Button';
 import InputUI from '../Input/InputUI/InputUI';
 import TextAreaUI from '../Input/InputUI/TextAreaUI';
@@ -252,16 +252,16 @@ function Footer({ isPrivate }) {
         <div className={`container ${classes.footer__end}`}>
           <div className={classes.logo}>
             <div className={classes.logo__principal}>
-              <LogoAlt />
+              {/*<LogoAlt />
               <div className={classes.logo__principal__sublogo}>
                 <CustomIcon name='fintechwhite' />
-              </div>
+              </div>*/}
             </div>
             <CustomIcon name='apimarketwhite' />
           </div>
           <div className={classes.email}>
             <h1 className='body-1 font-weight-medium text__white mb-2'>Correo electrónico</h1>
-            <p className='body-1 font-weight-bold text__white'>Empresas@towertech.com.co</p>
+            <p className='body-1 font-weight-bold text__white'>contacto@apiquality.es</p>
           </div>
           <div className={classes.policies}>
             <h1 className='body-1 font-weight-medium text__white mb-2'>Política de</h1>
@@ -278,7 +278,7 @@ function Footer({ isPrivate }) {
               {' '}
               <span>{ year }</span>
               {' '}
-              TOWERTECH. TODOS LOS DERECHOS RESERVADOS
+              API QUALITY. TODOS LOS DERECHOS RESERVADOS
               {' '}
             </p>
           </div>

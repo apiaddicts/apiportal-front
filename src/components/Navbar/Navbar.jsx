@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 import classes from './navbar.module.scss';
 import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
-import { ReactComponent as Logo } from '../../static/img/logo.svg';
+/*import { ReactComponent as Logo } from '../../static/img/logo.svg';*/
 import CustomIcon from '../MdIcon/CustomIcon';
 
 function Navbar({ setIsOpen, setOpenForm }) {
@@ -50,8 +50,8 @@ function Navbar({ setIsOpen, setOpenForm }) {
         <div className={`container ${classes.header__content}`}>
           <NavLink to='/' className={classes.header__content__logo}>
             <div className={classes.header__content__logo__img}>
-              <CustomIcon name='logo' />
-              <CustomIcon name='fintech' />
+              {/*<CustomIcon name='logo' />
+              <CustomIcon name='fintech' />*/}
             </div>
             <CustomIcon name='apimarket' />
           </NavLink>
@@ -74,14 +74,14 @@ function Navbar({ setIsOpen, setOpenForm }) {
 
               <div className={classes.navbar__xs__header}>
                 <div className={classes.navbar__xs__header__logo}>
-                  <img src={Logo} alt='Logo' />
+                  {/*<img src={Logo} alt='Logo' />*/}
                 </div>
                 <div className={classes.navbar__xs__header__toggle}>
                   <MdClose onClick={menuToggleHandler} />
                 </div>
               </div>
               <div className={classes.navbar__xs__section}>
-                <NavLink to='/' className={classes.navbar__xs__section__logo} onClick={menuToggleHandler}>FINTECH AS A SERVICE</NavLink>
+                {/*<NavLink to='/' className={classes.navbar__xs__section__logo} onClick={menuToggleHandler}>FINTECH AS A SERVICE</NavLink>*/}
               </div>
               <ul>
                 {
@@ -146,9 +146,9 @@ function Navbar({ setIsOpen, setOpenForm }) {
       </header>
       <div className={classes.buttom__nav}>
         <div className={`container ${classes.buttom__options}`}>
-          <Link to='/' className={classes.buttom__nav__logo}>
+          {/*<Link to='/' className={classes.buttom__nav__logo}>
             FINTECH AS A SERVICE
-          </Link>
+            </Link>*/}
           <div className={classes.buttom__nav__options}>
             <ul>
               <li>
