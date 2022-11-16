@@ -3,7 +3,7 @@ import React from 'react';
 import { FaFacebookF, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { RiInstagramFill } from 'react-icons/ri';
 import classes from './customfooter.module.scss';
-import Logo from '../../../static/img/Logo.svg';
+/*import Logo from '../../../static/img/logo.svg';*/
 import config from '../../../services/config';
 
 function CustomFooter() {
@@ -19,12 +19,12 @@ function CustomFooter() {
   return (
     <div className={classes.wrapper__footer}>
       <div className={classes.footer__end}>
-        <div className={classes.Logo}>
-          <img src={Logo} alt='' />
+        <div className={classes.logo}>
+          {/*<img src={Logo} alt='' />*/}
         </div>
         <div className={classes.email}>
           <h1 className='body-1 font-weight-medium text__dark__primary  mb-2'>Correo electronico</h1>
-          <p className='body-1 font-weight-bold text__dark__primary '>Empresas@towertech.com.co</p>
+          <p className='body-1 font-weight-bold text__dark__primary '>contacto@apiquality.es</p>
         </div>
         <div className={classes.policies}>
           <h1 className='body-1 font-weight-medium text__dark__primary  mb-2'>Política de</h1>
@@ -41,7 +41,7 @@ function CustomFooter() {
             {' '}
             <span>{ year }</span>
             {' '}
-            TOWERTECH. TODOS LOS DERECHOS RESERVADOS
+            API QUALITY. TODOS LOS DERECHOS RESERVADOS
             {' '}
           </p>
         </div>
