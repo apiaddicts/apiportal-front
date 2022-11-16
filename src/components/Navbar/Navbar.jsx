@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 import classes from './navbar.module.scss';
 import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
-import { ReactComponent as SuraLogo } from '../../static/img/logo.svg';
+import { ReactComponent as Logo } from '../../static/img/logo.svg';
 import CustomIcon from '../MdIcon/CustomIcon';
 
 function Navbar({ setIsOpen, setOpenForm }) {
@@ -74,7 +74,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
 
               <div className={classes.navbar__xs__header}>
                 <div className={classes.navbar__xs__header__logo}>
-                  <img src={SuraLogo} alt='Logo Sura' />
+                  <img src={Logo} alt='Logo' />
                 </div>
                 <div className={classes.navbar__xs__header__toggle}>
                   <MdClose onClick={menuToggleHandler} />

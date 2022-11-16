@@ -22,7 +22,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import classes from './sliderdrawer.module.scss';
-import SuraLogoAlt from '../../static/img/logoAlt.svg';
+import LogoAlt from '../../static/img/logoAlt.svg';
 import { logout } from '../../redux/actions/userAction';
 
 function SidebarDrawer({ children, user }) {
@@ -148,7 +148,7 @@ function SidebarDrawer({ children, user }) {
       <Box sx={{ flexGrow: 1 }}>
         <AppBar position='fixed' elevation={0} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, background: 'linear-gradient(90deg, #15A192 0%, #14234B 100%)', padding: { xs: '0 1rem', sm: '0 100px' } }}>
           <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <img src={SuraLogoAlt} alt='Sura Logo' />
+            <img src={LogoAlt} alt='Logo' />
             {isPermanent && (
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <Button
@@ -231,7 +231,7 @@ function SidebarDrawer({ children, user }) {
       >
         <DrawerHeader>
           <div>
-            <img src={SuraLogoAlt} alt='' />
+            <img src={LogoAlt} alt='' />
           </div>
           <div className='text__secondary'>
             <IconButton

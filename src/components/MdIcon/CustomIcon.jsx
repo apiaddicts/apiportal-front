@@ -1,6 +1,6 @@
 import React from 'react';
 import { ReactComponent as AccountIcon } from '../../static/icons/AccountIcon.svg';
-import { ReactComponent as SuraLogo } from '../../static/img/logo.svg';
+import { ReactComponent as Logo } from '../../static/img/logo.svg';
 import { ReactComponent as ApiMarketIcon } from '../../static/img/LogoApiMarket.svg';
 import { ReactComponent as FintechIcon } from '../../static/img/LogoFintech.svg';
 import { ReactComponent as FintechWhiteIcon } from '../../static/img/LogoFintechWhite.svg';
@@ -25,7 +25,7 @@ function CustomIcon({ name, ...rest }) {
     },
     logo: {
       render: (
-        <SuraLogo />
+        <Logo />
       ),
     },
     apimarket: {

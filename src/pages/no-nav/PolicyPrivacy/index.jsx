@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getPrivacyPolicyContent } from '../../../redux/actions/policyAction';
 import CustomMarkdown from '../../../components/CustomMarkdown';
 import classes from './policyPrivacy.module.scss';
-import SuraLogo from '../../../static/img/logoAlt.svg';
+import LogoAlt from '../../../static/img/logoAlt.svg';
 
 function PolicyPrivacy() {
 
@@ -21,7 +21,7 @@ function PolicyPrivacy() {
       <div className={classes.navbar}>
         <div className={classes.navbar__content}>
           <a href='/'>
-            <img src={SuraLogo} alt='' />
+            <img src={LogoAlt} alt='' />
           </a>
         </div>
       </div>
