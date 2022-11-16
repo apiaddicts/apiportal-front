@@ -45,6 +45,7 @@ variables:
 
 .template:deploy: &ssh-deploy
   script:
+    - apk add gettext
     - mkdir -p ~/.ssh
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - echo "$PRIVATE_RSA_KEY" | tr -d '\r' > ssh-auth
