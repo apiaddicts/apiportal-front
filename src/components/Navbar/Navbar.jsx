@@ -74,14 +74,14 @@ function Navbar({ setIsOpen, setOpenForm }) {
 
               <div className={classes.navbar__xs__header}>
                 <div className={classes.navbar__xs__header__logo}>
-                  <img src={Logo} alt='Logo' />
+                  {/*<img src={Logo} alt='Logo' />*/}
                 </div>
                 <div className={classes.navbar__xs__header__toggle}>
                   <MdClose onClick={menuToggleHandler} />
                 </div>
               </div>
               <div className={classes.navbar__xs__section}>
-                <NavLink to='/' className={classes.navbar__xs__section__logo} onClick={menuToggleHandler}>FINTECH AS A SERVICE</NavLink>
+                {/*<NavLink to='/' className={classes.navbar__xs__section__logo} onClick={menuToggleHandler}>FINTECH AS A SERVICE</NavLink>*/}
               </div>
               <ul>
                 {
@@ -146,9 +146,9 @@ function Navbar({ setIsOpen, setOpenForm }) {
       </header>
       <div className={classes.buttom__nav}>
         <div className={`container ${classes.buttom__options}`}>
-          <Link to='/' className={classes.buttom__nav__logo}>
+          {/*<Link to='/' className={classes.buttom__nav__logo}>
             FINTECH AS A SERVICE
-          </Link>
+            </Link>*/}
           <div className={classes.buttom__nav__options}>
             <ul>
               <li>

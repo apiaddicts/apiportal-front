@@ -261,7 +261,7 @@ function Footer({ isPrivate }) {
           </div>
           <div className={classes.email}>
             <h1 className='body-1 font-weight-medium text__white mb-2'>Correo electrónico</h1>
-            <p className='body-1 font-weight-bold text__white'>Empresas@towertech.com.co</p>
+            <p className='body-1 font-weight-bold text__white'>contacto@apiquality.es</p>
           </div>
           <div className={classes.policies}>
             <h1 className='body-1 font-weight-medium text__white mb-2'>Política de</h1>
@@ -278,7 +278,7 @@ function Footer({ isPrivate }) {
               {' '}
               <span>{ year }</span>
               {' '}
-              TOWERTECH. TODOS LOS DERECHOS RESERVADOS
+              API QUALITY. TODOS LOS DERECHOS RESERVADOS
               {' '}
             </p>
           </div>
