@@ -2,7 +2,6 @@
 import userConstants from '../constants/userConstats';
 import userService from '../../services/userService';
 import config from '../../services/config';
-
 import store from '../store';
 
 // eslint-disable-next-line import/prefer-default-export
@@ -23,7 +22,6 @@ export const login = (data) => (dispatch) => {
           localStorage.setItem('password', secureKeyEncrypted);
         }
         sessionStorage.setItem('token', JSON.stringify(response));
-        /* ! TODO: Asisgnar tiempo de sesion */
         dispatch(getUser(response));
         dispatch(getUserEntityTag(response));
         dispatch({ type: userConstants.RESET_ALERT });
@@ -42,12 +40,13 @@ export const confirmAccount = (queryParams, setIsOpen) => (dispatch) => {
   userService.confirmAccount(queryParams).then(
     (response) => {
       if (response.status === 204) {
+        sessionStorage.setItem('token', JSON.stringify(response));
+        dispatch(getUser(response));
+        dispatch(getUserEntityTag(response));
         dispatch({
           type: userConstants.CONFIRM_ACCOUNT_SUCCESS,
         });
-        dispatch(getUser(response));
-        dispatch(getUserEntityTag(response));
-        dispatch({ type: userConstants.RESET_ALERT });
+        setTimeout(() => { window.location = '/developer/profile'; }, 1500);
       } else {
         dispatch({
           type: userConstants.CONFIRM_ACCOUNT_FAILURE,
@@ -69,7 +68,6 @@ export const logout = () => (dispatch) => {
   dispatch({
     type: userConstants.LOGOUT_USER,
   });
-  // window.location = '/';
 };
 
 export const signUp = (data) => (dispatch) => {
@@ -120,7 +118,6 @@ export const getUser = (tokens) => (dispatch) => {
 };
 
 export const getUserEntityTag = (tokens) => (dispatch) => {
-
   userService.getUserEntityTag(tokens.token, tokens.id).then(
     (response) => {
       localStorage.setItem('If-Match', JSON.stringify(response));

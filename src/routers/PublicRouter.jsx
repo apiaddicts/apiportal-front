@@ -43,7 +43,7 @@ function PublicRoute() {
       )}
       <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} />
       <Routes>
-        <Route path='/' element={<Home setIsOpen={setIsOpen} />} />
+        <Route path='/' element={<Home setIsOpen={setIsOpen} setOpenForm={setOpenForm} />} />
         <Route path='/apis' exact='true' element={<Apis setIsOpen={setIsOpen} />} />
         <Route path='/apis/:id' exact='true' element={<ApiDetail setIsOpen={setOpenForm} />} />
         <Route path='/faqs' exact='true' element={<Faqs />} />
