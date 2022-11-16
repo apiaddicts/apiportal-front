@@ -1,7 +1,7 @@
 version: '3'
 services:
   nextjs:
-    image: _IMAGE:_VERSION
+    image: ${DOCKER_IMAGE_PATH}:${CI_COMMIT_SHA}
     # environment:
     #   REACT_APP_STRAPI_URL: ${REACT_APP_STRAPI_URL}
     #   REACT_APP_SURA_URL: ${REACT_APP_SURA_URL}
@@ -12,4 +12,4 @@ services:
     #   #REACT_APP_HMAC_AUTH_HEADER: ${REACT_APP_HMAC_AUTH_HEADER}
     #   REACT_APP_REMEMBER_KEY: ${REACT_APP_REMEMBER_KEY}
     ports:
-      - $PORT:3000
+      - ${PORT}:8080
