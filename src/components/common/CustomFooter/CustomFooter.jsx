@@ -3,24 +3,24 @@ import React from 'react';
 import { FaFacebookF, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { RiInstagramFill } from 'react-icons/ri';
 import classes from './customfooter.module.scss';
-import SuraLogo from '../../../static/img/logo.svg';
+import Logo from '../../../static/img/Logo.svg';
 import config from '../../../services/config';
 
 function CustomFooter() {
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
   const socialLinks = [
-    { link: 'https://www.facebook.com/SegurosSURAMexico/', icon: <FaFacebookF /> },
-    { link: 'https://twitter.com/SegurosSURA_MX', icon: <FaTwitter /> },
-    { link: 'https://www.youtube.com/channel/UCXm_a8qOYWL4oYnzHcoeWlw', icon: <FaYoutube /> },
-    { link: 'https://www.instagram.com/segurossuramx/', icon: <RiInstagramFill /> },
+    { link: 'https://apiquality.es', icon: <FaFacebookF /> },
+    { link: 'https://apiquality.es', icon: <FaTwitter /> },
+    { link: 'https://apiquality.es', icon: <FaYoutube /> },
+    { link: 'https://apiquality.es', icon: <RiInstagramFill /> },
   ];
 
   return (
     <div className={classes.wrapper__footer}>
       <div className={classes.footer__end}>
-        <div className={classes.logo}>
-          <img src={SuraLogo} alt='' />
+        <div className={classes.Logo}>
+          <img src={Logo} alt='' />
         </div>
         <div className={classes.email}>
           <h1 className='body-1 font-weight-medium text__dark__primary  mb-2'>Correo electronico</h1>

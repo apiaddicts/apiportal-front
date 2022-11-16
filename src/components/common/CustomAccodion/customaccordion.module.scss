@@ -12,7 +12,7 @@
     h1 {
       font-size: 1.2rem;
       font-weight: bold;   
-      color: $blue_sura;
+      color: $blue;
     }
     p {
       font-size: 1rem;
@@ -147,16 +147,16 @@
 }
 
 .POST {
-  background: $blue_sura !important;
+  background: $blue !important;
 }
 .GET {
-  background: $green_sura;
+  background: $green;
 }
 .PUSH {
-  background: $orange_sura;
+  background: $orange;
 }
 .DEL {
-  background: $red_sura;
+  background: $red;
 }
 
 .item__active{

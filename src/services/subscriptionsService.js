@@ -48,7 +48,7 @@ function getName(urlValidate) {
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.suraUrl}${urlValidate}?api-version=${config.apiVersion}`;
+  const url = `${config.azureUrl}${urlValidate}?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
