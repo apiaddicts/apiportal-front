@@ -1,12 +1,10 @@
 import React from 'react';
 
-import { HashLink } from 'react-router-hash-link';
-
 import Base from './Base';
 import Button from '../Buttons/Button';
 import classes from './banner.module.scss';
 
-function BannerCentered({ title, subtitle, buttonLabel, img, buttonType, redirect }) {
+function BannerCentered({ title, subtitle, buttonLabel, img, buttonType, redirect, setOpenForm }) {
 
   return (
     <Base img={img}>
@@ -27,11 +25,9 @@ function BannerCentered({ title, subtitle, buttonLabel, img, buttonType, redirec
           <div className='flex-lg-3 flex-md-5 flex-sm-12 flex-xl-3'>
 
             {redirect === null ? (
-              <HashLink smooth to='/#data'>
-                <Button styles='primary-blue'/*styles={buttonType}*/>
-                  {buttonLabel}
-                </Button>
-              </HashLink>
+              <Button styles={buttonType} onClick={() => { setOpenForm(true); }}>
+                {buttonLabel}
+              </Button>
             ) : (
               <Button styles={buttonType}>
                 {buttonLabel}

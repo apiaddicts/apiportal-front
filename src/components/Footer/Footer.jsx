@@ -266,7 +266,7 @@ function Footer({ isPrivate }) {
           <div className={classes.policies}>
             <h1 className='body-1 font-weight-medium text__white mb-2'>Política de</h1>
             <p className='body-1 font-weight-bold'>
-              <a href={config.policyPath} className='text__white'>Privacidad de datos</a>
+              <a href={config.policyPath} target='blank' className='text__white'>Privacidad de datos</a>
             </p>
           </div>
 

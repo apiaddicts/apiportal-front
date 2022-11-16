@@ -23,7 +23,7 @@ import CustomIcon from '../../../components/MdIcon/CustomIcon';
 
 moment.locale('es');
 
-function Home({ setIsOpen }) {
+function Home({ setOpenForm }) {
   const dispatch = useDispatch();
   const { homePage } = useSelector((state) => state.home);
   const { blogs } = useSelector((state) => state.blog);
@@ -87,7 +87,7 @@ function Home({ setIsOpen }) {
   const filterHomeBannerSubtitle = filterHomeBanner.length > 0 && filterHomeBanner[0]?.subtitle ? filterHomeBanner[0]?.subtitle : '';
   const filterHomeBannerImage = filterHomeBanner.length > 0 && filterHomeBanner[0]?.background ? filterHomeBanner[0]?.background?.url : '';
   const filterHomeBannerNameButtom = filterHomeBanner.length > 0 && filterHomeBanner[0]?.buttons.length > 0 ? filterHomeBanner[0]?.buttons?.[0]?.name : '';
-  const filterHomeBannerNameType = filterHomeBanner.length > 0 && filterHomeBanner[0]?.buttons.length > 0 ? filterHomeBanner[0]?.buttons?.[0]?.type : '/#data';
+  const filterHomeBannerNameTarget = filterHomeBanner.length > 0 && filterHomeBanner[0]?.buttons.length > 0 ? filterHomeBanner[0]?.buttons?.[0]?.target : '/#data';
 
   const datanews = blogs && blogs.length > 0 ? _.sortBy(blogs, (m) => {
     return moment(m.created_at).toDate().getTime();
@@ -311,7 +311,8 @@ function Home({ setIsOpen }) {
               img={filterHomeBannerImage !== '' ? '' : ''}
               buttonType='primary'
               buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : 'empezar ahora'}
-              redirect={filterHomeBannerNameType}
+              redirect={filterHomeBannerNameTarget}
+              setOpenForm={setOpenForm}
             />
           </section>
           {/* Novedades */}

@@ -4,6 +4,7 @@ import { FaFacebookF, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { RiInstagramFill } from 'react-icons/ri';
 import classes from './customfooter.module.scss';
 import SuraLogo from '../../../static/img/logo.svg';
+import config from '../../../services/config';
 
 function CustomFooter() {
   const currentDate = new Date();
@@ -27,7 +28,9 @@ function CustomFooter() {
         </div>
         <div className={classes.policies}>
           <h1 className='body-1 font-weight-medium text__dark__primary  mb-2'>Política de</h1>
-          <p className='body-1 font-weight-bold text__dark__primary '>Privacidad de datos</p>
+          <p className='body-1 font-weight-bold text__dark__primary '>
+            <a href={config.policyPath} target='blank' className='text__gray__gray_lighten-3'>Privacidad de datos</a>
+          </p>
         </div>
 
       </div>

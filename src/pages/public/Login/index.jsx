@@ -36,7 +36,6 @@ function Login({ setOpenForm, setIsOpen, setPrivateSession }) {
     <Modal setOpen={setIsOpen}>
       <div className={classes.login__wrapper}>
         <h1 className={classes.login__title}>{showForm ? 'Iniciar sesión' : 'Recuperar contraseña'}</h1>
-        {/*showAlert && <AlertFeedbock setShowAlert={setShowAlert} success />*/}
         {showForm && (
           <Form
             handleSubmit={handleSubmit}
