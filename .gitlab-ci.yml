@@ -49,7 +49,7 @@ variables:
     - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
     - echo "$PRIVATE_RSA_KEY" | tr -d '\r' > ssh-auth
     - chmod 600 ssh-auth
-    - sed -i "s|_VERSION|$CI_COMMIT_SHA|g;" docker-compose.yaml
+    - sed -i "s|_VERSION|$CI_COMMIT_SHA|g; s|_IMAGE|$DOCKER_IMAGE_PATH|g;" docker-compose.yaml
     - scp -i ssh-auth docker-compose.yaml $SSH_LOGIN:$REMOTE_PATH/docker-compose.yaml
     - ssh -i ssh-auth $SSH_LOGIN "cd $REMOTE_PATH && docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com && docker-compose down && docker-compose up -d "
 
