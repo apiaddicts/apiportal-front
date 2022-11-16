@@ -19,7 +19,7 @@ function CustomFooter() {
   return (
     <div className={classes.wrapper__footer}>
       <div className={classes.footer__end}>
-        <div className={classes.Logo}>
+        <div className={classes.logo}>
           <img src={Logo} alt='' />
         </div>
         <div className={classes.email}>
