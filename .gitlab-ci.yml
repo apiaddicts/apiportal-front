@@ -17,7 +17,7 @@ variables:
     - docker build 
         --build-arg BUILDKIT_INLINE_CACHE=1 
         --build-arg REACT_APP_STRAPI_URL=$REACT_APP_STRAPI_URL
-        --build-arg REACT_APP_SURA_URL=$REACT_APP_SURA_URL
+        --build-arg REACT_APP_AZURE_APIM_URL=$REACT_APP_AZURE_APIM_URL
         --build-arg REACT_APP_SUBSCRIPTION_ID=$REACT_APP_SUBSCRIPTION_ID
         --build-arg REACT_APP_RESOURCE_GROUP_NAME=$REACT_APP_RESOURCE_GROUP_NAME
         --build-arg REACT_APP_SERVICE_NAME=$REACT_APP_SERVICE_NAME
@@ -76,12 +76,7 @@ docker:deploy:
     SSH_KEY: $PRIVATE_RSA_KEY
     REMOTE_PATH: /var/www/aplicacion/devportal-clo-front
   rules:
-    # - if: $CI_COMMIT_REF_NAME == "develop"
-    #   variables:
-    #     REMOTE_PATH: /var/www/aplicacion/devportal-sura-front/dev
     - if: $CI_COMMIT_REF_NAME == "main"
-      # variables:
-      #   REMOTE_PATH: /var/www/aplicacion/devportal-sura-front/pre
   <<: *ssh-deploy
   environment:
     name: $CI_COMMIT_REF_NAME
