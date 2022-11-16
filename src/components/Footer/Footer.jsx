@@ -27,10 +27,10 @@ function Footer({ isPrivate }) {
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
   const socialLinks = [
-    { link: 'https://www.facebook.com/SegurosSURAMexico/', icon: <FaFacebookF /> },
-    { link: 'https://twitter.com/SegurosSURA_MX', icon: <FaTwitter /> },
-    { link: 'https://www.youtube.com/channel/UCXm_a8qOYWL4oYnzHcoeWlw', icon: <FaYoutube /> },
-    { link: 'https://www.instagram.com/segurossuramx/', icon: <RiInstagramFill /> },
+    { link: 'https://apiquality.es', icon: <FaFacebookF /> },
+    { link: 'https://apiquality.es', icon: <FaTwitter /> },
+    { link: 'https://apiquality.es', icon: <FaYoutube /> },
+    { link: 'https://apiquality.es', icon: <RiInstagramFill /> },
   ];
   const [contactForm, setContactForm] = useState(false);
   const [success, setSuccess] = useState(false);

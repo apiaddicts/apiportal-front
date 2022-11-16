@@ -271,11 +271,11 @@ function ApiDetail({ setIsOpen }) {
           </section>
           <section id='Banner'>
             <BannerCentered
-              title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : 'Integras tus sistemas con las APIs de SURA'}
+              title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : 'Title'}
               subtitle={filterHomeBannerSubtitle !== '' ? filterHomeBannerSubtitle : ''}
               img={filterHomeBannerImage !== '' ? '' : ''}
               buttonType='primary'
-              buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : 'empezar ahora'}
+              buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : 'Empezar ahora'}
               redirect={filterHomeBannerNameType}
             />
           </section>

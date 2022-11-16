@@ -13,7 +13,6 @@ function App() {
         <meta name='author' content='CloudAppi México' />
         <meta name='description' content='Towertech API Market description' />
         <meta property='og:title' content='Towertech API Market' />
-        {/* <meta property='og:image' content='https://apimarket-dev.segurossura.com.mx/static/media/sura_logo.fb3321719796ca3ec873142ecdaae65d.svg' /> */}
         <meta property='og:description' content='API Market description' />
         <meta property='og:url' content={`${window.location.protocol}//${window.location.hostname}`} />
         <meta property='og:locale' content='es_MX' />

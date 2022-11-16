@@ -78,9 +78,9 @@ function BlogDetails({ setIsOpen }) {
         <meta property='og:url' content={`${window.location.protocol}//${window.location.hostname}/blog/${blog?.id}`} />
         <meta property='og:locale' content='es_MX' />
         <meta property='og:type' content='article' />
-        <meta property='og:site_name' content='Seguros Sura API Market' />
+        <meta property='og:site_name' content='API Market' />
         <meta name='twitter:card' content='summary' />
-        <meta name='twitter:site' content='Seguros Sura API Market' />
+        <meta name='twitter:site' content='API Market' />
         <meta name='twitter:title' content={blog?.title ? blog?.title : ''} />
         <meta name='twitter:description' content={blog?.description ? blog?.description : ''} />
         <meta name='twitter:image' content={blog?.image ? blog?.image?.[0]?.url : ''} />
@@ -88,7 +88,7 @@ function BlogDetails({ setIsOpen }) {
       {blog && Object.keys(blog).length > 0 ? (
         <>
           <BannerStatic
-            title={blog?.title ? blog?.title : 'Descubre las novedades de SURA'}
+            title={blog?.title ? blog?.title : 'Descubre las novedades'}
             img={blog?.image ? blog?.image?.[0]?.url : ''}
             styles={stylesPerso}
             stylesTitle={stylesBannerTitle}
