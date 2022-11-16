@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Navigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import CustomFooter from '../../../components/common/CustomFooter/CustomFooter';
 import Spinner from '../../../components/Spinner';
 import { confirmAccount } from '../../../redux/actions/userAction';
@@ -9,7 +9,7 @@ import SuraLogo from '../../../static/img/logoAlt.svg';
 
 function ConfirmAccount({ setIsOpen }) {
 
-  const accountVerificationSent = useSelector((state) => state.user.accountVerificationSent);
+  const { accountVerificationSent } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
@@ -29,22 +29,18 @@ function ConfirmAccount({ setIsOpen }) {
   return (
     <div>
       <div className={classes.navbar}>
-        <div className={classes.navbar__content}>
-          <img src={SuraLogo} alt='' />
-        </div>
+        <Navigate to='/' replace>
+            <img src={SuraLogo} alt='' />
+        </Navigate>
       </div>
       <div className={classes.wrapper}>
         <div className={classes.wrapper__content}>
           <div className={classes.wrapper__content__text}>
             <div className='container'>
               <div className='row'>
-                {queryParams.userId && queryParams.ticket && queryParams.ticketId && queryParams.identity ? (
-                  <div className='flex-sm-12 flex-md-12'>
-                    <Spinner />
-                  </div>
-                ) : (
-                  <Navigate to='/' replace />
-                )}
+                <div className='flex-sm-12 flex-md-12'>
+                  <Spinner />
+                </div>
               </div>
             </div>
           </div>

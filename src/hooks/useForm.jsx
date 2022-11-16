@@ -12,11 +12,11 @@ const validationSchema = Yup.object().shape({
   password: string()
     .min(8, 'La contraseña debe tener al menos 8 carácteres de longitud')
     .max(16, 'Se ha excedido el número de caracteres permitidos')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/, 'Su contraseña debe tener al menos 1 letra mayúscula, 1 letra minuscula, 1 número y 1 caracter')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/, 'Su contraseña debe tener al menos una letra mayúscula, una letra minuscula, un número y un caracter especial (@$!%*?&).')
     .trim('Los espacios no estan permitidos')
     .strict()
-    .required('Campo requerido'),
-  password_confirmation: string().oneOf([Yup.ref('password')], 'La contraseñas y la confirmación de contraseña deben coincidir').required('Campo requerido').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/, 'Su contraseña debe tener al menos 1 letra mayúscula, 1 letra minuscula, 1 número y 1 caracter'),
+    .required('La contraseña es obligatoria'),
+  password_confirmation: string().oneOf([Yup.ref('password')], 'La contraseñas y la confirmación de contraseña deben coincidir').required('Campo requerido').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/, 'Su contraseña debe tener al menos una letra mayúscula, una letra minuscula, un número y un caracter especial (@$!%*?&).'),
 });
 
 const objectFromArray = (fields, key) => {
