@@ -11,7 +11,7 @@ import 'yup-phone';
 import Base from './Base';
 import classes from './footer.module.scss';
 import Icon from '../MdIcon/Icon';
-import { ReactComponent as LogoAlt } from '../../static/img/logoAlt.svg';
+/*import { ReactComponent as LogoAlt } from '../../static/img/logoAlt.svg';*/
 import Button from '../Buttons/Button';
 import InputUI from '../Input/InputUI/InputUI';
 import TextAreaUI from '../Input/InputUI/TextAreaUI';
@@ -252,10 +252,10 @@ function Footer({ isPrivate }) {
         <div className={`container ${classes.footer__end}`}>
           <div className={classes.logo}>
             <div className={classes.logo__principal}>
-              <LogoAlt />
+              {/*<LogoAlt />
               <div className={classes.logo__principal__sublogo}>
                 <CustomIcon name='fintechwhite' />
-              </div>
+              </div>*/}
             </div>
             <CustomIcon name='apimarketwhite' />
           </div>

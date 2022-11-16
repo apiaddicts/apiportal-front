@@ -3,7 +3,7 @@ import React from 'react';
 import { FaFacebookF, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { RiInstagramFill } from 'react-icons/ri';
 import classes from './customfooter.module.scss';
-import Logo from '../../../static/img/logo.svg';
+/*import Logo from '../../../static/img/logo.svg';*/
 import config from '../../../services/config';
 
 function CustomFooter() {
@@ -20,7 +20,7 @@ function CustomFooter() {
     <div className={classes.wrapper__footer}>
       <div className={classes.footer__end}>
         <div className={classes.logo}>
-          <img src={Logo} alt='' />
+          {/*<img src={Logo} alt='' />*/}
         </div>
         <div className={classes.email}>
           <h1 className='body-1 font-weight-medium text__dark__primary  mb-2'>Correo electronico</h1>

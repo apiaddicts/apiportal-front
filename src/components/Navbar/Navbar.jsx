@@ -5,7 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 import classes from './navbar.module.scss';
 import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
-import { ReactComponent as Logo } from '../../static/img/logo.svg';
+/*import { ReactComponent as Logo } from '../../static/img/logo.svg';*/
 import CustomIcon from '../MdIcon/CustomIcon';
 
 function Navbar({ setIsOpen, setOpenForm }) {
@@ -50,8 +50,8 @@ function Navbar({ setIsOpen, setOpenForm }) {
         <div className={`container ${classes.header__content}`}>
           <NavLink to='/' className={classes.header__content__logo}>
             <div className={classes.header__content__logo__img}>
-              <CustomIcon name='logo' />
-              <CustomIcon name='fintech' />
+              {/*<CustomIcon name='logo' />
+              <CustomIcon name='fintech' />*/}
             </div>
             <CustomIcon name='apimarket' />
           </NavLink>
