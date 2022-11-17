@@ -24,7 +24,7 @@ const config = {
   subscriptionId: process.env.REACT_APP_AZURE_SUBSCRIPTION_ID,
   resourceGroupName: process.env.REACT_APP_AZURE_RESOURCE_GROUP_NAME,
   serviceName: process.env.REACT_APP_AZURE_SERVICE_NAME,
-  apiVersion: process.env.REACT_APP_API_VERSION,
+  apiVersion: process.env.REACT_APP_AZURE_APIM_ADMIN_API_VERSION,
   hmacAuthHeader: createSharedAccessToken(process.env.REACT_APP_AZURE_APIM_ADMIN_API_UID, process.env.REACT_APP_AZURE_APIM_ADMIN_API_PRIMARY_KEY, process.env.REACT_APP_AZURE_APIM_ADMIN_API_TOKEN_VALID_DAYS),
   rememberkey: process.env.REACT_APP_REMEMBER_KEY,
   topProduct: process.env.REACT_APP_LIST_PRODUCT_TOP,
