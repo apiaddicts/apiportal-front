@@ -9,7 +9,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(90deg, #15A192 0%, #14234B 100%);
+    background: #000B39; /*linear-gradient(90deg, #15A192 0%, #14234B 100%);*/
     min-height: 455px;
     @include breakpoint(xs) {
         height: 615px !important;

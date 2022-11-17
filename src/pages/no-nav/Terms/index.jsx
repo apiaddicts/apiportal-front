@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getTermsContent } from '../../../redux/actions/termAction';
 import CustomMarkdown from '../../../components/CustomMarkdown';
 import classes from './terms.module.scss';
-import LogoAlt from '../../../static/img/logoAlt.svg';
+/*import LogoAlt from '../../../static/img/logoAlt.svg';*/
 
 function Terms() {
 
@@ -21,9 +21,9 @@ function Terms() {
     <>
       <div className={classes.navbar}>
         <div className={classes.navbar__content}>
-          <a href='/'>
+          {/*<a href='/'>
             <img src={LogoAlt} alt='' />
-          </a>
+          </a>*/}
         </div>
       </div>
       <div className={classes.wrapper}>

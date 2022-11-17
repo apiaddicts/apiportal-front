@@ -8,7 +8,7 @@ import Button from '../../../components/Buttons/Button';
 import InputUI from '../../../components/Input/InputUI/InputUI';
 import CustomFooter from '../../../components/common/CustomFooter/CustomFooter';
 import { resetPasswordWithTicket } from '../../../redux/actions/userAction';
-import LogoAlt from '../../../static/img/logoAlt.svg';
+/*import LogoAlt from '../../../static/img/logoAlt.svg';*/
 import classes from './confirm-password.module.scss';
 
 function ResetPassword(props) {
@@ -68,7 +68,7 @@ function ResetPassword(props) {
     <div>
       <div className={classes.navbar}>
         <div className={classes.navbar__content}>
-          <img src={LogoAlt} alt='' />
+          {/*<img src={LogoAlt} alt='' />*/}
         </div>
       </div>
       <div className={classes.wrapper}>
