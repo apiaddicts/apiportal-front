@@ -15,15 +15,15 @@ const createSharedAccessToken = (apimUid, apimAccessKey, validDays) => {
 
 const createUrlApimAdminAPI
  = () => {
-  return `${process.env.REACT_APP_AZURE_APIM_URL}/subscriptions/${process.env.REACT_APP_SUBSCRIPTION_ID}/resourceGroups/${process.env.REACT_APP_RESOURCE_GROUP_NAME}/providers/Microsoft.ApiManagement/service/${process.env.REACT_APP_SERVICE_NAME}`;
+  return `${process.env.REACT_APP_AZURE_APIM_URL}/subscriptions/${process.env.REACT_APP_AZURE_SUBSCRIPTION_ID}/resourceGroups/${process.env.REACT_APP_AZURE_RESOURCE_GROUP_NAME}/providers/Microsoft.ApiManagement/service/${process.env.REACT_APP_AZURE_SERVICE_NAME}`;
 };
 
 const config = {
   apiUrl: process.env.REACT_APP_STRAPI_URL,
   azureUrl: process.env.REACT_APP_AZURE_APIM_URL,
-  subscriptionId: process.env.REACT_APP_SUBSCRIPTION_ID,
-  resourceGroupName: process.env.REACT_APP_RESOURCE_GROUP_NAME,
-  serviceName: process.env.REACT_APP_SERVICE_NAME,
+  subscriptionId: process.env.REACT_APP_AZURE_SUBSCRIPTION_ID,
+  resourceGroupName: process.env.REACT_APP_AZURE_RESOURCE_GROUP_NAME,
+  serviceName: process.env.REACT_APP_AZURE_SERVICE_NAME,
   apiVersion: process.env.REACT_APP_API_VERSION,
   hmacAuthHeader: createSharedAccessToken(process.env.REACT_APP_APIM_UID, process.env.REACT_APP_PRIMARY_KEY, process.env.REACT_APP_TOKEN_VALID_DAYS),
   rememberkey: process.env.REACT_APP_REMEMBER_KEY,
