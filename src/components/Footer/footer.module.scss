@@ -2,7 +2,7 @@
 @import "./../../styles/mixins/mixin.scss";
 
 .footer {
-  background: linear-gradient(90deg, #15A192 0%, #14234B 100%);
+  background: #000B39; /*linear-gradient(90deg, #15A192 0%, #14234B 100%);*/
   &__container {
     height: 300px;
     display: flex;

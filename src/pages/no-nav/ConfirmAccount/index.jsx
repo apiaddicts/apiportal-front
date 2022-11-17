@@ -5,7 +5,7 @@ import CustomFooter from '../../../components/common/CustomFooter/CustomFooter';
 import Spinner from '../../../components/Spinner';
 import { confirmAccount } from '../../../redux/actions/userAction';
 import classes from './confirm-account.module.scss';
-import LogoAlt from '../../../static/img/logoAlt.svg';
+/*import LogoAlt from '../../../static/img/logoAlt.svg';*/
 
 function ConfirmAccount({ setIsOpen }) {
 
@@ -30,7 +30,7 @@ function ConfirmAccount({ setIsOpen }) {
     <div>
       <div className={classes.navbar}>
         <Navigate to='/' replace>
-            <img src={LogoAlt} alt='' />
+            {/*<img src={LogoAlt} alt='' />*/}
         </Navigate>
       </div>
       <div className={classes.wrapper}>

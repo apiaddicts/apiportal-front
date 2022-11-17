@@ -3,7 +3,11 @@ import mailService from '../../services/mailService';
 
 // eslint-disable-next-line import/prefer-default-export
 export const sendContactMail = (values) => (dispatch) => {
-  mailService.sendContactMail(values).then(
+  dispatch({
+    type: mailConstants.GET_ALL_MAIL_CONTACT_SUCCESS,
+    payload: {},
+  });
+  /*mailService.sendContactMail(values).then(
     (response) => {
       if (response.ok) {
         dispatch({
@@ -23,11 +27,15 @@ export const sendContactMail = (values) => (dispatch) => {
         payload: error.response,
       });
     },
-  );
+  );*/
 };
 
 export const sendConversationMail = (values) => (dispatch) => {
-  mailService.sendConversationMail(values).then(
+  dispatch({
+    type: mailConstants.GET_ALL_MAIL_CONVERSATION_SUCCESS,
+    payload: {},
+  });
+  /*mailService.sendConversationMail(values).then(
     (response) => {
       if (response.ok) {
         dispatch({
@@ -47,5 +55,5 @@ export const sendConversationMail = (values) => (dispatch) => {
         payload: error.response,
       });
     },
-  );
+  );*/
 };
