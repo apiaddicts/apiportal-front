@@ -227,7 +227,7 @@ function ApiDetail({ setIsOpen }) {
               </div>
               <Tabs direction='center' colorTab='white' activeColor='yellow'>
                 {filterDiscoverTab.map((item, i) => (
-                  <div label={item?.title} key={i} preIcon={item?.smallText}>
+                  <div label={item?.title} key={i}>
                     <div className='row'>
                       {item.Products.map((data, x) => (
                         <div key={x + i} className='flex-lg-4 flex-md-12 flex-sm-12 py-6'>

@@ -134,7 +134,7 @@ function SidebarDrawer({ children, user }) {
 
   const DrawerHeader = styled('div')(({ theme }) => ({
     width: '100%',
-    background: '#1C2D47',
+    background: '#000B39',
     display: 'flex',
     alignItems: 'center',
     padding: theme.spacing(1, 3),
@@ -186,18 +186,18 @@ function SidebarDrawer({ children, user }) {
                   }}
                 >
                   <MenuItem onClick={() => { handleUser(); handleClose(); }}>
-                    <ListItemIcon sx={{ color: '#1C2D47' }}>
+                    <ListItemIcon sx={{ color: '#000B39' }}>
                       <PersonSharpIcon />
                     </ListItemIcon>
-                    <ListItemText sx={{ color: '#1C2D47' }}>
+                    <ListItemText sx={{ color: '#000B39' }}>
                       Mi perfil
                     </ListItemText>
                   </MenuItem>
                   <MenuItem onClick={() => { handleLogout(); handleClose(); }}>
-                    <ListItemIcon sx={{ color: '#1C2D47' }}>
+                    <ListItemIcon sx={{ color: '#000B39' }}>
                       <LogoutIcon />
                     </ListItemIcon>
-                    <ListItemText sx={{ color: '#1C2D47' }}>
+                    <ListItemText sx={{ color: '#000B39' }}>
                       Salir
                     </ListItemText>
                   </MenuItem>
@@ -271,20 +271,20 @@ function SidebarDrawer({ children, user }) {
         <List
           sx={{
             [`& .active, & .${listItemClasses.root}:hover`]: {
-              color: '#1C2D47',
+              color: '#000B39',
               fontWeight: '700',
               background: 'rgb(0, 174, 199, 0.1)',
               width: '100%',
               '& svg': {
-                fill: '#1C2D47',
+                fill: '#000B39',
               },
             },
           }}
         >
           {
             listItems.map((item, index) => (
-              <ListItem button key={index} sx={{ color: '#1C2D47', fontWeight: 500 }} component={MyNavLink} to={item.route}>
-                <ListItemIcon sx={{ color: '#1C2D47' }}>
+              <ListItem button key={index} sx={{ color: '#000B39', fontWeight: 500 }} component={MyNavLink} to={item.route}>
+                <ListItemIcon sx={{ color: '#000B39' }}>
                   {item.icon}
                 </ListItemIcon>
                 <ListItemText primary={item.text} />
@@ -353,12 +353,12 @@ function SidebarDrawer({ children, user }) {
         <List
           sx={{
             [`& .active, & .${listItemClasses.root}:hover`]: {
-              color: '#1C2D47',
+              color: '#000B39',
               fontWeight: 'bold',
-              borderRight: '2px solid #1C2D47',
+              borderRight: '2px solid #000B39',
               width: '100%',
               '& svg': {
-                fill: '#1C2D47',
+                fill: '#000B39',
               },
             },
             paddingTop: `${!toggleMenu ? '180px' : '8px'}`,

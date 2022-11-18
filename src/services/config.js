@@ -13,8 +13,7 @@ const createSharedAccessToken = (apimUid, apimAccessKey, validDays) => {
   return sasToken;
 };
 
-const createUrlApimAdminAPI
- = () => {
+const createUrlApimAdminAPI = () => {
   return `${process.env.REACT_APP_AZURE_APIM_URL}/subscriptions/${process.env.REACT_APP_AZURE_SUBSCRIPTION_ID}/resourceGroups/${process.env.REACT_APP_AZURE_RESOURCE_GROUP_NAME}/providers/Microsoft.ApiManagement/service/${process.env.REACT_APP_AZURE_SERVICE_NAME}`;
 };
 
@@ -31,8 +30,7 @@ const config = {
   topDetail: process.env.REACT_APP_LIST_PRODUCT_APIS_TOP,
   topApi: process.env.REACT_APP_LIST_API_TOP,
   topSubscriptions: process.env.REACT_APP_LIST_SUBSCRIPTIONS,
-  url: createUrlApimAdminAPI
-(),
+  url: createUrlApimAdminAPI(),
   homePageSlug: process.env.REACT_APP_HOME_PAGE_SLUG,
   blogPageSlug: process.env.REACT_APP_BLOG_PAGE_SLUG,
   faqPageSlug: process.env.REACT_APP_FAQ_PAGE_SLUG,

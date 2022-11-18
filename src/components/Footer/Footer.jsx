@@ -225,7 +225,7 @@ function Footer({ isPrivate }) {
                         {' '}
                         Acepto recibir correos de acuerdo con los siguientes
                         {' '}
-                        <a href={config.termsPath}>términos y condiciones.</a>
+                        <a target='blank' href={config.termsPath}>términos y condiciones.</a>
                         {' '}
                       </span>
                     </div>
