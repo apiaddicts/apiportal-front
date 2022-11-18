@@ -1,5 +1,5 @@
 import mailConstants from '../constants/mailConstants';
-import mailService from '../../services/mailService';
+//import mailService from '../../services/mailService';
 
 // eslint-disable-next-line import/prefer-default-export
 export const sendContactMail = (values) => (dispatch) => {

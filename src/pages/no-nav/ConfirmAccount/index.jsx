@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+/*import { Navigate } from 'react-router-dom';*/
 import { useSearchParams } from 'react-router-dom';
 import CustomFooter from '../../../components/common/CustomFooter/CustomFooter';
 import Spinner from '../../../components/Spinner';
@@ -29,9 +30,9 @@ function ConfirmAccount({ setIsOpen }) {
   return (
     <div>
       <div className={classes.navbar}>
-        <Navigate to='/' replace>
-            {/*<img src={LogoAlt} alt='' />*/}
-        </Navigate>
+        {/*<Navigate to='/' replace>
+            <img src={LogoAlt} alt='' />
+        </Navigate>*/}
       </div>
       <div className={classes.wrapper}>
         <div className={classes.wrapper__content}>
