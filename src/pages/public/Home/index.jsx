@@ -154,7 +154,7 @@ function Home({ setOpenForm }) {
               <Tabs direction='center' colorTab='white' activeColor='yellow'>
                 {
                   filterDiscoverTab.map((item, i) => (
-                    <div label={item?.title} key={i} preIcon={item.smallText}>
+                    <div label={item?.title} key={i}>
                       <div className='row'>
                         {item.Products.map((data, x) => (
                           <div key={x} className='flex-lg-4 flex-md-12 flex-sm-12 py-6'>
@@ -306,7 +306,7 @@ function Home({ setOpenForm }) {
               title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : 'Integras tus sistemas con las APIs'}
               subtitle={filterHomeBannerSubtitle !== '' ? filterHomeBannerSubtitle : ''}
               img={filterHomeBannerImage !== '' ? '' : ''}
-              buttonType='btn-secundary'
+              buttonType='primary-blue'
               buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : 'empezar ahora'}
               redirect={filterHomeBannerNameTarget}
               setOpenForm={setOpenForm}

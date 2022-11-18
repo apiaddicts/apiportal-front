@@ -32,8 +32,8 @@ export const CustomFormControl = styled(FormControlLabel)(({ active }) => ({
   textAlign: 'center',
   cursor: 'pointer',
   padding: '0 0.8rem',
-  backgroundColor: active ? '#1C2D47' : '#fff',
-  color: active ? '#fff' : '#1C2D47',
+  backgroundColor: active ? '#000B39' : '#fff',
+  color: active ? '#fff' : '#000B39',
 }));
 
 export const CustomCheck = styled(Checkbox)({

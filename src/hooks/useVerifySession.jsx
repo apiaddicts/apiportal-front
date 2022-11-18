@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { useSelector } from 'react-redux';
 import store from '../redux/store';
 import { sessionTimeout } from '../redux/actions/userAction';
@@ -39,16 +40,10 @@ const useVerifySession = () => {
   const checkSession = () => {
     const tokenTimeUTC = getTimeSessionToken();
     const currentDateUTC = getCurrentTime();
-    // console.log(`tokenTimeUTC: ${tokenTimeUTC}`);
-    // console.log(`currentDateUTC: ${currentDateUTC}`);
     if (tokenTimeUTC === null || tokenTimeUTC === undefined ||
       currentDateUTC === null || currentDateUTC === undefined) { return; };
-    // console.log('Diferencia', Math.sign(tokenTimeUTC - currentDateUTC));
     if (Math.sign(tokenTimeUTC - currentDateUTC) === -1) {
-      console.log('Cerrar la sesion');
       store.dispatch(sessionTimeout());
-    } else if (Number.isNaN(Math.sign(tokenTimeUTC - currentDateUTC))) {
-      console.log('No se esta realizando un comparativo de fechas correcto');
     }
   };
 
