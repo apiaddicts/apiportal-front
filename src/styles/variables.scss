@@ -1,3 +1,4 @@
+@use 'sass:math';
 @import "./tools/tools.scss";
 @import "./mixins/mixin.scss";
 // @import url("https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;700&display=swap");
@@ -298,8 +299,8 @@ $width-container-xl: 130rem;
   }
   .flex-sm-5 {
     @include breakpoint(sm) {
-      flex: 0 0 percentage(5 / 12);
-      max-width: percentage(5 / 12);
+      flex: 0 0 percentage(math.div(5, 12));
+      max-width: percentage(math.div(5, 12));
     }
   }
   .flex-sm-6 {
@@ -309,32 +310,32 @@ $width-container-xl: 130rem;
   }
   .flex-sm-7 {
     @include breakpoint(sm) {
-      flex: 0 0 percentage(7 / 12);
-      max-width: percentage(7 / 12);
+      flex: 0 0 percentage(math.div(7, 12));
+      max-width: percentage(math.div(7, 12));
     }
   }
   .flex-sm-8 {
     @include breakpoint(sm) {
-      flex: 0 0 percentage(8 / 12);
-      max-width: percentage(8 / 12);
+      flex: 0 0 percentage(math.div(8, 12));
+      max-width: percentage(math.div(8, 12));
     }
   }
   .flex-sm-9 {
     @include breakpoint(sm) {
-      flex: 0 0 percentage(9 / 12);
-      max-width: percentage(9 / 12);
+      flex: 0 0 percentage(math.div(9, 12));
+      max-width: percentage(math.div(9, 12));
     }
   }
   .flex-sm-10 {
     @include breakpoint(sm) {
-      flex: 0 0 percentage(10 / 12);
-      max-width: percentage(10 / 12);
+      flex: 0 0 percentage(math.div(10, 12));
+      max-width: percentage(math.div(10, 12));
     }
   }
   .flex-sm-11 {
     @include breakpoint(sm) {
-      flex: 0 0 percentage(11 / 12);
-      max-width: percentage(11 / 12);
+      flex: 0 0 percentage(math.div(11, 12));
+      max-width: percentage(math.div(11, 12));
     }
   }
   .flex-sm-12 {
@@ -386,8 +387,8 @@ $width-container-xl: 130rem;
 
   .flex-md-5 {
     @include breakpoint(md) {
-      flex: 0 0 percentage((5 / 12));
-      max-width: percentage((5 / 12));
+      flex: 0 0 percentage(math.div(5, 12));
+      max-width: percentage(math.div(5, 12));
     }
   }
 
@@ -399,36 +400,36 @@ $width-container-xl: 130rem;
 
   .flex-md-7 {
     @include breakpoint(md) {
-      flex: 0 0 percentage((7 / 12));
-      max-width: percentage((7 / 12));
+      flex: 0 0 percentage(math.div(7, 12));
+      max-width: percentage(math.div(7, 12));
     }
   }
 
   .flex-md-8 {
     @include breakpoint(md) {
-      flex: 0 0 percentage((8 / 12));
-      max-width: percentage((8 / 12));
+      flex: 0 0 percentage(math.div(8, 12));
+      max-width: percentage(math.div(8, 12));
     }
   }
 
   .flex-md-9 {
     @include breakpoint(md) {
-      flex: 0 0 percentage((9 / 12));
-      max-width: percentage((9 / 12));
+      flex: 0 0 percentage(math.div(9, 12));
+      max-width: percentage(math.div(9, 12));
     }
   }
 
   .flex-md-10 {
     @include breakpoint(md) {
-      flex: 0 0 percentage((10 / 12));
-      max-width: percentage((10 / 12));
+      flex: 0 0 percentage(math.div(10, 12));
+      max-width: percentage(math.div(10, 12));
     }
   }
 
   .flex-md-11 {
     @include breakpoint(md) {
-      flex: 0 0 percentage((11 / 12));
-      max-width: percentage((11 / 12));
+      flex: 0 0 percentage(math.div(11, 12));
+      max-width: percentage(math.div(11, 12));
     }
   }
 
@@ -480,8 +481,8 @@ $width-container-xl: 130rem;
 
   .flex-lg-5 {
     @include breakpoint(lg) {
-      flex: 0 0 percentage((5 / 12));
-      max-width: percentage((5 / 12));
+      flex: 0 0 percentage(math.div(5, 12));
+      max-width: percentage(math.div(5, 12));
     }
   }
 
@@ -493,36 +494,36 @@ $width-container-xl: 130rem;
 
   .flex-lg-7 {
     @include breakpoint(lg) {
-      flex: 0 0 percentage((7 / 12));
-      max-width: percentage((7 / 12));
+      flex: 0 0 percentage(math.div(7, 12));
+      max-width: percentage(math.div(7, 12));
     }
   }
 
   .flex-lg-8 {
     @include breakpoint(lg) {
-      flex: 0 0 percentage((8 / 12));
-      max-width: percentage((8 / 12));
+      flex: 0 0 percentage(math.div(8, 12));
+      max-width: percentage(math.div(8, 12));
     }
   }
 
   .flex-lg-9 {
     @include breakpoint(lg) {
-      flex: 0 0 percentage((9 / 12));
-      max-width: percentage((9 / 12));
+      flex: 0 0 percentage(math.div(9, 12));
+      max-width: percentage(math.div(9, 12));
     }
   }
 
   .flex-lg-10 {
     @include breakpoint(lg) {
-      flex: 0 0 percentage((10 / 12));
-      max-width: percentage((10 / 12));
+      flex: 0 0 percentage(math.div(10, 12));
+      max-width: percentage(math.div(10, 12));
     }
   }
 
   .flex-lg-11 {
     @include breakpoint(lg) {
-      flex: 0 0 percentage((11 / 12));
-      max-width: percentage((11 / 12));
+      flex: 0 0 percentage(math.div(11, 12));
+      max-width: percentage(math.div(11, 12));
     }
   }
 
@@ -574,8 +575,8 @@ $width-container-xl: 130rem;
 
   .flex-xl-5 {
     @include breakpoint(xl) {
-      flex: 0 0 percentage((5 / 12));
-      max-width: percentage((5 / 12));
+      flex: 0 0 percentage(math.div(5, 12));
+      max-width: percentage(math.div(5, 12));
     }
   }
 
@@ -587,36 +588,36 @@ $width-container-xl: 130rem;
 
   .flex-xl-7 {
     @include breakpoint(xl) {
-      flex: 0 0 percentage((7 / 12));
-      max-width: percentage((7 / 12));
+      flex: 0 0 percentage(math.div(7, 12));
+      max-width: percentage(math.div(7, 12));
     }
   }
 
   .flex-xl-8 {
     @include breakpoint(xl) {
-      flex: 0 0 percentage((8 / 12));
-      max-width: percentage((8 / 12));
+      flex: 0 0 percentage(math.div(8, 12));
+      max-width: percentage(math.div(8, 12));
     }
   }
 
   .flex-xl-9 {
     @include breakpoint(xl) {
-      flex: 0 0 percentage((9 / 12));
-      max-width: percentage((9 / 12));
+      flex: 0 0 percentage(math.div(9, 12));
+      max-width: percentage(math.div(9, 12));
     }
   }
 
   .flex-xl-10 {
     @include breakpoint(xl) {
-      flex: 0 0 percentage((10 / 12));
-      max-width: percentage((10 / 12));
+      flex: 0 0 percentage(math.div(10, 12));
+      max-width: percentage(math.div(10, 12));
     }
   }
 
   .flex-xl-11 {
     @include breakpoint(xl) {
-      flex: 0 0 percentage((11 / 12));
-      max-width: percentage((11 / 12));
+      flex: 0 0 percentage(math.div(11, 12));
+      max-width: percentage(math.div(11, 12));
     }
   }
 
