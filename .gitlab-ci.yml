@@ -102,7 +102,7 @@ build react-app:
     - test
   script:
     - export PATH=$PATH:/usr/bin/npm
-    - echo $ENV_CONFIG > .env
+    - echo $ENV_CONFIG | base64 -d > .env
     - npm install
     - CI=false npm run build
   artifacts:    
