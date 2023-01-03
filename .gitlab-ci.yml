@@ -115,7 +115,7 @@ deploy-bucket:
   stage: deploy-bucket
   only:
     # - main
-    - test
+    - main
   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   script:
    - aws --version
@@ -130,7 +130,7 @@ deploy-cloudfare:
   stage: deploy-cloudfare
   only:
     # - main
-    - test
+    - main
   variables:
     URL_S3: "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}.s3-website-eu-west-1.amazonaws.com"
     NAME_DNS: "$SUBDOMAIN_PROJECT.$DOMAIN_PROJECT"
