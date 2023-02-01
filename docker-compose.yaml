@@ -13,3 +13,4 @@ services:
     #   REACT_APP_REMEMBER_KEY: ${REACT_APP_REMEMBER_KEY}
     ports:
       - ${PORT}:8080
+    restart: always
