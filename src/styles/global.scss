@@ -839,6 +839,12 @@ a {
   color: $primary;
   &__primary {
     color: $primary_text;
+    &__title{
+      color: $theme_primary;
+    }
+    &__subtitle{
+      color: $dark_lighten-2;
+    }
   }
   &__secondary {
     color: $secondary_text !important;
@@ -856,7 +862,7 @@ a {
     color: #fff;
   }
   &__gray__darken {
-    color: $gray_darken;
+    color: $dark-lighten-0;
   }
   &__gray__lighten {
     color: $gray_lighten-4;

@@ -29,10 +29,11 @@ function Button({ children, styles, opacity, size = 'regular', preIcon, icon, ..
           styles === 'primary-blue' ? 'btn btn-primary-blue' :
             styles === 'secundary' ? 'btn btn-secundary' :
               styles === 'secundary-white' ? 'btn btn-secundary-white' :
-                styles === 'tertiary-white' ? 'btn btn-tertiary-white' :
-                  styles === 'ghost' ? 'btn btn-ghost' :
-                    styles === 'ghost-variant' ? 'btn btn-ghost-variant' :
-                      styles === 'greey-primary' ? 'btn btn-grey' : 'btn-none'
+                styles === 'tertiary' ? 'btn btn-tertiary' :
+                  styles === 'tertiary-white' ? 'btn btn-tertiary-white' :
+                    styles === 'ghost' ? 'btn btn-ghost' :
+                      styles === 'ghost-variant' ? 'btn btn-ghost-variant' :
+                        styles === 'greey-primary' ? 'btn btn-grey' : 'btn-none'
       }
       style={btnStyled(size, opacity)}
       {...rest}

@@ -90,10 +90,9 @@ function Slider({ slides }) {
                                 <Button styles={i?.type} onClick={() => handleClick(i?.route)}>
                                   {i?.label}
                                 </Button>
-
                               ) : (
                                 <HashLink smooth to='/#data'>
-                                  <Button styles='primary-blue' onClick={() => handleClick(i?.route)}>
+                                  <Button styles='tertiary' onClick={() => handleClick(i?.route)}>
                                     {i?.label}
                                   </Button>
                                 </HashLink>

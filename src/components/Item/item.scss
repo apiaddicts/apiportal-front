@@ -98,6 +98,6 @@
 .square__frame {
     width: 80px;
     height: 80px;
-    background: rgba(21, 161, 146, 0.5);
+    @include background-opacity($theme_secondary, 0.1);
     padding: 10px;
 }

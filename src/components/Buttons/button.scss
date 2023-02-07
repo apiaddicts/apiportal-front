@@ -40,11 +40,10 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  border: 1px solid #E3E829;
   &__icon {
     font-size: 22px;
     text-align: center;
-    color: $primary;
+    color: $theme_secondary;
     width: 22px;
     height: 22px;
   }
@@ -54,6 +53,12 @@
   display: none;
 }
 
+.btn-tertiary {
+  @include button-bg($theme_tertiary);
+  @include letter($secondary_white);
+  @include border($theme_tertiary);
+}
+
 .btn-secundary {
   @include button-bg($secondary_text);
   @include letter($secondary_white);
@@ -61,8 +66,9 @@
 }
 
 .btn-primary {
-  @include button-bg($secondary_yellow);
-  @include letter($primary);
+  @include button-bg($theme_primary);
+  @include letter($white);
+  @include border($theme_primary);
 }
 
 .btn-primary-blue {
@@ -85,8 +91,8 @@
 
 .btn-ghost-variant {
   @include button-bg($secondary_white);
-  @include letter($primary);
-  @include border($primary);
+  @include letter($theme_secondary);
+  @include border($theme_secondary);
 }
 
 .btn-tertiary-white {

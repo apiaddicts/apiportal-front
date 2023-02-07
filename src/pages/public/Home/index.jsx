@@ -118,7 +118,7 @@ function Home({ setOpenForm }) {
           <section className={`container ${classes.section__content}`}>
             <div className='row'>
               <div className='flex-md-12 flex-md-12 flex-lg-12 flex-sm-12'>
-                <h1 className='h3 text__dark__primary font-weight-bold mb-5 text-center'>
+                <h1 className='h3 text__primary__title font-weight-bold mb-5 text-center'>
                   {titleSection || 'Benificios principales'}
                 </h1>
               </div>

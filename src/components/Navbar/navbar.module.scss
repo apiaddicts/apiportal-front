@@ -170,7 +170,7 @@
   position: relative;
   z-index: 100;
   &__nav {
-    background: #000B39; /*linear-gradient(90deg, $secondary_text 0%, $primary 100%);*/
+    background: $theme_primary; /*linear-gradient(90deg, $secondary_text 0%, $primary 100%);*/
     padding: 0 1.5rem;
     transition: 0.3s ease all;
     color: $primary;
