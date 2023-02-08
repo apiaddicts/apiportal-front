@@ -237,7 +237,7 @@ function Footer({ isPrivate }) {
                   {
                     displaySubmit &&
                     (
-                      <Button styles='primary-blue' type='submit'>
+                      <Button styles='tertiary' type='submit'>
                         ¡Me interesa!
                       </Button>
                     )
@@ -257,11 +257,11 @@ function Footer({ isPrivate }) {
                 <CustomIcon name='fintechwhite' />
               </div>*/}
             </div>
-            <CustomIcon name='apimarketwhite' />
+            <CustomIcon name='logowhite' />
           </div>
           <div className={classes.email}>
             <h1 className='body-1 font-weight-medium text__white mb-2'>Correo electrónico</h1>
-            <p className='body-1 font-weight-bold text__white'>contacto@apiquality.es</p>
+            <p className='body-1 font-weight-bold text__white'>contacto@wolterskluwer.es</p>
           </div>
           <div className={classes.policies}>
             <h1 className='body-1 font-weight-medium text__white mb-2'>Política de</h1>
@@ -278,7 +278,7 @@ function Footer({ isPrivate }) {
               {' '}
               <span>{ year }</span>
               {' '}
-              API QUALITY. TODOS LOS DERECHOS RESERVADOS
+              Wolters Kluwer. TODOS LOS DERECHOS RESERVADOS
               {' '}
             </p>
           </div>

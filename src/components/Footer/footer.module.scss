@@ -2,7 +2,7 @@
 @import "./../../styles/mixins/mixin.scss";
 
 .footer {
-  background: #000B39; /*linear-gradient(90deg, #15A192 0%, #14234B 100%);*/
+  background: $theme_primary; /*linear-gradient(90deg, #15A192 0%, #14234B 100%);*/
   &__container {
     height: 300px;
     display: flex;
@@ -201,7 +201,7 @@
     }
   }
   &__section {
-    background: #ecf0f1;
+    background: $gray-lighten-4;
     &__contact {
       padding-top: 100px;
       padding-bottom: 73px;
@@ -212,20 +212,20 @@
           display: inline-block;
           width: 20px;
           height: 20px;
-          border: 3px solid #0033a0 !important;
+          border: 3px solid $theme_primary !important;
           border-radius: 3px;
           cursor: pointer;
           margin-right: 12px;
         }
         span {
-          color: $primary;
+          color: $theme_primary;
           font-size: 0.938rem;
           font-weight: 400;
           letter-spacing: 0.25px;
           font-family: $primary_font;
           line-height: 20px;
           a {
-            color: $primary;
+            color: $theme_primary;
             font-weight: 700;
             letter-spacing: 0.25px;
             font-family: $primary_font;
@@ -251,7 +251,7 @@
 .heroOverlay {
   height: 100%;
   width: 100%;
-  background: $dark_primary url("../../static/icons/lockWifi.svg") no-repeat left 2px;
+  background: $theme_primary url("../../static/icons/lockWifi.svg") no-repeat left 2px;
 }
 .divider {
   border-bottom: 4px solid $secondary_white;
@@ -269,7 +269,7 @@
     position: relative;
     z-index: 1;
     top: -50px;
-    background: $primary;
+    background: $theme_secondary;
     border: none;
     border-radius: 0%;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.12), 0px 6px 6px rgba(0, 0, 0, 0.24);

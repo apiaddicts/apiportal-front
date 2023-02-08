@@ -69,29 +69,29 @@
   &:focus-within {
     label {
       transform: translate(0, -20px) scale(0.75);
-      color: $primary;
+      color: $input-color-primary;
       font-weight: 500;
       font-size: 1rem;
     }
     input {
-      border: 2px solid $primary;
+      border: 2px solid $input-color-warning;
     }
   }
 }
 
 .active {
   transform: translate(0, -20px) scale(0.75) !important;
-  color: $primary !important;
+  color: $input-color-primary !important;
   font-weight: 500 !important;
   font-size: 1rem !important;
 }
 
 .error {
   font-size: 0.75rem;
-  color: #e4002b !important;
+  color: $input-color-danger !important;
   &__input__error {
     input, textarea {
-      border: 2px solid #e4002b;
+      border: 2px solid $input-color-danger;
     }
   }
   p {
@@ -116,7 +116,7 @@
   font-size: 25px;
   color: rgba(0, 0, 0, 0.38);
   &__error {
-    color: #e4002b;
+    color: $input-color-danger;
   }
 }
 
