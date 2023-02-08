@@ -45,28 +45,28 @@ function CardBasic({ chipTitle, title, img, description, info, route, maxWidth, 
                     <h1 className='chip_title'>{title}</h1>
                   </>
                 ) : (
-                  <h1 className='h4 font-weight-bold px-8 pt-5 text__dark__primary'>{title}</h1>
+                  <h1 className='h4 font-weight-bold px-8 pt-5 card__title'>{title}</h1>
                 )}
               </div>
-              <div className='card_chip_desciption'>
+              <div className='card_chip_desciption card__description'>
                 <p className='text-left'>
                   {description}
                 </p>
                 {url !== undefined && url !== '' && route && route !== undefined ? (
                   <div className='card_chip_info mt-4 display_flex justify_content__end' onClick={route}>
                     <HashLink smooth to={url}>
-                      <span>{info}</span>
+                      <span className='card__link'>{info}</span>
                       {' '}
-                      <MdEast className='svg' />
+                      <MdEast className='svg card__icon' />
                     </HashLink>
 
                   </div>
                 ) : url !== undefined && url !== '' ? (
                   <div className='card_chip_info mt-4 display_flex justify_content__end'>
                     <HashLink smooth to={url}>
-                      <span>{info}</span>
+                      <span className='card__link'>{info}</span>
                       {' '}
-                      <MdEast className='svg' />
+                      <MdEast className='svg card__icon' />
                     </HashLink>
 
                   </div>

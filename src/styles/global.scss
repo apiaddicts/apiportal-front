@@ -835,15 +835,46 @@ a {
   //   font-size: 10px;
   // }
 }
+
+.card {
+  color: #000000;
+  &__title{
+    color: $blue-lighten-1 !important;
+  }
+  &__subtitle {
+    color: $blue-lighten-3 !important;
+  }
+  &__description {
+    color: $dark-lighten-0 !important;
+  }
+  &__link,
+  &__icon {
+    color: $red-lighen-2 !important;
+  }
+}
+
+.link {
+  color: #000000;
+  &__primary {
+    color: $blue-lighten-0 !important;
+  }
+  &__secondary {
+    color: $red-lighen-0 !important;
+  }
+  &__tertiary {
+    color: $dark_lighten-2 !important;
+  }
+}
+
 .text {
   color: $primary;
   &__primary {
-    color: $primary_text;
+    color: $primary_text !important;
     &__title{
-      color: $theme_primary;
+      color: $theme_primary !important;
     }
     &__subtitle{
-      color: $dark_lighten-2;
+      color: $dark_lighten-2 !important;
     }
   }
   &__secondary {
@@ -853,10 +884,10 @@ a {
     color: $accent;
   }
   &__dark__primary {
-    color: $dark_primary;
+    color: $dark-lighten-0;
   }
   &__light__primary {
-    color: $dark_primary;
+    color: $dark-lighten-2;
   }
   &__white{
     color: #fff;
@@ -865,7 +896,7 @@ a {
     color: $dark-lighten-0;
   }
   &__gray__lighten {
-    color: $gray_lighten-4;
+    color: $gray_lighten-0;
   }
   &__dark__grey {
     color: $gray_darken-2;

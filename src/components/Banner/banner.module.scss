@@ -15,7 +15,7 @@
   &__container {
     height: 100%;
     width: 100%;
-    background: #000B39; /*linear-gradient(90deg, #15A192 0%, #14234B 100%);*/
+    background: $theme_primary; /*linear-gradient(90deg, #15A192 0%, #14234B 100%);*/
   }
   &__content {
     padding-top: 101px;

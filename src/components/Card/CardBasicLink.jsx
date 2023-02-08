@@ -12,6 +12,7 @@ import Base from './Base';
 import './cards.scss';
 
 function CardBasicLink({ chipTitle, title, img, description, info, route, maxWidth, tabCard, footerTabCard }) {
+  console.log('props', footerTabCard);
   return (
     <Base maxWidth={maxWidth} css_styles={{ override_card_height: 'custom_card__height' }}>
 
@@ -49,7 +50,7 @@ function CardBasicLink({ chipTitle, title, img, description, info, route, maxWid
                   </>
                 ) : (
                   <h1
-                    className='fs__26 font-weight-bold px-8 pt-5 text__dark__primary'
+                    className='fs__26 font-weight-bold px-8 pt-5 card__title'
                     style={{
                       'margin': 0,
                       'textOverflow': 'ellipsis',
@@ -62,14 +63,14 @@ function CardBasicLink({ chipTitle, title, img, description, info, route, maxWid
                 )}
               </div>
               <div className='card_chip_desciption'>
-                <p className='text-left'>
+                <p className='text-left card__description'>
                   {description}
                 </p>
                 <HashLink to={route !== undefined && route.length > 0 ? route : ''}>
-                  <div className='card_chip_info mt-4 display_flex justify_content__end'>
+                  <div className='card_chip_info mt-4 display_flex justify_content__end card__link'>
                     <span>{info}</span>
                     {' '}
-                    <MdEast className='svg' />
+                    <MdEast className='svg card__link' />
                   </div>
                 </HashLink>
               </div>
