@@ -53,10 +53,15 @@ $gray_lighten-2: #8189a9;
 $gray_lighten-3: #ecf0f1;
 $gray-lighten-4: #F5F6F8;
 
+$base-red: $red-lighen-2;
+$base-blue: $blue-lighten-2;
+$base-orange: #97D700;
+$base-green: #85BC20;
+
 $input-color-danger: $red-lighen-2;
 $input-color-primary: $blue-lighten-2;
-$input-color-warning: #85BC20;
-$input-color-success: #97D700;
+$input-color-warning: $base-green;
+$input-color-success: $base-orange;
 $input-color-normal: $gray_lighten-3;
 
 $secondary: #101010;

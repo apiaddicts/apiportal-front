@@ -240,7 +240,7 @@
               font-weight: map-deep-get($font-weights, "bold") !important;
             }
             &:active {
-              color: $secondary;
+              color: $theme_tertiary;
               font-weight: map-deep-get($font-weights, "bold") !important;
             }
           }

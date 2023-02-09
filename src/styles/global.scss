@@ -741,7 +741,7 @@ a {
   display: inline-block !important;
   opacity: 80% !important;
   text-align: center !important;
-  background: #ECF0F1 !important;
+  background: $gray_lighten-3 !important;
   padding: 3px 6px !important;
   color: #53565A !important;
   border-radius: 8px !important;
@@ -845,6 +845,7 @@ a {
     color: $blue-lighten-3 !important;
   }
   &__description {
+    font-family: $secondary_font !important;
     color: $dark-lighten-0 !important;
   }
   &__link,
@@ -1178,6 +1179,9 @@ a {
     margin: 0 !important;
     text-align: center;
   }
+  .MuiFormControlLabel-root[active="active"]{
+    background: $theme_secondary;
+  }
 }
 
 .MuiButtonGroup-root>*:nth-child(2n) {
@@ -1187,13 +1191,13 @@ a {
 
 .MuiAccordionDetails-root{
   .MuiCheckbox-root + span{
-    color: $primary;
+    @include text-color-opacity($theme_secondary, 0.7);
     font-size: 16px;
     font-weight: map-deep-get($font-weights, "light") !important;
   }
 
   .Mui-checked + span{
-    color: $primary;
+    color: $theme_secondary;
     font-weight: map-deep-get($font-weights, "bold") !important;
   }
 }
