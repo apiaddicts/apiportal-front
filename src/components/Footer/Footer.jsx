@@ -27,10 +27,10 @@ function Footer({ isPrivate }) {
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
   const socialLinks = [
-    { link: 'https://apiquality.es', icon: <FaFacebookF /> },
-    { link: 'https://apiquality.es', icon: <FaTwitter /> },
-    { link: 'https://apiquality.es', icon: <FaYoutube /> },
-    { link: 'https://apiquality.es', icon: <RiInstagramFill /> },
+    { link: 'https://www.wolterskluwer.com/', icon: <FaFacebookF /> },
+    { link: 'https://www.wolterskluwer.com/', icon: <FaTwitter /> },
+    { link: 'https://www.wolterskluwer.com/', icon: <FaYoutube /> },
+    { link: 'https://www.wolterskluwer.com/', icon: <RiInstagramFill /> },
   ];
   const [contactForm, setContactForm] = useState(false);
   const [success, setSuccess] = useState(false);
