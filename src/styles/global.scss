@@ -795,7 +795,7 @@ a {
 }
 
 .get {
-  background-color: #97d700 !important;
+  background-color: $base-orange !important;
   color: $secondary_white !important;
 }
 
@@ -804,7 +804,7 @@ a {
   color: $secondary_white;
 }
 .post {
-  background-color: $dark_primary !important;
+  background-color: $theme_primary !important;
   color: $secondary_white !important;
 }
 
