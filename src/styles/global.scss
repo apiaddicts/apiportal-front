@@ -741,9 +741,9 @@ a {
   display: inline-block !important;
   opacity: 80% !important;
   text-align: center !important;
-  background: $gray_lighten-3 !important;
+  background: lighten($theme_tertiary, 45%) !important;
   padding: 3px 6px !important;
-  color: #53565A !important;
+  color: darken($theme_tertiary, 50%) !important;
   border-radius: 8px !important;
 
   span {
@@ -880,6 +880,9 @@ a {
   }
   &__secondary {
     color: $secondary_text !important;
+  }
+  &__tertiary {
+    color: $tertiary_text;
   }
   &__accent {
     color: $accent;

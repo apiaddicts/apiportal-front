@@ -152,7 +152,7 @@ function Blog({ setIsOpen }) {
                       <div id='Suggestions' className={`d-xs-none ${stylesBlog.apis__library__suggestions}`}>
                         <div className={stylesBlog.apis__library__suggestions__content}>
                           <Contact pathname='/blog' />
-                          <h1 className={`${stylesBlog.apis__library__suggestions__content__title} fs__16 text-uppercase text mt-4`}>Lo más reciente</h1>
+                          <h1 className={`${stylesBlog.apis__library__suggestions__content__title} fs__16 text-uppercase text__tertiary mt-4`}>Lo más reciente</h1>
                           <Novedades data={datanews?.reverse().slice(0, 4)} />
                         </div>
                       </div>
@@ -183,7 +183,7 @@ function Blog({ setIsOpen }) {
                       <h1 className='h2 text__dark__primary'>También te puede interesar</h1>
                     </div>
                     <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
-                      <p className='body-1 text__gray__gray_darken'>
+                      <p className='body-1 text__gray__lighten'>
                         Conoce todas las novedades sobre tecnología, APIs y transformación digital
                       </p>
                     </div>
@@ -200,7 +200,7 @@ function Blog({ setIsOpen }) {
                   <div className='row justify-center'>
                     <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center'>
                       <HashLink smooth to='/blog#blogIndex'>
-                        <div>Ver más</div>
+                        <div className='link__tertiary'>Ver más</div>
                       </HashLink>
                     </div>
                   </div>

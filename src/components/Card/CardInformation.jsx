@@ -103,14 +103,14 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
             </div>
           )}
           <div className={`pr-8 pl-8 pb-8 pt-2 ${custom_margin_top} ${reading ? 'py-4' : null}`}>
-            <p className={`${blogTitle ? 'card__title_blog' : 'h3'} w-full font-weight-semi-bold ${reading ? 'px-8' : null} ${!blog ? 'mb-2' : ''}  ${theme === 'primary' ? 'text__dark__grey' : ''} `}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
+            <p className={`${blogTitle ? 'card__title_blog' : 'h3'} w-full font-weight-semi-bold text__primary__title ${reading ? 'px-8' : null} ${!blog ? 'mb-2' : ''}`}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
 
             {blog && (
               <div className='card__information hidden__tags' style={blogTitleStyles}>
                 <div className={`card__information__tags ${buttons?.length >= 3 ? 'tags-flex-wrap' : null} ${reading ? 'px-8' : null}`}>
                   {buttons && buttons?.length > 0 && buttons.map((button, index) => (
                     <div key={index} className='pr-2'>
-                      <Chip title={button.label} className={`${button.class} ${buttons.length >= 4 ? 'tags-reponsive' : null} `} spanClass={`${button.spanClass} fs__14 ${blogTitle === true ? '' : 'font-weight-medium'} text-capitalize`} />
+                      <Chip title={button.label} className={`${buttons.length >= 4 ? 'tags-reponsive' : null} `} spanClass={`${button.spanClass} fs__14 ${blogTitle === true ? '' : 'font-weight-medium'} text-capitalize`} />
                     </div>
                   ))}
                 </div>
@@ -118,25 +118,25 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
               </div>
             )}
 
-            <p className={`line-height-1 ${reading ? 'px-8' : null} text__gray__gray_darken body-2`}>
+            <p className={`line-height-1 ${reading ? 'px-8' : null} card__description body-2`}>
               {description ?? 'Quisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.Suspendisse potenti. Integer tincidunt. Aenean commodo ligula eget dolor. Nulla consequat massa quis enimQuisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.Suspendisse potenti. Integer tincidunt. Aenean commodo ligula eget dolor. Nulla consequat massa quis enimQuisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.'}
             </p>
 
             {info && (
               link ? (
                 <HashLink smooth to={link}>
-                  <div className='card_chip_info mt-7 display_flex justify_content__end'>
+                  <div className='card_chip_info mt-7 display_flex justify_content__end card__link'>
                     <span>{info}</span>
                     {' '}
-                    <MdEast className='svg' />
+                    <MdEast className='svg card__icon' />
                   </div>
                 </HashLink>
               ) : (
                 <HashLink smooth to={`/blog/${id}#blogDetail`}>
-                  <div className='card_chip_info mt-7 display_flex justify_content__end'>
+                  <div className='card_chip_info mt-7 display_flex justify_content__end card__link'>
                     <span>{info}</span>
                     {' '}
-                    <MdEast className='svg' />
+                    <MdEast className='svg card__icon' />
                   </div>
                 </HashLink>
               )

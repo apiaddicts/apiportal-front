@@ -12,7 +12,6 @@ import Base from './Base';
 import './cards.scss';
 
 function CardBasicLink({ chipTitle, title, img, description, info, route, maxWidth, tabCard, footerTabCard }) {
-  console.log('props', footerTabCard);
   return (
     <Base maxWidth={maxWidth} css_styles={{ override_card_height: 'custom_card__height' }}>
 
