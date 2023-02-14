@@ -1,3 +1,4 @@
+@use 'sass:math';
 @mixin breakpoint($point) {
   @if $point == xl {
     // 1200px
@@ -123,8 +124,8 @@
 }
 
 @mixin grid($number) {
-  flex: 0 0 percentage((100 / $number) / 100);
-  max-width: percentage((100 / $number) / 100);
+  flex: 0 0 percentage(math.div(math.div(100, $number), 100));
+  max-width: percentage(math.div(math.div(100, $number), 100));
 }
 
 @mixin background-opacity($color, $opacity: 0.3) {
