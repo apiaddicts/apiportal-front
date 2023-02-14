@@ -37,7 +37,7 @@
       text-transform: uppercase;
       span {
         font-family: $secondary_font;
-        color: #000B39;
+        color: $theme_primary;
         letter-spacing: 1.5px;
       }
     }
