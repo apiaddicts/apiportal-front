@@ -9,22 +9,22 @@ variables:
   CLOUDFARE_HEADERKEY: 'X-Auth-Key: '
   CLOUDFARE_APPLICATION: 'Content-Type: application/json'
 
-build react-app:
-  image: node:12-alpine
-  stage: build
-  only:
+#build react-app:
+#  image: node:12-alpine
+#  stage: build
+#  only:
     # - main
-    - test
-  script:
-    - export PATH=$PATH:/usr/bin/npm
-    - echo $ENV_CONFIG | base64 -d > .env
-    - cat .env    
-    - npm install
-    - CI=false npm run build
-  artifacts:    
-    paths:
-      - build/    
-    expire_in: 1 hour
+#    - test
+#  script:
+#    - export PATH=$PATH:/usr/bin/npm
+#    - echo $ENV_CONFIG | base64 -d > .env
+#    - cat .env    
+#    - npm install
+#    - CI=false npm run build
+#  artifacts:    
+#    paths:
+#      - build/    
+#    expire_in: 1 hour
 
 deploy-bucket:
   stage: deploy-bucket
@@ -34,7 +34,7 @@ deploy-bucket:
   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   script:
    - aws --version
-   - bucketstatus=$(aws s3api head-bucket --bucket "test.${DOMAIN_PROJECT}" 2>&1)
+   - bucketstatus=$(aws s3 ls "s3://$S3_BUCKET" 2>&1 | grep -q 'NoSuchBucket')
    - echo $bucketstatus
 #   - aws s3 mb s3://test.${DOMAIN_PROJECT} --region eu-west-1
 #   - aws s3 cp build/ s3://test.${DOMAIN_PROJECT} --region eu-west-1
