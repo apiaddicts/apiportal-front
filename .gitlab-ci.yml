@@ -41,7 +41,7 @@ deploy-bucket:
    - NAME_DNS=$(echo "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}")
    - echo "$NAME_DNS"
    - >  
-        if [[ ! -z $(aws s3api list-buckets --query 'Buckets[?Name==`$$NAME_DNS`]' --output text) ]]; then 
+        if [[ ! -z $(aws s3api list-buckets --query 'Buckets[?Name==`\$NAME_DNS`]' --output text) ]]; then 
           echo "Bucket Exists"
         else 
           echo "Bucket Not Exists"
