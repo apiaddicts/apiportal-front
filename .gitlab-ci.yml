@@ -9,22 +9,22 @@ variables:
   CLOUDFARE_HEADERKEY: 'X-Auth-Key: '
   CLOUDFARE_APPLICATION: 'Content-Type: application/json'
 
-#build react-app:
-#  image: node:12-alpine
-#  stage: build
-#  only:
+build react-app:
+  image: node:12-alpine
+  stage: build
+  only:
     # - main
-#    - test
-#  script:
-#    - export PATH=$PATH:/usr/bin/npm
-#    - echo $ENV_CONFIG | base64 -d > .env
-#    - cat .env    
-#    - npm install
-#    - CI=false npm run build
-#  artifacts:    
-#    paths:
-#      - build/    
-#    expire_in: 1 hour
+    - test
+  script:
+    - export PATH=$PATH:/usr/bin/npm
+    - echo $ENV_CONFIG | base64 -d > .env
+    - cat .env    
+    - npm install
+    - CI=false npm run build
+  artifacts:    
+    paths:
+      - build/    
+    expire_in: 1 hour
 
 deploy-bucket:
   stage: deploy-bucket
@@ -33,22 +33,18 @@ deploy-bucket:
     - test
   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   script:
-   #- aws --version
-   #- bucketstatus=$(aws s3 ls "s3://$S3_BUCKET" 2>&1 | grep -q 'NoSuchBucket')
-   #- aws s3 ls s3://test.${DOMAIN_PROJECT} --region eu-west-1 2>&1 | grep -q 'NoSuchBucket'
-   #- aws s3 ls "s3://test.${DOMAIN_PROJECT}" 2>&1
    - echo "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}"
    - NAME_DNS=$(echo "test.${DOMAIN_PROJECT}")
    - echo "$NAME_DNS"
    - >  
         if [[ ! -z $(aws s3api list-buckets --query 'Buckets[?Name==`'${NAME_DNS}'`]' --output text) ]]; then 
-          aws s3 mb s3://${NAME_DNS} --region eu-west-1
-          aws s3 cp build/ s3://${NAME_DNS} --region eu-west-1
-          aws s3 website s3://${NAME_DNS} --index-document index.html --region eu-west-1
-          sed -i "s|NOMBRE-BUCKET|${NAME_DNS}|g;" policy-s3.json
-          aws s3api put-bucket-policy --bucket ${NAME_DNS} --policy file://policy-s3.json --region eu-west-1
+          aws s3 mb s3://${NAME_DNS} --region eu-west-1;
+          aws s3 cp build/ s3://${NAME_DNS} --region eu-west-1;
+          aws s3 website s3://${NAME_DNS} --index-document index.html --region eu-west-1;
+          sed -i "s|NOMBRE-BUCKET|${NAME_DNS}|g;" policy-s3.json;
+          aws s3api put-bucket-policy --bucket ${NAME_DNS} --policy file://policy-s3.json --region eu-west-1;
         else 
-          aws s3 sync ./build s3://$S3_BUCKET_NAME
+          aws s3 sync build/ s3://${NAME_DNS};
         fi;
 #   - aws s3 mb s3://test.${DOMAIN_PROJECT} --region eu-west-1
 #   - aws s3 cp build/ s3://test.${DOMAIN_PROJECT} --region eu-west-1
