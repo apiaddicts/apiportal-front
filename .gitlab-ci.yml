@@ -37,8 +37,9 @@ deploy-bucket:
    #- bucketstatus=$(aws s3 ls "s3://$S3_BUCKET" 2>&1 | grep -q 'NoSuchBucket')
    #- aws s3 ls s3://test.${DOMAIN_PROJECT} --region eu-west-1 2>&1 | grep -q 'NoSuchBucket'
    #- aws s3 ls "s3://test.${DOMAIN_PROJECT}" 2>&1
+   - echo "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}"
    - >  
-        if [[ ! -z $(aws s3api list-buckets --query 'Buckets[?Name==`"${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}"`]' --output text) ]]; then 
+        if [[ ! -z $(aws s3api list-buckets --query 'Buckets[?Name==`${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}`]' --output text) ]]; then 
           echo "Bucket Exists"
         else 
           echo "Bucket Not Exists"
