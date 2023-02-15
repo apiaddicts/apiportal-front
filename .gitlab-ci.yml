@@ -40,7 +40,7 @@ deploy-bucket:
    - echo "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}"
    #- NAME_DNS=
    - >  
-        if [[ ! -z $(aws s3api list-buckets --query 'Buckets[?Name==`wkeportal.apiquality.es`]' --output text) ]]; then 
+        if [[ ! -z $(aws s3api list-buckets --query "Buckets[?Name==`${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}`]" --output text) ]]; then 
           echo "Bucket Exists"
         else 
           echo "Bucket Not Exists"
