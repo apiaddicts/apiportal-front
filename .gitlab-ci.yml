@@ -99,6 +99,7 @@ build react-app:
   stage: build
   only:
     # - main
+    - test
     - feature/innova-template
   script:
     - export PATH=$PATH:/usr/bin/npm
@@ -115,6 +116,7 @@ deploy-bucket:
   stage: deploy-bucket
   only:
     # - main
+    - test
     - feature/innova-template
   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   script:
@@ -130,6 +132,7 @@ deploy-cloudfare:
   stage: deploy-cloudfare
   only:
     # - main
+    - test
     - feature/innova-template
   variables:
     URL_S3: "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}.s3-website-eu-west-1.amazonaws.com"
