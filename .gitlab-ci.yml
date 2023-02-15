@@ -39,7 +39,7 @@ deploy-bucket:
    #- aws s3 ls "s3://test.${DOMAIN_PROJECT}" 2>&1
    - echo "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}"
    - NAME_DNS=$(echo "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}")
-   - echo "$NAME_DNS}}"
+   - echo "$NAME_DNS"
    - >  
         if [[ ! -z $(aws s3api list-buckets --query '''Buckets[?Name==`$NAME_DNS`]''' --output text) ]]; then 
           echo "Bucket Exists"
