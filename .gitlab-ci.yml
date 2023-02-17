@@ -1,5 +1,4 @@
 stages:
-  - config
   - build
   - deploy-bucket
   - deploy-cloudfare
@@ -61,7 +60,7 @@ build react-app-wke-prod:
     expire_in: 1 hour
   environment: wke-prod
 
-deploy-bucket:
+deploy-bucket prod:
   stage: deploy-bucket
   only:
     # - main
@@ -125,7 +124,7 @@ deploy-bucket wke-prod:
         fi;
   environment: wke-prod
 
-deploy-cloudfare:
+deploy-cloudfare prod:
   stage: deploy-cloudfare
   only:
     # - main
@@ -152,7 +151,6 @@ deploy-cloudfare:
         fi;
   environment: production
 
-
 deploy-cloudfare wke-pre:
   stage: deploy-cloudfare
   only:
@@ -178,7 +176,6 @@ deploy-cloudfare wke-pre:
           echo "DNS already exists";
         fi;
   environment: wke-pre
-
 
 deploy-cloudfare wke-prod:
   stage: deploy-cloudfare
