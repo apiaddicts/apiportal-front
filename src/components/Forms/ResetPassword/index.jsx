@@ -56,7 +56,7 @@ function ResetPassword() {
           <div className='row justify-center'>
             <div className='flex-sm-12 flex-md-10 flex-lg-10'>
               <Button
-                styles='primary-blue'
+                styles='tertiary'
                 onClick={() => {
                   handleSubmit();
                 }}
