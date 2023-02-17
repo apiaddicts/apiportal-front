@@ -15,8 +15,8 @@ import Products from '../../pages/private/Products';
 import ProductDetail from '../../pages/private/ProductDetail';
 import Apis from '../../pages/private/Apis';
 import ApiDetail from '../../pages/private/ApiDetail';
-import SwaggerUI from '../../pages/private/SwaggerUI';
-import OAuthRedirect from '../../pages/private/OAuthRedirect';
+import SwaggerUI from '../../pages/common/SwaggerUI';
+import OAuthRedirect from '../../pages/common/OAuthRedirect';
 import Subscriptions from '../../pages/private/Subscriptions';
 import Logout from '../../pages/private/Logout/Logout';
 
@@ -65,7 +65,6 @@ function PrivateRouter({ children }) {
                 <Route path='apis' exact='true' element={<Apis />} />
                 <Route path='apis/:id' exact='true' element={<ApiDetail />} />
                 <Route path='apis/:id/swagger-ui' exact='true' element={<SwaggerUI />} />
-                <Route path='apis/swagger-ui/oauth-redirect' exact='true' element={<OAuthRedirect />} />
                 <Route path='subscriptions' exact='true' element={<Subscriptions />} />
                 <Route path='*' element={<Navigate to='/' replace />} />
               </Routes>
@@ -79,8 +78,12 @@ function PrivateRouter({ children }) {
       ) : (<SkeletonComponent />)}
 
     </Box>
-  ) : <Navigate to='/' />;
-
+  ) : (
+    <Routes>
+      <Route path='apis/swagger-ui/oauth-redirect' exact='true' element={<OAuthRedirect />} />
+      <Route path='*' element={<Navigate to='/' replace />} />
+    </Routes>
+  );
 }
 
 export default PrivateRouter;

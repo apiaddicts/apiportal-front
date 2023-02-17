@@ -22,7 +22,6 @@ import CustomIcon from '../MdIcon/CustomIcon';
 
 function Footer({ isPrivate }) {
   const { pathname } = useLocation();
-  console.log(pathname);
   if (pathname === '/contacto' || pathname === '/wiki') return null;
   const dispatch = useDispatch();
   const mail = useSelector((state) => state.mail);

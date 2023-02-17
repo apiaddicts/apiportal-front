@@ -80,10 +80,6 @@ function ApiDetail({ setIsOpen }) {
       label: 'Probar API',
       class: 'primary',
     },
-    {
-      label: 'Documentación',
-      class: 'btn-tertiary-white',
-    },
   ];
 
   const datanews = blogs?.length > 0 ? _.sortBy(blogs, (m) => {
@@ -118,6 +114,7 @@ function ApiDetail({ setIsOpen }) {
           <section>
             <BannerImage
               title={library?.title}
+              apiId={library?.slug}
               img={library?.image?.length > 0 && library?.image?.length === 1 ? library?.image?.[0]?.url : ''}
               buttons={buttonsLbls}
               setIsOpen={setIsOpen}

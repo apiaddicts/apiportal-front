@@ -16,6 +16,7 @@ import ApiDetail from '../pages/public/ApiDetail';
 import Faqs from '../pages/public/Faqs';
 import Blog from '../pages/public/Blog';
 import BlogPost from '../pages/public/BlogPost';
+import SwaggerUI from '../pages/common/SwaggerUI';
 
 import Logout from '../pages/private/Logout/Logout';
 import Wiki from '../pages/public/Wiki';
@@ -49,6 +50,7 @@ function PublicRoute() {
         <Route path='/apis' exact='true' element={<Apis setIsOpen={setIsOpen} />} />
         <Route path='/apis/:id' exact='true' element={<ApiDetail setIsOpen={setOpenForm} />} />
         <Route path='/faqs' exact='true' element={<Faqs />} />
+        <Route path='/apis/:id/swagger-ui' exact='true' element={<SwaggerUI setIsOpen={setOpenForm} />} />
         <Route path='/blog' exact='true' element={<Blog setIsOpen={setIsOpen} />} />
         <Route path='/blog/:id' exact='true' element={<BlogPost setIsOpen={setIsOpen} />} />
         <Route path='/wiki' exact='true' element={<Wiki setIsOpen={setIsOpen} />} />
