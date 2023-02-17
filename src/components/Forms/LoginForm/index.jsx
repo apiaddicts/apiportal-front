@@ -94,7 +94,7 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin, set
               type: userConstants.RESET_ALERT,
             });
           }}
-          className='text__secondary font-weight-bold caption cpointer'
+          className='text__primary__title font-weight-bold caption cpointer'
         >
           ¿Olvidaste tu contraseña?
         </p>
@@ -110,7 +110,7 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin, set
         >
           Registrarme
         </Button>
-        <Button styles='primary-blue' type='submit'>
+        <Button styles='tertiary' type='submit'>
           Iniciar sesión
         </Button>
       </div>

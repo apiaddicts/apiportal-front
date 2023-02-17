@@ -78,19 +78,19 @@
 }
 
 .btn-secundary-white {
-  @include button-bg($secondary_white);
-  @include letter(#0033a0);
-  @include border($secondary_white);
+  @include button-bg($white);
+  @include letter($theme_primary);
+  @include border($white);
 }
 
 .btn-ghost {
   @include button-bg(transparent);
-  @include letter($secondary_white);
-  @include border($secondary_white);
+  @include letter($white);
+  @include border($white);
 }
 
 .btn-ghost-variant {
-  @include button-bg($secondary_white);
+  @include button-bg($white);
   @include letter($theme_secondary);
   @include border($theme_secondary);
 }

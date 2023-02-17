@@ -59,7 +59,7 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
         {/* checkbox */}
         <div className='row'>
           <div className='flex-sm-12 flex-md-12'>
-            <div className='input__checkbox'>
+            <div className='create-account__checkbox input__checkbox'>
               {
                 fieldsRegister.filter((field) => field.type === 'checkbox')
                   .map((field, index) => (
@@ -95,7 +95,7 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
           </div>
           <div className='flex-sm-12 flex-md-5'>
             <Button
-              styles='primary-blue'
+              styles='tertiary'
               type='submit'
             >
               Registrarme
