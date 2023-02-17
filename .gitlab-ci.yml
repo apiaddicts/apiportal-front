@@ -83,7 +83,7 @@ deploy-bucket:
         fi;
   environment: production
 
-deploy-bucket-wke-pre:
+deploy-bucket wke-pre:
   stage: deploy-bucket
   only:
     - wke-pre
@@ -104,7 +104,7 @@ deploy-bucket-wke-pre:
         fi;
   environment: wke-pre
 
-deploy-bucket-wke-prod:
+deploy-bucket wke-prod:
   stage: deploy-bucket
   only:
     - wke-prod
@@ -153,7 +153,7 @@ deploy-cloudfare:
   environment: production
 
 
-deploy-cloudfare-wke-pre:
+deploy-cloudfare wke-pre:
   stage: deploy-cloudfare
   only:
     - wke-pre
@@ -180,7 +180,7 @@ deploy-cloudfare-wke-pre:
   environment: wke-pre
 
 
-deploy-cloudfare-wke-prod:
+deploy-cloudfare wke-prod:
   stage: deploy-cloudfare
   only:
     - wke-prod
