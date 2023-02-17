@@ -18,6 +18,8 @@ import Blog from '../pages/public/Blog';
 import BlogPost from '../pages/public/BlogPost';
 
 import Logout from '../pages/private/Logout/Logout';
+import Wiki from '../pages/public/Wiki';
+import Contacto from '../pages/public/Contacto';
 
 function PublicRoute() {
   const { openModal } = useSelector((state) => state.user);
@@ -49,6 +51,8 @@ function PublicRoute() {
         <Route path='/faqs' exact='true' element={<Faqs />} />
         <Route path='/blog' exact='true' element={<Blog setIsOpen={setIsOpen} />} />
         <Route path='/blog/:id' exact='true' element={<BlogPost setIsOpen={setIsOpen} />} />
+        <Route path='/wiki' exact='true' element={<Wiki setIsOpen={setIsOpen} />} />
+        <Route path='/contacto' exact='true' element={<Contacto setIsOpen={setIsOpen} />} />
       </Routes>
       <Footer />
     </>

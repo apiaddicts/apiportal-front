@@ -6,6 +6,7 @@ import { Alert } from '@mui/material';
 import { RiInstagramFill } from 'react-icons/ri';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useLocation } from 'react-router-dom';
 import { sendConversationMail } from '../../redux/actions/mailAction';
 import 'yup-phone';
 import Base from './Base';
@@ -20,7 +21,9 @@ import config from '../../services/config';
 import CustomIcon from '../MdIcon/CustomIcon';
 
 function Footer({ isPrivate }) {
-
+  const { pathname } = useLocation();
+  console.log(pathname);
+  if (pathname === '/contacto' || pathname === '/wiki') return null;
   const dispatch = useDispatch();
   const mail = useSelector((state) => state.mail);
   const img = '';
