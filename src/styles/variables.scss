@@ -55,14 +55,16 @@ $gray-lighten-4: #F5F6F8;
 
 $base-red: $red-lighen-2;
 $base-blue: $blue-lighten-2;
-$base-orange: #97D700;
-$base-green: #85BC20;
+$base-orange: #85BC20;
+$base-green: #89b13f;
 
 $input-color-danger: $red-lighen-2;
 $input-color-primary: $blue-lighten-2;
 $input-color-warning: $base-orange;
 $input-color-success: $base-green;
 $input-color-normal: $gray_lighten-3;
+
+$border-radius: 6px;
 
 $secondary: #101010;
 $secondary_white: #ffffff;
@@ -74,7 +76,7 @@ $gray_darken-2: #292929;
 $success: #389e0d;
 $dark: $dark-lighten-0;
 $error: #f54b5e;
-$warning: #85BC20;
+$warning: $base-orange;
 $green: #97D700;
 $blue: $blue-lighten-0;
 $orange: #F1B434;

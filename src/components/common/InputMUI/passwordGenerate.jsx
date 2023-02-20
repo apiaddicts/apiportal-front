@@ -62,11 +62,11 @@ function PasswordGenerate({ idSuscripcion, user, version, status }) {
   return (
     <div className='input-data display_flex justify_content__between'>
       {hidden ? (
-        <span className='text'>
+        <span className='text__secondary'>
           {primaryKey}
         </span>
       ) : (
-        <span className='text'>
+        <span className='text__secondary'>
           xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         </span>
       )}

@@ -1,12 +1,43 @@
 @import "../../styles/variables.scss";
 
+.custom__navbar {
+  background: $theme_primary !important;
+}
+
+.custom__sidebar > div {
+  background: $gray_lighten-4 !important;
+  border: none;
+}
+
+.sidebar__item > a > div {
+  color: $theme_tertiary !important;
+}
+
+.dropdown__item > svg,
+.dropdown__item > span {
+  color: $theme_primary !important;
+  fill: $theme_primary !important;
+}
+
+.sidebar__item__back > div {
+  color: $theme_primary !important;
+  & svg {
+    fill: $theme_primary !important;
+  }
+}
+
+.line__separator {
+  border-bottom: 1px solid $theme_secondary;
+  width: 58px;
+}
+
 .title {
-  font-family: $secondary_font;
+  font-family: $primary_font;
   font-size: 2.5rem;
   font-weight: 400;
   letter-spacing: -0.6px;
   &__name {
-    font-family: $secondary_font;
+    font-family: $primary_font;
     font-weight: 500;
     font-size: 2.5rem;
     width: 100%;
@@ -19,16 +50,16 @@
     font-size: 0.75rem;
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    color: $dark_primary;
+    color: $theme_primary;
   }
   &__organization {
     font-weight: 400;
     font-size: 1.25rem;
-    color: $dark_primary;
+    color: $theme_primary;
   }
   &__role {
     font-weight: 600;
     font-size: 1.25rem;
-    color: $dark_primary;
+    color: $theme_primary;
   }
 }

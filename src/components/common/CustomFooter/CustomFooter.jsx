@@ -24,12 +24,12 @@ function CustomFooter() {
         </div>
         <div className={classes.email}>
           <h1 className='body-1 font-weight-medium text__dark__primary  mb-2'>Correo electronico</h1>
-          <p className='body-1 font-weight-bold text__dark__primary '>contacto@apiquality.es</p>
+          <p className='body-1 font-weight-bold text__dark__primary '>contacto@wolterskluwer.es</p>
         </div>
         <div className={classes.policies}>
           <h1 className='body-1 font-weight-medium text__dark__primary  mb-2'>Política de</h1>
-          <p className='body-1 font-weight-bold text__dark__primary '>
-            <a href={config.policyPath} target='blank' className='text__gray__gray_lighten-3'>Privacidad de datos</a>
+          <p className='body-1 font-weight-bold text__dark__primary'>
+            <a href={config.policyPath} target='blank' className='text__dark__primary'>Privacidad de datos</a>
           </p>
         </div>
 
@@ -41,7 +41,7 @@ function CustomFooter() {
             {' '}
             <span>{ year }</span>
             {' '}
-            API QUALITY. TODOS LOS DERECHOS RESERVADOS
+            WOLTERS KLUWER. TODOS LOS DERECHOS RESERVADOS
             {' '}
           </p>
         </div>

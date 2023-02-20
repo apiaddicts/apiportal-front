@@ -113,16 +113,16 @@
     }
     &__icons {
       grid-area: icons;
-      color: $dark_primary;
+      color: $theme_primary;
       font-size: 25px;
       display: flex;
       justify-content: space-between;
       a {
         text-decoration: none;
-        color: $dark_primary;
+        color: $theme_primary;
       }
       a:hover {
-        color: $dark_primary;
+        color: $theme_primary;
       }
     }
     @include breakpoint(xs) {
