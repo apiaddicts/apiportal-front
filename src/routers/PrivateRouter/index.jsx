@@ -55,7 +55,7 @@ function PrivateRouter({ children }) {
       }
       {user && Object.keys(user).length > 0 ? (
         <Box>
-          <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#FAFAFC', minHeight: '100vh' }}>
+          <Box sx={{ display: 'flex', flex: '1', minHeight: '100vh' }} className={classes.custom__body}>
             <SidebarDrawer user={user} />
             <div className={`container ${classes.wrapper}`}>
               <Routes>
@@ -70,7 +70,7 @@ function PrivateRouter({ children }) {
               </Routes>
             </div>
           </Box>
-          <Box sx={{ zIndex: 1300, position: 'absolute', background: '#fff', width: '100%' }}>
+          <Box sx={{ zIndex: 1300, position: 'absolute', width: '100%' }} className={classes.container__footer}>
             <CustomFooter />
           </Box>
 

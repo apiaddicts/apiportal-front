@@ -10,7 +10,7 @@
     color: #8189A9;
 
     h2 {
-        font-family: $secondary_font;
+        font-family: $primary_font;
         font-style: normal;
         font-weight: 700;
         font-size: 12px;
@@ -18,14 +18,14 @@
         display: flex;
         align-items: center;
         letter-spacing: 0.2px;
-        color: $dark_primary;
+        color: $theme_primary;
     }
 }
 
 .cell_name {
-    font-family: $secondary_font;
+    font-family: $primary_font;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 400;
     font-size: 12px;
     line-height: 20px;
 
@@ -33,11 +33,11 @@
     align-items: center;
     letter-spacing: 0.2px;
 
-    color: $secondary_text;
+    color: $theme_primary;
 }
 
 .cell_description {
-    font-family: $secondary_font;
+    font-family: $primary_font;
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
@@ -45,7 +45,7 @@
     display: flex;
     align-items: center;
     letter-spacing: 0.2px;
-    color: #53565A;
+    color: $gray_lighten-2;
 }
 
 .pagination {

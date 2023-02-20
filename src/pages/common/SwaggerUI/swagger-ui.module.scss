@@ -7,7 +7,7 @@
   width: 64px;
 
   div {
-    color: $primary;
+    color: $theme_secondary;
     font-size: 20px;
   }
 
@@ -20,7 +20,7 @@
     text-align: right;
     letter-spacing: 1.33333px;
     text-transform: uppercase;
-    color: $primary;
+    color: $theme_secondary;
   }
 }
 .back__btn {
@@ -53,7 +53,7 @@
       position: absolute;
       width: 100%;
       z-index: 1;
-      background: $theme_primary; /*linear-gradient(90deg, #15A192 0%, #14234B 100%);*/
+      background: $theme_primary;
     }
   
     &__backTo {

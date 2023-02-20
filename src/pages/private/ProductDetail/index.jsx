@@ -129,14 +129,14 @@ function ProductDetail(props) {
             <Card sx={{ borderRadius: '20px', marginTop: '1rem', paddingTop: '3px', paddingLeft: '41px', paddingRight: '45px', paddingBottom: '40px', marginBottom: '40px', boxShadow: '0px 4px 28px rgba(169, 177, 209, 0.12)' }}>
               <Grid style={{ marginTop: '0px' }} container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 <Grid item xs={6}>
-                  <span className='subtitle-2 text__gray__gray_darken font-weigth-semi-bold text-uppercase'>
+                  <span className='subtitle-2 text__dark__primary font-weigth-semi-bold text-uppercase'>
                     <b>Descripción</b>
                   </span>
                 </Grid>
               </Grid>
               <Grid style={{ marginTop: '-25px' }} container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                 <Grid item xs={12}>
-                  <p className='body-2 text__gray__gray_darken'>
+                  <p className='body-2 text__dark__primary'>
                     {product.properties.description}
                   </p>
                 </Grid>

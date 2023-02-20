@@ -136,7 +136,6 @@ function Apis(props) {
               handleChangeSearchFilter(e.target.value);
             }}
             placeholder='Buscar APIs...'
-            borderRadius='20px'
           />
         </div>
         <div className={classes.wrapper__filters__search}>
