@@ -1,0 +1,67 @@
+.benefits {
+ list-style: none;
+ font-weight: 700;
+ padding: 0;
+ text-align: center;
+
+ li {
+    padding: 1rem 0;
+ }
+
+ li:nth-child(odd) {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+ }
+}
+
+.price {
+    text-align: center;
+    padding: 2.5rem 0;
+    border-bottom: 1px solid #ccc;
+    
+    p {
+        font-size: 36px;
+        font-weight: 600;
+    }
+
+    &__wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+
+        &__month {
+          font-size: 20px !important;
+          font-weight: 400 !important;
+          padding-bottom: 6px;
+        }
+    }
+}
+
+.apis {
+    text-align: center;
+    padding: 1rem 0;
+    &__title {
+        font-size: 14px;
+        font-weight: 500;
+    }
+    &__link {
+        color: #003D62;
+        font-weight: 600;
+        margin: 0 5px;
+    }
+}
+
+.section__subs{
+    margin-top: 95px;
+    margin-bottom: 100px;
+}
+
+.markdown {
+    padding: 0 1.5rem;
+}
+.content {
+    p {
+      text-align: center;
+    }
+    padding: 1rem 0;
+}

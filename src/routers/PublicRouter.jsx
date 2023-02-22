@@ -21,6 +21,7 @@ import SwaggerUI from '../pages/common/SwaggerUI';
 import Logout from '../pages/private/Logout/Logout';
 import Wiki from '../pages/public/Wiki';
 import Contacto from '../pages/public/Contacto';
+import Products from '../pages/public/Products';
 
 function PublicRoute() {
   const { openModal } = useSelector((state) => state.user);
@@ -55,6 +56,7 @@ function PublicRoute() {
         <Route path='/blog/:id' exact='true' element={<BlogPost setIsOpen={setIsOpen} />} />
         <Route path='/wiki' exact='true' element={<Wiki setIsOpen={setIsOpen} />} />
         <Route path='/contacto' exact='true' element={<Contacto setIsOpen={setIsOpen} />} />
+        <Route path='/products' exact='true' element={<Products setIsOpen={setIsOpen} />} />
       </Routes>
       <Footer />
     </>

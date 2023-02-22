@@ -41,6 +41,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
   const listOptions = [
     { icon: '', name: 'APIs', route: '/apis' },
     { icon: '', name: 'Blog', route: '/blog' },
+    { icon: '', name: 'Productos', route: '/products' },
     { icon: '', name: 'FAQs', route: '/faqs' },
     { icon: '', name: 'Wiki', route: '/wiki' },
     { icon: '', name: 'Contacto', route: '/contacto' },
