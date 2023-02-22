@@ -184,6 +184,27 @@ function getApiHostnames(apiName) {
     });
 }
 
+const getApiProducts = (apiId) => {
+  const { token } = store.getState().user;
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      'Authorization': `SharedAccessSignature ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const url = `${config.url}/apis/${apiId}/products?api-version=${config.apiVersion}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response;
+    }).catch((error) => {
+      return error;
+    });
+};
+
 const libraryService = {
   getApiBookStores,
   getApiBookStore,
@@ -195,6 +216,7 @@ const libraryService = {
   filterAPIsByTags,
   searchApis,
   getApiHostnames,
+  getApiProducts,
 };
 
 export default libraryService;
