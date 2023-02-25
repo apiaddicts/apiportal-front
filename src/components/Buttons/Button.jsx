@@ -33,7 +33,8 @@ function Button({ children, styles, opacity, size = 'regular', preIcon, icon, ..
                   styles === 'tertiary-white' ? 'btn btn-tertiary-white' :
                     styles === 'ghost' ? 'btn btn-ghost' :
                       styles === 'ghost-variant' ? 'btn btn-ghost-variant' :
-                        styles === 'greey-primary' ? 'btn btn-grey' : 'btn-none'
+                        styles === 'greey-primary' ? 'btn btn-grey' :
+                          styles === 'disabled' ? 'btn btn-disabled' : 'btn-none'
       }
       style={btnStyled(size, opacity)}
       {...rest}

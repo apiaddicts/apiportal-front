@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import BannerStatic from '../../../components/Banner/BannerStatic';
+import PartnerCard from '../../../components/Card/PartnerCard';
 import SubscriptionCard from '../../../components/Card/SubscriptionCard';
 import { getSubscriptions } from '../../../redux/actions/productsAction';
 
@@ -15,10 +16,15 @@ function index(props) {
 
   const arrCardSubs = subscriptionRes && Object.keys(subscriptionRes).length > 0 ? subscriptionRes.map((item) => {
     const apis = item.library_apis.map((api) => {
-      return api.title;
+      return {
+        title: api.title,
+        id: api.id,
+      };
     });
 
     return {
+      slug: item.slug,
+      title: item.title,
       price: item.price,
       apis,
       btnLabel: item.btnLabel,
@@ -35,13 +41,19 @@ function index(props) {
           title='Subscripciones'
           img='https://picsum.photos/id/1/1440/630'
         />
-        <section className='container section__subs'>
-          <div className='row'>
-            {arrCardSubs.map((card, index) => (
-              <div className='flex-sm-12 flex-md-3' key={index}>
-                <SubscriptionCard items={card} />
-              </div>
-            ))}
+        <section className='container__fluid section__subs'>
+          <div className='row justify-center'>
+            {arrCardSubs.map((card, index) => {
+              return card.slug === 'partner' ? (
+                <div className='flex-sm-12 flex-md-2' key={index}>
+                  <PartnerCard title={card.title} content={card.content} />
+                </div>
+              ) : (
+                <div className='flex-sm-12 flex-md-2' key={index}>
+                  <SubscriptionCard items={card} />
+                </div>
+              );
+            })}
           </div>
         </section>
       </div>

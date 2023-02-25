@@ -37,6 +37,7 @@ const config = {
   apisPageSlug: process.env.REACT_APP_APIS_PAGE_SLUG,
   termsPageSlug: process.env.REACT_APP_TERMS_PAGE_SLUG,
   policyPageSlug: process.env.REACT_APP_POLICY_PAGE_SLUG,
+  legalPageSlug: process.env.REACT_APP_LEGAL_NOTICE_SLUG,
   emailUrl: process.env.REACT_APP_EMAIL_ENDPOINT,
   apiKeySendGrid: process.env.REACT_APP_API_KEY_SEND_GRID,
   subscriptionKey: process.env.REACT_APP_EMAIL_SUBSCRIPTION_KEY,
@@ -46,7 +47,7 @@ const config = {
   emailConversationTemplateId: process.env.REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID,
   locale: 'es',
   termsPath: '/user/terms',
-  policyPath: '/user/policy-privacy',
+  policyPath: '/aviso-legal',
   notImage: '/notImage.svg',
 };
 

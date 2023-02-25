@@ -6,12 +6,15 @@ import Button from '../Buttons/Button';
 
 function SubscriptionCard({ items }) {
 
-  const { price, apis, benefits, content, btnLabel, accentColor } = items;
+  const { title, price, apis, benefits, content, btnLabel, accentColor } = items;
 
   return (
     <Base>
       <div className='container'>
         <div className='price'>
+          <div className='price__title'>
+            <h1>{title}</h1>
+          </div>
           {price > 0 ? (
             <div className='price__wrapper'>
               <p className={accentColor === 'primary' ? 'text' : accentColor === 'secondary' ? 'text__secondary' : accentColor === 'tertiary' ? 'text__tertiary' : ''}>{`${price}€`}</p>
@@ -30,7 +33,7 @@ function SubscriptionCard({ items }) {
           <div className='apis'>
             <p className='mb-2 apis__title'>Contiene las APIS de:</p>
             {apis.map((item, index) => (
-              <Link to='/' className='apis__link' key={index}>{item}</Link>
+              <Link to={`/apis/${item.id}#api`} className='apis__link' key={index}>{item.title}</Link>
             ))}
           </div>
         )}

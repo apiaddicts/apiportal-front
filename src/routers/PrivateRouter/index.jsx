@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 
+import { Toaster } from 'react-hot-toast';
 import useTimer from '../../hooks/useTimer';
 import useVerifySession from '../../hooks/useVerifySession';
 
@@ -56,6 +57,12 @@ function PrivateRouter({ children }) {
       {user && Object.keys(user).length > 0 ? (
         <Box>
           <Box sx={{ display: 'flex', flex: '1', minHeight: '100vh' }} className={classes.custom__body}>
+            <Toaster
+              position='top-right'
+              toastOptions={{
+                icon: '👏',
+              }}
+            />
             <SidebarDrawer user={user} />
             <div className={`container ${classes.wrapper}`}>
               <Routes>
