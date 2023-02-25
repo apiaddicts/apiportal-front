@@ -24,6 +24,10 @@
         font-weight: 600;
     }
 
+    &__title {
+        margin-bottom: 1rem;
+    }
+
     &__wrapper {
         display: flex;
         justify-content: center;
@@ -64,4 +68,14 @@
       text-align: center;
     }
     padding: 1rem 0;
+}
+
+.partner {
+    text-align: center;
+    padding: 2.5rem 0;
+
+    &__img {
+        display: flex;
+        justify-content: center;
+    }
 }

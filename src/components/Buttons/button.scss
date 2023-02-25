@@ -106,3 +106,9 @@
   @include letter($gray_darken);
   @include border($gray_lighten-1);
 }
+
+.btn-primary-white {
+  background: $gray-lighten-0;
+  @include letter($white);
+  @include border($theme_primary);
+}

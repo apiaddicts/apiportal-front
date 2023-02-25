@@ -6,7 +6,7 @@ import { Alert } from '@mui/material';
 import { RiInstagramFill } from 'react-icons/ri';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import { sendConversationMail } from '../../redux/actions/mailAction';
 import 'yup-phone';
 import Base from './Base';
@@ -54,7 +54,7 @@ function Footer({ isPrivate }) {
       name: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
       lastname: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
       email: Yup.string().email('Correo electrónico inválido').required('Campo requerido'),
-      phone: Yup.string().phone('MX', true, 'Debe ingresar un número telefónico válido').required('Campo requerido'),
+      phone: Yup.string().phone('MX', true, 'Debe ingresar un número telefónico válido'),
       // topic: Yup.string().required('Campo requerido'),
       subject: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(70, 'Se ha excedido el número de caracteres permitidos'),
       message: Yup.string().required('Campo requerido'),
@@ -168,7 +168,7 @@ function Footer({ isPrivate }) {
                           name='phone'
                           id='phone'
                           type='tel'
-                          label='Celular*'
+                          label='Teléfono de contacto'
                           touched={formik.touched.phone}
                           errors={formik.errors.phone}
                           onChange={formik.handleChange}
@@ -266,9 +266,9 @@ function Footer({ isPrivate }) {
             <p className='body-1 font-weight-bold text__white'>contacto@wolterskluwer.es</p>
           </div>
           <div className={classes.policies}>
-            <h1 className='body-1 font-weight-medium text__white mb-2'>Política de</h1>
+            <h1 className='body-1 font-weight-medium text__white mb-2'>Aviso</h1>
             <p className='body-1 font-weight-bold'>
-              <a href={config.policyPath} target='blank' className='text__white'>Privacidad de datos</a>
+              <Link to={config.policyPath} target='blank' className='text__white'>Legal</Link>
             </p>
           </div>
 

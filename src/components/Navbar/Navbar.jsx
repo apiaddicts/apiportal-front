@@ -59,7 +59,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
             <ul className={classes.show__lg__up__buttons}>
               <li className='pr-2'>
                 <Button type='button' styles='ghost-variant' size='small' icon='account' style={{ width: '200px', height: '32px' }} onClick={() => { setIsOpen(true); }}>
-                  Iniciar sesión
+                  Mi Perfil
                 </Button>
               </li>
               <li>

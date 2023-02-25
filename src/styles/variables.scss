@@ -273,6 +273,10 @@ $width-container-xl: 130rem;
   @include breakpoint(xl) {
     max-width: 1168px !important;
   }
+
+  &__fluid {
+    width: 100%;
+  }
 }
 
 .row {

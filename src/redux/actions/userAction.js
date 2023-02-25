@@ -63,6 +63,7 @@ export const confirmAccount = (queryParams, setIsOpen) => (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
+  window.location.reload(false);
   sessionStorage.removeItem('token');
   localStorage.removeItem('If-Match');
   dispatch({

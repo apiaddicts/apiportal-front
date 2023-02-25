@@ -17,6 +17,7 @@ import Faqs from '../pages/public/Faqs';
 import Blog from '../pages/public/Blog';
 import BlogPost from '../pages/public/BlogPost';
 import SwaggerUI from '../pages/common/SwaggerUI';
+import LegalNotice from '../pages/public/LegalNotice';
 
 import Logout from '../pages/private/Logout/Logout';
 import Wiki from '../pages/public/Wiki';
@@ -57,6 +58,7 @@ function PublicRoute() {
         <Route path='/wiki' exact='true' element={<Wiki setIsOpen={setIsOpen} />} />
         <Route path='/contacto' exact='true' element={<Contacto setIsOpen={setIsOpen} />} />
         <Route path='/products' exact='true' element={<Products setIsOpen={setIsOpen} />} />
+        <Route path='/aviso-legal' exact='true' element={<LegalNotice setIsOpen={setIsOpen} />} />
       </Routes>
       <Footer />
     </>
