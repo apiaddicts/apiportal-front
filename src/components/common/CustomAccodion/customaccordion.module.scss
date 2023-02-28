@@ -97,7 +97,8 @@
 .active {
   transition: 0.3s ease all;
   background: $white;
-  color: $theme_secondary;
+  color: $theme_primary;
+  font-weight: 700;
 }
 
 .filter {

@@ -1,0 +1,27 @@
+.pagination {
+    cursor: pointer;
+    display: flex;
+    color: #0033A0;
+    font-size: 20px;
+    align-items: center;
+
+    &__icon {
+        color: $secondary;
+    }
+    
+    p {
+        font-family: $secondary_font;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 32px;
+    }
+
+    .next {
+        margin-left: -30px;
+
+        @media (min-width: 1440px) {
+            margin-left: -10px;
+        }
+    }
+}

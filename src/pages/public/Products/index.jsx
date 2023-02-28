@@ -31,6 +31,7 @@ function index(props) {
       benefits: item?.benefits?.data,
       content: item.content,
       accentColor: item.accentColor,
+      iframeSource: item.form,
     };
   }) : [];
 

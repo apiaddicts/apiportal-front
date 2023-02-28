@@ -25,11 +25,15 @@ import classes from './sliderdrawer.module.scss';
 /*import LogoAlt from '../../static/img/logoAlt.svg';*/
 import { logout } from '../../redux/actions/userAction';
 
+import styles from '../../styles/variables.scss';
+
 function SidebarDrawer({ children, user }) {
   const theme = useTheme();
   const [isPermanent, setPermanent] = useState(true);
   const [toggleMenu, setToggleMenu] = useState(true);
   const [toggleMenuTemporary, setToggleMenuTemporary] = useState(false);
+
+  const { primaryColor, grayColor } = styles;
 
   const drawerTemp = useRef();
   const drawerPerm = useRef();
@@ -359,13 +363,16 @@ function SidebarDrawer({ children, user }) {
         <List
           sx={{
             [`& .active, & .${listItemClasses.root}:hover`]: {
+              color: primaryColor,
               fontWeight: 'bold',
               borderRight: '2px solid #000B39',
               width: '100%',
+              '& svg': {
+                fill: primaryColor,
+              },
             },
             paddingTop: `${!toggleMenu ? '180px' : '8px'}`,
           }}
-          className={classes.sidebar__item}
         >
           {toggleMenu && (
             <ListItem
@@ -378,8 +385,8 @@ function SidebarDrawer({ children, user }) {
           )}
           {
             listItems.map((item, index) => (
-              <ListItem button key={index} sx={{ color: '#14234B', paddingLeft: toggleMenu ? '80px' : '54px', paddingRight: 0 }} component={MyNavLink} to={item.route} exact='true'>
-                <ListItemIcon sx={{ justifyContent: 'center', color: '#14234B' }}>
+              <ListItem button key={index} sx={{ color: grayColor, paddingLeft: toggleMenu ? '80px' : '54px', paddingRight: 0 }} component={MyNavLink} to={item.route} exact='true'>
+                <ListItemIcon sx={{ justifyContent: 'center', color: grayColor }}>
                   {item.icon}
                 </ListItemIcon>
                 {toggleMenu && (<ListItemText primary={item.text} />)}

@@ -6,7 +6,7 @@ import Button from '../Buttons/Button';
 
 function SubscriptionCard({ items }) {
 
-  const { title, price, apis, benefits, content, btnLabel, accentColor } = items;
+  const { title, price, apis, benefits, content, btnLabel, accentColor, handleClick } = items;
 
   return (
     <Base>
@@ -23,7 +23,7 @@ function SubscriptionCard({ items }) {
           ) : (<p className={accentColor === 'primary' ? 'text' : ''}>{`${price}€`}</p>)}
           {btnLabel && (
             <div className='mt-5'>
-              <Button styles='primary'>
+              <Button styles='primary' onClick={handleClick}>
                 {btnLabel}
               </Button>
             </div>
