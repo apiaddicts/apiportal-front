@@ -54,11 +54,11 @@ function Footer({ isPrivate }) {
       name: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
       lastname: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
       email: Yup.string().email('Correo electrónico inválido').required('Campo requerido'),
-      phone: Yup.string().phone('MX', true, 'Debe ingresar un número telefónico válido'),
+      //phone: Yup.string().phone('MX', true, 'Debe ingresar un número telefónico válido'),
       // topic: Yup.string().required('Campo requerido'),
       subject: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(70, 'Se ha excedido el número de caracteres permitidos'),
       message: Yup.string().required('Campo requerido'),
-      sendMailTerms: Yup.bool().oneOf([true], 'Debes aceptar los términos y condiciones'),
+      //sendMailTerms: Yup.bool().oneOf([true], 'Debes aceptar los términos y condiciones'),
     }),
     onSubmit: (values) => {
       //Handle envio de correo de contacto
@@ -170,7 +170,6 @@ function Footer({ isPrivate }) {
                           type='tel'
                           label='Teléfono de contacto'
                           touched={formik.touched.phone}
-                          errors={formik.errors.phone}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
                           value={formik.values.phone}
@@ -213,7 +212,7 @@ function Footer({ isPrivate }) {
                   </div>
                 </div>
               </div>
-              <div className='row mb-5 px-5'>
+              {/*<div className='row mb-5 px-5'>
                 <div className='container'>
                   <div className='row justify-center'>
                     <div className={`flex-sm-12 flex-md-8 flex-sm-8 ${classes.footer__section__contact__terms}`}>
@@ -233,7 +232,7 @@ function Footer({ isPrivate }) {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>*/}
               <div className='row mb-5 mt-10 justify-center'>
                 <div className='flex-md-4 flex-lg-3 flex-sm-12'>
                   {
@@ -268,7 +267,7 @@ function Footer({ isPrivate }) {
           <div className={classes.policies}>
             <h1 className='body-1 font-weight-medium text__white mb-2'>Aviso</h1>
             <p className='body-1 font-weight-bold'>
-              <Link to={config.policyPath} target='blank' className='text__white'>Legal</Link>
+              <Link to={config.legalWarningPath} target='blank' className='text__white'>Legal</Link>
             </p>
           </div>
 

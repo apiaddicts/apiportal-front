@@ -46,8 +46,9 @@ const config = {
   emailContactTemplateId: process.env.REACT_APP_EMAIL_CONTACT_TEMPLATE_ID,
   emailConversationTemplateId: process.env.REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID,
   locale: 'es',
-  termsPath: '/user/terms',
-  policyPath: '/aviso-legal',
+  termsPath: process.env.REACT_APP_TERMS_PATH,
+  policyPath: process.env.REACT_APP_POLICY_PATH,
+  legalWarningPath: process.env.REACT_APP_LEGAL_NOTICE_PATH,
   notImage: '/notImage.svg',
 };
 

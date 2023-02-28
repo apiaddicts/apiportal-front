@@ -17,7 +17,6 @@ import Faqs from '../pages/public/Faqs';
 import Blog from '../pages/public/Blog';
 import BlogPost from '../pages/public/BlogPost';
 import SwaggerUI from '../pages/common/SwaggerUI';
-import LegalNotice from '../pages/public/LegalNotice';
 
 import Logout from '../pages/private/Logout/Logout';
 import Wiki from '../pages/public/Wiki';
@@ -60,7 +59,6 @@ function PublicRoute() {
         <Route path='/contacto' exact='true' element={<Contacto />} />
         <Route path='/suscripciones' exact='true' element={<Subscriptions setOpenForm={setOpenForm} />} />
         <Route path='/suscripciones/:id' exact='true' element={<SubscriptionDetail />} />
-        <Route path='/aviso-legal' exact='true' element={<LegalNotice />} />
       </Routes>
       <Footer />
     </>

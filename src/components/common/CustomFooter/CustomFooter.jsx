@@ -27,9 +27,9 @@ function CustomFooter() {
           <p className='body-1 font-weight-bold text__dark__primary '>contacto@wolterskluwer.es</p>
         </div>
         <div className={classes.policies}>
-          <h1 className='body-1 font-weight-medium text__dark__primary  mb-2'>Política de</h1>
+          <h1 className='body-1 font-weight-medium text__dark__primary  mb-2'>Aviso</h1>
           <p className='body-1 font-weight-bold text__dark__primary'>
-            <a href={config.policyPath} target='blank' className='text__dark__primary'>Privacidad de datos</a>
+            <a href={config.legalWarningPath} target='blank' className='text__dark__primary'>Legal</a>
           </p>
         </div>
 
