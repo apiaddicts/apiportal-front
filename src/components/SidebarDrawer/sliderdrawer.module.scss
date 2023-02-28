@@ -10,7 +10,11 @@
 }
 
 .sidebar__item > a > div {
-  color: $theme_tertiary !important;
+  color: $gray !important;
+
+  & .active {
+    color: $theme_primary;
+  }
 }
 
 .dropdown__item > svg,

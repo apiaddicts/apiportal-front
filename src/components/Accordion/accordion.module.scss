@@ -61,7 +61,7 @@
     letter-spacing: 1.33px;
     font-family: $primary_font;
     text-transform: uppercase;
-    color: $theme_primary;
+    color: $gray_darken;
     cursor: pointer;
   }
   &__body{
@@ -111,8 +111,8 @@
   margin: 15px 0;
   padding-left: 10px;
   font-weight: 700;
-  border-left: 2px solid $theme_secondary;
-  color: $theme_secondary;
+  border-left: 2px solid $blue-lighten-2;
+  color: $theme_primary;
 }
 
 

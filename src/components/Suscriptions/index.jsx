@@ -168,7 +168,7 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
                                           className={classes.input}
                                         />
                                       ) :
-                                        <p>{row.properties.displayName}</p>
+                                        <p className='text__accent'>{row.properties.displayName}</p>
                                     }
                                   </TableCell>
                                   <TableCell>

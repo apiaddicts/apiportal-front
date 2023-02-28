@@ -69,7 +69,7 @@ $border-radius: 6px;
 $secondary: #101010;
 $secondary_white: #ffffff;
 $secondary_yellow: #0078E6;
-$gray: #768692;
+$gray: #474747;;
 $gray_darken: #53565a;
 $gray_darken-1: #101010;
 $gray_darken-2: #292929;
@@ -103,6 +103,17 @@ $tertiary_text: $warning;
 $divider: #BDBDBD;
 $black: #000000;
 $secondary_dark: #1C7B7F;
+
+
+/* ------------------------------
+    EXPORT VARIABLES TO JS
+------------------------------ */
+:export {
+  primaryColor: $theme_primary;
+  secondaryColor: $theme_secondary;
+  grayColor: $gray;
+  grayDarkenColor: $gray_darken;
+};
 
 /* ------------------------------
     WEIGHTS 
