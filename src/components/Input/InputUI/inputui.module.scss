@@ -81,7 +81,7 @@
 
 .active {
   transform: translate(0, -20px) scale(0.75) !important;
-  color: $input-color-warning !important;
+  color: $theme_primary !important;
   font-weight: 500 !important;
   font-size: 1rem !important;
 }
