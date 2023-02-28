@@ -1,8 +1,10 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-use-before-define */
 import userConstants from '../constants/userConstats';
 import userService from '../../services/userService';
 import config from '../../services/config';
 import store from '../store';
+import { subscribeToAProduct } from './subscriptionsAction';
 
 // eslint-disable-next-line import/prefer-default-export
 export const login = (data) => (dispatch) => {
@@ -72,6 +74,7 @@ export const logout = () => (dispatch) => {
 };
 
 export const signUp = (data) => (dispatch) => {
+  let dataResponse = {};
   dispatch({ type: userConstants.SIGNUP_REQUEST });
   userService.signUp(data).then(
     (response) => {
@@ -82,6 +85,7 @@ export const signUp = (data) => (dispatch) => {
             response,
           });
         } else {
+          dataResponse = response;
           dispatch({
             type: userConstants.SIGNUP_SUCCESS,
             response,
@@ -92,7 +96,20 @@ export const signUp = (data) => (dispatch) => {
     (error) => {
       console.error(error);
     },
-  );
+  )
+    .then((resp) => {
+      if (dataResponse && Object.keys(dataResponse).length > 0) {
+        const { name } = dataResponse;
+        const data = {
+          properties: {
+            name: 'starter',
+            scope: '/products/starter',
+            appType: 'developerPortal',
+          },
+        };
+        dispatch(subscribeToAProduct(data, name));
+      }
+    });
 };
 
 export const getUser = (tokens) => (dispatch) => {
