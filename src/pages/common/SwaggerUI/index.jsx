@@ -8,7 +8,7 @@ import { Container } from '@mui/material';
 import { useSelector } from 'react-redux';
 import Icon from '../../../components/MdIcon/Icon';
 import libraryService from '../../../services/libraryService';
-import productService from '../../../services/productsService';
+//import productService from '../../../services/productsService';
 import subscriptionsService from '../../../services/subscriptionsService';
 import classes from './swagger-ui.module.scss';
 import Select from '../../../components/Input/InputUI/Select';
@@ -23,23 +23,37 @@ function SwaggerUI() {
   const [subscriptionSecrets, setSubscriptionSecrets] = useState([]);
   const [swaggerUi, setSwaggerUi] = useState();
 
+  /*const LogoutPlugin = () => ({
+    statePlugins: {
+      auth: {
+        wrapActions: {
+          logout: (oriAction) => (keys) => {
+            // here, you can do the logout request.
+            console.log('Logout from following securities:', keys);
+            return oriAction(keys); // don't forget! otherwise, Swagger UI won't logout
+          },
+        },
+      },
+    },
+  });*/
+
   useEffect(() => {
     libraryService.getApiOpenAPI(params.id).then((jsonOpenApi) => {
       setOpenApi(jsonOpenApi);
       const swaggerUi = SwaggerUi({
         dom_id: '#swaggerContainer',
         spec: jsonOpenApi,
-        presets: SwaggerUi.presets.apis,
-        plugins: SwaggerUi.plugins.DownloadUrl,
+        presets: [SwaggerUi.presets.apis],
+        //plugins: [LogoutPlugin],
         oauth2RedirectUrl: `${window.location.protocol}//${window.location.host}/developer/apis/swagger-ui/oauth-redirect`,
         persistAuthorization: true,
       });
       setSwaggerUi(swaggerUi);
+      console.log(swaggerUi);
     });
 
     if (Object.keys(user).length > 0) {
       libraryService.getApiProducts(params.id).then((productList) => {
-        console.log(productList);
         const products = productList && Object.keys(productList).length > 0 ? productList.value.map((product) => {
           const prodItem = {
             ...product.properties,
@@ -50,11 +64,27 @@ function SwaggerUI() {
           return prodItem;
         }) : [];
         setProducts(products);
+
+        subscriptionsService.listUserSubscriptions(user.name).then((subscriptionList) => {
+          const subscriptions = subscriptionList && Object.keys(subscriptionList).length > 0 ? subscriptionList.value.filter((subscription) => {
+            return (subscription.properties.state !== 'cancelled' && products.some((product) => subscription.properties.scope.includes(product.id)));
+          }).map((subscription) => {
+            const subscriptionItem = {
+              ...subscription.properties,
+              id: subscription.name,
+              value: subscription.name,
+              text: subscription.properties.displayName,
+            };
+            return subscriptionItem;
+          }) : [];
+          setSubscriptions(subscriptions);
+        });
+
       });
     }
   }, []);
 
-  const handleProductSelect = (selectProduct) => {
+  /*const handleProductSelect = (selectProduct) => {
     if (Object.keys(user).length > 0 && selectProduct) {
       productService.getProductSuscripcion(selectProduct.id).then((subscriptionList) => {
         const subscriptions = subscriptionList && Object.keys(subscriptionList).length > 0 ? subscriptionList.value.filter((subscription) => {
@@ -69,17 +99,19 @@ function SwaggerUI() {
           return subscriptionItem;
         }) : [];
         setSubscriptions(subscriptions);
+        setSubscriptionSecrets([]);
       });
     } else {
       setSubscriptions([]);
+      setSubscriptionSecrets([]);
     }
-  };
+    swaggerUi.authActions.logout(['apiKeyHeader']);
+  };*/
 
   const handleSubscriptionSelect = (selectedSubscription) => {
     if (Object.keys(user).length > 0 && selectedSubscription) {
       subscriptionsService.listSubscriptionSecrets(user.name, selectedSubscription.id).then((subscriptionSecrets) => {
         const subscriptionSecretList = subscriptionSecrets && Object.keys(subscriptionSecrets).length > 0 ? Object.keys(subscriptionSecrets).map((subscriptionSecret) => {
-          console.log(subscriptionSecret, subscriptionSecrets, subscriptionSecrets[subscriptionSecret]);
           return {
             id: subscriptionSecrets[subscriptionSecret],
             value: subscriptionSecrets[subscriptionSecret],
@@ -91,14 +123,17 @@ function SwaggerUI() {
     } else {
       setSubscriptionSecrets([]);
     }
+    swaggerUi.authActions.logout(['apiKeyHeader']);
   };
 
   const handleSubscriptionSecretSelect = (selectedSubscriptionKey) => {
-    console.log(selectedSubscriptionKey);
+    swaggerUi.authActions.logout(['apiKeyHeader']);
     if (Object.keys(user).length > 0 && selectedSubscriptionKey) {
-      swaggerUi.preauthorizeApiKey('apiKeyHeader', selectedSubscriptionKey.value);
-    } else {
-      swaggerUi.preauthorizeApiKey('apiKeyHeader', '');
+      const openAuthFormButton = document.querySelector('.auth-wrapper .authorize');
+      openAuthFormButton.click();
+      setTimeout(() => {
+        swaggerUi.preauthorizeApiKey('apiKeyHeader', selectedSubscriptionKey.value);
+      }, 350);
     }
   };
 
@@ -118,11 +153,13 @@ function SwaggerUI() {
           </div>
           { products.length > 0 && (
             <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
+              {/*
               <div className='row mt-6'>
                 <div className='flex-sm-12 flex-md-12 flex-lg-12'>
                   <Select label='Producto' placeholder='Seleccione un producto' items={products} itemText='text' itemValue='value' onChange={(e) => handleProductSelect(e)} />
                 </div>
               </div>
+              */}
               <div className='row mt-6'>
                 <div className='flex-sm-12 flex-md-12 flex-lg-12'>
                   <Select label='Suscripción' disabled={!subscriptions.length > 0} placeholder='Seleccione una suscripción' items={subscriptions} itemText='text' itemValue='value' onChange={(e) => handleSubscriptionSelect(e)} />

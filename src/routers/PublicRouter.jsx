@@ -22,7 +22,8 @@ import LegalNotice from '../pages/public/LegalNotice';
 import Logout from '../pages/private/Logout/Logout';
 import Wiki from '../pages/public/Wiki';
 import Contacto from '../pages/public/Contacto';
-import Products from '../pages/public/Products';
+import Subscriptions from '../pages/public/Subscriptions';
+import SubscriptionDetail from '../pages/public/SubscriptionDetail';
 
 function PublicRoute() {
   const { openModal } = useSelector((state) => state.user);
@@ -55,10 +56,11 @@ function PublicRoute() {
         <Route path='/apis/:id/swagger-ui' exact='true' element={<SwaggerUI setIsOpen={setOpenForm} />} />
         <Route path='/blog' exact='true' element={<Blog setIsOpen={setIsOpen} />} />
         <Route path='/blog/:id' exact='true' element={<BlogPost setIsOpen={setIsOpen} />} />
-        <Route path='/wiki' exact='true' element={<Wiki setIsOpen={setIsOpen} />} />
-        <Route path='/contacto' exact='true' element={<Contacto setIsOpen={setIsOpen} />} />
-        <Route path='/products' exact='true' element={<Products setIsOpen={setIsOpen} />} />
-        <Route path='/aviso-legal' exact='true' element={<LegalNotice setIsOpen={setIsOpen} />} />
+        <Route path='/wiki' exact='true' element={<Wiki />} />
+        <Route path='/contacto' exact='true' element={<Contacto />} />
+        <Route path='/suscripciones' exact='true' element={<Subscriptions setOpenForm={setOpenForm} />} />
+        <Route path='/suscripciones/:id' exact='true' element={<SubscriptionDetail />} />
+        <Route path='/aviso-legal' exact='true' element={<LegalNotice />} />
       </Routes>
       <Footer />
     </>

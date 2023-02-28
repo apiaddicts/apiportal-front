@@ -64,7 +64,7 @@ function SidebarDrawer({ children, user }) {
   });
 
   const listItems = [
-    { route: '/developer/products', text: 'Productos', icon: <Terminal /> },
+    /*{ route: '/developer/products', text: 'Productos', icon: <Terminal /> },*/
     { route: '/developer/apis', text: 'Biblioteca de APIs', icon: <Settings /> },
     { route: '/developer/subscriptions', text: 'Suscripciones', icon: <Terminal /> },
   ];
