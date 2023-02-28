@@ -12,8 +12,8 @@ import CustomFooter from '../../components/common/CustomFooter/CustomFooter';
 import SkeletonComponent from '../../components/SkeletonComponent/SkeletonComponent';
 
 import Profile from '../../pages/private/Profile';
-import Products from '../../pages/private/Products';
-import ProductDetail from '../../pages/private/ProductDetail';
+//import Products from '../../pages/private/Products';
+//import ProductDetail from '../../pages/private/ProductDetail';
 import Apis from '../../pages/private/Apis';
 import ApiDetail from '../../pages/private/ApiDetail';
 import SwaggerUI from '../../pages/common/SwaggerUI';
@@ -67,8 +67,8 @@ function PrivateRouter({ children }) {
             <div className={`container ${classes.wrapper}`}>
               <Routes>
                 <Route path='profile' element={<Profile />} />
-                <Route path='products' exact='true' element={<Products />} />
-                <Route path='products/:id' exact='true' element={<ProductDetail />} />
+                {/*<Route path='products' exact='true' element={<Products />} />*/}
+                {/*<Route path='products/:id' exact='true' element={<ProductDetail />} />*/}
                 <Route path='apis' exact='true' element={<Apis />} />
                 <Route path='apis/:id' exact='true' element={<ApiDetail />} />
                 <Route path='apis/:id/swagger-ui' exact='true' element={<SwaggerUI />} />

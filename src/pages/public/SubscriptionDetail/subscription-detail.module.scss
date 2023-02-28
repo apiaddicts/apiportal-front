@@ -1,0 +1,16 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/mixins/mixin.scss";
+
+.subscription_detail {
+    padding-top: 160px;
+    margin: 0 1rem;
+
+    &__form {
+        border: none;
+        width: 100%;
+        max-width: 550px;
+        display: flex;
+        justify-content: center;
+        margin: 1rem auto 0;
+    }
+}

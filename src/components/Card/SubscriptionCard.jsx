@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import Base from './Base';
-import CustomMarkdown from '../CustomMarkdown';
+//import CustomMarkdown from '../CustomMarkdown';
 import Button from '../Buttons/Button';
 
-function SubscriptionCard({ items }) {
+function SubscriptionCard({ items, setOpenForm }) {
 
-  const { title, price, apis, benefits, content, btnLabel, accentColor, handleClick } = items;
+  const { title, price, apis, benefits, slug, btnLabel, accentColor } = items;
 
   return (
     <Base>
@@ -23,9 +24,17 @@ function SubscriptionCard({ items }) {
           ) : (<p className={accentColor === 'primary' ? 'text' : ''}>{`${price}€`}</p>)}
           {btnLabel && (
             <div className='mt-5'>
-              <Button styles='primary' onClick={handleClick}>
-                {btnLabel}
-              </Button>
+              {slug === 'starter' ? (
+                <Button styles='primary' onClick={() => { setOpenForm(true); }}>
+                  {btnLabel}
+                </Button>
+              ) : (
+                <HashLink smooth to={`/suscripciones/${slug}`}>
+                  <Button styles='primary'>
+                    {btnLabel}
+                  </Button>
+                </HashLink>
+              )}
             </div>
           )}
         </div>
@@ -37,17 +46,21 @@ function SubscriptionCard({ items }) {
             ))}
           </div>
         )}
-        {benefits && (
+        {benefits && benefits.general && (
           <ul className='benefits'>
-            {benefits.map((item, index) => (
+            {benefits?.general.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ul>
         )}
-        {content && (
+        {benefits && benefits.specific && (
           <div className='content'>
             <p className='mb-2 apis__title'>Características:</p>
-            <CustomMarkdown content={content} />
+            <ul>
+              {benefits?.specific.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
           </div>
         )}
       </div>

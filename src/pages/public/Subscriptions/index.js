@@ -5,7 +5,7 @@ import PartnerCard from '../../../components/Card/PartnerCard';
 import SubscriptionCard from '../../../components/Card/SubscriptionCard';
 import { getSubscriptions } from '../../../redux/actions/productsAction';
 
-function index(props) {
+function Subscriptions({ setOpenForm }) {
 
   const dispatch = useDispatch();
   const { subscriptionRes } = useSelector((state) => state.products);
@@ -28,7 +28,7 @@ function index(props) {
       price: item.price,
       apis,
       btnLabel: item.btnLabel,
-      benefits: item?.benefits?.data,
+      benefits: item?.benefits,
       content: item.content,
       accentColor: item.accentColor,
       iframeSource: item.form,
@@ -39,19 +39,19 @@ function index(props) {
     <div className='div__container__pt'>
       <div>
         <BannerStatic
-          title='Subscripciones'
-          img='https://picsum.photos/id/1/1440/630'
+          title='Suscripciones'
+          img=''
         />
         <section className='container__fluid section__subs'>
           <div className='row justify-center'>
             {arrCardSubs.map((card, index) => {
               return card.slug === 'partner' ? (
                 <div className='flex-sm-12 flex-md-2' key={index}>
-                  <PartnerCard title={card.title} content={card.content} />
+                  <PartnerCard title='Partner' slug={card.slug} content={card.benefits?.markdown} />
                 </div>
               ) : (
                 <div className='flex-sm-12 flex-md-2' key={index}>
-                  <SubscriptionCard items={card} />
+                  <SubscriptionCard items={card} setOpenForm={setOpenForm} />
                 </div>
               );
             })}
@@ -62,4 +62,4 @@ function index(props) {
   );
 }
 
-export default index;
+export default Subscriptions;

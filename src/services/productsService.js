@@ -181,6 +181,21 @@ function getSubscriptions() {
     .catch((error) => error);
 };
 
+function getSubscriptionById(productId) {
+
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const url = `${config.apiUrl}/products?_where[slug]=${productId}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response[0])
+    .catch((error) => error);
+};
+
 const productsService = {
   listProducts,
   searchProducts,
@@ -192,6 +207,7 @@ const productsService = {
   getProductSuscripcion,
   getProductApis,
   getSubscriptions,
+  getSubscriptionById,
 };
 
 export default productsService;
