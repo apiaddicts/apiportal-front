@@ -21,6 +21,25 @@ function listUserSubscriptions(userId, top = config.topSubscriptions, skip = 0) 
     });
 }
 
+function subscribeToAProductWithHmac(data, userId) {
+  const subscriptionId = crypto.randomUUID();
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `${config.getHmacAuthHeader()}` },
+    body: JSON.stringify(data),
+  };
+
+  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response;
+    }).catch((error) => {
+      console.error(error);
+    });
+}
+
 function subscribeToAProduct(data, userId) {
   const { token } = store.getState().user;
   const subscriptionId = crypto.randomUUID();
@@ -143,6 +162,7 @@ const subscriptionsService = {
   regenerateSubscription,
   renameSubscription,
   cancelSubscription,
+  subscribeToAProductWithHmac,
 };
 
 export default subscriptionsService;

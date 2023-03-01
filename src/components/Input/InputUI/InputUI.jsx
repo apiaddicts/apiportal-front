@@ -58,7 +58,7 @@ function InputUI({ type = 'text', label, touched, errors, required = false, onCh
             </div>
           ) :
             errors === undefined && type === 'password' ? (
-              <div className={classes.wrapper__icon} onClick={togglePass} role='button' tabIndex={0}>
+              <div tabIndex='-1' className={classes.wrapper__icon} onClick={togglePass} role='button'>
                 <Icon id='MdRemoveRedEye' />
               </div>
             ) :

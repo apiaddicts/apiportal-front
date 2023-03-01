@@ -4,7 +4,7 @@ import userConstants from '../constants/userConstats';
 import userService from '../../services/userService';
 import config from '../../services/config';
 import store from '../store';
-import { subscribeToAProduct } from './subscriptionsAction';
+import subscriptionsService from '../../services/subscriptionsService';
 
 // eslint-disable-next-line import/prefer-default-export
 export const login = (data) => (dispatch) => {
@@ -90,26 +90,24 @@ export const signUp = (data) => (dispatch) => {
             type: userConstants.SIGNUP_SUCCESS,
             response,
           });
+          if (config.generateStarterSubscriptionOnSignup) {
+            const { name } = dataResponse;
+            const data = {
+              properties: {
+                name: 'starter',
+                scope: '/products/starter',
+                appType: 'developerPortal',
+              },
+            };
+            subscriptionsService.subscribeToAProductWithHmac(data, name);
+          }
         }
       }
     },
     (error) => {
       console.error(error);
     },
-  )
-    .then((resp) => {
-      if (dataResponse && Object.keys(dataResponse).length > 0) {
-        const { name } = dataResponse;
-        const data = {
-          properties: {
-            name: 'starter',
-            scope: '/products/starter',
-            appType: 'developerPortal',
-          },
-        };
-        dispatch(subscribeToAProduct(data, name));
-      }
-    });
+  );
 };
 
 export const getUser = (tokens) => (dispatch) => {

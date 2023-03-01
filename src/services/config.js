@@ -1,8 +1,8 @@
 const cryptoJs = require('crypto-js');
 
-const createSharedAccessToken = (apimUid, apimAccessKey, validDays) => {
+const createSharedAccessToken = (apimUid, apimAccessKey, expirationTime) => {
   const expiryDate = new Date();
-  expiryDate.setDate(expiryDate.getDate() + validDays);
+  expiryDate.setTime(expiryDate.getTime() + (expirationTime * 1000));
 
   const expiry = expiryDate.toISOString().replace(/\d+.\d+Z/, '00.0000000Z');
   const expiryShort = expiryDate.toISOString().substr(0, 16).replace(/[^\d]/g, '');
@@ -24,7 +24,9 @@ const config = {
   resourceGroupName: process.env.REACT_APP_AZURE_RESOURCE_GROUP_NAME,
   serviceName: process.env.REACT_APP_AZURE_SERVICE_NAME,
   apiVersion: process.env.REACT_APP_AZURE_APIM_ADMIN_API_VERSION,
-  hmacAuthHeader: process.env.REACT_APP_AZURE_APIM_ADMIN_API_TOKEN ? process.env.REACT_APP_AZURE_APIM_ADMIN_API_TOKEN : createSharedAccessToken(process.env.REACT_APP_AZURE_APIM_ADMIN_API_UID, process.env.REACT_APP_AZURE_APIM_ADMIN_API_PRIMARY_KEY, process.env.REACT_APP_AZURE_APIM_ADMIN_API_TOKEN_VALID_DAYS),
+  getHmacAuthHeader: () => {
+    return process.env.REACT_APP_AZURE_APIM_ADMIN_API_TOKEN ? process.env.REACT_APP_AZURE_APIM_ADMIN_API_TOKEN : createSharedAccessToken(process.env.REACT_APP_AZURE_APIM_ADMIN_API_UID, process.env.REACT_APP_AZURE_APIM_ADMIN_API_PRIMARY_KEY, process.env.REACT_APP_AZURE_APIM_ADMIN_API_TOKEN_EXPIRATION_TIME);
+  },
   rememberkey: process.env.REACT_APP_REMEMBER_KEY,
   topProduct: process.env.REACT_APP_LIST_PRODUCT_TOP,
   topDetail: process.env.REACT_APP_LIST_PRODUCT_APIS_TOP,
@@ -50,6 +52,7 @@ const config = {
   policyPath: process.env.REACT_APP_POLICY_PATH,
   legalWarningPath: process.env.REACT_APP_LEGAL_NOTICE_PATH,
   notImage: '/notImage.svg',
+  generateStarterSubscriptionOnSignup: (process.env.REACT_APP_GENERATE_STARTER_SUBSCRIPTION_ON_SIGNUP === 'true'),
 };
 
 export default config;

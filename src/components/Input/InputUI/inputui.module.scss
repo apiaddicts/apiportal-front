@@ -115,6 +115,7 @@
   top: 1rem;
   font-size: 25px;
   color: rgba(0, 0, 0, 0.38);
+  cursor: pointer;
   &__error {
     color: $input-color-danger;
   }
