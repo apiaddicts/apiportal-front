@@ -54,7 +54,7 @@ function Footer({ isPrivate }) {
       name: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
       lastname: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
       email: Yup.string().email('Correo electrónico inválido').required('Campo requerido'),
-      //phone: Yup.string().phone('MX', true, 'Debe ingresar un número telefónico válido'),
+      //phone: Yup.string().phone('MX', false, 'Debe ingresar un número telefónico válido'),
       // topic: Yup.string().required('Campo requerido'),
       subject: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(70, 'Se ha excedido el número de caracteres permitidos'),
       message: Yup.string().required('Campo requerido'),
@@ -169,7 +169,7 @@ function Footer({ isPrivate }) {
                           id='phone'
                           type='tel'
                           label='Teléfono de contacto'
-                          touched={formik.touched.phone}
+                          errors={formik.errors.phone}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
                           value={formik.values.phone}
@@ -238,7 +238,7 @@ function Footer({ isPrivate }) {
                   {
                     displaySubmit &&
                     (
-                      <Button styles='tertiary' type='submit'>
+                      <Button styles={formik.isValid ? 'tertiary' : 'disabled'} disabled={!formik.isValid} type='submit'>
                         ¡Me interesa!
                       </Button>
                     )

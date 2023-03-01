@@ -4,7 +4,6 @@ import classes from './inputui.module.scss';
 import Icon from '../../MdIcon/Icon';
 
 function InputUI({ type = 'text', label, touched, errors, required = false, onChange, onBlur, ...rest }) {
-
   const { value } = rest;
   const [isActive, setIsActive] = useState(false);
   const [typeInput, setTypeInput] = useState(type);
