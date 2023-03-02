@@ -1,6 +1,6 @@
 /* eslint-disable */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { HashLink } from 'react-router-hash-link';
 
@@ -10,7 +10,8 @@ import Base from './Base';
 import config from '../../services/config';
 import './cards.scss';
 
-function CardInformation({ img, buttons, title, description, reading, info, maxWidth, version, status, colorStatus, theme, blog, modal, link, css_styles, blogTitle, id }) {
+function CardInformation({ img, buttons, title, description, reading, info, maxWidth, version, status, theme, blog, modal, link, css_styles, blogTitle, id }) {
+  const [colorStatus, setColorStatus] = useState('');
   const { custom_title_size, custom_status_size, custom_margin_top } = css_styles;
   const blogClasses = {
     paddingTop: blog ? '51px' : '',
@@ -24,6 +25,15 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
   const clickModal = () => {
     modal(true);
   };
+
+  useEffect(() => {
+    if (status === 'publicado') {
+      setColorStatus('green')
+    } else {
+      setColorStatus('warning')
+    }
+  }, []);
+
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment

@@ -8,12 +8,12 @@ import Title from '../../../components/Title';
 import SearchInput from '../../../components/Input/SearchInput';
 import Icon from '../../../components/MdIcon/Icon';
 import CardInformationLibrary from '../../../components/Card/CardInformationLibrary';
-import { listApis, searchApis, getListTags, filterAPIsByTags, resetLibraryApi, getLibraryApiNextSearch, getLibraryApiPreviosSearch, getLibraryApiNext, getLibraryApiPrevios } from '../../../redux/actions/libraryAction';
+import { listApis, searchApis, getListTags, filterAPIsByTags, resetLibraryApi, getLibraryApiNextSearch, getLibraryApiPreviosSearch, getLibraryApiNext, getLibraryApiPrevios, getLibraries } from '../../../redux/actions/libraryAction';
 import classes from './apis.module.scss';
 
 function Apis(props) {
 
-  const { loadingLibraries, apis, tagsList, apisSkip } = useSelector((state) => state.library);
+  const { loadingLibraries, apis, tagsList, apisSkip, libraries } = useSelector((state) => state.library);
 
   const dispatch = useDispatch();
 
@@ -80,6 +80,9 @@ function Apis(props) {
     if (apis && Object.keys(apis).length === 0) {
       dispatch(listApis());
     }
+    if (libraries && libraries.length === 0) {
+      dispatch(getLibraries());
+    }
 
   }, []);
 
@@ -123,6 +126,17 @@ function Apis(props) {
     }
   };
 
+  const compareArrays = (array1, array2) => {
+    return array1.filter((a) => {
+      return array2.some((b) => {
+        return a.slug === b.apiName;
+      });
+    });
+  };
+
+  
+  const fApis = libraries && libraries.length > 0 && apis && Object.keys(apis).length > 0 ? compareArrays(libraries, arrApis) : arrApis;
+
   return (
     <Container fixed sx={{ paddingLeft: {xs: '0px', md: '59px !important'}, paddingRight: {xs:' 0px', md: '97px !important'} }}>
       <Title stylesTitle={{ fontSize: '48px' }} text='Biblioteca de Apis' />
@@ -161,8 +175,8 @@ function Apis(props) {
       </div>
       <div className={classes.grid__apis}>
         {loadingLibraries === false && apis ? (
-          arrApis.length > 0 ? (
-            arrApis.map((item, index) => (
+          fApis.length > 0 ? (
+            fApis.map((item, index) => (
               <CardInformationLibrary
                 key={index}
                 apiName={item.apiName}
@@ -183,7 +197,7 @@ function Apis(props) {
 
       <div className='display_flex justify_content__center mt-4'>
         {loadingLibraries === false && apis ? (
-          arrApis.length == 0 ? (
+          fApis.length == 0 ? (
             <h1 className='text-center'>Información no disponible</h1>
           ) : (null)
         ) : (
@@ -204,7 +218,7 @@ function Apis(props) {
           ) : (null)}
         </div>
         <div>
-          {apis.nextLink !== undefined ? (
+          {apis.nextLink !== undefined && fApis.length > 0 ? (
             <div onClick={() => handleNextLibrary()} className={classes.pagination}>
               <p className={classes.next}>Siguiente</p>
               <div className={classes.pagination__icon}>
