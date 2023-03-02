@@ -303,3 +303,21 @@ export const resetApiHostname = () => (dispatch) => {
     type: libraryConstants.RESET_API_HOSTNAMES,
   });
 };
+
+export const getApisUnsecure = () => (dispatch) => {
+  dispatch({
+    type: libraryConstants.GET_APIS_UNSECURE_REQUEST,
+  });
+  libraryService.getApisUnsecure()
+    .then((response) => {
+      dispatch({
+        type: libraryConstants.GET_APIS_UNSECURE_SUCCESS,
+        payload: response,
+      });
+    }, (error) => {
+      dispatch({
+        type: libraryConstants.GET_APIS_UNSECURE_FAILURE,
+        payload: error,
+      });
+    });
+};

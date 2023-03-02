@@ -29,6 +29,10 @@ const initialState = {
   hostnames: {},
   errorHostnames: {},
 
+  apisUnsecureReq: false,
+  apisUnsecureRes: [],
+  apisUnsecureFail: {},
+
 };
 
 // eslint-disable-next-line default-param-last
@@ -184,6 +188,27 @@ export default function libraryReducer(state = initialState, action) {
         hostnames: {},
         errorHostnames: {},
       };
+
+    case libraryConstants.GET_APIS_UNSECURE_REQUEST:
+      return {
+        ...state,
+        apisUnsecureReq: true,
+      };
+
+    case libraryConstants.GET_APIS_UNSECURE_SUCCESS:
+      return {
+        ...state,
+        apisUnsecureRes: action.payload,
+        apisUnsecureReq: false,
+      };
+
+    case libraryConstants.GET_APIS_UNSECURE_FAILURE:
+      return {
+        ...state,
+        apisUnsecureReq: false,
+        apisUnsecureFail: action.payload,
+      };
+
     default:
       return state;
   }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getApiContent } from '../../../redux/actions/apiAction';
-import { getLibraries, filterCheck, sortApiCollection } from '../../../redux/actions/libraryAction';
+import { getLibraries, filterCheck, sortApiCollection, getApisUnsecure } from '../../../redux/actions/libraryAction';
 import BannerImage from '../../../components/Banner/BannerImage';
 import SearchInput from '../../../components/Input/SearchInput';
 import InputSelect from '../../../components/Input/InputSelect';
@@ -15,7 +15,7 @@ import classes from './apis.module.scss';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 
 function Apis({ setIsOpen }) {
-  const { libraries, filters, backUpLibreries, loadingLibraries } = useSelector((state) => state.library);
+  const { libraries, filters, backUpLibreries, loadingLibraries, apisUnsecureRes } = useSelector((state) => state.library);
   const [filtersSelect, setFiltersSelect] = useState([]);
   const [searchApiInputValue, setSearchApiInputValue] = useState('');
   const dispatch = useDispatch();
@@ -125,7 +125,22 @@ function Apis({ setIsOpen }) {
     if (libraries && libraries.length === 0 && Object.keys(filters).length === 0) {
       dispatch(getLibraries());
     }
+
+    if (apisUnsecureRes && apisUnsecureRes.length === 0) {
+      dispatch(getApisUnsecure());
+    }
+
   }, []);
+
+  const compareArrays = (array1, array2) => {
+    return array1.filter((a) => {
+      return array2.some((b) => {
+        return a.slug === b.name;
+      });
+    });
+  };
+
+  const fApis = libraries && libraries.length > 0 && apisUnsecureRes && apisUnsecureRes.length > 0 ? compareArrays(libraries, apisUnsecureRes) : [];
 
   return (
     <div id='apiHome' style={{ paddingTop: '114px' }}>
@@ -230,7 +245,7 @@ function Apis({ setIsOpen }) {
                 {loadingLibraries === false && libraries ? (
                   libraries.length > 0 ? (
                     <ApisPaginated
-                      apis={libraries}
+                      apis={fApis}
                       itemsPerPage={8}
                     />
                   ) : (
