@@ -7,21 +7,20 @@ import Alert from '@mui/material/Alert';
 import Button from '../../../components/Buttons/Button';
 import InputUI from '../../../components/Input/InputUI/InputUI';
 import CustomFooter from '../../../components/common/CustomFooter/CustomFooter';
-import { resetPasswordWithTicket } from '../../../redux/actions/userAction';
+import { confirmPassword } from '../../../redux/actions/userAction';
 /*import LogoAlt from '../../../static/img/logoAlt.svg';*/
 import classes from './confirm-password.module.scss';
+import Spinner from '../../../components/Spinner';
 
 function ResetPassword(props) {
 
-  const { responseResetPwd, responseResetPwdError } = useSelector((state) => state.user);
+  const { responseResetPwd, responseResetPwdError, loadingSignUp } = useSelector((state) => state.user);
   const [hasErrors, setHasErrors] = useState(false);
   const [hasSuccess, setHasSuccess] = useState(false);
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const queryParams = {
-    id: searchParams.get('userid'),
-    ticketid: searchParams.get('ticketid'),
-    ticket: searchParams.get('ticket'),
+    token: searchParams.get('token'),
   };
 
   useEffect(() => {
@@ -43,11 +42,10 @@ function ResetPassword(props) {
     },
     onSubmit: (values) => {
       const data = {
-        properties: {
-          password: values.password,
-        },
+        confirmToken: queryParams.token,
+        newPassword: values.password,
       };
-      dispatch(resetPasswordWithTicket(queryParams, data));
+      dispatch(confirmPassword(data));
     },
     validate: (values) => {
       const errors = {};
@@ -71,79 +69,81 @@ function ResetPassword(props) {
           {/*<img src={LogoAlt} alt='' />*/}
         </div>
       </div>
-      <div className={classes.wrapper}>
-        <div className={classes.wrapper__content}>
-          <div className={classes.wrapper__content__text}>
+      {loadingSignUp ? (<Spinner title='Verificando...' styles={{ height: '500px' }} />) : (
+        <div className={classes.wrapper}>
+          <div className={classes.wrapper__content}>
+            <div className={classes.wrapper__content__text}>
+              <div className='container'>
+                <div className='row'>
+                  <div className='flex-sm-12 flex-md-12'>
+                    <h1>Ingresa tu nueva contraseña</h1>
+                    {
+                      hasErrors &&
+                      // eslint-disable-next-line react/jsx-wrap-multilines
+                      <Alert severity='error'>
+                        <p>Es posible que el enlace para actualizar tu contraseña haya expirado o tu cuenta de correo aún no se encuentre confirmada </p>
+                      </Alert>
+                    }
+                    {
+                      hasSuccess &&
+                      // eslint-disable-next-line react/jsx-wrap-multilines
+                      <Alert severity='success'>
+                        Tu contraseña ha sido cambiada
+                      </Alert>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
             <div className='container'>
               <div className='row'>
                 <div className='flex-sm-12 flex-md-12'>
-                  <h1>Ingresa tu nueva contraseña</h1>
-                  {
-                    hasErrors &&
-                    // eslint-disable-next-line react/jsx-wrap-multilines
+                  {formik.errors.password || formik.errors.confirmPassword ? (
                     <Alert severity='error'>
-                      <p>Es posible que el enlace para actualizar tu contraseña haya expirado o tu cuenta de correo aún no se encuentre confirmada </p>
+                      <p>{formik.errors.password}</p>
+                      <p>{formik.errors.confirmPassword}</p>
                     </Alert>
-                  }
-                  {
-                    hasSuccess &&
-                    // eslint-disable-next-line react/jsx-wrap-multilines
-                    <Alert severity='success'>
-                      Tu contraseña ha sido cambiada
-                    </Alert>
-                  }
+                  ) : null }
                 </div>
               </div>
             </div>
-          </div>
-          <div className='container'>
-            <div className='row'>
-              <div className='flex-sm-12 flex-md-12'>
-                {formik.errors.password || formik.errors.confirmPassword ? (
-                  <Alert severity='error'>
-                    <p>{formik.errors.password}</p>
-                    <p>{formik.errors.confirmPassword}</p>
-                  </Alert>
-                ) : null }
-              </div>
+            <div className='container'>
+              <form onSubmit={formik.handleSubmit} noValidate>
+                <div className='row justify-center'>
+                  <div className='flex-sm-12 flex-md-12 py-10'>
+                    <InputUI
+                      name='password'
+                      id='password'
+                      label='Nueva contraseña*'
+                      type='password'
+                      onChange={formik.handleChange}
+                      value={formik.values.password}
+                      required={true}
+                    />
+                  </div>
+                  <div className='flex-sm-12 flex-md-12 pb-10'>
+                    <InputUI
+                      name='confirmPassword'
+                      label='Confirmar contraseña*'
+                      type='password'
+                      onChange={formik.handleChange}
+                      value={formik.values.confirmPassword}
+                      required={true}
+                    />
+                  </div>
+                </div>
+                <div className='row'>
+                  <div className='flex-sm-12 flex-md-12'>
+                    <Button styles='primary-blue' type='submit'>
+                      Restablecer contraseña
+                    </Button>
+                  </div>
+                </div>
+              </form>
             </div>
-          </div>
-          <div className='container'>
-            <form onSubmit={formik.handleSubmit} noValidate>
-              <div className='row justify-center'>
-                <div className='flex-sm-12 flex-md-12 py-10'>
-                  <InputUI
-                    name='password'
-                    id='password'
-                    label='Nueva contraseña*'
-                    type='password'
-                    onChange={formik.handleChange}
-                    value={formik.values.password}
-                    required={true}
-                  />
-                </div>
-                <div className='flex-sm-12 flex-md-12 pb-10'>
-                  <InputUI
-                    name='confirmPassword'
-                    label='Confirmar contraseña*'
-                    type='password'
-                    onChange={formik.handleChange}
-                    value={formik.values.confirmPassword}
-                    required={true}
-                  />
-                </div>
-              </div>
-              <div className='row'>
-                <div className='flex-sm-12 flex-md-12'>
-                  <Button styles='primary-blue' type='submit'>
-                    Restablecer contraseña
-                  </Button>
-                </div>
-              </div>
-            </form>
           </div>
         </div>
-      </div>
+      )}
       <CustomFooter />
     </div>
   );

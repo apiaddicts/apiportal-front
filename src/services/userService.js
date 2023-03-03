@@ -1,18 +1,24 @@
 import handleResponse from './handleResponse';
 import handleResponseToken from './handleResponseToken';
 import handleResponseRestore from './handleResponseRestore';
-import handleResponseResetPwd from './handleResponseResetPwd';
 import store from '../redux/store';
 
 import config from './config';
 
 function login(email, password) {
-  const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${btoa(`${email}:${password}`)}` },
+
+  const params = {
+    username: email,
+    password,
   };
 
-  const url = `${config.url}/identity?api-version=${config.apiVersion}`;
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(params),
+  };
+
+  const url = `${config.apimUrl}/login`;
 
   return fetch(
     url,
@@ -25,18 +31,17 @@ function login(email, password) {
     });
 }
 
-function confirmAccount(queryParams) {
+function confirmAccount({ token }) {
   const requestOptions = {
-    method: 'PUT',
-    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `Ticket id="${queryParams.ticketId}",ticket="${queryParams.ticket}"` },
+    method: 'GET',
+    headers: { 'Accept': '*/*', 'Content-Type': 'application/json' },
   };
 
-  const url = `${config.url}/users/${queryParams.userId}/identities/Basic/${queryParams.identity}?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}/accounts/${token}`;
   return fetch(url, requestOptions)
     .then(handleResponseToken)
-    .then((response) => {
-      return { ...response, id: queryParams.userId };
-    }).catch((error) => {
+    .then((response) => response)
+    .catch((error) => {
       console.error(error);
     });
 }
@@ -106,13 +111,13 @@ function updateUser(data) {
 
 function signUp(data) {
   const requestOptions = {
-    method: 'PUT',
-    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `${config.hmacAuthHeader}` },
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   };
-  const uuid = crypto.randomUUID();
 
-  const url = `${config.url}/users/${uuid}?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}/signup`;
+
   return fetch(
     url,
     requestOptions,
@@ -168,11 +173,11 @@ function changePassword(newPassword) {
 function resetPassword(data) {
   const requestOptions = {
     method: 'POST',
-    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `${config.hmacAuthHeader}` },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   };
 
-  const url = `${config.url}/confirmations/password?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}/password-recovery`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
@@ -182,21 +187,24 @@ function resetPassword(data) {
     });
 }
 
-function resetPasswordWithTicket(queryParams, data) {
-  const requestOptions = {
-    method: 'PATCH',
-    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `Ticket id="${queryParams.ticketid}",ticket="${queryParams.ticket}"` },
-    body: JSON.stringify(data),
+function confirmPassword(confirmToken, newPassword) {
+
+  const bodyParams = {
+    password: newPassword,
   };
 
-  const url = `${config.url}/users/${queryParams.id}?api-version=${config.apiVersion}`;
+  const requestOptions = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(bodyParams),
+  };
+
+  const url = `${config.apimUrl}/accounts/${confirmToken}/password`;
+
   return fetch(url, requestOptions)
-    .then(handleResponseResetPwd)
-    .then((response) => {
-      return response;
-    }).catch((error) => {
-      console.error(error);
-    });
+    .then(handleResponse)
+    .then((response) => response)
+    .catch((error) => error);
 }
 
 const userService = {
@@ -209,7 +217,7 @@ const userService = {
   verifyOldPassword,
   changePassword,
   resetPassword,
-  resetPasswordWithTicket,
+  confirmPassword,
 };
 
 export default userService;

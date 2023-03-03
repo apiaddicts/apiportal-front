@@ -5,8 +5,10 @@ import { string, bool } from 'yup';
 import * as Yup from 'yup';
 
 const validationSchema = Yup.object().shape({
-  first_name: string().required('Campo requeridp').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
-  last_name: string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
+  first_name: string().trim().required('Campo requeridp').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos')
+    .max(50, 'Se ha excedido el número de caracteres permitidos'),
+  last_name: string().trim().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos')
+    .max(50, 'Se ha excedido el número de caracteres permitidos'),
   email: string().email('Correo electrónico inválido').required('Campo requerido'),
   terms: bool().oneOf([true], 'Debes aceptar los términos y condiciones'),
   password: string()

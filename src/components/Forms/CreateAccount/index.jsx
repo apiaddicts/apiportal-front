@@ -17,15 +17,10 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
 
   const handleSubmit = async (values) => {
     const data = {
-      properties: {
-        email: values.email,
-        firstName: values.first_name,
-        lastName: values.last_name,
-        appType: 'developerPortal',
-        confirmation: 'signup',
-        password: values.password,
-        state: 'pending',
-      },
+      email: values.email,
+      firstName: values.first_name,
+      lastName: values.last_name,
+      password: values.password,
     };
 
     dispatch(signUp(data));

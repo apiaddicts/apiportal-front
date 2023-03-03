@@ -48,6 +48,8 @@ const config = {
   termsPath: '/user/terms',
   policyPath: '/user/policy-privacy',
   notImage: '/notImage.svg',
+  apimUrl: process.env.REACT_APP_APIM_URL,
+  adminId: process.env.REACT_APP_ADMIN_GROUP_ID,
 };
 
 export default config;

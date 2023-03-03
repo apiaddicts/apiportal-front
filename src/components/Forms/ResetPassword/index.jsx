@@ -12,10 +12,7 @@ function ResetPassword() {
   const dispatch = useDispatch();
   const handleSubmit = (dataForm) => {
     const data = {
-      properties: {
-        to: dataForm.email,
-        appType: 'developerPortal',
-      },
+      email: dataForm.email,
     };
     dispatch(resetPassword(data));
   };
@@ -26,7 +23,7 @@ function ResetPassword() {
       <p className='py-5 text__reset-password'>Introduce tu email y te enviaremos un correo electrónico de confirmación de cambio de contraseña con las instrucciones para que puedas realizar el cambio de contraseña.</p>
       <Alert
         key={Math.floor(Math.random() * 100) + 1}
-        css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
+        css_styles={{ custom_padding: 'p-4', custom_margin: 'mb-5' }}
         alert_type='alert__success'
         title='Solicitud enviada'
       />

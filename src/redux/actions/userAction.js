@@ -39,25 +39,19 @@ export const confirmAccount = (queryParams, setIsOpen) => (dispatch) => {
   });
   userService.confirmAccount(queryParams).then(
     (response) => {
-      if (response.status === 204) {
-        sessionStorage.setItem('token', JSON.stringify(response));
-        dispatch(getUser(response));
-        dispatch(getUserEntityTag(response));
-        dispatch({
-          type: userConstants.CONFIRM_ACCOUNT_SUCCESS,
-        });
-        setTimeout(() => { window.location = '/developer/profile'; }, 1500);
-      } else {
-        dispatch({
-          type: userConstants.CONFIRM_ACCOUNT_FAILURE,
-          error: response,
-        });
-        dispatch(logout());
-        window.location = '/';
+      if (response && Object.keys(response).length > 0) {
+        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+          dispatch({
+            type: userConstants.CONFIRM_ACCOUNT_FAILURE,
+            response,
+          });
+        } else {
+          dispatch({
+            type: userConstants.CONFIRM_ACCOUNT_SUCCESS,
+            response: response.data,
+          });
+        }
       }
-    },
-    (error) => {
-      console.error('Confirm account error', error);
     },
   );
 };
@@ -184,11 +178,17 @@ export const changePassword = (newPassword) => (dispatch) => {
 export const resetPassword = (data) => (dispatch) => {
   userService.resetPassword(data).then(
     (response) => {
-      if (response.status === 204) {
-        dispatch({
-          type: userConstants.RESET_SIGNUP,
-          response,
-        });
+      if (response && Object.keys(response).length > 0) {
+        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+          dispatch({
+            type: userConstants.RESET_SIGNUP_FAILURE,
+          });
+        } else {
+          dispatch({
+            type: userConstants.RESET_SIGNUP,
+            response,
+          });
+        }
       }
     },
     (error) => {
@@ -196,21 +196,23 @@ export const resetPassword = (data) => (dispatch) => {
     },
   );
 };
-export const resetPasswordWithTicket = (queryParams, data, password) => (dispatch) => {
-  userService.resetPasswordWithTicket(queryParams, data, password).then(
+export const confirmPassword = ({ confirmToken, newPassword }) => (dispatch) => {
+  dispatch({
+    type: userConstants.CONFIRM_PASSWORD_REQUEST,
+  });
+  userService.confirmPassword(confirmToken, newPassword).then(
     (response) => {
       if (response && Object.keys(response).length > 0) {
         if (Object.prototype.hasOwnProperty.call(response, 'error')) {
-          if (response?.error?.status === 401) {
-            dispatch({ type: userConstants.RESET_PASSWORD_TICKET_FAILURE, response });
-          }
+          dispatch({
+            type: userConstants.CONFIRM_PASSWORD_FAILURE,
+            response,
+          });
         } else {
-          dispatch({ type: userConstants.RESET_PASSWORD_TICKET_SUCCESS, response });
-          dispatch(logout());
-          setTimeout(() => {
-            console.error('redireccionar');
-            window.location = '/';
-          }, 1500);
+          dispatch({
+            type: userConstants.CONFIRM_PASSWORD_SUCCESS,
+            response,
+          });
         }
       }
     },

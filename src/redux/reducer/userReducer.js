@@ -84,11 +84,12 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         accountVerificationSent: true,
+        accountVerified: true,
       };
     case userConstants.CONFIRM_ACCOUNT_SUCCESS:
       return {
         ...state,
-        accountVerified: true,
+        accountVerified: false,
       };
     case userConstants.CONFIRM_ACCOUNT_FAILURE:
       return {
@@ -170,6 +171,27 @@ export default function userReducer(state = initialState, action) {
         ...state,
         openModal: true,
       };
+
+    case userConstants.CONFIRM_PASSWORD_REQUEST:
+      return {
+        ...state,
+        loadingSignUp: true,
+      };
+
+    case userConstants.CONFIRM_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        loadingSignUp: false,
+        responseResetPwd: action.response,
+      };
+
+    case userConstants.CONFIRM_PASSWORD_FAILURE:
+      return {
+        ...state,
+        loadingSignUp: false,
+        responseResetPwdError: action.response,
+      };
+
     default:
       return state;
   }
