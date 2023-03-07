@@ -8,7 +8,6 @@ import { HashLink } from 'react-router-hash-link';
 import BannerStatic from '../../../components/Banner/BannerStatic';
 import BlogDetailsInfo from '../../../components/BlogDetails';
 import Slick from '../../../components/SlickSlider/Slick';
-import Contact from '../../../components/Contact';
 import FooterAuthor from '../../../components/FooterAuthor';
 import { getBlog, resetGetBlog, getBlogs } from '../../../redux/actions/blogAction';
 import styles from './blog-post.module.scss';
@@ -139,9 +138,6 @@ function BlogDetails({ setIsOpen }) {
                 </div>
               </div>
             </div>
-          </section>
-          <section className={styles.container_contact__details}>
-            <Contact css_styles={{ 'display_detail_description': 'd-block', 'border_radius': 'no_border__radius', 'override_margin_right': 'custom_margin__right' }} />
           </section>
         </>
       ) : (null)}
