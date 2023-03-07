@@ -41,11 +41,12 @@ function subscribeToAProductWithHmac(data, userId) {
 }
 
 function subscribeToAProduct(data, userId) {
-  const { token } = store.getState().user;
+  //const { token } = store.getState().user;
+
   const subscriptionId = crypto.randomUUID();
   const requestOptions = {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `${config.hmacAuthHeader}` },
     body: JSON.stringify(data),
   };
 

@@ -8,7 +8,7 @@ function getApiBookStores() {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
-  return fetch(`${config.apiUrl}/library-apis/`, requestOptions)
+  return fetch(`${config.apiUrl}/library-apis?_where[status]=publicado`, requestOptions)
     .then(handleResponse)
     .then((libraries) => {
       return libraries;
@@ -205,6 +205,21 @@ const getApiProducts = (apiId) => {
     });
 };
 
+const getApisUnsecure = () => {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-type': 'application/json' },
+  };
+
+  const url = 'https://wkeapipre.management.azure-api.net/subscriptions/d191459e-3142-4ecb-8468-89398ec98aac/resourceGroups/RG-PRE-SHARED/providers/Microsoft.ApiManagement/service/WKEAPIPRE/apis?api-version=2021-08-01';
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response.value)
+    .catch((error) => error);
+
+};
+
 const libraryService = {
   getApiBookStores,
   getApiBookStore,
@@ -217,6 +232,7 @@ const libraryService = {
   searchApis,
   getApiHostnames,
   getApiProducts,
+  getApisUnsecure,
 };
 
 export default libraryService;
