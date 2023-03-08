@@ -46,22 +46,36 @@ function confirmAccount({ token }) {
     });
 }
 
-function getUserDetails(token, id) {
+function getProfile(token, userId) {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
   };
 
-  const url = `${config.url}/users/${id}?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}/users/${userId}`;
   return fetch(
     url,
     requestOptions,
   ).then(handleResponse)
     .then((response) => {
-      return response;
+      return response.data;
     }).catch((error) => {
       console.error(error);
     });
+}
+
+function getUserGroups(token, userId) {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+  };
+
+  const url = `${config.apimUrl}/users/${userId}/groups`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response.data)
+    .catch((error) => error);
 }
 
 function getUserEntityTag(token, id) {
@@ -210,7 +224,8 @@ function confirmPassword(confirmToken, newPassword) {
 const userService = {
   login,
   confirmAccount,
-  getUserDetails,
+  getProfile,
+  getUserGroups,
   getUserEntityTag,
   signUp,
   updateUser,

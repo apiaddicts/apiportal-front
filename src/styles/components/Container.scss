@@ -1,0 +1,109 @@
+.container__padding {
+  @media only screen and (max-width: 600px) {
+    padding: 0px !important;
+  }
+
+  @media only screen and (min-width: 768px) {
+    padding: 0 97px 0 59px !important;
+  }
+}
+
+.grid__container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
+  align-items: center;
+}
+
+.wrapper__flex {
+  display: flex;
+}
+
+.wrapper__title {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  align-items: center;
+  &__btn {
+    justify-self: flex-end;
+  }
+}
+
+.fm {
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+
+  &__form {
+    padding: 2.5rem 0;
+    box-shadow: 0px 4px 28px rgba(169, 177, 209, 0.12);
+    background: #fff;
+    border-radius: 12px;
+    width: 100%;
+  }
+
+  &__form__container {
+    padding: 0 3rem;
+
+    &__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+
+      &__avatar {
+        cursor: pointer;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80px;
+        height: 80px;
+        border: 3px solid #0033a0;
+        border-radius: 100%;
+
+        &__input {
+          display: none;
+        }
+
+        &__icon {
+          position: absolute;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 25px;
+          height: 25px;
+          bottom: 0%;
+          right: 0%;
+          background: #0033a0;
+          color: #fff;
+          border-radius: 100%;
+        }
+      }
+    }
+    &__button {
+      margin-top: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+  }
+  &__filter__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0px 2px 20px #ecf0f1;
+    overflow: hidden;
+    max-height: 0;
+    transition: all 0.3s ease-in-out;
+    overflow-y: scroll;
+    overflow-x: hidden;
+  }
+}

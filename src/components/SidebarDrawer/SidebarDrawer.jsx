@@ -14,7 +14,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Terminal from '@mui/icons-material/Terminal';
 import Settings from '@mui/icons-material/Settings';
 import { AppBar, Box, Button, IconButton, Menu, MenuItem, Toolbar } from '@mui/material';
-import { ChevronLeft, ChevronRight } from '@mui/icons-material';
+import { ChevronLeft, ChevronRight, Person } from '@mui/icons-material';
 import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSharp';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -25,7 +25,7 @@ import classes from './sliderdrawer.module.scss';
 /*import LogoAlt from '../../static/img/logoAlt.svg';*/
 import { logout } from '../../redux/actions/userAction';
 
-function SidebarDrawer({ children, user }) {
+function SidebarDrawer({ children, user, isAdmin }) {
   const theme = useTheme();
   const [isPermanent, setPermanent] = useState(true);
   const [toggleMenu, setToggleMenu] = useState(true);
@@ -60,9 +60,10 @@ function SidebarDrawer({ children, user }) {
   });
 
   const listItems = [
-    { route: '/developer/products', text: 'Productos', icon: <Terminal /> },
-    { route: '/developer/apis', text: 'Biblioteca de APIs', icon: <Settings /> },
-    { route: '/developer/subscriptions', text: 'Suscripciones', icon: <Terminal /> },
+    { route: '/developer/products', text: 'Productos', icon: <Terminal />, primaryRole: true },
+    { route: '/developer/apis', text: 'Biblioteca de APIs', icon: <Settings />, primaryRole: true },
+    { route: '/developer/subscriptions', text: 'Suscripciones', icon: <Terminal />, primaryRole: true },
+    { route: '/developer/users', text: 'Usuarios', icon: <Person />, primaryRole: isAdmin },
   ];
 
   const dispatch = useDispatch();
@@ -282,7 +283,7 @@ function SidebarDrawer({ children, user }) {
           }}
         >
           {
-            listItems.map((item, index) => (
+            listItems.filter((item) => item.primaryRole).map((item, index) => (
               <ListItem button key={index} sx={{ color: '#000B39', fontWeight: 500 }} component={MyNavLink} to={item.route}>
                 <ListItemIcon sx={{ color: '#000B39' }}>
                   {item.icon}
@@ -374,7 +375,7 @@ function SidebarDrawer({ children, user }) {
             </ListItem>
           )}
           {
-            listItems.map((item, index) => (
+            listItems.filter((item) => item.primaryRole).map((item, index) => (
               <ListItem button key={index} sx={{ color: '#14234B', paddingLeft: toggleMenu ? '80px' : '54px', paddingRight: 0 }} component={MyNavLink} to={item.route} exact='true'>
                 <ListItemIcon sx={{ justifyContent: 'center', color: '#14234B' }}>
                   {item.icon}

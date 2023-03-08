@@ -1,12 +1,11 @@
 import userConstants from '../constants/userConstats';
 
 const token = JSON.parse(sessionStorage.getItem('token'));
-const etag = JSON.parse(localStorage.getItem('If-Match'));
 
-const initialState = token && etag ? {
+const initialState = token ? {
   id: token.id,
   token: token.token,
-  etag: etag.etag,
+  etag: '',
   loadingSignUp: false,
   signUpData: {},
   user: {},
@@ -20,6 +19,9 @@ const initialState = token && etag ? {
   accountVerificationSent: false,
   accountVerified: false,
   openModal: false,
+  userGroupReq: false,
+  userGroupRes: {},
+  userGroupFail: {},
 } : {
   user: {},
   loadingUser: false,
@@ -37,6 +39,9 @@ const initialState = token && etag ? {
   accountVerificationSent: false,
   accountVerified: false,
   openModal: false,
+  userGroupReq: false,
+  userGroupRes: {},
+  userGroupFail: {},
 };
 
 // eslint-disable-next-line default-param-last
@@ -190,6 +195,26 @@ export default function userReducer(state = initialState, action) {
         ...state,
         loadingSignUp: false,
         responseResetPwdError: action.response,
+      };
+
+    case userConstants.GET_USER_GROUPS_REQUEST:
+      return {
+        ...state,
+        userGroupReq: true,
+      };
+
+    case userConstants.GET_USER_GROUPS_SUCCESS:
+      return {
+        ...state,
+        userGroupRes: action.response,
+        userGroupReq: false,
+      };
+
+    case userConstants.GET_USER_GROUPS_FAILURE:
+      return {
+        ...state,
+        userGroupFail: action.response,
+        userGroupReq: false,
       };
 
     default:

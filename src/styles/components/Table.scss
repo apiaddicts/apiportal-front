@@ -1,0 +1,95 @@
+.custom__table {
+    &__cell {
+      &__title {
+        display: flex;
+        font-size: 20px;
+        color: #8189a9;
+  
+        h2 {
+          font-style: normal;
+          font-weight: 700;
+          font-size: 12px;
+          line-height: 20px;
+          display: flex;
+          align-items: center;
+          letter-spacing: 0.2px;
+          color: #53565a;
+        }
+      }
+  
+      &__content {
+        font-family: "Barlow";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 20px;
+  
+        display: flex;
+        align-items: center;
+        letter-spacing: 0.2px;
+  
+        &__description {
+          color: #53565a;
+        }
+        &__link {
+          color: #00aec7;
+        }
+      }
+    }
+    &__filter {
+      height: 36px;
+      margin-top: 14px;
+    }
+    &__data {
+      &__notfound {
+        color: #53565a
+        
+      }
+    }
+  }
+  
+  .wrapper__table {
+    &__wide {
+      &__display {
+        display: block;
+      }
+      @include breakpoint(xsl) {
+        &__display {
+          display: none;
+        }
+      }
+    }
+    &__small {
+      &__display {
+        display: none;
+      }
+      @include breakpoint(xsl) {
+        &__display {
+          display: block;        
+          .border__bottom {
+            border-bottom: 1px solid #ecf0f1;
+          }
+        }
+      }
+    }
+  }
+  
+  .chip__wrapper {
+    display: flex;
+  }
+  
+  .flex__column {
+    display: flex !important;
+    gap: 1rem;
+    align-items: center;
+  }
+  
+  .wrapper {
+    &__flex {
+      &__column {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  }

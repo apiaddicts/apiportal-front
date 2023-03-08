@@ -20,12 +20,16 @@ import OAuthRedirect from '../../pages/private/OAuthRedirect';
 import Subscriptions from '../../pages/private/Subscriptions';
 import Logout from '../../pages/private/Logout/Logout';
 
-import { getUser } from '../../redux/actions/userAction';
+import Users from '../../pages/private/Users';
+import UsersDetail from '../../pages/private/Users/UsersDetail';
+
+import { getProfile, getUserGroups } from '../../redux/actions/userAction';
 import classes from './private-router.module.scss';
+import config from '../../services/config';
 
 function PrivateRouter({ children }) {
   // const [showModal, setShowModal] = useState(false);
-  const { id, token, user, openModal } = useSelector((state) => state.user);
+  const { id, token, user, openModal, userGroupRes } = useSelector((state) => state.user);
   const { time } = useSelector((state) => state.timer);
   const { checkSession } = useVerifySession();
   const { getTime } = useTimer();
@@ -35,10 +39,13 @@ function PrivateRouter({ children }) {
   useEffect(() => {
     if (id !== '' && token !== '' && user && Object.keys(user).length === 0) {
       const tokens = {
-        id,
+        userId: {
+          id,
+        },
         token,
       };
-      dispatch(getUser(tokens));
+      dispatch(getProfile(tokens));
+      if (user) dispatch(getUserGroups(tokens));
       getTime();
     }
   }, []);
@@ -46,6 +53,8 @@ function PrivateRouter({ children }) {
   useEffect(() => {
     checkSession();
   }, [time]);
+
+  const isAdmin = userGroupRes.value.find((group) => group.name === config.adminId);
 
   return privateSession ? (
     <Box>
@@ -56,7 +65,7 @@ function PrivateRouter({ children }) {
       {user && Object.keys(user).length > 0 ? (
         <Box>
           <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#FAFAFC', minHeight: '100vh' }}>
-            <SidebarDrawer user={user} />
+            <SidebarDrawer user={user} isAdmin={isAdmin} />
             <div className={`container ${classes.wrapper}`}>
               <Routes>
                 <Route path='profile' element={<Profile />} />
@@ -68,6 +77,12 @@ function PrivateRouter({ children }) {
                 <Route path='apis/swagger-ui/oauth-redirect' exact='true' element={<OAuthRedirect />} />
                 <Route path='subscriptions' exact='true' element={<Subscriptions />} />
                 <Route path='*' element={<Navigate to='/' replace />} />
+                {isAdmin && (
+                  <>
+                    <Route path='users' exact='true' element={<Users />} />
+                    <Route path='users/:id' exact='true' element={<UsersDetail />} />
+                  </>
+                )}
               </Routes>
             </div>
           </Box>

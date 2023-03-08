@@ -1,0 +1,39 @@
+.back__btn {
+  position: absolute;
+  top: -42px;
+  left: 30px;
+
+  @include breakpoint(xs) {
+    left: 0;
+  }
+
+  @include breakpoint(sm) {
+    left: 0;
+  }
+
+  @include breakpoint(lg) {
+    left: 30px;
+  }
+}
+.return {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 64px;
+
+  div {
+    color: $secondary;
+    font-size: 20px;
+  }
+
+  span {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: right;
+    letter-spacing: 1.33333px;
+    text-transform: uppercase;
+    color: $secondary;
+  }
+}

@@ -22,8 +22,8 @@ export const login = (data) => (dispatch) => {
           localStorage.setItem('password', secureKeyEncrypted);
         }
         sessionStorage.setItem('token', JSON.stringify(response));
-        dispatch(getUser(response));
-        dispatch(getUserEntityTag(response));
+        dispatch(getProfile(response.data));
+        dispatch(getUserGroups(response.data));
         dispatch({ type: userConstants.RESET_ALERT });
       }
     }
@@ -88,20 +88,19 @@ export const signUp = (data) => (dispatch) => {
   );
 };
 
-export const getUser = (tokens) => (dispatch) => {
+export const getProfile = (tokens) => (dispatch) => {
   dispatch({ type: userConstants.GET_USER_REQUEST });
-  userService.getUserDetails(tokens.token, tokens.id).then(
+  userService.getProfile(tokens?.token, tokens?.userId?.id).then(
     (response) => {
       if (response && Object.keys(response).length > 0) {
         dispatch({ type: userConstants.GET_USER_SUCCESS, response });
         dispatch({
           type: userConstants.LOGIN_SUCCESS,
-          id: tokens.id,
+          id: tokens?.userId?.id,
           token: tokens.token,
         });
       } else {
         sessionStorage.removeItem('token');
-        localStorage.removeItem('If-Match');
         dispatch({ type: userConstants.LOGOUT_USER });
       }
     },
@@ -111,16 +110,27 @@ export const getUser = (tokens) => (dispatch) => {
   );
 };
 
-export const getUserEntityTag = (tokens) => (dispatch) => {
-  userService.getUserEntityTag(tokens.token, tokens.id).then(
-    (response) => {
-      localStorage.setItem('If-Match', JSON.stringify(response));
-      dispatch({ type: userConstants.HEAD_ETAG_SUCCESS, response });
-    },
-    (error) => {
-      console.error(error);
-    },
-  );
+export const getUserGroups = (tokens) => (dispatch) => {
+  console.log(tokens);
+  dispatch({
+    type: userConstants.GET_USER_GROUPS_REQUEST,
+  });
+  userService.getUserGroups(tokens?.token, tokens?.userId?.id)
+    .then((response) => {
+      if (response && Object.keys(response).length > 0) {
+        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+          dispatch({
+            type: userConstants.GET_USER_GROUPS_FAILURE,
+            response,
+          });
+        } else {
+          dispatch({
+            type: userConstants.GET_USER_GROUPS_SUCCESS,
+            response,
+          });
+        }
+      }
+    });
 };
 
 export const updateUser = (data) => (dispatch) => {
@@ -132,7 +142,7 @@ export const updateUser = (data) => (dispatch) => {
           token,
           id,
         };
-        dispatch(getUser(tokens));
+        dispatch(getProfile(tokens));
       }
     },
     (error) => {
