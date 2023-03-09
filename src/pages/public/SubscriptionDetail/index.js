@@ -14,8 +14,8 @@ function SubscriptionDetail(props) {
   useEffect(() => {
 
     productsService.getSubscriptionById(params.id).then((subscriptionDetail) => {
-      if (subscriptionDetail && subscriptionDetail?.apis && subscriptionDetail?.apis?.portalId &&
-        subscriptionDetail?.apis?.formId && subscriptionDetail?.apis?.sfdcCampaignId) {
+      if (subscriptionDetail && subscriptionDetail?.formSetting && subscriptionDetail?.formSetting?.portalId &&
+        subscriptionDetail?.formSetting?.formId && subscriptionDetail?.formSetting?.sfdcCampaignId) {
         setSubscriptionDetail(subscriptionDetail);
         const script = document.createElement('script');
         script.src = 'https://js.hsforms.net/forms/v2.js';
@@ -23,9 +23,9 @@ function SubscriptionDetail(props) {
         script.addEventListener('load', () => {
           if (window.hbspt) {
             window.hbspt.forms.create({
-              portalId: subscriptionDetail?.apis?.portalId,
-              formId: subscriptionDetail?.apis?.formId,
-              sfdcCampaignId: subscriptionDetail?.apis?.sfdcCampaignId,
+              portalId: subscriptionDetail?.formSetting?.portalId,
+              formId: subscriptionDetail?.formSetting?.formId,
+              sfdcCampaignId: subscriptionDetail?.formSetting?.sfdcCampaignId,
               target: '#hubspotForm',
             });
             setFormLoaded(true);

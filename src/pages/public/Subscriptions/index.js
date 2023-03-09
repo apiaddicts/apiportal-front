@@ -46,11 +46,11 @@ function Subscriptions({ setOpenForm }) {
           <div className='row justify-center'>
             {arrCardSubs.map((card, index) => {
               return card.slug === 'partner' ? (
-                <div className='flex-sm-12 flex-md-2' key={index}>
+                <div className='flex-sm-12 flex-md-4 flex-lg-2' key={index}>
                   <PartnerCard title='Partner' slug={card.slug} content={card.benefits?.markdown} />
                 </div>
               ) : (
-                <div className='flex-sm-12 flex-md-2' key={index}>
+                <div className='flex-sm-12 flex-md-4 flex-lg-2' key={index}>
                   <SubscriptionCard items={card} setOpenForm={setOpenForm} />
                 </div>
               );

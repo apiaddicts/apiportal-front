@@ -9,20 +9,22 @@ function PartnerCard(props) {
   const { title, content, slug } = props;
   return (
     <Base>
-      <div className='container'>
-        <div className='partner price__title'>
-          <h1>{title}</h1>
-        </div>
-        <div className='partner__img'>
-          <HandshakeIcon sx={{ fontSize: 100 }} />
-        </div>
-        <div className='mt-5'>
-          <HashLink smooth to={`/suscripciones/${slug}`}>
-            <Button styles='primary'>Contáctanos</Button>
-          </HashLink>
-        </div>
-        <div className='mt-5 mb-2 partner__markdown'>
-          <CustomMarkdown content={content} />
+      <div className='card__wrapper__subs'>
+        <div className='container'>
+          <div className='partner price__title'>
+            <h1>{title}</h1>
+          </div>
+          <div className='partner__img'>
+            <HandshakeIcon sx={{ fontSize: 100 }} />
+          </div>
+          <div className='mt-5'>
+            <HashLink smooth to={`/suscripciones/${slug}`}>
+              <Button styles='primary'>Contáctanos</Button>
+            </HashLink>
+          </div>
+          <div className='mt-5 mb-2 partner__markdown'>
+            <CustomMarkdown content={content} />
+          </div>
         </div>
       </div>
     </Base>
