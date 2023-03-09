@@ -90,6 +90,26 @@ function Slider({ slides }) {
                                 <Button styles={i?.type} onClick={() => handleClick(i?.route)}>
                                   {i?.label}
                                 </Button>
+                              ) : i?.externalUrl !== '' ? (
+                                <a
+                                  className={
+                                    i?.type === 'primary' ? 'btn btn-primary' :
+                                      i?.type === 'primary-blue' ? 'btn btn-primary-blue' :
+                                        i?.type === 'secundary' ? 'btn btn-secundary' :
+                                          i?.type === 'secundary-white' ? 'btn btn-secundary-white' :
+                                            i?.type === 'tertiary' ? 'btn btn-tertiary' :
+                                              i?.type === 'tertiary-white' ? 'btn btn-tertiary-white' :
+                                                i?.type === 'ghost' ? 'btn btn-ghost' :
+                                                  i?.type === 'ghost-variant' ? 'btn btn-ghost-variant' :
+                                                    i?.type === 'greey-primary' ? 'btn btn-grey' :
+                                                      i?.type === 'disabled' ? 'btn btn-disabled' : 'btn-none'
+                                  }
+                                  href={i?.externalUrl}
+                                  target='_blank'
+                                  rel='noreferrer'
+                                >
+                                  {i?.label}
+                                </a>
                               ) : (
                                 <HashLink smooth to='/#data'>
                                   <Button styles='tertiary' onClick={() => handleClick(i?.route)}>

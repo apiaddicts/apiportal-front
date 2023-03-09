@@ -1,81 +1,106 @@
 .benefits {
- list-style: none;
- font-weight: 700;
- padding: 0;
- text-align: center;
+  list-style: none;
+  font-weight: 700;
+  padding: 0;
+  text-align: center;
 
- li {
+  li {
     padding: 1rem 0;
- }
+  }
 
- li:nth-child(odd) {
+  li:nth-child(odd) {
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
- }
+  }
 }
 
 .price {
-    text-align: center;
-    padding: 2.5rem 0;
-    border-bottom: 1px solid #ccc;
-    
-    p {
-        font-size: 36px;
-        font-weight: 600;
-    }
+  text-align: center;
+  padding: 2.5rem 0;
+  border-bottom: 1px solid #ccc;
 
-    &__title {
-        margin-bottom: 1rem;
-    }
+  p {
+    font-size: 36px;
+    font-weight: 600;
+  }
 
-    &__wrapper {
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
+  &__title {
+    margin-bottom: 1rem;
+  }
 
-        &__month {
-          font-size: 20px !important;
-          font-weight: 400 !important;
-          padding-bottom: 6px;
-        }
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+
+    &__month {
+      font-size: 20px !important;
+      font-weight: 400 !important;
+      padding-bottom: 6px;
     }
+  }
 }
 
 .apis {
-    text-align: center;
-    padding: 1rem 0;
-    &__title {
-        font-size: 14px;
-        font-weight: 500;
-    }
-    &__link {
-        color: #003D62;
-        font-weight: 600;
-        margin: 0 5px;
-    }
+  text-align: center;
+  padding: 1rem 0;
+  &__title {
+    font-size: 14px;
+    font-weight: 500;
+  }
+  &__link {
+    color: #007AC3;
+    font-weight: 600;
+    margin: 0 5px;
+  }
 }
 
-.section__subs{
-    margin-top: 95px;
-    margin-bottom: 100px;
+.section__subs {
+  margin-top: 95px;
+  margin-bottom: 250px;
 }
 
 .markdown {
-    padding: 0 1.5rem;
+  padding: 0 1.5rem;
 }
 .content {
-    p {
-      text-align: center;
-    }
-    padding: 1rem 0;
+  p {
+    text-align: center;
+  }
+  padding: 1rem 0;
 }
 
 .partner {
-    text-align: center;
-    padding: 2.5rem 0;
+  text-align: center;
+  padding: 2.5rem 0;
 
-    &__img {
-        display: flex;
-        justify-content: center;
+  &__img {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.card {
+  &__wrapper {
+    &__subs {
+        background: #F9F9F9;
+        height: 100%;
+        width: 100%;
     }
+  }
+}
+
+.expand__subs {
+  background: #DFEFED;
+  width: 100%;
+  text-align: center;
+  padding: 1.5rem 0.5rem;
+
+  p {
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  span {
+    font-size: 12px;
+  }
 }
