@@ -17,6 +17,20 @@ const createUrlApimAdminAPI = () => {
   return `${process.env.REACT_APP_AZURE_APIM_URL}/subscriptions/${process.env.REACT_APP_AZURE_SUBSCRIPTION_ID}/resourceGroups/${process.env.REACT_APP_AZURE_RESOURCE_GROUP_NAME}/providers/Microsoft.ApiManagement/service/${process.env.REACT_APP_AZURE_SERVICE_NAME}`;
 };
 
+export const enumStatus = [
+  { value: 'active', text: 'Aprobado', disabled: false },
+  { value: 'blocked', text: 'Bloqueado', disabled: false },
+  { value: 'pending', text: 'Pendiente', disabled: true },
+];
+
+export const compareArrays = (a, b) => {
+  return a.filter((x) => {
+    return !b.some((y) => {
+      return x.value === y.name;
+    });
+  });
+};
+
 const config = {
   apiUrl: process.env.REACT_APP_STRAPI_URL,
   azureUrl: process.env.REACT_APP_AZURE_APIM_URL,
@@ -30,6 +44,8 @@ const config = {
   topDetail: process.env.REACT_APP_LIST_PRODUCT_APIS_TOP,
   topApi: process.env.REACT_APP_LIST_API_TOP,
   topSubscriptions: process.env.REACT_APP_LIST_SUBSCRIPTIONS,
+  topGroups: process.env.REACT_APP_LIST_GROUPS,
+  topUsers: process.env.REACT_APP_LIST_USERS,
   url: createUrlApimAdminAPI(),
   homePageSlug: process.env.REACT_APP_HOME_PAGE_SLUG,
   blogPageSlug: process.env.REACT_APP_BLOG_PAGE_SLUG,

@@ -21,6 +21,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+import ShareIcon from '@mui/icons-material/Share';
 import classes from './sliderdrawer.module.scss';
 /*import LogoAlt from '../../static/img/logoAlt.svg';*/
 import { logout } from '../../redux/actions/userAction';
@@ -64,6 +65,7 @@ function SidebarDrawer({ children, user, isAdmin }) {
     { route: '/developer/apis', text: 'Biblioteca de APIs', icon: <Settings />, primaryRole: true },
     { route: '/developer/subscriptions', text: 'Suscripciones', icon: <Terminal />, primaryRole: true },
     { route: '/developer/users', text: 'Usuarios', icon: <Person />, primaryRole: isAdmin },
+    { route: '/developer/groups', text: 'Grupos', icon: <ShareIcon />, primaryRole: isAdmin },
   ];
 
   const dispatch = useDispatch();

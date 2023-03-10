@@ -1,0 +1,19 @@
+.custom__btn {
+    border-radius: 40px !important;
+    height: 50px;
+    &__text {
+        font-weight: 700 !important;      
+        letter-spacing: 0.4px !important;  
+    }
+    &__primary {
+        font-weight: 700 !important; 
+        background-color: $secondary_yellow !important;
+        padding: 12px 1rem !important;
+    }
+    &__disabled {
+        background-color: rgba($color: #ecf0f1, $alpha: 1) !important;
+        @include letter($gray_darken);
+        @include border($gray_lighten-1);
+        cursor: not-allowed;
+    }
+}

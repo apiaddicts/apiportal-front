@@ -90,7 +90,7 @@ export const signUp = (data) => (dispatch) => {
 
 export const getProfile = (tokens) => (dispatch) => {
   dispatch({ type: userConstants.GET_USER_REQUEST });
-  userService.getProfile(tokens?.token, tokens?.userId?.id).then(
+  userService.getProfile(tokens.token, tokens?.userId?.id).then(
     (response) => {
       if (response && Object.keys(response).length > 0) {
         dispatch({ type: userConstants.GET_USER_SUCCESS, response });
@@ -111,7 +111,6 @@ export const getProfile = (tokens) => (dispatch) => {
 };
 
 export const getUserGroups = (tokens) => (dispatch) => {
-  console.log(tokens);
   dispatch({
     type: userConstants.GET_USER_GROUPS_REQUEST,
   });

@@ -107,3 +107,15 @@
     overflow-x: hidden;
   }
 }
+
+
+.justify {
+  &__self {
+    &__start {
+      justify-self: flex-start;
+    }
+    &__end {
+      justify-self: flex-end !important;
+    }
+  }
+}

@@ -3,7 +3,7 @@ import userConstants from '../constants/userConstats';
 const token = JSON.parse(sessionStorage.getItem('token'));
 
 const initialState = token ? {
-  id: token.id,
+  id: token?.userId?.id,
   token: token.token,
   etag: '',
   loadingSignUp: false,

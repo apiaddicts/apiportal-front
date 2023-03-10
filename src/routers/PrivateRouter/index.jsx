@@ -22,6 +22,7 @@ import Logout from '../../pages/private/Logout/Logout';
 
 import Users from '../../pages/private/Users';
 import UsersDetail from '../../pages/private/Users/UsersDetail';
+import Groups from '../../pages/private/Groups';
 
 import { getProfile, getUserGroups } from '../../redux/actions/userAction';
 import classes from './private-router.module.scss';
@@ -37,6 +38,7 @@ function PrivateRouter({ children }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log(id, token, user);
     if (id !== '' && token !== '' && user && Object.keys(user).length === 0) {
       const tokens = {
         userId: {
@@ -54,7 +56,7 @@ function PrivateRouter({ children }) {
     checkSession();
   }, [time]);
 
-  const isAdmin = userGroupRes.value.find((group) => group.name === config.adminId);
+  const isAdmin = userGroupRes && userGroupRes?.value.find((group) => group.name === config.adminId);
 
   return privateSession ? (
     <Box>
@@ -81,6 +83,7 @@ function PrivateRouter({ children }) {
                   <>
                     <Route path='users' exact='true' element={<Users />} />
                     <Route path='users/:id' exact='true' element={<UsersDetail />} />
+                    <Route path='groups' exact='true' element={<Groups />} />
                   </>
                 )}
               </Routes>

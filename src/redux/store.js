@@ -15,6 +15,7 @@ import termReducer from './reducer/termReducer';
 import policyReducer from './reducer/policyReducer';
 import timeReducer from './reducer/timeReducer';
 import usersReducer from './reducer/usersReducer';
+import groupReducer from './reducer/groupReducer';
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
@@ -32,6 +33,7 @@ const reducers = combineReducers({
   policy: policyReducer,
   timer: timeReducer,
   users: usersReducer,
+  groups: groupReducer,
 });
 
 const store = createStore(

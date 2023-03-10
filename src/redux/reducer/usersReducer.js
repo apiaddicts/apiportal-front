@@ -65,12 +65,14 @@ export default function usersReducer(state = initialState, { type, payload } = {
       return {
         ...state,
         changeStatusReq: true,
+        usersDetailReq: true,
       };
 
     case usersConstants.UPDATE_USERS_STATUS_SUCCESS:
       return {
         ...state,
         changeStatusReq: false,
+        usersDetailReq: false,
         changeStatusRes: payload,
       };
 
@@ -78,6 +80,7 @@ export default function usersReducer(state = initialState, { type, payload } = {
       return {
         ...state,
         changeStatusReq: false,
+        usersDetailReq: false,
         changeStatusFail: payload,
       };
 

@@ -2,7 +2,7 @@ import store from '../redux/store';
 import config from './config';
 import handleResponse from './handleResponse';
 
-function listUsers(top = 5, skip = 0, filter = '') {
+function listUsers(top = config.topUsers, skip = 0, filter = '') {
 
   const { token } = store.getState().user;
 
