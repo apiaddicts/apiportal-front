@@ -23,6 +23,7 @@ import Wiki from '../pages/public/Wiki';
 import Contacto from '../pages/public/Contacto';
 import Subscriptions from '../pages/public/Subscriptions';
 import SubscriptionDetail from '../pages/public/SubscriptionDetail';
+import SubscriptionDetailContact from '../pages/public/SubscriptionDetailContact';
 
 function PublicRoute() {
   const { openModal } = useSelector((state) => state.user);
@@ -59,6 +60,7 @@ function PublicRoute() {
         <Route path='/contacto' exact='true' element={<Contacto />} />
         <Route path='/suscripciones' exact='true' element={<Subscriptions setOpenForm={setOpenForm} />} />
         <Route path='/suscripciones/:id' exact='true' element={<SubscriptionDetail />} />
+        <Route path='/suscripciones/:id/contact' exact='true' element={<SubscriptionDetailContact />} />
       </Routes>
       <Footer />
     </>

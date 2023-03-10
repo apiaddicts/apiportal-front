@@ -1,0 +1,32 @@
+@import "../../../styles/variables.scss";
+
+.hs-button.primary.large {
+    cursor: pointer;
+    text-decoration: none;
+    border-radius: 6px !important;
+    font-family: "Fira Sans", sans-serif;
+    font-style: normal;
+    font-weight: 700 !important;
+    font-size: 16px !important;
+    line-height: 19.2px;
+    letter-spacing: 1.33px !important;
+    text-align: center;
+    padding: 18px 32px !important;
+    text-transform: uppercase !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $theme_primary !important;
+    color: #FFFFFF !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    &:hover {
+      background: darken($theme_primary, 8%) !important;
+      transition: all 0.3s ease !important;
+      box-shadow: none !important;
+    }
+    &:active {
+      background: darken($theme_primary, 25%) !important;
+      box-shadow: none !important;
+    }
+}

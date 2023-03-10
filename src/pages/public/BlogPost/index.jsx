@@ -77,9 +77,9 @@ function BlogDetails({ setIsOpen }) {
         <meta property='og:url' content={`${window.location.protocol}//${window.location.hostname}/blog/${blog?.id}`} />
         <meta property='og:locale' content='es_MX' />
         <meta property='og:type' content='article' />
-        <meta property='og:site_name' content='API Market' />
+        <meta property='og:site_name' content='Worlters Kluwer | Developer Portal' />
         <meta name='twitter:card' content='summary' />
-        <meta name='twitter:site' content='API Market' />
+        <meta name='twitter:site' content='Worlters Kluwer | Developer Portal' />
         <meta name='twitter:title' content={blog?.title ? blog?.title : ''} />
         <meta name='twitter:description' content={blog?.description ? blog?.description : ''} />
         <meta name='twitter:image' content={blog?.image ? blog?.image?.[0]?.url : ''} />

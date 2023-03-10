@@ -8,7 +8,7 @@ import Button from '../Buttons/Button';
 function PartnerCard(props) {
   const { title, content, slug } = props;
   return (
-    <Base>
+    <Base css_styles={{ 'override_card_height': 'custom_card__public_subscription' }}>
       <div className='card__wrapper__subs'>
         <div className='container'>
           <div className='partner price__title'>

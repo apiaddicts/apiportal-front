@@ -13,7 +13,7 @@ function BannerStatic({ title, subtitle, img, isSearch, buttons, styles, stylesT
       <div style={stylesTitle} className={`container ${classes.banner__content} ${custom_overlay}`}>
         <div className={`row ${custom_padding}`}>
           <div className='flex-md-12 flex-sm-12'>
-            <h1 className={`h1 text__white ${classes.shadow__text}`}>{ title }</h1>
+            <h1 className='h1 text__white'>{ title }</h1>
           </div>
           {subtitle && (
             <div className='flex-md-8 flex-sm-12'>

@@ -68,6 +68,8 @@ function Slider({ slides }) {
     }
   };
 
+  console.log(slides);
+
   return (
     <div className={classes.content}>
       <div className={classes.content__slider} ref={slider}>
@@ -86,11 +88,11 @@ function Slider({ slides }) {
                         x?.actionButtons && x?.actionButtons?.length ? (
                           x?.actionButtons.map((i, index) => (
                             <div key={index + i} className='pr-2 mb-4 justify-start'>
-                              {i?.route !== '' ? (
+                              {'route' in i && i?.route !== '' ? (
                                 <Button styles={i?.type} onClick={() => handleClick(i?.route)}>
                                   {i?.label}
                                 </Button>
-                              ) : i?.externalUrl !== '' ? (
+                              ) : ('externalUrl' in i && i?.externalUrl !== '') ? (
                                 <a
                                   className={
                                     i?.type === 'primary' ? 'btn btn-primary' :
