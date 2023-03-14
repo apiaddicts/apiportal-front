@@ -68,8 +68,6 @@ function Slider({ slides }) {
     }
   };
 
-  console.log(slides);
-
   return (
     <div className={classes.content}>
       <div className={classes.content__slider} ref={slider}>

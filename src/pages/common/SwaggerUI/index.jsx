@@ -49,7 +49,6 @@ function SwaggerUI() {
         persistAuthorization: true,
       });
       setSwaggerUi(swaggerUi);
-      console.log(swaggerUi);
     });
 
     if (Object.keys(user).length > 0) {

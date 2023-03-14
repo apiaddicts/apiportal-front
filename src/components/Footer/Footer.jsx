@@ -7,7 +7,7 @@ import { RiInstagramFill } from 'react-icons/ri';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useLocation, Link } from 'react-router-dom';
-import { sendConversationMail } from '../../redux/actions/mailAction';
+import emailAction from '../../redux/actions/emailAction';
 import 'yup-phone';
 import Base from './Base';
 import classes from './footer.module.scss';
@@ -16,7 +16,6 @@ import Icon from '../MdIcon/Icon';
 import Button from '../Buttons/Button';
 import InputUI from '../Input/InputUI/InputUI';
 import TextAreaUI from '../Input/InputUI/TextAreaUI';
-import SelectUI from '../Input/InputUI/SelectUI';
 import config from '../../services/config';
 import CustomIcon from '../MdIcon/CustomIcon';
 
@@ -24,7 +23,7 @@ function Footer({ isPrivate }) {
   const { pathname } = useLocation();
   if (pathname === '/contacto' || pathname === '/wiki') return null;
   const dispatch = useDispatch();
-  const mail = useSelector((state) => state.mail);
+  const email = useSelector((state) => state.email);
   const img = '';
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
@@ -63,21 +62,21 @@ function Footer({ isPrivate }) {
     onSubmit: (values) => {
       //Handle envio de correo de contacto
       setDisplaySubmit(false);
-      dispatch(sendConversationMail(values));
+      dispatch(emailAction.sendContactEmail(values));
     },
   });
 
   useEffect(() => {
-    if (mail?.mailConversationError?.ok === false) {
+    if (email?.contactEmailError?.ok === false) {
       setError(true);
       setTimeout(() => { setError(false); }, 2000);
       setDisplaySubmit(true);
-    } else if (mail?.mailConversation?.ok) {
+    } else if (email?.contactEmail?.ok) {
       setSuccess(true);
       setTimeout(() => { setSuccess(false); }, 2000);
       setDisplaySubmit(true);
     }
-  }, [mail]);
+  }, [email]);
 
   return (
     <div>
@@ -177,10 +176,7 @@ function Footer({ isPrivate }) {
                       </div>
                     </div>
                     <div className='row justify-center'>
-                      <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
-                        <SelectUI defaultValue='Sup' label='Temas' required={true} options={[{ value: 'Sup', text: 'Soporte' }, { value: 'Com', text: 'Comercial' }, { value: 'Admin', text: 'Administración' }]} />
-                      </div>
-                      <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
+                      <div className='flex-sm-12 flex-md-8 flex-lg-8 pb-10'>
                         <InputUI
                           name='subject'
                           id='subject'

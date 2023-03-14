@@ -10,7 +10,7 @@ import userReducer from './reducer/userReducer';
 import productReducer from './reducer/productReducer';
 import subscriptionsReducer from './reducer/subscriptionsReducer';
 import apiReducer from './reducer/apiReducer';
-import mailReducer from './reducer/mailReducer';
+import emailReducer from './reducer/emailReducer';
 import termReducer from './reducer/termReducer';
 import policyReducer from './reducer/policyReducer';
 import timeReducer from './reducer/timeReducer';
@@ -26,7 +26,7 @@ const reducers = combineReducers({
   products: productReducer,
   suscripcions: subscriptionsReducer,
   api: apiReducer,
-  mail: mailReducer,
+  email: emailReducer,
   term: termReducer,
   policy: policyReducer,
   timer: timeReducer,
