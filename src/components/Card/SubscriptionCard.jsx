@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import Base from './Base';
 //import CustomMarkdown from '../CustomMarkdown';
@@ -7,7 +7,7 @@ import Button from '../Buttons/Button';
 
 function SubscriptionCard({ items, setOpenForm }) {
 
-  const { title, price, apis, benefits, slug, btnLabel, accentColor } = items;
+  const { title, price, /*apis, */benefits, slug, btnLabel, accentColor } = items;
 
   return (
     <Base css_styles={{ 'override_card_height': 'custom_card__public_subscription' }}>
@@ -39,14 +39,21 @@ function SubscriptionCard({ items, setOpenForm }) {
               </div>
             )}
           </div>
-          {apis && (
+          {/*apis && (
             <div className='apis'>
               <p className='mb-2 apis__title'>Contiene las APIS de:</p>
               {apis.map((item, index) => (
                 <Link to={`/apis/${item.id}#api`} className='apis__link' key={index}>{item.title}</Link>
               ))}
             </div>
-          )}
+          )*/}
+          <div className='apis'>
+            <p className='mb-2 apis__title'>Contiene las APIS de:</p>
+            <p className='apis__link'>a3Nómina cloud · a3factura</p>
+            <p className='apis__link'>a3innuva | Facturación</p>
+            <p className='apis__link'>a3innuva | Nómina</p>
+            <p className='apis__link'>a3innuva | Contabilidad</p>
+          </div>
           {benefits && benefits.general && (
             <ul className='benefits'>
               {benefits?.general.map((item, index) => (
