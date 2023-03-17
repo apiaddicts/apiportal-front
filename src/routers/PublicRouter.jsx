@@ -56,8 +56,8 @@ function PublicRoute() {
         <Route path='/apis/:id/swagger-ui' exact='true' element={<SwaggerUI setIsOpen={setOpenForm} />} />
         <Route path='/blog' exact='true' element={<Blog setIsOpen={setIsOpen} />} />
         <Route path='/blog/:id' exact='true' element={<BlogPost setIsOpen={setIsOpen} />} />
-        <Route path='/wiki' exact='true' element={<Wiki />} />
-        <Route path='/contacto' exact='true' element={<Contacto />} />
+        <Route path='/documentacion' exact='true' element={<Wiki />} />
+        <Route path='/soporte' exact='true' element={<Contacto />} />
         <Route path='/suscripciones' exact='true' element={<Subscriptions setOpenForm={setOpenForm} />} />
         <Route path='/suscripciones/:id' exact='true' element={<SubscriptionDetail />} />
         <Route path='/suscripciones/:id/contact' exact='true' element={<SubscriptionDetailContact />} />

@@ -110,6 +110,8 @@ function Apis(props) {
     };
   }) : [];
 
+  console.log(apis, arrApis);
+
   const handleNextLibrary = (url) => {
     if (search.length > 0) {
       dispatch(getLibraryApiNextSearch(search));
@@ -136,6 +138,8 @@ function Apis(props) {
 
   
   const fApis = libraries && libraries.length > 0 && apis && Object.keys(apis).length > 0 ? compareArrays(libraries, arrApis) : arrApis;
+
+  console.log(fApis);
 
   return (
     <Container fixed sx={{ paddingLeft: {xs: '0px', md: '59px !important'}, paddingRight: {xs:' 0px', md: '97px !important'} }}>
@@ -179,7 +183,7 @@ function Apis(props) {
             fApis.map((item, index) => (
               <CardInformationLibrary
                 key={index}
-                apiName={item.apiName}
+                apiName={item.slug}
                 title={item.title}
                 status={item.status}
                 version={item.version}
@@ -188,7 +192,7 @@ function Apis(props) {
                 theme='dark'
                 info='ver Documentación'
                 description={item.description}
-                redirectTo={`/developer/apis/${item.apiName}`}
+                redirectTo={`/developer/apis/${item.slug}`}
               />
             ))
           ) : (null)

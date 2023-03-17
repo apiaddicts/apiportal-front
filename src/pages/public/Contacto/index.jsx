@@ -8,7 +8,7 @@ function Contacto(props) {
       <iframe
         className={classes.contact__iframe}
         title='Contact Form'
-        src='https://forms.office.com/Pages/ResponsePage.aspx?id=kWzHivHn_0GonDVTstosF8g3aEk_p3xEtQ9xfKeMn9lUODBPS0kyTEk3UlVSWEFaVEtHRjgxRlNSVy4u&embed=true'
+        src='https://forms.office.com/pages/responsepage.aspx?id=kWzHivHn_0GonDVTstosF9LJZ4ctACBMskZ9JKMrGD5UOVQ0WldOUkk4TU9WTDNOVkdQTkhXTklVTy4u&embed=true'
       />
     </div>
   );

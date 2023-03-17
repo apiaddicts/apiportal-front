@@ -39,13 +39,18 @@ function Navbar({ setIsOpen, setOpenForm }) {
   };
 
   const listOptions = [
+    { icon: '', name: 'Inicio', route: '/' },
     { icon: '', name: 'APIs', route: '/apis' },
-    { icon: '', name: 'Blog', route: '/blog' },
+    //{ icon: '', name: 'Blog', route: '/blog' },
     { icon: '', name: 'Suscripciones', route: '/suscripciones' },
+    { icon: '', name: 'Documentación', route: '/documentacion' },
+    { icon: '', name: 'App Partners', route: '/app-partners' },
+    { icon: '', name: 'a3Marketplace', route: 'https://a3marketplace.wolterskluwer.es/', external: true },
+    { icon: '', name: 'Soporte', route: '/soporte' },
     { icon: '', name: 'FAQs', route: '/faqs' },
-    { icon: '', name: 'Wiki', route: '/wiki' },
-    { icon: '', name: 'Contacto', route: '/contacto' },
   ];
+
+  console.log(listOptions);
 
   return (
     <div style={{ position: 'fixed', top: '0', width: '100%', zIndex: '5000' }}>
@@ -84,22 +89,29 @@ function Navbar({ setIsOpen, setOpenForm }) {
               </div>
               <ul>
                 {
-                  listOptions.map((item, index) => (
-                    <NavLink to={item.route} key={index} className='text__dark__primary font-weight-medium' onClick={menuToggleHandler}>
-                      <li>
+                  listOptions && listOptions.length > 0 && listOptions.map((item, index) => (
+                    // eslint-disable-next-line react/jsx-no-useless-fragment
+                    <div key={index}>
+                      {item.external === false || item.external === undefined ? (
+                        <NavLink external={item.external} to={item.route} className='text__dark__primary font-weight-medium' onClick={menuToggleHandler}>
+                          <li>
 
-                        <div className={classes.navbar__xs__icon}>
-                          {item.icon ? (<Icon id={item.icon} />) : (
-                            <div />
-                          )}
-                        </div>
-                        <div>
-                          {item.name}
-                        </div>
+                            <div className={classes.navbar__xs__icon}>
+                              {item.icon ? (<Icon id={item.icon} />) : (
+                                <div />
+                              )}
+                            </div>
+                            <div>
+                              {item.name}
+                            </div>
 
-                      </li>
+                          </li>
 
-                    </NavLink>
+                        </NavLink>
+                      ) : (
+                        <div />
+                      )}
+                    </div>
                   ))
                 }
                 <li className='text__dark__primary' onClick={() => { setIsOpen(true); menuToggleHandler(); }}>
@@ -149,7 +161,14 @@ function Navbar({ setIsOpen, setOpenForm }) {
             <ul>
               <li>
                 {listOptions && listOptions.length > 0 ? listOptions.map((item, index) => (
-                  <Link key={index} to={item.route}>{item.name}</Link>
+                  // eslint-disable-next-line react/jsx-no-useless-fragment
+                  <>
+                    {item.external === false || item.external === undefined ? (
+                      <Link key={index} to={item.route}>{item.name}</Link>
+                    ) : (
+                      <a key={index} href={item.route} target='_blank' rel='noreferrer'>{item.name}</a>
+                    )}
+                  </>
                 )) : null}
               </li>
             </ul>

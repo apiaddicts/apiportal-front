@@ -1,12 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { FaFacebookF, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { FaFacebookF, FaLinkedinIn, FaTwitter, FaYoutube } from 'react-icons/fa';
 import { Alert } from '@mui/material';
-import { RiInstagramFill } from 'react-icons/ri';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useLocation, Link } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import emailAction from '../../redux/actions/emailAction';
 import 'yup-phone';
 import Base from './Base';
@@ -21,17 +20,17 @@ import CustomIcon from '../MdIcon/CustomIcon';
 
 function Footer({ isPrivate }) {
   const { pathname } = useLocation();
-  if (pathname === '/contacto' || pathname === '/wiki') return null;
+  if (pathname === '/soporte' || pathname === '/documentacion') return null;
   const dispatch = useDispatch();
   const email = useSelector((state) => state.email);
   const img = '';
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
   const socialLinks = [
-    { link: 'https://www.wolterskluwer.com/', icon: <FaFacebookF /> },
-    { link: 'https://www.wolterskluwer.com/', icon: <FaTwitter /> },
-    { link: 'https://www.wolterskluwer.com/', icon: <FaYoutube /> },
-    { link: 'https://www.wolterskluwer.com/', icon: <RiInstagramFill /> },
+    { link: 'https://www.facebook.com/wolterskluwer', icon: <FaFacebookF /> },
+    { link: 'https://twitter.com/Wolters_Kluwer', icon: <FaTwitter /> },
+    { link: 'https://www.youtube.com/user/WoltersKluwerComms', icon: <FaYoutube /> },
+    { link: 'https://www.linkedin.com/company/wolters-kluwer', icon: <FaLinkedinIn /> },
   ];
   const [contactForm, setContactForm] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -248,25 +247,29 @@ function Footer({ isPrivate }) {
       <div className={classes.footer}>
         <div className={`container ${classes.footer__end}`}>
           <div className={classes.logo}>
-            <div className={classes.logo__principal}>
-              {/*<LogoAlt />
-              <div className={classes.logo__principal__sublogo}>
-                <CustomIcon name='fintechwhite' />
-              </div>*/}
-            </div>
             <CustomIcon name='logowhite' />
           </div>
           <div className={classes.email}>
             <h1 className='body-1 font-weight-medium text__white mb-2'>Correo electrónico</h1>
-            <p className='body-1 font-weight-bold text__white'>contacto@wolterskluwer.es</p>
+            <p className='body-1 font-weight-bold text__white'>a3developers@wolterskluwer.com</p>
           </div>
+        </div>
+        <div className={`container ${classes.footer__legals}`}>
           <div className={classes.policies}>
-            <h1 className='body-1 font-weight-medium text__white mb-2'>Aviso</h1>
             <p className='body-1 font-weight-bold'>
-              <Link to={config.legalWarningPath} target='blank' className='text__white'>Legal</Link>
+              <a href={config.legalWarningPath} target='blank' className='text__white'>Aviso Legal</a>
             </p>
           </div>
-
+          <div className={classes.policies}>
+            <p className='body-1 font-weight-bold'>
+              <a href={config.legalWarningPath} target='blank' className='text__white'>Aviso Legal</a>
+            </p>
+          </div>
+          <div className={classes.policies}>
+            <p className='body-1 font-weight-bold'>
+              <a href={config.legalWarningPath} target='blank' className='text__white'>Aviso Legal</a>
+            </p>
+          </div>
         </div>
         <div className={`container ${classes.footer__social}`}>
           <div className={classes.footer__social__copyright}>
