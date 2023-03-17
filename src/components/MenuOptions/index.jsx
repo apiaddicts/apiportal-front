@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IconButton, Menu, MenuItem } from '@mui/material';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, Menu, MenuItem } from '@mui/material';
 // import CreateOutlinedIcon from '@mui/icons-material/CreateOutlined';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Icon from '../MdIcon/Icon';
@@ -8,6 +8,11 @@ import classes from './MenuOptions.module.scss';
 function MenuOptions(props) {
 
   const { row, handleRename, handleCancel } = props;
+  const [confirmDialog, setConfirmDialog] = useState(true);
+
+  const toggleConfirmation = () => {
+    setConfirmDialog(!confirmDialog);
+  };
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -29,6 +34,29 @@ function MenuOptions(props) {
 
   return (
     <div className={classes.wrapper_menu}>
+
+      {confirmDialog && (
+        <Dialog
+          open={confirmDialog}
+          onClose={toggleConfirmation}
+        >
+          <DialogTitle id='alert-dialog-title'>
+            Cancelar subscripción
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id='alert-dialog-description'>
+              ¿Desea cancelar la subscripción? Esta es una acción irreversible.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={toggleConfirmation} color='error'>Cancelar</Button>
+            <Button onClick={() => handleCancelSubscription()} variant='contained' autoFocus>
+              Aceptar
+            </Button>
+          </DialogActions>
+        </Dialog>
+      )}
+
       <IconButton
         sx={{
           borderRadius: '6px',
@@ -57,7 +85,7 @@ function MenuOptions(props) {
           <Icon id='MdOutlineEdit' css_styles={{ 'custom_icon_styles': 'fs__20 text_gray__gray_darken mr-2' }} />
           Renombrar
         </MenuItem>
-        <MenuItem onClick={handleCancelSubscription}>
+        <MenuItem onClick={() => toggleConfirmation()}>
           <Icon id='MdDeleteOutline' css_styles={{ 'custom_icon_styles': 'fs__20 text_gray__gray_darken mr-2' }} />
           Cancelar
         </MenuItem>
