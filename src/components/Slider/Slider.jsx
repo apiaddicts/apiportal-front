@@ -75,25 +75,27 @@ function Slider({ slides }) {
           <div key={i} className={classes.content__slider__slide}>
             <img src={x?.imgSrc} alt='' />
             <div className={classes.content__slider__slide__text}>
-              <div className='container display_flex align-center'>
+              <div className='container align-center'>
                 <div className='display_flex justify_content__center'>
                   <h1 className='h1 text__white w_800 text-center'>{x?.title}</h1>
                 </div>
+                {
+                  x?.subtitleList && x?.subtitleList?.length > 0 && (
+                    <div className='container align-center mt-10'>
+                      <div className='container align-center'>
+                        {
+                          x?.subtitleList.map((i, index) => (
+                            <div key={index + i} className='pr-2 mb-4 justify-center'>
+                              <p className='h4 text__white w_800 font-weight-medium text-center'>{i.text}</p>
+                            </div>
+                          ))
+                        }
+                      </div>
+                    </div>
+                  )
+                }
                 <div className='display_flex justify_content__center'>
-                  <div className='display_flex'>
-                    {
-                      x?.subtitleList && x?.subtitleList?.length ? (
-                        x?.subtitleList.map((i, index) => (
-                          <div key={index + i} className='pr-2 mb-4 justify-start'>
-                            <span className='h4 text__white w_800 text-center'>{i.text}</span>
-                          </div>
-                        ))
-                      ) : (null)
-                    }
-                  </div>
-                </div>
-                <div className='display_flex justify_content__center'>
-                  <div className='flex-md-12 flex-sm-12 mt-5'>
+                  <div className='flex-md-12 flex-sm-12'>
                     <div className='button__group mt-10'>
                       {
                         x?.actionButtons && x?.actionButtons?.length ? (
