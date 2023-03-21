@@ -3,6 +3,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 
 import homeReducer from './reducer/homeReducer';
+import appPartnersReducer from './reducer/appPartnersReducer';
 import faqReducer from './reducer/faqReducer';
 import blogReducer from './reducer/blogReducer';
 import libraryReducer from './reducer/libraryReducer';
@@ -19,6 +20,7 @@ const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOO
 
 const reducers = combineReducers({
   home: homeReducer,
+  appPartners: appPartnersReducer,
   faq: faqReducer,
   blog: blogReducer,
   library: libraryReducer,

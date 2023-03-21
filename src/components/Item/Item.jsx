@@ -11,7 +11,7 @@ function Item({ icon, title, description, type = 'basic', number, textColor = '#
     <div className='main_item_contain'>
       <div className='item_contenedor'>
         <div className='item_circle'>
-          <div style={iconStyle} className='square__frame'>
+          <div className='square__frame' style={iconStyle}>
             <span className='icon' style={color(iconColor)}>
               <CustomIcon name={icon} />
             </span>
