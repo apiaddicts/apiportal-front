@@ -112,3 +112,9 @@
   @include letter($white);
   @include border($theme_primary);
 }
+
+.btn-alert {
+  @include button-bg($theme_secondary);
+  @include letter($white);
+  @include border($theme_secondary);
+}

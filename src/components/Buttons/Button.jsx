@@ -5,7 +5,7 @@ import Icon from '../MdIcon/Icon';
 
 import './button.scss';
 
-function Button({ children, styles, opacity, size = 'regular', preIcon, icon, ...rest }) {
+function Button({ children, styles, opacity, size = 'regular', preIcon, postIcon, icon, ...rest }) {
 
   const btnStyled = (size, opacity) => {
     const height = size.toLowerCase();
@@ -34,7 +34,8 @@ function Button({ children, styles, opacity, size = 'regular', preIcon, icon, ..
                     styles === 'ghost' ? 'btn btn-ghost' :
                       styles === 'ghost-variant' ? 'btn btn-ghost-variant' :
                         styles === 'greey-primary' ? 'btn btn-grey' :
-                          styles === 'disabled' ? 'btn btn-disabled' : 'btn-none'
+                          styles === 'alert' ? 'btn btn-alert' :
+                            styles === 'disabled' ? 'btn btn-disabled' : 'btn-none'
       }
       style={btnStyled(size, opacity)}
       {...rest}
@@ -52,6 +53,11 @@ function Button({ children, styles, opacity, size = 'regular', preIcon, icon, ..
       <div style={{ minWidth: '146px' }}>
         {children}
       </div>
+      {postIcon && (
+        <div>
+          <CustomIcon name={postIcon} />
+        </div>
+      )}
     </button>
   );
 }

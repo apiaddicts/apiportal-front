@@ -34,6 +34,7 @@ const config = {
   topSubscriptions: process.env.REACT_APP_LIST_SUBSCRIPTIONS,
   url: createUrlApimAdminAPI(),
   homePageSlug: process.env.REACT_APP_HOME_PAGE_SLUG,
+  appPartnersPageSlug: process.env.REACT_APP_APPPARTNERS_PAGE_SLUG,
   blogPageSlug: process.env.REACT_APP_BLOG_PAGE_SLUG,
   faqPageSlug: process.env.REACT_APP_FAQ_PAGE_SLUG,
   apisPageSlug: process.env.REACT_APP_APIS_PAGE_SLUG,

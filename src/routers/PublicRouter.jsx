@@ -11,6 +11,7 @@ import Footer from '../components/Footer/Footer';
 import Login from '../pages/public/Login';
 import Register from '../pages/public/Register';
 import Home from '../pages/public/Home';
+import AppPartners from '../pages/public/AppPartners';
 import Apis from '../pages/public/Apis';
 import ApiDetail from '../pages/public/ApiDetail';
 import Faqs from '../pages/public/Faqs';
@@ -52,6 +53,7 @@ function PublicRoute() {
         <Route path='/' element={<Home setIsOpen={setIsOpen} setOpenForm={setOpenForm} />} />
         <Route path='/apis' exact='true' element={<Apis setIsOpen={setIsOpen} />} />
         <Route path='/apis/:id' exact='true' element={<ApiDetail setIsOpen={setOpenForm} />} />
+        <Route path='/app-partners' exact='true' element={<AppPartners />} />
         <Route path='/faqs' exact='true' element={<Faqs />} />
         <Route path='/apis/:id/swagger-ui' exact='true' element={<SwaggerUI setIsOpen={setOpenForm} />} />
         <Route path='/blog' exact='true' element={<Blog setIsOpen={setIsOpen} />} />
