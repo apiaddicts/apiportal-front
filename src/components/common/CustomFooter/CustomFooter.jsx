@@ -35,12 +35,12 @@ function CustomFooter() {
         </div>
         <div className={classes.privacy}>
           <p className='body-1 text__dark__primary font-weight-bold'>
-            <a href={config.legalWarningPath} target='blank' className='text__dark__primary'>Aviso Legal</a>
+            <a href={config.privacyPolicyPath} target='blank' className='text__dark__primary'>Política de Privacidad</a>
           </p>
         </div>
         <div className={classes.cookies}>
           <p className='body-1 text__dark__primary font-weight-bold'>
-            <a href={config.legalWarningPath} target='blank' className='text__dark__primary'>Aviso Legal</a>
+            <a href={config.cookiesPolicyPath} target='blank' className='text__dark__primary'>Política de Cookies</a>
           </p>
         </div>
       </div>

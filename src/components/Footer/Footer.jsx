@@ -262,12 +262,12 @@ function Footer({ isPrivate }) {
           </div>
           <div className={classes.policies}>
             <p className='body-1 font-weight-bold'>
-              <a href={config.legalWarningPath} target='blank' className='text__white'>Aviso Legal</a>
+              <a href={config.privacyPolicyPath} target='blank' className='text__white'>Política de Privacidad</a>
             </p>
           </div>
           <div className={classes.policies}>
             <p className='body-1 font-weight-bold'>
-              <a href={config.legalWarningPath} target='blank' className='text__white'>Aviso Legal</a>
+              <a href={config.cookiesPolicyPath} target='blank' className='text__white'>Política de Cookies</a>
             </p>
           </div>
         </div>
