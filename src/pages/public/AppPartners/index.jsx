@@ -81,9 +81,8 @@ function AppPartners({ setOpenForm }) {
             <div className='flex-lg-6 flex-md-6 flex-sm-12'>
               <div className='button__group mt-5'>
                 <Button
-                  styles='alert'
-                  onClick={() => { navigate(`/${listSection(item).section?.buttons?.[0]?.url}`); }}
-                  target={listSection(item).section?.buttons?.[0]?.target}
+                  styles={listSection(item).section.buttons[0].class}
+                  onClick={() => { navigate(`/${listSection(item).section?.buttons?.[0]?.link}`); }}
                 >
                   {listSection(item).section?.buttons?.[0]?.name}
                 </Button>
@@ -118,9 +117,8 @@ function AppPartners({ setOpenForm }) {
                 <div className='container flex-lg-4 flex-md-6 flex-sm-12 pt-10 align-self-end'>
                   <div className='button__group mt-5'>
                     <Button
-                      styles='alert'
-                      onClick={() => { navigate(`/${bannerSection?.buttons?.[0]?.url}`); }}
-                      target={bannerSection?.buttons?.[0]?.target}
+                      styles={bannerSection?.buttons?.[0]?.class}
+                      onClick={() => { navigate(`/${bannerSection?.buttons?.[0]?.link}`); }}
                     >
                       {bannerSection?.buttons?.[0]?.name}
                     </Button>
