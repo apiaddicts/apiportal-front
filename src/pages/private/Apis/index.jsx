@@ -98,20 +98,6 @@ function Apis(props) {
     };
   }, []);
 
-  const arrApis = apis && Object.keys(apis).length > 0 ? apis.value.map((api) => {
-    return {
-      apiName: api.name,
-      title: api.properties.displayName,
-      status: 'Publicado',
-      version: api.properties.apiVersion,
-      tags: [{ label: 'ejemplo' }],
-      color_status: 'green',
-      description: api.properties.description,
-    };
-  }) : [];
-
-  console.log(apis, arrApis);
-
   const handleNextLibrary = (url) => {
     if (search.length > 0) {
       dispatch(getLibraryApiNextSearch(search));
@@ -131,15 +117,12 @@ function Apis(props) {
   const compareArrays = (array1, array2) => {
     return array1.filter((a) => {
       return array2.some((b) => {
-        return a.slug === b.apiName;
+        return a.slug === b.name;
       });
     });
   };
 
-  
-  const fApis = libraries && libraries.length > 0 && apis && Object.keys(apis).length > 0 ? compareArrays(libraries, arrApis) : arrApis;
-
-  console.log(fApis);
+  const fApis = libraries && libraries.length > 0 && apis && Object.keys(apis).length > 0 && apis.value.length > 0 ? compareArrays(libraries, apis.value) : [];
 
   return (
     <Container fixed sx={{ paddingLeft: {xs: '0px', md: '59px !important'}, paddingRight: {xs:' 0px', md: '97px !important'} }}>

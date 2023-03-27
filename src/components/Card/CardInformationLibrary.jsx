@@ -67,7 +67,7 @@ function CardInformationLibrary({ apiName, img, title, description, reading, inf
           </div>
         )}
         <div className={`pr-8 pl-8 pb-8 pt-2 ${reading ? 'py-2' : null}`} style={blogClasses}>
-          <p onClick={clickLink} className={`h3 w-full font-weight-semi-bold text__dark ${reading ? 'px-8' : null}  ${theme === 'primary' ? 'text__primary' : ''} ${custom_title_size}`} style={blogTitleStyles}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
+          <p onClick={clickLink} className={`h3 w-full font-weight-semi-bold text__dark ${reading ? 'px-8' : null}  ${theme === 'primary' ? 'text__primary' : ''} ${custom_title_size}`} style={blogTitleStyles}>{title ?? ''}</p>
           <div onClick={clickLink} className={`card__information hidden__tags ${custom_margin_top}`} style={blogTitleStyles}>
             <div className={`card__information__tags ${buttons.length >= 3 ? 'tags-flex-wrap' : null} ${reading ? 'px-8' : null}`}>
               {buttons.map((button, index) => (
@@ -79,7 +79,7 @@ function CardInformationLibrary({ apiName, img, title, description, reading, inf
             {reading && <p className='h6 font-weight-bold' style={{ fontSize: '12px', letterSpacing: '0.8px' }}>{reading.toUpperCase()}</p>}
           </div>
           <p onClick={clickLink} className={`line-height-1 ${reading ? 'px-8' : null} text__gray__gray_darken body-2 description`}>
-            {description ?? 'Quisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.Suspendisse potenti. Integer tincidunt. Aenean commodo ligula eget dolor. Nulla consequat massa quis enimQuisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.Suspendisse potenti. Integer tincidunt. Aenean commodo ligula eget dolor. Nulla consequat massa quis enimQuisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.'}
+            {description ?? ''}
           </p>
 
           {info && modal !== undefined ? (
@@ -117,7 +117,7 @@ function CardInformationLibrary({ apiName, img, title, description, reading, inf
           </div>
         )}
         <div className={`pr-8 pl-8 pb-8 pt-2 ${reading ? 'py-2' : null}`} style={blogClasses}>
-          <p className={`${blogTitle ? 'card__title_blog' : 'h5'} w-full font-weight-semi-bold text ${reading ? 'px-8' : null}  text__primary`}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
+          <p className={`${blogTitle ? 'card__title_blog' : 'h5'} w-full font-weight-semi-bold text ${reading ? 'px-8' : null}  text__primary`}>{title ?? ''}</p>
           <div className='card__information hidden__tags' style={blogTitleStyles}>
             <div className={`card__information__tags ${buttons.length >= 3 ? 'tags-flex-wrap' : null} ${reading ? 'px-8' : null}`}>
               {buttons.map((button, index) => (
@@ -129,7 +129,7 @@ function CardInformationLibrary({ apiName, img, title, description, reading, inf
             {reading && <p className='h6 font-weight-bold' style={{ fontSize: '12px', letterSpacing: '0.8px' }}>{reading.toUpperCase()}</p>}
           </div>
           <p className={`line-height-1 w-full ${reading ? 'px-8' : null} card__description body-2 description`}>
-            {description ?? 'Quisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.Suspendisse potenti. Integer tincidunt. Aenean commodo ligula eget dolor. Nulla consequat massa quis enimQuisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.Suspendisse potenti. Integer tincidunt. Aenean commodo ligula eget dolor. Nulla consequat massa quis enimQuisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.'}
+            {description ?? ''}
           </p>
 
           {info && (

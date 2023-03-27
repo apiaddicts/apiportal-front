@@ -8,7 +8,7 @@ import classes from './MenuOptions.module.scss';
 function MenuOptions(props) {
 
   const { row, handleRename, handleCancel } = props;
-  const [confirmDialog, setConfirmDialog] = useState(true);
+  const [confirmDialog, setConfirmDialog] = useState(false);
 
   const toggleConfirmation = () => {
     setConfirmDialog(!confirmDialog);

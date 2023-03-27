@@ -58,7 +58,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
           )}
           <div className={`pr-8 pl-8 pb-8 pt-2 ${custom_margin_top} ${reading ? 'py-2' : null}`} style={blogClasses}>
             <HashLink smooth to={link}>
-              <p className={`h3 w-full font-weight-semi-bold card__title ${reading ? 'px-8' : null} ${custom_title_size}`} style={blogTitleStyles}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
+              <p className={`h3 w-full font-weight-semi-bold card__title ${reading ? 'px-8' : null} ${custom_title_size}`} style={blogTitleStyles}>{title ?? ''}</p>
             </HashLink>
             <HashLink smooth to={link}>
               <div className='card__information hidden__tags' style={blogTitleStyles}>
@@ -74,7 +74,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
             </HashLink>
             <HashLink smooth to={link}>
               <p className={`line-height-1 ${reading ? 'px-8' : null} card__description body-2`}>
-                {description ?? 'Quisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.Suspendisse potenti. Integer tincidunt. Aenean commodo ligula eget dolor. Nulla consequat massa quis enimQuisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.Suspendisse potenti. Integer tincidunt. Aenean commodo ligula eget dolor. Nulla consequat massa quis enimQuisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.'}
+                {description ?? ''}
               </p>
             </HashLink>
 
@@ -113,7 +113,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
             </div>
           )}
           <div className={`pr-8 pl-8 pb-8 pt-2 ${custom_margin_top} ${reading ? 'py-4' : null}`}>
-            <p className={`${blogTitle ? 'card__title_blog' : 'h3'} w-full font-weight-semi-bold text__primary__title ${reading ? 'px-8' : null} ${!blog ? 'mb-2' : ''}`}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
+            <p className={`${blogTitle ? 'card__title_blog' : 'h3'} w-full font-weight-semi-bold text__primary__title ${reading ? 'px-8' : null} ${!blog ? 'mb-2' : ''}`}>{title ?? ''}</p>
 
             {blog && (
               <div className='card__information hidden__tags' style={blogTitleStyles}>
@@ -129,7 +129,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
             )}
 
             <p className={`line-height-1 ${reading ? 'px-8' : null} card__description body-2`}>
-              {description ?? 'Quisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.Suspendisse potenti. Integer tincidunt. Aenean commodo ligula eget dolor. Nulla consequat massa quis enimQuisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.Suspendisse potenti. Integer tincidunt. Aenean commodo ligula eget dolor. Nulla consequat massa quis enimQuisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.'}
+              {description ?? ''}
             </p>
 
             {info && (
