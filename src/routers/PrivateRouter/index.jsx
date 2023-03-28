@@ -16,6 +16,7 @@ import Profile from '../../pages/private/Profile';
 //import ProductDetail from '../../pages/private/ProductDetail';
 import Apis from '../../pages/private/Apis';
 import ApiDetail from '../../pages/private/ApiDetail';
+import SubscriptionDetail from '../../pages/private/SubscriptionDetail';
 import SwaggerUI from '../../pages/common/SwaggerUI';
 import OAuthRedirect from '../../pages/common/OAuthRedirect';
 import Subscriptions from '../../pages/private/Subscriptions';
@@ -73,6 +74,7 @@ function PrivateRouter({ children }) {
                 <Route path='apis/:id' exact='true' element={<ApiDetail />} />
                 <Route path='apis/:id/swagger-ui' exact='true' element={<SwaggerUI />} />
                 <Route path='subscriptions' exact='true' element={<Subscriptions />} />
+                <Route path='subscriptions/:id' exact='true' element={<SubscriptionDetail />} />
                 <Route path='*' element={<Navigate to='/' replace />} />
               </Routes>
             </div>
