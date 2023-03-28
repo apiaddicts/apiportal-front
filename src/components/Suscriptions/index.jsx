@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { TableHead, TableRow, TableCell, Table, TableContainer, TableBody, Chip, Container, Grid } from '@mui/material';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
@@ -167,8 +168,11 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
                                           onBlur={(e) => handleBLur(row, e)}
                                           className={classes.input}
                                         />
-                                      ) :
-                                        <p className='text__accent'>{row.properties.displayName}</p>
+                                      ) : (
+                                        <Link to={`/developer/subscriptions/${row.name}`}>
+                                          <p className='text__accent'>{row.properties.displayName}</p>
+                                        </Link>
+                                      )
                                     }
                                   </TableCell>
                                   <TableCell>
