@@ -2,7 +2,10 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import Multiselect from 'multiselect-react-dropdown';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import moment from 'moment';
 import { Box, TableHead, TableRow, TableCell, Table, TableContainer, TableBody, Container } from '@mui/material';
 import subscriptionsService from '../../../services/subscriptionsService';
 import Title from '../../../components/Title';
@@ -14,7 +17,8 @@ function SubscriptionDetail(props) {
   const { user } = useSelector((state) => state.user);
   const [subscriptionDetail, setSubscriptionDetail] = useState();
   const [subscriptionReport, setSubscriptionReport] = useState();
-
+  const [loading, setLoading] = useState(false);
+  const [time, setTime] = useState(1);
   const params = useParams();
 
   useEffect(() => {
@@ -22,9 +26,12 @@ function SubscriptionDetail(props) {
       subscriptionsService.listSubscriptionbyId(user.name, params.id).then((subscriptionDetail) => {
         if (subscriptionDetail) {
           setSubscriptionDetail(subscriptionDetail);
-          subscriptionsService.getReportsbySubscription(params.id, subscriptionDetail.properties.createdDate).then((subscriptionReport) => {
+          setLoading(true);
+          const actual = moment(new Date(subscriptionDetail?.properties?.createdDate)).subtract(1, 'months').toISOString();
+          subscriptionsService.getReportsbySubscription(params.id, actual).then((subscriptionReport) => {
             if (subscriptionReport) {
               setSubscriptionReport(subscriptionReport.value[0]);
+              setLoading(false);
             }
           });
         };
@@ -32,44 +39,49 @@ function SubscriptionDetail(props) {
     };
   }, []);
 
-  const onSelect = (selectedList, selectedItem) => {
-    let search = '';
-    selectedList.forEach((items, index) => {
-      let data = '';
-      if (search.length === 0) {
-        data = `tags[${index}]=${items.name}`;
-      } else {
-        data = `&tags[${index}]=${items.name}`;
-      }
-      search = search + data;
-    });
-    subscriptionsService.getReportsbySubscription(params.id, subscriptionDetail.properties.createdDate).then((subscriptionReport) => {
-      if (subscriptionReport) {
-        setSubscriptionReport(subscriptionReport.value[0]);
-      }
-    });
-  };
-
   const getMonthDifference = () => {
     return (
-      (new Date()).getMonth() -
-      (new Date('2022-09-15')).getMonth() +
-      12 * ((new Date()).getFullYear() - (new Date('2022-09-15')).getFullYear())
+      ((new Date()).getMonth() + 1) -
+      ((new Date(subscriptionDetail?.properties?.createdDate)).getMonth() + 1) +
+      12 * ((new Date()).getFullYear() - (new Date(subscriptionDetail?.properties?.createdDate)).getFullYear())
     );
   };
 
-  const selectData = () => {
+  const selectData = getMonthDifference() === 0 ? () => {
+    return (
+      [
+        {
+          name: 'Mes actual',
+          id: 1,
+        },
+      ]);
+  } : () => {
     const options = [];
-    const months = getMonthDifference();
-    for (let i = 0; i < months; i++) {
+    for (let i = 0; i < getMonthDifference(); i++) {
       options[i] = {
-        name: `Hace ${i + 1} mes(es)`,
-        id: i,
+        name: i === 0 ? `Hace ${i + 1} mes` : `Hace ${i + 1} meses`,
+        id: i + 1,
       };
     };
-
     return options;
   };
+
+  const handleChange = (event) => {
+    setTime(event.target.value);
+    const timestamp = moment(new Date(subscriptionDetail?.properties?.createdDate)).subtract(event.target.value, 'months').toISOString();
+    setLoading(true);
+    subscriptionsService.getReportsbySubscription(params.id, timestamp).then((subscriptionReport) => {
+      if (subscriptionReport) {
+        setSubscriptionReport(subscriptionReport.value[0]);
+        setLoading(false);
+      }
+    });
+  };
+
+  useEffect(() => {
+    console.log('listen', loading, subscriptionReport);
+
+  }, [loading, subscriptionReport]);
 
   return (
     <>
@@ -94,80 +106,80 @@ function SubscriptionDetail(props) {
                 <span className={classes.filter}>
                   Filtrar por
                   {' '}
-                  <b>Tiempo</b>
-                  {' '}
+                  <b>Tiempo </b>
+                  {'  '}
                   :
                 </span>
-                <Multiselect
-                  className={`inputSelect ${classes.selectIn}`}
-                  options={selectData()} // Options to display in the dropdown
-                  // selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
-                  onSelect={onSelect} // Function will trigger on select event
-                  displayValue='name' // Property name to display in the dropdown options
-                  // selectionLimit={2}
-                  placeholder=''
-                />
 
+                <FormControl sx={{ m: 1, minWidth: 80 }}>
+                  <Select
+                    labelId='demo-simple-select-autowidth-label'
+                    id='demo-simple-select-autowidth'
+                    value={time}
+                    defaultValue={1}
+                    onChange={handleChange}
+                    autoWidth
+                  >
+                    {selectData().map((time) => (
+                      <MenuItem key={time.id} value={time.id}>
+                        {time.name}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               </div>
             </Box>
-            <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className={classes.box__title}>
-              <TableContainer>
-                <Table sx={{ minWidth: 650 }} aria-label='simple table'>
-                  <TableHead className={classes.table_head}>
-                    <TableRow>
-                      <TableCell style={{ width: '255px' }}>
-                        Llamadas correctas
-                      </TableCell>
-                      <TableCell style={{ width: '255px' }}>
-                        Llamadas bloqueadas
-                      </TableCell>
-                      <TableCell style={{ width: '255px' }}>
-                        Llamadas con error
-                      </TableCell>
-                      <TableCell style={{ width: '255px' }}>
-                        Otras llamadas
-                      </TableCell>
-                      <TableCell style={{ width: '255px' }}>
-                        Total llamadas
-                      </TableCell>
-                      <TableCell style={{ width: '255px' }}>
-                        Tiempo de respuesta promedio
-                      </TableCell>
-                      <TableCell style={{ width: '255px' }}>
-                        Ancho de banda
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    <TableRow
-                      sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 6 }}
-                    >
-                      <TableCell>
-                        <p>{subscriptionReport ? subscriptionReport.callCountSuccess : '0'}</p>
-                      </TableCell>
-                      <TableCell>
-                        <p>{subscriptionReport ? subscriptionReport.callCountBlocked : '0'}</p>
-                      </TableCell>
-                      <TableCell>
-                        <p>{subscriptionReport ? subscriptionReport.callCountFailed : '0'}</p>
-                      </TableCell>
-                      <TableCell>
-                        <p>{subscriptionReport ? subscriptionReport.callCountOther : '0'}</p>
-                      </TableCell>
-                      <TableCell>
-                        <p>{subscriptionReport ? subscriptionReport.callCountTotal : '0'}</p>
-                      </TableCell>
-                      <TableCell>
-                        <p>{subscriptionReport ? subscriptionReport.apiTimeAvg : '0.0'}</p>
-                      </TableCell>
-                      <TableCell>
-                        <p>{subscriptionReport ? subscriptionReport.bandwidth : '0.0'}</p>
-                      </TableCell>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            </Box>
+            {
+              loading ? (<SkeletonComponent />) :
+                (
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className={classes.box__title}>
+                    <TableContainer>
+                      <Table sx={{ minWidth: 650 }} aria-label='simple table'>
+                        <TableHead className={classes.table_head}>
+                          <TableRow>
+                            <TableCell style={{ width: '255px' }}>
+                              Llamadas correctas
+                            </TableCell>
+                            <TableCell style={{ width: '255px' }}>
+                              Llamadas bloqueadas
+                            </TableCell>
+                            <TableCell style={{ width: '255px' }}>
+                              Llamadas con error
+                            </TableCell>
+                            <TableCell style={{ width: '255px' }}>
+                              Otras llamadas
+                            </TableCell>
+                            <TableCell style={{ width: '255px' }}>
+                              Total llamadas
+                            </TableCell>
+                          </TableRow>
+                        </TableHead>
+                        <TableBody>
+                          <TableRow
+                            sx={{ '&:last-child td, &:last-child th': { border: 0 }, zIndex: 6 }}
+                          >
+                            <TableCell>
+                              <p>{subscriptionReport ? subscriptionReport.callCountSuccess : '0'}</p>
+                            </TableCell>
+                            <TableCell>
+                              <p>{subscriptionReport ? subscriptionReport.callCountBlocked : '0'}</p>
+                            </TableCell>
+                            <TableCell>
+                              <p>{subscriptionReport ? subscriptionReport.callCountFailed : '0'}</p>
+                            </TableCell>
+                            <TableCell>
+                              <p>{subscriptionReport ? subscriptionReport.callCountOther : '0'}</p>
+                            </TableCell>
+                            <TableCell>
+                              <p>{subscriptionReport ? subscriptionReport.callCountTotal : '0'}</p>
+                            </TableCell>
+                          </TableRow>
+                        </TableBody>
+                      </Table>
+                    </TableContainer>
+                  </Box>
+                )
+            }
           </div>
         ) : (<SkeletonComponent />)}
       </Container>

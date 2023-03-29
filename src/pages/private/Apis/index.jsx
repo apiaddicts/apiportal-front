@@ -42,8 +42,6 @@ function Apis(props) {
     };
     return options;
   }) : [];
-  console.log('d', selectData);
-
 
   const onSelect = (selectedList, selectedItem) => {
     let search = '';
