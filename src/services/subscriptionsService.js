@@ -178,7 +178,7 @@ function getReportsbySubscription(subscriptionId, timestamp) {
     headers: { 'Content-Type': 'application/json', 'Authorization': `${config.getHmacAuthHeader()}` },
   };
 
-  const url = `${config.url}/reports/bySubscription?api-version=${config.apiVersion}&%24filter=timestamp%20ge%20datetime%27${timestamp}T00%3A00%3A00%27%20and%20subscriptionId%20eq%20%27${subscriptionId}%27`;
+  const url = `${config.url}/reports/bySubscription?api-version=${config.apiVersion}&%24filter=timestamp%20ge%20datetime%27${timestamp}%27%20and%20subscriptionId%20eq%20%27${subscriptionId}%27`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
