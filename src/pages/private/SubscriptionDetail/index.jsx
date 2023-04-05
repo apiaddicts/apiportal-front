@@ -19,7 +19,6 @@ function SubscriptionDetail(props) {
   const [periods, setPeriods] = useState([]);
   const [subscriptionReport, setSubscriptionReport] = useState();
   const [loading, setLoading] = useState(false);
-  const [selectedPeriod, setSelectedPeriod] = useState();
   const params = useParams();
 
   const isLeapYear = (year) => {
@@ -94,24 +93,14 @@ function SubscriptionDetail(props) {
       subscriptionsService.listSubscriptionbyId(user.name, params.id).then((subscriptionDetail) => {
         if (subscriptionDetail) {
           setSubscriptionDetail(subscriptionDetail);
-          setLoading(true);
           const periods = calculatePeriods(subscriptionDetail?.properties?.createdDate);
           setPeriods(periods);
-          const selectedPeriod = periods[0];
-          setSelectedPeriod(selectedPeriod);
-          subscriptionsService.getReportsbySubscription(params.id, selectedPeriod.init.toISOString()).then((subscriptionReport) => {
-            if (subscriptionReport) {
-              setSubscriptionReport(subscriptionReport.value[0]);
-              setLoading(false);
-            }
-          });
         };
       });
     };
   }, []);
 
   const handlePeriods = (selectedPeriod) => {
-    setSelectedPeriod(selectedPeriod);
     setLoading(true);
     subscriptionsService.getReportsbySubscription(params.id, selectedPeriod.init.toISOString(), selectedPeriod.limit.toISOString()).then((subscriptionReport) => {
       if (subscriptionReport) {
@@ -141,12 +130,12 @@ function SubscriptionDetail(props) {
             </Box>
             <div className='row mt-6'>
               <div className='flex-sm-12 flex-md-12 flex-lg-12'>
-                <Select label='Periodo' disabled={!periods.length > 0} placeholder='Seleccione un periodo' items={periods} defaultValue={selectedPeriod} itemText='text' itemValue='value' onChange={(e) => handlePeriods(e)} />
+                <Select label='Periodo' disabled={!periods.length > 0} placeholder='Seleccione un periodo' items={periods} itemText='text' itemValue='value' onChange={(e) => handlePeriods(e)} />
               </div>
             </div>
             {
               loading ? (<SkeletonComponent />) :
-                (
+                (subscriptionReport ? (
                   <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className={classes.box__title}>
                     <TableContainer>
                       <Table sx={{ minWidth: 650 }} aria-label='simple table'>
@@ -193,6 +182,7 @@ function SubscriptionDetail(props) {
                       </Table>
                     </TableContainer>
                   </Box>
+                ) : null
                 )
             }
           </div>

@@ -20,6 +20,7 @@ function Select({ name, label, placeholder, items, itemText, itemValue, defaultV
         className={classes.custom__select}
         {...rest}
       >
+        <option selected>{placeholder}</option>
         {items && items.length > 0 ? items.map((item) => (
           <option value={item.id} key={item[itemValue]}>{item[itemText]}</option>
         )) : null}
