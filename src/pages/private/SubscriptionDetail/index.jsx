@@ -19,7 +19,7 @@ function SubscriptionDetail(props) {
   const [periods, setPeriods] = useState([]);
   const [subscriptionReport, setSubscriptionReport] = useState();
   const [loading, setLoading] = useState(false);
-  //const [time, setTime] = useState(1);
+  const [selectedPeriod, setSelectedPeriod] = useState();
   const params = useParams();
 
   const isLeapYear = (year) => {
@@ -39,8 +39,8 @@ function SubscriptionDetail(props) {
   };
 
   const calculatePeriods = (creationDateStr) => {
-    const createdDate = new Date(2023, 0, 31);
-    const currentDate = new Date(2024, 1, 28);
+    const createdDate = new Date(creationDateStr);
+    const currentDate = new Date();
     const yearsDifference = Math.abs(currentDate.getFullYear() - createdDate.getFullYear());
     let monthsDifference = currentDate.getMonth() - createdDate.getMonth() + 12 * yearsDifference;
     if (addSubsMonths(createdDate, monthsDifference) > currentDate) monthsDifference -= 1;
@@ -56,32 +56,37 @@ function SubscriptionDetail(props) {
     const lastNintyDaysInitDate = new Date(currentDate);
     lastNintyDaysInitDate.setDate(currentDate.getDate() - 89);
 
-    return [
+    const periods = [
       {
-        text: `Periodo actual - Desde ${currentPeriodInitDate}`,
+        id: 'current',
+        text: `Periodo actual - Desde ${currentPeriodInitDate.toLocaleDateString('en-GB')} hasta ${currentPeriodLimitDate.toLocaleDateString('en-GB')}`,
         value: 'current',
         init: currentPeriodInitDate,
         limit: currentPeriodLimitDate,
       },
       {
-        text: `Periodo anterior - Desde ${prevPeriodInitDate} hasta ${prevPeriodLimitDate}`,
+        id: 'prev',
+        text: `Periodo anterior - Desde ${prevPeriodInitDate.toLocaleDateString('en-GB')} hasta ${prevPeriodLimitDate.toLocaleDateString('en-GB')}`,
         value: 'prev',
         init: prevPeriodInitDate,
         limit: prevPeriodLimitDate,
       },
       {
-        text: `Últimos 7 días - Desde ${lastSevenDaysInitDate} hasta ${currentDate}`,
-        value: 'prev',
+        id: 'last7',
+        text: `Últimos 7 días - Desde ${lastSevenDaysInitDate.toLocaleDateString('en-GB')} hasta ${currentDate.toLocaleDateString('en-GB')}`,
+        value: 'last7',
         init: lastSevenDaysInitDate,
         limit: currentDate,
       },
       {
-        text: `Últimos 90 días - Desde ${lastNintyDaysInitDate} hasta ${currentDate}`,
-        value: 'prev',
+        id: 'last90',
+        text: `Últimos 90 días - Desde ${lastNintyDaysInitDate.toLocaleDateString('en-GB')} hasta ${currentDate.toLocaleDateString('en-GB')}`,
+        value: 'last90',
         init: lastNintyDaysInitDate,
         limit: currentDate,
       },
     ];
+    return periods;
   };
 
   useEffect(() => {
@@ -92,7 +97,9 @@ function SubscriptionDetail(props) {
           setLoading(true);
           const periods = calculatePeriods(subscriptionDetail?.properties?.createdDate);
           setPeriods(periods);
-          subscriptionsService.getReportsbySubscription(params.id, periods[0]['init'].toISOString()).then((subscriptionReport) => {
+          const selectedPeriod = periods[0];
+          setSelectedPeriod(selectedPeriod);
+          subscriptionsService.getReportsbySubscription(params.id, selectedPeriod.init.toISOString()).then((subscriptionReport) => {
             if (subscriptionReport) {
               setSubscriptionReport(subscriptionReport.value[0]);
               setLoading(false);
@@ -103,47 +110,15 @@ function SubscriptionDetail(props) {
     };
   }, []);
 
-  /*const getMonthDifference = () => {
-    return (
-      ((new Date()).getMonth() + 1) -
-      ((new Date(subscriptionDetail?.properties?.createdDate)).getMonth() + 1) +
-      12 * ((new Date()).getFullYear() - (new Date(subscriptionDetail?.properties?.createdDate)).getFullYear())
-    );
-  };*/
-
-  /*const selectData = getMonthDifference() === 0 ? () => {
-    return (
-      [
-        {
-          name: 'Mes actual',
-          id: 1,
-        },
-      ]);
-  } : () => {
-    const options = [];
-    for (let i = 0; i < getMonthDifference(); i++) {
-      options[i] = {
-        name: i === 0 ? `Hace ${i + 1} mes` : `Hace ${i + 1} meses`,
-        id: i + 1,
-      };
-    };
-    return options;
-  };*/
-
-  /*const handleChange = (event) => {
-    setTime(event.target.value);
-    const timestamp = moment(new Date(subscriptionDetail?.properties?.createdDate)).subtract(event.target.value, 'months').toISOString();
+  const handlePeriods = (selectedPeriod) => {
+    setSelectedPeriod(selectedPeriod);
     setLoading(true);
-    subscriptionsService.getReportsbySubscription(params.id, timestamp).then((subscriptionReport) => {
+    subscriptionsService.getReportsbySubscription(params.id, selectedPeriod.init.toISOString(), selectedPeriod.limit.toISOString()).then((subscriptionReport) => {
       if (subscriptionReport) {
         setSubscriptionReport(subscriptionReport.value[0]);
         setLoading(false);
       }
     });
-  };*/
-
-  const handlePeriods = () => {
-    console.log('changed...');
   };
 
   return (
@@ -166,7 +141,7 @@ function SubscriptionDetail(props) {
             </Box>
             <div className='row mt-6'>
               <div className='flex-sm-12 flex-md-12 flex-lg-12'>
-                <Select label='Periodo' disabled={!periods.length > 0} placeholder='Seleccione un periodo' items={periods} itemText='text' itemValue='value' onChange={(e) => handlePeriods(e)} />
+                <Select label='Periodo' disabled={!periods.length > 0} placeholder='Seleccione un periodo' items={periods} defaultValue={selectedPeriod} itemText='text' itemValue='value' onChange={(e) => handlePeriods(e)} />
               </div>
             </div>
             {
