@@ -47,10 +47,8 @@ function Navbar({ setIsOpen, setOpenForm }) {
     { icon: '', name: 'App Partners', route: '/app-partners' },
     { icon: '', name: 'a3Marketplace', route: 'https://a3marketplace.wolterskluwer.es/', external: true },
     { icon: '', name: 'Soporte', route: '/soporte' },
-    { icon: '', name: 'FAQs', route: '/faqs' },
+    //{ icon: '', name: 'FAQs', route: '/faqs' },
   ];
-
-  console.log(listOptions);
 
   return (
     <div style={{ position: 'fixed', top: '0', width: '100%', zIndex: '5000' }}>
