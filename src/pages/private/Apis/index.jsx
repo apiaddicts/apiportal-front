@@ -10,24 +10,35 @@ import Icon from '../../../components/MdIcon/Icon';
 import CardInformationLibrary from '../../../components/Card/CardInformationLibrary';
 import { listApis, searchApis, getListTags, filterAPIsByTags, resetLibraryApi, getLibraryApiNextSearch, getLibraryApiPreviosSearch, getLibraryApiNext, getLibraryApiPrevios, getLibraries } from '../../../redux/actions/libraryAction';
 import classes from './apis.module.scss';
+import config from '../../../services/config';
+import { useMemo } from 'react';
+
+const compareArrays = (array1, array2) => {
+  return array1.filter((a) => {
+    return array2.some((b) => {
+      return a.slug === b.name;
+    });
+  });
+};
 
 function Apis(props) {
 
-  const { loadingLibraries, apis, tagsList, apisSkip, libraries } = useSelector((state) => state.library);
-
+  const topApi = config.topApi;
+  const { loadingLibraries, apis, tagsList, libraries } = useSelector((state) => state.library);
+  const fApis = libraries && libraries.length > 0 && apis && Object.keys(apis).length > 0 && apis.value.length > 0 ? compareArrays(libraries, apis.value) : [];
+  const [skip, setSkip] = useState(0);
   const dispatch = useDispatch();
 
-  const [search, setSearch] = useState('');
+  const displayApis = useMemo(() => ({
+    apis: fApis.slice(skip, skip + topApi),
+    skip: skip,
+    count: fApis.length,
+  }), [fApis, skip]);
 
   const handleChangeSearchFilter = (text) => {
     const filterText = text.replace(/[/[`&\/\\#,@|!+()$~%.'":*?<>\]{}]/g, '');
     if (filterText.trim().length >= 3) {
       dispatch(searchApis(filterText));
-      setSearch(filterText);
-    }
-
-    if (text.trim().length < 3) {
-      setSearch('');
     }
 
     if (text.trim().length === 0) {
@@ -42,22 +53,18 @@ function Apis(props) {
     };
     return options;
   }) : [];
+  const filteredSelectData = useMemo(() => selectData.filter(option => option.name !== 'published'), [selectData]);
 
-  const onSelect = (selectedList, selectedItem) => {
-    let search = '';
+  const onSelect = (selectedList) => {
+    let search = 'tags[0]=published';
     selectedList.forEach((items, index) => {
-      let data = '';
-      if (search.length === 0) {
-        data = `tags[${index}]=${items.name}`;
-      } else {
-        data = `&tags[${index}]=${items.name}`;
-      }
+      const data = `&tags[${index}]=${items.name}`;
       search = search + data;
     });
     dispatch(filterAPIsByTags(search));
   };
 
-  const onRemove = (selectedList, removedItem) => {
+  const onRemove = (selectedList) => {
 
     if (selectedList.length > 0) {
       let search = '';
@@ -97,32 +104,12 @@ function Apis(props) {
       dispatch(resetLibraryApi());
     };
   }, []);
-
-  const handleNextLibrary = (url) => {
-    if (search.length > 0) {
-      dispatch(getLibraryApiNextSearch(search));
-    } else {
-      dispatch(getLibraryApiNext());
-    };
+  const handleNext = () => {
+    if (skip < displayApis.count) return setSkip(skip + topApi);
   };
-
-  const handlePreviousLibrary = () => {
-    if (search.length > 0) {
-      dispatch(getLibraryApiPreviosSearch(search));
-    } else {
-      dispatch(getLibraryApiPrevios());
-    }
+  const handlePrevious = () => {
+    if (skip >= topApi) return setSkip(skip - topApi);
   };
-
-  const compareArrays = (array1, array2) => {
-    return array1.filter((a) => {
-      return array2.some((b) => {
-        return a.slug === b.name;
-      });
-    });
-  };
-
-  const fApis = libraries && libraries.length > 0 && apis && Object.keys(apis).length > 0 && apis.value.length > 0 ? compareArrays(libraries, apis.value) : [];
 
   return (
     <Container fixed sx={{ paddingLeft: {xs: '0px', md: '59px !important'}, paddingRight: {xs:' 0px', md: '97px !important'} }}>
@@ -149,7 +136,7 @@ function Apis(props) {
           </span>
           <Multiselect
             className={`inputSelect ${classes.selectIn}`}
-            options={selectData} // Options to display in the dropdown
+            options={filteredSelectData} // Options to display in the dropdown
             // selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
             onSelect={onSelect} // Function will trigger on select event
             onRemove={onRemove} // Function will trigger on remove event
@@ -162,8 +149,8 @@ function Apis(props) {
       </div>
       <div className={classes.grid__apis}>
         {loadingLibraries === false && apis ? (
-          fApis.length > 0 ? (
-            fApis.map((item, index) => (
+          displayApis.apis.length > 0 ? (
+            displayApis.apis.map((item, index) => (
               <CardInformationLibrary
                 key={index}
                 apiName={item.slug}
@@ -194,8 +181,8 @@ function Apis(props) {
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginTop: '1.875rem' }}>
         <div>
-          {apisSkip > 0 ? (
-            <div onClick={() => handlePreviousLibrary()} className={classes.pagination}>
+          {skip > 0 && skip - topApi >= 0 ? (
+            <div onClick={() => handlePrevious()} className={classes.pagination}>
               <div className={classes.pagination__icon}>
                 <Icon id='MdNavigateBefore' />
               </div>
@@ -205,8 +192,8 @@ function Apis(props) {
           ) : (null)}
         </div>
         <div>
-          {apis.nextLink !== undefined && fApis.length > 0 ? (
-            <div onClick={() => handleNextLibrary()} className={classes.pagination}>
+          {displayApis.apis.length > 0 && skip + topApi < displayApis.count ? (
+            <div onClick={() => handleNext()} className={classes.pagination}>
               <p className={classes.next}>Siguiente</p>
               <div className={classes.pagination__icon}>
                 <Icon id='MdNavigateNext' />

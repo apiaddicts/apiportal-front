@@ -31,15 +31,14 @@ function getApiBookStore(id) {
     });
 }
 
-function getApis(top, skip, filter) {
+function getApis(filter) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  let url = `${config.url}/apis?api-version=${config.apiVersion}&expandApiVersionSet=true&$skip=${skip}`;
-  url += top !== undefined && top !== null && top !== 0 ? `&$top=${top}` : '';
+  let url = `${config.url}/apis?api-version=${config.apiVersion}&expandApiVersionSet=true&tags[0]=published`;
   url += filter !== undefined && filter !== null && filter.length > 0 ? `&$filter=${filter}` : '&$filter=isCurrent';
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -131,7 +130,7 @@ function getListTagsByApi(apiName) {
     });
 }
 
-function filterAPIsByTags(search, filter = 'isCurrent', top = config.topApi, skip = 0, includeNotTaggedApis = false) {
+function filterAPIsByTags(search, filter = 'isCurrent', includeNotTaggedApis = false) {
   const { token } = store.getState().user;
 
   const requestOptions = {
@@ -139,7 +138,7 @@ function filterAPIsByTags(search, filter = 'isCurrent', top = config.topApi, ski
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.url}/apis?api-version=${config.apiVersion}&expandApiVersionSet=${true}&$top=${top}&$skip=${skip}&$filter=${filter}&includeNotTaggedApis=${includeNotTaggedApis}&${search}`;
+  const url = `${config.url}/apis?api-version=${config.apiVersion}&expandApiVersionSet=${true}&$filter=${filter}&includeNotTaggedApis=${includeNotTaggedApis}&${search}`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
@@ -149,14 +148,14 @@ function filterAPIsByTags(search, filter = 'isCurrent', top = config.topApi, ski
     });
 }
 
-function searchApis(search, top, skip) {
+function searchApis(search) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.url}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}')) or (contains(properties/description,'${search}'))`;
+  const url = `${config.url}/apis?api-version=${config.apiVersion}&tags[0]=published&$filter=(contains(properties/displayName,'${search}')) or (contains(properties/description,'${search}'))`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)

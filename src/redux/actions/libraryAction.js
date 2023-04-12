@@ -65,8 +65,8 @@ export const getLibrary = (id) => (dispatch) => {
   );
 };
 
-export const listApis = (top = config.topApi, skip = 0, filter = '') => (dispatch) => {
-  libraryService.getApis(top, skip, filter).then(
+export const listApis = (filter = '') => (dispatch) => {
+  libraryService.getApis(filter).then(
     (res) => {
       dispatch({
         type: libraryConstants.GET_APIS_SUCCESS,
@@ -198,8 +198,8 @@ export const filterCheck = (label, checked, name) => (dispatch) => {
 
 };
 
-export const searchApis = (search, top = config.topApi, skip = 0) => (dispatch) => {
-  libraryService.searchApis(search, top, skip).then(
+export const searchApis = (search) => (dispatch) => {
+  libraryService.searchApis(search).then(
     (res) => {
       dispatch({
         type: libraryConstants.GET_APIS_SUCCESS,
