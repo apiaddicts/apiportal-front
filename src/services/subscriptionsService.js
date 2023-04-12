@@ -179,7 +179,7 @@ function getReportsbySubscription(subscriptionId, init, limit) {
   };
 
   let filter = `subscriptionId eq '${subscriptionId}' and timestamp ge datetime'${init}'`;
-  if (limit) filter += ` and timestamp le datetime'${init}'`;
+  if (limit) filter += ` and timestamp le datetime'${limit}'`;
   const url = `${config.url}/reports/bySubscription?api-version=${config.apiVersion}&%24filter=${filter}`;
 
   return fetch(url, requestOptions)
