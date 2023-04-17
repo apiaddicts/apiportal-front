@@ -28,12 +28,12 @@ function index({ onChange, options, value, className, isMulti, isCreatable = fal
     } });
   };
 
-  const handleValue = (inputValue) => {
-    if (inputValue.trim().length > 0) {
-      setMenuIsOpen(true);
-    } else {
-      setMenuIsOpen(false);
-    }
+  const handleFocus = () => {
+    setMenuIsOpen(true);
+  };
+
+  const handleBlur = () => {
+    setMenuIsOpen(false);
   };
 
   return (
@@ -47,8 +47,9 @@ function index({ onChange, options, value, className, isMulti, isCreatable = fal
           isMulti={isMulti}
           menuIsOpen={menuIsOpen}
           onCreateOption={handleCreate}
-          onInputChange={handleValue}
           isSearchable={true}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           styles={{ control: (baseStyles, state) => ({ ...baseStyles, borderRadius: 100, border: '1px solid #ECF0F1', boxShadow: '0px 2px 20px #ECF0F1' }) }}
         />
       ) : (
@@ -59,7 +60,8 @@ function index({ onChange, options, value, className, isMulti, isCreatable = fal
           options={options}
           isMulti={isMulti}
           menuIsOpen={menuIsOpen}
-          onInputChange={handleValue}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
           styles={{ control: (baseStyles, state) => ({ ...baseStyles, borderRadius: 100, border: '1px solid #ECF0F1', boxShadow: '0px 2px 20px #ECF0F1' }) }}
         />
       )}

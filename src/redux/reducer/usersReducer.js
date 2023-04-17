@@ -1,87 +1,71 @@
 import usersConstants from '../constants/usersConstants';
 
 const initialState = {
-
-  // LIST USERS
-  listUsersReq: false,
-  listUsersRes: {},
-  listUsersFail: {},
-
-  // USERS DETAILS
-  usersDetailReq: false,
-  usersDetailRes: {},
-  usersDetailFail: {},
-
-  // CHANGE STATUS
-  changeStatusReq: false,
-  changeStatusRes: {},
-  changeStatusFail: {},
-
+  // users
+  users: {},
+  error: {},
+  spinner: false,
+  usersSkip: 0,
+  // user
+  userDetail: {},
+  errorUser: {},
+  spinnerUser: false,
 };
 
-export default function usersReducer(state = initialState, { type, payload } = {}) {
-  switch (type) {
-    case usersConstants.LIST_USERS_REQUEST:
+// eslint-disable-next-line default-param-last
+export default function usersReducer(state = initialState, action) {
+  switch (action.type) {
+    // Cases to bring the users
+    case usersConstants.GET_USERS_REQUEST:
       return {
         ...state,
-        listUsersReq: true,
+        spinner: true,
+      };
+    case usersConstants.GET_USERS_SUCCESS:
+      return {
+        ...state,
+        spinner: false,
+        users: action.response,
+        error: {},
+      };
+    case usersConstants.GET_USERS_FAILURE:
+      return {
+        ...state,
+        spinner: false,
+        users: [],
+        error: action.response,
+      };
+    // Case to bring the next user
+    case usersConstants.GET_USERS_SKIP:
+      return {
+        ...state,
+        usersSkip: parseInt(action.skip, 10),
+      };
+      // Cases to bring the user
+    case usersConstants.GET_USER_DETAIL_REQUEST:
+      return {
+        ...state,
+        spinnerUser: true,
+      };
+    case usersConstants.GET_USER_DETAIL_SUCCESS:
+      return {
+        ...state,
+        spinnerUser: false,
+        userDetail: action.response,
+        errorUser: {},
+      };
+    case usersConstants.GET_USER_DETAIL_FAILURE:
+      return {
+        ...state,
+        spinnerUser: false,
+        userDetail: {},
+        errorUser: action.response,
       };
 
-    case usersConstants.LIST_USERS_SUCCESS:
+    case usersConstants.RESET_USERS:
       return {
         ...state,
-        listUsersReq: false,
-        listUsersRes: payload,
-      };
-
-    case usersConstants.LIST_USERS_FAILURE:
-      return {
-        ...state,
-        listUsersReq: false,
-        listUsersFail: payload,
-      };
-
-    case usersConstants.GET_USERS_DETAIL_REQUEST:
-      return {
-        ...state,
-        usersDetailReq: true,
-      };
-
-    case usersConstants.GET_USERS_DETAIL_SUCCESS:
-      return {
-        ...state,
-        usersDetailReq: false,
-        usersDetailRes: payload,
-      };
-
-    case usersConstants.GET_USERS_DETAIL_FAILURE:
-      return {
-        ...state,
-        usersDetailReq: false,
-        usersDetailFail: payload,
-      };
-
-    case usersConstants.UPDATE_USERS_STATUS_REQUEST:
-      return {
-        ...state,
-        changeStatusReq: true,
-        usersDetailReq: true,
-      };
-
-    case usersConstants.UPDATE_USERS_STATUS_SUCCESS:
-      return {
-        ...state,
-        changeStatusReq: false,
-        usersDetailReq: false,
-        changeStatusRes: payload,
-      };
-
-    case usersConstants.UPDATE_USERS_STATUS_FAILURE:
-      return {
-        ...state,
-        changeStatusReq: false,
-        usersDetailReq: false,
-        changeStatusFail: payload,
+        usersSkip: 0,
       };
 
     default:

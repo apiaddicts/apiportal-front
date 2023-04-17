@@ -48,7 +48,7 @@ export default function productReducer(state = initialState, action) {
     case productsConstants.GET_PRODUCTS_SKIP:
       return {
         ...state,
-        productsSkip: action.skip,
+        productsSkip: parseInt(action.skip, 10),
       };
       // Cases to bring the product
     case productsConstants.GET_PRODUCT_REQUEST:
@@ -114,7 +114,7 @@ export default function productReducer(state = initialState, action) {
     case productsConstants.GET_PRODUCT_API_SKIP:
       return {
         ...state,
-        productsApisSkip: action.skip,
+        productsApisSkip: parseInt(action.skip, 10),
       };
       // Reset constants product:
     case productsConstants.RESET_PRODUCT:

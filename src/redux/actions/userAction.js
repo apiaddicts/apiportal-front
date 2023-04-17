@@ -2,7 +2,7 @@
 import userConstants from '../constants/userConstats';
 import userService from '../../services/userService';
 import config from '../../services/config';
-import store from '../store';
+import { getUserDetail, listUsers } from './usersAction';
 
 // eslint-disable-next-line import/prefer-default-export
 export const login = (data) => (dispatch) => {
@@ -21,8 +21,8 @@ export const login = (data) => (dispatch) => {
           localStorage.setItem('email', data.email);
           localStorage.setItem('password', secureKeyEncrypted);
         }
-        sessionStorage.setItem('token', JSON.stringify(response));
-        dispatch(getProfile(response.data));
+        sessionStorage.setItem('token', JSON.stringify(response.data));
+        dispatch(getUser(response.data));
         dispatch(getUserGroups(response.data));
         dispatch({ type: userConstants.RESET_ALERT });
       }
@@ -57,6 +57,7 @@ export const confirmAccount = (queryParams, setIsOpen) => (dispatch) => {
 };
 
 export const logout = () => (dispatch) => {
+  window.location.reload(false);
   sessionStorage.removeItem('token');
   localStorage.removeItem('If-Match');
   dispatch({
@@ -77,7 +78,7 @@ export const signUp = (data) => (dispatch) => {
         } else {
           dispatch({
             type: userConstants.SIGNUP_SUCCESS,
-            response,
+            response: response.data,
           });
         }
       }
@@ -88,16 +89,16 @@ export const signUp = (data) => (dispatch) => {
   );
 };
 
-export const getProfile = (tokens) => (dispatch) => {
+export const getUser = (tokens) => (dispatch) => {
   dispatch({ type: userConstants.GET_USER_REQUEST });
-  userService.getProfile(tokens.token, tokens?.userId?.id).then(
+  userService.getUserDetails(tokens.token, tokens?.userId?.id).then(
     (response) => {
       if (response && Object.keys(response).length > 0) {
         dispatch({ type: userConstants.GET_USER_SUCCESS, response });
         dispatch({
           type: userConstants.LOGIN_SUCCESS,
           id: tokens?.userId?.id,
-          token: tokens.token,
+          token: tokens?.token,
         });
       } else {
         sessionStorage.removeItem('token');
@@ -111,45 +112,81 @@ export const getProfile = (tokens) => (dispatch) => {
 };
 
 export const getUserGroups = (tokens) => (dispatch) => {
-  dispatch({
-    type: userConstants.GET_USER_GROUPS_REQUEST,
-  });
-  userService.getUserGroups(tokens?.token, tokens?.userId?.id)
-    .then((response) => {
-      if (response && Object.keys(response).length > 0) {
-        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
-          dispatch({
-            type: userConstants.GET_USER_GROUPS_FAILURE,
-            response,
-          });
-        } else {
-          dispatch({
-            type: userConstants.GET_USER_GROUPS_SUCCESS,
-            response,
-          });
-        }
-      }
-    });
+  dispatch({ type: userConstants.GET_USER_GROUPS_REQUEST });
+  userService.getUserGroups(tokens?.token, tokens?.userId?.id).then(
+    (response) => {
+      dispatch({ type: userConstants.GET_USER_GROUPS_SUCCESS, response });
+    },
+  );
 };
 
-export const updateUser = (data) => (dispatch) => {
-  userService.updateUser(data).then(
+/*export const getUserEntityTag = (tokens) => (dispatch) => {
+  userService.getUserEntityTag(tokens.token, tokens?.userId?.id).then(
     (response) => {
-      if (Object.keys(response).length > 0) {
-        const { id, token } = store.getState().user;
-        const tokens = {
-          token,
-          id,
-        };
-        dispatch(getProfile(tokens));
-      }
+      localStorage.setItem('If-Match', JSON.stringify(response));
+      dispatch({ type: userConstants.HEAD_ETAG_SUCCESS, response });
     },
     (error) => {
       console.error(error);
     },
   );
+};*/
+
+export const updateUser = (data, userId, tokens) => (dispatch) => {
+  dispatch({
+    type: userConstants.UPDATE_USER_PROFILE_REQUEST,
+  });
+  userService.updateUser(data, userId).then(
+    (response) => {
+      if (response && Object.keys(response).length > 0) {
+        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+          dispatch({
+            type: userConstants.UPDATE_USER_PROFILE_FAILURE,
+            response,
+          });
+        } else {
+          dispatch({
+            type: userConstants.UPDATE_USER_PROFILE_SUCCESS,
+            response,
+          });
+        }
+      }
+    },
+  ).finally(() => {
+    dispatch(getUser(tokens));
+  });
 };
-export const verifyOldPassword = (data) => (dispatch) => {
+
+export const changeStatus = (data, userId) => (dispatch) => {
+  dispatch({
+    type: userConstants.UPDATE_USER_STATUS_REQUEST,
+  });
+  userService.changeStatus(data, userId)
+    .then((response) => {
+      if (Object.keys(response).length > 0) {
+        if (Object.prototype.hasOwnProperty.call(response, 'errors')) {
+          dispatch({
+            type: userConstants.UPDATE_USER_STATUS_FAILURE,
+            payload: response,
+          });
+          dispatch(resetAlert());
+        } else {
+          dispatch({
+            type: userConstants.UPDATE_USER_STATUS_SUCCESS,
+            payload: response.data,
+          });
+        }
+      }
+    }).finally(() => {
+      dispatch(getUserDetail(userId));
+      dispatch(listUsers());
+    });
+};
+
+/*export const verifyOldPassword = (data) => (dispatch) => {
+  dispatch({
+    type: userConstants.RESTORE_SIGNUP_REQUEST,
+  });
   userService.verifyOldPassword(data).then(
     (response) => {
       if (response && Object.keys(response).length > 0) {
@@ -161,8 +198,11 @@ export const verifyOldPassword = (data) => (dispatch) => {
             });
           }
         } else {
-          dispatch(getUserEntityTag(response));
-          dispatch(changePassword(data.new_password));
+          dispatch({
+            type: userConstants.RESTORE_SIGNUP_SUCCESS,
+            response,
+          });
+          dispatch(changePassword(data.new_password, response?.data?.id));
         }
       }
     },
@@ -170,20 +210,34 @@ export const verifyOldPassword = (data) => (dispatch) => {
       console.error(error);
     },
   );
-};
-export const changePassword = (newPassword) => (dispatch) => {
-  userService.changePassword(newPassword).then(
+};*/
+
+export const changePassword = (data) => (dispatch) => {
+  dispatch({
+    type: userConstants.CHANGE_PASSWORD_LOGGED_REQUEST,
+  });
+  userService.changePassword(data).then(
     (response) => {
-      const passwordEncrypted = btoa(newPassword);
-      const secureKeyEncrypted = btoa(`${passwordEncrypted}:${config.rememberkey}`);
-      localStorage.setItem('password', secureKeyEncrypted);
-      // dispatch(logout());
-    },
-    (error) => {
-      console.error('Update password error', error);
+      if (response && Object.keys(response).length > 0) {
+        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+          dispatch({
+            type: userConstants.CHANGE_PASSWORD_LOGGED_FAILURE,
+            response,
+          });
+        } else {
+          dispatch({
+            type: userConstants.CHANGE_PASSWORD_LOGGED_SUCCESS,
+            response: response.data,
+          });
+          const passwordEncrypted = btoa(data.password);
+          const secureKeyEncrypted = btoa(`${passwordEncrypted}:${config.rememberkey}`);
+          localStorage.setItem('password', secureKeyEncrypted);
+        }
+      }
     },
   );
 };
+
 export const resetPassword = (data) => (dispatch) => {
   userService.resetPassword(data).then(
     (response) => {
@@ -205,12 +259,37 @@ export const resetPassword = (data) => (dispatch) => {
     },
   );
 };
+
+/*export const resetPasswordWithTicket = (queryParams, data, password) => (dispatch) => {
+  userService.resetPasswordWithTicket(queryParams, data, password).then(
+    (response) => {
+      if (response && Object.keys(response).length > 0) {
+        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+          if (response?.error?.status === 401) {
+            dispatch({ type: userConstants.RESET_PASSWORD_TICKET_FAILURE, response });
+          }
+        } else {
+          dispatch({ type: userConstants.RESET_PASSWORD_TICKET_SUCCESS, response });
+          dispatch(logout());
+          setTimeout(() => {
+            console.error('redireccionar');
+            window.location = '/';
+          }, 1500);
+        }
+      }
+    },
+    (error) => {
+      console.error('Reset password error', error);
+    },
+  );
+};*/
+
 export const confirmPassword = ({ confirmToken, newPassword }) => (dispatch) => {
   dispatch({
     type: userConstants.CONFIRM_PASSWORD_REQUEST,
   });
-  userService.confirmPassword(confirmToken, newPassword).then(
-    (response) => {
+  userService.confirmPassword(confirmToken, newPassword)
+    .then((response) => {
       if (response && Object.keys(response).length > 0) {
         if (Object.prototype.hasOwnProperty.call(response, 'error')) {
           dispatch({
@@ -224,11 +303,7 @@ export const confirmPassword = ({ confirmToken, newPassword }) => (dispatch) => 
           });
         }
       }
-    },
-    (error) => {
-      console.error('Reset password error', error);
-    },
-  );
+    });
 };
 
 export const sessionTimeout = () => (dispatch) => {

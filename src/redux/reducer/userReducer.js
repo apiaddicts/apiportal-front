@@ -13,15 +13,18 @@ const initialState = token ? {
   responseError: {},
   responseErrorLogin: {},
   responseRestoreError: {},
+  responseRestoreResponse: {},
   responseResetSignup: {},
   responseResetPwd: {},
   responseResetPwdError: {},
   accountVerificationSent: false,
   accountVerified: false,
+  accountVerifiedResponse: {},
   openModal: false,
-  userGroupReq: false,
-  userGroupRes: {},
-  userGroupFail: {},
+  changePasswordRequest: false,
+  changePasswordSuccess: {},
+  changePasswordFailure: {},
+  chnStatusRes: {},
 } : {
   user: {},
   loadingUser: false,
@@ -33,15 +36,21 @@ const initialState = token ? {
   responseError: {},
   responseErrorLogin: {},
   responseRestoreError: {},
+  responseRestoreResponse: {},
   responseResetSignup: {},
   responseResetPwd: {},
   responseResetPwdError: {},
   accountVerificationSent: false,
   accountVerified: false,
+  accountVerifiedResponse: {},
   openModal: false,
-  userGroupReq: false,
-  userGroupRes: {},
-  userGroupFail: {},
+  changePasswordRequest: false,
+  changePasswordSuccess: {},
+  changePasswordFailure: {},
+  updateProfileReq: false,
+  updateProfileSucc: {},
+  updateProfileFail: {},
+  chnStatusRes: {},
 };
 
 // eslint-disable-next-line default-param-last
@@ -73,6 +82,18 @@ export default function userReducer(state = initialState, action) {
         loadingSignUp: false,
         responseError: action.response,
       };
+    case userConstants.RESTORE_SIGNUP_REQUEST:
+      return {
+        ...state,
+        loadingSignUp: true,
+        responseRestoreError: {},
+      };
+    case userConstants.RESTORE_SIGNUP_SUCCESS:
+      return {
+        ...state,
+        loadingSignUp: false,
+        responseRestoreResponse: action.response,
+      };
     case userConstants.RESTORE_SIGNUP_FAILURE:
       return {
         ...state,
@@ -95,6 +116,7 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         accountVerified: false,
+        accountVerifiedResponse: action.response,
       };
     case userConstants.CONFIRM_ACCOUNT_FAILURE:
       return {
@@ -113,6 +135,18 @@ export default function userReducer(state = initialState, action) {
         ...state,
         user: action.response,
         loadingUser: false,
+      };
+    // login user groups
+    case userConstants.GET_USER_GROUPS_REQUEST:
+      return {
+        ...state,
+        loadingUserGroups: true,
+      };
+    case userConstants.GET_USER_GROUPS_SUCCESS:
+      return {
+        ...state,
+        userGroups: action.response,
+        loadingUserGroups: false,
       };
     case userConstants.LOGIN_SUCCESS:
       return {
@@ -155,6 +189,8 @@ export default function userReducer(state = initialState, action) {
         ResponseResetPwd: {},
         responseResetPwdError: {},
         signUpData: {},
+        changePasswordSuccess: {},
+        changePasswordFailure: {},
       };
     case userConstants.LOGOUT_USER:
       return {
@@ -177,6 +213,53 @@ export default function userReducer(state = initialState, action) {
         openModal: true,
       };
 
+    case userConstants.UPDATE_USER_STATUS_REQUEST:
+      return {
+        ...state,
+        loadingUser: true,
+      };
+    case userConstants.UPDATE_USER_STATUS_SUCCESS:
+      return {
+        ...state,
+        loadingUser: false,
+        chnStatusRes: action.payload,
+      };
+    case userConstants.UPDATE_USER_STATUS_FAILURE:
+      return {
+        ...state,
+        loadingUser: false,
+        responseError: action.payload,
+      };
+
+    case userConstants.CHANGE_PASSWORD_LOGGED_REQUEST:
+      return {
+        ...state,
+        changePasswordRequest: true,
+        changePasswordSuccess: {},
+        changePasswordFailure: {},
+      };
+    case userConstants.CHANGE_PASSWORD_LOGGED_SUCCESS:
+      return {
+        ...state,
+        changePasswordRequest: false,
+        changePasswordSuccess: action.response,
+        changePasswordFailure: {},
+      };
+    case userConstants.CHANGE_PASSWORD_LOGGED_FAILURE:
+      return {
+        ...state,
+        changePasswordRequest: false,
+        changePasswordSuccess: {},
+        changePasswordFailure: action.response,
+      };
+    case userConstants.CHANGE_PASSWORD_LOGGED_RESET:
+      return {
+        ...state,
+        changePasswordRequest: false,
+        changePasswordSuccess: {},
+        changePasswordFailure: {},
+      };
+
     case userConstants.CONFIRM_PASSWORD_REQUEST:
       return {
         ...state,
@@ -185,36 +268,34 @@ export default function userReducer(state = initialState, action) {
 
     case userConstants.CONFIRM_PASSWORD_SUCCESS:
       return {
-        ...state,
         loadingSignUp: false,
         responseResetPwd: action.response,
       };
 
     case userConstants.CONFIRM_PASSWORD_FAILURE:
       return {
-        ...state,
         loadingSignUp: false,
         responseResetPwdError: action.response,
       };
 
-    case userConstants.GET_USER_GROUPS_REQUEST:
+    case userConstants.UPDATE_USER_PROFILE_REQUEST:
       return {
         ...state,
-        userGroupReq: true,
+        updateProfileReq: true,
       };
 
-    case userConstants.GET_USER_GROUPS_SUCCESS:
+    case userConstants.UPDATE_USER_PROFILE_SUCCESS:
       return {
         ...state,
-        userGroupRes: action.response,
-        userGroupReq: false,
+        updateProfileReq: false,
+        updateProfileSucc: action.response,
       };
 
-    case userConstants.GET_USER_GROUPS_FAILURE:
+    case userConstants.UPDATE_USER_PROFILE_FAILURE:
       return {
         ...state,
-        userGroupFail: action.response,
-        userGroupReq: false,
+        updateProfileReq: false,
+        updateProfileFail: action.response,
       };
 
     default:

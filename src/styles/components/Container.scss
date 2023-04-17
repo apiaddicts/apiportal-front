@@ -27,6 +27,29 @@
   }
 }
 
+.grid__wrapper {
+  margin-bottom: 31px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 1rem;
+  &__2xl {
+    margin: 31px 0;
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    align-items: center;
+    gap: 4rem;
+  }
+}
+.wrapper {
+  &__content {
+    &__right {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
+
 .fm {
   margin: auto;
   display: flex;

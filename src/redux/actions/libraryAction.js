@@ -67,19 +67,132 @@ export const getLibrary = (id) => (dispatch) => {
 
 export const listApis = (top = config.topApi, skip = 0, filter = '') => (dispatch) => {
   libraryService.getApis(top, skip, filter).then(
-    (res) => {
-      dispatch({
-        type: libraryConstants.GET_APIS_SUCCESS,
-        payload: res,
-      });
-    },
-    (error) => {
-      dispatch({
-        type: libraryConstants.GET_APIS_FAILURE,
-        payload: error,
-      });
+    (response) => {
+      if (response && Object.keys(response).length > 0) {
+        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+          dispatch({
+            type: libraryConstants.GET_APIS_FAILURE,
+            payload: response,
+          });
+        } else {
+          dispatch({
+            type: libraryConstants.GET_APIS_SUCCESS,
+            payload: response.data,
+          });
+        }
+      }
     },
   );
+};
+
+export const listApisProduct = (skip = 0, filter = '') => (dispatch) => {
+  dispatch({
+    type: libraryConstants.GET_API_PRODUCTS_REQUEST,
+  });
+  libraryService.listApisProduct(skip, filter)
+    .then((response) => {
+      if (response && Object.keys(response).length > 0) {
+        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+          dispatch({
+            type: libraryConstants.GET_API_PRODUCTS_FAILURE,
+            payload: error,
+          });
+        } else {
+          dispatch({
+            type: libraryConstants.GET_API_PRODUCTS_SUCCESS,
+            payload: response.data,
+            resp: response,
+          });
+        }
+
+      }
+    });
+};
+
+export const getApisProductNext = () => (dispatch) => {
+  const { apisProductSkip } = store.getState().library;
+  const skip = parseInt(apisProductSkip, 10) + parseInt(config.topApi, 10);
+  dispatch(listApisProduct(config.topApi, skip));
+  dispatch({
+    type: libraryConstants.GET_APIS_PRODUCT_SKIP,
+    payload: skip,
+  });
+};
+
+export const getApisProductPrevious = () => (dispatch) => {
+  const { apisProductSkip } = store.getState().library;
+  const skip = parseInt(apisProductSkip, 10) - parseInt(config.topApi, 10);
+  dispatch(listApisProduct(config.topApi, skip));
+  dispatch({
+    type: libraryConstants.GET_APIS_PRODUCT_SKIP,
+    payload: skip,
+  });
+};
+
+export const filterByName = (search, top = config.topApi, skip = 0) => (dispatch) => {
+  const filter = `api=${search}`;
+  libraryService.listApisProduct(top, skip, filter)
+    .then((response) => {
+      if (response && Object.keys(response).length > 0) {
+        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+          dispatch({
+            type: libraryConstants.GET_API_PRODUCTS_FAILURE,
+            payload: error,
+          });
+        } else {
+          dispatch({
+            type: libraryConstants.GET_API_PRODUCTS_SUCCESS,
+            payload: response.data,
+            resp: response,
+          });
+        }
+
+      }
+    });
+};
+
+export const filterByProduct = (search, top = config.topApi, skip = 0) => (dispatch) => {
+  const filter = `product=${search}`;
+  libraryService.listApisProduct(top, skip, filter)
+    .then((response) => {
+      if (response && Object.keys(response).length > 0) {
+        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+          dispatch({
+            type: libraryConstants.GET_API_PRODUCTS_FAILURE,
+            payload: error,
+          });
+        } else {
+          dispatch({
+            type: libraryConstants.GET_API_PRODUCTS_SUCCESS,
+            payload: response.data,
+            resp: response,
+          });
+        }
+
+      }
+    });
+};
+
+export const filterByDescription = (search, top = config.topApi, skip = 0) => (dispatch) => {
+  const filter = `apiDescription=${search}`;
+  libraryService.listApisProduct(top, skip, filter)
+    .then((response) => {
+      if (response && Object.keys(response).length > 0) {
+        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+          dispatch({
+            type: libraryConstants.GET_API_PRODUCTS_FAILURE,
+            payload: error,
+          });
+        } else {
+          dispatch({
+            type: libraryConstants.GET_API_PRODUCTS_SUCCESS,
+            payload: response.data,
+            resp: response,
+          });
+        }
+
+      }
+    });
 };
 
 export const getApi = (id) => (dispatch) => {
@@ -132,6 +245,27 @@ export const getApiOpenAPI = (id) => (dispatch) => {
       });
     },
   );
+};
+
+export const getApiDescription = (id) => (dispatch) => {
+  dispatch({
+    type: libraryConstants.GET_API_DESCRIPTION_REQUEST,
+  });
+  libraryService.getApiDescription(id)
+    .then(
+      (response) => {
+        dispatch({
+          type: libraryConstants.GET_API_DESCRIPTION_SUCCESS,
+          payload: response,
+        });
+      },
+      (error) => {
+        dispatch({
+          type: libraryConstants.GET_API_DESCRIPTION_FAILURE,
+          payload: error,
+        });
+      },
+    );
 };
 
 export const sortApiCollection = (sort) => (dispatch) => {
@@ -205,6 +339,7 @@ export const searchApis = (search, top = config.topApi, skip = 0) => (dispatch) 
         type: libraryConstants.GET_APIS_SUCCESS,
         payload: res,
       });
+      dispatch({ type: libraryConstants.GET_LIBRARY_SKIP, skip });
     },
     (error) => {
       dispatch({
@@ -215,8 +350,8 @@ export const searchApis = (search, top = config.topApi, skip = 0) => (dispatch) 
   );
 };
 
-export const filterAPIsByTags = (search) => (dispatch) => {
-  libraryService.filterAPIsByTags(search).then(
+export const filterAPIsByTags = (data) => (dispatch) => {
+  libraryService.filterAPIsByTags(data).then(
     (res) => {
       dispatch({
         type: libraryConstants.GET_APIS_SUCCESS,
@@ -286,7 +421,7 @@ export const getApiHostnames = (apiName) => (dispatch) => {
     (res) => {
       dispatch({
         type: libraryConstants.GET_API_HOSTNAMES_SUCCESS,
-        payload: res,
+        payload: res.data,
       });
     },
     (error) => {
@@ -301,5 +436,12 @@ export const getApiHostnames = (apiName) => (dispatch) => {
 export const resetApiHostname = () => (dispatch) => {
   dispatch({
     type: libraryConstants.RESET_API_HOSTNAMES,
+  });
+};
+
+export const showSelectedApis = (selectedApis) => (dispatch) => {
+  dispatch({
+    type: libraryConstants.SELECTED_APIS,
+    payload: selectedApis,
   });
 };

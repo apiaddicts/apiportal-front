@@ -8,7 +8,7 @@ function getApiBookStores() {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
-  return fetch(`${config.apiUrl}/library-apis/`, requestOptions)
+  return fetch(`${config.apiUrl}/sura-library-apis/`, requestOptions)
     .then(handleResponse)
     .then((libraries) => {
       return libraries;
@@ -22,7 +22,7 @@ function getApiBookStore(id) {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
-  return fetch(`${config.apiUrl}/library-apis/${id}`, requestOptions)
+  return fetch(`${config.apiUrl}/sura-library-apis/${id}`, requestOptions)
     .then(handleResponse)
     .then((library) => {
       return library;
@@ -35,12 +35,12 @@ function getApis(top, skip, filter) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
   };
 
-  let url = `${config.url}/apis?api-version=${config.apiVersion}&expandApiVersionSet=true&$skip=${skip}`;
+  let url = `${config.apimUrl}/apis?expandApiVersionSet=true&$skip=${skip}`;
   url += top !== undefined && top !== null && top !== 0 ? `&$top=${top}` : '';
-  url += filter !== undefined && filter !== null && filter.length > 0 ? `&$filter=${filter}` : '&$filter=isCurrent';
+  url += filter !== undefined && filter !== null && filter.length > 0 ? `&$filter=${filter}` : '';
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
@@ -48,66 +48,109 @@ function getApis(top, skip, filter) {
     }).catch((error) => {
       console.error(error);
     });
+}
+
+function listApisProduct(top, skip, filter) {
+
+  const { token } = store.getState().user;
+
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Authorization': token },
+  };
+
+  let url = `${config.apimUrl}/apis-with-products?$skip=${skip}&expandApiVersionSet`;
+  url += top !== undefined && top !== null && top !== 0 ? `&$top=${top}` : '';
+  url += filter !== undefined && filter !== null && filter.length > 0 ? `&$filter=${filter}` : '';
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response)
+    .catch((error) => error);
+
 }
 
 function getAPi(id) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
   };
 
-  const url = `${config.url}/apis/${id}?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}/apis/${id}?expandApiVersionSet=true&exportQuery&format`;
+
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response;
+      return response.data;
     }).catch((error) => {
       console.error(error);
     });
 }
+
+const isJsonString = (str) => {
+  try {
+    JSON.parse(str);
+  } catch (e) {
+    return str;
+  }
+  return JSON.parse(str);
+};
 
 function getApiOpenAPI(id) {
-  const { token } = store.getState().user;
+
   const requestOptions = {
     method: 'GET',
-    headers: { 'Accept': 'application/vnd.oai.openapi+json; charset=utf-8', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json' },
   };
-
-  const url = `${config.url}/apis/${id}?api-version=${config.apiVersion}&export=true&format=swagger`;
+  const url = `${config.apiUrl}/sura-library-apis?_where[slug]=${id}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      if (response.components && response.components.securitySchemes) {
-        delete response.components.securitySchemes['apiKeyQuery'];
-        /*response.components.securitySchemes['API Key Header'] = { ...response.components.securitySchemes['apiKeyHeader'] };
-        delete response.components.securitySchemes['apiKeyHeader'];*/
+      if (response[0].openDoc.components && response[0].openDoc.components.securitySchemes) {
+        delete response[0].openDoc.components.securitySchemes['apiKeyQuery'];
       }
-      if (response.securityDefinitions) {
-        delete response.securityDefinitions['apiKeyQuery'];
-        /*response.securityDefinitions['API Key Header'] = { ...response.securityDefinitions['apiKeyHeader'] };
-        delete response.securityDefinitions['apiKeyHeader'];*/
+      if (response[0].openDoc.security) {
+        delete response[0].openDoc.security['apiKeyQuery'];
       }
-      return response;
+
+      const strOpenDoc = response[0].openDoc;
+
+      return isJsonString(strOpenDoc);
     }).catch((error) => {
       console.error(error);
     });
 }
 
-function getListTags() {
+function getApiDescription(id) {
+
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const url = `${config.apiUrl}/sura-library-apis?_where[slug]=${id}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response[0])
+    .catch((error) => error);
+}
+
+function getListTags(skip = 0, filter = '') {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
   };
 
-  const url = `${config.url}/tags?api-version=${config.apiVersion}&scope=apis`;
+  const url = `${config.apimUrl}/api-tags?$skip=${skip}&expandApiVersionSet=true&includeNotTaggedApis=false`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response;
+      return response.data;
     }).catch((error) => {
       console.error(error);
     });
@@ -117,33 +160,34 @@ function getListTagsByApi(apiName) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
   };
 
-  const url = `${config.url}/apis/${apiName}/tags?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}/apis/${apiName}/tags`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response;
+      return response.data;
     }).catch((error) => {
       console.error(error);
     });
 }
 
-function filterAPIsByTags(search, filter = 'isCurrent', top = config.topApi, skip = 0, includeNotTaggedApis = false) {
+function filterAPIsByTags(data) {
   const { token } = store.getState().user;
 
   const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+    body: JSON.stringify(data),
   };
 
-  const url = `${config.url}/apis?api-version=${config.apiVersion}&expandApiVersionSet=${true}&$top=${top}&$skip=${skip}&$filter=${filter}&includeNotTaggedApis=${includeNotTaggedApis}&${search}`;
+  const url = `${config.apimUrl}/apis-by-tags/get`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response;
+      return response.data;
     }).catch((error) => {
       console.error(error);
     });
@@ -153,15 +197,15 @@ function searchApis(search, top, skip) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
   };
 
-  const url = `${config.url}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}')) or (contains(properties/description,'${search}'))`;
+  const url = `${config.apimUrl}/apis?$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}')) or (contains(properties/description,'${search}'))`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response;
+      return response.data;
     }).catch((error) => {
       console.error(error);
     });
@@ -171,10 +215,10 @@ function getApiHostnames(apiName) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
   };
 
-  const url = `${config.url}/apis/${apiName}/hostnames?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}/apis/${apiName}/hostnames`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
@@ -195,6 +239,8 @@ const libraryService = {
   filterAPIsByTags,
   searchApis,
   getApiHostnames,
+  getApiDescription,
+  listApisProduct,
 };
 
 export default libraryService;

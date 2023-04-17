@@ -7,15 +7,16 @@ function listProducts(top, skip) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Authorization': token },
   };
 
-  const url = `${config.url}/products?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}`;
+  let url = `${config.apimUrl}/products?$skip=${skip}&include_applications=false`;
+  url += top !== undefined && top !== null && top !== 0 ? `&$top=${top}` : '';
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response;
+      return response.data;
     }).catch((error) => {
       console.error(error);
     });
@@ -25,15 +26,15 @@ function searchProducts(search, top, skip) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Authorization': token },
   };
 
-  const url = `${config.url}/products?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}')) or (contains(properties/description,'${search}'))`;
+  const url = `${config.apimUrl}/products?$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}')) or (contains(properties/description,'${search}'))&include_applications=false`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response;
+      return response.data;
     }).catch((error) => {
       console.error(error);
     });
@@ -43,15 +44,15 @@ function filterProductsByName(search, top, skip) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Authorization': token },
   };
 
-  const url = `${config.url}/products?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}'))`;
+  const url = `${config.apimUrl}/products?$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}'))&include_applications=false`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response;
+      return response.data;
     }).catch((error) => {
       console.error(error);
     });
@@ -61,15 +62,15 @@ function filterProductsByDescription(search, top, skip) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Authorization': token },
   };
 
-  const url = `${config.url}/products?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/description,'${search}'))`;
+  const url = `${config.apimUrl}/products?$top=${top}&$skip=${skip}&$filter=(contains(properties/description,'${search}'))&include_applications=false`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response;
+      return response.data;
     }).catch((error) => {
       console.error(error);
     });
@@ -79,15 +80,15 @@ function filterProductAPIsByName(productName, search, top, skip) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Authorization': token },
   };
 
-  const url = `${config.url}/products/${productName}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}'))`;
+  const url = `${config.apimUrl}/products/${productName}/apis?$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}'))`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response;
+      return response.data;
     }).catch((error) => {
       console.error(error);
     });
@@ -97,15 +98,15 @@ function filterProductAPIsByDescription(productName, search, top, skip) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Authorization': token },
   };
 
-  const url = `${config.url}/products/${productName}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/description,'${search}'))`;
+  const url = `${config.apimUrl}/products/${productName}/apis?$top=${top}&$skip=${skip}&$filter=(contains(properties/description,'${search}'))`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response;
+      return response.data;
     }).catch((error) => {
       console.error(error);
     });
@@ -115,10 +116,10 @@ function getProductDetail(productName) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Authorization': token },
   };
 
-  const url = `${config.url}/products/${productName}?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}/products/${productName}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -133,10 +134,11 @@ function getProductSuscripcion(productName, top, skip) {
   const { token, id } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Authorization': token },
   };
 
-  const url = `${config.url}/users/${id}/subscriptions?api-version=${config.apiVersion}&$filter=(properties/scope eq '/products/${productName}')&$top=${top}&$skip=${skip}`;
+  let url = `${config.apimUrl}/users/${id}/products/${productName}/subscriptions?$skip=${skip}`;
+  url += top !== undefined && top !== null && top !== 0 ? `&$top=${top}` : '';
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -151,15 +153,15 @@ function getProductApis(productName, top, skip) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Authorization': token },
   };
 
-  const url = `${config.url}/products/${productName}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}`;
+  const url = `${config.apimUrl}/products/${productName}/apis?$top=${top}&$skip=${skip}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response;
+      return response.data;
     }).catch((error) => {
       console.error(error);
     });

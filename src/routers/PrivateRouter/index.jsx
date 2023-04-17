@@ -21,16 +21,22 @@ import Subscriptions from '../../pages/private/Subscriptions';
 import Logout from '../../pages/private/Logout/Logout';
 
 import Users from '../../pages/private/Users';
-import UsersDetail from '../../pages/private/Users/UsersDetail';
+import UsersDetail from '../../pages/private/UserDetail';
 import Groups from '../../pages/private/Groups';
+import GroupDetailed from '../../pages/private/Groups/GroupDetailed';
 
-import { getProfile, getUserGroups } from '../../redux/actions/userAction';
+import { getUser, getUserGroups } from '../../redux/actions/userAction';
 import classes from './private-router.module.scss';
+import GettingStarted from '../../pages/private/GettingStarted';
+import Apps from '../../pages/private/Apps/Apps';
+import AppDetailed from '../../pages/private/Apps/AppDetailed';
+import AddApp from '../../pages/private/Apps/AddApp';
+import AddUserB2c from '../../pages/private/Apps/AddUserB2c';
 import config from '../../services/config';
 
 function PrivateRouter({ children }) {
   // const [showModal, setShowModal] = useState(false);
-  const { id, token, user, openModal, userGroupRes } = useSelector((state) => state.user);
+  const { id, token, user, openModal, userGroups } = useSelector((state) => state.user);
   const { time } = useSelector((state) => state.timer);
   const { checkSession } = useVerifySession();
   const { getTime } = useTimer();
@@ -38,7 +44,6 @@ function PrivateRouter({ children }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log(id, token, user);
     if (id !== '' && token !== '' && user && Object.keys(user).length === 0) {
       const tokens = {
         userId: {
@@ -46,7 +51,7 @@ function PrivateRouter({ children }) {
         },
         token,
       };
-      dispatch(getProfile(tokens));
+      dispatch(getUser(tokens));
       if (user) dispatch(getUserGroups(tokens));
       getTime();
     }
@@ -56,7 +61,7 @@ function PrivateRouter({ children }) {
     checkSession();
   }, [time]);
 
-  const isAdmin = userGroupRes && userGroupRes?.value.find((group) => group.name === config.adminId);
+  const isAdmin = userGroups?.value.find((group) => group.name === config.adminId);
 
   return privateSession ? (
     <Box>
@@ -84,8 +89,14 @@ function PrivateRouter({ children }) {
                     <Route path='users' exact='true' element={<Users />} />
                     <Route path='users/:id' exact='true' element={<UsersDetail />} />
                     <Route path='groups' exact='true' element={<Groups />} />
+                    <Route path='groups/:id' exact='true' element={<GroupDetailed />} />
                   </>
                 )}
+                <Route path='apps' element={<Apps />} />
+                <Route path='apps/:id' element={<AppDetailed />} />
+                <Route path='apps/new-app' element={<AddApp />} />
+                <Route path='apps/user-b2c' element={<AddUserB2c />} />
+                <Route path='getting-started' element={<GettingStarted />} />
               </Routes>
             </div>
           </Box>

@@ -1,110 +1,231 @@
+/* eslint-disable default-param-last */
 import groupConstants from '../constants/groupConstants';
 
 const initialState = {
-  // LIST GROUPS
-  listGroupsReq: false,
-  listGroupsRes: {},
-  listGroupsFail: {},
-
-  // DELETE GROUP
+  groups: {},
+  assigned: {},
+  assignedGroups: {},
+  assignedProduct: {},
+  group: {},
+  errorGroupGroup: {},
   groupLoading: false,
-
-  //GET GROUPS BY USER
-  getGroupsUserReq: false,
-  getGroupsUserRes: {},
-  getGroupsUserFail: {},
-
-  //DELETE GROUPS OF USER
-  delGroupsUserReq: false,
-  delGroupsUserRes: {},
-  delGroupsUserFail: {},
-
-  //DELETE GROUPS OF USER
-  addGroupsUserReq: false,
-  addGroupsUserRes: {},
-  addGroupsUserFail: {},
+  productGroup: {},
+  groupSkip: 0,
+  groupAssignedSkip: 0,
+  groupProdSkip: 0,
 };
 
-export default function groupReducer(state = initialState, { type, payload } = {}) {
-  switch (type) {
+export default function groupReducer(state = initialState, action) {
 
-    case groupConstants.LIST_GROUPS_REQUEST:
+  switch (action.type) {
+    case groupConstants.LIST_ALL_GROUPS_REQUEST:
       return {
         ...state,
-        listGroupsReq: true,
+        groupLoading: true,
       };
 
-    case groupConstants.LIST_GROUPS_SUCCESS:
+    case groupConstants.LIST_ALL_GROUPS_SUCCESS:
       return {
         ...state,
-        listGroupsReq: false,
-        listGroupsRes: payload,
+        groups: action.payload,
+        groupLoading: false,
       };
 
-    case groupConstants.LIST_GROUPS_FAILURE:
+    case groupConstants.LIST_ALL_GROUPS_ERROR:
       return {
         ...state,
-        listGroupsReq: false,
-        listGroupsFail: payload,
+        errorGroup: action.payload,
+        groupLoading: false,
       };
 
-    case groupConstants.GET_GROUPS_USER_REQUEST:
+    case groupConstants.ASSIGN_GROUP_REQUEST:
       return {
         ...state,
-        getGroupsUserReq: true,
+        groupLoading: true,
       };
 
-    case groupConstants.GET_GROUPS_USER_SUCCESS:
+    case groupConstants.ASSIGN_GROUP_SUCCESS:
       return {
         ...state,
-        getGroupsUserReq: false,
-        getGroupsUserRes: payload,
+        assigned: action.payload,
+        groupLoading: false,
       };
 
-    case groupConstants.GET_GROUPS_USER_FAILURE:
+    case groupConstants.ASSIGN_GROUP_ERROR:
       return {
         ...state,
-        getGroupsUserReq: false,
-        getGroupsUserFail: payload,
+        errorGroup: action.payload,
+        groupLoading: false,
       };
 
-    case groupConstants.DELETE_GROUPS_USER_REQUEST:
+    case groupConstants.ASSIGNED_GROUP_REQUEST:
       return {
         ...state,
-        delGroupsUserReq: true,
+        groupLoading: true,
       };
 
-    case groupConstants.DELETE_GROUPS_USER_SUCCESS:
+    case groupConstants.ASSIGNED_GROUP_SUCCESS:
       return {
         ...state,
-        delGroupsUserReq: false,
-        delGroupsUserRes: payload,
+        assignedGroups: action.payload,
+        groupLoading: false,
       };
 
-    case groupConstants.DELETE_GROUPS_USER_FAILURE:
-      return {
-        delGroupsUserReq: false,
-        delGroupsUserFail: payload,
-      };
-
-    case groupConstants.ADD_GROUPS_USER_REQUEST:
+    case groupConstants.ASSIGNED_GROUP_ERROR:
       return {
         ...state,
-        addGroupsUserReq: true,
+        errorGroup: action.payload,
+        groupLoading: false,
       };
 
-    case groupConstants.ADD_GROUPS_USER_SUCCESS:
+    case groupConstants.DETAIL_GROUP_REQUEST:
       return {
         ...state,
-        addGroupsUserReq: false,
-        addGroupsUserRes: payload,
+        groupLoading: true,
       };
 
-    case groupConstants.ADD_GROUPS_USER_FAILURE:
+    case groupConstants.DETAIL_GROUP_SUCCESS:
       return {
         ...state,
-        addGroupsUserReq: false,
-        addGroupsUserFail: payload,
+        groupLoading: false,
+        group: action.payload,
+      };
+
+    case groupConstants.DETAIL_GROUP_ERROR:
+      return {
+        ...state,
+        groupLoading: false,
+        errorGroup: action.payload,
+      };
+
+    case groupConstants.UPDATE_GROUP_REQUEST:
+      return {
+        ...state,
+        groupLoading: true,
+      };
+
+    case groupConstants.UPDATE_GROUP_SUCCESS:
+      return {
+        ...state,
+        groupLoading: false,
+        group: action.payload,
+      };
+
+    case groupConstants.UPDATE_GROUP_ERROR:
+      return {
+        ...state,
+        groupLoading: false,
+        errorGroup: action.payload,
+      };
+
+    case groupConstants.ADD_GROUP_REQUEST:
+      return {
+        ...state,
+        groupLoading: true,
+      };
+
+    case groupConstants.ADD_GROUP_SUCCESS:
+      return {
+        ...state,
+        groupLoading: false,
+        group: action.payload,
+      };
+
+    case groupConstants.ADD_GROUP_ERROR:
+      return {
+        ...state,
+        groupLoading: false,
+        errorGroup: action.payload,
+      };
+
+    case groupConstants.ADD_PRODUCT_GROUP_REQUEST:
+      return {
+        ...state,
+        groupLoading: true,
+      };
+
+    case groupConstants.ADD_PRODUCT_GROUP_SUCCESS:
+      return {
+        ...state,
+        groupLoading: false,
+        productGroup: action.payload,
+      };
+
+    case groupConstants.ADD_PRODUCT_GROUP_ERROR:
+      return {
+        ...state,
+        groupLoading: false,
+        errorGroup: action.payload,
+      };
+
+    case groupConstants.DELETE_PRODUCT_GROUP_REQUEST:
+      return {
+        ...state,
+        groupLoading: true,
+      };
+
+    case groupConstants.DELETE_PRODUCT_GROUP_SUCCESS:
+      return {
+        ...state,
+        groupLoading: false,
+      };
+
+    case groupConstants.DELETE_PRODUCT_GROUP_ERROR:
+      return {
+        ...state,
+        groupLoading: false,
+        errorGroup: action.payload,
+      };
+
+    case groupConstants.ASSIGNED_PRODUCT_GROUP_REQUEST:
+      return {
+        ...state,
+        groupLoading: true,
+      };
+
+    case groupConstants.ASSIGNED_PRODUCT_GROUP_SUCCESS:
+      return {
+        ...state,
+        groupLoading: false,
+        assignedProduct: action.payload,
+      };
+
+    case groupConstants.ASSIGNED_PRODUCT_GROUP_ERROR:
+      return {
+        ...state,
+        groupLoading: false,
+        errorGroup: action.payload,
+      };
+
+    case groupConstants.GET_GROUP_SKIP:
+      return {
+        ...state,
+        groupSkip: action.payload,
+      };
+
+    case groupConstants.GET_GROUP_ASSIGNED_SKIP:
+      return {
+        ...state,
+        groupAssignedSkip: action.payload,
+      };
+
+    case groupConstants.DELETE_ASSIGNED_GROUP_REQUEST:
+      return {
+        ...state,
+        groupLoading: true,
+      };
+
+    case groupConstants.DELETE_ASSIGNED_GROUP_SUCCESS:
+      return {
+        ...state,
+        groupLoading: false,
+      };
+
+    case groupConstants.DELETE_ASSIGNED_GROUP_ERROR:
+      return {
+        ...state,
+        groupLoading: false,
+        errorGroup: action.payload,
       };
 
     case groupConstants.DELETE_GROUP_REQUEST:
@@ -119,14 +240,29 @@ export default function groupReducer(state = initialState, { type, payload } = {
         groupLoading: false,
       };
 
-    case groupConstants.DELETE_GROUP_FAILURE:
+    case groupConstants.DELETE_GROUP_ERROR:
       return {
         ...state,
         groupLoading: false,
         error: action.payload,
       };
 
+    case groupConstants.RESET_GROUP:
+      return {
+        ...state,
+        groupSkip: 0,
+        groupProdSkip: 0,
+        groups: {},
+      };
+
+    case groupConstants.GET_PROD_GROUP_SKIP:
+      return {
+        ...state,
+        groupProdSkip: action.payload,
+      };
+
     default:
       return state;
   }
+
 }

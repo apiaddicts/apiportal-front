@@ -29,6 +29,18 @@ const initialState = {
   hostnames: {},
   errorHostnames: {},
 
+  apiDescription: {},
+  apiDescriptionError: {},
+  apiDescriptionLoader: false,
+
+  apisProduct: [],
+  apisProductRes: {},
+  apisProductError: {},
+  apisProductLoading: false,
+  apisProductSkip: 0,
+
+  selectedApis: [],
+
 };
 
 // eslint-disable-next-line default-param-last
@@ -110,7 +122,7 @@ export default function libraryReducer(state = initialState, action) {
     case libraryConstants.GET_LIBRARY_SKIP:
       return {
         ...state,
-        apisSkip: action.skip,
+        apisSkip: parseInt(action.skip, 10),
       };
     // Reset data of the api librerie
     case libraryConstants.RESET_LIBRARY_API:
@@ -184,6 +196,59 @@ export default function libraryReducer(state = initialState, action) {
         hostnames: {},
         errorHostnames: {},
       };
+
+    case libraryConstants.GET_API_DESCRIPTION_REQUEST:
+      return {
+        ...state,
+        apiDescriptionLoader: true,
+      };
+    case libraryConstants.GET_API_DESCRIPTION_SUCCESS:
+      return {
+        ...state,
+        apiDescription: action.payload,
+        apiDescriptionLoader: false,
+        apiDescriptionError: {},
+      };
+    case libraryConstants.GET_API_DESCRIPTION_FAILURE:
+      return {
+        ...state,
+        apiDescription: {},
+        apiDescriptionLoader: false,
+        apiDescriptionError: action.payload,
+      };
+
+    case libraryConstants.GET_API_PRODUCTS_REQUEST:
+      return {
+        ...state,
+        apisProductLoading: true,
+      };
+    case libraryConstants.GET_API_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        apisProductLoading: false,
+        apisProduct: action.payload,
+        apisProductRes: action.resp,
+        apisProductError: {},
+      };
+    case libraryConstants.GET_API_PRODUCTS_FAILURE:
+      return {
+        ...state,
+        apisProductLoading: false,
+        apisProduct: [],
+        apisProductError: action.payload,
+      };
+
+    case libraryConstants.GET_APIS_PRODUCT_SKIP:
+      return {
+        apisProductSkip: action.payload,
+      };
+
+    case libraryConstants.SELECTED_APIS:
+      return {
+        ...state,
+        selectedApis: action.payload,
+      };
+
     default:
       return state;
   }

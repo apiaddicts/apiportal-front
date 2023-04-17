@@ -1,9 +1,11 @@
 import handleResponse from './handleResponse';
 import handleResponseToken from './handleResponseToken';
-import handleResponseRestore from './handleResponseRestore';
+//import handleResponseRestore from './handleResponseRestore';
+//import handleResponseResetPwd from './handleResponseResetPwd';
 import store from '../redux/store';
 
 import config from './config';
+import handleResponseChangePwd from './handleResponseChangePwd';
 
 function login(email, password) {
 
@@ -27,36 +29,35 @@ function login(email, password) {
     .then((response) => {
       return response;
     }).catch((error) => {
-      console.error(error);
+      return error;
     });
 }
 
 function confirmAccount({ token }) {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Accept': '*/*', 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json' },
   };
 
   const url = `${config.apimUrl}/accounts/${token}`;
+
   return fetch(url, requestOptions)
-    .then(handleResponseToken)
+    .then(handleResponse)
     .then((response) => response)
-    .catch((error) => {
-      console.error(error);
-    });
+    .catch((error) => error);
+
 }
 
-function getProfile(token, userId) {
+function getUserDetails(token, userId) {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+    headers: { 'Authorization': token, 'Content-type': 'application/json' },
   };
 
   const url = `${config.apimUrl}/users/${userId}`;
-  return fetch(
-    url,
-    requestOptions,
-  ).then(handleResponse)
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
     .then((response) => {
       return response.data;
     }).catch((error) => {
@@ -64,21 +65,25 @@ function getProfile(token, userId) {
     });
 }
 
-function getUserGroups(token, userId) {
+function getUserGroups(token, id) {
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', 'Authorization': token },
   };
 
-  const url = `${config.apimUrl}/users/${userId}/groups`;
-
-  return fetch(url, requestOptions)
-    .then(handleResponse)
-    .then((response) => response.data)
-    .catch((error) => error);
+  const url = `${config.apimUrl}/users/${id}/groups`;
+  return fetch(
+    url,
+    requestOptions,
+  ).then(handleResponse)
+    .then((response) => {
+      return response.data;
+    }).catch((error) => {
+      return error;
+    });
 }
 
-function getUserEntityTag(token, id) {
+/*function getUserEntityTag(token, id) {
   const requestOptions = {
     method: 'HEAD',
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
@@ -102,26 +107,48 @@ function getUserEntityTag(token, id) {
     .catch((error) => {
       console.error(error);
     });
-}
+}*/
 
-function updateUser(data) {
-  const { id, token, etag } = store.getState().user;
+function updateUser(data, userId) {
+  const { token } = store.getState().user;
+  const params = {
+    firstName: data.firstName,
+    lastName: data.lastName,
+  };
   const requestOptions = {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}`, 'If-Match': `${etag}` },
-    body: JSON.stringify(data),
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+    body: JSON.stringify(params),
   };
 
-  const url = `${config.url}/users/${id}?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}/users/${userId}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response;
+      return response.data;
     }).catch((error) => {
       console.error(error);
     });
 }
+
+function changeStatus(data, userId) {
+  const { token } = store.getState().user;
+
+  const requestOptions = {
+    method: 'PATCH',
+    headers: { 'Authorization': token, 'Content-type': 'application/json' },
+    body: JSON.stringify(data),
+  };
+
+  const url = `${config.apimUrl}/users/${userId}`;
+
+  return fetch(url, requestOptions)
+    .then((response) => response.json())
+    .then((json) => json)
+    .catch((error) => error);
+
+};
 
 function signUp(data) {
   const requestOptions = {
@@ -139,17 +166,25 @@ function signUp(data) {
     .then((response) => {
       return response;
     }).catch((error) => {
-      console.error(error);
+      return error;
     });
 }
 
-function verifyOldPassword(data) {
-  const requestOptions = {
-    method: 'GET',
-    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `Basic ${btoa(`${data.email}:${data.password}`)}` },
+/*function verifyOldPassword({ email, password, new_password }) {
+  const { token } = store.getState().user;
+
+  const dataBody = {
+    username: email,
+    password,
   };
 
-  const url = `${config.url}/identity?api-version=${config.apiVersion}`;
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+    body: JSON.stringify(dataBody),
+  };
+
+  const url = `${config.apimUrl}/users/identity/verifyOldPassword`;
   return fetch(
     url,
     requestOptions,
@@ -157,30 +192,26 @@ function verifyOldPassword(data) {
     .then((response) => {
       return response;
     }).catch((error) => {
-      console.error(error);
+      return error;
     });
-}
+}*/
 
-function changePassword(newPassword) {
-  const { id, token, etag } = store.getState().user;
-  const data = {
-    properties: {
-      password: newPassword,
-    },
-  };
+function changePassword(data) {
+  const { id, token } = store.getState().user;
+
   const requestOptions = {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}`, 'If-Match': `${etag}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
     body: JSON.stringify(data),
   };
 
-  const url = `${config.url}/users/${id}?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}/users/${id}/password`;
   return fetch(url, requestOptions)
-    .then(handleResponse)
+    .then(handleResponseChangePwd)
     .then((response) => {
       return response;
     }).catch((error) => {
-      console.error(error);
+      return error;
     });
 }
 
@@ -192,16 +223,35 @@ function resetPassword(data) {
   };
 
   const url = `${config.apimUrl}/password-recovery`;
+
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
       return response;
     }).catch((error) => {
-      console.error(error);
+      return error;
     });
 }
 
+/*function resetPasswordWithTicket(queryParams, data) {
+  const requestOptions = {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Ticket id="${queryParams.ticketid}",ticket="${queryParams.ticket}"` },
+    body: JSON.stringify(data),
+  };
+
+  const url = `${config.url}/users/${queryParams.id}?api-version=${config.apiVersion}`;
+  return fetch(url, requestOptions)
+    .then(handleResponseResetPwd)
+    .then((response) => {
+      return response;
+    }).catch((error) => {
+      console.error(error);
+    });
+}*/
+
 function confirmPassword(confirmToken, newPassword) {
+  const { token } = store.getState().user;
 
   const bodyParams = {
     password: newPassword,
@@ -209,7 +259,7 @@ function confirmPassword(confirmToken, newPassword) {
 
   const requestOptions = {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Authorization': token, 'Content-type': 'application/json' },
     body: JSON.stringify(bodyParams),
   };
 
@@ -219,19 +269,22 @@ function confirmPassword(confirmToken, newPassword) {
     .then(handleResponse)
     .then((response) => response)
     .catch((error) => error);
-}
+
+};
 
 const userService = {
   login,
   confirmAccount,
-  getProfile,
-  getUserGroups,
-  getUserEntityTag,
+  getUserDetails,
+  //getUserEntityTag,
   signUp,
   updateUser,
-  verifyOldPassword,
+  //verifyOldPassword,
   changePassword,
   resetPassword,
+  //resetPasswordWithTicket,
+  getUserGroups,
+  changeStatus,
   confirmPassword,
 };
 

@@ -15,7 +15,7 @@ import classes from './profile.module.scss';
 
 function Profile() {
   const dispatch = useDispatch();
-  const { user, loadingUser } = useSelector((state) => state.user);
+  const { user, loadingUser, id, token } = useSelector((state) => state.user);
   const [displayRestorePassword, setDisplayRestorePassword] = useState(false);
   const { suscripcionsUser } = useSelector((state) => state.suscripcions);
 
@@ -32,7 +32,13 @@ function Profile() {
         lastName: values.last_name,
       },
     };
-    dispatch(updateUser(data));
+    const tokens = {
+      userId: {
+        id,
+      },
+      token,
+    };
+    dispatch(updateUser(data, user.name, tokens));
   };
   const name = user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? user.properties.firstName : '';
   const lastName = user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? user.properties.lastName : '';

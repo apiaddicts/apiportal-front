@@ -1,0 +1,10 @@
+//stepper__wrapper__actions
+.stepper {
+    &__wrapper {
+        &__actions {
+            display: flex;
+            justify-content: flex-end;
+            margin: 1rem 0;
+        }
+    }
+}
