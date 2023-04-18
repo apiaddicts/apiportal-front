@@ -18,4 +18,15 @@ export const StepperUI = styled(Stepper)({
 
 export const StepUI = styled(Step)({
   color: '#fff',
+  icon: {
+    color: '#fd8e18',
+    '&$activeicon': {
+      color: '#fd8e18',
+    },
+    '&$completedIcon': {
+      color: '#fd8e18',
+    },
+  },
+  activeStep: {},
+  completedStep: {},
 });

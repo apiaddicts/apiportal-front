@@ -58,7 +58,7 @@ function InputField(props) {
       <InputLabel
         shrink
         htmlFor='bootstrap-input'
-        sx={{ color: '#0033a0', padding: '0 1rem', fontSize: '1rem', fontWeight: 500 }}
+        sx={{ color: '#fd8e18', padding: '0 1rem', fontSize: '1rem', fontWeight: 500 }}
       >
         {label}
       </InputLabel>

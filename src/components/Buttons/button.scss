@@ -73,7 +73,7 @@
 
 .btn-secundary-white {
   @include button-bg($secondary_white);
-  @include letter(#0033a0);
+  @include letter(#000B39);
   @include border($secondary_white);
 }
 

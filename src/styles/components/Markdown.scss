@@ -1,0 +1,75 @@
+.markdown {
+
+	* {
+		box-sizing: border-box;
+	}
+
+	h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+		line-height: 1.1;
+		margin-block: 10px;
+		margin-bottom: 0.5rem;
+		margin-top: 0;
+	}
+
+	h1 {
+		font-size: 36px;
+		font-weight: 600;
+		margin: 0.67rem 0;
+	}
+
+	h2 {
+		font-size: 30px;
+		font-weight: 500;
+	}
+
+	p {
+		margin-top: 0;
+		margin-bottom: 1rem;
+	}
+
+	ol, ul, dl {
+		margin-top: 0;
+		margin-bottom: 1rem;
+	}
+
+	table {
+		border-collapse: collapse;
+		border-spacing: 0;
+	}
+
+	table thead {
+		background: rgb(243, 243, 243);
+	}
+
+	table tr {
+		border: 1px solid rgb(198, 203, 209);
+	}
+
+	table thead tr {
+		height: 43px;
+	}
+
+	table tbody tr {
+		height: 54px;
+	}
+
+	table th, table td {
+		padding: 0px 25px;
+    border-width: 0px 1px;
+    border-right-style: solid;
+    border-left-style: solid;
+    border-right-color: rgb(198, 203, 209);
+    border-left-color: rgb(198, 203, 209);
+    border-image: initial;
+    border-bottom-style: initial;
+    border-bottom-color: initial;
+    border-top-style: initial;
+    border-top-color: initial;
+	}
+
+	img {
+		vertical-align: middle;
+		border-style: none;
+		max-width: 100%;
+	}
+}

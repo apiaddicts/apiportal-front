@@ -10,7 +10,7 @@
     color: #8189A9;
 
     h2 {
-        font-family: 'Barlow';
+        font-family: $secondary_font;
         font-style: normal;
         font-weight: 700;
         font-size: 12px;
@@ -18,33 +18,34 @@
         display: flex;
         align-items: center;
         letter-spacing: 0.2px;
-        color: #53565A;
+        color: $dark_primary;
     }
 }
 
 .cell_name {
-  font-family: 'Barlow';
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 20px;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.2px;
+    font-family: $secondary_font;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 20px;
 
-  color: #00AEC7;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.2px;
+
+    color: $secondary_text;
 }
 
-.cell_email {
-  font-family: 'Barlow';
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 20px;
-  display: flex;
-  align-items: center;
-  letter-spacing: 0.2px;
-  color: #53565A;
+.cell_description {
+    font-family: $secondary_font;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 20px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.2px;
+    color: #53565A;
 }
 
 .pagination {
@@ -59,7 +60,7 @@
     }
     
     p {
-        font-family: 'Barlow';
+        font-family: $secondary_font;
         font-style: normal;
         font-weight: 400;
         font-size: 14px;

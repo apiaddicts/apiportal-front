@@ -8,3 +8,11 @@
         }
     }
 }
+.MuiSvgIcon-root {
+    &.Mui-active {
+        color: #fd8e18 !important;
+    }
+    &.Mui-completed {
+        color: #fd8e18 !important;
+    }
+}

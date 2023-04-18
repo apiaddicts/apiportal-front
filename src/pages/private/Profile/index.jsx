@@ -77,6 +77,10 @@ function Profile() {
 
   const formConfig = useFormUserConfig(labelsUser, handleSubmit);
 
+  const toggleForm = () => {
+    setDisplayRestorePassword(!displayRestorePassword);
+  };
+
   return (
     <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
       <div className={classes.main__admin}>
@@ -90,10 +94,6 @@ function Profile() {
                 <div className={classes.admin__form__container}>
                   <div className={classes.admin__form__container__header}>
                     <div className='font-fs-joey fs__36 font-weight-bold text__dark__primary'>Datos personales</div>
-                    {/* <div className='fs__16 text__gray__gray_darken ls_05'>
-                        <span className='text-uppercase font-weight-semi-bold'>Fecha de registro:</span>
-                        <span className='fs'>12/05/2022</span>
-                      </div> */}
                   </div>
                   <div className='row'>
                     {labelsUser.map((field) => (
@@ -124,7 +124,7 @@ function Profile() {
                 </div>
               </form>
               <div className={`${classes.admin__form__container} margin_top`}>
-                <RestorePassword userEmail={user?.properties?.email} display={displayRestorePassword} />
+                <RestorePassword userEmail={user?.properties?.email} display={displayRestorePassword} toggleForm={toggleForm} />
               </div>
             </div>
           </div>

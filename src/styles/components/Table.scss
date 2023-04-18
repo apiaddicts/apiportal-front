@@ -6,6 +6,7 @@
         color: #8189a9;
   
         h2 {
+          font-family: 'Trebuchet MS', serif;
           font-style: normal;
           font-weight: 700;
           font-size: 12px;
@@ -18,7 +19,7 @@
       }
   
       &__content {
-        font-family: Barlow;
+        font-family: 'Trebuchet MS', serif;
         font-style: normal;
         font-weight: 500;
         font-size: 12px;
@@ -32,7 +33,7 @@
           color: #53565a;
         }
         &__link {
-          color: #00aec7;
+          color: #000B39;
         }
       }
     }
