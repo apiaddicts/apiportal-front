@@ -59,13 +59,13 @@ function listApisProduct(top, skip, filter) {
     headers: { 'Authorization': token },
   };
 
-  let url = `${config.apimUrl}/apis-with-products?$skip=${skip}&expandApiVersionSet`;
+  let url = `${config.apimUrl}/apis-with-products?expandApiVersionSet`;
   url += top !== undefined && top !== null && top !== 0 ? `&$top=${top}` : '';
   url += filter !== undefined && filter !== null && filter.length > 0 ? `&$filter=${filter}` : '';
 
   return fetch(url, requestOptions)
     .then(handleResponse)
-    .then((response) => response)
+    .then((response) => response.data)
     .catch((error) => error);
 
 }
@@ -108,6 +108,7 @@ function getApiOpenAPI(id) {
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
+      if (response.length === 0) return null;
       if (response[0].openDoc.components && response[0].openDoc.components.securitySchemes) {
         delete response[0].openDoc.components.securitySchemes['apiKeyQuery'];
       }
