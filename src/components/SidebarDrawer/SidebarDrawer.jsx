@@ -66,7 +66,7 @@ function SidebarDrawer({ children, user, isAdmin }) {
     { route: '/developer/products', text: 'Productos', icon: <Terminal />, primaryRole: true },
     { route: '/developer/apps', text: 'Aplicaciones', icon: <Terminal />, primaryRole: true },
     { route: '/developer/apis', text: 'Biblioteca de APIs', icon: <Settings />, primaryRole: true },
-    //{ route: '/developer/subscriptions', text: 'Suscripciones', icon: <Terminal />, primaryRole: true },
+    { route: '/developer/subscriptions', text: 'Suscripciones', icon: <Terminal />, primaryRole: true },
     { route: '/developer/users', text: 'Usuarios', icon: <Person />, primaryRole: isAdmin },
     { route: '/developer/groups', text: 'Grupos', icon: <ShareIcon />, primaryRole: isAdmin },
   ];

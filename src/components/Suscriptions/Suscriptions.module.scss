@@ -1,53 +1,51 @@
 @import "../../styles/variables.scss";
 
-.wrapper{
-  padding: 2.5rem 2rem;
-  box-shadow: 0px 4px 28px rgba(169, 177, 209, 0.12);
-  background: #fff;
-  border-radius: 12px;
-  width: 100%;
-  .input {
-    width: 100%;
-    border: none;
-    border-radius: 15px;
-    outline: none;
-    padding: 5px 10px;
-    font-size: 0.9rem;
-    color: #000;
-    margin: 0;
-    transition: all 0.3s ease-in-out;
-    box-shadow: 0px 2px 20px #ECF0F1;
-    &:focus {
-      border-color: aqua;
-    }
+.table-left {
+  margin-left: 5%;
+}
+
+.cell_title {
+  display: flex;
+  font-size: 20px;
+  color: #8189A9;
+
+  h2 {
+      font-family: $secondary_font;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 12px;
+      line-height: 20px;
+      display: flex;
+      align-items: center;
+      letter-spacing: 0.2px;
+      color: $dark_primary;
   }
-  table { 
-    thead{
-      th {
-        font-family: $primary_font;
-        font-size: 12px;
-        font-weight: bold;
-        color: $dark_primary;
-        letter-spacing: 0.2px;
-        padding: 16px 5px;
-        text-transform: uppercase;
-      }
-    }
-    tbody {
-      tr {
-        cursor: default;
-        td {
-          font-family: $primary_font;
-          font-size: 12px;
-          letter-spacing: 0.2px;
-          padding: 16px 5px;
-          &:first-child{
-            color: #00AEC7;
-          }
-        }
-      }
-    }
-  }
+}
+
+.cell_name {
+  font-family: $secondary_font;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 20px;
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.2px;
+
+  color: $secondary_text;
+}
+
+.cell_description {
+  font-family: $secondary_font;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.2px;
+  color: #53565A;
 }
 
 .pagination {
@@ -62,7 +60,7 @@
     }
     
     p {
-        font-family: 'Barlow';
+        font-family: $secondary_font;
         font-style: normal;
         font-weight: 400;
         font-size: 14px;
@@ -76,4 +74,12 @@
             margin-left: -10px;
         }
     }
+}
+
+.wrapper{
+  padding: 2.5rem 2rem;
+  box-shadow: 0px 4px 28px rgba(169, 177, 209, 0.12);
+  background: #fff;
+  border-radius: 12px;
+  width: 100%;
 }

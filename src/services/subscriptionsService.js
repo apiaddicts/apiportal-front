@@ -7,30 +7,29 @@ function listUserSubscriptions(userId, top = config.topSubscriptions, skip = 0) 
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Authorization': token },
   };
 
-  const url = `${config.url}/users/${userId}/subscriptions?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}`;
+  const url = `${config.apimUrl}/users/${userId}/subscriptions?$top=${top}&$skip=${skip}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response;
+      return response.data;
     }).catch((error) => {
       console.error(error);
     });
 }
 
-function subscribeToAProduct(data, userId) {
+function subscribeToAProduct(data, userId, productName) {
   const { token } = store.getState().user;
-  const subscriptionId = crypto.randomUUID();
   const requestOptions = {
-    method: 'PUT',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
     body: JSON.stringify(data),
   };
 
-  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}/users/${userId}/products/${productName}/subscriptions`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -48,7 +47,7 @@ function getName(urlValidate) {
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.azureUrl}${urlValidate}?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}${urlValidate}?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -64,10 +63,10 @@ function regenerateSubscription(userId, subscriptionId, fragmentUrl) {
 
   const requestOptions = {
     method: 'POST',
-    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Authorization': token },
   };
 
-  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}/${fragmentUrl}?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}/users/${userId}/subscriptions/${subscriptionId}/${fragmentUrl}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -82,16 +81,16 @@ function listSubscriptionSecrets(userId, subscriptionId) {
   const { token } = store.getState().user;
 
   const requestOptions = {
-    method: 'POST',
-    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+    method: 'GET',
+    headers: { 'Authorization': token },
   };
 
-  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}/listSecrets?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}/users/${userId}/subscriptions/${subscriptionId}/secrets`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response;
+      return response.data;
     }).catch((error) => {
       console.error(error);
     });
@@ -101,11 +100,11 @@ function renameSubscription(userId, subscriptionId, data) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
     body: JSON.stringify(data),
   };
 
-  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}/users/${userId}/subscriptions/${subscriptionId}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -120,11 +119,29 @@ function cancelSubscription(userId, subscriptionId, data) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
     body: JSON.stringify(data),
   };
 
-  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}/users/${userId}/subscriptions/${subscriptionId}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response;
+    }).catch((error) => {
+      console.error(error);
+    });
+}
+
+function listSubscriptionbyId(userId, subscriptionId) {
+  const { token } = store.getState().user;
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+  };
+
+  const url = `${config.apimUrl}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -143,6 +160,7 @@ const subscriptionsService = {
   regenerateSubscription,
   renameSubscription,
   cancelSubscription,
+  listSubscriptionbyId,
 };
 
 export default subscriptionsService;

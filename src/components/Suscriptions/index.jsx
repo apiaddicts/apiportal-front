@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { TableHead, TableRow, TableCell, Table, TableContainer, TableBody, Chip, Container, Grid } from '@mui/material';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
@@ -107,7 +108,6 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
       dispatch(getDetailListUserSubscriptionsPrevious(productId));
     }
   };
-
   return (
     <div>
       <div className={classes.wrapper}>
@@ -125,22 +125,32 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
                         <TableHead className={classes.table_head}>
                           <TableRow>
                             <TableCell style={{ width: '210px' }}>
-                              Nombre
+                              <div className={classes.cell_title}>
+                                <h2 className='text-uppercase'>Nombre</h2>
+                              </div>
                             </TableCell>
                             <TableCell style={{ width: '70px' }}>
-                              Solicitud
+                              <div className={classes.cell_title}>
+                                <h2 className='text-uppercase'>Solicitud</h2>
+                              </div>
                             </TableCell>
                             <TableCell style={{ width: '255px' }}>
-                              Primary key
+                              <div className={classes.cell_title}>
+                                <h2 className='text-uppercase'>Primary key</h2>
+                              </div>
                             </TableCell>
                             <TableCell style={{ width: '255px' }}>
-                              Secondary key
+                              <div className={classes.cell_title}>
+                                <h2 className='text-uppercase'>Secondary key</h2>
+                              </div>
                             </TableCell>
                             {/* <TableCell>
                               Producto
                             </TableCell> */}
                             <TableCell style={{ width: '90px' }}>
-                              Estado
+                              <div className={classes.cell_title}>
+                                <h2 className='text-uppercase'>Estado</h2>
+                              </div>
                             </TableCell>
                             <TableCell style={{ width: '50px' }}>
                             &nbsp;
@@ -167,12 +177,15 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
                                           onBlur={(e) => handleBLur(row, e)}
                                           className={classes.input}
                                         />
-                                      ) :
-                                        <p>{row.properties.displayName}</p>
+                                      ) : (
+                                        <Link to={`/developer/subscriptions/${row.name}`}>
+                                          <p className={classes.cell_name}>{row.properties.displayName}</p>
+                                        </Link>
+                                      )
                                     }
                                   </TableCell>
                                   <TableCell>
-                                    <p>
+                                    <p className={classes.cell_description}>
                                       {moment(row.properties.createdDate).format('DD/MM/YYYY')}
                                     </p>
                                   </TableCell>

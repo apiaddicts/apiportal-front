@@ -18,6 +18,7 @@ import ApiDetail from '../../pages/private/ApiDetail';
 import SwaggerUI from '../../pages/private/SwaggerUI';
 import OAuthRedirect from '../../pages/private/OAuthRedirect';
 import Subscriptions from '../../pages/private/Subscriptions';
+import SubscriptionDetail from '../../pages/private/SubscriptionDetail';
 import Logout from '../../pages/private/Logout/Logout';
 
 import Users from '../../pages/private/Users';
@@ -83,6 +84,7 @@ function PrivateRouter({ children }) {
                 <Route path='apis/:id/swagger-ui' exact='true' element={<SwaggerUI />} />
                 <Route path='apis/swagger-ui/oauth-redirect' exact='true' element={<OAuthRedirect />} />
                 <Route path='subscriptions' exact='true' element={<Subscriptions />} />
+                <Route path='subscriptions/:id' exact='true' element={<SubscriptionDetail />} />
                 <Route path='*' element={<Navigate to='/' replace />} />
                 {isAdmin && (
                   <>
