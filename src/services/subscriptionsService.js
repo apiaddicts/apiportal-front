@@ -138,10 +138,29 @@ function listSubscriptionbyId(userId, subscriptionId) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Authorization': token },
   };
 
   const url = `${config.apimUrl}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response;
+    }).catch((error) => {
+      console.error(error);
+    });
+}
+
+function getReportsbySubscription(subscriptionId, init, limit) {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+  };
+
+  let filter = `subscriptionId eq '${subscriptionId}' and timestamp ge datetime'${init}'`;
+  if (limit) filter += ` and timestamp le datetime'${limit}'`;
+  const url = `${config.apimUrl}/reports/bySubscription?api-version=${config.apiVersion}&%24filter=${filter}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -161,6 +180,7 @@ const subscriptionsService = {
   renameSubscription,
   cancelSubscription,
   listSubscriptionbyId,
+  getReportsbySubscription,
 };
 
 export default subscriptionsService;
