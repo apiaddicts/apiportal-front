@@ -38,8 +38,7 @@ function getApis(top, skip, filter) {
     headers: { 'Content-Type': 'application/json', 'Authorization': token },
   };
 
-  let url = `${config.apimUrl}/apis?expandApiVersionSet=true&$skip=${skip}`;
-  url += top !== undefined && top !== null && top !== 0 ? `&$top=${top}` : '';
+  let url = `${config.apimUrl}/apis?expandApiVersionSet=true`;
   url += filter !== undefined && filter !== null && filter.length > 0 ? `&$filter=${filter}` : '';
   return fetch(url, requestOptions)
     .then(handleResponse)

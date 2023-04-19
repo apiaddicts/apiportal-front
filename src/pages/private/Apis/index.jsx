@@ -1,6 +1,6 @@
 /* eslint-disable */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container } from '@mui/material';
 import Multiselect from 'multiselect-react-dropdown';
@@ -10,13 +10,27 @@ import Icon from '../../../components/MdIcon/Icon';
 import CardInformationLibrary from '../../../components/Card/CardInformationLibrary';
 import { listApis, searchApis, getListTags, filterAPIsByTags, resetLibraryApi, getLibraryApiNextSearch, getLibraryApiPreviosSearch, getLibraryApiNext, getLibraryApiPrevios } from '../../../redux/actions/libraryAction';
 import classes from './apis.module.scss';
+import config from '../../../services/config'
 
 function Apis(props) {
 
-  const { loadingLibraries, apis, tagsList, apisSkip } = useSelector((state) => state.library);
-
+  const topApi = parseInt(config.topApi);
+  const { loadingLibraries, apis, tagsList } = useSelector((state) => state.library);
+  const [skip, setSkip] = useState(0);
   const dispatch = useDispatch();
-
+  const displayApis = useMemo(() => ({
+    apis: apis && Object.keys(apis).length > 0 ? apis.value.map((api) => ({
+    apiName: api.name,
+    title: api.properties.displayName,
+    status: 'Publicado',
+    version: api.properties.apiVersion,
+    tags: [{ label: 'ejemplo' }],
+    color_status: 'green',
+    description: api.properties.description,
+  })).slice(skip, skip + topApi) : [],
+    skip: skip,
+    count: apis.count,
+  }), [apis, skip]);
   const [search, setSearch] = useState('');
 
   const handleChangeSearchFilter = (text) => {
@@ -33,6 +47,7 @@ function Apis(props) {
     if (text.trim().length === 0) {
       dispatch(listApis());
     }
+    setSkip(0);
   };
 
   const selectData = tagsList && Object.keys(tagsList).length > 0 && tagsList.value && tagsList.value.length > 0 ? tagsList.value.map((item, index) => {
@@ -44,36 +59,28 @@ function Apis(props) {
   }) : [];
 
   const onSelect = (selectedList, selectedItem) => {
-    let search = '';
-    selectedList.forEach((items, index) => {
-      let data = '';
-      if (search.length === 0) {
-        data = `tags[${index}]=${items.name}`;
-      } else {
-        data = `&tags[${index}]=${items.name}`;
-      }
-      search = search + data;
+    let tags = [];
+    selectedList.forEach((item, index) => {
+      tags.push(item.name);
     });
-    dispatch(filterAPIsByTags(search));
+    const data = { tags };
+    dispatch(filterAPIsByTags(data));
+    setSkip(0);
   };
 
   const onRemove = (selectedList, removedItem) => {
 
     if (selectedList.length > 0) {
-      let search = '';
+      let tags = [];
       selectedList.forEach((items, index) => {
-        let data = '';
-        if (search.length === 0) {
-          data = `tags[${index}]=${items.name}`;
-        } else {
-          data = `&tags[${index}]=${items.name}`;
-        }
-        search = search + data;
+        tags.push(items.name);
       });
-      dispatch(filterAPIsByTags(search));
+      const data = { tags };
+      dispatch(filterAPIsByTags(data));
     } else {
       dispatch(listApis());
     }
+    setSkip(0);
   };
 
   useEffect(() => {
@@ -94,35 +101,13 @@ function Apis(props) {
       dispatch(resetLibraryApi());
     };
   }, []);
-
-  const arrApis = apis && Object.keys(apis).length > 0 ? apis.value.map((api) => {
-    return {
-      apiName: api.name,
-      title: api.properties.displayName,
-      status: 'Publicado',
-      version: api.properties.apiVersion,
-      tags: [{ label: 'ejemplo' }],
-      color_status: 'green',
-      description: api.properties.description,
-    };
-  }) : [];
-
-  const handleNextLibrary = (url) => {
-    if (search.length > 0) {
-      dispatch(getLibraryApiNextSearch(search));
-    } else {
-      dispatch(getLibraryApiNext());
-    };
+  
+  const handleNext = () => {
+    if (skip < displayApis.count) return setSkip(skip + topApi);
   };
-
-  const handlePreviousLibrary = () => {
-    if (search.length > 0) {
-      dispatch(getLibraryApiPreviosSearch(search));
-    } else {
-      dispatch(getLibraryApiPrevios());
-    }
+  const handlePrevious = () => {
+    if (skip >= topApi) return setSkip(skip - topApi);
   };
-
   return (
     <Container fixed sx={{ paddingLeft: {xs: '0px', md: '59px !important'}, paddingRight: {xs:' 0px', md: '97px !important'} }}>
       <Title stylesTitle={{ fontSize: '48px' }} text='Biblioteca de Apis' />
@@ -162,8 +147,8 @@ function Apis(props) {
       </div>
       <div className={classes.grid__apis}>
         {loadingLibraries === false && apis ? (
-          arrApis.length > 0 ? (
-            arrApis.map((item, index) => (
+          displayApis.apis.length > 0 ? (
+            displayApis.apis.map((item, index) => (
               <CardInformationLibrary
                 key={index}
                 apiName={item.apiName}
@@ -184,7 +169,7 @@ function Apis(props) {
 
       <div className='display_flex justify_content__center mt-4'>
         {loadingLibraries === false && apis ? (
-          arrApis.length == 0 ? (
+          displayApis.apis.length == 0 ? (
             <h1 className='text-center'>Información no disponible</h1>
           ) : (null)
         ) : (
@@ -194,8 +179,8 @@ function Apis(props) {
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginTop: '1.875rem' }}>
         <div>
-          {apisSkip > 0 ? (
-            <div onClick={() => handlePreviousLibrary()} className={classes.pagination}>
+          {skip > 0 && skip - topApi >= 0 ? (
+            <div onClick={() => handlePrevious()} className={classes.pagination}>
               <div className={classes.pagination__icon}>
                 <Icon id='MdNavigateBefore' />
               </div>
@@ -205,8 +190,8 @@ function Apis(props) {
           ) : (null)}
         </div>
         <div>
-          {apis.nextLink !== undefined ? (
-            <div onClick={() => handleNextLibrary()} className={classes.pagination}>
+          {displayApis.apis.length > 0 && skip + topApi < displayApis.count ? (
+            <div onClick={() => handleNext()} className={classes.pagination}>
               <p className={classes.next}>Siguiente</p>
               <div className={classes.pagination__icon}>
                 <Icon id='MdNavigateNext' />
