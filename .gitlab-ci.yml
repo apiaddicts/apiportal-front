@@ -1,90 +1,4 @@
-#image: docker:latest
-#services:
-#  - docker:dind
-#
-#stages:
-#  - build
-#  - deploy
-#
-#variables:
-#  DOCKER_IMAGE_PATH: "$CI_REGISTRY_IMAGE"
-#.template:docker:build: &docker-build
-#  before_script:
-#    # Log in to GitLab Container Registry
-#    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com
-#  script:
-#    - echo version:$CI_TAG
-#    - docker build 
-#        --build-arg BUILDKIT_INLINE_CACHE=1 
-#        --build-arg REACT_APP_STRAPI_URL=$REACT_APP_STRAPI_URL
-#        --build-arg REACT_APP_AZURE_APIM_URL=$REACT_APP_AZURE_APIM_URL
-#        --build-arg REACT_APP_AZURE_SUBSCRIPTION_ID=$REACT_APP_AZURE_SUBSCRIPTION_ID
-#        --build-arg REACT_APP_AZURE_RESOURCE_GROUP_NAME=$REACT_APP_AZURE_RESOURCE_GROUP_NAME
-#        --build-arg REACT_APP_AZURE_SERVICE_NAME=$REACT_APP_AZURE_SERVICE_NAME
-#        --build-arg REACT_APP_AZURE_APIM_ADMIN_API_VERSION=$REACT_APP_AZURE_APIM_ADMIN_API_VERSION
-#        --build-arg REACT_APP_REMEMBER_KEY=$REACT_APP_REMEMBER_KEY
-#        --build-arg REACT_APP_AZURE_APIM_ADMIN_API_PRIMARY_KEY=$REACT_APP_AZURE_APIM_ADMIN_API_PRIMARY_KEY
-#        --build-arg REACT_APP_AZURE_APIM_ADMIN_API_UID=$REACT_APP_AZURE_APIM_ADMIN_API_UID
-#        --build-arg REACT_APP_AZURE_APIM_ADMIN_API_TOKEN_VALID_DAYS=$REACT_APP_AZURE_APIM_ADMIN_API_TOKEN_VALID_DAYS
-#        --build-arg REACT_APP_LIST_API_TOP=$REACT_APP_LIST_API_TOP
-#        --build-arg REACT_APP_LIST_PRODUCT_APIS_TOP=$REACT_APP_LIST_PRODUCT_APIS_TOP
-#        --build-arg REACT_APP_LIST_PRODUCT_TOP=$REACT_APP_LIST_PRODUCT_TOP
-#        --build-arg REACT_APP_LIST_SUBSCRIPTIONS=$REACT_APP_LIST_SUBSCRIPTIONS
-#        --build-arg WDS_SOCKET_PORT=$WDS_SOCKET_PORT
-#        --build-arg REACT_APP_HOME_PAGE_SLUG=$REACT_APP_HOME_PAGE_SLUG
-#        --build-arg REACT_APP_BLOG_PAGE_SLUG=$REACT_APP_BLOG_PAGE_SLUG
-#        --build-arg REACT_APP_FAQ_PAGE_SLUG=$REACT_APP_FAQ_PAGE_SLUG
-#        --build-arg REACT_APP_APIS_PAGE_SLUG=$REACT_APP_APIS_PAGE_SLUG
-#        --build-arg REACT_APP_TERMS_PAGE_SLUG=$REACT_APP_TERMS_PAGE_SLUG
-#        --build-arg REACT_APP_POLICY_PAGE_SLUG=$REACT_APP_POLICY_PAGE_SLUG
-#        --cache-from "${DOCKER_IMAGE_PATH}:$TAG"
-#        -t "${DOCKER_IMAGE_PATH}:$CI_TAG" -t "${DOCKER_IMAGE_PATH}:$TAG" .
-#
-#    - docker push $DOCKER_IMAGE_PATH:$TAG
-#    - docker push $DOCKER_IMAGE_PATH:$CI_TAG
-#
-#.template:deploy: &ssh-deploy
-#  script:
-#    - apk add gettext
-#    - mkdir -p ~/.ssh
-#    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
-#    - echo "$PRIVATE_RSA_KEY" | tr -d '\r' > ssh-auth
-#    - chmod 600 ssh-auth
-#    - envsubst < docker-compose.yaml > docker-compose.yaml.tmp
-#    - scp -i ssh-auth docker-compose.yaml.tmp $SSH_LOGIN:$REMOTE_PATH/docker-compose.yaml
-#    - ssh -i ssh-auth $SSH_LOGIN "cd $REMOTE_PATH && docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN registry.gitlab.com && docker-compose down && docker-compose up -d "
-#
-#docker:build:
-#  stage: build
-#  variables:
-#    TAG: $CI_COMMIT_REF_NAME
-#    CI_TAG: $CI_COMMIT_SHA
-#  rules:
-#    - if: $CI_COMMIT_TAG =~ /^v[0-9]+(\.[0-9]+)+(\.[0-9]+)$/
-#      variables:
-#        TAG: latest
-#        CI_TAG: $CI_COMMIT_TAG
-#    - if: $CI_COMMIT_REF_NAME == "main"
-#    # - if: $CI_COMMIT_REF_NAME == "develop"
-#
-#  <<: *docker-build
-#
-#docker:deploy:
-#  stage: deploy
-#  variables:
-#    SSH_LOGIN: ubuntu@$PRE_UBUNTU
-#    SSH_KEY: $PRIVATE_RSA_KEY
-#    REMOTE_PATH: /var/www/aplicacion/devportal-clo-front
-#  rules:
-#    - if: $CI_COMMIT_REF_NAME == "main"
-#  <<: *ssh-deploy
-#  environment:
-#    name: $CI_COMMIT_REF_NAME
-#
-#
-
 stages:
-  - config
   - build
   - deploy-bucket
   - deploy-cloudfare
@@ -108,25 +22,109 @@ build react-app:
     - CI=false npm run build
   artifacts:    
     paths:
-      - build/    
+     - build/    
     expire_in: 1 hour
+  environment: production
 
-deploy-bucket:
+build react-app-wke-pre:
+  image: node:12-alpine
+  stage: build
+  only:
+    - wke-pre
+  script:
+    - export PATH=$PATH:/usr/bin/npm
+    - echo $ENV_CONFIG | base64 -d > .env
+    - cat .env    
+    - npm install
+    - CI=false npm run build
+  artifacts:    
+    paths:
+     - build/    
+    expire_in: 1 hour
+  environment: wke-pre
+
+build react-app-wke-prod:
+  image: node:12-alpine
+  stage: build
+  only:
+    - wke-prod
+  script:
+    - export PATH=$PATH:/usr/bin/npm
+    - echo $ENV_CONFIG | base64 -d > .env
+    - cat .env    
+    - npm install
+    - CI=false npm run build
+  artifacts:    
+    paths:
+     - build/    
+    expire_in: 1 hour
+  environment: wke-prod
+
+deploy-bucket prod:
   stage: deploy-bucket
   only:
     # - main
     - test
   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   script:
-   - aws --version
-   - aws s3 mb s3://${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT} --region eu-west-1
-   - aws s3 cp build/ s3://${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT} --recursive --region eu-west-1
-   - aws s3 website s3://${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT} --index-document index.html --region eu-west-1
-   - sed -i "s|NOMBRE-BUCKET|${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}|g;" policy-s3.json
-   - aws s3api put-bucket-policy --bucket ${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT} --policy file://policy-s3.json --region eu-west-1
+   - echo "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}"
+   - NAME_DNS=$(echo "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}")
+   - echo "$NAME_DNS"
+   - >  
+        if [[ ! -z $(aws s3api list-buckets --query 'Buckets[?Name==`'${NAME_DNS}'`]' --output text) ]]; then 
+          aws s3 sync build/ s3://${NAME_DNS} --region eu-west-1;
+        else 
+          aws s3 mb s3://${NAME_DNS} --region eu-west-1;
+          aws s3 cp build/ s3://${NAME_DNS} --recursive --region eu-west-1;
+          aws s3 website s3://${NAME_DNS} --index-document index.html --error-document index.html --region eu-west-1;
+          sed -i "s|NOMBRE-BUCKET|${NAME_DNS}|g;" policy-s3.json;
+          aws s3api put-bucket-policy --bucket ${NAME_DNS} --policy file://policy-s3.json --region eu-west-1;
+        fi;
   environment: production
 
-deploy-cloudfare:
+deploy-bucket wke-pre:
+  stage: deploy-bucket
+  only:
+    - wke-pre
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  script:
+   - echo "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}"
+   - NAME_DNS=$(echo "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}")
+   - echo "$NAME_DNS"
+   - >  
+        if [[ ! -z $(aws s3api list-buckets --query 'Buckets[?Name==`'${NAME_DNS}'`]' --output text) ]]; then 
+          aws s3 sync build/ s3://${NAME_DNS} --region eu-west-1;
+        else 
+          aws s3 mb s3://${NAME_DNS} --region eu-west-1;
+          aws s3 cp build/ s3://${NAME_DNS} --recursive --region eu-west-1;
+          aws s3 website s3://${NAME_DNS} --index-document index.html --error-document index.html --region eu-west-1;
+          sed -i "s|NOMBRE-BUCKET|${NAME_DNS}|g;" policy-s3.json;
+          aws s3api put-bucket-policy --bucket ${NAME_DNS} --policy file://policy-s3.json --region eu-west-1;
+        fi;
+  environment: wke-pre
+
+deploy-bucket wke-prod:
+  stage: deploy-bucket
+  only:
+    - wke-prod
+  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
+  script:
+   - echo "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}"
+   - NAME_DNS=$(echo "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}")
+   - echo "$NAME_DNS"
+   - >  
+        if [[ ! -z $(aws s3api list-buckets --query 'Buckets[?Name==`'${NAME_DNS}'`]' --output text) ]]; then 
+          aws s3 sync build/ s3://${NAME_DNS} --region eu-west-1;
+        else 
+          aws s3 mb s3://${NAME_DNS} --region eu-west-1;
+          aws s3 cp build/ s3://${NAME_DNS} --recursive --region eu-west-1;
+          aws s3 website s3://${NAME_DNS} --index-document index.html --error-document index.html --region eu-west-1;
+          sed -i "s|NOMBRE-BUCKET|${NAME_DNS}|g;" policy-s3.json;
+          aws s3api put-bucket-policy --bucket ${NAME_DNS} --policy file://policy-s3.json --region eu-west-1;
+        fi;
+  environment: wke-prod
+
+deploy-cloudfare prod:
   stage: deploy-cloudfare
   only:
     # - main
@@ -141,4 +139,66 @@ deploy-cloudfare:
     - echo "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}"
     - echo "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}"
     - echo "${URL_S3}"
-    - curl -X POST ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/dns_records --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" --data-raw '{"type":"CNAME","name":"'${NAME_DNS}'","content":"'${URL_S3}'","ttl":3600,"proxied":true}'
+    - curl -X GET ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/dns_records  --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" >> response_dns_list.json
+    - DNS_VALUE=$(cat response_dns_list.json | jq -r '.result[] | select( .name=="'${NAME_DNS}'") | .name')
+    - echo "$DNS_VALUE"
+    - >
+        if [ "${DNS_VALUE}" == "" ]; then
+          curl -X POST ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/dns_records --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" --data-raw '{"type":"CNAME","name":"'${NAME_DNS}'","content":"'${URL_S3}'","ttl":3600,"proxied":true}';
+          curl -X POST ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/pagerules --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" --data-raw '{"targets":[{"target":"url","constraint":{"operator":"matches","value":"'${NAME_DNS}'/*"}}],"actions":[{"id":"ssl","value":"flexible"}],"priority":1,"status":"active"}';
+        else 
+          echo "DNS already exists";
+        fi;
+  environment: production
+
+deploy-cloudfare wke-pre:
+  stage: deploy-cloudfare
+  only:
+    - wke-pre
+  variables:
+    URL_S3: "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}.s3-website-eu-west-1.amazonaws.com"
+    NAME_DNS: "$SUBDOMAIN_PROJECT.$DOMAIN_PROJECT"
+  before_script:
+    - apk add --update curl && rm -rf /var/cache/apk/*
+    - apk add --no-cache curl jq
+  script:
+    - echo "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}"
+    - echo "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}"
+    - echo "${URL_S3}"
+    - curl -X GET ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/dns_records  --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" >> response_dns_list.json
+    - DNS_VALUE=$(cat response_dns_list.json | jq -r '.result[] | select( .name=="'${NAME_DNS}'") | .name')
+    - echo "$DNS_VALUE"
+    - >
+        if [ "${DNS_VALUE}" == "" ]; then
+          curl -X POST ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/dns_records --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" --data-raw '{"type":"CNAME","name":"'${NAME_DNS}'","content":"'${URL_S3}'","ttl":3600,"proxied":true}';
+          curl -X POST ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/pagerules --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" --data-raw '{"targets":[{"target":"url","constraint":{"operator":"matches","value":"'${NAME_DNS}'/*"}}],"actions":[{"id":"ssl","value":"flexible"}],"priority":1,"status":"active"}';
+        else 
+          echo "DNS already exists";
+        fi;
+  environment: wke-pre
+
+deploy-cloudfare wke-prod:
+  stage: deploy-cloudfare
+  only:
+    - wke-prod
+  variables:
+    URL_S3: "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}.s3-website-eu-west-1.amazonaws.com"
+    NAME_DNS: "$SUBDOMAIN_PROJECT.$DOMAIN_PROJECT"
+  before_script:
+    - apk add --update curl && rm -rf /var/cache/apk/*
+    - apk add --no-cache curl jq
+  script:
+    - echo "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}"
+    - echo "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}"
+    - echo "${URL_S3}"
+    - curl -X GET ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/dns_records  --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" >> response_dns_list.json
+    - DNS_VALUE=$(cat response_dns_list.json | jq -r '.result[] | select( .name=="'${NAME_DNS}'") | .name')
+    - echo "$DNS_VALUE"
+    - >
+        if [ "${DNS_VALUE}" == "" ]; then
+          curl -X POST ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/dns_records --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" --data-raw '{"type":"CNAME","name":"'${NAME_DNS}'","content":"'${URL_S3}'","ttl":3600,"proxied":true}';
+          curl -X POST ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/pagerules --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" --data-raw '{"targets":[{"target":"url","constraint":{"operator":"matches","value":"'${NAME_DNS}'/*"}}],"actions":[{"id":"ssl","value":"flexible"}],"priority":1,"status":"active"}';
+        else 
+          echo "DNS already exists";
+        fi;
+  environment: wke-prod
