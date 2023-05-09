@@ -8,7 +8,7 @@ function getApiBookStores() {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
-  return fetch(`${config.apiUrl}/sura-library-apis/`, requestOptions)
+  return fetch(`${config.apiUrl}/library-apis?_where[status]=Publicado`, requestOptions)
     .then(handleResponse)
     .then((libraries) => {
       return libraries;
@@ -22,7 +22,7 @@ function getApiBookStore(id) {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
-  return fetch(`${config.apiUrl}/sura-library-apis/${id}`, requestOptions)
+  return fetch(`${config.apiUrl}/library-apis/${id}`, requestOptions)
     .then(handleResponse)
     .then((library) => {
       return library;
@@ -31,15 +31,15 @@ function getApiBookStore(id) {
     });
 }
 
-function getApis(top, skip, filter) {
+function getApis(filter) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  let url = `${config.apimUrl}/apis?expandApiVersionSet=true`;
-  url += filter !== undefined && filter !== null && filter.length > 0 ? `&$filter=${filter}` : '';
+  let url = `${config.url}/apis?api-version=${config.apiVersion}&expandApiVersionSet=true&tags[0]=published`;
+  url += filter !== undefined && filter !== null && filter.length > 0 ? `&$filter=${filter}` : '&$filter=isCurrent';
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
@@ -102,7 +102,7 @@ function getApiOpenAPI(id) {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
-  const url = `${config.apiUrl}/sura-library-apis?_where[slug]=${id}`;
+  const url = `${config.apiUrl}/library-apis?_where[slug]=${id}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -130,7 +130,7 @@ function getApiDescription(id) {
     headers: { 'Content-Type': 'application/json' },
   };
 
-  const url = `${config.apiUrl}/sura-library-apis?_where[slug]=${id}`;
+  const url = `${config.apiUrl}/library-apis?_where[slug]=${id}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -138,19 +138,19 @@ function getApiDescription(id) {
     .catch((error) => error);
 }
 
-function getListTags(skip = 0, filter = '') {
+function getListTags() {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.apimUrl}/api-tags?$skip=${skip}&expandApiVersionSet=true&includeNotTaggedApis=false`;
+  const url = `${config.url}/tags?api-version=${config.apiVersion}&scope=apis`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response.data;
+      return response;
     }).catch((error) => {
       console.error(error);
     });
