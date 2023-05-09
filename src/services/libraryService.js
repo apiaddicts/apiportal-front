@@ -171,20 +171,19 @@ function getListTagsByApi(apiName) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.apimUrl}/apis/${apiName}/tags`;
+  const url = `${config.url}/apis/${apiName}/tags?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response.data;
+      return response;
     }).catch((error) => {
       console.error(error);
     });
 }
-
 function filterAPIsByTags(data) {
   const { token } = store.getState().user;
 
