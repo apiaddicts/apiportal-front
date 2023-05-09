@@ -13,7 +13,6 @@
   font-size: 20px;
   color: $dark_primary;
   text-transform: uppercase;
-
   h2 {
     font-family: $primary_font;
     font-style: normal;
@@ -50,13 +49,13 @@
   display: flex;
   align-items: center;
   letter-spacing: 0.2px;
-  color: #53565a;
+  color: $gray_darken;
 }
 
 .pagination {
   cursor: pointer;
   display: flex;
-  color: $dark_primary;
+  color: $blue;
   font-size: 20px;
   align-items: center;
 
