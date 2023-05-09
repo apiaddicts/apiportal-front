@@ -417,7 +417,7 @@ export const getApiHostnames = (apiName) => (dispatch) => {
     (res) => {
       dispatch({
         type: libraryConstants.GET_API_HOSTNAMES_SUCCESS,
-        payload: res.data,
+        payload: res,
       });
     },
     (error) => {
