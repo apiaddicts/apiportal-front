@@ -20,15 +20,17 @@ function listUserSubscriptions(userId, top = config.topSubscriptions, skip = 0) 
     });
 }
 
-function subscribeToAProduct(data, userId, productName) {
+function subscribeToAProduct(data, userId) {
   const { token } = store.getState().user;
+
+  const subscriptionId = crypto.randomUUID();
   const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
     body: JSON.stringify(data),
   };
 
-  const url = `${config.apimUrl}/users/${userId}/products/${productName}/subscriptions`;
+  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -118,11 +120,11 @@ function renameSubscription(userId, subscriptionId, data) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
     body: JSON.stringify(data),
   };
 
-  const url = `${config.apimUrl}/users/${userId}/subscriptions/${subscriptionId}`;
+  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -137,11 +139,11 @@ function cancelSubscription(userId, subscriptionId, data) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
     body: JSON.stringify(data),
   };
 
-  const url = `${config.apimUrl}/users/${userId}/subscriptions/${subscriptionId}`;
+  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
