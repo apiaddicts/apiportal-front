@@ -1,11 +1,10 @@
 import handleResponse from './handleResponse';
 import handleResponseToken from './handleResponseToken';
-//import handleResponseRestore from './handleResponseRestore';
-//import handleResponseResetPwd from './handleResponseResetPwd';
+import handleResponseRestore from './handleResponseRestore';
+import handleResponseResetPwd from './handleResponseResetPwd';
 import store from '../redux/store';
 
 import config from './config';
-import handleResponseChangePwd from './handleResponseChangePwd';
 
 function login(email, password) {
   const requestOptions = {
@@ -104,24 +103,20 @@ function getUserEntityTag(token, id) {
     });
 }
 
-function updateUser(data, userId) {
-  const { token } = store.getState().user;
-  const params = {
-    firstName: data.firstName,
-    lastName: data.lastName,
-  };
+function updateUser(data) {
+  const { id, token, etag } = store.getState().user;
   const requestOptions = {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'Authorization': token },
-    body: JSON.stringify(params),
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}`, 'If-Match': `${etag}` },
+    body: JSON.stringify(data),
   };
 
-  const url = `${config.apimUrl}/users/${userId}`;
+  const url = `${config.url}/users/${id}?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response.data;
+      return response;
     }).catch((error) => {
       console.error(error);
     });
@@ -165,21 +160,13 @@ function signUp(data) {
     });
 }
 
-/*function verifyOldPassword({ email, password, new_password }) {
-  const { token } = store.getState().user;
-
-  const dataBody = {
-    username: email,
-    password,
-  };
-
+function verifyOldPassword(data) {
   const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': token },
-    body: JSON.stringify(dataBody),
+    method: 'GET',
+    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `Basic ${btoa(`${data.email}:${data.password}`)}` },
   };
 
-  const url = `${config.apimUrl}/users/identity/verifyOldPassword`;
+  const url = `${config.url}/identity?api-version=${config.apiVersion}`;
   return fetch(
     url,
     requestOptions,
@@ -187,51 +174,54 @@ function signUp(data) {
     .then((response) => {
       return response;
     }).catch((error) => {
-      return error;
+      console.error(error);
     });
-}*/
+}
 
-function changePassword(data) {
-  const { id, token } = store.getState().user;
-
+function changePassword(newPassword) {
+  const { id, token, etag } = store.getState().user;
+  const data = {
+    properties: {
+      password: newPassword,
+    },
+  };
   const requestOptions = {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}`, 'If-Match': `${etag}` },
     body: JSON.stringify(data),
   };
 
-  const url = `${config.apimUrl}/users/${id}/password`;
+  const url = `${config.url}/users/${id}?api-version=${config.apiVersion}`;
   return fetch(url, requestOptions)
-    .then(handleResponseChangePwd)
+    .then(handleResponse)
     .then((response) => {
       return response;
     }).catch((error) => {
-      return error;
+      console.error(error);
     });
 }
 
 function resetPassword(data) {
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `${config.hmacAuthHeader}` },
     body: JSON.stringify(data),
   };
 
-  const url = `${config.apimUrl}/password-recovery`;
-
+  const url = `${config.url}/confirmations/password?api-version=${config.apiVersion}`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
       return response;
     }).catch((error) => {
-      return error;
+      console.error(error);
     });
 }
 
-/*function resetPasswordWithTicket(queryParams, data) {
+function resetPasswordWithTicket(queryParams, data) {
   const requestOptions = {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `Ticket id="${queryParams.ticketid}",ticket="${queryParams.ticket}"` },
+    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `Ticket id="${queryParams.ticketid}",ticket="${queryParams.ticket}"` },
     body: JSON.stringify(data),
   };
 
@@ -243,7 +233,7 @@ function resetPassword(data) {
     }).catch((error) => {
       console.error(error);
     });
-}*/
+}
 
 function confirmPassword(confirmToken, newPassword) {
   const { token } = store.getState().user;
@@ -274,10 +264,10 @@ const userService = {
   getUserEntityTag,
   signUp,
   updateUser,
-  //verifyOldPassword,
+  verifyOldPassword,
   changePassword,
   resetPassword,
-  //resetPasswordWithTicket,
+  resetPasswordWithTicket,
   getUserGroups,
   changeStatus,
   confirmPassword,
