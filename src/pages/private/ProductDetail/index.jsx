@@ -12,7 +12,7 @@ import { getProductDetail, resetProduct, filterProductAPIsByName, filterProductA
 //import { subscribeToAProduct } from '../../../redux/actions/subscriptionsAction';
 import { Container, Card, Grid, Box, TableHead, TableRow, TableCell, Table, TableContainer, TableBody } from '@mui/material';
 import Title from '../../../components/Title';
-//import Btn from '../../../components/Buttons/Button';
+import Btn from '../../../components/Buttons/Button';
 //import Suscriptions from '../../../components/Suscriptions';
 //import SuscriptionsVertical from '../../../components/SuscriptionsVertical';
 import Spinner from '../../../components/Spinner';
@@ -23,14 +23,14 @@ import classes from './product-detail.module.scss';
 
 moment.locale('es');
 function ProductDetail(props) {
-  const { product, productApis, /*productSubscriptions, */spinnerApis, productsApisSkip/*, spinnerSubscriptions*/ } = useSelector((state) => state.products);
-  //const { user } = useSelector((state) => state.user);
-  //const { loadingCreateSubscription } = useSelector((state) => state.subscriptions);
+  const { product, productApis, productSubscriptions, spinnerApis, productsApisSkip } = useSelector((state) => state.products);
+  const { user } = useSelector((state) => state.user);
+  const { loadingCreateSubscription } = useSelector((state) => state.suscripcions);
 
   const dispatch = useDispatch();
   const params = useParams();
 
-  //const [searchSuscription, setSearchSuscription] = useState('');
+  const [searchSuscription, setSearchSuscription] = useState('');
 
   const { formik } = useSearch({
     initialState: {
@@ -40,7 +40,7 @@ function ProductDetail(props) {
     },
   });
 
-  const handleSearch = () => {
+  useEffect(() => {
     if (formik.values.name.trim().length >= 3) {
       dispatch(filterProductAPIsByName(params.id, formik.values.name));
     }
@@ -52,13 +52,10 @@ function ProductDetail(props) {
     if (formik.values.name.trim().length === 0 && formik.values.description.trim().length === 0) {
       dispatch(getProductApis(params.id));
     }
-  };
-  useEffect(() => {
-    const timer = setTimeout(() => handleSearch(), 500);
-    return () => clearTimeout(timer);
+
   }, [formik.values.name, formik.values.description]);
 
-  /*useEffect(() => {
+  useEffect(() => {
     if (formik.values.suscription.trim().length > 1) {
       setSearchSuscription(formik.values.suscription);
     }
@@ -67,7 +64,7 @@ function ProductDetail(props) {
       setSearchSuscription('');
     }
 
-  }, [formik.values.suscription]);*/
+  }, [formik.values.suscription]);
 
   useEffect(() => {
     if (params.id && product && Object.keys(product).length === 0) {
@@ -90,18 +87,22 @@ function ProductDetail(props) {
     dispatch(getProductApiPrevious(params.id));
   };
 
-  /*const handleSubmitSuscription = () => {
+  const handleSubmitSuscription = () => {
     if (searchSuscription.trim().length > 0 && user && Object.keys(user).length > 0) {
       const data = {
-        name: searchSuscription
+        properties: {
+          name: searchSuscription,
+          scope: `/products/${product.name}`,
+          appType: 'developerPortal',
+        },
       };
       dispatch(subscribeToAProduct(data, user.name, params.id));
     }
-    formik.resetForm();
-  };*/
+  };
 
-  //const suscriptionValidate = Object.keys(productSubscriptions).length > 0 && productSubscriptions?.data?.value.length > 0 ? productSubscriptions?.data?.value.filter((item) => item.properties.state !== 'cancelled') : [];
-  //const limits = product.properties && Object.keys(product.properties).length > 0 ? product.properties.subscriptionsLimit : 0;
+
+  const suscriptionValidate = Object.keys(productSubscriptions).length > 0 && productSubscriptions.value.length > 0 ? productSubscriptions.value.filter((item) => item.properties.state !== 'cancelled') : [];
+  const limits = product.properties && Object.keys(product.properties).length > 0 ? product.properties.subscriptionsLimit : 0;
 
   return (
     <div>
@@ -141,7 +142,7 @@ function ProductDetail(props) {
                 </Grid>
               </Grid>
             </Card>
-            {/*productSubscriptions && Object.keys(productSubscriptions).length > 0 && productSubscriptions.count > 0 ? (
+            {productSubscriptions && Object.keys(productSubscriptions).length > 0 && productSubscriptions.count > 0 ? (
               <>
                 <div className={classes.wrapper_subscriptions__wide__display}>
                   <Suscriptions user={user} suscriptions={productSubscriptions} title='Suscripción' productId={params.id}/>
@@ -152,9 +153,9 @@ function ProductDetail(props) {
               </>
             ) : (
               null
-            ) */}
+            ) }
 
-            {/*limits === null || suscriptionValidate.length < limits ? (
+            {limits === null || suscriptionValidate.length < limits ? (
                 <Card sx={{ borderRadius: '20px', marginTop: '33px', padding: '35px 47px 43px 41px', marginBottom: '40px', boxShadow: '0px 4px 28px rgba(169, 177, 209, 0.12)' }}>
                   {suscriptionValidate.length === 0 && productSubscriptions.count === 0 ? (
                     <Title text='Suscripción' divider={false} stylesTitle={{ fontSize: '2.25rem' }} />
@@ -173,13 +174,13 @@ function ProductDetail(props) {
                         />
                       </div>
                       <div className={classes.form_suscriptione__btn}>
-                        <Btn size='responsive' onClick={handleSubmitSuscription} styles={searchSuscription.length > 0 ? 'primary' : 'greey-primary'}>SUSCRIBIRME</Btn>
+                        <Btn size='responsive' onClick={handleSubmitSuscription} styles={searchSuscription.length > 0 ? 'primary-blue' : 'primary-blue'}>SUSCRIBIRME</Btn>
                       </div>
                     </div>
 
                   )}
                   </Card>
-            ) : (null)*/}
+            ) : (null)}
 
             {/* APis del producto */}
             <Card sx={{ borderRadius: '20px', marginTop: '33px', padding: '35px 47px 43px 41px', marginBottom: '15px', boxShadow: '0px 4px 28px rgba(169, 177, 209, 0.12)' }}>

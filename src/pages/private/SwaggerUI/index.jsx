@@ -8,106 +8,61 @@ import 'swagger-ui/dist/swagger-ui.css';
 import { Container } from '@mui/material';
 import Icon from '../../../components/MdIcon/Icon';
 import libraryService from '../../../services/libraryService';
-import appsService from '../../../services/appsService';
+// import appsService from '../../../services/appsService';
 //import apiService from '../../../services/apiService';
 import subscriptionsService from '../../../services/subscriptionsService';
 //import productService from '../../../services/productsService';
 import classes from './swagger-ui.module.scss';
 import Select from '../../../components/Input/InputUI/Select';
-import config from '../../../services/config';
+import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
+// import config from '../../../services/config';
 
 function SwaggerUI() {
 
   const { user } = useSelector((state) => state.user);
+  const [openApi, setOpenApi] = useState();
   const params = useParams();
-  const [docCheck, setDocCheck] = useState(false);
-  //const [apps, setApps] = useState([]);
   const [products, setProducts] = useState([]);
   const [subscriptions, setSubscriptions] = useState([]);
   const [subscriptionSecrets, setSubscriptionSecrets] = useState([]);
-  //const [swaggerUi, setSwaggerUi] = useState();
+  const [swaggerUi, setSwaggerUi] = useState();
 
-  const updateScopes = (openapi, apps) => {
-    for (const [, securityScheme] of Object.entries(openapi.components?.securitySchemes)) {
-      if (securityScheme.type === 'oauth2') {
-        for (const [typeFlow, flow] of Object.entries(securityScheme.flows)) {
-          if (typeFlow === 'clientCredentials') {
-            for (const app of apps) {
-              flow.scopes[`${config.b2cBaseUrl}/${app.id}/.default`] = 'Grant access to data';
-            }
-            continue;
-          }
-          if (typeFlow === 'password' || typeFlow === 'authorizationCode') {
-            for (const app of apps) {
-              flow.scopes[`${app.id}`] = 'Grant access to data';
-            }
-            continue;
-          }
-        }
-      }
-    }
-    return openapi;
-  };
-
-  const updateServers = (openapi, hostnames) => {
-    const customOpenApi = { ...openapi };
-    const servers = customOpenApi && customOpenApi['servers'] !== undefined && customOpenApi.servers.length > 0 ? customOpenApi.servers.filter((server) => {
-      const url = new URL(server.url);
-      if (hostnames.includes(url.hostname)) return true;
-      return false;
-    }) : [];
-    customOpenApi['servers'] = servers;
-    return customOpenApi;
-  };
+  /*const LogoutPlugin = () => ({
+    statePlugins: {
+      auth: {
+        wrapActions: {
+          logout: (oriAction) => (keys) => {
+            // here, you can do the logout request.
+            console.log('Logout from following securities:', keys);
+            return oriAction(keys); // don't forget! otherwise, Swagger UI won't logout
+          },
+        },
+      },
+    },
+  });*/
 
   useEffect(() => {
-    appsService.listAllApps(0).then((appList) => {
-      const apps = appList && Object.keys(appList).length > 0 ? appList.data.filter((app) => app.apis.some((api) => api.id === params.id)).map((app) => {
-        const appItem = {
-          ...app,
-          id: app.appId,
-          value: app.appId,
-          text: app.displayName,
-        };
-        return appItem;
-      }) : [];
-      //setApps(apps);
-
-      libraryService.getApiHostnames(params.id).then((hostnameList) => {
-        const hostnames = hostnameList.data && Object.keys(hostnameList.data).length > 0 ? hostnameList.data.value.map((hostname) => {
-          return hostname.properties.value;
-        }) : [];
-
-        libraryService.getApiOpenAPI(params.id).then((jsonOpenApi) => {
-          //setOpenApiFormat(('swagger' in jsonOpenApi) ? 'swagger' : 'openapi');
-          //hasApiKeySecurity();
-          //hasOAuthSecurity();
-          //selectEnvHost();
-          let customOpenApi = updateScopes(jsonOpenApi, apps);
-          customOpenApi = updateServers(customOpenApi, hostnames);
-
-          SwaggerUi({
-            dom_id: '#swaggerContainer',
-            spec: customOpenApi,
-            presets: SwaggerUi.presets.apis,
-            oauth2RedirectUrl: `${window.location.protocol}//${window.location.host}/developer/apis/swagger-ui/oauth-redirect`,
-            persistAuthorization: false,
-          });
-          //setSwaggerUi(swaggerUi);
-        }).catch((e) => {
-          setDocCheck(true);
-        });;
-
+    libraryService.getApiOpenAPI(params.id).then((jsonOpenApi) => {
+      setOpenApi(jsonOpenApi);
+      const swaggerUi = SwaggerUi({
+        dom_id: '#swaggerContainer',
+        spec: jsonOpenApi,
+        presets: [SwaggerUi.presets.apis],
+        //plugins: [LogoutPlugin],
+        oauth2RedirectUrl: `${window.location.protocol}//${window.location.host}/developer/apis/swagger-ui/oauth-redirect`,
+        persistAuthorization: true,
       });
+      setSwaggerUi(swaggerUi);
     });
+
     if (Object.keys(user).length > 0) {
-      libraryService.listApisProduct(params.id).then((productList) => {
-        const products = productList && Object.keys(productList).length > 0 ? productList.map((product) => {
+      libraryService.getApiProducts(params.id).then((productList) => {
+        const products = productList && Object.keys(productList).length > 0 ? productList.value.map((product) => {
           const prodItem = {
             ...product.properties,
             id: product.name,
             value: product.name,
-            text: product.displayName,
+            text: product.properties.displayName,
           };
           return prodItem;
         }) : [];
@@ -130,8 +85,31 @@ function SwaggerUI() {
 
       });
     }
-
   }, []);
+
+  /*const handleProductSelect = (selectProduct) => {
+    if (Object.keys(user).length > 0 && selectProduct) {
+      productService.getProductSuscripcion(selectProduct.id).then((subscriptionList) => {
+        const subscriptions = subscriptionList && Object.keys(subscriptionList).length > 0 ? subscriptionList.value.filter((subscription) => {
+          return (subscription.properties.state !== 'cancelled');
+        }).map((subscription) => {
+          const subscriptionItem = {
+            ...subscription.properties,
+            id: subscription.name,
+            value: subscription.name,
+            text: subscription.properties.displayName,
+          };
+          return subscriptionItem;
+        }) : [];
+        setSubscriptions(subscriptions);
+        setSubscriptionSecrets([]);
+      });
+    } else {
+      setSubscriptions([]);
+      setSubscriptionSecrets([]);
+    }
+    swaggerUi.authActions.logout(['apiKeyHeader']);
+  };*/
 
   const handleSubscriptionSelect = (selectedSubscription) => {
     if (Object.keys(user).length > 0 && selectedSubscription) {
@@ -163,37 +141,68 @@ function SwaggerUI() {
   };
 
   return (
-    <>
-      <div className={classes.back__btn}>
-        <Link to={-1}>
-          <div className={classes.return}>
-            <div>
-              <Icon id='MdKeyboardBackspace' />
-            </div>
-            <span>VOLVER</span>
+    <div>
+      {Object.keys(user).length > 0 ? (
+        <>
+          <div className={classes.back__btn}>
+            <Link to={-1}>
+              <div className={classes.return}>
+                <div>
+                  <Icon id='MdKeyboardBackspace' />
+                </div>
+                <span>VOLVER</span>
+              </div>
+            </Link>
           </div>
-        </Link>
-      </div>
-      { products.length > 0 && (
-        <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
-          <div className='row mt-6'>
-            <div className='flex-sm-12 flex-md-12 flex-lg-12'>
-              <Select label='Suscripción' disabled={!subscriptions.length > 0} placeholder='Seleccione una suscripción' items={subscriptions} itemText='text' itemValue='value' onChange={(e) => handleSubscriptionSelect(e)} />
+          { products.length > 0 && (
+            <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
+              {/*
+              <div className='row mt-6'>
+                <div className='flex-sm-12 flex-md-12 flex-lg-12'>
+                  <Select label='Producto' placeholder='Seleccione un producto' items={products} itemText='text' itemValue='value' onChange={(e) => handleProductSelect(e)} />
+                </div>
+              </div>
+              */}
+              <div className='row mt-6'>
+                <div className='flex-sm-12 flex-md-12 flex-lg-12'>
+                  <Select label='Suscripción' disabled={!subscriptions.length > 0} placeholder='Seleccione una suscripción' items={subscriptions} itemText='text' itemValue='value' onChange={(e) => handleSubscriptionSelect(e)} />
+                </div>
+              </div>
+              <div className='row mt-6'>
+                <div className='flex-sm-12 flex-md-12 flex-lg-12'>
+                  <Select label='Clave de Suscripción' disabled={!subscriptionSecrets.length > 0} placeholder='Seleccione una clave de suscripción' items={subscriptionSecrets} itemText='text' itemValue='value' onChange={(e) => handleSubscriptionSecretSelect(e)} />
+                </div>
+              </div>
+            </Container>
+          )}
+          <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
+            { openApi ? <div id='swaggerContainer' /> : <SkeletonComponent /> }
+          </Container>
+        </>
+      ) : (
+        <div id='apiHome' style={{ paddingTop: '114px' }}>
+          <div className={classes.banner_img}>
+            <div className={`${classes.banner_img__layout}`}>
+              <div className='container'>
+                <div className={classes.banner_img__backTo}>
+                  <Link to='/apis' className={classes.banner_img__backTo__btn}>
+                    <div>
+                      <Icon id='MdKeyboardBackspace' />
+                    </div>
+                    <div className={classes.banner_img__backTo__label}>
+                      <span>Volver</span>
+                    </div>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
-          <div className='row mt-6'>
-            <div className='flex-sm-12 flex-md-12 flex-lg-12'>
-              <Select label='Clave de Suscripción' disabled={!subscriptionSecrets.length > 0} placeholder='Seleccione una clave de suscripción' items={subscriptionSecrets} itemText='text' itemValue='value' onChange={(e) => handleSubscriptionSecretSelect(e)} />
-            </div>
+          <div className='container'>
+            { openApi ? <div id='swaggerContainer' /> : <SkeletonComponent /> }
           </div>
-        </Container>
+        </div>
       )}
-      <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
-        {
-          docCheck ? <h1>Información no disponible</h1> : <div id='swaggerContainer' />
-        }
-      </Container>
-    </>
+    </div>
   );
 };
 
