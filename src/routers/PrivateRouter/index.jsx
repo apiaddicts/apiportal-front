@@ -26,7 +26,8 @@ import UsersDetail from '../../pages/private/UserDetail';
 import Groups from '../../pages/private/Groups';
 import GroupDetailed from '../../pages/private/Groups/GroupDetailed';
 
-import { getUser, getUserGroups } from '../../redux/actions/userAction';
+import { getUser } from '../../redux/actions/userAction';
+// import { getUser, getUserGroups } from '../../redux/actions/userAction';
 import classes from './private-router.module.scss';
 // import GettingStarted from '../../pages/private/GettingStarted';
 import Apps from '../../pages/private/Apps/Apps';
@@ -53,7 +54,7 @@ function PrivateRouter({ children }) {
         token,
       };
       dispatch(getUser(tokens));
-      if (user) dispatch(getUserGroups(tokens));
+      // if (user) dispatch(getUserGroups(tokens));
       getTime();
     }
   }, []);

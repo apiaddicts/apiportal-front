@@ -33,9 +33,7 @@ function Profile() {
       },
     };
     const tokens = {
-      userId: {
-        id,
-      },
+      id,
       token,
     };
     dispatch(updateUser(data, user.name, tokens));

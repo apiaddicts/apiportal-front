@@ -24,7 +24,7 @@ export const login = (data) => (dispatch) => {
         }
         sessionStorage.setItem('token', JSON.stringify(response));
         dispatch(getUser(response));
-        dispatch(getUserGroups(response));
+        // dispatch(getUserGroups(response));
         dispatch({ type: userConstants.RESET_ALERT });
       }
     }
@@ -203,10 +203,7 @@ export const changeStatus = (data, userId) => (dispatch) => {
     });
 };
 
-/*export const verifyOldPassword = (data) => (dispatch) => {
-  dispatch({
-    type: userConstants.RESTORE_SIGNUP_REQUEST,
-  });
+export const verifyOldPassword = (data) => (dispatch) => {
   userService.verifyOldPassword(data).then(
     (response) => {
       if (response && Object.keys(response).length > 0) {
@@ -218,11 +215,8 @@ export const changeStatus = (data, userId) => (dispatch) => {
             });
           }
         } else {
-          dispatch({
-            type: userConstants.RESTORE_SIGNUP_SUCCESS,
-            response,
-          });
-          dispatch(changePassword(data.new_password, response?.data?.id));
+          dispatch(getUserEntityTag(response));
+          dispatch(changePassword(data.new_password));
         }
       }
     },
@@ -230,30 +224,21 @@ export const changeStatus = (data, userId) => (dispatch) => {
       console.error(error);
     },
   );
-};*/
+};
 
-export const changePassword = (data) => (dispatch) => {
-  dispatch({
-    type: userConstants.CHANGE_PASSWORD_LOGGED_REQUEST,
-  });
-  userService.changePassword(data).then(
+export const changePassword = (newPassword) => (dispatch) => {
+  userService.changePassword(newPassword).then(
     (response) => {
-      if (response && Object.keys(response).length > 0) {
-        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
-          dispatch({
-            type: userConstants.CHANGE_PASSWORD_LOGGED_FAILURE,
-            response,
-          });
-        } else {
-          dispatch({
-            type: userConstants.CHANGE_PASSWORD_LOGGED_SUCCESS,
-            response: response.data,
-          });
-          const passwordEncrypted = btoa(data.password);
-          const secureKeyEncrypted = btoa(`${passwordEncrypted}:${config.rememberkey}`);
-          localStorage.setItem('password', secureKeyEncrypted);
-        }
-      }
+      const passwordEncrypted = btoa(newPassword);
+      const secureKeyEncrypted = btoa(`${passwordEncrypted}:${config.rememberkey}`);
+      localStorage.setItem('password', secureKeyEncrypted);
+      dispatch({
+        type: userConstants.CHANGE_PASSWORD_LOGGED_SUCCESS,
+        response,
+      });
+    },
+    (error) => {
+      console.error('Update password error', error);
     },
   );
 };
@@ -261,17 +246,11 @@ export const changePassword = (data) => (dispatch) => {
 export const resetPassword = (data) => (dispatch) => {
   userService.resetPassword(data).then(
     (response) => {
-      if (response && Object.keys(response).length > 0) {
-        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
-          dispatch({
-            type: userConstants.RESET_SIGNUP_FAILURE,
-          });
-        } else {
-          dispatch({
-            type: userConstants.RESET_SIGNUP,
-            response,
-          });
-        }
+      if (response.status === 204) {
+        dispatch({
+          type: userConstants.RESET_SIGNUP,
+          response,
+        });
       }
     },
     (error) => {
@@ -280,21 +259,14 @@ export const resetPassword = (data) => (dispatch) => {
   );
 };
 
-/*export const resetPasswordWithTicket = (queryParams, data, password) => (dispatch) => {
-  userService.resetPasswordWithTicket(queryParams, data, password).then(
+export const resetPasswordWithTicket = (queryParams, data) => (dispatch) => {
+  userService.resetPasswordWithTicket(queryParams, data).then(
     (response) => {
       if (response && Object.keys(response).length > 0) {
         if (Object.prototype.hasOwnProperty.call(response, 'error')) {
-          if (response?.error?.status === 401) {
-            dispatch({ type: userConstants.RESET_PASSWORD_TICKET_FAILURE, response });
-          }
+          dispatch({ type: userConstants.RESET_PASSWORD_TICKET_FAILURE, response });
         } else {
           dispatch({ type: userConstants.RESET_PASSWORD_TICKET_SUCCESS, response });
-          dispatch(logout());
-          setTimeout(() => {
-            console.error('redireccionar');
-            window.location = '/';
-          }, 1500);
         }
       }
     },
@@ -302,7 +274,7 @@ export const resetPassword = (data) => (dispatch) => {
       console.error('Reset password error', error);
     },
   );
-};*/
+};
 
 export const confirmPassword = ({ confirmToken, newPassword }) => (dispatch) => {
   dispatch({
