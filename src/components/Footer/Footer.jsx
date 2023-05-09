@@ -6,7 +6,7 @@ import { Alert } from '@mui/material';
 import { RiInstagramFill } from 'react-icons/ri';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { sendConversationMail } from '../../redux/actions/mailAction';
+import { sendContactMail } from '../../redux/actions/mailAction';
 import 'yup-phone';
 import Base from './Base';
 import classes from './footer.module.scss';
@@ -61,7 +61,7 @@ function Footer({ isPrivate }) {
     onSubmit: (values) => {
       //Handle envio de correo de contacto
       setDisplaySubmit(false);
-      dispatch(sendConversationMail(values));
+      dispatch(sendContactMail(values));
     },
   });
 

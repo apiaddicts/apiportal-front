@@ -1,5 +1,5 @@
 import mailConstants from '../constants/mailConstants';
-//import mailService from '../../services/mailService';
+import mailService from '../../services/mailService';
 
 // eslint-disable-next-line import/prefer-default-export
 export const sendContactMail = (values) => (dispatch) => {
@@ -7,7 +7,7 @@ export const sendContactMail = (values) => (dispatch) => {
     type: mailConstants.GET_ALL_MAIL_CONTACT_SUCCESS,
     payload: {},
   });
-  /*mailService.sendContactMail(values).then(
+  mailService.sendContactMail(values).then(
     (response) => {
       if (response.ok) {
         dispatch({
@@ -27,7 +27,7 @@ export const sendContactMail = (values) => (dispatch) => {
         payload: error.response,
       });
     },
-  );*/
+  );
 };
 
 export const sendConversationMail = (values) => (dispatch) => {
@@ -35,7 +35,7 @@ export const sendConversationMail = (values) => (dispatch) => {
     type: mailConstants.GET_ALL_MAIL_CONVERSATION_SUCCESS,
     payload: {},
   });
-  /*mailService.sendConversationMail(values).then(
+  mailService.sendConversationMail(values).then(
     (response) => {
       if (response.ok) {
         dispatch({
@@ -55,5 +55,5 @@ export const sendConversationMail = (values) => (dispatch) => {
         payload: error.response,
       });
     },
-  );*/
+  );
 };
