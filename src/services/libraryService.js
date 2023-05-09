@@ -204,19 +204,19 @@ function filterAPIsByTags(data) {
     });
 }
 
-function searchApis(search, top, skip) {
+function searchApis(search) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.apimUrl}/apis?$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}')) or (contains(properties/description,'${search}'))`;
+  const url = `${config.url}/apis?api-version=${config.apiVersion}&tags[0]=published&$filter=(contains(properties/displayName,'${search}')) or (contains(properties/description,'${search}'))`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response.data;
+      return response;
     }).catch((error) => {
       console.error(error);
     });
