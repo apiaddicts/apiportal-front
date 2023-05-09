@@ -18,6 +18,7 @@ import { getLibrary, getLibraries } from '../../../redux/actions/libraryAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
 import codeSnipet from '../../../static/img/code-snippet.png';
 import classes from './api-detail.module.scss';
+import CustomMarkdown from '../../../components/CustomMarkdown';
 
 function ApiDetail({ setIsOpen }) {
 
@@ -161,6 +162,13 @@ function ApiDetail({ setIsOpen }) {
               </div>
             </div>
           </section>
+          {library?.markdown && library?.markdown.length > 0 && (
+            <section className={`container ${classes.section__content} pb-9`}>
+              <div className='markdown__content'>
+                <CustomMarkdown content={library?.markdown} />
+              </div>
+            </section>
+          )}
           <section className={classes.section__discover}>
             <div className='container'>
               <div className='row'>
