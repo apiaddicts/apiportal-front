@@ -66,7 +66,7 @@ export const getLibrary = (id) => (dispatch) => {
 };
 
 export const listApis = (top = config.topApi, skip = 0, filter = '') => (dispatch) => {
-  libraryService.getApis(top, skip, filter).then(
+  libraryService.getApis(filter).then(
     (response) => {
       if (response && Object.keys(response).length > 0) {
         if (Object.prototype.hasOwnProperty.call(response, 'error')) {

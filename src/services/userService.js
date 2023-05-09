@@ -8,19 +8,12 @@ import config from './config';
 import handleResponseChangePwd from './handleResponseChangePwd';
 
 function login(email, password) {
-
-  const params = {
-    username: email,
-    password,
-  };
-
   const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(params),
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${btoa(`${email}:${password}`)}` },
   };
 
-  const url = `${config.apimUrl}/login`;
+  const url = `${config.url}/identity?api-version=${config.apiVersion}`;
 
   return fetch(
     url,
@@ -29,37 +22,39 @@ function login(email, password) {
     .then((response) => {
       return response;
     }).catch((error) => {
-      return error;
+      console.error(error);
     });
 }
 
-function confirmAccount({ token }) {
+function confirmAccount(queryParams) {
   const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    method: 'PUT',
+    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `Ticket id="${queryParams.ticketId}",ticket="${queryParams.ticket}"` },
   };
 
-  const url = `${config.apimUrl}/accounts/${token}`;
-
+  const url = `${config.url}/users/${queryParams.userId}/identities/Basic/${queryParams.identity}?api-version=${config.apiVersion}`;
   return fetch(url, requestOptions)
-    .then(handleResponse)
-    .then((response) => response)
-    .catch((error) => error);
-
+    .then(handleResponseToken)
+    .then((response) => {
+      return { ...response, id: queryParams.userId };
+    }).catch((error) => {
+      console.error(error);
+    });
 }
 
-function getUserDetails(token, userId) {
+function getUserDetails(token, id) {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': token, 'Content-type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.apimUrl}/users/${userId}`;
-
-  return fetch(url, requestOptions)
-    .then(handleResponse)
+  const url = `${config.url}/users/${id}?api-version=${config.apiVersion}`;
+  return fetch(
+    url,
+    requestOptions,
+  ).then(handleResponse)
     .then((response) => {
-      return response.data;
+      return response;
     }).catch((error) => {
       console.error(error);
     });
@@ -83,7 +78,7 @@ function getUserGroups(token, id) {
     });
 }
 
-/*function getUserEntityTag(token, id) {
+function getUserEntityTag(token, id) {
   const requestOptions = {
     method: 'HEAD',
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
@@ -107,7 +102,7 @@ function getUserGroups(token, id) {
     .catch((error) => {
       console.error(error);
     });
-}*/
+}
 
 function updateUser(data, userId) {
   const { token } = store.getState().user;
@@ -152,13 +147,13 @@ function changeStatus(data, userId) {
 
 function signUp(data) {
   const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    method: 'PUT',
+    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `${config.hmacAuthHeader}` },
     body: JSON.stringify(data),
   };
+  const uuid = crypto.randomUUID();
 
-  const url = `${config.apimUrl}/signup`;
-
+  const url = `${config.url}/users/${uuid}?api-version=${config.apiVersion}`;
   return fetch(
     url,
     requestOptions,
@@ -166,7 +161,7 @@ function signUp(data) {
     .then((response) => {
       return response;
     }).catch((error) => {
-      return error;
+      console.error(error);
     });
 }
 
@@ -276,7 +271,7 @@ const userService = {
   login,
   confirmAccount,
   getUserDetails,
-  //getUserEntityTag,
+  getUserEntityTag,
   signUp,
   updateUser,
   //verifyOldPassword,

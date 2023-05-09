@@ -16,11 +16,14 @@ function ConfirmAccount({ setIsOpen }) {
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
   const queryParams = {
-    token: searchParams.get('token'),
+    userId: searchParams.get('userid'),
+    ticketId: searchParams.get('ticketid'),
+    ticket: searchParams.get('ticket'),
+    identity: searchParams.get('identity'),
   };
 
   useEffect(() => {
-    if (queryParams.token && !accountVerificationSent) {
+    if (queryParams.userId && queryParams.ticket && queryParams.ticketId && queryParams.identity && !accountVerificationSent) {
       dispatch(confirmAccount(queryParams, setIsOpen));
     }
   }, [accountVerificationSent]);
