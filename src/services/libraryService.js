@@ -86,15 +86,6 @@ function getAPi(id) {
     });
 }
 
-const isJsonString = (str) => {
-  try {
-    JSON.parse(str);
-  } catch (e) {
-    return str;
-  }
-  return JSON.parse(str);
-};
-
 function getApiOpenAPI(id) {
   const { token } = store.getState().user;
   const requestOptions = {
@@ -132,7 +123,6 @@ function getApiDescription(id) {
   };
 
   const url = `${config.apiUrl}/library-apis?_where[slug]=${id}`;
-
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => response[0])
