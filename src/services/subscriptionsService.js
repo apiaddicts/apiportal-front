@@ -11,11 +11,10 @@ function listUserSubscriptions(userId, top = config.topSubscriptions, skip = 0) 
   };
 
   const url = `${config.url}/users/${userId}/subscriptions?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}`;
-
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response.data;
+      return response;
     }).catch((error) => {
       console.error(error);
     });
@@ -100,16 +99,16 @@ function listSubscriptionSecrets(userId, subscriptionId) {
   const { token } = store.getState().user;
 
   const requestOptions = {
-    method: 'GET',
-    headers: { 'Authorization': token },
+    method: 'POST',
+    headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.apimUrl}/users/${userId}/subscriptions/${subscriptionId}/secrets`;
+  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}/listSecrets?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response.data;
+      return response;
     }).catch((error) => {
       console.error(error);
     });

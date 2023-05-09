@@ -96,7 +96,7 @@ export const getProductSuscripcion = (productName, top = config.topSubscriptions
   dispatch({ type: productsConstants.GET_PRODUCT_SUSCRIPCION_REQUEST });
   productsService.getProductSuscripcion(productName, top, skip).then((response) => {
     if (Object.keys(response).length > 0) {
-      dispatch({ type: productsConstants.GET_PRODUCT_SUSCRIPCION_SUCCESS, response: response.data });
+      dispatch({ type: productsConstants.GET_PRODUCT_SUSCRIPCION_SUCCESS, response });
     }
   }, (error) => {
     dispatch({ type: productsConstants.GET_PRODUCT_SUSCRIPCION_FAILURE, error });
@@ -117,9 +117,9 @@ export const getProductDetail = (productName) => (dispatch) => {
   dispatch({ type: productsConstants.GET_PRODUCT_REQUEST });
   productsService.getProductDetail(productName).then((response) => {
     if (Object.keys(response).length > 0) {
-      dispatch(getProductSuscripcion(productName));
-      dispatch(getProductApis(productName));
-      dispatch({ type: productsConstants.GET_PRODUCT_SUCCESS, response: response.data });
+      dispatch(getProductSuscripcion(response.name));
+      dispatch(getProductApis(response.name));
+      dispatch({ type: productsConstants.GET_PRODUCT_SUCCESS, response });
     } else {
       dispatch(logout());
     }
