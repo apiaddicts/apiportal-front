@@ -12,7 +12,6 @@ build react-app:
   image: node:12-alpine
   stage: build
   only:
-    # - main
     - test
   script:
     - export PATH=$PATH:/usr/bin/npm
@@ -25,45 +24,10 @@ build react-app:
      - build/    
     expire_in: 1 hour
   environment: production
-
-build react-app-wke-pre:
-  image: node:12-alpine
-  stage: build
-  only:
-    - wke-pre
-  script:
-    - export PATH=$PATH:/usr/bin/npm
-    - echo $ENV_CONFIG | base64 -d > .env
-    - cat .env    
-    - npm install
-    - CI=false npm run build
-  artifacts:    
-    paths:
-     - build/    
-    expire_in: 1 hour
-  environment: wke-pre
-
-build react-app-wke-prod:
-  image: node:12-alpine
-  stage: build
-  only:
-    - wke-prod
-  script:
-    - export PATH=$PATH:/usr/bin/npm
-    - echo $ENV_CONFIG | base64 -d > .env
-    - cat .env    
-    - npm install
-    - CI=false npm run build
-  artifacts:    
-    paths:
-     - build/    
-    expire_in: 1 hour
-  environment: wke-prod
 
 deploy-bucket prod:
   stage: deploy-bucket
   only:
-    # - main
     - test
   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   script:
@@ -82,55 +46,10 @@ deploy-bucket prod:
           aws s3api put-bucket-policy --bucket ${NAME_DNS} --policy file://policy-s3.json --region eu-west-1;
         fi;
   environment: production
-
-deploy-bucket wke-pre:
-  stage: deploy-bucket
-  only:
-    - wke-pre
-  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
-  script:
-   - echo "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}"
-   - NAME_DNS=$(echo "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}")
-   - echo "$NAME_DNS"
-   - >  
-        if [[ ! -z $(aws s3api list-buckets --query 'Buckets[?Name==`'${NAME_DNS}'`]' --output text) ]]; then 
-          aws s3 sync build/ s3://${NAME_DNS} --region eu-west-1;
-        else 
-          aws s3 mb s3://${NAME_DNS} --region eu-west-1;
-          aws s3 cp build/ s3://${NAME_DNS} --recursive --region eu-west-1;
-          aws s3 website s3://${NAME_DNS} --index-document index.html --error-document index.html --region eu-west-1;
-          aws s3api put-public-access-block --bucket ${NAME_DNS} --public-access-block-configuration  BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false
-          sed -i "s|NOMBRE-BUCKET|${NAME_DNS}|g;" policy-s3.json;
-          aws s3api put-bucket-policy --bucket ${NAME_DNS} --policy file://policy-s3.json --region eu-west-1;
-        fi;
-  environment: wke-pre
-
-deploy-bucket wke-prod:
-  stage: deploy-bucket
-  only:
-    - wke-prod
-  image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
-  script:
-   - echo "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}"
-   - NAME_DNS=$(echo "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}")
-   - echo "$NAME_DNS"
-   - >  
-        if [[ ! -z $(aws s3api list-buckets --query 'Buckets[?Name==`'${NAME_DNS}'`]' --output text) ]]; then 
-          aws s3 sync build/ s3://${NAME_DNS} --region eu-west-1;
-        else 
-          aws s3 mb s3://${NAME_DNS} --region eu-west-1;
-          aws s3 cp build/ s3://${NAME_DNS} --recursive --region eu-west-1;
-          aws s3 website s3://${NAME_DNS} --index-document index.html --error-document index.html --region eu-west-1;
-          aws s3api put-public-access-block --bucket ${NAME_DNS} --public-access-block-configuration  BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false
-          sed -i "s|NOMBRE-BUCKET|${NAME_DNS}|g;" policy-s3.json;
-          aws s3api put-bucket-policy --bucket ${NAME_DNS} --policy file://policy-s3.json --region eu-west-1;
-        fi;
-  environment: wke-prod
 
 deploy-cloudfare prod:
   stage: deploy-cloudfare
   only:
-    # - main
     - test
   variables:
     URL_S3: "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}.s3-website-eu-west-1.amazonaws.com"
@@ -153,55 +72,3 @@ deploy-cloudfare prod:
           echo "DNS already exists";
         fi;
   environment: production
-
-deploy-cloudfare wke-pre:
-  stage: deploy-cloudfare
-  only:
-    - wke-pre
-  variables:
-    URL_S3: "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}.s3-website-eu-west-1.amazonaws.com"
-    NAME_DNS: "$SUBDOMAIN_PROJECT.$DOMAIN_PROJECT"
-  before_script:
-    - apk add --update curl && rm -rf /var/cache/apk/*
-    - apk add --no-cache curl jq
-  script:
-    - echo "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}"
-    - echo "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}"
-    - echo "${URL_S3}"
-    - curl -X GET ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/dns_records  --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" >> response_dns_list.json
-    - DNS_VALUE=$(cat response_dns_list.json | jq -r '.result[] | select( .name=="'${NAME_DNS}'") | .name')
-    - echo "$DNS_VALUE"
-    - >
-        if [ "${DNS_VALUE}" == "" ]; then
-          curl -X POST ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/dns_records --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" --data-raw '{"type":"CNAME","name":"'${NAME_DNS}'","content":"'${URL_S3}'","ttl":3600,"proxied":true}';
-          curl -X POST ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/pagerules --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" --data-raw '{"targets":[{"target":"url","constraint":{"operator":"matches","value":"'${NAME_DNS}'/*"}}],"actions":[{"id":"ssl","value":"flexible"}],"priority":1,"status":"active"}';
-        else 
-          echo "DNS already exists";
-        fi;
-  environment: wke-pre
-
-deploy-cloudfare wke-prod:
-  stage: deploy-cloudfare
-  only:
-    - wke-prod
-  variables:
-    URL_S3: "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}.s3-website-eu-west-1.amazonaws.com"
-    NAME_DNS: "$SUBDOMAIN_PROJECT.$DOMAIN_PROJECT"
-  before_script:
-    - apk add --update curl && rm -rf /var/cache/apk/*
-    - apk add --no-cache curl jq
-  script:
-    - echo "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}"
-    - echo "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}"
-    - echo "${URL_S3}"
-    - curl -X GET ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/dns_records  --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" >> response_dns_list.json
-    - DNS_VALUE=$(cat response_dns_list.json | jq -r '.result[] | select( .name=="'${NAME_DNS}'") | .name')
-    - echo "$DNS_VALUE"
-    - >
-        if [ "${DNS_VALUE}" == "" ]; then
-          curl -X POST ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/dns_records --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" --data-raw '{"type":"CNAME","name":"'${NAME_DNS}'","content":"'${URL_S3}'","ttl":3600,"proxied":true}';
-          curl -X POST ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/pagerules --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" --data-raw '{"targets":[{"target":"url","constraint":{"operator":"matches","value":"'${NAME_DNS}'/*"}}],"actions":[{"id":"ssl","value":"flexible"}],"priority":1,"status":"active"}';
-        else 
-          echo "DNS already exists";
-        fi;
-  environment: wke-prod
