@@ -48,9 +48,7 @@ function PrivateRouter({ children }) {
   useEffect(() => {
     if (id !== '' && token !== '' && user && Object.keys(user).length === 0) {
       const tokens = {
-        userId: {
-          id,
-        },
+        id,
         token,
       };
       dispatch(getUser(tokens));
