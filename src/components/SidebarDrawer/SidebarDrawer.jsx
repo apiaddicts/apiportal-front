@@ -14,15 +14,16 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Terminal from '@mui/icons-material/Terminal';
 import Settings from '@mui/icons-material/Settings';
 import { AppBar, Box, Button, IconButton, Menu, MenuItem, Toolbar } from '@mui/material';
-import { ChevronLeft, ChevronRight, Person } from '@mui/icons-material';
+import { ChevronLeft, ChevronRight } from '@mui/icons-material';
+// import { ChevronLeft, ChevronRight, Person } from '@mui/icons-material';
 import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSharp';
 import LogoutIcon from '@mui/icons-material/Logout';
 import CloseIcon from '@mui/icons-material/Close';
 import MenuIcon from '@mui/icons-material/Menu';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-import { MdNotStarted } from 'react-icons/md';
-import ShareIcon from '@mui/icons-material/Share';
+// import { MdNotStarted } from 'react-icons/md';
+// import ShareIcon from '@mui/icons-material/Share';
 import classes from './sliderdrawer.module.scss';
 /*import LogoAlt from '../../static/img/logoAlt.svg';*/
 import { logout } from '../../redux/actions/userAction';
@@ -62,13 +63,13 @@ function SidebarDrawer({ children, user, isAdmin }) {
   });
 
   const listItems = [
-    { route: '/developer/getting-started', text: 'Comencemos', icon: <MdNotStarted size='1.5rem' />, primaryRole: true },
-    { route: '/developer/products', text: 'Productos', icon: <Terminal />, primaryRole: true },
-    { route: '/developer/apps', text: 'Aplicaciones', icon: <Terminal />, primaryRole: true },
+    // { route: '/developer/getting-started', text: 'Comencemos', icon: <MdNotStarted size='1.5rem' />, primaryRole: true },
+    // { route: '/developer/products', text: 'Productos', icon: <Terminal />, primaryRole: true },
+    // { route: '/developer/apps', text: 'Aplicaciones', icon: <Terminal />, primaryRole: true },
     { route: '/developer/apis', text: 'Biblioteca de APIs', icon: <Settings />, primaryRole: true },
     { route: '/developer/subscriptions', text: 'Suscripciones', icon: <Terminal />, primaryRole: true },
-    { route: '/developer/users', text: 'Usuarios', icon: <Person />, primaryRole: isAdmin },
-    { route: '/developer/groups', text: 'Grupos', icon: <ShareIcon />, primaryRole: isAdmin },
+    // { route: '/developer/users', text: 'Usuarios', icon: <Person />, primaryRole: isAdmin },
+    // { route: '/developer/groups', text: 'Grupos', icon: <ShareIcon />, primaryRole: isAdmin },
   ];
 
   const dispatch = useDispatch();

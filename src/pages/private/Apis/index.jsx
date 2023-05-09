@@ -8,46 +8,39 @@ import Title from '../../../components/Title';
 import SearchInput from '../../../components/Input/SearchInput';
 import Icon from '../../../components/MdIcon/Icon';
 import CardInformationLibrary from '../../../components/Card/CardInformationLibrary';
-import { listApis, searchApis, getListTags, filterAPIsByTags, resetLibraryApi, getLibraryApiNextSearch, getLibraryApiPreviosSearch, getLibraryApiNext, getLibraryApiPrevios } from '../../../redux/actions/libraryAction';
+import { listApis, searchApis, getListTags, filterAPIsByTags, resetLibraryApi, getLibraries } from '../../../redux/actions/libraryAction';
 import classes from './apis.module.scss';
 import config from '../../../services/config'
 
+const compareArrays = (array1, array2) => {
+  return array1.filter((a) => {
+    return array2.some((b) => {
+      return a.slug === b.name;
+    });
+  });
+};
 function Apis(props) {
-
-  const topApi = parseInt(config.topApi);
-  const { loadingLibraries, apis, tagsList } = useSelector((state) => state.library);
+  const topApi = config.topApi;
+  const { loadingLibraries, apis, tagsList, libraries } = useSelector((state) => state.library);
+  const fApis = libraries && libraries.length > 0 && apis && Object.keys(apis).length > 0 && apis.value.length > 0 ? compareArrays(libraries, apis.value) : [];
   const [skip, setSkip] = useState(0);
   const dispatch = useDispatch();
+
   const displayApis = useMemo(() => ({
-    apis: apis && Object.keys(apis).length > 0 ? apis.value.map((api) => ({
-    apiName: api.name,
-    title: api.properties.displayName,
-    status: 'Publicado',
-    version: api.properties.apiVersion,
-    tags: [{ label: 'ejemplo' }],
-    color_status: 'green',
-    description: api.properties.description,
-  })).slice(skip, skip + topApi) : [],
+    apis: fApis.slice(skip, skip + topApi),
     skip: skip,
-    count: apis.count,
-  }), [apis, skip]);
-  const [search, setSearch] = useState('');
+    count: fApis.length,
+  }), [fApis, skip]);
 
   const handleChangeSearchFilter = (text) => {
     const filterText = text.replace(/[/[`&\/\\#,@|!+()$~%.'":*?<>\]{}]/g, '');
     if (filterText.trim().length >= 3) {
       dispatch(searchApis(filterText));
-      setSearch(filterText);
-    }
-
-    if (text.trim().length < 3) {
-      setSearch('');
     }
 
     if (text.trim().length === 0) {
       dispatch(listApis());
     }
-    setSkip(0);
   };
 
   const selectData = tagsList && Object.keys(tagsList).length > 0 && tagsList.value && tagsList.value.length > 0 ? tagsList.value.map((item, index) => {
@@ -57,35 +50,42 @@ function Apis(props) {
     };
     return options;
   }) : [];
+  const filteredSelectData = useMemo(() => selectData.filter(option => option.name !== 'published'), [selectData]);
 
-  const onSelect = (selectedList, selectedItem) => {
-    let tags = [];
-    selectedList.forEach((item, index) => {
-      tags.push(item.name);
+  const onSelect = (selectedList) => {
+    let search = 'tags[0]=published';
+    selectedList.forEach((items, index) => {
+      const data = `&tags[${index}]=${items.name}`;
+      search = search + data;
     });
-    const data = { tags };
-    dispatch(filterAPIsByTags(data));
-    setSkip(0);
+    dispatch(filterAPIsByTags(search));
   };
 
-  const onRemove = (selectedList, removedItem) => {
+  const onRemove = (selectedList) => {
 
     if (selectedList.length > 0) {
-      let tags = [];
+      let search = '';
       selectedList.forEach((items, index) => {
-        tags.push(items.name);
+        let data = '';
+        if (search.length === 0) {
+          data = `tags[${index}]=${items.name}`;
+        } else {
+          data = `&tags[${index}]=${items.name}`;
+        }
+        search = search + data;
       });
-      const data = { tags };
-      dispatch(filterAPIsByTags(data));
+      dispatch(filterAPIsByTags(search));
     } else {
       dispatch(listApis());
     }
-    setSkip(0);
   };
 
   useEffect(() => {
     if (apis && Object.keys(apis).length === 0) {
       dispatch(listApis());
+    }
+    if (libraries && libraries.length === 0) {
+      dispatch(getLibraries());
     }
 
   }, []);
@@ -101,13 +101,13 @@ function Apis(props) {
       dispatch(resetLibraryApi());
     };
   }, []);
-  
   const handleNext = () => {
     if (skip < displayApis.count) return setSkip(skip + topApi);
   };
   const handlePrevious = () => {
     if (skip >= topApi) return setSkip(skip - topApi);
   };
+
   return (
     <Container fixed sx={{ paddingLeft: {xs: '0px', md: '59px !important'}, paddingRight: {xs:' 0px', md: '97px !important'} }}>
       <Title stylesTitle={{ fontSize: '48px' }} text='Biblioteca de Apis' />
@@ -121,7 +121,6 @@ function Apis(props) {
               handleChangeSearchFilter(e.target.value);
             }}
             placeholder='Buscar APIs...'
-            borderRadius='20px'
           />
         </div>
         <div className={classes.wrapper__filters__search}>
@@ -134,7 +133,7 @@ function Apis(props) {
           </span>
           <Multiselect
             className={`inputSelect ${classes.selectIn}`}
-            options={selectData} // Options to display in the dropdown
+            options={filteredSelectData} // Options to display in the dropdown
             // selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
             onSelect={onSelect} // Function will trigger on select event
             onRemove={onRemove} // Function will trigger on remove event
@@ -151,7 +150,7 @@ function Apis(props) {
             displayApis.apis.map((item, index) => (
               <CardInformationLibrary
                 key={index}
-                apiName={item.apiName}
+                apiName={item.slug}
                 title={item.title}
                 status={item.status}
                 version={item.version}
@@ -160,7 +159,7 @@ function Apis(props) {
                 theme='dark'
                 info='ver Documentación'
                 description={item.description}
-                redirectTo={`/developer/apis/${item.apiName}`}
+                redirectTo={`/developer/apis/${item.slug}`}
               />
             ))
           ) : (null)
@@ -168,13 +167,16 @@ function Apis(props) {
       </div>
 
       <div className='display_flex justify_content__center mt-4'>
-        {loadingLibraries === false && apis ? (
-          displayApis.apis.length == 0 ? (
+        {apis ? (
+          fApis.length == 0 ? (
             <h1 className='text-center'>Información no disponible</h1>
           ) : (null)
+        ) : loadingLibraries === false ? (
+          <h1 className='text-center'>Información no disponible</h1>
         ) : (
-          <h1>Cargando....</h1>
-        )}
+              <h1>Cargando....</h1>
+            )
+        }
       </div>
 
       <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginTop: '1.875rem' }}>

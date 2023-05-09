@@ -3,6 +3,7 @@ import userConstants from '../constants/userConstats';
 import userService from '../../services/userService';
 import config from '../../services/config';
 import { getUserDetail, listUsers } from './usersAction';
+import subscriptionsService from '../../services/subscriptionsService';
 
 // eslint-disable-next-line import/prefer-default-export
 export const login = (data) => (dispatch) => {
@@ -21,9 +22,9 @@ export const login = (data) => (dispatch) => {
           localStorage.setItem('email', data.email);
           localStorage.setItem('password', secureKeyEncrypted);
         }
-        sessionStorage.setItem('token', JSON.stringify(response.data));
-        dispatch(getUser(response.data));
-        dispatch(getUserGroups(response.data));
+        sessionStorage.setItem('token', JSON.stringify(response));
+        dispatch(getUser(response));
+        dispatch(getUserGroups(response));
         dispatch({ type: userConstants.RESET_ALERT });
       }
     }
@@ -39,19 +40,25 @@ export const confirmAccount = (queryParams, setIsOpen) => (dispatch) => {
   });
   userService.confirmAccount(queryParams).then(
     (response) => {
-      if (response && Object.keys(response).length > 0) {
-        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
-          dispatch({
-            type: userConstants.CONFIRM_ACCOUNT_FAILURE,
-            response,
-          });
-        } else {
-          dispatch({
-            type: userConstants.CONFIRM_ACCOUNT_SUCCESS,
-            response: response.data,
-          });
-        }
+      if (response.status === 204) {
+        sessionStorage.setItem('token', JSON.stringify(response));
+        dispatch(getUser(response));
+        dispatch(getUserEntityTag(response));
+        dispatch({
+          type: userConstants.CONFIRM_ACCOUNT_SUCCESS,
+        });
+        setTimeout(() => { window.location = '/developer/profile'; }, 1500);
+      } else {
+        dispatch({
+          type: userConstants.CONFIRM_ACCOUNT_FAILURE,
+          error: response,
+        });
+        dispatch(logout());
+        window.location = '/';
       }
+    },
+    (error) => {
+      console.error('Confirm account error', error);
     },
   );
 };
@@ -66,6 +73,7 @@ export const logout = () => (dispatch) => {
 };
 
 export const signUp = (data) => (dispatch) => {
+  let dataResponse = {};
   dispatch({ type: userConstants.SIGNUP_REQUEST });
   userService.signUp(data).then(
     (response) => {
@@ -76,10 +84,22 @@ export const signUp = (data) => (dispatch) => {
             response,
           });
         } else {
+          dataResponse = response;
           dispatch({
             type: userConstants.SIGNUP_SUCCESS,
-            response: response.data,
+            response,
           });
+          if (config.generateStarterSubscriptionOnSignup) {
+            const { name } = dataResponse;
+            const data = {
+              properties: {
+                name: 'starter',
+                scope: '/products/starter',
+                appType: 'developerPortal',
+              },
+            };
+            subscriptionsService.subscribeToAProductWithHmac(data, name);
+          }
         }
       }
     },
@@ -91,14 +111,14 @@ export const signUp = (data) => (dispatch) => {
 
 export const getUser = (tokens) => (dispatch) => {
   dispatch({ type: userConstants.GET_USER_REQUEST });
-  userService.getUserDetails(tokens.token, tokens?.userId?.id).then(
+  userService.getUserDetails(tokens.token, tokens.id).then(
     (response) => {
       if (response && Object.keys(response).length > 0) {
         dispatch({ type: userConstants.GET_USER_SUCCESS, response });
         dispatch({
           type: userConstants.LOGIN_SUCCESS,
-          id: tokens?.userId?.id,
-          token: tokens?.token,
+          id: tokens.id,
+          token: tokens.token,
         });
       } else {
         sessionStorage.removeItem('token');
@@ -120,8 +140,8 @@ export const getUserGroups = (tokens) => (dispatch) => {
   );
 };
 
-/*export const getUserEntityTag = (tokens) => (dispatch) => {
-  userService.getUserEntityTag(tokens.token, tokens?.userId?.id).then(
+export const getUserEntityTag = (tokens) => (dispatch) => {
+  userService.getUserEntityTag(tokens.token, tokens.id).then(
     (response) => {
       localStorage.setItem('If-Match', JSON.stringify(response));
       dispatch({ type: userConstants.HEAD_ETAG_SUCCESS, response });
@@ -130,7 +150,7 @@ export const getUserGroups = (tokens) => (dispatch) => {
       console.error(error);
     },
   );
-};*/
+};
 
 export const updateUser = (data, userId, tokens) => (dispatch) => {
   dispatch({
