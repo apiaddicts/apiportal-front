@@ -48,6 +48,11 @@ function Products(props) {
   }, [formik.values.search, formik.values.name, formik.values.description]);
 
   useEffect(() => {
+    if (products && Object.keys(products).length === 0 && productsSkip === 0) {
+      dispatch(listProducts());
+    }
+  }, []);
+  useEffect(() => {
     return () => {
       dispatch(resetProduct());
     };
