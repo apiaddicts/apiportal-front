@@ -4,7 +4,7 @@ const sendContactMail = (values) => {
   const data = {
     'to': config.emailTo,
     'from': config.emailFrom,
-    'subject': values['subject'],
+    'subject': config.contactEmailSubject,
     'templateId': config.emailContactTemplateId,
     'emailData': {
       'firstName': values['name'],

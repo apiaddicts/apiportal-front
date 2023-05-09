@@ -34,7 +34,7 @@ export const compareArrays = (a, b) => {
 const config = {
   apiUrl: process.env.REACT_APP_STRAPI_URL,
   azureUrl: process.env.REACT_APP_AZURE_APIM_URL,
-  subscriptionId: process.env.REACT_APP_SUBSCRIPTION_ID,
+  subscriptionId: process.env.REACT_APP_AZURE_SUBSCRIPTION_ID,
   resourceGroupName: process.env.REACT_APP_RESOURCE_GROUP_NAME,
   serviceName: process.env.REACT_APP_SERVICE_NAME,
   apiVersion: process.env.REACT_APP_AZURE_APIM_ADMIN_API_VERSION,
@@ -62,6 +62,7 @@ const config = {
   emailTo: process.env.REACT_APP_EMAIL_TO,
   emailContactTemplateId: process.env.REACT_APP_EMAIL_CONTACT_TEMPLATE_ID,
   emailConversationTemplateId: process.env.REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID,
+  contactEmailSubject: process.env.REACT_APP_CONTACT_EMAIL_SUBJECT,
   locale: 'es',
   termsPath: '/user/terms',
   policyPath: '/user/policy-privacy',
