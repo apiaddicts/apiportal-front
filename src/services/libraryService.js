@@ -73,15 +73,14 @@ function getAPi(id) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.apimUrl}/apis/${id}?expandApiVersionSet=true&exportQuery&format`;
-
+  const url = `${config.url}/apis/${id}?api-version=${config.apiVersion}`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response.data;
+      return response;
     }).catch((error) => {
       console.error(error);
     });
@@ -97,31 +96,33 @@ const isJsonString = (str) => {
 };
 
 function getApiOpenAPI(id) {
-
+  const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Accept': 'application/vnd.oai.openapi+json; charset=utf-8', 'Authorization': `SharedAccessSignature ${token}` },
   };
-  const url = `${config.apiUrl}/library-apis?_where[slug]=${id}`;
+
+  const url = `${config.url}/apis/${id}?api-version=${config.apiVersion}&export=true&format=swagger`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      if (response.length === 0) return null;
-      if (response[0].openDoc.components && response[0].openDoc.components.securitySchemes) {
-        delete response[0].openDoc.components.securitySchemes['apiKeyQuery'];
+      if (response.components && response.components.securitySchemes) {
+        delete response.components.securitySchemes['apiKeyQuery'];
+        /*response.components.securitySchemes['API Key Header'] = { ...response.components.securitySchemes['apiKeyHeader'] };
+        delete response.components.securitySchemes['apiKeyHeader'];*/
       }
-      if (response[0].openDoc.security) {
-        delete response[0].openDoc.security['apiKeyQuery'];
+      if (response.securityDefinitions) {
+        delete response.securityDefinitions['apiKeyQuery'];
+        /*response.securityDefinitions['API Key Header'] = { ...response.securityDefinitions['apiKeyHeader'] };
+        delete response.securityDefinitions['apiKeyHeader'];*/
       }
-
-      const strOpenDoc = response[0].openDoc;
-
-      return isJsonString(strOpenDoc);
+      return response;
     }).catch((error) => {
       console.error(error);
     });
 }
+
 
 function getApiDescription(id) {
 
@@ -137,6 +138,27 @@ function getApiDescription(id) {
     .then((response) => response[0])
     .catch((error) => error);
 }
+
+const getApiProducts = (apiId) => {
+  const { token } = store.getState().user;
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      'Authorization': `SharedAccessSignature ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const url = `${config.url}/apis/${apiId}/products?api-version=${config.apiVersion}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response;
+    }).catch((error) => {
+      return error;
+    });
+};
 
 function getListTags() {
   const { token } = store.getState().user;
@@ -241,6 +263,7 @@ const libraryService = {
   getApiHostnames,
   getApiDescription,
   listApisProduct,
+  getApiProducts,
 };
 
 export default libraryService;
