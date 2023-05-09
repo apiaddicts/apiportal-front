@@ -114,7 +114,6 @@ function getApiOpenAPI(id) {
     });
 }
 
-
 function getApiDescription(id) {
 
   const requestOptions = {
