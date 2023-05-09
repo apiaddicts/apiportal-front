@@ -55,7 +55,7 @@ const config = {
   termsPageSlug: process.env.REACT_APP_TERMS_PAGE_SLUG,
   policyPageSlug: process.env.REACT_APP_POLICY_PAGE_SLUG,
   startedPageSlug: process.env.REACT_APP_STARTED_PAGE_SLUG,
-  emailUrl: process.env.REACT_APP_EMAIL_ENDPOINT,
+  emailUrl: process.env.REACT_APP_SENDING_EMAIL_ENDPOINT_URL,
   apiKeySendGrid: process.env.REACT_APP_API_KEY_SEND_GRID,
   subscriptionKey: process.env.REACT_APP_EMAIL_SUBSCRIPTION_KEY,
   emailFrom: process.env.REACT_APP_EMAIL_FROM,
