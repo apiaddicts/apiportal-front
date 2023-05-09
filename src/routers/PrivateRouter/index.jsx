@@ -28,7 +28,7 @@ import GroupDetailed from '../../pages/private/Groups/GroupDetailed';
 
 import { getUser, getUserGroups } from '../../redux/actions/userAction';
 import classes from './private-router.module.scss';
-import GettingStarted from '../../pages/private/GettingStarted';
+// import GettingStarted from '../../pages/private/GettingStarted';
 import Apps from '../../pages/private/Apps/Apps';
 import AppDetailed from '../../pages/private/Apps/AppDetailed';
 import AddApp from '../../pages/private/Apps/AddApp';
@@ -98,7 +98,7 @@ function PrivateRouter({ children }) {
                 <Route path='apps/:id' element={<AppDetailed />} />
                 <Route path='apps/new-app' element={<AddApp />} />
                 <Route path='apps/user-b2c' element={<AddUserB2c />} />
-                <Route path='getting-started' element={<GettingStarted />} />
+                {/* <Route path='getting-started' element={<GettingStarted />} /> */}
               </Routes>
             </div>
           </Box>
