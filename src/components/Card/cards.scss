@@ -61,7 +61,7 @@
     .card_chip_desciption {
         width: 100%;
         padding: 8px 40px 35px 40px;
-        color: #53565A;
+        color: $gray_darken;
         p{
             display: -webkit-box !important;
             -webkit-line-clamp: 4;
@@ -293,7 +293,7 @@
     line-height: 16px;
     align-items: center;
     justify-content: space-between;
-    color: #97D700;
+    color: $green;
     }
     
     .warning {
@@ -302,7 +302,7 @@
     line-height: 16px;
     align-items: center;
     justify-content: space-between;
-    color: #F1B434;
+    color: $warning;
 }
     .red {
         display: flex;
@@ -310,7 +310,7 @@
     line-height: 16px;
     align-items: center;
     justify-content: space-between;
-    color: #e91818;
+    color: $second_red;
 }
 
 

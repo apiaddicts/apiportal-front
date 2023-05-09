@@ -7,7 +7,7 @@
 .cell_title {
     display: flex;
     font-size: 20px;
-    color: #8189A9;
+    color: $gray_lighten-2;
 
     h2 {
         font-family: $secondary_font;
@@ -45,13 +45,13 @@
     display: flex;
     align-items: center;
     letter-spacing: 0.2px;
-    color: #53565A;
+    color: $gray_darken;
 }
 
 .pagination {
     cursor: pointer;
     display: flex;
-    color: #0033A0;
+    color: $blue;
     font-size: 20px;
     align-items: center;
 

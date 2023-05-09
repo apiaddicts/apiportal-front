@@ -1,7 +1,7 @@
 .pagination {
     cursor: pointer;
     display: flex;
-    color: #0033A0;
+    color: $blue;
     font-size: 20px;
     align-items: center;
 
@@ -10,7 +10,7 @@
     }
     
     p {
-        font-family: 'Trebuchet MS', serif;
+        font-family: $secondary_font;
         font-style: normal;
         font-weight: 400;
         font-size: 14px;

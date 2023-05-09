@@ -3,7 +3,7 @@
       &__title {
         display: flex;
         font-size: 20px;
-        color: #8189a9;
+        color: $gray_lighten-2;
   
         h2 {
           font-family: 'Trebuchet MS', serif;
@@ -14,7 +14,7 @@
           display: flex;
           align-items: center;
           letter-spacing: 0.2px;
-          color: #53565a;
+          color: $dark_primary;
         }
       }
   
@@ -30,10 +30,10 @@
         letter-spacing: 0.2px;
   
         &__description {
-          color: #53565a;
+          color: $gray_darken;
         }
         &__link {
-          color: #000B39;
+          color: $secondary_text;
         }
       }
     }
@@ -43,7 +43,7 @@
     }
     &__data {
       &__notfound {
-        color: #53565a
+        color: $gray_darken
         
       }
     }
