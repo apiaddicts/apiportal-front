@@ -48,6 +48,13 @@ function handleResponseResetPwd(response) {
             statusText: response.statusText,
           },
         };
+      case statusCode.HTTP_500_INTERNAL_SERVER_ERROR:
+        return {
+          error: {
+            status: response.status,
+            statusText: response.message,
+          },
+        };
       default:
         throw new Error(response.status);
     }

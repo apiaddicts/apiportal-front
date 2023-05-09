@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changePassword } from '../../redux/actions/userAction';
+import { verifyOldPassword } from '../../redux/actions/userAction';
 import useFormRestorePassword from '../../hooks/useFormRestorePassword';
 import Button from '../Buttons/Button';
 import Input from '../Input';
@@ -12,10 +12,11 @@ function RestorePasswordForm({ userEmail, display, toggleForm }) {
   const dispatch = useDispatch();
   const handleSubmit = async (values) => {
     const data = {
-      oldPassword: values.password,
-      password: values.new_password,
+      email: userEmail,
+      password: values.password,
+      new_password: values.new_password,
     };
-    dispatch(changePassword(data));
+    dispatch(verifyOldPassword(data));
   };
 
   const restorePasswordFields = [

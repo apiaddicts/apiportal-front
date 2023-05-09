@@ -12,7 +12,10 @@ function ResetPassword() {
   const dispatch = useDispatch();
   const handleSubmit = (dataForm) => {
     const data = {
-      email: dataForm.email,
+      properties: {
+        to: dataForm.email,
+        appType: 'developerPortal',
+      },
     };
     dispatch(resetPassword(data));
   };
