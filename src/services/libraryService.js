@@ -94,6 +94,21 @@ function getApiOpenAPI(id) {
     });
 }
 
+function getOpenApiFromStrapi(id) {
+
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const url = `${config.apiUrl}/library-apis?_where[slug]=${id}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response[0])
+    .catch((error) => error);
+}
+
 function getListTags() {
   const { token } = store.getState().user;
   const requestOptions = {
@@ -232,6 +247,7 @@ const libraryService = {
   getApiHostnames,
   getApiProducts,
   getApisUnsecure,
+  getOpenApiFromStrapi,
 };
 
 export default libraryService;

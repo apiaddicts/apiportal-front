@@ -38,7 +38,7 @@ function SwaggerUI() {
   });*/
 
   useEffect(() => {
-    libraryService.getApiOpenAPI(params.id).then((jsonOpenApi) => {
+    libraryService.getOpenApiFromStrapi(params.id).then((jsonOpenApi) => {
       setOpenApi(jsonOpenApi);
       const swaggerUi = SwaggerUi({
         dom_id: '#swaggerContainer',
