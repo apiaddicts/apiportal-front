@@ -13,6 +13,7 @@ import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonCom
 import BannerImage from '../../../components/Banner/BannerImage';
 import Slick from '../../../components/SlickSlider/Slick';
 import Icon from '../../../components/MdIcon/Icon';
+import CustomMarkdown from '../../../components/CustomMarkdown';
 import { getHomeContent } from '../../../redux/actions/homeAction';
 import { getLibrary, getLibraries } from '../../../redux/actions/libraryAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
@@ -159,6 +160,13 @@ function ApiDetail({ setIsOpen }) {
               </div>
             </div>
           </section>
+          {library?.markdown && library?.markdown.length > 0 && (
+            <section className={`container ${classes.section__content} pb-9`}>
+              <div className='markdown__content'>
+                <CustomMarkdown content={library?.markdown} />
+              </div>
+            </section>
+          )}
           <section className={classes.section__discover}>
             <div className='container'>
               <div className='row'>
