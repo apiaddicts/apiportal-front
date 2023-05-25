@@ -10,7 +10,6 @@ variables:
   
 build:
   image: node:12-alpine
-  environment: $CI_COMMIT_REF_NAME
   stage: build
   script:
     - export PATH=$PATH:/usr/bin/npm
@@ -22,10 +21,10 @@ build:
     paths:
      - build/    
     expire_in: 1 hour
+  environment: $CI_COMMIT_REF_NAME
 
 deploy-bucket:
   stage: deploy-bucket
-  environment: $CI_COMMIT_REF_NAME
   image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   script:
    - echo "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}"
@@ -42,10 +41,10 @@ deploy-bucket:
           sed -i "s|NOMBRE-BUCKET|${NAME_DNS}|g;" policy-s3.json;
           aws s3api put-bucket-policy --bucket ${NAME_DNS} --policy file://policy-s3.json --region eu-west-1;
         fi;
+  environment: $CI_COMMIT_REF_NAME
 
 deploy-cloudfare:
   stage: deploy-cloudfare
-  environment: $CI_COMMIT_REF_NAME
   variables:
     URL_S3: "${SUBDOMAIN_PROJECT}.${DOMAIN_PROJECT}.s3-website-eu-west-1.amazonaws.com"
     NAME_DNS: "$SUBDOMAIN_PROJECT.$DOMAIN_PROJECT"
@@ -66,3 +65,4 @@ deploy-cloudfare:
         else 
           echo "DNS already exists";
         fi;
+  environment: $CI_COMMIT_REF_NAME
