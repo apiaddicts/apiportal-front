@@ -36,7 +36,11 @@ function CardBasic({ chipTitle, title, img, description, info, route, maxWidth, 
               <picture>
                 <img className='card_img' src={img !== '' ? img : config.notImage} alt={img} />
               </picture>
-            ) : (null, null)}
+            ) : (
+              <picture>
+                <img className='card_img' src={config.notImage} alt={img} />
+              </picture>
+            )}
             <section className='card_container'>
               <div className='card_chip_title'>
                 {chipTitle ? (

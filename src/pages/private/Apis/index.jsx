@@ -110,7 +110,7 @@ function Apis(props) {
 
   return (
     <Container fixed sx={{ paddingLeft: {xs: '0px', md: '59px !important'}, paddingRight: {xs:' 0px', md: '97px !important'} }}>
-      <Title stylesTitle={{ fontSize: '48px' }} text='Biblioteca de Apis' />
+      <Title stylesTitle={{ fontSize: '48px' }} text='APIs' />
       <div className={classes.wrapper__filters}>
         <div>
           <SearchInput

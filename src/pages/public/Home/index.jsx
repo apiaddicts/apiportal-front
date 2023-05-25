@@ -10,7 +10,6 @@ import { getLibraries } from '../../../redux/actions/libraryAction';
 import Item from '../../../components/Item/Item';
 //import Icon from '../../../components/MdIcon/Icon';
 import CardBasic from '../../../components/Card/CardBasic';
-//Enable when alliances exist
 //import CardSlider from '../../../components/Card/CardSlider';
 import BannerCentered from '../../../components/Banner/BannerCentered';
 import Tabs from '../../../components/Tabs/Tabs';
@@ -20,6 +19,7 @@ import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonCom
 import Slick from '../../../components/SlickSlider/Slick';
 import classes from './home.module.scss';
 import CustomIcon from '../../../components/MdIcon/CustomIcon';
+import config from '../../../services/config';
 
 moment.locale('es');
 
@@ -79,6 +79,9 @@ function Home({ setOpenForm }) {
   const filterDiscoverSubtitle = filterDiscover.length > 0 && filterDiscover[0]?.subtitle ? filterDiscover[0]?.subtitle : '';
 
   // Load tab cards
+  //const filterTabCard = homePage && homePage.contentSections && homePage.contentSections?.length > 0 ? homePage.contentSections.filter((item) => item.__component === 'custom.tab-card') : [];
+
+  // Load tab cards
   const filterHomeBanner = homePage && homePage.contentSections && homePage.contentSections?.length > 0 ? homePage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
   const filterHomeBannerTitle = filterHomeBanner.length > 0 && filterHomeBanner[0]?.title ? filterHomeBanner[0]?.title : '';
   const filterHomeBannerSubtitle = filterHomeBanner.length > 0 && filterHomeBanner[0]?.subtitle ? filterHomeBanner[0]?.subtitle : '';
@@ -119,7 +122,7 @@ function Home({ setOpenForm }) {
             <div className='row'>
               <div className='flex-md-12 flex-md-12 flex-lg-12 flex-sm-12'>
                 <h1 className='h3 text__dark__primary font-weight-bold mb-5 text-center'>
-                  {titleSection || 'Benificios principales'}
+                  {titleSection || ''}
                 </h1>
               </div>
             </div>
@@ -137,17 +140,18 @@ function Home({ setOpenForm }) {
                 ))}
               </div>
               <div className={`flex-md-5 flex-lg-5 flex-sm-12 ${classes.section__content__img}`}>
-                <img src={backgroundSection || ''} alt='' />
+                <img src={backgroundSection || config.notImage} alt='' />
               </div>
             </div>
           </section>
+
           {/* Como funciona */}
           <section className={`${classes.section__works}`}>
             <div className='container'>
               <div className='row'>
                 <div className='flex-md-12 flex-sm-12'>
                   <h1 className={`h3 text__white mb-5 ${classes.section__works__title}`}>
-                    {filterWorks && filterWorks.length > 0 && filterWorks[0]?.title ? filterWorks[0]?.title : '¿Cómo funciona?'}
+                    {filterWorks && filterWorks.length > 0 && filterWorks[0]?.title ? filterWorks[0]?.title : ''}
                   </h1>
                 </div>
               </div>
@@ -204,58 +208,74 @@ function Home({ setOpenForm }) {
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
                 <h1 className={`h2 text__dark__primary font-weight-bold text-center ${classes.section__discover__title}`}>
-                  {filterDiscoverTitle || 'Descubre nuestras APIs'}
+                  {filterDiscoverTitle || ''}
                 </h1>
               </div>
             </div>
-            <div className='row d-xs-none'>
+            <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
                 <p className={`subtitle-1 mb-10 text__gray__darken primary-font text-center ${classes.section__discover__subtitle}`}>
                   {filterDiscoverSubtitle || ''}
                 </p>
               </div>
             </div>
-            <div className='row d-xs-none'>
-              {
-                apisNews && apisNews.length > 0 ? (
-                  apisNews.map((card, i) => (
+            {apisNews && apisNews.length > 0 ? (
+              <>
+                <div className='row'>
+                  {apisNews.map((card, i) => (
                     <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
                       <CardBasic chipTitle='' title={card?.title} description={card?.description} info='MÁS INFORMACIÓN' url={`/apis/${card?.id}#api`} />
                     </div>
-                  ))
-                ) : (null)
-              }
-            </div>
-            <div className='container d-xs-only'>
-              <div className='row'>
-                <div className='flex-md-12 flex-sm-12 pxs-none'>
-                  <Slick slides={filterDiscover && filterDiscover.length > 0 && filterDiscover[0]?.useCaseList} />
+                  ))}
                 </div>
-              </div>
-            </div>
-            <div className='row'>
-              <div className='flex-md-12 flex-sm-12'>
-                <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
-                  <HashLink smooth to='/apis#apiHome' className={`button text d-xs-none ${classes.section__discover__showmore__button}`}>
-                    <span className='mr-1'>ver todas</span>
-                    <div className={classes.section__discover__showmore__button__chevron}>
-                      <CustomIcon name='chevron_right' />
+                {/*<div className='container'>
+                    <div className='row'>
+                        <div className='flex-md-12 flex-sm-12 pxs-none'>
+                        <Slick slides={filterDiscover && filterDiscover.length > 0 && filterDiscover[0]?.useCaseList} />
+                        </div>
                     </div>
-                  </HashLink>
-                  <HashLink smooth to='/apis#apiHome' className={`d-sm-none ${classes.section__discover__showmore__button}`}>
-                    Ver todas
-                  </HashLink>
+                    </div>*/}
+                <div className='row'>
+                  <div className='flex-md-12 flex-sm-12'>
+                    <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
+                      <HashLink smooth to='/apis#apiHome' className={`button text d-xs-none ${classes.section__discover__showmore__button}`}>
+                        <span className='mr-1'>ver todas</span>
+                        <div className={classes.section__discover__showmore__button__chevron}>
+                          <CustomIcon name='chevron_right' />
+                        </div>
+                      </HashLink>
+                      <HashLink smooth to='/apis#apiHome' className={`d-sm-none ${classes.section__discover__showmore__button}`}>
+                        Ver todas
+                      </HashLink>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </>
+            ) : (
+              <section
+                style={{
+                  width: '100%',
+                }}
+              >
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    margin: '2rem',
+                  }}
+                >
+                  <h1>No hay APIs disponibles</h1>
+                </div>
+              </section>
+            )}
           </section>
           {/* Nuestras Experiencias */}
-          {/* Enable when alliances exist */}
-          {/* <section className={classes.section__experiences}>
+          {/*<section className={classes.section__experiences}>
             <div className='container'>
               <div className={classes.section__experiences__title}>
                 <h1 className='h2 text__primary mb-2'>
-                  {filterWorks && filterWorks.length > 1 && filterWorks[1]?.title ? filterWorks[1]?.title : 'Nuestras experiencias'}
+                  {filterWorks && filterWorks.length > 1 && filterWorks[1]?.title ? filterWorks[1]?.title : ''}
                 </h1>
               </div>
               <div className={`d-xs-none ${classes.section__experiences__subtitle}`}>
@@ -299,15 +319,15 @@ function Home({ setOpenForm }) {
                 </div>
               </div>
             </div>
-          </section> */}
+          </section>*/}
           {/* Integra */}
           <section id='Banner'>
             <BannerCentered
-              title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : 'Integras tus sistemas con las APIs'}
+              title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : ''}
               subtitle={filterHomeBannerSubtitle !== '' ? filterHomeBannerSubtitle : ''}
               img={filterHomeBannerImage !== '' ? '' : ''}
               buttonType='primary-blue'
-              buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : 'empezar ahora'}
+              buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : ''}
               redirect={filterHomeBannerNameTarget}
               setOpenForm={setOpenForm}
             />
@@ -317,30 +337,51 @@ function Home({ setOpenForm }) {
             <div className='container'>
               <div className='row'>
                 <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
-                  <h1 className='h2 text__dark__primary'>{filterWorks && filterWorks.length > 2 && filterWorks[2]?.title ? filterWorks[2]?.title : 'Novedades'}</h1>
+                  <h1 className='h2 text__dark__primary'>{filterWorks && filterWorks.length > 1 && filterWorks[1]?.title ? filterWorks[1]?.title : ''}</h1>
                 </div>
 
                 <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
-                  <p className='body-1 secondary-font text__gray__lighten'>{filterWorks && filterWorks.length > 2 && filterWorks[2]?.subtitle ? filterWorks[2]?.subtitle : ''}</p>
+                  <p className='body-1 secondary-font text__gray__lighten'>{filterWorks && filterWorks.length > 1 && filterWorks[1]?.subtitle ? filterWorks[1]?.subtitle : ''}</p>
                 </div>
               </div>
             </div>
-            <div className='container'>
-              <div className='row'>
-                <div className='flex-md-12 flex-sm-12'>
-                  <Slick slides={slidesNew} />
+            {slidesNew && slidesNew.length > 0 ? (
+              <>
+                <div className='container'>
+                  <div className='row'>
+                    <div className='flex-md-12 flex-sm-12'>
+                      <Slick slides={slidesNew} />
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <div className={`container ${classes.section__news__showmore}`}>
-              <div className='row justify-center'>
-                <div className='flex-lg-2 flex-md-6 flex-sm-12 text__dark__primary text-center mt-8'>
-                  <HashLink smooth to='/blog#blogIndex'>
-                    <div>Ver Más</div>
-                  </HashLink>
+                <div className={`container ${classes.section__news__showmore}`}>
+                  <div className='row justify-center'>
+                    <div className='flex-lg-2 flex-md-6 flex-sm-12 text__dark__primary text-center mt-8'>
+                      <HashLink smooth to='/blog#blogIndex'>
+                        <div>Ver Más</div>
+                      </HashLink>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
+              </>
+            ) : (
+              <section
+                style={{
+                  width: '100%',
+                }}
+              >
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    margin: '2rem',
+                  }}
+                >
+                  <h1>Aún no hay entradas en el blog</h1>
+                </div>
+              </section>
+            )}
           </section>
           <div id='data' />
         </div>

@@ -58,6 +58,7 @@ export default function SimpleSlider({ slides, tabCard, footerTabCard, setIsOpen
       },
     ],
   };
+
   return (
     <div className='wrapper__slider'>
       { typeof setIsOpen === 'function' ? (

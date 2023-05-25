@@ -47,7 +47,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
           )}
           <div className={`pr-8 pl-8 pb-8 pt-2 ${custom_margin_top} ${reading ? 'py-2' : null}`} style={blogClasses}>
             <HashLink smooth to={link}>
-              <p className={`h3 w-full font-weight-semi-bold text__dark__grey ${reading ? 'px-8' : null}  ${theme === 'primary' ? 'text__dark__grey' : ''} ${custom_title_size}`} style={blogTitleStyles}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
+              <p className={`h3 w-full font-weight-semi-bold text__dark__grey ${reading ? 'px-8' : null}  ${theme === 'primary' ? 'text__dark__grey' : ''} ${custom_title_size}`} style={blogTitleStyles}>{title ?? ''}</p>
             </HashLink>
             <HashLink smooth to={link}>
               <div className='card__information hidden__tags' style={blogTitleStyles}>
@@ -102,7 +102,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
             </div>
           )}
           <div className={`pr-8 pl-8 pb-8 pt-2 ${custom_margin_top} ${reading ? 'py-4' : null}`}>
-            <p className={`${blogTitle ? 'card__title_blog' : 'h3'} w-full font-weight-semi-bold ${reading ? 'px-8' : null} ${!blog ? 'mb-2' : ''}  ${theme === 'primary' ? 'text__dark__grey' : ''} `}>{title ?? 'Conoce nuestras APIs de auto flexible'}</p>
+            <p className={`${blogTitle ? 'card__title_blog' : 'h3'} w-full font-weight-semi-bold ${reading ? 'px-8' : null} ${!blog ? 'mb-2' : ''}  ${theme === 'primary' ? 'text__dark__grey' : ''} `}>{title ?? ''}</p>
 
             {blog && (
               <div className='card__information hidden__tags' style={blogTitleStyles}>

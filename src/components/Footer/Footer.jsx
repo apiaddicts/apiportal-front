@@ -27,10 +27,10 @@ function Footer({ isPrivate }) {
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
   const socialLinks = [
-    { link: 'https://apiquality.es', icon: <FaFacebookF /> },
-    { link: 'https://apiquality.es', icon: <FaTwitter /> },
-    { link: 'https://apiquality.es', icon: <FaYoutube /> },
-    { link: 'https://apiquality.es', icon: <RiInstagramFill /> },
+    { link: '', icon: <FaFacebookF /> },
+    { link: '', icon: <FaTwitter /> },
+    { link: '', icon: <FaYoutube /> },
+    { link: '', icon: <RiInstagramFill /> },
   ];
   const [contactForm, setContactForm] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -82,8 +82,8 @@ function Footer({ isPrivate }) {
       {!isPrivate && (
         <Base img={img}>
           <div className={`container ${classes.footer__container}`}>
-            <h1 className='h2 text__white mb-3'>¿Hablamos?</h1>
-            <p style={{ fontWeight: 400 }} className='h5 text__white mb-10'>Déjanos tus datos para que nuestros expertos conecten contigo.</p>
+            <h1 className='h2 text__white mb-3'>Contáctanos</h1>
+            <p style={{ fontWeight: 400 }} className='h5 text__white mb-10'>Déjanos un mensaje y nos pondremos en contacto contigo a la brevedad.</p>
           </div>
           <div className={classes.button__fab}>
             <button type='button' onClick={() => { setContactForm(!contactForm); formik.resetForm(); }}>
@@ -104,7 +104,7 @@ function Footer({ isPrivate }) {
                       success && (
                         <div className='row justify-center'>
                           <div className='flex-sm-12 flex-md-8 flex-lg-8 pb-5'>
-                            <Alert severity='success' className='mb-5'>Datos enviados correctamente</Alert>
+                            <Alert severity='success' className='mb-5'>Datos enviados correctamente.</Alert>
                           </div>
                         </div>
                       )
@@ -114,7 +114,7 @@ function Footer({ isPrivate }) {
                       error && (
                         <div className='row justify-center'>
                           <div className='flex-sm-12 flex-md-8 flex-lg-8 pb-5'>
-                            <Alert severity='error' className='mb-5'>Ups!! Ocurrio un error, vuelve a intentarlo</Alert>
+                            <Alert severity='error' className='mb-5'>Ocurrio un error, vuelve a intentarlo.</Alert>
                           </div>
                         </div>
                       )
@@ -261,7 +261,7 @@ function Footer({ isPrivate }) {
           </div>
           <div className={classes.email}>
             <h1 className='body-1 font-weight-medium text__white mb-2'>Correo electrónico</h1>
-            <p className='body-1 font-weight-bold text__white'>contacto@apiquality.es</p>
+            <p className='body-1 font-weight-bold text__white'>{config.contact}</p>
           </div>
           <div className={classes.policies}>
             <h1 className='body-1 font-weight-medium text__white mb-2'>Política de</h1>
@@ -278,7 +278,7 @@ function Footer({ isPrivate }) {
               {' '}
               <span>{ year }</span>
               {' '}
-              API QUALITY. TODOS LOS DERECHOS RESERVADOS
+              CLOUDAPPI. TODOS LOS DERECHOS RESERVADOS
               {' '}
             </p>
           </div>

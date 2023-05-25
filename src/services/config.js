@@ -66,7 +66,7 @@ const config = {
   locale: 'es',
   termsPath: '/user/terms',
   policyPath: '/user/policy-privacy',
-  notImage: '/notImage.svg',
+  notImage: '/no-image.jpeg',
   apimUrl: process.env.REACT_APP_APIM_URL,
   adminId: process.env.REACT_APP_ADMIN_GROUP_ID,
 };

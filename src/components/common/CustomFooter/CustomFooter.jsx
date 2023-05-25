@@ -10,10 +10,10 @@ function CustomFooter() {
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
   const socialLinks = [
-    { link: 'https://apiquality.es', icon: <FaFacebookF /> },
-    { link: 'https://apiquality.es', icon: <FaTwitter /> },
-    { link: 'https://apiquality.es', icon: <FaYoutube /> },
-    { link: 'https://apiquality.es', icon: <RiInstagramFill /> },
+    { link: '', icon: <FaFacebookF /> },
+    { link: '', icon: <FaTwitter /> },
+    { link: '', icon: <FaYoutube /> },
+    { link: '', icon: <RiInstagramFill /> },
   ];
 
   return (
@@ -24,7 +24,7 @@ function CustomFooter() {
         </div>
         <div className={classes.email}>
           <h1 className='body-1 font-weight-medium text__dark__primary  mb-2'>Correo electronico</h1>
-          <p className='body-1 font-weight-bold text__dark__primary '>contacto@apiquality.es</p>
+          <p className='body-1 font-weight-bold text__dark__primary '>{config.contact}</p>
         </div>
         <div className={classes.policies}>
           <h1 className='body-1 font-weight-medium text__dark__primary  mb-2'>Política de</h1>
@@ -41,7 +41,7 @@ function CustomFooter() {
             {' '}
             <span>{ year }</span>
             {' '}
-            API QUALITY. TODOS LOS DERECHOS RESERVADOS
+            CLOUDAPPI. TODOS LOS DERECHOS RESERVADOS
             {' '}
           </p>
         </div>

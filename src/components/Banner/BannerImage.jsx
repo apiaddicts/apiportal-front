@@ -41,7 +41,7 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
             className={classes.banner_img__title}
           >
             <h1 className='h2 mb-3 text__white'>
-              {title !== '' ? title : 'Biblioteca de APIs' }
+              {title !== '' ? title : '' }
             </h1>
             <div className={classes['width-text-banner']}>
               <p className={`subtitle-1 text__white ${custom_line_height}`}>
