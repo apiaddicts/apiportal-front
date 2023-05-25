@@ -61,7 +61,6 @@ deploy-cloudfare:
     - >
         if [ "${DNS_VALUE}" == "" ]; then
           curl -X POST ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/dns_records --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" --data-raw '{"type":"CNAME","name":"'${NAME_DNS}'","content":"'${URL_S3}'","ttl":3600,"proxied":true}';
-          curl -X POST ${CLOUDFARE_BASEAPI}/${CLOUDFARE_ZONE}/pagerules --header "${CLOUDFARE_HEADERMAIL} ${CLOUDFARE_EMAIL}" --header "${CLOUDFARE_HEADERKEY} ${CLOUDFARE_APIKEY}" --header "${CLOUDFARE_APPLICATION}" --data-raw '{"targets":[{"target":"url","constraint":{"operator":"matches","value":"'${NAME_DNS}'/*"}}],"actions":[{"id":"ssl","value":"flexible"}],"priority":1,"status":"active"}';
         else 
           echo "DNS already exists";
         fi;
