@@ -34,7 +34,7 @@
   font-weight: 600;
   font-size: 18px;
   text-align: center;
-  color: #53565a;
+  color: $gray_lighten-0;
   cursor: pointer;
 }
 
@@ -57,7 +57,7 @@
 }
 
 .tab-list-active-primary {
-  border-bottom: 5px solid $primary;
+  border-bottom: 5px solid $theme_secondary;
 }
 
 .tab-list-active-secundary {

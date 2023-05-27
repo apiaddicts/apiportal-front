@@ -133,6 +133,11 @@
   background: rgba($color, $opacity);
 }
 
+@mixin text-color-opacity($color, $opacity: 0.5){
+  color: $color;
+  color: rgba($color, $opacity);
+}
+  
 @mixin button-bg($bg) {
   background: $bg;
   &:hover {

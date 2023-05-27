@@ -207,14 +207,14 @@ function Home({ setOpenForm }) {
           <section className={`container ${classes.section__discover__sc}`}>
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
-                <h1 className={`h2 text__dark__primary font-weight-bold text-center ${classes.section__discover__title}`}>
+                <h1 className={`h2 text__primary__title font-weight-bold text-center ${classes.section__discover__title}`}>
                   {filterDiscoverTitle || ''}
                 </h1>
               </div>
             </div>
             <div className='row'>
               <div className='flex-md-12 flex-sm-12'>
-                <p className={`subtitle-1 mb-10 text__gray__darken primary-font text-center ${classes.section__discover__subtitle}`}>
+                <p className={`subtitle-1 mb-10 text__primary__subtitle primary-font text-center ${classes.section__discover__subtitle}`}>
                   {filterDiscoverSubtitle || ''}
                 </p>
               </div>
@@ -238,7 +238,7 @@ function Home({ setOpenForm }) {
                 <div className='row'>
                   <div className='flex-md-12 flex-sm-12'>
                     <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
-                      <HashLink smooth to='/apis#apiHome' className={`button text d-xs-none ${classes.section__discover__showmore__button}`}>
+                      <HashLink smooth to='/apis#apiHome' className={`button link__tertiary d-xs-none ${classes.section__discover__showmore__button}`}>
                         <span className='mr-1'>ver todas</span>
                         <div className={classes.section__discover__showmore__button__chevron}>
                           <CustomIcon name='chevron_right' />
@@ -326,7 +326,7 @@ function Home({ setOpenForm }) {
               title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : ''}
               subtitle={filterHomeBannerSubtitle !== '' ? filterHomeBannerSubtitle : ''}
               img={filterHomeBannerImage !== '' ? '' : ''}
-              buttonType='primary-blue'
+              buttonType='tertiary'
               buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : ''}
               redirect={filterHomeBannerNameTarget}
               setOpenForm={setOpenForm}
@@ -356,8 +356,8 @@ function Home({ setOpenForm }) {
                 </div>
                 <div className={`container ${classes.section__news__showmore}`}>
                   <div className='row justify-center'>
-                    <div className='flex-lg-2 flex-md-6 flex-sm-12 text__dark__primary text-center mt-8'>
-                      <HashLink smooth to='/blog#blogIndex'>
+                    <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
+                      <HashLink smooth to='/blog#blogIndex' className='link__tertiary'>
                         <div>Ver Más</div>
                       </HashLink>
                     </div>

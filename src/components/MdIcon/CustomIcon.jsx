@@ -1,7 +1,7 @@
 import React from 'react';
 import { ReactComponent as AccountIcon } from '../../static/icons/AccountIcon.svg';
-import { ReactComponent as Logo } from '../../static/img/logo.svg';
-import { ReactComponent as ApiMarketIcon } from '../../static/img/LogoApiMarket.svg';
+import { ReactComponent as Logo } from '../../static/img/LogoApiMarket.svg';
+import { ReactComponent as LogoWhite } from '../../static/img/LogoApiMarketWhite.svg';
 import { ReactComponent as FintechIcon } from '../../static/img/LogoFintech.svg';
 import { ReactComponent as FintechWhiteIcon } from '../../static/img/LogoFintechWhite.svg';
 import { ReactComponent as SettingsIcon } from '../../static/icons/SettingsIcon.svg';
@@ -10,7 +10,6 @@ import { ReactComponent as LaptopCodeIcon } from '../../static/icons/LaptopCodeI
 import { ReactComponent as SettingsSwitchIcon } from '../../static/icons/SettingsSwitchIcon.svg';
 import { ReactComponent as AddUserIcon } from '../../static/icons/AddUserIcon.svg';
 import { ReactComponent as ChevronRightIcon } from '../../static/icons/ChevronRightIcon.svg';
-import { ReactComponent as ApiMarketWhiteIcon } from '../../static/img/LogoApiMarketWhite.svg';
 import { ReactComponent as SuccessWindow } from '../../static/icons/success-window.svg';
 import { ReactComponent as Archivist } from '../../static/icons/archivist.svg';
 import { ReactComponent as Elearning } from '../../static/icons/note-1.svg';
@@ -28,14 +27,9 @@ function CustomIcon({ name, ...rest }) {
         <Logo />
       ),
     },
-    apimarket: {
+    logowhite: {
       render: (
-        <ApiMarketIcon />
-      ),
-    },
-    apimarketwhite: {
-      render: (
-        <ApiMarketWhiteIcon />
+        <LogoWhite />
       ),
     },
     fintech: {

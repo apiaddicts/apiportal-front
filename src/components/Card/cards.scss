@@ -32,7 +32,7 @@
             display: flex;
             align-items: center;
             letter-spacing: 0.157143px;
-            color: $dark;
+            color: $theme_primary;
         }
     
         .title {
@@ -86,13 +86,11 @@
         line-height: 19px;
         letter-spacing: 1.33333px;
         text-transform: uppercase;
-        color: $dark_primary;
         margin-right: 10px;
     }
 
     .svg {
         font-size: 15px;
-        color: $dark_primary;
     }
 }
 
@@ -293,7 +291,7 @@
     line-height: 16px;
     align-items: center;
     justify-content: space-between;
-    color: $green;
+    color: $base-green;
     }
     
     .warning {

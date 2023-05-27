@@ -40,7 +40,6 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  border: 1px solid #E3E829;
   &__icon {
     font-size: 22px;
     text-align: center;
@@ -54,6 +53,12 @@
   display: none;
 }
 
+.btn-tertiary {
+  @include button-bg($theme_tertiary);
+  @include letter($secondary_white);
+  @include border($theme_tertiary);
+}
+
 .btn-secundary {
   @include button-bg($secondary_text);
   @include letter($secondary_white);
@@ -61,8 +66,9 @@
 }
 
 .btn-primary {
-  @include button-bg($secondary_yellow);
-  @include letter($primary);
+  @include button-bg($theme_primary);
+  @include letter($white);
+  @include border($theme_primary);
 }
 
 .btn-primary-blue {
@@ -72,25 +78,25 @@
 }
 
 .btn-secundary-white {
-  @include button-bg($secondary_white);
-  @include letter($blue);
-  @include border($secondary_white);
+  @include button-bg($white);
+  @include letter($theme_primary);
+  @include border($white);  
 }
 
 .btn-ghost {
   @include button-bg(transparent);
-  @include letter($secondary_white);
-  @include border($secondary_white);
+  @include letter($white);
+  @include border($white);
 }
 
 .btn-ghost-variant {
-  @include button-bg($secondary_white);
-  @include letter($primary);
-  @include border($primary);
+  @include button-bg($white);
+  @include letter($theme_secondary);
+  @include border($theme_secondary);
 }
 
 .btn-tertiary-white {
-  background: $gray-lighten-0;
+  background: $gray_lighten-0;
   @include letter($primary);
   @include border($primary);
 }

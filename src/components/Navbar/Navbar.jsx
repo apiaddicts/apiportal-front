@@ -53,7 +53,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
               {/*<CustomIcon name='logo' />
               <CustomIcon name='fintech' />*/}
             </div>
-            <CustomIcon name='apimarket' />
+            <CustomIcon name='logo' />
           </NavLink>
           <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
 
@@ -64,7 +64,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
                 </Button>
               </li>
               <li>
-                <Button type='button' styles='secundary' size='small' style={{ width: '140px', height: '32px' }} onClick={() => { setOpenForm(true); }}>
+                <Button type='button' styles='primary' size='small' style={{ width: '140px', height: '32px' }} onClick={() => { setOpenForm(true); }}>
                   regístrate
                 </Button>
               </li>

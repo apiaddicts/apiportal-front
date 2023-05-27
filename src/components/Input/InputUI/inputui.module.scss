@@ -10,8 +10,7 @@
     padding: 0 2.75rem 0 1rem;
     outline: 0;
     font-size: 1rem;
-    border: 1px solid #ecf0f1;
-    box-shadow: 0px 2px 20px #ecf0f1;
+    border: 1px solid $input-color-normal;
     border-radius: 6px;
   }
 
@@ -21,8 +20,7 @@
     outline: 0;
     font-size: 1rem;
     font-family: $primary_font;
-    border: 1px solid #ecf0f1;
-    box-shadow: 0px 2px 20px #ecf0f1;
+    border: 1px solid $input-color-normal;
     border-radius: 20px;
   }
 
@@ -32,8 +30,7 @@
     outline: 0;
     font-size: 1rem;
     height: 56px;
-    border: 1px solid #ecf0f1;
-    box-shadow: 0px 2px 20px #ecf0f1;
+    border: 1px solid $input-color-normal;
     border-radius: 20px;
     -webkit-appearance: none;
     -moz-appearance: none;
@@ -70,12 +67,12 @@
   &:focus-within {
     label {
       transform: translate(0, -20px) scale(0.75);
-      color: $primary;
+      color: $input-color-warning;
       font-weight: 500;
       font-size: 1rem;
     }
     input {
-      border: 2px solid $primary;
+      border: 2px solid $input-color-warning;
     }
   }
 }
@@ -91,8 +88,7 @@
     padding: 0 4.75rem 0 1rem;
     outline: 0;
     font-size: 14px;
-    border: 1px solid #ecf0f1;
-    box-shadow: 0px 2px 20px #ecf0f1;
+    border: 1px solid $input-color-normal;
     border-radius: 100px;
   }
 
@@ -111,29 +107,29 @@
   &:focus-within {
     label {
       transform: translate(0, -20px) scale(0.75);
-      color: $primary;
+      color: $input-color-warning;
       font-weight: 500;
       font-size: 1rem;
     }
     input {
-      border: 2px solid $secondary;
+      border: 2px solid $input-color-warning;;
     }
   }
 }
 
 .active {
   transform: translate(0, -20px) scale(0.75) !important;
-  color: $primary !important;
+  color: $input-color-warning !important;
   font-weight: 500 !important;
   font-size: 1rem !important;
 }
 
 .error {
   font-size: 0.75rem;
-  color: #e4002b !important;
+  color: $input-color-danger !important;
   &__input__error {
     input, textarea {
-      border: 2px solid #e4002b;
+      border: 2px solid $input-color-danger;
     }
   }
   p {
@@ -196,6 +192,6 @@
   font-size: 25px;
   color: rgba(0, 0, 0, 0.38);
   &__error {
-    color: #e4002b;
+    color: $input-color-danger;
   }
 }

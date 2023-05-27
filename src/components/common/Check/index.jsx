@@ -1,5 +1,6 @@
 import React from 'react';
 import { Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel } from '@mui/material';
+import classes from './checkbox.module.scss';
 
 function CheckboxWrapper({
   name,
@@ -26,14 +27,7 @@ function CheckboxWrapper({
         <FormControlLabel
           control={(
             <Checkbox
-              sx={{
-                '&.MuiCheckbox-root': {
-                  borderRadius: '10px',
-                },
-                '&.Mui-checked': {
-                  color: '#14234B',
-                },
-              }}
+              className={classes.custom__checkbox}
               {...configCheckbox}
             />
           )}

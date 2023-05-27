@@ -111,7 +111,7 @@ function Contact({ css_styles, pathname }) {
               </div>
             </div>
             <div className={classes.contact__form__button}>
-              <Button styles='primary-blue' type='submit'>
+              <Button styles='tertiary' type='submit'>
                 SUSCRÍBETE
               </Button>
             </div>

@@ -237,7 +237,7 @@ function Footer({ isPrivate }) {
                   {
                     displaySubmit &&
                     (
-                      <Button styles='primary-blue' type='submit'>
+                      <Button styles='tertiary' type='submit'>
                         ¡Me interesa!
                       </Button>
                     )
@@ -257,7 +257,7 @@ function Footer({ isPrivate }) {
                 <CustomIcon name='fintechwhite' />
               </div>*/}
             </div>
-            <CustomIcon name='apimarketwhite' />
+            <CustomIcon name='logowhite' />
           </div>
           <div className={classes.email}>
             <h1 className='body-1 font-weight-medium text__white mb-2'>Correo electrónico</h1>

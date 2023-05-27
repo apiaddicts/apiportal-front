@@ -27,26 +27,57 @@ $secondary_font: 'Trebuchet MS', serif;
 /* ------------------------------ 
     COLORS 
 ------------------------------ */
+// Palete colors
+$red-lighen-0: #731017;
+$red-lighen-1: #AC1823;
+$red-lighen-2: #E5202E;
+$red-lighen-3: #F29097;
+$red-lighen-4: #FAD2D5;
+
+$blue-lighten-0: #003D62;
+$blue-lighten-1: #005C92;
+$blue-lighten-2: #007AC3;
+$blue-lighten-3: #409BD2;
+$blue-lighten-4: #A6D0EA;
+
+$dark-lighten-0: #191919;
+$dark_lighten-1: #005C92;
+$dark_lighten-2: #939393;
+$dark_lighten-3: #DADADA;
+$dark_lighten-4: #EDEDED;
+
+$gray_lighten-0: #878990;
+$gray_lighten-1: #8b92b1;
+$gray_lighten-2: #8189a9;
+$gray_lighten-3: #ecf0f1;
+$gray_lighten-4: #F5F6F8;
+
+$base-red: $red-lighen-2;
+$base-blue: $blue-lighten-2;
+$base-orange: #97D700;
+$base-green: #85BC20;
+
+$input-color-danger: $red-lighen-2;
+$input-color-primary: $blue-lighten-2;
+$input-color-warning: $base-orange;
+$input-color-success: $base-green;
+$input-color-normal: $gray_lighten-3;
+
 $secondary: #101010;
 $secondary_white: #ffffff;
 $secondary_yellow: #0078E6;
 $gray: #768692;
-$gray-lighten-0: #F5F6F8;
-$gray_lighten-1: #ecf0f1;
-$gray_lighten-2: #8189a9;
-$gray_lighten-3: #8b92b1;
-$gray_lighten-4: #878990;
 $gray_darken: #53565a;
 $gray_darken-1: #101010;
 $gray_darken-2: #292929;
 $success: #389e0d;
-$dark: #000;
+$dark: $dark-lighten-0;
 $error: #f54b5e;
 $warning: #f1b434;
 $green: #97D700;
-$blue: #0034A0;
+$blue: $blue-lighten-0;
 $orange: #F1B434;
-$red: #F54B5E;
+$red: $red-lighen-2;
 $yellow: #e3e829;
 $white: #FFFFFF;
 $text_h__primary: #1C7B7F;
@@ -55,6 +86,9 @@ $second_red: #e91818;
 /* ------------------------------ 
     THEME COLORS 
 ------------------------------ */
+$theme_primary: $blue-lighten-0;
+$theme_secondary: $green;
+$theme_tertiary: $warning;
 
 $dark_primary: #1C2D47;
 $light_primary: #BBDEFB;
@@ -63,6 +97,7 @@ $text_icons: #FFFFFF;
 $accent: #2196F3;
 $primary_text: #212121;
 $secondary_text: #00AC9A/*#00AC9A*/;
+$tertiary_text: $warning;
 $divider: #BDBDBD;
 $black: #000000;
 $secondary_dark: #1C7B7F;

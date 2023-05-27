@@ -26,7 +26,7 @@ function Item({ icon, title, description, type = 'basic', number, textColor = '#
             </div>
           ) : (null)}
           {type !== 'title' ? (
-            <h1 className='mb-3 text__h__primary' style={titleStyles}>{title}</h1>
+            <h1 className='mb-3 text__primary__subtitle' style={titleStyles}>{title}</h1>
           ) : (null)}
           <p className={custom_description}>{description}</p>
         </div>

@@ -97,7 +97,7 @@ function BlogDetails({ setIsOpen }) {
             <div
               className={classes.backTo}
             >
-              <Link to={-1} className={classes.backTo__btn}>
+              <Link to={-1} className={`${classes.backTo__btn} card__link`}>
                 <div>
                   <Icon id='MdKeyboardBackspace' />
                 </div>
@@ -133,8 +133,8 @@ function BlogDetails({ setIsOpen }) {
               <div className='row justify-center'>
                 <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
                   <HashLink smooth to='/blog#blogIndex'>
-                    <div className='d-xs-none'>Ver Más</div>
-                    <div className='d-xs-only'>Ver todas</div>
+                    <div className='d-xs-none link__tertiary'>Ver Más</div>
+                    <div className='d-xs-only link__tertiary'>Ver todas</div>
                   </HashLink>
                 </div>
               </div>

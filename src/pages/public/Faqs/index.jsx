@@ -59,7 +59,7 @@ function Faqs(props) {
                   faqs.map((item, i) => {
                     return (
                       <div key={i}>
-                        <h1 className='h3 text__dark__primary mb-5 mt-5'>{item?.question}</h1>
+                        <h1 className='h3 text__primary__title mb-5 mt-5'>{item?.question}</h1>
                         <Accordion items={item?.data} subItem={subItem} setSubItem={setSubItem} parent={i} clicked={clicked} setClicked={setClicked} />
                       </div>
                     );

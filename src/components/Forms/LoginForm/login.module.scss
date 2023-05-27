@@ -15,7 +15,8 @@
             height: 18px;
         }
         input[type="checkbox"]:checked {
-            background-color: $primary;
+            background-color: $theme_primary;
+            accent-color: $theme_primary;
         }
     }
 

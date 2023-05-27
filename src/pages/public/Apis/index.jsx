@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography } from '@mui/material';
 import { getApiContent } from '../../../redux/actions/apiAction';
 import { getLibraries, filterCheck, sortApiCollection } from '../../../redux/actions/libraryAction';
 import BannerImage from '../../../components/Banner/BannerImage';
@@ -139,18 +138,9 @@ function Apis({ setIsOpen }) {
         <section className={classes.wrapper}>
           <article className={classes.wrapper__left}>
             {((state && Object.keys(state).length > 0) || (versions && Object.keys(versions).length > 0) || (items && Object.keys(items).length > 0) || (tags && Object.keys(tags).length > 0)) && (
-              <Typography
-                sx={{
-                  fontSize: '1rem',
-                  fontWeight: '700',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1.33px',
-                  color: '#53565A',
-                  marginBottom: '15px',
-                }}
-              >
+              <div className={classes.wrapper__title}>
                 Filtrar por:
-              </Typography>
+              </div>
             )}
             {state && Object.keys(state).length > 0 && (
               <CustomizedAccordions title='Estado'>
@@ -173,18 +163,9 @@ function Apis({ setIsOpen }) {
             )}
             {versions && Object.keys(versions).length > 0 && (
               <div className='w-full pl-4'>
-                <Typography
-                  sx={{
-                    fontSize: '1rem',
-                    fontWeight: '700',
-                    textTransform: 'uppercase',
-                    letterSpacing: '1.33px',
-                    color: '#53565A',
-                    marginBottom: '15px',
-                  }}
-                >
+                <div className={classes.wrapper__title}>
                   Versión
-                </Typography>
+                </div>
                 <ButtonGroupMUI sx={{ marginBottom: '15px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(50px, 1fr))', gap: '2px', alignItems: 'center', justifyContent: 'center' }}>
                   {versions.map((item, index) => (
                     <CheckboxLabels
