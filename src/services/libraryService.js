@@ -8,7 +8,7 @@ function getApiBookStores() {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
-  return fetch(`${config.apiUrl}/library-apis?_where[status]=Publicado`, requestOptions)
+  return fetch(`${config.apiUrl}/library-apis?_where[status]=publicado`, requestOptions)
     .then(handleResponse)
     .then((libraries) => {
       return libraries;
@@ -128,26 +128,19 @@ function getApiDescription(id) {
     .catch((error) => error);
 }
 
-const getApiProducts = (apiId) => {
-  const { token } = store.getState().user;
+function getOpenApiFromStrapi(id) {
+
   const requestOptions = {
     method: 'GET',
-    headers: {
-      'Authorization': `SharedAccessSignature ${token}`,
-      'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
   };
 
-  const url = `${config.url}/apis/${apiId}/products?api-version=${config.apiVersion}`;
-
+  const url = `${config.apiUrl}/library-apis?_where[slug]=${id}`;
   return fetch(url, requestOptions)
     .then(handleResponse)
-    .then((response) => {
-      return response;
-    }).catch((error) => {
-      return error;
-    });
-};
+    .then((response) => response[0])
+    .catch((error) => error);
+}
 
 function getListTags() {
   const { token } = store.getState().user;
@@ -193,7 +186,7 @@ function filterAPIsByTags(data) {
     body: JSON.stringify(data),
   };
 
-  const url = `${config.apimUrl}/apis-by-tags/get`;
+  const url = `${config.url}/apis?api-version=${config.apiVersion}&expandApiVersionSet=${true}&$filter=${filter}&includeNotTaggedApis=${includeNotTaggedApis}&${search}`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
@@ -238,6 +231,42 @@ function getApiHostnames(apiName) {
     });
 }
 
+const getApiProducts = (apiId) => {
+  const { token } = store.getState().user;
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      'Authorization': `SharedAccessSignature ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const url = `${config.url}/apis/${apiId}/products?api-version=${config.apiVersion}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response;
+    }).catch((error) => {
+      return error;
+    });
+};
+
+const getApisUnsecure = () => {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-type': 'application/json' },
+  };
+
+  const url = 'https://wkeapipre.management.azure-api.net/subscriptions/d191459e-3142-4ecb-8468-89398ec98aac/resourceGroups/RG-PRE-SHARED/providers/Microsoft.ApiManagement/service/WKEAPIPRE/apis?api-version=2021-08-01';
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response.value)
+    .catch((error) => error);
+
+};
+
 const libraryService = {
   getApiBookStores,
   getApiBookStore,
@@ -252,6 +281,8 @@ const libraryService = {
   getApiDescription,
   listApisProduct,
   getApiProducts,
+  getApisUnsecure,
+  getOpenApiFromStrapi,
 };
 
 export default libraryService;

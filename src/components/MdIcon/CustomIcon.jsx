@@ -1,4 +1,11 @@
 import React from 'react';
+import LightbulbOutlinedIcon from '@mui/icons-material/LightbulbOutlined';
+import AttachmentOutlinedIcon from '@mui/icons-material/AttachmentOutlined';
+import ThumbUpOutlinedIcon from '@mui/icons-material/ThumbUpOutlined';
+import SettingsInputSvideoOutlinedIcon from '@mui/icons-material/SettingsInputSvideoOutlined';
+import LibraryAddOutlinedIcon from '@mui/icons-material/LibraryAddOutlined';
+import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
+import SchemaOutlinedIcon from '@mui/icons-material/SchemaOutlined';
 import { ReactComponent as AccountIcon } from '../../static/icons/AccountIcon.svg';
 import { ReactComponent as Logo } from '../../static/img/LogoApiMarket.svg';
 import { ReactComponent as LogoWhite } from '../../static/img/LogoApiMarketWhite.svg';
@@ -85,6 +92,41 @@ function CustomIcon({ name, ...rest }) {
     elearning: {
       render: (
         <Elearning />
+      ),
+    },
+    idea: {
+      render: (
+        <LightbulbOutlinedIcon sx={{ width: 60, height: 60 }} />
+      ),
+    },
+    link: {
+      render: (
+        <AttachmentOutlinedIcon sx={{ width: 60, height: 60 }} />
+      ),
+    },
+    like: {
+      render: (
+        <ThumbUpOutlinedIcon sx={{ width: 60, height: 60 }} />
+      ),
+    },
+    setting: {
+      render: (
+        <SettingsInputSvideoOutlinedIcon sx={{ width: 60, height: 60 }} />
+      ),
+    },
+    add: {
+      render: (
+        <LibraryAddOutlinedIcon sx={{ width: 60, height: 60 }} />
+      ),
+    },
+    world: {
+      render: (
+        <LanguageOutlinedIcon sx={{ width: 60, height: 60 }} />
+      ),
+    },
+    organizer: {
+      render: (
+        <SchemaOutlinedIcon sx={{ width: 60, height: 60 }} />
       ),
     },
     default: {

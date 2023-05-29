@@ -14,9 +14,7 @@ function Subscriptions() {
   const { suscripcionsUser } = useSelector((state) => state.suscripcions);
 
   useEffect(() => {
-    if (suscripcionsUser && Object.keys(user).length > 0 && Object.keys(suscripcionsUser).length === 0) {
-      dispatch(listUserSubscriptions(user.name));
-    }
+    dispatch(listUserSubscriptions(user.name));
   }, []);
 
   return (

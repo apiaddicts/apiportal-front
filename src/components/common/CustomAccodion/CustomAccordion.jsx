@@ -95,7 +95,7 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                           </div>
                           <div className={classes.accordion__body__title}>
                             <h1>URI:</h1>
-                            <code className={classes.scopes__code}>{`https://${hostname}/${items.properties.path}/${items.properties.apiVersion}/`}</code>
+                            <code className={classes.scopes__code}>{`https://${hostname}/${items.properties.path}/${items.properties.apiVersion ? `${items.properties.apiVersion}/` : ''}`}</code>
                           </div>
                         </div>
                       ) : subItem === 1 ? (
@@ -110,7 +110,7 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                               {items.properties.displayName}
                             </p>
                           </div>
-                          {mApis.map((pos, index) => (
+                          {mApis.length > 0 ? mApis.map((pos, index) => (
                             <div key={index}>
                               <div className={classes.accordion__body__title}>
                                 <h1>Versión</h1>
@@ -120,10 +120,10 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                               </div>
                               <div className={classes.accordion__body__title}>
                                 <h1>URI Live:</h1>
-                                <code className={classes.scopes__code}>{`https://${hostname}/${items.properties.path}/${pos.properties.apiVersion}/`}</code>
+                                <code className={classes.scopes__code}>{`https://${hostname}/${items.properties.path}/${pos.properties.apiVersion ? `${pos.properties.apiVersion}/` : ''}`}</code>
                               </div>
                             </div>
-                          ))}
+                          )) : <p>Información no disponible</p>}
                         </div>
                       ) : subItem === 3 ? (
                         <div>

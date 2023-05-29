@@ -18,7 +18,7 @@
   width: 64px;
 
   div {
-    color: $secondary;
+    color: $theme_secondary;
     font-size: 20px;
   }
 
@@ -31,7 +31,7 @@
     text-align: right;
     letter-spacing: 1.33333px;
     text-transform: uppercase;
-    color: $secondary;
+    color: $theme_secondary;
   }
 }
 .back__btn {
@@ -59,7 +59,7 @@ table {
       font-family: $primary_font;
       font-size: 12px !important;
       font-weight: bold;
-      color: $dark_primary !important;
+      color: $theme_primary !important;
       letter-spacing: 0.2px;
       padding: 16px 5px;
       text-transform: uppercase;

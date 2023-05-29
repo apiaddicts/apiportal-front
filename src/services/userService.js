@@ -143,7 +143,7 @@ function changeStatus(data, userId) {
 function signUp(data) {
   const requestOptions = {
     method: 'PUT',
-    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `${config.hmacAuthHeader}` },
+    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `${config.getHmacAuthHeader()}` },
     body: JSON.stringify(data),
   };
   const uuid = crypto.randomUUID();
@@ -204,7 +204,7 @@ function changePassword(newPassword) {
 function resetPassword(data) {
   const requestOptions = {
     method: 'POST',
-    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `${config.hmacAuthHeader}` },
+    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `${config.getHmacAuthHeader()}` },
     body: JSON.stringify(data),
   };
 

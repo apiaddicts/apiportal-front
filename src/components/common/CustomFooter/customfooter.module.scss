@@ -18,6 +18,26 @@
   &__end {
     .logo {
       grid-area: logo;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      @include breakpoint(xs) {
+        flex-direction: column;
+      }
+      &__principal {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 5px;
+
+        &__sublogo {
+          @include breakpoint(xs) {
+            display: none;
+          }
+        }
+
+      }
     }
     .email {
       grid-area: email;
@@ -27,77 +47,86 @@
         }
       }
     }
-    .policies {
-      grid-area: policies;
-      @include breakpoint(xs) {
-        h1, p {
-          font-size: 16px !important;
-        }
-      }
-    }
 
-    .email,
-    .policies {
+    .email {
       text-align: right;
     }
 
     display: grid;
-    grid-template-areas: "logo" "email" "policies";
+    grid-template-areas: "logo email";
+    grid-template-columns: 1fr 1fr;
     align-items: center;
-    gap: 4rem;
+    gap: 0;
     border-bottom: 1px solid #e6e7ee;
     padding-top: 1rem;
     padding-bottom: 1rem;
     padding-left: 0;
     padding-right: 0;
 
-    @include breakpoint(sm) {
-      grid-template-columns: 2fr;
-      grid-template-areas: "logo logo" "email policies";
+    @include breakpoint(xs) {
+      grid-template-columns: 1fr;
+      grid-template-areas: "logo" "email";
       gap: 2rem;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      align-content: center;
+      text-align: center;
+      border-bottom: none;
       .logo {
         margin-left: auto;
         margin-right: auto;
       }
       .email {
-        text-align: left !important;
-      }
-      .policies {
-        text-align: right !important;
+        text-align: center !important;
       }
     }
 
-    @media only screen and (min-width: 860px) {
-      grid-template-columns: 2fr 1fr 200px;
-      grid-template-areas: "logo email policies";
-      .logo {
-        margin: 0;
-      }
-    }
-
-    @include breakpoint(lg) {
-      grid-template-columns: 3fr 1fr 200px;
-      grid-template-areas: "logo email policies";
-      .logo {
-        margin: 0;
-      }
-    }
-
-    @include breakpoint(xs) {
+    @include breakpoint(sm) {
       grid-template-columns: 1fr;
-      grid-template-areas: "logo" "email" "policies";
+      grid-template-areas: "logo" "email";
       gap: 2rem;
-      padding-top: 2rem;
-      padding-bottom: 2rem;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
       align-content: center;
       text-align: center;
+      border-bottom: none;
       .logo {
         margin-left: auto;
         margin-right: auto;
       }
-      .email,
-      .policies {
+      .email {
         text-align: center !important;
+      }
+    }
+
+    @include breakpoint(md) {
+      grid-template-areas: "logo email";
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid #e6e7ee;
+      gap: 0rem;
+      align-items: center;
+      padding-left: 0;
+      padding-right: 0;
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+      .email {
+        text-align: right !important;
+      }
+      .logo {
+        margin: 0;
+      }
+    }
+  }
+  &__legals {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 5px;
+    border-bottom: 1px solid #e6e7ee;
+    .policies {
+      @include breakpoint(xs) {
+        h1, p {
+          font-size: 16px !important;
+        }
       }
     }
   }
@@ -108,21 +137,20 @@
     align-items: center;
     padding: 30px 5px;
     &__copyright {
-      grid-area: copyright;
-      text-align: right;
+        grid-area: copyright;
     }
     &__icons {
       grid-area: icons;
-      color: $dark_primary;
+      color: $theme_primary;
       font-size: 25px;
       display: flex;
       justify-content: space-between;
       a {
         text-decoration: none;
-        color: $dark_primary;
+        color: $theme_primary;
       }
       a:hover {
-        color: $dark_primary;
+        color: $theme_primary;
       }
     }
     @include breakpoint(xs) {
@@ -137,6 +165,36 @@
         justify-content: space-around;
         padding-bottom: 2rem;
         border-bottom: 1px solid #e6e7ee;
+      }
+    }
+
+    @include breakpoint(sm) {
+      grid-template-columns: 1fr;
+      grid-template-areas: "icons" "copyright";
+      gap: 2rem;
+      padding-top: 2rem;
+      &__copyright {
+        text-align: center;
+      }
+      &__icons {
+        justify-content: space-around;
+        padding-bottom: 2rem;
+        border-bottom: 1px solid #e6e7ee;
+      }
+    }
+
+    @include breakpoint(md) {
+      grid-template-columns: 1fr 8fr;
+      grid-template-areas: "icons copyright";
+      align-items: center;
+      padding: 30px 5px;
+      &__copyright {
+        text-align: right;
+      }
+      &__icons {
+        justify-content: space-between;
+        padding-bottom: 0;
+        border-bottom: none;
       }
     }
   }

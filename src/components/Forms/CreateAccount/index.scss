@@ -128,11 +128,13 @@
       font-size: 13px;
     }
     letter-spacing: 0.25px;
-    font-weight: 400;
+    font-weight: 700;
     color: $theme_primary;
     span, a {
       font-weight: 700;
+
       text-decoration: underline;
+      color: $theme_tertiary;
     }
   }
 }

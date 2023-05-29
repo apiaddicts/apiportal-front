@@ -5,12 +5,12 @@
 .pagination {
     cursor: pointer;
     display: flex;
-    color: $blue;
+    color: $theme_primary;
     font-size: 20px;
     align-items: center;
 
     &__icon {
-        color: $secondary;
+        color: $theme_primary;
     }
     
     p {

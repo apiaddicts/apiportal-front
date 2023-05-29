@@ -20,13 +20,11 @@ function listUserSubscriptions(userId, top = config.topSubscriptions, skip = 0) 
     });
 }
 
-function subscribeToAProduct(data, userId) {
-  const { token } = store.getState().user;
-
+function subscribeToAProductWithHmac(data, userId) {
   const subscriptionId = crypto.randomUUID();
   const requestOptions = {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `${config.getHmacAuthHeader()}` },
     body: JSON.stringify(data),
   };
 
@@ -41,11 +39,13 @@ function subscribeToAProduct(data, userId) {
     });
 }
 
-function subscribeToAProductWithHmac(data, userId) {
+function subscribeToAProduct(data, userId) {
+  const { token } = store.getState().user;
+
   const subscriptionId = crypto.randomUUID();
   const requestOptions = {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `${config.hmacAuthHeader}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
     body: JSON.stringify(data),
   };
 
@@ -158,10 +158,10 @@ function listSubscriptionbyId(userId, subscriptionId) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': token },
+    headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.apimUrl}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
+  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -175,12 +175,12 @@ function listSubscriptionbyId(userId, subscriptionId) {
 function getReportsbySubscription(subscriptionId, init, limit) {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `${config.getHmacAuthHeader()}` },
   };
 
   let filter = `subscriptionId eq '${subscriptionId}' and timestamp ge datetime'${init}'`;
   if (limit) filter += ` and timestamp le datetime'${limit}'`;
-  const url = `${config.apimUrl}/reports/bySubscription?api-version=${config.apiVersion}&%24filter=${filter}`;
+  const url = `${config.url}/reports/bySubscription?api-version=${config.apiVersion}&%24filter=${filter}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -199,9 +199,9 @@ const subscriptionsService = {
   regenerateSubscription,
   renameSubscription,
   cancelSubscription,
+  subscribeToAProductWithHmac,
   listSubscriptionbyId,
   getReportsbySubscription,
-  subscribeToAProductWithHmac,
 };
 
 export default subscriptionsService;

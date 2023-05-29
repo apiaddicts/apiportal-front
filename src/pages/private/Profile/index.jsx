@@ -113,7 +113,7 @@ function Profile() {
                     <div className='flex-lg-3 flex-sm-12 display_flex align_items__bottom justify_content__end ml-auto mb-2'>
                       <Button
                         type='submit'
-                        styles='primary-blue'
+                        styles='tertiary'
                       >
                         Guardar
                       </Button>

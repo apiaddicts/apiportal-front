@@ -8,9 +8,9 @@ import Title from '../../../components/Title';
 import SearchInput from '../../../components/Input/SearchInput';
 import Icon from '../../../components/MdIcon/Icon';
 import CardInformationLibrary from '../../../components/Card/CardInformationLibrary';
-import { listApis, searchApis, getListTags, filterAPIsByTags, resetLibraryApi, getLibraries } from '../../../redux/actions/libraryAction';
+import { listApis, searchApis, getListTags, filterAPIsByTags, resetLibraryApi, getLibraryApiNextSearch, getLibraryApiPreviosSearch, getLibraryApiNext, getLibraryApiPrevios, getLibraries } from '../../../redux/actions/libraryAction';
 import classes from './apis.module.scss';
-import config from '../../../services/config'
+import config from '../../../services/config';
 
 const compareArrays = (array1, array2) => {
   return array1.filter((a) => {
@@ -19,7 +19,9 @@ const compareArrays = (array1, array2) => {
     });
   });
 };
+
 function Apis(props) {
+
   const topApi = config.topApi;
   const { loadingLibraries, apis, tagsList, libraries } = useSelector((state) => state.library);
   const fApis = libraries && libraries.length > 0 && apis && Object.keys(apis).length > 0 && apis.value.length > 0 ? compareArrays(libraries, apis.value) : [];
@@ -167,7 +169,7 @@ function Apis(props) {
       </div>
 
       <div className='display_flex justify_content__center mt-4'>
-        {apis ? (
+        {loadingLibraries === false && apis ? (
           fApis.length == 0 ? (
             <h1 className='text-center'>Información no disponible</h1>
           ) : (null)

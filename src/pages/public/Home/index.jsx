@@ -48,6 +48,7 @@ function Home({ setOpenForm }) {
       imgSrc: i.imgSrc && i.imgSrc.length > 0 ? i.imgSrc[0].url : '',
       title: i.title,
       actionButtons: i.actionButtons ? i.actionButtons : null,
+      subtitleList: i.subtitleList ? i.subtitleList : null,
     };
     return response;
   }) : [];

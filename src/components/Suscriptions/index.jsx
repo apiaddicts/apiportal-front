@@ -179,7 +179,7 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
                                         />
                                       ) : (
                                         <Link to={`/developer/subscriptions/${row.name}`}>
-                                          <p className={classes.cell_name}>{row.properties.displayName}</p>
+                                          <p className='text__accent'>{row.properties.displayName}</p>
                                         </Link>
                                       )
                                     }

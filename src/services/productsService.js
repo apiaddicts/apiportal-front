@@ -166,6 +166,36 @@ function getProductApis(productName, top, skip) {
     });
 }
 
+function getSubscriptions() {
+
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const url = `${config.apiUrl}/products`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response)
+    .catch((error) => error);
+};
+
+function getSubscriptionById(productId) {
+
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const url = `${config.apiUrl}/products?_where[slug]=${productId}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response[0])
+    .catch((error) => error);
+};
+
 const productsService = {
   listProducts,
   searchProducts,
@@ -176,6 +206,8 @@ const productsService = {
   getProductDetail,
   getProductSuscripcion,
   getProductApis,
+  getSubscriptions,
+  getSubscriptionById,
 };
 
 export default productsService;

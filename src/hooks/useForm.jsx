@@ -10,7 +10,7 @@ const validationSchema = Yup.object().shape({
   last_name: string().trim().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos')
     .max(50, 'Se ha excedido el número de caracteres permitidos'),
   email: string().email('Correo electrónico inválido').required('Campo requerido'),
-  terms: bool().oneOf([true], 'Debes aceptar los términos y condiciones'),
+  terms: bool().oneOf([true], 'Debes aceptar los términos de uso'),
   password: string()
     .min(8, 'La contraseña debe tener al menos 8 carácteres de longitud')
     .max(16, 'Se ha excedido el número de caracteres permitidos')

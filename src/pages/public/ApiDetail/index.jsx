@@ -13,12 +13,12 @@ import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonCom
 import BannerImage from '../../../components/Banner/BannerImage';
 import Slick from '../../../components/SlickSlider/Slick';
 import Icon from '../../../components/MdIcon/Icon';
+import CustomMarkdown from '../../../components/CustomMarkdown';
 import { getHomeContent } from '../../../redux/actions/homeAction';
 import { getLibrary, getLibraries } from '../../../redux/actions/libraryAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
 import codeSnipet from '../../../static/img/code-snippet.png';
 import classes from './api-detail.module.scss';
-import CustomMarkdown from '../../../components/CustomMarkdown';
 
 function ApiDetail({ setIsOpen }) {
 
@@ -81,10 +81,6 @@ function ApiDetail({ setIsOpen }) {
       label: 'Probar API',
       class: 'primary',
     },
-    {
-      label: 'Documentación',
-      class: 'btn-tertiary-white',
-    },
   ];
 
   const datanews = blogs?.length > 0 ? _.sortBy(blogs, (m) => {
@@ -119,6 +115,7 @@ function ApiDetail({ setIsOpen }) {
           <section>
             <BannerImage
               title={library?.title}
+              apiId={library?.slug}
               img={library?.image?.length > 0 && library?.image?.length === 1 ? library?.image?.[0]?.url : ''}
               buttons={buttonsLbls}
               setIsOpen={setIsOpen}
@@ -147,6 +144,7 @@ function ApiDetail({ setIsOpen }) {
                             key={i}
                             title={item?.title}
                             icon={item?.number ? item?.number : 'note1'}
+                            iconColor='rgba(0, 0, 0, 0.5)'
                             titleStyles={{ fontSize: '18px', fontWeight: '500', color: '#53565A' }}
                             iconStyle={{ width: '50px', height: '50px' }}
                           />

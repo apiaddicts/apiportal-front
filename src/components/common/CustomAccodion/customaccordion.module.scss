@@ -22,7 +22,7 @@
   &__head {
     transition: 0.3s ease all;
     background: $white;
-    color: $dark_primary;
+    color: $theme_primary;
     border-radius: 0px;
     width: 100%;
     display: flex;
@@ -74,7 +74,7 @@
       h1 {
         font-size: 1rem;
         font-weight: 400;   
-        color: $gray_darken;
+        color: $gray_lighten-0;
       }
 
       p {
@@ -97,7 +97,8 @@
 .active {
   transition: 0.3s ease all;
   background: $white;
-  color: $secondary_text;
+  color: $theme_primary;
+  font-weight: 700;
 }
 
 .filter {
@@ -208,10 +209,10 @@
     display: inline-block;
     max-width: 600px;
     word-break: break-all;
-    color: $primary;
-    background: #FAFAFC;
+    color: $theme_primary;
+    background: $gray_lighten-4;
     border-radius: 12px;
-    border: 1px solid #ECF0F1;
+    border: 1px solid $gray_lighten-3;
     font-size: 1rem;
     font-weight: 500;
     letter-spacing: 0.1px;

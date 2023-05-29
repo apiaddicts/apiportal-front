@@ -1,5 +1,6 @@
+/* eslint-disable */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { HashLink } from 'react-router-hash-link';
 
@@ -9,7 +10,8 @@ import Base from './Base';
 import config from '../../services/config';
 import './cards.scss';
 
-function CardInformation({ img, buttons, title, description, reading, info, maxWidth, version, status, colorStatus, theme, blog, modal, link, css_styles, blogTitle, id }) {
+function CardInformation({ img, buttons, title, description, reading, info, maxWidth, version, status, theme, blog, modal, link, css_styles, blogTitle, id }) {
+  const [colorStatus, setColorStatus] = useState('');
   const { custom_title_size, custom_status_size, custom_margin_top } = css_styles;
   const blogClasses = {
     paddingTop: blog ? '51px' : '',
@@ -23,6 +25,15 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
   const clickModal = () => {
     modal(true);
   };
+
+  useEffect(() => {
+    if (status === 'publicado') {
+      setColorStatus('green')
+    } else {
+      setColorStatus('warning')
+    }
+  }, []);
+
 
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
@@ -63,7 +74,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
             </HashLink>
             <HashLink smooth to={link}>
               <p className={`line-height-1 ${reading ? 'px-8' : null} card__description body-2`}>
-                {description ?? 'Quisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.Suspendisse potenti. Integer tincidunt. Aenean commodo ligula eget dolor. Nulla consequat massa quis enimQuisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.Suspendisse potenti. Integer tincidunt. Aenean commodo ligula eget dolor. Nulla consequat massa quis enimQuisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.'}
+                {description ?? ''}
               </p>
             </HashLink>
 
@@ -118,7 +129,7 @@ function CardInformation({ img, buttons, title, description, reading, info, maxW
             )}
 
             <p className={`line-height-1 ${reading ? 'px-8' : null} card__description body-2`}>
-              {description ?? 'Quisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.Suspendisse potenti. Integer tincidunt. Aenean commodo ligula eget dolor. Nulla consequat massa quis enimQuisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.Suspendisse potenti. Integer tincidunt. Aenean commodo ligula eget dolor. Nulla consequat massa quis enimQuisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adipi cing, dui. Vestibulum volutpat pretium libero. Praesent blandit laoreet nibh. Nam at totor in tellus interdum sai.'}
+              {description ?? ''}
             </p>
 
             {info && (

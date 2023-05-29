@@ -40,6 +40,9 @@ const initialState = {
   apisProductSkip: 0,
 
   selectedApis: [],
+  apisUnsecureReq: false,
+  apisUnsecureRes: [],
+  apisUnsecureFail: {},
 
 };
 
@@ -247,6 +250,26 @@ export default function libraryReducer(state = initialState, action) {
       return {
         ...state,
         selectedApis: action.payload,
+      };
+
+    case libraryConstants.GET_APIS_UNSECURE_REQUEST:
+      return {
+        ...state,
+        apisUnsecureReq: true,
+      };
+
+    case libraryConstants.GET_APIS_UNSECURE_SUCCESS:
+      return {
+        ...state,
+        apisUnsecureRes: action.payload,
+        apisUnsecureReq: false,
+      };
+
+    case libraryConstants.GET_APIS_UNSECURE_FAILURE:
+      return {
+        ...state,
+        apisUnsecureReq: false,
+        apisUnsecureFail: action.payload,
       };
 
     default:

@@ -82,7 +82,6 @@ function Products(props) {
             type='text'
             placeholder='Buscar Producto'
             icon
-            borderRadius={50}
             onChange={(e) => {
               formik.handleChange(e);
               formik.setFieldValue('description', '');

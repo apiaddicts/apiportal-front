@@ -1,12 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { FaFacebookF, FaTwitter, FaYoutube } from 'react-icons/fa';
+import { FaFacebookF, FaLinkedinIn, FaTwitter, FaYoutube, FaInstagram } from 'react-icons/fa';
 import { Alert } from '@mui/material';
-import { RiInstagramFill } from 'react-icons/ri';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { sendContactMail } from '../../redux/actions/mailAction';
+import { useLocation } from 'react-router-dom';
+import emailAction from '../../redux/actions/emailAction';
 import 'yup-phone';
 import Base from './Base';
 import classes from './footer.module.scss';
@@ -15,14 +15,14 @@ import Icon from '../MdIcon/Icon';
 import Button from '../Buttons/Button';
 import InputUI from '../Input/InputUI/InputUI';
 import TextAreaUI from '../Input/InputUI/TextAreaUI';
-import SelectUI from '../Input/InputUI/SelectUI';
 import config from '../../services/config';
 import CustomIcon from '../MdIcon/CustomIcon';
 
 function Footer({ isPrivate }) {
-
+  const { pathname } = useLocation();
+  if (pathname === '/soporte' || pathname === '/documentacion') return null;
   const dispatch = useDispatch();
-  const mail = useSelector((state) => state.mail);
+  const email = useSelector((state) => state.email);
   const img = '';
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
@@ -30,7 +30,8 @@ function Footer({ isPrivate }) {
     { link: '', icon: <FaFacebookF /> },
     { link: '', icon: <FaTwitter /> },
     { link: '', icon: <FaYoutube /> },
-    { link: '', icon: <RiInstagramFill /> },
+    { link: '', icon: <FaInstagram /> },
+    { link: '', icon: <FaLinkedinIn /> },
   ];
   const [contactForm, setContactForm] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -52,30 +53,30 @@ function Footer({ isPrivate }) {
       name: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
       lastname: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(50, 'Se ha excedido el número de caracteres permitidos'),
       email: Yup.string().email('Correo electrónico inválido').required('Campo requerido'),
-      phone: Yup.string().phone('MX', true, 'Debe ingresar un número telefónico válido').required('Campo requerido'),
+      //phone: Yup.string().phone('MX', false, 'Debe ingresar un número telefónico válido'),
       // topic: Yup.string().required('Campo requerido'),
       subject: Yup.string().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos').max(70, 'Se ha excedido el número de caracteres permitidos'),
       message: Yup.string().required('Campo requerido'),
-      sendMailTerms: Yup.bool().oneOf([true], 'Debes aceptar los términos y condiciones'),
+      //sendMailTerms: Yup.bool().oneOf([true], 'Debes aceptar los términos y condiciones'),
     }),
     onSubmit: (values) => {
       //Handle envio de correo de contacto
       setDisplaySubmit(false);
-      dispatch(sendContactMail(values));
+      dispatch(emailAction.sendContactEmail(values));
     },
   });
 
   useEffect(() => {
-    if (mail?.mailConversationError?.ok === false) {
+    if (email?.contactEmailError?.ok === false) {
       setError(true);
       setTimeout(() => { setError(false); }, 2000);
       setDisplaySubmit(true);
-    } else if (mail?.mailConversation?.ok) {
+    } else if (email?.contactEmail?.ok) {
       setSuccess(true);
       setTimeout(() => { setSuccess(false); }, 2000);
       setDisplaySubmit(true);
     }
-  }, [mail]);
+  }, [email]);
 
   return (
     <div>
@@ -166,8 +167,7 @@ function Footer({ isPrivate }) {
                           name='phone'
                           id='phone'
                           type='tel'
-                          label='Celular*'
-                          touched={formik.touched.phone}
+                          label='Teléfono de contacto'
                           errors={formik.errors.phone}
                           onChange={formik.handleChange}
                           onBlur={formik.handleBlur}
@@ -176,10 +176,7 @@ function Footer({ isPrivate }) {
                       </div>
                     </div>
                     <div className='row justify-center'>
-                      <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
-                        <SelectUI defaultValue='Sup' label='Temas' required={true} options={[{ value: 'Sup', text: 'Soporte' }, { value: 'Com', text: 'Comercial' }, { value: 'Admin', text: 'Administración' }]} />
-                      </div>
-                      <div className='flex-sm-12 flex-md-4 flex-lg-4 pb-10'>
+                      <div className='flex-sm-12 flex-md-8 flex-lg-8 pb-10'>
                         <InputUI
                           name='subject'
                           id='subject'
@@ -211,7 +208,7 @@ function Footer({ isPrivate }) {
                   </div>
                 </div>
               </div>
-              <div className='row mb-5 px-5'>
+              {/*<div className='row mb-5 px-5'>
                 <div className='container'>
                   <div className='row justify-center'>
                     <div className={`flex-sm-12 flex-md-8 flex-sm-8 ${classes.footer__section__contact__terms}`}>
@@ -231,13 +228,13 @@ function Footer({ isPrivate }) {
                     </div>
                   </div>
                 </div>
-              </div>
+              </div>*/}
               <div className='row mb-5 mt-10 justify-center'>
                 <div className='flex-md-4 flex-lg-3 flex-sm-12'>
                   {
                     displaySubmit &&
                     (
-                      <Button styles='tertiary' type='submit'>
+                      <Button styles={formik.isValid ? 'tertiary' : 'disabled'} disabled={!formik.isValid} type='submit'>
                         ¡Me interesa!
                       </Button>
                     )
@@ -251,12 +248,6 @@ function Footer({ isPrivate }) {
       <div className={classes.footer}>
         <div className={`container ${classes.footer__end}`}>
           <div className={classes.logo}>
-            <div className={classes.logo__principal}>
-              {/*<LogoAlt />
-              <div className={classes.logo__principal__sublogo}>
-                <CustomIcon name='fintechwhite' />
-              </div>*/}
-            </div>
             <CustomIcon name='logowhite' />
           </div>
           <div className={classes.email}>
@@ -264,12 +255,15 @@ function Footer({ isPrivate }) {
             <p className='body-1 font-weight-bold text__white'>{config.contact}</p>
           </div>
           <div className={classes.policies}>
-            <h1 className='body-1 font-weight-medium text__white mb-2'>Política de</h1>
             <p className='body-1 font-weight-bold'>
-              <a href={config.policyPath} target='blank' className='text__white'>Privacidad de datos</a>
+              <a href={config.privacyPolicyPath} target='blank' className='text__white'>Política de Privacidad</a>
             </p>
           </div>
-
+          <div className={classes.policies}>
+            <p className='body-1 font-weight-bold'>
+              <a href={config.cookiesPolicyPath} target='blank' className='text__white'>Política de Cookies</a>
+            </p>
+          </div>
         </div>
         <div className={`container ${classes.footer__social}`}>
           <div className={classes.footer__social__copyright}>
@@ -278,7 +272,7 @@ function Footer({ isPrivate }) {
               {' '}
               <span>{ year }</span>
               {' '}
-              CLOUDAPPI. TODOS LOS DERECHOS RESERVADOS
+              {`${config.company}. TODOS LOS DERECHOS RESERVADOS`}
               {' '}
             </p>
           </div>

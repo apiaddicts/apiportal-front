@@ -163,3 +163,21 @@ export const getProductApiPrevious = (productName) => (dispatch) => {
 export const resetProduct = () => (dispatch) => {
   dispatch({ type: productsConstants.RESET_PRODUCT });
 };
+
+export const getSubscriptions = () => (dispatch) => {
+  dispatch({
+    type: productsConstants.GET_SUBSCRIPTIONS_REQUEST,
+  });
+  productsService.getSubscriptions()
+    .then((response) => {
+      dispatch({
+        type: productsConstants.GET_SUBSCRIPTIONS_SUCCESS,
+        response,
+      });
+    }, (error) => {
+      dispatch({
+        type: productsConstants.GET_SUBSCRIPTIONS_FAILURE,
+        error,
+      });
+    });
+};

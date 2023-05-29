@@ -107,7 +107,7 @@ function RestorePasswordForm({ userEmail, display, toggleForm }) {
                   </Button>
                   <Button
                     type='submit'
-                    styles='primary-blue'
+                    styles='tertiary'
                     disabled={
                       !formConfig.dirty || !formConfig.isValid || formConfig.isSubmitting
                     }

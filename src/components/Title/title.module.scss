@@ -1,10 +1,10 @@
 @import '../../styles/variables.scss';
 
 .title {
-    font-family: $secondary_font;
+    font-family: $primary_font;
     font-size: 3rem;
     font-weight: 700;
-    color: $dark_primary;
+    color: $dark-lighten-0;
     margin-bottom: 0.5rem;
 }
 .divider {

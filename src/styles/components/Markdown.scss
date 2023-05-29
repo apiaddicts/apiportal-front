@@ -73,3 +73,40 @@
 		max-width: 100%;
 	}
 }
+.legal__notice__mk {
+  h1 {
+    font-size: 40px;
+    font-weight: 400;
+    color: #007ac3;
+    margin-bottom: 30px;
+  }
+
+  h4 {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 17.5px;
+  }
+
+  p + p {
+    margin-top: 20px;
+  }
+
+  a {
+    color: #08c;
+  }
+}
+
+.partner__markdown {
+  h1 {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 500;
+    strong {
+      font-weight: 600;
+    }
+  }
+  p{
+    margin-top: 30px;
+  }
+}

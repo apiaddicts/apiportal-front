@@ -4,7 +4,6 @@ import classes from './inputui.module.scss';
 import Icon from '../../MdIcon/Icon';
 
 function InputUI({ type = 'text', label, touched, errors, required = false, onChange, onBlur, ...rest }) {
-
   const { value } = rest;
   const [isActive, setIsActive] = useState(false);
   const [typeInput, setTypeInput] = useState(type);
@@ -58,7 +57,7 @@ function InputUI({ type = 'text', label, touched, errors, required = false, onCh
             </div>
           ) :
             errors === undefined && type === 'password' ? (
-              <div className={classes.wrapper__icon} onClick={togglePass} role='button' tabIndex={0}>
+              <div tabIndex='-1' className={classes.wrapper__icon} onClick={togglePass} role='button'>
                 <Icon id='MdRemoveRedEye' />
               </div>
             ) :

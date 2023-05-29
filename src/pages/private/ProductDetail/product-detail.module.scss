@@ -11,7 +11,7 @@
 .cell_title {
   display: flex;
   font-size: 20px;
-  color: $dark_primary;
+  color: $theme_primary;
   text-transform: uppercase;
   h2 {
     font-family: $primary_font;
@@ -22,7 +22,7 @@
     display: flex;
     align-items: center;
     letter-spacing: 0.2px;
-    color: $dark_primary;
+    color: $theme_primary;
   }
 }
 
@@ -37,7 +37,7 @@
   align-items: center;
   letter-spacing: 0.2px;
 
-  color: $secondary;
+  color: $blue-lighten-3;
 }
 
 .cell_description {
@@ -49,18 +49,18 @@
   display: flex;
   align-items: center;
   letter-spacing: 0.2px;
-  color: $gray_darken;
+  color: $gray_lighten-2;
 }
 
 .pagination {
   cursor: pointer;
   display: flex;
-  color: $blue;
+  color: $theme_primary;
   font-size: 20px;
   align-items: center;
 
   &__icon {
-    color: $secondary;
+    color: $theme_primary;
   }
 
   p {
@@ -143,7 +143,7 @@
   width: 64px;
 
   div {
-    color: $secondary;
+    color: $theme_secondary;
     font-size: 20px;
   }
 
@@ -156,7 +156,7 @@
     text-align: right;
     letter-spacing: 1.33333px;
     text-transform: uppercase;
-    color: $secondary;
+    color: $theme_secondary;
   }
 }
 

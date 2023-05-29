@@ -18,3 +18,18 @@ export const getTermsContent = () => (dispatch) => {
     },
   );
 };
+
+export const getLegalNoticeContent = () => (dispatch) => {
+  termsService.getLegalNoticeContent()
+    .then((response) => {
+      dispatch({
+        type: termConstants.GET_ALL_LEGAL_NOTICE_SUCCESS,
+        payload: response,
+      });
+    }, (error) => {
+      dispatch({
+        type: termConstants.GET_ALL_LEGAL_NOTICE_FAILURE,
+        payload: error,
+      });
+    });
+};
