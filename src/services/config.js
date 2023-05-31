@@ -2,7 +2,7 @@ const cryptoJs = require('crypto-js');
 
 const createSharedAccessToken = (apimUid, apimAccessKey, expirationTime) => {
   const expiryDate = new Date();
-  expiryDate.setDate(expiryDate.getTime() + (expirationTime * 1000));
+  expiryDate.setTime(expiryDate.getTime() + (Number(expirationTime) * 1000));
 
   const expiry = expiryDate.toISOString().replace(/\d+.\d+Z/, '00.0000000Z');
   const expiryShort = expiryDate.toISOString().substr(0, 16).replace(/[^\d]/g, '');
