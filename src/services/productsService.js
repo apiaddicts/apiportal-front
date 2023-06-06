@@ -82,12 +82,12 @@ function filterProductAPIsByName(productName, search, top, skip) {
     headers: { 'Authorization': token },
   };
 
-  const url = `${config.apimUrl}/products/${productName}/apis?$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}'))`;
+  const url = `${config.url}/products/${productName}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}'))`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response.data;
+      return response;
     }).catch((error) => {
       console.error(error);
     });
@@ -100,12 +100,12 @@ function filterProductAPIsByDescription(productName, search, top, skip) {
     headers: { 'Authorization': token },
   };
 
-  const url = `${config.apimUrl}/products/${productName}/apis?$top=${top}&$skip=${skip}&$filter=(contains(properties/description,'${search}'))`;
+  const url = `${config.url}/products/${productName}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/description,'${search}'))`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response.data;
+      return response;
     }).catch((error) => {
       console.error(error);
     });
