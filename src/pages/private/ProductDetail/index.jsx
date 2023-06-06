@@ -20,6 +20,7 @@ import Icon from '../../../components/MdIcon/Icon';
 import InputResponse from '../../../components/Input/InputUI/InputResponse';
 import useSearch from '../../../hooks/useSearch';
 import classes from './product-detail.module.scss';
+import config from '../../../services/config';
 
 moment.locale('es');
 function ProductDetail(props) {
@@ -300,7 +301,7 @@ function ProductDetail(props) {
                   ) : (null)}
                 </div>
                 <div>
-                  {productApis.nextLink !== undefined ? (
+                  {productApis.value && productApis.value.length === Number(config.topApi) ? (
                     <div onClick={() => handleNextProductApi()} className={classes.pagination}>
                       <p className={classes.next}>Siguiente</p>
                       <div className={classes.pagination__icon}>

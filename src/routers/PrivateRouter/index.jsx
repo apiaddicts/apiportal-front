@@ -12,8 +12,8 @@ import CustomFooter from '../../components/common/CustomFooter/CustomFooter';
 import SkeletonComponent from '../../components/SkeletonComponent/SkeletonComponent';
 
 import Profile from '../../pages/private/Profile';
-//import Products from '../../pages/private/Products';
-//import ProductDetail from '../../pages/private/ProductDetail';
+import Products from '../../pages/private/Products';
+import ProductDetail from '../../pages/private/ProductDetail';
 import Apis from '../../pages/private/Apis';
 import ApiDetail from '../../pages/private/ApiDetail';
 import SubscriptionDetail from '../../pages/private/SubscriptionDetail';
@@ -22,19 +22,19 @@ import OAuthRedirect from '../../pages/common/OAuthRedirect';
 import Subscriptions from '../../pages/private/Subscriptions';
 import Logout from '../../pages/private/Logout/Logout';
 
-import Users from '../../pages/private/Users';
-import UsersDetail from '../../pages/private/UserDetail';
-import Groups from '../../pages/private/Groups';
-import GroupDetailed from '../../pages/private/Groups/GroupDetailed';
+// import Users from '../../pages/private/Users';
+// import UsersDetail from '../../pages/private/UserDetail';
+// import Groups from '../../pages/private/Groups';
+// import GroupDetailed from '../../pages/private/Groups/GroupDetailed';
 
 import { getUser } from '../../redux/actions/userAction';
 // import { getUser, getUserGroups } from '../../redux/actions/userAction';
 import classes from './private-router.module.scss';
 // import GettingStarted from '../../pages/private/GettingStarted';
-import Apps from '../../pages/private/Apps/Apps';
-import AppDetailed from '../../pages/private/Apps/AppDetailed';
-import AddApp from '../../pages/private/Apps/AddApp';
-import AddUserB2c from '../../pages/private/Apps/AddUserB2c';
+// import Apps from '../../pages/private/Apps/Apps';
+// import AppDetailed from '../../pages/private/Apps/AppDetailed';
+// import AddApp from '../../pages/private/Apps/AddApp';
+// import AddUserB2c from '../../pages/private/Apps/AddUserB2c';
 import config from '../../services/config';
 
 function PrivateRouter({ children }) {
@@ -83,15 +83,15 @@ function PrivateRouter({ children }) {
             <div className={`container ${classes.wrapper}`}>
               <Routes>
                 <Route path='profile' element={<Profile />} />
-                {/*<Route path='products' exact='true' element={<Products />} />*/}
-                {/*<Route path='products/:id' exact='true' element={<ProductDetail />} />*/}
+                <Route path='products' exact='true' element={<Products />} />
+                <Route path='products/:id' exact='true' element={<ProductDetail />} />
                 <Route path='apis' exact='true' element={<Apis />} />
                 <Route path='apis/:id' exact='true' element={<ApiDetail />} />
                 <Route path='apis/:id/swagger-ui' exact='true' element={<SwaggerUI />} />
                 <Route path='subscriptions' exact='true' element={<Subscriptions />} />
                 <Route path='subscriptions/:id' exact='true' element={<SubscriptionDetail />} />
                 <Route path='*' element={<Navigate to='/' replace />} />
-                {isAdmin && (
+                {/* {isAdmin && (
                   <>
                     <Route path='users' exact='true' element={<Users />} />
                     <Route path='users/:id' exact='true' element={<UsersDetail />} />
@@ -102,7 +102,7 @@ function PrivateRouter({ children }) {
                 <Route path='apps' element={<Apps />} />
                 <Route path='apps/:id' element={<AppDetailed />} />
                 <Route path='apps/new-app' element={<AddApp />} />
-                <Route path='apps/user-b2c' element={<AddUserB2c />} />
+                <Route path='apps/user-b2c' element={<AddUserB2c />} /> */}
                 {/* <Route path='getting-started' element={<GettingStarted />} /> */}
               </Routes>
             </div>

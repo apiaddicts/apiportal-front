@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { TableHead, TableRow, TableCell, Table, TableContainer, TableBody, Chip, Container, Grid } from '@mui/material';
 import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
@@ -178,9 +177,7 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
                                           className={classes.input}
                                         />
                                       ) : (
-                                        <Link to={`/developer/subscriptions/${row.name}`}>
-                                          <p className='text__accent'>{row.properties.displayName}</p>
-                                        </Link>
+                                        <p className={classes.cell_name}>{row.properties.displayName}</p>
                                       )
                                     }
                                   </TableCell>
