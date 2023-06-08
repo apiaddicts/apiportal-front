@@ -1,0 +1,18 @@
+//stepper__wrapper__actions
+.stepper {
+    &__wrapper {
+        &__actions {
+            display: flex;
+            justify-content: flex-end;
+            margin: 1rem 0;
+        }
+    }
+}
+.MuiSvgIcon-root {
+    &.Mui-active {
+        color: #fd8e18 !important;
+    }
+    &.Mui-completed {
+        color: #fd8e18 !important;
+    }
+}

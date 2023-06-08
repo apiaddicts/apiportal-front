@@ -59,6 +59,24 @@ function getUserDetails(token, id) {
     });
 }
 
+function getUserGroups(token, id) {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+  };
+
+  const url = `${config.apimUrl}/users/${id}/groups`;
+  return fetch(
+    url,
+    requestOptions,
+  ).then(handleResponse)
+    .then((response) => {
+      return response.data;
+    }).catch((error) => {
+      return error;
+    });
+}
+
 function getUserEntityTag(token, id) {
   const requestOptions = {
     method: 'HEAD',
@@ -104,10 +122,28 @@ function updateUser(data) {
     });
 }
 
+function changeStatus(data, userId) {
+  const { token } = store.getState().user;
+
+  const requestOptions = {
+    method: 'PATCH',
+    headers: { 'Authorization': token, 'Content-type': 'application/json' },
+    body: JSON.stringify(data),
+  };
+
+  const url = `${config.apimUrl}/users/${userId}`;
+
+  return fetch(url, requestOptions)
+    .then((response) => response.json())
+    .then((json) => json)
+    .catch((error) => error);
+
+};
+
 function signUp(data) {
   const requestOptions = {
     method: 'PUT',
-    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `${config.hmacAuthHeader}` },
+    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `${config.getHmacAuthHeader()}` },
     body: JSON.stringify(data),
   };
   const uuid = crypto.randomUUID();
@@ -168,7 +204,7 @@ function changePassword(newPassword) {
 function resetPassword(data) {
   const requestOptions = {
     method: 'POST',
-    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `${config.hmacAuthHeader}` },
+    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `${config.getHmacAuthHeader()}` },
     body: JSON.stringify(data),
   };
 
@@ -199,6 +235,28 @@ function resetPasswordWithTicket(queryParams, data) {
     });
 }
 
+function confirmPassword(confirmToken, newPassword) {
+  const { token } = store.getState().user;
+
+  const bodyParams = {
+    password: newPassword,
+  };
+
+  const requestOptions = {
+    method: 'PATCH',
+    headers: { 'Authorization': token, 'Content-type': 'application/json' },
+    body: JSON.stringify(bodyParams),
+  };
+
+  const url = `${config.apimUrl}/accounts/${confirmToken}/password`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response)
+    .catch((error) => error);
+
+};
+
 const userService = {
   login,
   confirmAccount,
@@ -210,6 +268,9 @@ const userService = {
   changePassword,
   resetPassword,
   resetPasswordWithTicket,
+  getUserGroups,
+  changeStatus,
+  confirmPassword,
 };
 
 export default userService;

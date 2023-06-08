@@ -17,6 +17,8 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin, set
     }
   }, [formik.values.remember]);
 
+  const msjError = responseErrorLogin && Object.keys(responseErrorLogin).length > 0 ? responseErrorLogin?.error?.statusText : '';
+
   return (
     <form className='container' onSubmit={formik.handleSubmit} noValidate>
       <div className='row my-4'>
@@ -38,7 +40,7 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin, set
                   css_styles={{ custom_padding: 'p-4', custom_margin: 'mt-4' }}
                   alert_type='alert__danger'
                   title='Error al iniciar sesión'
-                  msg={['La información ingresada no es correcta, intenta cambiar la contraseña, si no la recuerdas puedes ir a ', <b key={Math.floor(Math.random() * 100) + 1}>olvidaste tu contraseña</b>]}
+                  msg={msjError}
                   display={true}
                 />
               ) : (null)
@@ -94,7 +96,7 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin, set
               type: userConstants.RESET_ALERT,
             });
           }}
-          className='text__secondary font-weight-bold caption cpointer'
+          className='text__primary__title font-weight-bold caption cpointer'
         >
           ¿Olvidaste tu contraseña?
         </p>
@@ -110,7 +112,7 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin, set
         >
           Registrarme
         </Button>
-        <Button styles='primary-blue' type='submit'>
+        <Button styles='tertiary' type='submit'>
           Iniciar sesión
         </Button>
       </div>

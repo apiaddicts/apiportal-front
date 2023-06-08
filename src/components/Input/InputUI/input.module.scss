@@ -2,7 +2,7 @@
 .wrapper__input {
   display: flex;
   flex-direction: column;
-  min-width: 350px;
+  min-width: 200px;
   position: relative;
   height: 100%;
 
@@ -93,7 +93,7 @@
 
 .active {
   transform: translate(0, -20px) scale(0.75) !important;
-  color: $primary !important;
+  color: $theme_primary !important;
   font-weight: 500 !important;
   font-size: 1rem !important;
 }

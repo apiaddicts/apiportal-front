@@ -1,3 +1,4 @@
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -13,6 +14,11 @@ function Collapse({ children, row, user, css_styles, initialState, productId = '
   const { custom_title } = css_styles;
   const [edit, setEdit] = useState(false);
   const [chevron, setChevron] = useState(initialState);
+  const [confirmDialog, setConfirmDialog] = useState(false);
+
+  const toggleConfirmation = () => {
+    setConfirmDialog(!confirmDialog);
+  };
   const chevronIcon = chevron ?
     <Icon id='MdArrowDropUp' css_styles={{ 'custom_icon_styles': 'fs__30 text__gray__gray_darken mr-2' }} /> :
     <Icon id='MdArrowDropDown' css_styles={{ 'custom_icon_styles': 'fs__30 text__gray__gray_darken mr-2' }} />;
@@ -80,6 +86,28 @@ function Collapse({ children, row, user, css_styles, initialState, productId = '
 
   return (
     <div className={`${classes.collapse__container}`}>
+
+      {confirmDialog && (
+        <Dialog
+          open={confirmDialog}
+          onClose={toggleConfirmation}
+        >
+          <DialogTitle id='alert-dialog-title'>
+            Cancelar subscripción
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id='alert-dialog-description'>
+              ¿Desea cancelar la subscripción? Esta es una acción irreversible.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={toggleConfirmation} color='error'>Cancelar</Button>
+            <Button onClick={() => handleCancel()} variant='contained' autoFocus>
+              Aceptar
+            </Button>
+          </DialogActions>
+        </Dialog>
+      )}
       <div className={classes.collapse__title}>
         <div className={`mr-auto ${custom_title}`}>
           {
@@ -109,7 +137,7 @@ function Collapse({ children, row, user, css_styles, initialState, productId = '
               />
             </span>
             {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-            <span onClick={() => handleCancel()}>
+            <span onClick={() => toggleConfirmation()}>
               <Icon id='MdDeleteOutline' css_styles={{ 'custom_icon_styles': 'fs__20 text__gray__gray_darken mr-2 cpointer' }} />
             </span>
           </>

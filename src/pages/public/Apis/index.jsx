@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Typography } from '@mui/material';
 import { getApiContent } from '../../../redux/actions/apiAction';
-import { getLibraries, filterCheck, sortApiCollection } from '../../../redux/actions/libraryAction';
+import { getLibraries, filterCheck, sortApiCollection, getApisUnsecure } from '../../../redux/actions/libraryAction';
 import BannerImage from '../../../components/Banner/BannerImage';
 import SearchInput from '../../../components/Input/SearchInput';
 import InputSelect from '../../../components/Input/InputSelect';
@@ -16,7 +15,7 @@ import classes from './apis.module.scss';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 
 function Apis({ setIsOpen }) {
-  const { libraries, filters, backUpLibreries, loadingLibraries } = useSelector((state) => state.library);
+  const { libraries, filters, backUpLibreries, loadingLibraries, apisUnsecureRes } = useSelector((state) => state.library);
   const [filtersSelect, setFiltersSelect] = useState([]);
   const [searchApiInputValue, setSearchApiInputValue] = useState('');
   const dispatch = useDispatch();
@@ -126,7 +125,22 @@ function Apis({ setIsOpen }) {
     if (libraries && libraries.length === 0 && Object.keys(filters).length === 0) {
       dispatch(getLibraries());
     }
+
+    if (apisUnsecureRes && apisUnsecureRes.length === 0) {
+      dispatch(getApisUnsecure());
+    }
+
   }, []);
+
+  const compareArrays = (array1, array2) => {
+    return array1.filter((a) => {
+      return array2.some((b) => {
+        return a.slug === b.name;
+      });
+    });
+  };
+
+  const fApis = libraries && libraries.length > 0 && apisUnsecureRes && apisUnsecureRes.length > 0 ? compareArrays(libraries, apisUnsecureRes) : [];
 
   return (
     <div id='apiHome' style={{ paddingTop: '114px' }}>
@@ -138,109 +152,117 @@ function Apis({ setIsOpen }) {
       <div className='container'>
         <section className={classes.wrapper}>
           <article className={classes.wrapper__left}>
-            <CustomizedAccordions title='Estado'>
-              {
-                state.map((item, index) => (
-                  <div
-                    className={classes.wrapper__checkbox}
-                    key={index}
-                  >
-                    <CheckboxWrapper
-                      name={item}
+            {((state && Object.keys(state).length > 0) || (versions && Object.keys(versions).length > 0) || (items && Object.keys(items).length > 0) || (tags && Object.keys(tags).length > 0)) && (
+              <div className={classes.wrapper__title}>
+                Filtrar por:
+              </div>
+            )}
+            {state && Object.keys(state).length > 0 && (
+              <CustomizedAccordions title='Estado'>
+                {
+                  state.map((item, index) => (
+                    <div
+                      className={classes.wrapper__checkbox}
+                      key={index}
+                    >
+                      <CheckboxWrapper
+                        name={item}
+                        label={item}
+                        handleChangeSelect={handleChangeStatus}
+                        checked={filtersSelect[item] !== undefined ? filtersSelect[item] : false}
+                      />
+                    </div>
+                  ))
+                }
+              </CustomizedAccordions>
+            )}
+            {versions && Object.keys(versions).length > 0 && (
+              <div className='w-full pl-4'>
+                <div className={classes.wrapper__title}>
+                  Versión
+                </div>
+                <ButtonGroupMUI sx={{ marginBottom: '15px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(50px, 1fr))', gap: '2px', alignItems: 'center', justifyContent: 'center' }}>
+                  {versions.map((item, index) => (
+                    <CheckboxLabels
+                      key={index}
                       label={item}
-                      handleChangeSelect={handleChangeStatus}
+                      name={item}
+                      handleChangeSelect={handleChangeVersions}
                       checked={filtersSelect[item] !== undefined ? filtersSelect[item] : false}
                     />
+                  ))}
+                </ButtonGroupMUI>
+              </div>
+            )}
+            {items && Object.keys(items).length > 0 && (
+              <CustomizedAccordions title='Solución'>
+                { items && items.map((item, index) => (
+                  <div key={index} className={classes.wrapper__checkbox}>
+                    <CheckboxWrapper
+                      name={item.title}
+                      label={item.title}
+                      handleChangeSelect={handleChangeSolutions}
+                      checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
+                    />
+                    <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{item.count}</p>
                   </div>
-                ))
-              }
-            </CustomizedAccordions>
-            <div className='w-full pl-4'>
-              <Typography
-                sx={{
-                  fontSize: '1rem',
-                  fontWeight: '700',
-                  textTransform: 'uppercase',
-                  letterSpacing: '1.33px',
-                  color: '#53565A',
-                  marginBottom: '15px',
-                }}
-              >
-                Versión
-              </Typography>
-              <ButtonGroupMUI sx={{ marginBottom: '15px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(50px, 1fr))', gap: '2px', alignItems: 'center', justifyContent: 'center' }}>
-                {versions.map((item, index) => (
-                  <CheckboxLabels
-                    key={index}
-                    label={item}
-                    name={item}
-                    handleChangeSelect={handleChangeVersions}
-                    checked={filtersSelect[item] !== undefined ? filtersSelect[item] : false}
-                  />
                 ))}
-              </ButtonGroupMUI>
-            </div>
-            <CustomizedAccordions title='Solución'>
-              { items && items.map((item, index) => (
-                <div key={index} className={classes.wrapper__checkbox}>
-                  <CheckboxWrapper
-                    name={item.title}
-                    label={item.title}
-                    handleChangeSelect={handleChangeSolutions}
-                    checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
-                  />
-                  <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{item.count}</p>
-                </div>
-              ))}
-            </CustomizedAccordions>
-            <CustomizedAccordions title='Etiquetas'>
-              { tags.map((item, index) => (
-                <div className={classes.wrapper__checkbox} key={index}>
-                  <CheckboxWrapper
-                    name={item.title}
-                    label={item.title}
-                    handleChangeSelect={handleChangFilterTags}
-                    checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
-                  />
-                  <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{item.count}</p>
-                </div>
-              ))}
-            </CustomizedAccordions>
-            <div className={classes.wrapper__filters}>
-              <Icon id='MdDeleteOutline' />
-              <button type='button' className={classes.wrapper__reset} onClick={resetFilters}>Eliminar filtros</button>
-            </div>
+              </CustomizedAccordions>
+            )}
+            {tags && Object.keys(tags).length > 0 && (
+              <CustomizedAccordions title='Etiquetas'>
+                { tags.map((item, index) => (
+                  <div className={classes.wrapper__checkbox} key={index}>
+                    <CheckboxWrapper
+                      name={item.title}
+                      label={item.title}
+                      handleChangeSelect={handleChangFilterTags}
+                      checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
+                    />
+                    <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{item.count}</p>
+                  </div>
+                ))}
+              </CustomizedAccordions>
+            )}
+            {((state && Object.keys(state).length > 0) || (versions && Object.keys(versions).length > 0) || (items && Object.keys(items).length > 0) || (tags && Object.keys(tags).length > 0)) && (
+              <div className={classes.wrapper__filters}>
+                <Icon id='MdDeleteOutline' />
+                <button type='button' className={classes.wrapper__reset} onClick={resetFilters}>Eliminar filtros</button>
+              </div>
+            )}
           </article>
           <section className={classes.wrapper__right}>
-            <div className='w-full'>
-              <div className='row'>
-                <div className={`flex-sm-12 flex-md-7 flex-lg-7 ${classes.wrapper__right__control_container}`}>
-                  <SearchInput
-                    icon
-                    name='search'
-                    type='text'
-                    onChange={(e) => {
-                      handleChangeSearchFilter(e.target.value);
+            {loadingLibraries === false && libraries && (
+              <div className='w-full'>
+                <div className='row'>
+                  <div className={`flex-sm-12 flex-md-7 flex-lg-7 ${classes.wrapper__right__control_container}`}>
+                    <SearchInput
+                      icon
+                      name='search'
+                      type='text'
+                      onChange={(e) => {
+                        handleChangeSearchFilter(e.target.value);
+                      }}
+                      placeholder='Buscar APIs...'
+                      borderRadius='6px'
+                      value={searchApiInputValue}
+                    />
+                  </div>
+                  <div className={`flex-sm-12 flex-md-5 flex-lg-5 ${classes.wrapper__right__control_container}`}>
+                    <InputSelect handleSelect={(e) => {
+                      handleSort(e);
                     }}
-                    placeholder='Buscar APIs...'
-                    borderRadius='6px'
-                    value={searchApiInputValue}
-                  />
-                </div>
-                <div className={`flex-sm-12 flex-md-5 flex-lg-5 ${classes.wrapper__right__control_container}`}>
-                  <InputSelect handleSelect={(e) => {
-                    handleSort(e);
-                  }}
-                  />
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
+            )}
             <div className='flex-sm-12 flex-md-6'>
               <div className='row'>
                 {loadingLibraries === false && libraries ? (
                   libraries.length > 0 ? (
                     <ApisPaginated
-                      apis={libraries}
+                      apis={fApis}
                       itemsPerPage={8}
                     />
                   ) : (

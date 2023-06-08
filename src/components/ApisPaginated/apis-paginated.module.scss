@@ -27,7 +27,7 @@
 }
 
 .previous {
-  color: #0033a0;
+  color: $blue;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -60,7 +60,7 @@
 }
 
 .next {
-  color: #0033a0;
+  color: $blue;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -99,12 +99,12 @@
   line-height: 32px;
   margin-bottom: 2px;
   height: 32px;
-  color: #0033a0;
+  color: $theme_primary;
   cursor: pointer;
 }
 
 .number_page_active {
-  color: #00aec7;
+  color: $secondary_text;
 }
 
 .disabled {

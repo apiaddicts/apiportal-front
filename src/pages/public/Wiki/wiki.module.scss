@@ -1,0 +1,14 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/mixins/mixin.scss";
+
+.wiki {
+    padding-top: 140px;
+    min-height: 100vh;
+
+    &__iframe {
+        border: none;
+        width: 100%;
+        max-width: 100%;
+        height: calc(100vh - 144px);
+    }
+}

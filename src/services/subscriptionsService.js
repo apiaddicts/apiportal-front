@@ -11,6 +11,24 @@ function listUserSubscriptions(userId, top = config.topSubscriptions, skip = 0) 
   };
 
   const url = `${config.url}/users/${userId}/subscriptions?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}`;
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response;
+    }).catch((error) => {
+      console.error(error);
+    });
+}
+
+function subscribeToAProductWithHmac(data, userId) {
+  const subscriptionId = crypto.randomUUID();
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `${config.getHmacAuthHeader()}` },
+    body: JSON.stringify(data),
+  };
+
+  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -23,6 +41,7 @@ function listUserSubscriptions(userId, top = config.topSubscriptions, skip = 0) 
 
 function subscribeToAProduct(data, userId) {
   const { token } = store.getState().user;
+
   const subscriptionId = crypto.randomUUID();
   const requestOptions = {
     method: 'PUT',
@@ -48,7 +67,7 @@ function getName(urlValidate) {
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.azureUrl}${urlValidate}?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}${urlValidate}?api-version=${config.apiVersion}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -64,10 +83,10 @@ function regenerateSubscription(userId, subscriptionId, fragmentUrl) {
 
   const requestOptions = {
     method: 'POST',
-    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Authorization': token },
   };
 
-  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}/${fragmentUrl}?api-version=${config.apiVersion}`;
+  const url = `${config.apimUrl}/users/${userId}/subscriptions/${subscriptionId}/${fragmentUrl}`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -135,6 +154,43 @@ function cancelSubscription(userId, subscriptionId, data) {
     });
 }
 
+function listSubscriptionbyId(userId, subscriptionId) {
+  const { token } = store.getState().user;
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+  };
+
+  const url = `${config.url}/users/${userId}/subscriptions/${subscriptionId}?api-version=${config.apiVersion}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response;
+    }).catch((error) => {
+      console.error(error);
+    });
+}
+
+function getReportsbySubscription(subscriptionId, init, limit) {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', 'Authorization': `${config.getHmacAuthHeader()}` },
+  };
+
+  let filter = `subscriptionId eq '${subscriptionId}' and timestamp ge datetime'${init}'`;
+  if (limit) filter += ` and timestamp le datetime'${limit}'`;
+  const url = `${config.url}/reports/bySubscription?api-version=${config.apiVersion}&%24filter=${filter}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response;
+    }).catch((error) => {
+      console.error(error);
+    });
+}
+
 const subscriptionsService = {
   listUserSubscriptions,
   listSubscriptionSecrets,
@@ -143,6 +199,9 @@ const subscriptionsService = {
   regenerateSubscription,
   renameSubscription,
   cancelSubscription,
+  subscribeToAProductWithHmac,
+  listSubscriptionbyId,
+  getReportsbySubscription,
 };
 
 export default subscriptionsService;

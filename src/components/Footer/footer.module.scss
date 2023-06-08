@@ -2,7 +2,7 @@
 @import "./../../styles/mixins/mixin.scss";
 
 .footer {
-  background: #000B39; /*linear-gradient(90deg, #15A192 0%, #14234B 100%);*/
+  background: $theme_primary; /*linear-gradient(90deg, #15A192 0%, #14234B 100%);*/
   &__container {
     height: 300px;
     display: flex;
@@ -37,48 +37,31 @@
     }
     .email {
       grid-area: email;
-      display: flex;
-      gap: 1rem;
-      justify-content: flex-end;
       @include breakpoint(xs) {
         h1, p {
           font-size: 16px !important;
         }
-        flex-direction: column;
-      }
-    }
-    .policies {
-      grid-area: policies;
-      display: flex;
-      gap: 5px;
-      justify-content: flex-end;
-      @include breakpoint(xs) {
-        h1, p {
-          font-size: 16px !important;
-        }
-        flex-direction: column;
       }
     }
 
-    .email,
-    .policies {
+    .email {
       text-align: right;
     }
 
     display: grid;
-    grid-template-areas: "logo" "email" "policies";
-    grid-template-columns: 3fr 1fr 1fr;
+    grid-template-areas: "logo email";
+    grid-template-columns: 1fr 1fr;
     align-items: center;
     gap: 0;
     border-bottom: 1px solid #e6e7ee;
     padding-top: 5rem;
-    padding-bottom: 16px;
+    padding-bottom: 1rem;
     padding-left: 0;
     padding-right: 0;
 
     @include breakpoint(xs) {
       grid-template-columns: 1fr;
-      grid-template-areas: "logo" "email" "policies";
+      grid-template-areas: "logo" "email";
       gap: 2rem;
       padding-top: 4rem;
       padding-bottom: 2rem;
@@ -89,47 +72,58 @@
         margin-left: auto;
         margin-right: auto;
       }
-      .email,
-      .policies {
+      .email {
         text-align: center !important;
       }
     }
 
     @include breakpoint(sm) {
       grid-template-columns: 1fr;
-      grid-template-areas: "logo" "email" "policies";
-      gap: 0rem;
-      align-content: center;
+      grid-template-areas: "logo" "email";
+      gap: 2rem;
       padding-top: 4rem;
       padding-bottom: 2rem;
+      align-content: center;
+      text-align: center;
+      border-bottom: none;
       .logo {
-        margin: 0 auto;
+        margin-left: auto;
+        margin-right: auto;
       }
-      .email, .policies {
+      .email {
         text-align: center !important;
       }
     }
 
     @include breakpoint(md) {
-      grid-template-columns: 3fr 1fr 1fr;
-      grid-template-areas: "logo email policies";
+      grid-template-areas: "logo email";
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid #e6e7ee;
       gap: 0rem;
       align-items: center;
       padding-left: 0;
       padding-right: 0;
       padding-top: 5rem;
       padding-bottom: 16px;
-      .email, .policies {
+      .email {
         text-align: right !important;
       }
       .logo {
         margin: 0;
       }
     }
-
-    @include breakpoint(lg) {
-      grid-template-columns: 2fr 3fr 2fr;
-      grid-template-areas: "logo email policies";
+  }
+  &__legals {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 5px;
+    border-bottom: 1px solid #e6e7ee;
+    .policies {
+      @include breakpoint(xs) {
+        h1, p {
+          font-size: 16px !important;
+        }
+      }
     }
   }
   &__social {
@@ -201,7 +195,7 @@
     }
   }
   &__section {
-    background: #ecf0f1;
+    background: $gray_lighten-4;
     &__contact {
       padding-top: 100px;
       padding-bottom: 73px;
@@ -212,20 +206,20 @@
           display: inline-block;
           width: 20px;
           height: 20px;
-          border: 3px solid #0033a0 !important;
+          border: 3px solid $theme_primary !important;
           border-radius: 3px;
           cursor: pointer;
           margin-right: 12px;
         }
         span {
-          color: $primary;
+          color: $theme_primary;
           font-size: 0.938rem;
           font-weight: 400;
           letter-spacing: 0.25px;
           font-family: $primary_font;
           line-height: 20px;
           a {
-            color: $primary;
+            color: $theme_primary;
             font-weight: 700;
             letter-spacing: 0.25px;
             font-family: $primary_font;
@@ -251,7 +245,7 @@
 .heroOverlay {
   height: 100%;
   width: 100%;
-  background: $dark_primary url("../../static/icons/lockWifi.svg") no-repeat left 2px;
+  background: $theme_primary url("../../static/icons/lockWifi.svg") no-repeat left 2px;
 }
 .divider {
   border-bottom: 4px solid $secondary_white;
@@ -269,7 +263,7 @@
     position: relative;
     z-index: 1;
     top: -50px;
-    background: $primary;
+    background: $theme_secondary;
     border: none;
     border-radius: 0%;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.12), 0px 6px 6px rgba(0, 0, 0, 0.24);

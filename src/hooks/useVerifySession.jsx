@@ -44,6 +44,8 @@ const useVerifySession = () => {
       currentDateUTC === null || currentDateUTC === undefined) { return; };
     if (Math.sign(tokenTimeUTC - currentDateUTC) === -1) {
       store.dispatch(sessionTimeout());
+    } else if (Number.isNaN(Math.sign(tokenTimeUTC - currentDateUTC))) {
+      console.log('No se esta realizando un comparativo de fechas correcto');
     }
   };
 

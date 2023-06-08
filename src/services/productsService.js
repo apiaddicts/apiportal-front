@@ -79,7 +79,7 @@ function filterProductAPIsByName(productName, search, top, skip) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Authorization': token },
   };
 
   const url = `${config.url}/products/${productName}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}'))`;
@@ -97,7 +97,7 @@ function filterProductAPIsByDescription(productName, search, top, skip) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Authorization': token },
   };
 
   const url = `${config.url}/products/${productName}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/description,'${search}'))`;
@@ -129,14 +129,15 @@ function getProductDetail(productName) {
     });
 }
 
-function getProductSuscripcion(productName, top, skip) {
+function getProductSuscripcion(productName, top, skip = 0) {
   const { token, id } = store.getState().user;
   const requestOptions = {
     method: 'GET',
     headers: { 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.url}/users/${id}/subscriptions?api-version=${config.apiVersion}&$filter=(properties/scope eq '/products/${productName}')&$top=${top}&$skip=${skip}`;
+  let url = `${config.url}/users/${id}/subscriptions?api-version=${config.apiVersion}&$filter=(properties/scope eq '/products/${productName}')&$skip=${skip}`;
+  url += top !== undefined && top !== null && top !== 0 ? `&$top=${top}` : '';
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -165,6 +166,36 @@ function getProductApis(productName, top, skip) {
     });
 }
 
+function getSubscriptions() {
+
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const url = `${config.apiUrl}/products`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response)
+    .catch((error) => error);
+};
+
+function getSubscriptionById(productId) {
+
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const url = `${config.apiUrl}/products?_where[slug]=${productId}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response[0])
+    .catch((error) => error);
+};
+
 const productsService = {
   listProducts,
   searchProducts,
@@ -175,6 +206,8 @@ const productsService = {
   getProductDetail,
   getProductSuscripcion,
   getProductApis,
+  getSubscriptions,
+  getSubscriptionById,
 };
 
 export default productsService;

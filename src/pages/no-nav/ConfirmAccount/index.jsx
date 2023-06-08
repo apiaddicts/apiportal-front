@@ -1,7 +1,8 @@
+import { Card, Container } from '@mui/material';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link, useSearchParams } from 'react-router-dom';
 /*import { Navigate } from 'react-router-dom';*/
-import { useSearchParams } from 'react-router-dom';
 import CustomFooter from '../../../components/common/CustomFooter/CustomFooter';
 import Spinner from '../../../components/Spinner';
 import { confirmAccount } from '../../../redux/actions/userAction';
@@ -10,7 +11,7 @@ import classes from './confirm-account.module.scss';
 
 function ConfirmAccount({ setIsOpen }) {
 
-  const { accountVerificationSent } = useSelector((state) => state.user);
+  const { accountVerificationSent, accountVerified, accountVerifiedResponse } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
   const [searchParams] = useSearchParams();
@@ -27,20 +28,32 @@ function ConfirmAccount({ setIsOpen }) {
     }
   }, [accountVerificationSent]);
 
+  const msg = accountVerifiedResponse && Object.keys(accountVerifiedResponse).length > 0 ? accountVerifiedResponse?.result : 'Su cuenta ha sido verificada y se encuentra pendiente de aprobacion';
+
   return (
     <div>
-      <div className={classes.navbar}>
-        {/*<Navigate to='/' replace>
-            <img src={LogoAlt} alt='' />
-        </Navigate>*/}
-      </div>
+      <div className={classes.navbar} />
       <div className={classes.wrapper}>
         <div className={classes.wrapper__content}>
           <div className={classes.wrapper__content__text}>
             <div className='container'>
               <div className='row'>
                 <div className='flex-sm-12 flex-md-12'>
-                  <Spinner />
+                  {accountVerified ? (<Spinner />) : (
+                    <Container fixed className='container__padding'>
+                      <Card sx={{ borderRadius: '20px', marginTop: '20px', padding: '35px 47px 43px 41px', marginBottom: '15px', width: '100%' }}>
+                        <p className='fs__24 font-weight-bold text__primary'>{msg}</p>
+                        <div className='row justify-center'>
+                          <div className='flex-sm-12 flex-md-6 flex-lg-6'>
+                            <Link to='/' style={{ textDecoration: 'underline', fontWeight: 500 }}>
+                              Ir al inicio
+                            </Link>
+                          </div>
+                        </div>
+                      </Card>
+
+                    </Container>
+                  )}
                 </div>
               </div>
             </div>

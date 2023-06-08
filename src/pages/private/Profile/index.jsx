@@ -15,7 +15,7 @@ import classes from './profile.module.scss';
 
 function Profile() {
   const dispatch = useDispatch();
-  const { user, loadingUser } = useSelector((state) => state.user);
+  const { user, loadingUser, id, token } = useSelector((state) => state.user);
   const [displayRestorePassword, setDisplayRestorePassword] = useState(false);
   const { suscripcionsUser } = useSelector((state) => state.suscripcions);
 
@@ -32,7 +32,11 @@ function Profile() {
         lastName: values.last_name,
       },
     };
-    dispatch(updateUser(data));
+    const tokens = {
+      id,
+      token,
+    };
+    dispatch(updateUser(data, user.name, tokens));
   };
   const name = user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? user.properties.firstName : '';
   const lastName = user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? user.properties.lastName : '';
@@ -71,6 +75,10 @@ function Profile() {
 
   const formConfig = useFormUserConfig(labelsUser, handleSubmit);
 
+  const toggleForm = () => {
+    setDisplayRestorePassword(!displayRestorePassword);
+  };
+
   return (
     <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
       <div className={classes.main__admin}>
@@ -84,10 +92,6 @@ function Profile() {
                 <div className={classes.admin__form__container}>
                   <div className={classes.admin__form__container__header}>
                     <div className='font-fs-joey fs__36 font-weight-bold text__dark__primary'>Datos personales</div>
-                    {/* <div className='fs__16 text__gray__gray_darken ls_05'>
-                        <span className='text-uppercase font-weight-semi-bold'>Fecha de registro:</span>
-                        <span className='fs'>12/05/2022</span>
-                      </div> */}
                   </div>
                   <div className='row'>
                     {labelsUser.map((field) => (
@@ -109,7 +113,7 @@ function Profile() {
                     <div className='flex-lg-3 flex-sm-12 display_flex align_items__bottom justify_content__end ml-auto mb-2'>
                       <Button
                         type='submit'
-                        styles='primary-blue'
+                        styles='tertiary'
                       >
                         Guardar
                       </Button>
@@ -118,7 +122,7 @@ function Profile() {
                 </div>
               </form>
               <div className={`${classes.admin__form__container} margin_top`}>
-                <RestorePassword userEmail={user?.properties?.email} display={displayRestorePassword} />
+                <RestorePassword userEmail={user?.properties?.email} display={displayRestorePassword} toggleForm={toggleForm} />
               </div>
             </div>
           </div>

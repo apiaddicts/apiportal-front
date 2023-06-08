@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react';
 // import { useLocation } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { Alert } from '@mui/material';
-import { sendContactMail } from '../../redux/actions/mailAction';
 import classes from './contact.module.scss';
 import Button from '../Buttons/Button';
 import icons from '../../static/icons';
 import InputUI from '../Input/InputUI/InputUI';
 
 function Contact({ css_styles, pathname }) {
-
-  const dispatch = useDispatch();
-  const mail = useSelector((state) => state.mail);
+  const email = useSelector((state) => state.email);
   const { display_contact, display_detail_description, border_radius, override_margin_right } = css_styles;
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(false);
@@ -29,21 +26,19 @@ function Contact({ css_styles, pathname }) {
     }),
     onSubmit: (values) => {
       setError(false);
-      setSuccess(false);
-      dispatch(sendContactMail(values));
       setSuccess(true);
     },
   });
 
   useEffect(() => {
-    if (mail?.mailContactError?.ok === false) {
+    if (email?.newsletterEmailError?.ok === false) {
       setError(true);
       setTimeout(() => { setError(false); }, 2000);
-    } else if (mail?.mailContact?.ok) {
+    } else if (email?.newsletterEmail?.ok) {
       setSuccess(true);
       setTimeout(() => { setSuccess(false); }, 2000);
     }
-  }, [mail]);
+  }, [email]);
 
   return (
     <div className={`${classes.contact} ${display_contact} ${classes[border_radius]}`}>
@@ -111,7 +106,7 @@ function Contact({ css_styles, pathname }) {
               </div>
             </div>
             <div className={classes.contact__form__button}>
-              <Button styles='primary-blue' type='submit'>
+              <Button styles='tertiary' type='submit'>
                 SUSCRÍBETE
               </Button>
             </div>

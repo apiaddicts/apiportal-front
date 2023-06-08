@@ -13,6 +13,7 @@ import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonCom
 import BannerImage from '../../../components/Banner/BannerImage';
 import Slick from '../../../components/SlickSlider/Slick';
 import Icon from '../../../components/MdIcon/Icon';
+import CustomMarkdown from '../../../components/CustomMarkdown';
 import { getHomeContent } from '../../../redux/actions/homeAction';
 import { getLibrary, getLibraries } from '../../../redux/actions/libraryAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
@@ -80,10 +81,6 @@ function ApiDetail({ setIsOpen }) {
       label: 'Probar API',
       class: 'primary',
     },
-    {
-      label: 'Documentación',
-      class: 'btn-tertiary-white',
-    },
   ];
 
   const datanews = blogs?.length > 0 ? _.sortBy(blogs, (m) => {
@@ -118,6 +115,7 @@ function ApiDetail({ setIsOpen }) {
           <section>
             <BannerImage
               title={library?.title}
+              apiId={library?.slug}
               img={library?.image?.length > 0 && library?.image?.length === 1 ? library?.image?.[0]?.url : ''}
               buttons={buttonsLbls}
               setIsOpen={setIsOpen}
@@ -130,7 +128,7 @@ function ApiDetail({ setIsOpen }) {
           <section className='container mb-15'>
             <div className='row'>
               <div className={`flex-md-12 flex-sm-12 -ml-23 ${classes.section__content__title}`}>
-                <h1 className='h2 text__dark__primary font-weight-bold mb-10 -ml-23 text-center'>
+                <h1 className='h2 text__primary__title font-weight-bold mb-10 -ml-23 text-center'>
                   {library?.benefits && library?.benefits?.length > 0 && library?.benefits?.length === 1 ?
                     library?.benefits?.[0]?.title :
                     'Benificios principales'}
@@ -146,6 +144,7 @@ function ApiDetail({ setIsOpen }) {
                             key={i}
                             title={item?.title}
                             icon={item?.number ? item?.number : 'note1'}
+                            iconColor='rgba(0, 0, 0, 0.5)'
                             titleStyles={{ fontSize: '18px', fontWeight: '500', color: '#53565A' }}
                             iconStyle={{ width: '50px', height: '50px' }}
                           />
@@ -161,18 +160,25 @@ function ApiDetail({ setIsOpen }) {
               </div>
             </div>
           </section>
+          {library?.markdown && library?.markdown.length > 0 && (
+            <section className={`container ${classes.section__content} pb-9`}>
+              <div className='markdown__content'>
+                <CustomMarkdown content={library?.markdown} />
+              </div>
+            </section>
+          )}
           <section className={classes.section__discover}>
             <div className='container'>
               <div className='row'>
                 <div className='flex-md-12 flex-sm-12'>
-                  <h1 className='h2 text__dark__primary text-center font-weight-bold mb-2 ml-1'>
+                  <h1 className='h2 text__primary__title text-center font-weight-bold mb-2 ml-1'>
                     Otras APIs que te pueden interesar
                   </h1>
                 </div>
               </div>
               <div className='row'>
                 <div className='flex-md-12 flex-sm-12'>
-                  <p className={`subtitle-1 mb-10 text__gray__gray_lighten-4 text-center ${classes.section__discover__subtitle}`}>
+                  <p className={`subtitle-1 mb-10 text__gray__darken text-center ${classes.section__discover__subtitle}`}>
                     Encuentra las mejores APIs para tu negocio.
                     {' '}
                     <br />
@@ -274,7 +280,7 @@ function ApiDetail({ setIsOpen }) {
               title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : 'Title'}
               subtitle={filterHomeBannerSubtitle !== '' ? filterHomeBannerSubtitle : ''}
               img={filterHomeBannerImage !== '' ? '' : ''}
-              buttonType='primary'
+              buttonType='tertiary'
               buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : 'Empezar ahora'}
               redirect={filterHomeBannerNameType}
             />

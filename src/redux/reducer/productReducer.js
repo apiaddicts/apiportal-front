@@ -19,6 +19,10 @@ const initialState = {
   errorApis: {},
   spinnerApis: false,
   productsApisSkip: 0,
+
+  subscriptionReq: false,
+  subscriptionRes: [],
+  subscriptionFail: {},
 };
 
 // eslint-disable-next-line default-param-last
@@ -48,7 +52,7 @@ export default function productReducer(state = initialState, action) {
     case productsConstants.GET_PRODUCTS_SKIP:
       return {
         ...state,
-        productsSkip: action.skip,
+        productsSkip: parseInt(action.skip, 10),
       };
       // Cases to bring the product
     case productsConstants.GET_PRODUCT_REQUEST:
@@ -114,7 +118,7 @@ export default function productReducer(state = initialState, action) {
     case productsConstants.GET_PRODUCT_API_SKIP:
       return {
         ...state,
-        productsApisSkip: action.skip,
+        productsApisSkip: parseInt(action.skip, 10),
       };
       // Reset constants product:
     case productsConstants.RESET_PRODUCT:
@@ -130,6 +134,27 @@ export default function productReducer(state = initialState, action) {
         errorProduct: {},
         productSubscriptions: {},
       };
+
+    case productsConstants.GET_SUBSCRIPTIONS_REQUEST:
+      return {
+        ...state,
+        subscriptionReq: true,
+      };
+
+    case productsConstants.GET_SUBSCRIPTIONS_SUCCESS:
+      return {
+        ...state,
+        subscriptionRes: action.response,
+        subscriptionReq: false,
+      };
+
+    case productsConstants.GET_SUBSCRIPTIONS_FAILURE:
+      return {
+        ...state,
+        subscriptionFail: action.error,
+        subscriptionReq: false,
+      };
+
     default:
       return state;
   }

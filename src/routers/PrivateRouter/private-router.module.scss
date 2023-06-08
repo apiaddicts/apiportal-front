@@ -1,6 +1,14 @@
 @import '../../styles/variables.scss';
 @import '../../styles/mixins/mixin.scss';
 
+.custom__body{
+    background: $white;
+}
+
+.container__footer{
+    background: $white;
+}
+
 .wrapper {
     margin-top: 152px !important;
     margin-bottom: 87px !important;

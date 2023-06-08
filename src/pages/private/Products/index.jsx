@@ -26,30 +26,32 @@ function Products(props) {
     },
   });
 
-  useEffect(() => {
-    if (formik.values.search.trim().length >= 3) {
+  const handleSearch = () => {
+    if (formik.values.search.trim().length >= 1) {
       dispatch(searchProducts(formik.values.search));
     }
-    if (formik.values.name.trim().length >= 3) {
+    if (formik.values.name.trim().length >= 1) {
       dispatch(filterProductsByName(formik.values.name));
     }
 
-    if (formik.values.description.trim().length >= 3) {
+    if (formik.values.description.trim().length >= 1) {
       dispatch(filterProductsByDescription(formik.values.description));
     }
 
     if (formik.values.search.trim().length === 0 && formik.values.name.trim().length === 0 && formik.values.description.trim().length === 0) {
       dispatch(listProducts());
     }
+  };
+  useEffect(() => {
+    const timer = setTimeout(() => handleSearch(), 500);
+    return () => clearTimeout(timer);
   }, [formik.values.search, formik.values.name, formik.values.description]);
 
   useEffect(() => {
     if (products && Object.keys(products).length === 0 && productsSkip === 0) {
       dispatch(listProducts());
     }
-
   }, []);
-
   useEffect(() => {
     return () => {
       dispatch(resetProduct());
@@ -80,7 +82,6 @@ function Products(props) {
             type='text'
             placeholder='Buscar Producto'
             icon
-            borderRadius={50}
             onChange={(e) => {
               formik.handleChange(e);
               formik.setFieldValue('description', '');
@@ -94,7 +95,7 @@ function Products(props) {
         <Spinner styles={{ height: '500px' }} title='Cargando...' />
       ) : (
         <div>
-          <Card sx={{ borderRadius: '0px', marginTop: '20px', padding: '35px 47px 43px 41px', marginBottom: '15px', width: '100%' }}>
+          <Card sx={{ borderRadius: '20px', marginTop: '20px', padding: '35px 47px 43px 41px', marginBottom: '15px', width: '100%' }}>
             <Grid item sx={{ marginBottom: '31px' }} xs={12}>
               <div className={classes.wrapper_apps__wide__display}>
                 <TableContainer>
@@ -105,7 +106,6 @@ function Products(props) {
                           <>
                             <div className={classes.cell_title}>
                               <h2 className='text-uppercase'>Nombre</h2>
-                              <Icon id='MdExpandMore' />
                             </div>
                             <div style={{ height: '36px', marginTop: '14px' }}>
                               <InputResponse
@@ -126,7 +126,6 @@ function Products(props) {
                           <>
                             <div className={classes.cell_title}>
                               <h2 className='text-uppercase'>Descripción</h2>
-                              <Icon id='MdExpandMore' />
                             </div>
                             <div style={{ height: '36px', marginTop: '14px' }}>
                               <InputResponse
@@ -155,7 +154,7 @@ function Products(props) {
                               onClick={() => handleClickRow(row.name)}
                             >
                               <TableCell component='th' scope='row'>
-                                <p className={classes.cell_name}>{row.name}</p>
+                                <p className={classes.cell_name}>{row.properties.displayName}</p>
                               </TableCell>
                               <TableCell>
                                 <p className={classes.cell_description}>
@@ -180,7 +179,7 @@ function Products(props) {
                           className='fs__12 text__secondary ls__02 cpointer'
                           onClick={() => handleClickRow(row.name)}
                         >
-                          {row.name}
+                          {row.properties.displayName}
                         </div>
                         <div className='fs__12 text__gray__gray_darken mt-2'>{row.properties.description}</div>
                       </div>
@@ -191,7 +190,7 @@ function Products(props) {
             </Grid>
             <Grid item xs={12}>
               <Grid container direction='row' justifyContent='space-between'>
-                <Grid xs={3}>
+                <Grid item xs={3}>
                   {productsSkip > 0 ? (
                     <div onClick={() => handlePreviousProduct()} className={classes.pagination}>
                       <div className={classes.pagination__icon}>
@@ -202,7 +201,7 @@ function Products(props) {
 
                   ) : (null)}
                 </Grid>
-                <Grid xs={1}>
+                <Grid item xs={1}>
                   {products.nextLink !== undefined ? (
                     <div onClick={() => handleNextProduct(products.nextLink)} className={classes.pagination}>
                       <p className={classes.next}>Siguiente</p>

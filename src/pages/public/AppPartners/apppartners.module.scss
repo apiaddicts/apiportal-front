@@ -1,0 +1,19 @@
+@import "../../../styles/variables.scss";
+@import "../../../styles/mixins/mixin.scss";
+
+.app {
+  &__banner {
+    background: $theme_primary; /*linear-gradient(90deg, #15A192 0%, #14234B 100%);*/
+    margin: 20px;
+  }
+
+  &__container {
+    height: 100%;
+    width: 100%;
+    background: $theme_primary; /*linear-gradient(90deg, #15A192 0%, #14234B 100%);*/
+  }
+  &__content {
+      padding-top: 601px;
+  }
+  
+}

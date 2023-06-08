@@ -51,6 +51,13 @@ function handleResponseToken(response) {
             statusText: response.statusText,
           },
         };
+      case statusCode.HTTP_403_FORBIDDEN:
+        return {
+          error: {
+            status: data.errors[0].code,
+            statusText: data.errors[0].description,
+          },
+        };
       default:
         throw new Error(response.status);
     }

@@ -5,8 +5,9 @@ import { string } from 'yup';
 import * as Yup from 'yup';
 
 const validationSchema = Yup.object().shape({
-  password: string().min(8, 'La contraseña actual debe tener al menos 8 carácteres de longitud').required('La contraseña actual es obligatoria').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/, 'Su contraseña debe tener al menos una letra mayúscula, una letra minuscula, un número y un caracter especial (@$!%*?&).'),
-  new_password: string().min(8, 'La nueva contraseña debe tener al menos 8 carácteres de longitud').required('La nueva contraseña es obligatoria').trim('Los espacios no estan permitidos'),
+  password: string().min(8, 'La contraseña actual debe tener al menos 8 carácteres de longitud').required('La contraseña actual es obligatoria'),
+  new_password: string().min(8, 'La nueva contraseña debe tener al menos 8 carácteres de longitud').required('La nueva contraseña es obligatoria').trim('Los espacios no estan permitidos')
+    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/, 'Su contraseña debe tener al menos una letra mayúscula, una letra minuscula, un número y un caracter especial (@$!%*?&).'),
   confirm_password: string().required('La confirmación de contraseña es obligatoria').oneOf([Yup.ref('new_password'), null], 'La nueva contraseña y la confirmación de contraseña deben coincidir'),
 });
 

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { toast } from 'react-hot-toast';
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import Icon from '../../MdIcon/Icon';
 
 import subscriptionsConstants from '../../../redux/constants/subscriptionsConstants';
@@ -12,6 +14,8 @@ function PasswordGenerate({ idSuscripcion, user, version, status }) {
   const dispatch = useDispatch();
   const [hidden, setHidden] = useState(false);
   const [primaryKey, setPrimaryKey] = useState('');
+  const notify = (msg) => toast(msg);
+  const [confirmDialog, setConfirmDialog] = useState(false);
 
   const handleClickHidden = () => {
     if (hidden) {
@@ -19,6 +23,10 @@ function PasswordGenerate({ idSuscripcion, user, version, status }) {
     } else {
       setHidden(true);
     }
+  };
+
+  const toggleConfirmation = () => {
+    setConfirmDialog(!confirmDialog);
   };
 
   const handleRegenerateSubscriptions = () => {
@@ -44,12 +52,14 @@ function PasswordGenerate({ idSuscripcion, user, version, status }) {
     if (version === 1) {
       subscriptionsService.regenerateSubscription(user.name, idSuscripcion, 'regeneratePrimaryKey').then((response) => {
         handleRegenerateSubscriptions();
+        notify('Se ha regenerado exitosamente!');
       }, (err) => {
         console.error(err);
       });
     } else {
       subscriptionsService.regenerateSubscription(user.name, idSuscripcion, 'regenerateSecondaryKey').then((response) => {
         handleRegenerateSubscriptions();
+        notify('Se ha regenerado exitosamente!');
       }, (err) => {
         console.error(err);
       });
@@ -61,24 +71,51 @@ function PasswordGenerate({ idSuscripcion, user, version, status }) {
 
   return (
     <div className='input-data display_flex justify_content__between'>
+
+      {confirmDialog && (
+        <Dialog
+          open={confirmDialog}
+          onClose={toggleConfirmation}
+        >
+          <DialogTitle id='alert-dialog-title'>
+            Regenerar claves de subscripción
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id='alert-dialog-description'>
+              ¿Desea regenerar sus claves de subscripción? Esta es una acción irreversible.
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={toggleConfirmation} color='error'>Cancelar</Button>
+            <Button onClick={() => handleReloadRegerateSubscription()} variant='contained' autoFocus>
+              Aceptar
+            </Button>
+          </DialogActions>
+        </Dialog>
+      )}
+
       {hidden ? (
-        <span className='text'>
+        <span className='text__primary'>
           {primaryKey}
         </span>
       ) : (
-        <span className='text'>
+        <span className='text__primary'>
           xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         </span>
       )}
 
-      <button onClick={handleClickHidden} className='btn-input ml-auto' type='button'>
-        <Icon id='MdOutlineRemoveRedEye' css_styles={{ 'custom_icon_styles': 'text__gray__gray_lighten-2' }} />
-      </button>
+      <div className='iconbtn iconbtn__hover'>
+        <button onClick={handleClickHidden} className='btn-input ml-auto' type='button'>
+          <Icon id='MdOutlineRemoveRedEye' css_styles={{ 'custom_icon_styles': 'text__gray__gray_lighten-2 fs__18' }} />
+        </button>
+      </div>
       {
         status && status !== 'cancelled' ? (
-          <button onClick={() => handleReloadRegerateSubscription()} className='btn-input' type='button'>
-            <Icon id='MdAutorenew' css_styles={{ 'custom_icon_styles': 'text__gray__gray_lighten-2' }} />
-          </button>
+          <div className='iconbtn iconbtn__hover'>
+            <button onClick={() => toggleConfirmation()} className='btn-input' type='button'>
+              <Icon id='MdAutorenew' css_styles={{ 'custom_icon_styles': 'text__gray__gray_lighten-2 fs__18' }} />
+            </button>
+          </div>
         ) : (null)
       }
 

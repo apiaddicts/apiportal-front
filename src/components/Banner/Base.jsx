@@ -8,7 +8,7 @@ function Base({ children, img }) {
   });
 
   return (
-    <div className={`${classes.banner__container}`} style={img.length > 0 ? bannerStyle(img) : null}>
+    <div className={`${classes.banner__container}`} style={img && img.length > 0 ? bannerStyle(img) : null}>
       {children}
     </div>
   );

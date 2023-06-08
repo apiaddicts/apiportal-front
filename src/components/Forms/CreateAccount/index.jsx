@@ -59,7 +59,7 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
         {/* checkbox */}
         <div className='row'>
           <div className='flex-sm-12 flex-md-12'>
-            <div className='input__checkbox'>
+            <div className='create-account__checkbox input__checkbox'>
               {
                 fieldsRegister.filter((field) => field.type === 'checkbox')
                   .map((field, index) => (
@@ -76,6 +76,9 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
               }
               <p className={` ${formConfig.errors.terms ? 'text__error' : ''}`}>
                 <CustomMarkdown content={checkboxTermsLabel} />
+                {
+                  formConfig.errors.terms && formConfig.touched.terms ? (<p className='text__error'>Para completar el registro es necesario aceptar los terminos de uso</p>) : null
+                }
               </p>
             </div>
           </div>
@@ -95,8 +98,9 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
           </div>
           <div className='flex-sm-12 flex-md-5'>
             <Button
-              styles='primary-blue'
+              styles={formConfig.errors.terms && formConfig.touched.terms ? 'greey-primary' : 'tertiary'}
               type='submit'
+              disabled={formConfig.errors.terms && formConfig.touched.terms}
             >
               Registrarme
             </Button>

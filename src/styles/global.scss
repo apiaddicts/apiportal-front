@@ -1,5 +1,6 @@
 @import "./variables.scss";
 @import "./tools/tools.scss";
+@import "./components/index.scss";
 
 * {
   box-sizing: border-box;
@@ -741,9 +742,9 @@ a {
   display: inline-block !important;
   opacity: 80% !important;
   text-align: center !important;
-  background: #ECF0F1 !important;
+  background: lighten($theme_tertiary, 45%) !important;
   padding: 3px 6px !important;
-  color: #53565A !important;
+  color: darken($theme_tertiary, 50%) !important;
   border-radius: 8px !important;
 
   span {
@@ -795,7 +796,7 @@ a {
 }
 
 .get {
-  background-color: #97d700 !important;
+  background-color: $base-orange !important;
   color: $secondary_white !important;
 }
 
@@ -804,7 +805,7 @@ a {
   color: $secondary_white;
 }
 .post {
-  background-color: $dark_primary !important;
+  background-color: $theme_primary !important;
   color: $secondary_white !important;
 }
 
@@ -835,31 +836,75 @@ a {
   //   font-size: 10px;
   // }
 }
+
+.card {
+  color: #000000;
+  &__title{
+    color: $blue-lighten-1 !important;
+  }
+  &__subtitle {
+    color: $blue-lighten-3 !important;
+  }
+  &__description {
+    font-family: $primary_font !important;
+    color: $dark-lighten-0 !important;
+  }
+  &__link,
+  &__icon {
+    color: $blue-lighten-1 !important;
+  }
+}
+
+.link {
+  color: #000000;
+  &__primary {
+    color: $blue-lighten-0 !important;
+  }
+  &__secondary {
+    color: $red-lighen-0 !important;
+  }
+  &__tertiary {
+    color: $dark_lighten-2 !important;
+  }
+}
+
 .text {
   color: $primary;
   &__primary {
-    color: $primary_text;
+    color: $primary_text !important;
+    &__title{
+      color: $theme_primary !important;
+    }
+    &__subtitle{
+      color: $dark_lighten-2 !important;
+    }
   }
   &__secondary {
-    color: $secondary_text !important;
+    color: $red-lighen-2 !important;
+  }
+  &__tertiary {
+    color: $tertiary_text;
+  }
+  &__tertiary {
+    color: $tertiary_text;
   }
   &__accent {
     color: $accent;
   }
   &__dark__primary {
-    color: $dark_primary;
+    color: $dark-lighten-0;
   }
   &__light__primary {
-    color: $dark_primary;
+    color: $dark-lighten-2;
   }
   &__white{
     color: #fff;
   }
   &__gray__darken {
-    color: $gray_darken;
+    color: $dark-lighten-0;
   }
   &__gray__lighten {
-    color: $gray_lighten-4;
+    color: $gray_lighten-0;
   }
   &__dark__grey {
     color: $gray_darken-2;
@@ -949,6 +994,10 @@ a {
 
 .align-center {
   align-items: center;
+}
+
+.align-self-end {
+  align-self: end;
 }
 
 .d-none {
@@ -1141,6 +1190,9 @@ a {
     margin: 0 !important;
     text-align: center;
   }
+  .MuiFormControlLabel-root[active="active"]{
+    background: $theme_secondary;
+  }
 }
 
 .MuiButtonGroup-root>*:nth-child(2n) {
@@ -1150,13 +1202,13 @@ a {
 
 .MuiAccordionDetails-root{
   .MuiCheckbox-root + span{
-    color: $primary;
+    @include text-color-opacity($theme_secondary, 0.7);
     font-size: 16px;
     font-weight: map-deep-get($font-weights, "light") !important;
   }
 
   .Mui-checked + span{
-    color: $primary;
+    color: $theme_secondary;
     font-weight: map-deep-get($font-weights, "bold") !important;
   }
 }
@@ -1186,22 +1238,28 @@ a {
     height: 42px !important;
     border: 1px solid #ecf0f1 !important;
     box-shadow: 0px 2px 20px #ecf0f1 !important;
-    border-radius: 20px !important;
+    border-radius: $border-radius !important;
     -webkit-appearance: none !important;
     -moz-appearance: none !important;
     appearance: none !important;
-    background-position: calc(100% - 12px) center !important;
-    background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%23000000' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat #fff !important;
+    background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%23000000' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat calc(100% - 12px) center #fff !important;
 }
 
 .multiSelectContainer {
   li {
-    color: $gray_darken;
+    color: $dark-lighten-0;
+    &:hover{
+      color: $dark-lighten-0;
+      background: $gray_lighten-4;
+    }
+  }
+  li.highlightOption {
+    background: $gray_lighten-3;
   }
 }
 
 .closeIcon{
-  background-color: $gray_darken;
+  background-color: $base-orange;
 }
 
 .margin_top {
@@ -1221,7 +1279,7 @@ a {
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
-  color: $gray_darken;
+  color: $gray_lighten-0;
   font-family: $primary_font;
   p{
     margin: 10px 0;
@@ -1248,4 +1306,8 @@ img[src*='#right']{ display: block; margin-left: auto; }
 
 .custom_margin__right{
   margin-right: 2.5rem !important;
+  @include breakpoint(xs) {
+    width: 100%;
+    margin-right: 0 !important;
+  }
 }

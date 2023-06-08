@@ -80,6 +80,7 @@
     }
     img {
       border-radius: 0px;
+      width: 100%;
     }
   }
   &__items {
@@ -100,7 +101,7 @@
 
 .section__works {
   /*background: url("../../../static/img/texture_points.svg"), $accent;*/
-  background: $dark_primary;
+  background: $theme_primary;
   background-repeat: no-repeat;
   background-size: cover;
   padding-top: 74px !important;

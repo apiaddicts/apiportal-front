@@ -79,21 +79,55 @@ function Slider({ slides }) {
                 <div className='display_flex justify_content__center'>
                   <h1 className='h1 text__white w_800 text-center'>{x?.title}</h1>
                 </div>
+                {
+                  x?.subtitleList && x?.subtitleList?.length > 0 && (
+                    <div className='container align-center mt-10'>
+                      <div className='container align-center'>
+                        {
+                          x?.subtitleList.map((i, index) => (
+                            <div key={index + i} className='pr-2 mb-4 justify-center'>
+                              <p className='h4 text__white w_800 font-weight-medium text-center'>{i.text}</p>
+                            </div>
+                          ))
+                        }
+                      </div>
+                    </div>
+                  )
+                }
                 <div className='display_flex justify_content__center'>
-                  <div className='flex-md-12 flex-sm-12 mt-5'>
+                  <div className='flex-md-12 flex-sm-12'>
                     <div className='button__group mt-10'>
                       {
                         x?.actionButtons && x?.actionButtons?.length ? (
                           x?.actionButtons.map((i, index) => (
                             <div key={index + i} className='pr-2 mb-4 justify-start'>
-                              {i?.route !== '' ? (
+                              {'route' in i && i?.route !== '' ? (
                                 <Button styles={i?.type} onClick={() => handleClick(i?.route)}>
                                   {i?.label}
                                 </Button>
-
+                              ) : ('externalUrl' in i && i?.externalUrl !== '') ? (
+                                <a
+                                  className={
+                                    i?.type === 'primary' ? 'btn btn-primary' :
+                                      i?.type === 'primary-blue' ? 'btn btn-primary-blue' :
+                                        i?.type === 'secundary' ? 'btn btn-secundary' :
+                                          i?.type === 'secundary-white' ? 'btn btn-secundary-white' :
+                                            i?.type === 'tertiary' ? 'btn btn-tertiary' :
+                                              i?.type === 'tertiary-white' ? 'btn btn-tertiary-white' :
+                                                i?.type === 'ghost' ? 'btn btn-ghost' :
+                                                  i?.type === 'ghost-variant' ? 'btn btn-ghost-variant' :
+                                                    i?.type === 'greey-primary' ? 'btn btn-grey' :
+                                                      i?.type === 'disabled' ? 'btn btn-disabled' : 'btn-none'
+                                  }
+                                  href={i?.externalUrl}
+                                  target='_blank'
+                                  rel='noreferrer'
+                                >
+                                  {i?.label}
+                                </a>
                               ) : (
                                 <HashLink smooth to='/#data'>
-                                  <Button styles='primary-blue' onClick={() => handleClick(i?.route)}>
+                                  <Button styles='tertiary' onClick={() => handleClick(i?.route)}>
                                     {i?.label}
                                   </Button>
                                 </HashLink>

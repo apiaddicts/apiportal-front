@@ -35,7 +35,6 @@
       margin-bottom: 0;
       border-bottom: 1px solid #0033a07e;
       padding: 10px 20px;
-      margin-top: -40px;
     }
 
     &__icons {
@@ -64,7 +63,7 @@
       font-weight: 400;
       font-size: 18px;
       line-height: 28px;
-      color: $gray_darken;
+      color: $gray_lighten-0;
       margin-top: -16px;
 
       @media (max-width: 768px) {
@@ -78,7 +77,7 @@
       font-style: normal;
       font-size: 16px;
       font-weight: 700;
-      color: $dark_primary;
+      color: $theme_primary;
       line-height: 19px;
       width: 450px;
       letter-spacing: 1.33333px;
@@ -263,6 +262,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    color: $theme_tertiary;
 
     @media (max-width: 768px) {
       padding: 0;
@@ -311,10 +311,10 @@
       cursor: pointer;
       a {
         text-decoration: none;
-        color: $dark_primary;
+        color: $theme_tertiary;
       }
       a:hover {
-        color: $dark_primary;
+        color: $theme_tertiary;
       }
     }
   }

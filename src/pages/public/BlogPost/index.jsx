@@ -8,7 +8,6 @@ import { HashLink } from 'react-router-hash-link';
 import BannerStatic from '../../../components/Banner/BannerStatic';
 import BlogDetailsInfo from '../../../components/BlogDetails';
 import Slick from '../../../components/SlickSlider/Slick';
-import Contact from '../../../components/Contact';
 import FooterAuthor from '../../../components/FooterAuthor';
 import { getBlog, resetGetBlog, getBlogs } from '../../../redux/actions/blogAction';
 import styles from './blog-post.module.scss';
@@ -78,9 +77,9 @@ function BlogDetails({ setIsOpen }) {
         <meta property='og:url' content={`${window.location.protocol}//${window.location.hostname}/blog/${blog?.id}`} />
         <meta property='og:locale' content='es_MX' />
         <meta property='og:type' content='article' />
-        <meta property='og:site_name' content='API Market' />
+        <meta property='og:site_name' content='Worlters Kluwer | Developer Portal' />
         <meta name='twitter:card' content='summary' />
-        <meta name='twitter:site' content='API Market' />
+        <meta name='twitter:site' content='Worlters Kluwer | Developer Portal' />
         <meta name='twitter:title' content={blog?.title ? blog?.title : ''} />
         <meta name='twitter:description' content={blog?.description ? blog?.description : ''} />
         <meta name='twitter:image' content={blog?.image ? blog?.image?.[0]?.url : ''} />
@@ -97,7 +96,7 @@ function BlogDetails({ setIsOpen }) {
             <div
               className={classes.backTo}
             >
-              <Link to={-1} className={classes.backTo__btn}>
+              <Link to={-1} className={`${classes.backTo__btn} card__link`}>
                 <div>
                   <Icon id='MdKeyboardBackspace' />
                 </div>
@@ -133,15 +132,12 @@ function BlogDetails({ setIsOpen }) {
               <div className='row justify-center'>
                 <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
                   <HashLink smooth to='/blog#blogIndex'>
-                    <div className='d-xs-none'>Ver Más</div>
-                    <div className='d-xs-only'>Ver todas</div>
+                    <div className='d-xs-none link__tertiary'>Ver Más</div>
+                    <div className='d-xs-only link__tertiary'>Ver todas</div>
                   </HashLink>
                 </div>
               </div>
             </div>
-          </section>
-          <section className={styles.container_contact__details}>
-            <Contact css_styles={{ 'display_detail_description': 'd-block', 'border_radius': 'no_border__radius', 'override_margin_right': 'custom_margin__right' }} />
           </section>
         </>
       ) : (null)}

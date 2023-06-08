@@ -69,7 +69,7 @@ export const cancelSubscription = (userId, subscriptionId, data, productName = '
 export const getlistUserSubscriptionsNext = (userId) => (dispatch) => {
   const { subscriptionsSkip } = store.getState().suscripcions;
 
-  const skip = subscriptionsSkip + config.topSubscriptions;
+  const skip = parseInt(subscriptionsSkip, 10) + parseInt(config.topSubscriptions, 10);
 
   dispatch(listUserSubscriptions(userId, config.topSubscriptions, skip));
   dispatch({ type: subscriptionsConstants.GET_SUBSCRIPTIONS_SKIP, skip });
@@ -78,7 +78,7 @@ export const getlistUserSubscriptionsNext = (userId) => (dispatch) => {
 export const getlistUserSubscriptionsPrevious = (userId) => (dispatch) => {
   const { subscriptionsSkip } = store.getState().suscripcions;
 
-  const skip = subscriptionsSkip - config.topSubscriptions;
+  const skip = parseInt(subscriptionsSkip, 10) - parseInt(config.topSubscriptions, 10);
 
   dispatch(listUserSubscriptions(userId, config.topSubscriptions, skip));
   dispatch({ type: subscriptionsConstants.GET_SUBSCRIPTIONS_SKIP, skip });
@@ -87,7 +87,7 @@ export const getlistUserSubscriptionsPrevious = (userId) => (dispatch) => {
 export const getDetailListUserSubscriptionsNext = (productName) => (dispatch) => {
   const { detailSubscriptionsSkip } = store.getState().suscripcions;
 
-  const skip = detailSubscriptionsSkip + config.topSubscriptions;
+  const skip = parseInt(detailSubscriptionsSkip, 10) + parseInt(config.topSubscriptions, 10);
 
   dispatch(getProductSuscripcion(productName, config.topSubscriptions, skip));
   dispatch({ type: subscriptionsConstants.GET_DETAIL_SUBSCRIPTIONS_SKIP, skip });
@@ -96,7 +96,7 @@ export const getDetailListUserSubscriptionsNext = (productName) => (dispatch) =>
 export const getDetailListUserSubscriptionsPrevious = (productName) => (dispatch) => {
   const { detailSubscriptionsSkip } = store.getState().suscripcions;
 
-  const skip = detailSubscriptionsSkip - config.topSubscriptions;
+  const skip = parseInt(detailSubscriptionsSkip, 10) - parseInt(config.topSubscriptions, 10);
 
   dispatch(getProductSuscripcion(productName, config.topSubscriptions, skip));
   dispatch({ type: subscriptionsConstants.GET_DETAIL_SUBSCRIPTIONS_SKIP, skip });

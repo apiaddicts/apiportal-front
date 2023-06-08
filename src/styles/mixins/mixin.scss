@@ -132,3 +132,31 @@
   background: $color; /* The Fallback */
   background: rgba($color, $opacity);
 }
+
+@mixin text-color-opacity($color, $opacity: 0.5){
+  color: $color;
+  color: rgba($color, $opacity);
+}
+  
+@mixin button-bg($bg) {
+  background: $bg;
+  &:hover {
+    background: darken($bg, 8%);
+    transition: all 0.3s ease;
+  }
+  &:active {
+    background: darken($bg, 25%);
+  }
+}
+
+@mixin letter($color) {
+  color: $color;
+  &:hover {
+    color: darken($color, 5%);
+    transition: all 0.3s ease;
+  }
+}
+
+@mixin border($color) {
+  border: 2px solid $color;
+}

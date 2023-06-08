@@ -8,7 +8,7 @@ function getApiBookStores() {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
-  return fetch(`${config.apiUrl}/library-apis/`, requestOptions)
+  return fetch(`${config.apiUrl}/library-apis?_where[status]=publicado`, requestOptions)
     .then(handleResponse)
     .then((libraries) => {
       return libraries;
@@ -31,15 +31,14 @@ function getApiBookStore(id) {
     });
 }
 
-function getApis(top, skip, filter) {
+function getApis(filter) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  let url = `${config.url}/apis?api-version=${config.apiVersion}&expandApiVersionSet=true&$skip=${skip}`;
-  url += top !== undefined && top !== null && top !== 0 ? `&$top=${top}` : '';
+  let url = `${config.url}/apis?api-version=${config.apiVersion}&expandApiVersionSet=true&tags[0]=published`;
   url += filter !== undefined && filter !== null && filter.length > 0 ? `&$filter=${filter}` : '&$filter=isCurrent';
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -48,6 +47,26 @@ function getApis(top, skip, filter) {
     }).catch((error) => {
       console.error(error);
     });
+}
+
+function listApisProduct(top, skip, filter) {
+
+  const { token } = store.getState().user;
+
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Authorization': token },
+  };
+
+  let url = `${config.apimUrl}/apis-with-products?expandApiVersionSet`;
+  url += top !== undefined && top !== null && top !== 0 ? `&$top=${top}` : '';
+  url += filter !== undefined && filter !== null && filter.length > 0 ? `&$filter=${filter}` : '';
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response.data)
+    .catch((error) => error);
+
 }
 
 function getAPi(id) {
@@ -95,6 +114,34 @@ function getApiOpenAPI(id) {
     });
 }
 
+function getApiDescription(id) {
+
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const url = `${config.apiUrl}/library-apis?_where[slug]=${id}`;
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response[0])
+    .catch((error) => error);
+}
+
+function getOpenApiFromStrapi(id) {
+
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json' },
+  };
+
+  const url = `${config.apiUrl}/library-apis?_where[slug]=${id}`;
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response[0])
+    .catch((error) => error);
+}
+
 function getListTags() {
   const { token } = store.getState().user;
   const requestOptions = {
@@ -130,33 +177,33 @@ function getListTagsByApi(apiName) {
       console.error(error);
     });
 }
-
-function filterAPIsByTags(search, filter = 'isCurrent', top = config.topApi, skip = 0, includeNotTaggedApis = false) {
+function filterAPIsByTags(data) {
   const { token } = store.getState().user;
 
   const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+    body: JSON.stringify(data),
   };
 
-  const url = `${config.url}/apis?api-version=${config.apiVersion}&expandApiVersionSet=${true}&$top=${top}&$skip=${skip}&$filter=${filter}&includeNotTaggedApis=${includeNotTaggedApis}&${search}`;
+  const url = `${config.url}/apis?api-version=${config.apiVersion}&expandApiVersionSet=${true}&$filter=${filter}&includeNotTaggedApis=${includeNotTaggedApis}&${search}`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => {
-      return response;
+      return response.data;
     }).catch((error) => {
       console.error(error);
     });
 }
 
-function searchApis(search, top, skip) {
+function searchApis(search) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
   };
 
-  const url = `${config.url}/apis?api-version=${config.apiVersion}&$top=${top}&$skip=${skip}&$filter=(contains(properties/displayName,'${search}')) or (contains(properties/description,'${search}'))`;
+  const url = `${config.url}/apis?api-version=${config.apiVersion}&tags[0]=published&$filter=(contains(properties/displayName,'${search}')) or (contains(properties/description,'${search}'))`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -184,6 +231,42 @@ function getApiHostnames(apiName) {
     });
 }
 
+const getApiProducts = (apiId) => {
+  const { token } = store.getState().user;
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      'Authorization': `SharedAccessSignature ${token}`,
+      'Content-Type': 'application/json',
+    },
+  };
+
+  const url = `${config.url}/apis/${apiId}/products?api-version=${config.apiVersion}`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => {
+      return response;
+    }).catch((error) => {
+      return error;
+    });
+};
+
+const getApisUnsecure = () => {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-type': 'application/json' },
+  };
+
+  const url = 'https://wkeapipre.management.azure-api.net/subscriptions/d191459e-3142-4ecb-8468-89398ec98aac/resourceGroups/RG-PRE-SHARED/providers/Microsoft.ApiManagement/service/WKEAPIPRE/apis?api-version=2021-08-01';
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response.value)
+    .catch((error) => error);
+
+};
+
 const libraryService = {
   getApiBookStores,
   getApiBookStore,
@@ -195,6 +278,11 @@ const libraryService = {
   filterAPIsByTags,
   searchApis,
   getApiHostnames,
+  getApiDescription,
+  listApisProduct,
+  getApiProducts,
+  getApisUnsecure,
+  getOpenApiFromStrapi,
 };
 
 export default libraryService;

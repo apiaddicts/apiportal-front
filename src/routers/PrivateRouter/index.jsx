@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { Box } from '@mui/material';
 
+import { Toaster } from 'react-hot-toast';
 import useTimer from '../../hooks/useTimer';
 import useVerifySession from '../../hooks/useVerifySession';
 
@@ -15,17 +16,30 @@ import Products from '../../pages/private/Products';
 import ProductDetail from '../../pages/private/ProductDetail';
 import Apis from '../../pages/private/Apis';
 import ApiDetail from '../../pages/private/ApiDetail';
-import SwaggerUI from '../../pages/private/SwaggerUI';
-import OAuthRedirect from '../../pages/private/OAuthRedirect';
+import SubscriptionDetail from '../../pages/private/SubscriptionDetail';
+import SwaggerUI from '../../pages/common/SwaggerUI';
+import OAuthRedirect from '../../pages/common/OAuthRedirect';
 import Subscriptions from '../../pages/private/Subscriptions';
 import Logout from '../../pages/private/Logout/Logout';
 
+// import Users from '../../pages/private/Users';
+// import UsersDetail from '../../pages/private/UserDetail';
+// import Groups from '../../pages/private/Groups';
+// import GroupDetailed from '../../pages/private/Groups/GroupDetailed';
+
 import { getUser } from '../../redux/actions/userAction';
+// import { getUser, getUserGroups } from '../../redux/actions/userAction';
 import classes from './private-router.module.scss';
+// import GettingStarted from '../../pages/private/GettingStarted';
+// import Apps from '../../pages/private/Apps/Apps';
+// import AppDetailed from '../../pages/private/Apps/AppDetailed';
+// import AddApp from '../../pages/private/Apps/AddApp';
+// import AddUserB2c from '../../pages/private/Apps/AddUserB2c';
+import config from '../../services/config';
 
 function PrivateRouter({ children }) {
   // const [showModal, setShowModal] = useState(false);
-  const { id, token, user, openModal } = useSelector((state) => state.user);
+  const { id, token, user, openModal, userGroups } = useSelector((state) => state.user);
   const { time } = useSelector((state) => state.timer);
   const { checkSession } = useVerifySession();
   const { getTime } = useTimer();
@@ -39,6 +53,7 @@ function PrivateRouter({ children }) {
         token,
       };
       dispatch(getUser(tokens));
+      // if (user) dispatch(getUserGroups(tokens));
       getTime();
     }
   }, []);
@@ -46,6 +61,8 @@ function PrivateRouter({ children }) {
   useEffect(() => {
     checkSession();
   }, [time]);
+
+  const isAdmin = userGroups?.value.find((group) => group.name === config.adminId);
 
   return privateSession ? (
     <Box>
@@ -55,8 +72,14 @@ function PrivateRouter({ children }) {
       }
       {user && Object.keys(user).length > 0 ? (
         <Box>
-          <Box sx={{ display: 'flex', flex: '1', backgroundColor: '#FAFAFC', minHeight: '100vh' }}>
-            <SidebarDrawer user={user} />
+          <Box sx={{ display: 'flex', flex: '1', minHeight: '100vh' }} className={classes.custom__body}>
+            <Toaster
+              position='top-right'
+              toastOptions={{
+                icon: '👏',
+              }}
+            />
+            <SidebarDrawer user={user} isAdmin={isAdmin} />
             <div className={`container ${classes.wrapper}`}>
               <Routes>
                 <Route path='profile' element={<Profile />} />
@@ -65,13 +88,26 @@ function PrivateRouter({ children }) {
                 <Route path='apis' exact='true' element={<Apis />} />
                 <Route path='apis/:id' exact='true' element={<ApiDetail />} />
                 <Route path='apis/:id/swagger-ui' exact='true' element={<SwaggerUI />} />
-                <Route path='apis/swagger-ui/oauth-redirect' exact='true' element={<OAuthRedirect />} />
                 <Route path='subscriptions' exact='true' element={<Subscriptions />} />
+                <Route path='subscriptions/:id' exact='true' element={<SubscriptionDetail />} />
                 <Route path='*' element={<Navigate to='/' replace />} />
+                {/* {isAdmin && (
+                  <>
+                    <Route path='users' exact='true' element={<Users />} />
+                    <Route path='users/:id' exact='true' element={<UsersDetail />} />
+                    <Route path='groups' exact='true' element={<Groups />} />
+                    <Route path='groups/:id' exact='true' element={<GroupDetailed />} />
+                  </>
+                )}
+                <Route path='apps' element={<Apps />} />
+                <Route path='apps/:id' element={<AppDetailed />} />
+                <Route path='apps/new-app' element={<AddApp />} />
+                <Route path='apps/user-b2c' element={<AddUserB2c />} /> */}
+                {/* <Route path='getting-started' element={<GettingStarted />} /> */}
               </Routes>
             </div>
           </Box>
-          <Box sx={{ zIndex: 1300, position: 'absolute', background: '#fff', width: '100%' }}>
+          <Box sx={{ zIndex: 1300, position: 'absolute', width: '100%' }} className={classes.container__footer}>
             <CustomFooter />
           </Box>
 
@@ -79,8 +115,12 @@ function PrivateRouter({ children }) {
       ) : (<SkeletonComponent />)}
 
     </Box>
-  ) : <Navigate to='/' />;
-
+  ) : (
+    <Routes>
+      <Route path='apis/swagger-ui/oauth-redirect' exact='true' element={<OAuthRedirect />} />
+      <Route path='*' element={<Navigate to='/' replace />} />
+    </Routes>
+  );
 }
 
 export default PrivateRouter;

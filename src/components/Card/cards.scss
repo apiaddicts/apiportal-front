@@ -32,7 +32,7 @@
             display: flex;
             align-items: center;
             letter-spacing: 0.157143px;
-            color: $dark;
+            color: $theme_primary;
         }
     
         .title {
@@ -61,7 +61,7 @@
     .card_chip_desciption {
         width: 100%;
         padding: 8px 40px 35px 40px;
-        color: #53565A;
+        color: $gray_darken;
         p{
             display: -webkit-box !important;
             -webkit-line-clamp: 4;
@@ -86,13 +86,11 @@
         line-height: 19px;
         letter-spacing: 1.33333px;
         text-transform: uppercase;
-        color: $dark_primary;
         margin-right: 10px;
     }
 
     .svg {
         font-size: 15px;
-        color: $dark_primary;
     }
 }
 
@@ -275,16 +273,10 @@
             display: none;
         }
     }
-    // .card_chip_info{
-    //     @include breakpoint(md) {
-    //         display: none;
-    //     }
-    // }
-    // card-header img {
-    //     width: 100%;
-    //     height: 100%;
-    //     object-fit: cover;
-    //   }
+}
+
+.custom_card__public_subscription{
+    box-shadow: none !important;
 }
 
 .green {
@@ -293,7 +285,7 @@
     line-height: 16px;
     align-items: center;
     justify-content: space-between;
-    color: #97D700;
+    color: $base-green;
     }
     
     .warning {
@@ -302,7 +294,7 @@
     line-height: 16px;
     align-items: center;
     justify-content: space-between;
-    color: #F1B434;
+    color: $warning;
 }
     .red {
         display: flex;
@@ -310,7 +302,7 @@
     line-height: 16px;
     align-items: center;
     justify-content: space-between;
-    color: #e91818;
+    color: $second_red;
 }
 
 

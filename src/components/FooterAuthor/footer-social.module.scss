@@ -6,19 +6,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-top: 1px solid #bbbaba;
-    border-bottom: 1px solid #bbbaba;
+    border-top: 1px solid $gray_lighten-1;
+    border-bottom: 1px solid $gray_lighten-1;
     position: relative;
     .border_bottom__line{
         display: none;
         @include breakpoint(xs) {
             display: block;
-            width: 30px;
+            width: 60px;
             height: 3px;
             background: $secondary;
             position: absolute;
             bottom: -2px;
-            left: 90px;
+            left: 120px;
           }
     }
 }

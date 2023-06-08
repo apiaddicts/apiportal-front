@@ -9,7 +9,6 @@ import BannerStatic from '../../../components/Banner/BannerStatic';
 import Tabs from '../../../components/Tabs/Tabs';
 import CardInformation from '../../../components/Card/CardInformation';
 import Novedades from '../../../components/Novedades';
-import Contact from '../../../components/Contact';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 import Slick from '../../../components/SlickSlider/Slick';
 import BlogPostsPaginated from '../../../components/BlogPostsPaginated';
@@ -151,8 +150,7 @@ function Blog({ setIsOpen }) {
                       </div>
                       <div id='Suggestions' className={`d-xs-none ${stylesBlog.apis__library__suggestions}`}>
                         <div className={stylesBlog.apis__library__suggestions__content}>
-                          <Contact pathname='/blog' />
-                          <h1 className={`${stylesBlog.apis__library__suggestions__content__title} fs__16 text-uppercase text mt-4`}>Lo más reciente</h1>
+                          <h1 className={`${stylesBlog.apis__library__suggestions__content__title} fs__16 text-uppercase text__tertiary mt-4`}>Lo más reciente</h1>
                           <Novedades data={datanews?.reverse().slice(0, 4)} />
                         </div>
                       </div>
@@ -174,44 +172,36 @@ function Blog({ setIsOpen }) {
               </section>
             )
           }
-          {
-            formik.values.search === '' ? (
-              <section className={`${classes.section__news} ${classes.section__news_toppadding} d-xs-none mt-10`}>
-                <div className='container'>
-                  <div className='row'>
-                    <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
-                      <h1 className='h2 text__dark__primary'>También te puede interesar</h1>
-                    </div>
-                    <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
-                      <p className='body-1 text__gray__gray_darken'>
-                        Conoce todas las novedades sobre tecnología, APIs y transformación digital
-                      </p>
-                    </div>
-                  </div>
+          <section className={`${classes.section__news} ${classes.section__news_toppadding} d-xs-none mt-10`}>
+            <div className='container'>
+              <div className='row'>
+                <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
+                  <h1 className='h2 text__dark__primary'>También te puede interesar</h1>
                 </div>
-                <div className='container'>
-                  <div className='row'>
-                    <div className='flex-md-12 flex-sm-12'>
-                      <Slick slides={slidesNew} />
-                    </div>
-                  </div>
+                <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
+                  <p className='body-1 text__gray__lighten'>
+                    Conoce todas las novedades sobre tecnología, APIs y transformación digital
+                  </p>
                 </div>
-                <div className={`container ${classes.section__news__showmore}`}>
-                  <div className='row justify-center'>
-                    <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center'>
-                      <HashLink smooth to='/blog#blogIndex'>
-                        <div>Ver más</div>
-                      </HashLink>
-                    </div>
-                  </div>
+              </div>
+            </div>
+            <div className='container'>
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <Slick slides={slidesNew} />
                 </div>
-              </section>
-            ) : (
-              <section>
-                <Contact css_styles={{ 'display_detail_description': 'd-block', 'border_radius': 'no_border__radius' }} />
-              </section>
-            )
-          }
+              </div>
+            </div>
+            <div className={`container ${classes.section__news__showmore}`}>
+              <div className='row justify-center'>
+                <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center'>
+                  <HashLink smooth to='/blog#blogIndex'>
+                    <div className='link__tertiary'>Ver más</div>
+                  </HashLink>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
       ) : (
         <SkeletonComponent />

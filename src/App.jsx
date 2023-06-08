@@ -9,19 +9,19 @@ function App() {
   return (
     <div className='app'>
       <Helmet>
-        <title>API Market</title>
+        <title>CloudAppi | Developer Portal</title>
         <meta name='author' content='CloudAppi México' />
-        <meta name='description' content='API Market description' />
-        <meta property='og:title' content='API Market' />
-        <meta property='og:description' content='API Market description' />
+        <meta name='description' content='CloudAppi | Developer Portal description' />
+        <meta property='og:title' content='CloudAppi | Developer Portal' />
+        <meta property='og:description' content='CloudAppi | Developer Portal description' />
         <meta property='og:url' content={`${window.location.protocol}//${window.location.hostname}`} />
         <meta property='og:locale' content='es_MX' />
         <meta property='og:type' content='article' />
-        <meta property='og:site_name' content='API Market' />
+        <meta property='og:site_name' content='CloudAppi | Developer Portal' />
         <meta name='twitter:card' content='summary' />
-        <meta name='twitter:site' content='API Market' />
-        <meta name='twitter:title' content='API Market' />
-        <meta name='twitter:description' content='API Market description' />
+        <meta name='twitter:site' content='CloudAppi | Developer Portal' />
+        <meta name='twitter:title' content='CloudAppi | Developer Portal' />
+        <meta name='twitter:description' content='CloudAppi | Developer Portal description' />
         <meta name='twitter:image' content={`${window.location.protocol}//${window.location.hostname}`} />
       </Helmet>
       <Provider store={store}>
