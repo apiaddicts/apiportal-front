@@ -79,7 +79,7 @@ const config = {
   sendingEmailEndpointUrl: process.env.REACT_APP_SENDING_EMAIL_ENDPOINT_URL,
   contactEmailFrom: process.env.REACT_APP_EMAIL_FROM,
   contactEmailTo: process.env.REACT_APP_EMAIL_TO,
-  contactEmailTemplateId: process.env.REACT_APP_CONTACT_EMAIL_TEMPLATE_ID,
+  contactEmailTemplateId: process.env.REACT_APP_EMAIL_CONTACT_TEMPLATE_ID,
   generateStarterSubscriptionOnSignup: (process.env.REACT_APP_GENERATE_STARTER_SUBSCRIPTION_ON_SIGNUP === 'true'),
 };
 
