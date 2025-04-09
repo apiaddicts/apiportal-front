@@ -67,7 +67,7 @@ const config = {
   emailContactTemplateId: process.env.REACT_APP_EMAIL_CONTACT_TEMPLATE_ID,
   emailConversationTemplateId: process.env.REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID,
   contactEmailSubject: process.env.REACT_APP_CONTACT_EMAIL_SUBJECT,
-  locale: 'es',
+  locale: 'en',
   termsPath: process.env.REACT_APP_TERMS_PATH,
   privacyPolicyPath: process.env.REACT_APP_PRIVACY_POLICY_PATH,
   cookiesPolicyPath: process.env.REACT_APP_COOKIES_POLICY_PATH,

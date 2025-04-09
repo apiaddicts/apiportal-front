@@ -7,11 +7,19 @@ function getPageBlog() {
     headers: { 'Content-Type': 'application/json' },
   };
 
+  console.log('config.blogPageSlug', config.blogPageSlug);
+  console.log(`${config.apiUrl}/pages?_where[slug]=${config.blogPageSlug}&_locale=${config.locale}`);
+
   return fetch(`${config.apiUrl}/pages?_where[slug]=${config.blogPageSlug}&_locale=${config.locale}`, requestOptions)
+
+
     .then(handleResponse)
+
     .then((dataBlog) => {
+      console.log('dataBlog', dataBlog);
       return dataBlog[0];
     }).catch((error) => {
+      console.error('Error fetching blog page:', error);
       console.error(error);
     });
 }

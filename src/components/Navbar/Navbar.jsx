@@ -7,8 +7,20 @@ import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
 /*import { ReactComponent as Logo } from '../../static/img/logo.svg';*/
 import CustomIcon from '../MdIcon/CustomIcon';
+//import productService from '../../../services/productsService';
+import settingsService from '../../services/settingsService';
 
 function Navbar({ setIsOpen, setOpenForm }) {
+  const [settings, setSettings] = useState(null);
+
+  useEffect(() => {
+    settingsService.getSettingsContent()
+      .then(data => {
+        if (data) {
+          setSettings(data);
+        }
+      });
+  }, []);
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [size, setSize] = useState({
@@ -55,7 +67,13 @@ function Navbar({ setIsOpen, setOpenForm }) {
       <header className={classes.header}>
         <div className={`container ${classes.header__content}`}>
           <NavLink to='/' className={classes.header__content__logo}>
-            <CustomIcon name='logo' />
+            {settings?.logo?.[0]?.url && (
+              <img
+                src={`http://localhost:1337${settings.logo[0].url}`}
+                alt="logo"
+                width="200"
+              />
+            )}
           </NavLink>
           <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
 
