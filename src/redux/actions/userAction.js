@@ -8,6 +8,7 @@ import subscriptionsService from '../../services/subscriptionsService';
 
 // eslint-disable-next-line import/prefer-default-export
 export const login = (data) => (dispatch) => {
+  console.log(data);
   dispatch({ type: userConstants.LOGIN_REQUEST });
   userService.login(data.email, data.password).then((response) => {
     if (response && Object.keys(response).length > 0) {
@@ -34,6 +35,71 @@ export const login = (data) => (dispatch) => {
   });
 
 };
+
+/* Mulesoft endpoints while the architecture is being completed */
+// eslint-disable-next-line import/prefer-default-export
+export const loginMulesoft = (data) => (dispatch) => {
+  console.log(data);
+  dispatch({ type: userConstants.LOGIN_REQUEST });
+  userService.loginMulesoft(data.username, data.password).then((response) => {
+    console.log('response desde el action');
+    console.log(response);
+    if (response && Object.keys(response).length > 0) {
+      if (data.remember) {
+        const passwordEncrypted = btoa(data.password);
+        const secureKeyEncrypted = btoa(`${passwordEncrypted}:${config.rememberkey}`);
+        localStorage.setItem('username', data.username);
+        localStorage.setItem('password', secureKeyEncrypted);
+      }
+      const expirationTime = Date.now() + response['expiresIn'] * 1000;
+      const token = {
+        ...response,
+        expiresIn: expirationTime,
+        refreshExpiresIn: expirationTime,
+      };
+      sessionStorage.setItem('token', JSON.stringify(token));
+      dispatch(getUserMulesoft(response['accessToken']));
+      dispatch({ type: userConstants.RESET_ALERT });
+    }
+  }, (error) => {
+    console.error('error', error);
+    dispatch({
+      type: userConstants.LOGIN_FAILURE,
+      error,
+    });
+  });
+
+};
+
+export const getUserMulesoft = (token) => (dispatch) => {
+  dispatch({ type: userConstants.GET_USER_REQUEST });
+  userService.getUserDetailsMulesoft(token).then(
+    (response) => {
+      if (response && Object.keys(response).length > 0) {
+        mulesoftLogin();
+        dispatch({ type: userConstants.GET_USER_SUCCESS, response });
+        dispatch({
+          type: userConstants.LOGIN_SUCCESS,
+          token,
+        });
+      } else {
+        sessionStorage.removeItem('token');
+        dispatch({ type: userConstants.LOGOUT_USER });
+      }
+    },
+    (error) => {
+      console.error(error);
+    },
+  );
+};
+
+export const mulesoftLogin = () => {
+  userService.loginApisMulesoft()
+    .then((response) => {
+      localStorage.setItem('tokenM', response['access_token']);
+    });
+};
+/* ************************************** */
 
 export const confirmAccount = (queryParams, setIsOpen) => (dispatch) => {
   dispatch({

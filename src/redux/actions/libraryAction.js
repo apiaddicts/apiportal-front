@@ -5,6 +5,33 @@ import config from '../../services/config';
 
 import store from '../store';
 
+export const getLisMulesoftApis = () => {
+  return libraryService.loadingApiMulesoft()
+    .then(
+      (response) => {
+        console.log(response);
+        return response;
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
+};
+
+export const getMuleApi = (id) => {
+  return libraryService.getApiMulesoft(id)
+    .then(
+      (response) => {
+        console.log(response);
+        return response;
+      },
+      (error) => {
+        console.log(error);
+      },
+    );
+};
+/* ***************** */
+
 const sortingValues = (key, order = 'asc') => {
   return function innerSort(a, b) {
     if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {

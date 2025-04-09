@@ -30,7 +30,7 @@ import { logout } from '../../redux/actions/userAction';
 
 import styles from '../../styles/variables.scss';
 
-function SidebarDrawer({ children, user, isAdmin }) {
+function SidebarDrawer({ children, user }) {
   const theme = useTheme();
   const [isPermanent, setPermanent] = useState(true);
   const [toggleMenu, setToggleMenu] = useState(true);
@@ -69,6 +69,7 @@ function SidebarDrawer({ children, user, isAdmin }) {
   const listItems = [
     // { route: '/developer/getting-started', text: 'Comencemos', icon: <MdNotStarted size='1.5rem' />, primaryRole: true },
     { route: '/developer/products', text: 'Productos', icon: <Terminal />, primaryRole: true },
+    { route: '/developer/billings', text: 'Pasarela de Pagos', icon: <Terminal />, primaryRole: true },
     // { route: '/developer/apps', text: 'Aplicaciones', icon: <Terminal />, primaryRole: true },
     { route: '/developer/apis', text: 'Biblioteca de APIs', icon: <Settings />, primaryRole: true },
     { route: '/developer/subscriptions', text: 'Suscripciones', icon: <Terminal />, primaryRole: true },
@@ -173,9 +174,9 @@ function SidebarDrawer({ children, user, isAdmin }) {
                   }}
                   onClick={handleClick}
                 >
-                  {user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? (
+                  {user && Object.keys(user).length > 0 ? (
                     <span className='text-capitalize' style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {`${splitStr(user.properties.firstName)} ${splitStr(user.properties.lastName)}`}
+                      {`${splitStr(user.firstName)} ${splitStr(user.lastName)}`}
                     </span>
                   ) : ('')}
                 </Button>

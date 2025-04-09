@@ -267,6 +267,43 @@ const getApisUnsecure = () => {
 
 };
 
+function loadingApiMulesoft() {
+  const muleToken = localStorage.getItem('tokenM');
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Authorization': `Bearer ${muleToken}` },
+  };
+  const url = '/mule-proxy/exchange/api/v2/assets/search?organizationId=3e53fa03-8f9f-4f72-a909-ee206b9d09a1';
+  return fetch(
+    url,
+    requestOptions,
+  ).then(handleResponse)
+    .then((response) => {
+      return response;
+    }).catch((error) => {
+      console.error(error);
+    });
+}
+
+function getApiMulesoft(apiId) {
+  const muleToken = localStorage.getItem('tokenM');
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Authorization': `Bearer ${muleToken}` },
+  };
+  const url = `/mule-proxy/exchange/api/v2/assets/3e53fa03-8f9f-4f72-a909-ee206b9d09a1/${apiId}`;
+  return fetch(
+    url,
+    requestOptions,
+  ).then(handleResponse)
+    .then((response) => {
+      console.log(response);
+      return response;
+    }).catch((error) => {
+      console.error(error);
+    });
+}
+
 const libraryService = {
   getApiBookStores,
   getApiBookStore,
@@ -283,6 +320,8 @@ const libraryService = {
   getApiProducts,
   getApisUnsecure,
   getOpenApiFromStrapi,
+  loadingApiMulesoft,
+  getApiMulesoft,
 };
 
 export default libraryService;

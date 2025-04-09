@@ -5,9 +5,9 @@ import { string } from 'yup';
 import * as Yup from 'yup';
 
 const validationSchema = Yup.object().shape({
-  email: string().email('Correo electrónico inválido').required('Campo requerido'),
+  username: string().required('Campo requerido'),
   password: string()
-    .min(8, 'La contraseña debe tener al menos 8 carácteres de longitud')
+    // .min(8, 'La contraseña debe tener al menos 8 carácteres de longitud')
     .max(16, 'Se ha excedido el número de caracteres permitidos')
     .trim('Los espacios no estan permitidos')
     .strict()

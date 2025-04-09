@@ -25,6 +25,73 @@ function login(email, password) {
     });
 }
 
+/* Mulesoft endpoints while the architecture is being completed */
+function loginMulesoft(username, password) {
+  const body = {
+    username,
+    password,
+  };
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(body),
+  };
+  const url = `${config.kopernicaUrlPrc}/auth/v1/token`;
+  return fetch(
+    url,
+    requestOptions,
+  ).then(handleResponseToken)
+    .then((response) => {
+      return response;
+    }).catch((error) => {
+      console.error(error);
+    });
+}
+
+function getUserDetailsMulesoft(token) {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Authorization': `Bearer ${token}`, 'client_id': process.env.REACT_APP_CLIENT_ID, 'client_secret': process.env.REACT_APP_CLIENT_SECRET },
+  };
+  const url = `${config.kopernicaUrlPrc}/users/v1/users/me`;
+  return fetch(
+    url,
+    requestOptions,
+  ).then(handleResponse)
+    .then((response) => {
+      return response;
+    }).catch((error) => {
+      console.error(error);
+    });
+}
+
+function loginApisMulesoft() {
+  const body = new URLSearchParams({
+    grant_type: 'client_credentials',
+    client_id: process.env.REACT_APP_CLIENT_ID_MULESOFT,
+    client_secret: process.env.REACT_APP_CLIENT_SECRET_MULESOFT,
+  });
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    body: body.toString(),
+  };
+  const url = '/mule-proxy/accounts/api/v2/oauth2/token';
+  return fetch(
+    url,
+    requestOptions,
+  ).then(handleResponse)
+    .then((response) => {
+      console.log(response);
+      return response;
+    }).catch((error) => {
+      console.error(error);
+    });
+}
+/* ************************************** */
+
 function confirmAccount(queryParams) {
   const requestOptions = {
     method: 'PUT',
@@ -271,6 +338,9 @@ const userService = {
   getUserGroups,
   changeStatus,
   confirmPassword,
+  loginMulesoft,
+  getUserDetailsMulesoft,
+  loginApisMulesoft,
 };
 
 export default userService;

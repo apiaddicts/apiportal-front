@@ -67,7 +67,7 @@ const config = {
   emailContactTemplateId: process.env.REACT_APP_EMAIL_CONTACT_TEMPLATE_ID,
   emailConversationTemplateId: process.env.REACT_APP_EMAIL_CONVERSATION_TEMPLATE_ID,
   contactEmailSubject: process.env.REACT_APP_CONTACT_EMAIL_SUBJECT,
-  locale: 'en',
+  locale: 'es',
   termsPath: process.env.REACT_APP_TERMS_PATH,
   privacyPolicyPath: process.env.REACT_APP_PRIVACY_POLICY_PATH,
   cookiesPolicyPath: process.env.REACT_APP_COOKIES_POLICY_PATH,
@@ -81,6 +81,8 @@ const config = {
   contactEmailTo: process.env.REACT_APP_EMAIL_TO,
   contactEmailTemplateId: process.env.REACT_APP_EMAIL_CONTACT_TEMPLATE_ID,
   generateStarterSubscriptionOnSignup: (process.env.REACT_APP_GENERATE_STARTER_SUBSCRIPTION_ON_SIGNUP === 'true'),
+  kopernicaUrlPrc: 'https://dev.kopernica.cloud/prc',
+  mulesoftUrl: 'https://eu1.anypoint.mulesoft.com',
 };
 
 export default config;
