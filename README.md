@@ -12,19 +12,19 @@ Set up the following environment variables in a `.env` file:
 
 | Variable                 | Description                       |
 | ------------------------ | --------------------------------- |
-| `REACT_APP_STRAPI_URL`   | URL of the Strapi backend         |
+| `VITE_APP_STRAPI_URL`   | URL of the Strapi backend         |
 | `PORT`                   | Port on which the frontend runs   |
-| `REACT_APP_REMEMBER_KEY` | Key for remembering user settings |
+| `VITE_APP_REMEMBER_KEY` | Key for remembering user settings |
 
 ## ⚙️ Environment variables if using Azure Api Manager
 
 | Variable                                 | Description                              |
 | ---------------------------------------- | ---------------------------------------- |
-| `REACT_APP_AZURE_APIM_URL`               | Azure API Management URL                 |
-| `REACT_APP_AZURE_SUBSCRIPTION_ID`        | Azure subscription ID                    |
-| `REACT_APP_AZURE_RESOURCE_GROUP_NAME`    | Azure resource group name                |
-| `REACT_APP_AZURE_SERVICE_NAME`           | Azure API service name                   |
-| `REACT_APP_AZURE_APIM_ADMIN_API_VERSION` | Azure APIM admin API version (commented) |
+| `VITE_APP_AZURE_APIM_URL`               | Azure API Management URL                 |
+| `VITE_APP_AZURE_SUBSCRIPTION_ID`        | Azure subscription ID                    |
+| `VITE_APP_AZURE_RESOURCE_GROUP_NAME`    | Azure resource group name                |
+| `VITE_APP_AZURE_SERVICE_NAME`           | Azure API service name                   |
+| `VITE_APP_AZURE_APIM_ADMIN_API_VERSION` | Azure APIM admin API version (commented) |
 
 ## 🚀 Installation & Usage
 
