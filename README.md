@@ -4,7 +4,7 @@ This is an open-source **Devportal** frontend built with React. It provides a mu
 
 ## 📦 Prerequisites
 
-- **Node.js**: `14.20.1`
+- **Node.js**: `18.20.8`
 
 ## ⚙️ Environment Variables
 
