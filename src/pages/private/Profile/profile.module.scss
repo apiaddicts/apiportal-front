@@ -1,4 +1,4 @@
-@import "../../../styles/variables.scss";
+@import "../../../styles/variables.module.scss";
 @import "../../../styles/mixins/mixin.scss";
 
 .main__admin {
@@ -12,7 +12,7 @@
     &__suscription {
         margin-bottom: 87px !important;
     }
-        
+
 }
 .admin {
     margin: auto;
@@ -109,7 +109,7 @@
       }
     }
   }
-  
+
   .wrapper_subscriptions__small {
     &__display{
       display: none;

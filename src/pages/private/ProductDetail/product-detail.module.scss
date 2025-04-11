@@ -1,4 +1,4 @@
-@import "../../../styles/variables.scss";
+@import "../../../styles/variables.module.scss";
 @import "../../../styles/mixins/mixin.scss";
 
 .title {
@@ -180,11 +180,11 @@
   position: absolute;
   top: -42px;
   left: 30px;
-  
+
   @include breakpoint(xs) {
     left: 0;
   }
-  
+
 
   @include breakpoint(sm) {
     left: 0;

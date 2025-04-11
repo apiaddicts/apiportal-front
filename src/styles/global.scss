@@ -1,4 +1,4 @@
-@import "./variables.scss";
+@import "./variables.module.scss";
 @import "./tools/tools.scss";
 @import "./components/index.scss";
 
@@ -19,8 +19,8 @@ body {
 a {
   text-decoration: none;
 }
-/* ------------------------------ 
-    PADDINGS 
+/* ------------------------------
+    PADDINGS
 ------------------------------ */
 .p-0 {
   padding: 0px !important;
@@ -298,8 +298,8 @@ a {
   }
 }
 
-/* ------------------------------ 
-    MARGINS 
+/* ------------------------------
+    MARGINS
 ------------------------------ */
 .m-0 {
   margin: 0px !important;
@@ -552,8 +552,8 @@ a {
   margin-left: -15px;
 }
 
-/* ------------------------------ 
-    HEADINGS 
+/* ------------------------------
+    HEADINGS
 ------------------------------ */
 .headline {
   font-size: map-deep-get($heading, "headline-ad", "size") !important;
@@ -1028,7 +1028,7 @@ a {
 .d-lg-none {
   @include breakpoint(lg) {
     display: none;
-  } 
+  }
 }
 
 .d-xl-none {
@@ -1136,7 +1136,7 @@ a {
 
 .fs{
   &__10 { font-size: 10px !important; }
-  &__11 { font-size: 11px !important; }  
+  &__11 { font-size: 11px !important; }
   &__12 { font-size: 12px !important; }
   &__13 { font-size: 13px !important; }
   &__14 { font-size: 14px !important; }
@@ -1273,8 +1273,8 @@ a {
   font-family: $secondary_font;
 }
 
-.markdown__content{ 
-  width: 100%; 
+.markdown__content{
+  width: 100%;
   overflow: hidden;
   font-style: normal;
   font-weight: 400;
@@ -1289,7 +1289,7 @@ a {
 img[src*='#center']{ display: block; margin: 0 auto; }
 img[src*='#right']{ display: block; margin-left: auto; }
 
-.w_800{ 
+.w_800{
   width: 800px;
   @include breakpoint(xs) {
     width: 100%;
@@ -1301,7 +1301,7 @@ img[src*='#right']{ display: block; margin-left: auto; }
 
   @include breakpoint(md) {
     width: 100%;
-  } 
+  }
 }
 
 .custom_margin__right{

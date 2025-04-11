@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import "../../styles/variables.module.scss";
 
 .contact {
     border-radius: 0px;
@@ -92,7 +92,7 @@
             margin-right: 5%;
             padding: 8px 0px;
             }
-            
+
             &__button {
                 // margin-right: 5%;
                 padding: 15px 0px;
@@ -103,7 +103,7 @@
                     margin-left: 0px;
                 }
                 }
-            
+
         &__new {
             margin: 8px 30px 8px 0px;
             @media (max-width: 768px) {
@@ -112,10 +112,10 @@
         }
         }
 
-        
-                
+
+
                 // Container Alternative
-                
+
                 &__container__alternative {
                     width: 100%;
                     display: flex;
@@ -123,7 +123,7 @@
                     justify-content: center;
                     align-items: center;
                 }
-                
+
                 &__alternative__header {
                     width: 80%;
                     flex-wrap: wrap;
@@ -136,17 +136,17 @@
                             justify-content: center;
                         }
                     }
-                
+
                     @media (max-width: 768px) {
                         justify-content: center;
                         align-items: center;
                     }
-                
+
                     p {
                         margin-left: 20px;
                     }
                 }
-                
+
                 &__alternative__title {
                     font-family: $secondary_font;
                     font-style: normal;
@@ -154,26 +154,26 @@
                     font-size: 46px;
                     line-height: 48px;
                     color: $white;
-                
+
                     @media (max-width: 768px) {
                         text-align: center;
                         margin-left: 0px!important;
                     }
                 }
-                
+
                 &__header__title__alternative {
                     width: 80%;
                     margin: auto;
                     flex-wrap: wrap;
                     display: flex;
                     padding: 20px 0;
-                
+
                     @media (max-width: 768px) {
                         justify-content: center;
                         align-items: center;
                     }
                 }
-                
+
                 &__alternative__description {
                     display: none;
                     flex-direction: row;
@@ -212,7 +212,7 @@
                         display: none;
                     }
                 }
-                
+
                 &__container__alternative__form {
                     display: flex;
                     flex-wrap: wrap;
@@ -220,15 +220,15 @@
                     align-items: center;
                     width: 80%;
                     margin: auto;
-                
+
                 }
-                
+
                 &__alternative__form {
                     width: 100%;
                     display: flex;
                     flex-direction: row;
                     align-items: center;
-                
+
                     @media (max-width: 768px) {
                         flex-direction: column;
         }

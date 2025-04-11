@@ -1,4 +1,4 @@
-@import "../../../styles/variables.scss";
+@import "../../../styles/variables.module.scss";
 @import "../../../styles/mixins/mixin.scss";
 
 .texture {
@@ -16,7 +16,7 @@
   transform: translateY(30%);
   display: flex;
   justify-content: flex-end;
-  
+
   img {
     width: 146px;
     @include breakpoint(xs) {
@@ -71,7 +71,7 @@
 
     @include breakpoint(xs) {
       display: none;
-    }    
+    }
     @include breakpoint(md) {
       display: none;
     }
@@ -100,7 +100,7 @@
     @include breakpoint(lg) {
       padding-left: 6rem !important;
     }
-  } 
+  }
 }
 
 .section__works {
@@ -263,7 +263,7 @@
     padding-top: 0.5rem;
     padding-bottom: 2rem;
   }
-  
+
   &__tabs {
     margin-bottom: 60px;
     margin-top: 30px;

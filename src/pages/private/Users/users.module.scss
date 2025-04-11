@@ -1,4 +1,4 @@
-@import "../../../styles/variables.scss";
+@import "../../../styles/variables.module.scss";
 
 .table-left {
     margin-left: 5%;
@@ -58,7 +58,7 @@
     &__icon {
         color: $secondary;
     }
-    
+
     p {
         font-family: $secondary_font;
         font-style: normal;
@@ -86,7 +86,7 @@
       }
     }
   }
-  
+
   .wrapper_apps__small {
     &__display{
       display: none;

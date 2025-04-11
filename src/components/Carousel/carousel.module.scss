@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import "../../styles/variables.module.scss";
 
 .slider {
   &__container {
@@ -11,7 +11,7 @@
     @media (max-width: 1140px) {
       width: 90vw;
     }
-    
+
     @media (max-width: 768px) {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -39,7 +39,7 @@
       &__card:hover {
         transform: scale(1.1);
       }
-      
+
       // margin 2 children
       &__card:nth-child(2) {
         transform: translateY(-40px);
@@ -47,7 +47,7 @@
           transform: translateY(0);
         }
       }
-      
+
       &__card:nth-child(2):hover {
         transform: translateY(-18px) scale(1.1);
         @media (max-width: 768px) {

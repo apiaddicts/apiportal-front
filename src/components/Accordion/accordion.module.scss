@@ -1,4 +1,4 @@
-@import "./../../styles/variables.scss";
+@import "./../../styles/variables.module.scss";
 
 .accordion {
   width: 100%;
@@ -41,7 +41,7 @@
     border-radius: 0px;
   }
 }
-  
+
 .active {
   transition: 0.3s ease all;
   background: $white;
@@ -90,7 +90,7 @@
           border-radius: 0.313rem;
         }
       }
-    } 
+    }
   }
 }
 
@@ -112,7 +112,7 @@
   padding-left: 10px;
   font-weight: 700;
   border-left: 2px solid $theme_secondary;
-  color: $theme_secondary;          
+  color: $theme_secondary;
 }
 
 

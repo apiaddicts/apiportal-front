@@ -1,4 +1,4 @@
-@import "./../../../styles/variables.scss";
+@import "./../../../styles/variables.module.scss";
 
 .accordion {
   width: 100%;
@@ -11,12 +11,12 @@
     padding: 0.5rem 1rem 0.5rem 0.5rem;
     h1 {
       font-size: 1.2rem;
-      font-weight: bold;   
+      font-weight: bold;
       color: $blue;
     }
     p {
       font-size: 1rem;
-      font-weight: bold;   
+      font-weight: bold;
     }
   }
   &__head {
@@ -73,7 +73,7 @@
 
       h1 {
         font-size: 1rem;
-        font-weight: 400;   
+        font-weight: 400;
         color: $gray_lighten-0;
       }
 
@@ -93,7 +93,7 @@
     }
   }
 }
-  
+
 .active {
   transition: 0.3s ease all;
   background: $white;
@@ -143,7 +143,7 @@
           border-radius: 0.313rem;
         }
       }
-    } 
+    }
   }
 }
 
@@ -165,7 +165,7 @@
   padding-left: 10px;
   font-weight: 700;
   border-left: 2px solid $secondary;
-  color: $primary;          
+  color: $primary;
 }
 
 .auth__title {
@@ -234,7 +234,7 @@
   display: grid;
   grid-template-columns: 1fr 3fr;
   gap: 1rem;
-  align-items: center; 
+  align-items: center;
   margin: 1rem 0;
 
   &__apikey {

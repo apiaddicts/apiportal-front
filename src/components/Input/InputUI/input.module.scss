@@ -1,4 +1,4 @@
-@import "./../../../styles/variables.scss";
+@import "./../../../styles/variables.module.scss";
 .wrapper__input {
   display: flex;
   flex-direction: column;
@@ -23,7 +23,7 @@
     color: #53565A;
     margin-left: -1%;
   }
-  
+
   // input:invalid{
   //   border: 2px solid #e4002b;
   // }

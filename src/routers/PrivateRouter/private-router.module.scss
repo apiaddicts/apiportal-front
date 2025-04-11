@@ -1,4 +1,4 @@
-@import '../../styles/variables.scss';
+@import '../../styles/variables.module.scss';
 @import '../../styles/mixins/mixin.scss';
 
 .custom__body{
@@ -13,7 +13,7 @@
     margin-top: 152px !important;
     margin-bottom: 87px !important;
     padding-left: 59px;
-    padding-right: 97px;   
+    padding-right: 97px;
 
     @include breakpoint(xs) {
         // margin-top: 80px !important;
@@ -40,7 +40,7 @@
     display: flex;
     justify-content: flex-end;
     z-index: 0;
-    
+
     img {
         @include breakpoint(xs) {
             object-fit: cover;

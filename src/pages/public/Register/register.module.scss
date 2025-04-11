@@ -1,4 +1,4 @@
-@import "../../../styles/variables.scss";
+@import "../../../styles/variables.module.scss";
 
 .login__close {
     position: absolute;
@@ -54,10 +54,10 @@
         align-items: center;
         padding: 1rem;
         margin-bottom: 10px;
-        
+
         @media (max-width: 768px) {
             flex-direction: column-reverse;
-        
+
             p {
                 text-align: center;
                 padding: 0 !important;
@@ -67,7 +67,7 @@
         }
 
     }
-    
+
     &__links {
         display: flex;
         justify-content: space-between;
