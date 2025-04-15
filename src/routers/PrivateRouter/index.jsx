@@ -21,6 +21,7 @@ import SwaggerUI from '../../pages/common/SwaggerUI';
 import OAuthRedirect from '../../pages/common/OAuthRedirect';
 import Subscriptions from '../../pages/private/Subscriptions';
 import Logout from '../../pages/private/Logout/Logout';
+import Dashboard from '../../pages/private/Dashboard';
 
 // import Users from '../../pages/private/Users';
 // import UsersDetail from '../../pages/private/UserDetail';
@@ -82,6 +83,7 @@ function PrivateRouter({ children }) {
             <SidebarDrawer user={user} isAdmin={isAdmin} />
             <div className={`container ${classes.wrapper}`}>
               <Routes>
+                <Route path='dashboard' exact='true' element={<Dashboard />} />
                 <Route path='profile' element={<Profile />} />
                 <Route path='products' exact='true' element={<Products />} />
                 <Route path='products/:id' exact='true' element={<ProductDetail />} />
