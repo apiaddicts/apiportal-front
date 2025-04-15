@@ -29,6 +29,7 @@ import classes from './sliderdrawer.module.scss';
 import { logout } from '../../redux/actions/userAction';
 
 import styles from '../../styles/variables.module.scss';
+import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
 function SidebarDrawer({ children, user, isAdmin }) {
   const theme = useTheme();
@@ -71,7 +72,7 @@ function SidebarDrawer({ children, user, isAdmin }) {
     // { route: '/developer/apps', text: 'Aplicaciones', icon: <Terminal />, primaryRole: true },
     { route: '/developer/apis', text: 'Biblioteca de APIs', icon: <Settings />, primaryRole: true },
     { route: '/developer/subscriptions', text: 'Suscripciones', icon: <Terminal />, primaryRole: true },
-    // { route: '/developer/docs', text: 'Documentacion', icon: <Terminal />, primaryRole: true },
+    // { route: '/developer/docs', text: 'Documentacion', icon: <Terminal />, primaryRole: true }
     // { route: '/developer/users', text: 'Usuarios', icon: <Person />, primaryRole: isAdmin },
     // { route: '/developer/groups', text: 'Grupos', icon: <ShareIcon />, primaryRole: isAdmin },
   ];
@@ -400,6 +401,7 @@ function SidebarDrawer({ children, user, isAdmin }) {
             ))
           }
         </List>
+        <DropdownMenu />
         <List>
           <ListItem
             button
