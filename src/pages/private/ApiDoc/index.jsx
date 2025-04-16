@@ -1,9 +1,10 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
-import { Container, Grid, Card, CardContent, Typography, Button, TextField, Box } from '@mui/material';
+import { Container, Snackbar, Alert, Grid, Card, CardContent, Typography, Button, TextField, Box } from '@mui/material';
 import apiFaceAiService from '../../../services/apiDocsService';
 import Spinner from '../../../components/Spinner';
 import CodeTabs from './CodeTabs';
+import AppSnackbar from '../../../components/Snackbar/Snackbar';
 
 
 function ApiDoc() {
@@ -11,6 +12,20 @@ function ApiDoc() {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [previewUrl, setPreviewUrl] = useState(null);
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: '',
+    severity: 'info', 
+  });
+
+  const showMessage = (message, severity = 'info') => {
+    setSnackbar({
+      open: true,
+      message,
+      severity,
+    });
+  };
+
 
 
   const handleFileChange = (event) => {
@@ -29,7 +44,7 @@ function ApiDoc() {
   const handleSubmit = async () => {
     try {
       if (!imageFile) {
-        alert('Por favor selecciona una imagen');
+        showMessage('Por favor selecciona una imagen', 'warning');
         return;
       }
 
@@ -39,9 +54,11 @@ function ApiDoc() {
       const base64Image = await apiFaceAiService.convertImageToBase64(imageFile);
       const response = await apiFaceAiService.processFaceImage(base64Image);
       setResult(response);
+
+      showMessage('Imagen procesada correctamente ✅', 'success');
     } catch (error) {
       console.error('Error al procesar la imagen:', error);
-      alert('Ocurrió un error. Revisa la consola.');
+      showMessage('Ocurrió un error. Revisa la consola.', 'error');
     } finally {
       setLoading(false);
     }
@@ -68,8 +85,6 @@ function ApiDoc() {
               <TextField
                 type="file"
                 fullWidth
-                InputLabelProps={{ shrink: true }}
-                inputProps={{ accept: 'image/*' }}
                 onChange={handleFileChange}
               />
 
@@ -136,7 +151,15 @@ function ApiDoc() {
           </Card>
         </Grid>
       </Grid>
+      <AppSnackbar
+  open={snackbar.open}
+  message={snackbar.message}
+  severity={snackbar.severity}
+  onClose={() => setSnackbar({ ...snackbar, open: false })}
+/>
+
     </Container>
+
   );
 }
 
