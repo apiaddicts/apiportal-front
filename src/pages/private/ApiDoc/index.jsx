@@ -3,17 +3,28 @@ import React, { useState } from 'react';
 import { Container, Grid, Card, CardContent, Typography, Button, TextField, Box } from '@mui/material';
 import apiFaceAiService from '../../../services/apiDocsService';
 import Spinner from '../../../components/Spinner';
+import CodeTabs from './CodeTabs';
 
 
 function ApiDoc() {
   const [imageFile, setImageFile] = useState(null);
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState(null);
 
 
   const handleFileChange = (event) => {
-    setImageFile(event.target.files[0]);
+    const file = event.target.files[0];
+    setImageFile(file);
+
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setPreviewUrl(imageUrl);
+    } else {
+      setPreviewUrl(null);
+    }
   };
+
 
   const handleSubmit = async () => {
     try {
@@ -48,7 +59,7 @@ function ApiDoc() {
 
       <Grid container spacing={3} sx={{ marginTop: '20px' }} justifyContent="space-between" wrap="nowrap">
 
-        <Grid item size={8}>
+        <Grid item size={6}>
           <Card>
             <CardContent>
               <Typography variant="subtitle1" gutterBottom>
@@ -61,6 +72,22 @@ function ApiDoc() {
                 inputProps={{ accept: 'image/*' }}
                 onChange={handleFileChange}
               />
+
+              {previewUrl && (
+                <Box sx={{ marginTop: 2, textAlign: 'center' }}>
+                  <img
+                    src={previewUrl}
+                    alt="Preview"
+                    style={{
+                      maxWidth: '100%',
+                      maxHeight: 200,
+                      borderRadius: 8,
+                      objectFit: 'cover',
+                      boxShadow: '0 0 5px rgba(0,0,0,0.1)',
+                    }}
+                  />
+                </Box>
+              )}
 
               <Button
                 variant="contained"
@@ -101,44 +128,10 @@ function ApiDoc() {
           </Card>
         </Grid>
 
-        <Grid item >
+        <Grid item size={6}>
           <Card>
             <CardContent>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
-                <Typography variant="subtitle1">Python</Typography>
-                <Button variant="outlined" size="small">
-                  Copy the code
-                </Button>
-              </Box>
-              <Box
-                component="pre"
-                sx={{
-                  backgroundColor: '#f5f5f5',
-                  padding: '10px',
-                  borderRadius: '5px',
-                  overflowX: 'auto',
-                  fontSize: '0.875rem',
-                }}
-              >
-                {`#!/usr/bin/env python3
-  import requests
-
-  data = {
-    "collections": "",
-  }
-  files = {
-    "photo": open("", "rb"),
-  }
-  url = "https://api.cloudappi.net/photo/search/v2"
-
-  headers = {
-    "token": "1abfd168cb149cfa93ce5fff67afe03",
-  }
-
-  response = requests.request("POST", url, headers=headers, data=data, files=files)
-
-  print(response.text.encode('utf8'))`}
-              </Box>
+              <CodeTabs />
             </CardContent>
           </Card>
         </Grid>
