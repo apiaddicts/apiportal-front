@@ -1,25 +1,54 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Grid, Card, CardContent, Typography, Button, TextField, Box } from '@mui/material';
+import apiFaceAiService from '../../../services/apiDocsService';
+import Spinner from '../../../components/Spinner';
+
 
 function ApiDoc() {
+  const [imageFile, setImageFile] = useState(null);
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+
+  const handleFileChange = (event) => {
+    setImageFile(event.target.files[0]);
+  };
+
+  const handleSubmit = async () => {
+    try {
+      if (!imageFile) {
+        alert('Por favor selecciona una imagen');
+        return;
+      }
+
+      setLoading(true);
+      setResult(null);
+
+      const base64Image = await apiFaceAiService.convertImageToBase64(imageFile);
+      const response = await apiFaceAiService.processFaceImage(base64Image);
+      setResult(response);
+    } catch (error) {
+      console.error('Error al procesar la imagen:', error);
+      alert('Ocurrió un error. Revisa la consola.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   return (
     <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
       <Typography variant="h4" gutterBottom>
         Recognize People in a Photo
       </Typography>
       <Typography variant="body1" gutterBottom>
-        Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.
-      </Typography>
-      <Typography variant="body2" gutterBottom>
-        Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.
+        Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto...
       </Typography>
 
-      <Grid container spacing={3} sx={{ marginTop: '20px' }} justifyContent="space-between" wrap="no-wrap">
+      <Grid container spacing={3} sx={{ marginTop: '20px' }} justifyContent="space-between" wrap="nowrap">
 
-
-        {/* File Upload Section */}
-        <Grid item xs={12} md={4}>
+        <Grid item size={8}>
           <Card>
             <CardContent>
               <Typography variant="subtitle1" gutterBottom>
@@ -30,19 +59,49 @@ function ApiDoc() {
                 fullWidth
                 InputLabelProps={{ shrink: true }}
                 inputProps={{ accept: 'image/*' }}
+                onChange={handleFileChange}
               />
-              <Typography variant="body2" color="primary" sx={{ marginTop: '10px', cursor: 'pointer' }}>
-                Show optional parameters
-              </Typography>
-              <Button variant="contained" color="primary" fullWidth sx={{ marginTop: '20px' }}>
-                Perform request
+
+              <Button
+                variant="contained"
+                color="primary"
+                fullWidth
+                sx={{ marginTop: '20px' }}
+                onClick={handleSubmit}
+                disabled={loading}
+              >
+                Realizar solicitud
               </Button>
+
+              {loading && (
+                <Box sx={{ marginTop: 2 }}>
+                  <Spinner title="Procesando imagen..." />
+                </Box>
+              )}
+
+              {result && !loading && (
+                <Box sx={{ marginTop: 3 }}>
+                  <Typography variant="subtitle2">Respuesta:</Typography>
+                  <Box
+                    component="pre"
+                    sx={{
+                      backgroundColor: '#f0f0f0',
+                      padding: 2,
+                      borderRadius: 1,
+                      maxHeight: 300,
+                      overflowY: 'auto',
+                      fontSize: '0.85rem',
+                    }}
+                  >
+                    {JSON.stringify(result, null, 2)}
+                  </Box>
+                </Box>
+              )}
             </CardContent>
           </Card>
         </Grid>
 
-        {/* Code Example Section */}
-        <Grid item xs={12} md={6}>
+        <Grid item >
           <Card>
             <CardContent>
               <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
@@ -62,29 +121,23 @@ function ApiDoc() {
                 }}
               >
                 {`#!/usr/bin/env python3
-import requests
+  import requests
 
-# Request data
-data = {
-  "collections": "",
-}
-# Request files
-files = {
-  "photo": open("", "rb"),
-}
-# Endpoint URL
-url = "https://api.cloudappi.net/photo/search/v2"
+  data = {
+    "collections": "",
+  }
+  files = {
+    "photo": open("", "rb"),
+  }
+  url = "https://api.cloudappi.net/photo/search/v2"
 
-# Request headers
-headers = {
-  "token": "1abfd168cb149cfa93ce5fff67afe03",
-}
+  headers = {
+    "token": "1abfd168cb149cfa93ce5fff67afe03",
+  }
 
-# Making the POST request
-response = requests.request("POST", url, headers=headers, data=data, files=files)
+  response = requests.request("POST", url, headers=headers, data=data, files=files)
 
-# Printing the response
-print(response.text.encode('utf8'))`}
+  print(response.text.encode('utf8'))`}
               </Box>
             </CardContent>
           </Card>
