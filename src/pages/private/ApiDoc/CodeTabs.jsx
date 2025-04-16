@@ -3,6 +3,9 @@ import { Tabs, Tab, Box, Button } from '@mui/material';
 import { CopyAll } from '@mui/icons-material';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 
+import AppSnackbar from '../../../components/Snackbar/Snackbar'; // Asegúrate de que la ruta sea correcta
+
+
 const codeSnippets = {
     Python: `
 import requests
@@ -69,6 +72,14 @@ fetch("https://dev.kopernica.cloud/api/v1/sync/xp/face-ai/process", requestOptio
 
 function CodeTabs() {
     const [tab, setTab] = useState('Python');
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
+    const [snackbarMessage, setSnackbarMessage] = useState('');
+
+    const handleCopy = () => {
+        setSnackbarMessage(`Código en ${tab} copiado`);
+        setSnackbarOpen(true);
+    };
+
 
     const handleChange = (event, newValue) => {
         setTab(newValue);
@@ -83,7 +94,7 @@ function CodeTabs() {
             </Tabs>
 
             <Box sx={{ position: 'relative', paddingTop: 2 }} >
-                <CopyToClipboard text={codeSnippets[tab]}>
+                <CopyToClipboard text={codeSnippets[tab]} onCopy={handleCopy}>
                     <Button
                         variant="contained"
                         size="small"
@@ -93,6 +104,7 @@ function CodeTabs() {
                         Copiar código
                     </Button>
                 </CopyToClipboard>
+
 
                 <Box
                     component="pre"
@@ -109,7 +121,16 @@ function CodeTabs() {
                     {codeSnippets[tab]}
                 </Box>
             </Box>
+            <AppSnackbar
+                open={snackbarOpen}
+                message={snackbarMessage}
+                severity="success"
+                onClose={() => setSnackbarOpen(false)}
+                autoHideDuration={3000}
+            />
+
         </Box>
+
     );
 }
 
