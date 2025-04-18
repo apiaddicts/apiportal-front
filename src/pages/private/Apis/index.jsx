@@ -70,7 +70,6 @@ function Apis(props) {
   useEffect(() => {
     if(apis && apis.length === 0){
       dispatch(getApiList('Mulesoft'))
-      console.log(loading);
     }
 
 
