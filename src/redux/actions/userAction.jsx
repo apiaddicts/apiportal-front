@@ -44,8 +44,6 @@ export const login = (data) => (dispatch) => {
 export const loginApim = (configApim) => (dispatch) => {
   apiManagerService.integrationLogin(configApim)
    .then(response => {
-     console.log('respuesta desde el action de las apis');
-     console.log(response);
      if(response.data['token']){
       localStorage.setItem('tokenApim',response.data['token']);
       dispatch({

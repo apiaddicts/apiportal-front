@@ -15,7 +15,6 @@ function integrationLogin(configType){
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then(response => {
-      console.log('response desde el servicio de integracion');
       return response;
     })
     .catch(error => {
@@ -32,8 +31,6 @@ function integrationListApis(configType) {
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then(response => {
-      console.log('response desde el servicio listar apis');
-      console.log(response);
       return response;
     })
     .catch(error => {
@@ -50,8 +47,6 @@ function integrationApiDetail(configType, apiId) {
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then(response => {
-      console.log('response desde el servicio de detalle de la api');
-      console.log(response);
       return response;
     })
     .catch(error => {
