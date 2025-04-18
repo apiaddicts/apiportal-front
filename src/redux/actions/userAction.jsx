@@ -5,11 +5,12 @@ import userService from '../../services/userService';
 import config from '../../services/config';
 import { getUserDetail, listUsers } from './usersAction';
 import subscriptionsService from '../../services/subscriptionsService';
+import apiManagerService from '../../services/apiManagerService';
 
 // eslint-disable-next-line import/prefer-default-export
 export const login = (data) => (dispatch) => {
   dispatch({ type: userConstants.LOGIN_REQUEST });
-  userService.login(data.email, data.password).then((response) => {
+  userService.login(data.username, data.password).then((response) => {
     if (response && Object.keys(response).length > 0) {
       if (Object.prototype.hasOwnProperty.call(response, 'error')) {
         dispatch({
@@ -20,12 +21,17 @@ export const login = (data) => (dispatch) => {
         if (data.remember) {
           const passwordEncrypted = btoa(data.password);
           const secureKeyEncrypted = btoa(`${passwordEncrypted}:${config.rememberkey}`);
-          localStorage.setItem('email', data.email);
+          localStorage.setItem('username', data.username);
           localStorage.setItem('password', secureKeyEncrypted);
         }
-        sessionStorage.setItem('token', JSON.stringify(response));
-        dispatch(getUser(response));
-        // dispatch(getUserGroups(response));
+        const expirationTime = Date.now() + response['expiresIn'] * 1000;
+        const token = {
+          ...response,
+          expiresIn: expirationTime,
+          refreshExpiresIn: expirationTime
+        }
+        sessionStorage.setItem('token', JSON.stringify(token));
+        dispatch(getUser(response['accessToken']));
         dispatch({ type: userConstants.RESET_ALERT });
       }
     }
@@ -34,6 +40,35 @@ export const login = (data) => (dispatch) => {
   });
 
 };
+
+export const loginApim = (configApim) => (dispatch) => {
+  apiManagerService.integrationLogin(configApim)
+   .then(response => {
+     console.log('respuesta desde el action de las apis');
+     console.log(response);
+     if(response.data['token']){
+      localStorage.setItem('tokenApim',response.data['token']);
+      dispatch({
+        type: userConstants.LOGIN_APIM_SUCCESS,
+        apimToken: response.data['token']
+      })
+     }else{
+      dispatch({
+        type: userConstants.LOGIN_APIM_FAILURE,
+        error: response
+      })
+      sessionStorage.removeItem('token');
+      localStorage.removeItem('tokenApim');
+      dispatch({ type: userConstants.LOGOUT_USER });
+     }
+     // return response
+   })
+   .catch(error => {
+     console.error(error);
+    //  ocalStorage.removeItem('tokenApim');
+    // dispatch({ type: userConstants.LOGOUT_USER });
+   })
+ }
 
 export const confirmAccount = (queryParams, setIsOpen) => (dispatch) => {
   dispatch({
@@ -110,16 +145,15 @@ export const signUp = (data) => (dispatch) => {
   );
 };
 
-export const getUser = (tokens) => (dispatch) => {
+export const getUser = (token) => (dispatch) => {
   dispatch({ type: userConstants.GET_USER_REQUEST });
-  userService.getUserDetails(tokens.token, tokens.id).then(
+  userService.getUserDetails(token).then(
     (response) => {
       if (response && Object.keys(response).length > 0) {
         dispatch({ type: userConstants.GET_USER_SUCCESS, response });
         dispatch({
           type: userConstants.LOGIN_SUCCESS,
-          id: tokens.id,
-          token: tokens.token,
+          token,
         });
       } else {
         sessionStorage.removeItem('token');

@@ -22,54 +22,38 @@ import OAuthRedirect from '../../pages/common/OAuthRedirect';
 import Subscriptions from '../../pages/private/Subscriptions';
 import Logout from '../../pages/private/Logout/Logout';
 
-// import Users from '../../pages/private/Users';
-// import UsersDetail from '../../pages/private/UserDetail';
-// import Groups from '../../pages/private/Groups';
-// import GroupDetailed from '../../pages/private/Groups/GroupDetailed';
 
-import { getUser } from '../../redux/actions/userAction';
-// import { getUser, getUserGroups } from '../../redux/actions/userAction';
+import { getUser, logout } from '../../redux/actions/userAction';
 import classes from './private-router.module.scss';
-// import GettingStarted from '../../pages/private/GettingStarted';
-// import Apps from '../../pages/private/Apps/Apps';
-// import AppDetailed from '../../pages/private/Apps/AppDetailed';
-// import AddApp from '../../pages/private/Apps/AddApp';
-// import AddUserB2c from '../../pages/private/Apps/AddUserB2c';
 import config from '../../services/config';
 
 function PrivateRouter({ children }) {
-  // const [showModal, setShowModal] = useState(false);
   const { id, token, user, openModal, userGroups } = useSelector((state) => state.user);
   const { time } = useSelector((state) => state.timer);
-  const { checkSession } = useVerifySession();
+  const { checkSession,isSessionValid } = useVerifySession();
   const { getTime } = useTimer();
-  const privateSession = id !== '' && token !== '';
+  const privateSession = token !== '';
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (id !== '' && token !== '' && user && Object.keys(user).length === 0) {
-      const tokens = {
-        id,
-        token,
-      };
-      dispatch(getUser(tokens));
-      // if (user) dispatch(getUserGroups(tokens));
+    if (token !== '' && user && Object.keys(user).length === 0) {
+      dispatch(getUser(token));
       getTime();
     }
   }, []);
 
   useEffect(() => {
-    checkSession();
+    // checkSession();
+    isSessionValid();
+    if(openModal) dispatch(logout());
   }, [time]);
-
-  const isAdmin = userGroups?.value.find((group) => group.name === config.adminId);
 
   return privateSession ? (
     <Box>
-      {
+      {/* {
         openModal &&
         (<Logout showModal={openModal} setShowModal={openModal} />)
-      }
+      } */}
       {user && Object.keys(user).length > 0 ? (
         <Box>
           <Box sx={{ display: 'flex', flex: '1', minHeight: '100vh' }} className={classes.custom__body}>
@@ -79,7 +63,7 @@ function PrivateRouter({ children }) {
                 icon: '👏',
               }}
             />
-            <SidebarDrawer user={user} isAdmin={isAdmin} />
+            <SidebarDrawer user={user} />
             <div className={`container ${classes.wrapper}`}>
               <Routes>
                 <Route path='profile' element={<Profile />} />

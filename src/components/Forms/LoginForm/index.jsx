@@ -12,7 +12,7 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin, set
   const dispatch = useDispatch();
   useEffect(() => {
     if (!formik.values.remember) {
-      localStorage.removeItem('email');
+      localStorage.removeItem('username');
       localStorage.removeItem('password');
     }
   }, [formik.values.remember]);
@@ -49,7 +49,7 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin, set
       </div>
       <div className='row'>
         {
-          fieldsLogin.filter((field) => field.type === 'email' || field.type === 'password')
+          fieldsLogin.filter((field) => field.type === 'username' || field.type === 'password')
             .map((field, index) => {
               return (
                 <div key={index} className='flex-sm-12 flex-md-12 flex-lg-12 py-4'>

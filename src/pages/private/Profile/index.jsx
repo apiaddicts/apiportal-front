@@ -38,9 +38,9 @@ function Profile() {
     };
     dispatch(updateUser(data, user.name, tokens));
   };
-  const name = user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? user.properties.firstName : '';
-  const lastName = user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? user.properties.lastName : '';
-  const email = user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? user.properties.email : '';
+  const name = user && Object.keys(user).length > 0  ? user.firstName : '';
+  const lastName = user && Object.keys(user).length > 0  ? user.lastName : '';
+  const email = user && Object.keys(user).length > 0  ? user.email : '';
 
   const labelsUser = [
     {

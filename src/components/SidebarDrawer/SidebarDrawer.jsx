@@ -30,7 +30,7 @@ import { logout } from '../../redux/actions/userAction';
 
 import styles from '../../styles/variables.module.scss';
 
-function SidebarDrawer({ children, user, isAdmin }) {
+function SidebarDrawer({ children, user }) {
   const theme = useTheme();
   const [isPermanent, setPermanent] = useState(true);
   const [toggleMenu, setToggleMenu] = useState(true);
@@ -173,9 +173,9 @@ function SidebarDrawer({ children, user, isAdmin }) {
                   }}
                   onClick={handleClick}
                 >
-                  {user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? (
+                  {user && Object.keys(user).length > 0 ? (
                     <span className='text-capitalize' style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {`${splitStr(user.properties.firstName)} ${splitStr(user.properties.lastName)}`}
+                      {`${splitStr(user.firstName)} ${splitStr(user.lastName)}`}
                     </span>
                   ) : ('')}
                 </Button>
@@ -262,11 +262,11 @@ function SidebarDrawer({ children, user, isAdmin }) {
               <h1 className={`font-weight-regular text__tertiary ${classes.title}`}>Hola,</h1>
               <h1 className={`font-weight-bold text__primary ${classes.title__name}`}>
                 {
-                  user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? (
+                  user && Object.keys(user).length > 0  ? (
                     <>
-                      {user.properties.firstName}
+                      {user.firstName}
                       <br />
-                      {user.properties.lastName }
+                      {user.lastName }
                     </>
                   ) : ('')
                 }

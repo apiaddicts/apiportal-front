@@ -32,6 +32,9 @@ export const compareArrays = (a, b) => {
 };
 
 const config = {
+  authUrl: import.meta.env.VITE_APP_AUTH,
+  keycloakKey: import.meta.env.VITE_APP_KEYCLOAK_CLIENT_ID,
+  integratorUrl: import.meta.env.VITE_APP_INTEGRATOR_URL,
   apiUrl: import.meta.env.VITE_APP_STRAPI_URL,
   azureUrl: import.meta.env.VITE_APP_AZURE_APIM_URL,
   subscriptionId: import.meta.env.VITE_APP_AZURE_SUBSCRIPTION_ID,

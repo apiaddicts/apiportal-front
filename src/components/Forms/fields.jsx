@@ -1,7 +1,7 @@
 /* eslint-disable */
 import config from "../../services/config";
 
-const email = localStorage.getItem('email') === null ? '' : localStorage.getItem('email');
+const username = localStorage.getItem('username') === null ? '' : localStorage.getItem('username');
 let password = '';
 if (localStorage.getItem('password') !== null) {
   const decryptedKey = atob(localStorage.getItem('password'));
@@ -94,12 +94,12 @@ export const fieldsRegister = [
 
 export const fieldsLogin = [
   {
-    id: 'email',
-    initialValue: email,
+    id: 'username',
+    initialValue: username,
     placeholder: 'Correo electrónico',
-    validate: 'email',
+    validate: 'username',
     required: true,
-    type: 'email',
+    type: 'username',
   },
   {
     id: 'password',
@@ -116,7 +116,7 @@ export const fieldsLogin = [
     type: 'checkbox',
     name: 'remember',
     label: 'Recordar datos',
-    initialValue: localStorage.getItem('email') !== null && localStorage.getItem('password') !== null,
+    initialValue: localStorage.getItem('username') !== null && localStorage.getItem('password') !== null,
   },
 ];
 export const fieldsContact = [
