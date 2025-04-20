@@ -8,7 +8,7 @@ import Title from '../../../components/Title';
 import SearchInput from '../../../components/Input/SearchInput';
 import Icon from '../../../components/MdIcon/Icon';
 import CardInformationLibrary from '../../../components/Card/CardInformationLibrary';
-import { listApis, searchApis, getListTags, filterAPIsByTags, resetLibraryApi, getLibraryApiNextSearch, getLibraryApiPreviosSearch, getLibraryApiNext, getLibraryApiPrevios, getLibraries } from '../../../redux/actions/libraryAction';
+import { listApis, searchApis, getListTags, filterAPIsByTags, resetLibraryApi, getLibraryApiNextSearch, getLibraryApiPreviosSearch, getLibraryApiNext, getLibraryApiPrevios, getLibraries,getLisMulesoftApis } from '../../../redux/actions/libraryAction';
 import classes from './apis.module.scss';
 import config from '../../../services/config';
 
@@ -27,6 +27,7 @@ function Apis(props) {
   const fApis = libraries && libraries.length > 0 && apis && Object.keys(apis).length > 0 && apis.value.length > 0 ? compareArrays(libraries, apis.value) : [];
   const [skip, setSkip] = useState(0);
   const dispatch = useDispatch();
+  const [muleApis, setMuleApis] = useState([])
 
   const displayApis = useMemo(() => ({
     apis: fApis.slice(skip, skip + topApi),
@@ -90,6 +91,12 @@ function Apis(props) {
       dispatch(getLibraries());
     }
 
+    getLisMulesoftApis()
+      .then((response) => {
+        console.log(response);
+        setMuleApis(response);
+      })
+    
   }, []);
 
   useEffect(() => {
@@ -113,7 +120,7 @@ function Apis(props) {
   return (
     <Container fixed sx={{ paddingLeft: {xs: '0px', md: '59px !important'}, paddingRight: {xs:' 0px', md: '97px !important'} }}>
       <Title stylesTitle={{ fontSize: '48px' }} text='APIs' />
-      <div className={classes.wrapper__filters}>
+      {/* <div className={classes.wrapper__filters}>
         <div>
           <SearchInput
             icon
@@ -204,6 +211,28 @@ function Apis(props) {
 
           ) : (null)}
         </div>
+      </div> */}
+      <div>
+        {
+          muleApis && muleApis.length > 0 ?
+          (
+            muleApis.map((api, index) => (
+              <CardInformationLibrary 
+                key={index}
+                apiName={api.name}
+                title={api.name}
+                status={api.status}
+                version={api.version}
+                description={api.description}
+                theme='dark'
+                info='ver Documentación'
+                redirectTo={`/developer/apis/${api.assetId}`}
+              />
+            ))
+          )
+          :
+          (<h1>Cargando....</h1>)
+        }
       </div>
     </Container>
   );

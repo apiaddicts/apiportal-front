@@ -49,8 +49,17 @@ const useVerifySession = () => {
     }
   };
 
+  const isSessionValid = () => {
+    const token = JSON.parse(sessionStorage.getItem('token'));
+    if (!token) return false;
+    if (Date.now() < token.expiredIn) {
+      store.dispatch(sessionTimeout());
+    }
+  };
+
   return {
     checkSession,
+    isSessionValid,
   };
 };
 
