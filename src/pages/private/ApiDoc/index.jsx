@@ -15,7 +15,7 @@ function ApiDoc() {
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: '',
-    severity: 'info', 
+    severity: 'info',
   });
 
   const showMessage = (message, severity = 'info') => {
@@ -52,7 +52,9 @@ function ApiDoc() {
       setResult(null);
 
       const base64Image = await apiFaceAiService.convertImageToBase64(imageFile);
+      // const ejemplo = await apiFaceAiService.getUsersCredentials();
       const response = await apiFaceAiService.processFaceImage(base64Image);
+      consoloe.log('ejemplo', ejemplo);
       setResult(response);
 
       showMessage('Imagen procesada correctamente ✅', 'success');
@@ -152,11 +154,11 @@ function ApiDoc() {
         </Grid>
       </Grid>
       <AppSnackbar
-  open={snackbar.open}
-  message={snackbar.message}
-  severity={snackbar.severity}
-  onClose={() => setSnackbar({ ...snackbar, open: false })}
-/>
+        open={snackbar.open}
+        message={snackbar.message}
+        severity={snackbar.severity}
+        onClose={() => setSnackbar({ ...snackbar, open: false })}
+      />
 
     </Container>
 
