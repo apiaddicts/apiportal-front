@@ -88,8 +88,10 @@ const config = {
   contactEmailTo: import.meta.env.VITE_APP_EMAIL_TO,
   contactEmailTemplateId: import.meta.env.VITE_APP_EMAIL_CONTACT_TEMPLATE_ID,
   generateStarterSubscriptionOnSignup: (import.meta.env.VITE_APP_GENERATE_STARTER_SUBSCRIPTION_ON_SIGNUP === 'true'),
-  urlFaceAi: import.meta.env.VITE_APP_FACE_AI,  
-  urlUserCredential: import.meta.env.VITE_APP_CREDENTIAL
+  urlFaceAi: import.meta.env.VITE_APP_FACE_AI,
+  urlUserCredential: import.meta.env.VITE_APP_CREDENTIAL,
+  kopernicaUrlPrc: 'https://dev.kopernica.cloud/prc',
+  mulesoftUrl: 'https://eu1.anypoint.mulesoft.com',
 };
 
 export default config;
