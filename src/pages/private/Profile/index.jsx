@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container } from '@mui/material';
 import { updateUser } from '../../../redux/actions/userAction';
-import { listUserSubscriptions } from '../../../redux/actions/subscriptionsAction';
+// import { listUserSubscriptions } from '../../../redux/actions/subscriptionsAction';
 import useFormUserConfig from '../../../hooks/useFormUser';
 import Input from '../../../components/Input';
 import Button from '../../../components/Buttons/Button';
@@ -20,9 +20,9 @@ function Profile() {
   const { suscripcionsUser } = useSelector((state) => state.suscripcions);
 
   useEffect(() => {
-    if (suscripcionsUser && Object.keys(user).length > 0 && Object.keys(suscripcionsUser).length === 0) {
-      dispatch(listUserSubscriptions(user.name));
-    }
+    // if (suscripcionsUser && Object.keys(user).length > 0 && Object.keys(suscripcionsUser).length === 0) {
+    //   dispatch(listUserSubscriptions(user.name));
+    // }
   }, [suscripcionsUser]);
 
   const handleSubmit = async (values) => {
@@ -38,6 +38,9 @@ function Profile() {
     };
     dispatch(updateUser(data, user.name, tokens));
   };
+  const name = user && Object.keys(user).length > 0 ? user.firstName : '';
+  const lastName = user && Object.keys(user).length > 0 ? user.lastName : '';
+  const email = user && Object.keys(user).length > 0 ? user.email : '';
   const name = user && Object.keys(user).length > 0  ? user.firstName : '';
   const lastName = user && Object.keys(user).length > 0  ? user.lastName : '';
   const email = user && Object.keys(user).length > 0  ? user.email : '';

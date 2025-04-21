@@ -11,6 +11,9 @@ const usersConstants = {
 
   RESET_USERS: 'RESET_USERS',
 
+  SHOW_ALERT: 'SHOW_ALERT',
+  RESET_ALERT: 'RESET_ALERT',
+
 };
 
 export default usersConstants;
