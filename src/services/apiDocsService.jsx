@@ -1,6 +1,35 @@
 import handleResponse from './handleResponse';
 import config from './config';
 
+export function getAccessToken() {
+  const token = sessionStorage.getItem('token');
+  return token ? JSON.parse(token).accessToken : null;
+}
+
+
+function getUsersCredentials() {
+  const token = getAccessToken();
+  const requestOptions = {
+    method: 'GET',
+    headers: {
+      'client_id': 'ab5481325055405a97fcc7a826fac919',
+      'client_secret': '08f5c7b4aE194eCaBF7E33c990Ca7504',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    },
+
+  };
+  const url = 'http://localhost:5000/sys/users/v1/users/credentials';
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response)
+    .catch((error) => error);
+}
+
+
+
+
 /**
  * 
  * @param {File} file 
@@ -21,11 +50,18 @@ function convertImageToBase64(file) {
  * @returns {Promise<any>}
  */
 function processFaceImage(imageBase64) {
+
+  const token = getAccessToken();
+  // const userCredential = getUsersCredentials()
+  // console.log('userCredential', userCredential);
+
+
+
   const headers = {
     'client_id': 'f7f4c38d9fa64dbe9557f1710a148ca3',
     'client_secret': '051f2478200544Aa9F5149b411Bd1aDA',
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5MnlsQmRRVUhBdS1yQmNBbmZGYU9uTXBWYVFGVnZ3eTJ4bENwaTVCUlNnIn0.eyJleHAiOjE3NDUyNDU4NzUsImlhdCI6MTc0NTI0NDA3NSwianRpIjoiZDU4NWRiNmYtNGMwMy00OWQxLWJlYmQtYTUyMThkOTQ4ZTZkIiwiaXNzIjoiaHR0cHM6Ly9pZHAua29wZXJuaWNhLmNsb3VkL3JlYWxtcy9uZXVyby1kZXYiLCJhdWQiOiJhY2NvdW50Iiwic3ViIjoiMDhmMTVhY2EtZjFjNS00ZGZmLWEzNzUtNTdjY2FlY2M4ZWE5IiwidHlwIjoiQmVhcmVyIiwiYXpwIjoiZjdmNGMzOGQ5ZmE2NGRiZTk1NTdmMTcxMGExNDhjYTMiLCJzaWQiOiI4YzE4NDEwMS1jYTk4LTRmNDQtODRlMi1jYzFhMDBmODZjYzIiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHBzOi8vbmV1cm9sb2d5Y2EuY29tIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLW5ldXJvLWRldiIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJmN2Y0YzM4ZDlmYTY0ZGJlOTU1N2YxNzEwYTE0OGNhMyI6eyJyb2xlcyI6WyI2Y2QwM2U0NC1hNjJiLTRiY2MtYTM4Yy0zZTJlNTNkNGE3NTEiXX0sImFjY291bnQiOnsicm9sZXMiOlsibWFuYWdlLWFjY291bnQiLCJtYW5hZ2UtYWNjb3VudC1saW5rcyIsInZpZXctcHJvZmlsZSJdfX0sInNjb3BlIjoib3BlbmlkIHByb2ZpbGUgZW1haWwiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsIm5hbWUiOiJUZXN0IFRlc3QxIiwicHJlZmVycmVkX3VzZXJuYW1lIjoidGVzdCIsImdpdmVuX25hbWUiOiJUZXN0IiwiZmFtaWx5X25hbWUiOiJUZXN0MSIsImVtYWlsIjoiVGVzdCJ9.Eu_f17KFSuKR4R6wQ7tFJH4_zSLy2-fuLctNQemVlHnj1OGB7bsdjXPpjXXqhWrPUHER0bez15fUThAuWJa4Pqq_9xWp6tMQbnuukx250CjhU0EQLYvg_L3mP50dFeY0PeI9TMazDCkUPxkqldBHaJj2iHbm6u4dEP45X7yOs8qVyFGIwBCHHWma3Qn6DuilMXQ9eY5r6VRzYTrbrNELH4Xd8U_lpg19hlrw07yP8ukBRwf6rK5x3rDoH2C2vO23dmFwv12lRaruhNHyNM_9tWBj9fNTP99T0pZY3O9jrGgCgwY_BENuQK8XcqV_ps9bgVHwNkI82PtwSOEwoOiq8Q'
+    'Authorization': `Bearer ${token}`
   };
 
   const body = JSON.stringify({
@@ -61,6 +97,7 @@ function processFaceImage(imageBase64) {
 const apiFaceAiService = {
   convertImageToBase64,
   processFaceImage,
+  getUsersCredentials
 };
 
 export default apiFaceAiService;
