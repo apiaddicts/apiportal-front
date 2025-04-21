@@ -12,8 +12,10 @@ const billingsProducts = () => {
   const requestOptions = {
     method: 'GET',
     headers: {
-      'client_id': process.env.REACT_APP_CLIENT_ID,
-      'client_secret': process.env.REACT_APP_CLIENT_SECRET,
+      // 'client_id': process.env.REACT_APP_CLIENT_ID,
+      // 'client_secret': process.env.REACT_APP_CLIENT_SECRET,
+      'client_id': 'ab5481325055405a97fcc7a826fac919',
+      'client_secret': '08f5c7b4aE194eCaBF7E33c990Ca7504',
       'Authorization': `Bearer ${accessToken}`
     },
   };
@@ -43,8 +45,10 @@ const billingsLink = (priceId) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'client_id': process.env.REACT_APP_CLIENT_ID,
-      'client_secret': process.env.REACT_APP_CLIENT_SECRET,
+      // 'client_id': process.env.REACT_APP_CLIENT_ID,
+      // 'client_secret': process.env.REACT_APP_CLIENT_SECRET,
+      'client_id': 'ab5481325055405a97fcc7a826fac919',
+      'client_secret': '08f5c7b4aE194eCaBF7E33c990Ca7504',
       'Authorization': `Bearer ${accessToken}`
     },
     body: data

@@ -22,6 +22,7 @@ import OAuthRedirect from '../../pages/common/OAuthRedirect';
 import Subscriptions from '../../pages/private/Subscriptions';
 import Logout from '../../pages/private/Logout/Logout';
 import Dashboard from '../../pages/private/Dashboard';
+import Billings from '../../pages/private/Billings';
 import ApiDoc from '../../pages/private/ApiDoc';
 
 
@@ -32,7 +33,7 @@ import config from '../../services/config';
 function PrivateRouter({ children }) {
   const { id, token, user, openModal, userGroups } = useSelector((state) => state.user);
   const { time } = useSelector((state) => state.timer);
-  const { checkSession,isSessionValid } = useVerifySession();
+  const { checkSession, isSessionValid } = useVerifySession();
   const { getTime } = useTimer();
   const privateSession = token !== '';
   const dispatch = useDispatch();
@@ -47,7 +48,7 @@ function PrivateRouter({ children }) {
   useEffect(() => {
     // checkSession();
     isSessionValid();
-    if(openModal) dispatch(logout());
+    if (openModal) dispatch(logout());
   }, [time]);
 
   return privateSession ? (
@@ -69,6 +70,7 @@ function PrivateRouter({ children }) {
             <div className={`container ${classes.wrapper}`}>
               <Routes>
                 <Route path='dashboard' exact='true' element={<Dashboard />} />
+                <Route path='billings' exact='true' element={<Billings />} />
                 <Route path='profile' element={<Profile />} />
                 <Route path='products' exact='true' element={<Products />} />
                 <Route path='products/:id' exact='true' element={<ProductDetail />} />

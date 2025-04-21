@@ -68,9 +68,8 @@ function Billings() {
                     <Typography variant="h4" color="primary">${priceFormatted} <small>/ mo</small></Typography>
                     <Box mt={2}>
                       <Typography>{monthlyRequests} API requests</Typography>
-                      <Typography>{dailyRequests} transactions / minute</Typography>
-                      <Typography>7-day free trial</Typography>
-                      <Typography>Cancel anytime</Typography>
+                      <Typography>{dailyRequests} transactions </Typography>
+
                     </Box>
                     <Button
                       variant="contained"
