@@ -1,4 +1,4 @@
-@import "./../../../styles/variables.scss";
+@import "./../../../styles/variables.module.scss";
 @import "../../../styles/mixins/mixin.scss";
 
 .create-account {
@@ -54,7 +54,7 @@
     height: 18px;
     border: 2px solid $primary;
     border-radius: 3px;
-  }  
+  }
   input[type="checkbox"]:checked {
     background-color: $theme_primary;
     accent-color: $theme_primary;

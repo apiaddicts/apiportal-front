@@ -1,4 +1,4 @@
-@import "../../../styles/variables.scss";
+@import "../../../styles/variables.module.scss";
 
 .return {
   display: grid;
@@ -27,11 +27,11 @@
   position: absolute;
   top: -42px;
   left: 30px;
-  
+
   @include breakpoint(xs) {
     left: 0;
   }
-  
+
   @include breakpoint(sm) {
     left: 0;
   }
@@ -55,11 +55,11 @@
       z-index: 1;
       background: $theme_primary;
     }
-  
+
     &__backTo {
       width: 100%;
       padding: 6% 0 2%;
-  
+
       &__btn {
         display: flex;
         align-items: center;

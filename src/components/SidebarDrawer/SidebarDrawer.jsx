@@ -28,7 +28,7 @@ import classes from './sliderdrawer.module.scss';
 /*import LogoAlt from '../../static/img/logoAlt.svg';*/
 import { logout } from '../../redux/actions/userAction';
 
-import styles from '../../styles/variables.scss';
+import styles from '../../styles/variables.module.scss';
 
 function SidebarDrawer({ children, user, isAdmin }) {
   const theme = useTheme();

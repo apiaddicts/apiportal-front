@@ -1,4 +1,4 @@
-@import "../../styles/variables.scss";
+@import "../../styles/variables.module.scss";
 
 @mixin button-bg($bg) {
   background: $bg;
@@ -80,7 +80,7 @@
 .btn-secundary-white {
   @include button-bg($white);
   @include letter($theme_primary);
-  @include border($white);  
+  @include border($white);
 }
 
 .btn-ghost {
