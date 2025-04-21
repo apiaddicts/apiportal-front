@@ -41,9 +41,6 @@ function Profile() {
   const name = user && Object.keys(user).length > 0 ? user.firstName : '';
   const lastName = user && Object.keys(user).length > 0 ? user.lastName : '';
   const email = user && Object.keys(user).length > 0 ? user.email : '';
-  const name = user && Object.keys(user).length > 0  ? user.firstName : '';
-  const lastName = user && Object.keys(user).length > 0  ? user.lastName : '';
-  const email = user && Object.keys(user).length > 0  ? user.email : '';
 
   const labelsUser = [
     {
