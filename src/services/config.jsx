@@ -1,5 +1,9 @@
 import { cryptoJs } from 'crypto-js'
 
+
+
+
+
 const createSharedAccessToken = (apimUid, apimAccessKey, expirationTime) => {
   const expiryDate = new Date();
   expiryDate.setTime(expiryDate.getTime() + (Number(expirationTime) * 1000));
@@ -84,7 +88,8 @@ const config = {
   contactEmailTo: import.meta.env.VITE_APP_EMAIL_TO,
   contactEmailTemplateId: import.meta.env.VITE_APP_EMAIL_CONTACT_TEMPLATE_ID,
   generateStarterSubscriptionOnSignup: (import.meta.env.VITE_APP_GENERATE_STARTER_SUBSCRIPTION_ON_SIGNUP === 'true'),
-  urlFaceAi: import.meta.env.VITE_APP_FACE_AI,
+  urlFaceAi: import.meta.env.VITE_APP_FACE_AI,  
+  urlUserCredential: import.meta.env.VITE_APP_CREDENTIAL
 };
 
 export default config;
