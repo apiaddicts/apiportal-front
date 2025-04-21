@@ -28,7 +28,7 @@ function Login({ setOpenForm, setIsOpen, setPrivateSession }) {
   useEffect(() => {
     if (token.length > 0) {
       setIsOpen(false);
-      navigate('/developer/profile');
+      navigate('/developer/dashboard');
     }
   }, [token]);
 

@@ -21,6 +21,8 @@ import SwaggerUI from '../../pages/common/SwaggerUI';
 import OAuthRedirect from '../../pages/common/OAuthRedirect';
 import Subscriptions from '../../pages/private/Subscriptions';
 import Logout from '../../pages/private/Logout/Logout';
+import Dashboard from '../../pages/private/Dashboard';
+import ApiDoc from '../../pages/private/ApiDoc';
 
 
 import { getUser, logout } from '../../redux/actions/userAction';
@@ -66,6 +68,7 @@ function PrivateRouter({ children }) {
             <SidebarDrawer user={user} />
             <div className={`container ${classes.wrapper}`}>
               <Routes>
+                <Route path='dashboard' exact='true' element={<Dashboard />} />
                 <Route path='profile' element={<Profile />} />
                 <Route path='products' exact='true' element={<Products />} />
                 <Route path='products/:id' exact='true' element={<ProductDetail />} />
@@ -74,6 +77,7 @@ function PrivateRouter({ children }) {
                 <Route path='apis/:id/swagger-ui' exact='true' element={<SwaggerUI />} />
                 <Route path='subscriptions' exact='true' element={<Subscriptions />} />
                 <Route path='subscriptions/:id' exact='true' element={<SubscriptionDetail />} />
+                <Route path='docs' element={<ApiDoc />} />
                 <Route path='*' element={<Navigate to='/' replace />} />
                 {/* {isAdmin && (
                   <>
