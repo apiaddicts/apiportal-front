@@ -2,73 +2,14 @@ import React, { useState } from 'react';
 import { Tabs, Tab, Box, Button } from '@mui/material';
 import { CopyAll } from '@mui/icons-material';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import AppSnackbar from '../../../components/Snackbar/Snackbar';
 
-import AppSnackbar from '../../../components/Snackbar/Snackbar'; // Asegúrate de que la ruta sea correcta
-
-
-const codeSnippets = {
-    Python: `
-import requests
-import json
-
-url = "https://dev.kopernica.cloud/api/v1/sync/xp/face-ai/process"
-
-payload = json.dumps({
-  "image": "/9j/4AAQSkZJRgABAQAAAQABAAD/.....",
-  "models": {
-    "bboxes": "dlib",
-    "landmarks": "mediapipe",
-    "emotions": "ferKpN",
-    "kpiEmotional": "default",
-    "kpiAttentional": "default",
-    "kpiComposed": "default"
-  }
-})
-headers = {
-  'client_id': 'f7f4c38d9fa64db..',
-  'client_secret': '051f2478200544..',
-  'Content-Type': 'application/json',
-  'Authorization': 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCIg...'
-}
-
-response = requests.request("POST", url, headers=headers, data=payload)
-
-print(response.text)
-`,
-    JavaScript: `
-const myHeaders = new Headers();
-myHeaders.append("client_id", "f7f4c38d9fa64dbe95....");
-myHeaders.append("client_secret", "051f2478200544....");
-myHeaders.append("Content-Type", "application/json");
-myHeaders.append("Authorization", "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI5Mnl...");
+import codeSnippets from '../../../static/const/codeSnippets';
 
 
-const raw = JSON.stringify({
-  "image": "/9j/4AAQSkZJRgABAQAAAQABAAD/....",
-  "models": {
-    "bboxes": "dlib",
-    "landmarks": "mediapipe",
-    "emotions": "ferKpN",
-    "kpiEmotional": "default",
-    "kpiAttentional": "default",
-    "kpiComposed": "default"
-  }
-});
 
 
-const requestOptions = {
-  method: "POST",
-  headers: myHeaders,
-  body: raw,
-  redirect: "follow"
-};
-
-
-fetch("https://dev.kopernica.cloud/api/v1/sync/xp/face-ai/process", requestOptions)
-  .then((response) => response.text())
-  .then((result) => console.log(result))
-  .catch((error) => console.error(error));`,
-};
 
 function CodeTabs() {
     const [tab, setTab] = useState('Python');
@@ -106,20 +47,27 @@ function CodeTabs() {
                 </CopyToClipboard>
 
 
-                <Box
-                    component="pre"
-                    sx={{
-                        backgroundColor: '#f0f0f0',
-                        padding: 2,
-                        borderRadius: 1,
-                        overflowX: 'auto',
+
+                <SyntaxHighlighter
+                    language={
+                        tab.toLowerCase() === 'nodejs'
+                            ? 'javascript'
+                            : tab.toLowerCase() === 'php'
+                                ? 'php'
+                                : tab.toLowerCase()
+                    }
+
+                    customStyle={{
+                        padding: '16px',
+                        borderRadius: '8px',
+                        marginTop: '40px',
                         fontSize: '0.85rem',
-                        whiteSpace: 'pre-wrap',
-                        marginTop: 5,
+                        overflowX: 'auto',
+                        background: '#f3f3f3',
                     }}
                 >
-                    {codeSnippets[tab]}
-                </Box>
+                    {codeSnippets[tab].trim()}
+                </SyntaxHighlighter>
             </Box>
             <AppSnackbar
                 open={snackbarOpen}
