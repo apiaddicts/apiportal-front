@@ -54,7 +54,7 @@ function ApiDoc() {
       const base64Image = await apiFaceAiService.convertImageToBase64(imageFile);
       // const ejemplo = await apiFaceAiService.getUsersCredentials();
       const response = await apiFaceAiService.processFaceImage(base64Image);
-      consoloe.log('ejemplo', ejemplo);
+      // consoloe.log('ejemplo', ejemplo);
       setResult(response);
 
       showMessage('Imagen procesada correctamente ✅', 'success');
