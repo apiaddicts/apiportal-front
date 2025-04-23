@@ -46,6 +46,12 @@ export default function apiManagerReducer (state = initialState, action) {
         error: action.payload,
         api: {}
       }
+    case apiManagerConstant.RESET_API_DETAILED:
+      return {
+        ...state,
+        api: {},
+        error: {},
+      };
     default:
       return state;
   }
