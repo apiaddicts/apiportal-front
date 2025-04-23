@@ -29,6 +29,10 @@ import ApiDoc from '../../pages/private/ApiDoc';
 import { getUser, logout } from '../../redux/actions/userAction';
 import classes from './private-router.module.scss';
 import config from '../../services/config';
+import CodeSamples from '../../pages/private/codeSamples';
+import codeSamplesDetail from '../../pages/private/codeSamplesDetail';
+import CodeSampleDetailss from '../../pages/private/codeSamplesDetail';
+
 
 function PrivateRouter({ children }) {
   const { id, token, user, openModal, userGroups } = useSelector((state) => state.user);
@@ -79,8 +83,11 @@ function PrivateRouter({ children }) {
                 <Route path='apis/:id/swagger-ui' exact='true' element={<SwaggerUI />} />
                 <Route path='subscriptions' exact='true' element={<Subscriptions />} />
                 <Route path='subscriptions/:id' exact='true' element={<SubscriptionDetail />} />
+                <Route path='code-samples' exact='true' element={<CodeSamples />} />
+                <Route path='code-samples/:id' exact='true' element={<CodeSampleDetailss />} />
                 <Route path='docs' element={<ApiDoc />} />
                 <Route path='*' element={<Navigate to='/' replace />} />
+
                 {/* {isAdmin && (
                   <>
                     <Route path='users' exact='true' element={<Users />} />
