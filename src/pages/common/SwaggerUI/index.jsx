@@ -8,19 +8,13 @@ import { Container } from '@mui/material';
 import { useSelector } from 'react-redux';
 import Icon from '../../../components/MdIcon/Icon';
 import libraryService from '../../../services/libraryService';
-//import productService from '../../../services/productsService';
-import subscriptionsService from '../../../services/subscriptionsService';
 import classes from './swagger-ui.module.scss';
-import Select from '../../../components/Input/InputUI/Select';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 
 function SwaggerUI() {
   const { user } = useSelector((state) => state.user);
   const [openApi, setOpenApi] = useState();
   const params = useParams();
-  const [products, setProducts] = useState([]);
-  const [subscriptions, setSubscriptions] = useState([]);
-  const [subscriptionSecrets, setSubscriptionSecrets] = useState([]);
   const [swaggerUi, setSwaggerUi] = useState();
 
   /*const LogoutPlugin = () => ({
@@ -38,7 +32,12 @@ function SwaggerUI() {
   });*/
 
   useEffect(() => {
-    libraryService.getOpenApiFromStrapi(params.id).then((jsonOpenApi) => {
+    console.log(params.id);
+    libraryService.getOpenApiFromStrapi(params.id).then((response) => {
+      console.log(response);
+
+      const jsonOpenApi = response[0]['openDoc'];
+      console.log(jsonOpenApi);
       setOpenApi(jsonOpenApi);
       const swaggerUi = SwaggerUi({
         dom_id: '#swaggerContainer',
@@ -51,90 +50,8 @@ function SwaggerUI() {
       setSwaggerUi(swaggerUi);
     });
 
-    if (Object.keys(user).length > 0) {
-      libraryService.getApiProducts(params.id).then((productList) => {
-        const products = productList && Object.keys(productList).length > 0 ? productList.value.map((product) => {
-          const prodItem = {
-            ...product.properties,
-            id: product.name,
-            value: product.name,
-            text: product.properties.displayName,
-          };
-          return prodItem;
-        }) : [];
-        setProducts(products);
-
-        subscriptionsService.listUserSubscriptions(user.name).then((subscriptionList) => {
-          const subscriptions = subscriptionList && Object.keys(subscriptionList).length > 0 ? subscriptionList.value.filter((subscription) => {
-            return (subscription.properties.state !== 'cancelled' && products.some((product) => subscription.properties.scope.includes(product.id)));
-          }).map((subscription) => {
-            const subscriptionItem = {
-              ...subscription.properties,
-              id: subscription.name,
-              value: subscription.name,
-              text: subscription.properties.displayName,
-            };
-            return subscriptionItem;
-          }) : [];
-          setSubscriptions(subscriptions);
-        });
-
-      });
-    }
   }, []);
-
-  /*const handleProductSelect = (selectProduct) => {
-    if (Object.keys(user).length > 0 && selectProduct) {
-      productService.getProductSuscripcion(selectProduct.id).then((subscriptionList) => {
-        const subscriptions = subscriptionList && Object.keys(subscriptionList).length > 0 ? subscriptionList.value.filter((subscription) => {
-          return (subscription.properties.state !== 'cancelled');
-        }).map((subscription) => {
-          const subscriptionItem = {
-            ...subscription.properties,
-            id: subscription.name,
-            value: subscription.name,
-            text: subscription.properties.displayName,
-          };
-          return subscriptionItem;
-        }) : [];
-        setSubscriptions(subscriptions);
-        setSubscriptionSecrets([]);
-      });
-    } else {
-      setSubscriptions([]);
-      setSubscriptionSecrets([]);
-    }
-    swaggerUi.authActions.logout(['apiKeyHeader']);
-  };*/
-
-  const handleSubscriptionSelect = (selectedSubscription) => {
-    if (Object.keys(user).length > 0 && selectedSubscription) {
-      subscriptionsService.listSubscriptionSecrets(user.name, selectedSubscription.id).then((subscriptionSecrets) => {
-        const subscriptionSecretList = subscriptionSecrets && Object.keys(subscriptionSecrets).length > 0 ? Object.keys(subscriptionSecrets).map((subscriptionSecret) => {
-          return {
-            id: subscriptionSecrets[subscriptionSecret],
-            value: subscriptionSecrets[subscriptionSecret],
-            text: subscriptionSecret,
-          };
-        }) : [];
-        setSubscriptionSecrets(subscriptionSecretList);
-      });
-    } else {
-      setSubscriptionSecrets([]);
-    }
-    swaggerUi.authActions.logout(['apiKeyHeader']);
-  };
-
-  const handleSubscriptionSecretSelect = (selectedSubscriptionKey) => {
-    swaggerUi.authActions.logout(['apiKeyHeader']);
-    if (Object.keys(user).length > 0 && selectedSubscriptionKey) {
-      const openAuthFormButton = document.querySelector('.auth-wrapper .authorize');
-      openAuthFormButton.click();
-      setTimeout(() => {
-        swaggerUi.preauthorizeApiKey('apiKeyHeader', selectedSubscriptionKey.value);
-      }, 350);
-    }
-  };
+  
 
   return (
     <div>
@@ -150,27 +67,6 @@ function SwaggerUI() {
               </div>
             </Link>
           </div>
-          { products.length > 0 && (
-            <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
-              {/*
-              <div className='row mt-6'>
-                <div className='flex-sm-12 flex-md-12 flex-lg-12'>
-                  <Select label='Producto' placeholder='Seleccione un producto' items={products} itemText='text' itemValue='value' onChange={(e) => handleProductSelect(e)} />
-                </div>
-              </div>
-              */}
-              <div className='row mt-6'>
-                <div className='flex-sm-12 flex-md-12 flex-lg-12'>
-                  <Select label='Suscripción' disabled={!subscriptions.length > 0} placeholder='Seleccione una suscripción' items={subscriptions} itemText='text' itemValue='value' onChange={(e) => handleSubscriptionSelect(e)} />
-                </div>
-              </div>
-              <div className='row mt-6'>
-                <div className='flex-sm-12 flex-md-12 flex-lg-12'>
-                  <Select label='Clave de Suscripción' disabled={!subscriptionSecrets.length > 0} placeholder='Seleccione una clave de suscripción' items={subscriptionSecrets} itemText='text' itemValue='value' onChange={(e) => handleSubscriptionSecretSelect(e)} />
-                </div>
-              </div>
-            </Container>
-          )}
           <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
             { openApi ? <div id='swaggerContainer' /> : <SkeletonComponent /> }
           </Container>
