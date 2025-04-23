@@ -76,6 +76,8 @@ function SidebarDrawer({ children, user }) {
     // { route: '/developer/docs', text: 'Documentacion', icon: <Terminal />, primaryRole: true }
     // { route: '/developer/users', text: 'Usuarios', icon: <Person />, primaryRole: isAdmin },
     // { route: '/developer/groups', text: 'Grupos', icon: <ShareIcon />, primaryRole: isAdmin },
+    { route: '/developer/code-samples', text: 'Code Samples', icon: <Terminal />, primaryRole: true },
+    // { route: '/developer/code-samples/details', text: 'Code Samples Details', icon: <Terminal size='1.5rem' />, primaryRole: true },
   ];
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -263,11 +265,11 @@ function SidebarDrawer({ children, user }) {
               <h1 className={`font-weight-regular text__tertiary ${classes.title}`}>Hola,</h1>
               <h1 className={`font-weight-bold text__primary ${classes.title__name}`}>
                 {
-                  user && Object.keys(user).length > 0  ? (
+                  user && Object.keys(user).length > 0 ? (
                     <>
                       {user.firstName}
                       <br />
-                      {user.lastName }
+                      {user.lastName}
                     </>
                   ) : ('')
                 }
