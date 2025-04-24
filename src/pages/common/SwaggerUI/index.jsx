@@ -1,56 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
 import SwaggerUi from 'swagger-ui';
 import 'swagger-ui/dist/swagger-ui.css';
 
 import { Container } from '@mui/material';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Icon from '../../../components/MdIcon/Icon';
-import libraryService from '../../../services/libraryService';
+import { getApiDefinition } from '../../../redux/actions/apiManagerAction'
 import classes from './swagger-ui.module.scss';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 
 function SwaggerUI() {
   const { user } = useSelector((state) => state.user);
-  const [openApi, setOpenApi] = useState();
+  const { definition } = useSelector((state) => state.apiManager);
+  const dispatch = useDispatch();
   const params = useParams();
-  const [swaggerUi, setSwaggerUi] = useState();
-
-  /*const LogoutPlugin = () => ({
-    statePlugins: {
-      auth: {
-        wrapActions: {
-          logout: (oriAction) => (keys) => {
-            // here, you can do the logout request.
-            console.log('Logout from following securities:', keys);
-            return oriAction(keys); // don't forget! otherwise, Swagger UI won't logout
-          },
-        },
-      },
-    },
-  });*/
+  const swaggerRef = useRef(null);
 
   useEffect(() => {
-    console.log(params.id);
-    libraryService.getOpenApiFromStrapi(params.id).then((response) => {
-      console.log(response);
+    console.log('primer effect');
+    console.log(definition);
+    if( Object.keys(definition).length == 0){
+      dispatch(getApiDefinition('Mulesoft', params.id));
+    }
+  }, []);
 
-      const jsonOpenApi = response[0]['openDoc'];
-      console.log(jsonOpenApi);
-      setOpenApi(jsonOpenApi);
-      const swaggerUi = SwaggerUi({
-        dom_id: '#swaggerContainer',
-        spec: jsonOpenApi,
+  useEffect(() => {
+    if(Object.keys(definition).length > 0 && swaggerRef.current){
+      SwaggerUi({
+        domNode: swaggerRef.current,
+        spec: definition,
         presets: [SwaggerUi.presets.apis],
-        //plugins: [LogoutPlugin],
-        oauth2RedirectUrl: `${window.location.protocol}//${window.location.host}/developer/apis/swagger-ui/oauth-redirect`,
         persistAuthorization: true,
       });
-      setSwaggerUi(swaggerUi);
-    });
+    }
 
-  }, []);
+  }, [definition]);
   
 
   return (
@@ -68,7 +54,7 @@ function SwaggerUI() {
             </Link>
           </div>
           <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
-            { openApi ? <div id='swaggerContainer' /> : <SkeletonComponent /> }
+            { Object.keys(definition).length > 0 ? <div ref={swaggerRef} id='swaggerContainer' /> : <SkeletonComponent /> }
           </Container>
         </>
       ) : (
@@ -90,7 +76,7 @@ function SwaggerUI() {
             </div>
           </div>
           <div className='container'>
-            { openApi ? <div id='swaggerContainer' /> : <SkeletonComponent /> }
+            { Object.keys(definition).length > 0 ? <div ref={swaggerRef} id='swaggerContainer' /> : <SkeletonComponent /> }
           </div>
         </div>
       )}

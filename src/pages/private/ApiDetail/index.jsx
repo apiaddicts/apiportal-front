@@ -57,10 +57,10 @@ function ApiDetail(props) {
           <div>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className={classes.box__title}>
               <Title text={api.assetId ? api.assetId : 'Demo API'} />
-              {/* <Link to={`/developer/apis/${api.name}/swagger-ui`} className={classes.wrapper__btn}>
-                <span>Probar</span>
+              <Link to={`/developer/apis/${api.assetId}/swagger-ui`} className={classes.wrapper__btn}>
+                <span>Definición</span>
                 <Icon id='MdChevronRight' />
-              </Link> */}
+              </Link>
             </Box>
             <Box className={classes.grid__apidetail}>
               <div className={classes.grid__apidetail__accordionfilter}>
