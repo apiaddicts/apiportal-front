@@ -17,34 +17,17 @@ function CustomAccordion({ items, subItem, setSubItem }) {
   const arrOption = [
     'Información',
     'Descripción',
-    'Versiones',
-    'Autenticación',
+    // 'Versiones',
     // 'Sandbox',
   ];
 
-  useEffect(() => {
-    if (apis && Object.keys(apis).length === 0) {
-      dispatch(listApis());
-    }
-    if (hostnames && Object.keys(hostnames).length === 0) {
-      dispatch(getApiHostnames(items.name));
-    }
-    if (jsonOpenApi && Object.keys(jsonOpenApi).length === 0) {
-      dispatch(getApiOpenAPI(items.name));
-    }
-  }, [dispatch, apis, hostnames, jsonOpenApi]);
 
-  // const mApis = apis && Object.keys(apis).length > 0 ? apis.value.map((f) => {
-  //   return f;
-  // }).filter((n) => n.properties.apiVersionSetId === items.properties.apiVersionSetId) : [];
+  const mApis = items.versions && items.versions.length > 0 ? items.versions : [];
 
-  // const hostname = hostnames && Object.keys(hostnames).length > 0 ? hostnames.value.map((x) => {
-  //   return x.properties.value;
-  // }) : [];
 
   return (
     <div>
-      { items && Object.keys(items).length > 0 ? (
+      {items && Object.keys(items).length > 0 ? (
         <div>
           {arrOption.map((option, index) => (
             <div className={classes.accordion} key={index}>
@@ -72,18 +55,23 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                           <div className={classes.accordion__body__title}>
                             <h1>Título</h1>
                             <p>
-                              {items.name}
-                            </p>
-                          </div>
+<<<<<<< HEAD
+  { items.name }
+=======
+                              {items.assetId}
+>>>>>>> feat/adding_login_portal
+                            </p >
+                          </div >
 
-                          <div className={classes.accordion__body__title}>
-                            <h1>Versión</h1>
-                            <p>
-                              {items.version}
-                            </p>
-                          </div>
+    <div className={classes.accordion__body__title}>
+      <h1>Versión</h1>
+      <p>
+<<<<<<< HEAD
+  { items.version }
+                            </p >
+                          </div >
 
-                          {/* <div className={classes.accordion__body__title}>
+  {/* <div className={classes.accordion__body__title}>
                             <h1>Protocolo</h1>
                             <p>
                               {
@@ -91,31 +79,66 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                                   return protocol;
                                 })
                               }
+=======
+                              {items.assetVersion}
+>>>>>>> feat/adding_login_portal
                             </p>
                           </div> */}
-                          <div className={classes.accordion__body__title}>
-                            {/* <h1>URI:</h1>
+    < div className = { classes.accordion__body__title } >
+<<<<<<< HEAD
+    {/* <h1>URI:</h1>
                             <code className={classes.scopes__code}>{`https://${hostname}/${items.properties.path}/${items.properties.apiVersion ? `${items.properties.apiVersion}/` : ''}`}</code> */}
-                          </div>
-                        </div>
+=======
+                            <h1>URI:</h1>
+                            <code className={classes.scopes__code}>{items.endpoint.uri}</code>
+>>>>>>> feat/adding_login_portal
+                          </div >
+                        </div >
                       ) : subItem === 1 ? (
+    <div>
+      <p className={classes.accordion__body__description}>{items.description}</p>
+    </div>
+<<<<<<< HEAD
+  ) : (
+=======
+                      ) /* : subItem === 2 ? (
                         <div>
-                          <p className={classes.accordion__body__description}>{items.description}</p>
+                          <div className={classes.accordion__body__title}>
+                            <h1>Titulo</h1>
+                            <p>
+                              {items.name}
+                            </p>
+                          </div>
+                              <div className={classes.accordion__body__title}>
+                                <h1>Versión</h1>
+                                <p>
+                                  {version}
+                                </p>
+                              </div>
+                          {mApis.length > 0 ? mApis.map((pos, index) => (
+                            <div key={index}>
+                              <div className={classes.accordion__body__title}>
+                                <h1>URI Live:</h1>
+                                <code className={classes.scopes__code}>{`https://${hostname}/${items.properties.path}/${pos.properties.apiVersion ? `${pos.properties.apiVersion}/` : ''}`}</code>
+                              </div>
+                            </div>
+                          )) : <p>Información no disponible</p>}
                         </div>
-                      ) : (
-                        <div>
-                          <p>Información no disponible</p>
-                        </div>
-                      )
-                    }
-                  </div>
+                      ) */ : (
+>>>>>>> feat/adding_login_portal
+    <div>
+      <p>Información no disponible</p>
+    </div>
+  )
+}
+                  </div >
                 ) : null
               }
-            </div>
+            </div >
           ))}
-        </div>
+        </div >
       ) : null }
-    </div>
+    </div >
   );
 }
 

@@ -6,10 +6,10 @@ export const getApiList = (configApim) => (dispatch) => {
  dispatch({type: apiManagerConstants.GET_ALL_API_MANAGER_REQUEST});
  apiManagerService.integrationListApis(configApim)
   .then(response => {
-    if(response.data.length > 0){
+    if(response.data && Object.keys(response.data).length > 0){
       dispatch({
         type: apiManagerConstants.GET_ALL_API_MANAGER_SUCCESS,
-        payload: response.data
+        payload: response.data.instances
       })
     }else{
       dispatch({
@@ -31,12 +31,12 @@ export const getApiDetail = (configApim,id) => (dispatch) => {
       if(response.data && Object.keys(response.data).length > 0){
         dispatch({
           type: apiManagerConstants.GET_API_DETAIL_SUCCESS,
-          apis: response.data
+          payload: response.data
         })
       }else{
         dispatch({
           type: apiManagerConstants.GET_ALL_API_MANAGER_FAILURE,
-          apis: response
+          payload: response
         })
       }
     })
@@ -44,3 +44,28 @@ export const getApiDetail = (configApim,id) => (dispatch) => {
       console.error(error);
     })
 }
+export const getApiDefinition = (configApim, id) => (dispatch) => {
+  dispatch({type: apiManagerConstants.GET_DEFINITION_REQUEST});
+  apiManagerService.getApiDefinition(configApim,id)
+    .then(response => {
+      if(response.data || response.data != null) {
+        console.log(typeof response.data);
+        const openApiDef = JSON.parse(response.data);
+        dispatch({
+          type: apiManagerConstants.GET_DEFINITION_SUCCESS,
+          payload: openApiDef
+        })
+      }else{
+        dispatch({
+          type: apiManagerConstants.GET_DEFINITION_FAILED,
+          payload: response
+        })
+      }
+    })
+} 
+
+export const resetApiDetailed = () => (dispatch) => {
+  dispatch({
+    type: apiManagerConstants.RESET_API_DETAILED,
+  });
+};

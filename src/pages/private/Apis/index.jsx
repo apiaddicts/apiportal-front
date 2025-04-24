@@ -91,14 +91,14 @@ function Apis(props) {
             apis.map((api,index) => (
               <CardInformationLibrary 
                 key={index}
-                apiName={api.name}
-                title={api.name}
+                apiName={api.assetId}
+                title={api.assetId}
                 status={api.status}
-                version={api.version}
+                version={api.assetVersion}
                 description={api.description}
                 theme='dark'
                 info='ver Documentacion'
-                redirectTo={`/developer/apis/${api.assetId}`}
+                redirectTo={`/developer/apis/${api.id}`}
               />
             ))
           ) :
