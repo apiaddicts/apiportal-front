@@ -3,6 +3,7 @@ import apiManagerConstant from '../constants/apiManagerConstant';
 const initialState = {
   apis: [],
   api: {},
+  definition:{},
   loading: false,
   error: {}
 }
@@ -46,6 +47,31 @@ export default function apiManagerReducer (state = initialState, action) {
         error: action.payload,
         api: {}
       }
+    case apiManagerConstant.RESET_API_DETAILED:
+      return {
+        ...state,
+        api: {},
+        error: {},
+        definition:{}
+      };
+    case apiManagerConstant.GET_DEFINITION_REQUEST:
+      return {
+        ...state,
+        loading: true
+      };
+    case apiManagerConstant.GET_DEFINITION_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        definition: action.payload
+      };
+    case apiManagerConstant.GET_DEFINITION_FAILED:
+      return {
+        ...state,
+        loading: false,
+        definition: {},
+        error: action.payload
+      };
     default:
       return state;
   }

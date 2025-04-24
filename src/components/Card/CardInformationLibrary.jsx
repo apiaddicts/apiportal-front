@@ -25,22 +25,6 @@ function CardInformationLibrary({ apiName, img, title, description, reading, inf
 
   const [buttons, setButtons] = useState([]);
 
-  useEffect(() => {
-    if (apiName && apiName.length > 0) {
-      libraryService.getListTagsByApi(apiName).then((response) => {
-        const values = [];
-        if (response.value) {
-          response.value.forEach((element) => {
-            values.push({ label: element.name });
-          });
-
-          setButtons(values);
-        }
-      }, (err) => {
-        console.error(err);
-      });
-    }
-  }, [apiName]);
 
   const clickLink = () => {
     navigate(link);
