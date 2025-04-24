@@ -55,52 +55,25 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                           <div className={classes.accordion__body__title}>
                             <h1>Título</h1>
                             <p>
-<<<<<<< HEAD
-  { items.name }
-=======
                               {items.assetId}
->>>>>>> feat/adding_login_portal
-                            </p >
-                          </div >
-
-    <div className={classes.accordion__body__title}>
-      <h1>Versión</h1>
-      <p>
-<<<<<<< HEAD
-  { items.version }
-                            </p >
-                          </div >
-
-  {/* <div className={classes.accordion__body__title}>
-                            <h1>Protocolo</h1>
-                            <p>
-                              {
-                                items.properties.protocols.map((protocol, index) => {
-                                  return protocol;
-                                })
-                              }
-=======
-                              {items.assetVersion}
->>>>>>> feat/adding_login_portal
                             </p>
-                          </div> */}
-    < div className = { classes.accordion__body__title } >
-<<<<<<< HEAD
-    {/* <h1>URI:</h1>
-                            <code className={classes.scopes__code}>{`https://${hostname}/${items.properties.path}/${items.properties.apiVersion ? `${items.properties.apiVersion}/` : ''}`}</code> */}
-=======
+                          </div>
+
+                          <div className={classes.accordion__body__title}>
+                            <h1>Versión</h1>
+                            <p>
+                              {items.assetVersion}
+                            </p>
+                          </div>
+                          <div className={classes.accordion__body__title}>
                             <h1>URI:</h1>
                             <code className={classes.scopes__code}>{items.endpoint.uri}</code>
->>>>>>> feat/adding_login_portal
-                          </div >
-                        </div >
+                          </div>
+                        </div>
                       ) : subItem === 1 ? (
-    <div>
-      <p className={classes.accordion__body__description}>{items.description}</p>
-    </div>
-<<<<<<< HEAD
-  ) : (
-=======
+                        <div>
+                          <p className={classes.accordion__body__description}>{items.description}</p>
+                        </div>
                       ) /* : subItem === 2 ? (
                         <div>
                           <div className={classes.accordion__body__title}>
@@ -125,20 +98,19 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                           )) : <p>Información no disponible</p>}
                         </div>
                       ) */ : (
->>>>>>> feat/adding_login_portal
-    <div>
-      <p>Información no disponible</p>
-    </div>
-  )
-}
-                  </div >
+                          <div>
+                            <p>Información no disponible</p>
+                          </div>
+                        )
+                    }
+                  </div>
                 ) : null
               }
-            </div >
+            </div>
           ))}
-        </div >
-      ) : null }
-    </div >
+        </div>
+      ) : null}
+    </div>
   );
 }
 
