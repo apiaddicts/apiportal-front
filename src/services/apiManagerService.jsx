@@ -54,10 +54,28 @@ function integrationApiDetail(configType, apiId) {
     })
 }
 
+function getApiDefinition(configType,assetId) {
+  const requestOptions = {
+    method: 'GET',
+    headers: {'x-apimanager-id': `${configType}`}
+  }
+
+  const url = `${config.integratorUrl}/definition/${assetId}`
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then(response => {
+      return response;
+    })
+    .catch(error => {
+      console.error(error);
+    })
+}
+
 const integrationService = {
   integrationLogin,
   integrationListApis,
-  integrationApiDetail
+  integrationApiDetail,
+  getApiDefinition
 }
 export default integrationService;
 
