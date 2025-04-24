@@ -7,7 +7,7 @@ import 'swagger-ui/dist/swagger-ui.css';
 import { Container } from '@mui/material';
 import { useSelector, useDispatch } from 'react-redux';
 import Icon from '../../../components/MdIcon/Icon';
-import { getApiDefinition } from '../../../redux/actions/apiManagerAction'
+import { getApiDefinition, resetApiDetailed } from '../../../redux/actions/apiManagerAction'
 import classes from './swagger-ui.module.scss';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 
@@ -19,12 +19,16 @@ function SwaggerUI() {
   const swaggerRef = useRef(null);
 
   useEffect(() => {
-    console.log('primer effect');
-    console.log(definition);
     if( Object.keys(definition).length == 0){
       dispatch(getApiDefinition('Mulesoft', params.id));
     }
   }, []);
+
+  useEffect(() => {
+      return () => {
+        dispatch(resetApiDetailed());
+      };
+    }, []);
 
   useEffect(() => {
     if(Object.keys(definition).length > 0 && swaggerRef.current){
