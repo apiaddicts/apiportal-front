@@ -6,7 +6,7 @@ import Modal from '../../../components/Modal';
 // import Icon from '../../../components/MdIcon/Icon';
 import ResetPassword from '../../../components/Forms/ResetPassword';
 import { fieldsLogin } from '../../../components/Forms/fields';
-import { login } from '../../../redux/actions/userAction';
+import { login, loginApim } from '../../../redux/actions/userAction';
 import useLoginConfig from '../../../hooks/useLogin';
 import classes from './login.module.scss';
 
@@ -21,13 +21,14 @@ function Login({ setOpenForm, setIsOpen, setPrivateSession }) {
 
   // This function is responsible for sending the user to local storage
   const handleSubmit = (dataForm) => {
-    dispatch(login(dataForm));
+    dispatch(login(dataForm,'Mulesoft'));
+    dispatch(loginApim('Mulesoft'));
   };
 
   useEffect(() => {
     if (token.length > 0) {
       setIsOpen(false);
-      navigate('/developer/profile');
+      navigate('/developer/dashboard');
     }
   }, [token]);
 

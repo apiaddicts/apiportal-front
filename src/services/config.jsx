@@ -1,5 +1,9 @@
 import { cryptoJs } from 'crypto-js'
 
+
+
+
+
 const createSharedAccessToken = (apimUid, apimAccessKey, expirationTime) => {
   const expiryDate = new Date();
   expiryDate.setTime(expiryDate.getTime() + (Number(expirationTime) * 1000));
@@ -32,6 +36,9 @@ export const compareArrays = (a, b) => {
 };
 
 const config = {
+  authUrl: import.meta.env.VITE_APP_AUTH,
+  keycloakKey: import.meta.env.VITE_APP_KEYCLOAK_CLIENT_ID,
+  integratorUrl: import.meta.env.VITE_APP_INTEGRATOR_URL,
   apiUrl: import.meta.env.VITE_APP_STRAPI_URL,
   azureUrl: import.meta.env.VITE_APP_AZURE_APIM_URL,
   subscriptionId: import.meta.env.VITE_APP_AZURE_SUBSCRIPTION_ID,
@@ -81,6 +88,8 @@ const config = {
   contactEmailTo: import.meta.env.VITE_APP_EMAIL_TO,
   contactEmailTemplateId: import.meta.env.VITE_APP_EMAIL_CONTACT_TEMPLATE_ID,
   generateStarterSubscriptionOnSignup: (import.meta.env.VITE_APP_GENERATE_STARTER_SUBSCRIPTION_ON_SIGNUP === 'true'),
+  urlFaceAi: import.meta.env.VITE_APP_FACE_AI,
+  urlUserCredential: import.meta.env.VITE_APP_CREDENTIAL
 };
 
 export default config;

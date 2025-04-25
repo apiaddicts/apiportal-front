@@ -6,6 +6,8 @@ import homeReducer from './reducer/homeReducer';
 import appPartnersReducer from './reducer/appPartnersReducer';
 import faqReducer from './reducer/faqReducer';
 import blogReducer from './reducer/blogReducer';
+import codeSampleReducer from './reducer/codeSampleReducer';
+import BillingReducer from './reducer/billingReducer';
 import libraryReducer from './reducer/libraryReducer';
 import userReducer from './reducer/userReducer';
 import productReducer from './reducer/productReducer';
@@ -19,14 +21,18 @@ import usersReducer from './reducer/usersReducer';
 import groupReducer from './reducer/groupReducer';
 import appsReducer from './reducer/appsReducer';
 import gettingStartedReducer from './reducer/gettingStartedReducer';
+import apiManagerReducer from './reducer/apiManagerReducer';
 
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 const reducers = combineReducers({
   home: homeReducer,
+  apiManager: apiManagerReducer,
   appPartners: appPartnersReducer,
   faq: faqReducer,
   blog: blogReducer,
+  codeSampleReducer: codeSampleReducer,
+  billing: BillingReducer,
   library: libraryReducer,
   user: userReducer,
   products: productReducer,

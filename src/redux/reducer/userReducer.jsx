@@ -3,8 +3,9 @@ import userConstants from '../constants/userConstats';
 const token = JSON.parse(sessionStorage.getItem('token'));
 
 const initialState = token ? {
-  id: token?.userId?.id,
-  token: token.token,
+  // id: token?.userId?.id,
+  token: token['accessToken'],
+  apimToken: false,
   etag: '',
   loadingSignUp: false,
   signUpData: {},
@@ -30,6 +31,7 @@ const initialState = token ? {
   loadingUser: false,
   id: '',
   token: '',
+  apimToken:false,
   etag: '',
   loadingSignUp: false,
   signUpData: {},
@@ -151,7 +153,6 @@ export default function userReducer(state = initialState, action) {
     case userConstants.LOGIN_SUCCESS:
       return {
         ...state,
-        id: action.id,
         token: action.token,
       };
     case userConstants.LOGIN_FAILURE:
@@ -298,6 +299,24 @@ export default function userReducer(state = initialState, action) {
         updateProfileFail: action.response,
       };
 
+    // case userConstants.LOGIN_APIM_REQUEST:
+    //   return {
+    //     ...state,
+    //     loading: true
+    //   }
+    case userConstants.LOGIN_APIM_SUCCESS:
+      return {
+        ...state,
+        apimToken: action.payload,
+        loading: false
+      }
+    
+    case userConstants.LOGIN_APIM_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+        apimToken: false
+      }
     default:
       return state;
   }

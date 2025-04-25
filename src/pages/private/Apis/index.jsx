@@ -9,30 +9,25 @@ import SearchInput from '../../../components/Input/SearchInput';
 import Icon from '../../../components/MdIcon/Icon';
 import CardInformationLibrary from '../../../components/Card/CardInformationLibrary';
 import { listApis, searchApis, getListTags, filterAPIsByTags, resetLibraryApi, getLibraryApiNextSearch, getLibraryApiPreviosSearch, getLibraryApiNext, getLibraryApiPrevios, getLibraries } from '../../../redux/actions/libraryAction';
+import { getApiList } from '../../../redux/actions/apiManagerAction';
 import classes from './apis.module.scss';
 import config from '../../../services/config';
 
-const compareArrays = (array1, array2) => {
-  return array1.filter((a) => {
-    return array2.some((b) => {
-      return a.slug === b.name;
-    });
-  });
-};
+
 
 function Apis(props) {
 
   const topApi = config.topApi;
-  const { loadingLibraries, apis, tagsList, libraries } = useSelector((state) => state.library);
-  const fApis = libraries && libraries.length > 0 && apis && Object.keys(apis).length > 0 && apis.value.length > 0 ? compareArrays(libraries, apis.value) : [];
+  const { apis, loading } = useSelector((state) => state.apiManager);
+
   const [skip, setSkip] = useState(0);
   const dispatch = useDispatch();
 
-  const displayApis = useMemo(() => ({
-    apis: fApis.slice(skip, skip + topApi),
-    skip: skip,
-    count: fApis.length,
-  }), [fApis, skip]);
+  // const displayApis = useMemo(() => ({
+  //   apis: fApis.slice(skip, skip + topApi),
+  //   skip: skip,
+  //   count: fApis.length,
+  // }), [fApis, skip]);
 
   const handleChangeSearchFilter = (text) => {
     const filterText = text.replace(/[/[`&\/\\#,@|!+()$~%.'":*?<>\]{}]/g, '');
@@ -44,15 +39,6 @@ function Apis(props) {
       dispatch(listApis());
     }
   };
-
-  const selectData = tagsList && Object.keys(tagsList).length > 0 && tagsList.value && tagsList.value.length > 0 ? tagsList.value.map((item, index) => {
-    const options = {
-      name: item.properties.displayName ? item.properties.displayName : item.name,
-      id: index,
-    };
-    return options;
-  }) : [];
-  const filteredSelectData = useMemo(() => selectData.filter(option => option.name !== 'published'), [selectData]);
 
   const onSelect = (selectedList) => {
     let search = 'tags[0]=published';
@@ -83,26 +69,13 @@ function Apis(props) {
   };
 
   useEffect(() => {
-    if (apis && Object.keys(apis).length === 0) {
-      dispatch(listApis());
-    }
-    if (libraries && libraries.length === 0) {
-      dispatch(getLibraries());
+    if (apis && apis.length === 0) {
+      dispatch(getApiList('Mulesoft'))
     }
 
+
   }, []);
 
-  useEffect(() => {
-    if (tagsList && Object.keys(tagsList).length === 0) {
-      dispatch(getListTags());
-    };
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      dispatch(resetLibraryApi());
-    };
-  }, []);
   const handleNext = () => {
     if (skip < displayApis.count) return setSkip(skip + topApi);
   };
@@ -111,99 +84,27 @@ function Apis(props) {
   };
 
   return (
-    <Container fixed sx={{ paddingLeft: {xs: '0px', md: '59px !important'}, paddingRight: {xs:' 0px', md: '97px !important'} }}>
+    <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: ' 0px', md: '97px !important' } }}>
       <Title stylesTitle={{ fontSize: '48px' }} text='APIs' />
-      <div className={classes.wrapper__filters}>
-        <div>
-          <SearchInput
-            icon
-            name='search'
-            type='text'
-            onChange={(e) => {
-              handleChangeSearchFilter(e.target.value);
-            }}
-            placeholder='Buscar APIs...'
-          />
-        </div>
-        <div className={classes.wrapper__filters__search}>
-          <span className={classes.filter}>
-            Filtrar por
-            {' '}
-            <b>Tag</b>
-            {' '}
-            :
-          </span>
-          <Multiselect
-            className={`inputSelect ${classes.selectIn}`}
-            options={filteredSelectData} // Options to display in the dropdown
-            // selectedValues={this.state.selectedValue} // Preselected value to persist in dropdown
-            onSelect={onSelect} // Function will trigger on select event
-            onRemove={onRemove} // Function will trigger on remove event
-            displayValue='name' // Property name to display in the dropdown options
-            // selectionLimit={2}
-            placeholder=''
-          />
-
-        </div>
-      </div>
-      <div className={classes.grid__apis}>
-        {loadingLibraries === false && apis ? (
-          displayApis.apis.length > 0 ? (
-            displayApis.apis.map((item, index) => (
+      <div>
+        {
+          apis && apis.length > 0 ? (
+            apis.map((api, index) => (
               <CardInformationLibrary
                 key={index}
-                apiName={item.slug}
-                title={item.title}
-                status={item.status}
-                version={item.version}
-                buttons={item.tags}
-                colorStatus={item.color_status}
+                apiName={api.assetId}
+                title={api.assetId}
+                status={api.status}
+                version={api.assetVersion}
+                description={api.description}
                 theme='dark'
-                info='ver Documentación'
-                description={item.description}
-                redirectTo={`/developer/apis/${item.slug}`}
+                info='ver Documentacion'
+                redirectTo={`/developer/apis/${api.id}`}
               />
             ))
-          ) : (null)
-        ) : (null)}
-      </div>
-
-      <div className='display_flex justify_content__center mt-4'>
-        {loadingLibraries === false && apis ? (
-          fApis.length == 0 ? (
-            <h1 className='text-center'>Información no disponible</h1>
-          ) : (null)
-        ) : loadingLibraries === false ? (
-          <h1 className='text-center'>Información no disponible</h1>
-        ) : (
-              <h1>Cargando....</h1>
-            )
+          ) :
+            (<h1>Cargando...</h1>)
         }
-      </div>
-
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignContent: 'center', marginTop: '1.875rem' }}>
-        <div>
-          {skip > 0 && skip - topApi >= 0 ? (
-            <div onClick={() => handlePrevious()} className={classes.pagination}>
-              <div className={classes.pagination__icon}>
-                <Icon id='MdNavigateBefore' />
-              </div>
-              <p>Anterior</p>
-            </div>
-
-          ) : (null)}
-        </div>
-        <div>
-          {displayApis.apis.length > 0 && skip + topApi < displayApis.count ? (
-            <div onClick={() => handleNext()} className={classes.pagination}>
-              <p className={classes.next}>Siguiente</p>
-              <div className={classes.pagination__icon}>
-                <Icon id='MdNavigateNext' />
-              </div>
-            </div>
-
-          ) : (null)}
-        </div>
       </div>
     </Container>
   );

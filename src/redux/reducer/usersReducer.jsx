@@ -10,7 +10,9 @@ const initialState = {
   userDetail: {},
   errorUser: {},
   spinnerUser: false,
+  customAlert: {},
 };
+
 
 // eslint-disable-next-line default-param-last
 export default function usersReducer(state = initialState, action) {
@@ -41,7 +43,7 @@ export default function usersReducer(state = initialState, action) {
         ...state,
         usersSkip: parseInt(action.skip, 10),
       };
-      // Cases to bring the user
+    // Cases to bring the user
     case usersConstants.GET_USER_DETAIL_REQUEST:
       return {
         ...state,
@@ -66,6 +68,22 @@ export default function usersReducer(state = initialState, action) {
       return {
         ...state,
         usersSkip: 0,
+      };
+
+    case usersConstants.SHOW_ALERT:
+      return {
+        ...state,
+        customAlert: {
+          alert_type: action.payload.alert_type,
+          title: action.payload.title,
+          msg: action.payload.msg,
+        },
+      };
+
+    case usersConstants.RESET_ALERT:
+      return {
+        ...state,
+        customAlert: {},
       };
 
     default:

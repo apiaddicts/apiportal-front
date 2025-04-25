@@ -6,13 +6,19 @@ import store from '../redux/store';
 
 import config from './config';
 
-function login(email, password) {
+function login(username, password) {
+  const body = {
+    clientId: config.keycloakKey,
+    username,
+    password
+  }
   const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `Basic ${btoa(`${email}:${password}`)}` },
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
   };
 
-  const url = `${config.url}/identity?api-version=${config.apiVersion}`;
+  const url = `${config.authUrl}/token`;
 
   return fetch(
     url,
@@ -41,13 +47,13 @@ function confirmAccount(queryParams) {
     });
 }
 
-function getUserDetails(token, id) {
+function getUserDetails(token, headerManager) {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Authorization': `Bearer ${token}`, 'x-apimanager-id': `Manager-${headerManager}` },
   };
 
-  const url = `${config.url}/users/${id}?api-version=${config.apiVersion}`;
+  const url = `${config.integratorUrl}/users/me`;
   return fetch(
     url,
     requestOptions,

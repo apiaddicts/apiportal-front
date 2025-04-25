@@ -21,55 +21,46 @@ import SwaggerUI from '../../pages/common/SwaggerUI';
 import OAuthRedirect from '../../pages/common/OAuthRedirect';
 import Subscriptions from '../../pages/private/Subscriptions';
 import Logout from '../../pages/private/Logout/Logout';
+import Dashboard from '../../pages/private/Dashboard';
+import Billings from '../../pages/private/Billings';
+import ApiDoc from '../../pages/private/ApiDoc';
 
-// import Users from '../../pages/private/Users';
-// import UsersDetail from '../../pages/private/UserDetail';
-// import Groups from '../../pages/private/Groups';
-// import GroupDetailed from '../../pages/private/Groups/GroupDetailed';
 
-import { getUser } from '../../redux/actions/userAction';
-// import { getUser, getUserGroups } from '../../redux/actions/userAction';
+import { getUser, logout } from '../../redux/actions/userAction';
 import classes from './private-router.module.scss';
-// import GettingStarted from '../../pages/private/GettingStarted';
-// import Apps from '../../pages/private/Apps/Apps';
-// import AppDetailed from '../../pages/private/Apps/AppDetailed';
-// import AddApp from '../../pages/private/Apps/AddApp';
-// import AddUserB2c from '../../pages/private/Apps/AddUserB2c';
 import config from '../../services/config';
+import CodeSamples from '../../pages/private/codeSamples';
+import codeSamplesDetail from '../../pages/private/codeSamplesDetail';
+import CodeSampleDetailss from '../../pages/private/codeSamplesDetail';
+
 
 function PrivateRouter({ children }) {
-  // const [showModal, setShowModal] = useState(false);
   const { id, token, user, openModal, userGroups } = useSelector((state) => state.user);
   const { time } = useSelector((state) => state.timer);
-  const { checkSession } = useVerifySession();
+  const { checkSession, isSessionValid } = useVerifySession();
   const { getTime } = useTimer();
-  const privateSession = id !== '' && token !== '';
+  const privateSession = token !== '';
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (id !== '' && token !== '' && user && Object.keys(user).length === 0) {
-      const tokens = {
-        id,
-        token,
-      };
-      dispatch(getUser(tokens));
-      // if (user) dispatch(getUserGroups(tokens));
+    if (token !== '' && user && Object.keys(user).length === 0) {
+      dispatch(getUser(token));
       getTime();
     }
   }, []);
 
   useEffect(() => {
-    checkSession();
+    // checkSession();
+    isSessionValid();
+    if (openModal) dispatch(logout());
   }, [time]);
-
-  const isAdmin = userGroups?.value.find((group) => group.name === config.adminId);
 
   return privateSession ? (
     <Box>
-      {
+      {/* {
         openModal &&
         (<Logout showModal={openModal} setShowModal={openModal} />)
-      }
+      } */}
       {user && Object.keys(user).length > 0 ? (
         <Box>
           <Box sx={{ display: 'flex', flex: '1', minHeight: '100vh' }} className={classes.custom__body}>
@@ -79,9 +70,11 @@ function PrivateRouter({ children }) {
                 icon: '👏',
               }}
             />
-            <SidebarDrawer user={user} isAdmin={isAdmin} />
+            <SidebarDrawer user={user} />
             <div className={`container ${classes.wrapper}`}>
               <Routes>
+                <Route path='dashboard' exact='true' element={<Dashboard />} />
+                <Route path='billings' exact='true' element={<Billings />} />
                 <Route path='profile' element={<Profile />} />
                 <Route path='products' exact='true' element={<Products />} />
                 <Route path='products/:id' exact='true' element={<ProductDetail />} />
@@ -90,7 +83,11 @@ function PrivateRouter({ children }) {
                 <Route path='apis/:id/swagger-ui' exact='true' element={<SwaggerUI />} />
                 <Route path='subscriptions' exact='true' element={<Subscriptions />} />
                 <Route path='subscriptions/:id' exact='true' element={<SubscriptionDetail />} />
+                <Route path='code-samples' exact='true' element={<CodeSamples />} />
+                <Route path='code-samples/:id' exact='true' element={<CodeSampleDetailss />} />
+                <Route path='docs' element={<ApiDoc />} />
                 <Route path='*' element={<Navigate to='/' replace />} />
+
                 {/* {isAdmin && (
                   <>
                     <Route path='users' exact='true' element={<Users />} />

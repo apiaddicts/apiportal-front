@@ -29,8 +29,9 @@ import classes from './sliderdrawer.module.scss';
 import { logout } from '../../redux/actions/userAction';
 
 import styles from '../../styles/variables.module.scss';
+import DropdownMenu from '../DropdownMenu/DropdownMenu';
 
-function SidebarDrawer({ children, user, isAdmin }) {
+function SidebarDrawer({ children, user }) {
   const theme = useTheme();
   const [isPermanent, setPermanent] = useState(true);
   const [toggleMenu, setToggleMenu] = useState(true);
@@ -65,17 +66,19 @@ function SidebarDrawer({ children, user, isAdmin }) {
       window.removeEventListener('resize', handleWindowWithChange());
     };
   });
-
   const listItems = [
-    // { route: '/developer/getting-started', text: 'Comencemos', icon: <MdNotStarted size='1.5rem' />, primaryRole: true },
-    { route: '/developer/products', text: 'Productos', icon: <Terminal />, primaryRole: true },
+    { route: '/developer/dashboard', text: 'Dashboard', icon: <Terminal size='1.5rem' />, primaryRole: true },
+    // { route: '/developer/products', text: 'Productos', icon: <Terminal />, primaryRole: true },
+    { route: '/developer/billings', text: 'Pasarela de Pagos', icon: <Terminal />, primaryRole: true },
     // { route: '/developer/apps', text: 'Aplicaciones', icon: <Terminal />, primaryRole: true },
     { route: '/developer/apis', text: 'Biblioteca de APIs', icon: <Settings />, primaryRole: true },
-    { route: '/developer/subscriptions', text: 'Suscripciones', icon: <Terminal />, primaryRole: true },
+    // { route: '/developer/subscriptions', text: 'Suscripciones', icon: <Terminal />, primaryRole: true },
+    // { route: '/developer/docs', text: 'Documentacion', icon: <Terminal />, primaryRole: true }
     // { route: '/developer/users', text: 'Usuarios', icon: <Person />, primaryRole: isAdmin },
     // { route: '/developer/groups', text: 'Grupos', icon: <ShareIcon />, primaryRole: isAdmin },
+    { route: '/developer/code-samples', text: 'Code Samples', icon: <Terminal />, primaryRole: true },
+    // { route: '/developer/code-samples/details', text: 'Code Samples Details', icon: <Terminal size='1.5rem' />, primaryRole: true },
   ];
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -173,9 +176,9 @@ function SidebarDrawer({ children, user, isAdmin }) {
                   }}
                   onClick={handleClick}
                 >
-                  {user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? (
+                  {user && Object.keys(user).length > 0 ? (
                     <span className='text-capitalize' style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {`${splitStr(user.properties.firstName)} ${splitStr(user.properties.lastName)}`}
+                      {`${splitStr(user.firstName)} ${splitStr(user.lastName)}`}
                     </span>
                   ) : ('')}
                 </Button>
@@ -262,11 +265,11 @@ function SidebarDrawer({ children, user, isAdmin }) {
               <h1 className={`font-weight-regular text__tertiary ${classes.title}`}>Hola,</h1>
               <h1 className={`font-weight-bold text__primary ${classes.title__name}`}>
                 {
-                  user && Object.keys(user).length > 0 && user.properties && Object.keys(user.properties).length > 0 ? (
+                  user && Object.keys(user).length > 0 ? (
                     <>
-                      {user.properties.firstName}
+                      {user.firstName}
                       <br />
-                      {user.properties.lastName }
+                      {user.lastName}
                     </>
                   ) : ('')
                 }
@@ -401,6 +404,7 @@ function SidebarDrawer({ children, user, isAdmin }) {
             ))
           }
         </List>
+        <DropdownMenu />
         <List>
           <ListItem
             button

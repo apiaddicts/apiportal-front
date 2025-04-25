@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Container } from '@mui/material';
-import { getApi, resetApiDetailed } from '../../../redux/actions/libraryAction';
+import { getApiDetail,resetApiDetailed } from '../../../redux/actions/apiManagerAction';
 import Title from '../../../components/Title';
 import AccordionFilter from '../../../components/Accordion/AccordionFilter';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
@@ -12,7 +12,7 @@ import Icon from '../../../components/MdIcon/Icon';
 import classes from './api-detail.module.scss';
 
 function ApiDetail(props) {
-  const { api } = useSelector((state) => state.library);
+  const { api, loading } = useSelector((state) => state.apiManager);
 
   const params = useParams();
   const dispatch = useDispatch();
@@ -25,14 +25,12 @@ function ApiDetail(props) {
     questions: [
       'Información',
       'Descripción',
-      'Versiones',
-      'Autenticación',
     ],
   }];
 
   useEffect(() => {
     if (params.id && api && Object.keys(api).length === 0) {
-      dispatch(getApi(params.id));
+      dispatch(getApiDetail('Mulesoft',params.id))
     }
   }, []);
 
@@ -58,16 +56,15 @@ function ApiDetail(props) {
         {api && Object.keys(api).length > 0 ? (
           <div>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className={classes.box__title}>
-              <Title text={api.properties.displayName ? api.properties.displayName : 'Demo API'} />
-              <Link to={`/developer/apis/${api.name}/swagger-ui`} className={classes.wrapper__btn}>
-                <span>Probar</span>
+              <Title text={api.assetId ? api.assetId : 'Demo API'} />
+              <Link to={`/developer/apis/${api.assetId}/swagger-ui`} className={classes.wrapper__btn}>
+                <span>Definición</span>
                 <Icon id='MdChevronRight' />
               </Link>
             </Box>
             <Box className={classes.grid__apidetail}>
               <div className={classes.grid__apidetail__accordionfilter}>
                 <AccordionFilter items={infoApi} clicked={clicked} setClicked={setClicked} subItem={subItem} setSubItem={setSubItem} />
-                {/* <AccordionFilter items={endPoints} clicked={clicked} setClicked={setClicked} /> */}
               </div>
               <div className={classes.grid__apidetail__customaccordion}>
                 <CustomAccordion items={api} subItem={subItem} setSubItem={setSubItem} />
