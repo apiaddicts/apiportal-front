@@ -1,61 +1,48 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, Grid, Card, CardContent, Typography, Button, Box } from '@mui/material';
 import Title from '../../../components/Title';
-import billingService from '../../../services/billingsService';
-import { useDispatch } from 'react-redux';
-import usersConstants from '../../../redux/constants/userConstats'; // Ajusta si es necesario
 
+import { billingsProducts, billingsLink } from '../../../redux/actions/billingsAction';
+import billingService from '../../../services/billingsService';
 
 function Billings() {
-  const [products, setProducts] = useState([]);
-
   const dispatch = useDispatch();
 
+  const { billings = {}, loading } = useSelector((state) => state.billing);
+  const products = billings.data ?? [];
+
   useEffect(() => {
-    billingService.billingsProducts()
-      .then((producto) => {
-        setProducts(producto);
-      })
-      .catch((err) => {
-        console.error('Error al obtener productos:', err);
-
-        // Despachar alerta por error
-        dispatch({
-          type: usersConstants.SHOW_ALERT,
-          payload: {
-            alert_type: 'alert__danger',
-            title: 'Error al cargar productos',
-            msg: 'No se pudieron obtener los productos de la pasarela de pagos.',
-          },
-        });
-
-        // Cerrar automáticamente después de 5 segundos
-        setTimeout(() => {
-          dispatch({ type: usersConstants.RESET_ALERT });
-        }, 5000);
-      });
-  }, []);
-
-  const handleActivateProduct = async (priceId) => {
-    try {
-      const response = await billingService.billingsLink(priceId);
-      if (response?.link) {
-        window.open(response.link, '_blank');
-      } else {
-        console.error('No se recibió una URL válida');
-      }
-    } catch (error) {
-      console.error('Error al activar prueba:', error);
+    if (products.length === 0) {
+      dispatch(billingsProducts('Mulesoft'));
     }
+  }, [products, dispatch]);
+
+  const handleActivateProduct = (priceId) => {
+    const headerManager = 'Mulesoft';
+
+    billingService.billingsLink(priceId, headerManager)
+      .then((response) => {
+        if (response?.data?.link) {
+          window.open(response.data.link, '_blank');
+        } else {
+          console.error('Error al obtener el link de pago:', response);
+        }
+      })
+      .catch((error) => {
+        console.error('Error al activar el producto:', error);
+      });
   };
 
   return (
     <Container fixed sx={{ paddingLeft: { xs: 0, md: '59px' }, paddingRight: { xs: 0, md: '97px' } }}>
       <Title text='Pasarela de pagos' />
       <Grid container spacing={3} mt={2}>
-        {Array.isArray(products) && products.length > 0 ? (
+        {products.length > 0 ? (
           products.map((product) => {
             const price = product.prices?.[0] ?? {};
+            const priceId = price.id ?? 'N/A';
+            const name = product.name ?? product.id;
             const monthlyRequests = price.metadata?.monthlyRequests ?? 'N/A';
             const dailyRequests = price.metadata?.dailyRequests ?? 'N/A';
             const priceFormatted = price.unitAmount ? (price.unitAmount / 100).toFixed(2) : '0.00';
@@ -64,17 +51,18 @@ function Billings() {
               <Grid item xs={12} sm={6} md={4} key={product.id}>
                 <Card sx={{ textAlign: 'center', height: '100%' }}>
                   <CardContent>
-                    <Typography variant="h6" gutterBottom>{product.name}</Typography>
-                    <Typography variant="h4" color="primary">${priceFormatted} <small>/ mo</small></Typography>
+                    <Typography variant="h6" gutterBottom>{name}</Typography>
+                    <Typography variant="h4" color="primary">
+                      €{priceFormatted} <small>/ mo</small>
+                    </Typography>
                     <Box mt={2}>
                       <Typography>{monthlyRequests} API requests</Typography>
-                      <Typography>{dailyRequests} transactions </Typography>
-
+                      <Typography>{dailyRequests} transactions</Typography>
                     </Box>
                     <Button
                       variant="contained"
                       sx={{ mt: 2 }}
-                      onClick={() => handleActivateProduct(price.id)}
+                      onClick={() => handleActivateProduct(priceId)}
                     >
                       Activate
                     </Button>
@@ -84,9 +72,11 @@ function Billings() {
             );
           })
         ) : (
-          <Typography variant="body1" color="textSecondary">
-            No hay productos disponibles en este momento.
-          </Typography>
+          <Grid item xs={12}>
+            <Typography variant="body1" color="textSecondary" textAlign="center">
+              No hay productos disponibles en este momento.
+            </Typography>
+          </Grid>
         )}
       </Grid>
     </Container>

@@ -2,15 +2,17 @@ import handleResponse from './handleResponse';
 
 import config from './config';
 
-function integrationLogin(configType){
+function integrationLogin(configType) {
   const requestOptions = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'x-apimanager-id': `${configType}`},
-      body: JSON.stringify({})
+      'x-apimanager-id': `${configType}`
+    },
+    body: JSON.stringify({})
   }
   const url = `${config.integratorUrl}/login`;
+
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -23,9 +25,10 @@ function integrationLogin(configType){
 }
 
 function integrationListApis(configType) {
+  console.log('Fetching API listsasdas...');
   const requestOptions = {
     method: 'GET',
-    headers: {'x-apimanager-id': `${configType}`}
+    headers: { 'x-apimanager-id': `${configType}` }
   }
   const url = `${config.integratorUrl}/list-apis`;
   return fetch(url, requestOptions)
@@ -41,7 +44,7 @@ function integrationListApis(configType) {
 function integrationApiDetail(configType, apiId) {
   const requestOptions = {
     method: 'GET',
-    headers: {'x-apimanager-id': `${configType}`}
+    headers: { 'x-apimanager-id': `${configType}` }
   }
   const url = `${config.integratorUrl}/api-detail/${apiId}`;
   return fetch(url, requestOptions)
@@ -54,10 +57,10 @@ function integrationApiDetail(configType, apiId) {
     })
 }
 
-function getApiDefinition(configType,assetId) {
+function getApiDefinition(configType, assetId) {
   const requestOptions = {
     method: 'GET',
-    headers: {'x-apimanager-id': `${configType}`}
+    headers: { 'x-apimanager-id': `${configType}` }
   }
 
   const url = `${config.integratorUrl}/definition/${assetId}`

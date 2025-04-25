@@ -7,7 +7,7 @@ import appPartnersReducer from './reducer/appPartnersReducer';
 import faqReducer from './reducer/faqReducer';
 import blogReducer from './reducer/blogReducer';
 import codeSampleReducer from './reducer/codeSampleReducer';
-import billingReducer from './reducer/billingReducer';
+import BillingReducer from './reducer/billingReducer';
 import libraryReducer from './reducer/libraryReducer';
 import userReducer from './reducer/userReducer';
 import productReducer from './reducer/productReducer';
@@ -32,7 +32,7 @@ const reducers = combineReducers({
   faq: faqReducer,
   blog: blogReducer,
   codeSampleReducer: codeSampleReducer,
-  billingReducer: billingReducer,
+  billing: BillingReducer,
   library: libraryReducer,
   user: userReducer,
   products: productReducer,

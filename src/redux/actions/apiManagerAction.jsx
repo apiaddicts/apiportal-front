@@ -3,37 +3,38 @@ import apiManagerConstants from '../constants/apiManagerConstant';
 
 
 export const getApiList = (configApim) => (dispatch) => {
- dispatch({type: apiManagerConstants.GET_ALL_API_MANAGER_REQUEST});
- apiManagerService.integrationListApis(configApim)
-  .then(response => {
-    if(response.data && Object.keys(response.data).length > 0){
-      dispatch({
-        type: apiManagerConstants.GET_ALL_API_MANAGER_SUCCESS,
-        payload: response.data.instances
-      })
-    }else{
-      dispatch({
-        type: apiManagerConstants.GET_ALL_API_MANAGER_FAILURE,
-        payload: response
-      })
-    }
-    // return response
-  })
-  .catch(error => {
-    console.error(error);
-  })
+  console.log('Fetching API list...');
+  dispatch({ type: apiManagerConstants.GET_ALL_API_MANAGER_REQUEST });
+  apiManagerService.integrationListApis(configApim)
+    .then(response => {
+      if (response.data && Object.keys(response.data).length > 0) {
+        dispatch({
+          type: apiManagerConstants.GET_ALL_API_MANAGER_SUCCESS,
+          payload: response.data.instances
+        })
+      } else {
+        dispatch({
+          type: apiManagerConstants.GET_ALL_API_MANAGER_FAILURE,
+          payload: response
+        })
+      }
+      // return response
+    })
+    .catch(error => {
+      console.error(error);
+    })
 }
 
-export const getApiDetail = (configApim,id) => (dispatch) => {
-  dispatch({type: apiManagerConstants.GET_API_DETAIL_REQUEST});
-  apiManagerService.integrationApiDetail(configApim,id)
+export const getApiDetail = (configApim, id) => (dispatch) => {
+  dispatch({ type: apiManagerConstants.GET_API_DETAIL_REQUEST });
+  apiManagerService.integrationApiDetail(configApim, id)
     .then(response => {
-      if(response.data && Object.keys(response.data).length > 0){
+      if (response.data && Object.keys(response.data).length > 0) {
         dispatch({
           type: apiManagerConstants.GET_API_DETAIL_SUCCESS,
           payload: response.data
         })
-      }else{
+      } else {
         dispatch({
           type: apiManagerConstants.GET_ALL_API_MANAGER_FAILURE,
           payload: response
@@ -45,24 +46,24 @@ export const getApiDetail = (configApim,id) => (dispatch) => {
     })
 }
 export const getApiDefinition = (configApim, id) => (dispatch) => {
-  dispatch({type: apiManagerConstants.GET_DEFINITION_REQUEST});
-  apiManagerService.getApiDefinition(configApim,id)
+  dispatch({ type: apiManagerConstants.GET_DEFINITION_REQUEST });
+  apiManagerService.getApiDefinition(configApim, id)
     .then(response => {
-      if(response.data || response.data != null) {
+      if (response.data || response.data != null) {
         console.log(typeof response.data);
         const openApiDef = JSON.parse(response.data);
         dispatch({
           type: apiManagerConstants.GET_DEFINITION_SUCCESS,
           payload: openApiDef
         })
-      }else{
+      } else {
         dispatch({
           type: apiManagerConstants.GET_DEFINITION_FAILED,
           payload: response
         })
       }
     })
-} 
+}
 
 export const resetApiDetailed = () => (dispatch) => {
   dispatch({

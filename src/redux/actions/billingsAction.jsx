@@ -3,35 +3,46 @@ import billingService from '../../services/billingsService';
 
 
 
-export const billingsProducts = () => (dispatch) => {
-  billingService.billingsProducts().then(
-    (response) => {
-      dispatch({
-        type: BillingConstant.GET_BILLING_SUCCESS,
-        payload: response,
-      });
-    },
-    (error) => {
-      dispatch({
-        type: BillingConstant.GET_BILLING_FAILURE,
-        payload: error,
-      });
-    },
-  );
-};
+export const billingsProducts = (headerManager) => (dispatch) => {
+
+  dispatch({ type: BillingConstant.GET_BILLING_REQUEST });
+  billingService.billingsProducts(headerManager)
+    .then(response => {
+      if (response.data && Object.keys(response.data).length > 0) {
+        dispatch({
+          type: BillingConstant.GET_ALL_BILLING_SUCCESS,
+          payload: response
+        })
+      } else {
+        dispatch({
+          type: BillingConstant.GET_ALL_BILLING_FAILURE,
+          payload: response
+        })
+      }
+      // return response
+    })
+    .catch(error => {
+      console.error(error);
+    })
+}
 export const billingsLink = (id, headerManager) => (dispatch) => {
-  billingService.billingsLink(id, headerManager).then(
-    (response) => {
-      dispatch({
-        type: BillingConstant.GET_BILLING_SUCCESS,
-        payload: response,
-      });
-    },
-    (error) => {
-      dispatch({
-        type: BillingConstant.GET_BILLING_FAILURE,
-        payload: error,
-      });
-    },
-  );
-};
+  dispatch({ type: BillingConstant.GET_BILLING_REQUEST });
+  billingService.billingsLink(id, headerManager)
+    .then(response => {
+      if (response.data && Object.keys(response.data).length > 0) {
+        dispatch({
+          type: BillingConstant.GET_ALL_BILLING_SUCCESS,
+          payload: response
+        })
+      } else {
+        dispatch({
+          type: BillingConstant.GET_ALL_BILLING_FAILURE,
+          payload: response
+        })
+      }
+      // return response
+    })
+    .catch(error => {
+      console.error(error);
+    })
+}

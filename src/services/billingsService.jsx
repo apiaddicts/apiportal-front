@@ -6,6 +6,7 @@ import config from './config';
 
 const billingsProducts = (headerManager) => {
 
+
   const tokenData = JSON.parse(sessionStorage.getItem('token'));
   const accessToken = tokenData?.accessToken;
   const requestOptions = {
@@ -13,8 +14,8 @@ const billingsProducts = (headerManager) => {
     headers: { 'Authorization': `Bearer ${accessToken}`, 'x-apimanager-id': `Manager-${headerManager}` },
   };
 
-  return fetch(`${config.integratorUrl}/payments/v1/products`, requestOptions)
 
+  return fetch(`${config.integratorUrl}/list/products`, requestOptions)
     .then(handleResponse)
     .then((response) => {
       return response;
@@ -40,7 +41,7 @@ const billingsLink = (priceId, headerManager) => {
     body: data
   };
 
-  return fetch(`${config.integratorUrl}/payments/v1/payment-link`, requestOptions)
+  return fetch(`${config.integratorUrl}/payments/link`, requestOptions)
     .then(handleResponse)
     .then((response) => {
 
