@@ -1,12 +1,11 @@
 import userConstants from '../constants/userConstats';
 
 const token = JSON.parse(sessionStorage.getItem('token'));
-const apimToken = localStorage.getItem('tokenApim');
 
 const initialState = token ? {
   // id: token?.userId?.id,
   token: token['accessToken'],
-  apimToken: apimToken,
+  apimToken: false,
   etag: '',
   loadingSignUp: false,
   signUpData: {},
@@ -32,7 +31,7 @@ const initialState = token ? {
   loadingUser: false,
   id: '',
   token: '',
-  apimToken:'',
+  apimToken:false,
   etag: '',
   loadingSignUp: false,
   signUpData: {},
@@ -315,7 +314,8 @@ export default function userReducer(state = initialState, action) {
     case userConstants.LOGIN_APIM_FAILURE:
       return {
         ...state,
-        error: action.payload
+        error: action.payload,
+        apimToken: false
       }
     default:
       return state;

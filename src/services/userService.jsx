@@ -47,10 +47,10 @@ function confirmAccount(queryParams) {
     });
 }
 
-function getUserDetails(token) {
+function getUserDetails(token,headerManager) {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': `Bearer ${token}`},
+    headers: { 'Authorization': `Bearer ${token}`, 'x-apimanager-id': `Manager-${headerManager}`},
   };
 
   const url = `${config.integratorUrl}/users/me`;
