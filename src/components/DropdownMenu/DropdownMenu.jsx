@@ -5,10 +5,10 @@ import TerminalIcon from '@mui/icons-material/Terminal';
 import { Link } from 'react-router-dom';
 
 function DropdownMenu() {
-  const [open, setOpen] = useState(true); // 👉 abierto por defecto
+  const [open, setOpen] = useState(true); 
 
   const handleToggle = () => {
-    setOpen(!open); // 👉 sigue siendo colapsable
+    setOpen(!open); 
   };
 
   return (

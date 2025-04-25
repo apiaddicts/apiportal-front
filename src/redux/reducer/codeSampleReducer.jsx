@@ -1,16 +1,16 @@
 import CodeSamplesConstant from '../constants/CodeSamplesConstant';
 
 const initialState = {
-  // Data pagecodeSamples
+ 
   codeSamplePage: {},
   error: {},
-  //codeSamples constants
+
   codeSamples: [],
   filteredCodeSamples: [],
   filters: [],
   errorCodeSamples: {},
   loading: false,
-  //codeSample constant
+
   codeSample: {},
   errorCodeSample: {},
   loadingCodeSample: false,

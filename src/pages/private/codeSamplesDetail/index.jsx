@@ -38,7 +38,7 @@ function CodeSampleDetailss() {
     dispatch(getCodeSample(params.id));
   }, [dispatch]);
 
-  // Obtiene los lenguajes únicos desde los datos
+
   const availableLanguages = useMemo(() => {
     if (!sample?.data) return [];
     const langs = sample.data.map((s) => s.Language);
@@ -46,14 +46,14 @@ function CodeSampleDetailss() {
     return uniqueLangs;
   }, [sample]);
 
-  // Inicializa el lenguaje seleccionado al primero disponible
+
   useEffect(() => {
     if (availableLanguages.length > 0 && !selectedLang) {
       setSelectedLang(availableLanguages[0]);
     }
   }, [availableLanguages, selectedLang]);
 
-  // Obtiene el sample actual según el lenguaje seleccionado
+
   const currentSample = sample?.data?.find(
     (s) => s.Language.toLowerCase() === selectedLang.toLowerCase()
   );
@@ -90,9 +90,7 @@ function CodeSampleDetailss() {
                 label={lang}
                 sx={{
                   textTransform: 'none',
-                  fontWeight: 'bold',
-                  // color: selectedLang === lang ? 'white' : 'black',
-                  // backgroundColor: selectedLang === lang ? '#1976d2' : 'transparent',
+                  fontWeight: 'bold',             
                   borderRadius: 1,
                   mx: 0.5,
                 }}

@@ -52,8 +52,7 @@ function convertImageToBase64(file) {
 function processFaceImage(imageBase64) {
 
   const token = getAccessToken();
-  // const userCredential = getUsersCredentials()
-  // console.log('userCredential', userCredential);
+
 
 
 
