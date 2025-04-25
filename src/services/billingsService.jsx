@@ -20,7 +20,7 @@ const billingsProducts = () => {
     },
   };
 
-  return fetch(`${config.kopernicaUrlPrc}/payments/v1/products`, requestOptions)
+  return fetch(`${config.integratorUrl}/payments/v1/products`, requestOptions)
 
     .then(handleResponse)
     .then((response) => {
@@ -54,7 +54,7 @@ const billingsLink = (priceId) => {
     body: data
   };
 
-  return fetch(`${config.kopernicaUrlPrc}/payments/v1/payment-link`, requestOptions)
+  return fetch(`${config.integratorUrl}/payments/v1/payment-link`, requestOptions)
     .then(handleResponse)
     .then((response) => {
 
