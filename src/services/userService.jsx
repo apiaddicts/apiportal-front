@@ -47,10 +47,10 @@ function confirmAccount(queryParams) {
     });
 }
 
-function getUserDetails(token) {
+function getUserDetails(token, headerManager) {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': `Bearer ${token}` },
+    headers: { 'Authorization': `Bearer ${token}`, 'x-apimanager-id': `Manager-${headerManager}` },
   };
 
   const url = `${config.integratorUrl}/users/me`;
@@ -64,24 +64,6 @@ function getUserDetails(token) {
       console.error(error);
     });
 }
-
-// function getUserDetails(token) {
-//   const requestOptions = {
-//     method: 'GET',
-//     headers: { 'Authorization': `Bearer ${token}`, 'client_id': '0d9283d1242b48b598ff818939c96a25', 'client_secret': '018dD2A4c52944008De8ecfAAc571eFc' },
-//   };
-
-//   const url = `https://dev.kopernica.cloud/prc/users/v1/users/me`;
-//   return fetch(
-//     url,
-//     requestOptions,
-//   ).then(handleResponse)
-//     .then((response) => {
-//       return response;
-//     }).catch((error) => {
-//       console.error(error);
-//     });
-// }
 
 function getUserGroups(token, id) {
   const requestOptions = {
