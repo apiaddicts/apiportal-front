@@ -8,7 +8,7 @@ import subscriptionsService from '../../services/subscriptionsService';
 import apiManagerService from '../../services/apiManagerService';
 
 // eslint-disable-next-line import/prefer-default-export
-export const login = (data) => (dispatch) => {
+export const login = (data,headerManager) => (dispatch) => {
   dispatch({ type: userConstants.LOGIN_REQUEST });
   userService.login(data.username, data.password).then((response) => {
     if (response && Object.keys(response).length > 0) {
@@ -31,7 +31,7 @@ export const login = (data) => (dispatch) => {
           refreshExpiresIn: expirationTime
         }
         sessionStorage.setItem('token', JSON.stringify(token));
-        dispatch(getUser(response['accessToken']));
+        dispatch(getUser(response['accessToken'],headerManager));
         dispatch({ type: userConstants.RESET_ALERT });
       }
     }
@@ -45,25 +45,21 @@ export const loginApim = (configApim) => (dispatch) => {
   apiManagerService.integrationLogin(configApim)
    .then(response => {
      if(response.data['token']){
-      localStorage.setItem('tokenApim',response.data['token']);
       dispatch({
         type: userConstants.LOGIN_APIM_SUCCESS,
-        apimToken: response.data['token']
+        payload: true
       })
      }else{
       dispatch({
         type: userConstants.LOGIN_APIM_FAILURE,
-        error: response
+        payload: response
       })
       sessionStorage.removeItem('token');
-      localStorage.removeItem('tokenApim');
       dispatch({ type: userConstants.LOGOUT_USER });
      }
-     // return response
    })
    .catch(error => {
      console.error(error);
-    //  ocalStorage.removeItem('tokenApim');
     // dispatch({ type: userConstants.LOGOUT_USER });
    })
  }
@@ -143,12 +139,12 @@ export const signUp = (data) => (dispatch) => {
   );
 };
 
-export const getUser = (token) => (dispatch) => {
+export const getUser = (token,headerManager) => (dispatch) => {
   dispatch({ type: userConstants.GET_USER_REQUEST });
-  userService.getUserDetails(token).then(
+  userService.getUserDetails(token,headerManager).then(
     (response) => {
-      if (response && Object.keys(response).length > 0) {
-        dispatch({ type: userConstants.GET_USER_SUCCESS, response });
+      if (response.data && Object.keys(response.data).length > 0) {
+        dispatch({ type: userConstants.GET_USER_SUCCESS, response: response.data });
         dispatch({
           type: userConstants.LOGIN_SUCCESS,
           token,

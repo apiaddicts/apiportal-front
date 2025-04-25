@@ -21,7 +21,7 @@ function Login({ setOpenForm, setIsOpen, setPrivateSession }) {
 
   // This function is responsible for sending the user to local storage
   const handleSubmit = (dataForm) => {
-    dispatch(login(dataForm));
+    dispatch(login(dataForm,'Mulesoft'));
     dispatch(loginApim('Mulesoft'));
   };
 
