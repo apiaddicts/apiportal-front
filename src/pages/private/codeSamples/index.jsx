@@ -1,36 +1,22 @@
-import React from 'react';
-import { Grid, Box, Typography, Paper, Link, Container } from '@mui/material';
-import TransgenderIcon from '@mui/icons-material/Transgender';
-import TagFacesIcon from '@mui/icons-material/TagFaces';
-import FaceIcon from '@mui/icons-material/Face';
-import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
-const features = [
-  {
-    title: 'Age and gender detection',
-    description: 'Detect gender and age of people in a photo',
-    icon: <TransgenderIcon sx={{ fontSize: 40 }} />,
-    url: 'code-samples/1',
-  },
-  {
-    title: 'Face recognition',
-    description: 'Recognize who is in an image ("Who is this?")',
-    icon: <TagFacesIcon sx={{ fontSize: 40 }} />,
-    url: '/docs/face-recognition',
-  },
-  {
-    title: 'Face verification',
-    description: 'Make sure the person is present in an image ("Is this Steve?")',
-    icon: <FaceIcon sx={{ fontSize: 40 }} />,
-    url: '/docs/face-verification',
-  },
-  {
-    title: 'Emotion recognition',
-    description: 'Recognize emotions of people in a photo',
-    icon: <EmojiEmotionsIcon sx={{ fontSize: 40 }} />,
-    url: '/docs/emotion-recognition',
-  },
-];
+import React, { useEffect, useState, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { Grid, Box, Typography, Paper, Container } from '@mui/material';
+
+import { getApiList } from '../../../redux/actions/apiManagerAction';
+
 function CodeSamples(props) {
+
+  const { apis, loading } = useSelector((state) => state.apiManager);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (apis && apis.length === 0) {
+      dispatch(getApiList('Mulesoft'))
+    }
+
+
+  }, []);
+
   return (
 
     <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
@@ -44,9 +30,9 @@ function CodeSamples(props) {
         </Typography>
 
         <Grid container spacing={4} justifyContent="center">
-          {features.map(({ icon, title, description, url }, index) => (
+          {apis.map((apiItem, index) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
-              <Link href={url} underline="none" color="inherit">
+              <Link to={`/developer/code-samples/${apiItem.assetId}`} underline="none" color="inherit">
                 <Paper
                   elevation={0}
                   sx={{
@@ -62,18 +48,18 @@ function CodeSamples(props) {
                     },
                   }}
                 >
-                  <Box mb={2}>{icon}</Box>
                   <Typography variant="subtitle1" fontWeight={600}>
-                    {title}
+                    {apiItem.assetId}
                   </Typography>
                   <Typography variant="body2" color="text.secondary" mt={1}>
-                    {description}
+                    {apiItem.description ?? 'Sin descripción'}
                   </Typography>
                 </Paper>
               </Link>
             </Grid>
           ))}
         </Grid>
+
       </Box>
     </Container>
   );
