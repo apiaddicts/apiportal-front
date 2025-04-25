@@ -3,13 +3,13 @@ import config from './config';
 
 
 
-function getcodeSample(libraryId) {
+function getcodeSample(id_integrationApi) {
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
 
-  return fetch(`${config.apiUrl}/code-samples?filters[id_libraryApi][$eq]=${libraryId}&populate=*`, requestOptions)
+  return fetch(`${config.apiUrl}/code-samples?filters[id_integrationApi][$eq]=${id_integrationApi}&populate=*`, requestOptions)
     .then(handleResponse)
     .then((blog) => {
       return blog;
