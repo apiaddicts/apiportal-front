@@ -166,38 +166,6 @@ function CodeSampleDetailss() {
 
         </Box>
 
-        {/* Sidebar
-        <Box
-          sx={{
-            width: 260,
-            backgroundColor: '#f9f9f9',
-            borderRadius: 2,
-            p: 2,
-            height: 'fit-content',
-            position: 'sticky',
-            top: 100,
-          }}
-        >
-          <Typography variant="subtitle1" fontWeight={700} mb={2}>Table of contents</Typography>
-          <List dense disablePadding>
-            {tocItems.map((label, idx) => (
-              <ListItemButton
-                key={idx}
-                href={`#${label.toLowerCase().replace(/\s+/g, '-')}`}
-                sx={{
-                  fontSize: '0.9rem',
-                  color: '#1976d2',
-                  borderRadius: 1,
-                  '&:hover': {
-                    backgroundColor: '#e3f2fd',
-                  },
-                }}
-              >
-                {label}
-              </ListItemButton>
-            ))}
-          </List>
-        </Box> */}
       </Box>
     </>
   );
