@@ -68,11 +68,11 @@ function SidebarDrawer({ children, user }) {
   });
   const listItems = [
     { route: '/developer/dashboard', text: 'Dashboard', icon: <Terminal size='1.5rem' />, primaryRole: true },
-    { route: '/developer/products', text: 'Productos', icon: <Terminal />, primaryRole: true },
+    // { route: '/developer/products', text: 'Productos', icon: <Terminal />, primaryRole: true },
     { route: '/developer/billings', text: 'Pasarela de Pagos', icon: <Terminal />, primaryRole: true },
     // { route: '/developer/apps', text: 'Aplicaciones', icon: <Terminal />, primaryRole: true },
     { route: '/developer/apis', text: 'Biblioteca de APIs', icon: <Settings />, primaryRole: true },
-    { route: '/developer/subscriptions', text: 'Suscripciones', icon: <Terminal />, primaryRole: true },
+    // { route: '/developer/subscriptions', text: 'Suscripciones', icon: <Terminal />, primaryRole: true },
     // { route: '/developer/docs', text: 'Documentacion', icon: <Terminal />, primaryRole: true }
     // { route: '/developer/users', text: 'Usuarios', icon: <Person />, primaryRole: isAdmin },
     // { route: '/developer/groups', text: 'Grupos', icon: <ShareIcon />, primaryRole: isAdmin },
