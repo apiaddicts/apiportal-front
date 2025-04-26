@@ -8,7 +8,7 @@ function getApiBookStores() {
     method: 'GET',
     headers: { 'Content-Type': 'application/json' },
   };
-  return fetch(`${config.apiUrl}/library-apis?_where[status]=publicado`, requestOptions)
+  return fetch(`${config.apiUrl}/library-apis?filters[publish][$eq]=publicado&populate[tags]=*`, requestOptions)
     .then(handleResponse)
     .then((libraries) => {
       return libraries;
