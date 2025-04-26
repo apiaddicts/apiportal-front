@@ -86,7 +86,7 @@ function Apis({ setIsOpen }) {
 
   // Filters status array
   const stateRepeated = backUpLibreries && backUpLibreries.map((element) => {
-    return element.status;
+    return element.publish;
   });
   const stateArr = stateRepeated && new Set(stateRepeated);
   const state = stateArr ? [...stateArr] : [];
@@ -126,9 +126,6 @@ function Apis({ setIsOpen }) {
       dispatch(getLibraries());
     }
 
-    if (apisUnsecureRes && apisUnsecureRes.length === 0) {
-      dispatch(getApisUnsecure());
-    }
 
   }, []);
 
@@ -140,7 +137,7 @@ function Apis({ setIsOpen }) {
     });
   };
 
-  const fApis = libraries && libraries.length > 0 && apisUnsecureRes && apisUnsecureRes.length > 0 ? compareArrays(libraries, apisUnsecureRes) : [];
+  const fApis = libraries && libraries.length > 0  ? libraries : [];
 
   return (
     <div id='apiHome' style={{ paddingTop: '114px' }}>
@@ -157,7 +154,7 @@ function Apis({ setIsOpen }) {
                 Filtrar por:
               </div>
             )}
-            {state && Object.keys(state).length > 0 && (
+            {/* {state && Object.keys(state).length > 0 && (
               <CustomizedAccordions title='Estado'>
                 {
                   state.map((item, index) => (
@@ -175,7 +172,7 @@ function Apis({ setIsOpen }) {
                   ))
                 }
               </CustomizedAccordions>
-            )}
+            )} */}
             {versions && Object.keys(versions).length > 0 && (
               <div className='w-full pl-4'>
                 <div className={classes.wrapper__title}>
