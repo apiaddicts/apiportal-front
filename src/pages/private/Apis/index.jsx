@@ -13,20 +13,29 @@ import {getApiList} from '../../../redux/actions/apiManagerAction';
 import classes from './apis.module.scss';
 import config from '../../../services/config';
 
-
+const compareArrays = (array1, array2) => {
+  return array1.filter((a) => {
+    return array2.some((b) => {
+      return a.assetId === b.slug;
+    });
+  });
+};
 function Apis(props) {
 
   const topApi = config.topApi;
-  const { apis, loading } = useSelector((state) => state.apiManager);
-  
+  const { apis } = useSelector((state) => state.apiManager);
+  const { libraries } = useSelector((state) => state.library);
   const [skip, setSkip] = useState(0);
   const dispatch = useDispatch();
 
-  // const displayApis = useMemo(() => ({
-  //   apis: fApis.slice(skip, skip + topApi),
-  //   skip: skip,
-  //   count: fApis.length,
-  // }), [fApis, skip]);
+  const fApis = libraries && libraries.length > 0 && apis && apis.length > 0 ? compareArrays(apis, libraries) : [];
+
+  const displayApis = useMemo(() => ({
+    apis: fApis.slice(skip, skip + topApi),
+    skip: skip,
+    count: fApis.length,
+  }), [fApis, skip]);
+  
 
   const handleChangeSearchFilter = (text) => {
     const filterText = text.replace(/[/[`&\/\\#,@|!+()$~%.'":*?<>\]{}]/g, '');
@@ -71,8 +80,15 @@ function Apis(props) {
     if(apis && apis.length === 0){
       dispatch(getApiList('Mulesoft'))
     }
+    if(libraries && libraries.length === 0){
+      dispatch(getLibraries())
+    }
+  }, []);
 
-
+  useEffect(() => {
+    return () => {
+      dispatch(resetLibraryApi());
+    };
   }, []);
 
   const handleNext = () => {
@@ -87,8 +103,8 @@ function Apis(props) {
       <Title stylesTitle={{ fontSize: '48px' }} text='APIs' />
       <div>
         {
-          apis && apis.length > 0 ? (
-            apis.map((api,index) => (
+          fApis && fApis.length > 0 ? (
+            fApis.map((api,index) => (
               <CardInformationLibrary 
                 key={index}
                 apiName={api.assetId}

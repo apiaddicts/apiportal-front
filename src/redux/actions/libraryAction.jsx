@@ -31,12 +31,11 @@ export const getLibraries = () => (dispatch) => {
   dispatch({
     type: libraryConstants.GET_ALL_LIBRARY_REQUEST,
   });
-  const { sort } = store.getState().library;
   libraryService.getApiBookStores().then(
     (response) => {
       dispatch({
         type: libraryConstants.GET_ALL_LIBRARY_SUCCESS,
-        payload: response.sort(sortingValues('title', sort)),
+        payload: response.data,
       });
     },
     (error) => {
@@ -53,7 +52,7 @@ export const getLibrary = (id) => (dispatch) => {
     (response) => {
       dispatch({
         type: libraryConstants.GET_LIBRARY_SUCCESS,
-        payload: response,
+        payload: response.data,
       });
     },
     (error) => {
@@ -298,8 +297,8 @@ export const filterCheck = (label, checked, name) => (dispatch) => {
   let data = backUpLibreries.filter((item) => {
     const conditions = [];
     Object.keys(newFilters).forEach((key) => {
-      if (key === 'status') {
-        conditions.push((newFilters['status'].length) ? newFilters['status'].includes(item['status'].toLowerCase()) : true);
+      if (key === 'publish') {
+        conditions.push((newFilters['publish'].length) ? newFilters['publish'].includes(item['publish'].toLowerCase()) : true);
       }
       if (key === 'solution') {
         conditions.push((newFilters['solution'].length) ? newFilters['solution'].includes(item['title'].toLowerCase()) : true);

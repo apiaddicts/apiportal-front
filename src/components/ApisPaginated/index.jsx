@@ -18,7 +18,7 @@ function Apis({ currentItems }) {
             colorStatus={item?.color_status || ''}
             info='Ver Documentación'
             description={item?.description || ''}
-            link={`/apis/${item?.id}#api`}
+            link={`/apis/${item?.documentId}#api`}
             css_styles={{ 'custom_title_size': 'fs__22', 'custom_status_size': 'fs__10' }}
           />
         ))}

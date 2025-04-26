@@ -10,8 +10,10 @@ function CustomMarkdown({ content }) {
     <ReactMarkdown
       children={content}
       remarkPlugins={[gfm]}
-      linkTarget="_blank"
       components={{
+        a({ node, ...props }) {
+          return <a {...props} target="_blank" rel="noopener noreferrer" />;
+        },
         code({ node, inline, className, children, ...props }) {
           const match = /language-(\w+)/.exec(className || '')
           return !inline && match ? (
