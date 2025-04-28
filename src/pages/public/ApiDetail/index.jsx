@@ -72,7 +72,7 @@ function ApiDetail({ setIsOpen }) {
     const data = {
       label: item?.name,
       class: item?.class,
-      link: item?.link !== '' ? `/apis/${params?.id}#contact` : '',
+      link: item?.link !== '' ? `/apis/${params?.documentId}#contact` : '',
     };
 
     return data;
@@ -93,7 +93,7 @@ function ApiDetail({ setIsOpen }) {
       title: item?.title,
       description: item?.description,
       linkText: 'Conoce más',
-      route: `/blog/${item?.id}#blogDetail`,
+      route: `/blog/${item?.documentId}#blogDetail`,
     };
     return itemData;
   }) : [];
@@ -110,7 +110,7 @@ function ApiDetail({ setIsOpen }) {
 
   return (
     <div id='api' style={{ paddingTop: '114px' }}>
-      {Object.keys(homePage).length > 0 && Object.keys(library).length > 0 ? (
+      { Object.keys(library).length > 0 ? (
         <>
           <section>
             <BannerImage
@@ -196,9 +196,9 @@ function ApiDetail({ setIsOpen }) {
                           title={card?.title}
                           description={card?.description}
                           info='MÁS INFORMACIÓN'
-                          url={`/apis/${card?.id}#api`}
+                          url={`/apis/${card?.documentId}#api`}
                           css_styles={{ 'override_border__chip': 'custom_border__chip' }}
-                          route={() => handleClickPage(card?.id)}
+                          route={() => handleClickPage(card?.documentId)}
                         />
                       </div>
                     ))

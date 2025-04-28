@@ -49,8 +49,7 @@ export const getApiDefinition = (configApim, id) => (dispatch) => {
   dispatch({ type: apiManagerConstants.GET_DEFINITION_REQUEST });
   apiManagerService.getApiDefinition(configApim, id)
     .then(response => {
-      if (response.data || response.data != null) {
-        console.log(typeof response.data);
+      if(response.data || response.data != null) {
         const openApiDef = JSON.parse(response.data);
         dispatch({
           type: apiManagerConstants.GET_DEFINITION_SUCCESS,
