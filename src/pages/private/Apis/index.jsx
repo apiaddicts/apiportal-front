@@ -35,7 +35,7 @@ function Apis(props) {
     skip: skip,
     count: fApis.length,
   }), [fApis, skip]);
-  
+
 
   const handleChangeSearchFilter = (text) => {
     const filterText = text.replace(/[/[`&\/\\#,@|!+()$~%.'":*?<>\]{}]/g, '');
@@ -80,7 +80,7 @@ function Apis(props) {
     if (apis && apis.length === 0) {
       dispatch(getApiList('Mulesoft'))
     }
-    if(libraries && libraries.length === 0){
+    if (libraries && libraries.length === 0) {
       dispatch(getLibraries())
     }
   }, []);
@@ -104,8 +104,8 @@ function Apis(props) {
       <div>
         {
           fApis && fApis.length > 0 ? (
-            fApis.map((api,index) => (
-              <CardInformationLibrary 
+            fApis.map((api, index) => (
+              <CardInformationLibrary
                 key={index}
                 apiName={api.assetId}
                 title={api.assetId}
