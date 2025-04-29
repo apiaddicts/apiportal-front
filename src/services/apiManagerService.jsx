@@ -7,7 +7,8 @@ function integrationLogin(configType) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'x-apimanager-id': `${configType}`
+      'x-apimanager-id': `${configType}`,
+      'apiKey': `${config.integratorApiKey}`
     },
     body: JSON.stringify({})
   }
@@ -25,10 +26,12 @@ function integrationLogin(configType) {
 }
 
 function integrationListApis(configType) {
-  console.log('Fetching API listsasdas...');
   const requestOptions = {
     method: 'GET',
-    headers: { 'x-apimanager-id': `${configType}` }
+    headers: { 'x-apimanager-id': `${configType}`,
+    'apiKey': `${config.integratorApiKey}`
+
+   }
   }
   const url = `${config.integratorUrl}/list-apis`;
   return fetch(url, requestOptions)
@@ -44,7 +47,9 @@ function integrationListApis(configType) {
 function integrationApiDetail(configType, apiId) {
   const requestOptions = {
     method: 'GET',
-    headers: { 'x-apimanager-id': `${configType}` }
+    headers: { 'x-apimanager-id': `${configType}`,
+    'apiKey': `${config.integratorApiKey}`
+   }
   }
   const url = `${config.integratorUrl}/api-detail/${apiId}`;
   return fetch(url, requestOptions)
@@ -60,7 +65,9 @@ function integrationApiDetail(configType, apiId) {
 function getApiDefinition(configType, assetId) {
   const requestOptions = {
     method: 'GET',
-    headers: { 'x-apimanager-id': `${configType}` }
+    headers: { 'x-apimanager-id': `${configType}`,
+    'apiKey': `${config.integratorApiKey}`
+   }
   }
 
   const url = `${config.integratorUrl}/definition/${assetId}`
