@@ -13,10 +13,10 @@ function Billings() {
   const products = billings.data ?? [];
 
   useEffect(() => {
-    if (products.length === 0) {
+    if (!billings.data || billings.data.length === 0) {
       dispatch(billingsProducts('Mulesoft'));
     }
-  }, [products, dispatch]);
+  }, [dispatch]);
 
   const handleActivateProduct = (priceId) => {
     const headerManager = 'Mulesoft';

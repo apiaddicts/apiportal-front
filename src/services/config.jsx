@@ -89,7 +89,9 @@ const config = {
   contactEmailTemplateId: import.meta.env.VITE_APP_EMAIL_CONTACT_TEMPLATE_ID,
   generateStarterSubscriptionOnSignup: (import.meta.env.VITE_APP_GENERATE_STARTER_SUBSCRIPTION_ON_SIGNUP === 'true'),
   urlFaceAi: import.meta.env.VITE_APP_FACE_AI,
-  urlUserCredential: import.meta.env.VITE_APP_CREDENTIAL
+  urlUserCredential: import.meta.env.VITE_APP_CREDENTIAL,
+  clientIdFace: import.meta.env.VITE_APP_CLIENT_ID,
+  clientSecretFace: import.meta.env.VITE_APP_CLIENT_SECRET
 };
 
 export default config;
