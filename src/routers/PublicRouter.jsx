@@ -29,13 +29,13 @@ import SubscriptionDetailContact from '../pages/public/SubscriptionDetailContact
 function PublicRoute() {
   const { openModal } = useSelector((state) => state.user);
   const { time } = useSelector((state) => state.timer);
-  const { checkSession } = useVerifySession();
+  const { checkSession,isSessionValid } = useVerifySession();
   const { getTime } = useTimer();
   const [isOpen, setIsOpen] = useState(false);
   const [openForm, setOpenForm] = useState(false);
 
   useEffect(() => { getTime(); }, []);
-  useEffect(() => { checkSession(); }, [time]);
+  useEffect(() => { isSessionValid(); }, [time]);
 
   return (
     <>
