@@ -22,30 +22,40 @@ const compareArrays = (array1, array2) => {
 };
 function Apis(props) {
 
-  const topApi = config.topApi;
-  const { apis } = useSelector((state) => state.apiManager);
+  const topApi = 10;
+  const { apis, loading } = useSelector((state) => state.apiManager);
   const { libraries } = useSelector((state) => state.library);
   const [skip, setSkip] = useState(0);
   const dispatch = useDispatch();
+  const [searchTerm, setSearchTerm] = useState('');
 
   const fApis = libraries && libraries.length > 0 && apis && apis.length > 0 ? compareArrays(apis, libraries) : [];
 
+
+  const filteredApis = useMemo(() => {
+    if (searchTerm.trim().length === 0) {
+      return fApis;
+    }
+    const normalizedSearchTerm = searchTerm.trim().toLowerCase();
+    return fApis.filter(api => 
+      api.assetId.toLowerCase().includes(normalizedSearchTerm) ||
+      api.description?.toLowerCase().includes(normalizedSearchTerm)
+    );
+  }, [searchTerm, fApis]);
+
   const displayApis = useMemo(() => ({
-    apis: fApis.slice(skip, skip + topApi),
+    apis: filteredApis.slice(skip, skip + topApi),
     skip: skip,
-    count: fApis.length,
-  }), [fApis, skip]);
+    count: filteredApis.length,
+  }), [filteredApis, skip]);
   
+  useEffect(() => {
+    setSkip(0);
+  }, [searchTerm]);
 
   const handleChangeSearchFilter = (text) => {
     const filterText = text.replace(/[/[`&\/\\#,@|!+()$~%.'":*?<>\]{}]/g, '');
-    if (filterText.trim().length >= 3) {
-      dispatch(searchApis(filterText));
-    }
-
-    if (text.trim().length === 0) {
-      dispatch(listApis());
-    }
+    setSearchTerm(filterText);
   };
 
   const onSelect = (selectedList) => {
@@ -101,10 +111,23 @@ function Apis(props) {
   return (
     <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: ' 0px', md: '97px !important' } }}>
       <Title stylesTitle={{ fontSize: '48px' }} text='APIs' />
+      <div className={classes.wrapper__filters}>
+        <div>
+          <SearchInput
+            icon
+            name='search'
+            type='text'
+            onChange={(e) => {
+              handleChangeSearchFilter(e.target.value);
+            }}
+            placeholder='Buscar APIs...'
+          />
+        </div>
+      </div>
       <div>
         {
-          fApis && fApis.length > 0 ? (
-            fApis.map((api,index) => (
+          displayApis.apis && displayApis.apis.length > 0 && loading === false ? (
+            displayApis.apis.map((api,index) => (
               <CardInformationLibrary 
                 key={index}
                 apiName={api.assetId}
@@ -117,10 +140,32 @@ function Apis(props) {
                 redirectTo={`/developer/apis/${api.id}`}
               />
             ))
-          ) :
-            (<h1>Cargando...</h1>)
+          ) : loading === true ?
+              (<h1>Cargando...</h1>)
+            : (<h3>No se encontraron resultados</h3>)
         }
       </div>
+
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '1.875rem' }}>
+        {skip > 0 && (
+          <div onClick={handlePrevious} className={classes.pagination}>
+            <div className={classes.pagination__icon}>
+              <Icon id='MdNavigateBefore' />
+            </div>
+            <p>Anterior</p>
+          </div>
+        )}
+
+        {displayApis.count > 0 && skip + topApi < displayApis.count && (
+          <div onClick={handleNext} className={classes.pagination}>
+            <p className={classes.next}>Siguiente</p>
+            <div className={classes.pagination__icon}>
+              <Icon id='MdNavigateNext' />
+            </div>
+          </div>
+        )}
+      </div>
+
     </Container>
   );
 }
