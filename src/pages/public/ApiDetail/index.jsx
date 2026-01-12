@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import moment from 'moment';
 import _ from 'underscore';
+import { useTranslation } from 'react-i18next';
+
 import BannerCentered from '../../../components/Banner/BannerCentered';
 import Button from '../../../components/Buttons/Button';
 import CardBasic from '../../../components/Card/CardBasic';
@@ -21,7 +23,7 @@ import codeSnipet from '../../../static/img/code-snippet.png';
 import classes from './api-detail.module.scss';
 
 function ApiDetail({ setIsOpen }) {
-
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const params = useParams();
   const { homePage } = useSelector((state) => state.home);
@@ -92,7 +94,7 @@ function ApiDetail({ setIsOpen }) {
       img: item?.image?.[0]?.url,
       title: item?.title,
       description: item?.description,
-      linkText: 'Conoce más',
+      linkText: t('ApiDetail.moreInfo'),
       route: `/blog/${item?.documentId}#blogDetail`,
     };
     return itemData;
@@ -131,7 +133,7 @@ function ApiDetail({ setIsOpen }) {
                 <h1 className='h2 text__primary__title font-weight-bold mb-10 -ml-23 text-center'>
                   {library?.benefits && library?.benefits?.length > 0 && library?.benefits?.length === 1 ?
                     library?.benefits?.[0]?.title :
-                    'Benificios principales'}
+                    t('Home.titleSection')}
                 </h1>
               </div>
               <div className='row px-5'>
@@ -155,7 +157,7 @@ function ApiDetail({ setIsOpen }) {
                   </div>
                 </div>
                 <div className={`flex-sm-12 flex-md-6 flex-lg-6 container ${classes.section__content__img}`}>
-                  <img src={library?.benefits && library?.benefits?.length > 0 && library?.benefits?.length === 1 && library?.benefits?.[0]?.background ? library?.benefits?.[0]?.background.url : codeSnipet} alt='Benefits' className='w-full' />
+                  <img src={library?.benefits && library?.benefits?.length > 0 && library?.benefits?.length === 1 && library?.benefits?.[0]?.background ? library?.benefits?.[0]?.background.url : codeSnipet} alt={t('image')} className='w-full' />
                 </div>
               </div>
             </div>
@@ -172,17 +174,14 @@ function ApiDetail({ setIsOpen }) {
               <div className='row'>
                 <div className='flex-md-12 flex-sm-12'>
                   <h1 className='h2 text__primary__title text-center font-weight-bold mb-2 ml-1'>
-                    Otras APIs que te pueden interesar
+                    {t('Home.discoverTitle')}
                   </h1>
                 </div>
               </div>
               <div className='row'>
                 <div className='flex-md-12 flex-sm-12'>
                   <p className={`subtitle-1 mb-10 text__gray__darken text-center ${classes.section__discover__subtitle}`}>
-                    Encuentra las mejores APIs para tu negocio.
-                    {' '}
-                    <br />
-                    Nuestras APIs son fáciles de personalizar e integrar, para comenzar a vender y gestionar los productos.
+                    {t('Home.discoverSubtitle')}
                   </p>
                 </div>
               </div>
@@ -195,7 +194,7 @@ function ApiDetail({ setIsOpen }) {
                           chipTitle={card?.status && card?.status === 'Publicado' ? 'GET' : 'POST'}
                           title={card?.title}
                           description={card?.description}
-                          info='MÁS INFORMACIÓN'
+                          info={t('ApiDetail.moreInfo')}
                           url={`/apis/${card?.documentId}#api`}
                           css_styles={{ 'override_border__chip': 'custom_border__chip' }}
                           route={() => handleClickPage(card?.documentId)}
@@ -210,7 +209,7 @@ function ApiDetail({ setIsOpen }) {
                   <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
                     <div className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
                       <HashLink smooth to='/apis#apiHome'>
-                        <span className='mr-1'>ver todas</span>
+                        <span className='mr-1'>{t('ApiDetail.seeAll')}</span>
                       </HashLink>
                       <Icon id='MdOutlineEast' />
                     </div>
@@ -227,7 +226,7 @@ function ApiDetail({ setIsOpen }) {
               <div className='row'>
                 <div className='flex-md-12 flex-sm-12'>
                   <h1 className={`h3 text-center text__white mb-5 ${classes.section__works__title}`}>
-                    ¿Cómo funciona?
+                    {t('ApiDetail.howItWorks')}
                   </h1>
                 </div>
               </div>
@@ -289,12 +288,12 @@ function ApiDetail({ setIsOpen }) {
             <div className='container'>
               <div className='row'>
                 <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
-                  <h1 className='h2 text__dark__primary'>Novedades</h1>
+                  <h1 className='h2 text__dark__primary'>{t('ApiDetail.news')}</h1>
                 </div>
 
                 <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
                   <p className='body-1'>
-                    Conoce todas las novedades sobre tecnología, APIs y transformación digital
+                    {t('ApiDetail.newsDescription')}
                   </p>
                 </div>
               </div>
@@ -310,7 +309,7 @@ function ApiDetail({ setIsOpen }) {
               <div className='row justify-center'>
                 <div className={`flex-lg-2 flex-md-6 flex-sm-12 text-center ${classes.custom_top}`}>
                   <HashLink smooth to='/blog#blogIndex'>
-                    <div className='text__secondary'>Ver más</div>
+                    <div className='text__secondary'>{t('ApiDetail.seeMore')}</div>
                   </HashLink>
                 </div>
               </div>

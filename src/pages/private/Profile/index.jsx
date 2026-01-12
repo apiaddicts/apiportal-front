@@ -11,9 +11,12 @@ import Title from '../../../components/Title';
 import Suscriptions from '../../../components/Suscriptions';
 import SuscriptionsVertical from '../../../components/SuscriptionsVertical';
 import RestorePassword from '../../../components/RestorePasswordForm';
+import CredentialViewer from '../../../components/ApiKeys/ApiKeys';
+import { useTranslation } from 'react-i18next';
 import classes from './profile.module.scss';
 
 function Profile() {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const { user, loadingUser, id, token } = useSelector((state) => state.user);
   const [displayRestorePassword, setDisplayRestorePassword] = useState(false);
@@ -84,14 +87,16 @@ function Profile() {
       <div className={classes.main__admin}>
         {user && Object.keys(user).length > 0 && loadingUser === false ? (
           <div className={classes.admin}>
-            <div className='w-full mb-5'>
-              <Title text='Mi perfil' />
+            <div className='w-full mb-5 mt-5'>
+              <Title text={t('Profile.myProfile')} />
             </div>
             <div className={classes.admin__form}>
               <form onSubmit={formConfig.handleSubmit} noValidate>
                 <div className={classes.admin__form__container}>
                   <div className={classes.admin__form__container__header}>
-                    <div className='font-fs-joey fs__36 font-weight-bold text__dark__primary'>Datos personales</div>
+                    <div className='font-fs-joey fs__36 font-weight-bold text__dark__primary'>
+                      {t('Profile.personalData')}
+                    </div>
                   </div>
                   <div className='row'>
                     {labelsUser.map((field) => (
@@ -102,12 +107,11 @@ function Profile() {
                   </div>
                   <div className='row align_items__center mt-4 justify_content__between'>
                     <div className='flex-lg-6 flex-sm-12'>
-                      {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
                       <div
                         className='fs__16 text__dark__primary ls_05 font-weight-bold ml-3 mb-2 cpointer'
                         onClick={() => setDisplayRestorePassword(!displayRestorePassword)}
                       >
-                        Restablecer contraseña
+                        {t('Profile.resetPassword')}
                       </div>
                     </div>
                     <div className='flex-lg-3 flex-sm-12 display_flex align_items__bottom justify_content__end ml-auto mb-2'>
@@ -115,7 +119,7 @@ function Profile() {
                         type='submit'
                         styles='tertiary'
                       >
-                        Guardar
+                        {t('Profile.save')}
                       </Button>
                     </div>
                   </div>
@@ -129,12 +133,23 @@ function Profile() {
         ) : (null)}
 
       </div>
-      <div className={classes.main__suscription}>
-        <div className={classes.wrapper_subscriptions__wide__display}>
-          <Suscriptions user={user} suscriptions={suscripcionsUser} title='Suscripciones' />
+
+      <div className={classes.main__api__keys}>
+        <div className={classes.wrapper_api_keys__wide__display}>
+          <CredentialViewer />
         </div>
-        <div className={classes.wrapper_subscriptions__small__display}>
-          <SuscriptionsVertical user={user} suscriptions={suscripcionsUser} title='Suscripciones' />
+      </div>
+
+      <div>
+        <br />
+
+        <div className={classes.main__suscription}>
+          <div className={classes.wrapper_subscriptions__wide__display}>
+            <Suscriptions user={user} suscriptions={suscripcionsUser} title={t('Profile.subscriptions')} />
+          </div>
+          <div className={classes.wrapper_subscriptions__small__display}>
+            <SuscriptionsVertical user={user} suscriptions={suscripcionsUser} title={t('Profile.subscriptions')} />
+          </div>
         </div>
       </div>
     </Container>

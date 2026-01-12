@@ -4,9 +4,12 @@ import { HashLink } from 'react-router-hash-link';
 import CustomMarkdown from '../CustomMarkdown';
 import Base from './Base';
 import Button from '../Buttons/Button';
+import { useTranslation } from 'react-i18next';
 
 function PartnerCard(props) {
   const { title, content, slug } = props;
+  const { t } = useTranslation();
+
   return (
     <Base css_styles={{ 'override_card_height': 'custom_card__public_subscription' }}>
       <div className='card__wrapper__subs'>
@@ -19,7 +22,7 @@ function PartnerCard(props) {
           </div>
           <div className='mt-5'>
             <HashLink smooth to={`/suscripciones/${slug}`}>
-              <Button styles='primary'>Contáctanos</Button>
+              <Button styles='primary'>{t('PartnerCard.contactUs')}</Button>
             </HashLink>
           </div>
           <div className='mt-5 mb-2 partner__markdown'>

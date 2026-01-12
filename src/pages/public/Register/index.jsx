@@ -7,8 +7,10 @@ import CreateAccount from '../../../components/Forms/CreateAccount';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 import Alert from '../../../components/Alert';
 import classes from './register.module.scss';
+import { useTranslation } from 'react-i18next';
 
 function Register({ setOpenForm, setIsOpen }) {
+  const { t } = useTranslation();
   const { loadingSignUp, signUpData, responseError } = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -21,7 +23,7 @@ function Register({ setOpenForm, setIsOpen }) {
     <Modal setOpen={setOpenForm} maxWidth='md'>
       {loadingSignUp === false ? (
         <div>
-          <h1 className={classes.login__title}>Crea tu Cuenta</h1>
+          <h1 className={classes.login__title}>{t('Register.createAccount')}</h1>
           <div className='container'>
             <div className='row'>
               <div className='flex-sm-12 flex-md-12 flex-lg-12'>
@@ -31,15 +33,15 @@ function Register({ setOpenForm, setIsOpen }) {
                       <Alert
                         css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
                         alert_type='alert__success'
-                        title='Revisa tu cuenta de correo'
-                        msg='Para completar el registro, es necesario confirmar tu cuenta de correo'
+                        title={t('Register.checkEmail')}
+                        msg={t('Register.confirmEmail')}
                       />
                     ) : Object.keys(signUpData).length === 0 && Object.keys(responseError).length > 0 ? (
                       <Alert
                         css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
                         alert_type='alert__danger'
-                        title='Error al registrarte'
-                        msg='El usuario ya esta dado de alta'
+                        title={t('Register.errorRegister')}
+                        msg={t('Register.userExists')}
                       />
                     ) : (null)
                 }

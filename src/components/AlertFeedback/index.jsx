@@ -1,8 +1,12 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+
 import Icon from '../MdIcon/Icon';
 import classes from './alert.module.scss';
 
 function AlertFeedbock({ setShowAlert, error, success }) {
+  const { t } = useTranslation();
+
   return (
     <div className={classes.alert}>
       <button
@@ -21,11 +25,11 @@ function AlertFeedbock({ setShowAlert, error, success }) {
               <Icon id='MdWarning' />
             </div>
             <div className={classes.alert__error__message}>
-              <p className={classes.alert__error__title}>Error on login</p>
+              <p className={classes.alert__error__title}>{t('AlertFeedback.errorLogin')}</p>
               <p>
-                The data entered are not correct, try to change the password, if you do not remember you can
+                {t('AlertFeedback.incorrectData')}
                 {' '}
-                <span>forgot your password</span>
+                <span>{t('AlertFeedback.forgotPassword')}</span>
               </p>
             </div>
           </div>
@@ -36,9 +40,9 @@ function AlertFeedbock({ setShowAlert, error, success }) {
               <Icon id='MdWarning' />
             </div>
             <div className={classes.alert__success__message}>
-              <p className={classes.alert__success__title}>Exit on login</p>
+              <p className={classes.alert__success__title}>{t('AlertFeedback.successLogin')}</p>
               <p>
-                Se ha enviado un correo con el cambio de contraseña al correo b**********@e****.com. Ingrese con la nueva contraseña.
+                {t('AlertFeedback.passwordChangeEmail')}
               </p>
             </div>
           </div>

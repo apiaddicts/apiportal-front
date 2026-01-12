@@ -17,11 +17,15 @@ import InputUI from '../Input/InputUI/InputUI';
 import TextAreaUI from '../Input/InputUI/TextAreaUI';
 import config from '../../services/config';
 import CustomIcon from '../MdIcon/CustomIcon';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+import { useTranslation } from 'react-i18next';
 
 function Footer({ isPrivate }) {
+  const { t } = useTranslation();
   const { pathname } = useLocation();
   if (pathname === '/soporte' || pathname === '/documentacion') return null;
   const dispatch = useDispatch();
+  const { executeRecaptcha } = useGoogleReCaptcha()
   const email = useSelector((state) => state.email);
   const img = '';
   const currentDate = new Date();
@@ -59,10 +63,26 @@ function Footer({ isPrivate }) {
       message: Yup.string().required('Campo requerido'),
       //sendMailTerms: Yup.bool().oneOf([true], 'Debes aceptar los términos y condiciones'),
     }),
-    onSubmit: (values) => {
-      //Handle envio de correo de contacto
+    onSubmit: async (values) => {
+      if (!executeRecaptcha) {
+        console.warn('Recaptcha not yet available');
+        return;
+      }
+
+      const recaptchaToken = await executeRecaptcha('contact_form');
+      if (!recaptchaToken) {
+       
+        return;
+      }
+
+      
+      const dataWithToken = {
+        ...values,
+        recaptchaToken,
+      };
+
       setDisplaySubmit(false);
-      dispatch(emailAction.sendContactEmail(values));
+      dispatch(emailAction.sendContactEmail(dataWithToken));
     },
   });
 
@@ -83,12 +103,12 @@ function Footer({ isPrivate }) {
       {!isPrivate && (
         <Base img={img}>
           <div className={`container ${classes.footer__container}`}>
-            <h1 className='h2 text__white mb-3'>Contáctanos</h1>
-            <p style={{ fontWeight: 400 }} className='h5 text__white mb-10'>Déjanos un mensaje y nos pondremos en contacto contigo a la brevedad.</p>
+            <h1 className='h2 text__white mb-3'>{t('Footer.contactUs')}</h1>
+            <p style={{ fontWeight: 400 }} className='h5 text__white mb-10'>{t('Footer.leaveMessage')}</p>
           </div>
           <div className={classes.button__fab}>
             <button type='button' onClick={() => { setContactForm(!contactForm); formik.resetForm(); }}>
-              {contactForm ? <Icon style={{ fontSize: '44px' }} id='MdExpandLess' /> : <Icon style={{ fontSize: '44px' }} id='MdExpandMore' />}
+              {contactForm ? <span style={{ fontSize: 25 }}>{t('Footer.interested')}</span> : <span style={{ fontSize: 25 }}>{t('Footer.interested')}</span>}
             </button>
           </div>
         </Base>
@@ -235,7 +255,7 @@ function Footer({ isPrivate }) {
                     displaySubmit &&
                     (
                       <Button styles={formik.isValid ? 'tertiary' : 'disabled'} disabled={!formik.isValid} type='submit'>
-                        ¡Me interesa!
+                        Enviar
                       </Button>
                     )
                   }
@@ -251,17 +271,17 @@ function Footer({ isPrivate }) {
             <CustomIcon name='logowhite' />
           </div>
           <div className={classes.email}>
-            <h1 className='body-1 font-weight-medium text__white mb-2'>Correo electrónico</h1>
+            <h1 className='body-1 font-weight-medium text__white mb-2'>{t('Footer.email')}</h1>
             <p className='body-1 font-weight-bold text__white'>{config.contact}</p>
           </div>
           <div className={classes.policies}>
             <p className='body-1 font-weight-bold'>
-              <a href={config.privacyPolicyPath} target='blank' className='text__white'>Política de Privacidad</a>
+              <a href={config.privacyPolicyPath} target='blank' className='text__white'>{t('Footer.privacyPolicy')}</a>
             </p>
           </div>
           <div className={classes.policies}>
             <p className='body-1 font-weight-bold'>
-              <a href={config.cookiesPolicyPath} target='blank' className='text__white'>Política de Cookies</a>
+              <a href={config.cookiesPolicyPath} target='blank' className='text__white'>{t('Footer.cookiesPolicy')}</a>
             </p>
           </div>
         </div>
@@ -270,9 +290,9 @@ function Footer({ isPrivate }) {
             <p className='caption text-uppercase text__white mb-3'>
               &copy;
               {' '}
-              <span>{ year }</span>
+              <span>{year}</span>
               {' '}
-              {`${config.company}. TODOS LOS DERECHOS RESERVADOS`}
+              {`${config.company}. ${t('Footer.allRightsReserved')}`}
               {' '}
             </p>
           </div>

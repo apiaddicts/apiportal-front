@@ -1,46 +1,46 @@
-/* eslint-disable prefer-regex-literals */
 import { useFormik } from 'formik';
 import { useState } from 'react';
 import { string, bool } from 'yup';
 import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
-const validationSchema = Yup.object().shape({
-  first_name: string().trim().required('Campo requeridp').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos')
-    .max(50, 'Se ha excedido el número de caracteres permitidos'),
-  last_name: string().trim().required('Campo requerido').matches(/^[a-zA-ZÀ-ÿ\s]+$/, 'No se permiten caracteres especiales o númericos')
-    .max(50, 'Se ha excedido el número de caracteres permitidos'),
-  email: string().email('Correo electrónico inválido').required('Campo requerido'),
-  terms: bool().oneOf([true], 'Debes aceptar los términos de uso'),
-  password: string()
-    .min(8, 'La contraseña debe tener al menos 8 carácteres de longitud')
-    .max(16, 'Se ha excedido el número de caracteres permitidos')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/, 'Su contraseña debe tener al menos una letra mayúscula, una letra minuscula, un número y un caracter especial (@$!%*?&).')
-    .trim('Los espacios no estan permitidos')
-    .strict()
-    .required('La contraseña es obligatoria'),
-  password_confirmation: string().oneOf([Yup.ref('password')], 'La contraseñas y la confirmación de contraseña deben coincidir').required('Campo requerido').matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/, 'Su contraseña debe tener al menos una letra mayúscula, una letra minuscula, un número y un caracter especial (@$!%*?&).'),
-});
+const useFormConfig = (fields, customHandleSubmit) => {
+  const { t } = useTranslation(); // ✅ Agregado aquí antes de usarlo
 
-const objectFromArray = (fields, key) => {
-  const mappedProps = fields.map((field) => {
-    if (key !== 'validate') {
-      return [field.id, field[key]];
-    }
-    const validation = validationSchema[field.validate];
-    return [field.id, field.required ? validation.required() : validation];
+  const validationSchema = Yup.object().shape({
+    first_name: string().trim().required(t('Form.requiredField')).matches(/^[a-zA-ZÀ-ÿ\s]+$/, t('Form.noSpecialCharacters'))
+      .max(50, t('Form.maxCharacters')),
+    last_name: string().trim().required(t('Form.requiredField')).matches(/^[a-zA-ZÀ-ÿ\s]+$/, t('Form.noSpecialCharacters'))
+      .max(50, t('Form.maxCharacters')),
+    email: string().email(t('Form.invalidEmail')).required(t('Form.requiredField')),
+    terms: bool().oneOf([true], t('Form.acceptTerms')),
+    password: string()
+      .min(8, t('Form.passwordMinLength'))
+      .max(16, t('Form.maxCharacters'))
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/, t('Form.passwordRequirements'))
+      .trim(t('Form.noSpaces'))
+      .strict()
+      .required(t('Form.passwordRequired')),
+    password_confirmation: string().oneOf([Yup.ref('password')], t('Form.passwordMatch')).required(t('Form.requiredField')).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/, t('Form.passwordRequirements')),
   });
 
-  return Object.fromEntries(mappedProps);
-};
+  const objectFromArray = (fields, key) => {
+    const mappedProps = fields.map((field) => {
+      if (key !== 'validate') {
+        return [field.id, field[key]];
+      }
+      const validation = validationSchema[field.validate];
+      return [field.id, field.required ? validation.required() : validation];
+    });
 
-function useFormConfig(
-  fields,
-  customHandleSubmit,
-) {
+    return Object.fromEntries(mappedProps);
+  };
+
   const [formStatus, setFormStatus] = useState({
     status: 'not_started',
     message: '',
   });
+
   const formik = useFormik({
     initialValues: objectFromArray(fields, 'initialValue'),
     onSubmit: async (values, { resetForm }) => {
@@ -54,6 +54,6 @@ function useFormConfig(
   });
 
   return { ...formik, formStatus, setFormStatus };
-}
+};
 
 export default useFormConfig;

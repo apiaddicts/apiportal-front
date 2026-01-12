@@ -1,0 +1,406 @@
+{
+  "welcome": "Welcome to React and i18next",
+  "dashboard": "Dashboard",
+  "apiToken": "Token",
+  "apisLibrary": "APIs Library",
+  "codeSamples": "Code Samples",
+  "billings": "Payment Gateway",
+  "news": "News",
+  "blog": "Blog",
+  "faqs": "FAQs",
+  "support": "Support",
+  "liveApiDocs": "Live API Docs",
+  "faceAiExperience": "Face AI Experience",
+  "currentPlan": "Current plan",
+  "monthlyQuota": "Monthly quota",
+  "apiCallsUsed": "API calls used",
+  "facesInStorage": "Faces in storage",
+  "active": "Active",
+  "perMonth": "€ / Month",
+  "apiCredentials": "API Credentials",
+  "clientId": "Client ID",
+  "clientSecret": "Client Secret",
+  "copiedToClipboard": "Copied to clipboard",
+  "copyError": "Error copying to clipboard",
+  "filterResults": "Filter results",
+  "searchPlaceholder": "Search",
+  "filterByVersion": "Filter by version",
+  "loading": "Loading...",
+  "noResultsFound": "No results found",
+  "name": "Name",
+  "version": "Version",
+  "context": "Context",
+  "provider": "Provider",
+  "type": "Type",
+  "back": "BACK",
+  "definition": "Definition",
+  "apiInformation": "API Information",
+  "information": "Information",
+  "description": "Description",
+  "expand": "Expand",
+  "collapse": "Collapse",
+  "title": "Title",
+  "uri": "URI",
+  "noInformation": "No information available",
+  "codeSamplesTitle": "API contains a wide range of ready-to-use cases...",
+  "descriptionExample": "Description of the example",
+  "configSection": "Configuration Section",
+  "installDependencies": "Installing dependencies",
+  "importPackages": "Importing packages",
+  "configVariables": "Configuring variables",
+  "execSection": "Execution Section",
+  "exampleFunction": "Example function",
+  "resultSection": "Result Section",
+  "dtoExample": "DTO with example response result in JSON",
+  "noData": "No data available",
+  "recognizePeople": "Recognize People in a Photo",
+  "loremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry...",
+  "image": "Image",
+  "jsonData": "JSON Data (optional)",
+  "bboxes": "BBoxes (JSON array)",
+  "landmarks": "Landmarks (JSON array)",
+  "emotions": "Emotions (JSON array)",
+  "models": "Models (JSON object)",
+  "submitRequest": "Submit Request",
+  "processingImage": "Processing image...",
+  "response": "Response:",
+  "unexpectedError": "Unexpected error",
+  "imageProcessed": "Image processed successfully ✅",
+  "processingError": "Error processing the request ❌",
+  "codeCopied": "Code in {{language}} copied",
+  "copyCode": "Copy code",
+  "Billings": {
+    "choosePlan": "Choose Your Plan",
+    "activate": "ACTIVATE",
+    "noProducts": "No products available at this time.",
+    "monthlyRequests": "API requests",
+    "dailyRequests": "transactions"
+  },
+  "Support": {
+    "name": "Name",
+    "lastname": "Last Name",
+    "email": "Email",
+    "phone": "Contact Phone",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send",
+    "requiredField": "Required field",
+    "invalidEmail": "Invalid email",
+    "noSpecialCharacters": "No special characters or numbers allowed",
+    "maxCharacters": "Exceeded the maximum number of characters allowed"
+  },
+  "Profile": {
+    "myProfile": "My Profile",
+    "personalData": "Personal Data",
+    "resetPassword": "Reset Password",
+    "save": "Save",
+    "subscriptions": "Subscriptions"
+  },
+  "SidebarDrawer": {
+    "logout": "Logout",
+    "hello": "Hello,",
+    "developerPortal": "Developer Portal",
+    "hideMenu": "Hide menu"
+  },
+  "UserDetail": {
+    "personalData": "Personal Data"
+  },
+  "CustomFooter": {
+    "legalWarning": "Legal Warning",
+    "privacyPolicy": "Privacy Policy",
+    "cookiesPolicy": "Cookies Policy",
+    "allRightsReserved": "ALL RIGHTS RESERVED"
+  },
+  "Home": {
+    "learnMore": "Learn more",
+    "titleSection": "Main Benefits",
+    "noImage": "No image available",
+    "worksTitle": "How it works",
+    "discoverTitle": "Discover our APIs",
+    "discoverSubtitle": "Explore the possibilities",
+    "moreInfo": "More information",
+    "seeAll": "See all",
+    "noApis": "No APIs available",
+    "news": "News",
+    "newsDescription": "Discover all the news about technology, APIs, and digital transformation",
+    "seeMore": "See more",
+    "noBlogEntries": "No blog entries available"
+  },
+  "ApiDetail": {
+    "bannerTitle": "API Details",
+    "benefitsTitle": "Main Benefits",
+    "discoverTitle": "Discover our APIs",
+    "discoverSubtitle": "Explore the possibilities",
+    "noBlogEntries": "No blog entries available",
+    "howItWorks": "How it works",
+    "moreInfo": "More information",
+    "seeAll": "See all",
+    "news": "News",
+    "newsDescription": "Discover all the news about technology, APIs, and digital transformation",
+    "seeMore": "See more"
+  },
+  "Apis": {
+    "filterBy": "Filter by",
+    "version": "Version",
+    "clearFilters": "Clear filters",
+    "searchPlaceholder": "Search APIs...",
+    "noData": "No data available",
+    "solution": "Solution",
+    "tags": "Tags"
+  },
+  "Blog": {
+    "learnMore": "Learn more",
+    "noData": "No data available",
+    "recent": "Recent",
+    "ourExperiences": "Our Experiences",
+    "youMayAlsoLike": "You may also like",
+    "knowMore": "Know more",
+    "seeMore": "See more",
+    "discoverNews": "Discover the news",
+    "goBack": "Go back",
+    "seeAll": "See all"
+  },
+  "Login": {
+    "signIn": "Sign In",
+    "resetPassword": "Reset Password"
+  },
+  "Register": {
+    "createAccount": "Create your Account",
+    "checkEmail": "Check your email account",
+    "confirmEmail": "To complete the registration, you need to confirm your email account",
+    "errorRegister": "Error registering",
+    "userExists": "The user is already registered"
+  },
+  "SubscriptionDetail": {
+    "contactForm": "Contact Form"
+  },
+  "Contact": {
+    "subscribe": "SUBSCRIBE",
+    "name": "Name*",
+    "email": "Email*",
+    "error": "Oops! An error occurred, please try again",
+    "success": "Data sent successfully",
+    "description": "Choose one or more capabilities and be the first to know.",
+    "connected": "Let's stay connected!"
+  },
+  "Form": {
+    "requiredField": "Required field",
+    "noSpecialCharacters": "No special characters or numbers allowed",
+    "invalidEmail": "Invalid email",
+    "acceptTerms": "You must accept the terms of use",
+    "passwordMinLength": "Password must be at least 8 characters",
+    "maxCharacters": "Exceeded the maximum number of characters allowed",
+    "passwordRequirements": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+    "noSpaces": "No spaces allowed",
+    "passwordRequired": "Password is required",
+    "passwordMatch": "Passwords must match",
+    "emailPlaceholder": "Email",
+    "passwordPlaceholder": "Password",
+    "loginButton": "Login"
+  },
+  "ForgotPassword": {
+    "invalidEmail": "Invalid email",
+    "requiredField": "Required field",
+    "emailPlaceholder": "Email"
+  },
+  "RestorePassword": {
+    "passwordMinLength": "Current password must be at least 8 characters long",
+    "passwordRequired": "Current password is required",
+    "newPasswordMinLength": "New password must be at least 8 characters long",
+    "newPasswordRequired": "New password is required",
+    "noSpaces": "Spaces are not allowed",
+    "passwordRequirements": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+    "confirmPasswordRequired": "Confirm password is required",
+    "passwordMatch": "Passwords must match"
+  },
+  "RestorePasswordForm": {
+    "password": "Password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "passwordRequired": "Current password is required",
+    "newPasswordRequired": "New password is required",
+    "confirmPasswordRequired": "Confirm password is required",
+    "restoreErrorTitle": "An error occurred while resetting the password",
+    "restoreErrorMessage": "Verify that your previous password is correct, try again.",
+    "passwordErrorTitle": "Password error",
+    "passwordErrorMessage": "Verify that your previous password is correct, try again.",
+    "successTitle": "Password changed",
+    "successMessage": "Your password has been successfully changed",
+    "cancelButton": "Cancel",
+    "saveButton": "Save",
+    "loading": "Loading..."
+  },
+  "UserForm": {
+    "requiredField": "Required field",
+    "invalidEmail": "Invalid email"
+  },
+  "Accordion": {
+    "missingContent": "Missing content"
+  },
+  "Alert": {
+    "passwordChangeEmailSent": "A confirmation email for password change has been sent. Please check your inbox."
+  },
+  "AlertFeedback": {
+    "errorLogin": "Error on login",
+    "incorrectData": "The data entered are not correct. Please try again.",
+    "forgotPassword": "Forgot your password?",
+    "successLogin": "Exit on login",
+    "passwordChangeEmail": "A confirmation email for password change has been sent. Please check your inbox."
+  },
+  "ApiKeys": {
+    "copiedToClipboard": "Copied to clipboard",
+    "copyError": "Error copying to clipboard"
+  },
+  "ApisPaginated": {
+    "viewDocumentation": "View Documentation",
+    "next": "Next",
+    "previous": "Previous"
+  },
+  "BannerImage": {
+    "goBack": "Go Back",
+    "noImage": "No image available"
+  },
+  "BannerStatic": {
+    "searchPlaceholder": "Search"
+  },
+  "BlogDetails": {
+    "defaultTimeRead": "5 min read",
+    "defaultDate": "February 16, 2022",
+    "share": "SHARE:"
+  },
+  "BlogPostsPaginated": {
+    "next": "Next",
+    "previous": "Previous"
+  },
+  "CardSlider": {
+    "moreInfo": "MORE INFORMATION",
+    "defaultDescription": "Default description for the card slider."
+  },
+  "PartnerCard": {
+    "contactUs": "Contact Us"
+  },
+  "SubscriptionCard": {
+    "perMonth": "per month",
+    "containsApis": "Contains the APIs of:",
+    "features": "Features:",
+    "expandSubscription": "Do you need to expand your subscription?",
+    "packDetails": "*Pack of 10 companies at €10/company",
+    "contactUs": "Contact Us"
+  },
+  "Carousel": {
+    "moreInfo": "MORE INFORMATION",
+    "defaultDescription": "Default description for the carousel."
+  },
+  "Collapse": {
+    "cancelSubscription": "Cancel Subscription",
+    "confirmCancelSubscription": "Do you want to cancel the subscription? This action is irreversible.",
+    "cancel": "Cancel",
+    "accept": "Accept",
+    "regenerateSubscriptionKeys": "Regenerate Subscription Keys",
+    "confirmRegenerateSubscriptionKeys": "Do you want to regenerate the subscription keys? This action is irreversible."
+  },
+  "Stepper": {
+    "save": "Save",
+    "finish": "Finish",
+    "next": "Next",
+    "verifyInsertedData": "Verify inserted data",
+    "allStepsCompleted": "All steps completed - you're finished",
+    "reset": "Reset"
+  },
+  "Footer": {
+    "contactUs": "Contact Us",
+    "leaveMessage": "Leave us a message and we will get back to you shortly.",
+    "interested": "I'm interested!",
+    "email": "Email",
+    "privacyPolicy": "Privacy Policy",
+    "cookiesPolicy": "Cookies Policy",
+    "allRightsReserved": "ALL RIGHTS RESERVED"
+  },
+  "CreateAccount": {
+    "email": "Email",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "password": "Password",
+    "checkboxTermsLabel": "I accept the terms and conditions",
+    "acceptTermsError": "To complete the registration, you must accept the terms of use",
+    "loginButton": "Login",
+    "registerButton": "Register"
+  },
+  "LoginForm": {
+    "checkEmailTitle": "Check your email account",
+    "checkEmailMessage": "To complete the registration, you need to confirm your email account",
+    "errorLoginTitle": "Error logging in",
+    "username": "Username",
+    "password": "Password",
+    "rememberData": "Remember data",
+    "forgotPassword": "Forgot your password?",
+    "registerButton": "Register",
+    "loginButton": "Login"
+  },
+  "ResetPassword": {
+    "instructions": "Enter your email and we will send you a confirmation email with instructions to change your password.",
+    "requestSent": "Request sent",
+    "email": "Email",
+    "recoverPasswordButton": "Recover Password"
+  },
+  "InputResponse": {
+    "required": "Required *"
+  },
+  "InputUI": {
+    "required": "Required *"
+  },
+  "SelectUI": {
+    "placeholder": "Topics",
+    "noOptions": "No options to display"
+  },
+  "InputKeys": {
+    "copied": "Copied to clipboard"
+  },
+  "InputSelect": {
+    "orderBy": "Order by",
+    "nameAsc": "Name (A-Z)",
+    "nameDesc": "Name (Z-A)"
+  },
+  "MenuOptions": {
+    "cancelSubscriptionTitle": "Cancel Subscription",
+    "cancelSubscriptionMessage": "Do you want to cancel the subscription? This action is irreversible.",
+    "cancelButton": "Cancel",
+    "acceptButton": "Accept",
+    "renameOption": "Rename",
+    "cancelOption": "Cancel"
+  },
+  "Navbar": {
+    "apis": "APIs",
+    "blog": "Blog",
+    "faqs": "FAQs",
+    "myProfile": "My Profile",
+    "register": "Register",
+    "login": "Login"
+  },
+  "Novedades": {
+    "noData": "No data available"
+  },
+  "PaginacionApis": {
+    "info": "{{start}}-{{end}} of {{total}} APIs"
+  },
+  "Suscriptions": {
+    "loading": "Loading...",
+    "name": "Name",
+    "request": "Request",
+    "primaryKey": "Primary key",
+    "secondaryKey": "Secondary key",
+    "product": "Product",
+    "state": "State",
+    "renameOption": "Rename",
+    "cancelOption": "Cancel"
+  },
+  "SuscriptionsVertical": {
+    "loading": "Loading...",
+    "request": "Request",
+    "primaryKey": "Primary key",
+    "secondaryKey": "Secondary key",
+    "product": "Product",
+    "state": "State",
+    "noData": "No data available"
+  }
+}

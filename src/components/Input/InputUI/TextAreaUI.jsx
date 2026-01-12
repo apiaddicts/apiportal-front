@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Icon from '../../MdIcon/Icon';
 import classes from './inputui.module.scss';
 
-function TextAreaUI({ label, rows = 3, counter = 10, required = false, value, touched, errors, onChange, onBlur, ...rest }) {
+function TextAreaUI({ label, rows = 3, counter = 200, required = false, value, touched, errors, onChange, onBlur, ...rest }) {
   const [isActive, setIsActive] = useState(false);
   const [initialValue, setInitialValue] = useState(() => {
     if (value === undefined) {

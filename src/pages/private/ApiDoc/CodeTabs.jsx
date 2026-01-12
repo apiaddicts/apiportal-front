@@ -4,23 +4,21 @@ import { CopyAll } from '@mui/icons-material';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import AppSnackbar from '../../../components/Snackbar/Snackbar';
+import { useTranslation } from 'react-i18next';
 
 import codeSnippets from '../../../static/const/codeSnippets';
 
-
-
-
-
 function CodeTabs() {
+    const { t } = useTranslation();
+
     const [tab, setTab] = useState('Python');
     const [snackbarOpen, setSnackbarOpen] = useState(false);
     const [snackbarMessage, setSnackbarMessage] = useState('');
 
     const handleCopy = () => {
-        setSnackbarMessage(`Código en ${tab} copiado`);
+        setSnackbarMessage(t('codeCopied', { language: tab }));
         setSnackbarOpen(true);
     };
-
 
     const handleChange = (event, newValue) => {
         setTab(newValue);
@@ -42,11 +40,9 @@ function CodeTabs() {
                         sx={{ position: 'absolute', top: 8, right: 8 }}
                         startIcon={<CopyAll />}
                     >
-                        Copiar código
+                        {t('copyCode')}
                     </Button>
                 </CopyToClipboard>
-
-
 
                 <SyntaxHighlighter
                     language={

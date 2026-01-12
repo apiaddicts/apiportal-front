@@ -11,6 +11,15 @@ if (localStorage.getItem('password') !== null) {
 
 export const fieldsRegister = [
   {
+    id: 'username',
+    initialValue: '',
+    placeholder: 'John123',
+    label: 'Nombre de usuario *',
+    validate: 'username',
+    required: true,
+    type: 'text',
+  },
+  {
     id: 'first_name',
     initialValue: '',
     placeholder: 'John',
@@ -37,15 +46,15 @@ export const fieldsRegister = [
   //   required: true,
   //   type: 'number',
   // },
-  // {
-  //   id: 'company',
-  //   initialValue: '',
-  //   placeholder: 'Compañia',
-  //   label: 'Compañia',
-  //   validate: 'company',
-  //   required: true,
-  //   type: 'text',
-  // },
+  {
+    id: 'company',
+    initialValue: '',
+    placeholder: 'Compañia',
+    label: 'Compañia *',
+    validate: 'company',
+    required: true,
+    type: 'text',
+  },
   // {
   //   id: 'industry',
   //   initialValue: '',
@@ -72,6 +81,8 @@ export const fieldsRegister = [
     validate: 'password',
     required: true,
     type: 'password',
+    icon: true,
+    iconName: 'MdOutlineRemoveRedEye'
   },
   {
     id: 'password_confirmation',
@@ -81,6 +92,8 @@ export const fieldsRegister = [
     validate: 'password_confirmation',
     required: true,
     type: 'password',
+    icon: true,
+    iconName: 'MdOutlineRemoveRedEye'
   },
   {
     id: 'terms',

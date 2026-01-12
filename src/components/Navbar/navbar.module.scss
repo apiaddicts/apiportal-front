@@ -5,8 +5,9 @@
   background: $secondary_white;
   width: 100%;
   height: 100%;
-  padding: 1rem 1.5rem;
+
   transition: 0.3s ease all;
+
   @include breakpoint(md) {
     padding: 1rem 3rem;
   }
@@ -30,6 +31,7 @@
       justify-content: space-around;
       font-size: 18px;
       font-weight: map-deep-get($font-weights, "medium") !important;
+
       &__img {
         padding-right: 10px;
         display: flex;
@@ -38,9 +40,11 @@
         align-items: flex-start;
         gap: 5px;
       }
+
       &__text {
         color: $secondary;
       }
+
       &__variant {
         font-size: 18px;
         color: $secondary;
@@ -55,6 +59,7 @@
         position: relative;
         z-index: -1;
       }
+
       top: 0;
       right: 100%;
       bottom: 0;
@@ -81,6 +86,7 @@
         list-style: none;
         display: flex;
         flex-direction: column;
+
         // margin-bottom: ;
         @include breakpoint(md) {
           flex-direction: row;
@@ -95,6 +101,7 @@
               margin-bottom: 0;
             }
           }
+
           a {
             text-decoration: none;
             color: inherit;
@@ -106,6 +113,7 @@
               color: $secondary;
               font-weight: map-deep-get($font-weights, "bold") !important;
             }
+
             &:active {
               color: $secondary;
               font-weight: map-deep-get($font-weights, "bold") !important;
@@ -120,6 +128,7 @@
         transform: translate(100%);
       }
     }
+
     &__divider {
       border-left: 1px solid #ecf0f1;
       height: 40%;
@@ -128,6 +137,7 @@
       align-items: center;
       position: relative;
     }
+
     &__search {
       cursor: pointer;
       display: flex;
@@ -136,10 +146,12 @@
       color: $primary;
       padding: 20px;
       font-size: 25px;
+
       &:hover {
         color: $secondary;
       }
     }
+
     &__toggle {
       cursor: pointer;
       display: flex;
@@ -158,6 +170,7 @@
     }
   }
 }
+
 .buttom {
   overflow: hidden;
   color: $dark_primary;
@@ -169,22 +182,28 @@
   justify-content: space-between;
   position: relative;
   z-index: 100;
+
   &__nav {
-    background: $theme_primary; /*linear-gradient(90deg, $secondary_text 0%, $primary 100%);*/
+    background: $theme_primary;
+    /*linear-gradient(90deg, $secondary_text 0%, $primary 100%);*/
     padding: 0 1.5rem;
     transition: 0.3s ease all;
     color: $primary;
     width: 100%;
+
     @include breakpoint(md) {
       padding: 0 3rem;
     }
+
     &__logo {
       font-weight: 600;
       size: 20px;
       font-family: $primary_font;
       color: $white;
     }
+
     &__options {
+
       top: 0;
       right: 100%;
       bottom: 0;
@@ -199,7 +218,7 @@
       backdrop-filter: blur(1px);
       transform: translate(0);
       transition: 0.3s ease transform;
-      color: $white;
+      color: $white !important;
 
       @include breakpoint(md) {
         transform: none;
@@ -209,10 +228,12 @@
         height: 100%;
         position: static;
       }
+
       ul {
         list-style: none;
         display: flex;
         flex-direction: column;
+
         @include breakpoint(md) {
           flex-direction: row;
           align-items: center;
@@ -221,14 +242,17 @@
 
         li {
           padding: 20px;
+
           @include breakpoint(md) {
             padding: 1px;
           }
+
           &:not(:last-child) {
             @include breakpoint(md) {
               margin-bottom: 0;
             }
           }
+
           a {
             text-decoration: none;
             color: inherit;
@@ -239,6 +263,7 @@
             &:hover {
               font-weight: map-deep-get($font-weights, "bold") !important;
             }
+
             &:active {
               color: $theme_tertiary;
               font-weight: map-deep-get($font-weights, "bold") !important;
@@ -248,29 +273,36 @@
       }
     }
   }
+
   &__options {
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 42px;
+    color: #ecf0f1 !important;
   }
 }
+
 .show__lg__up {
   display: flex !important;
+
   @include breakpoint(xs) {
     display: none !important;
   }
+
   @include breakpoint(md) {
     display: flex !important;
   }
+
   @include breakpoint(lg) {
     display: flex !important;
   }
 
   &__buttons {
     display: none !important;
+
     @include breakpoint(md) {
-      display:  flex !important;
+      display: flex !important;
     }
   }
 }
@@ -278,15 +310,19 @@
 .navbar {
   &__xs {
     display: none !important;
+
     @include breakpoint(xs) {
       display: block !important;
     }
+
     @include breakpoint(sm) {
       display: block !important;
     }
+
     @include breakpoint(md) {
       display: none !important;
     }
+
     &__header {
       display: flex;
       justify-content: space-between;
@@ -298,6 +334,7 @@
         color: $secondary;
       }
     }
+
     &__section {
       width: 100%;
       background: $secondary_white;
@@ -306,10 +343,12 @@
       font-size: 16px;
       font-weight: 600;
       padding: 11px 208px 9px 40px;
-      &__logo{
+
+      &__logo {
         color: $primary;
       }
     }
+
     &__item {
       font-weight: 500;
       color: $primary;
@@ -318,15 +357,18 @@
     ul {
       width: 100%;
       padding: 0;
+
       li {
         cursor: pointer;
         text-align: left !important;
         padding: 12px 81.5px 12px 78px;
         font-size: 15px;
+
         &:hover {
-          background: lighten( $theme_secondary, 45% );
+          background: lighten($theme_secondary, 45%);
           font-weight: 700;
         }
+
         display: flex;
         align-items: center;
       }
@@ -338,7 +380,7 @@
       color: $gray_darken;
     }
 
-    &__icon{
+    &__icon {
       font-size: 24px;
       margin-right: 15px;
       width: 24px;
@@ -356,3 +398,18 @@
 }
 
 
+.btn--success {
+  background-color: $theme_primary; // o usa $success si lo tienes
+  color: $white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  font-size: 14px;
+  transition: 0.3s ease all;
+
+  &:hover {
+    background-color: darken($theme_primary, 5%);
+    cursor: pointer;
+  }
+}

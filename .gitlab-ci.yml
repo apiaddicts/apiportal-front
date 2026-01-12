@@ -9,7 +9,7 @@ variables:
   CLOUDFARE_APPLICATION: 'Content-Type: application/json'
   
 build:
-  image: node:12-alpine
+  image: node:22-alpine
   stage: build
   script:
     - export PATH=$PATH:/usr/bin/npm
@@ -19,9 +19,11 @@ build:
     - CI=false npm run build
   artifacts:    
     paths:
-     - build/    
+     - dist/    
     expire_in: 1 hour
   environment: $CI_COMMIT_REF_NAME
+  tags:
+    - microservice
 
 deploy-bucket:
   stage: deploy-bucket
@@ -32,16 +34,18 @@ deploy-bucket:
    - echo "$NAME_DNS"
    - >  
         if [[ ! -z $(aws s3api list-buckets --query 'Buckets[?Name==`'${NAME_DNS}'`]' --output text) ]]; then 
-          aws s3 sync build/ s3://${NAME_DNS} --region eu-west-1;
+          aws s3 sync dist/ s3://${NAME_DNS} --region eu-west-1;
         else 
           aws s3 mb s3://${NAME_DNS} --region eu-west-1;
-          aws s3 cp build/ s3://${NAME_DNS} --recursive --region eu-west-1;
+          aws s3 cp dist/ s3://${NAME_DNS} --recursive --region eu-west-1;
           aws s3 website s3://${NAME_DNS} --index-document index.html --error-document index.html --region eu-west-1;
           aws s3api put-public-access-block --bucket ${NAME_DNS} --public-access-block-configuration  BlockPublicAcls=false,IgnorePublicAcls=false,BlockPublicPolicy=false,RestrictPublicBuckets=false
           sed -i "s|NOMBRE-BUCKET|${NAME_DNS}|g;" policy-s3.json;
           aws s3api put-bucket-policy --bucket ${NAME_DNS} --policy file://policy-s3.json --region eu-west-1;
         fi;
   environment: $CI_COMMIT_REF_NAME
+  tags:
+    - microservice
 
 deploy-cloudfare:
   stage: deploy-cloudfare
@@ -65,3 +69,5 @@ deploy-cloudfare:
           echo "DNS already exists";
         fi;
   environment: $CI_COMMIT_REF_NAME
+  tags:
+    - microservice

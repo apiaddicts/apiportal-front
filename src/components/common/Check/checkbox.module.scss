@@ -3,4 +3,13 @@
 .custom__checkbox {
     color: $theme_secondary !important;
     border-radius: 10px;
+
+}
+
+.custom__checkbox_label {
+    color: #85BC20 !important;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 20px;
+    margin-left: 10px;
 }

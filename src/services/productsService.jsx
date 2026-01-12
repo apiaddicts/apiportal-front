@@ -170,7 +170,7 @@ function getSubscriptions() {
 
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
   const url = `${config.apiUrl}/products`;
@@ -185,7 +185,7 @@ function getSubscriptionById(productId) {
 
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
   const url = `${config.apiUrl}/products?_where[slug]=${productId}`;

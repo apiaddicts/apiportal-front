@@ -1,10 +1,12 @@
 import { Container } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 import classes from './subscription-detail.module.scss';
 import './form.scss';
 
 function SubscriptionDetail(props) {
+  const { t } = useTranslation();
   const [formLoaded, setFormLoaded] = useState(false);
 
   useEffect(() => {
@@ -29,7 +31,7 @@ function SubscriptionDetail(props) {
     (formLoaded) ? (
       <div className={classes.subscription_detail}>
         <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
-          <h1 className='h2 text__primary__title font-weight-bold text-center'>Formulario de contacto</h1>
+          <h1 className='h2 text__primary__title font-weight-bold text-center'>{t('SubscriptionDetail.contactForm')}</h1>
           <div className={classes.subscription_detail__form}>
             <div id='hubspotForm' />
           </div>

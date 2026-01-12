@@ -1,0 +1,410 @@
+{
+  "welcome": "Bienvenido a React y i18next",
+  "dashboard": "Dashboard",
+  "apiToken": "Token",
+  "apisLibrary": "Biblioteca de APIs",
+  "codeSamples": "Ejemplos de Código",
+  "billings": "Pasarela de Pagos",
+  "news": "Noticias",
+  "blog": "Blog",
+  "faqs": "Preguntas Frecuentes",
+  "support": "Soporte",
+  "liveApiDocs": "Documentos API en Vivo",
+  "faceAiExperience": "Experiencia de IA Facial",
+  "currentPlan": "Plan actual",
+  "monthlyQuota": "Cuota mensual",
+  "apiCallsUsed": "Llamadas a la API usadas",
+  "facesInStorage": "Caras en almacenamiento",
+  "active": "Activo",
+  "perMonth": "€ / Mes",
+  "apiCredentials": "Credenciales de API",
+  "clientId": "ID del Cliente",
+  "clientSecret": "Secreto del Cliente",
+  "copiedToClipboard": "Copiado al portapapeles",
+  "copyError": "Error al copiar al portapapeles",
+  "filterResults": "Filtrar resultados",
+  "searchPlaceholder": "Buscar",
+  "filterByVersion": "Filtrar por versión",
+  "loading": "Cargando...",
+  "noResultsFound": "No se encontraron resultados",
+  "name": "Nombre",
+  "version": "Versión",
+  "context": "Contexto",
+  "provider": "Proveedor",
+  "type": "Tipo",
+  "back": "VOLVER",
+  "definition": "Definición",
+  "apiInformation": "Información API",
+  "information": "Información",
+  "description": "Descripción",
+  "expand": "Expandir",
+  "collapse": "Colapsar",
+  "title": "Título",
+  "uri": "URI",
+  "noInformation": "Información no disponible",
+  "codeSamplesTitle": "La API contiene una amplia gama de casos listos para usar...",
+  "descriptionExample": "Descripción del ejemplo",
+  "configSection": "Sección de configuración",
+  "installDependencies": "Instalación de dependencias",
+  "importPackages": "Importado de paquetes",
+  "configVariables": "Configuración de variables",
+  "execSection": "Sección de ejecución",
+  "exampleFunction": "Función de ejemplo",
+  "resultSection": "Sección de resultado",
+  "dtoExample": "DTO con resultado de ejemplo de respuesta en JSON",
+  "noData": "No hay datos disponibles",
+  "recognizePeople": "Reconocer Personas en una Foto",
+  "loremIpsum": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto...",
+  "image": "Imagen",
+  "jsonData": "Datos JSON (opcional)",
+  "bboxes": "BBoxes (arreglo JSON)",
+  "landmarks": "Landmarks (arreglo JSON)",
+  "emotions": "Emociones (arreglo JSON)",
+  "models": "Modelos (objeto JSON)",
+  "submitRequest": "Realizar solicitud",
+  "processingImage": "Procesando imagen...",
+  "response": "Respuesta:",
+  "unexpectedError": "Error inesperado",
+  "imageProcessed": "Imagen procesada correctamente ✅",
+  "processingError": "Error al procesar la solicitud ❌",
+  "codeCopied": "Código en {{language}} copiado",
+  "copyCode": "Copiar código",
+  "Billings": {
+    "choosePlan": "Elije Tu plan",
+    "activate": "ACTIVAR",
+    "noProducts": "No hay productos disponibles en este momento.",
+    "monthlyRequests": "solicitudes de API",
+    "dailyRequests": "transacciones"
+  },
+  "Support": {
+    "name": "Nombre",
+    "lastname": "Apellidos",
+    "email": "Correo electrónico",
+    "phone": "Teléfono de contacto",
+    "subject": "Asunto",
+    "message": "Mensaje",
+    "send": "Enviar",
+    "requiredField": "Campo requerido",
+    "invalidEmail": "Correo electrónico inválido",
+    "noSpecialCharacters": "No se permiten caracteres especiales o númericos",
+    "maxCharacters": "Se ha excedido el número de caracteres permitidos"
+  },
+  "Profile": {
+    "myProfile": "Mi perfil",
+    "personalData": "Datos personales",
+    "resetPassword": "Restablecer contraseña",
+    "save": "Guardar",
+    "subscriptions": "Suscripciones"
+  },
+  "SidebarDrawer": {
+    "logout": "Salir",
+    "hello": "Hola,",
+    "developerPortal": "Portal del Desarrollador",
+    "hideMenu": "Ocultar menú"
+  },
+  "UserDetail": {
+    "personalData": "Datos personales"
+  },
+  "CustomFooter": {
+    "legalWarning": "Aviso Legal",
+    "privacyPolicy": "Política de Privacidad",
+    "cookiesPolicy": "Política de Cookies",
+    "allRightsReserved": "TODOS LOS DERECHOS RESERVADOS"
+  },
+  "Home": {
+    "learnMore": "Conoce más",
+    "titleSection": "Beneficios principales",
+    "noImage": "No hay imagen disponible",
+    "worksTitle": "Cómo funciona",
+    "discoverTitle": "Descubre nuestras APIs",
+    "discoverSubtitle": "Explora las posibilidades",
+    "moreInfo": "Más información",
+    "seeAll": "Ver todas",
+    "noApis": "No hay APIs disponibles",
+    "news": "Novedades",
+    "newsDescription": "Conoce todas las novedades sobre tecnología, APIs y transformación digital",
+    "seeMore": "Ver más",
+    "noBlogEntries": "Aún no hay entradas en el blog"
+  },
+  "ApiDetail": {
+    "bannerTitle": "Detalles de la API",
+    "benefitsTitle": "Beneficios principales",
+    "discoverTitle": "Descubre nuestras APIs",
+    "discoverSubtitle": "Explora las posibilidades",
+    "noBlogEntries": "Aún no hay entradas en el blog",
+    "howItWorks": "Cómo funciona",
+    "moreInfo": "Más información",
+    "seeAll": "Ver todas",
+    "news": "Novedades",
+    "newsDescription": "Conoce todas las novedades sobre tecnología, APIs y transformación digital",
+    "seeMore": "Ver más"
+  },
+  "Apis": {
+    "filterBy": "Filtrar por",
+    "version": "Versión",
+    "clearFilters": "Eliminar filtros",
+    "searchPlaceholder": "Buscar APIs...",
+    "noData": "Información no disponible",
+    "solution": "Solución",
+    "tags": "Etiquetas"
+  },
+  "Blog": {
+    "learnMore": "Conoce más",
+    "noData": "Información no disponible",
+    "recent": "Lo más reciente",
+    "ourExperiences": "Nuestras Experiencias",
+    "youMayAlsoLike": "También te puede interesar",
+    "knowMore": "Saber más",
+    "seeMore": "Ver más",
+    "discoverNews": "Descubre las novedades",
+    "goBack": "Volver",
+    "seeAll": "Ver todas"
+  },
+  "Login": {
+    "signIn": "Iniciar sesión",
+    "resetPassword": "Recuperar contraseña"
+  },
+  "Register": {
+    "createAccount": "Crea tu Cuenta",
+    "checkEmail": "Revisa tu cuenta de correo",
+    "confirmEmail": "Para completar el registro, es necesario confirmar tu cuenta de correo",
+    "errorRegister": "Error al registrarte",
+    "userExists": "El usuario ya está dado de alta"
+  },
+  "SubscriptionDetail": {
+    "contactForm": "Formulario de contacto"
+  },
+  "Contact": {
+    "subscribe": "SUSCRIBIRSE",
+    "name": "Nombre*",
+    "email": "Correo electrónico*",
+    "error": "¡Ups! Ocurrió un error, por favor inténtalo de nuevo",
+    "success": "Datos enviados exitosamente",
+    "description": "Elige una o más capacidades y sé el primero en enterarte.",
+    "connected": "¡Mantengámonos conectados!"
+  },
+  "Form": {
+    "requiredField": "Campo requerido",
+    "noSpecialCharacters": "No se permiten caracteres especiales o números",
+    "invalidEmail": "Correo electrónico inválido",
+    "acceptTerms": "Debes aceptar los términos de uso",
+    "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
+    "maxCharacters": "Se ha excedido el número de caracteres permitidos",
+    "passwordRequirements": "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial",
+    "noSpaces": "No se permiten espacios",
+    "passwordRequired": "La contraseña es obligatoria",
+    "passwordMatch": "Las contraseñas deben coincidir",
+    "emailPlaceholder": "Correo electrónico",
+    "passwordPlaceholder": "Contraseña",
+    "loginButton": "Iniciar sesión"
+  },
+  "ForgotPassword": {
+    "invalidEmail": "Correo electrónico inválido",
+    "requiredField": "Campo requerido",
+    "emailPlaceholder": "Correo electrónico"
+  },
+  "RestorePassword": {
+    "passwordMinLength": "La contraseña actual debe tener al menos 8 caracteres de longitud",
+    "passwordRequired": "La contraseña actual es obligatoria",
+    "newPasswordMinLength": "La nueva contraseña debe tener al menos 8 caracteres de longitud",
+    "newPasswordRequired": "La nueva contraseña es obligatoria",
+    "noSpaces": "Los espacios no están permitidos",
+    "passwordRequirements": "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial",
+    "confirmPasswordRequired": "Confirmar contraseña es obligatorio",
+    "passwordMatch": "Las contraseñas deben coincidir"
+  },
+  "RestorePasswordForm": {
+    "password": "Contraseña",
+    "newPassword": "Nueva Contraseña",
+    "confirmPassword": "Confirmar Contraseña",
+    "passwordRequired": "La contraseña actual es obligatoria",
+    "newPasswordRequired": "La nueva contraseña es obligatoria",
+    "confirmPasswordRequired": "La confirmación de contraseña es obligatoria",
+    "restoreErrorTitle": "Sucedió un error al restablecer contraseña",
+    "restoreErrorMessage": "Verifique que su contraseña anterior sea correcta, intente nuevamente.",
+    "passwordErrorTitle": "Error con contraseña",
+    "passwordErrorMessage": "Verifique que su contraseña anterior sea correcta, intente nuevamente.",
+    "successTitle": "Contraseña modificada",
+    "successMessage": "Su contraseña se ha modificado exitosamente",
+    "cancelButton": "Cancelar",
+    "saveButton": "Guardar",
+    "loading": "Cargando..."
+  },
+  "UserForm": {
+    "requiredField": "Campo requerido",
+    "invalidEmail": "Correo electrónico inválido"
+  },
+  "Accordion": {
+    "missingContent": "Contenido faltante"
+  },
+  "Alert": {
+    "passwordChangeEmailSent": "Se ha enviado un correo electrónico de confirmación de cambio de contraseña. Por favor, revisa tu bandeja de entrada."
+  },
+  "AlertFeedback": {
+    "errorLogin": "Error al iniciar sesión",
+    "incorrectData": "Los datos ingresados no son correctos. Por favor, inténtalo nuevamente.",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "successLogin": "Éxito al iniciar sesión",
+    "passwordChangeEmail": "Se ha enviado un correo electrónico de confirmación de cambio de contraseña. Por favor, revisa tu bandeja de entrada."
+  },
+  "ApiKeys": {
+    "copiedToClipboard": "Copiado al portapapeles",
+    "copyError": "Error al copiar al portapapeles"
+  },
+  "ApisPaginated": {
+    "viewDocumentation": "Ver Documentación",
+    "next": "Siguiente",
+    "previous": "Anterior"
+  },
+  "BannerImage": {
+    "goBack": "Volver",
+    "noImage": "No hay imagen disponible"
+  },
+  "BannerStatic": {
+    "searchPlaceholder": "Buscar"
+  },
+  "BlogDetails": {
+    "defaultTimeRead": "Lectura de 5 min.",
+    "defaultDate": "16 febrero del 2022",
+    "share": "COMPARTIR:"
+  },
+  "BlogPostsPaginated": {
+    "next": "Siguiente",
+    "previous": "Anterior"
+  },
+  "CardSlider": {
+    "moreInfo": "MÁS INFORMACIÓN",
+    "defaultDescription": "Descripción predeterminada para el deslizador de tarjetas."
+  },
+  "PartnerCard": {
+    "contactUs": "Contáctanos"
+  },
+  "SubscriptionCard": {
+    "perMonth": "/mes",
+    "containsApis": "Contiene las APIS de:",
+    "features": "Características:",
+    "expandSubscription": "¿Necesitas ampliar tu suscripción?",
+    "packDetails": "*Pack de 10 empresas a 10€/empresa",
+    "contactUs": "Contáctanos"
+  },
+  "Carousel": {
+    "moreInfo": "MÁS INFORMACIÓN",
+    "defaultDescription": "Descripción predeterminada para el carrusel."
+  },
+  "Collapse": {
+    "cancelSubscription": "Cancelar subscripción",
+    "confirmCancelSubscription": "¿Desea cancelar la subscripción? Esta es una acción irreversible.",
+    "cancel": "Cancelar",
+    "accept": "Aceptar"
+  },
+  "RegenerateKeys": {
+    "regenerateSubscriptionKeys": "Regenerar claves de suscripción",
+    "confirmRegenerateSubscriptionKeys": "¿Desea regenerar las claves de suscripción? Esta es una acción irreversible.",
+    "cancel": "Cancelar",
+    "accept": "Aceptar"
+  },
+  "Stepper": {
+    "save": "Guardar",
+    "finish": "Finalizar",
+    "next": "Siguiente",
+    "verifyInsertedData": "Verificar datos insertados",
+    "allStepsCompleted": "Todos los pasos completados - has terminado",
+    "reset": "Reiniciar"
+  },
+  "Footer": {
+    "contactUs": "Contáctanos",
+    "leaveMessage": "Déjanos un mensaje y nos pondremos en contacto contigo a la brevedad.",
+    "interested": "¡Me interesa!",
+    "email": "Correo electrónico",
+    "privacyPolicy": "Política de Privacidad",
+    "cookiesPolicy": "Política de Cookies",
+    "allRightsReserved": "TODOS LOS DERECHOS RESERVADOS"
+  },
+  "CreateAccount": {
+    "email": "Correo electrónico",
+    "first_name": "Nombre",
+    "last_name": "Apellido",
+    "password": "Contraseña",
+    "checkboxTermsLabel": "Acepto los términos y condiciones",
+    "acceptTermsError": "Para completar el registro es necesario aceptar los términos de uso",
+    "loginButton": "Iniciar Sesión",
+    "registerButton": "Registrarme"
+  },
+  "LoginForm": {
+    "checkEmailTitle": "Revisa tu cuenta de correo",
+    "checkEmailMessage": "Para completar el registro, es necesario confirmar tu cuenta de correo",
+    "errorLoginTitle": "Error al iniciar sesión",
+    "username": "Nombre de usuario",
+    "password": "Contraseña",
+    "rememberData": "Recordar datos",
+    "forgotPassword": "¿Olvidaste tu contraseña?",
+    "registerButton": "Registrarme",
+    "loginButton": "Iniciar sesión"
+  },
+  "ResetPassword": {
+    "instructions": "Introduce tu email y te enviaremos un correo electrónico de confirmación de cambio de contraseña con las instrucciones para que puedas realizar el cambio de contraseña.",
+    "requestSent": "Solicitud enviada",
+    "email": "Correo electrónico",
+    "recoverPasswordButton": "Recuperar Contraseña"
+  },
+  "InputResponse": {
+    "required": "Requerido *"
+  },
+  "InputUI": {
+    "required": "Requerido *"
+  },
+  "SelectUI": {
+    "placeholder": "Temas",
+    "noOptions": "Sin opciones por mostrar"
+  },
+  "InputKeys": {
+    "copied": "Copiado en el portapapeles"
+  },
+  "InputSelect": {
+    "orderBy": "Ordenar por",
+    "nameAsc": "Nombre (A-Z)",
+    "nameDesc": "Nombre (Z-A)"
+  },
+  "MenuOptions": {
+    "cancelSubscriptionTitle": "Cancelar subscripción",
+    "cancelSubscriptionMessage": "¿Desea cancelar la subscripción? Esta es una acción irreversible.",
+    "cancelButton": "Cancelar",
+    "acceptButton": "Aceptar",
+    "renameOption": "Renombrar",
+    "cancelOption": "Cancelar"
+  },
+  "Navbar": {
+    "apis": "APIs",
+    "blog": "Blog",
+    "faqs": "FAQs",
+    "myProfile": "Mi Perfil",
+    "register": "Regístrate",
+    "login": "Iniciar sesión"
+  },
+  "Novedades": {
+    "noData": "Información no disponible"
+  },
+  "PaginacionApis": {
+    "info": "{{start}}-{{end}} de {{total}} Apis"
+  },
+  "Suscriptions": {
+    "loading": "Cargando...",
+    "name": "Nombre",
+    "request": "Solicitud",
+    "primaryKey": "Clave primaria",
+    "secondaryKey": "Clave secundaria",
+    "product": "Producto",
+    "state": "Estado",
+    "renameOption": "Renombrar",
+    "cancelOption": "Cancelar"
+  },
+  "SuscriptionsVertical": {
+    "loading": "Cargando...",
+    "request": "Solicitud",
+    "primaryKey": "Clave primaria",
+    "secondaryKey": "Clave secundaria",
+    "product": "Producto",
+    "state": "Estado",
+    "noData": "Información no disponible"
+  }
+}

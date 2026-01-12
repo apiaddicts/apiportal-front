@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useState } from 'react';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { useTranslation } from 'react-i18next';
 import classes from './input.module.scss';
 
 function InputSelect({ label, children, handleSelect }) {
+  const { t } = useTranslation();
   const [showFilteer, setShowFilteer] = useState(false);
   const [filter, setFilter] = useState('Nombre (A-Z)');
 
@@ -21,7 +23,7 @@ function InputSelect({ label, children, handleSelect }) {
           }
         >
           <p className='fs__14'>
-            Ordenar por:
+            {t('InputSelect.orderBy')}:
             {' '}
             <span className='fs__13'>{filter}</span>
           </p>
@@ -31,26 +33,26 @@ function InputSelect({ label, children, handleSelect }) {
             <p
               onClick={
                 () => {
-                  setFilter('Nombre (A-Z)');
+                  setFilter(t('InputSelect.nameAsc'));
                   setShowFilteer(false);
                   handleChange('asc');
                 }
               }
               className={classes['filter-option']}
             >
-              Nombre (A-Z)
+              {t('InputSelect.nameAsc')}
             </p>
             <p
               onClick={
                 () => {
-                  setFilter('Nombre (Z-A)');
+                  setFilter(t('InputSelect.nameDesc'));
                   setShowFilteer(false);
                   handleChange('desc');
                 }
               }
               className={classes['filter-option']}
             >
-              Nombre (Z-A)
+              {t('InputSelect.nameDesc')}
             </p>
           </div>
         )}

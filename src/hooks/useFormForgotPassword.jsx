@@ -3,27 +3,29 @@ import { useFormik } from 'formik';
 import { useState } from 'react';
 import { string } from 'yup';
 import * as Yup from 'yup';
-
-const validationSchema = Yup.object().shape({
-  email: string().email('Correo electrónico inválido').required('Campo requerido'),
-});
-
-const objectFromArray = (fields, key) => {
-  const mappedProps = fields.map((field) => {
-    if (key !== 'validate') {
-      return [field.id, field[key]];
-    }
-    const validation = validationSchema[field.validate];
-    return [field.id, field.required ? validation.required() : validation];
-  });
-
-  return Object.fromEntries(mappedProps);
-};
+import { useTranslation } from 'react-i18next';
 
 function useFormForgotPassword(
   fields,
   customHandleSubmit,
 ) {
+  const { t } = useTranslation();
+  const validationSchema = Yup.object().shape({
+    email: string().email(t('ForgotPassword.invalidEmail')).required(t('ForgotPassword.requiredField')),
+  });
+
+  const objectFromArray = (fields, key) => {
+    const mappedProps = fields.map((field) => {
+      if (key !== 'validate') {
+        return [field.id, field[key]];
+      }
+      const validation = validationSchema[field.validate];
+      return [field.id, field.required ? validation.required() : validation];
+    });
+
+    return Object.fromEntries(mappedProps);
+  };
+
   const [formStatus, setFormStatus] = useState({
     status: 'not_started',
     message: '',

@@ -5,7 +5,7 @@ function gettingStarted() {
 
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
   const url = `${config.apiUrl}/pages?_where[slug]=${config.startedPageSlug}&_locale=${config.locale}`;

@@ -4,13 +4,13 @@ import config from './config';
 function getTermsContent() {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
-  return fetch(`${config.apiUrl}/pages?_where[slug]=${config.termsPageSlug}&_locale=${config.locale}`, requestOptions)
+  return fetch(`${config.apiUrl}/pages?filters[slug][$eq]=${config.termsPageSlug}&populate[contentSections][populate]=*`, requestOptions)
     .then(handleResponse)
     .then((term_content) => {
-      return term_content[0];
+      return term_content.data[0];
     }).catch((error) => {
       console.error(error);
     });
@@ -19,13 +19,13 @@ function getTermsContent() {
 function getLegalNoticeContent() {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
-  return fetch(`${config.apiUrl}/pages?_where[slug]=${config.legalPageSlug}&_locale=${config.locale}`, requestOptions)
+  return fetch(`${config.apiUrl}/pages?filters[slug][$eq]=${config.legalPageSlug}`, requestOptions)
     .then(handleResponse)
     .then((term_content) => {
-      return term_content[0];
+      return term_content.data[0];
     }).catch((error) => {
       console.error(error);
     });

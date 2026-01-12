@@ -23,8 +23,10 @@ import InputResponse from '../../../components/Input/InputUI/InputResponse';
 import useSearch from '../../../hooks/useSearch';
 import Spinner from '../../../components/Spinner';
 import appsActions from '../../../redux/actions/appsActions';
+import { useTranslation } from 'react-i18next';
 
 function UserDetail() {
+  const { t } = useTranslation();
   const { userDetail, spinnerUser, errorUser } = useSelector((state) => state.users);
   const { responseError } = useSelector((state) => state.user);
   const { groups, assignedGroups, groupLoading, errorGroup, groupAssignedSkip } = useSelector((state) => state.group);
@@ -261,7 +263,7 @@ function UserDetail() {
               <form onSubmit={formConfig.handleSubmit} noValidate>
                 <div className={classes.admin__form__container}>
                   <div className={classes.admin__form__container__header}>
-                    <div className='font-fs-joey fs__36 font-weight-bold text__primary'>Datos personales</div>
+                    <div className='font-fs-joey fs__36 font-weight-bold text__primary'>{t('UserDetail.personalData')}</div>
                   </div>
                   <div className='row'>
                     {labelsUser.map((field) => {

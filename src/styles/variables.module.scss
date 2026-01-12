@@ -10,15 +10,15 @@
 @font-face {
   font-family: "Century Gothic";
   src: url("../static/fonts/century/GOTHIC.TTF") format('truetype') font-weight-normal,
-       url("../static/fonts/century/GOTHICB.TTF") format('truetype') font-weight-bold,
-       url("../static/fonts/century/GOTHICI.TTF") format('truetype') font-weight-italic,
-       url("../static/fonts/century/GOTHICBI.TTF") format('truetype') font-italic font-weight-bold;
+    url("../static/fonts/century/GOTHICB.TTF") format('truetype') font-weight-bold,
+    url("../static/fonts/century/GOTHICI.TTF") format('truetype') font-weight-italic,
+    url("../static/fonts/century/GOTHICBI.TTF") format('truetype') font-italic font-weight-bold;
 }
 
 @font-face {
   font-family: "Trebuchet MS";
   src: url("../static/fonts/trebuchet/Trebuchet-MS.ttf") format('truetype') font-weight-normal,
-       url("../static/fonts/trebuchet/Trebuchet-MS-Italic.ttf") format('truetype') font-weight-italic;
+    url("../static/fonts/trebuchet/Trebuchet-MS-Italic.ttf") format('truetype') font-weight-italic;
 }
 
 // $primary_font: 'Century Gothic', sans-serif;
@@ -69,7 +69,8 @@ $border-radius: 6px;
 $secondary: #101010;
 $secondary_white: #ffffff;
 $secondary_yellow: #0078E6;
-$gray: #474747;;
+$gray: #474747;
+;
 $gray_darken: #53565a;
 $gray_darken-1: #101010;
 $gray_darken-2: #292929;
@@ -95,11 +96,14 @@ $theme_tertiary: $warning;
 
 $dark_primary: #1C2D47;
 $light_primary: #BBDEFB;
-$primary: #fd8e18; /*#14234B;*/
+$primary: #fd8e18;
+/*#14234B;*/
 $text_icons: #FFFFFF;
 $accent: #2196F3;
 $primary_text: #212121;
-$secondary_text: #000B39/*#00AC9A*/;
+$secondary_text: #000B39
+  /*#00AC9A*/
+;
 $tertiary_text: $warning;
 $divider: #BDBDBD;
 $black: #000000;
@@ -114,137 +118,124 @@ $secondary_dark: #1C7B7F;
   secondaryColor: $theme_secondary;
   grayColor: $gray;
   grayDarkenColor: $gray_darken;
-};
+}
+
+;
 
 /* ------------------------------
     WEIGHTS 
 ------------------------------ */
-$font-weights: () !default;
-$font-weights: map-deep-merge(
-  (
-    "thin": 100,
-    "light": 300,
-    "regular": 400,
-    "medium": 500,
-    "semi-bold": 600,
-    "bold": 700,
-    "black": 900,
-  ),
-  $font-weights
+$font-weights: (
+  ) !default;
+$font-weights: map-deep-merge(("thin": 100,
+      "light": 300,
+      "regular": 400,
+      "medium": 500,
+      "semi-bold": 600,
+      "bold": 700,
+      "black": 900,
+    ),
+    $font-weights
 );
 
 /* ------------------------------ 
     HEADINGS 
 ------------------------------ */
-$heading: () !default;
-$heading: map-deep-merge(
-  (
-    "headline-ad": (
-      "size": 90px,
-      "weight": 700,
-      "line-height": auto,
-      "letter-spacing": -1.5px,
-      "font-family": $primary_font,
-      "text-transform": false,
+$heading: (
+  ) !default;
+$heading: map-deep-merge(("headline-ad": ("size": 90px,
+        "weight": 700,
+        "line-height": auto,
+        "letter-spacing": -1.5px,
+        "font-family": $primary_font,
+        "text-transform": false,
+      ),
+      "h1": ("size": 60px,
+        "weight": 700,
+        "line-height": auto,
+        "letter-spacing": -0.5px,
+        "font-family": $primary_font,
+        "text-transform": false,
+      ),
+      "h2": ("size": 48px,
+        "weight": 700,
+        "line-height": auto,
+        "letter-spacing": auto,
+        "font-family": $primary_font,
+        "text-transform": false,
+      ),
+      "h3": ("size": 36px,
+        "weight": 700,
+        "line-height": auto,
+        "letter-spacing": 0.25,
+        "font-family": $primary_font,
+        "text-transform": false,
+      ),
+      "h4": ("size": 28px,
+        "weight": 600,
+        "line-height": auto,
+        "letter-spacing": auto,
+        "font-family": $primary_font,
+        "text-transform": false,
+      ),
+      "h5": ("size": 22px,
+        "weight": 500,
+        "line-height": auto,
+        "letter-spacing": 0.15,
+        "font-family": $primary_font,
+        "text-transform": false,
+      ),
+      "subtitle-1": ("size": 18px,
+        "weight": 400,
+        "line-height": auto,
+        "letter-spacing": 0.15,
+        "font-family": $primary_font,
+        "text-transform": false,
+      ),
+      "subtitle-2": ("size": 16px,
+        "weight": 500,
+        "line-height": auto,
+        "letter-spacing": 0.1,
+        "font-family": $primary_font,
+        "text-transform": false,
+      ),
+      "body-1": ("size": 18px,
+        "weight": 400,
+        "line-height": auto,
+        "letter-spacing": 0.5,
+        "font-family": $primary_font,
+        "text-transform": false,
+      ),
+      "body-2": ("size": 16px,
+        "weight": 400,
+        "line-height": auto,
+        "letter-spacing": 0.25,
+        "font-family": $primary_font,
+        "text-transform": false,
+      ),
+      "button": ("size": 16px,
+        "weight": 700,
+        "line-height": auto,
+        "letter-spacing": 1.25px,
+        "font-family": $primary_font,
+        "text-transform": uppercase,
+      ),
+      "caption": ("size": 13px,
+        "weight": 400,
+        "line-height": auto,
+        "letter-spacing": 0.4,
+        "font-family": $primary_font,
+        "text-transform": false,
+      ),
+      "overline": ("size": 10px,
+        "weight": 500,
+        "line-height": auto,
+        "letter-spacing": 1.5px,
+        "font-family": $primary_font,
+        "text-transform": uppercase,
+      ),
     ),
-    "h1": (
-      "size": 60px,
-      "weight": 700,
-      "line-height": auto,
-      "letter-spacing": -0.5px,
-      "font-family": $primary_font,
-      "text-transform": false,
-    ),
-    "h2": (
-      "size": 48px,
-      "weight": 700,
-      "line-height": auto,
-      "letter-spacing": auto,
-      "font-family": $primary_font,
-      "text-transform": false,
-    ),
-    "h3": (
-      "size": 36px,
-      "weight": 700,
-      "line-height": auto,
-      "letter-spacing": 0.25,
-      "font-family": $primary_font,
-      "text-transform": false,
-    ),
-    "h4": (
-      "size": 28px,
-      "weight": 600,
-      "line-height": auto,
-      "letter-spacing": auto,
-      "font-family": $primary_font,
-      "text-transform": false,
-    ),
-    "h5": (
-      "size": 22px,
-      "weight": 500,
-      "line-height": auto,
-      "letter-spacing": 0.15,
-      "font-family": $primary_font,
-      "text-transform": false,
-    ),
-    "subtitle-1": (
-      "size": 18px,
-      "weight": 400,
-      "line-height": auto,
-      "letter-spacing": 0.15,
-      "font-family": $primary_font,
-      "text-transform": false,
-    ),
-    "subtitle-2": (
-      "size": 16px,
-      "weight": 500,
-      "line-height": auto,
-      "letter-spacing": 0.1,
-      "font-family": $primary_font,
-      "text-transform": false,
-    ),
-    "body-1": (
-      "size": 18px,
-      "weight": 400,
-      "line-height": auto,
-      "letter-spacing": 0.5,
-      "font-family": $primary_font,
-      "text-transform": false,
-    ),
-    "body-2": (
-      "size": 16px,
-      "weight": 400,
-      "line-height": auto,
-      "letter-spacing": 0.25,
-      "font-family": $primary_font,
-      "text-transform": false,
-    ),
-    "button": (
-      "size": 16px,
-      "weight": 700,
-      "line-height": auto,
-      "letter-spacing": 1.25px,
-      "font-family": $primary_font,
-      "text-transform": uppercase,
-    ),
-    "caption": (
-      "size": 13px,
-      "weight": 400,
-      "line-height": auto,
-      "letter-spacing": 0.4,
-      "font-family": $primary_font,
-      "text-transform": false,
-    ),
-    "overline": (
-      "size": 10px,
-      "weight": 500,
-      "line-height": auto,
-      "letter-spacing": 1.5px,
-      "font-family": $primary_font,
-      "text-transform": uppercase,
-    ),
-  ),
-  $heading
+    $heading
 );
 
 /* ------------------------------ 
@@ -267,11 +258,13 @@ $width-container-xl: 130rem;
   width: $width-container-sm;
   margin: 0 auto;
   position: relative;
+
   @include breakpoint(xs) {
-    .MuiContainer-root{
+    .MuiContainer-root {
       padding: 0 !important;
     }
   }
+
   @include breakpoint(md) {
     width: 90%;
     max-width: 1168px;
@@ -279,9 +272,11 @@ $width-container-xl: 130rem;
     //   padding: 0 !important;
     // }
   }
+
   @include breakpoint(lg) {
     max-width: 1168px;
   }
+
   @include breakpoint(xl) {
     max-width: 1168px !important;
   }
@@ -304,10 +299,12 @@ $width-container-xl: 130rem;
     padding-left: $gutter-padding-horizontal;
     min-width: 0.1rem;
     margin-bottom: $gutter-margin-vertical;
+
     &:last-child {
       margin-bottom: 0;
     }
   }
+
   .test {
     background-color: #f1b434;
     text-align: center;
@@ -336,62 +333,73 @@ $width-container-xl: 130rem;
       @include grid(12);
     }
   }
+
   .flex-sm-2 {
     @include breakpoint(sm) {
       @include grid(6);
     }
   }
+
   .flex-sm-3 {
     @include breakpoint(sm) {
       @include grid(4);
     }
   }
+
   .flex-sm-4 {
     @include breakpoint(sm) {
       @include grid(3);
     }
   }
+
   .flex-sm-5 {
     @include breakpoint(sm) {
       flex: 0 0 percentage(math.div(5, 12));
       max-width: percentage(math.div(5, 12));
     }
   }
+
   .flex-sm-6 {
     @include breakpoint(sm) {
       @include grid(2);
     }
   }
+
   .flex-sm-7 {
     @include breakpoint(sm) {
       flex: 0 0 percentage(math.div(7, 12));
       max-width: percentage(math.div(7, 12));
     }
   }
+
   .flex-sm-8 {
     @include breakpoint(sm) {
       flex: 0 0 percentage(math.div(8, 12));
       max-width: percentage(math.div(8, 12));
     }
   }
+
   .flex-sm-9 {
     @include breakpoint(sm) {
       flex: 0 0 percentage(math.div(9, 12));
       max-width: percentage(math.div(9, 12));
     }
   }
+
   .flex-sm-10 {
     @include breakpoint(sm) {
       flex: 0 0 percentage(math.div(10, 12));
       max-width: percentage(math.div(10, 12));
     }
   }
+
   .flex-sm-11 {
     @include breakpoint(sm) {
       flex: 0 0 percentage(math.div(11, 12));
       max-width: percentage(math.div(11, 12));
     }
   }
+
   .flex-sm-12 {
     @include breakpoint(sm) {
       @include grid(1);
@@ -492,6 +500,7 @@ $width-container-xl: 130rem;
       @include grid(1);
     }
   }
+
   .flex-lg-1,
   .flex-lg-2,
   .flex-lg-3,
@@ -586,6 +595,7 @@ $width-container-xl: 130rem;
       @include grid(1);
     }
   }
+
   .flex-xl-1,
   .flex-xl-2,
   .flex-xl-3,

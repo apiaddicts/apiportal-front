@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import classes from './inputui.module.scss';
 import Icon from '../../MdIcon/Icon';
 
 function InputUI({ type = 'text', label, touched, errors, required = false, onChange, onBlur, ...rest }) {
+  const { t } = useTranslation();
   const { value } = rest;
   const [isActive, setIsActive] = useState(false);
   const [typeInput, setTypeInput] = useState(type);
@@ -48,7 +50,7 @@ function InputUI({ type = 'text', label, touched, errors, required = false, onCh
         onBlur={onBlur}
         {...rest}
       />
-      <label className={isActive || initialValue.length > 0 ? `${classes.active}` : ''} onClick={() => { setIsActive(true); inputRef.current.focus(); }}>{label}</label>
+      <label className={isActive || initialValue.length > 0 ? `${classes.active}` : ''} onClick={() => { setIsActive(true); inputRef.current.focus(); }}>{t(label)}</label>
       {
         errors === undefined && initialValue.length < 0 ? null :
           errors === undefined && initialValue.length > 0 && type !== 'password' && type !== 'email' ? (
@@ -67,7 +69,7 @@ function InputUI({ type = 'text', label, touched, errors, required = false, onCh
                 </div>
               ) : null
       }
-      { required && (<span className={classes.required}>{isActive}</span>)}
+      { required && (<span className={classes.required}>{t('InputUI.required')}</span>)}
       { errors && touched === undefined ? null : (<p>{errors}</p>)}
     </div>
   );

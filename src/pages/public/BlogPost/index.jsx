@@ -5,6 +5,8 @@ import moment from 'moment';
 import _ from 'underscore';
 import { useParams, Link } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
+import { useTranslation } from 'react-i18next';
+
 import BannerStatic from '../../../components/Banner/BannerStatic';
 import BlogDetailsInfo from '../../../components/BlogDetails';
 import Slick from '../../../components/SlickSlider/Slick';
@@ -27,7 +29,7 @@ const stylesBannerTitle = {
 moment.locale('es');
 
 function BlogDetails({ setIsOpen }) {
-
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const params = useParams();
@@ -56,7 +58,7 @@ function BlogDetails({ setIsOpen }) {
       img: item?.image?.[0]?.url,
       title: item?.title,
       description: item?.description,
-      linkText: 'Conoce más',
+      linkText: t('Blog.learnMore'),
       route: `/blog/${item?.id}#blogDetail`,
     };
     return itemData;
@@ -87,7 +89,7 @@ function BlogDetails({ setIsOpen }) {
       {blog && Object.keys(blog).length > 0 ? (
         <>
           <BannerStatic
-            title={blog?.title ? blog?.title : 'Descubre las novedades'}
+            title={blog?.title ? blog?.title : t('Blog.discoverNews')}
             img={blog?.image ? blog?.image?.[0]?.url : ''}
             styles={stylesPerso}
             stylesTitle={stylesBannerTitle}
@@ -101,7 +103,7 @@ function BlogDetails({ setIsOpen }) {
                   <Icon id='MdKeyboardBackspace' />
                 </div>
                 <div className={classes.backTo__label}>
-                  <span>Volver</span>
+                  <span>{t('Blog.goBack')}</span>
                 </div>
               </Link>
             </div>
@@ -112,11 +114,11 @@ function BlogDetails({ setIsOpen }) {
             <div className='container'>
               <div className='row'>
                 <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
-                  <h1 className='h2 font-weight-bold text__dark__primary fs__joey'>Novedades</h1>
+                  <h1 className='h2 font-weight-bold text__dark__primary fs__joey'>{t('Blog.news')}</h1>
                 </div>
                 <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
                   <p className='body-1'>
-                    Conoce todas las novedades sobre tecnología, APIs y transformación digital
+                    {t('Blog.newsDescription')}
                   </p>
                 </div>
               </div>
@@ -132,8 +134,8 @@ function BlogDetails({ setIsOpen }) {
               <div className='row justify-center'>
                 <div className='flex-lg-2 flex-md-6 flex-sm-12 text-center mt-8'>
                   <HashLink smooth to='/blog#blogIndex'>
-                    <div className='d-xs-none link__tertiary'>Ver Más</div>
-                    <div className='d-xs-only link__tertiary'>Ver todas</div>
+                    <div className='d-xs-none link__tertiary'>{t('Blog.seeMore')}</div>
+                    <div className='d-xs-only link__tertiary'>{t('Blog.seeAll')}</div>
                   </HashLink>
                 </div>
               </div>

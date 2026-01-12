@@ -1,102 +1,94 @@
-@import "../../../styles/variables.scss";
+@import "../../../styles/variables.module.scss";
 
-.table-left {
-    margin-left: 5%;
+.cardBox {
+  background-color: #f7f8fa !important;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0px 8px 6px -1px rgba(0, 0, 0, 0.2) !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 120px;
+  margin: 30px;
 }
 
-.cell_title {
-    display: flex;
-    font-size: 20px;
-    color: $gray_lighten-2;
-
-    h2 {
-        font-family: $primary_font;
-        font-style: normal;
-        font-weight: 700;
-        font-size: 12px;
-        line-height: 20px;
-        display: flex;
-        align-items: center;
-        letter-spacing: 0.2px;
-        color: $theme_primary;
-    }
+.cardTitle {
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 4px;
 }
 
-.cell_name {
-    font-family: $primary_font;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 20px;
-
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.2px;
-
-    color: $theme_primary;
+.cardValue {
+  font-size: 15px;
+  font-weight: 700;
+  color: #007bff; // azul brillante
 }
 
-.cell_description {
-    font-family: $primary_font;
-    font-style: normal;
-    font-weight: 400;
-    font-size: 12px;
-    line-height: 20px;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.2px;
-    color: $gray_lighten-2;
+.statusBadge {
+  margin-top: 10px !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #00c853; // verde brillante
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 4px 10px;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e0e0e0;
 }
 
-.pagination {
-    cursor: pointer;
-    display: flex;
-    color: $blue;
-    font-size: 20px;
-    align-items: center;
 
-    &__icon {
-        color: $secondary;
-    }
-    
-    p {
-        font-family: $secondary_font;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 32px;
-    }
-
-    .next {
-        margin-left: -30px;
-
-        @media (min-width: 1440px) {
-            margin-left: -10px;
-        }
-    }
+.quotaBadge {
+  margin-top: 10px !important;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 14px;
+  color: #007bff;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 4px 10px;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-.wrapper_apps__wide {
-    &__display{
-      display: block;
-    }
-    @include breakpoint(xsl) {
-      &__display{
-        display: none;
-      }
-    }
+.progressContainer {
+  width: 100%;
+  height: 8px;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.progressBar {
+  height: 100%;
+  background-color: #007bff;
+  transition: width 0.3s ease-in-out;
+}
+
+.timeButton {
+  color: #007bcb;
+  border: 1px solid #007bcb;
+  border-radius: 6px !important;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 6px 20px;
+  background-color: white;
+  min-width: 48px;
+  transition: 0.2s all ease-in-out;
+  box-shadow: none !important;
+
+  &:hover {
+    background-color: #e6f0fb;
   }
-  
-  .wrapper_apps__small {
-    &__display{
-      display: none;
-    }
-    @include breakpoint(xsl) {
-      &__display{
-        display: block;
-        .border__bottom{
-            border-bottom: 1px solid #ECF0F1;
-        }
-      }
-    }
-  }
+}
+
+.timeButtonActive {
+  background-color: #007bcb !important;
+  color: white !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border-color: #007bcb;
+}

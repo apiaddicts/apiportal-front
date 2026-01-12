@@ -1,9 +1,13 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+
 import CustomMarkdown from '../CustomMarkdown';
 import Icon from '../MdIcon/Icon';
 import classes from './accordion.module.scss';
 
 function Accordion({ subItem, setSubItem, items, parent, clicked, setClicked }) {
+  const { t } = useTranslation();
+
   const toggleItem = (index) => {
     if (subItem === index && parent === clicked) {
       setClicked(null);
@@ -40,7 +44,7 @@ function Accordion({ subItem, setSubItem, items, parent, clicked, setClicked }) 
                     parent === clicked && subItem === index ? (
                       <div className={`body-1 text__gray__gray_darken ${classes.accordion__body}`}>
                         {
-                          item?.content ? <CustomMarkdown content={item?.content} /> : <p>Missing content</p>
+                          item?.content ? <CustomMarkdown content={item?.content} /> : <p>{t('Accordion.missingContent')}</p>
                         }
                       </div>
                     ) : null

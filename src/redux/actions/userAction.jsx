@@ -8,9 +8,9 @@ import subscriptionsService from '../../services/subscriptionsService';
 import apiManagerService from '../../services/apiManagerService';
 
 // eslint-disable-next-line import/prefer-default-export
-export const login = (data,headerManager) => (dispatch) => {
+export const login = (data, headerManager) => (dispatch) => {
   dispatch({ type: userConstants.LOGIN_REQUEST });
-  userService.login(data.username, data.password).then((response) => {
+  userService.login(data.username, data.password, data.recaptchaToken).then((response) => {
     if (response && Object.keys(response).length > 0) {
       if (Object.prototype.hasOwnProperty.call(response, 'error')) {
         dispatch({
@@ -30,8 +30,8 @@ export const login = (data,headerManager) => (dispatch) => {
           expiresIn: expirationTime,
           refreshExpiresIn: expirationTime
         }
-        sessionStorage.setItem('token', JSON.stringify(token));
-        dispatch(getUser(response['accessToken'],headerManager));
+        localStorage.setItem('token', JSON.stringify(token));
+        dispatch(getUser(response['accessToken'], headerManager));
         dispatch({ type: userConstants.RESET_ALERT });
       }
     }
@@ -43,26 +43,26 @@ export const login = (data,headerManager) => (dispatch) => {
 
 export const loginApim = (configApim) => (dispatch) => {
   apiManagerService.integrationLogin(configApim)
-   .then(response => {
-     if(response.data['token']){
-      dispatch({
-        type: userConstants.LOGIN_APIM_SUCCESS,
-        payload: true
-      })
-     }else{
-      dispatch({
-        type: userConstants.LOGIN_APIM_FAILURE,
-        payload: response
-      })
-      sessionStorage.removeItem('token');
-      dispatch({ type: userConstants.LOGOUT_USER });
-     }
-   })
-   .catch(error => {
-     console.error(error);
-    // dispatch({ type: userConstants.LOGOUT_USER });
-   })
- }
+    .then(response => {
+      if (response.data['token']) {
+        dispatch({
+          type: userConstants.LOGIN_APIM_SUCCESS,
+          payload: true
+        })
+      } else {
+        dispatch({
+          type: userConstants.LOGIN_APIM_FAILURE,
+          payload: response
+        })
+        sessionStorage.removeItem('token');
+        dispatch({ type: userConstants.LOGOUT_USER });
+      }
+    })
+    .catch(error => {
+      console.error(error);
+      // dispatch({ type: userConstants.LOGOUT_USER });
+    })
+}
 
 export const confirmAccount = (queryParams, setIsOpen) => (dispatch) => {
   dispatch({
@@ -95,41 +95,33 @@ export const confirmAccount = (queryParams, setIsOpen) => (dispatch) => {
 
 export const logout = () => (dispatch) => {
   window.location.reload(false);
-  sessionStorage.removeItem('token');
+  localStorage.removeItem('token');
   localStorage.removeItem('If-Match');
+  localStorage.removeItem('username');
+  localStorage.removeItem('password');
   dispatch({
     type: userConstants.LOGOUT_USER,
   });
 };
 
-export const signUp = (data) => (dispatch) => {
+export const signUp = (data, headerManager) => (dispatch) => {
   let dataResponse = {};
   dispatch({ type: userConstants.SIGNUP_REQUEST });
-  userService.signUp(data).then(
+  userService.signUp(data, headerManager, data.recaptchaToken).then(
     (response) => {
       if (response && Object.keys(response).length > 0) {
-        if (Object.prototype.hasOwnProperty.call(response, 'error')) {
+        if (response.status == 'error') {
           dispatch({
             type: userConstants.SIGNUP_FAILURE,
-            response,
+            payload: { message: 'Error al registrarse, intentelo de nuevo' },
           });
         } else {
           dataResponse = response;
           dispatch({
             type: userConstants.SIGNUP_SUCCESS,
-            response,
+            payload: response.data,
           });
-          if (config.generateStarterSubscriptionOnSignup) {
-            const { name } = dataResponse;
-            const data = {
-              properties: {
-                name: 'starter',
-                scope: '/products/starter',
-                appType: 'developerPortal',
-              },
-            };
-            subscriptionsService.subscribeToAProductWithHmac(data, name);
-          }
+          dispatch(sendEmailToConfirmEmail(data.email, headerManager))
         }
       }
     },
@@ -139,9 +131,35 @@ export const signUp = (data) => (dispatch) => {
   );
 };
 
-export const getUser = (token,headerManager) => (dispatch) => {
+export const sendEmailToConfirmEmail = (email, headerManager) => async (dispatch) => {
+  dispatch({ type: userConstants.EMAIL_CONFIRMATION_REQUEST });
+  try {
+    const response = await userService.sendEmailToConfirmAccount(email, headerManager);
+    if (response?.status === 'error' || response?.error?.length > 0) {
+      return dispatch({
+        type: userConstants.EMAIL_CONFIRMATION_FAILURE
+      })
+    } else {
+      dispatch({
+        type: userConstants.EMAIL_CONFIRMATION_SUCCESS,
+      })
+    }
+  } catch (error) {
+    console.error(error);
+  }
+
+}
+
+export const registerDataToStore = (data) => (dispatch) => {
+  dispatch({
+    type: userConstants.REGISTER_DATA,
+    payload: data
+  })
+}
+
+export const getUser = (token, headerManager) => (dispatch) => {
   dispatch({ type: userConstants.GET_USER_REQUEST });
-  userService.getUserDetails(token,headerManager).then(
+  userService.getUserDetails(token, headerManager).then(
     (response) => {
       if (response.data && Object.keys(response.data).length > 0) {
         dispatch({ type: userConstants.GET_USER_SUCCESS, response: response.data });

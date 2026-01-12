@@ -4,7 +4,7 @@ import PublicRouter from './PublicRouter';
 import PrivateRouter from './PrivateRouter';
 import NoNavRouter from './NoNavRouter';
 
-function AppRouter() {
+function AppRouter({ isAppReady }) {
   return (
     <Routes>
       <Route
@@ -22,7 +22,7 @@ function AppRouter() {
       <Route
         path='/developer/*'
         element={(
-          <PrivateRouter />
+          <PrivateRouter isAppReady={isAppReady} />
         )}
       />
 

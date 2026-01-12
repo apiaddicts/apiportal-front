@@ -4,13 +4,13 @@ import config from './config';
 function getFaq() {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
-  return fetch(`${config.apiUrl}/pages?_where[slug]=${config.faqPageSlug}&_locale=${config.locale}`, requestOptions)
+  return fetch(`${config.apiUrl}/pages?filters[slug][$eq]=${config.faqPageSlug}&populate[contentSections][populate]=*`, requestOptions)
     .then(handleResponse)
     .then((faq) => {
-      return faq[0];
+      return faq.data[0];
     }).catch((error) => {
       console.error(error);
     });

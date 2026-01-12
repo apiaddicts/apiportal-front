@@ -1,20 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import { MdClose, MdMenu } from 'react-icons/md';
 import { Link, NavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+
+import { useDispatch, useSelector } from 'react-redux';
+
+import { getSettingPage } from '../../redux/actions/settingPageAction';
+
 
 import classes from './navbar.module.scss';
 import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
 /*import { ReactComponent as Logo } from '../../static/img/logo.svg';*/
 import CustomIcon from '../MdIcon/CustomIcon';
+import config from '../../services/config';
+import useThemeColors from '../SettingPages/SettingPages';
+import LanguageSelector from '../LanguageSelector/LanguageSelector';
+
 
 function Navbar({ setIsOpen, setOpenForm }) {
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const { settingPage } = useSelector((state) => state.settingPage);
+  const { primaryColor, secondaryColor } = useThemeColors();
+
+
+
+  const logoUrl = settingPage?.Logo?.url
+    ? `${settingPage.Logo.url}`
+    : null;
+
+  useEffect(() => {
+    if (!settingPage || Object.keys(settingPage).length === 0) {
+      dispatch(getSettingPage());
+    }
+  }, [dispatch, settingPage]);
+
+
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [size, setSize] = useState({
     width: 0,
     height: 0,
   });
+
+
 
   useEffect(() => {
     const handleResize = () => {
@@ -39,35 +69,35 @@ function Navbar({ setIsOpen, setOpenForm }) {
   };
 
   const listOptions = [
-    //{ icon: '', name: 'Inicio', route: '/' },
-    { icon: '', name: 'APIs', route: '/apis' },
-    { icon: '', name: 'Blog', route: '/blog' },
-    //{ icon: '', name: 'Suscripciones', route: '/suscripciones' },
-    //{ icon: '', name: 'Documentación', route: '/documentacion' },
-    //{ icon: '', name: 'App Partners', route: '/app-partners' },
-    //{ icon: '', name: 'a3Marketplace', route: 'https://a3marketplace.wolterskluwer.es/', external: true },
-    //{ icon: '', name: 'Soporte', route: '/soporte' },
-    { icon: '', name: 'FAQs', route: '/faqs' },
+    { icon: '', name: t('Navbar.apis'), route: '/apis' },
+    { icon: '', name: t('Navbar.blog'), route: '/blog' },
+    { icon: '', name: t('Navbar.faqs'), route: '/faqs' },
   ];
 
   return (
-    <div style={{ position: 'fixed', top: '0', width: '100%', zIndex: '5000' }}>
-      <header className={classes.header}>
+    <div style={{ position: 'fixed', top: '0', width: '100%' }}>
+      <header className={classes.header} >
         <div className={`container ${classes.header__content}`}>
           <NavLink to='/' className={classes.header__content__logo}>
-            <CustomIcon name='logo' />
+            {logoUrl ? (
+              <img src={logoUrl} alt='Logo' style={{ height: '40px' }} />
+            ) : (
+              <CustomIcon name='logo' />
+            )}
           </NavLink>
-          <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`}>
-
+          <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`} >
+            <LanguageSelector />
             <ul className={classes.show__lg__up__buttons}>
               <li className='pr-2'>
-                <Button type='button' styles='ghost-variant' size='small' icon='account' style={{ width: '200px', height: '32px' }} onClick={() => { setIsOpen(true); }}>
-                  Mi Perfil
+                <Button type='button' styles='success' size='small' icon='account' style={{ width: '200px', height: '32px', }} onClick={() => { setIsOpen(true); }}>
+                  {t('Navbar.myProfile')}
                 </Button>
+
+
               </li>
               <li>
-                <Button type='button' styles='primary' size='small' style={{ width: '140px', height: '32px' }} onClick={() => { setOpenForm(true); }}>
-                  regístrate
+                <Button type='button' styles='primary' size='small' style={{ width: '200px', height: '32px' }} onClick={() => { setOpenForm(true); }}>
+                  {t('Navbar.register')}
                 </Button>
               </li>
             </ul>
@@ -112,6 +142,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
                     </div>
                   ))
                 }
+                <LanguageSelector />
                 <li className='text__dark__primary' onClick={() => { setIsOpen(true); menuToggleHandler(); }}>
                   <div className={classes.navbar__xs__icon}>
                     <svg width='12' height='18' viewBox='0 0 12 18' fill='none' xmlns='http://www.w3.org/2000/svg'>
@@ -119,7 +150,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
                     </svg>
                   </div>
                   <div>
-                    Iniciar sesión
+                    {t('Navbar.login')}
                   </div>
                 </li>
                 <li onClick={() => { setOpenForm(true); menuToggleHandler(); }}>
@@ -137,8 +168,8 @@ function Navbar({ setIsOpen, setOpenForm }) {
                       <path fillRule='evenodd' clipRule='evenodd' d='M14.4594 18L11.3809 14.8919L12.2428 14.0216L14.4594 16.2595L19.1387 11.5352L20.0007 12.4054L14.4594 18Z' fill='#0033A0' />
                     </svg>
                   </div>
-                  <div className='text__dark__primary'>
-                    Registrarte
+                  <div className='text__dark__primary' >
+                    {t('Navbar.register')}
                   </div>
                 </li>
               </ul>
@@ -149,6 +180,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
           </nav>
 
           <div className={classes.header__content__toggle}>
+            <LanguageSelector />
             {!menuOpen ? <MdMenu onClick={menuToggleHandler} /> : <div />}
           </div>
         </div>

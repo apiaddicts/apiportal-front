@@ -3,7 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Container } from '@mui/material';
-import { getApiDetail,resetApiDetailed } from '../../../redux/actions/apiManagerAction';
+import { getApiDetail, resetApiDetailed } from '../../../redux/actions/apiManagerAction';
+import { useTranslation } from 'react-i18next';
+
 import Title from '../../../components/Title';
 import AccordionFilter from '../../../components/Accordion/AccordionFilter';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
@@ -12,6 +14,7 @@ import Icon from '../../../components/MdIcon/Icon';
 import classes from './api-detail.module.scss';
 
 function ApiDetail(props) {
+  const { t } = useTranslation();
   const { api, loading } = useSelector((state) => state.apiManager);
 
   const params = useParams();
@@ -21,16 +24,16 @@ function ApiDetail(props) {
   const [subItem, setSubItem] = useState(0);
 
   const infoApi = [{
-    title: 'Información API',
+    title: t('apiInformation'),
     questions: [
-      'Información',
-      'Descripción',
+      t('information'),
+      t('description'),
     ],
   }];
 
   useEffect(() => {
     if (params.id && api && Object.keys(api).length === 0) {
-      dispatch(getApiDetail('Mulesoft',params.id))
+      dispatch(getApiDetail('Mulesoft', params.id))
     }
   }, []);
 
@@ -48,17 +51,17 @@ function ApiDetail(props) {
             <div>
               <Icon id='MdKeyboardBackspace' />
             </div>
-            <span>VOLVER</span>
+            <span>{t('back')}</span>
           </div>
         </Link>
       </div>
-      <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
+      <Container  >
         {api && Object.keys(api).length > 0 ? (
           <div>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className={classes.box__title}>
               <Title text={api.assetId ? api.assetId : 'Demo API'} />
               <Link to={`/developer/apis/${api.assetId}/swagger-ui`} className={classes.wrapper__btn}>
-                <span>Definición</span>
+                <span>{t('definition')}</span>
                 <Icon id='MdChevronRight' />
               </Link>
             </Box>

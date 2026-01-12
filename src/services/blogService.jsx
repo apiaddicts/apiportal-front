@@ -4,13 +4,13 @@ import config from './config';
 function getPageBlog() {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
-  return fetch(`${config.apiUrl}/pages?_where[slug]=${config.blogPageSlug}&_locale=${config.locale}`, requestOptions)
+  return fetch(`${config.apiUrl}/pages?filters[slug][$eq]=${config.blogPageSlug}&populate[contentSections][populate]=*`, requestOptions)
     .then(handleResponse)
     .then((dataBlog) => {
-      return dataBlog[0];
+      return dataBlog.data[0];
     }).catch((error) => {
       console.error(error);
     });
@@ -19,13 +19,13 @@ function getPageBlog() {
 function getBlogs() {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
-  return fetch(`${config.apiUrl}/blog-items/`, requestOptions)
+  return fetch(`${config.apiUrl}/blog-items?populate=*`, requestOptions)
     .then(handleResponse)
     .then((blogs) => {
-      return blogs;
+      return blogs.data;
     }).catch((error) => {
       console.error(error);
     });
@@ -34,13 +34,13 @@ function getBlogs() {
 function getBlog(id) {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
   return fetch(`${config.apiUrl}/blog-items/${id}`, requestOptions)
     .then(handleResponse)
     .then((blog) => {
-      return blog;
+      return blog.data;
     }).catch((error) => {
       console.error(error);
     });

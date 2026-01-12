@@ -1,6 +1,7 @@
 @import "./../../../styles/variables.module.scss";
 
 .accordion {
+  border: 1px solid #007AC3;
   width: 100%;
   transition: 0.3s ease all;
   padding: 0;
@@ -8,6 +9,8 @@
     padding: 0;
   }
   &__title {
+    border: none !important;
+    border-bottom: none !important;
     padding: 0.5rem 1rem 0.5rem 0.5rem;
     h1 {
       font-size: 1.2rem;
@@ -20,6 +23,8 @@
     }
   }
   &__head {
+    border: none !important;
+    border-bottom: none !important;
     transition: 0.3s ease all;
     background: $white;
     color: $theme_primary;
@@ -31,8 +36,10 @@
     padding: 23px 30px;
     position: relative;
     cursor: pointer;
-    border-bottom: 1px solid #ECF0F1;
+   
     &__title {
+      border: none !important;
+      border-bottom: none !important;
       font-size: 22px;
       font-weight: 500;
       @include breakpoint(xs) {
@@ -44,6 +51,7 @@
     }
   }
   &__body {
+    
     transition: 0.3s ease all;
     width: 100%;
     height: 100%;
@@ -52,6 +60,8 @@
     margin-top: -9px;
     border-radius: 0px;
     background: $white;
+    border: none !important;
+    border-bottom: none !important;
 
     &__description {
       font-size: 18px;
@@ -95,6 +105,8 @@
 }
 
 .active {
+  border: none !important;
+  border-bottom: none !important;
   transition: 0.3s ease all;
   background: $white;
   color: $theme_primary;
@@ -161,10 +173,13 @@
 }
 
 .item__active{
+
   margin: 15px 0;
   padding-left: 10px;
   font-weight: 700;
-  border-left: 2px solid $secondary;
+
+  border: none !important;
+  border-bottom: none !important;
   color: $primary;
 }
 
@@ -184,7 +199,8 @@
   width: 100%;
   margin: 1rem 0;
   table, th, td {
-    border-collapse: collapse;
+    border: none !important;
+    border-bottom: none !important;
     font-size: 14px;
   }
   th, td {
@@ -212,15 +228,15 @@
     color: $theme_primary;
     background: $gray_lighten-4;
     border-radius: 12px;
-    border: 1px solid $gray_lighten-3;
+    border: none !important;
+    border-bottom: none !important;
     font-size: 1rem;
     font-weight: 500;
     letter-spacing: 0.1px;
     padding: 0.5rem 11px;
     &__item {
       padding: 0 10px;
-      border-radius: 12px;
-      border: 1px solid #ECF0F1;
+      
       background: #FAFAFC;
       color: $primary;
       font-size: 1rem;
@@ -256,8 +272,8 @@
     &__code {
       color: $primary;
       background: #FAFAFC;
-      border-radius: 12px;
-      border: 1px solid #ECF0F1;
+      border: none !important;
+      border-bottom: none !important;
       font-size: 1rem;
       font-weight: 500;
       letter-spacing: 0.1px;

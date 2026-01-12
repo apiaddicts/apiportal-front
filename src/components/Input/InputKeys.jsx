@@ -2,10 +2,12 @@
 import React, { useRef, useState } from 'react';
 import CachedIcon from '@mui/icons-material/Cached';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { useTranslation } from 'react-i18next';
 import classes from './InputUI/inputui.module.scss';
 import Icon from '../MdIcon/Icon';
 
 function InputKeys({ type = 'text', label, touched, errors, required = false, onChange, onBlur, regenerate, handleRegenerate, ...rest }) {
+  const { t } = useTranslation();
 
   const { value } = rest;
   const [isActive, setIsActive] = useState(true);
@@ -60,7 +62,7 @@ function InputKeys({ type = 'text', label, touched, errors, required = false, on
         onBlur={onBlur}
         {...rest}
       />
-      <label className={isActive || initialValue.length > 0 ? `${classes.active}` : ''} onClick={() => { setIsActive(true); inputRef.current.focus(); }}>{label}</label>
+      <label className={isActive || initialValue.length > 0 ? `${classes.active}` : ''} onClick={() => { setIsActive(true); inputRef.current.focus(); }}>{t(label)}</label>
       {
         errors === undefined && initialValue.length < 0 ? null :
           errors === undefined && initialValue.length > 0 && type !== 'password' && type !== 'email' ? (
@@ -89,7 +91,7 @@ function InputKeys({ type = 'text', label, touched, errors, required = false, on
           <CachedIcon />
         </div>
       )}
-      { copied ? (<span className={classes.success}>Copiado en el portapapeles</span>) : null}
+      { copied ? (<span className={classes.success}>{t('InputKeys.copied')}</span>) : null}
     </div>
   );
 };

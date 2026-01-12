@@ -23,10 +23,9 @@
     color: $theme_secondary;
   }
 }
+
 .back__btn {
-  position: absolute;
-  top: -42px;
-  left: 30px;
+  padding: 20px;
 
   @include breakpoint(xs) {
     left: 0;
@@ -42,73 +41,33 @@
 
 }
 
-// sx={{ display: 'grid', gridTemplateColumns: '1fr 4fr', gap: '3rem', alignItems: 'baseline' }}
-.grid__apidetail {
-
-  &__accordionfilter {
-    grid-area: 'accordionfilter';
-    @include breakpoint(xs) {
-      display: none;
-    }
-    @include breakpoint(sm) {
-      display: none;
-    }
-    @include breakpoint(lg) {
-      display: block;
-    }
-  }
-  &__customaccodion {
-    grid-area: 'customaccordion';
-  }
-
-  display: grid;
-  grid-template-columns: 1fr 4fr;
-  gap: 3rem;
-  align-items: baseline;
-
-  @include breakpoint(xs) {
-    grid-template-columns: 1fr;
-    gap: 0;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1rem;
-  }
-  @include breakpoint(sm) {
-    grid-template-columns: 1fr;
-    gap: 0;
-    justify-content: center;
-    align-items: center;
-    margin-top: 1rem;
-  }
-
-  @include breakpoint(lg) {
-    grid-template-columns: 1fr 4fr;
-    gap: 3rem;
-    justify-content: center;
-    align-items: baseline;
-  }
-
+.tabsContainer {
+  background-color: none !important;
+  border-radius: 8px !important;
+  display: inline-flex !important;
+  padding: 2px !important;
+  gap: 4px !important;
 }
 
-.wrapper__btn {
-  background: $theme_tertiary;
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
-  width: 6rem;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  font-weight: 700;
-  font-size: 1rem;
-  letter-spacing: 0.8px;
-  color: $secondary_white;
+
+.tabItem {
+  font-weight: bold !important;
+  text-transform: none !important;
+
+
+  border-radius: 6px !important;
+  color: #666 !important;
+  min-height: unset !important;
+  transition: all 0.2s ease-in-out !important;
 }
 
-.box__title {
-  h1 {
-    @include breakpoint(xs) {
-      font-size: 2.25rem;
-    }
-  }
+.tabItemSelected {
+  background: #D2E4F5 !important;
+  color: #007AC3 !important;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.281) !important;
+  border-bottom: 0px !important;
 }
 
+.css-1qltlow-MuiTabs-indicator .MuiTabs-indicator {
+  background-color: red !important;
+}

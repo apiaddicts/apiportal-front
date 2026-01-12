@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-hot-toast';
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import Icon from '../../MdIcon/Icon';
+import { useTranslation } from 'react-i18next';
 
 import subscriptionsConstants from '../../../redux/constants/subscriptionsConstants';
 import subscriptionsService from '../../../services/subscriptionsService';
@@ -10,7 +11,7 @@ import subscriptionsService from '../../../services/subscriptionsService';
 import './passwordGenerate.scss';
 
 function PasswordGenerate({ idSuscripcion, user, version, status }) {
-
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [hidden, setHidden] = useState(false);
   const [primaryKey, setPrimaryKey] = useState('');
@@ -78,17 +79,19 @@ function PasswordGenerate({ idSuscripcion, user, version, status }) {
           onClose={toggleConfirmation}
         >
           <DialogTitle id='alert-dialog-title'>
-            Regenerar claves de subscripción
+            {t('Collapse.regenerateSubscriptionKeys')}
           </DialogTitle>
           <DialogContent>
             <DialogContentText id='alert-dialog-description'>
-              ¿Desea regenerar sus claves de subscripción? Esta es una acción irreversible.
+              {t('Collapse.confirmRegenerateSubscriptionKeys')}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={toggleConfirmation} color='error'>Cancelar</Button>
+            <Button onClick={toggleConfirmation} color='error'>
+              {t('Collapse.cancel')}
+            </Button>
             <Button onClick={() => handleReloadRegerateSubscription()} variant='contained' autoFocus>
-              Aceptar
+              {t('Collapse.accept')}
             </Button>
           </DialogActions>
         </Dialog>

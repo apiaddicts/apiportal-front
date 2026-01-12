@@ -6,6 +6,9 @@ import config from './config';
 function getApimConfig(){
   const requestOptions = {
     method: 'GET',
+    headers: {
+      'apikey': `${config.strapiApiKey}`
+    }
   }
   const url = `${config.apiUrl}/apim-configs`;
 
