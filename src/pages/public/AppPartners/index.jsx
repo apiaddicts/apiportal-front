@@ -17,6 +17,23 @@ function AppPartners({ setOpenForm }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { appPartnersPage } = useSelector((state) => state.appPartners);
+
+  useEffect(() => {
+    // Eliminar el div del carrusel de partners
+    const bloqueDivs = document.querySelectorAll('div.bloque');
+    bloqueDivs.forEach((div) => {
+      if (div.classList.length === 1 && div.classList.contains('bloque')) {
+        div.remove();
+      }
+    });
+
+    // Modificar el height del iframe
+    const iframe = document.querySelector('iframe');
+    if (iframe) {
+      iframe.style.height = '1535px';
+    }
+  }, [appPartnersPage]);
+
   useEffect(() => {
     if (appPartnersPage && Object.keys(appPartnersPage).length === 0) {
       dispatch(getAppPartnersContent());
