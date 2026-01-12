@@ -1,11 +1,14 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 import svgr from '@svgr/rollup';
 
-export default defineConfig({
-  plugins: [react(), svgr()],
-  server: {
-    port: 3000,
-    open: true
-  }
-});
+export default ({ mode }) => {
+  process.env = {...process.env, ...loadEnv(mode, process.cwd())};
+  return defineConfig({
+    plugins: [react(), svgr()],
+    server: {
+      port: parseInt(process.env.VITE_PORT),
+      open: true
+    }
+  });
+}
