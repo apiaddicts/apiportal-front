@@ -1,73 +1,36 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
-import { FaFacebookF, FaTwitter, FaYoutube, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 import classes from './customfooter.module.scss';
-/*import Logo from '../../../static/img/logo.svg';*/
 import config from '../../../services/config';
 import CustomIcon from '../../MdIcon/CustomIcon';
 
 function CustomFooter() {
+  const { t } = useTranslation();
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
-  const socialLinks = [
-    { link: '', icon: <FaFacebookF /> },
-    { link: '', icon: <FaTwitter /> },
-    { link: '', icon: <FaYoutube /> },
-    { link: '', icon: <FaInstagram /> },
-    { link: '', icon: <FaLinkedinIn /> },
-  ];
 
   return (
-    <div className={classes.wrapper__footer}>
-      <div className={classes.footer__end}>
-        <div className={classes.logo}>
-          <CustomIcon name='logo' />
+    <footer className={classes.footer}>
+      <div className={classes.footerContent}>
+        <div >
+          <CustomIcon name="logoNeuroBlanco" className={classes.logoIcon} />
         </div>
-        <div className={classes.email}>
-          <h1 className='body-1 font-weight-medium text__dark__primary  mb-2'>Correo electronico</h1>
-          <p className='body-1 font-weight-bold text__dark__primary '>{config.contact}</p>
-        </div>
-      </div>
-      <div className={classes.footer__legals}>
-        <div className={classes.legal}>
-          <p className='body-1 text__dark__primary font-weight-bold'>
-            <a href={config.legalWarningPath} target='blank' className='text__dark__primary'>Aviso Legal</a>
-          </p>
-        </div>
-        <div className={classes.privacy}>
-          <p className='body-1 text__dark__primary font-weight-bold'>
-            <a href={config.privacyPolicyPath} target='blank' className='text__dark__primary'>Política de Privacidad</a>
-          </p>
-        </div>
-        <div className={classes.cookies}>
-          <p className='body-1 text__dark__primary font-weight-bold'>
-            <a href={config.cookiesPolicyPath} target='blank' className='text__dark__primary'>Política de Cookies</a>
-          </p>
-        </div>
-      </div>
-      <div className={classes.footer__social}>
-        <div className={classes.footer__social__copyright}>
-          <p className='caption text-uppercase text__dark__primary  mb-3'>
-            &copy;
-            {' '}
-            <span>{ year }</span>
-            {' '}
-            {`${config.company}. TODOS LOS DERECHOS RESERVADOS`}
-            {' '}
-          </p>
-        </div>
-        <div className={classes.footer__social__icons}>
-          {
-            socialLinks.map((socialLink, index) => (
-              <a href={socialLink.link} key={index} target='_blank' rel='noreferrer'>
-                {socialLink.icon}
-              </a>
-            ))
-          }
-        </div>
-      </div>
 
-    </div>
+        <div className={classes.linksSection}>
+          <a href={config.legalWarningPath} target="_blank" rel="noreferrer">{t('CustomFooter.legalWarning')}</a>
+          <span>|</span>
+          <a href={config.privacyPolicyPath} target="_blank" rel="noreferrer">{t('CustomFooter.privacyPolicy')}</a>
+          <span>|</span>
+          <a href={config.cookiesPolicyPath} target="_blank" rel="noreferrer">{t('CustomFooter.cookiesPolicy')}</a>
+        </div>
+
+        <div className={classes.copySection}>
+          <p>
+            &copy; {year} {config.company || 'undefined'}. <strong>{t('CustomFooter.allRightsReserved')}</strong>
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 }
 

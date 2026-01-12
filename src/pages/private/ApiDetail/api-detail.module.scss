@@ -23,10 +23,9 @@
     color: $theme_secondary;
   }
 }
+
 .back__btn {
-  position: absolute;
-  top: -42px;
-  left: 30px;
+padding: 20px ;
 
   @include breakpoint(xs) {
     left: 0;
@@ -44,21 +43,27 @@
 
 // sx={{ display: 'grid', gridTemplateColumns: '1fr 4fr', gap: '3rem', alignItems: 'baseline' }}
 .grid__apidetail {
+  bas
 
   &__accordionfilter {
     grid-area: 'accordionfilter';
+
     @include breakpoint(xs) {
       display: none;
     }
+
     @include breakpoint(sm) {
       display: none;
     }
+
     @include breakpoint(lg) {
       display: block;
     }
   }
+
   &__customaccodion {
     grid-area: 'customaccordion';
+    background-color: red;
   }
 
   display: grid;
@@ -73,6 +78,7 @@
     align-items: center;
     margin-top: 1rem;
   }
+
   @include breakpoint(sm) {
     grid-template-columns: 1fr;
     gap: 0;
@@ -94,7 +100,7 @@
   background: $theme_tertiary;
   border-radius: 6px;
   padding: 0.75rem 1rem;
-  width: 6rem;
+  width: 8rem;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -105,10 +111,10 @@
 }
 
 .box__title {
+  margin-top: 50px;
   h1 {
     @include breakpoint(xs) {
       font-size: 2.25rem;
     }
   }
 }
-

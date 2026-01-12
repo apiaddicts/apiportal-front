@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 // import { MdArrowBackIos, MdArrowForwardIos } from 'react-icons/md';
 import * as MaterialDesign from 'react-icons/md';
+import { useTranslation } from 'react-i18next';
 
 import Base from './Base';
 
@@ -8,6 +9,7 @@ import './cards.scss';
 import CardBasic from './CardBasic';
 
 function CardSlider({ lists, flag = true }) {
+  const { t } = useTranslation();
   const slider = useRef(null);
 
   const nextSlide = () => {
@@ -101,7 +103,7 @@ function CardSlider({ lists, flag = true }) {
                 <div className='container'>
                   {imgs.map((src, i) => (
                     <div key={i}>
-                      <CardBasic info='MÁS INFORMACIÓN' img={src.img} title={`title ${i}`} description=' Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis ab voluptatum nisi alias veniam nesciunt facere non culpa itaque architecto ipsam iusto, repellat est sit? Esse et id vero ut! Lorem ipsum dolor, sit amet ' />
+                      <CardBasic info={t('CardSlider.moreInfo')} img={src.img} title={`title ${i}`} description={t('CardSlider.defaultDescription')} />
                     </div>
                   ))}
                 </div>

@@ -24,7 +24,7 @@
 
         .chip_title {
             margin-left: 5.7%;
-            font-family: $primary_font;
+            // font-family: $primary_font;
             font-style: normal;
             font-weight: 600;
             font-size: 22px;
@@ -36,7 +36,7 @@
         }
 
         .title {
-            font-family: $primary_font;
+            // font-family: $primary_font;
             font-style: normal;
             font-weight: 600;
             font-size: 22px;
@@ -79,7 +79,7 @@
     cursor: pointer;
 
     span {
-        font-family: $primary_font;
+        // font-family: $primary_font;
         font-style: normal;
         font-weight: 700;
         font-size: 16px;
@@ -148,16 +148,16 @@
             &_text {
                 margin-top: -10px;
                 h5 {
-                    font-family: $primary_font;
+                    // font-family: $primary_font;
                     font-style: normal;
                     font-weight: 700;
                     font-size: 18px;
                     line-height: 28px;
                     color: $primary;
                 }
-                span {
-                    font-family: $primary_font;
-                }
+                // span {
+                //     // font-family: $primary_font;
+                // }
             }
         }
 

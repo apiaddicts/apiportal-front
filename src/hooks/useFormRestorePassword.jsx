@@ -3,15 +3,9 @@ import { useFormik } from 'formik';
 import { useState } from 'react';
 import { string } from 'yup';
 import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
-const validationSchema = Yup.object().shape({
-  password: string().min(8, 'La contraseña actual debe tener al menos 8 carácteres de longitud').required('La contraseña actual es obligatoria'),
-  new_password: string().min(8, 'La nueva contraseña debe tener al menos 8 carácteres de longitud').required('La nueva contraseña es obligatoria').trim('Los espacios no estan permitidos')
-    .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/, 'Su contraseña debe tener al menos una letra mayúscula, una letra minuscula, un número y un caracter especial (@$!%*?&).'),
-  confirm_password: string().required('La confirmación de contraseña es obligatoria').oneOf([Yup.ref('new_password'), null], 'La nueva contraseña y la confirmación de contraseña deben coincidir'),
-});
-
-const objectFromArray = (fields, key) => {
+const objectFromArray = (fields, key, validationSchema) => {
   const mappedProps = fields.map((field) => {
     if (key !== 'validate') {
       return [field.id, field[key]];
@@ -23,16 +17,35 @@ const objectFromArray = (fields, key) => {
   return Object.fromEntries(mappedProps);
 };
 
-function useFormRestorePassword(
-  fields,
-  customHandleSubmit,
-) {
+function useFormRestorePassword(fields, customHandleSubmit) {
+  const { t } = useTranslation(); // ✅ ahora sí dentro del hook
+
+  const validationSchema = Yup.object().shape({
+    password: string()
+      .min(8, t('RestorePassword.passwordMinLength'))
+      .required(t('RestorePassword.passwordRequired')),
+
+    new_password: string()
+      .min(8, t('RestorePassword.newPasswordMinLength'))
+      .required(t('RestorePassword.newPasswordRequired'))
+      .trim(t('RestorePassword.noSpaces'))
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
+        t('RestorePassword.passwordRequirements')
+      ),
+
+    confirm_password: string()
+      .required(t('RestorePassword.confirmPasswordRequired'))
+      .oneOf([Yup.ref('new_password'), null], t('RestorePassword.passwordMatch')),
+  });
+
   const [formStatus, setFormStatus] = useState({
     status: 'not_started',
     message: '',
   });
+
   const formik = useFormik({
-    initialValues: objectFromArray(fields, 'initialValue'),
+    initialValues: objectFromArray(fields, 'initialValue', validationSchema),
     onSubmit: async (values, { resetForm }) => {
       try {
         setFormStatus({ status: 'loading' });

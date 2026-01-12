@@ -8,9 +8,11 @@ import ResetPassword from '../../../components/Forms/ResetPassword';
 import { fieldsLogin } from '../../../components/Forms/fields';
 import { login, loginApim } from '../../../redux/actions/userAction';
 import useLoginConfig from '../../../hooks/useLogin';
+import { useTranslation } from 'react-i18next';
 import classes from './login.module.scss';
 
 function Login({ setOpenForm, setIsOpen, setPrivateSession }) {
+  const { t } = useTranslation();
   const { token } = useSelector((state) => state.user);
   const [showForm, setShowForm] = useState(true);
   const [showResetForm, setShowResetForm] = useState(false);
@@ -21,12 +23,12 @@ function Login({ setOpenForm, setIsOpen, setPrivateSession }) {
 
   // This function is responsible for sending the user to local storage
   const handleSubmit = (dataForm) => {
-    dispatch(login(dataForm,'Mulesoft'));
+    dispatch(login(dataForm, 'Mulesoft'));
     dispatch(loginApim('Mulesoft'));
   };
 
   useEffect(() => {
-    if (token.length > 0) {
+    if (token && typeof token === 'string' && token.length > 0) {
       setIsOpen(false);
       navigate('/developer/dashboard');
     }
@@ -36,7 +38,7 @@ function Login({ setOpenForm, setIsOpen, setPrivateSession }) {
   return (
     <Modal setOpen={setIsOpen}>
       <div className={classes.login__wrapper}>
-        <h1 className={classes.login__title}>{showForm ? 'Iniciar sesión' : 'Recuperar contraseña'}</h1>
+        <h1 className={classes.login__title}>{showForm ? t('Login.signIn') : t('Login.resetPassword')}</h1>
         {showForm && (
           <Form
             handleSubmit={handleSubmit}

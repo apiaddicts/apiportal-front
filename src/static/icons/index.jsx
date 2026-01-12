@@ -9,6 +9,7 @@ import email from './email.svg';
 import adduser from './adduser.svg';
 import settingsSquare from './settings-square.svg';
 import develop from './develop.svg';
+import iconoBilling from './icono-billing.svg';
 
 const icons = (iconName) => {
   switch (iconName) {
@@ -32,6 +33,8 @@ const icons = (iconName) => {
       return <img src={settingsSquare} alt='' />;
     case 'develop':
       return <img src={develop} alt='' />;
+    case 'billing':
+      return <img src={iconoBilling} alt='' />;
     default:
       return <img src={person} alt='' />;
   }

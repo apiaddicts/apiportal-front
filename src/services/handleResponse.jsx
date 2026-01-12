@@ -48,6 +48,8 @@ function handleResponse(response) {
         throw new Error(response.status);
       case statusCode.HTTP_400_BAD_REQUEST:
         return data;
+      case statusCode.HTTP_500_INTERNAL_SERVER_ERROR:
+        return data;
       default:
         throw new Error(response.status);
     }

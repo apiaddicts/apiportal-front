@@ -4,8 +4,10 @@ import { HashLink } from 'react-router-hash-link';
 import Base from './Base';
 //import CustomMarkdown from '../CustomMarkdown';
 import Button from '../Buttons/Button';
+import { useTranslation } from 'react-i18next';
 
 function SubscriptionCard({ items, setOpenForm }) {
+  const { t } = useTranslation();
 
   const { title, price, /*apis, */benefits, slug, btnLabel, accentColor } = items;
 
@@ -20,7 +22,7 @@ function SubscriptionCard({ items, setOpenForm }) {
             {price > 0 ? (
               <div className='price__wrapper'>
                 <p className={accentColor === 'primary' ? 'text' : accentColor === 'secondary' ? 'text__secondary' : accentColor === 'tertiary' ? 'text__tertiary' : ''}>{`${price}€`}</p>
-                <p className='price__wrapper__month'>/mes</p>
+                <p className='price__wrapper__month'>{t('SubscriptionCard.perMonth')}</p>
               </div>
             ) : (<p className={accentColor === 'primary' ? 'text' : ''}>{`${price}€`}</p>)}
             {btnLabel && (
@@ -48,7 +50,7 @@ function SubscriptionCard({ items, setOpenForm }) {
             </div>
           )*/}
           <div className='apis'>
-            <p className='mb-2 apis__title'>Contiene las APIS de:</p>
+            <p className='mb-2 apis__title'>{t('SubscriptionCard.containsApis')}</p>
             <p className='apis__link'>a3Nómina cloud · a3factura</p>
             <p className='apis__link'>a3innuva | Facturación</p>
             <p className='apis__link'>a3innuva | Nómina</p>
@@ -63,7 +65,7 @@ function SubscriptionCard({ items, setOpenForm }) {
           )}
           {benefits && benefits.specific && (
             <div className='content'>
-              <p className='mb-2 apis__title'>Características:</p>
+              <p className='mb-2 apis__title'>{t('SubscriptionCard.features')}</p>
               <ul>
                 {benefits?.specific.map((item, index) => (
                   <li key={index}>{item}</li>
@@ -74,12 +76,12 @@ function SubscriptionCard({ items, setOpenForm }) {
         </div>
         {slug === 'enterprise-l' ? (
           <div className='expand__subs'>
-            <p>¿Necesitas ampliar tu suscripción?</p>
-            <span>*Pack de 10 empresas a 10€/empresa</span>
+            <p>{t('SubscriptionCard.expandSubscription')}</p>
+            <span>{t('SubscriptionCard.packDetails')}</span>
             <div className='container mt-5'>
               <HashLink smooth to={`/suscripciones/${slug}/contact`}>
                 <Button styles='primary'>
-                  Contáctanos
+                  {t('SubscriptionCard.contactUs')}
                 </Button>
               </HashLink>
             </div>

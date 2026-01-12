@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
+import { useTranslation } from 'react-i18next';
+
 import CardInformation from '../Card/CardInformation';
 import classes from './apis-paginated.module.scss';
 
 function Apis({ currentItems }) {
+  const { t } = useTranslation();
+
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <div className={`${classes.api_list}`}>
@@ -16,7 +20,7 @@ function Apis({ currentItems }) {
             version={item?.version || ''}
             buttons={item?.tags || ''}
             colorStatus={item?.color_status || ''}
-            info='Ver Documentación'
+            info={t('ApisPaginated.viewDocumentation')}
             description={item?.description || ''}
             link={`/apis/${item?.documentId}#api`}
             css_styles={{ 'custom_title_size': 'fs__22', 'custom_status_size': 'fs__10' }}
@@ -27,6 +31,8 @@ function Apis({ currentItems }) {
 }
 
 function ApisPaginated({ apis, itemsPerPage }) {
+  const { t } = useTranslation();
+
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -49,12 +55,12 @@ function ApisPaginated({ apis, itemsPerPage }) {
       <Apis currentItems={currentItems} />
       <ReactPaginate
         breakLabel='...'
-        nextLabel='Siguiente'
+        nextLabel={t('ApisPaginated.next')}
         onPageChange={handlePageClick}
         pageRangeDisplayed={2}
         marginPagesDisplayed={2}
         pageCount={pageCount}
-        previousLabel='Anterior'
+        previousLabel={t('ApisPaginated.previous')}
         previousClassName={`${classes.previous}`}
         previousLinkClassName={`${classes.previous__link}`}
         nextClassName={`${classes.next}`}

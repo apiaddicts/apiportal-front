@@ -31,7 +31,11 @@ function CheckboxWrapper({
               {...configCheckbox}
             />
           )}
-          label={label}
+          label={
+            <span className={classes.custom__checkbox_label}>
+              {label}
+            </span>
+          }
         />
       </FormGroup>
     </FormControl>

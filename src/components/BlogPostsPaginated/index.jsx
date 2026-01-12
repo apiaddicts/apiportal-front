@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
+import { useTranslation } from 'react-i18next';
 import CardInformation from '../Card/CardInformation';
 import classes from './blog-posts-paginated.module.scss';
 
@@ -30,6 +31,7 @@ function Posts({ currentItems, additionalClasses }) {
 }
 
 function BlogPostsPaginated({ posts, itemsPerPage, parentContainerClass }) {
+  const { t } = useTranslation();
   const [currentItems, setCurrentItems] = useState(null);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -53,12 +55,12 @@ function BlogPostsPaginated({ posts, itemsPerPage, parentContainerClass }) {
       <hr className={`${classes.separator}`} />
       <ReactPaginate
         breakLabel='...'
-        nextLabel='Siguiente'
+        nextLabel={t('BlogPostsPaginated.next')}
         onPageChange={handlePageClick}
         pageRangeDisplayed={2}
         marginPagesDisplayed={2}
         pageCount={pageCount}
-        previousLabel='Anterior'
+        previousLabel={t('BlogPostsPaginated.previous')}
         previousClassName={`${classes.previous}`}
         previousLinkClassName={`${classes.previous__link}`}
         nextClassName={`${classes.next}`}

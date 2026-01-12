@@ -6,7 +6,7 @@ import store from '../redux/store';
 function getApiBookStores() {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
   return fetch(`${config.apiUrl}/library-apis?filters[publish][$eq]=publicado&populate[tags]=*`, requestOptions)
     .then(handleResponse)
@@ -20,7 +20,7 @@ function getApiBookStores() {
 function getApiBookStore(id) {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
   return fetch(`${config.apiUrl}/library-apis/${id}`, requestOptions)
     .then(handleResponse)
@@ -35,7 +35,7 @@ function getApis(filter) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}`, 'apikey': `${config.strapiApiKey}` },
   };
 
   let url = `${config.url}/apis?api-version=${config.apiVersion}&expandApiVersionSet=true&tags[0]=published`;
@@ -55,7 +55,7 @@ function listApisProduct(top, skip, filter) {
 
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': token },
+    headers: { 'Authorization': token, 'apikey': `${config.strapiApiKey}` },
   };
 
   let url = `${config.apimUrl}/apis-with-products?expandApiVersionSet`;
@@ -73,7 +73,7 @@ function getAPi(id) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}`, 'apikey': `${config.strapiApiKey}` },
   };
 
   const url = `${config.url}/apis/${id}?api-version=${config.apiVersion}`;
@@ -90,7 +90,7 @@ function getApiOpenAPI(id) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Accept': 'application/vnd.oai.openapi+json; charset=utf-8', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Accept': 'application/vnd.oai.openapi+json; charset=utf-8', 'Authorization': `SharedAccessSignature ${token}`, 'apikey': `${config.strapiApiKey}` },
   };
 
   const url = `${config.url}/apis/${id}?api-version=${config.apiVersion}&export=true&format=swagger`;
@@ -118,7 +118,7 @@ function getApiDescription(id) {
 
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
   const url = `${config.apiUrl}/library-apis?_where[slug]=${id}`;
@@ -132,7 +132,7 @@ function getOpenApiFromStrapi(id) {
 
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
   const url = `${config.apiUrl}/library-apis?_where[slug]=${id}`;
@@ -146,7 +146,7 @@ function getListTags() {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}`, 'apikey': `${config.strapiApiKey}` },
   };
 
   const url = `${config.url}/tags?api-version=${config.apiVersion}&scope=apis`;
@@ -164,7 +164,7 @@ function getListTagsByApi(apiName) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}`, 'apikey': `${config.strapiApiKey}` },
   };
 
   const url = `${config.url}/apis/${apiName}/tags?api-version=${config.apiVersion}`;
@@ -182,7 +182,7 @@ function filterAPIsByTags(data) {
 
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'Authorization': token },
+    headers: { 'Content-Type': 'application/json', 'Authorization': token, 'apikey': `${config.strapiApiKey}` },
     body: JSON.stringify(data),
   };
 
@@ -200,7 +200,7 @@ function searchApis(search) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}`, 'apikey': `${config.strapiApiKey}` },
   };
 
   const url = `${config.url}/apis?api-version=${config.apiVersion}&tags[0]=published&$filter=(contains(properties/displayName,'${search}')) or (contains(properties/description,'${search}'))`;
@@ -218,7 +218,7 @@ function getApiHostnames(apiName) {
   const { token } = store.getState().user;
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}` },
+    headers: { 'Content-Type': 'application/json', 'Authorization': `SharedAccessSignature ${token}`, 'apikey': `${config.strapiApiKey}` },
   };
 
   const url = `${config.url}/apis/${apiName}/hostnames?api-version=${config.apiVersion}`;
@@ -238,6 +238,7 @@ const getApiProducts = (apiId) => {
     headers: {
       'Authorization': `SharedAccessSignature ${token}`,
       'Content-Type': 'application/json',
+      'apikey': `${config.strapiApiKey}`
     },
   };
 
@@ -255,7 +256,7 @@ const getApiProducts = (apiId) => {
 const getApisUnsecure = () => {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-type': 'application/json' },
+    headers: { 'Content-type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
   const url = 'https://wkeapipre.management.azure-api.net/subscriptions/d191459e-3142-4ecb-8468-89398ec98aac/resourceGroups/RG-PRE-SHARED/providers/Microsoft.ApiManagement/service/WKEAPIPRE/apis?api-version=2021-08-01';

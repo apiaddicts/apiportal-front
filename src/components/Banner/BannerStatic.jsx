@@ -1,19 +1,21 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Base from './Base';
 import classes from './banner.module.scss';
 import Button from '../Buttons/Button';
 import SearchInput from '../Input/SearchInput';
 
-function BannerStatic({ title, subtitle, img, isSearch, buttons, styles, stylesTitle, css_styles, ...props }) {
-
+function BannerStatic({ title, subtitle, img, isSearch, buttons, styles, stylesTitle, css_styles, isPrivate, ...props }) {
+  const { t } = useTranslation();
   const { custom_padding, custom_overlay } = css_styles;
 
+
   return (
-    <Base style={styles} img={img}>
+    <Base style={styles} img={img} isPrivate={isPrivate} >
       <div style={stylesTitle} className={`container ${classes.banner__content} ${custom_overlay}`}>
         <div className={`row ${custom_padding}`}>
           <div className='flex-md-12 flex-sm-12'>
-            <h1 className={`h1 text__white ${classes.shadow__text}`}>{ title }</h1>
+            <h1 className={`h1 text__white ${classes.shadow__text}`}>{title}</h1>
           </div>
           {subtitle && (
             <div className='flex-md-8 flex-sm-12'>
@@ -26,7 +28,7 @@ function BannerStatic({ title, subtitle, img, isSearch, buttons, styles, stylesT
                 {!buttons ? '' : buttons.map((button, index) => (
                   <div key={index} className='pr-2'>
                     <Button styles={button.class}>
-                      {button.label}
+                      {t(button.label)}
                     </Button>
                   </div>
                 ))}
@@ -39,7 +41,7 @@ function BannerStatic({ title, subtitle, img, isSearch, buttons, styles, stylesT
                 <SearchInput
                   name='search'
                   type='text'
-                  placeholder='Buscar'
+                  placeholder={t('BannerStatic.searchPlaceholder')}
                   icon
                   {...props}
                 />

@@ -1,285 +1,54 @@
-@import "./../../../styles/variables.module.scss";
-@import "./../../../styles/mixins/mixin.scss";
-
-.wrapper__footer {
-  margin: 0 auto;
-  max-width: 90%;
-}
-
 .footer {
-  &__container {
-    height: 300px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-  }
-  &__end {
-    .logo {
-      grid-area: logo;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      @include breakpoint(xs) {
-        flex-direction: column;
-      }
-      &__principal {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: flex-start;
-        gap: 5px;
+  background-color: #007AC3;
+  padding: 10px 40px;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  margin-top: 5px;
+}
 
-        &__sublogo {
-          @include breakpoint(xs) {
-            display: none;
-          }
-        }
+.footerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  // flex-wrap: wrap;
+}
 
-      }
-    }
-    .email {
-      grid-area: email;
-      @include breakpoint(xs) {
-        h1, p {
-          font-size: 16px !important;
-        }
-      }
-    }
+.logoSection {
+  font-weight: bold;
+  font-size: 20px;
+  color: white;
 
-    .email {
-      text-align: right;
-    }
-
-    display: grid;
-    grid-template-areas: "logo email";
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 0;
-    border-bottom: 1px solid #e6e7ee;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    padding-left: 0;
-    padding-right: 0;
-
-    @include breakpoint(xs) {
-      grid-template-columns: 1fr;
-      grid-template-areas: "logo" "email";
-      gap: 2rem;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-      align-content: center;
-      text-align: center;
-      border-bottom: none;
-      .logo {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .email {
-        text-align: center !important;
-      }
-    }
-
-    @include breakpoint(sm) {
-      grid-template-columns: 1fr;
-      grid-template-areas: "logo" "email";
-      gap: 2rem;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-      align-content: center;
-      text-align: center;
-      border-bottom: none;
-      .logo {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .email {
-        text-align: center !important;
-      }
-    }
-
-    @include breakpoint(md) {
-      grid-template-areas: "logo email";
-      grid-template-columns: 1fr 1fr;
-      border-bottom: 1px solid #e6e7ee;
-      gap: 0rem;
-      align-items: center;
-      padding-left: 0;
-      padding-right: 0;
-      padding-top: 1rem;
-      padding-bottom: 1rem;
-      .email {
-        text-align: right !important;
-      }
-      .logo {
-        margin: 0;
-      }
-    }
-  }
-  &__legals {
-    display: flex;
-    justify-content: space-between;
-    padding: 30px 5px;
-    border-bottom: 1px solid #e6e7ee;
-    .policies {
-      @include breakpoint(xs) {
-        h1, p {
-          font-size: 16px !important;
-        }
-      }
-    }
-  }
-  &__social {
-    display: grid;
-    grid-template-columns: 1fr 8fr;
-    grid-template-areas: "icons copyright";
-    align-items: center;
-    padding: 30px 5px;
-    &__copyright {
-        grid-area: copyright;
-    }
-    &__icons {
-      grid-area: icons;
-      color: $theme_primary;
-      font-size: 25px;
-      display: flex;
-      justify-content: space-between;
-      a {
-        text-decoration: none;
-        color: $theme_primary;
-      }
-      a:hover {
-        color: $theme_primary;
-      }
-    }
-    @include breakpoint(xs) {
-      grid-template-columns: 1fr;
-      grid-template-areas: "icons" "copyright";
-      gap: 2rem;
-      padding-top: 2rem;
-      &__copyright {
-        text-align: center;
-      }
-      &__icons {
-        justify-content: space-around;
-        padding-bottom: 2rem;
-        border-bottom: 1px solid #e6e7ee;
-      }
-    }
-
-    @include breakpoint(sm) {
-      grid-template-columns: 1fr;
-      grid-template-areas: "icons" "copyright";
-      gap: 2rem;
-      padding-top: 2rem;
-      &__copyright {
-        text-align: center;
-      }
-      &__icons {
-        justify-content: space-around;
-        padding-bottom: 2rem;
-        border-bottom: 1px solid #e6e7ee;
-      }
-    }
-
-    @include breakpoint(md) {
-      grid-template-columns: 1fr 8fr;
-      grid-template-areas: "icons copyright";
-      align-items: center;
-      padding: 30px 5px;
-      &__copyright {
-        text-align: right;
-      }
-      &__icons {
-        justify-content: space-between;
-        padding-bottom: 0;
-        border-bottom: none;
-      }
-    }
-  }
-  &__section {
-    background: #ecf0f1;
-    &__contact {
-      padding-top: 100px;
-      padding-bottom: 73px;
-      &__terms {
-        display: flex;
-        align-items: center;
-        input[id="checkbox"] {
-          display: inline-block;
-          width: 20px;
-          height: 20px;
-          border: 3px solid #0033a0 !important;
-          border-radius: 3px;
-          cursor: pointer;
-          margin-right: 12px;
-        }
-        span {
-          color: $primary;
-          font-size: 0.938rem;
-          font-weight: 400;
-          letter-spacing: 0.25px;
-          font-family: $primary_font;
-          line-height: 20px;
-          a {
-            color: $primary;
-            font-weight: 700;
-            letter-spacing: 0.25px;
-            font-family: $primary_font;
-            line-height: 20px;
-            text-decoration: underline;
-          }
-        }
-      }
-    }
+  .logoIcon {
+    width: 140px;
   }
 }
 
-.banner {
-  &__container {
-    height: 100%;
-    width: 100%;
-    background: $primary;
-    @include breakpoint(xs) {
-      text-align: center;
-    }
-  }
-}
-.heroOverlay {
-  height: 100%;
-  width: 100%;
-  background: rgba($primary, 0.7);
-}
-.divider {
-  border-bottom: 4px solid $secondary_white;
-  width: 56px;
-}
+.linksSection {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-weight: 600;
 
-.button__fab {
-  position: absolute;
-  width: 100px;
-  margin-left: auto;
-  margin-right: auto;
-  right: 0;
-  left: 0;
-  transform: translateY(-50%);
-  button {
-    background: #b7b09c;
-    border: none;
-    border-radius: 50%;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.12), 0px 6px 6px rgba(0, 0, 0, 0.24);
-    font-size: 34px;
-    color: $secondary_white;
-    height: 100px;
-    width: 100px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  a {
+    color: #160A68;
+    text-decoration: none;
+
     &:hover {
-      transform: scale(1.1);
-      transition: 0.3s ease all;
+      text-decoration: underline;
     }
+  }
+
+  span {
+    color: white;
+  }
+}
+
+.copySection {
+  font-size: 12px;
+  text-align: right;
+  color: white;
+
+  strong {
+    font-weight: 700;
   }
 }

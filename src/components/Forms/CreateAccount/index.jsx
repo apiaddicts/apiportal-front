@@ -1,37 +1,53 @@
 import React from 'react';
 
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import InputUI from '../../Input/InputUI/InputUI';
 import useFormConfig from '../../../hooks/useForm';
 import Button from '../../Buttons/Button';
 import { fieldsRegister } from '../fields';
-import { signUp } from '../../../redux/actions/userAction';
+import { signUp, registerDataToStore } from '../../../redux/actions/userAction';
 import CustomMarkdown from '../../CustomMarkdown';
+import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
+
 
 import './index.scss';
 
 function CreateAccount({ setOpenForm, setIsOpen }) {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+  const { executeRecaptcha } = useGoogleReCaptcha();
   const checkboxTermsLabel = fieldsRegister.filter((field) => field.type === 'checkbox').map((item) => item.label)[0];
 
   const handleSubmit = async (values) => {
+    if (!executeRecaptcha) {
+      console.warn("Recaptcha not yet available");
+      return;
+    }
+
+    const recaptchaToken = await executeRecaptcha('signup');
+
     const data = {
-      properties: {
+        username: values.username,
         email: values.email,
         firstName: values.first_name,
         lastName: values.last_name,
+        companyName: values.company,
         appType: 'developerPortal',
         confirmation: 'signup',
         password: values.password,
         state: 'pending',
-      },
+        recaptchaToken: recaptchaToken,
     };
+    dispatch(registerDataToStore(data.email))
 
-    dispatch(signUp(data));
+    dispatch(signUp(data,'Mulesoft'));
   };
 
+
   const formConfig = useFormConfig(fieldsRegister, handleSubmit);
+  
 
   return (
     <div className='wrapper__register'>
@@ -46,7 +62,7 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
                 id={field.id}
                 name={field.name}
                 type={field.type}
-                label={field.label}
+                label={t(`CreateAccount.${field.id}`)}
                 touched={formConfig.touched[field.id]}
                 errors={formConfig.errors[field.id]}
                 onChange={formConfig.handleChange}
@@ -75,9 +91,9 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
                   ))
               }
               <p className={` ${formConfig.errors.terms ? 'text__error' : ''}`}>
-                <CustomMarkdown content={checkboxTermsLabel} />
+                <CustomMarkdown content={t('CreateAccount.checkboxTermsLabel')} />
                 {
-                  formConfig.errors.terms && formConfig.touched.terms ? (<p className='text__error'>Para completar el registro es necesario aceptar los terminos de uso</p>) : null
+                  formConfig.errors.terms && formConfig.touched.terms ? (<p className='text__error'>{t('CreateAccount.acceptTermsError')}</p>) : null
                 }
               </p>
             </div>
@@ -93,7 +109,7 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
                 setIsOpen(true);
               }}
             >
-              Iniciar Sesión
+              {t('CreateAccount.loginButton')}
             </Button>
           </div>
           <div className='flex-sm-12 flex-md-5'>
@@ -102,7 +118,7 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
               type='submit'
               disabled={formConfig.errors.terms && formConfig.touched.terms}
             >
-              Registrarme
+              {t('CreateAccount.registerButton')}
             </Button>
           </div>
         </div>

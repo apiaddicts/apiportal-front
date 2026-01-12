@@ -7,9 +7,11 @@ import {
   cancelSubscription } from '../../redux/actions/subscriptionsAction';
 import Icon from '../MdIcon/Icon';
 import classes from './Collapse.module.scss';
+import { useTranslation } from 'react-i18next';
 
 function Collapse({ children, row, user, css_styles, initialState, productId = '' }) {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { renameSubscriptionResponse, cancelSubscriptionResponse } = useSelector((state) => state.suscripcions);
   const { custom_title } = css_styles;
   const [edit, setEdit] = useState(false);
@@ -93,17 +95,19 @@ function Collapse({ children, row, user, css_styles, initialState, productId = '
           onClose={toggleConfirmation}
         >
           <DialogTitle id='alert-dialog-title'>
-            Cancelar subscripción
+            {t('Collapse.cancelSubscription')}
           </DialogTitle>
           <DialogContent>
             <DialogContentText id='alert-dialog-description'>
-              ¿Desea cancelar la subscripción? Esta es una acción irreversible.
+              {t('Collapse.confirmCancelSubscription')}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={toggleConfirmation} color='error'>Cancelar</Button>
+            <Button onClick={toggleConfirmation} color='error'>
+              {t('Collapse.cancel')}
+            </Button>
             <Button onClick={() => handleCancel()} variant='contained' autoFocus>
-              Aceptar
+              {t('Collapse.accept')}
             </Button>
           </DialogActions>
         </Dialog>

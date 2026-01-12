@@ -40,6 +40,29 @@ function Contact({ css_styles, pathname }) {
     }
   }, [email]);
 
+  const translations = {
+    es: {
+      subscribe: 'SUSCRÍBETE',
+      name: 'Nombre*',
+      email: 'E-mail*',
+      error: 'Ups!! Ocurrio un error, vuelve a intentarlo',
+      success: 'Datos enviados correctamente',
+      description: 'Escoge una o varias capacidades y sé el primero en enterarte.',
+      connected: '¡Sigamos conectados!'
+    },
+    en: {
+      subscribe: 'SUBSCRIBE',
+      name: 'Name*',
+      email: 'E-mail*',
+      error: 'Oops!! An error occurred, please try again',
+      success: 'Data sent successfully',
+      description: 'Choose one or more capabilities and be the first to know.',
+      connected: 'Let’s stay connected!'
+    }
+  };
+
+  const locale = 'es'; // Change this dynamically based on user preference
+
   return (
     <div className={`${classes.contact} ${display_contact} ${classes[border_radius]}`}>
       <div className={pathname !== '/blog' ? classes.contact__container__alternative : classes.contact__container}>
@@ -58,14 +81,14 @@ function Contact({ css_styles, pathname }) {
           </div>
           {
             error && (
-              <Alert severity='error' className='mb-5'>Ups!! Ocurrio un error, vuelve a intentarlo</Alert>
+              <Alert severity='error' className='mb-5'>{translations[locale].error}</Alert>
             )
           }
           {
-            success ? (<Alert severity='success' className='mb-5'>Datos enviados correctamente</Alert>) :
+            success ? (<Alert severity='success' className='mb-5'>{translations[locale].success}</Alert>) :
               (
                 <div className={pathname !== '/blog' ? classes.contact__alternative__description : classes.contact__description}>
-                  <p className=''> Escoge una o varias capacidades y sé el primero en enterarte.</p>
+                  <p className=''> {translations[locale].description}</p>
                 </div>
               )
           }
@@ -82,7 +105,7 @@ function Contact({ css_styles, pathname }) {
                     name='name'
                     id='name'
                     type='text'
-                    label='Nombre*'
+                    label={translations[locale].name}
                     touched={formik.touched.name}
                     errors={formik.errors.name}
                     onChange={formik.handleChange}
@@ -95,7 +118,7 @@ function Contact({ css_styles, pathname }) {
                     name='email'
                     id='email'
                     type='email'
-                    label='E-mail*'
+                    label={translations[locale].email}
                     touched={formik.touched.email}
                     errors={formik.errors.email}
                     onChange={formik.handleChange}
@@ -107,7 +130,7 @@ function Contact({ css_styles, pathname }) {
             </div>
             <div className={classes.contact__form__button}>
               <Button styles='tertiary' type='submit'>
-                SUSCRÍBETE
+                {translations[locale].subscribe}
               </Button>
             </div>
           </form>

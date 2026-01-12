@@ -94,8 +94,8 @@ function CardInformationLibrary({ apiName, img, title, description, reading, inf
         {version && status && (
           <div className='header-api px-8 pt-5'>
             <div className={colorStatus}>
-              <p>●</p>
-              <p style={{ fontSize: '10px' }} className='ml-3 font-weight-bold text-uppercase'>{status}</p>
+              {/* <p>●</p>
+              <p style={{ fontSize: '10px' }} className='ml-3 font-weight-bold text-uppercase'>{status}</p> */}
             </div>
             <Chip title={version} className='version text-uppercase font-weight-medium ' />
           </div>

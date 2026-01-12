@@ -39,7 +39,9 @@ const config = {
   authUrl: import.meta.env.VITE_APP_AUTH,
   keycloakKey: import.meta.env.VITE_APP_KEYCLOAK_CLIENT_ID,
   integratorUrl: import.meta.env.VITE_APP_INTEGRATOR_URL,
+  integratorApiKey: import.meta.env.VITE_APP_INTEGRATOR_KONG_API_KEY,
   apiUrl: import.meta.env.VITE_APP_STRAPI_URL,
+  strapiApiKey: import.meta.env.VITE_APP_STRAPI_KONG_API_KEY,
   azureUrl: import.meta.env.VITE_APP_AZURE_APIM_URL,
   subscriptionId: import.meta.env.VITE_APP_AZURE_SUBSCRIPTION_ID,
   resourceGroupName: import.meta.env.VITE_APP_RESOURCE_GROUP_NAME,
@@ -91,7 +93,10 @@ const config = {
   urlFaceAi: import.meta.env.VITE_APP_FACE_AI,
   urlUserCredential: import.meta.env.VITE_APP_CREDENTIAL,
   clientIdFace: import.meta.env.VITE_APP_CLIENT_ID,
-  clientSecretFace: import.meta.env.VITE_APP_CLIENT_SECRET
+  clientSecretFace: import.meta.env.VITE_APP_CLIENT_SECRET,
+  dataChart: import.meta.env.VITE_APP_DATA_CHARTS_URL,
+  apiUrlImgs: import.meta.env.VITE_APP_STRAPI_URL_IMGS,
+  SiteKeyRecaptcha: import.meta.env.VITE_SITE_KEY_RECAPTCHA,
 };
 
 export default config;

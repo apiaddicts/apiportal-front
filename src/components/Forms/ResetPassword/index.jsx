@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import useFormForgotPassword from '../../../hooks/useFormForgotPassword';
 import Button from '../../Buttons/Button';
 import InputUI from '../../Input/InputUI/InputUI';
@@ -10,6 +11,8 @@ import './index.scss';
 
 function ResetPassword() {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
+
   const handleSubmit = (dataForm) => {
     const data = {
       properties: {
@@ -23,12 +26,12 @@ function ResetPassword() {
 
   return (
     <div className='container'>
-      <p className='py-5 text__reset-password'>Introduce tu email y te enviaremos un correo electrónico de confirmación de cambio de contraseña con las instrucciones para que puedas realizar el cambio de contraseña.</p>
+      <p className='py-5 text__reset-password'>{t('ResetPassword.instructions')}</p>
       <Alert
         key={Math.floor(Math.random() * 100) + 1}
         css_styles={{ custom_padding: 'p-4', custom_margin: 'mb-5' }}
         alert_type='alert__success'
-        title='Solicitud enviada'
+        title={t('ResetPassword.requestSent')}
       />
       <form onSubmit={formConfig.handleSubmit} noValidate>
         <div className='py-4'>
@@ -39,7 +42,7 @@ function ResetPassword() {
                   <InputUI
                     id={field.id}
                     name={field.id}
-                    label={field.placeholder}
+                    label={t(`ResetPassword.${field.id}`)}
                     type={field.type}
                     touched={formConfig.touched[field.id]}
                     errors={formConfig.errors[field.id]}
@@ -66,7 +69,7 @@ function ResetPassword() {
                 }
                 opacity={!formConfig.dirty || !formConfig.isValid || formConfig.isSubmitting ? 0.5 : 1}
               >
-                Recuperar Contraseña
+                {t('ResetPassword.recoverPasswordButton')}
               </Button>
             </div>
           </div>

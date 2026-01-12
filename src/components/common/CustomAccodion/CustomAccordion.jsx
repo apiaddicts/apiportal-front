@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import Icon from '../../MdIcon/Icon';
 import classes from './customaccordion.module.scss';
 import { listApis, getApiHostnames, getApiOpenAPI } from '../../../redux/actions/libraryAction';
 
 function CustomAccordion({ items, subItem, setSubItem }) {
+  const { t } = useTranslation();
   const { apis, hostnames, jsonOpenApi/* , openApiFormat */ } = useSelector((state) => state.library);
   const dispatch = useDispatch();
   const toggleItem = (index) => {
@@ -15,8 +17,8 @@ function CustomAccordion({ items, subItem, setSubItem }) {
 
   };
   const arrOption = [
-    'Información',
-    'Descripción',
+    t('information'),
+    t('description'),
     // 'Versiones',
     // 'Sandbox',
   ];
@@ -53,20 +55,20 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                       subItem === 0 ? (
                         <div>
                           <div className={classes.accordion__body__title}>
-                            <h1>Título</h1>
+                            <h1>{t('title')}</h1>
                             <p>
                               {items.assetId}
                             </p>
                           </div>
 
                           <div className={classes.accordion__body__title}>
-                            <h1>Versión</h1>
+                            <h1>{t('version')}</h1>
                             <p>
                               {items.assetVersion}
                             </p>
                           </div>
                           <div className={classes.accordion__body__title}>
-                            <h1>URI:</h1>
+                            <h1>{t('uri')}</h1>
                             <code className={classes.scopes__code}>{items.endpoint.uri}</code>
                           </div>
                         </div>
@@ -99,7 +101,7 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                         </div>
                       ) */ : (
                           <div>
-                            <p>Información no disponible</p>
+                            <p>{t('noInformation')}</p>
                           </div>
                         )
                     }

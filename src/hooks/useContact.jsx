@@ -3,10 +3,12 @@ import { useFormik } from 'formik';
 import { useState } from 'react';
 import { string } from 'yup';
 import * as Yup from 'yup';
+import { useTranslation } from 'react-i18next';
 
+const { t } = useTranslation();
 const validationSchema = Yup.object().shape({
-  name: string().required('Campo requerido'),
-  email: string().email('Ingresa un correo electrónico válido').required('Campo requerido'),
+  name: string().required(t('Contact.requiredField')),
+  email: string().email(t('Contact.invalidEmail')).required(t('Contact.requiredField')),
 });
 
 const objectFromArray = (fields, key) => {

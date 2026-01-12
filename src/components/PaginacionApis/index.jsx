@@ -1,13 +1,16 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import classes from './PaginacionApis.module.scss';
 import Icon from '../MdIcon/Icon';
 
 function PaginacionApis({ css_styles }) {
+  const { t } = useTranslation();
+
   const { custom_margin } = css_styles;
   return (
     <div className={`${classes.wrapper_pagination} ${custom_margin}`}>
       <div className={`${classes.wrapper_pagination__info} mr-auto`}>
-        1-10 de 32 Apis
+        {t('PaginacionApis.info', { start: 1, end: 10, total: 32 })}
       </div>
       <div className={classes.wrapper_pagination_pages}>
         <div className={classes.wrapper_pagination_page}>

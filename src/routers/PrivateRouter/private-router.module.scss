@@ -1,29 +1,31 @@
 @import '../../styles/variables.module.scss';
 @import '../../styles/mixins/mixin.scss';
 
-.custom__body{
-    background: $white;
+.custom__body {
+    background: #F5F6F8;
 }
 
-.container__footer{
+.container__footer {
     background: $white;
 }
 
 .wrapper {
-    margin-top: 152px !important;
-    margin-bottom: 87px !important;
-    padding-left: 59px;
-    padding-right: 97px;
+    margin-top: 200px !important;
+    margin-bottom: 40px !important;
+    background-color: white;
+    border-radius: 50px;
 
     @include breakpoint(xs) {
         // margin-top: 80px !important;
         padding-left: 0;
         padding-right: 0;
     }
+
     @include breakpoint(sm) {
         padding-left: 0;
         padding-right: 0;
     }
+
     table {
         font-family: $secondary_font;
     }

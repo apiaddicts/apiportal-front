@@ -22,7 +22,7 @@ import groupReducer from './reducer/groupReducer';
 import appsReducer from './reducer/appsReducer';
 import gettingStartedReducer from './reducer/gettingStartedReducer';
 import apiManagerReducer from './reducer/apiManagerReducer';
-
+import settingReducer from './reducer/settingReducer';
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 const reducers = combineReducers({
@@ -30,6 +30,7 @@ const reducers = combineReducers({
   apiManager: apiManagerReducer,
   appPartners: appPartnersReducer,
   faq: faqReducer,
+  settingPage: settingReducer,
   blog: blogReducer,
   codeSampleReducer: codeSampleReducer,
   billing: BillingReducer,

@@ -14,7 +14,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Terminal from '@mui/icons-material/Terminal';
 import Settings from '@mui/icons-material/Settings';
 import { AppBar, Box, Button, IconButton, Menu, MenuItem, Toolbar } from '@mui/material';
-import { ChevronLeft, ChevronRight } from '@mui/icons-material';
+import { ChevronLeft, ChevronRight, Toll } from '@mui/icons-material';
 // import { ChevronLeft, ChevronRight, Person } from '@mui/icons-material';
 import PersonSharpIcon from '@mui/icons-material/PersonSharp';
 import KeyboardArrowDownSharpIcon from '@mui/icons-material/KeyboardArrowDownSharp';
@@ -30,12 +30,23 @@ import { logout } from '../../redux/actions/userAction';
 
 import styles from '../../styles/variables.module.scss';
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
+import CustomIcon from '../MdIcon/CustomIcon';
+import UserInfoButton from '../../core/User/UserInfoButton';
+import PageTitle from '../../core/HeaderTitle/PageTitle';
+import getListItems from '../../core/const';
+import { useTranslation } from 'react-i18next';
+import LanguageSelector from '../LanguageSelector/LanguageSelector';
 
 function SidebarDrawer({ children, user }) {
+  const { t, i18n } = useTranslation(); // Asegurarse de obtener tanto t como i18n
+
+  const listItems = getListItems(t);
+
   const theme = useTheme();
   const [isPermanent, setPermanent] = useState(true);
   const [toggleMenu, setToggleMenu] = useState(true);
   const [toggleMenuTemporary, setToggleMenuTemporary] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(true); // Estado para DropdownMenu
 
   const { primaryColor, grayColor } = styles;
 
@@ -66,19 +77,7 @@ function SidebarDrawer({ children, user }) {
       window.removeEventListener('resize', handleWindowWithChange());
     };
   });
-  const listItems = [
-    { route: '/developer/dashboard', text: 'Dashboard', icon: <Terminal size='1.5rem' />, primaryRole: true },
-    // { route: '/developer/products', text: 'Productos', icon: <Terminal />, primaryRole: true },
-    { route: '/developer/billings', text: 'Pasarela de Pagos', icon: <Terminal />, primaryRole: true },
-    // { route: '/developer/apps', text: 'Aplicaciones', icon: <Terminal />, primaryRole: true },
-    { route: '/developer/apis', text: 'Biblioteca de APIs', icon: <Settings />, primaryRole: true },
-    // { route: '/developer/subscriptions', text: 'Suscripciones', icon: <Terminal />, primaryRole: true },
-    // { route: '/developer/docs', text: 'Documentacion', icon: <Terminal />, primaryRole: true }
-    // { route: '/developer/users', text: 'Usuarios', icon: <Person />, primaryRole: isAdmin },
-    // { route: '/developer/groups', text: 'Grupos', icon: <ShareIcon />, primaryRole: isAdmin },
-    { route: '/developer/code-samples', text: 'Code Samples', icon: <Terminal />, primaryRole: true },
-    // { route: '/developer/code-samples/details', text: 'Code Samples Details', icon: <Terminal size='1.5rem' />, primaryRole: true },
-  ];
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -105,6 +104,14 @@ function SidebarDrawer({ children, user }) {
 
   const handleMenuTemporary = () => {
     setToggleMenuTemporary(!toggleMenuTemporary);
+  };
+
+  const handleLanguageChange = (event) => {
+    i18n.changeLanguage(event.target.value); // Usar i18n.changeLanguage para cambiar el idioma
+  };
+
+  const toggleDropdown = () => {
+    setDropdownOpen(!dropdownOpen);
   };
 
   const drawerWidth = 300;
@@ -157,30 +164,33 @@ function SidebarDrawer({ children, user }) {
   }));
 
   return (
-    <div className={classes.backgroundSidebar}>
+    <div >
       {/* <CssBaseline /> */}
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position='fixed' elevation={0} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, padding: { xs: '0 1rem', sm: '0 100px' } }} className={classes.custom__navbar}>
-          <Toolbar disableGutters sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            {/*<img src={LogoAlt} alt='Logo' />*/}
+      <Box sx={{ flexGrow: 1 }} >
+        <AppBar position='fixed' elevation={0} sx={{ zIndex: (theme) => theme.zIndex.drawer + 1, padding: { xs: '0 1rem', sm: '0 0px' } }} className={classes.custom__navbar}>
+          <Toolbar
+            disableGutters
+            sx={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              padding: { xs: '0 1rem', sm: '0 60px' },
+
+            }}
+          >
+            <CustomIcon name="logoNeuro" className={classes.logoIcon} />
+            {/* <Box sx={{ display: 'flex', alignItems: 'center' }}>
+              
+            </Box> */}
             {isPermanent && (
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
+                <LanguageSelector />
                 <Button
-                  variant='outlined'
-                  startIcon={<PersonSharpIcon sx={{ color: '#fff' }} />}
-                  endIcon={<KeyboardArrowDownSharpIcon color='white' sx={{ color: '#fff' }} />}
-                  sx={{
-                    borderRadius: '6px',
-                    border: '1px solid #15A192',
-                    color: '#fff',
-                  }}
+
                   onClick={handleClick}
+
                 >
-                  {user && Object.keys(user).length > 0 ? (
-                    <span className='text-capitalize' style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
-                      {`${splitStr(user.firstName)} ${splitStr(user.lastName)}`}
-                    </span>
-                  ) : ('')}
+                  <UserInfoButton user={user} />
                 </Button>
                 <Menu
                   id='basic-menu'
@@ -204,7 +214,7 @@ function SidebarDrawer({ children, user }) {
                       <PersonSharpIcon />
                     </ListItemIcon>
                     <ListItemText className={classes.dropdown__item}>
-                      Mi perfil
+                      {t('Profile.myProfile')}
                     </ListItemText>
                   </MenuItem>
                   <MenuItem onClick={() => { handleLogout(); handleClose(); }}>
@@ -212,7 +222,7 @@ function SidebarDrawer({ children, user }) {
                       <LogoutIcon />
                     </ListItemIcon>
                     <ListItemText className={classes.dropdown__item}>
-                      Salir
+                      {t('logout')}
                     </ListItemText>
                   </MenuItem>
                 </Menu>
@@ -223,7 +233,7 @@ function SidebarDrawer({ children, user }) {
                 <IconButton
                   size='large'
                   edge='start'
-                  color='inherit'
+                  // color='inherit'
                   aria-label='menu'
                   onClick={handleMenuTemporary}
                 >
@@ -232,6 +242,11 @@ function SidebarDrawer({ children, user }) {
               ) : null
             }
           </Toolbar>
+
+          <Toolbar className={classes.custom__navbar__title}>
+            <PageTitle />
+          </Toolbar>
+
         </AppBar>
       </Box>
       <SwipeableDrawer
@@ -262,7 +277,7 @@ function SidebarDrawer({ children, user }) {
         <List>
           <ListItem>
             <ListItemText>
-              <h1 className={`font-weight-regular text__tertiary ${classes.title}`}>Hola,</h1>
+              <h1 className={`font-weight-regular text__tertiary ${classes.title}`}>{t('hello')}</h1>
               <h1 className={`font-weight-bold text__primary ${classes.title__name}`}>
                 {
                   user && Object.keys(user).length > 0 ? (
@@ -278,7 +293,7 @@ function SidebarDrawer({ children, user }) {
           </ListItem>
           <ListItem>
             <ListItemText>
-              <h1 className={`${classes.title__developer} text__primary__title`}>developer portal</h1>
+              <h1 className={`${classes.title__developer} text__primary__title`}>{t('developerPortal')}</h1>
             </ListItemText>
           </ListItem>
         </List>
@@ -385,31 +400,65 @@ function SidebarDrawer({ children, user }) {
           }}
         >
           {toggleMenu && (
-            <ListItem
-              sx={{ paddingLeft: '97px' }}
-            >
+            <ListItem sx={{ paddingLeft: '97px', paddingTop: '20px' }}>
               <ListItemText>
                 <h1 className={classes.title__developer}>developer portal</h1>
               </ListItemText>
             </ListItem>
           )}
-          {
-            listItems.filter((item) => item.primaryRole).map((item, index) => (
-              <ListItem button key={index} sx={{ color: grayColor, paddingLeft: toggleMenu ? '80px' : '54px', paddingRight: 0 }} component={MyNavLink} to={item.route} exact='true'>
-                <ListItemIcon sx={{ justifyContent: 'center', color: grayColor }}>
-                  {item.icon}
-                </ListItemIcon>
-                {toggleMenu && (<ListItemText primary={item.text} />)}
-              </ListItem>
-            ))
-          }
+
+          {listItems
+            .filter((item) => item.primaryRole)
+            .map((item, index) => {
+              const isCodeSamples = item.key === 'codeSamples'; 
+              // Nuevo estado para hover
+              const [hoveredIndex, setHoveredIndex] = React.useState(null);
+
+              return (
+                <React.Fragment key={index}>
+                  <ListItem
+                    button
+                    sx={{
+                      color: grayColor,
+                      paddingLeft: toggleMenu ? '50px' : '30px',
+                      paddingRight: 0,
+                    }}
+                    component={MyNavLink}
+                    to={item.route}
+                    exact='true'
+                    onMouseEnter={() => setHoveredIndex(index)}
+                    onMouseLeave={() => setHoveredIndex(null)}
+                  >
+                    <ListItemIcon sx={{ justifyContent: 'center', color: grayColor }}>
+                      {React.isValidElement(item.icon) && item.icon.type === CustomIcon
+                        ? React.cloneElement(item.icon, { isHovered: hoveredIndex === index })
+                        : item.icon}
+                    </ListItemIcon>
+                    {toggleMenu && <ListItemText primary={item.text} />}
+                  </ListItem>
+
+
+                  {isCodeSamples && (
+                    <ListItem
+                      disablePadding
+                      sx={{
+                        paddingLeft: toggleMenu ? '50px' : '30px',
+                        paddingRight: 0,
+                      }}
+                    >
+                      <DropdownMenu toggleMenu={toggleMenu} open={dropdownOpen} onToggle={toggleDropdown} />
+                    </ListItem>
+                  )}
+                </React.Fragment>
+              );
+            })}
         </List>
-        <DropdownMenu />
+
         <List>
           <ListItem
             button
             onClick={handleMenu}
-            sx={{ paddingLeft: toggleMenu ? '80px' : '54px' }}
+            sx={{ paddingLeft: toggleMenu ? '50px' : '24px' }}
             className={classes.sidebar__item__back}
           >
             <ListItemIcon sx={{ justifyContent: 'center' }}>
@@ -417,7 +466,7 @@ function SidebarDrawer({ children, user }) {
                 toggleMenu ? (<ChevronLeft />) : (<ChevronRight />)
               }
             </ListItemIcon>
-            {toggleMenu && (<ListItemText primary='Ocultar menú' />)}
+            {toggleMenu && (<ListItemText primary={t('SidebarDrawer.hideMenu')} />)}
           </ListItem>
         </List>
       </Drawer>

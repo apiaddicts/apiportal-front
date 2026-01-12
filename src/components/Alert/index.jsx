@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import Icon from '../MdIcon/Icon';
 import userConstants from '../../redux/constants/userConstats';
 import classes from './Alert.module.scss';
 
-function Alert({ alert_type, title, msg, css_styles, display }) {
+function Alert({ alert_type, title, msg, css_styles, display, onResend }) {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
   const { responseError, responseRestoreError, responseResetSignup } = useSelector((state) => state.user);
   const { custom_padding, custom_margin } = css_styles;
   const [showAlert, setShowAlert] = useState('d-none');
@@ -13,14 +15,13 @@ function Alert({ alert_type, title, msg, css_styles, display }) {
   useEffect(() => {
     if (Object.keys(responseResetSignup).length > 0) {
       setShowAlert('d-block');
-      setMessage(['Se ha enviado un correo electrónico de confirmación de cambio de contraseña, siga las instrucciones del correo electrónico para relizar el cambio de contraseña.']);
+      setMessage([t('Alert.passwordChangeEmailSent')]);
     } else if (Object.keys(responseRestoreError).length > 0) {
       setShowAlert('d-block');
       setMessage(responseRestoreError.error.statusText);
     } else if (Object.keys(responseError).length > 0) {
       setShowAlert('d-block');
       if (Object.prototype.hasOwnProperty.call(responseError?.error, 'details')) {
-        // setMessage(responseError?.error?.details[0]?.message);
         setMessage(msg);
       } else {
         setMessage(msg);
@@ -54,8 +55,18 @@ function Alert({ alert_type, title, msg, css_styles, display }) {
           { title && <span className='fs__16 font-weight-bold'>{title}</span> }
           <br />
           <span className='fs__14'>{ message }</span>
+          {
+            alert_type === 'alert__success' && onResend && (
+            <div className='mt-2'>
+              <a href='#' className='fs__14 text-primary' style={{ textDecoration: 'underline' }} onClick={(e) => {
+                e.preventDefault();
+                onResend();
+              }}>
+                ¿No se envió el correo? Inténtalo de nuevo
+              </a>
+            </div>
+          )}
         </div>
-        {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
         <div className={classes.close} onClick={() => handleClose()}>
           <Icon id='MdClose' />
         </div>

@@ -4,13 +4,13 @@ import config from './config';
 function getApiContent() {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
-  return fetch(`${config.apiUrl}/pages?_where[slug]=${config.apisPageSlug}&_locale=${config.locale}`, requestOptions)
+  return fetch(`${config.apiUrl}/pages?filters[slug][$eq]=${config.apisPageSlug}&populate[contentSections][populate]=*`, requestOptions)
     .then(handleResponse)
     .then((api_content) => {
-      return api_content[0];
+      return api_content.data[0];
     }).catch((error) => {
       console.error(error);
     });

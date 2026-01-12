@@ -353,6 +353,7 @@
 .section__news_toppadding{
   padding-top: 70px !important;
   background: rgba(9, 178, 156, 0.1) !important;
+  border-radius: 50px;
 }
 .section__news {
   text-align: center;
@@ -413,4 +414,17 @@
   @include breakpoint(xs) {
     margin: 2rem 0 !important;
   }
+}
+
+.containerPriv {
+
+  padding: 2rem !important;
+  border-radius: 20px !important;
+  padding-top: 200px ;
+  height: 100% !important;
+  width: 100% !important;
+
+  background-color: red !important;
+  padding-top: 50px !important;
+  border-radius: 0 0 20px 20px !important;
 }

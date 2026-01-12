@@ -3,7 +3,8 @@ import { Helmet } from 'react-helmet';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import store from './redux/store';
-import AppRouter from './routers/AppRouter';
+
+import AppWrapper from './AppWrapper';
 
 function App() {
   return (
@@ -26,7 +27,7 @@ function App() {
       </Helmet>
       <Provider store={store}>
         <BrowserRouter>
-          <AppRouter />
+          <AppWrapper />
         </BrowserRouter>
       </Provider>
     </div>

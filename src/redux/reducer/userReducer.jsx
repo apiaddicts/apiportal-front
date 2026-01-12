@@ -1,6 +1,7 @@
 import userConstants from '../constants/userConstats';
+const raw = localStorage.getItem('token') || sessionStorage.getItem('token');
+const token = raw ? JSON.parse(raw) : null;
 
-const token = JSON.parse(sessionStorage.getItem('token'));
 
 const initialState = token ? {
   // id: token?.userId?.id,
@@ -26,12 +27,15 @@ const initialState = token ? {
   changePasswordSuccess: {},
   changePasswordFailure: {},
   chnStatusRes: {},
+  emailConfirmation: null,
+  loadingSendEmail: false,
+  registerData: {}
 } : {
   user: {},
   loadingUser: false,
   id: '',
   token: '',
-  apimToken:false,
+  apimToken: false,
   etag: '',
   loadingSignUp: false,
   signUpData: {},
@@ -53,6 +57,9 @@ const initialState = token ? {
   updateProfileSucc: {},
   updateProfileFail: {},
   chnStatusRes: {},
+  emailConfirmation: null,
+  loadingSendEmail: false,
+  registerData: ''
 };
 
 // eslint-disable-next-line default-param-last
@@ -76,14 +83,34 @@ export default function userReducer(state = initialState, action) {
       return {
         ...state,
         loadingSignUp: false,
-        signUpData: action.response,
+        signUpData: action.payload,
       };
     case userConstants.SIGNUP_FAILURE:
       return {
         ...state,
         loadingSignUp: false,
-        responseError: action.response,
+        responseError: action.payload,
       };
+    case userConstants.REGISTER_DATA:
+      return {
+        ...state,
+        registerData: action.payload
+      }
+    case userConstants.EMAIL_CONFIRMATION_REQUEST:
+      return {
+        ...state,
+        loadingSendEmail: true
+      }
+    case userConstants.EMAIL_CONFIRMATION_FAILURE:
+      return {
+        ...state,
+        emailConfirmation: false,
+      }
+    case userConstants.EMAIL_CONFIRMATION_SUCCESS:
+      return {
+        ...state,
+        emailConfirmation: true
+      }
     case userConstants.RESTORE_SIGNUP_REQUEST:
       return {
         ...state,
@@ -310,7 +337,7 @@ export default function userReducer(state = initialState, action) {
         apimToken: action.payload,
         loading: false
       }
-    
+
     case userConstants.LOGIN_APIM_FAILURE:
       return {
         ...state,

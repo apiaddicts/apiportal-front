@@ -4,7 +4,7 @@ import config from './config';
 function getAppPartnersContent() {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
   return fetch(`${config.apiUrl}/pages?_where[slug]=${config.appPartnersPageSlug}&_locale=${config.locale}`, requestOptions)

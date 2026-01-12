@@ -7,7 +7,7 @@ import BannerStatic from '../../../components/Banner/BannerStatic';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 import classes from './faqs.module.scss';
 
-function Faqs(props) {
+function Faqs({ isPrivate }) {
   const [clicked, setClicked] = useState(0);
   const [subItem, setSubItem] = useState(0);
   const dispatch = useDispatch();
@@ -42,24 +42,32 @@ function Faqs(props) {
   }) : [];
 
   return (
-    <div style={{ paddingTop: '114px' }}>
+    <div
+      style={{
+        ...(isPrivate ? {} : { paddingTop: '114px' }),
+      }}
+    >
       {dataFaq && Object.keys(dataFaq).length > 0 ? (
         <div>
-          <BannerStatic
-            title={dataFaq?.contentSections?.[0]?.title}
-            img={dataFaq.contentSections?.[0]?.background?.url}
-          />
+          {!isPrivate && (
+            <BannerStatic
+              title={dataFaq?.contentSections?.[0]?.title}
+              img={dataFaq.contentSections?.[0]?.background?.url}
+            />
+          )}
           <section className={`container ${classes.faq}`}>
-            <div className={classes.faq__content}>
-              <div className={`d-xs-none ${classes.faq__content__filter}`}>
-                <AccordionFilter items={fFaqs} clicked={clicked} setClicked={setClicked} subItem={subItem} setSubItem={setSubItem} />
-              </div>
+            <div className={`${classes.faq__content} ${isPrivate ? classes.faq__content__private : ''}`}>
+              {!isPrivate && (
+                <div className={`d-xs-none ${classes.faq__content__filter}`}>
+                  <AccordionFilter items={fFaqs} clicked={clicked} setClicked={setClicked} subItem={subItem} setSubItem={setSubItem} />
+                </div>
+              )}
               <div className={classes.faq__content__qa}>
-                { faqs.length > 0 ? (
+                {faqs.length > 0 ? (
                   faqs.map((item, i) => {
                     return (
-                      <div key={i}>
-                        <h1 className='h3 text__primary__title mb-5 mt-5'>{item?.question}</h1>
+                      <div key={i} >
+                        <h1 className='h3 text__primary__title mb-5 mt-5' style={!isPrivate ? { color: 'red !important' } : {}}>{item?.question}</h1>
                         <Accordion items={item?.data} subItem={subItem} setSubItem={setSubItem} parent={i} clicked={clicked} setClicked={setClicked} />
                       </div>
                     );

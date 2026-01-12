@@ -6,10 +6,10 @@ import config from './config';
 function getcodeSample(id_integrationApi) {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
-  return fetch(`${config.apiUrl}/code-samples?filters[id_integrationApi][$eq]=${id_integrationApi}&populate=*`, requestOptions)
+  return fetch(`${config.apiUrl}/code-samples?filters[library_api][title][$eq]=${id_integrationApi}&populate=*`, requestOptions)
     .then(handleResponse)
     .then((blog) => {
       return blog;

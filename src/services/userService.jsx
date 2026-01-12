@@ -6,27 +6,27 @@ import store from '../redux/store';
 
 import config from './config';
 
-function login(username, password) {
+function login(username, password, recaptchaToken) {
   const body = {
     clientId: config.keycloakKey,
     username,
     password
-  }
+  };
+
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'x-recaptcha-token': recaptchaToken 
+    },
     body: JSON.stringify(body),
   };
 
   const url = `${config.authUrl}/token`;
 
-  return fetch(
-    url,
-    requestOptions,
-  ).then(handleResponseToken)
-    .then((response) => {
-      return response;
-    }).catch((error) => {
+  return fetch(url, requestOptions)
+    .then(handleResponseToken)
+    .catch((error) => {
       console.error(error);
     });
 }
@@ -50,7 +50,7 @@ function confirmAccount(queryParams) {
 function getUserDetails(token, headerManager) {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': `Bearer ${token}`, 'x-apimanager-id': `Manager-${headerManager}` },
+    headers: { 'Authorization': `Bearer ${token}`, 'x-apimanager-id': `Manager-${headerManager}`, 'apiKey': `${config.integratorApiKey}` },
   };
 
   const url = `${config.integratorUrl}/users/me`;
@@ -146,19 +146,41 @@ function changeStatus(data, userId) {
 
 };
 
-function signUp(data) {
+function signUp(data,headerManager,recaptchaToken) {
   const requestOptions = {
-    method: 'PUT',
-    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'Authorization': `${config.getHmacAuthHeader()}` },
+    method: 'POST',
+    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'x-apimanager-id': `Manager-${headerManager}`, 'apikey': `${config.integratorApiKey}`,'x-recaptcha-token': recaptchaToken },
     body: JSON.stringify(data),
   };
-  const uuid = crypto.randomUUID();
 
-  const url = `${config.url}/users/${uuid}?api-version=${config.apiVersion}`;
+  const url = `${config.integratorUrl}/register`;
   return fetch(
     url,
     requestOptions,
   ).then(handleResponse)
+    .then((response) => {
+      return response;
+    }).catch((error) => {
+      console.error(error);
+    });
+}
+
+function sendEmailToConfirmAccount(email,headerManager) {
+  const setBody = {
+    email,
+    action: [
+      'VERIFY_EMAIL'
+    ]
+  }
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Accept': '*/*', 'Content-Type': 'application/json', 'x-apimanager-id': `Manager-${headerManager}`, 'apikey': `${config.integratorApiKey}`},
+    body: JSON.stringify(setBody)
+  };
+
+  const url = `${config.integratorUrl}/email/actions`;
+  return fetch(url, requestOptions)
+    .then(handleResponseToken)
     .then((response) => {
       return response;
     }).catch((error) => {
@@ -269,6 +291,7 @@ const userService = {
   getUserDetails,
   getUserEntityTag,
   signUp,
+  sendEmailToConfirmAccount,
   updateUser,
   verifyOldPassword,
   changePassword,

@@ -2,12 +2,16 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Container, Grid, Card, CardContent, Typography, Button, Box } from '@mui/material';
 import Title from '../../../components/Title';
+import { useTranslation } from 'react-i18next';
 
 import { billingsProducts, billingsLink } from '../../../redux/actions/billingsAction';
 import billingService from '../../../services/billingsService';
 
+import classes from './billing.module.scss';
+
 function Billings() {
   const dispatch = useDispatch();
+  const { t } = useTranslation();
 
   const { billings = {}, loading } = useSelector((state) => state.billing);
   const products = billings.data ?? [];
@@ -35,8 +39,8 @@ function Billings() {
   };
 
   return (
-    <Container fixed sx={{ paddingLeft: { xs: 0, md: '59px' }, paddingRight: { xs: 0, md: '97px' } }}>
-      <Title text='Pasarela de pagos' />
+    <Container fixed sx={{ paddingLeft: { xs: 0, md: '59px' }, paddingRight: { xs: 0, md: '97px' }, paddingTop: '50px' }}>
+      <Title text={t('Billings.choosePlan')} />
       <Grid container spacing={3} mt={2}>
         {products.length > 0 ? (
           products.map((product) => {
@@ -49,24 +53,26 @@ function Billings() {
 
             return (
               <Grid item xs={12} sm={6} md={4} key={product.id}>
-                <Card sx={{ textAlign: 'center', height: '100%' }}>
-                  <CardContent>
-                    <Typography variant="h6" gutterBottom>{name}</Typography>
-                    <Typography variant="h4" color="primary">
-                      €{priceFormatted} <small>/ mo</small>
+                <Card className={classes.cardContainer}>
+                  <div className={classes.cardHeader}>{name}</div>
+
+                  <CardContent className={classes.cardContent}>
+                    <Typography className={classes.priceText}>
+                      {priceFormatted}€ <small className={classes.priceSmall}>/ mes</small>
                     </Typography>
-                    <Box mt={2}>
-                      <Typography>{monthlyRequests} API requests</Typography>
-                      <Typography>{dailyRequests} transactions</Typography>
+                    <Box className={classes.detailsText}>
+                      <Typography>{monthlyRequests} {t('Billings.monthlyRequests')}</Typography>
+                      <Typography>{dailyRequests} {t('Billings.dailyRequests')}</Typography>
                     </Box>
-                    <Button
-                      variant="contained"
-                      sx={{ mt: 2 }}
-                      onClick={() => handleActivateProduct(priceId)}
-                    >
-                      Activate
-                    </Button>
                   </CardContent>
+
+                  <Button
+                    variant="contained"
+                    className={classes.activateButton}
+                    onClick={() => handleActivateProduct(priceId)}
+                  >
+                    {t('Billings.activate')}
+                  </Button>
                 </Card>
               </Grid>
             );
@@ -74,7 +80,7 @@ function Billings() {
         ) : (
           <Grid item xs={12}>
             <Typography variant="body1" color="textSecondary" textAlign="center">
-              No hay productos disponibles en este momento.
+              {t('Billings.noProducts')}
             </Typography>
           </Grid>
         )}
@@ -84,3 +90,4 @@ function Billings() {
 }
 
 export default Billings;
+ 

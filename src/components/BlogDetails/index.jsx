@@ -2,12 +2,16 @@ import React from 'react';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaTelegramPlane } from 'react-icons/fa';
 import moment from 'moment';
 import 'moment/locale/es';
+import { useTranslation } from 'react-i18next';
+
 import Chip from '../Chip/Chip';
 import CustomMarkdown from '../CustomMarkdown';
 
 moment.locale('es');
 
 function BlogDetailsInfo({ styles, data }) {
+  const { t } = useTranslation();
+
   const styleChip = {
     color: '#000B39'/*'#000B39'*/,
     fontWeight: 500,
@@ -23,8 +27,8 @@ function BlogDetailsInfo({ styles, data }) {
       <div className={styles.blog__details__header}>
         <div className={styles.blog__details__header__content}>
           <div className={styles.blog__details__header__title}>
-            <p>{data.timeRead ? data.timeRead : 'Lectura de 5 min.'}</p>
-            <p>{data.created_at ? moment(data.date).format('LL') : '16 febrero del 2022'}</p>
+            <p>{data.timeRead ? data.timeRead : t('BlogDetails.defaultTimeRead')}</p>
+            <p>{data.created_at ? moment(data.date).format('LL') : t('BlogDetails.defaultDate')}</p>
           </div>
           <div className={styles.blog__details__header__tags}>
             {data.tags.length > 0 ? data.tags.map((tag, index) => (
@@ -69,7 +73,7 @@ function BlogDetailsInfo({ styles, data }) {
 
       <div className={styles.blog__details__list__content}>
         <div className={styles.blog__details__social__content}>
-          <p>COMPARTIR:</p>
+          <p>{t('BlogDetails.share')}</p>
           <div className={styles.blog__details__social__icons}>
             <div className={styles.blog__details__social__icon__content}>
               <a href={`https://www.facebook.com/sharer/sharer.php?u=${url}`} target='_blank' rel='noreferrer'>

@@ -6,8 +6,10 @@ import Button from '../Buttons/Button';
 import Input from '../Input';
 import Alert from '../Alert';
 import Spinner from '../Spinner';
+import { useTranslation } from 'react-i18next';
 
 function RestorePasswordForm({ userEmail, display, toggleForm }) {
+  const { t } = useTranslation();
   const { loadingSignUp, changePasswordSuccess, changePasswordFailure, responseRestoreError } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const handleSubmit = async (values) => {
@@ -24,31 +26,31 @@ function RestorePasswordForm({ userEmail, display, toggleForm }) {
       id: 'password',
       initialValue: '',
       placeholder: '********',
-      label: 'Contraseña',
+      label: t('RestorePasswordForm.password'),
       validate: 'password',
       required: true,
       type: 'password',
-      label_message: 'La contraseña actual es obligatoria',
+      label_message: t('RestorePasswordForm.passwordRequired'),
     },
     {
       id: 'new_password',
       initialValue: '',
       placeholder: '********',
-      label: 'Nueva Contraseña',
+      label: t('RestorePasswordForm.newPassword'),
       validate: 'new_password',
       required: true,
       type: 'password',
-      label_message: 'La nueva contraseña es obligatoria',
+      label_message: t('RestorePasswordForm.newPasswordRequired'),
     },
     {
       id: 'confirm_password',
       initialValue: '',
       placeholder: '********',
-      label: 'Confirmar Contraseña',
+      label: t('RestorePasswordForm.confirmPassword'),
       validate: 'confirm_password',
       required: true,
       type: 'password',
-      label_message: 'La confirmación de contraseña es obligatoria',
+      label_message: t('RestorePasswordForm.confirmPasswordRequired'),
     },
   ];
 
@@ -64,8 +66,8 @@ function RestorePasswordForm({ userEmail, display, toggleForm }) {
                 key={Math.floor(Math.random() * 100) + 1}
                 css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
                 alert_type='alert__danger'
-                title='Sucedio un error al restablecer contraseña'
-                msg='Verifique que su contraseña anterior sea correcta, intente nuevamente.'
+                title={t('RestorePasswordForm.restoreErrorTitle')}
+                msg={t('RestorePasswordForm.restoreErrorMessage')}
                 display={true}
               />
             ) : null}
@@ -74,8 +76,8 @@ function RestorePasswordForm({ userEmail, display, toggleForm }) {
                 key={Math.floor(Math.random() * 100) + 1}
                 css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
                 alert_type='alert__danger'
-                title='Error con contraseña'
-                msg='Verifique que su contraseña anterior sea correcta, intente nuevamente.'
+                title={t('RestorePasswordForm.passwordErrorTitle')}
+                msg={t('RestorePasswordForm.passwordErrorMessage')}
                 display={true}
               />
             ) : null}
@@ -84,8 +86,8 @@ function RestorePasswordForm({ userEmail, display, toggleForm }) {
                 key={Math.floor(Math.random() * 100) + 1}
                 css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
                 alert_type='alert__success'
-                title='Contraseña modificada'
-                msg='Su contraseña se ha modificado exitosamente'
+                title={t('RestorePasswordForm.successTitle')}
+                msg={t('RestorePasswordForm.successMessage')}
                 display={true}
               />
             ) : null}
@@ -103,7 +105,7 @@ function RestorePasswordForm({ userEmail, display, toggleForm }) {
                     onClick={() => { toggleForm(); formConfig.resetForm(); formConfig.handleReset(); }}
                     type='reset'
                   >
-                    Cancelar
+                    {t('RestorePasswordForm.cancelButton')}
                   </Button>
                   <Button
                     type='submit'
@@ -113,7 +115,7 @@ function RestorePasswordForm({ userEmail, display, toggleForm }) {
                     }
                     opacity={!formConfig.dirty || !formConfig.isValid || formConfig.isSubmitting ? 0.5 : 1}
                   >
-                    Guardar
+                    {t('RestorePasswordForm.saveButton')}
                   </Button>
                 </div>
               </div>
@@ -121,7 +123,7 @@ function RestorePasswordForm({ userEmail, display, toggleForm }) {
           </div>
         </form>
       ) : (
-        <Spinner title='Cargando...' />
+        <Spinner title={t('RestorePasswordForm.loading')} />
       )}
     </div>
   );

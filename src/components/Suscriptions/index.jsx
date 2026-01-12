@@ -14,16 +14,19 @@ import {
   getlistUserSubscriptionsPrevious,
   getDetailListUserSubscriptionsNext,
   getDetailListUserSubscriptionsPrevious,
-  cancelSubscription } from '../../redux/actions/subscriptionsAction';
+  cancelSubscription
+} from '../../redux/actions/subscriptionsAction';
 import 'moment/locale/es';
 import MenuOptions from '../MenuOptions';
 import Spinner from '../Spinner';
 import classes from './Suscriptions.module.scss';
 
 import Icon from '../MdIcon/Icon';
+import { useTranslation } from 'react-i18next';
 
 moment.locale('es');
 function Suscriptions({ user, suscriptions, title, productId = '' }) {
+  const { t } = useTranslation();
   const { renameSubscriptionResponse, cancelSubscriptionResponse, spinner, subscriptionsSkip, detailSubscriptionsSkip } = useSelector((state) => state.suscripcions);
   const [edit, setEdit] = useState('');
   const dispatch = useDispatch();
@@ -111,11 +114,11 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
     <div>
       <div className={classes.wrapper}>
         <Container>
-          { spinner ? (
-            <Spinner title='Cargando...' />
+          {spinner ? (
+            <Spinner title={t('Suscriptions.loading')} />
           ) : (
             <>
-              <div className='font-fs-joey fs__36 font-weight-bold text__dark__primary'>{ title }</div>
+              <div className='font-fs-joey fs__36 font-weight-bold text__dark__primary'>{title}</div>
               {
                 suscriptions && Object.keys(suscriptions).length > 0 && suscriptions.value.length > 0 ? (
                   <>
@@ -125,34 +128,31 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
                           <TableRow>
                             <TableCell style={{ width: '210px' }}>
                               <div className={classes.cell_title}>
-                                <h2 className='text-uppercase'>Nombre</h2>
+                                <h2 className='text-uppercase'>{t('Suscriptions.name')}</h2>
                               </div>
                             </TableCell>
                             <TableCell style={{ width: '70px' }}>
                               <div className={classes.cell_title}>
-                                <h2 className='text-uppercase'>Solicitud</h2>
+                                <h2 className='text-uppercase'>{t('Suscriptions.request')}</h2>
                               </div>
                             </TableCell>
                             <TableCell style={{ width: '255px' }}>
                               <div className={classes.cell_title}>
-                                <h2 className='text-uppercase'>Primary key</h2>
+                                <h2 className='text-uppercase'>{t('Suscriptions.primaryKey')}</h2>
                               </div>
                             </TableCell>
                             <TableCell style={{ width: '255px' }}>
                               <div className={classes.cell_title}>
-                                <h2 className='text-uppercase'>Secondary key</h2>
+                                <h2 className='text-uppercase'>{t('Suscriptions.secondaryKey')}</h2>
                               </div>
                             </TableCell>
-                            {/* <TableCell>
-                              Producto
-                            </TableCell> */}
                             <TableCell style={{ width: '90px' }}>
                               <div className={classes.cell_title}>
-                                <h2 className='text-uppercase'>Estado</h2>
+                                <h2 className='text-uppercase'>{t('Suscriptions.state')}</h2>
                               </div>
                             </TableCell>
                             <TableCell style={{ width: '50px' }}>
-                            &nbsp;
+                              &nbsp;
                             </TableCell>
                           </TableRow>
                         </TableHead>
@@ -170,7 +170,7 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
                                         <input
                                           id={row.id}
                                           type='text'
-                                          placeholder='Nuevo nombre'
+                                          placeholder={t('Suscriptions.newNamePlaceholder')}
                                           defaultValue={row.properties.displayName}
                                           onKeyDown={(e) => handleKeyDown(row, e)}
                                           onBlur={(e) => handleBLur(row, e)}
@@ -192,9 +192,6 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
                                   <TableCell>
                                     <PasswordGenerate idSuscripcion={row.name} user={user} version={2} status={row.properties.state} />
                                   </TableCell>
-                                  {/* <TableCell>
-                                    <ProductName scope={row.properties.scope} />
-                                  </TableCell> */}
                                   <TableCell>
                                     <Chip
                                       color='secondary'
@@ -234,7 +231,7 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
                               <div className={classes.pagination__icon}>
                                 <Icon id='MdNavigateBefore' />
                               </div>
-                              <p>Anterior</p>
+                              <p>{t('Suscriptions.previous')}</p>
                             </div>
 
                           ) : (null)}
@@ -242,7 +239,7 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
                         <Grid xs={1}>
                           {suscriptions.nextLink !== undefined ? (
                             <div onClick={() => handleNextSubscriptions(suscriptions.nextLink)} className={classes.pagination}>
-                              <p className={classes.next}>Siguiente</p>
+                              <p className={classes.next}>{t('Suscriptions.next')}</p>
                               <div className={classes.pagination__icon}>
                                 <Icon id='MdNavigateNext' />
                               </div>
@@ -254,7 +251,7 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
                     </Grid>
                   </>
                 ) : (
-                  <h3 style={{ width: '100%', textAlign: 'center', color: '#53565A', fontSize: '1rem' }}>Información no disponible</h3>
+                  <h3 style={{ width: '100%', textAlign: 'center', color: '#53565A', fontSize: '1rem' }}>{t('SuscriptionsVertical.noData')}</h3>
                 )
               }
             </>
@@ -264,7 +261,5 @@ function Suscriptions({ user, suscriptions, title, productId = '' }) {
     </div>
   );
 }
-
 Suscriptions.propTypes = {};
-
 export default Suscriptions;

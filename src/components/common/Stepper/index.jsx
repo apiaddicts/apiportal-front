@@ -35,6 +35,30 @@ function _renderStepContent(step) {
   }
 }
 
+const translations = {
+  es: {
+    save: 'Guardar',
+    finish: 'Finalizar',
+    next: 'Siguiente',
+    verifyInsertedData: 'Verificar datos insertados',
+    allStepsCompleted: 'Todos los pasos completados - has terminado',
+    reset: 'Reiniciar'
+  },
+  en: {
+    save: 'Save',
+    finish: 'Finish',
+    next: 'Next',
+    verifyInsertedData: 'Verify inserted data',
+    allStepsCompleted: 'All steps completed - you\'re finished',
+    reset: 'Reset'
+  }
+};
+
+const getTranslation = (key) => {
+  const lang = localStorage.getItem('lang') || 'en';
+  return translations[lang][key] || key;
+};
+
 export default function HorizontalStepper({
   steps,
 }) {
@@ -42,7 +66,7 @@ export default function HorizontalStepper({
   const [completed, setCompleted] = useState({});
   const isLastStep = activeStep === steps.length - 1;
   const currentValidationSchema = InformationSchema[activeStep];
-  const notify = (msg) => toast(msg);
+  const notify = (msg) => toast(getTranslation(msg));
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -151,11 +175,11 @@ export default function HorizontalStepper({
         {allStepsCompleted() ? (
           <>
             <Typography sx={{ mt: 2, mb: 1 }}>
-              All steps completed - you&apos;re finished
+              {getTranslation('allStepsCompleted')}
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleReset}>Reset</Button>
+              <Button onClick={handleReset}>{getTranslation('reset')}</Button>
             </Box>
           </>
         ) : (
@@ -171,10 +195,10 @@ export default function HorizontalStepper({
                   <div className='stepper__wrapper__actions'>
                     <Button type='submit' disabled={isSubmitting} className='custom__btn custom__btn__primary stepper__wrapper__actions__next'>
                       {activeStep === 0 ?
-                        'Guardar' :
+                        getTranslation('save') :
                         isLastStep ?
-                          'Finalizar' :
-                          'Siguiente'}
+                          getTranslation('finish') :
+                          getTranslation('next')}
                     </Button>
                   </div>
                 </Form>

@@ -13,8 +13,10 @@ import ApisPaginated from '../../../components/ApisPaginated';
 import Icon from '../../../components/MdIcon/Icon';
 import classes from './apis.module.scss';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
+import { useTranslation } from 'react-i18next';
 
 function Apis({ setIsOpen }) {
+  const { t } = useTranslation();
   const { libraries, filters, backUpLibreries, loadingLibraries, apisUnsecureRes } = useSelector((state) => state.library);
   const [filtersSelect, setFiltersSelect] = useState([]);
   const [searchApiInputValue, setSearchApiInputValue] = useState('');
@@ -137,13 +139,14 @@ function Apis({ setIsOpen }) {
     });
   };
 
-  const fApis = libraries && libraries.length > 0  ? libraries : [];
+  const fApis = libraries && libraries.length > 0 ? libraries : [];
 
   return (
     <div id='apiHome' style={{ paddingTop: '114px' }}>
       <BannerImage
         title={filterApiBanner?.[0]?.title}
         img={filterApiBanner?.[0]?.background?.url}
+        description={filterApiBanner?.[0]?.subtitle}
         css_styles={{ 'layout_height': 'banner_custom__layout--height' }}
       />
       <div className='container'>
@@ -151,32 +154,13 @@ function Apis({ setIsOpen }) {
           <article className={classes.wrapper__left}>
             {((state && Object.keys(state).length > 0) || (versions && Object.keys(versions).length > 0) || (items && Object.keys(items).length > 0) || (tags && Object.keys(tags).length > 0)) && (
               <div className={classes.wrapper__title}>
-                Filtrar por:
+                {t('Apis.filterBy')}
               </div>
             )}
-            {/* {state && Object.keys(state).length > 0 && (
-              <CustomizedAccordions title='Estado'>
-                {
-                  state.map((item, index) => (
-                    <div
-                      className={classes.wrapper__checkbox}
-                      key={index}
-                    >
-                      <CheckboxWrapper
-                        name={item}
-                        label={item}
-                        handleChangeSelect={handleChangeStatus}
-                        checked={filtersSelect[item] !== undefined ? filtersSelect[item] : false}
-                      />
-                    </div>
-                  ))
-                }
-              </CustomizedAccordions>
-            )} */}
             {versions && Object.keys(versions).length > 0 && (
               <div className='w-full pl-4'>
                 <div className={classes.wrapper__title}>
-                  Versión
+                  {t('Apis.version')}
                 </div>
                 <ButtonGroupMUI sx={{ marginBottom: '15px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(50px, 1fr))', gap: '2px', alignItems: 'center', justifyContent: 'center' }}>
                   {versions.map((item, index) => (
@@ -192,8 +176,8 @@ function Apis({ setIsOpen }) {
               </div>
             )}
             {items && Object.keys(items).length > 0 && (
-              <CustomizedAccordions title='Solución'>
-                { items && items.map((item, index) => (
+              <CustomizedAccordions title={t('Apis.solution')}>
+                {items && items.map((item, index) => (
                   <div key={index} className={classes.wrapper__checkbox}>
                     <CheckboxWrapper
                       name={item.title}
@@ -207,8 +191,8 @@ function Apis({ setIsOpen }) {
               </CustomizedAccordions>
             )}
             {tags && Object.keys(tags).length > 0 && (
-              <CustomizedAccordions title='Etiquetas'>
-                { tags.map((item, index) => (
+              <CustomizedAccordions title={t('Apis.tags')}>
+                {tags.map((item, index) => (
                   <div className={classes.wrapper__checkbox} key={index}>
                     <CheckboxWrapper
                       name={item.title}
@@ -224,7 +208,7 @@ function Apis({ setIsOpen }) {
             {((state && Object.keys(state).length > 0) || (versions && Object.keys(versions).length > 0) || (items && Object.keys(items).length > 0) || (tags && Object.keys(tags).length > 0)) && (
               <div className={classes.wrapper__filters}>
                 <Icon id='MdDeleteOutline' />
-                <button type='button' className={classes.wrapper__reset} onClick={resetFilters}>Eliminar filtros</button>
+                <button type='button' className={classes.wrapper__reset} onClick={resetFilters}>{t('Apis.clearFilters')}</button>
               </div>
             )}
           </article>
@@ -240,7 +224,7 @@ function Apis({ setIsOpen }) {
                       onChange={(e) => {
                         handleChangeSearchFilter(e.target.value);
                       }}
-                      placeholder='Buscar APIs...'
+                      placeholder={t('Apis.searchPlaceholder')}
                       borderRadius='6px'
                       value={searchApiInputValue}
                     />
@@ -276,7 +260,7 @@ function Apis({ setIsOpen }) {
                           margin: '2rem',
                         }}
                       >
-                        <h1>Información no disponible</h1>
+                        <h1>{t('Apis.noData')}</h1>
                       </div>
                     </section>
                   )
@@ -291,7 +275,7 @@ function Apis({ setIsOpen }) {
                   >
                     <SkeletonComponent />
                   </div>
-                ) }
+                )}
               </div>
             </div>
           </section>

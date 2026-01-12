@@ -46,3 +46,29 @@ export const billingsLink = (id, headerManager) => (dispatch) => {
       console.error(error);
     })
 }
+export const billingDataChart = () => (dispatch) => {
+  dispatch({ type: BillingConstant.GET_BILLING_REQUEST });
+
+  billingService.billingDataChart()
+    .then(response => {
+      
+      if (response?.response && Array.isArray(response.response)) {
+        dispatch({
+          type: BillingConstant.GET_ALL_BILLING_SUCCESS,
+          payload: response.response[0] 
+        });
+      } else {
+        dispatch({
+          type: BillingConstant.GET_ALL_BILLING_FAILURE,
+          payload: response
+        });
+      }
+    })
+    .catch(error => {
+      console.error(error);
+      dispatch({
+        type: BillingConstant.GET_ALL_BILLING_FAILURE,
+        payload: error
+      });
+    });
+};

@@ -4,8 +4,10 @@ import { Button, Dialog, DialogActions, DialogContent, DialogContentText, Dialog
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import Icon from '../MdIcon/Icon';
 import classes from './MenuOptions.module.scss';
+import { useTranslation } from 'react-i18next';
 
 function MenuOptions(props) {
+  const { t } = useTranslation();
 
   const { row, handleRename, handleCancel } = props;
   const [confirmDialog, setConfirmDialog] = useState(false);
@@ -41,17 +43,17 @@ function MenuOptions(props) {
           onClose={toggleConfirmation}
         >
           <DialogTitle id='alert-dialog-title'>
-            Cancelar subscripción
+            {t('MenuOptions.cancelSubscriptionTitle')}
           </DialogTitle>
           <DialogContent>
             <DialogContentText id='alert-dialog-description'>
-              ¿Desea cancelar la subscripción? Esta es una acción irreversible.
+              {t('MenuOptions.cancelSubscriptionMessage')}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={toggleConfirmation} color='error'>Cancelar</Button>
+            <Button onClick={toggleConfirmation} color='error'>{t('MenuOptions.cancelButton')}</Button>
             <Button onClick={() => handleCancelSubscription()} variant='contained' autoFocus>
-              Aceptar
+              {t('MenuOptions.acceptButton')}
             </Button>
           </DialogActions>
         </Dialog>
@@ -83,11 +85,11 @@ function MenuOptions(props) {
       >
         <MenuItem onClick={handleEdit}>
           <Icon id='MdOutlineEdit' css_styles={{ 'custom_icon_styles': 'fs__20 text_gray__gray_darken mr-2' }} />
-          Renombrar
+          {t('MenuOptions.renameOption')}
         </MenuItem>
         <MenuItem onClick={() => toggleConfirmation()}>
           <Icon id='MdDeleteOutline' css_styles={{ 'custom_icon_styles': 'fs__20 text_gray__gray_darken mr-2' }} />
-          Cancelar
+          {t('MenuOptions.cancelOption')}
         </MenuItem>
       </Menu>
     </div>

@@ -1,8 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import Icon from '../MdIcon/Icon';
 import classes from './accordion.module.scss';
 
 function AccordionFilter({ items, clicked, setClicked, subItem, setSubItem }) {
+  const { t } = useTranslation();
+
   const toggle = (index) => {
     setSubItem(0);
     if (clicked === index) {
