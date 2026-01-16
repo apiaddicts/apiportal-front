@@ -7,12 +7,12 @@
   width: 64px;
 
   div {
-    color: $theme_secondary;
+    color: var(--secondary-color);
     font-size: 20px;
   }
 
   span {
-    font-family: $primary_font;
+    font-family: var(--font-family);
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -20,7 +20,7 @@
     text-align: right;
     letter-spacing: 1.33333px;
     text-transform: uppercase;
-    color: $theme_secondary;
+    color: var(--secondary-color);
   }
 }
 

@@ -5,6 +5,7 @@ import CardInformation from '../Card/CardInformation';
 import classes from './blog-posts-paginated.module.scss';
 
 function Posts({ currentItems, additionalClasses }) {
+  const { t } = useTranslation();
   return (
     // eslint-disable-next-line react/jsx-no-useless-fragment
     <div className={additionalClasses ? `${classes.blog_list} ${classes[additionalClasses]}` : `${classes.blog_list}`}>
@@ -20,7 +21,7 @@ function Posts({ currentItems, additionalClasses }) {
               buttons={item?.tags && item?.tags?.length > 0 ? item?.tags : []}
               css_styles={{ 'override_card_height': 'custom_card__height' }}
               theme='primary'
-              info='Conoce más'
+              info={t('BlogPostsPaginated.learnMore')}
               blogTitle={true}
               blog={true}
             />

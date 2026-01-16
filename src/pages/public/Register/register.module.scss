@@ -38,12 +38,12 @@
     }
 
     &__title {
-        font-family: $primary_font;
+        font-family: var(--font-family);
         font-style: normal;
         font-weight: 700;
         font-size: 32px;
         line-height: 42px;
-        color: $theme_primary;
+        color: var(--primary-color);
         text-align: center;
     }
 

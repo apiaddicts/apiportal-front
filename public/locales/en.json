@@ -127,6 +127,8 @@
     "noBlogEntries": "No blog entries available"
   },
   "ApiDetail": {
+    "tryApi": "Try API",
+    "start": "Get started",
     "bannerTitle": "API Details",
     "benefitsTitle": "Main Benefits",
     "discoverTitle": "Discover our APIs",
@@ -163,6 +165,11 @@
   "Login": {
     "signIn": "Sign In",
     "resetPassword": "Reset Password"
+  },
+  "Logout": {
+    "expiredTitle": "Session expired",
+    "expiredDescription": "Your session has exceeded the activity time. You need to log in again.",
+    "exit": "Logout"
   },
   "Register": {
     "createAccount": "Create your Account",
@@ -238,7 +245,8 @@
     "missingContent": "Missing content"
   },
   "Alert": {
-    "passwordChangeEmailSent": "A confirmation email for password change has been sent. Please check your inbox."
+    "passwordChangeEmailSent": "A confirmation email for password change has been sent. Please check your inbox.",
+    "resendPasswordChangeEmail": "Didn't receive the email? Try again."
   },
   "AlertFeedback": {
     "errorLogin": "Error on login",
@@ -269,6 +277,7 @@
     "share": "SHARE:"
   },
   "BlogPostsPaginated": {
+    "learnMore": "Learn more",
     "next": "Next",
     "previous": "Previous"
   },
@@ -295,9 +304,14 @@
     "cancelSubscription": "Cancel Subscription",
     "confirmCancelSubscription": "Do you want to cancel the subscription? This action is irreversible.",
     "cancel": "Cancel",
-    "accept": "Accept",
+    "accept": "Accept"
+  },
+  "RegenerateKeys": {
+    "successMessage": "Regenerated successfully!",
     "regenerateSubscriptionKeys": "Regenerate Subscription Keys",
-    "confirmRegenerateSubscriptionKeys": "Do you want to regenerate the subscription keys? This action is irreversible."
+    "confirmRegenerateSubscriptionKeys": "Do you want to regenerate the subscription keys? This action is irreversible.",
+    "cancel": "Cancel",
+    "accept": "Accept"
   },
   "Stepper": {
     "save": "Save",
@@ -318,9 +332,12 @@
   },
   "CreateAccount": {
     "email": "Email",
+    "username": "Username",
     "first_name": "First Name",
     "last_name": "Last Name",
+    "company": "Company Name",
     "password": "Password",
+    "password_confirmation": "Confirm Password",
     "checkboxTermsLabel": "I accept the terms and conditions",
     "acceptTermsError": "To complete the registration, you must accept the terms of use",
     "loginButton": "Login",
@@ -402,5 +419,9 @@
     "product": "Product",
     "state": "State",
     "noData": "No data available"
+  },
+  "SwaggerUI": {
+    "noInfo": "No information available",
+    "back": "GO BACK"
   }
 }

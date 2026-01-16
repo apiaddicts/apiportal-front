@@ -36,7 +36,7 @@ export default function SimpleSlider({ slides, tabCard, footerTabCard, setIsOpen
         breakpoint: 1024,
         settings: {
           slidesToShow: 3,
-          slidesToScroll: 3,
+          slidesToScroll: 1,
           infinite: true,
           dots: true,
         },
@@ -63,7 +63,7 @@ export default function SimpleSlider({ slides, tabCard, footerTabCard, setIsOpen
     <div className='wrapper__slider'>
       { typeof setIsOpen === 'function' ? (
         <Slider {...settings}>
-          {slides && slides?.lenght > 0 && slides.map((slide, i) => (
+          {slides && slides.length > 0 && slides.map((slide, i) => (
             <div key={i} className={i === slideIndex ? 'activeSlide' : 'slide'} style={{ padding: '15px' }}>
               <CardBasic chipTitle={slide?.statusText ? slide?.statusText : ''} info={slide?.linkText} img={slide?.img ? slide?.img : ''} title={slide?.title} description={slide?.description} route={handleRoute} tabCard={tabCard} footerTabCard={footerTabCard} />
             </div>

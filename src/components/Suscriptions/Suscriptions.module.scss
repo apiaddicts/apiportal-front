@@ -24,10 +24,10 @@
   table {
     thead{
       th {
-        font-family: $primary_font;
+        font-family: var(--font-family);
         font-size: 12px;
         font-weight: bold;
-        color: $theme_primary;
+        color: var(--primary-color);
         letter-spacing: 0.2px;
         padding: 16px 5px;
         text-transform: uppercase;
@@ -37,7 +37,7 @@
       tr {
         cursor: default;
         td {
-          font-family: $primary_font;
+          font-family: var(--font-family);
           font-size: 12px;
           letter-spacing: 0.2px;
           padding: 16px 5px;
@@ -115,7 +115,7 @@
 table {
   thead{
     th {
-      font-family: $primary_font;
+      font-family: var(--font-family);
       font-size: 12px;
       font-weight: bold;
       color: $dark_primary;
@@ -128,7 +128,7 @@ table {
     tr {
       cursor: default;
       td {
-        font-family: $primary_font;
+        font-family: var(--font-family);
         font-size: 12px;
         letter-spacing: 0.2px;
         padding: 16px 5px;

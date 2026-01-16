@@ -19,7 +19,7 @@
 .loader::after{
   inset: 8px;
   transform: rotate3d(90, 90, 0, 180deg );
-  border-color: $theme_primary;
+  border-color: var(--primary-color);
 }
 
 @keyframes rotate {

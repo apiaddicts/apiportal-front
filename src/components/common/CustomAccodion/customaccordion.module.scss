@@ -27,7 +27,7 @@
     border-bottom: none !important;
     transition: 0.3s ease all;
     background: $white;
-    color: $theme_primary;
+    color: var(--primary-color);
     border-radius: 0px;
     width: 100%;
     display: flex;
@@ -109,7 +109,7 @@
   border-bottom: none !important;
   transition: 0.3s ease all;
   background: $white;
-  color: $theme_primary;
+  color: var(--primary-color);
   font-weight: 700;
 }
 
@@ -124,14 +124,14 @@
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 1.33px;
-    font-family: $primary_font;
+    font-family: var(--font-family);
     text-transform: uppercase;
     color: $gray_darken;
     cursor: pointer;
   }
   &__body{
     font-size: 16px;
-    font-family: $primary_font;
+    font-family: var(--font-family);
     font-weight: 400;
     &__list {
       list-style: none;
@@ -150,7 +150,7 @@
           height: 29px;
           font-weight: 500;
           font-size: 0.875rem;
-          font-family: $primary_font;
+          font-family: var(--font-family);
           color: $secondary_white;
           border-radius: 0.313rem;
         }
@@ -225,7 +225,7 @@
     display: inline-block;
     max-width: 600px;
     word-break: break-all;
-    color: $theme_primary;
+    color: var(--primary-color);
     background: $gray_lighten-4;
     border-radius: 12px;
     border: none !important;

@@ -357,7 +357,7 @@
   text-align: center;
   padding-top: 94px;
   padding-bottom: 88px;
-  background: rgba(9, 178, 156, 0.1);
+  background-color: rgba(var(--primary-color-rgb), 0.05);
   @include breakpoint(xs) {
     padding-bottom: 0 !important;
   }
@@ -375,7 +375,7 @@
     }
     div {
       text-decoration: none;
-      color: $primary;
+      color: var(--primary-color);
       text-transform: uppercase;
       font-size: 16px;
       font-weight: 700;

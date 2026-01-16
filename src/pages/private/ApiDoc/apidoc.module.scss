@@ -10,7 +10,7 @@
     color: $gray_lighten-2;
 
     h2 {
-        font-family: $primary_font;
+        font-family: var(--font-family);
         font-style: normal;
         font-weight: 700;
         font-size: 12px;
@@ -18,12 +18,12 @@
         display: flex;
         align-items: center;
         letter-spacing: 0.2px;
-        color: $theme_primary;
+        color: var(--primary-color);
     }
 }
 
 .cell_name {
-    font-family: $primary_font;
+    font-family: var(--font-family);
     font-style: normal;
     font-weight: 400;
     font-size: 12px;
@@ -33,11 +33,11 @@
     align-items: center;
     letter-spacing: 0.2px;
 
-    color: $theme_primary;
+    color: var(--primary-color);
 }
 
 .cell_description {
-    font-family: $primary_font;
+    font-family: var(--font-family);
     font-style: normal;
     font-weight: 400;
     font-size: 12px;

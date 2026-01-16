@@ -23,7 +23,7 @@
     &__title {
       font-size: 22px;
       font-weight: 400;
-      font-family: $primary_font;
+      font-family: var(--font-family);
       @include breakpoint(xs) {
         font-size: 18px;
       }
@@ -59,14 +59,14 @@
     font-size: 16px;
     font-weight: 700;
     letter-spacing: 1.33px;
-    font-family: $primary_font;
+    font-family: var(--font-family);
     text-transform: uppercase;
-    color: $theme_primary;
+    color: var(--primary-color);
     cursor: pointer;
   }
   &__body{
     font-size: 16px;
-    font-family: $primary_font;
+    font-family: var(--font-family);
     font-weight: 400;
     &__list {
       list-style: none;
@@ -85,7 +85,7 @@
           height: 29px;
           font-weight: 500;
           font-size: 0.875rem;
-          font-family: $primary_font;
+          font-family: var(--font-family);
           color: $secondary_white;
           border-radius: 0.313rem;
         }
@@ -111,8 +111,8 @@
   margin: 15px 0;
   padding-left: 10px;
   font-weight: 700;
-  border-left: 2px solid $theme_secondary;
-  color: $theme_secondary;
+  border-left: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
 }
 
 

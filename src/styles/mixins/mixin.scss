@@ -124,8 +124,8 @@
 }
 
 @mixin grid($number) {
-  flex: 0 0 percentage(math.div(math.div(100, $number), 100));
-  max-width: percentage(math.div(math.div(100, $number), 100));
+  flex: 0 0 math.percentage(math.div(math.div(100, $number), 100));
+  max-width: math.percentage(math.div(math.div(100, $number), 100));
 }
 
 @mixin background-opacity($color, $opacity: 0.3) {
@@ -159,4 +159,27 @@
 
 @mixin border($color) {
   border: 2px solid $color;
+}
+
+@mixin button-bg-dynamic($bg) {
+  background: #{$bg};
+  &:hover {
+    filter: brightness(0.92);
+    transition: all 0.3s ease;
+  }
+  &:active {
+    filter: brightness(0.75);
+  }
+}
+
+@mixin letter-dynamic($color) {
+  color: #{$color};
+  &:hover {
+    filter: brightness(0.95);
+    transition: all 0.3s ease;
+  }
+}
+
+@mixin border-dynamic($color) {
+  border: 2px solid #{$color};
 }

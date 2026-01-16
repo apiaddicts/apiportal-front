@@ -18,12 +18,12 @@
   width: 64px;
 
   div {
-    color: $theme_secondary;
+    color: var(--secondary-color);
     font-size: 20px;
   }
 
   span {
-    font-family: $primary_font;
+    font-family: var(--font-family);
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -31,7 +31,7 @@
     text-align: right;
     letter-spacing: 1.33333px;
     text-transform: uppercase;
-    color: $theme_secondary;
+    color: var(--secondary-color);
   }
 }
 .back__btn {
@@ -56,10 +56,10 @@
 table {
   thead{
     th {
-      font-family: $primary_font;
+      font-family: var(--font-family);
       font-size: 12px !important;
       font-weight: bold;
-      color: $theme_primary !important;
+      color: var(--primary-color) !important;
       letter-spacing: 0.2px;
       padding: 16px 5px;
       text-transform: uppercase;
@@ -68,7 +68,7 @@ table {
   tbody {
     tr {
       td {
-        font-family: $primary_font;
+        font-family: var(--font-family);
         font-size: 12px;
         letter-spacing: 0.2px;
         padding: 16px 5px;

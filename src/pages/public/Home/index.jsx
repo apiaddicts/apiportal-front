@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { HashLink } from 'react-router-hash-link';
 import moment from 'moment';
@@ -30,6 +30,19 @@ function Home({ setOpenForm }) {
   const { homePage } = useSelector((state) => state.home);
   const { blogs } = useSelector((state) => state.blog);
   const { libraries } = useSelector((state) => state.library);
+  const [cardsImages, setCardsImages] = useState({});
+
+  useEffect(() => {
+    if (libraries && libraries.length > 0) {
+      const imgs = {};
+      libraries.forEach(lib => {
+        imgs[lib.id] = lib.image?.length > 0
+          ? `${lib.image[0].formats?.medium?.url || lib.image[0].url}`
+          : config.notImage;
+      });
+      setCardsImages(imgs);
+    }
+  }, [libraries]);
 
   useEffect(() => {
     if (homePage && Object.keys(homePage).length === 0) {
@@ -91,7 +104,7 @@ function Home({ setOpenForm }) {
   const filterHomeBannerImage = filterHomeBanner.length > 0 && filterHomeBanner[0]?.background ? filterHomeBanner[0]?.background?.url : '';
   const filterHomeBannerNameButtom = filterHomeBanner.length > 0 && filterHomeBanner[0]?.buttons.length > 0 ? filterHomeBanner[0]?.buttons?.[0]?.name : '';
   const filterHomeBannerNameTarget = filterHomeBanner.length > 0 && filterHomeBanner[0]?.buttons.length > 0 ? filterHomeBanner[0]?.buttons?.[0]?.target : '/#data';
-
+  const filterHomeBannerLink = filterHomeBanner.length > 0 && filterHomeBanner[0]?.buttons?.length > 0 ? filterHomeBanner[0].buttons[0].link : null;
   const datanews = blogs && blogs.length > 0 ? _.sortBy(blogs, (m) => {
     return moment(m.created_at).toDate().getTime();
   }) : [];
@@ -107,14 +120,13 @@ function Home({ setOpenForm }) {
     return itemData;
   }) : [];
 
-  const random = libraries && libraries.length > 0 && Math.floor(Math.random() * libraries.length);
-  const random2 = libraries && libraries.length > 0 && Math.floor(Math.random() * libraries.length);
-  const random3 = libraries && libraries.length > 0 && Math.floor(Math.random() * libraries.length);
-
-  const apisNews = libraries && libraries.length > 0 ? [libraries[random], libraries[random2], libraries[random3]] : [];
+  const apisNews =
+    libraries && libraries.length > 0
+      ? _.shuffle(libraries).slice(0, 3)
+      : [];
 
   return (
-    <div style={{ paddingTop: '114px' }}>
+    <div>
       {homePage && Object.keys(homePage).length > 0 ? (
         <div>
           <section>
@@ -224,12 +236,21 @@ function Home({ setOpenForm }) {
             </div>
             {apisNews && apisNews.length > 0 ? (
               <>
-                <div className='row'>
-                  {apisNews.map((card, i) => (
-                    <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
-                      <CardBasic chipTitle='' title={card?.title} description={card?.description} info={t('Home.moreInfo')} url={`/apis/${card?.id}#api`} />
-                    </div>
-                  ))}
+                <div className='row justify-center'>
+                  {apisNews.map((card, i) => {
+                    return (
+                      <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
+                        <CardBasic
+                          chipTitle=''
+                          title={card?.title}
+                          description={card?.description}
+                          info={t('Home.moreInfo')}
+                          url={`/apis/${card?.id}#api`}
+                          img={cardsImages[card.id] || config.notImage}
+                        />
+                      </div>
+                    );
+                  })}
                 </div>
                 <div className='row'>
                   <div className='flex-md-12 flex-sm-12'>
@@ -275,7 +296,7 @@ function Home({ setOpenForm }) {
               img={filterHomeBannerImage !== '' ? filterHomeBannerImage : ''}
               buttonType='tertiary'
               buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : ''}
-              redirect={filterHomeBannerNameTarget}
+              redirect={filterHomeBannerLink}
               setOpenForm={setOpenForm}
             />
           </section>

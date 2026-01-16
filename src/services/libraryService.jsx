@@ -8,7 +8,7 @@ function getApiBookStores() {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
-  return fetch(`${config.apiUrl}/library-apis?filters[publish][$eq]=publicado&populate[tags]=*`, requestOptions)
+  return fetch(`${config.apiUrl}/library-apis?filters[publish][$eq]=publicado&populate[tags]=*&populate[image][populate]=*`, requestOptions)
     .then(handleResponse)
     .then((libraries) => {
       return libraries;
@@ -22,7 +22,7 @@ function getApiBookStore(id) {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
-  return fetch(`${config.apiUrl}/library-apis/${id}`, requestOptions)
+  return fetch(`${config.apiUrl}/library-apis/${id}?populate=image`, requestOptions)
     .then(handleResponse)
     .then((library) => {
       return library;
@@ -135,10 +135,10 @@ function getOpenApiFromStrapi(id) {
     headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
-  const url = `${config.apiUrl}/library-apis?_where[slug]=${id}`;
+  const url = `${config.apiUrl}/library-apis?filters[slug][$eq]=${id}`;
   return fetch(url, requestOptions)
     .then(handleResponse)
-    .then((response) => response[0])
+    .then((response) => response?.data?.[0])
     .catch((error) => error);
 }
 

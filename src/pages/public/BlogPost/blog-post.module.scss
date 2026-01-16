@@ -58,7 +58,7 @@
     }
 
     &__subtitle {
-      font-family: $primary_font;
+      font-family: var(--font-family);
       font-style: normal;
       font-weight: 400;
       font-size: 18px;
@@ -73,11 +73,11 @@
     &__title {
       display: flex;
 
-      font-family: $primary_font;
+      font-family: var(--font-family);
       font-style: normal;
       font-size: 16px;
       font-weight: 700;
-      color: $theme_primary;
+      color: var(--primary-color);
       line-height: 19px;
       width: 450px;
       letter-spacing: 1.33333px;
@@ -183,7 +183,7 @@
       width: 100%;
       margin-bottom: 10px;
 
-      font-family: $primary_font;
+      font-family: var(--font-family);
       font-style: normal;
       font-weight: 400;
       font-size: 18px;
@@ -262,7 +262,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    color: $theme_tertiary;
+    color: var(--secondary-color) !important;
 
     @media (max-width: 768px) {
       padding: 0;
@@ -270,7 +270,7 @@
     }
 
     p {
-      font-family: $primary_font;
+      font-family: var(--font-family);
       font-style: normal;
       font-weight: 700;
       font-size: 16px;

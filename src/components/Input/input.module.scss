@@ -25,8 +25,8 @@
   }
 
   p {
-    font-family: $primary_font;
-    color: $theme_primary;
+    font-family: var(--font-family);
+    color: var(--primary-color);
     margin-bottom: 0;
     margin-left: 8px;
     font-style: normal;
@@ -194,7 +194,7 @@
   transition: all 0.3s ease-in-out;
   font-size: 0.9rem;
   color: #696974;
-  font-family: $primary_font;
+  font-family: var(--font-family);
 
   &:hover {
     background-color: $gray_lighten-4;
@@ -236,7 +236,6 @@
   padding: 11px 11px 11px 35px !important;
   width: 100% !important;
   background-color: white !important;
-  border: 2px solid #0375D6 !important;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08) !important;
 }
 

@@ -127,6 +127,8 @@
     "noBlogEntries": "Aún no hay entradas en el blog"
   },
   "ApiDetail": {
+    "tryApi": "Probar API",
+    "start": "Empezar ahora",
     "bannerTitle": "Detalles de la API",
     "benefitsTitle": "Beneficios principales",
     "discoverTitle": "Descubre nuestras APIs",
@@ -163,6 +165,11 @@
   "Login": {
     "signIn": "Iniciar sesión",
     "resetPassword": "Recuperar contraseña"
+  },
+  "Logout": {
+    "expiredTitle": "Sesión caducada",
+    "expiredDescription": "Tu sesión ha excedido el tiempo de actividad. Necesitas iniciar sesión nuevamente.",
+    "exit": "Salir"
   },
   "Register": {
     "createAccount": "Crea tu Cuenta",
@@ -238,7 +245,8 @@
     "missingContent": "Contenido faltante"
   },
   "Alert": {
-    "passwordChangeEmailSent": "Se ha enviado un correo electrónico de confirmación de cambio de contraseña. Por favor, revisa tu bandeja de entrada."
+    "passwordChangeEmailSent": "Se ha enviado un correo electrónico de confirmación de cambio de contraseña. Por favor, revisa tu bandeja de entrada.",
+    "resendPasswordChangeEmail": "¿No se envió el correo? Inténtalo de nuevo."
   },
   "AlertFeedback": {
     "errorLogin": "Error al iniciar sesión",
@@ -269,6 +277,7 @@
     "share": "COMPARTIR:"
   },
   "BlogPostsPaginated": {
+    "learnMore": "Conoce más",
     "next": "Siguiente",
     "previous": "Anterior"
   },
@@ -298,6 +307,7 @@
     "accept": "Aceptar"
   },
   "RegenerateKeys": {
+    "successMessage": "¡Se ha regenerado exitosamente!",
     "regenerateSubscriptionKeys": "Regenerar claves de suscripción",
     "confirmRegenerateSubscriptionKeys": "¿Desea regenerar las claves de suscripción? Esta es una acción irreversible.",
     "cancel": "Cancelar",
@@ -322,9 +332,12 @@
   },
   "CreateAccount": {
     "email": "Correo electrónico",
+    "username": "Nombre de usuario",
     "first_name": "Nombre",
     "last_name": "Apellido",
+    "company": "Nombre de la empresa",
     "password": "Contraseña",
+    "password_confirmation": "Confirmar contraseña",
     "checkboxTermsLabel": "Acepto los términos y condiciones",
     "acceptTermsError": "Para completar el registro es necesario aceptar los términos de uso",
     "loginButton": "Iniciar Sesión",
@@ -406,5 +419,9 @@
     "product": "Producto",
     "state": "Estado",
     "noData": "Información no disponible"
+  },
+  "SwaggerUI": {
+    "noInfo": "Sin información disponible",
+    "back": "VOLVER"
   }
 }

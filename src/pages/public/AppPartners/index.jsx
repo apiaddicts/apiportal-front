@@ -102,7 +102,7 @@ function AppPartners({ setOpenForm }) {
   };
 
   return (
-    <div style={{ paddingTop: '114px' }}>
+    <div>
       {appPartnersPage && Object.keys(appPartnersPage).length > 0 ? (
         <div>
           <Base

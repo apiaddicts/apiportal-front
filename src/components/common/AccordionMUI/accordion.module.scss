@@ -1,14 +1,14 @@
 @import '../../../styles/variables.module.scss';
 
 .title {
-    font-family: $primary_font;
+    font-family: var(--font-family);
     font-size: 1rem;
     font-weight: 700 !important;
     text-transform: uppercase;
     letter-spacing: 1.33px !important;
-    color: $theme_primary;
+    color: var(--primary-color);
 }
 
 .color_chevron {
-    color: $theme_primary;
+    color: var(--primary-color);
 }

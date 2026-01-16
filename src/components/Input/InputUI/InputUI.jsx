@@ -58,16 +58,11 @@ function InputUI({ type = 'text', label, touched, errors, required = false, onCh
               <Icon id='MdOutlineCheck' />
             </div>
           ) :
-            errors === undefined && type === 'password' ? (
-              <div tabIndex='-1' className={classes.wrapper__icon} onClick={togglePass} role='button'>
-                <Icon id='MdRemoveRedEye' />
+            type === 'password' ? (
+              <div tabIndex='-1' className={classes.wrapper__icon} onClick={togglePass} role='button' style={{ cursor: 'pointer' }}>
+                <Icon id={typeInput === 'password' ? 'MdRemoveRedEye' : 'MdVisibilityOff'} />
               </div>
-            ) :
-              errors !== undefined && touched !== undefined ? (
-                <div className={`${classes.wrapper__icon} ${classes.wrapper__icon__error}`}>
-                  <Icon id='MdErrorOutline' />
-                </div>
-              ) : null
+            ) : null
       }
       { required && (<span className={classes.required}>{t('InputUI.required')}</span>)}
       { errors && touched === undefined ? null : (<p>{errors}</p>)}

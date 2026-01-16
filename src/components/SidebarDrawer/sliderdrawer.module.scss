@@ -22,35 +22,35 @@
   color: black !important; // Change the default color to black
 
   & .active {
-    color: $theme_primary; // Keep the active color as the theme primary
+    color: var(--primary-color); // Keep the active color as the theme primary
   }
 }
 
 .dropdown__item>svg,
 .dropdown__item>span {
-  color: $theme_primary !important;
-  fill: $theme_primary !important;
+  color: var(--primary-color) !important;
+  fill: var(--primary-color) !important;
 }
 
 .sidebar__item__back>div {
-  color: $theme_primary !important;
+  color: var(--primary-color) !important;
   cursor: pointer;
 
   & svg {
-    fill: $theme_primary !important;
+    fill: var(--primary-color) !important;
   }
 }
 
 
 
 .title {
-  font-family: $primary_font;
+  font-family: var(--font-family);
   font-size: 2.5rem;
   font-weight: 400;
   letter-spacing: -0.6px;
 
   &__name {
-    font-family: $primary_font;
+    font-family: var(--font-family);
     font-weight: 500;
     font-size: 2.5rem;
     width: 100%;
@@ -64,19 +64,19 @@
     font-size: 0.75rem;
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    color: $theme_primary;
+    color: var(--primary-color);
   }
 
   &__organization {
     font-weight: 400;
     font-size: 1.25rem;
-    color: $theme_primary;
+    color: var(--primary-color);
   }
 
   &__role {
     font-weight: 600;
     font-size: 1.25rem;
-    color: $theme_primary;
+    color: var(--primary-color);
   }
 }
 

@@ -19,7 +19,7 @@
     padding: 1rem;
     outline: 0;
     font-size: 1rem;
-    font-family: $primary_font;
+    font-family: var(--font-family);
     border: 1px solid $input-color-normal;
     border-radius: 20px;
   }
@@ -119,7 +119,7 @@
 
 .active {
   transform: translate(0, -20px) scale(0.75) !important;
-  color: $theme_primary !important;
+  color: var(--primary-color) !important;
   font-weight: 500 !important;
   font-size: 1rem !important;
 }

@@ -8,8 +8,8 @@ const ButtonGroupCustom = styled(ButtonGroup)({
   justifyContent: 'center',
   borderRadius: '15px',
   border: '1px solid #e0e0e0',
-  // add margin to second child
-  '& > *:nth-child(2n)': {
+
+  '& > *:nth-of-type(2n)': {
     marginLeft: '0.2rem',
     marginRight: '0.2rem',
   },

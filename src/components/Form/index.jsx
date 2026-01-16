@@ -55,7 +55,7 @@ function Form({ handleSubmit }) {
           onChange={handleInputChange}
         />
       </div>
-      {/* <div className='my-2 w-full'>
+      <div className='my-2 w-full'>
         <Input
           placeholder={t('Form.passwordPlaceholder')}
           type='password'

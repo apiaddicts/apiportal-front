@@ -29,7 +29,7 @@
   list-style: none;
   margin-bottom: -1px;
   padding: 0.5rem 2rem 1.75rem 2rem;
-  font-family: $primary_font;
+  font-family: var(--font-family);
   font-style: normal;
   font-weight: 600;
   font-size: 18px;
@@ -43,7 +43,7 @@
   list-style: none;
   margin: 0.5rem 0.75rem;
   padding-bottom: 0.25rem;
-  font-family: $primary_font;
+  font-family: var(--font-family);
   font-style: normal;
   font-weight: 400;
   font-size: 1.375rem;
@@ -57,7 +57,7 @@
 }
 
 .tab-list-active-primary {
-  border-bottom: 5px solid $theme_secondary;
+  border-bottom: 5px solid var(--secondary-color);
 }
 
 .tab-list-active-secundary {

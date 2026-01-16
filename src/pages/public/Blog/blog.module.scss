@@ -140,7 +140,7 @@
   &__result__description {
     line-height: 25px;
     font-weight: 100;
-    font-family: $primary_font;
+    font-family: var(--font-family);
   }
 
   &__pagination {
@@ -179,7 +179,7 @@
       align-items: center;
       justify-content: center;
       font-weight: 100;
-      font-family: $primary_font;
+      font-family: var(--font-family);
 
       p {
         margin-left: 10px;
