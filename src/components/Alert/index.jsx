@@ -62,7 +62,7 @@ function Alert({ alert_type, title, msg, css_styles, display, onResend }) {
                 e.preventDefault();
                 onResend();
               }}>
-                ¿No se envió el correo? Inténtalo de nuevo
+                {t('Alert.resendPasswordChangeEmail')}
               </a>
             </div>
           )}

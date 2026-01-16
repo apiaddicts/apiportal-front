@@ -33,9 +33,14 @@ function PublicRoute() {
   const { getTime } = useTimer();
   const [isOpen, setIsOpen] = useState(false);
   const [openForm, setOpenForm] = useState(false);
+  const { user } = useSelector((state) => state.user);
 
   useEffect(() => { getTime(); }, []);
-  useEffect(() => { isSessionValid(); }, [time]);
+  useEffect(() => {
+    if (Object.keys(user).length > 0) {
+      isSessionValid();
+    }
+  }, [time, user]);
 
   return (
     <>
@@ -45,25 +50,34 @@ function PublicRoute() {
       {openForm && (
         <Register setOpenForm={setOpenForm} setIsOpen={setIsOpen} />
       )}
-      { openModal && (
-        <Logout showModal={openModal} setShowModal={openModal} />
+      {openModal && Object.keys(user).length > 0 && (
+        <Logout showModal={openModal} />
       )}
       <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} />
-      <Routes>
-        <Route path='/' element={<Home setIsOpen={setIsOpen} setOpenForm={setOpenForm} />} />
-        <Route path='/apis' exact='true' element={<Apis setIsOpen={setIsOpen} />} />
-        <Route path='/apis/:id' exact='true' element={<ApiDetail setIsOpen={setOpenForm} />} />
-        <Route path='/app-partners' exact='true' element={<AppPartners />} />
-        <Route path='/faqs' exact='true' element={<Faqs />} />
-        <Route path='/apis/:id/swagger-ui' exact='true' element={<SwaggerUI setIsOpen={setOpenForm} />} />
-        <Route path='/blog' exact='true' element={<Blog setIsOpen={setIsOpen} />} />
-        <Route path='/blog/:id' exact='true' element={<BlogPost setIsOpen={setIsOpen} />} />
-        <Route path='/documentacion' exact='true' element={<Wiki />} />
-        <Route path='/soporte' exact='true' element={<Contacto />} />
-        <Route path='/suscripciones' exact='true' element={<Subscriptions setOpenForm={setOpenForm} />} />
-        <Route path='/suscripciones/:id' exact='true' element={<SubscriptionDetail />} />
-        <Route path='/suscripciones/:id/contact' exact='true' element={<SubscriptionDetailContact />} />
-      </Routes>
+      <main
+        style={{
+          marginTop: window.innerWidth < 768 ? '120px' : '96px',
+          minHeight: window.innerWidth < 768
+            ? 'calc(100vh - 120px)'
+            : 'calc(100vh - 96px)',
+        }}
+      >
+        <Routes>
+          <Route path='/' element={<Home setIsOpen={setIsOpen} setOpenForm={setOpenForm} />} />
+          <Route path='/apis' exact='true' element={<Apis setIsOpen={setIsOpen} />} />
+          <Route path='/apis/:id' exact='true' element={<ApiDetail setIsOpen={setOpenForm} />} />
+          <Route path='/app-partners' exact='true' element={<AppPartners />} />
+          <Route path='/faqs' exact='true' element={<Faqs />} />
+          <Route path='/apis/:id/swagger-ui' exact='true' element={<SwaggerUI setIsOpen={setOpenForm} />} />
+          <Route path='/blog' exact='true' element={<Blog setIsOpen={setIsOpen} />} />
+          <Route path='/blog/:id' exact='true' element={<BlogPost setIsOpen={setIsOpen} />} />
+          <Route path='/documentacion' exact='true' element={<Wiki />} />
+          <Route path='/soporte' exact='true' element={<Contacto />} />
+          <Route path='/suscripciones' exact='true' element={<Subscriptions setOpenForm={setOpenForm} />} />
+          <Route path='/suscripciones/:id' exact='true' element={<SubscriptionDetail />} />
+          <Route path='/suscripciones/:id/contact' exact='true' element={<SubscriptionDetailContact />} />
+        </Routes>
+      </main>
       <Footer />
     </>
   );

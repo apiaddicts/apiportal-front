@@ -5,22 +5,31 @@ import Icon from '../MdIcon/Icon';
 
 import './button.scss';
 
-function Button({ children, styles, opacity, size = 'regular', preIcon, postIcon, icon, ...rest }) {
+function Button({ children, styles, baseColor, opacity, size = 'regular', preIcon, postIcon, icon, ...rest }) {
 
   const btnStyled = (size, opacity) => {
     const height = size.toLowerCase();
     const style = (opacity) ? { opacity } : {};
     if (height === 'regular') {
-      style[height] = '47px';
+      style.height = '47px';
     } if (height === 'small') {
-      style[height] = '32px';
+      style.height = '32px';
     } if (height === 'large') {
-      style[height] = '50px';
+      style.height = '50px';
     } if (height === 'responsive') {
-      style[height] = '100%';
+      style.height = '100%';
     }
     return style;
   };
+
+  const dynamicStyle = baseColor
+    ? {
+        '--btn-bg': baseColor,
+        '--btn-bg-hover': baseColor,
+        '--btn-bg-active': baseColor,
+        border: `2px solid ${baseColor}`,
+      }
+    : {};
 
   return (
     <button
@@ -36,10 +45,16 @@ function Button({ children, styles, opacity, size = 'regular', preIcon, postIcon
                         styles === 'greey-primary' ? 'btn btn-grey' :
                           styles === 'alert' ? 'btn btn-alert' :
                             styles === 'disabled' ? 'btn btn-disabled' :
-                              styles === 'success' ? 'btn btn-success' : 'btn-none'
+                              styles === 'success' ? 'btn btn-success' :
+                                styles === 'primary-dinamic' ? 'btn btn-primary-dinamic' :
+                                  styles === 'secundary-dinamic' ? 'btn btn-secundary-dinamic' : 'btn-none'
 
       }
-      style={btnStyled(size, opacity)}
+      style={{
+        ...btnStyled(size, opacity),
+        ...dynamicStyle,
+        ...rest.style,
+      }}
       {...rest}
     >
       {preIcon && (

@@ -1,19 +1,24 @@
 import React from 'react';
 import { Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import Button from '../../../components/Buttons/Button';
 import { logout } from '../../../redux/actions/userAction';
 
-function Logout({ showModal, setShowModal }) {
+function Logout({ showModal }) {
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleClose = () => {
-    setShowModal(false);
+    dispatch(logout());
+    navigate(-1);
   };
-
-  const dispatch = useDispatch();
 
   const handlerLogout = () => {
     dispatch(logout());
+    navigate(-1);
   };
 
   return (
@@ -27,11 +32,11 @@ function Logout({ showModal, setShowModal }) {
           aria-describedby='alert-dialog-description'
         >
           <DialogTitle>
-            Sesión caducada
+            {t('Logout.expiredTitle')}
           </DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Tu sesión ha excedido el tiempo de actividad. Necesitas iniciar sesión nuevamente.
+              {t('Logout.expiredDescription')}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
@@ -39,7 +44,7 @@ function Logout({ showModal, setShowModal }) {
               <div className='row justify-center'>
                 <div className='flex-sm-12 flex-md-8'>
                   <Button styles='primary-blue' onClick={handlerLogout}>
-                    Salir
+                    {t('Logout.exit')}
                   </Button>
                 </div>
               </div>

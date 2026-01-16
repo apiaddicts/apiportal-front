@@ -13,6 +13,7 @@ import ApisPaginated from '../../../components/ApisPaginated';
 import Icon from '../../../components/MdIcon/Icon';
 import classes from './apis.module.scss';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
+import config from '../../../services/config';
 import { useTranslation } from 'react-i18next';
 
 function Apis({ setIsOpen }) {
@@ -139,13 +140,17 @@ function Apis({ setIsOpen }) {
     });
   };
 
+  const apiImageUrl = filterApiBanner?.[0]?.background?.url
+    ? `${filterApiBanner[0].background.url}`
+    : config.notImage;
+
   const fApis = libraries && libraries.length > 0 ? libraries : [];
 
   return (
-    <div id='apiHome' style={{ paddingTop: '114px' }}>
+    <div id='apiHome'>
       <BannerImage
         title={filterApiBanner?.[0]?.title}
-        img={filterApiBanner?.[0]?.background?.url}
+        img={apiImageUrl}
         description={filterApiBanner?.[0]?.subtitle}
         css_styles={{ 'layout_height': 'banner_custom__layout--height' }}
       />

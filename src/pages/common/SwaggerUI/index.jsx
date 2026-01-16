@@ -1,91 +1,76 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-import SwaggerUi from 'swagger-ui';
-import 'swagger-ui/dist/swagger-ui.css';
+import SwaggerUIReact from 'swagger-ui-react';
+import 'swagger-ui-react/swagger-ui.css';
 
 import { Container } from '@mui/material';
-import { useSelector, useDispatch } from 'react-redux';
 import Icon from '../../../components/MdIcon/Icon';
-import { getApiDefinition, resetApiDetailed } from '../../../redux/actions/apiManagerAction'
+import libraryService from '../../../services/libraryService';
 import classes from './swagger-ui.module.scss';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 
 function SwaggerUI() {
-  const { user } = useSelector((state) => state.user);
-  const { definition } = useSelector((state) => state.apiManager);
-  const dispatch = useDispatch();
   const params = useParams();
-  const swaggerRef = useRef(null);
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const [openApi, setOpenApi] = useState(null);
+  const [swaggerUi, setSwaggerUi] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [hasOpenApi, setHasOpenApi] = useState(false);
 
   useEffect(() => {
-    if( Object.keys(definition).length == 0){
-      dispatch(getApiDefinition('Mulesoft', params.id));
-    }
-  }, []);
+    setLoading(true);
+    setHasOpenApi(false);
+    setOpenApi(null);
 
-  useEffect(() => {
-      return () => {
-        dispatch(resetApiDetailed());
-      };
-    }, []);
+    libraryService
+      .getOpenApiFromStrapi(params.id)
+      .then((library) => {
+        const openDoc = library?.openDoc;
 
-  useEffect(() => {
-    if(Object.keys(definition).length > 0 && swaggerRef.current){
-      SwaggerUi({
-        domNode: swaggerRef.current,
-        spec: definition,
-        presets: [SwaggerUi.presets.apis],
-        persistAuthorization: true,
-      });
-    }
+        if (!openDoc?.openapi || !openDoc?.paths) return;
 
-  }, [definition]);
-  
+        setOpenApi(openDoc);
+        setHasOpenApi(true);
+      })
+      .finally(() => setLoading(false));
+  }, [params.id]);
 
-  return (
-    <div>
-      {Object.keys(user).length > 0 ? (
-        <>
-          <div className={classes.back__btn}>
-            <Link to={-1}>
-              <div className={classes.return}>
-                <div>
-                  <Icon id='MdKeyboardBackspace' />
-                </div>
-                <span>VOLVER</span>
-              </div>
-            </Link>
-          </div>
-          <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
-            { Object.keys(definition).length > 0 ? <div ref={swaggerRef} id='swaggerContainer' /> : <SkeletonComponent /> }
-          </Container>
-        </>
-      ) : (
-        <div id='apiHome' style={{ paddingTop: '114px' }}>
-          <div className={classes.banner_img}>
-            <div className={`${classes.banner_img__layout}`}>
-              <div className='container'>
-                <div className={classes.banner_img__backTo}>
-                  <Link to='/apis' className={classes.banner_img__backTo__btn}>
-                    <div>
-                      <Icon id='MdKeyboardBackspace' />
-                    </div>
-                    <div className={classes.banner_img__backTo__label}>
-                      <span>Volver</span>
-                    </div>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='container'>
-            { Object.keys(definition).length > 0 ? <div ref={swaggerRef} id='swaggerContainer' /> : <SkeletonComponent /> }
-          </div>
-        </div>
-      )}
+  const EmptyState = () => (
+    <div style={{ padding: '40px', textAlign: 'center', color: '#666' }}>
+      <p>{t('SwaggerUI.noInfo')}</p>
     </div>
   );
-};
+
+  return (
+    <div
+      style={{
+        paddingTop: '80px',
+        paddingBottom: '80px',
+      }}
+    >
+      <div className={classes.back__btn}>
+        <div className={classes.return} style={{ cursor: 'pointer' }} onClick={() => navigate(-1)}>
+          <Icon id='MdKeyboardBackspace' />
+          <span>{t('SwaggerUI.back')}</span>
+        </div>
+      </div>
+
+      <Container fixed>
+        {loading && <SkeletonComponent />}
+        {!loading && !hasOpenApi && <EmptyState />}
+        {!loading && hasOpenApi && (
+          <SwaggerUIReact
+            spec={openApi}
+            onComplete={(ui) => setSwaggerUi(ui)}
+          />
+        )}
+      </Container>
+    </div>
+  );
+}
 
 export default SwaggerUI;

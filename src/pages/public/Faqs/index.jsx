@@ -42,11 +42,7 @@ function Faqs({ isPrivate }) {
   }) : [];
 
   return (
-    <div
-      style={{
-        ...(isPrivate ? {} : { paddingTop: '114px' }),
-      }}
-    >
+    <div>
       {dataFaq && Object.keys(dataFaq).length > 0 ? (
         <div>
           {!isPrivate && (

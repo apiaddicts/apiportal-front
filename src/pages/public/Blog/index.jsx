@@ -83,12 +83,7 @@ function Blog({ setIsOpen, isPrivate, isPrivateNews }) {
 
 
   return (
-    <div
-      id='blogIndex'
-      style={{
-        paddingTop: (isPrivateNews || isPrivate) ? '0px' : '114px'
-      }}
-    >
+    <div id='blogIndex'>
       {blogPage && Object.keys(blogPage).length > 0 ? (
         <div>
           {!isPrivateNews && (

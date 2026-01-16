@@ -19,7 +19,7 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
     <div
       className={classes.banner_img}
     >
-      <div className={`${classes.banner_img__layout} ${classes[layout_height]} ${classes[apiindividual_height]}`} style={{ backgroundColor: "#007ac385" }}>
+      <div className={`${classes.banner_img__layout} ${classes[layout_height]} ${classes[apiindividual_height]}`}>
         <div className='container'>
           <div
             className={classes.banner_img__backTo}

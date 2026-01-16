@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import { useTranslation } from 'react-i18next';
 
 const useFormConfig = (fields, customHandleSubmit) => {
-  const { t } = useTranslation(); // ✅ Agregado aquí antes de usarlo
+  const { t } = useTranslation();
 
   const validationSchema = Yup.object().shape({
     first_name: string().trim().required(t('Form.requiredField')).matches(/^[a-zA-ZÀ-ÿ\s]+$/, t('Form.noSpecialCharacters'))
@@ -17,11 +17,11 @@ const useFormConfig = (fields, customHandleSubmit) => {
     password: string()
       .min(8, t('Form.passwordMinLength'))
       .max(16, t('Form.maxCharacters'))
-      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/, t('Form.passwordRequirements'))
+      .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=.,?])[A-Za-z\d!@#$%^&*()_+\-=.,?]{8,16}$/, t('Form.passwordRequirements'))
       .trim(t('Form.noSpaces'))
       .strict()
       .required(t('Form.passwordRequired')),
-    password_confirmation: string().oneOf([Yup.ref('password')], t('Form.passwordMatch')).required(t('Form.requiredField')).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,16}$/, t('Form.passwordRequirements')),
+    password_confirmation: string().oneOf([Yup.ref('password')], t('Form.passwordMatch')).required(t('Form.requiredField')).matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=.,?])[A-Za-z\d!@#$%^&*()_+\-=.,?]{8,16}$/, t('Form.passwordRequirements')),
   });
 
   const objectFromArray = (fields, key) => {

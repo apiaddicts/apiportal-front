@@ -53,14 +53,14 @@ function PasswordGenerate({ idSuscripcion, user, version, status }) {
     if (version === 1) {
       subscriptionsService.regenerateSubscription(user.name, idSuscripcion, 'regeneratePrimaryKey').then((response) => {
         handleRegenerateSubscriptions();
-        notify('Se ha regenerado exitosamente!');
+        notify(t('RegenerateKeys.successMessage'));
       }, (err) => {
         console.error(err);
       });
     } else {
       subscriptionsService.regenerateSubscription(user.name, idSuscripcion, 'regenerateSecondaryKey').then((response) => {
         handleRegenerateSubscriptions();
-        notify('Se ha regenerado exitosamente!');
+        notify(t('RegenerateKeys.successMessage'));
       }, (err) => {
         console.error(err);
       });
@@ -79,19 +79,19 @@ function PasswordGenerate({ idSuscripcion, user, version, status }) {
           onClose={toggleConfirmation}
         >
           <DialogTitle id='alert-dialog-title'>
-            {t('Collapse.regenerateSubscriptionKeys')}
+            {t('RegenerateKeys.regenerateSubscriptionKeys')}
           </DialogTitle>
           <DialogContent>
             <DialogContentText id='alert-dialog-description'>
-              {t('Collapse.confirmRegenerateSubscriptionKeys')}
+              {t('RegenerateKeys.confirmRegenerateSubscriptionKeys')}
             </DialogContentText>
           </DialogContent>
           <DialogActions>
             <Button onClick={toggleConfirmation} color='error'>
-              {t('Collapse.cancel')}
+              {t('RegenerateKeys.cancel')}
             </Button>
             <Button onClick={() => handleReloadRegerateSubscription()} variant='contained' autoFocus>
-              {t('Collapse.accept')}
+              {t('RegenerateKeys.accept')}
             </Button>
           </DialogActions>
         </Dialog>

@@ -21,7 +21,7 @@
     url("../static/fonts/trebuchet/Trebuchet-MS-Italic.ttf") format('truetype') font-weight-italic;
 }
 
-// $primary_font: 'Century Gothic', sans-serif;
+// var(--font-family): 'Century Gothic', sans-serif;
 $primary_font: 'Fira Sans', sans-serif;
 $secondary_font: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
@@ -147,91 +147,91 @@ $heading: map-deep-merge(("headline-ad": ("size": 90px,
         "weight": 700,
         "line-height": auto,
         "letter-spacing": -1.5px,
-        "font-family": $primary_font,
+        "font-family": var(--font-family),
         "text-transform": false,
       ),
       "h1": ("size": 60px,
         "weight": 700,
         "line-height": auto,
         "letter-spacing": -0.5px,
-        "font-family": $primary_font,
+        "font-family": var(--font-family),
         "text-transform": false,
       ),
       "h2": ("size": 48px,
         "weight": 700,
         "line-height": auto,
         "letter-spacing": auto,
-        "font-family": $primary_font,
+        "font-family": var(--font-family),
         "text-transform": false,
       ),
       "h3": ("size": 36px,
         "weight": 700,
         "line-height": auto,
         "letter-spacing": 0.25,
-        "font-family": $primary_font,
+        "font-family": var(--font-family),
         "text-transform": false,
       ),
       "h4": ("size": 28px,
         "weight": 600,
         "line-height": auto,
         "letter-spacing": auto,
-        "font-family": $primary_font,
+        "font-family": var(--font-family),
         "text-transform": false,
       ),
       "h5": ("size": 22px,
         "weight": 500,
         "line-height": auto,
         "letter-spacing": 0.15,
-        "font-family": $primary_font,
+        "font-family": var(--font-family),
         "text-transform": false,
       ),
       "subtitle-1": ("size": 18px,
         "weight": 400,
         "line-height": auto,
         "letter-spacing": 0.15,
-        "font-family": $primary_font,
+        "font-family": var(--font-family),
         "text-transform": false,
       ),
       "subtitle-2": ("size": 16px,
         "weight": 500,
         "line-height": auto,
         "letter-spacing": 0.1,
-        "font-family": $primary_font,
+        "font-family": var(--font-family),
         "text-transform": false,
       ),
       "body-1": ("size": 18px,
         "weight": 400,
         "line-height": auto,
         "letter-spacing": 0.5,
-        "font-family": $primary_font,
+        "font-family": var(--font-family),
         "text-transform": false,
       ),
       "body-2": ("size": 16px,
         "weight": 400,
         "line-height": auto,
         "letter-spacing": 0.25,
-        "font-family": $primary_font,
+        "font-family": var(--font-family),
         "text-transform": false,
       ),
       "button": ("size": 16px,
         "weight": 700,
         "line-height": auto,
         "letter-spacing": 1.25px,
-        "font-family": $primary_font,
+        "font-family": var(--font-family),
         "text-transform": uppercase,
       ),
       "caption": ("size": 13px,
         "weight": 400,
         "line-height": auto,
         "letter-spacing": 0.4,
-        "font-family": $primary_font,
+        "font-family": var(--font-family),
         "text-transform": false,
       ),
       "overline": ("size": 10px,
         "weight": 500,
         "line-height": auto,
         "letter-spacing": 1.5px,
-        "font-family": $primary_font,
+        "font-family": var(--font-family),
         "text-transform": uppercase,
       ),
     ),
@@ -354,8 +354,8 @@ $width-container-xl: 130rem;
 
   .flex-sm-5 {
     @include breakpoint(sm) {
-      flex: 0 0 percentage(math.div(5, 12));
-      max-width: percentage(math.div(5, 12));
+      flex: 0 0 math.percentage(math.div(5, 12));
+      max-width: math.percentage(math.div(5, 12));
     }
   }
 
@@ -367,36 +367,36 @@ $width-container-xl: 130rem;
 
   .flex-sm-7 {
     @include breakpoint(sm) {
-      flex: 0 0 percentage(math.div(7, 12));
-      max-width: percentage(math.div(7, 12));
+      flex: 0 0 math.percentage(math.div(7, 12));
+      max-width: math.percentage(math.div(7, 12));
     }
   }
 
   .flex-sm-8 {
     @include breakpoint(sm) {
-      flex: 0 0 percentage(math.div(8, 12));
-      max-width: percentage(math.div(8, 12));
+      flex: 0 0 math.percentage(math.div(8, 12));
+      max-width: math.percentage(math.div(8, 12));
     }
   }
 
   .flex-sm-9 {
     @include breakpoint(sm) {
-      flex: 0 0 percentage(math.div(9, 12));
-      max-width: percentage(math.div(9, 12));
+      flex: 0 0 math.percentage(math.div(9, 12));
+      max-width: math.percentage(math.div(9, 12));
     }
   }
 
   .flex-sm-10 {
     @include breakpoint(sm) {
-      flex: 0 0 percentage(math.div(10, 12));
-      max-width: percentage(math.div(10, 12));
+      flex: 0 0 math.percentage(math.div(10, 12));
+      max-width: math.percentage(math.div(10, 12));
     }
   }
 
   .flex-sm-11 {
     @include breakpoint(sm) {
-      flex: 0 0 percentage(math.div(11, 12));
-      max-width: percentage(math.div(11, 12));
+      flex: 0 0 math.percentage(math.div(11, 12));
+      max-width: math.percentage(math.div(11, 12));
     }
   }
 
@@ -449,8 +449,8 @@ $width-container-xl: 130rem;
 
   .flex-md-5 {
     @include breakpoint(md) {
-      flex: 0 0 percentage(math.div(5, 12));
-      max-width: percentage(math.div(5, 12));
+      flex: 0 0 math.percentage(math.div(5, 12));
+      max-width: math.percentage(math.div(5, 12));
     }
   }
 
@@ -462,36 +462,36 @@ $width-container-xl: 130rem;
 
   .flex-md-7 {
     @include breakpoint(md) {
-      flex: 0 0 percentage(math.div(7, 12));
-      max-width: percentage(math.div(7, 12));
+      flex: 0 0 math.percentage(math.div(7, 12));
+      max-width: math.percentage(math.div(7, 12));
     }
   }
 
   .flex-md-8 {
     @include breakpoint(md) {
-      flex: 0 0 percentage(math.div(8, 12));
-      max-width: percentage(math.div(8, 12));
+      flex: 0 0 math.percentage(math.div(8, 12));
+      max-width: math.percentage(math.div(8, 12));
     }
   }
 
   .flex-md-9 {
     @include breakpoint(md) {
-      flex: 0 0 percentage(math.div(9, 12));
-      max-width: percentage(math.div(9, 12));
+      flex: 0 0 math.percentage(math.div(9, 12));
+      max-width: math.percentage(math.div(9, 12));
     }
   }
 
   .flex-md-10 {
     @include breakpoint(md) {
-      flex: 0 0 percentage(math.div(10, 12));
-      max-width: percentage(math.div(10, 12));
+      flex: 0 0 math.percentage(math.div(10, 12));
+      max-width: math.percentage(math.div(10, 12));
     }
   }
 
   .flex-md-11 {
     @include breakpoint(md) {
-      flex: 0 0 percentage(math.div(11, 12));
-      max-width: percentage(math.div(11, 12));
+      flex: 0 0 math.percentage(math.div(11, 12));
+      max-width: math.percentage(math.div(11, 12));
     }
   }
 
@@ -544,8 +544,8 @@ $width-container-xl: 130rem;
 
   .flex-lg-5 {
     @include breakpoint(lg) {
-      flex: 0 0 percentage(math.div(5, 12));
-      max-width: percentage(math.div(5, 12));
+      flex: 0 0 math.percentage(math.div(5, 12));
+      max-width: math.percentage(math.div(5, 12));
     }
   }
 
@@ -557,36 +557,36 @@ $width-container-xl: 130rem;
 
   .flex-lg-7 {
     @include breakpoint(lg) {
-      flex: 0 0 percentage(math.div(7, 12));
-      max-width: percentage(math.div(7, 12));
+      flex: 0 0 math.percentage(math.div(7, 12));
+      max-width: math.percentage(math.div(7, 12));
     }
   }
 
   .flex-lg-8 {
     @include breakpoint(lg) {
-      flex: 0 0 percentage(math.div(8, 12));
-      max-width: percentage(math.div(8, 12));
+      flex: 0 0 math.percentage(math.div(8, 12));
+      max-width: math.percentage(math.div(8, 12));
     }
   }
 
   .flex-lg-9 {
     @include breakpoint(lg) {
-      flex: 0 0 percentage(math.div(9, 12));
-      max-width: percentage(math.div(9, 12));
+      flex: 0 0 math.percentage(math.div(9, 12));
+      max-width: math.percentage(math.div(9, 12));
     }
   }
 
   .flex-lg-10 {
     @include breakpoint(lg) {
-      flex: 0 0 percentage(math.div(10, 12));
-      max-width: percentage(math.div(10, 12));
+      flex: 0 0 math.percentage(math.div(10, 12));
+      max-width: math.percentage(math.div(10, 12));
     }
   }
 
   .flex-lg-11 {
     @include breakpoint(lg) {
-      flex: 0 0 percentage(math.div(11, 12));
-      max-width: percentage(math.div(11, 12));
+      flex: 0 0 math.percentage(math.div(11, 12));
+      max-width: math.percentage(math.div(11, 12));
     }
   }
 
@@ -639,8 +639,8 @@ $width-container-xl: 130rem;
 
   .flex-xl-5 {
     @include breakpoint(xl) {
-      flex: 0 0 percentage(math.div(5, 12));
-      max-width: percentage(math.div(5, 12));
+      flex: 0 0 math.percentage(math.div(5, 12));
+      max-width: math.percentage(math.div(5, 12));
     }
   }
 
@@ -652,36 +652,36 @@ $width-container-xl: 130rem;
 
   .flex-xl-7 {
     @include breakpoint(xl) {
-      flex: 0 0 percentage(math.div(7, 12));
-      max-width: percentage(math.div(7, 12));
+      flex: 0 0 math.percentage(math.div(7, 12));
+      max-width: math.percentage(math.div(7, 12));
     }
   }
 
   .flex-xl-8 {
     @include breakpoint(xl) {
-      flex: 0 0 percentage(math.div(8, 12));
-      max-width: percentage(math.div(8, 12));
+      flex: 0 0 math.percentage(math.div(8, 12));
+      max-width: math.percentage(math.div(8, 12));
     }
   }
 
   .flex-xl-9 {
     @include breakpoint(xl) {
-      flex: 0 0 percentage(math.div(9, 12));
-      max-width: percentage(math.div(9, 12));
+      flex: 0 0 math.percentage(math.div(9, 12));
+      max-width: math.percentage(math.div(9, 12));
     }
   }
 
   .flex-xl-10 {
     @include breakpoint(xl) {
-      flex: 0 0 percentage(math.div(10, 12));
-      max-width: percentage(math.div(10, 12));
+      flex: 0 0 math.percentage(math.div(10, 12));
+      max-width: math.percentage(math.div(10, 12));
     }
   }
 
   .flex-xl-11 {
     @include breakpoint(xl) {
-      flex: 0 0 percentage(math.div(11, 12));
-      max-width: percentage(math.div(11, 12));
+      flex: 0 0 math.percentage(math.div(11, 12));
+      max-width: math.percentage(math.div(11, 12));
     }
   }
 

@@ -49,19 +49,25 @@ export const getApiDefinition = (configApim, id) => (dispatch) => {
   dispatch({ type: apiManagerConstants.GET_DEFINITION_REQUEST });
   apiManagerService.getApiDefinition(configApim, id)
     .then(response => {
-      if(response.data || response.data != null) {
+      if (response?.data) {
         const openApiDef = JSON.parse(response.data);
         dispatch({
           type: apiManagerConstants.GET_DEFINITION_SUCCESS,
           payload: openApiDef
-        })
+        });
       } else {
         dispatch({
           type: apiManagerConstants.GET_DEFINITION_FAILED,
           payload: response
-        })
+        });
       }
     })
+    .catch(error => {
+      dispatch({
+        type: apiManagerConstants.GET_DEFINITION_FAILED,
+        payload: error
+      });
+    });
 }
 
 export const resetApiDetailed = () => (dispatch) => {

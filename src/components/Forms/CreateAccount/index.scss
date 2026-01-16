@@ -56,8 +56,8 @@
     border-radius: 3px;
   }
   input[type="checkbox"]:checked {
-    background-color: $theme_primary;
-    accent-color: $theme_primary;
+    background-color: var(--primary-color);
+    accent-color: var(--primary-color);
   }
 
   // input {
@@ -129,12 +129,12 @@
     }
     letter-spacing: 0.25px;
     font-weight: 700;
-    color: $theme_primary;
+    color: var(--primary-color);
     span, a {
       font-weight: 700;
 
       text-decoration: underline;
-      color: $theme_tertiary;
+      color: var(--secondary-color) !important;
     }
   }
 }

@@ -11,10 +11,10 @@
 .cell_title {
   display: flex;
   font-size: 20px;
-  color: $theme_primary;
+  color: var(--primary-color);
   text-transform: uppercase;
   h2 {
-    font-family: $primary_font;
+    font-family: var(--font-family);
     font-style: normal;
     font-weight: 700;
     font-size: 12px;
@@ -22,12 +22,12 @@
     display: flex;
     align-items: center;
     letter-spacing: 0.2px;
-    color: $theme_primary;
+    color: var(--primary-color);
   }
 }
 
 .cell_name {
-  font-family: $primary_font;
+  font-family: var(--font-family);
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
@@ -41,7 +41,7 @@
 }
 
 .cell_description {
-  font-family: $primary_font;
+  font-family: var(--font-family);
   font-style: normal;
   font-weight: 400;
   font-size: 12px;
@@ -55,16 +55,16 @@
 .pagination {
   cursor: pointer;
   display: flex;
-  color: $theme_primary;
+  color: var(--primary-color);
   font-size: 20px;
   align-items: center;
 
   &__icon {
-    color: $theme_primary;
+    color: var(--primary-color);
   }
 
   p {
-    font-family: $primary_font;
+    font-family: var(--font-family);
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -143,12 +143,12 @@
   width: 64px;
 
   div {
-    color: $theme_secondary;
+    color: var(--secondary-color);
     font-size: 20px;
   }
 
   span {
-    font-family: $primary_font;
+    font-family: var(--font-family);
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -156,7 +156,7 @@
     text-align: right;
     letter-spacing: 1.33333px;
     text-transform: uppercase;
-    color: $theme_secondary;
+    color: var(--secondary-color);
   }
 }
 

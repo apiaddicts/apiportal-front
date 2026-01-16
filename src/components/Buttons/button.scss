@@ -17,7 +17,7 @@
   color: $color;
 
   &:hover {
-    color: darken($color, 5%);
+    filter: brightness(95%);
     transition: all 0.3s ease;
   }
 }
@@ -30,7 +30,7 @@
   cursor: pointer;
   text-decoration: none;
   border-radius: 6px;
-  font-family: $primary_font;
+  font-family: var(--font-family);
   font-style: normal;
   font-weight: 700;
   font-size: 16px;
@@ -58,15 +58,32 @@
 }
 
 .btn-tertiary {
-  @include button-bg($theme_tertiary);
+  @include button-bg-dynamic(rgba(var(--secondary-color-rgb), 0.9));
   @include letter($secondary_white);
-  @include border($theme_tertiary);
+  @include border-dynamic(rgba(var(--secondary-color-rgb), 0.4));
 }
 
 .btn-secundary {
   @include button-bg($secondary_text);
   @include letter($secondary_white);
   @include border($secondary_text);
+}
+
+.btn-primary-dinamic {
+  @include button-bg-dynamic(var(--primary-color));
+  @include letter-dynamic($white);
+  @include border-dynamic(var(--primary-color));
+}
+
+.btn-secundary-dinamic {
+  @include button-bg-dynamic(var(--secondary-color));
+  @include letter-dynamic($white);
+  @include border-dynamic(var(--secondary-color));
+
+  .btn__icon {
+    color: $white;
+    margin-right: 8px;
+  }
 }
 
 .btn-primary {
@@ -83,7 +100,7 @@
 
 .btn-secundary-white {
   @include button-bg($white);
-  @include letter($theme_primary);
+  @include letter(var(--primary-color-rgb));
   @include border($white);
 }
 

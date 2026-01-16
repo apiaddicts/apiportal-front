@@ -16,6 +16,7 @@ import Connection from '../../../pages/private/Apps/Forms/Connection';
 import InformationInitialValues from '../../../pages/private/Apps/FormModel/InformationInitialValues';
 import InformationSchema from '../../../pages/private/Apps/FormModel/InformationSchema';
 import appsActions from '../../../redux/actions/appsActions';
+import { useTranslation } from 'react-i18next';
 import { showSelectedApis } from '../../../redux/actions/libraryAction';
 
 const { formId, formField } = InformationFormModel;
@@ -35,38 +36,15 @@ function _renderStepContent(step) {
   }
 }
 
-const translations = {
-  es: {
-    save: 'Guardar',
-    finish: 'Finalizar',
-    next: 'Siguiente',
-    verifyInsertedData: 'Verificar datos insertados',
-    allStepsCompleted: 'Todos los pasos completados - has terminado',
-    reset: 'Reiniciar'
-  },
-  en: {
-    save: 'Save',
-    finish: 'Finish',
-    next: 'Next',
-    verifyInsertedData: 'Verify inserted data',
-    allStepsCompleted: 'All steps completed - you\'re finished',
-    reset: 'Reset'
-  }
-};
-
-const getTranslation = (key) => {
-  const lang = localStorage.getItem('lang') || 'en';
-  return translations[lang][key] || key;
-};
-
 export default function HorizontalStepper({
   steps,
 }) {
+  const { t } = useTranslation();
   const { createdApp, error, addApisRes, activeStep } = useSelector((state) => state.apps);
   const [completed, setCompleted] = useState({});
   const isLastStep = activeStep === steps.length - 1;
   const currentValidationSchema = InformationSchema[activeStep];
-  const notify = (msg) => toast(getTranslation(msg));
+  const notify = (msg) => toast(msg);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -138,11 +116,11 @@ export default function HorizontalStepper({
 
   useEffect(() => {
     if (error && Object.prototype.hasOwnProperty.call(error, 'error')) {
-      let newText = error.error.statusText;
       if (error.error.status === 400) {
-        newText = 'Verificar datos insertados';
+        toast(t('Stepper.verifyInsertedData'));
+      } else {
+        toast(error.error.statusText);
       }
-      notify(newText);
       dispatch(appsActions.resetErrors());
     }
   }, [error]);
@@ -175,11 +153,11 @@ export default function HorizontalStepper({
         {allStepsCompleted() ? (
           <>
             <Typography sx={{ mt: 2, mb: 1 }}>
-              {getTranslation('allStepsCompleted')}
+              {t('Stepper.allStepsCompleted')}
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
               <Box sx={{ flex: '1 1 auto' }} />
-              <Button onClick={handleReset}>{getTranslation('reset')}</Button>
+              <Button onClick={handleReset}>{t('Stepper.reset')}</Button>
             </Box>
           </>
         ) : (
@@ -195,10 +173,10 @@ export default function HorizontalStepper({
                   <div className='stepper__wrapper__actions'>
                     <Button type='submit' disabled={isSubmitting} className='custom__btn custom__btn__primary stepper__wrapper__actions__next'>
                       {activeStep === 0 ?
-                        getTranslation('save') :
+                        t('Stepper.save') :
                         isLastStep ?
-                          getTranslation('finish') :
-                          getTranslation('next')}
+                          t('Stepper.finish') :
+                          t('Stepper.next')}
                     </Button>
                   </div>
                 </Form>

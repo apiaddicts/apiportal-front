@@ -2,7 +2,7 @@ import React from 'react';
 import CustomIcon from '../MdIcon/CustomIcon';
 import './item.scss';
 
-function Item({ icon, title, description, type = 'basic', number, textColor = '#000', iconColor = '#fff', background = '#00acc742', titleStyles, iconStyle, css_styles }) {
+function Item({ icon, title, description, type = 'basic', number, textColor = '#000', iconColor = '#fff', background = '#00acc742', titleStyles, iconStyle, css_styles = { custom_description: 'text__gray__darken' } }) {
   const { custom_description } = css_styles;
   const color = (color) => ({
     color: `${color}`,
@@ -36,7 +36,4 @@ function Item({ icon, title, description, type = 'basic', number, textColor = '#
   );
 }
 
-Item.defaultProps = {
-  css_styles: { 'custom_description': 'text__gray__darken' },
-};
 export default Item;

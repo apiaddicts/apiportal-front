@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
@@ -19,6 +19,7 @@ import CustomMarkdown from '../../../components/CustomMarkdown';
 import { getHomeContent } from '../../../redux/actions/homeAction';
 import { getLibrary, getLibraries } from '../../../redux/actions/libraryAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
+import config from '../../../services/config';
 import codeSnipet from '../../../static/img/code-snippet.png';
 import classes from './api-detail.module.scss';
 
@@ -29,6 +30,29 @@ function ApiDetail({ setIsOpen }) {
   const { homePage } = useSelector((state) => state.home);
   const { library, libraries } = useSelector((state) => state.library);
   const { blogs } = useSelector((state) => state.blog);
+
+  const [bannerImg, setBannerImg] = useState('');
+  const [cardsImages, setCardsImages] = useState({});
+
+  useEffect(() => {
+    if (library?.image?.length > 0) {
+      setBannerImg(`${library.image[0].formats?.medium?.url || library.image[0].url}`);
+    } else if (library && Object.keys(library).length > 0) {
+      setBannerImg(config.notImage);
+    }
+  }, [library]);
+
+  useEffect(() => {
+    if (libraries && libraries.length > 0) {
+      const imgs = {};
+      libraries.forEach(lib => {
+        imgs[lib.documentId] = lib.image?.length > 0
+          ? `${lib.image[0].formats?.medium?.url || lib.image[0].url}`
+          : config.notImage;
+      });
+      setCardsImages(imgs);
+    }
+  }, [libraries]);
 
   useEffect(() => {
     if (params?.id) {
@@ -41,10 +65,6 @@ function ApiDetail({ setIsOpen }) {
       dispatch(getHomeContent());
     }
 
-    //if (params.id && library && Object.keys(library).length === 0) {
-    //  dispatch(getLibrary(params?.id));
-    //}
-
     if (blogs && blogs.length === 0) {
       dispatch(getBlogs());
     }
@@ -53,7 +73,6 @@ function ApiDetail({ setIsOpen }) {
       dispatch(getLibraries());
     }
 
-    //dispatch(resetGetLibrary());
   }, []);
 
   // Load Banner Section
@@ -70,20 +89,20 @@ function ApiDetail({ setIsOpen }) {
   // Load buttons sections
   const filterButtonSection = homePage && homePage?.contentSections && homePage?.contentSections?.length > 0 ? homePage?.contentSections?.filter((item) => item.__component === 'sections.button-hero') : [];
 
-  const buttonsLbls = library && library?.buttons && library?.buttons?.length > 0 ? library?.buttons?.map((item) => {
-    const data = {
-      label: item?.name,
-      class: item?.class,
-      link: item?.link !== '' ? `/apis/${params?.documentId}#contact` : '',
-    };
-
-    return data;
-  }) : [
-    {
-      label: 'Probar API',
-      class: 'primary',
-    },
-  ];
+  const buttonsLbls =
+    library?.buttons?.length > 0
+      ? library.buttons.map((item) => ({
+          label: item?.name,
+          class: item?.class,
+          link: `/apis/${params?.documentId}/swagger-ui`,
+        }))
+      : [
+          {
+            label: t('ApiDetail.tryApi'),
+            class: 'primary-dinamic',
+            link: `/apis/${params?.documentId}/swagger-ui`,
+          },
+        ];
 
   const datanews = blogs?.length > 0 ? _.sortBy(blogs, (m) => {
     return moment(m.created_at).toDate().getTime();
@@ -100,25 +119,28 @@ function ApiDetail({ setIsOpen }) {
     return itemData;
   }) : [];
 
-  const random = Math.floor(Math.random() * libraries.length);
-  const random2 = Math.floor(Math.random() * libraries.length);
-  const random3 = Math.floor(Math.random() * libraries.length);
+  const firstImageUrl = library?.image?.length > 0
+    ? `${library.image[0].formats?.medium?.url || library.image[0].url}`
+    : config.notImage;
 
-  const apisNews = libraries?.length > 0 ? [libraries[random], libraries[random2], libraries[random3]] : [];
+
+  const otherApis = libraries?.filter(lib => lib.documentId !== library?.documentId) || [];
+  const shuffledApis = _.shuffle(otherApis);
+  const apisNews = shuffledApis.slice(0, 3);
 
   const handleClickPage = (id) => {
     dispatch(getLibrary(id));
   };
 
   return (
-    <div id='api' style={{ paddingTop: '114px' }}>
+    <div id='api'>
       { Object.keys(library).length > 0 ? (
         <>
           <section>
             <BannerImage
               title={library?.title}
               apiId={library?.slug}
-              img={library?.image?.length > 0 && library?.image?.length === 1 ? library?.image?.[0]?.url : ''}
+              img={bannerImg}
               buttons={buttonsLbls}
               setIsOpen={setIsOpen}
               css_styles={{ 'image_display': 'banner_custom__img--dnone', 'apiindividual_height': 'banner_apiindividual__layout--height', 'custom_line_height': 'line-height-1' }}
@@ -127,45 +149,44 @@ function ApiDetail({ setIsOpen }) {
             />
           </section>
           <section className={`container ${classes.section__content} pb-9`}>&nbsp;</section>
-          <section className='container mb-15'>
-            <div className='row'>
-              <div className={`flex-md-12 flex-sm-12 -ml-23 ${classes.section__content__title}`}>
-                <h1 className='h2 text__primary__title font-weight-bold mb-10 -ml-23 text-center'>
-                  {library?.benefits && library?.benefits?.length > 0 && library?.benefits?.length === 1 ?
-                    library?.benefits?.[0]?.title :
-                    t('Home.titleSection')}
-                </h1>
-              </div>
-              <div className='row px-5'>
-                <div className='flex-sm-12 flex-md-6 flex-lg-6' style={{ display: 'flex', alignItems: 'center', padding: '0 4rem' }}>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(1fr)', gap: '2rem', alignContent: 'center' }}>
-                    {library?.benefits && library?.benefits?.length > 0 && library?.benefits?.length === 1 && library?.benefits?.[0]?.Steps?.length > 0 ? (
-                      library?.benefits?.[0]?.Steps.map((item, i) => (
-                        <div key={i}>
-                          <Item
-                            key={i}
-                            title={item?.title}
-                            icon={item?.number ? item?.number : 'note1'}
-                            iconColor='rgba(0, 0, 0, 0.5)'
-                            titleStyles={{ fontSize: '18px', fontWeight: '500', color: '#53565A' }}
-                            iconStyle={{ width: '50px', height: '50px' }}
-                          />
-                        </div>
-                      ))
-
-                    ) : (null)}
+          {library?.benefits && library?.benefits.length > 0 && (
+            <section className='container mb-15'>
+              <div className='row'>
+                <div className={`flex-md-12 flex-sm-12 -ml-23 ${classes.section__content__title}`}>
+                  <h1 className='h2 text__primary__title font-weight-bold mb-10 -ml-23 text-center'>
+                    {library.benefits[0]?.title || t('Home.titleSection')}
+                  </h1>
+                </div>
+                <div className='row px-5'>
+                  <div className='flex-sm-12 flex-md-6 flex-lg-6' style={{ display: 'flex', alignItems: 'center', padding: '0 4rem' }}>
+                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(1fr)', gap: '2rem', alignContent: 'center' }}>
+                      {library.benefits[0]?.Steps?.length > 0 &&
+                        library.benefits[0].Steps.map((item, i) => (
+                          <div key={i}>
+                            <Item
+                              title={item.title}
+                              icon={item.number || 'note1'}
+                              iconColor='rgba(0, 0, 0, 0.5)'
+                              titleStyles={{ fontSize: '18px', fontWeight: '500', color: '#53565A' }}
+                              iconStyle={{ width: '50px', height: '50px' }}
+                            />
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                  <div className={`flex-sm-12 flex-md-6 flex-lg-6 container ${classes.section__content__img}`}>
+                    {library.benefits[0]?.background?.url && (
+                      <img src={library.benefits[0].background.url} alt={t('image')} className='w-full' />
+                    )}
                   </div>
                 </div>
-                <div className={`flex-sm-12 flex-md-6 flex-lg-6 container ${classes.section__content__img}`}>
-                  <img src={library?.benefits && library?.benefits?.length > 0 && library?.benefits?.length === 1 && library?.benefits?.[0]?.background ? library?.benefits?.[0]?.background.url : codeSnipet} alt={t('image')} className='w-full' />
-                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          )}
           {library?.markdown && library?.markdown.length > 0 && (
             <section className={`container ${classes.section__content} pb-9`}>
-              <div className='markdown__content'>
-                <CustomMarkdown content={library?.markdown} />
+              <div className='markdown__content' style={{ textAlign: 'center', fontFamily: 'var(--font-family)', lineHeight: '1.6', color: '#333' }}>
+                <CustomMarkdown content={library.markdown} />
               </div>
             </section>
           )}
@@ -185,23 +206,24 @@ function ApiDetail({ setIsOpen }) {
                   </p>
                 </div>
               </div>
-              <div className='row'>
+              <div className='row justify-center'>
                 {
-                  apisNews && apisNews.length > 0 ? (
-                    apisNews.map((card, i) => (
-                      <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
+                  apisNews.length > 0 && (
+                    apisNews.map((card) => (
+                      <div key={card.documentId} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
                         <CardBasic
-                          chipTitle={card?.status && card?.status === 'Publicado' ? 'GET' : 'POST'}
+                          chipTitle={card?.status === 'Publicado' ? 'GET' : 'POST'}
                           title={card?.title}
                           description={card?.description}
                           info={t('ApiDetail.moreInfo')}
                           url={`/apis/${card?.documentId}#api`}
                           css_styles={{ 'override_border__chip': 'custom_border__chip' }}
                           route={() => handleClickPage(card?.documentId)}
+                          img={cardsImages[card.documentId] || config.notImage}
                         />
                       </div>
                     ))
-                  ) : (null)
+                  )
                 }
               </div>
               <div className='row'>
@@ -280,7 +302,7 @@ function ApiDetail({ setIsOpen }) {
               subtitle={filterHomeBannerSubtitle !== '' ? filterHomeBannerSubtitle : ''}
               img={filterHomeBannerImage !== '' ? '' : ''}
               buttonType='tertiary'
-              buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : 'Empezar ahora'}
+              buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : t('Home.discoverSubtitle')}
               redirect={filterHomeBannerNameType}
             />
           </section>

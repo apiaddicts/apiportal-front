@@ -2,7 +2,8 @@
 @import "./../../styles/mixins/mixin.scss";
 
 .footer {
-  background: $theme_primary; /*linear-gradient(90deg, #15A192 0%, #14234B 100%);*/
+  background: var(--primary-color); /*linear-gradient(90deg, #15A192 0%, #14234B 100%);*/
+  padding: '48px 0 24px';
   &__container {
     height: 300px;
     display: flex;
@@ -12,6 +13,23 @@
     position: relative;
   }
   &__end {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    align-items: center;
+    gap: 32px;
+    border-bottom: 1px solid #e6e7ee;
+    padding-top: 5rem;
+    padding-bottom: 1rem;
+    align-items: stretch;
+
+    > div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      text-align: center;
+    }
+
     .logo {
       grid-area: logo;
       display: flex;
@@ -37,55 +55,27 @@
     }
     .email {
       grid-area: email;
-      @include breakpoint(xs) {
-        h1, p {
-          font-size: 16px !important;
-        }
-      }
-    }
-
-    .email {
       text-align: right;
     }
-
-    display: grid;
-    grid-template-areas: "logo email";
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    gap: 0;
-    border-bottom: 1px solid #e6e7ee;
-    padding-top: 5rem;
-    padding-bottom: 1rem;
-    padding-left: 0;
-    padding-right: 0;
 
     @include breakpoint(xs) {
       grid-template-columns: 1fr;
       grid-template-areas: "logo" "email";
       gap: 2rem;
-      padding-top: 4rem;
-      padding-bottom: 2rem;
-      align-content: center;
       text-align: center;
       border-bottom: none;
-      .logo {
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .email {
-        text-align: center !important;
-      }
+      padding-top: 4rem;
+      padding-bottom: 2rem;
     }
 
     @include breakpoint(sm) {
       grid-template-columns: 1fr;
       grid-template-areas: "logo" "email";
       gap: 2rem;
-      padding-top: 4rem;
-      padding-bottom: 2rem;
-      align-content: center;
       text-align: center;
       border-bottom: none;
+      padding-top: 4rem;
+      padding-bottom: 2rem;
       .logo {
         margin-left: auto;
         margin-right: auto;
@@ -94,17 +84,11 @@
         text-align: center !important;
       }
     }
-
     @include breakpoint(md) {
       grid-template-areas: "logo email";
-      grid-template-columns: 1fr 1fr;
-      border-bottom: 1px solid #e6e7ee;
-      gap: 0rem;
-      align-items: center;
-      padding-left: 0;
-      padding-right: 0;
-      padding-top: 5rem;
-      padding-bottom: 16px;
+      grid-template-columns: repeat(4, 1fr);
+      text-align: left;
+
       .email {
         text-align: right !important;
       }
@@ -206,23 +190,23 @@
           display: inline-block;
           width: 20px;
           height: 20px;
-          border: 3px solid $theme_primary !important;
+          border: 3px solid var(--primary-color) !important;
           border-radius: 3px;
           cursor: pointer;
           margin-right: 12px;
         }
         span {
-          color: $theme_primary;
+          color: var(--primary-color);
           font-size: 0.938rem;
           font-weight: 400;
           letter-spacing: 0.25px;
-          // font-family: $primary_font;
+          // font-family: var(--font-family);
           line-height: 20px;
           a {
-            color: $theme_primary;
+            color: var(--primary-color);
             font-weight: 700;
             letter-spacing: 0.25px;
-            // font-family: $primary_font;
+            // font-family: var(--font-family);
             line-height: 20px;
             text-decoration: underline;
           }
@@ -245,7 +229,7 @@
 .heroOverlay {
   height: 100%;
   width: 100%;
-  background: $theme_primary url("../../static/icons/lockWifi.svg") no-repeat left 2px;
+  background: var(--primary-color) url("../../static/icons/lockWifi.svg") no-repeat left 2px;
 }
 .divider {
   border-bottom: 4px solid $secondary_white;
@@ -254,30 +238,26 @@
 
 .button__fab {
   position: absolute;
-  width: 100px;
-  margin-left: auto;
-  margin-right: auto;
-  right: 0;
-  left: 0;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
   button {
-    position: relative;
-    z-index: 1;
-    top: -50px;
-    background: $theme_secondary;
+    background: var(--secondary-color);
     border: none;
-    border-radius: 0%;
-    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.12), 0px 6px 6px rgba(0, 0, 0, 0.24);
-    font-size: 34px;
+    border-radius: 999px;
+    padding: 18px 48px;
+    font-size: 18px;
+    font-weight: 600;
     color: $secondary_white;
-    height: 100px;
-    width: 100px;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
     &:hover {
-      transform: scale(1.1);
-      transition: 0.3s ease all;
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45);
     }
   }
 }
+

@@ -2,17 +2,16 @@
 
 .return {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: auto 1fr;
   gap: 10px;
-  width: 64px;
 
   div {
-    color: $theme_secondary;
+    color: var(--secondary-color);
     font-size: 20px;
   }
 
   span {
-    font-family: $primary_font;
+    font-family: var(--font-family);
     font-style: normal;
     font-weight: 700;
     font-size: 16px;
@@ -20,24 +19,28 @@
     text-align: right;
     letter-spacing: 1.33333px;
     text-transform: uppercase;
-    color: $theme_secondary;
+    color: var(--secondary-color);
   }
 }
+
 .back__btn {
-  position: absolute;
-  top: -42px;
-  left: 30px;
+  position: sticky;
+  top: 64px;
+  padding-left: 50px;
+  z-index: 900;
+  display: flex;
+  align-items: center;
 
   @include breakpoint(xs) {
-    left: 0;
+    padding-left: 16px;
   }
 
   @include breakpoint(sm) {
-    left: 0;
+    padding-left: 16px;
   }
 
   @include breakpoint(lg) {
-    left: 30px;
+    padding-left: 80px;
   }
 }
 
@@ -53,7 +56,7 @@
       position: absolute;
       width: 100%;
       z-index: 1;
-      background: $theme_primary;
+      background: var(--primary-color);
     }
 
     &__backTo {

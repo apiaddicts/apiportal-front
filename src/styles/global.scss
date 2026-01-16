@@ -6,7 +6,7 @@
 *,
 *::before,
 *::after {
-  font-family: var(--typography-font, 'Roboto'), sans-serif !important;
+  font-family: var(--font-family, 'Roboto'), sans-serif !important;
 }
 
 * {
@@ -15,12 +15,14 @@
 }
 
 :root {
-  --typography-font: 'Roboto', sans-serif; // valor por defecto
+  --font-family: 'Roboto', sans-serif; // valor por defecto
+  --primary-color: #0057ff;
+  --secondary-color: #00c389;
 }
 
 body {
   width: 100%;
-  font-family: var(--typography-font) !important;
+  font-family: var(--font-family) !important;
   
 }
 
@@ -892,13 +894,13 @@ a {
   display: inline-block !important;
   opacity: 80% !important;
   text-align: center !important;
-  background: lighten($theme_tertiary, 45%) !important;
+  background-color: rgba(var(--secondary-color-rgb), 0.45) !important;
   padding: 3px 6px !important;
   color: darken($theme_tertiary, 50%) !important;
   border-radius: 8px !important;
 
   span {
-    font-family: $primary_font;
+    font-family: var(--font-family);
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -957,7 +959,7 @@ a {
 }
 
 .post {
-  background-color: $theme_primary !important;
+  background-color: var(--primary-color) !important;
   color: $secondary_white !important;
 }
 
@@ -993,21 +995,24 @@ a {
   color: #000000;
 
   &__title {
-    color: $blue-lighten-1 !important;
+    color: var(--primary-color) !important;
+    filter: brightness(80%);
   }
 
   &__subtitle {
-    color: $blue-lighten-3 !important;
+    color: var(--primary-color) !important;
+    filter: brightness(130%);
   }
 
   &__description {
-    font-family: $primary_font !important;
+    font-family: var(--font-family) !important;
     color: $dark-lighten-0 !important;
   }
 
   &__link,
   &__icon {
-    color: $blue-lighten-1 !important;
+    color: var(--primary-color) !important;
+    filter: brightness(90%);
   }
 }
 
@@ -1019,7 +1024,7 @@ a {
   }
 
   &__secondary {
-    color: $red-lighen-0 !important;
+    color: var(--primary-color) !important;
   }
 
   &__tertiary {
@@ -1034,7 +1039,7 @@ a {
     color: $primary_text !important;
 
     &__title {
-      color: $theme_primary !important;
+      color: var(--primary-color) !important;
     }
 
     &__subtitle {
@@ -1043,15 +1048,12 @@ a {
   }
 
   &__secondary {
-    color: $red-lighen-2 !important;
+    color: var(--primary-color) !important;
   }
 
   &__tertiary {
-    color: $tertiary_text;
-  }
-
-  &__tertiary {
-    color: $tertiary_text;
+    color: var(--secondary-color) !important;
+    filter: brightness(90%);
   }
 
   &__accent {
@@ -1327,7 +1329,7 @@ a {
 }
 
 .primary-font {
-  font-family: $primary_font !important;
+  font-family: var(--font-family) !important;
 }
 
 .secondary-font {
@@ -1481,7 +1483,7 @@ a {
   }
 
   .MuiFormControlLabel-root[active="active"] {
-    background: $theme_secondary;
+    background: var(--secondary-color);
   }
 }
 
@@ -1498,7 +1500,7 @@ a {
   }
 
   .Mui-checked+span {
-    color: $theme_secondary;
+    color: var(--secondary-color);
     font-weight: map-deep-get($font-weights, "bold") !important;
   }
 }
@@ -1574,11 +1576,39 @@ a {
   font-weight: 400;
   font-size: 18px;
   color: $gray_lighten-0;
-  font-family: $primary_font;
+  font-family: var(--font-family);
 
   p {
     margin: 10px 0;
   }
+
+  ul, ol {
+    display: inline-block;
+    text-align: left;
+  }
+
+
+  table {
+    display: inline-table;
+    margin: 1rem auto;
+    border-collapse: collapse;
+    width: auto;
+  }
+
+  th, td {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    text-align: left;
+  }
+
+  img {
+    max-width: 50%;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+
 }
 
 img[src*='#center'] {

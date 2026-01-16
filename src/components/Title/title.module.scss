@@ -1,7 +1,7 @@
 @import '../../styles/variables.module.scss';
 
 .title {
-    font-family: $primary_font;
+    font-family: var(--font-family);
     font-size: 2rem;
     font-weight: 700;
     color: #160A68;

@@ -1,7 +1,7 @@
 @import "../../styles/variables.module.scss";
 
 .custom__navbar {
-  background: $theme_primary !important;
+  background: var(--primary-color) !important;
 }
 
 .custom__sidebar>div {
@@ -13,37 +13,37 @@
   color: $gray !important;
 
   & .active {
-    color: $theme_primary;
+    color: var(--primary-color);
   }
 }
 
 .dropdown__item>svg,
 .dropdown__item>span {
-  color: $theme_primary !important;
-  fill: $theme_primary !important;
+  color: var(--primary-color) !important;
+  fill: var(--primary-color) !important;
 }
 
 .sidebar__item__back>div {
-  color: $theme_primary !important;
+  color: var(--primary-color) !important;
 
   & svg {
-    fill: $theme_primary !important;
+    fill: var(--primary-color) !important;
   }
 }
 
 .line__separator {
-  border-bottom: 1px solid $theme_secondary;
+  border-bottom: 1px solid var(--secondary-color);
   width: 58px;
 }
 
 .title {
-  font-family: $primary_font;
+  font-family: var(--font-family);
   font-size: 2.5rem;
   font-weight: 400;
   letter-spacing: -0.6px;
 
   &__name {
-    font-family: $primary_font;
+    font-family: var(--font-family);
     font-weight: 500;
     font-size: 2.5rem;
     width: 100%;
@@ -57,18 +57,18 @@
     font-size: 0.75rem;
     letter-spacing: 0.8px;
     text-transform: uppercase;
-    color: $theme_primary;
+    color: var(--primary-color);
   }
 
   &__organization {
     font-weight: 400;
     font-size: 1.25rem;
-    color: $theme_primary;
+    color: var(--primary-color);
   }
 
   &__role {
     font-weight: 600;
     font-size: 1.25rem;
-    color: $theme_primary;
+    color: var(--primary-color);
   }
 }

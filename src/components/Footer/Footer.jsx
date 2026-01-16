@@ -42,6 +42,8 @@ function Footer({ isPrivate }) {
   const [error, setError] = useState(false);
   const [displaySubmit, setDisplaySubmit] = useState(true);
 
+  // console.log(config);
+
   const formik = useFormik({
     initialValues: {
       name: '',
@@ -265,38 +267,48 @@ function Footer({ isPrivate }) {
           </div>
         </form>
       )}
-      <div className={classes.footer}>
-        <div className={`container ${classes.footer__end}`}>
+      <div
+        className={classes.footer}
+      >
+        <div
+          className={`container ${classes.footer__end}`}
+        >
           <div className={classes.logo}>
             <CustomIcon name='logowhite' />
           </div>
           <div className={classes.email}>
-            <h1 className='body-1 font-weight-medium text__white mb-2'>{t('Footer.email')}</h1>
+            <p className='body-1 font-weight-bold text__white'>
+              {t('Footer.email')}
+            </p>
             <p className='body-1 font-weight-bold text__white'>{config.contact}</p>
           </div>
           <div className={classes.policies}>
             <p className='body-1 font-weight-bold'>
-              <a href={config.privacyPolicyPath} target='blank' className='text__white'>{t('Footer.privacyPolicy')}</a>
+              <a href={config.privacyPolicyPath} target='_blank' className='text__white'>{t('Footer.privacyPolicy')}</a>
             </p>
           </div>
           <div className={classes.policies}>
             <p className='body-1 font-weight-bold'>
-              <a href={config.cookiesPolicyPath} target='blank' className='text__white'>{t('Footer.cookiesPolicy')}</a>
+              <a href={config.cookiesPolicyPath} target='_blank' className='text__white'>{t('Footer.cookiesPolicy')}</a>
             </p>
           </div>
         </div>
         <div className={`container ${classes.footer__social}`}>
           <div className={classes.footer__social__copyright}>
             <p className='caption text-uppercase text__white mb-3'>
-              &copy;
-              {' '}
-              <span>{year}</span>
-              {' '}
-              {`${config.company}. ${t('Footer.allRightsReserved')}`}
-              {' '}
+              &copy; <span>{year}</span>{' '}
+              {config.company && `${config.company}. ` }
+              {t('Footer.allRightsReserved')}
             </p>
           </div>
-          <div className={classes.footer__social__icons}>
+          <div
+            className={classes.footer__social__icons}
+            style={{
+              display: 'flex',
+              gap: '16px',
+              fontSize: '20px',
+            }}
+          >
             {
               socialLinks.map((socialLink, index) => (
                 <a href={socialLink.link} key={index} target='_blank' rel='noreferrer'>

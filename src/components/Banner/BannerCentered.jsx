@@ -23,16 +23,20 @@ function BannerCentered({ title, subtitle, buttonLabel, img, buttonType, redirec
 
         <div className='row justify-center text-center'>
           <div className='flex-lg-3 flex-md-5 flex-sm-12 flex-xl-3'>
-
-            {redirect === null ? (
-              <Button styles={buttonType} onClick={() => { setOpenForm(true); }}>
+          {buttonLabel && (
+            redirect ? (
+              <Button
+                styles={buttonType}
+                onClick={() => window.open(redirect, '_blank')}
+              >
                 {buttonLabel}
               </Button>
             ) : (
-              <Button styles={buttonType}>
+              <Button styles={buttonType} onClick={() => setOpenForm(true)}>
                 {buttonLabel}
               </Button>
-            )}
+            )
+          )}
           </div>
         </div>
 
