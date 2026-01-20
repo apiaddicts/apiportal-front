@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getApiContent } from '../../../redux/actions/apiAction';
-import { getLibraries, filterCheck, sortApiCollection, getApisUnsecure } from '../../../redux/actions/libraryAction';
+import { getLibraries, filterCheck, sortApiCollection  } from '../../../redux/actions/libraryAction';
 import BannerImage from '../../../components/Banner/BannerImage';
 import SearchInput from '../../../components/Input/SearchInput';
 import InputSelect from '../../../components/Input/InputSelect';
@@ -18,7 +18,7 @@ import { useTranslation } from 'react-i18next';
 
 function Apis({ setIsOpen }) {
   const { t } = useTranslation();
-  const { libraries, filters, backUpLibreries, loadingLibraries, apisUnsecureRes } = useSelector((state) => state.library);
+  const { libraries, filters, backUpLibreries, loadingLibraries } = useSelector((state) => state.library);
   const [filtersSelect, setFiltersSelect] = useState([]);
   const [searchApiInputValue, setSearchApiInputValue] = useState('');
   const dispatch = useDispatch();
@@ -28,11 +28,16 @@ function Apis({ setIsOpen }) {
     if (apiPage && Object.keys(apiPage).length === 0) {
       dispatch(getApiContent());
     }
-  }, []);
+  }, [apiPage, dispatch]);
+
+  useEffect(() => {
+    if (libraries?.length === 0 && Object.keys(filters).length === 0) {
+      dispatch(getLibraries());
+    }
+  }, [libraries, filters, dispatch]);
 
   const filterApiBanner = apiPage && apiPage.contentSections && apiPage.contentSections?.length > 0 ? apiPage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
 
-  // remove all filters
   const resetFilters = () => {
     dispatch(getLibraries());
     dispatch({
@@ -65,6 +70,11 @@ function Apis({ setIsOpen }) {
   const handleChangeSearchFilter = (text) => {
     setSearchApiInputValue(text);
     dispatch(filterCheck(text, null, 'search'));
+  };
+
+  const handleChangeProducts = (name, label, checked) => {
+    dispatch(filterCheck(name, checked, 'product'));
+    setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
 
   const handleSort = (sort) => {
@@ -124,13 +134,29 @@ function Apis({ setIsOpen }) {
   const versionArr = new Set(versionRepeated);
   const versions = [...versionArr].sort();
 
-  useEffect(() => {
-    if (libraries && libraries.length === 0 && Object.keys(filters).length === 0) {
-      dispatch(getLibraries());
-    }
+  const products = useMemo(() => {
+    if (!backUpLibreries || backUpLibreries.length === 0) return [];
+    return backUpLibreries.flatMap((library) => library.products || []);
+  }, [backUpLibreries]);
 
+  const productsFilters = useMemo(() => {
+    if (!products.length) return [];
 
-  }, []);
+    const map = products.reduce((acc, product) => {
+      if (!acc[product.slug]) {
+        acc[product.slug] = {
+          title: product.title,
+          slug: product.slug,
+          count: 1,
+        };
+      } else {
+        acc[product.slug].count += 1;
+      }
+      return acc;
+    }, {});
+
+    return Object.values(map);
+  }, [products]);
 
   const compareArrays = (array1, array2) => {
     return array1.filter((a) => {
@@ -206,6 +232,27 @@ function Apis({ setIsOpen }) {
                       checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
                     />
                     <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{item.count}</p>
+                  </div>
+                ))}
+              </CustomizedAccordions>
+            )}
+            {productsFilters && productsFilters.length > 0 && (
+              <CustomizedAccordions title={t('Apis.products')}>
+                {productsFilters.map((item, index) => (
+                  <div key={index} className={classes.wrapper__checkbox}>
+                    <CheckboxWrapper
+                      name={item.slug}
+                      label={item.title}
+                      handleChangeSelect={handleChangeProducts}
+                      checked={
+                        filtersSelect[item.slug] !== undefined
+                          ? filtersSelect[item.slug]
+                          : false
+                      }
+                    />
+                    <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>
+                      {item.count}
+                    </p>
                   </div>
                 ))}
               </CustomizedAccordions>
