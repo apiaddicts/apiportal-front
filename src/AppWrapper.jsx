@@ -24,8 +24,8 @@ const AppWrapper = () => {
         }
     }, [dispatch]);
 
-    const primaryColor = settingPage?.mainColor ?? '#000000';
-    const secondaryColor = settingPage?.secondaryColor ?? '#ffffff';
+    const primaryColor = settingPage?.mainColor ?? '#023d4c';
+    const secondaryColor = settingPage?.secondaryColor ?? '#ef910d';
     const typography = settingPage?.typography ?? 'Roboto';
 
     useEffect(() => {

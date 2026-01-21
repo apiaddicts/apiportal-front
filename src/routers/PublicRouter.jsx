@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 import useTimer from '../hooks/useTimer';
 import useVerifySession from '../hooks/useVerifySession';
@@ -25,8 +25,13 @@ import Contacto from '../pages/public/Contacto';
 import Subscriptions from '../pages/public/Subscriptions';
 import SubscriptionDetail from '../pages/public/SubscriptionDetail';
 import SubscriptionDetailContact from '../pages/public/SubscriptionDetailContact';
+import ResetPassword from '../pages/public/ResetPassword';
 
 function PublicRoute() {
+  const location = useLocation();
+  const hideLayoutPaths = ['/reset-password'];
+  const hideLayout = hideLayoutPaths.includes(location.pathname);
+
   const { openModal } = useSelector((state) => state.user);
   const { time } = useSelector((state) => state.timer);
   const { checkSession,isSessionValid } = useVerifySession();
@@ -53,32 +58,28 @@ function PublicRoute() {
       {openModal && Object.keys(user).length > 0 && (
         <Logout showModal={openModal} />
       )}
-      <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} />
-      <main
-        style={{
-          marginTop: window.innerWidth < 768 ? '120px' : '96px',
-          minHeight: window.innerWidth < 768
-            ? 'calc(100vh - 120px)'
-            : 'calc(100vh - 96px)',
-        }}
-      >
+      {!hideLayout && <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} />}
+
+      <main style={{ marginTop: hideLayout ? '0' : window.innerWidth < 768 ? '120px' : '96px', minHeight: hideLayout ? '100vh' : window.innerWidth < 768 ? 'calc(100vh - 120px)' : 'calc(100vh - 96px)' }}>
         <Routes>
           <Route path='/' element={<Home setIsOpen={setIsOpen} setOpenForm={setOpenForm} />} />
-          <Route path='/apis' exact='true' element={<Apis setIsOpen={setIsOpen} />} />
-          <Route path='/apis/:id' exact='true' element={<ApiDetail setIsOpen={setOpenForm} />} />
-          <Route path='/app-partners' exact='true' element={<AppPartners />} />
-          <Route path='/faqs' exact='true' element={<Faqs />} />
-          <Route path='/apis/:id/swagger-ui' exact='true' element={<SwaggerUI setIsOpen={setOpenForm} />} />
-          <Route path='/blog' exact='true' element={<Blog setIsOpen={setIsOpen} />} />
-          <Route path='/blog/:id' exact='true' element={<BlogPost setIsOpen={setIsOpen} />} />
-          <Route path='/documentacion' exact='true' element={<Wiki />} />
-          <Route path='/soporte' exact='true' element={<Contacto />} />
-          <Route path='/suscripciones' exact='true' element={<Subscriptions setOpenForm={setOpenForm} />} />
-          <Route path='/suscripciones/:id' exact='true' element={<SubscriptionDetail />} />
-          <Route path='/suscripciones/:id/contact' exact='true' element={<SubscriptionDetailContact />} />
+          <Route path='/apis' element={<Apis setIsOpen={setIsOpen} />} />
+          <Route path='/apis/:id' element={<ApiDetail setIsOpen={setOpenForm} />} />
+          <Route path='/app-partners' element={<AppPartners />} />
+          <Route path='/faqs' element={<Faqs />} />
+          <Route path='/apis/:id/swagger-ui' element={<SwaggerUI setIsOpen={setOpenForm} />} />
+          <Route path='/blog' element={<Blog setIsOpen={setIsOpen} />} />
+          <Route path='/blog/:id' element={<BlogPost setIsOpen={setIsOpen} />} />
+          <Route path='/documentacion' element={<Wiki />} />
+          <Route path='/reset-password' element={<ResetPassword />} />
+          <Route path='/soporte' element={<Contacto />} />
+          <Route path='/suscripciones' element={<Subscriptions setOpenForm={setOpenForm} />} />
+          <Route path='/suscripciones/:id' element={<SubscriptionDetail />} />
+          <Route path='/suscripciones/:id/contact' element={<SubscriptionDetailContact />} />
         </Routes>
       </main>
-      <Footer />
+
+      {!hideLayout && <Footer />}
     </>
   );
 

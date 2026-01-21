@@ -206,10 +206,19 @@
     "passwordPlaceholder": "Contraseña",
     "loginButton": "Iniciar sesión"
   },
-  "ForgotPassword": {
+  "ForgotPasswordForm": {
     "invalidEmail": "Correo electrónico inválido",
     "requiredField": "Campo requerido",
     "emailPlaceholder": "Correo electrónico"
+  },
+  "ResetPassword": {
+    "title": "Restablecer contraseña",
+    "error": "El enlace es inválido o ha expirado.",
+    "success": "Tu contraseña ha sido cambiada correctamente. Redirigiendo...",
+    "labelPassword": "Nueva contraseña*",
+    "labelConfirm": "Confirmar contraseña*",
+    "processing": "Procesando...",
+    "submit": "Restablecer contraseña"
   },
   "RestorePassword": {
     "passwordMinLength": "La contraseña actual debe tener al menos 8 caracteres de longitud",
@@ -355,7 +364,7 @@
     "registerButton": "Registrarme",
     "loginButton": "Iniciar sesión"
   },
-  "ResetPassword": {
+  "ForgotPassword": {
     "instructions": "Introduce tu email y te enviaremos un correo electrónico de confirmación de cambio de contraseña con las instrucciones para que puedas realizar el cambio de contraseña.",
     "requestSent": "Solicitud enviada",
     "email": "Correo electrónico",

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Form from '../../../components/Forms/LoginForm';
 import Modal from '../../../components/Modal';
 // import Icon from '../../../components/MdIcon/Icon';
-import ResetPassword from '../../../components/Forms/ResetPassword';
+import ForgotPassword from '../../../components/Forms/ForgotPassword';
 import { fieldsLogin } from '../../../components/Forms/fields';
 import { login, loginApim } from '../../../redux/actions/userAction';
 import useLoginConfig from '../../../hooks/useLogin';
@@ -51,7 +51,7 @@ function Login({ setOpenForm, setIsOpen, setPrivateSession }) {
             setIsOpen={setIsOpen}
           />
         )}
-        {showResetForm && <ResetPassword handleSubmit={handleSubmit} />}
+        {showResetForm && <ForgotPassword handleSubmit={handleSubmit} />}
       </div>
 
     </Modal>

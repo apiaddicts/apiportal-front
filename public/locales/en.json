@@ -206,10 +206,19 @@
     "passwordPlaceholder": "Password",
     "loginButton": "Login"
   },
-  "ForgotPassword": {
+  "ForgotPasswordForm": {
     "invalidEmail": "Invalid email",
     "requiredField": "Required field",
     "emailPlaceholder": "Email"
+  },
+  "ResetPassword": {
+    "title": "Reset password",
+    "error": "The link is invalid or has expired.",
+    "success": "Your password has been changed successfully. Redirecting...",
+    "labelPassword": "New password*",
+    "labelConfirm": "Confirm password*",
+    "processing": "Processing...",
+    "submit": "Reset password"
   },
   "RestorePassword": {
     "passwordMinLength": "Current password must be at least 8 characters long",
@@ -355,7 +364,7 @@
     "registerButton": "Register",
     "loginButton": "Login"
   },
-  "ResetPassword": {
+  "ForgotPassword": {
     "instructions": "Enter your email and we will send you a confirmation email with instructions to change your password.",
     "requestSent": "Request sent",
     "email": "Email",

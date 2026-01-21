@@ -5,7 +5,7 @@ import Icon from '../MdIcon/Icon';
 import userConstants from '../../redux/constants/userConstats';
 import classes from './Alert.module.scss';
 
-function Alert({ alert_type, title, msg, css_styles, display, onResend }) {
+function Alert({ alert_type, title, msg, css_styles = {}, display, onResend }) {
   const dispatch = useDispatch();
   const { t } = useTranslation();
   const { responseError, responseRestoreError, responseResetSignup } = useSelector((state) => state.user);
@@ -74,9 +74,5 @@ function Alert({ alert_type, title, msg, css_styles, display, onResend }) {
     </div>
   );
 }
-
-Alert.defaultProps = {
-  css_styles: '',
-};
 
 export default Alert;
