@@ -366,7 +366,7 @@
   },
   "ForgotPassword": {
     "instructions": "Introduce tu email y te enviaremos un correo electrónico de confirmación de cambio de contraseña con las instrucciones para que puedas realizar el cambio de contraseña.",
-    "requestSent": "Solicitud enviada",
+    "requestSent": "Hemos enviado un mensaje a tu correo. Si tu cuenta existe, lo recibirás en breve.",
     "email": "Correo electrónico",
     "recoverPasswordButton": "Recuperar Contraseña"
   },

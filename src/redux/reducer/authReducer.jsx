@@ -23,6 +23,7 @@ export default function authReducer(state = initialState, action) {
         ...state,
         loading: false,
         success: true,
+        error: null,
       };
 
     case authConstants.FORGOT_PASSWORD_FAILURE:
@@ -32,6 +33,14 @@ export default function authReducer(state = initialState, action) {
         loading: false,
         success: false,
         error: action.error,
+      };
+
+    case authConstants.AUTH_RESET_STATE:
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        error: null,
       };
 
     default:

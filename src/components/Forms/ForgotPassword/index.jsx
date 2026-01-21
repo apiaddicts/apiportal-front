@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import useFormForgotPassword from '../../../hooks/useFormForgotPassword';
@@ -7,12 +7,18 @@ import InputUI from '../../Input/InputUI/InputUI';
 import { fieldsForgotPassword } from '../fields';
 import Alert from '../../Alert';
 import './index.scss';
-import { forgotPassword } from '../../../redux/actions/authAction';
+import { forgotPassword, resetAuthState } from '../../../redux/actions/authAction';
 
 function ForgotPassword() {
   const dispatch = useDispatch();
   const { loading, success, error } = useSelector((state) => state.auth);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    dispatch(resetAuthState());
+
+    return () => dispatch(resetAuthState());
+  }, [dispatch]);
 
   const handleSubmit = (dataForm) => {
     dispatch(forgotPassword(dataForm.email));
@@ -27,20 +33,15 @@ function ForgotPassword() {
       </p>
 
       {success && (
-        <Alert
-          css_styles={{ custom_padding: 'p-4', custom_margin: 'mb-5' }}
-          alert_type="alert__success"
-          title={t('ForgotPassword.requestSent')}
-        />
+        <div className="inlineSuccess">
+          {t('ForgotPassword.requestSent')}
+        </div>
       )}
 
       {error && (
-        <Alert
-          css_styles={{ custom_padding: 'p-4', custom_margin: 'mb-5' }}
-          alert_type="alert__error"
-          title={t('Common.error')}
-          description={error?.message || t('Common.genericError')}
-        />
+        <div className="inlineError">
+          {error?.message || t('Common.genericError')}
+        </div>
       )}
 
       <form onSubmit={formConfig.handleSubmit} noValidate>

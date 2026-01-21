@@ -49,3 +49,7 @@ export const resetPassword = (code, password, passwordConfirmation) => async (di
       return { error };
     }
   };
+
+export const resetAuthState = () => ({
+  type: authConstants.AUTH_RESET_STATE,
+});
