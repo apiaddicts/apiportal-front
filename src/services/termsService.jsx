@@ -9,9 +9,8 @@ function getTermsContent() {
 
   return fetch(`${config.apiUrl}/pages?filters[slug][$eq]=${config.termsPageSlug}&populate[contentSections][populate]=*`, requestOptions)
     .then(handleResponse)
-    .then((term_content) => {
-      return term_content.data[0];
-    }).catch((error) => {
+    .then((term_content) => term_content.data[0])
+    .catch((error) => {
       console.error(error);
     });
 }
