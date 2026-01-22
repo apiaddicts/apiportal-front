@@ -342,7 +342,8 @@
     "checkboxTermsLabel": "Acepto los términos y condiciones",
     "acceptTermsError": "Para completar el registro es necesario aceptar los términos de uso",
     "loginButton": "Iniciar Sesión",
-    "registerButton": "Registrarme"
+    "registerButton": "Registrarme",
+    "termsTitle": "Términos y Condiciones"
   },
   "LoginForm": {
     "checkEmailTitle": "Revisa tu cuenta de correo",
