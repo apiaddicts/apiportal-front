@@ -11,7 +11,7 @@ function useFormForgotPassword(
 ) {
   const { t } = useTranslation();
   const validationSchema = Yup.object().shape({
-    email: string().email(t('ForgotPassword.invalidEmail')).required(t('ForgotPassword.requiredField')),
+    email: string().email(t('ForgotPasswordForm.invalidEmail')).required(t('ForgotPasswordForm.requiredField')),
   });
 
   const objectFromArray = (fields, key) => {
@@ -37,7 +37,7 @@ function useFormForgotPassword(
         setFormStatus({ status: 'loading' });
         const submitResponse = await customHandleSubmit(values);
         setFormStatus(submitResponse);
-        submitResponse.status === 'success' && resetForm();
+        if (submitResponse?.status === 'success') resetForm();
       } catch (error) {
         console.error('Error', error);
       }
