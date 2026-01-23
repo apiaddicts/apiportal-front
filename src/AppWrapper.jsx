@@ -10,13 +10,17 @@ const colorToRgb = (color) => {
 
     const temp = document.createElement('div');
     temp.style.color = color;
+
+    if (!temp.style.color) return null;
+
     document.body.appendChild(temp);
 
     const computed = getComputedStyle(temp).color;
+
     document.body.removeChild(temp);
 
     const match = computed.match(/\d+/g);
-    if (!match || match.length < 3) return null;
+    if (!match) return null;
 
     const [r, g, b] = match;
     return `${r}, ${g}, ${b}`;
