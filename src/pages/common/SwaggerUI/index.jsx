@@ -31,12 +31,12 @@ function SwaggerUI() {
       .getOpenApiFromStrapi(params.id)
       .then((library) => {
         let openDoc = library?.openDoc;
-        let openDocSource = library?.openDocSource;
+        let openDocFormat = library?.openDocFormat;
 
         if (!openDoc) return;
 
         try {
-          if (openDocSource === "api-json") {
+          if (openDocFormat === "json") {
             openDoc = JSON.parse(openDoc);
           } else {
             openDoc = yaml.load(openDoc);
