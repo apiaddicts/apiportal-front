@@ -1,0 +1,81 @@
+@import "../../../styles/variables.module.scss";
+
+.asyncapiWrapper {
+  width: 100%;
+  min-height: 80vh;
+  overflow: hidden;
+  font-family: var(--font-family);
+  background-color: #fff;
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    font-family: var(--font-family);
+    font-weight: 600;
+  }
+
+  :global(.examples) {
+    margin: 20px 0px !important;
+  }
+
+  :global(.examples .example__path),
+  :global(.examples .examples__path),
+  :global(.examples .path) {
+    display: none !important;
+  }
+
+  :global(.examples .inline-block) {
+    display: initial !important;
+  }
+  :global(button:focus),
+  :global(button:active),
+  :global(button:focus-visible) {
+    outline: none !important;
+    box-shadow: none !important;
+  }
+}
+
+.return {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 10px;
+
+  div {
+    color: var(--secondary-color);
+    font-size: 20px;
+  }
+
+  span {
+    font-family: var(--font-family);
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: right;
+    letter-spacing: 1.33333px;
+    text-transform: uppercase;
+    color: var(--secondary-color);
+  }
+}
+
+.back__btn {
+  position: sticky;
+  top: 64px;
+  padding-left: 50px;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+
+  @include breakpoint(xs) {
+    padding-left: 16px;
+  }
+
+  @include breakpoint(sm) {
+    padding-left: 16px;
+  }
+
+  @include breakpoint(lg) {
+    padding-left: 80px;
+  }
+}
