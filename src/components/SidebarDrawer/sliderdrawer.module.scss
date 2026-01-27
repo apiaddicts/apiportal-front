@@ -28,16 +28,16 @@
 
 .dropdown__item>svg,
 .dropdown__item>span {
-  color: var(--primary-color) !important;
-  fill: var(--primary-color) !important;
+  color: var(--primary-color);
+  fill: var(--primary-color);
 }
 
 .sidebar__item__back>div {
-  color: var(--primary-color) !important;
+  color: var(--primary-color);
   cursor: pointer;
 
   & svg {
-    fill: var(--primary-color) !important;
+    fill: var(--primary-color);
   }
 }
 

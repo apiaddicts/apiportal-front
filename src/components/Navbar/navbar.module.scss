@@ -264,7 +264,7 @@
             }
 
             &:active {
-              color: var(--secondary-color) !important;
+              color: var(--secondary-color);
               font-weight: map-deep-get($font-weights, "bold") !important;
             }
           }
