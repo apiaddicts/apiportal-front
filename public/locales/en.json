@@ -139,7 +139,13 @@
     "seeAll": "See all",
     "news": "News",
     "newsDescription": "Discover all the news about technology, APIs, and digital transformation",
-    "seeMore": "See more"
+    "seeMore": "See more",
+    "globalGradesTitle": "Global grades of the API",
+    "globalGradesSubtitle": "Overall quality and readiness indicators",
+    "ratingGlobal": "Global",
+    "ratingDefinition": "Definition",
+    "ratingSecurity": "Security",
+    "ratingQuality": "Quality"
   },
   "Apis": {
     "filterBy": "Filter by",
@@ -368,6 +374,7 @@
   "ForgotPassword": {
     "instructions": "Enter your email and we will send you a confirmation email with instructions to change your password.",
     "requestSent": "We've sent a message to your email. If your account exists, you'll receive it shortly.",
+    "error": "Could not send the email. Please try again later.",
     "email": "Email",
     "recoverPasswordButton": "Recover Password"
   },

@@ -139,7 +139,13 @@
     "seeAll": "Ver todas",
     "news": "Novedades",
     "newsDescription": "Conoce todas las novedades sobre tecnología, APIs y transformación digital",
-    "seeMore": "Ver más"
+    "seeMore": "Ver más",
+    "globalGradesTitle": "Calificaciones globales de la API",
+    "globalGradesSubtitle": "Indicadores generales de calidad y disponibilidad",
+    "ratingGlobal": "Global",
+    "ratingDefinition": "Definición",
+    "ratingSecurity": "Seguridad",
+    "ratingQuality": "Calidad"
   },
   "Apis": {
     "filterBy": "Filtrar por",
@@ -368,6 +374,7 @@
   "ForgotPassword": {
     "instructions": "Introduce tu email y te enviaremos un correo electrónico de confirmación de cambio de contraseña con las instrucciones para que puedas realizar el cambio de contraseña.",
     "requestSent": "Hemos enviado un mensaje a tu correo. Si tu cuenta existe, lo recibirás en breve.",
+    "error": "No se pudo enviar el correo electrónico. Por favor, inténtalo de nuevo más tarde.",
     "email": "Correo electrónico",
     "recoverPasswordButton": "Recuperar Contraseña"
   },
