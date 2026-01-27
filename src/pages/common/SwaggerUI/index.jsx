@@ -10,6 +10,7 @@ import Icon from '../../../components/MdIcon/Icon';
 import libraryService from '../../../services/libraryService';
 import classes from './swagger-ui.module.scss';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
+import yaml from 'js-yaml';
 
 function SwaggerUI() {
   const params = useParams();
@@ -29,12 +30,26 @@ function SwaggerUI() {
     libraryService
       .getOpenApiFromStrapi(params.id)
       .then((library) => {
-        const openDoc = library?.openDoc;
+        let openDoc = library?.openDoc;
+        let openDocFormat = library?.openDocFormat;
 
-        if (!openDoc?.openapi || !openDoc?.paths) return;
+        if (!openDoc) return;
 
-        setOpenApi(openDoc);
-        setHasOpenApi(true);
+        try {
+          if (openDocFormat === "json") {
+            openDoc = JSON.parse(openDoc);
+          } else {
+            openDoc = yaml.load(openDoc);
+          }
+
+          if (!openDoc?.openapi || !openDoc?.paths) return;
+
+          setOpenApi(openDoc);
+          setHasOpenApi(true);
+        } catch (err) {
+          console.error(err);
+          setHasOpenApi(false);
+        }
       })
       .finally(() => setLoading(false));
   }, [params.id]);
