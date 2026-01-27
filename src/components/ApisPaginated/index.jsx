@@ -22,6 +22,7 @@ function Apis({ currentItems }) {
             colorStatus={item?.color_status || ''}
             info={t('ApisPaginated.viewDocumentation')}
             description={item?.description || ''}
+            globalRating={item?.globalRating}
             link={`/apis/${item?.documentId}#api`}
             css_styles={{ 'custom_title_size': 'fs__22', 'custom_status_size': 'fs__10' }}
           />

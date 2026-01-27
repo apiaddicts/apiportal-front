@@ -9,7 +9,7 @@ import Base from './Base';
 import config from '../../services/config';
 import './cards.scss';
 
-function CardInformation({ img, buttons = [], title = '', description = '', reading = null, info = null, maxWidth, version, status, theme, blog = false, modal, link, css_styles = {}, blogTitle = false, id }) {
+function CardInformation({ img, buttons = [], title = '', description = '', globalRating = null, reading = null, info = null, maxWidth, version, status, theme, blog = false, modal, link, css_styles = {}, blogTitle = false, id }) {
   const [colorStatus, setColorStatus] = useState('');
 
   const {
@@ -78,7 +78,17 @@ function CardInformation({ img, buttons = [], title = '', description = '', read
                 } ${custom_title_size}`}
                 style={blogTitleStyles}
               >
-                {title}
+                <span className="card__title__row">
+                  {title}
+                  {globalRating && (
+                    <span
+                      className={`card__rating__circle rating__${globalRating}`}
+                      title={`Global rating: ${globalRating}`}
+                    >
+                      {globalRating}
+                    </span>
+                  )}
+                </span>
               </p>
             </HashLink>
 

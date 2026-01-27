@@ -72,6 +72,11 @@ function Apis({ setIsOpen }) {
     dispatch(filterCheck(text, null, 'search'));
   };
 
+  const handleChangeGlobalRating = (name, label, checked) => {
+    dispatch(filterCheck(label, checked, 'globalRating'));
+    setFiltersSelect({ ...filtersSelect, [name]: checked });
+  };
+
   const handleChangeProducts = (name, label, checked) => {
     dispatch(filterCheck(name, checked, 'product'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
@@ -133,6 +138,13 @@ function Apis({ setIsOpen }) {
 
   const versionArr = new Set(versionRepeated);
   const versions = [...versionArr].sort();
+
+  const globalRatingRepeated = backUpLibreries && backUpLibreries
+    .map((element) => element.globalRating)
+    .filter(Boolean); // quita null/undefined
+
+  const globalRatingArr = new Set(globalRatingRepeated);
+  const globalRatings = [...globalRatingArr].sort();
 
   const products = useMemo(() => {
     if (!backUpLibreries || backUpLibreries.length === 0) return [];
@@ -232,6 +244,20 @@ function Apis({ setIsOpen }) {
                       checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
                     />
                     <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{item.count}</p>
+                  </div>
+                ))}
+              </CustomizedAccordions>
+            )}
+            {globalRatings && globalRatings.length > 0 && (
+              <CustomizedAccordions title={t('Apis.globalRating')}>
+                {globalRatings.map((item, index) => (
+                  <div key={index} className={classes.wrapper__checkbox}>
+                    <CheckboxWrapper
+                      name={item}
+                      label={item}
+                      handleChangeSelect={handleChangeGlobalRating}
+                      checked={filtersSelect[item] !== undefined ? filtersSelect[item] : false}
+                    />
                   </div>
                 ))}
               </CustomizedAccordions>
