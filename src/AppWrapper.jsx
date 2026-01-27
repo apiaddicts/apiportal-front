@@ -3,6 +3,28 @@ import AppRouter from './routers/AppRouter';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser } from './redux/actions/userAction';
 import { getSettingPage } from './redux/actions/settingPageAction';
+import config from './services/config';
+
+const colorToRgb = (color) => {
+    if (!color) return null;
+
+    const temp = document.createElement('div');
+    temp.style.color = color;
+
+    if (!temp.style.color) return null;
+
+    document.body.appendChild(temp);
+
+    const computed = getComputedStyle(temp).color;
+
+    document.body.removeChild(temp);
+
+    const match = computed.match(/\d+/g);
+    if (!match) return null;
+
+    const [r, g, b] = match;
+    return `${r}, ${g}, ${b}`;
+};
 
 const AppWrapper = () => {
     const dispatch = useDispatch();
@@ -27,6 +49,7 @@ const AppWrapper = () => {
     const primaryColor = settingPage?.mainColor ?? '#023d4c';
     const secondaryColor = settingPage?.secondaryColor ?? '#ef910d';
     const typography = settingPage?.typography ?? 'Roboto';
+    const customCssUrl = settingPage?.customCss?.url;
 
     useEffect(() => {
         if (!settingPage || !primaryColor || !secondaryColor || !typography) return;
@@ -42,16 +65,16 @@ const AppWrapper = () => {
         document.documentElement.style.setProperty('--primary-color', primaryColor);
         document.documentElement.style.setProperty('--secondary-color', secondaryColor);
 
-        const hexToRgb = (hex) => {
-            const cleanHex = hex.replace('#', '');
-            const r = parseInt(cleanHex.slice(0, 2), 16);
-            const g = parseInt(cleanHex.slice(2, 4), 16);
-            const b = parseInt(cleanHex.slice(4, 6), 16);
-            return `${r}, ${g}, ${b}`;
-        };
+        const basePrimaryRgb = colorToRgb(primaryColor);
+        const baseSecondaryRgb = colorToRgb(secondaryColor);
 
-        document.documentElement.style.setProperty('--primary-color-rgb', hexToRgb(primaryColor));
-        document.documentElement.style.setProperty('--secondary-color-rgb', hexToRgb(secondaryColor));
+        if (basePrimaryRgb) {
+            document.documentElement.style.setProperty('--primary-color-rgb', basePrimaryRgb);
+        }
+
+        if (baseSecondaryRgb) {
+            document.documentElement.style.setProperty('--secondary-color-rgb', baseSecondaryRgb);
+        }
 
         setIsAppReady(true);
 
@@ -59,6 +82,54 @@ const AppWrapper = () => {
             document.head.removeChild(link);
         };
     }, [settingPage, primaryColor, secondaryColor, typography]);
+
+    useEffect(() => {
+        if (!customCssUrl) return;
+
+        const existing = document.getElementById('custom-css');
+        if (existing) {
+            existing.remove();
+        }
+
+        const link = document.createElement('link');
+        link.id = 'custom-css';
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = `${customCssUrl}?v=${Date.now()}`;
+
+        document.head.appendChild(link);
+
+        return () => {
+            link.remove();
+        };
+    }, [customCssUrl]);
+
+    useEffect(() => {
+        if (!customCssUrl) return;
+
+        const timeout = setTimeout(() => {
+            const styles = getComputedStyle(document.documentElement);
+
+            const primary = styles.getPropertyValue('--primary-color')?.trim();
+            const secondary = styles.getPropertyValue('--secondary-color')?.trim();
+
+            if (primary) {
+                const rgb = colorToRgb(primary);
+                if (rgb) {
+                    document.documentElement.style.setProperty('--primary-color-rgb', rgb);
+                }
+            }
+
+            if (secondary) {
+                const rgb = colorToRgb(secondary);
+                if (rgb) {
+                    document.documentElement.style.setProperty('--secondary-color-rgb', rgb);
+                }
+            }
+        }, 100);
+
+        return () => clearTimeout(timeout);
+    }, [customCssUrl]);
 
     if (!isAppReady) {
         return <div style={{ width: '100vw', height: '100vh', backgroundColor: '#fff' }} />;

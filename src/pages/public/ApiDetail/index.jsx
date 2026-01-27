@@ -35,6 +35,10 @@ function ApiDetail({ setIsOpen }) {
   const [cardsImages, setCardsImages] = useState({});
 
   useEffect(() => {
+    dispatch(getLibraries());
+  }, []);
+
+  useEffect(() => {
     if (library?.image?.length > 0) {
       setBannerImg(`${library.image[0].formats?.medium?.url || library.image[0].url}`);
     } else if (library && Object.keys(library).length > 0) {
