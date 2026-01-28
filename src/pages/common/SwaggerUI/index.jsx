@@ -29,22 +29,37 @@ function SwaggerUI() {
 
     libraryService
       .getOpenApiFromStrapi(params.id)
-      .then((library) => {
+      .then(async (library) => {
         let openDoc = library?.openDoc;
+        let openDocUrl = library?.openDocUrl;
         let openDocFormat = library?.openDocFormat;
 
-        if (!openDoc) return;
-
         try {
-          if (openDocFormat === "json") {
-            openDoc = JSON.parse(openDoc);
-          } else {
-            openDoc = yaml.load(openDoc);
+          let parsedDoc = null;
+          if (openDocUrl) {
+            const response = await fetch(openDocUrl);
+            const text = await response.text();
+
+            if (openDocFormat === 'json') {
+              parsedDoc = JSON.parse(text);
+            } else {
+              parsedDoc = yaml.load(text);
+            }
           }
 
-          if (!openDoc?.openapi || !openDoc?.paths) return;
+          else if (openDoc) {
+            if (openDocFormat === 'json') {
+              parsedDoc = JSON.parse(openDoc);
+            } else {
+              parsedDoc = yaml.load(openDoc);
+            }
+          }
 
-          setOpenApi(openDoc);
+          if (!parsedDoc?.openapi || !parsedDoc?.paths) {
+            throw new Error('Invalid OpenAPI spec');
+          }
+
+          setOpenApi(parsedDoc);
           setHasOpenApi(true);
         } catch (err) {
           console.error(err);
