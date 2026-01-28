@@ -93,18 +93,25 @@ function ApiDetail({ setIsOpen }) {
   // Load buttons sections
   const filterButtonSection = homePage && homePage?.contentSections && homePage?.contentSections?.length > 0 ? homePage?.contentSections?.filter((item) => item.__component === 'sections.button-hero') : [];
 
+  const getDocRoute = (library, id) => {
+    if (library?.openDocType === 'asyncapi') {
+      return `/apis/${id}/asyncapi-ui`;
+    }
+    return `/apis/${id}/swagger-ui`;
+  };
+
   const buttonsLbls =
     library?.buttons?.length > 0
       ? library.buttons.map((item) => ({
           label: item?.name,
           class: item?.class,
-          link: `/apis/${params?.documentId}/swagger-ui`,
+          link: getDocRoute(library, library?.slug),
         }))
       : [
           {
             label: t('ApiDetail.tryApi'),
             class: 'primary-dinamic',
-            link: `/apis/${params?.documentId}/swagger-ui`,
+            link: getDocRoute(library, library?.slug),
           },
         ];
 
