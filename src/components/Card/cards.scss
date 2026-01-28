@@ -313,3 +313,36 @@
     white-space: nowrap;
     overflow: hidden;
 }
+
+
+.card__title {
+  padding-top: 20px;
+  filter: brightness(100%) !important;
+}
+
+.card__title__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  filter: brightness(100%) !important;
+}
+
+.card__rating__circle {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  font-size: 13px;
+  font-weight: 800;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff !important;
+}
+
+.rating__A { background: #27ae60; }
+.rating__B { background: #b0d226; }
+.rating__C { background: #f1c40f; }
+.rating__D { background: #f39c12; }
+.rating__E { background: #d52c19; }

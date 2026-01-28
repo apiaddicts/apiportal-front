@@ -123,14 +123,20 @@ function ApiDetail({ setIsOpen }) {
     return itemData;
   }) : [];
 
-  const firstImageUrl = library?.image?.length > 0
-    ? `${library.image[0].formats?.medium?.url || library.image[0].url}`
-    : config.notImage;
-
-
   const otherApis = libraries?.filter(lib => lib.documentId !== library?.documentId) || [];
   const shuffledApis = _.shuffle(otherApis);
   const apisNews = shuffledApis.slice(0, 3);
+
+  const hasAnyRating =
+    !!library?.globalRating ||
+    !!library?.definitionRating ||
+    !!library?.securityRating ||
+    !!library?.qualityRating;
+
+  const getRatingClass = (rating) => {
+    if (!rating) return classes.rating__empty;
+    return classes[`rating__${rating}`] || classes.rating__empty;
+  };
 
   const handleClickPage = (id) => {
     dispatch(getLibrary(id));
@@ -153,35 +159,43 @@ function ApiDetail({ setIsOpen }) {
             />
           </section>
           <section className={`container ${classes.section__content} pb-9`}>&nbsp;</section>
-          {library?.benefits && library?.benefits.length > 0 && (
-            <section className='container mb-15'>
-              <div className='row'>
-                <div className={`flex-md-12 flex-sm-12 -ml-23 ${classes.section__content__title}`}>
-                  <h1 className='h2 text__primary__title font-weight-bold mb-10 -ml-23 text-center'>
-                    {library.benefits[0]?.title || t('Home.titleSection')}
-                  </h1>
-                </div>
-                <div className='row px-5'>
-                  <div className='flex-sm-12 flex-md-6 flex-lg-6' style={{ display: 'flex', alignItems: 'center', padding: '0 4rem' }}>
-                    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(1fr)', gap: '2rem', alignContent: 'center' }}>
-                      {library.benefits[0]?.Steps?.length > 0 &&
-                        library.benefits[0].Steps.map((item, i) => (
-                          <div key={i}>
-                            <Item
-                              title={item.title}
-                              icon={item.number || 'note1'}
-                              iconColor='rgba(0, 0, 0, 0.5)'
-                              titleStyles={{ fontSize: '18px', fontWeight: '500', color: '#53565A' }}
-                              iconStyle={{ width: '50px', height: '50px' }}
-                            />
-                          </div>
-                        ))}
+          {library && hasAnyRating && (
+            <section className={`container ${classes.section__content} ${classes.section__ratings}`}>
+              <div className={classes.ratings__wrapper}>
+                <h2 className={classes.ratings__title}>
+                  {t('ApiDetail.globalGradesTitle')}
+                </h2>
+                <p className={classes.ratings__subtitle}>
+                  {t('ApiDetail.globalGradesSubtitle')}
+                </p>
+
+                <div className={classes.ratings__grid}>
+                  <div className={classes.rating__item}>
+                    <div className={`${classes.rating__circle} ${getRatingClass(library.globalRating)}`}>
+                      {library.globalRating || '-'}
                     </div>
+                    <span>{t('ApiDetail.ratingGlobal')}</span>
                   </div>
-                  <div className={`flex-sm-12 flex-md-6 flex-lg-6 container ${classes.section__content__img}`}>
-                    {library.benefits[0]?.background?.url && (
-                      <img src={library.benefits[0].background.url} alt={t('image')} className='w-full' />
-                    )}
+
+                  <div className={classes.rating__item}>
+                    <div className={`${classes.rating__circle} ${getRatingClass(library.definitionRating)}`}>
+                      {library.definitionRating || '-'}
+                    </div>
+                    <span>{t('ApiDetail.ratingDefinition')}</span>
+                  </div>
+
+                  <div className={classes.rating__item}>
+                    <div className={`${classes.rating__circle} ${getRatingClass(library.securityRating)}`}>
+                      {library.securityRating || '-'}
+                    </div>
+                    <span>{t('ApiDetail.ratingSecurity')}</span>
+                  </div>
+
+                  <div className={classes.rating__item}>
+                    <div className={`${classes.rating__circle} ${getRatingClass(library.qualityRating)}`}>
+                      {library.qualityRating || '-'}
+                    </div>
+                    <span>{t('ApiDetail.ratingQuality')}</span>
                   </div>
                 </div>
               </div>

@@ -5,7 +5,6 @@ import useFormForgotPassword from '../../../hooks/useFormForgotPassword';
 import Button from '../../Buttons/Button';
 import InputUI from '../../Input/InputUI/InputUI';
 import { fieldsForgotPassword } from '../fields';
-import Alert from '../../Alert';
 import './index.scss';
 import { forgotPassword, resetAuthState } from '../../../redux/actions/authAction';
 
@@ -40,7 +39,7 @@ function ForgotPassword() {
 
       {error && (
         <div className="inlineError">
-          {error?.message || t('Common.genericError')}
+          {error?.message || t('ForgotPassword.error')}
         </div>
       )}
 
