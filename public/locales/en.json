@@ -170,6 +170,11 @@
     "goBack": "Go back",
     "seeAll": "See all"
   },
+  "EmailConfirmed": {
+    "successTitle": "Account confirmed",
+    "successMessage": "Your account has been successfully activated. You can now access the platform.",
+    "goHome": "Go to home"
+  },
   "Login": {
     "signIn": "Sign In",
     "resetPassword": "Reset Password"
@@ -359,7 +364,10 @@
     "acceptTermsError": "To complete the registration, you must accept the terms of use",
     "loginButton": "Login",
     "registerButton": "Register",
-    "termsTitle": "Terms and Conditions"
+    "loadingButton": "Loading...",
+    "termsTitle": "Terms and Conditions",
+    "successMessage": "Almost there! We've sent a confirmation link to your email. Please check your inbox to activate your account.",
+    "errorMessage": "We're sorry, we couldn't create your account right now. Please check your details or try again later."
   },
   "LoginForm": {
     "checkEmailTitle": "Check your email account",

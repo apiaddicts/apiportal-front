@@ -95,7 +95,7 @@ const AppWrapper = () => {
         link.id = 'custom-css';
         link.rel = 'stylesheet';
         link.type = 'text/css';
-        link.href = `${customCssUrl}?v=${Date.now()}`;
+        link.href = `${customCssUrl}`;
 
         document.head.appendChild(link);
 

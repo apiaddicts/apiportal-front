@@ -28,22 +28,40 @@ function AsyncApiUI() {
 
     libraryService
       .getOpenApiFromStrapi(id)
-      .then((library) => {
-        const doc = library?.openDoc;
-        if (!doc) return;
+      .then(async (library) => {
+        let openDoc = library?.openDoc;
+        let openDocUrl = library?.openDocUrl;
+        let openDocFormat = library?.openDocFormat;
 
         try {
-          const parsed =
-            library?.openDocFormat === 'json'
-              ? JSON.parse(doc)
-              : yaml.load(doc);
+          let parsedDoc = null;
 
-          if (!parsed?.asyncapi) return;
+          if (openDocUrl) {
+            const response = await fetch(openDocUrl);
+            const text = await response.text();
 
-          setAsyncApi(parsed);
+            if (openDocFormat === 'json') {
+              parsedDoc = JSON.parse(text);
+            } else {
+              parsedDoc = yaml.load(text);
+            }
+          } else if (openDoc) {
+            if (openDocFormat === 'json') {
+              parsedDoc = JSON.parse(openDoc);
+            } else {
+              parsedDoc = yaml.load(openDoc);
+            }
+          }
+
+          if (!parsedDoc?.asyncapi) {
+            throw new Error('Invalid AsyncAPI spec');
+          }
+
+          setAsyncApi(parsedDoc);
           setHasAsyncApi(true);
         } catch (e) {
-          console.error('AsyncAPI parse error', e);
+          console.error('AsyncAPI load/parse error', e);
+          setHasAsyncApi(false);
         }
       })
       .finally(() => setLoading(false));

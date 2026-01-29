@@ -8,6 +8,30 @@ const initialState = {
 
 export default function authReducer(state = initialState, action) {
   switch (action.type) {
+    case authConstants.REGISTER_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+        success: false,
+      };
+
+    case authConstants.REGISTER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        error: null,
+      };
+
+    case authConstants.REGISTER_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        error: action.error,
+      };
+
     case authConstants.FORGOT_PASSWORD_REQUEST:
     case authConstants.RESET_PASSWORD_REQUEST:
       return {
