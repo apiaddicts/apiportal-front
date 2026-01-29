@@ -31,33 +31,31 @@ import ApiDoc from '../../pages/private/ApiDoc';
 import CodeSamples from '../../pages/private/codeSamples';
 import CodeSampleDetailss from '../../pages/private/codeSamplesDetail';
 
-import { getUser, logout } from '../../redux/actions/userAction';
+import { logout } from '../../redux/actions/authAction';
 import classes from './private-router.module.scss';
 
 function PrivateRouter({ isAppReady }) {
   const dispatch = useDispatch();
-  const { token, user, openModal } = useSelector((state) => state.user);
+
+  const { token, user } = useSelector((state) => state.auth);
   const { time } = useSelector((state) => state.timer);
-  const { checkSession, isSessionValid } = useVerifySession();
+
+  const { isSessionValid } = useVerifySession();
   const { getTime } = useTimer();
 
   const hasToken = token || localStorage.getItem('token');
 
   useEffect(() => {
-    if (token && Object.keys(user).length === 0) {
-      dispatch(getUser(token, 'Mulesoft'));
+    if (token) {
       getTime();
     }
-  }, []);
+  }, [token]);
 
   useEffect(() => {
     isSessionValid();
-    if (openModal) dispatch(logout());
   }, [time]);
 
-
   if (!isAppReady) return <SkeletonComponent />;
-
 
   if (!hasToken) {
     return (
@@ -68,9 +66,7 @@ function PrivateRouter({ isAppReady }) {
     );
   }
 
-
-  if (Object.keys(user).length === 0) return <SkeletonComponent />;
-
+  if (!user) return <SkeletonComponent />;
 
   return (
     <Box>

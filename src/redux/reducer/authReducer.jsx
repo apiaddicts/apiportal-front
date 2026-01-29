@@ -4,6 +4,8 @@ const initialState = {
   loading: false,
   success: false,
   error: null,
+  token: localStorage.getItem('token'),
+  user: JSON.parse(localStorage.getItem('user') || 'null'),
 };
 
 export default function authReducer(state = initialState, action) {
@@ -41,6 +43,41 @@ export default function authReducer(state = initialState, action) {
         loading: false,
         success: false,
         error: null,
+      };
+
+    case authConstants.LOGIN_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+      };
+
+    case authConstants.LOGIN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        token: action.response.jwt,
+        user: action.response.user,
+        error: null,
+      };
+
+    case authConstants.LOGIN_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        error: action.error,
+      };
+
+    case authConstants.LOGOUT:
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        error: null,
+        token: null,
+        user: null,
       };
 
     default:

@@ -3,28 +3,25 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Form from '../../../components/Forms/LoginForm';
 import Modal from '../../../components/Modal';
-// import Icon from '../../../components/MdIcon/Icon';
 import ForgotPassword from '../../../components/Forms/ForgotPassword';
 import { fieldsLogin } from '../../../components/Forms/fields';
-import { login, loginApim } from '../../../redux/actions/userAction';
 import useLoginConfig from '../../../hooks/useLogin';
 import { useTranslation } from 'react-i18next';
 import classes from './login.module.scss';
+import { login } from '../../../redux/actions/authAction';
 
 function Login({ setOpenForm, setIsOpen, setPrivateSession }) {
   const { t } = useTranslation();
-  const { token } = useSelector((state) => state.user);
+  const { token } = useSelector((state) => state.auth);
   const [showForm, setShowForm] = useState(true);
   const [showResetForm, setShowResetForm] = useState(false);
 
   const navigate = useNavigate();
-
   const dispatch = useDispatch();
 
-  // This function is responsible for sending the user to local storage
   const handleSubmit = (dataForm) => {
-    dispatch(login(dataForm, 'Mulesoft'));
-    dispatch(loginApim('Mulesoft'));
+    const { username, password } = dataForm;
+    dispatch(login(username, password));
   };
 
   useEffect(() => {
@@ -32,7 +29,7 @@ function Login({ setOpenForm, setIsOpen, setPrivateSession }) {
       setIsOpen(false);
       navigate('/developer/dashboard');
     }
-  }, [token]);
+  }, [token, navigate, setIsOpen]);
 
   const formConfig = useLoginConfig(fieldsLogin, handleSubmit);
   return (

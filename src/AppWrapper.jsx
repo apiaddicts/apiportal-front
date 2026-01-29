@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AppRouter from './routers/AppRouter';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser } from './redux/actions/userAction';
 import { getSettingPage } from './redux/actions/settingPageAction';
 import config from './services/config';
 
@@ -33,17 +32,6 @@ const AppWrapper = () => {
 
     useEffect(() => {
         dispatch(getSettingPage());
-    }, [dispatch]);
-
-    useEffect(() => {
-        const raw = localStorage.getItem('token') || sessionStorage.getItem('token');
-        if (raw) {
-            const parsed = JSON.parse(raw);
-            const stillValid = parsed.expiresIn > Date.now();
-            if (stillValid) {
-                dispatch(getUser(parsed.accessToken, 'Mulesoft'));
-            }
-        }
     }, [dispatch]);
 
     const primaryColor = settingPage?.mainColor ?? '#023d4c';
