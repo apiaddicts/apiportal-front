@@ -27,10 +27,11 @@ import Subscriptions from '../pages/public/Subscriptions';
 import SubscriptionDetail from '../pages/public/SubscriptionDetail';
 import SubscriptionDetailContact from '../pages/public/SubscriptionDetailContact';
 import ResetPassword from '../pages/public/ResetPassword';
+import EmailConfirmed from '../pages/public/EmailConfirmed';
 
 function PublicRoute() {
   const location = useLocation();
-  const hideLayoutPaths = ['/reset-password'];
+  const hideLayoutPaths = ['/auth/reset-password', '/auth/email-confirmed'];
   const hideLayout = hideLayoutPaths.includes(location.pathname);
 
   const { openModal } = useSelector((state) => state.user);
@@ -73,7 +74,8 @@ function PublicRoute() {
           <Route path='/blog' element={<Blog setIsOpen={setIsOpen} />} />
           <Route path='/blog/:id' element={<BlogPost setIsOpen={setIsOpen} />} />
           <Route path='/documentacion' element={<Wiki />} />
-          <Route path='/reset-password' element={<ResetPassword />} />
+          <Route path='/auth/reset-password' element={<ResetPassword />} />
+          <Route path='/auth/email-confirmed' element={<EmailConfirmed />} />
           <Route path='/soporte' element={<Contacto />} />
           <Route path='/suscripciones' element={<Subscriptions setOpenForm={setOpenForm} />} />
           <Route path='/suscripciones/:id' element={<SubscriptionDetail />} />

@@ -45,9 +45,7 @@ function SwaggerUI() {
             } else {
               parsedDoc = yaml.load(text);
             }
-          }
-
-          else if (openDoc) {
+          } else if (openDoc) {
             if (openDocFormat === 'json') {
               parsedDoc = JSON.parse(openDoc);
             } else {

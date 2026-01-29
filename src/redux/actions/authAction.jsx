@@ -1,6 +1,32 @@
 import authConstants from '../constants/authConstants';
 import authService from '../../services/authService';
 
+export const register = (userData) => async (dispatch) => {
+  dispatch({ type: authConstants.REGISTER_REQUEST });
+
+  try {
+    const response = await authService.register(userData);
+
+    if (response?.error) {
+      throw response.error;
+    }
+
+    dispatch({
+      type: authConstants.REGISTER_SUCCESS,
+      response,
+    });
+
+    return { success: true, response };
+  } catch (error) {
+    dispatch({
+      type: authConstants.REGISTER_FAILURE,
+      error,
+    });
+
+    return { error };
+  }
+};
+
 export const forgotPassword = (email) => (dispatch) => {
   dispatch({ type: authConstants.FORGOT_PASSWORD_REQUEST });
 

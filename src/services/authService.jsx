@@ -1,6 +1,20 @@
 import handleResponse from './handleResponse';
 import config from './config';
 
+function register(userData) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(userData),
+  };
+
+  const url = `${config.apiUrl}/auth/local/register`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response);
+}
+
 function forgotPassword(email) {
   const requestOptions = {
     method: 'POST',
@@ -34,6 +48,7 @@ function resetPassword(code, password, passwordConfirmation) {
 }
 
 const authService = {
+  register,
   forgotPassword,
   resetPassword,
 };

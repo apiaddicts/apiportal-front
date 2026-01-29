@@ -170,6 +170,11 @@
     "goBack": "Volver",
     "seeAll": "Ver todas"
   },
+  "EmailConfirmed": {
+    "successTitle": "Cuenta confirmada",
+    "successMessage": "Tu cuenta se ha activado correctamente. Ya puedes acceder a la plataforma.",
+    "goHome": "Ir al inicio"
+  },
   "Login": {
     "signIn": "Iniciar sesión",
     "resetPassword": "Recuperar contraseña"
@@ -359,7 +364,10 @@
     "acceptTermsError": "Para completar el registro es necesario aceptar los términos de uso",
     "loginButton": "Iniciar Sesión",
     "registerButton": "Registrarme",
-    "termsTitle": "Términos y Condiciones"
+    "loadingButton": "Cargando...",
+    "termsTitle": "Términos y Condiciones",
+    "successMessage": "¡Casi listo! Hemos enviado un enlace de confirmación a tu correo electrónico. Por favor, verifica tu bandeja de entrada para activar tu cuenta.",
+    "errorMessage": "Lo sentimos, no pudimos crear tu cuenta en este momento. Por favor, verifica que tus datos sean correctos o inténtalo de nuevo más tarde."
   },
   "LoginForm": {
     "checkEmailTitle": "Revisa tu cuenta de correo",
