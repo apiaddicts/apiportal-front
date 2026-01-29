@@ -76,6 +76,47 @@ export const resetPassword = (code, password, passwordConfirmation) => async (di
     }
   };
 
+export const login = (identifier, password) => async (dispatch) => {
+  dispatch({ type: authConstants.LOGIN_REQUEST });
+
+  try {
+    const response = await authService.login(identifier, password);
+
+    if (response?.error) {
+      throw response.error;
+    }
+
+    const tokenObj = {
+      accessToken: response.jwt,
+      expiresIn: Date.now() + 3600 * 1000,
+    };
+    localStorage.setItem('token', JSON.stringify(tokenObj));
+    localStorage.setItem('user', JSON.stringify(response.user));
+
+    dispatch({
+      type: authConstants.LOGIN_SUCCESS,
+      response,
+    });
+
+    return response;
+  } catch (error) {
+    dispatch({
+      type: authConstants.LOGIN_FAILURE,
+      error,
+    });
+
+    throw error;
+  }
+};
+
+
+export const logout = () => (dispatch) => {
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+
+  dispatch({ type: authConstants.LOGOUT });
+};
+
 export const resetAuthState = () => ({
   type: authConstants.AUTH_RESET_STATE,
 });

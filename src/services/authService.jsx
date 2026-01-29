@@ -47,10 +47,28 @@ function resetPassword(code, password, passwordConfirmation) {
     .then((response) => response);
 }
 
+function login(identifier, password) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      identifier,
+      password,
+    }),
+  };
+
+  const url = `${config.apiUrl}/auth/local`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response);
+}
+
 const authService = {
   register,
   forgotPassword,
   resetPassword,
+  login,
 };
 
 export default authService;
