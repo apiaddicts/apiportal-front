@@ -4,7 +4,10 @@ import config from './config';
 function register(userData) {
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': `${config.strapiApiKey}`,
+    },
     body: JSON.stringify(userData),
   };
 
@@ -18,7 +21,10 @@ function register(userData) {
 function forgotPassword(email) {
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': `${config.strapiApiKey}`,
+    },
     body: JSON.stringify({ email }),
   };
 
@@ -32,7 +38,10 @@ function forgotPassword(email) {
 function resetPassword(code, password, passwordConfirmation) {
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': `${config.strapiApiKey}`,
+    },
     body: JSON.stringify({
       code,
       password,
@@ -50,7 +59,10 @@ function resetPassword(code, password, passwordConfirmation) {
 function login(identifier, password) {
   const requestOptions = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': `${config.strapiApiKey}`,
+    },
     body: JSON.stringify({
       identifier,
       password,
