@@ -76,11 +76,29 @@ function login(identifier, password) {
     .then((response) => response);
 }
 
+function resendConfirmationEmail(email) {
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': `${config.strapiApiKey}`,
+    },
+    body: JSON.stringify({ email }),
+  };
+
+  const url = `${config.apiUrl}/auth/send-email-confirmation`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response);
+}
+
 const authService = {
   register,
   forgotPassword,
   resetPassword,
   login,
+  resendConfirmationEmail,
 };
 
 export default authService;

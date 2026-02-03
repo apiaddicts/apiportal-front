@@ -195,3 +195,19 @@
     position: relative;
   }
 }
+
+.resend__link {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--primary-color);
+  text-decoration: underline;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+  margin-bottom: 20px;
+
+  &:hover {
+    opacity: 1;
+    color: var(--secondary-color);
+  }
+}

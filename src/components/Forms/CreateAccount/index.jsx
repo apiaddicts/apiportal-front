@@ -17,6 +17,7 @@ import './index.scss';
 import { getTermsContent } from '../../../redux/actions/termAction';
 import { IconButton, Alert } from '@mui/material';
 import authConstants from '../../../redux/constants/authConstants';
+import { resendConfirmationEmail } from '../../../redux/actions/authAction';
 
 function CreateAccount({ setOpenForm, setIsOpen }) {
   const dispatch = useDispatch();
@@ -27,6 +28,7 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
 
   const [isTermsOpen, setIsTermsOpen] = useState(false);
   const [termsData, setTermsData] = useState({ title: '', content: '' });
+  const [isConfirmedSuccess, setIsConfirmedSuccess] = useState(false);
 
   const { termPage } = useSelector((state) => state.term);
 
@@ -50,7 +52,22 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
     return () => {
       dispatch({ type: authConstants.AUTH_RESET_STATE });
     };
-  }, [dispatch]);
+  }, [isConfirmedSuccess]);
+
+  useEffect(() => {
+    if (success) {
+      setIsConfirmedSuccess(true);
+    }
+  }, [success]);
+
+  const handleResend = () => {
+    const email = formConfig.values.email;
+    if (email && email.includes('@')) {
+      dispatch(resendConfirmationEmail(email));
+    } else {
+      alert(t('CreateAccount.enterEmailToResend'));
+    }
+  };
 
   const handleSubmit = async (values) => {
     if (!executeRecaptcha) {
@@ -78,10 +95,13 @@ function CreateAccount({ setOpenForm, setIsOpen }) {
 
   return (
     <div className='wrapper__register'>
-      {success ? (
+      {isConfirmedSuccess ? (
         <div className='register-success-wrapper'>
-          <p style={{ textAlign: 'center', marginBottom: '20px', padding: '30px' }}>
+          <p style={{ textAlign: 'center', padding: '30px' }}>
             {t('CreateAccount.successMessage')}
+          </p>
+          <p className='resend__link' onClick={handleResend} style={{textAlign: 'center', cursor:'pointer', textDecoration:'underline'}}>
+            {t('CreateAccount.noEmailReceived')}
           </p>
         </div>
       ) : (

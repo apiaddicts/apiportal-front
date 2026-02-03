@@ -109,6 +109,31 @@ export const login = (identifier, password) => async (dispatch) => {
   }
 };
 
+export const resendConfirmationEmail = (email) => async (dispatch) => {
+  dispatch({ type: authConstants.RESEND_CONFIRMATION_REQUEST });
+
+  try {
+    const response = await authService.resendConfirmationEmail(email);
+
+    if (response?.error) {
+      throw response.error;
+    }
+
+    dispatch({
+      type: authConstants.RESEND_CONFIRMATION_SUCCESS,
+      response,
+    });
+
+    return { success: true };
+  } catch (error) {
+    dispatch({
+      type: authConstants.RESEND_CONFIRMATION_FAILURE,
+      error,
+    });
+
+    return { error };
+  }
+};
 
 export const logout = () => (dispatch) => {
   localStorage.removeItem('token');
