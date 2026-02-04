@@ -9,7 +9,6 @@ import SearchInput from '../../../components/Input/SearchInput';
 import Icon from '../../../components/MdIcon/Icon';
 import CardInformationLibrary from '../../../components/Card/CardInformationLibrary';
 import { listApis, searchApis, getListTags, filterAPIsByTags, resetLibraryApi, getLibraryApiNextSearch, getLibraryApiPreviosSearch, getLibraryApiNext, getLibraryApiPrevios, getLibraries } from '../../../redux/actions/libraryAction';
-import { getApiList } from '../../../redux/actions/apiManagerAction';
 import classes from './apis.module.scss';
 import config from '../../../services/config';
 import CardLibrary from './card';

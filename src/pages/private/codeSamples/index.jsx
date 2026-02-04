@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import { Grid, Box, Typography, Paper, Container } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
-import { getApiList } from '../../../redux/actions/apiManagerAction';
 import { getLibraries } from '../../../redux/actions/libraryAction';
 import classes from './code.module.scss';
 
