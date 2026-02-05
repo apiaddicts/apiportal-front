@@ -9,7 +9,6 @@ import SearchInput from '../../../components/Input/SearchInput';
 import Icon from '../../../components/MdIcon/Icon';
 import CardInformationLibrary from '../../../components/Card/CardInformationLibrary';
 import { listApis, searchApis, getListTags, filterAPIsByTags, resetLibraryApi, getLibraryApiNextSearch, getLibraryApiPreviosSearch, getLibraryApiNext, getLibraryApiPrevios, getLibraries } from '../../../redux/actions/libraryAction';
-import { getApiList } from '../../../redux/actions/apiManagerAction';
 import classes from './apis.module.scss';
 import config from '../../../services/config';
 import CardLibrary from './card';
@@ -26,33 +25,36 @@ function Apis(props) {
   const { t } = useTranslation();
 
   const topApi = 10;
-  const { apis, loading } = useSelector((state) => state.apiManager);
-  const { libraries } = useSelector((state) => state.library);
+  const { libraries, loading } = useSelector((state) => state.library);
   const [skip, setSkip] = useState(0);
-  const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState('');
   const [viewType, setViewType] = useState('list');
-
-
-  const fApis = libraries && libraries.length > 0 && apis && apis.length > 0 ? compareArrays(apis, libraries) : [];
-
+  const dispatch = useDispatch();
 
   const filteredApis = useMemo(() => {
+    if (!libraries) return [];
+
     if (searchTerm.trim().length === 0) {
-      return fApis;
+      return libraries;
     }
+
     const normalizedSearchTerm = searchTerm.trim().toLowerCase();
-    return fApis.filter(api =>
-      api.assetId.toLowerCase().includes(normalizedSearchTerm) ||
+    return libraries.filter(api =>
+      api.title?.toLowerCase().includes(normalizedSearchTerm) ||
+      api.slug?.toLowerCase().includes(normalizedSearchTerm) ||
       api.description?.toLowerCase().includes(normalizedSearchTerm)
     );
-  }, [searchTerm, fApis]);
+  }, [searchTerm, libraries]);
 
   const displayApis = useMemo(() => ({
     apis: filteredApis.slice(skip, skip + topApi),
     skip: skip,
     count: filteredApis.length,
   }), [filteredApis, skip]);
+
+  const isLoading =
+    loading &&
+    (!libraries || libraries.length === 0);
 
   useEffect(() => {
     setSkip(0);
@@ -92,9 +94,6 @@ function Apis(props) {
   };
 
   useEffect(() => {
-    if (apis && apis.length === 0) {
-      dispatch(getApiList('Mulesoft'))
-    }
     if (libraries && libraries.length === 0) {
       dispatch(getLibraries())
     }
@@ -171,19 +170,19 @@ function Apis(props) {
             <div>{t('type')}</div>
           </div>
           {
-            displayApis.apis && displayApis.apis.length > 0 && !loading ? (
+            displayApis.apis && displayApis.apis.length > 0 && !isLoading ? (
               displayApis.apis.map((api, index) => (
                 <div key={index} className={classes.table__row}>
-                  <div className={classes.api__name} onClick={() => window.location.href = `/developer/apis/${api.id}`}>
-                    {api.assetId}
+                  <div className={classes.api__name} onClick={() => window.location.href = `/developer/apis/${api.documentId}`}>
+                    {api.slug}
                   </div>
-                  <div>{api.assetVersion}</div>
+                  <div>{api.version || '-'}</div>
                   <div>{api.context || '-'}</div>
-                  <div>{api.provider || 'admin@neurologyca.com (Administrador)'}</div>
+                  <div>{api.provider || '-'}</div>
                   <div>{api.protocol || 'HTTP'}</div>
                 </div>
               ))
-            ) : loading ? (
+            ) : isLoading ? (
               <h1>{t('loading')}</h1>
             ) : (
               <h3>{t('noResultsFound')}</h3>
@@ -193,13 +192,13 @@ function Apis(props) {
       ) : (
         <div className={classes.apis__cards}>
           {
-            displayApis.apis && displayApis.apis.length > 0 && !loading ? (
+            displayApis.apis && displayApis.apis.length > 0 && !isLoading ? (
               <div className={classes.card__grid}>
                 {displayApis.apis.map((api, index) => (
                   <CardLibrary key={index} api={api} />
                 ))}
               </div>
-            ) : loading ? (
+            ) : isLoading ? (
               <h1>{t('loading')}</h1>
             ) : (
               <h3>{t('noResultsFound')}</h3>

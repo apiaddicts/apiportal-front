@@ -1,5 +1,5 @@
 .footer {
-  background-color: #007AC3;
+  background-color: var(--primary-color);
   padding: 10px 40px;
   color: white;
   font-family: 'Roboto', sans-serif;
@@ -30,7 +30,7 @@
   font-weight: 600;
 
   a {
-    color: #160A68;
+    color: white;
     text-decoration: none;
 
     &:hover {
