@@ -9,7 +9,7 @@ function getcodeSample(id_integrationApi) {
     headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
-  return fetch(`${config.apiUrl}/code-samples?filters[library_api][title][$eq]=${id_integrationApi}&populate=*`, requestOptions)
+  return fetch(`${config.apiUrl}/code-samples?filters[library_api][slug][$eq]=${id_integrationApi}&populate=*`, requestOptions)
     .then(handleResponse)
     .then((blog) => {
       return blog;
