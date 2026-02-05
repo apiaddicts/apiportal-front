@@ -80,7 +80,7 @@ function Billings() {
         ) : (
           <Grid item xs={12}>
             <Typography variant="body1" color="textSecondary" textAlign="center">
-              {t('Billings.noProducts')}
+              {t('Billings.serviceUnavailable')}
             </Typography>
           </Grid>
         )}

@@ -74,7 +74,8 @@
     "activate": "ACTIVAR",
     "noProducts": "No hay productos disponibles en este momento.",
     "monthlyRequests": "solicitudes de API",
-    "dailyRequests": "transacciones"
+    "dailyRequests": "transacciones",
+    "serviceUnavailable": "Este servicio no está disponible por el momento."
   },
   "Support": {
     "name": "Nombre",
