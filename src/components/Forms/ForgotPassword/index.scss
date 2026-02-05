@@ -1,0 +1,35 @@
+@import "./../../../styles/variables.module.scss";
+
+.text__reset-password {
+    color: $gray-darken;
+    text-align: center;
+}
+
+.container__button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inlineError {
+  margin: 0px 0px 30px 0px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: #fff5f5;
+  color: #c53030;
+  font-size: 14px;
+  line-height: 1.4;
+  border: 1px solid #fed7d7;
+}
+
+.inlineSuccess {
+  margin: 0px 0px 30px 0px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: #f0fff4;
+  color: #2f855a;
+  font-size: 14px;
+  line-height: 1.4;
+  border: 1px solid #c6f6d5;
+}

@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define */
 import React, { useState, useEffect, useRef } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { NavLink, useNavigate } from 'react-router-dom';
 import { styled, useTheme } from '@mui/material/styles';
@@ -47,6 +47,7 @@ function SidebarDrawer({ children, user }) {
   const [toggleMenu, setToggleMenu] = useState(true);
   const [toggleMenuTemporary, setToggleMenuTemporary] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(true); // Estado para DropdownMenu
+  const { settingPage } = useSelector((state) => state.settingPage);
 
   const { primaryColor, grayColor } = styles;
 
@@ -136,6 +137,10 @@ function SidebarDrawer({ children, user }) {
     },
   });
 
+  const logoUrl = settingPage?.Logo?.url
+    ? `${settingPage.Logo.url}`
+    : null;
+
   const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
     ({ theme, open }) => ({
       width: drawerWidth,
@@ -178,10 +183,11 @@ function SidebarDrawer({ children, user }) {
 
             }}
           >
-            <CustomIcon name="logoNeuro" className={classes.logoIcon} />
-            {/* <Box sx={{ display: 'flex', alignItems: 'center' }}>
-              
-            </Box> */}
+            {logoUrl ? (
+              <img src={logoUrl} alt='Logo' style={{ height: '40px' }} />
+            ) : (
+              <CustomIcon name='logo' />
+            )}
             {isPermanent && (
               <Box sx={{ display: 'flex', alignItems: 'center' }}>
                 <LanguageSelector />

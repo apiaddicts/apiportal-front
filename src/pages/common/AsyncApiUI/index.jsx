@@ -1,34 +1,33 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-
-import SwaggerUIReact from 'swagger-ui-react';
-import 'swagger-ui-react/swagger-ui.css';
-
+import { useNavigate, useParams } from 'react-router-dom';
 import { Container } from '@mui/material';
-import Icon from '../../../components/MdIcon/Icon';
-import libraryService from '../../../services/libraryService';
-import classes from './swagger-ui.module.scss';
-import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
+import { useTranslation } from 'react-i18next';
 import yaml from 'js-yaml';
 
-function SwaggerUI() {
-  const params = useParams();
+import '@asyncapi/react-component/styles/default.min.css';
+import AsyncAPIComponent from '@asyncapi/react-component/browser';
+import Icon from '../../../components/MdIcon/Icon';
+
+import libraryService from '../../../services/libraryService';
+import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
+import classes from './asyncapi-ui.module.scss';
+
+function AsyncApiUI() {
+  const { id } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
-  const [openApi, setOpenApi] = useState(null);
-  const [swaggerUi, setSwaggerUi] = useState(null);
+  const [asyncApi, setAsyncApi] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [hasOpenApi, setHasOpenApi] = useState(false);
+  const [hasAsyncApi, setHasAsyncApi] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    setHasOpenApi(false);
-    setOpenApi(null);
+    setHasAsyncApi(false);
+    setAsyncApi(null);
 
     libraryService
-      .getOpenApiFromStrapi(params.id)
+      .getOpenApiFromStrapi(id)
       .then(async (library) => {
         let openDoc = library?.openDoc;
         let openDocUrl = library?.openDocUrl;
@@ -36,6 +35,7 @@ function SwaggerUI() {
 
         try {
           let parsedDoc = null;
+
           if (openDocUrl) {
             const response = await fetch(openDocUrl);
             const text = await response.text();
@@ -53,25 +53,19 @@ function SwaggerUI() {
             }
           }
 
-          if (!parsedDoc?.openapi || !parsedDoc?.paths) {
-            throw new Error('Invalid OpenAPI spec');
+          if (!parsedDoc?.asyncapi) {
+            throw new Error('Invalid AsyncAPI spec');
           }
 
-          setOpenApi(parsedDoc);
-          setHasOpenApi(true);
-        } catch (err) {
-          console.error(err);
-          setHasOpenApi(false);
+          setAsyncApi(parsedDoc);
+          setHasAsyncApi(true);
+        } catch (e) {
+          console.error('AsyncAPI load/parse error', e);
+          setHasAsyncApi(false);
         }
       })
       .finally(() => setLoading(false));
-  }, [params.id]);
-
-  const EmptyState = () => (
-    <div style={{ padding: '40px', textAlign: 'center', color: '#666' }}>
-      <p>{t('SwaggerUI.noInfo')}</p>
-    </div>
-  );
+  }, [id]);
 
   return (
     <div
@@ -86,19 +80,34 @@ function SwaggerUI() {
           <span>{t('SwaggerUI.back')}</span>
         </div>
       </div>
-
       <Container fixed>
         {loading && <SkeletonComponent />}
-        {!loading && !hasOpenApi && <EmptyState />}
-        {!loading && hasOpenApi && (
-          <SwaggerUIReact
-            spec={openApi}
-            onComplete={(ui) => setSwaggerUi(ui)}
-          />
+
+        {!loading && hasAsyncApi && asyncApi && (
+          <div className={classes.asyncapiWrapper}>
+            <AsyncAPIComponent
+              schema={asyncApi}
+              config={{
+                showErrors: false,
+                disableSchemaValidation: true,
+                show: {
+                  info: true,
+                  servers: true,
+                  messages: true,
+                },
+              }}
+            />
+          </div>
+        )}
+
+        {!loading && !hasAsyncApi && (
+          <p style={{ textAlign: 'center', color: '#666' }}>
+            No AsyncAPI documentation available
+          </p>
         )}
       </Container>
     </div>
   );
 }
 
-export default SwaggerUI;
+export default AsyncApiUI;

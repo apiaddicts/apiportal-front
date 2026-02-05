@@ -262,7 +262,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    color: var(--secondary-color) !important;
+    color: var(--secondary-color);
 
     @media (max-width: 768px) {
       padding: 0;

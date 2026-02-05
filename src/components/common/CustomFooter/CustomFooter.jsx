@@ -3,17 +3,27 @@ import { useTranslation } from 'react-i18next';
 import classes from './customfooter.module.scss';
 import config from '../../../services/config';
 import CustomIcon from '../../MdIcon/CustomIcon';
+import { useSelector } from 'react-redux';
 
 function CustomFooter() {
   const { t } = useTranslation();
   const currentDate = new Date();
   const year = `${currentDate.getFullYear()}`;
+  const { settingPage } = useSelector((state) => state.settingPage);
+
+  const logoUrl = settingPage?.Logo?.url
+    ? `${settingPage.Logo.url}`
+    : null;
 
   return (
     <footer className={classes.footer}>
       <div className={classes.footerContent}>
         <div >
-          <CustomIcon name="logoNeuroBlanco" className={classes.logoIcon} />
+            {logoUrl ? (
+              <img src={logoUrl} alt='Logo' style={{ height: '40px' }} />
+            ) : (
+              <CustomIcon name='logo' />
+            )}
         </div>
 
         <div className={classes.linksSection}>

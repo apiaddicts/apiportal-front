@@ -345,7 +345,7 @@ function AppDetailed(props) {
                     <div className='flex-lg-3 flex-sm-12'>
                       <Button
                         type='submit'
-                        styles='primary'
+                        styles='primary-dinamic'
                         className={isAssigned.length > 0 ? 'custom__btn custom__btn__primary' : 'custom__btn custom__btn__disabled'}
                         disabled={!isAssigned.length > 0}
                         fullWidth
@@ -514,7 +514,7 @@ function AppDetailed(props) {
                           <Form id='formRegenerate' className='mt-7'>
                             <CustomSelect name='expiration' label={formField.expiration.label} placeholder='Seleccione una opción' items={formField.expiration.items} itemText='text' itemValue='value' />
                             <div className='mt-4 d-flex justify_content__between'>
-                              <Button type='reset' styles='primary' onClick={regenerateClientSecret}>
+                              <Button type='reset' styles='primary-dinamic' onClick={regenerateClientSecret}>
                                 Cancelar
                               </Button>
                               <Button type='submit' disabled={isSubmitting} className='custom__btn custom__btn__primary mt-5'>

@@ -23,6 +23,7 @@ import appsReducer from './reducer/appsReducer';
 import gettingStartedReducer from './reducer/gettingStartedReducer';
 import apiManagerReducer from './reducer/apiManagerReducer';
 import settingReducer from './reducer/settingReducer';
+import authReducer from './reducer/authReducer';
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 const reducers = combineReducers({
@@ -47,6 +48,7 @@ const reducers = combineReducers({
   group: groupReducer,
   apps: appsReducer,
   started: gettingStartedReducer,
+  auth: authReducer,
 });
 
 const store = createStore(

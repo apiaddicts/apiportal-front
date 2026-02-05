@@ -18,25 +18,23 @@ const objectFromArray = (fields, key, validationSchema) => {
 };
 
 function useFormRestorePassword(fields, customHandleSubmit) {
-  const { t } = useTranslation(); // ✅ ahora sí dentro del hook
+  const { t } = useTranslation();
 
   const validationSchema = Yup.object().shape({
     password: string()
-      .min(8, t('RestorePassword.passwordMinLength'))
-      .required(t('RestorePassword.passwordRequired')),
-
-    new_password: string()
-      .min(8, t('RestorePassword.newPasswordMinLength'))
-      .required(t('RestorePassword.newPasswordRequired'))
-      .trim(t('RestorePassword.noSpaces'))
+      .min(8, t('Form.passwordMinLength'))
+      .max(16, t('Form.maxCharacters'))
       .matches(
-        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/,
-        t('RestorePassword.passwordRequirements')
-      ),
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=.,?])[A-Za-z\d!@#$%^&*()_+\-=.,?]{8,16}$/,
+        t('Form.passwordRequirements')
+      )
+      .trim(t('Form.noSpaces'))
+      .strict()
+      .required(t('Form.passwordRequired')),
 
-    confirm_password: string()
-      .required(t('RestorePassword.confirmPasswordRequired'))
-      .oneOf([Yup.ref('new_password'), null], t('RestorePassword.passwordMatch')),
+    confirmPassword: string()
+      .oneOf([Yup.ref('password')], t('Form.passwordMatch'))
+      .required(t('Form.requiredField')),
   });
 
   const [formStatus, setFormStatus] = useState({
@@ -46,21 +44,28 @@ function useFormRestorePassword(fields, customHandleSubmit) {
 
   const formik = useFormik({
     initialValues: objectFromArray(fields, 'initialValue', validationSchema),
+    validationSchema,
+    validateOnMount: true,
     onSubmit: async (values, { resetForm }) => {
       try {
         setFormStatus({ status: 'loading' });
-        const submitResponse = await customHandleSubmit(values);
-        setFormStatus(submitResponse);
-        submitResponse.status === 'success' && resetForm();
+        const response = await customHandleSubmit(values);
+        setFormStatus(response);
+
+        if (response?.status === 'success') {
+          resetForm();
+        }
       } catch (error) {
-        console.error('Error', error);
+        setFormStatus({
+          status: 'error',
+          message: t('Form.genericError'),
+        });
       }
     },
-    validationSchema,
     enableReinitialize: true,
   });
 
-  return { ...formik, formStatus, setFormStatus };
+  return { ...formik, formStatus };
 }
 
 export default useFormRestorePassword;

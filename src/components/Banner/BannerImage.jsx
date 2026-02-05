@@ -11,8 +11,8 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
   const { pathname } = useLocation();
   const { layout_height, apiindividual_height, image_display, custom_line_height } = css_styles;
   const navigate = useNavigate();
-  const handleClick = () => {
-    navigate(`/apis/${apiId}/swagger-ui`);
+  const handleClick = (link) => {
+    navigate(link);
   };
 
   return (
@@ -53,7 +53,7 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
                     {!buttons ? '' : buttons.map((button, index) => {
                       return (
                         <div key={index} className='mr-10 pr-2'>
-                          <Button onClick={handleClick} styles={button.class}>
+                          <Button onClick={() => handleClick(button.link)} styles={button.class}>
                             {t(button.label)}
                           </Button>
                         </div>

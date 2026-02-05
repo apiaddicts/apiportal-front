@@ -314,6 +314,12 @@ export const filterCheck = (label, checked, name) => (dispatch) => {
       if (key === 'search') {
         conditions.push((newFilters['search'].length) ? item['title'].toLowerCase().includes(newFilters['search']) : true);
       }
+      if (key === 'product') {
+        conditions.push((newFilters['product']?.length) ? item['products']?.some((product) => newFilters['product'].includes(product.slug.toLowerCase())) : true);
+      }
+      if (key === 'globalRating') {
+        conditions.push((newFilters['globalRating']?.length) ? newFilters['globalRating'].includes((item['globalRating'] || '').toLowerCase()) : true);
+      }
     });
     return conditions.every((v) => v === true);
   });

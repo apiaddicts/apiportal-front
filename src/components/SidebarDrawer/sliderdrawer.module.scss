@@ -28,16 +28,16 @@
 
 .dropdown__item>svg,
 .dropdown__item>span {
-  color: var(--primary-color) !important;
-  fill: var(--primary-color) !important;
+  color: var(--primary-color);
+  fill: var(--primary-color);
 }
 
 .sidebar__item__back>div {
-  color: var(--primary-color) !important;
+  color: var(--primary-color);
   cursor: pointer;
 
   & svg {
-    fill: var(--primary-color) !important;
+    fill: var(--primary-color);
   }
 }
 
@@ -81,7 +81,7 @@
 }
 
 .custom__navbar__title {
-  background-color: #0074c9 !important;
+  background-color: var(--primary-color) !important;
   // height: 107px !important;
   display: flex !important;
   align-items: center !important;

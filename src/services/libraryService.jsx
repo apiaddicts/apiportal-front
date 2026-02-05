@@ -8,7 +8,7 @@ function getApiBookStores() {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
-  return fetch(`${config.apiUrl}/library-apis?filters[publish][$eq]=publicado&populate[tags]=*&populate[image][populate]=*`, requestOptions)
+  return fetch(`${config.apiUrl}/library-apis?filters[publish][$eq]=publicado&populate[tags]=*&populate[image][populate]=*&populate[products][populate]=*`, requestOptions)
     .then(handleResponse)
     .then((libraries) => {
       return libraries;

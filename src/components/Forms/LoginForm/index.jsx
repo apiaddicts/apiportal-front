@@ -8,14 +8,12 @@ import styles from './login.module.scss';
 import Alert from '../../Alert';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 
-import { sendEmailToConfirmEmail } from '../../../redux/actions/userAction';
-
 
 function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin, setOpenForm, setIsOpen }) {
   const { t } = useTranslation();
   const { signUpData, responseErrorLogin } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const { executeRecaptcha } = useGoogleReCaptcha(); // ✅ Hook de reCAPTCHA
+  const { executeRecaptcha } = useGoogleReCaptcha();
 
   useEffect(() => {
     if (!formik.values.remember) {
@@ -56,34 +54,15 @@ function Form({ classes, setShowForm, setShowResetForm, formik, fieldsLogin, set
   return (
     <form className='container' onSubmit={handleSubmitWithRecaptcha} noValidate>
       <div className='row my-4'>
-        <div className='flex-sm-12 flex-md-12 flex-lg-12'>
-          {
-            Object.keys(signUpData).length > 0 && Object.keys(responseErrorLogin).length === 0 ?
-              (
-                <Alert
-                  key={Math.floor(Math.random() * 100) + 1}
-                  css_styles={{ custom_padding: 'p-4', custom_margin: '' }}
-                  alert_type='alert__success'
-                  title={t('LoginForm.checkEmailTitle')}
-                  msg={t('LoginForm.checkEmailMessage')}
-                  display={true}
-                  onResend={ () => {
-                    dispatch(sendEmailToConfirmEmail(registerData,'Mulesoft'));
-                    }
-                  }
-                />
-              ) : Object.keys(signUpData).length === 0 && Object.keys(responseErrorLogin).length > 0 ? (
-                <Alert
-                  key={Math.floor(Math.random() * 100) + 1}
-                  css_styles={{ custom_padding: 'p-4', custom_margin: 'mt-4' }}
-                  alert_type='alert__danger'
-                  title={t('LoginForm.errorLoginTitle')}
-                  msg={msjError}
-                  display={true}
-                />
-              ) : (null)
-          }
-        </div>
+        {
+          Object.keys(responseErrorLogin).length > 0 ?
+            (
+              <div className="inlineError">
+                <strong>{t('LoginForm.errorLoginTitle')}</strong>
+                <p style={{ margin: 0 }}>{msjError}</p>
+              </div>
+            ) : (null)
+        }
       </div>
 
       <div className='row'>
