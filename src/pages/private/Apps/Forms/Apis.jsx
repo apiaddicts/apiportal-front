@@ -56,7 +56,7 @@ function Apis(props) {
         <div className='flex-lg-3 flex-sm-12'>
           <Button
             onClick={() => setApisSelected()}
-            styles='primary'
+            styles='primary-dinamic'
             className='custom__btn custom__btn__primary'
             fullWidth
           >

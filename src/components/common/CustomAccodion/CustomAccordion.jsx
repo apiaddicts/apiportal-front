@@ -57,19 +57,15 @@ function CustomAccordion({ items, subItem, setSubItem }) {
                           <div className={classes.accordion__body__title}>
                             <h1>{t('title')}</h1>
                             <p>
-                              {items.assetId}
+                              {items.slug}
                             </p>
                           </div>
 
                           <div className={classes.accordion__body__title}>
                             <h1>{t('version')}</h1>
                             <p>
-                              {items.assetVersion}
+                              {items.version}
                             </p>
-                          </div>
-                          <div className={classes.accordion__body__title}>
-                            <h1>{t('uri')}</h1>
-                            <code className={classes.scopes__code}>{items.endpoint.uri}</code>
                           </div>
                         </div>
                       ) : subItem === 1 ? (

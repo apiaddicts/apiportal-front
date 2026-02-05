@@ -12,10 +12,11 @@ import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonCom
 import CustomAccordion from '../../../components/common/CustomAccodion/CustomAccordion';
 import Icon from '../../../components/MdIcon/Icon';
 import classes from './api-detail.module.scss';
+import { getLibrary } from '../../../redux/actions/libraryAction';
 
 function ApiDetail(props) {
   const { t } = useTranslation();
-  const { api, loading } = useSelector((state) => state.apiManager);
+  const { library, libraries } = useSelector((state) => state.library);
 
   const params = useParams();
   const dispatch = useDispatch();
@@ -32,16 +33,10 @@ function ApiDetail(props) {
   }];
 
   useEffect(() => {
-    if (params.id && api && Object.keys(api).length === 0) {
-      dispatch(getApiDetail('Mulesoft', params.id))
+    if (params?.id) {
+      dispatch(getLibrary(params?.id));
     }
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      dispatch(resetApiDetailed());
-    };
-  }, []);
+  }, [params?.id]);
 
   return (
     <>
@@ -56,11 +51,11 @@ function ApiDetail(props) {
         </Link>
       </div>
       <Container  >
-        {api && Object.keys(api).length > 0 ? (
+        {library && Object.keys(library).length > 0 ? (
           <div>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className={classes.box__title}>
-              <Title text={api.assetId ? api.assetId : 'Demo API'} />
-              <Link to={`/developer/apis/${api.assetId}/swagger-ui`} className={classes.wrapper__btn}>
+              <Title text={library.slug ? library.slug : 'Demo API'} />
+              <Link to={`/developer/apis/${library.slug}/swagger-ui`} className={classes.wrapper__btn}>
                 <span>{t('definition')}</span>
                 <Icon id='MdChevronRight' />
               </Link>
@@ -70,7 +65,7 @@ function ApiDetail(props) {
                 <AccordionFilter items={infoApi} clicked={clicked} setClicked={setClicked} subItem={subItem} setSubItem={setSubItem} />
               </div>
               <div className={classes.grid__apidetail__customaccordion}>
-                <CustomAccordion items={api} subItem={subItem} setSubItem={setSubItem} />
+                <CustomAccordion items={library} subItem={subItem} setSubItem={setSubItem} />
               </div>
             </Box>
           </div>
