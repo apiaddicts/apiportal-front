@@ -104,6 +104,30 @@ export default function authReducer(state = initialState, action) {
         user: null,
       };
 
+    case authConstants.RESEND_CONFIRMATION_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+        success: false,
+      };
+
+    case authConstants.RESEND_CONFIRMATION_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        success: true,
+        error: null,
+      };
+
+    case authConstants.RESEND_CONFIRMATION_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        success: false,
+        error: action.error,
+      };
+
     default:
       return state;
   }

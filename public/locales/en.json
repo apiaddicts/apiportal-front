@@ -368,7 +368,8 @@
     "loadingButton": "Loading...",
     "termsTitle": "Terms and Conditions",
     "successMessage": "Almost there! We've sent a confirmation link to your email. Please check your inbox to activate your account.",
-    "errorMessage": "We're sorry, we couldn't create your account right now. Please check your details or try again later."
+    "errorMessage": "We're sorry, we couldn't create your account right now. Please check your details or try again later.",
+    "noEmailReceived": "Didn't receive the email? Click here to resend"
   },
   "LoginForm": {
     "checkEmailTitle": "Check your email account",

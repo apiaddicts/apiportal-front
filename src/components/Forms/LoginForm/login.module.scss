@@ -49,3 +49,21 @@
         }
     }
 }
+
+.inlineError {
+  margin: 1rem 0;
+  padding: 12px 16px;
+  border-radius: 8px;
+  background-color: #fff5f5;
+  color: #c53030;
+  font-size: 14px;
+  line-height: 1.4;
+  border: 1px solid #fed7d7;
+  width: 100%;
+  text-align: center;
+
+  strong {
+    display: block;
+    margin-bottom: 4px;
+  }
+}
