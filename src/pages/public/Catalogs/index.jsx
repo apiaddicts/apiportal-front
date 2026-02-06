@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getApiContent } from '../../../redux/actions/apiAction';
 import { getcatalogs  } from '../../../redux/actions/catalogAction';
@@ -23,6 +23,7 @@ function Catalog() {
   const [searchApiInputValue, setSearchApiInputValue] = useState('');
   const dispatch = useDispatch();
   const { apiPage } = useSelector((state) => state.api);
+  const hasFetched = useRef(false);
 
   useEffect(() => {
     if (apiPage && Object.keys(apiPage).length === 0) {
@@ -31,8 +32,9 @@ function Catalog() {
   }, [apiPage, dispatch]);
 
   useEffect(() => {
-    if (catalogs?.length === 0 && Object.keys(filtersCatalogs).length === 0) {
+    if (!hasFetched.current && catalogs?.length === 0 && Object.keys(filtersCatalogs).length === 0) {
       dispatch(getcatalogs());
+      hasFetched.current = true;
     }
   }, [catalogs, filtersCatalogs, dispatch]);
 
