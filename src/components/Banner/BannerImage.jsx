@@ -64,13 +64,6 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
               )}
             </div>
           </div>
-          {(!pathname.includes('try-out') && (
-            <img
-              className={`${classes.banner_img__img} ${classes[image_display]}`}
-              src={img !== '' ? img : config.notImage}
-              alt={t('BannerImage.noImage')}
-            />
-          ))}
         </div>
       </div>
     </div>

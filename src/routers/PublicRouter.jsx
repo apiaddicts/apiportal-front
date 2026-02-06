@@ -19,6 +19,8 @@ import Blog from '../pages/public/Blog';
 import BlogPost from '../pages/public/BlogPost';
 import SwaggerUI from '../pages/common/SwaggerUI';
 import AsyncApiUI from '../pages/common/AsyncApiUI';
+import Catalog from '../pages/public/Catalogs';
+import CatalogDetail from '../pages/public/CatalogDetail';
 
 import Logout from '../pages/private/Logout/Logout';
 import Wiki from '../pages/public/Wiki';
@@ -67,6 +69,8 @@ function PublicRoute() {
           <Route path='/' element={<Home setIsOpen={setIsOpen} setOpenForm={setOpenForm} />} />
           <Route path='/apis' element={<Apis setIsOpen={setIsOpen} />} />
           <Route path='/apis/:id' element={<ApiDetail setIsOpen={setOpenForm} />} />
+          <Route path='/catalogs' element={<Catalog />} />
+          <Route path='/catalogs/:id' element={<CatalogDetail setIsOpen={setOpenForm} />} />
           <Route path='/app-partners' element={<AppPartners />} />
           <Route path='/faqs' element={<Faqs />} />
           <Route path='/apis/:id/swagger-ui' element={<SwaggerUI setIsOpen={setOpenForm} />} />

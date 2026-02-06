@@ -452,5 +452,11 @@
   "SwaggerUI": {
     "noInfo": "Sin información disponible",
     "back": "VOLVER"
+  },
+  "Catalogs": {
+    "filterByOrg": "Filtrar por organización",
+    "filterByDataspace": "Filtrar por Espacio de datos",
+    "viewMore": "Ver más",
+    "noData": "Datos no disponibles"
   }
 }

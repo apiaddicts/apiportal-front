@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getApiContent } from '../../../redux/actions/apiAction';
-import { getLibraries, filterCheck, sortApiCollection  } from '../../../redux/actions/libraryAction';
+import { getcatalogs  } from '../../../redux/actions/catalogAction';
 import BannerImage from '../../../components/Banner/BannerImage';
 import SearchInput from '../../../components/Input/SearchInput';
 import InputSelect from '../../../components/Input/InputSelect';
@@ -9,16 +9,16 @@ import CheckboxWrapper from '../../../components/common/Check';
 import CustomizedAccordions from '../../../components/common/AccordionMUI';
 import ButtonGroupMUI from '../../../components/common/ButtonGroup';
 import CheckboxLabels from '../../../components/common/CustomCheck';
-import {ApisPaginated} from '../../../components/ApisPaginated';
+import {CatalogsPaginated} from '../../../components/ApisPaginated';
 import Icon from '../../../components/MdIcon/Icon';
-import classes from './apis.module.scss';
+import classes from './catalogs.module.scss';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 import config from '../../../services/config';
 import { useTranslation } from 'react-i18next';
 
-function Apis({ setIsOpen }) {
+function Catalog() {
   const { t } = useTranslation();
-  const { libraries, filters, backUpLibreries, loadingLibraries } = useSelector((state) => state.library);
+  const { catalogs, filtersCatalogs, backUpCatalogs, loadingCatalogs} = useSelector((state) => state.catalogs);
   const [filtersSelect, setFiltersSelect] = useState([]);
   const [searchApiInputValue, setSearchApiInputValue] = useState('');
   const dispatch = useDispatch();
@@ -31,10 +31,10 @@ function Apis({ setIsOpen }) {
   }, [apiPage, dispatch]);
 
   useEffect(() => {
-    if (libraries?.length === 0 && Object.keys(filters).length === 0) {
-      dispatch(getLibraries());
+    if (catalogs?.length === 0 && Object.keys(filtersCatalogs).length === 0) {
+      dispatch(getcatalogs());
     }
-  }, [libraries, filters, dispatch]);
+  }, [catalogs, filtersCatalogs, dispatch]);
 
   const filterApiBanner = apiPage && apiPage.contentSections && apiPage.contentSections?.length > 0 ? apiPage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
 
@@ -47,46 +47,29 @@ function Apis({ setIsOpen }) {
     setFiltersSelect([]);
   };
 
-  const handleChangeStatus = (name, label, checked) => {
-    dispatch(filterCheck(label, checked, 'status'));
-    setFiltersSelect({ ...filtersSelect, [name]: checked });
-  };
-
-  const handleChangeVersions = (name, label, checked) => {
-    dispatch(filterCheck(label, checked, 'version'));
-    setFiltersSelect({ ...filtersSelect, [name]: checked });
-  };
-
   const handleChangeSolutions = (name, label, checked) => {
-    dispatch(filterCheck(label, checked, 'solution'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
 
   const handleChangFilterTags = (name, label, checked) => {
-    dispatch(filterCheck(label, checked, 'tag'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
 
   const handleChangeSearchFilter = (text) => {
     setSearchApiInputValue(text);
-    dispatch(filterCheck(text, null, 'search'));
   };
 
   const handleChangeGlobalRating = (name, label, checked) => {
-    dispatch(filterCheck(label, checked, 'globalRating'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
 
   const handleChangeProducts = (name, label, checked) => {
-    dispatch(filterCheck(name, checked, 'product'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
 
-  const handleSort = (sort) => {
-    dispatch(sortApiCollection(sort));
-  };
+
   // Filters titles array
-  const titleRepeated = backUpLibreries && backUpLibreries.map((element) => {
+  const titleRepeated = backUpCatalogs && backUpCatalogs.map((element) => {
     return element.title;
   });
   // count items repeated
@@ -103,14 +86,14 @@ function Apis({ setIsOpen }) {
   });
 
   // Filters status array
-  const stateRepeated = backUpLibreries && backUpLibreries.map((element) => {
+  const stateRepeated = backUpCatalogs && backUpCatalogs.map((element) => {
     return element.publish;
   });
   const stateArr = stateRepeated && new Set(stateRepeated);
   const state = stateArr ? [...stateArr] : [];
 
   // Filters tags array
-  const arrayTagsRepeated = backUpLibreries && backUpLibreries.map((element) => {
+  const arrayTagsRepeated = backUpCatalogs && backUpCatalogs.map((element) => {
     return element.tags;
   });
   const tagsBtns = arrayTagsRepeated && arrayTagsRepeated.flat();
@@ -132,14 +115,14 @@ function Apis({ setIsOpen }) {
   });
 
   // Filters version array
-  const versionRepeated = backUpLibreries && backUpLibreries.map((element) => {
+  const versionRepeated = backUpCatalogs && backUpCatalogs.map((element) => {
     return element.version;
   });
 
   const versionArr = new Set(versionRepeated);
   const versions = [...versionArr].sort();
 
-  const globalRatingRepeated = backUpLibreries && backUpLibreries
+  const globalRatingRepeated = backUpCatalogs && backUpCatalogs
     .map((element) => element.globalRating)
     .filter(Boolean); // quita null/undefined
 
@@ -147,9 +130,9 @@ function Apis({ setIsOpen }) {
   const globalRatings = [...globalRatingArr].sort();
 
   const products = useMemo(() => {
-    if (!backUpLibreries || backUpLibreries.length === 0) return [];
-    return backUpLibreries.flatMap((library) => library.products || []);
-  }, [backUpLibreries]);
+    if (!backUpCatalogs || backUpCatalogs.length === 0) return [];
+    return backUpCatalogs.flatMap((library) => library.products || []);
+  }, [backUpCatalogs]);
 
   const productsFilters = useMemo(() => {
     if (!products.length) return [];
@@ -170,22 +153,14 @@ function Apis({ setIsOpen }) {
     return Object.values(map);
   }, [products]);
 
-  const compareArrays = (array1, array2) => {
-    return array1.filter((a) => {
-      return array2.some((b) => {
-        return a.slug === b.name;
-      });
-    });
-  };
-
   const apiImageUrl = filterApiBanner?.[0]?.background?.url
     ? `${filterApiBanner[0].background.url}`
     : config.notImage;
 
-  const fApis = libraries && libraries.length > 0 ? libraries : [];
+  const fApis = catalogs && catalogs.length > 0 ? catalogs : [];
 
   return (
-    <div id='apiHome'>
+    <div id='catalogHome'>
       <BannerImage
         title={filterApiBanner?.[0]?.title}
         img={apiImageUrl}
@@ -197,25 +172,7 @@ function Apis({ setIsOpen }) {
           <article className={classes.wrapper__left}>
             {((state && Object.keys(state).length > 0) || (versions && Object.keys(versions).length > 0) || (items && Object.keys(items).length > 0) || (tags && Object.keys(tags).length > 0)) && (
               <div className={classes.wrapper__title}>
-                {t('Apis.filterBy')}
-              </div>
-            )}
-            {versions && Object.keys(versions).length > 0 && (
-              <div className='w-full pl-4'>
-                <div className={classes.wrapper__title}>
-                  {t('Apis.version')}
-                </div>
-                <ButtonGroupMUI sx={{ marginBottom: '15px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(50px, 1fr))', gap: '2px', alignItems: 'center', justifyContent: 'center' }}>
-                  {versions.map((item, index) => (
-                    <CheckboxLabels
-                      key={index}
-                      label={item}
-                      name={item}
-                      handleChangeSelect={handleChangeVersions}
-                      checked={filtersSelect[item] !== undefined ? filtersSelect[item] : false}
-                    />
-                  ))}
-                </ButtonGroupMUI>
+                {t('Catalogs.filterByOrg')}
               </div>
             )}
             {items && Object.keys(items).length > 0 && (
@@ -291,7 +248,7 @@ function Apis({ setIsOpen }) {
             )}
           </article>
           <section className={classes.wrapper__right}>
-            {loadingLibraries === false && libraries && (
+            {loadingCatalogs === false && catalogs && (
               <div className='w-full'>
                 <div className='row'>
                   <div className={`flex-sm-12 flex-md-7 flex-lg-7 ${classes.wrapper__right__control_container}`}>
@@ -318,9 +275,9 @@ function Apis({ setIsOpen }) {
             )}
             <div className='flex-sm-12 flex-md-6'>
               <div className='row'>
-                {loadingLibraries === false && libraries ? (
-                  libraries.length > 0 ? (
-                    <ApisPaginated
+                {loadingCatalogs === false && catalogs ? (
+                  catalogs.length > 0 ? (
+                    <CatalogsPaginated
                       apis={fApis}
                       itemsPerPage={8}
                     />
@@ -363,4 +320,4 @@ function Apis({ setIsOpen }) {
   );
 };
 
-export default Apis;
+export default Catalog;
