@@ -22,6 +22,7 @@ import { getBlogs } from '../../../redux/actions/blogAction';
 import config from '../../../services/config';
 import codeSnipet from '../../../static/img/code-snippet.png';
 import classes from './catalog-detail.module.scss';
+import ReactJsonView from '@microlink/react-json-view';
 
 function CatalogDetail({ setIsOpen }) {
   const { t } = useTranslation();
@@ -204,7 +205,23 @@ function CatalogDetail({ setIsOpen }) {
           </section>
 
           <section>
-            
+            <ReactJsonView
+              src={{
+              string: 'this is a test string',
+              integer: 42,
+              array: [1, 2, 3, 'test', NaN],
+              float: 3.14159,
+              undefined: undefined,
+              object: {
+                'first-child': true,
+                'second-child': false,
+                'last-child': null
+                },
+              string_number: '1234',
+              date: new Date(),
+              }}
+              showComma
+            />
           </section>
 
           <section className={`container ${classes.section__content} pb-9`}>&nbsp;</section>
