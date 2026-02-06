@@ -18,7 +18,7 @@ import { useTranslation } from 'react-i18next';
 
 function Catalog() {
   const { t } = useTranslation();
-  const { catalogs, filtersCatalogs, backUpCatalogs, loadingCatalogs} = useSelector((state) => state.catalogs);
+  const { catalogs, backUpCatalogs, loadingCatalogs} = useSelector((state) => state.catalogs);
   const [filtersSelect, setFiltersSelect] = useState([]);
   const [searchApiInputValue, setSearchApiInputValue] = useState('');
   const dispatch = useDispatch();
@@ -32,11 +32,11 @@ function Catalog() {
   }, [apiPage, dispatch]);
 
   useEffect(() => {
-    if (!hasFetched.current && catalogs?.length === 0 && Object.keys(filtersCatalogs).length === 0) {
+    if (!hasFetched.current && catalogs?.length === 0) {
       dispatch(getcatalogs());
       hasFetched.current = true;
     }
-  }, [catalogs, filtersCatalogs, dispatch]);
+  }, [dispatch, catalogs]);
 
   const filterApiBanner = apiPage && apiPage.contentSections && apiPage.contentSections?.length > 0 ? apiPage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
 
