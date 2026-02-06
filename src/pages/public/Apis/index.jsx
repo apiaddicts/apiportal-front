@@ -30,11 +30,14 @@ function Apis({ setIsOpen }) {
     }
   }, [apiPage, dispatch]);
 
+  const librariesLength = libraries?.length;
+  const filtersCount = Object.keys(filters || {}).length;
+
   useEffect(() => {
-    if (libraries?.length === 0 && Object.keys(filters).length === 0) {
+    if (librariesLength === 0 && filtersCount === 0) {
       dispatch(getLibraries());
     }
-  }, [libraries, filters, dispatch]);
+  }, [dispatch, librariesLength, filtersCount]);
 
   const filterApiBanner = apiPage && apiPage.contentSections && apiPage.contentSections?.length > 0 ? apiPage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
 
