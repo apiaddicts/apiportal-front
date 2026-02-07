@@ -23,6 +23,8 @@ function Catalog() {
   const [searchApiInputValue, setSearchApiInputValue] = useState('');
   const dispatch = useDispatch();
   const { apiPage } = useSelector((state) => state.api);
+  const [cats, setCats] = useState([]);
+  const [loading, setLoaging] = useState(false);
 
   useEffect(() => {
     if (apiPage && Object.keys(apiPage).length === 0) {
@@ -30,18 +32,21 @@ function Catalog() {
     }
   }, [apiPage, dispatch]);
 
-  const catalogsCopy = useMemo(() => {
-    if (catalogs && catalogs.length > 0) {
-      return [...catalogs];
-    }
-    return [];
-  }, [catalogs?.length > 0]);
-
   useEffect(() => {
-    if (catalogs?.length === 0 && Object.keys(filtersCatalogs).length === 0) {
+    if (catalogs?.length === 0) {
+      setLoaging(true);
       dispatch(getcatalogs());
     }
-  }, [catalogs, filtersCatalogs, dispatch]);
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (catalogs && catalogs.length > 0) {
+      if (JSON.stringify(cats) !== JSON.stringify(catalogs)) {
+        setCats(prev => [...prev, ...catalogs]);
+        setLoaging(false);
+      }
+    }
+  }, [catalogs]);
 
   const filterApiBanner = apiPage && apiPage.contentSections && apiPage.contentSections?.length > 0 ? apiPage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
 
@@ -164,7 +169,7 @@ function Catalog() {
     ? `${filterApiBanner[0].background.url}`
     : config.notImage;
 
-  const fApis = catalogsCopy && catalogsCopy.length > 0 ? catalogsCopy : [];
+  const fApis = cats && cats.length > 0 ? cats : [];
 
   return (
     <div id='catalogHome'>
@@ -179,7 +184,7 @@ function Catalog() {
           <article className={classes.wrapper__left}>
             {((state && Object.keys(state).length > 0) || (versions && Object.keys(versions).length > 0) || (items && Object.keys(items).length > 0) || (tags && Object.keys(tags).length > 0)) && (
               <div className={classes.wrapper__title}>
-                {t('catalogsCopy.filterByOrg')}
+                {t('catalogs.filterByOrg')}
               </div>
             )}
             {items && Object.keys(items).length > 0 && (
@@ -255,7 +260,7 @@ function Catalog() {
             )}
           </article>
           <section className={classes.wrapper__right}>
-            {loadingCatalogs === false && catalogsCopy && (
+            {loading === false && cats && (
               <div className='w-full'>
                 <div className='row'>
                   <div className={`flex-sm-12 flex-md-7 flex-lg-7 ${classes.wrapper__right__control_container}`}>
@@ -282,8 +287,8 @@ function Catalog() {
             )}
             <div className='flex-sm-12 flex-md-6'>
               <div className='row'>
-                {loadingCatalogs === false && catalogsCopy ? (
-                  catalogsCopy.length > 0 ? (
+                {loading === false && cats ? (
+                  cats.length > 0 ? (
                     <CatalogsPaginated
                       apis={fApis}
                       itemsPerPage={8}
