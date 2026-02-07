@@ -3,7 +3,7 @@ import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import Icon from '../MdIcon/Icon';
 import Button from '../Buttons/Button';
-import classes from './Banner.module.scss';
+import classes from './banner.module.scss';
 
 function BannerImageBg({
   imageUrl,
