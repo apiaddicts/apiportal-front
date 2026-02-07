@@ -64,6 +64,7 @@ const config = {
   blogPageSlug: import.meta.env.VITE_APP_BLOG_PAGE_SLUG,
   faqPageSlug: import.meta.env.VITE_APP_FAQ_PAGE_SLUG,
   apisPageSlug: import.meta.env.VITE_APP_APIS_PAGE_SLUG,
+  catalogsPageSlug: import.meta.env.VITE_APP_CATALOGS_PAGE_SLUG,
   termsPageSlug: import.meta.env.VITE_APP_TERMS_PAGE_SLUG,
   policyPageSlug: import.meta.env.VITE_APP_POLICY_PAGE_SLUG,
   startedPageSlug: import.meta.env.VITE_APP_STARTED_PAGE_SLUG,

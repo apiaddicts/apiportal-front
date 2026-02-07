@@ -1,8 +1,9 @@
 import { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getApiContent } from '../../../redux/actions/apiAction';
+import { getCatalogContent } from '../../../redux/actions/catalogAction';
 import { getcatalogs  } from '../../../redux/actions/catalogAction';
 import BannerImage from '../../../components/Banner/BannerImage';
+import BannerImageBg from '../../../components/Banner/BannerImageBg';
 import SearchInput from '../../../components/Input/SearchInput';
 import InputSelect from '../../../components/Input/InputSelect';
 import CheckboxWrapper from '../../../components/common/Check';
@@ -18,19 +19,18 @@ import { useTranslation } from 'react-i18next';
 
 function Catalog() {
   const { t } = useTranslation();
-  const { catalogs, backUpCatalogs, filtersCatalogs, loadingCatalogs} = useSelector((state) => state.catalogs);
+  const { catalogPage, catalogs, backUpCatalogs, filtersCatalogs, loadingCatalogs} = useSelector((state) => state.catalogs);
   const [filtersSelect, setFiltersSelect] = useState([]);
   const [searchApiInputValue, setSearchApiInputValue] = useState('');
   const dispatch = useDispatch();
-  const { apiPage } = useSelector((state) => state.api);
   const [cats, setCats] = useState([]);
   const [loading, setLoaging] = useState(false);
 
   useEffect(() => {
-    if (apiPage && Object.keys(apiPage).length === 0) {
-      dispatch(getApiContent());
+    if (catalogPage && Object.keys(catalogPage).length === 0) {
+      dispatch(getCatalogContent());
     }
-  }, [apiPage, dispatch]);
+  }, [catalogPage, dispatch]);
 
   useEffect(() => {
     if (catalogs?.length === 0) {
@@ -48,7 +48,7 @@ function Catalog() {
     }
   }, [catalogs]);
 
-  const filterApiBanner = apiPage && apiPage.contentSections && apiPage.contentSections?.length > 0 ? apiPage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
+  const filterApiBanner = catalogPage && catalogPage.contentSections && catalogPage.contentSections?.length > 0 ? catalogPage.contentSections.filter((item) => item.__component === 'sections.calculate-section') : [];
 
   const resetFilters = () => {
     dispatch(getLibraries());
@@ -70,15 +70,6 @@ function Catalog() {
   const handleChangeSearchFilter = (text) => {
     setSearchApiInputValue(text);
   };
-
-  const handleChangeGlobalRating = (name, label, checked) => {
-    setFiltersSelect({ ...filtersSelect, [name]: checked });
-  };
-
-  const handleChangeProducts = (name, label, checked) => {
-    setFiltersSelect({ ...filtersSelect, [name]: checked });
-  };
-
 
   // Filters titles array
   const titleRepeated = backUpCatalogs && backUpCatalogs.map((element) => {
@@ -165,169 +156,137 @@ function Catalog() {
     return Object.values(map);
   }, [products]);
 
-  const apiImageUrl = filterApiBanner?.[0]?.background?.url
-    ? `${filterApiBanner[0].background.url}`
+  const apiImageUrl = filterApiBanner?.[0]?.image?.url
+    ? `${filterApiBanner[0].image.url}`
     : config.notImage;
 
   const fApis = cats && cats.length > 0 ? cats : [];
 
   return (
     <div id='catalogHome'>
-      <BannerImage
-        title={filterApiBanner?.[0]?.title}
-        img={apiImageUrl}
-        description={filterApiBanner?.[0]?.subtitle}
-        css_styles={{ 'layout_height': 'banner_custom__layout--height' }}
-      />
-      <div className='container'>
-        <section className={classes.wrapper}>
-          <article className={classes.wrapper__left}>
-            {((state && Object.keys(state).length > 0) || (versions && Object.keys(versions).length > 0) || (items && Object.keys(items).length > 0) || (tags && Object.keys(tags).length > 0)) && (
-              <div className={classes.wrapper__title}>
-                {t('catalogs.filterByOrg')}
-              </div>
-            )}
-            {items && Object.keys(items).length > 0 && (
-              <CustomizedAccordions title={t('Apis.solution')}>
-                {items && items.map((item, index) => (
-                  <div key={index} className={classes.wrapper__checkbox}>
-                    <CheckboxWrapper
-                      name={item.title}
-                      label={item.title}
-                      handleChangeSelect={handleChangeSolutions}
-                      checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
-                    />
-                    <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{item.count}</p>
-                  </div>
-                ))}
-              </CustomizedAccordions>
-            )}
-            {tags && Object.keys(tags).length > 0 && (
-              <CustomizedAccordions title={t('Apis.tags')}>
-                {tags.map((item, index) => (
-                  <div className={classes.wrapper__checkbox} key={index}>
-                    <CheckboxWrapper
-                      name={item.title}
-                      label={item.title}
-                      handleChangeSelect={handleChangFilterTags}
-                      checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
-                    />
-                    <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{item.count}</p>
-                  </div>
-                ))}
-              </CustomizedAccordions>
-            )}
-            {globalRatings && globalRatings.length > 0 && (
-              <CustomizedAccordions title={t('Apis.globalRating')}>
-                {globalRatings.map((item, index) => (
-                  <div key={index} className={classes.wrapper__checkbox}>
-                    <CheckboxWrapper
-                      name={item}
-                      label={item}
-                      handleChangeSelect={handleChangeGlobalRating}
-                      checked={filtersSelect[item] !== undefined ? filtersSelect[item] : false}
-                    />
-                  </div>
-                ))}
-              </CustomizedAccordions>
-            )}
-            {productsFilters && productsFilters.length > 0 && (
-              <CustomizedAccordions title={t('Apis.products')}>
-                {productsFilters.map((item, index) => (
-                  <div key={index} className={classes.wrapper__checkbox}>
-                    <CheckboxWrapper
-                      name={item.slug}
-                      label={item.title}
-                      handleChangeSelect={handleChangeProducts}
-                      checked={
-                        filtersSelect[item.slug] !== undefined
-                          ? filtersSelect[item.slug]
-                          : false
-                      }
-                    />
-                    <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>
-                      {item.count}
-                    </p>
-                  </div>
-                ))}
-              </CustomizedAccordions>
-            )}
-            {((state && Object.keys(state).length > 0) || (versions && Object.keys(versions).length > 0) || (items && Object.keys(items).length > 0) || (tags && Object.keys(tags).length > 0)) && (
-              <div className={classes.wrapper__filters}>
-                <Icon id='MdDeleteOutline' />
-                <button type='button' className={classes.wrapper__reset} onClick={resetFilters}>{t('Apis.clearFilters')}</button>
-              </div>
-            )}
-          </article>
-          <section className={classes.wrapper__right}>
-            {loading === false && cats && (
-              <div className='w-full'>
-                <div className='row'>
-                  <div className={`flex-sm-12 flex-md-7 flex-lg-7 ${classes.wrapper__right__control_container}`}>
-                    <SearchInput
-                      icon
-                      name='search'
-                      type='text'
-                      onChange={(e) => {
-                        handleChangeSearchFilter(e.target.value);
+      {catalogPage && Object.keys(catalogPage).length > 0 ? (
+        <div>
+          <section>
+            <BannerImageBg
+              imageUrl={apiImageUrl}
+              initialTitle={catalogPage.contentSections[0].title}
+              initialSubtitle={catalogPage.contentSections[0].subtitle}
+              textBtn={catalogPage.contentSections[0].button.name}
+            />
+          </section>
+          <section className={classes.wrapper}>
+            <article className={classes.wrapper__left}>
+              {items && Object.keys(items).length > 0 && (
+                <CustomizedAccordions title={t('Catalogs.filterByOrg')}>
+                  {items && items.map((item, index) => (
+                    <div key={index} className={classes.wrapper__checkbox}>
+                      <CheckboxWrapper
+                        name={item.title}
+                        label={item.title}
+                        handleChangeSelect={handleChangeSolutions}
+                        checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
+                      />
+                      <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{item.count}</p>
+                    </div>
+                  ))}
+                </CustomizedAccordions>
+              )}
+              {tags && Object.keys(tags).length > 0 && (
+                <CustomizedAccordions title={t('Catalogs.filterByTag')}>
+                  {tags.map((item, index) => (
+                    <div className={classes.wrapper__checkbox} key={index}>
+                      <CheckboxWrapper
+                        name={item.title}
+                        label={item.title}
+                        handleChangeSelect={handleChangFilterTags}
+                        checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
+                      />
+                      <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{item.count}</p>
+                    </div>
+                  ))}
+                </CustomizedAccordions>
+              )}
+              {((state && Object.keys(state).length > 0) || (versions && Object.keys(versions).length > 0) || (items && Object.keys(items).length > 0) || (tags && Object.keys(tags).length > 0)) && (
+                <div className={classes.wrapper__filters_primary}>
+                  <Icon id='MdDeleteOutline' />
+                  <button type='button' className={classes.wrapper__reset} onClick={resetFilters}>{t('Apis.clearFilters')}</button>
+                  <p>{t("Catalogs.deleteFilters")}</p>
+                </div>
+              )}
+            </article>
+            <section className={classes.wrapper__right}>
+              {loading === false && cats && (
+                <div className='w-full'>
+                  <div className='row'>
+                    <div className={`flex-sm-12 flex-md-7 flex-lg-7 ${classes.wrapper__right__control_container}`}>
+                      <SearchInput
+                        icon
+                        name='search'
+                        type='text'
+                        onChange={(e) => {
+                          handleChangeSearchFilter(e.target.value);
+                        }}
+                        placeholder={t('Catalogs.searchPlaceholder')}
+                        borderRadius='6px'
+                        value={searchApiInputValue}
+                      />
+                    </div>
+                    <div className={`flex-sm-12 flex-md-5 flex-lg-5 ${classes.wrapper__right__control_container}`}>
+                      <InputSelect handleSelect={(e) => {
+                        handleSort(e);
                       }}
-                      placeholder={t('Apis.searchPlaceholder')}
-                      borderRadius='6px'
-                      value={searchApiInputValue}
-                    />
-                  </div>
-                  <div className={`flex-sm-12 flex-md-5 flex-lg-5 ${classes.wrapper__right__control_container}`}>
-                    <InputSelect handleSelect={(e) => {
-                      handleSort(e);
-                    }}
-                    />
+                      />
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
-            <div className='flex-sm-12 flex-md-6'>
-              <div className='row'>
-                {loading === false && cats ? (
-                  cats.length > 0 ? (
-                    <CatalogsPaginated
-                      apis={fApis}
-                      itemsPerPage={8}
-                    />
+              )}
+              <div className='flex-sm-12 flex-md-6'>
+                <div className='row'>
+                  {loading === false && cats ? (
+                    cats.length > 0 ? (
+                      <CatalogsPaginated
+                        apis={fApis}
+                        itemsPerPage={8}
+                      />
+                    ) : (
+                      <section
+                        style={{
+                          width: '100%',
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            margin: '2rem',
+                          }}
+                        >
+                          <h1>{t('Apis.noData')}</h1>
+                        </div>
+                      </section>
+                    )
                   ) : (
-                    <section
+                    <div
                       style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                         width: '100%',
                       }}
                     >
-                      <div
-                        style={{
-                          display: 'flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          margin: '2rem',
-                        }}
-                      >
-                        <h1>{t('Apis.noData')}</h1>
-                      </div>
-                    </section>
-                  )
-                ) : (
-                  <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      width: '100%',
-                    }}
-                  >
-                    <SkeletonComponent />
-                  </div>
-                )}
+                      <SkeletonComponent />
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
+            </section>
           </section>
-        </section>
-      </div>
+        </div>
+      ) : (
+        <SkeletonComponent />
+      )}
+      
     </div>
   );
 };

@@ -1,6 +1,21 @@
 import handleResponse from './handleResponse';
 import config from './config';
 
+function getCatalogContent() {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
+  };
+
+  return fetch(`${config.apiUrl}/pages?filters[slug][$eq]=${config.catalogsPageSlug}&populate[contentSections][populate]=*`, requestOptions)
+    .then(handleResponse)
+    .then((catalog_content) => {
+      return catalog_content.data[0];
+    }).catch((error) => {
+      console.error(error);
+    });
+}
+
 function getCatalogsStores() {
   const requestOptions = {
     method: 'GET',
@@ -31,7 +46,8 @@ function getCatalogStore(id) {
 
 const catalogService = {
   getCatalogsStores,
-  getCatalogStore
+  getCatalogStore,
+  getCatalogContent
 };
 
 export default catalogService;

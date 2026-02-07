@@ -1,6 +1,7 @@
 import catalogConstants from '../constants/catalogConstant';
 
 const initialState = {
+  catalogPage: {},
 // catalogs constants
   backUpCatalogs: [],
   catalogs: [],
@@ -59,6 +60,18 @@ export default function catalogReducer(state = initialState, action) {
         ...state,
         loadingCatalog: false,
         catalog: {},
+        errorCatalog: action.payload,
+      };
+    case catalogConstants.GET_ALL_CATALOG_PAGE_SUCCESS:
+      return {
+        ...state,
+        catalogPage: action.payload,
+        errorCatalog: {},
+      };
+    case catalogConstants.GET_ALL_CATALOG_PAGE_FAILURE:
+      return {
+        ...state,
+        catalogPage: {},
         errorCatalog: action.payload,
       };
 

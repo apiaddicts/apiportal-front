@@ -74,6 +74,12 @@
       display: flex;
       color: var(--secondary-color);
     }
+    &__filters_primary {
+      margin-top: 1.5rem;
+      margin-left: 1rem;
+      display: flex;
+      color: var(--primary-color);
+    }
     &__reset {
       background: none;
       border: none;

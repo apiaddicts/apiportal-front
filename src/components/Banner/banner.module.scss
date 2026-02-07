@@ -136,6 +136,23 @@
 
   }
 
+  &__title_imgbg {
+    width: 100%;
+    text-align: left;
+    font-size: 2rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: black;
+    margin-left: 4rem;
+   
+    &__subtitle_imgbg {
+      white-space: normal;
+      overflow-wrap: break-word;
+      word-break: break-word;
+    }
+
+  }
+
   &__img {
     position: absolute;
     height: 341px;

@@ -36,6 +36,9 @@ function CatalogDetail({ setIsOpen }) {
   const [bannerImg, setBannerImg] = useState('');
   const [cardsImages, setCardsImages] = useState({});
   const [jsonDl, setJsonDl] = useState();
+  const [numCol, setNumCol] = useState(0);
+  const [listCharacteristics, setListCharacteristics] = useState(['']);
+  const [listColumns, setListColumns] = useState([['']]);
 
   const rootStyles = getComputedStyle(document.documentElement);
   const primaryColor = rootStyles.getPropertyValue('--primary-color').trim();
@@ -65,6 +68,21 @@ function CatalogDetail({ setIsOpen }) {
   }, [catalogs]);
 
   useEffect(() => {
+    if (catalog && catalog.markdown) {
+      const list = listToArray(catalog.markdown);
+      setListCharacteristics(list);
+      setNumCol(Math.ceil(list.length/3));
+    }
+  }, [catalog]);
+
+  useEffect(() => {
+    if (numCol > 0) {
+      const columns = makeColums(numCol, listCharacteristics);
+      setListColumns(columns);
+    }
+  }, [numCol]);
+
+  useEffect(() => {
     if (params?.id) {
       dispatch(getcatalog(params?.id));
     }
@@ -86,13 +104,13 @@ function CatalogDetail({ setIsOpen }) {
   }, []);
 
   useEffect(() => {
-    if (catalog && catalog.openDoc) {
+    if (catalog && catalog.openDocTaxonomy) {
       try {
         if (catalog.openDocFormat === 'yaml') {
-          const temp = yaml.load(catalog.openDoc);
+          const temp = yaml.load(catalog.openDocTaxonomy);
           setJsonDl(temp);
         } else if (catalog.openDocFormat === 'json') {
-          setJsonDl(JSON.parse(catalog.openDoc));
+          setJsonDl(JSON.parse(catalog.openDocTaxonomy));
         } else {
           const fallbackYaml = String.raw`status: formato_no_definido
             mensaje: "El formato del documento no está definido. Use 'yaml' o 'json'."
@@ -114,7 +132,7 @@ function CatalogDetail({ setIsOpen }) {
           mensaje: 'No se pudo convertir el documento al objeto esperado.',
           formato: catalog.openDocFormat ?? null,
           error: (err)?.message ?? String(err),
-          raw: catalog.openDoc
+          raw: catalog.openDocTaxonomy
         });
       }
     }
@@ -190,6 +208,20 @@ function CatalogDetail({ setIsOpen }) {
     dispatch(getcatalog(id));
   };
 
+  const listToArray = (md) => {
+    return md
+      .trim()
+      .split('\n')
+      .map(item => item.replace(/^[*+-]\s+/, '').trim())
+      .filter(item => item.length > 0);
+  };
+
+  const makeColums = (numColumns, items ) => Array.from({ length: numColumns }).map((_, colIndex) => {
+    const start = colIndex * 3;
+    const end = start + 3;
+    return items.slice(start, end);
+  });
+
   return (
     <div id='api'>
       { Object.keys(catalog).length > 0 ? (
@@ -207,99 +239,47 @@ function CatalogDetail({ setIsOpen }) {
             />
           </section>
 
-          <section>
-            <div className={`container ${classes.section__content} mt-8 pb-9`}>
-              <div className='row'>
-                <div>
-                  <h1><span style={{ color: primaryColor }}>Caracteristicas</span> principales</h1>
-                  <div className='row'>
-                    <ul>
-                      <li>
-                        <p>Gestión centralizada de espacios</p>
-                      </li>
-                      <li>
-                        <p>Disponibilidad en tiempo real</p>
-                      </li>
-                      <li>
-                        <p>Datos de ocupación y capacidad</p>
-                      </li>
+          <section className={`container ${classes.section__content}`}>
+            <div className={` ${classes.section__content__sec}`}>
+              <div className={classes.section__content__image}>
+                <div src={bannerImg} styles={{ backgroundImage: '0F0F0F' }}></div>
+              </div>
+              <div className={classes.section__content__list}>
+                <h1><span styles={{ color: primaryColor }}>{t("Catalogs.main")}</span> {t("Catalogs.features")}</h1>
+                <div className={classes.section__content__list_container}>
+                  {listColumns.map((colItems, colIndex) => (
+                    <ul key={colIndex} className={classes.section__content__list_column}>
+                      {colItems.map((item, itemIndex) => (
+                        <li key={itemIndex} className={classes.section__content__listItem}>{item}</li>
+                      ))}
                     </ul>
-                    <ul>
-                      <li>
-                        <p>Historico de uso de espacios</p>
-                      </li>
-                      <li>
-                        <p>Asignación flexible por horarios</p>
-                      </li>
-                      <li>
-                        <p>Filtrado por tipo y ubicación</p>
-                      </li>
-                    </ul>
-                  </div>
+                  ))}
                 </div>
               </div>
             </div>
           </section>
 
-          <section>
-            <ReactJsonView
-              src={
-                jsonDl
-              }
-              showComma
-            />
-          </section>
-
-          <section className={`container ${classes.section__content} pb-9`}>&nbsp;</section>
-          {catalog && hasAnyRating && (
-            <section className={`container ${classes.section__content} ${classes.section__ratings}`}>
-              <div className={classes.ratings__wrapper}>
-                <h2 className={classes.ratings__title}>
-                  {t('ApiDetail.globalGradesTitle')}
-                </h2>
-                <p className={classes.ratings__subtitle}>
-                  {t('ApiDetail.globalGradesSubtitle')}
-                </p>
-
-                <div className={classes.ratings__grid}>
-                  <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(catalog.globalRating)}`}>
-                      {catalog.globalRating || '-'}
-                    </div>
-                    <span>{t('ApiDetail.ratingGlobal')}</span>
-                  </div>
-
-                  <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(catalog.definitionRating)}`}>
-                      {catalog.definitionRating || '-'}
-                    </div>
-                    <span>{t('ApiDetail.ratingDefinition')}</span>
-                  </div>
-
-                  <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(catalog.securityRating)}`}>
-                      {catalog.securityRating || '-'}
-                    </div>
-                    <span>{t('ApiDetail.ratingSecurity')}</span>
-                  </div>
-
-                  <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(catalog.qualityRating)}`}>
-                      {catalog.qualityRating || '-'}
-                    </div>
-                    <span>{t('ApiDetail.ratingQuality')}</span>
-                  </div>
+          
+          <section className={`${classes.section__taxonomy} pb-9`}>
+            <div className='container'>
+              <div className='row'>
+                <div className='flex-md-12 flex-sm-12'>
+                  <h1 className='h2 text__primary__title text-center font-weight-bold mb-2 ml-1'>
+                    {t("Catalogs.taxonomyTitle")}
+                  </h1>
                 </div>
               </div>
-            </section>
-          )}
-          {catalog?.markdown && catalog?.markdown.length > 0 && (
-            <section className={`container ${classes.section__content} pb-9`}>
-              <div className='markdown__content' style={{ textAlign: 'center', fontFamily: 'var(--font-family)', lineHeight: '1.6', color: '#333' }}>
-                <CustomMarkdown content={catalog.markdown} />
+              <div className='p-6'>
+                <ReactJsonView
+                  src={
+                    jsonDl
+                  }
+                  showComma
+                />
               </div>
-            </section>
-          )}
+            </div>
+          </section>
+
           <section className={classes.section__discover}>
             <div className='container'>
               <div className='row'>

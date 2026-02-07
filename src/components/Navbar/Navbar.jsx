@@ -84,28 +84,11 @@ function Navbar({ setIsOpen, setOpenForm }) {
             )}
           </NavLink>
           <nav className={`${classes.header__content__nav} ${menuOpen ? classes.isMenu : ''}`} >
-            <div className={classes.buttom__nav__options}>
-              <ul>
-                <li>
-                  {listOptions.map((item) => (
-                    <React.Fragment key={item.route}>
-                      {item.external === false || item.external === undefined ? (
-                        <Link to={item.route} style={{ color: '#05172D' }}>{item.name}</Link>
-                      ) : (
-                        <a href={item.route} target='_blank' rel='noreferrer'>
-                          {item.name}
-                        </a>
-                      )}
-                    </React.Fragment>
-                  ))}
-                </li>
-              </ul>
-            </div>
             <LanguageSelector />
             {showAuthButtons && (
               <ul className={classes.show__lg__up__buttons}>
                 <li className='pr-2'>
-                  <Button type='button' baseColor={secondaryColor} styles='secundary-dinamic' size='small' icon='account' style={{ width: '200px', height: '32px', border: `2px solid ${primaryColor}`, color: primaryColor }} onClick={() => { setIsOpen(true); }} >
+                  <Button type='button' baseColor={secondaryColor} styles='secundary-dinamic' size='small' style={{ width: '200px', height: '32px', border: `2px solid ${primaryColor}`, color: primaryColor }} onClick={() => { setIsOpen(true); }} >
                     {t('Navbar.myProfile')}
                   </Button>
 
@@ -198,7 +181,27 @@ function Navbar({ setIsOpen, setOpenForm }) {
           </div>
         </div>
       </header>
-
+      <div className={`d-xs-none ${classes.buttom__nav}`}>
+        <div className={`container ${classes.buttom__options}`}>
+          <div className={classes.buttom__nav__options}>
+            <ul>
+              <li>
+                {listOptions.map((item) => (
+                  <React.Fragment key={item.route}>
+                    {item.external === false || item.external === undefined ? (
+                      <Link to={item.route}>{item.name}</Link>
+                    ) : (
+                      <a href={item.route} target='_blank' rel='noreferrer'>
+                        {item.name}
+                      </a>
+                    )}
+                  </React.Fragment>
+                ))}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

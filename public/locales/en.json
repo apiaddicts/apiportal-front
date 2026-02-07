@@ -455,8 +455,16 @@
   },
   "Catalogs": {
     "filterByOrg": "Filter by Organization",
+    "title": "Explore Data Space",
+    "subtitle": "We offer you Data Space, which has helped us lead the digital transformation. Discover it.",
     "filterByDataspace": "Filter by Dataspace",
     "viewMore": "View more",
-    "noData": "No data available"
+    "noData": "No data available",
+    "filterByTag": "Filter by tag",
+    "deleteFilters": "Delete filters",
+    "searchPlaceholder": "Search catalogs",
+    "features": "features",
+    "main": "Main",
+    "taxonomyTitle": "Catalog taxonomy"
   }
 }

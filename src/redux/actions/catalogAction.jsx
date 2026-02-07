@@ -1,9 +1,6 @@
 /* eslint-disable no-prototype-builtins */
 import catalogConstants from '../constants/catalogConstant';
 import catalogService from '../../services/catalogService';
-import config from '../../services/config';
-
-import store from '../store';
 
 
 // eslint-disable-next-line import/prefer-default-export
@@ -38,6 +35,24 @@ export const getcatalog = (id) => (dispatch) => {
     (error) => {
       dispatch({
         type: catalogConstants.GET_CATALOG_FAILURE,
+        payload: error,
+      });
+    },
+  );
+};
+
+// eslint-disable-next-line import/prefer-default-export
+export const getCatalogContent = () => (dispatch) => {
+  catalogService.getCatalogContent().then(
+    (response) => {
+      dispatch({
+        type: catalogConstants.GET_ALL_CATALOG_PAGE_SUCCESS,
+        payload: response,
+      });
+    },
+    (error) => {
+      dispatch({
+        type: catalogConstants.GET_ALL_CATALOG_PAGE_FAILURE,
         payload: error,
       });
     },

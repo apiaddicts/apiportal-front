@@ -455,8 +455,16 @@
   },
   "Catalogs": {
     "filterByOrg": "Filtrar por organización",
+    "title": "Explora Data Space",
+    "subtitle": "Ponemos a tu disposición Data Space, nos ha ayudado a liderar la transformación digital, descúbrelo.",
     "filterByDataspace": "Filtrar por Espacio de datos",
     "viewMore": "Ver más",
-    "noData": "Datos no disponibles"
+    "noData": "Datos no disponibles",
+    "filterByTag": "Filtrar por tags",
+    "deleteFilters": "Eliminar filtros",
+    "searchPlaceholder": "Buscar catalogos",
+    "features": "Caracteristicas",
+    "main": "Principales",
+    "taxonomyTitle": "Taxonomia del catalogo"
   }
 }
