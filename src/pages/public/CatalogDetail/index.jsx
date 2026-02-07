@@ -23,6 +23,7 @@ import config from '../../../services/config';
 import codeSnipet from '../../../static/img/code-snippet.png';
 import classes from './catalog-detail.module.scss';
 import ReactJsonView from '@microlink/react-json-view';
+import yaml from 'js-yaml';
 
 function CatalogDetail({ setIsOpen }) {
   const { t } = useTranslation();
@@ -34,6 +35,7 @@ function CatalogDetail({ setIsOpen }) {
 
   const [bannerImg, setBannerImg] = useState('');
   const [cardsImages, setCardsImages] = useState({});
+  const [jsonDl, setJsonDl] = useState();
 
   const rootStyles = getComputedStyle(document.documentElement);
   const primaryColor = rootStyles.getPropertyValue('--primary-color').trim();
@@ -82,6 +84,41 @@ function CatalogDetail({ setIsOpen }) {
     }
 
   }, []);
+
+  useEffect(() => {
+    if (catalog && catalog.openDoc) {
+      try {
+        if (catalog.openDocFormat === 'yaml') {
+          const temp = yaml.load(catalog.openDoc);
+          setJsonDl(temp);
+        } else if (catalog.openDocFormat === 'json') {
+          setJsonDl(JSON.parse(catalog.openDoc));
+        } else {
+          const fallbackYaml = String.raw`status: formato_no_definido
+            mensaje: "El formato del documento no está definido. Use 'yaml' o 'json'."
+            detalles:
+              formato_recibido: ${JSON.stringify(catalog.openDocFormat)}
+              ejemplo_yaml: |
+                string: ejemplo
+                integer: 42
+                array:
+                  - a
+                  - b
+          `;
+          const parsedFallback = yaml.parse(fallbackYaml);
+          setJsonDl(parsedFallback);
+        }
+      } catch (error) {
+        setJsonDl({
+          status: 'error_de_parseo',
+          mensaje: 'No se pudo convertir el documento al objeto esperado.',
+          formato: catalog.openDocFormat ?? null,
+          error: (err)?.message ?? String(err),
+          raw: catalog.openDoc
+        });
+      }
+    }
+  }, [catalog]);
 
   // Load Banner Section
   const filterHomeBanner = homePage && homePage.contentSections && homePage.contentSections?.length > 0 ? homePage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
@@ -206,20 +243,9 @@ function CatalogDetail({ setIsOpen }) {
 
           <section>
             <ReactJsonView
-              src={{
-              string: 'this is a test string',
-              integer: 42,
-              array: [1, 2, 3, 'test', NaN],
-              float: 3.14159,
-              undefined: undefined,
-              object: {
-                'first-child': true,
-                'second-child': false,
-                'last-child': null
-                },
-              string_number: '1234',
-              date: new Date(),
-              }}
+              src={
+                jsonDl
+              }
               showComma
             />
           </section>
