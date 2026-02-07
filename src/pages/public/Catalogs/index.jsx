@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo, useRef } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getApiContent } from '../../../redux/actions/apiAction';
 import { getcatalogs  } from '../../../redux/actions/catalogAction';
@@ -23,13 +23,19 @@ function Catalog() {
   const [searchApiInputValue, setSearchApiInputValue] = useState('');
   const dispatch = useDispatch();
   const { apiPage } = useSelector((state) => state.api);
-  const hasFetched = useRef(false);
 
   useEffect(() => {
     if (apiPage && Object.keys(apiPage).length === 0) {
       dispatch(getApiContent());
     }
   }, [apiPage, dispatch]);
+
+  const catalogsCopy = useMemo(() => {
+    if (catalogs && catalogs.length > 0) {
+      return [...catalogs];
+    }
+    return [];
+  }, [catalogs?.length > 0]);
 
   useEffect(() => {
     if (catalogs?.length === 0 && Object.keys(filtersCatalogs).length === 0) {
@@ -158,7 +164,7 @@ function Catalog() {
     ? `${filterApiBanner[0].background.url}`
     : config.notImage;
 
-  const fApis = catalogs && catalogs.length > 0 ? catalogs : [];
+  const fApis = catalogsCopy && catalogsCopy.length > 0 ? catalogsCopy : [];
 
   return (
     <div id='catalogHome'>
@@ -173,7 +179,7 @@ function Catalog() {
           <article className={classes.wrapper__left}>
             {((state && Object.keys(state).length > 0) || (versions && Object.keys(versions).length > 0) || (items && Object.keys(items).length > 0) || (tags && Object.keys(tags).length > 0)) && (
               <div className={classes.wrapper__title}>
-                {t('Catalogs.filterByOrg')}
+                {t('catalogsCopy.filterByOrg')}
               </div>
             )}
             {items && Object.keys(items).length > 0 && (
@@ -249,7 +255,7 @@ function Catalog() {
             )}
           </article>
           <section className={classes.wrapper__right}>
-            {loadingCatalogs === false && catalogs && (
+            {loadingCatalogs === false && catalogsCopy && (
               <div className='w-full'>
                 <div className='row'>
                   <div className={`flex-sm-12 flex-md-7 flex-lg-7 ${classes.wrapper__right__control_container}`}>
@@ -276,8 +282,8 @@ function Catalog() {
             )}
             <div className='flex-sm-12 flex-md-6'>
               <div className='row'>
-                {loadingCatalogs === false && catalogs ? (
-                  catalogs.length > 0 ? (
+                {loadingCatalogs === false && catalogsCopy ? (
+                  catalogsCopy.length > 0 ? (
                     <CatalogsPaginated
                       apis={fApis}
                       itemsPerPage={8}
