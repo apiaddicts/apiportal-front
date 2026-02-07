@@ -33,19 +33,31 @@ function Catalog() {
   }, [apiPage, dispatch]);
 
   useEffect(() => {
+    console.log('entro', catalogs);
     if (catalogs?.length === 0) {
+      console.log('ahora si entro', catalogs);
       setLoaging(true);
+      console.log('true');
       dispatch(getcatalogs());
+      console.log('done');
     }
+    console.log(catalogs);
   }, [dispatch]);
 
   useEffect(() => {
+    console.log('backUpCatalogs');
     if (catalogs && catalogs.length > 0) {
+      console.log('catalogs');
       if (JSON.stringify(cats) !== JSON.stringify(catalogs)) {
+        console.log('se debe cambiar');
         setCats(prev => [...prev, ...catalogs]);
+        console.log('debio cambiar');
         setLoaging(false);
+        console.log('false');
       }
+      console.log('done2');
     }
+    console.log('done3');
   }, [catalogs]);
 
   const filterApiBanner = apiPage && apiPage.contentSections && apiPage.contentSections?.length > 0 ? apiPage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
