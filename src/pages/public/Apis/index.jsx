@@ -34,10 +34,10 @@ function Apis({ setIsOpen }) {
   const filtersCount = Object.keys(filters || {}).length;
 
   useEffect(() => {
-    if (librariesLength === 0 && filtersCount === 0) {
+    if (libraries.length === 0) {
       dispatch(getLibraries());
     }
-  }, [dispatch, librariesLength, filtersCount]);
+  }, []);
 
   const filterApiBanner = apiPage && apiPage.contentSections && apiPage.contentSections?.length > 0 ? apiPage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
 
