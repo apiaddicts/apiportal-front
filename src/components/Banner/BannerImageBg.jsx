@@ -47,9 +47,9 @@ function BannerImageBg({
         ))}
       </div>
       <div className={classes.banner_img__title_imgbg}>
-        <h1 style={{color: '#000'}}>{title}</h1>
+        <h1>{title}</h1>
         <div style={{display: 'flex'}}>
-          <p className={classes.banner_img__title_imgbg__subtitle_imgbg} style={{flexBasis: '50%', color: '#000'}}>{subtitle}</p>
+          <p className={classes.banner_img__title_imgbg__subtitle_imgbg} style={{flexBasis: '50%' }}>{subtitle}</p>
         </div>
         <Button
           type='button'

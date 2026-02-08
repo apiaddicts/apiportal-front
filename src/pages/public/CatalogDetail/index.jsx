@@ -15,12 +15,10 @@ import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonCom
 import BannerImage from '../../../components/Banner/BannerImage';
 import Slick from '../../../components/SlickSlider/Slick';
 import Icon from '../../../components/MdIcon/Icon';
-import CustomMarkdown from '../../../components/CustomMarkdown';
 import { getHomeContent } from '../../../redux/actions/homeAction';
 import { getcatalog, getcatalogs } from '../../../redux/actions/catalogAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
 import config from '../../../services/config';
-import codeSnipet from '../../../static/img/code-snippet.png';
 import classes from './catalog-detail.module.scss';
 import ReactJsonView from '@microlink/react-json-view';
 import yaml from 'js-yaml';
@@ -77,7 +75,10 @@ function CatalogDetail({ setIsOpen }) {
 
   useEffect(() => {
     if (numCol > 0) {
+      console.log(numCol);
+      console.log(listCharacteristics);
       const columns = makeColums(numCol, listCharacteristics);
+      console.log(columns);
       setListColumns(columns);
     }
   }, [numCol]);
@@ -168,7 +169,7 @@ function CatalogDetail({ setIsOpen }) {
         }))
       : [
           {
-            label: t('ApiDetail.tryApi'),
+            label: t('Catalogs.regAndTry'),
             class: 'primary-dinamic',
             link: getDocRoute(catalog, catalog?.slug),
           },
@@ -192,17 +193,6 @@ function CatalogDetail({ setIsOpen }) {
   const otherApis = catalogs?.filter(lib => lib.documentId !== catalog?.documentId) || [];
   const shuffledApis = _.shuffle(otherApis);
   const apisNews = shuffledApis.slice(0, 3);
-
-  const hasAnyRating =
-    !!catalog?.globalRating ||
-    !!catalog?.definitionRating ||
-    !!catalog?.securityRating ||
-    !!catalog?.qualityRating;
-
-  const getRatingClass = (rating) => {
-    if (!rating) return classes.rating__empty;
-    return classes[`rating__${rating}`] || classes.rating__empty;
-  };
 
   const handleClickPage = (id) => {
     dispatch(getcatalog(id));
@@ -242,10 +232,14 @@ function CatalogDetail({ setIsOpen }) {
           <section className={`container ${classes.section__content}`}>
             <div className={` ${classes.section__content__sec}`}>
               <div className={classes.section__content__image}>
-                <div src={bannerImg} styles={{ backgroundImage: '0F0F0F' }}></div>
+                <img
+                  className={`${classes.img} banner_custom__img--dnone`}
+                  src={bannerImg !== '' ? bannerImg : config.notImage}
+                  alt={t('BannerImage.noImage')}
+                />
               </div>
               <div className={classes.section__content__list}>
-                <h1><span styles={{ color: primaryColor }}>{t("Catalogs.main")}</span> {t("Catalogs.features")}</h1>
+                <h1><span style={{ color: primaryColor }}>{t("Catalogs.main")}</span> {t("Catalogs.features")}</h1>
                 <div className={classes.section__content__list_container}>
                   {listColumns.map((colItems, colIndex) => (
                     <ul key={colIndex} className={classes.section__content__list_column}>
