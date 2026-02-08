@@ -36,7 +36,7 @@ function BannerImageBg({
       style={{ backgroundImage: `url(${imageUrl})` }}
       aria-hidden="true"
     >
-      <div className={`${classes.banner_img__layout} ${classes[layout_height]} ${classes[apiindividual_height]}`}>
+      <div>
         <div className='container'></div>
           <div className={classes.banner_img__backTo} >
             {(pathname !== '/catalogs' && (
