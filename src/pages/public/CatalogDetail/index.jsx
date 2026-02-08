@@ -10,7 +10,7 @@ import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonCom
 import BannerImageBg from '../../../components/Banner/BannerImageBg';
 import Icon from '../../../components/MdIcon/Icon';
 import { getHomeContent } from '../../../redux/actions/homeAction';
-import { getcatalog, getcatalogs } from '../../../redux/actions/catalogAction';
+import { getcatalog, getcatalogs, getCatalogContent } from '../../../redux/actions/catalogAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
 import config from '../../../services/config';
 import classes from './catalog-detail.module.scss';
