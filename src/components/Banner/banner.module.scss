@@ -93,6 +93,9 @@
   height: 500px;
   // padding: 0% 4.5%;
   position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 
   &__layout {
     position: absolute;

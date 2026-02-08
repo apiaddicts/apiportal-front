@@ -2,18 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
-import moment from 'moment';
 import _ from 'underscore';
 import { useTranslation } from 'react-i18next';
 
-import BannerCentered from '../../../components/Banner/BannerCentered';
-import Button from '../../../components/Buttons/Button';
 import CardBasic from '../../../components/Card/CardBasic';
-import Item from '../../../components/Item/Item';
-import Tabs from '../../../components/Tabs/Tabs';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
-import BannerImage from '../../../components/Banner/BannerImage';
-import Slick from '../../../components/SlickSlider/Slick';
+import BannerImageBg from '../../../components/Banner/BannerImageBg';
 import Icon from '../../../components/MdIcon/Icon';
 import { getHomeContent } from '../../../redux/actions/homeAction';
 import { getcatalog, getcatalogs } from '../../../redux/actions/catalogAction';
@@ -28,7 +22,7 @@ function CatalogDetail({ setIsOpen }) {
   const dispatch = useDispatch();
   const params = useParams();
   const { homePage } = useSelector((state) => state.home);
-  const { catalog, catalogs } = useSelector((state) => state.catalogs);
+  const { catalogPage, catalog, catalogs } = useSelector((state) => state.catalogs);
   const { blogs } = useSelector((state) => state.blog);
 
   const [bannerImg, setBannerImg] = useState('');
@@ -75,10 +69,7 @@ function CatalogDetail({ setIsOpen }) {
 
   useEffect(() => {
     if (numCol > 0) {
-      console.log(numCol);
-      console.log(listCharacteristics);
       const columns = makeColums(numCol, listCharacteristics);
-      console.log(columns);
       setListColumns(columns);
     }
   }, [numCol]);
@@ -139,19 +130,11 @@ function CatalogDetail({ setIsOpen }) {
     }
   }, [catalog]);
 
-  // Load Banner Section
-  const filterHomeBanner = homePage && homePage.contentSections && homePage.contentSections?.length > 0 ? homePage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
-  const filterHomeBannerTitle = filterHomeBanner.length > 0 && filterHomeBanner[0]?.title ? filterHomeBanner[0]?.title : '';
-  const filterHomeBannerSubtitle = filterHomeBanner.length > 0 && filterHomeBanner[0]?.subtitle ? filterHomeBanner[0]?.subtitle : '';
-  const filterHomeBannerImage = filterHomeBanner.length > 0 && filterHomeBanner[0]?.background ? filterHomeBanner[0]?.background?.url : '';
-  const filterHomeBannerNameButtom = filterHomeBanner.length > 0 && filterHomeBanner[0]?.buttons.length > 0 ? filterHomeBanner[0]?.buttons?.[0]?.name : '';
-  const filterHomeBannerNameType = filterHomeBanner.length > 0 && filterHomeBanner[0]?.buttons.length > 0 ? filterHomeBanner[0]?.buttons?.[0]?.type : '/#data';
-
-  // Load discover section
-  const filterDiscoverTab = homePage && homePage?.contentSections && homePage?.contentSections?.length > 0 ? homePage?.contentSections?.filter((item) => item.__component === 'home.discover-section') : [];
-
-  // Load buttons sections
-  const filterButtonSection = homePage && homePage?.contentSections && homePage?.contentSections?.length > 0 ? homePage?.contentSections?.filter((item) => item.__component === 'sections.button-hero') : [];
+  useEffect(() => {
+    if (catalogPage && Object.keys(catalogPage).length === 0) {
+      dispatch(getCatalogContent());
+    }
+  }, [catalogPage, dispatch]);
 
   const getDocRoute = (catalog, id) => {
     if (catalog?.openDocType === 'asyncapi') {
@@ -175,21 +158,6 @@ function CatalogDetail({ setIsOpen }) {
           },
         ];
 
-  const datanews = blogs?.length > 0 ? _.sortBy(blogs, (m) => {
-    return moment(m.created_at).toDate().getTime();
-  }) : [];
-
-  const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
-    const itemData = {
-      img: item?.image?.[0]?.url,
-      title: item?.title,
-      description: item?.description,
-      linkText: t('ApiDetail.moreInfo'),
-      route: `/blog/${item?.documentId}#blogDetail`,
-    };
-    return itemData;
-  }) : [];
-
   const otherApis = catalogs?.filter(lib => lib.documentId !== catalog?.documentId) || [];
   const shuffledApis = _.shuffle(otherApis);
   const apisNews = shuffledApis.slice(0, 3);
@@ -212,20 +180,22 @@ function CatalogDetail({ setIsOpen }) {
     return items.slice(start, end);
   });
 
+  const filterApiBanner = catalogPage && catalogPage.contentSections && catalogPage.contentSections?.length > 0 ? catalogPage.contentSections.filter((item) => item.__component === 'sections.calculate-section') : [];
+
+  const apiImageUrl = filterApiBanner?.[0]?.image?.url
+    ? `${filterApiBanner[0].image.url}`
+    : config.notImage;
+
   return (
-    <div id='api'>
+    <div id='catalog'>
       { Object.keys(catalog).length > 0 ? (
         <>
           <section>
-            <BannerImage
-              title={catalog?.title}
-              apiId={catalog?.slug}
-              img={bannerImg}
-              buttons={buttonsLbls}
-              setIsOpen={setIsOpen}
-              css_styles={{ 'image_display': 'banner_custom__img--dnone', 'apiindividual_height': 'banner_apiindividual__layout--height', 'custom_line_height': 'line-height-1' }}
-              redirect='/catalogs'
-              description={catalog?.description?.length > 0 && catalog?.description ? catalog?.description : ''}
+            <BannerImageBg
+              imageUrl={apiImageUrl}
+              initialTitle={catalog?.title}
+              initialSubtitle={catalog?.description?.length > 0 && catalog?.description ? catalog?.description : ''}
+              textBtn={buttonsLbls[0].label}
             />
           </section>
 
@@ -327,100 +297,7 @@ function CatalogDetail({ setIsOpen }) {
               </div>
             </div>
           </section>
-          <section className={`${classes.section__works}`}>
-            <div className='container'>
-              <div className='row'>
-                <div className='flex-md-12 flex-sm-12'>
-                  <h1 className={`h3 text-center text__white mb-5 ${classes.section__works__title}`}>
-                    {t('ApiDetail.howItWorks')}
-                  </h1>
-                </div>
-              </div>
-              <Tabs direction='center' colorTab='white' activeColor='yellow'>
-                {filterDiscoverTab.map((item, i) => (
-                  <div label={item?.title} key={i}>
-                    <div className='row'>
-                      {item.Products.map((data, x) => (
-                        <div key={x + i} className='flex-lg-4 flex-md-12 flex-sm-12 py-6'>
-                          <Item
-                            number={data?.num}
-                            title={data?.title}
-                            description={data?.subtitle}
-                            icon={data?.iconText}
-                            type='title'
-                            textColor='#d4d9db'
-                            css_styles={{ 'custom_description': 'text__white' }}
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </Tabs>
-              <div className='mt-10 justify-center' style={{ display: 'grid', gap: '2rem', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 230px))' }}>
-                {filterButtonSection && filterButtonSection.length > 0 ? (
-                  filterButtonSection?.[0]?.header.map((button, i) => (
-                    <div key={i} className='mb-4'>
-                      {button?.isKeywordInverted ? (
-                        <HashLink smooth to='/apis#apiHome'>
-                          <Button styles={button?.keyword}>
-                            {button?.title}
-                          </Button>
-                        </HashLink>
-                      ) : (
-                        <HashLink smooth to={`/apis/${params?.id}#contact`}>
-                          <Button styles={button?.keyword}>
-                            {button?.title}
-                          </Button>
-                        </HashLink>
-                      )}
-                    </div>
-                  ))
-                ) : (null)}
-              </div>
-            </div>
-          </section>
-          <section id='Banner'>
-            <BannerCentered
-              title={filterHomeBannerTitle !== '' ? filterHomeBannerTitle : 'Title'}
-              subtitle={filterHomeBannerSubtitle !== '' ? filterHomeBannerSubtitle : ''}
-              img={filterHomeBannerImage !== '' ? '' : ''}
-              buttonType='tertiary'
-              buttonLabel={filterHomeBannerNameButtom !== '' ? filterHomeBannerNameButtom : t('Home.discoverSubtitle')}
-              redirect={filterHomeBannerNameType}
-            />
-          </section>
-          <section className={classes.section__news}>
-            <div className='container'>
-              <div className='row'>
-                <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
-                  <h1 className='h2 text__dark__primary'>{t('ApiDetail.news')}</h1>
-                </div>
 
-                <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
-                  <p className='body-1'>
-                    {t('ApiDetail.newsDescription')}
-                  </p>
-                </div>
-              </div>
-            </div>
-            <div className='container'>
-              <div className='row'>
-                <div className='flex-md-12 flex-sm-12'>
-                  <Slick slides={slidesNew} />
-                </div>
-              </div>
-            </div>
-            <div id='contact' className={`container ${classes.section__news__showmore}`}>
-              <div className='row justify-center'>
-                <div className={`flex-lg-2 flex-md-6 flex-sm-12 text-center ${classes.custom_top}`}>
-                  <HashLink smooth to='/blog#blogIndex'>
-                    <div className='text__secondary'>{t('ApiDetail.seeMore')}</div>
-                  </HashLink>
-                </div>
-              </div>
-            </div>
-          </section>
           <div id='contact' />
         </>
       ) : (

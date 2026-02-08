@@ -1,15 +1,12 @@
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getCatalogContent } from '../../../redux/actions/catalogAction';
 import { getcatalogs  } from '../../../redux/actions/catalogAction';
-import BannerImage from '../../../components/Banner/BannerImage';
 import BannerImageBg from '../../../components/Banner/BannerImageBg';
 import SearchInput from '../../../components/Input/SearchInput';
 import InputSelect from '../../../components/Input/InputSelect';
 import CheckboxWrapper from '../../../components/common/Check';
 import CustomizedAccordions from '../../../components/common/AccordionMUI';
-import ButtonGroupMUI from '../../../components/common/ButtonGroup';
-import CheckboxLabels from '../../../components/common/CustomCheck';
 import {CatalogsPaginated} from '../../../components/ApisPaginated';
 import Icon from '../../../components/MdIcon/Icon';
 import classes from './catalogs.module.scss';
@@ -124,37 +121,6 @@ function Catalog() {
 
   const versionArr = new Set(versionRepeated);
   const versions = [...versionArr].sort();
-
-  const globalRatingRepeated = backUpCatalogs && backUpCatalogs
-    .map((element) => element.globalRating)
-    .filter(Boolean); // quita null/undefined
-
-  const globalRatingArr = new Set(globalRatingRepeated);
-  const globalRatings = [...globalRatingArr].sort();
-
-  const products = useMemo(() => {
-    if (!backUpCatalogs || backUpCatalogs.length === 0) return [];
-    return backUpCatalogs.flatMap((library) => library.products || []);
-  }, [backUpCatalogs]);
-
-  const productsFilters = useMemo(() => {
-    if (!products.length) return [];
-
-    const map = products.reduce((acc, product) => {
-      if (!acc[product.slug]) {
-        acc[product.slug] = {
-          title: product.title,
-          slug: product.slug,
-          count: 1,
-        };
-      } else {
-        acc[product.slug].count += 1;
-      }
-      return acc;
-    }, {});
-
-    return Object.values(map);
-  }, [products]);
 
   const apiImageUrl = filterApiBanner?.[0]?.image?.url
     ? `${filterApiBanner[0].image.url}`
