@@ -196,6 +196,8 @@ function CatalogDetail({ setIsOpen }) {
               initialTitle={catalog?.title}
               initialSubtitle={catalog?.description?.length > 0 && catalog?.description ? catalog?.description : ''}
               textBtn={buttonsLbls[0].label}
+              redirect='/catalogs'
+              css_styles={{ 'layout_height': 'banner_custom__layout--height' }}
             />
           </section>
 

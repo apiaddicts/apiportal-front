@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCatalogContent } from '../../../redux/actions/catalogAction';
-import { getcatalogs  } from '../../../redux/actions/catalogAction';
+import { getcatalogs, getCatalogContent, filterCheck, sortApiCollection } from '../../../redux/actions/catalogAction';
 import BannerImageBg from '../../../components/Banner/BannerImageBg';
 import SearchInput from '../../../components/Input/SearchInput';
 import InputSelect from '../../../components/Input/InputSelect';
@@ -20,8 +19,6 @@ function Catalog() {
   const [filtersSelect, setFiltersSelect] = useState([]);
   const [searchApiInputValue, setSearchApiInputValue] = useState('');
   const dispatch = useDispatch();
-  const [cats, setCats] = useState([]);
-  const [loading, setLoaging] = useState(false);
 
   useEffect(() => {
     if (catalogPage && Object.keys(catalogPage).length === 0) {
@@ -30,42 +27,39 @@ function Catalog() {
   }, [catalogPage, dispatch]);
 
   useEffect(() => {
-    if (catalogs?.length === 0) {
-      setLoaging(true);
+    if (catalogs?.length === 0 && Object.keys(filtersCatalogs || {}).length === 0) {
       dispatch(getcatalogs());
     }
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (catalogs && catalogs.length > 0) {
-      if (JSON.stringify(cats) !== JSON.stringify(catalogs)) {
-        setCats(prev => [...prev, ...catalogs]);
-        setLoaging(false);
-      }
-    }
-  }, [catalogs]);
+  }, [catalogs, filtersCatalogs, dispatch]);
 
   const filterApiBanner = catalogPage && catalogPage.contentSections && catalogPage.contentSections?.length > 0 ? catalogPage.contentSections.filter((item) => item.__component === 'sections.calculate-section') : [];
 
   const resetFilters = () => {
-    dispatch(getLibraries());
+    dispatch(getcatalogs());
     dispatch({
-      type: 'RESET_LIBRARY',
+      type: 'RESET_CATALOG',
     });
     setSearchApiInputValue('');
     setFiltersSelect([]);
   };
 
   const handleChangeSolutions = (name, label, checked) => {
+    dispatch(filterCheck(label, checked, 'solution'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
 
   const handleChangFilterTags = (name, label, checked) => {
+    dispatch(filterCheck(label, checked, 'tag'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
 
   const handleChangeSearchFilter = (text) => {
     setSearchApiInputValue(text);
+    dispatch(filterCheck(text, null, 'search'));
+  };
+
+  const handleSort = (sort) => {
+    dispatch(sortApiCollection(sort));
   };
 
   // Filters titles array
@@ -126,7 +120,7 @@ function Catalog() {
     ? `${filterApiBanner[0].image.url}`
     : config.notImage;
 
-  const fApis = cats && cats.length > 0 ? cats : [];
+  const fApis = catalogs && catalogs.length > 0 ? catalogs : [];
 
   return (
     <div id='catalogHome'>
@@ -138,6 +132,7 @@ function Catalog() {
               initialTitle={catalogPage.contentSections[0].title}
               initialSubtitle={catalogPage.contentSections[0].subtitle}
               textBtn={catalogPage.contentSections[0].button.name}
+              css_styles={{ 'layout_height': 'banner_custom__layout--height' }}
             />
           </section>
           <section className={classes.wrapper}>
@@ -181,7 +176,7 @@ function Catalog() {
               )}
             </article>
             <section className={classes.wrapper__right}>
-              {loading === false && cats && (
+              {loadingCatalogs === false && catalogs && (
                 <div className='w-full'>
                   <div className='row'>
                     <div className={`flex-sm-12 flex-md-7 flex-lg-7 ${classes.wrapper__right__control_container}`}>
@@ -208,8 +203,8 @@ function Catalog() {
               )}
               <div className='flex-sm-12 flex-md-6'>
                 <div className='row'>
-                  {loading === false && cats ? (
-                    cats.length > 0 ? (
+                  {loadingCatalogs === false && catalogs ? (
+                    catalogs.length > 0 ? (
                       <CatalogsPaginated
                         apis={fApis}
                         itemsPerPage={8}

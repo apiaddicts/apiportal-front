@@ -20,7 +20,7 @@ const initialState = {
   jsonOpenApiCatalog: {},
   openApiFormatCatalog: '',
   errorJsonOpenApiCatalog: {},
-
+  sort: 'asc',
 }
 
 // eslint-disable-next-line default-param-last
@@ -73,6 +73,21 @@ export default function catalogReducer(state = initialState, action) {
         ...state,
         catalogPage: {},
         errorCatalog: action.payload,
+      };
+    case catalogConstants.FILTER_ALL_CATALOG:
+      return {
+        ...state,
+        catalogs: action.data,
+        filtersCatalogs: action.newFilters,
+        loadingCatalogs: false,
+        sort: action.sort,
+      };
+    case catalogConstants.RESET_LIBRARY:
+      return {
+        ...state,
+        catalog: {},
+        filtersCatalogs: {},
+        catalogs: [],
       };
 
     default:

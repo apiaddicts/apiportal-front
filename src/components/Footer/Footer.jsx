@@ -43,6 +43,8 @@ function Footer({ isPrivate }) {
   const [displaySubmit, setDisplaySubmit] = useState(true);
 
   // console.log(config);
+  const rootStyles = getComputedStyle(document.documentElement);
+  const primaryColor = rootStyles.getPropertyValue('--primary-color').trim();
 
   const formik = useFormik({
     initialValues: {
@@ -109,7 +111,7 @@ function Footer({ isPrivate }) {
             <p style={{ fontWeight: 400 }} className='h5 text__white mb-10'>{t('Footer.leaveMessage')}</p>
           </div>
           <div className={classes.button__fab}>
-            <button type='button' onClick={() => { setContactForm(!contactForm); formik.resetForm(); }}>
+            <button type='button' style={{ color: primaryColor }} onClick={() => { setContactForm(!contactForm); formik.resetForm(); }}>
               {contactForm ? <span style={{ fontSize: 25 }}>{t('Footer.interested')}</span> : <span style={{ fontSize: 25 }}>{t('Footer.interested')}</span>}
             </button>
           </div>
