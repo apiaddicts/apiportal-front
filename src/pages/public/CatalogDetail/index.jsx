@@ -224,7 +224,7 @@ function CatalogDetail({ setIsOpen }) {
           </section>
 
           
-          <section className={`${classes.section__taxonomy} pb-9`}>
+          {/*<section className={`${classes.section__taxonomy} pb-9`}>
             <div className='container'>
               <div className='row'>
                 <div className='flex-md-12 flex-sm-12'>
@@ -242,7 +242,7 @@ function CatalogDetail({ setIsOpen }) {
                 />
               </div>
             </div>
-          </section>
+          </section>*/}
 
           <section className={classes.section__discover}>
             <div className='container'>

@@ -117,3 +117,24 @@
     left: 0;
   }
 }
+
+.btn {
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 6px;
+  font-family: var(--font-family);
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19.2px;
+  letter-spacing: 1.33px;
+  text-align: center;
+  padding: 18px 32px;
+  text-transform: uppercase !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: var(--primary-color);
+  @include border-dynamic(rgba(var(--primary-color), 0.4));
+}
