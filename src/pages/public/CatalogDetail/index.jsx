@@ -270,7 +270,7 @@ function CatalogDetail({ setIsOpen }) {
                           title={card?.title}
                           description={card?.description}
                           info={t('ApiDetail.moreInfo')}
-                          url={`/apis/${card?.documentId}#api`}
+                          url={`/catalogs/${card?.documentId}#api`}
                           css_styles={{ 'override_border__chip': 'custom_border__chip' }}
                           route={() => handleClickPage(card?.documentId)}
                           img={cardsImages[card.documentId] || config.notImage}
