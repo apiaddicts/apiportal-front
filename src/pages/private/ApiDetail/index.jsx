@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Box, Container } from '@mui/material';
-import { getApiDetail, resetApiDetailed } from '../../../redux/actions/apiManagerAction';
 import { useTranslation } from 'react-i18next';
 
 import Title from '../../../components/Title';
