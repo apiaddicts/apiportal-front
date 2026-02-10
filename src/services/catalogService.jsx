@@ -21,7 +21,7 @@ function getCatalogsStores() {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
-  return fetch(`${config.apiUrl}/library-apis?filters[publish][$eq]=publicado&filters[openDocType][$eq]=catalog&populate[tags]=*&populate[image][populate]=*&populate[products][populate]=*`, requestOptions)
+  return fetch(`${config.apiUrl}/library-catalogs?filters[publish][$eq]=publicado&populate[tags]=*&populate[image][populate]=*`, requestOptions)
     .then(handleResponse)
     .then((libraries) => {
       return libraries;
@@ -35,7 +35,7 @@ function getCatalogStore(id) {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
-  return fetch(`${config.apiUrl}/library-apis/${id}?populate=image`, requestOptions)
+  return fetch(`${config.apiUrl}/library-catalogs/${id}?populate=image`, requestOptions)
     .then(handleResponse)
     .then((library) => {
       return library;

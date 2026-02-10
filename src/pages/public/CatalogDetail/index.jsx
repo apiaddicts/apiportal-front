@@ -96,35 +96,15 @@ function CatalogDetail({ setIsOpen }) {
   }, []);
 
   useEffect(() => {
-    if (catalog && catalog.openDocTaxonomy) {
+    if (catalog && catalog.dataSource) {
       try {
-        if (catalog.openDocFormat === 'yaml') {
-          const temp = yaml.load(catalog.openDocTaxonomy);
-          setJsonDl(temp);
-        } else if (catalog.openDocFormat === 'json') {
-          setJsonDl(JSON.parse(catalog.openDocTaxonomy));
-        } else {
-          const fallbackYaml = String.raw`status: formato_no_definido
-            mensaje: "El formato del documento no está definido. Use 'yaml' o 'json'."
-            detalles:
-              formato_recibido: ${JSON.stringify(catalog.openDocFormat)}
-              ejemplo_yaml: |
-                string: ejemplo
-                integer: 42
-                array:
-                  - a
-                  - b
-          `;
-          const parsedFallback = yaml.parse(fallbackYaml);
-          setJsonDl(parsedFallback);
-        }
+        setJsonDl(JSON.parse(catalog.dataSource));
       } catch (error) {
         setJsonDl({
           status: 'error_de_parseo',
           mensaje: 'No se pudo convertir el documento al objeto esperado.',
-          formato: catalog.openDocFormat ?? null,
           error: (err)?.message ?? String(err),
-          raw: catalog.openDocTaxonomy
+          raw: catalog.dataSource
         });
       }
     }
@@ -137,10 +117,13 @@ function CatalogDetail({ setIsOpen }) {
   }, [catalogPage, dispatch]);
 
   const getDocRoute = (catalog, id) => {
+    if (!catalog?.openDocType) return;
     if (catalog?.openDocType === 'asyncapi') {
-      return `/apis/${id}/asyncapi-ui`;
+      //return `/apis/${id}/asyncapi-ui`;
+      return `/`;
     }
-    return `/apis/${id}/swagger-ui`;
+    //return `/apis/${id}/swagger-ui`;
+    return `/`;
   };
 
   const buttonsLbls =
