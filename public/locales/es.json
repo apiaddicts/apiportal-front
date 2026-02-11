@@ -466,6 +466,54 @@
     "features": "Caracteristicas",
     "main": "Principales",
     "regAndTry": "Regístrate y pruébalo",
-    "taxonomyTitle": "Taxonomia del catalogo"
+    "filterByDomain": "Filtrar por dominio",
+    "taxonomyTitle": "Taxonomia del catalogo",
+    "theAssets": "Los Activos",
+    "thePolicies": "Las Políticas",
+    "policiesPermission": "PERMISO",
+    "policiesAllow": "Acción permitida",
+    "policiesProhibition": "PROHIBICIÓN",
+    "policiesForbiden": "Prohibido",
+    "theContrat": "El Contrato",
+    "viewTermAndConds": "Ver Términos y Condiciones Generales",
+    "contractNegotiate": "Negociar Contrato",
+    "requierCredential": "Requiere Credencial Verificable",
+    "providedBy": "Proporcionado por",
+    "detTitle": "Catálogo",
+    "detAssets": "Activos",
+    "detPolicies": "Políticas",
+    "detContracts": "Contratos",
+    "Asset": {
+      "noData": "No hay activos disponibles.",
+      "title": "Activos"
+    },
+    "Policy": {
+      "title": "Políticas",
+      "permissions": "Permisos",
+      "permission": "PERMISO",
+      "allow": "Permitido",
+      "phobictions": "Prohibiciones",
+      "prohibition": "PROHIBICIÓN",
+      "forbiden": "Prohibido"
+    },
+    "Contract": {
+      "title": "Definición del Contrato",
+      "generalInfo": "Información General",
+      "contractId": "ID del Contrato",
+      "provider": "Proveedor",
+      "status": "Estado",
+      "consumer": "Consumidor",
+      "offeringModel": "Modelo de Oferta",
+      "PolicyClauses": "Cláusulas de la Política",
+      "type": "Tipo",
+      "clause": "Cláusula",
+      "metric": "Métrica",
+      "value": "Valor",
+      "linkedAssets": "Activos Vinculados",
+      "assetsName": "Nombre del Activo",
+      "datasetName": "Nombre del Conjunto de Datos",
+      "linkType": "Tipo",
+      "linkProducer": "Productor"
+    }
   }
 }

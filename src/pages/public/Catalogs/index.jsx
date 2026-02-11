@@ -64,7 +64,7 @@ function Catalog() {
 
   // Filters titles array
   const titleRepeated = backUpCatalogs && backUpCatalogs.map((element) => {
-    return element.title;
+    return element.organization;
   });
   // count items repeated
   const countRepeated = titleRepeated && titleRepeated.reduce((acc, cur) => {
@@ -116,6 +116,22 @@ function Catalog() {
   const versionArr = new Set(versionRepeated);
   const versions = [...versionArr].sort();
 
+  // Filters domains array
+  const domainRepeated = backUpCatalogs && backUpCatalogs.map((element) => {
+    return element.domain;
+  });
+  // count domains repeated
+  const countRepeatedDomains = domainRepeated && domainRepeated.reduce((acc, cur) => {
+    acc[cur] = (acc[cur] || 0) + 1;
+    return acc;
+  }, {});
+  const domains = countRepeatedDomains && Object.keys(countRepeatedDomains).map((key) => {
+    return {
+      title: key,
+      count: countRepeatedDomains[key],
+    };
+  });
+
   const apiImageUrl = filterApiBanner?.[0]?.image?.url
     ? `${filterApiBanner[0].image.url}`
     : config.notImage;
@@ -126,7 +142,7 @@ function Catalog() {
     <div id='catalogHome'>
       {catalogPage && Object.keys(catalogPage).length > 0 ? (
         <div>
-          <section>
+          {/*<section>
             <BannerImageBg
               imageUrl={apiImageUrl}
               initialTitle={catalogPage.contentSections[0].title}
@@ -134,7 +150,7 @@ function Catalog() {
               textBtn={catalogPage.contentSections[0].button.name}
               css_styles={{ 'layout_height': 'banner_custom__layout--height' }}
             />
-          </section>
+          </section>*/}
           <section className={classes.wrapper}>
             <article className={classes.wrapper__left}>
               {items && Object.keys(items).length > 0 && (
@@ -163,6 +179,21 @@ function Catalog() {
                         checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
                       />
                       <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{item.count}</p>
+                    </div>
+                  ))}
+                </CustomizedAccordions>
+              )}
+              {domains && Object.keys(domains).length > 0 && (
+                <CustomizedAccordions title={t('Catalogs.filterByDomain')}>
+                  {domains && domains.map((domain, index) => (
+                    <div key={index} className={classes.wrapper__checkbox}>
+                      <CheckboxWrapper
+                        name={domain.title}
+                        label={domain.title}
+                        handleChangeSelect={handleChangeSolutions}
+                        checked={filtersSelect[domain.title] !== undefined ? filtersSelect[domain.title] : false}
+                      />
+                      <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{domain.count}</p>
                     </div>
                   ))}
                 </CustomizedAccordions>

@@ -1,0 +1,160 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section_title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.asset_table {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.asset_row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: --secundary-color;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+}
+
+.asset_icon {
+  font-size: 1.6rem;
+}
+
+.asset_name {
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.asset_type {
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.policy_group_title {
+  margin-top: 20px;
+  margin-bottom: 6px;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.policy_card {
+  padding: 14px;
+  border-radius: 14px;
+  margin-bottom: 12px;
+  color: white;
+
+  &__perm {
+    background: #009bc5;
+  }
+
+  &__prohib {
+    background: --primary-color;
+    color: #074248;
+  }
+}
+
+.policy_header {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+
+.contract_section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.contract_title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  color: #1a1c1e;
+}
+
+.subsection_title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+  color: #1f2937;
+}
+
+.general_info_card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  border-radius: 12px;
+  padding: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.general_info_card .grid_item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  &.full {
+    grid-column: 1 / 4;
+  }
+}
+
+.general_info_card label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.field_box {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #111827;
+}
+
+.table_wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  font-size: 0.95rem;
+}
+
+th {
+  background: #f3f4f6;
+  padding: 10px;
+  font-weight: 700;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+td {
+  padding: 10px;
+  border-bottom: 1px solid #e5e7eb;
+  color: #4b5563;
+}
+
+tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+tbody tr:hover {
+  background: #eef6f8;
+}

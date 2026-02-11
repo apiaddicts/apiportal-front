@@ -346,3 +346,142 @@
 .rating__C { background: #f1c40f; }
 .rating__D { background: #f39c12; }
 .rating__E { background: #d52c19; }
+
+.catalog-card {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: 12px;
+    background: #ffffff;;
+    border-radius: 14px;
+    border: 2px solid transparent;
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.06);
+    padding: 16px;
+    cursor: pointer;
+    position: relative;
+    outline: none;
+    transition: border-color 140ms ease, box-shadow 140ms ease, transform 80ms ease;
+
+    &:hover {
+        box-shadow: 0 10px 28px rgba(16, 24, 40, 0.1);
+        transform: translateY(-1px);
+    }
+
+    &:focus-visible {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary-color) 20%, transparent);
+    }
+
+    &__is-selected {
+        border-color: var(--primary-color);
+    }
+
+    &.is-disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        filter: grayscale(8%);
+    }
+
+    &__media {
+        position: relative;
+        height: 130px;
+        background: #f3f4f6;
+        border-radius: 12px;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+
+        .catalog-card__img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .catalog-card__icon {
+            width: 72px;
+            height: 72px;
+
+            svg {
+                width: 100%;
+                height: 100%;
+
+                .icon-bg {
+                    fill: color-mix(in srgb, var(--primary-color) 14%, #eaf8f9);
+                    stroke: var(--primary-color);
+                    stroke-width: 1.4;
+                }
+                .icon-check {
+                    stroke: var(--primary-color);
+                }
+            }
+        }
+
+        .catalog-card__badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 26px;
+            height: 26px;
+
+            svg {
+                width: 100%;
+                height: 100%;
+
+                .badge-box {
+                    fill: #fff;
+                    stroke: var(--primary-color);
+                    stroke-width: 2;
+                }
+                .badge-check {
+                    fill: none;
+                    stroke: var(--primary-color);
+                    stroke-width: 2.2;
+                    stroke-linecap: round;
+                    stroke-linejoin: round;
+                }
+            }
+        }
+    }
+
+    &__body {
+        display: grid;
+        gap: 6px;
+    }
+
+    &__title {
+        margin: 0;
+        font-size: 1.15rem;
+        line-height: 1.2;
+        color: #0f172a;
+        font-weight: 700;
+    }
+
+    &__subtitle {
+        margin: 0;
+        color: var(--primary-color);
+        font-weight: 700;
+    }
+
+    &__provider {
+        margin: 2px 0 4px 0;
+        color: #6b7280;
+        font-size: 0.9rem;
+    }
+
+    &__tags {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+
+        .catalog-card__tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 2px 10px;
+            border-radius: 999px;
+            background: #e6f7f8;
+            color: --primary-color;
+            font-weight: 700;
+            font-size: 0.78rem;
+        }
+    }
+}

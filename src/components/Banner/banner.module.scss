@@ -87,6 +87,7 @@
 
 .banner_img {
   display: flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   width: 100%;
@@ -106,8 +107,10 @@
   }
 
   &__backTo {
+    position: absolute;
     width: 100%;
     padding: 6% 0 2%;
+    top: 0;
     margin-left: 4rem;
 
     &__btn {
@@ -141,6 +144,7 @@
   }
 
   &__title_imgbg {
+    position: absolute;
     width: 100%;
     text-align: left;
     font-size: 2rem;
@@ -148,7 +152,11 @@
     color: white;
     text-shadow: black;
     margin-left: 4rem;
-   
+    top: 9rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+
     &__subtitle_imgbg {
       white-space: normal;
       overflow-wrap: break-word;

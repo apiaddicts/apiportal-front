@@ -466,6 +466,54 @@
     "features": "features",
     "main": "Main",
     "regAndTry": "Sign up and try it out",
-    "taxonomyTitle": "Catalog taxonomy"
+    "filterByDomain": "Filter by Domain",
+    "taxonomyTitle": "Catalog taxonomy",
+    "theAssets": "The Assets",
+    "thePolicies": "The Policies",
+    "policiesPermission": "PERMISSION",
+    "policiesAllow": "Allowed action",
+    "policiesProhibition": "PROHIBITION",
+    "policiesForbiden": "Forbidden",
+    "theContrat": "The Contract",
+    "viewTermAndConds": "View General Terms & Conditions",
+    "contractNegotiate": "Negotiate Contract",
+    "requierCredential": "Requires Verifiable Credential",
+    "providedBy": "Provided by",
+    "detTitle": "Catalog",
+    "detAssets": "Assets",
+    "detPolicies": "Policies",
+    "detContracts": "Contracts",
+    "Asset": {
+      "noData": "No assets available.",
+      "title": "Assets"
+    },
+    "Policy": {
+      "title": "Policies",
+      "permissions": "Permissions",
+      "permission": "PERMISSION",
+      "allow": "Allowed",
+      "phobictions": "Prohibitions",
+      "prohibition": "PROHIBITION",
+      "forbiden": "Forbidden"
+    },
+    "Contract": {
+      "title": "Contract Definition",
+      "generalInfo": "General Information",
+      "contractId": "Contract ID",
+      "provider": "Provider",
+      "status": "Status",
+      "consumer": "Consumer",
+      "offeringModel": "Offering Model",
+      "PolicyClauses": "Policy Clauses",
+      "type": "Type",
+      "clause": "Clause",
+      "metric": "Metric",
+      "value": "Value",
+      "linkedAssets": "Linked Assets",
+      "assetsName": "Asset Name",
+      "datasetName": "Dataset Name",
+      "linkType": "Type",
+      "linkProducer": "Producer"
+    }
   }
 }
