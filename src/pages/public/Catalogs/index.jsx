@@ -32,8 +32,6 @@ function Catalog() {
     }
   }, [catalogs, filtersCatalogs, dispatch]);
 
-  const filterApiBanner = catalogPage && catalogPage.contentSections && catalogPage.contentSections?.length > 0 ? catalogPage.contentSections.filter((item) => item.__component === 'sections.calculate-section') : [];
-
   const resetFilters = () => {
     dispatch(getcatalogs());
     dispatch({
@@ -43,8 +41,13 @@ function Catalog() {
     setFiltersSelect([]);
   };
 
-  const handleChangeSolutions = (name, label, checked) => {
-    dispatch(filterCheck(label, checked, 'solution'));
+  const handleChangeOrganization = (name, label, checked) => {
+    dispatch(filterCheck(label, checked, 'organization'));
+    setFiltersSelect({ ...filtersSelect, [name]: checked });
+  };
+
+  const handleChangeDomain = (name, label, checked) => {
+    dispatch(filterCheck(label, checked, 'domain'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
 
@@ -108,33 +111,23 @@ function Catalog() {
     };
   });
 
-  // Filters version array
-  const versionRepeated = backUpCatalogs && backUpCatalogs.map((element) => {
-    return element.version;
-  });
-
-  const versionArr = new Set(versionRepeated);
-  const versions = [...versionArr].sort();
-
   // Filters domains array
   const domainRepeated = backUpCatalogs && backUpCatalogs.map((element) => {
     return element.domain;
   });
+
   // count domains repeated
   const countRepeatedDomains = domainRepeated && domainRepeated.reduce((acc, cur) => {
     acc[cur] = (acc[cur] || 0) + 1;
     return acc;
   }, {});
+
   const domains = countRepeatedDomains && Object.keys(countRepeatedDomains).map((key) => {
     return {
       title: key,
       count: countRepeatedDomains[key],
     };
   });
-
-  const apiImageUrl = filterApiBanner?.[0]?.image?.url
-    ? `${filterApiBanner[0].image.url}`
-    : config.notImage;
 
   const fApis = catalogs && catalogs.length > 0 ? catalogs : [];
 
@@ -160,7 +153,7 @@ function Catalog() {
                       <CheckboxWrapper
                         name={item.title}
                         label={item.title}
-                        handleChangeSelect={handleChangeSolutions}
+                        handleChangeSelect={handleChangeOrganization}
                         checked={filtersSelect[item.title] !== undefined ? filtersSelect[item.title] : false}
                       />
                       <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{item.count}</p>
@@ -190,7 +183,7 @@ function Catalog() {
                       <CheckboxWrapper
                         name={domain.title}
                         label={domain.title}
-                        handleChangeSelect={handleChangeSolutions}
+                        handleChangeSelect={handleChangeDomain}
                         checked={filtersSelect[domain.title] !== undefined ? filtersSelect[domain.title] : false}
                       />
                       <p className={`${classes.wrapper__checkbox__counter} fs__10 text__gray__gray_darken`}>{domain.count}</p>
@@ -198,7 +191,7 @@ function Catalog() {
                   ))}
                 </CustomizedAccordions>
               )}
-              {((state && Object.keys(state).length > 0) || (versions && Object.keys(versions).length > 0) || (items && Object.keys(items).length > 0) || (tags && Object.keys(tags).length > 0)) && (
+              {((state && Object.keys(state).length > 0) || (items && Object.keys(items).length > 0) || (tags && Object.keys(tags).length > 0) || (domains && Object.keys(domains).length > 0)) && (
                 <div className={classes.wrapper__filters_primary}>
                   <Icon id='MdDeleteOutline' />
                   <button type='button' className={classes.wrapper__reset} onClick={resetFilters}>{t('Apis.clearFilters')}</button>

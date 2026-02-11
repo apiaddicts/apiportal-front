@@ -117,25 +117,19 @@ export const filterCheck = (label, checked, name) => (dispatch) => {
       if (key === 'publish') {
         conditions.push((newFilters['publish'].length) ? newFilters['publish'].includes(item['publish'].toLowerCase()) : true);
       }
-      if (key === 'solution') {
-        conditions.push((newFilters['solution'].length) ? newFilters['solution'].includes(item['title'].toLowerCase()) : true);
+      if (key === 'organization') {
+        conditions.push((newFilters['organization'].length) ? newFilters['organization'].includes(item['organization'].toLowerCase()) : true);
+      }
+      if (key === 'domain') {
+        conditions.push((newFilters['domain'].length) ? newFilters['domain'].includes(item['domain'].toLowerCase()) : true);
       }
       if (key === 'tag') {
         conditions.push((newFilters['tag'].length) ? newFilters['tag'].some((filteredTag) => {
           return (item['tags'].map((tag) => tag.label.toLowerCase())).includes(filteredTag);
         }) : true);
       }
-      if (key === 'version') {
-        conditions.push((newFilters['version'].length) ? newFilters['version'].includes(item['version'].toLowerCase()) : true);
-      }
       if (key === 'search') {
         conditions.push((newFilters['search'].length) ? item['title'].toLowerCase().includes(newFilters['search']) : true);
-      }
-      if (key === 'product') {
-        conditions.push((newFilters['product']?.length) ? item['products']?.some((product) => newFilters['product'].includes(product.slug.toLowerCase())) : true);
-      }
-      if (key === 'globalRating') {
-        conditions.push((newFilters['globalRating']?.length) ? newFilters['globalRating'].includes((item['globalRating'] || '').toLowerCase()) : true);
       }
     });
     return conditions.every((v) => v === true);
