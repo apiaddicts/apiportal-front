@@ -2,10 +2,10 @@ import React from "react";
 import classes from "./section.module.scss";
 import { useTranslation } from 'react-i18next';
 
-function SectionPolicies({ contract }) {
+function SectionPolicies({ policies }) {
   const { t } = useTranslation();
 
-  const usage = contract?.credentialSubject?.["gx:usagePolicy"] || {};
+  const usage = policies?.credentialSubject?.["gx:usagePolicy"] || {};
   const permissions = usage["odrl:permission"] || [];
   const prohibitions = usage["odrl:prohibition"] || [];
 
@@ -17,15 +17,15 @@ function SectionPolicies({ contract }) {
       {permissions.map((p, i) => (
         <div className={classes.policy_card + classes.policy_card__perm} key={i}>
           <div className={classes.policy_header}>{t("Catalogs.Policy.permission")}</div>
-          <p>{t("Catalogs.Policy.allow")}: {p["odrl:action"]?.map(a => a["odrl:type"]).join(", ")}</p>
+          <p>{t("Catalogs.Policy.allow")}: {p["odrl:action"]}</p>
         </div>
       ))}
 
-      <h2 className={classes.policy_group_title}>{t("Catalogs.Policy.phobictions")}</h2>
+      <h2 className={classes.policy_group_title}>{t("Catalogs.Policy.prohibitions")}</h2>
       {prohibitions.map((p, i) => (
         <div className={classes.policy_card + classes.policy_card__rohib} key={i}>
           <div className={classes.policy_header}>{t("Catalogs.Policy.prohibition")}</div>
-          <p>{t("Catalogs.Policy.forbiden")}: {p["odrl:action"]?.map(a => a["odrl:type"]).join(", ")}</p>
+          <p>{t("Catalogs.Policy.forbiden")}: {p["odrl:action"]}</p>
         </div>
       ))}
     </div>

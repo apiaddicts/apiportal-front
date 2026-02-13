@@ -1,16 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getcatalogs, getCatalogContent, filterCheck, sortApiCollection } from '../../../redux/actions/catalogAction';
-import BannerImageBg from '../../../components/Banner/BannerImageBg';
 import SearchInput from '../../../components/Input/SearchInput';
 import InputSelect from '../../../components/Input/InputSelect';
 import CheckboxWrapper from '../../../components/common/Check';
 import CustomizedAccordions from '../../../components/common/AccordionMUI';
-import {CatalogsPaginated} from '../../../components/ApisPaginated';
+import CatalogsPaginated from '../../../components/CatalogsPaginated';
 import Icon from '../../../components/MdIcon/Icon';
 import classes from './catalogs.module.scss';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
-import config from '../../../services/config';
 import { useTranslation } from 'react-i18next';
 
 function Catalog() {

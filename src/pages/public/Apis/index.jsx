@@ -9,7 +9,7 @@ import CheckboxWrapper from '../../../components/common/Check';
 import CustomizedAccordions from '../../../components/common/AccordionMUI';
 import ButtonGroupMUI from '../../../components/common/ButtonGroup';
 import CheckboxLabels from '../../../components/common/CustomCheck';
-import {ApisPaginated} from '../../../components/ApisPaginated';
+import ApisPaginated from '../../../components/ApisPaginated';
 import Icon from '../../../components/MdIcon/Icon';
 import classes from './apis.module.scss';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
@@ -31,7 +31,7 @@ function Apis({ setIsOpen }) {
   }, [apiPage, dispatch]);
 
   useEffect(() => {
-    if (libraries?.length === 0 && Object.keys(filters || {}).length === 0) {
+    if (libraries?.length === 0 && Object.keys(filters).length === 0) {
       dispatch(getLibraries());
     }
   }, [libraries, filters, dispatch]);

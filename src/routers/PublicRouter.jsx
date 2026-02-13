@@ -74,6 +74,8 @@ function PublicRoute() {
           <Route path='/catalogs/:id/assets' initialSection={'assets'} element={<CatalogDetail />} />
           <Route path='/catalogs/:id/policies' initialSection={'policies'} element={<CatalogDetail />} />
           <Route path='/catalogs/:id/contracts' initialSection={'contracts'} element={<CatalogDetail />} />
+          <Route path='/catalogs/:id/dataresources' initialSection={'dataresources'} element={<CatalogDetail />} />
+          <Route path='/catalogs/:id/participants' initialSection={'participants'} element={<CatalogDetail />} />
           <Route path='/app-partners' element={<AppPartners />} />
           <Route path='/faqs' element={<Faqs />} />
           <Route path='/apis/:id/swagger-ui' element={<SwaggerUI setIsOpen={setOpenForm} />} />

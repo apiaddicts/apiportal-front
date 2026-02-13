@@ -68,6 +68,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
 
   const listOptions = [
     { icon: '', name: 'Data Space', route: '/catalogs' },
+    { icon: '', name: 'Apis', route: '/apis' },
     { icon: '', name: 'Documentación', route: '/blog' },
     { icon: '', name: 'Contacto', route: '/faqs' },
   ];
