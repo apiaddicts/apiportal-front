@@ -7,7 +7,7 @@ import classes from './input.module.scss';
 function InputSelect({ label, children, handleSelect }) {
   const { t } = useTranslation();
   const [showFilteer, setShowFilteer] = useState(false);
-  const [filter, setFilter] = useState('Nombre (A-Z)');
+  const [filter, setFilter] = useState(t('InputSelect.nameAsc'));
 
   const handleChange = (sort) => {
     handleSelect(sort);

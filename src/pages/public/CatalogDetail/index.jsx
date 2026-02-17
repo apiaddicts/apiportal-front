@@ -80,19 +80,19 @@ function CatalogDetail({ initialSection }) {
               <h2 className={classes.sidebar_title}>{t("Catalogs.detTitle")}</h2>
               <nav className={classes.sidebar_nav}>
                 <button
-                  className={section === "assets" ? classes.sidebar_nav__button__active : ""}
+                  className={section === "assets" ? classes.sidebar_nav__selected : ""}
                   onClick={() => handleClick("assets")}
                 >
                   {t("Catalogs.detAssets")}
                 </button>
                 <button
-                  className={section === "policies" ? classes.sidebar_nav__button__active : ""}
+                  className={section === "policies" ? classes.sidebar_nav__selected : ""}
                   onClick={() => handleClick("policies")}
                 >
                   {t("Catalogs.detPolicies")}
                 </button>
                 <button
-                  className={section === "contracts" ? classes.sidebar_nav__button__active : ""}
+                  className={section === "contracts" ? classes.sidebar_nav__selected : ""}
                   onClick={() => handleClick("contracts")}
                 >
                   {t("Catalogs.detContracts")}
@@ -101,13 +101,13 @@ function CatalogDetail({ initialSection }) {
               <hr/>
               <nav className={classes.sidebar_nav}>
                 <button
-                  className={section === "participants" ? classes.sidebar_nav__button__active : ""}
+                  className={section === "participants" ? classes.sidebar_nav__selected : ""}
                   onClick={() => handleClick("participants")}
                 >
                   Participants
                 </button>
                 <button
-                  className={section === "dataresources" ? classes.sidebar_nav__button__active : ""}
+                  className={section === "dataresources" ? classes.sidebar_nav__selected : ""}
                   onClick={() => handleClick("dataresources")}
                 >
                   Data Resource

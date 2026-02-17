@@ -59,6 +59,10 @@ function Catalog() {
     dispatch(filterCheck(text, null, 'search'));
   };
 
+  const handleClearSearchFilter = () => {
+    handleChangeSearchFilter('');
+  };
+
   const handleSort = (sort) => {
     dispatch(sortApiCollection(sort));
   };
@@ -94,7 +98,7 @@ function Catalog() {
   const tagsBtns = arrayTagsRepeated && arrayTagsRepeated.flat();
   const tagsArr = tagsBtns && new Set(tagsBtns);
   const tagsArrUnique = tagsArr ? [...tagsArr] : [];
-  const labelsTags = tagsArrUnique.map((item) => { return item.label; });
+  const labelsTags = tagsArrUnique.map((item) => { return item.label.toLowerCase(); });
 
   // count labelsTags repeated
   const countRepeatedTags = labelsTags.reduce((acc, cur) => {
@@ -212,6 +216,9 @@ function Catalog() {
                         placeholder={t('Catalogs.searchPlaceholder')}
                         borderRadius='6px'
                         value={searchApiInputValue}
+                        deleteOnClick={() => {
+                          handleClearSearchFilter();
+                        }}
                       />
                     </div>
                     <div className={`flex-sm-12 flex-md-5 flex-lg-5 ${classes.wrapper__right__control_container}`}>
