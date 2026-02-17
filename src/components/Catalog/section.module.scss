@@ -190,6 +190,10 @@ tbody tr:hover {
   }
 }
 
+.bg_white {
+  background-color: white;
+}
+
 .participant_container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -223,7 +227,7 @@ tbody tr:hover {
     padding: 20px;
     border-radius: 12px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-    margin-bottom: 20px;
+    margin-bottom: 6px;
     border: 1px solid #eee;
 
     &.compliance-card {
@@ -235,11 +239,43 @@ tbody tr:hover {
       border: none;
     }
 
+    &.highlight_red_card {
+      background-color: color-mix(in srgb, red, transparent 60%);;
+      border: none;
+    }
+
     .sub_card {
       border: 1px solid #eee;
       border-radius: 12px;
       padding: 15px;
       margin-bottom: 10px;
+    }
+  }
+
+  .void_card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    border-radius: 12px;
+
+    &.highlight_card {
+      padding: 20px;
+      background-color: color-mix(in srgb, var(--primary-color), transparent 60%);
+      border: none;
+    }
+
+    &.highlight_red_card {
+      padding: 20px;
+      background-color: color-mix(in srgb, red, transparent 60%);;
+      border: none;
+    }
+
+    .sub_card {
+      border-radius: 12px;
+      border: 1px solid #eee;
+      background: white;
+      padding: 15px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     }
   }
 
@@ -283,6 +319,7 @@ tbody tr:hover {
 
     p {
       color: #666;
+      overflow-wrap: anywhere;
     }
 
     &.success {
@@ -317,7 +354,7 @@ tbody tr:hover {
     gap: 15px;
     align-items: center;
     strong { font-size: 0.9rem; }
-    p { margin: 2px 0; font-size: 0.85rem; color: #666; }
+    p { margin: 2px 0; font-size: 0.85rem; color: #666; overflow-wrap: anywhere; }
   }
 
   .link {
