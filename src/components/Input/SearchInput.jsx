@@ -1,8 +1,8 @@
 import React from 'react';
-// import Icon from '../MdIcon/Icon';
+import Icon from '../MdIcon/Icon';
 import classes from './input.module.scss';
 
-function SearchInput({ icon, borderRadius, ...rest }) {
+function SearchInput({ icon, borderRadius, deleteOnClick, ...rest }) {
 
   return (
     <div className={classes.input__wrapper}>
@@ -14,6 +14,15 @@ function SearchInput({ icon, borderRadius, ...rest }) {
             <path d='M20.0943 18.2825L15.9649 14.153C15.0221 13.2102 13.6078 14.6244 14.5506 15.5672L18.6801 19.6967C19.6229 20.6395 21.0371 19.2253 20.0943 18.2825Z' fill='#14234B' />
           </svg>
         </div>
+      )}
+      {deleteOnClick && (
+        <button
+          type='button'
+          className={classes.input__icon_left}
+          onClick={deleteOnClick}
+        >
+          <Icon id='MdDeleteOutline' css_styles={{ custom_icon_styles: classes.input__icon_size }} />
+        </button>
       )}
     </div>
   );

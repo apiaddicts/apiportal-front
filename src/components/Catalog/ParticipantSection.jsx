@@ -2,6 +2,7 @@ import React from "react";
 import classes from "./section.module.scss";
 import { useTranslation } from 'react-i18next';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 
 function SectionParticipant({ participant }) {
   const { t } = useTranslation();
@@ -56,7 +57,7 @@ function SectionParticipant({ participant }) {
 
       <section className={classes.column}>
         <h3>{t("Catalogs.participant.complianceCert")}</h3>
-        <div className={classes.card}>
+        <div className={`${classes.void_card} ${classes.bg_white}`}>
           <div className={classes.status_badge_container}>
             <div className={classes.hexagon_icon}>✓</div>
             <strong>{compliance['gx:complianceLabel']}</strong>
@@ -65,7 +66,7 @@ function SectionParticipant({ participant }) {
         </div>
 
         <h3>{t("Catalogs.participant.parentOrg")}</h3>
-        <div className={classes.card}>
+        <div className={classes.void_card}>
           <div className={classes.sub_card}>
             <div className={classes.icon_text}>
               <span>📍</span>
@@ -75,17 +76,30 @@ function SectionParticipant({ participant }) {
               </div>
             </div>
           </div>
-          {/* cambiar por un for */}
-          <div className={classes.sub_card}>
-            <div className={classes.icon_text}>
-              <span>🏢</span>
-              <div>
-                <strong>{t("Catalogs.participant.subOrgs")}</strong>
-                <p>{t("Catalogs.participant.noneLabel")}</p>
+
+          {subOrganization && subOrganization.length > 0 ? (
+            subOrganization.map((sub, idx) => (
+              <div className={classes.sub_card} key={sub["@id"] || index}>
+                <div className={classes.icon_text}>
+                  <span>🏢</span>
+                  <div>
+                    <strong>{t("Catalogs.participant.subOrgs")}</strong>
+                    <p>{sub["@id"]}</p>
+                  </div>
+                </div>
+              </div>
+            ))
+          ) : (
+            <div className={classes.sub_card}>
+              <div className={classes.icon_text}>
+                <span>🏢</span>
+                <div>
+                  <strong>{t("Catalogs.participant.subOrgs")}</strong>
+                  <p>{t("Catalogs.participant.noneLabel")}</p>
+                </div>
               </div>
             </div>
-          </div>
-
+          )}
         </div>
       </section>
 
@@ -93,7 +107,7 @@ function SectionParticipant({ participant }) {
         <h3>{t("Catalogs.participant.contactLegal")}</h3>
         <div className={`${classes.card} ${classes.highlight_card}`}>
           <div className={classes.icon_text}>
-            <div className={`${classes.hexagon_icon} ${classes.small}`}>✓</div>
+            <CheckCircleIcon sx={{ color: "white" }} />
             <div>
               <strong>{t("Catalogs.participant.usage")}</strong>
               <p>{t("Catalogs.participant.licenseInfo")}</p>

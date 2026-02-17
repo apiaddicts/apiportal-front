@@ -42,9 +42,9 @@
       background: #eef6f8;
     }
 
-    &__active {
-      background: #d5f3f5;
-      color: #0f8b99;
+    &.sidebar_nav__selected {
+      background: var(--primary-color);
+      color: #000;
       font-weight: 700;
     }
   }
