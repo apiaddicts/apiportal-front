@@ -31,7 +31,7 @@ function BlogDetailsInfo({ styles, data }) {
             <p>{data.created_at ? moment(data.date).format('LL') : t('BlogDetails.defaultDate')}</p>
           </div>
           <div className={styles.blog__details__header__tags}>
-            {data.tags.length > 0 ? data.tags.map((tag, index) => (
+            {data?.tags?.length > 0 ? data.tags.map((tag, index) => (
               <span key={index} className={styles.blog__details__tag}>
                 <Chip title={tag.title} className='gray' styleChip={styleChip} />
               </span>

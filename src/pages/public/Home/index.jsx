@@ -115,7 +115,7 @@ function Home({ setOpenForm }) {
       title: item?.title,
       description: item?.description,
       linkText: t('Home.learnMore'),
-      route: `/blog/${item?.id}#blogDetail`,
+      route: `/blog/${item?.documentId}#blogDetail`,
     };
     return itemData;
   }) : [];
@@ -245,7 +245,7 @@ function Home({ setOpenForm }) {
                           title={card?.title}
                           description={card?.description}
                           info={t('Home.moreInfo')}
-                          url={`/apis/${card?.id}#api`}
+                          url={`/apis/${card?.documentId}#api`}
                           img={cardsImages[card.id] || config.notImage}
                         />
                       </div>
@@ -306,22 +306,39 @@ function Home({ setOpenForm }) {
             <div className='container'>
               <div className='row'>
                 <div className={`flex-md-12 flex-sm-12 ${classes.section__news__title}`}>
-                  <h1 className='h2 text__dark__primary'>{filterWorks && filterWorks.length > 1 && filterWorks[1]?.title ? filterWorks[1]?.title : t('Home.news')}</h1>
+                  <h1 className='h2 text__dark__primary'>
+                    {filterWorks && filterWorks.length > 1 && filterWorks[1]?.title ? filterWorks[1]?.title : t('Home.news')}
+                  </h1>
                 </div>
 
                 <div className={`flex-md-12 flex-sm-12 d-xs-none ${classes.section__news__subtitle}`}>
-                  <p className='body-1 secondary-font text__gray__lighten'>{filterWorks && filterWorks.length > 1 && filterWorks[1]?.subtitle ? filterWorks[1]?.subtitle : t('Home.newsDescription')}</p>
+                  <p className='body-1 secondary-font text__gray__lighten'>
+                    {filterWorks && filterWorks.length > 1 && filterWorks[1]?.subtitle ? filterWorks[1]?.subtitle : t('Home.newsDescription')}
+                  </p>
                 </div>
               </div>
             </div>
+
             {slidesNew && slidesNew.length > 0 ? (
-              <>
-                <div className='container'>
-                  <div className='row'>
+              <div className='container'>
+                <div className={`row ${slidesNew.length <= 3 ? 'justify-center' : ''}`}>
+                  {slidesNew.length <= 3 ? (
+                    slidesNew.map((item, i) => (
+                      <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
+                        <CardBasic
+                          title={item.title}
+                          description={item.description}
+                          img={item.img || config.notImage}
+                          info={item.linkText}
+                          url={item.route}
+                        />
+                      </div>
+                    ))
+                  ) : (
                     <div className='flex-md-12 flex-sm-12'>
                       <Slick slides={slidesNew} />
                     </div>
-                  </div>
+                  )}
                 </div>
                 <div className={`container ${classes.section__news__showmore}`}>
                   <div className='row justify-center'>
@@ -332,21 +349,10 @@ function Home({ setOpenForm }) {
                     </div>
                   </div>
                 </div>
-              </>
+              </div>
             ) : (
-              <section
-                style={{
-                  width: '100%',
-                }}
-              >
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    margin: '2rem',
-                  }}
-                >
+              <section style={{ width: '100%' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '2rem' }}>
                   <h1>{t('Home.noBlogEntries')}</h1>
                 </div>
               </section>
