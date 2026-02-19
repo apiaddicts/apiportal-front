@@ -169,7 +169,9 @@
     "seeMore": "Ver más",
     "discoverNews": "Descubre las novedades",
     "goBack": "Volver",
-    "seeAll": "Ver todas"
+    "seeAll": "Ver todas",
+    "news": "Novedades",
+    "newsDescription": "Conoce todas las novedades sobre tecnología, APIs y transformación digital"
   },
   "EmailConfirmed": {
     "successTitle": "Cuenta confirmada",

@@ -71,16 +71,14 @@ function Blog({ setIsOpen, isPrivate, isPrivateNews }) {
 
   const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
     const itemData = {
-      img: item?.image[0].url,
+      img: item?.image ? item?.image[0]?.url : null,
       title: item?.title,
       description: item?.description,
       linkText: t('Blog.learnMore'),
-      route: `/blog/${item?.id}#blogDetail`,
+      route: `/blog/${item?.documentId}#blogDetail`,
     };
     return itemData;
   }) : [];
-
-
 
   return (
     <div id='blogIndex'>
