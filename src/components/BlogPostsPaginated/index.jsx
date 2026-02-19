@@ -13,7 +13,7 @@ function Posts({ currentItems, additionalClasses }) {
         currentItems?.map((item, index) => {
           return (
             <CardInformation
-              id={item?.id}
+              id={item?.documentId}
               key={index}
               img={item?.image ? item?.image?.[0]?.url : ''}
               description={item?.description}

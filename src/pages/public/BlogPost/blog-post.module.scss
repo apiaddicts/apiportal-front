@@ -307,14 +307,14 @@
       width: 35px;
       height: 35px;
       font-size: 20px;
-      color: $gray_lighten-3;
+      color: var(--primary-color);
       cursor: pointer;
       a {
         text-decoration: none;
-        color: $theme_tertiary;
+        color: var(--primary-color);
       }
       a:hover {
-        color: $theme_tertiary;
+        color: var(--primary-color);
       }
     }
   }

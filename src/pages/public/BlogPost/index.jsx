@@ -15,6 +15,7 @@ import { getBlog, resetGetBlog, getBlogs } from '../../../redux/actions/blogActi
 import styles from './blog-post.module.scss';
 import classes from './home.module.scss';
 import Icon from '../../../components/MdIcon/Icon';
+import CardBasic from '../../../components/Card/CardBasic';
 
 const stylesPerso = {
   height: '345px',
@@ -59,7 +60,7 @@ function BlogDetails({ setIsOpen }) {
       title: item?.title,
       description: item?.description,
       linkText: t('Blog.learnMore'),
-      route: `/blog/${item?.id}#blogDetail`,
+      route: `/blog/${item?.documentId}#blogDetail`,
     };
     return itemData;
   }) : [];
@@ -123,11 +124,32 @@ function BlogDetails({ setIsOpen }) {
                 </div>
               </div>
             </div>
+
             <div className='container'>
-              <div className='row'>
-                <div className='flex-md-12 flex-sm-12'>
-                  <Slick slides={slidesNew} />
-                </div>
+              <div className={`row ${slidesNew.length <= 3 ? 'justify-center' : ''}`}>
+                {slidesNew.length > 0 && slidesNew.length <= 3 ? (
+                  slidesNew.map((item, i) => (
+                    <div key={i} className='flex-lg-4 flex-md-6 flex-sm-12 my-6'>
+                      <CardBasic
+                        title={item.title}
+                        description={item.description}
+                        img={item.img}
+                        info={item.linkText}
+                        url={item.route}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <div className='flex-md-12 flex-sm-12'>
+                    {slidesNew.length > 0 ? (
+                      <Slick slides={slidesNew} />
+                    ) : (
+                      <div className="text-center py-5">
+                        <p>{t('Home.noBlogEntries')}</p>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
             <div className={`container ${classes.section__news__showmore}`}>
