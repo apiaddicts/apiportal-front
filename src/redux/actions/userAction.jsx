@@ -4,8 +4,6 @@ import userConstants from '../constants/userConstats';
 import userService from '../../services/userService';
 import config from '../../services/config';
 import { getUserDetail, listUsers } from './usersAction';
-import subscriptionsService from '../../services/subscriptionsService';
-import apiManagerService from '../../services/apiManagerService';
 
 // eslint-disable-next-line import/prefer-default-export
 export const login = (data, headerManager) => (dispatch) => {
