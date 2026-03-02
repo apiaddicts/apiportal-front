@@ -14,6 +14,8 @@ import PoliciesSection from '../../../components/Catalog/PoliciesSection';
 import ContractsSection from '../../../components/Catalog/ContractsSection';
 import SectionParticipant from '../../../components/Catalog/ParticipantSection';
 import SectionDataresource from '../../../components/Catalog/DataresourceSection';
+import SectionSoftware from '../../../components/Catalog/SoftwareresourceSection';
+import SectionInfrastructure from '../../../components/Catalog/InfrastructureresourceSection';
 import classes from './catalog-view.module.scss';
 
 function CatalogDetail({ initialSection }) {
@@ -104,13 +106,25 @@ function CatalogDetail({ initialSection }) {
                   className={section === "participants" ? classes.sidebar_nav__selected : ""}
                   onClick={() => handleClick("participants")}
                 >
-                  Participants
+                  {t("Catalogs.detParticipants")}
                 </button>
                 <button
                   className={section === "dataresources" ? classes.sidebar_nav__selected : ""}
                   onClick={() => handleClick("dataresources")}
                 >
-                  Data Resource
+                  {t("Catalogs.detDataresource")}
+                </button>
+                <button
+                  className={section === "softwareresource" ? classes.sidebar_nav__selected : ""}
+                  onClick={() => handleClick("softwareresource")}
+                >
+                  {t("Catalogs.detSoftwareresource")}
+                </button>
+                <button
+                  className={section === "infrastructureresource" ? classes.sidebar_nav__selected : ""}
+                  onClick={() => handleClick("infrastructureresource")}
+                >
+                  {t("Catalogs.detInfrastructureresource")}
                 </button>
               </nav>
             </aside>
@@ -121,6 +135,8 @@ function CatalogDetail({ initialSection }) {
               {section === "contracts" && <ContractsSection contract={JSON.parse(catalog?.contracstDefinition || '{}')} />}
               {section === "participants" && <SectionParticipant participant={JSON.parse(catalog?.participants || '{}')} />}
               {section === "dataresources" && <SectionDataresource dataResource={JSON.parse(catalog?.dataSource || '{}')} />}
+              {section === "softwareresource" && <SectionSoftware software={JSON.parse(catalog?.softwareResource || '{}')} />}
+              {section === "infrastructureresource" && <SectionInfrastructure infrastructure={JSON.parse(catalog?.infrastructureResource || '{}')} />}
             </main>
           </div>
           {/*<div id='contact' />*/}

@@ -416,6 +416,7 @@
     "cancelOption": "Cancel"
   },
   "Navbar": {
+    "catalogs": "Data Space",
     "apis": "APIs",
     "blog": "Blog",
     "faqs": "FAQs",
@@ -483,6 +484,10 @@
     "detAssets": "Assets",
     "detPolicies": "Policies",
     "detContracts": "Contracts",
+    "detParticipant": "Participants",
+    "detDataresource": "Data Resource",
+    "detSoftwareresource": "Software Resource",
+    "detInfrastructureresource": "Infrastructure Resource",
     "Asset": {
       "noData": "No assets available.",
       "title": "Assets"
@@ -560,6 +565,46 @@
       "obligationTitle": "OBLIGATION",
       "reportUsageDesc": "User must report data usage monthly.",
       "viewMorePolicies": "View More Policies"
+    },
+    "softwareresource": {
+      "generalInfo": "General Information",
+      "id": "Id",
+      "name": "Name",
+      "description": "Description",
+      "version": "Version",
+      "issuer": "Issuer",
+      "publishedDate": "Published Date",
+      "validSignature": "Valid Digital Signature",
+      "viewProofDetails": "View Proof Details",
+      "technicalTitle": "Technical Interface",
+      "interfaceType": "Interface Type",
+      "endpoint": "Endpoint",
+      "apiOpsTitle": "Api Operations",
+      "noApiOps": "NoApiOperations",
+      "noApiOpsDesc": "No have ApiOperations",
+      "policiesTitle": "Access & Usage Policies",
+      "copyOwner": "Copyright owner"
+    },
+    "infrastructureresource": {
+      "generalInfo": "General Information",
+      "id": "Id",
+      "name": "Name",
+      "description": "Description",
+      "version": "version",
+      "issuer": "Issuer",
+      "issuanceDate": "Issuance Date",
+      "validSignature": "Valid Digital Signature",
+      "viewProofDetails": "View Proof Details",
+      "NodeTitle": "Node & Technical info",
+      "serviceType": "Service Type",
+      "databaseEngine": "Database engime",
+      "storageAsset": "Storage Asset",
+      "location": "Location",
+      "cpuCores": "CPU Cores",
+      "networkZone": "Network Zone",
+      "policiesTitle": "Access & Usage Policies",
+      "copyOwner": "Copyright owner",
+      "negotiationTitle": "Negotation process"
     }
   }
 }

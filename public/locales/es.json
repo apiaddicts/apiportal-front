@@ -416,6 +416,7 @@
     "cancelOption": "Cancelar"
   },
   "Navbar": {
+    "catalogs": "Data Space",
     "apis": "APIs",
     "blog": "Blog",
     "faqs": "FAQs",
@@ -483,6 +484,10 @@
     "detAssets": "Activos",
     "detPolicies": "Políticas",
     "detContracts": "Contratos",
+    "detParticipant": "Participantes",
+    "detDataresource": "Recurso de datos",
+    "detSoftwareresource": "Recurso de Software",
+    "detInfrastructureresource": "Recurso de Infraestructura",
     "Asset": {
       "noData": "No hay activos disponibles.",
       "title": "Activos"
@@ -560,6 +565,46 @@
       "obligationTitle": "OBLIGACIÓN",
       "reportUsageDesc": "El usuario debe informar mensualmente sobre el uso de los datos.",
       "viewMorePolicies": "Ver más políticas"
+    },
+    "softwareresource": {
+      "generalInfo": "Información General",
+      "id": "ID",
+      "name": "Nombre",
+      "description": "Descripción",
+      "version": "Versión",
+      "issuer": "Emisor",
+      "publishedDate": "Fecha de publicación",
+      "validSignature": "Firma digital válida",
+      "viewProofDetails": "Ver detalles de la prueba",
+      "technicalTitle": "Interfaz técnica",
+      "interfaceType": "Tipo de interfaz",
+      "endpoint": "Endpoint",
+      "apiOpsTitle": "Operaciones de la API",
+      "noApiOps": "Sin operaciones de API",
+      "noApiOpsDesc": "No tiene operaciones de API",
+      "policiesTitle": "Políticas de acceso y uso",
+      "copyOwner": "Titular de los derechos de autor"
+    },
+    "infrastructureresource": {
+      "generalInfo": "Información general",
+      "id": "ID",
+      "name": "Nombre",
+      "description": "Descripción",
+      "version": "Versión",
+      "issuer": "Emisor",
+      "issuanceDate": "Fecha de emisión",
+      "validSignature": "Firma digital válida",
+      "viewProofDetails": "Ver detalles de la prueba",
+      "NodeTitle": "Información técnica y del nodo",
+      "serviceType": "Tipo de servicio",
+      "databaseEngine": "Motor de base de datos",
+      "storageAsset": "Activo de almacenamiento",
+      "location": "Ubicación",
+      "cpuCores": "Núcleos de CPU",
+      "networkZone": "Zona de red",
+      "policiesTitle": "Políticas de acceso y uso",
+      "copyOwner": "Titular de los derechos de autor",
+      "negotiationTitle": "Proceso de negociación"
     }
   }
 }
