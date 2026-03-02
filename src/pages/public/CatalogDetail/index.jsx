@@ -106,7 +106,7 @@ function CatalogDetail({ initialSection }) {
                   className={section === "participants" ? classes.sidebar_nav__selected : ""}
                   onClick={() => handleClick("participants")}
                 >
-                  {t("Catalogs.detParticipants")}
+                  {t("Catalogs.detParticipant")}
                 </button>
                 <button
                   className={section === "dataresources" ? classes.sidebar_nav__selected : ""}

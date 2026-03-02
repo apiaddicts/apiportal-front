@@ -126,6 +126,7 @@
   border-radius: 8px;
   font-size: 0.95rem;
   color: #111827;
+  overflow-wrap: anywhere;
 }
 
 .table_wrapper {
@@ -198,9 +199,17 @@ tbody tr:hover {
 
 .participant_container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(1, 1fr);
   gap: 20px;
   background-color: #f4f7f9;
+
+  @include breakpoint(md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include breakpoint(lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
   .column {
     display: flex;
@@ -609,6 +618,7 @@ tbody tr:hover {
 
 .attribute_item {
   margin-bottom: 18px;
+  overflow-wrap: anywhere;
 
   label {
     display: block;
