@@ -67,10 +67,10 @@ function Navbar({ setIsOpen, setOpenForm }) {
   const menuToggleHandler = () => setMenuOpen((prev) => !prev);
 
   const listOptions = [
-    { icon: '', name: 'Data Space', route: '/catalogs' },
-    { icon: '', name: 'Apis', route: '/apis' },
-    { icon: '', name: 'Documentación', route: '/blog' },
-    { icon: '', name: 'Contacto', route: '/faqs' },
+    { icon: '', name: t("Navbar.catalogs"), route: '/catalogs' },
+    { icon: '', name: t("Navbar.apis"), route: '/apis' },
+    { icon: '', name: t("Navbar.blog"), route: '/blog' },
+    { icon: '', name: t("Navbar.faqs"), route: '/faqs' },
   ];
 
   return (

@@ -71,11 +71,13 @@ function PublicRoute() {
           <Route path='/apis/:id' element={<ApiDetail setIsOpen={setOpenForm} />} />
           <Route path='/catalogs' element={<Catalog />} />
           <Route path='/catalogs/:id' element={<CatalogDetail setIsOpen={setOpenForm} />} />
-          <Route path='/catalogs/:id/assets' initialSection={'assets'} element={<CatalogDetail />} />
-          <Route path='/catalogs/:id/policies' initialSection={'policies'} element={<CatalogDetail />} />
-          <Route path='/catalogs/:id/contracts' initialSection={'contracts'} element={<CatalogDetail />} />
-          <Route path='/catalogs/:id/dataresources' initialSection={'dataresources'} element={<CatalogDetail />} />
-          <Route path='/catalogs/:id/participants' initialSection={'participants'} element={<CatalogDetail />} />
+          <Route path='/catalogs/:id/assets' element={<CatalogDetail initialSection={'assets'} />} />
+          <Route path='/catalogs/:id/policies' element={<CatalogDetail initialSection={'policies'} />} />
+          <Route path='/catalogs/:id/contracts' element={<CatalogDetail initialSection={'contracts'} />} />
+          <Route path='/catalogs/:id/dataresources' element={<CatalogDetail initialSection={'dataresources'} />} />
+          <Route path='/catalogs/:id/participants' element={<CatalogDetail initialSection={'participants'} />} />
+          <Route path='/catalogs/:id/softwareresource' element={<CatalogDetail initialSection={'softwareresource'} />} />
+          <Route path='/catalogs/:id/infrastructureresource' element={<CatalogDetail initialSection={'infrastructureresource'} />} />
           <Route path='/app-partners' element={<AppPartners />} />
           <Route path='/faqs' element={<Faqs />} />
           <Route path='/apis/:id/swagger-ui' element={<SwaggerUI setIsOpen={setOpenForm} />} />
