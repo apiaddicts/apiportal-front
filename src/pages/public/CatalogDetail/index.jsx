@@ -4,6 +4,8 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import _ from 'underscore';
 import { useTranslation } from 'react-i18next';
 
+import { ArrowBack } from '@mui/icons-material';
+import { Button } from '@mui/material';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 import { getHomeContent } from '../../../redux/actions/homeAction';
 import { getcatalog, getcatalogs, getCatalogContent } from '../../../redux/actions/catalogAction';
@@ -16,6 +18,8 @@ import SectionParticipant from '../../../components/Catalog/ParticipantSection';
 import SectionDataresource from '../../../components/Catalog/DataresourceSection';
 import SectionSoftware from '../../../components/Catalog/SoftwareresourceSection';
 import SectionInfrastructure from '../../../components/Catalog/InfrastructureresourceSection';
+import SectionContractDefinition from '../../../components/Catalog/ContractDefinitionSection';
+import OverviewServiceOffering from '../../../components/Catalog/Overview';
 import classes from './catalog-view.module.scss';
 
 function CatalogDetail({ initialSection }) {
@@ -79,7 +83,16 @@ function CatalogDetail({ initialSection }) {
         <>
           <div className={classes.catalog_layout}>
             <aside className={classes.catalog_sidebar}>
-              <h2 className={classes.sidebar_title}>{t("Catalogs.detTitle")}</h2>
+              <h2 className={classes.sidebar_title}>
+                {t("Catalogs.detTitle")}
+                {["dataresources", "softwareresource", "infrastructureresource"].includes(section) ?
+                <Button
+                  startIcon={<ArrowBack />}
+                  onClick={() => navigate(-1)}
+                  
+                ></Button>
+                : null}
+              </h2>
               <nav className={classes.sidebar_nav}>
                 <button
                   className={section === "assets" ? classes.sidebar_nav__selected : ""}
@@ -109,34 +122,23 @@ function CatalogDetail({ initialSection }) {
                   {t("Catalogs.detParticipant")}
                 </button>
                 <button
-                  className={section === "dataresources" ? classes.sidebar_nav__selected : ""}
-                  onClick={() => handleClick("dataresources")}
+                  className={section === "contractdefinition" ? classes.sidebar_nav__selected : ""}
+                  onClick={() => handleClick("contractdefinition")}
                 >
-                  {t("Catalogs.detDataresource")}
-                </button>
-                <button
-                  className={section === "softwareresource" ? classes.sidebar_nav__selected : ""}
-                  onClick={() => handleClick("softwareresource")}
-                >
-                  {t("Catalogs.detSoftwareresource")}
-                </button>
-                <button
-                  className={section === "infrastructureresource" ? classes.sidebar_nav__selected : ""}
-                  onClick={() => handleClick("infrastructureresource")}
-                >
-                  {t("Catalogs.detInfrastructureresource")}
+                  {t("Catalogs.detContractDefinition")}
                 </button>
               </nav>
             </aside>
 
             <main className={classes.catalog_content}>
-              {section === "assets" && <AssetsSection serviceOffering={JSON.parse(catalog?.services || '{}')} />}
+              {section === "assets" && <OverviewServiceOffering serviceOffering={JSON.parse(catalog?.assets || '{}')} />}
               {section === "policies" && <PoliciesSection policies={JSON.parse(catalog?.policies || '{}')} />}
               {section === "contracts" && <ContractsSection contract={JSON.parse(catalog?.contracstDefinition || '{}')} />}
               {section === "participants" && <SectionParticipant participant={JSON.parse(catalog?.participants || '{}')} />}
               {section === "dataresources" && <SectionDataresource dataResource={JSON.parse(catalog?.dataSource || '{}')} />}
               {section === "softwareresource" && <SectionSoftware software={JSON.parse(catalog?.softwareResource || '{}')} />}
               {section === "infrastructureresource" && <SectionInfrastructure infrastructure={JSON.parse(catalog?.infrastructureResource || '{}')} />}
+              {section === "contractdefinition" && <SectionContractDefinition contract={JSON.parse(catalog?.contracstDefinitionOperations || '{}')} />}
             </main>
           </div>
           {/*<div id='contact' />*/}

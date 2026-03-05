@@ -93,7 +93,7 @@
 }
 
 .general_info_card {
-  background: #ffffff;
+  background: white;
   border: 1px solid #e5e7eb;
   box-shadow: 0 1px 2px rgba(0,0,0,0.06);
   border-radius: 12px;
@@ -215,7 +215,7 @@ tbody tr:hover {
     display: flex;
     flex-direction: column;
     gap: 15px;
-    min-width: 0;
+    width: 100%;
 
     h3 {
       font-size: 0.9rem;
@@ -247,6 +247,12 @@ tbody tr:hover {
 
     &.highlight_card {
       background-color: color-mix(in srgb, var(--primary-color), transparent 60%);
+      border: none;
+    }
+
+    &.highlight_card_no_transparency {
+      background-color: var(--primary-color);
+      color: white;
       border: none;
     }
 
@@ -300,6 +306,12 @@ tbody tr:hover {
     &.highlight_card {
       padding: 20px;
       background-color: color-mix(in srgb, var(--primary-color), transparent 60%);
+      border: none;
+    }
+
+    &.highlight_card_no_transparency {
+      background-color: var(--primary-color);
+      color: white;
       border: none;
     }
 
@@ -382,6 +394,18 @@ tbody tr:hover {
     border-radius: 6px;
     cursor: pointer;
     width: 70%;
+    margin-top: 10px;
+  }
+
+  .btn_primary_info {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 17px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
     margin-top: 10px;
   }
 
@@ -640,5 +664,231 @@ tbody tr:hover {
     font-size: 0.9rem;
     color: #666;
     margin: 4px 0;
+  }
+}
+
+
+.overview_layout {
+  display: flex;
+  gap: 20px;
+  background-color: #f4f7f9;
+
+  .card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 6px;
+    border: 1px solid #eee;
+    width: 30%;
+  }
+
+  .column {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+
+    .add {
+      width: 100%;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px dashed #e6ebf2;
+      background: white;
+      color: #2f80ed;
+      cursor: pointer;
+    }
+  }
+
+  .main_card {
+    background: white;
+    border: 2px solid #00b4c1;
+    border-radius: 12px;
+    padding: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    .checkbox_top {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: -10px;
+    }
+
+    .card_content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      .status_icon_container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        svg {
+          display: block;
+        }
+      }
+
+      .text_content {
+        .main_title {
+          font-size: 1.1rem;
+          font-weight: 700;
+          color: #334155;
+          margin: 0;
+          line-height: 1.1;
+        }
+
+        .subtitle {
+          color: #00b4c1;
+          font-weight: 600;
+          font-size: 0.95rem;
+          margin: 6px 0;
+        }
+
+        .provider {
+          color: #94a3b8;
+          font-size: 0.75rem;
+          margin: 0;
+        }
+      }
+    }
+
+    .card_footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 18px;
+
+      .version_tag {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.85rem;
+        color: #00b4c1;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .overview_button {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #94a3b8;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+
+    .left_group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+  }
+
+  .asset_grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    background-color: #f8fafc;
+
+    @include breakpoint(md) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .asset_card {
+      border: none;
+      outline: none;
+      font-family: inherit;
+      width: 100%;
+      text-align: left;
+      appearance: none;
+
+      background: white;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s ease;
+      min-height: 180px;
+      cursor: pointer;
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+
+      .card_top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .info_section {
+          .resource_type_label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #334155;
+            margin-bottom: 12px;
+            display: block;
+          }
+
+          .resource_main {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            .icon_wrapper {
+              font-size: 2rem;
+              color: #00acc1;
+              display: flex;
+              align-items: center;
+            }
+
+            .name_container {
+              h3 {
+                margin: 0;
+                font-size: 1.1rem;
+                color: #334155;
+              }
+              p {
+                margin: 4px 0 0;
+                font-size: 0.9rem;
+                color: #64748b;
+              }
+            }
+          }
+        }
+
+        .arrow_icon {
+          color: #64748b;
+          font-size: 1.5rem;
+        }
+      }
+
+      .card_footer {
+        margin-top: 20px;
+        border-top: 1px solid #f1f5f9;
+        padding-top: 12px;
+
+        .tag {
+          font-size: 0.8rem;
+          color: #00acc1;
+          font-weight: 600;
+          display: flex;
+          align-items: center;
+          gap: 4px;
+
+          &::before {
+            content: "#";
+          }
+        }
+      }
+    }
   }
 }
