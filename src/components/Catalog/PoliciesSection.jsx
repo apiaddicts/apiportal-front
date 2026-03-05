@@ -38,41 +38,41 @@ function SectionPolicies({ policies }) {
   const permissions = usagePolicy["odrl:permission"] || [];
   const prohibitions = usagePolicy["odrl:prohibition"] || [];
   const contractDefinitions = subject["gx:contractDefinitions"] || {};
-  
+
   return (
     <div className={classes.participant_container}>
       <section className={classes.column}>
-        <h3>General Information</h3>
+        <h3>{t("Catalogs.Policy.generalInfo")}</h3>
         <div className={classes.card}>
           <div className={classes.info_row}>
-            <label>Polley ID</label>
+            <label>{t("Catalogs.Policy.polleyId")}</label>
             <span className={``}></span>
           </div>
 
           <div className={classes.info_row}>
-            <label>Policy Name</label>
+            <label>{t("Catalogs.Policy.policyName")}</label>
             <MoreVertIcon style={{ cursor: "pointer" }} />
           </div>
 
           <div className={classes.info_row}>
-            <label>Issuer</label>
+            <label>{t("Catalogs.Policy.issuer")}</label>
             <MoreVertIcon style={{ cursor: "pointer" }} />
           </div>
 
           <div className={classes.info_row}>
-            <label>Issuance Date</label>
+            <label>{t("Catalogs.Policy.issuanceDate")}</label>
             <MoreVertIcon style={{ cursor: "pointer" }} />
           </div>
 
           <div className={classes.info_row}>
-            <label>Policy Type</label>
+            <label>{t("Catalogs.Policy.policyType")}</label>
             <span className={``}></span>
           </div>
         </div>
       </section>
 
       <section className={classes.column}>
-        <h3>Access Policies</h3>
+        <h3>{t("Catalogs.Policy.accessPoliciesTitle")}</h3>
         <div className={classes.void_card}>
           {accessPolicy && accessPolicy['gx:rules'] && accessPolicy['gx:rules'].length > 0 ? (
             accessPolicy['gx:rules'].map((pol, idx) => (
@@ -91,8 +91,8 @@ function SectionPolicies({ policies }) {
               <div className={classes.icon_text}>
                 <span>🏢</span>
                 <div>
-                  <strong>No access policies</strong>
-                  <p>{t("Catalogs.participant.noneLabel")}</p>
+                  <strong>{t("Catalogs.Policy.noAccessPolicies")}</strong>
+                  <p>{t("Catalogs.Policy.noAccessPoliciesDesc")}</p>
                 </div>
               </div>
             </div>
@@ -101,7 +101,7 @@ function SectionPolicies({ policies }) {
       </section>
 
       <section className={classes.column}>
-        <h3>Usage Policies & contract</h3>
+        <h3>{t("Catalogs.Policy.usageTitle")}</h3>
         {permissions && permissions.length > 0 ?
         permissions.map((per, idx) => (
           <div className={`${classes.void_card} ${classes.highlight_card}`} key={idx}>
@@ -110,7 +110,7 @@ function SectionPolicies({ policies }) {
               <div>
                 <strong>{per["odrl:action"].split(':')[1]}</strong>
                 <p>
-                  Usage for veterinary research until
+                  {t("Catalogs.Policy.usageDesc")}
                   {(per["odrl:constraint"][0]["odrl:rightOperand"].match(/\b\d{4}\b/) || [])[0]}
                 </p>
               </div>
@@ -121,8 +121,8 @@ function SectionPolicies({ policies }) {
             <div className={classes.icon_text}>
               <div>❌</div>
               <div>
-                <strong>{t("Catalogs.participant.usage")}</strong>
-                <p>{t("Catalogs.participant.noUsagePolicy")}</p>
+                <strong>{t("Catalogs.Policy.noUsagePolicies")}</strong>
+                <p>{t("Catalogs.Policy.noUsagePoliciesDesc")}</p>
               </div>
             </div>
           </div>
@@ -145,8 +145,8 @@ function SectionPolicies({ policies }) {
             <div className={classes.icon_text}>
               <div>❌</div>
               <div>
-                <strong>{t("Catalogs.participant.usage")}</strong>
-                <p>{t("Catalogs.participant.noUsagePolicy")}</p>
+                <strong>{t("Catalogs.Policy.noProhibition")}</strong>
+                <p>{t("Catalogs.Policy.noProhibitionDesc")}</p>
               </div>
             </div>
           </div>
@@ -155,13 +155,13 @@ function SectionPolicies({ policies }) {
           <div className={classes.icon_text}>
             <div>⚖️</div>
             <div>
-              <strong>Legal Template</strong>
-              <p className={classes.details}>Terms & Condition: {contractDefinitions["gx:arbitration"]}</p>
-              <p className={classes.details}>Governing LAW {contractDefinitions["gx:governingLaw"]}</p>
+              <strong>{t("Catalogs.Policy.legalTemplate")}</strong>
+              <p className={classes.details}>{t("Catalogs.Policy.terms&conditions")}: {contractDefinitions["gx:arbitration"]}</p>
+              <p className={classes.details}>{t("Catalogs.Policy.governingLaw")} {contractDefinitions["gx:governingLaw"]}</p>
             </div>
           </div>
           <button className={classes.btn_action}>
-            View Full ODRL Policy
+            {t("Catalogs.Policy.viewFullPolicy")}
           </button>
         </div>
       </section>

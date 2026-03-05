@@ -488,18 +488,31 @@
     "detDataresource": "Data Resource",
     "detSoftwareresource": "Software Resource",
     "detInfrastructureresource": "Infrastructure Resource",
+    "detContractDefinition": "Contract Definition",
     "Asset": {
       "noData": "No assets available.",
       "title": "Assets"
     },
     "Policy": {
-      "title": "Policies",
-      "permissions": "Permissions",
-      "permission": "PERMISSION",
-      "allow": "Allowed",
-      "prohibitions": "Prohibitions",
-      "prohibition": "PROHIBITION",
-      "forbiden": "Forbidden"
+      "generalInfo": "General Information",
+      "polleyId": "Polley ID",
+      "policyName": "Policy Name",
+      "issuer": "Issuer",
+      "issuanceDate": "Issuance Date",
+      "policyType": "Policy Type",
+      "accessPoliciesTitle": "Access Policies",
+      "noAccessPolicies": "No access policies",
+      "noAccessPoliciesDesc": "This Service no have access policies",
+      "usageTitle": "Usage Policies & contract",
+      "usageDesc": "Usage for veterinary research until",
+      "noUsagePolicies": "No usage policies",
+      "noUsagePoliciesDesc": "This Service no have usage policies",
+      "noProhibition": "No prohibitions",
+      "noProhibitionDesc": "This Service no have prohibitions",
+      "legalTemplate": "Legal Template",
+      "terms&conditions": "Terms & Condition",
+      "governingLaw": "Governing LAW",
+      "viewFullPolicy": "View Full ODRL Policy"
     },
     "Contract": {
       "title": "Contract Definition",
@@ -605,6 +618,34 @@
       "policiesTitle": "Access & Usage Policies",
       "copyOwner": "Copyright owner",
       "negotiationTitle": "Negotation process"
+    },
+    "contractDefinition": {
+      "generalInfo": "General Information",
+      "contractId": "Contract ID",
+      "accessPolicyId": "Access Policy ID",
+      "contrasAllPolicyId": "Contras-all-policy ID",
+      "allowAllPolicy": "allow-all-policy",
+      "goverredAssets": "Goverred Assets",
+      "operations": "Operations",
+      "noAssets": "No assets",
+      "policiDetails": "Policy Details",
+      "grantAllAccess": "Grants All Access",
+      "allowsAllUsage": "Allows All Usage",
+      "viewRawJsonLd": "View Raw JSON-LD"
+    },
+    "Overview": {
+      "softwareLabel": "Software Assets",
+      "softwareTag": "API-Implementation",
+      "softwareDesc": "Functional logic for management",
+      "dataLabel": "Data Assets",
+      "dataTag": "Dataset-Schema",
+      "dataDesc": "Structured information resource",
+      "infrastructureLabel": "Infrastructure Assets",
+      "infrastructureTag": "Service-Node",
+      "infrastructureDesc": "Cloud storage and compute",
+      "overview": "Overview",
+      "providedBy": "Provided by",
+      "linkedAssetsTitle": "Linked Assets"
     }
   }
 }

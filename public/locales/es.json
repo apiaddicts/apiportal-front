@@ -488,18 +488,31 @@
     "detDataresource": "Recurso de datos",
     "detSoftwareresource": "Recurso de Software",
     "detInfrastructureresource": "Recurso de Infraestructura",
+    "detContractDefinition": "Definición de Contrato",
     "Asset": {
       "noData": "No hay activos disponibles.",
       "title": "Activos"
     },
     "Policy": {
-      "title": "Políticas",
-      "permissions": "Permisos",
-      "permission": "PERMISO",
-      "allow": "Permitido",
-      "prohibitions": "Prohibiciones",
-      "prohibition": "PROHIBICIÓN",
-      "forbiden": "Prohibido"
+      "generalInfo": "Información general",
+      "polleyId": "ID de política",
+      "policyName": "Nombre de la política",
+      "issuer": "Emisor",
+      "issuanceDate": "Fecha de emisión",
+      "policyType": "Tipo de política",
+      "accessPoliciesTitle": "Políticas de acceso",
+      "noAccessPolicies": "Sin políticas de acceso",
+      "noAccessPoliciesDesc": "Este servicio no tiene políticas de acceso",
+      "usageTitle": "Políticas de uso y contrato",
+      "usageDesc": "Uso para investigación veterinaria hasta",
+      "noUsagePolicies": "Sin políticas de uso",
+      "noUsagePoliciesDesc": "Este servicio no tiene políticas de uso",
+      "noProhibition": "Sin prohibiciones",
+      "noProhibitionDesc": "Este servicio no tiene prohibiciones",
+      "legalTemplate": "Plantilla legal",
+      "terms&conditions": "Términos y condiciones",
+      "governingLaw": "Ley aplicable",
+      "viewFullPolicy": "Ver política ODRL completa"
     },
     "Contract": {
       "title": "Definición del Contrato",
@@ -605,6 +618,34 @@
       "policiesTitle": "Políticas de acceso y uso",
       "copyOwner": "Titular de los derechos de autor",
       "negotiationTitle": "Proceso de negociación"
+    },
+    "contractDefinition": {
+      "generalInfo": "Información general",
+      "contractId": "ID del contrato",
+      "accessPolicyId": "ID de la política de acceso",
+      "contrasAllPolicyId": "ID de política Contras-all",
+      "allowAllPolicy": "Política de permitir todo",
+      "goverredAssets": "Activos regulados",
+      "operations": "Operaciones",
+      "noAssets": "Sin activos",
+      "policiDetails": "Detalles de la política",
+      "grantAllAccess": "Concede acceso total",
+      "allowsAllUsage": "Permite todo uso",
+      "viewRawJsonLd": "Ver JSON-LD original"
+    },
+    "Overview": {
+      "softwareLabel": "Activos de Software",
+      "softwareTag": "Implementación de API",
+      "softwareDesc": "Lógica funcional para la gestión",
+      "dataLabel": "Activos de Datos",
+      "dataTag": "Esquema de Dataset",
+      "dataDesc": "Recurso de información estructurada",
+      "infrastructureLabel": "Activos de Infraestructura",
+      "infrastructureTag": "Nodo de Servicio",
+      "infrastructureDesc": "Almacenamiento y cómputo en la nube",
+      "overview": "Resumen general",
+      "providedBy": "Proporcionado por",
+      "linkedAssetsTitle": "Activos vinculados"
     }
   }
 }

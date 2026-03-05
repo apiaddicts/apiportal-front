@@ -2,12 +2,12 @@ import React from "react";
 import classes from "./section.module.scss";
 import { useTranslation } from 'react-i18next';
 
-function SectionAssets({ serviceOffering }) {
+function SectionAssets({ assetsJson }) {
   const { t } = useTranslation();
 
-  if (!serviceOffering) return <div>{t("Catalogs.Asset.noData")}</div>;
+  if (!assetsJson) return <div>{t("Catalogs.Asset.noData")}</div>;
 
-  const assets = serviceOffering?.credentialSubject?.["gx:aggregationOf"] || [];
+  const assets = assetsJson?.credentialSubject?.["gx:aggregationOf"] || [];
 
   return (
     <div className={classes.section}>
