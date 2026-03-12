@@ -86,10 +86,12 @@
 }
 
 .subsection_title {
-  font-size: 1.3rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  margin-bottom: 6px;
-  color: #1f2937;
+  color: #000;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 .general_info_card {
@@ -107,10 +109,6 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
-
-  &.full {
-    grid-column: 1 / 4;
-  }
 }
 
 .general_info_card label {
@@ -131,35 +129,37 @@
 
 .table_wrapper {
   overflow-x: auto;
-}
 
-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
-  font-size: 0.95rem;
-}
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    font-size: 0.95rem;
+  }
 
-th {
-  background: #f3f4f6;
-  padding: 10px;
-  font-weight: 700;
-  color: #374151;
-  border-bottom: 1px solid #e5e7eb;
-}
+  th {
+    background: #f3f4f6;
+    padding: 10px;
+    font-weight: 700;
+    text-align: left;
+    color: var(--primary-color);
+    border-bottom: 1px solid #e5e7eb;
+  }
 
-td {
-  padding: 10px;
-  border-bottom: 1px solid #e5e7eb;
-  color: #4b5563;
-}
+  td {
+    padding: 10px;
+    border-bottom: 1px solid #e5e7eb;
+    color: #4b5563;
+  }
+  td:first-child { color: #4b5563 }
 
-tbody tr:nth-child(even) {
-  background: #fafafa;
-}
+  tbody tr:nth-child(even) {
+    background: #fafafa;
+  }
 
-tbody tr:hover {
-  background: #eef6f8;
+  tbody tr:hover {
+    background: #eef6f8;
+  }
 }
 
 
@@ -241,6 +241,14 @@ tbody tr:hover {
     margin-bottom: 6px;
     border: 1px solid #eee;
 
+    .card_layout {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      strong { font-size: 0.9rem; }
+      p { margin: 2px 0; font-size: 0.85rem; color: #666; overflow-wrap: anywhere; }
+    }
+
     &.compliance-card {
       text-align: center;
     }
@@ -303,6 +311,14 @@ tbody tr:hover {
     gap: 6px;
     border-radius: 12px;
 
+    .card_layout {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      strong { font-size: 0.9rem; }
+      p { margin: 2px 0; font-size: 0.85rem; color: #666; overflow-wrap: anywhere; }
+    }
+
     &.highlight_card {
       padding: 20px;
       background-color: color-mix(in srgb, var(--primary-color), transparent 60%);
@@ -327,6 +343,39 @@ tbody tr:hover {
       background: white;
       padding: 15px;
       box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+
+      &:hover {
+        border: 1px solid var(--primary-color);
+        transform: scale(1.05);
+      }
+    }
+
+    .badge {
+      display: flex;
+      flex-direction: column;
+    }
+    .badge > * {
+      width: auto;
+      align-self: flex-start;
+    }
+
+    .operation_card {
+      border-radius: 12px;
+      border: 1px solid #eee;
+      background: white;
+      padding: 15px;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+      display: flex;
+
+      > * {
+        min-width: 0;
+      }
+      > :first-child {
+        flex: 0 0 20%;
+      }
+      > :last-child {
+        flex: 1 0 80%;
+      }
 
       &:hover {
         border: 1px solid var(--primary-color);
@@ -414,13 +463,13 @@ tbody tr:hover {
     padding: 12px;
     font-weight: bold;
     text-transform: uppercase;
-    width: 100%;
   }
 
   .icon_text {
     display: flex;
     gap: 15px;
     align-items: center;
+    justify-content: space-between;
     strong { font-size: 0.9rem; }
     p { margin: 2px 0; font-size: 0.85rem; color: #666; overflow-wrap: anywhere; }
   }
@@ -575,8 +624,11 @@ tbody tr:hover {
   font-weight: 600;
   cursor: pointer;
   padding: 0;
-  text-decoration: underline;
   margin-top: 10px;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .signature_section {
@@ -597,6 +649,7 @@ tbody tr:hover {
   font-size: 0.9rem;
   color: var(--primary-color);
   font-weight: 500;
+  line-height: 1.2;
 
   input {
     position: absolute;
@@ -613,14 +666,20 @@ tbody tr:hover {
         display: block;
       }
     }
+
+    &:focus ~ .checkmark {
+      outline: 2px solid color-mix(in srgb, var(--primary-color) 60%, white);
+      outline-offset: 2px;
+    }
   }
 
   .checkmark {
     position: absolute;
-    top: -2px;
+    top: 50%;
     left: 0;
     height: 20px;
     width: 20px;
+    transform: translateY(-50%);
     background-color: #eee;
     border: 2px solid #ddd;
     border-radius: 4px;
@@ -629,13 +688,14 @@ tbody tr:hover {
       content: "";
       position: absolute;
       display: none;
-      left: 6px;
-      top: 2px;
+      left: 50%;
+      top: 40%;
       width: 5px;
       height: 10px;
       border: solid white;
       border-width: 0 2px 2px 0;
-      transform: rotate(45deg);
+      box-sizing: content-box;
+      transform: translate(-50%, -50%) rotate(45deg);
     }
   }
 }

@@ -1,10 +1,14 @@
-import React from "react";
 import classes from "./section.module.scss";
-import { useTranslation } from 'react-i18next';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
+
+import { ArrowBack, Cancel } from '@mui/icons-material';
+import { Button } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 function SectionDataresource({ dataResource }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const subject = dataResource?.credentialSubject || {};
   const generalInfo = {
@@ -23,7 +27,22 @@ function SectionDataresource({ dataResource }) {
   return (
     <div className={classes.resource_container}>
       <section className={classes.column}>
-        <h3>{t("Catalogs.dataresource.generalInfoTitle")}</h3>
+        <h3>
+          <Button
+            onClick={() => navigate(-1)}
+            title='Back'
+            disableElevation
+            sx={{
+              p: 0,
+              minWidth: 0,
+              minHeight: 1,
+              lineHeight: 'inherit'
+            }}
+          >
+            <ArrowBack sx={{ fontSize: '1em', marginRight: '8px' }} />
+          </Button>
+          {t("Catalogs.dataresource.generalInfoTitle")}
+        </h3>
         <div className={classes.card}>
           <div className={classes.input_group}>
             <label>{t("Catalogs.dataresource.resourceId")}</label>

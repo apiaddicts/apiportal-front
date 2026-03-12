@@ -55,6 +55,7 @@ function Catalog() {
   };
 
   const handleChangeSearchFilter = (text) => {
+    if (text.length > 50) return;
     setSearchApiInputValue(text);
     dispatch(filterCheck(text, null, 'search'));
   };
@@ -194,11 +195,11 @@ function Catalog() {
                 </CustomizedAccordions>
               )}
               {((state && Object.keys(state).length > 0) || (items && Object.keys(items).length > 0) || (tags && Object.keys(tags).length > 0) || (domains && Object.keys(domains).length > 0)) && (
-                <div className={classes.wrapper__filters_primary}>
+                <button type='button' className={classes.wrapper__filters_primary} onClick={resetFilters}>
                   <Icon id='MdDeleteOutline' />
-                  <button type='button' className={classes.wrapper__reset} onClick={resetFilters}>{t('Apis.clearFilters')}</button>
+                  <div type='button' className={classes.wrapper__reset} onClick={resetFilters}>{t('Apis.clearFilters')}</div>
                   <p>{t("Catalogs.deleteFilters")}</p>
-                </div>
+                </button>
               )}
             </article>
             <section className={classes.wrapper__right}>

@@ -1,12 +1,17 @@
-import React from "react";
 import classes from "./section.module.scss";
-import { useTranslation } from 'react-i18next';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CancelIcon from '@mui/icons-material/Cancel';
+
+import { ArrowBack, Cancel, CheckCircle } from '@mui/icons-material';
+import { Button } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 function SectionInfrastructure({ infrastructure }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const rootStyles = getComputedStyle(document.documentElement);
+  const primaryColor = rootStyles.getPropertyValue('--primary-color').trim();
 
   const subject = infrastructure?.credentialSubject || {};
   const generalInfo = {
@@ -29,7 +34,22 @@ function SectionInfrastructure({ infrastructure }) {
   return (
     <div className={classes.participant_container}>
       <section className={classes.column}>
-        <h3>{t("Catalogs.infrastructureresource.generalInfo")}</h3>
+        <h3>
+          <Button
+            onClick={() => navigate(-1)}
+            title='Back'
+            disableElevation
+            sx={{
+              p: 0,
+              minWidth: 0,
+              minHeight: 1,
+              lineHeight: 'inherit'
+            }}
+          >
+            <ArrowBack sx={{ fontSize: '1em', marginRight: '8px' }} />
+          </Button>
+          {t("Catalogs.infrastructureresource.generalInfo")}
+        </h3>
         <div className={classes.card}>
           <div className={classes.input_group}>
             <label>{t("Catalogs.infrastructureresource.id")}</label>
@@ -58,7 +78,7 @@ function SectionInfrastructure({ infrastructure }) {
 
           <div className={classes.input_group}>
             <label>{t("Catalogs.infrastructureresource.issuanceDate")}</label>
-            <div className={classes.field_box}>{generalInfo.issuanceDate}</div>
+            <div className={classes.field_box}>{new Date(generalInfo.issuanceDate).toLocaleDateString()}</div>
           </div>
 
           <div className={classes.signature_section}>
@@ -121,7 +141,7 @@ function SectionInfrastructure({ infrastructure }) {
                   <strong>{policy["type"]}</strong>
                   <p>{policy["description"]}</p>
                 </div>
-                <CancelIcon sx={{ color: "red" }} />
+                {policy["type"] === "Permission" ? <CheckCircle sx={{ color: primaryColor }} /> : <Cancel sx={{ color: "red" }} />}
               </div>
             </div>
           )))
@@ -130,7 +150,7 @@ function SectionInfrastructure({ infrastructure }) {
         <hr />
         <div>
           <p>{t("Catalogs.infrastructureresource.copyOwner")}</p>
-          <div className={classes.field_box}>{generalInfo.copyrightOwner}</div>
+          <div className={`${classes.field_box} mt-2`}>{generalInfo.copyrightOwner}</div>
           <button className={classes.btn_action}>
             {t("Catalogs.infrastructureresource.negotiationTitle")}
           </button>

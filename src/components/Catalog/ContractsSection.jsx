@@ -19,8 +19,7 @@ function SectionContracts({ contract }) {
 
   return (
     <div className={classes.contract_section}>
-      <h1 className={classes.contract_title}>{t("Catalogs.Contract.title")}</h1>
-      <h2 className={classes.subsection_title}>{t("Catalogs.Contract.generalInfo")}</h2>
+      <h3 className={classes.subsection_title}>{t("Catalogs.Contract.generalInfo")}</h3>
       <div className={classes.general_info_card}>
         <div className={classes.grid_item}>
           <label>{t("Catalogs.Contract.contractId")}</label>
@@ -38,59 +37,57 @@ function SectionContracts({ contract }) {
           <label>{t("Catalogs.Contract.consumer")}</label>
           <div className={classes.field_box}>{generalInfo.consumer}</div>
         </div>
-        <div className={classes.grid_item + classes.full}>
+        <div className={`${classes.grid_item}`}>
           <label>{t("Catalogs.Contract.offeringModel")}</label>
           <div className={classes.field_box}>{generalInfo.offeringModel}</div>
         </div>
       </div>
 
-      <h2 className={classes.subsection_title}>{t("Catalogs.Contract.PolicyClauses")}</h2>
-      <div className={classes.table_wrapper}>
-        <table className={classes.clauses_table}>
-          <thead>
-            <tr>
-              <th>{t("Catalogs.Contract.type")}</th>
-              <th>{t("Catalogs.Contract.clause")}</th>
-              <th>{t("Catalogs.Contract.metric")}</th>
-              <th>{t("Catalogs.Contract.value")}</th>
+      <h3 className={classes.subsection_title}>{t("Catalogs.Contract.PolicyClauses")}</h3>
+      <table className={classes.table_wrapper}>
+        <thead>
+          <tr>
+            <th>{t("Catalogs.Contract.type")}</th>
+            <th>{t("Catalogs.Contract.clause")}</th>
+            <th>{t("Catalogs.Contract.metric")}</th>
+            <th>{t("Catalogs.Contract.value")}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {policyClauses.map((p, idx) => (
+            <tr key={p.value}>
+              <td>{p.type || "—"}</td>
+              <td>{p.clause || "—"}</td>
+              <td>{p.metric || "—"}</td>
+              <td>{p.value || "—"}</td>
             </tr>
-          </thead>
-          <tbody>
-            {policyClauses.map((p, idx) => (
-              <tr key={idx}>
-                <td>{p.type || "—"}</td>
-                <td>{p.clause || "—"}</td>
-                <td>{p.metric || "—"}</td>
-                <td>{p.value || "—"}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
 
-      <h2 className={classes.subsection_title}>{t("Catalogs.Contract.linkedAssets")}</h2>
-      <div className={classes.table_wrapper}>
-        <table className={classes.assets_table}>
-          <thead>
-            <tr>
-              <th>{t("Catalogs.Contract.assetsName")}</th>
-              <th>{t("Catalogs.Contract.datasetName")}</th>
-              <th>{t("Catalogs.Contract.linkType")}</th>
-              <th>{t("Catalogs.Contract.linkProducer")}</th>
+
+      <h3 className={classes.subsection_title}>{t("Catalogs.Contract.linkedAssets")}</h3>
+      <table className={classes.table_wrapper}>
+        <thead>
+          <tr>
+            <th>{t("Catalogs.Contract.assetsName")}</th>
+            <th>{t("Catalogs.Contract.datasetName")}</th>
+            <th>{t("Catalogs.Contract.linkType")}</th>
+            <th>{t("Catalogs.Contract.linkProducer")}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {linkedAssets.map((a, idx) => (
+            <tr key={idx}>
+              <td>{a.assetName || "—"}</td>
+              <td>{a.datasetName || "—"}</td>
+              <td>{a.type || "—"}</td>
+              <td>{a.producer || "—"}</td>
             </tr>
-          </thead>
-          <tbody>
-            {linkedAssets.map((a, idx) => (
-              <tr key={idx}>
-                <td>{a.assetName || "—"}</td>
-                <td>{a.datasetName || "—"}</td>
-                <td>{a.type || "—"}</td>
-                <td>{a.producer || "—"}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
+
     </div>
   );
 }

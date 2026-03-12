@@ -67,12 +67,12 @@
   &:focus-within {
     label {
       transform: translate(0, -20px) scale(0.75);
-      color: $input-color-warning;
+      color: var(--primary-color);
       font-weight: 500;
       font-size: 1rem;
     }
     input {
-      border: 2px solid $input-color-warning;
+      border: 2px solid var(--primary-color);
     }
   }
 }
