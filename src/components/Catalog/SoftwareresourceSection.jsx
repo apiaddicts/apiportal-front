@@ -1,12 +1,14 @@
-import React, { useEffect } from "react";
 import classes from "./section.module.scss";
-import { useTranslation } from 'react-i18next';
 import "/node_modules/flag-icons/css/flag-icons.min.css";
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import CancelIcon from '@mui/icons-material/Cancel';
+
+import { ArrowBack, Cancel, CheckCircle } from '@mui/icons-material';
+import { Button } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 function SectionSoftware({ software }) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   const rootStyles = getComputedStyle(document.documentElement);
   const primaryColor = rootStyles.getPropertyValue('--primary-color').trim();
@@ -33,7 +35,22 @@ function SectionSoftware({ software }) {
   return (
     <div className={classes.participant_container}>
       <section className={classes.column}>
-        <h3>{t("Catalogs.softwareresource.generalInfo")}</h3>
+        <h3>
+          <Button
+            onClick={() => navigate(-1)}
+            title='Back'
+            disableElevation
+            sx={{
+              p: 0,
+              minWidth: 0,
+              minHeight: 1,
+              lineHeight: 'inherit'
+            }}
+          >
+            <ArrowBack sx={{ fontSize: '1em', marginRight: '8px' }} />
+          </Button>
+          {t("Catalogs.softwareresource.generalInfo")}
+        </h3>
         <div className={classes.card}>
           <div className={classes.input_group}>
             <label>{t("Catalogs.softwareresource.id")}</label>
@@ -62,7 +79,7 @@ function SectionSoftware({ software }) {
 
           <div className={classes.input_group}>
             <label>{t("Catalogs.softwareresource.publishedDate")}</label>
-            <div className={classes.field_box}>{generalInfo.date}</div>
+            <div className={classes.field_box}>{new Date(generalInfo.date).toLocaleDateString()}</div>
           </div>
 
           <div className={classes.signature_section}>
@@ -97,26 +114,28 @@ function SectionSoftware({ software }) {
         <div className={classes.void_card}>
           {ApiOperations && ApiOperations.length > 0 ? (
             ApiOperations.map((op, idx) => (
-              <div className={classes.sub_card} key={op["operationId"] || idx}>
+              <div className={classes.operation_card} key={op["operationId"] || idx}>
+                <div className={classes.badge}>
+                  <CheckCircle sx={{ color: primaryColor, fontSize: 30 }} />
+                  <span
+                    className={`${classes.badge_post} ${
+                      op["method"].toLowerCase() === 'get' ? classes.highlight_get_method :
+                      op["method"].toLowerCase() === 'post' ? classes.highlight_post_method :
+                      op["method"].toLowerCase() === 'put' ? classes.highlight_put_method :
+                      op["method"].toLowerCase() === 'patch' ? classes.highlight_patch_method :
+                      op["method"].toLowerCase() === 'delete' ? classes.highlight_delete_method :
+                      classes.highlight_default}`
+                    }
+                  >
+                    {op["method"]}
+                  </span>
+                </div>
                 <div className={classes.icon_text}>
-                  <CheckCircleIcon sx={{ color: primaryColor, fontSize: 30 }} />
                   <div>
                     <strong>{op["operationId"]}</strong>
                     <p>{op["description"]}</p>
                   </div>
                 </div>
-                <span
-                  className={`${classes.badge_post} ${
-                    op["method"].toLowerCase() === 'get' ? classes.highlight_get_method :
-                    op["method"].toLowerCase() === 'post' ? classes.highlight_post_method :
-                    op["method"].toLowerCase() === 'put' ? classes.highlight_put_method :
-                    op["method"].toLowerCase() === 'patch' ? classes.highlight_patch_method :
-                    op["method"].toLowerCase() === 'delete' ? classes.highlight_delete_method :
-                    classes.highlight_default}`
-                  }
-                >
-                  {op["method"]}
-                </span>
               </div>
             ))
           ) : (
@@ -144,7 +163,7 @@ function SectionSoftware({ software }) {
                   <strong>{policy["type"]}</strong>
                   <p>{policy["description"]}</p>
                 </div>
-                <CancelIcon sx={{ color: "red" }} />
+                {policy["type"] === "Permission" ? <CheckCircle sx={{ color: primaryColor }} /> : <Cancel sx={{ color: "red" }} />}
               </div>
             </div>
           )))
@@ -153,7 +172,7 @@ function SectionSoftware({ software }) {
         <hr />
         <div>
           <p>Copyright owner</p>
-          <div className={classes.field_box}>{generalInfo.copyrightOwner}</div>
+          <div className={`${classes.field_box} mt-2`}>{generalInfo.copyrightOwner}</div>
         </div>
       </section>
     </div>    

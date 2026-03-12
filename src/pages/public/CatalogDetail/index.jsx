@@ -1,17 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import _ from 'underscore';
 import { useTranslation } from 'react-i18next';
 
-import { ArrowBack } from '@mui/icons-material';
-import { Button } from '@mui/material';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 import { getHomeContent } from '../../../redux/actions/homeAction';
 import { getcatalog, getcatalogs, getCatalogContent } from '../../../redux/actions/catalogAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
-//import classes from './catalog-detail.module.scss';
-import AssetsSection from '../../../components/Catalog/AssetsSection';
 import PoliciesSection from '../../../components/Catalog/PoliciesSection';
 import ContractsSection from '../../../components/Catalog/ContractsSection';
 import SectionParticipant from '../../../components/Catalog/ParticipantSection';
@@ -85,13 +81,6 @@ function CatalogDetail({ initialSection }) {
             <aside className={classes.catalog_sidebar}>
               <h2 className={classes.sidebar_title}>
                 {t("Catalogs.detTitle")}
-                {["dataresources", "softwareresource", "infrastructureresource"].includes(section) ?
-                <Button
-                  startIcon={<ArrowBack />}
-                  onClick={() => navigate(-1)}
-                  
-                ></Button>
-                : null}
               </h2>
               <nav className={classes.sidebar_nav}>
                 <button

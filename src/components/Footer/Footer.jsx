@@ -258,7 +258,7 @@ function Footer({ isPrivate }) {
                   {
                     displaySubmit &&
                     (
-                      <Button styles={formik.isValid ? 'tertiary' : 'disabled'} disabled={!formik.isValid} type='submit'>
+                      <Button styles={formik.isValid ? 'primary-dinamic' : 'disabled'} disabled={!formik.isValid} type='submit'>
                         Enviar
                       </Button>
                     )
@@ -279,19 +279,19 @@ function Footer({ isPrivate }) {
             <CustomIcon name='logowhite' />
           </div>
           <div className={classes.email}>
-            <p className='body-1 font-weight-bold text__white'>
+            <p className={`body-1 font-weight-bold text__white ${classes.clickable}`}>
               {t('Footer.email')}
             </p>
-            <p className='body-1 font-weight-bold text__white'>{config.contact}</p>
+            <p className={`body-1 font-weight-bold text__white ${classes.clickable}`}>{config.contact}</p>
           </div>
           <div className={classes.policies}>
-            <p className='body-1 font-weight-bold'>
-              <a href={config.privacyPolicyPath} target='_blank' className='text__white'>{t('Footer.privacyPolicy')}</a>
+            <p className={`body-1 font-weight-bold ${classes.clickable}`}>
+              <a href={config.privacyPolicyPath} target='_blank' className={`text__white`}>{t('Footer.privacyPolicy')}</a>
             </p>
           </div>
           <div className={classes.policies}>
-            <p className='body-1 font-weight-bold'>
-              <a href={config.cookiesPolicyPath} target='_blank' className='text__white'>{t('Footer.cookiesPolicy')}</a>
+            <p className={`body-1 font-weight-bold ${classes.clickable}`}>
+              <a href={config.cookiesPolicyPath} target='_blank' className={`text__white`}>{t('Footer.cookiesPolicy')}</a>
             </p>
           </div>
         </div>

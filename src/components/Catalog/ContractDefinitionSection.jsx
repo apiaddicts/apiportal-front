@@ -26,19 +26,16 @@ function SectionContractDefinition({ contract }) {
             <div className={classes.field_box}>{generalInfo.id}</div>
           </div>
 
-          <div className={classes.info_row}>
-            <label>{t("Catalogs.contractDefinition.contractId")}</label>
-            <MoreVertIcon style={{ cursor: "pointer" }} />
-          </div>
-
           <div className={classes.input_group}>
             <label>{t("Catalogs.contractDefinition.accessPolicyId")}</label>
             <select><option>{t("Catalogs.contractDefinition.contrasAllPolicyId")}</option></select>
           </div>
 
-          <button className={classes.btn_primary_info}>
-            {t("Catalogs.contractDefinition.allowAllPolicy")}
-          </button>
+          <div className={classes.status_badge_container}>
+            <button className={classes.btn_action}>
+              {t("Catalogs.contractDefinition.allowAllPolicy")}
+            </button>
+          </div>
         </div>
       </section>
 

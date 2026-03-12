@@ -29,7 +29,7 @@ function SectionParticipant({ participant }) {
         <div className={classes.card}>
           <div className={classes.input_group}>
             <label>{t("Catalogs.participant.participantDid")}</label>
-            <div className={classes.field_box}>{generalInfo.id}</div>
+            <div className={`${classes.field_box} mt-2`}>{generalInfo.id}</div>
           </div>
 
           <div className={classes.info_row}>
@@ -44,7 +44,7 @@ function SectionParticipant({ participant }) {
 
           <div className={classes.input_group}>
             <label>{t("Catalogs.participant.legalRegNumber")}</label>
-            <select><option>VAT ID: {generalInfo.vatId}</option></select>
+            <select className="mt-2"><option>VAT ID: {generalInfo.vatId}</option></select>
           </div>
 
           <div className={classes.status_badge_container}>
@@ -65,10 +65,10 @@ function SectionParticipant({ participant }) {
           </div>
         </div>
 
-        <h3>{t("Catalogs.participant.parentOrg")}</h3>
+        <h3 className="mt-3">{t("Catalogs.participant.parentOrg")}</h3>
         <div className={classes.void_card}>
           <div className={classes.sub_card}>
-            <div className={classes.icon_text}>
+            <div className={classes.card_layout}>
               <span>📍</span>
               <div>
                 <strong>{t("Catalogs.participant.parentOrg")}</strong>
@@ -80,7 +80,7 @@ function SectionParticipant({ participant }) {
           {subOrganization && subOrganization.length > 0 ? (
             subOrganization.map((sub, idx) => (
               <div className={classes.sub_card} key={sub["@id"] || index}>
-                <div className={classes.icon_text}>
+                <div className={classes.card_layout}>
                   <span>🏢</span>
                   <div>
                     <strong>{t("Catalogs.participant.subOrgs")}</strong>
@@ -91,7 +91,7 @@ function SectionParticipant({ participant }) {
             ))
           ) : (
             <div className={classes.sub_card}>
-              <div className={classes.icon_text}>
+              <div className={classes.card_layout}>
                 <span>🏢</span>
                 <div>
                   <strong>{t("Catalogs.participant.subOrgs")}</strong>
@@ -106,7 +106,7 @@ function SectionParticipant({ participant }) {
       <section className={classes.column}>
         <h3>{t("Catalogs.participant.contactLegal")}</h3>
         <div className={`${classes.card} ${classes.highlight_card}`}>
-          <div className={classes.icon_text}>
+          <div className={classes.card_layout}>
             <CheckCircleIcon sx={{ color: "white" }} />
             <div>
               <strong>{t("Catalogs.participant.usage")}</strong>
@@ -116,7 +116,7 @@ function SectionParticipant({ participant }) {
         </div>
 
         <div className={classes.card}>
-          <div className={classes.icon_text}>
+          <div className={classes.card_layout}>
             <div>📧</div>
             <div>
               <strong>{t("Catalogs.participant.contactInfoTitle")}</strong>
@@ -127,7 +127,7 @@ function SectionParticipant({ participant }) {
         </div>
 
         <div className={classes.card}>
-          <div className={classes.icon_text}>
+          <div className={classes.card_layout}>
             <div>⚖️</div>
             <div>
               <strong>{t("Catalogs.participant.governingLawTitle")}</strong>
@@ -136,9 +136,11 @@ function SectionParticipant({ participant }) {
               <a href="#master-agreement" className={classes.link}>{t("Catalogs.participant.viewMasterAgreement")}</a>
             </div>
           </div>
-          <button className={classes.btn_action}>
-            {t("Catalogs.participant.linkServiceOffering")}
-          </button>
+          <div className={classes.status_badge_container}>
+            <button className={classes.btn_action}>
+              {t("Catalogs.participant.linkServiceOffering")}
+            </button>
+          </div>
         </div>
       </section>
     </div>    
