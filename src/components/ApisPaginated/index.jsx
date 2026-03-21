@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import CardInformation from '../Card/CardInformation';
 import classes from './apis-paginated.module.scss';
 
-function Apis({ currentItems }) {
+function ApisGrid({ currentItems }) {
   const { t } = useTranslation();
 
   return (
-    // eslint-disable-next-line react/jsx-no-useless-fragment
-    <div className={`${classes.api_list}`}>
+    <div className={classes.api_list}>
       {currentItems &&
         currentItems.map((item, index) => (
           <CardInformation
@@ -31,12 +31,42 @@ function Apis({ currentItems }) {
   );
 }
 
-function ApisPaginated({ apis, itemsPerPage }) {
+function ApisList({ currentItems }) {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  return (
+    <div className={classes.apis__table}>
+      <div className={classes.table__header}>
+        <div>{t('name')}</div>
+        <div>{t('version')}</div>
+        <div>{t('description')}</div>
+      </div>
+      {currentItems && currentItems.map((item, index) => (
+        <div
+          key={index}
+          className={classes.table__row}
+          onClick={() => navigate(`/apis/${item?.documentId}#api`)}
+        >
+          <div className={classes.api__name}>{item?.title || '-'}</div>
+          <div>{item?.version || '-'}</div>
+          <div className={classes.table__description}>{item?.description || '-'}</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ApisPaginated({ apis, itemsPerPage, viewType = 'grid' }) {
   const { t } = useTranslation();
 
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
+
+  useEffect(() => {
+    setItemOffset(0);
+  }, [itemsPerPage]);
 
   useEffect(() => {
     if (apis.length > 0) {
@@ -53,7 +83,10 @@ function ApisPaginated({ apis, itemsPerPage }) {
 
   return (
     <>
-      <Apis currentItems={currentItems} />
+      {viewType === 'grid'
+        ? <ApisGrid currentItems={currentItems} />
+        : <ApisList currentItems={currentItems} />
+      }
       <ReactPaginate
         breakLabel='...'
         nextLabel={t('ApisPaginated.next')}

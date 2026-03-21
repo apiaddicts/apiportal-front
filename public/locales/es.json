@@ -159,6 +159,16 @@
     "globalRating": "Calificación",
     "products": "Productos"
   },
+  "Mcps": {
+    "filterBy": "Filtrar por",
+    "version": "Versión",
+    "clearFilters": "Eliminar filtros",
+    "searchPlaceholder": "Buscar MCPs...",
+    "noData": "Información no disponible",
+    "solution": "Solución",
+    "tags": "Etiquetas",
+    "globalRating": "Calificación"
+  },
   "Blog": {
     "learnMore": "Conoce más",
     "noData": "Información no disponible",
@@ -285,6 +295,11 @@
     "copyError": "Error al copiar al portapapeles"
   },
   "ApisPaginated": {
+    "viewDocumentation": "Ver Documentación",
+    "next": "Siguiente",
+    "previous": "Anterior"
+  },
+  "McpsPaginated": {
     "viewDocumentation": "Ver Documentación",
     "next": "Siguiente",
     "previous": "Anterior"
@@ -419,6 +434,7 @@
   },
   "Navbar": {
     "apis": "APIs",
+    "mcps": "MCPs",
     "blog": "Blog",
     "faqs": "FAQs",
     "myProfile": "Mi Perfil",
