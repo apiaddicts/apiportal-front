@@ -135,10 +135,10 @@ function ApiDetail({ setIsOpen }) {
   const apisNews = shuffledApis.slice(0, 3);
 
   const hasAnyRating =
-    !!library?.globalRating ||
-    !!library?.definitionRating ||
-    !!library?.securityRating ||
-    !!library?.qualityRating;
+    !!library?.ratings?.globalRating ||
+    !!library?.ratings?.definitionRating ||
+    !!library?.ratings?.securityRating ||
+    !!library?.ratings?.qualityRating;
 
   const getRatingClass = (rating) => {
     if (!rating) return classes.rating__empty;
@@ -178,29 +178,29 @@ function ApiDetail({ setIsOpen }) {
 
                 <div className={classes.ratings__grid}>
                   <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(library.globalRating)}`}>
-                      {library.globalRating || '-'}
+                    <div className={`${classes.rating__circle} ${getRatingClass(library.ratings.globalRating)}`}>
+                      {library.ratings.globalRating || '-'}
                     </div>
                     <span>{t('ApiDetail.ratingGlobal')}</span>
                   </div>
 
                   <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(library.definitionRating)}`}>
-                      {library.definitionRating || '-'}
+                    <div className={`${classes.rating__circle} ${getRatingClass(library.ratings.definitionRating)}`}>
+                      {library.ratings.definitionRating || '-'}
                     </div>
                     <span>{t('ApiDetail.ratingDefinition')}</span>
                   </div>
 
                   <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(library.securityRating)}`}>
-                      {library.securityRating || '-'}
+                    <div className={`${classes.rating__circle} ${getRatingClass(library.ratings.securityRating)}`}>
+                      {library.ratings.securityRating || '-'}
                     </div>
                     <span>{t('ApiDetail.ratingSecurity')}</span>
                   </div>
 
                   <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(library.qualityRating)}`}>
-                      {library.qualityRating || '-'}
+                    <div className={`${classes.rating__circle} ${getRatingClass(library.ratings.qualityRating)}`}>
+                      {library.ratings.qualityRating || '-'}
                     </div>
                     <span>{t('ApiDetail.ratingQuality')}</span>
                   </div>
