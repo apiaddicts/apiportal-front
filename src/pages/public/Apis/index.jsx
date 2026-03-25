@@ -9,8 +9,7 @@ import CheckboxWrapper from '../../../components/common/Check';
 import CustomizedAccordions from '../../../components/common/AccordionMUI';
 import ButtonGroupMUI from '../../../components/common/ButtonGroup';
 import CheckboxLabels from '../../../components/common/CustomCheck';
-import ApisPaginated from '../../../components/ApisPaginated';
-import CustomIcon from '../../../components/MdIcon/CustomIcon';
+import LibraryPaginated from '../../../components/LibraryPaginated';
 import Icon from '../../../components/MdIcon/Icon';
 import classes from './apis.module.scss';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
@@ -345,10 +344,12 @@ function Apis({ setIsOpen }) {
               <div className='row'>
                 {loadingLibraries === false && libraries ? (
                   libraries.length > 0 ? (
-                    <ApisPaginated
-                      apis={fApis}
+                    <LibraryPaginated
+                      items={fApis}
                       itemsPerPage={itemsPerPage}
                       viewType={viewType}
+                      basePath='/apis'
+                      anchor='api'
                     />
                   ) : (
                     <section

@@ -319,12 +319,7 @@
     "copiedToClipboard": "Copiado al portapapeles",
     "copyError": "Error al copiar al portapapeles"
   },
-  "ApisPaginated": {
-    "viewDocumentation": "Ver Documentación",
-    "next": "Siguiente",
-    "previous": "Anterior"
-  },
-  "McpsPaginated": {
+  "LibraryPaginated": {
     "viewDocumentation": "Ver Documentación",
     "next": "Siguiente",
     "previous": "Anterior"

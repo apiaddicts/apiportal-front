@@ -9,7 +9,7 @@ import CheckboxWrapper from '../../../components/common/Check';
 import CustomizedAccordions from '../../../components/common/AccordionMUI';
 import ButtonGroupMUI from '../../../components/common/ButtonGroup';
 import CheckboxLabels from '../../../components/common/CustomCheck';
-import McpsPaginated from '../../../components/McpsPaginated';
+import LibraryPaginated from '../../../components/LibraryPaginated';
 import CustomIcon from '../../../components/MdIcon/CustomIcon';
 import Icon from '../../../components/MdIcon/Icon';
 import classes from './mcps.module.scss';
@@ -334,10 +334,12 @@ function Mcps({ setIsOpen }) {
               <div className='row'>
                 {loadingMcpLibraries === false && mcpLibraries ? (
                   mcpLibraries.length > 0 ? (
-                    <McpsPaginated
-                      mcps={fMcps}
+                    <LibraryPaginated
+                      items={fMcps}
                       itemsPerPage={itemsPerPage}
                       viewType={viewType}
+                      basePath='/mcps'
+                      anchor='mcp'
                     />
                   ) : (
                     <section

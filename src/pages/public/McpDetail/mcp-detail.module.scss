@@ -147,85 +147,6 @@
   margin-bottom: 40px !important;
 }
 
-.ratings__wrapper {
-  background: #fff;
-  border-radius: 12px;
-  padding: 32px 24px;
-  border: 1px solid #eee;
-  box-shadow: none;
-  text-align: center;
-  margin: 0 0 100px 0;
-}
-
-.ratings__title {
-  font-size: clamp(22px, 3.5vw, 35px);
-  font-weight: 700;
-  margin-bottom: clamp(12px, 2vw, 20px);
-  color: #222;
-}
-
-.ratings__subtitle {
-  font-size: clamp(13px, 1.8vw, 17px);
-  color: #777;
-  margin-bottom: clamp(16px, 3vw, 28px);
-}
-
-.ratings__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: clamp(20px, 3vw, 32px);
-  justify-items: center;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-.rating__item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: clamp(6px, 1vw, 8px);
-
-  span {
-    font-size: clamp(12px, 1.4vw, 16px);
-    font-weight: 700;
-    letter-spacing: 0.2px;
-    color: #555;
-  }
-}
-
-.rating__circle {
-  width: clamp(52px, 6vw, 62px);
-  height: clamp(52px, 6vw, 62px);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: clamp(16px, 2vw, 22px);
-  font-weight: 800;
-  color: #fff;
-}
-
-.rating__A { background: #27ae60; }
-.rating__B { background: #b0d226; }
-.rating__C { background: #f1c40f; }
-.rating__D { background: #f39c12; }
-.rating__E { background: #d52c19; }
-.rating__empty {
-  background: #fff;
-  border: 1px solid #000;
-  color: #000;
-  opacity: 0.6;
-}
-
-@media (max-width: 1024px) {
-  .ratings__grid {
-    grid-template-columns: repeat(2, 1fr);
-    max-width: 700px;
-    padding: 0 clamp(16px, 5vw, 50px);
-    gap: clamp(16px, 4vw, 24px);
-  }
-}
-
 .section__three_cols {
   margin-top: 0 !important;
   margin-bottom: 60px !important;
@@ -294,7 +215,7 @@
   padding: 10px 18px;
   font-size: 0.85rem;
   font-weight: 600;
-  cursor: not-allowed;
+  cursor: pointer;
   opacity: 0.85;
   align-self: flex-start;
   transition: opacity 0.2s;
@@ -305,10 +226,8 @@
 }
 
 .three_cols__placeholder {
-  padding: 16px;
-  border-radius: 10px;
+  border-radius: 8px;
   color: #64748b;
-  font-style: italic;
 }
 
 .three_cols__markdown {
@@ -337,7 +256,7 @@
   padding: 10px 22px;
   font-size: 0.9rem;
   font-weight: 600;
-  cursor: not-allowed;
+  cursor: pointer;
   opacity: 0.85;
   transition: opacity 0.2s;
 
@@ -358,3 +277,5 @@
   margin-top: 2.5rem;
   justify-content: center;
 }
+
+

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
+import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import CardInformation from '../Card/CardInformation';
-import classes from './mcps-paginated.module.scss';
+import classes from './library-paginated.module.scss';
 
-function McpsGrid({ currentItems }) {
-  const { t } = useTranslation();
-
+function LibraryGrid({ currentItems, basePath, anchor, viewDocLabel }) {
   return (
     <div className={classes.api_list}>
       {currentItems &&
@@ -20,10 +19,10 @@ function McpsGrid({ currentItems }) {
             version={item?.version || ''}
             buttons={item?.tags || ''}
             colorStatus={item?.color_status || ''}
-            info={t('McpsPaginated.viewDocumentation')}
+            info={viewDocLabel}
             description={item?.description || ''}
             globalRating={item?.globalRating}
-            link={`/mcps/${item?.documentId}#mcp`}
+            link={`${basePath}/${item?.documentId}#${anchor}`}
             css_styles={{ 'custom_title_size': 'fs__22', 'custom_status_size': 'fs__10' }}
           />
         ))}
@@ -31,7 +30,7 @@ function McpsGrid({ currentItems }) {
   );
 }
 
-function McpsList({ currentItems }) {
+function LibraryList({ currentItems, basePath, anchor }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
@@ -46,7 +45,7 @@ function McpsList({ currentItems }) {
         <div
           key={index}
           className={classes.table__row}
-          onClick={() => navigate(`/mcps/${item?.documentId}#mcp`)}
+          onClick={() => navigate(`${basePath}/${item?.documentId}#${anchor}`)}
         >
           <div className={classes.api__name}>{item?.title || '-'}</div>
           <div>{item?.version || '-'}</div>
@@ -57,7 +56,7 @@ function McpsList({ currentItems }) {
   );
 }
 
-function McpsPaginated({ mcps, itemsPerPage, viewType = 'grid' }) {
+function LibraryPaginated({ items, itemsPerPage, viewType, basePath, anchor }) {
   const { t } = useTranslation();
 
   const [currentItems, setCurrentItems] = useState([]);
@@ -69,32 +68,34 @@ function McpsPaginated({ mcps, itemsPerPage, viewType = 'grid' }) {
   }, [itemsPerPage]);
 
   useEffect(() => {
-    if (mcps.length > 0) {
+    if (items.length > 0) {
       const endOffset = itemOffset + itemsPerPage;
-      setCurrentItems(mcps.slice(itemOffset, endOffset));
-      setPageCount(Math.ceil(mcps.length / itemsPerPage));
+      setCurrentItems(items.slice(itemOffset, endOffset));
+      setPageCount(Math.ceil(items.length / itemsPerPage));
     }
-  }, [mcps, itemOffset, itemsPerPage]);
+  }, [items, itemOffset, itemsPerPage]);
 
   const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % mcps.length;
+    const newOffset = (event.selected * itemsPerPage) % items.length;
     setItemOffset(newOffset);
   };
+
+  const viewDocLabel = t(`LibraryPaginated.viewDocumentation`);
 
   return (
     <>
       {viewType === 'grid'
-        ? <McpsGrid currentItems={currentItems} />
-        : <McpsList currentItems={currentItems} />
+        ? <LibraryGrid currentItems={currentItems} basePath={basePath} anchor={anchor} viewDocLabel={viewDocLabel} />
+        : <LibraryList currentItems={currentItems} basePath={basePath} anchor={anchor} />
       }
       <ReactPaginate
         breakLabel='...'
-        nextLabel={t('McpsPaginated.next')}
+        nextLabel={t(`LibraryPaginated.next`)}
         onPageChange={handlePageClick}
         pageRangeDisplayed={2}
         marginPagesDisplayed={2}
         pageCount={pageCount}
-        previousLabel={t('McpsPaginated.previous')}
+        previousLabel={t(`LibraryPaginated.previous`)}
         previousClassName={`${classes.previous}`}
         previousLinkClassName={`${classes.previous__link}`}
         nextClassName={`${classes.next}`}
@@ -110,4 +111,29 @@ function McpsPaginated({ mcps, itemsPerPage, viewType = 'grid' }) {
   );
 }
 
-export default McpsPaginated;
+LibraryPaginated.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  itemsPerPage: PropTypes.number.isRequired,
+  viewType: PropTypes.string,
+  basePath: PropTypes.string.isRequired,
+  anchor: PropTypes.string.isRequired
+};
+
+LibraryPaginated.defaultProps = {
+  viewType: 'grid',
+};
+
+LibraryGrid.propTypes = {
+  currentItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+  basePath: PropTypes.string.isRequired,
+  anchor: PropTypes.string.isRequired,
+  viewDocLabel: PropTypes.string.isRequired,
+};
+
+LibraryList.propTypes = {
+  currentItems: PropTypes.arrayOf(PropTypes.object).isRequired,
+  basePath: PropTypes.string.isRequired,
+  anchor: PropTypes.string.isRequired,
+};
+
+export default LibraryPaginated;

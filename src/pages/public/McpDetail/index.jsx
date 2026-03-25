@@ -22,6 +22,8 @@ import { getMcpLibrary, getMcpLibraries } from '../../../redux/actions/mcpLibrar
 import { getBlogs } from '../../../redux/actions/blogAction';
 import config from '../../../services/config';
 import classes from './mcp-detail.module.scss';
+import CommandModal from '../../../components/Modal/CommandModal';
+import Ratings from '../../../components/Ratings';
 
 function McpDetail({ setIsOpen }) {
   const { t } = useTranslation();
@@ -33,6 +35,7 @@ function McpDetail({ setIsOpen }) {
 
   const [bannerImg, setBannerImg] = useState('');
   const [cardsImages, setCardsImages] = useState({});
+  const [vsCodeCopied, setVsCodeCopied] = useState(null);
 
   useEffect(() => {
     dispatch(getMcpLibraries());
@@ -125,19 +128,9 @@ function McpDetail({ setIsOpen }) {
     !!mcpLibrary?.ratings?.securityRating ||
     !!mcpLibrary?.ratings?.qualityRating;
 
-  const getRatingClass = (rating) => {
-    if (!rating) return classes.rating__empty;
-    return classes[`rating__${rating}`] || classes.rating__empty;
-  };
-
   const handleClickPage = (id) => {
     dispatch(getMcpLibrary(id));
   };
-
-  const hasThreeColumns =
-    mcpLibrary?.configSnippet ||
-    (mcpLibrary?.markdown && mcpLibrary.markdown.length > 0) ||
-    (mcpLibrary?.resources && mcpLibrary.resources.length > 0);
 
   let configJson = null;
   if (mcpLibrary?.configSnippet) {
@@ -169,40 +162,17 @@ function McpDetail({ setIsOpen }) {
           <section className={`container ${classes.section__content} pb-9`}>&nbsp;</section>
           {mcpLibrary && hasAnyRating && (
             <section className={`container ${classes.section__content} ${classes.section__ratings}`}>
-              <div className={classes.ratings__wrapper}>
-                <h2 className={classes.ratings__title}>
-                  {t('McpDetail.globalGradesTitle')}
-                </h2>
-                <p className={classes.ratings__subtitle}>
-                  {t('McpDetail.globalGradesSubtitle')}
-                </p>
-                <div className={classes.ratings__grid}>
-                  <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(mcpLibrary.ratings.globalRating)}`}>
-                      {mcpLibrary.ratings.globalRating || '-'}
-                    </div>
-                    <span>{t('McpDetail.ratingGlobal')}</span>
-                  </div>
-                  <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(mcpLibrary.ratings.definitionRating)}`}>
-                      {mcpLibrary.ratings.definitionRating || '-'}
-                    </div>
-                    <span>{t('McpDetail.ratingDefinition')}</span>
-                  </div>
-                  <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(mcpLibrary.ratings.securityRating)}`}>
-                      {mcpLibrary.ratings.securityRating || '-'}
-                    </div>
-                    <span>{t('McpDetail.ratingSecurity')}</span>
-                  </div>
-                  <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(mcpLibrary.ratings.qualityRating)}`}>
-                      {mcpLibrary.ratings.qualityRating || '-'}
-                    </div>
-                    <span>{t('McpDetail.ratingQuality')}</span>
-                  </div>
-                </div>
-              </div>
+              <Ratings
+                ratings={mcpLibrary.ratings}
+                title={t('McpDetail.globalGradesTitle')}
+                subtitle={t('McpDetail.globalGradesSubtitle')}
+                labels={{
+                  globalRating: t('McpDetail.ratingGlobal'),
+                  definitionRating: t('McpDetail.ratingDefinition'),
+                  securityRating: t('McpDetail.ratingSecurity'),
+                  qualityRating: t('McpDetail.ratingQuality'),
+                }}
+              />
             </section>
           )}
 
@@ -220,6 +190,12 @@ function McpDetail({ setIsOpen }) {
                   <button
                     type='button'
                     className={classes.three_cols__vscode_btn}
+                    onClick={() => {
+                      const jsonStr = JSON.stringify(mcpLibrary.configSnippet);
+                      const escaped = jsonStr.replaceAll('"', String.raw`\"`);
+                      const cmd = `code --add-mcp "${escaped}"`;
+                      navigator.clipboard.writeText(cmd).then(() => setVsCodeCopied(cmd));
+                    }}
                   >
                     <Icon id='MdCode' />
                     <span>{t('McpDetail.addToVsCode')}</span>
@@ -258,7 +234,11 @@ function McpDetail({ setIsOpen }) {
             </div>
 
             <div className={classes.three_cols__actions}>
-              <button type='button' className={classes.three_cols__action_btn}>
+              <button
+                type='button'
+                className={classes.three_cols__action_btn}
+                onClick={() => mcpLibrary.reportUrl && window.open(mcpLibrary.reportUrl, '_blank', 'noopener,noreferrer')}
+              >
                 <Icon id='MdDownload' />
                 <span>{t('McpDetail.downloadReport')}</span>
               </button>
@@ -430,6 +410,18 @@ function McpDetail({ setIsOpen }) {
               </div>
             </div>
           </section>
+          <CommandModal isOpen={!!vsCodeCopied} onClose={() => setVsCodeCopied(null)}>
+            <p style={{ fontSize: '1.1rem', fontWeight: 700, color: '#222', margin: 0 }}>{t('McpDetail.commandCopied')}</p>
+            <p style={{ fontSize: '0.9rem', color: '#555', margin: 0 }}>{t('McpDetail.openTerminalPaste')}</p>
+            <pre style={{ background: '#0f172a', color: '#e2e8f0', borderRadius: '8px', padding: '1rem 1.2rem', fontSize: '0.78rem', lineHeight: 1.6, overflowX: 'auto', whiteSpace: 'pre-wrap', wordBreak: 'break-all', margin: 0 }}>{vsCodeCopied}</pre>
+            <button
+              type='button'
+              className={classes.three_cols__vscode_btn}
+              onClick={() => navigator.clipboard.writeText(vsCodeCopied)}
+            >
+              {t('McpDetail.copyAgain')}
+            </button>
+          </CommandModal>
           <div id='contact' />
         </>
       ) : (
