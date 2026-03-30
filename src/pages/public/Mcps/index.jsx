@@ -81,12 +81,11 @@ function Mcps({ setIsOpen }) {
     dispatch(sortMcpCollection(sort));
   };
 
-  // Filters titles array
-  const titleRepeated = backUpMcpLibraries && backUpMcpLibraries.map((element) => {
+  const titleRepeated = backUpMcpLibraries?.map((element) => {
     return element.title;
   });
-  // count items repeated
-  const countRepeated = titleRepeated && titleRepeated.reduce((acc, cur) => {
+
+  const countRepeated = titleRepeated?.reduce((acc, cur) => {
     acc[cur] = (acc[cur] || 0) + 1;
     return acc;
   }, {});
@@ -98,15 +97,15 @@ function Mcps({ setIsOpen }) {
     };
   });
 
-  // Filters status array
-  const stateRepeated = backUpMcpLibraries && backUpMcpLibraries.map((element) => {
+
+  const stateRepeated = backUpMcpLibraries?.map((element) => {
     return element.publish;
   });
   const stateArr = stateRepeated && new Set(stateRepeated);
   const state = stateArr ? [...stateArr] : [];
 
-  // Filters tags array
-  const arrayTagsRepeated = backUpMcpLibraries && backUpMcpLibraries.map((element) => {
+
+  const arrayTagsRepeated = backUpMcpLibraries?.map((element) => {
     return element.tags;
   });
   const tagsBtns = arrayTagsRepeated && arrayTagsRepeated.flat();
@@ -114,7 +113,6 @@ function Mcps({ setIsOpen }) {
   const tagsArrUnique = tagsArr ? [...tagsArr] : [];
   const labelsTags = tagsArrUnique.map((item) => { return item.label; });
 
-  // count labelsTags repeated
   const countRepeatedTags = labelsTags.reduce((acc, cur) => {
     acc[cur] = (acc[cur] || 0) + 1;
     return acc;
@@ -127,16 +125,14 @@ function Mcps({ setIsOpen }) {
     };
   });
 
-  // Filters version array
-  const versionRepeated = backUpMcpLibraries && backUpMcpLibraries.map((element) => {
+  const versionRepeated = backUpMcpLibraries?.map((element) => {
     return element.version;
   });
 
   const versionArr = new Set(versionRepeated);
   const versions = [...versionArr].sort();
 
-  const globalRatingRepeated = backUpMcpLibraries && backUpMcpLibraries
-    .map((element) => element.globalRating)
+  const globalRatingRepeated = backUpMcpLibraries?.map((element) => element.globalRating)
     .filter(Boolean);
 
   const globalRatingArr = new Set(globalRatingRepeated);

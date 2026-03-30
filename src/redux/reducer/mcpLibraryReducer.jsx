@@ -8,6 +8,9 @@ const initialState = {
   filters: {},
   mcpLibrary: {},
   errorMcpLibrary: {},
+  mcpLibraryBySlug: null,
+  loadingMcpLibraryBySlug: false,
+  errorMcpLibraryBySlug: {},
   sort: 'asc',
   selectedMcps: [],
 };
@@ -47,6 +50,27 @@ export default function mcpLibraryReducer(state = initialState, action) {
         ...state,
         mcpLibrary: {},
         errorMcpLibrary: action.payload,
+      };
+    case mcpLibraryConstants.GET_MCP_LIBRARY_BY_SLUG_REQUEST:
+      return {
+        ...state,
+        loadingMcpLibraryBySlug: true,
+        mcpLibraryBySlug: null,
+        errorMcpLibraryBySlug: {},
+      };
+    case mcpLibraryConstants.GET_MCP_LIBRARY_BY_SLUG_SUCCESS:
+      return {
+        ...state,
+        mcpLibraryBySlug: action.payload,
+        loadingMcpLibraryBySlug: false,
+        errorMcpLibraryBySlug: {},
+      };
+    case mcpLibraryConstants.GET_MCP_LIBRARY_BY_SLUG_FAILURE:
+      return {
+        ...state,
+        mcpLibraryBySlug: null,
+        loadingMcpLibraryBySlug: false,
+        errorMcpLibraryBySlug: action.payload,
       };
     case mcpLibraryConstants.FILTER_ALL_MCP_LIBRARY:
       return {

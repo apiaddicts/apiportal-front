@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import moment from 'moment';
 import _ from 'underscore';
@@ -29,6 +29,7 @@ function McpDetail({ setIsOpen }) {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const params = useParams();
+  const navigate = useNavigate();
   const { homePage } = useSelector((state) => state.home);
   const { mcpLibrary, mcpLibraries } = useSelector((state) => state.mcpLibrary);
   const { blogs } = useSelector((state) => state.blog);
@@ -79,30 +80,27 @@ function McpDetail({ setIsOpen }) {
     }
   }, []);
 
-  // Load Banner Section
   const filterHomeBanner = homePage?.contentSections && homePage.contentSections?.length > 0 ? homePage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
   const filterHomeBannerTitle = filterHomeBanner.length > 0 && filterHomeBanner[0]?.title ? filterHomeBanner[0]?.title : '';
   const filterHomeBannerSubtitle = filterHomeBanner.length > 0 && filterHomeBanner[0]?.subtitle ? filterHomeBanner[0]?.subtitle : '';
   const filterHomeBannerImage = filterHomeBanner.length > 0 && filterHomeBanner[0]?.background ? filterHomeBanner[0]?.background?.url : '';
   const filterHomeBannerNameType = '/#data';
 
-  // Load discover section
   const filterDiscoverTab = homePage?.contentSections && homePage?.contentSections?.length > 0 ? homePage?.contentSections?.filter((item) => item.__component === 'home.discover-section') : [];
 
-  // Load buttons sections
   const filterButtonSection = homePage?.contentSections && homePage?.contentSections?.length > 0 ? homePage?.contentSections?.filter((item) => item.__component === 'sections.button-hero') : [];
 
   const buttonsLbls = mcpLibrary?.buttons?.length > 0
     ? mcpLibrary.buttons.map((item) => ({
         label: item?.name,
         class: item?.class,
-        link: `/mcps/${mcpLibrary?.slug}`,
+        link: `/mcps/${mcpLibrary?.slug}/mcp-ui`,
       }))
     : [
         {
           label: t('McpDetail.tryMcp'),
           class: 'primary-dinamic',
-          link: `/mcps/${mcpLibrary?.slug}`,
+          link: `/mcps/${mcpLibrary?.slug}/mcp-ui`,
         },
       ];
 
@@ -179,29 +177,35 @@ function McpDetail({ setIsOpen }) {
           <section className={`container ${classes.section__content} ${classes.section__three_cols}`}>
             <div className={classes.three_cols__grid}>
 
-              {mcpLibrary?.configSnippet && (
-                <div className={classes.three_cols__col}>
-                  <h3 className={classes.three_cols__col__title}>
-                    {t('McpDetail.technicalSetupTitle')}
-                  </h3>
+              <div className={classes.three_cols__col}>
+                <h3 className={classes.three_cols__col__title}>
+                  {t('McpDetail.technicalSetupTitle')}
+                </h3>
 
-                  <pre className={classes.three_cols__code}><code className="language-json">{JSON.stringify(JSON.parse(configJson), null, 2)}</code></pre>
+                {mcpLibrary?.configSnippet ? (
+                  <>
+                    <pre className={classes.three_cols__code}><code className="language-json">{JSON.stringify(JSON.parse(configJson), null, 2)}</code></pre>
 
-                  <button
-                    type='button'
-                    className={classes.three_cols__vscode_btn}
-                    onClick={() => {
-                      const jsonStr = JSON.stringify(mcpLibrary.configSnippet);
-                      const escaped = jsonStr.replaceAll('"', String.raw`\"`);
-                      const cmd = `code --add-mcp "${escaped}"`;
-                      navigator.clipboard.writeText(cmd).then(() => setVsCodeCopied(cmd));
-                    }}
-                  >
-                    <Icon id='MdCode' />
-                    <span>{t('McpDetail.addToVsCode')}</span>
-                  </button>
-                </div>
-              )}
+                    <button
+                      type='button'
+                      className={classes.three_cols__vscode_btn}
+                      onClick={() => {
+                        const jsonStr = JSON.stringify(mcpLibrary.configSnippet);
+                        const escaped = jsonStr.replaceAll('"', String.raw`\"`);
+                        const cmd = `code --add-mcp "${escaped}"`;
+                        navigator.clipboard.writeText(cmd).then(() => setVsCodeCopied(cmd));
+                      }}
+                    >
+                      <Icon id='MdCode' />
+                      <span>{t('McpDetail.addToVsCode')}</span>
+                    </button>
+                  </>
+                ) : (
+                  <div className={classes.three_cols__placeholder}>
+                    {t('McpDetail.noConfigSnippet')}
+                  </div>
+                )}
+              </div>
 
               <div className={classes.three_cols__col}>
                 <h3 className={classes.three_cols__col__title}>
@@ -219,18 +223,22 @@ function McpDetail({ setIsOpen }) {
                 )}
               </div>
 
-              {mcpLibrary?.resources && mcpLibrary.resources.length > 0 && (
-                <div className={classes.three_cols__col}>
-                  <h3 className={classes.three_cols__col__title}>
-                    {t('McpDetail.resourcesTitle')}
-                  </h3>
+              <div className={classes.three_cols__col}>
+                <h3 className={classes.three_cols__col__title}>
+                  {t('McpDetail.resourcesTitle')}
+                </h3>
+                {mcpLibrary?.resources && mcpLibrary.resources.length > 0 ? (
                   <div className={classes.resources__list}>
                     {mcpLibrary.resources.map((resource, index) => (
                       <CardResource key={resource?.id || index} resource={resource} />
                     ))}
                   </div>
-                </div>
-              )}
+                ) : (
+                  <div className={classes.three_cols__placeholder}>
+                    {t('McpDetail.noResources')}
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className={classes.three_cols__actions}>
@@ -242,7 +250,11 @@ function McpDetail({ setIsOpen }) {
                 <Icon id='MdDownload' />
                 <span>{t('McpDetail.downloadReport')}</span>
               </button>
-              <button type='button' className={`${classes.three_cols__action_btn} ${classes.three_cols__action_btn__primary}`}>
+              <button
+                type='button'
+                className={`${classes.three_cols__action_btn} ${classes.three_cols__action_btn__primary}`}
+                onClick={() => navigate(`/mcps/${mcpLibrary.slug}/mcp-ui`)}
+              >
                 <Icon id='MdPlayArrow' />
                 <span>{t('McpDetail.tryOut')}</span>
               </button>
@@ -254,14 +266,14 @@ function McpDetail({ setIsOpen }) {
               <div className='row'>
                 <div className='flex-md-12 flex-sm-12'>
                   <h1 className='h2 text__primary__title text-center font-weight-bold mb-2 ml-1'>
-                    {t('Home.discoverTitle')}
+                    {t('McpDetail.discoverTitle')}
                   </h1>
                 </div>
               </div>
               <div className='row'>
                 <div className='flex-md-12 flex-sm-12'>
                   <p className={`subtitle-1 mb-10 text__gray__darken text-center ${classes.section__discover__subtitle}`}>
-                    {t('Home.discoverSubtitle')}
+                    {t('McpDetail.discoverSubtitle')}
                   </p>
                 </div>
               </div>

@@ -30,6 +30,7 @@ import ResetPassword from '../pages/public/ResetPassword';
 import EmailConfirmed from '../pages/public/EmailConfirmed';
 import Mcps from '../pages/public/Mcps';
 import McpDetail from '../pages/public/McpDetail';
+import McpUI from '../pages/common/McpUI';
 
 function PublicRoute() {
   const location = useLocation();
@@ -71,6 +72,7 @@ function PublicRoute() {
           <Route path='/mcps' element={<Mcps setIsOpen={setIsOpen} />} />
           <Route path='/apis/:id' element={<ApiDetail setIsOpen={setOpenForm} />} />
           <Route path='/mcps/:id' element={<McpDetail setIsOpen={setOpenForm} />} />
+          <Route path='/mcps/:id/mcp-ui' element={<McpUI />} />
           <Route path='/app-partners' element={<AppPartners />} />
           <Route path='/faqs' element={<Faqs />} />
           <Route path='/apis/:id/swagger-ui' element={<SwaggerUI setIsOpen={setOpenForm} />} />

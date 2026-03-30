@@ -171,7 +171,14 @@
     "resourceMimeType": "MIME Type",
     "resourceSize": "Size",
     "descriptionTitle": "MCP Server Description",
-    "noDescription": "No description available for this MCP server."
+    "noDescription": "No description available for this MCP server.",
+    "noConfigSnippet": "No configuration snippet available for this MCP server.",
+    "noResources": "No resources available for this MCP server.",
+    "commandCopied": "Command copied to clipboard",
+    "openTerminalPaste": "Open the terminal and paste the command",
+    "copyAgain": "Copy again",
+    "discoverTitle": "Discover our MCPs",
+    "discoverSubtitle": "Explore the possibilities"
   },
   "Apis": {
     "filterBy": "Filter by",
@@ -319,12 +326,7 @@
     "copiedToClipboard": "Copied to clipboard",
     "copyError": "Error copying to clipboard"
   },
-  "ApisPaginated": {
-    "viewDocumentation": "View Documentation",
-    "next": "Next",
-    "previous": "Previous"
-  },
-  "McpsPaginated": {
+  "LibraryPaginated": {
     "viewDocumentation": "View Documentation",
     "next": "Next",
     "previous": "Previous"
@@ -495,5 +497,35 @@
   "SwaggerUI": {
     "noInfo": "No information available",
     "back": "GO BACK"
+  },
+  "McpUI": {
+    "back": "Back",
+    "connectTitle": "Connection",
+    "transport": "Transport",
+    "command": "Command",
+    "args": "Arguments (space-separated)",
+    "token": "Token (optional)",
+    "tokenPlaceholder": "Enter your access token",
+    "connect": "Connect",
+    "loading": "Connecting...",
+    "connectionError": "Connection failed. Please check the MCP ID and try again.",
+    "connectedHint": "Connected. Select an item from the list to inspect it.",
+    "listTitle": "Available",
+    "tools": "Tools",
+    "resources": "Resources",
+    "prompts": "Prompts",
+    "noItems": "None",
+    "connectFirst": "Connect first to see available tools, resources and prompts.",
+    "inspectorTitle": "Inspector",
+    "selectItem": "Select an item from the list to inspect it.",
+    "source": "Source",
+    "description": "Description",
+    "title": "Title",
+    "inputSchema": "Input Schema",
+    "outputSchema": "Output Schema",
+    "annotations": "Annotations",
+    "mimeType": "MIME Type",
+    "size": "Size",
+    "arguments": "Arguments"
   }
 }

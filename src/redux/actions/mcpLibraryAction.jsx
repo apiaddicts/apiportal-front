@@ -63,6 +63,24 @@ export const getMcpLibrary = (id) => (dispatch) => {
   );
 };
 
+export const getMcpLibraryBySlug = (slug) => (dispatch) => {
+  dispatch({ type: mcpLibraryConstants.GET_MCP_LIBRARY_BY_SLUG_REQUEST });
+  mcpLibraryService.getMcpBookStoreData(slug).then(
+    (entry) => {
+      dispatch({
+        type: mcpLibraryConstants.GET_MCP_LIBRARY_BY_SLUG_SUCCESS,
+        payload: entry,
+      });
+    },
+    (error) => {
+      dispatch({
+        type: mcpLibraryConstants.GET_MCP_LIBRARY_BY_SLUG_FAILURE,
+        payload: error,
+      });
+    },
+  );
+};
+
 export const sortMcpCollection = (sort) => (dispatch) => {
   dispatch({
     type: mcpLibraryConstants.GET_ALL_MCP_LIBRARY_REQUEST,
