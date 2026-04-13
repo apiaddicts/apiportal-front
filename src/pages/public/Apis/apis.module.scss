@@ -16,6 +16,7 @@
         margin-bottom: 2rem;
         display: none;
         visibility: hidden;
+        width: 25%;
 
         @include breakpoint(lg) {
           display: block;
@@ -25,6 +26,78 @@
     &__right {
         width: 80%;
         padding: 0 0 2% 4%;
+
+        &__view_switch {
+          display: flex;
+          align-items: center;
+          gap: 0.25rem;
+          margin-right: 0.5rem;
+          flex-shrink: 0;
+
+          button {
+            background: #f5f6fa;
+            border: 1px solid #e0e0e0;
+            color: #333;
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s;
+            outline: none;
+            line-height: 1;
+
+            &:hover {
+              background: #e0e0e0;
+            }
+          }
+
+          &__active {
+            background: #e0e0e0 !important;
+            color: #222 !important;
+            font-weight: bold;
+            border: 1.5px solid #bdbdbd !important;
+          }
+        }
+
+        &__controls_row {
+          display: flex;
+          flex-wrap: nowrap;
+          align-items: center;
+          gap: 0.5rem;
+          width: 100%;
+          margin-bottom: 1rem;
+        }
+
+        &__search {
+          flex: 1 1 0;
+          min-width: 0;
+        }
+
+        &__sort {
+          flex: 0 0 auto;
+        }
+
+        &__page_size {
+          flex: 0 0 auto;
+
+          &__select {
+            height: 38px;
+            padding: 0 0.75rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            background-color: #f5f6fa;
+            font-size: 0.9rem;
+            color: #333;
+            cursor: pointer;
+            outline: none;
+            transition: border-color 0.2s;
+
+            &:hover,
+            &:focus {
+              border-color: var(--primary-color);
+            }
+          }
+        }
 
         &__control_container {
           margin-bottom: 1rem !important;
@@ -56,7 +129,7 @@
 
         @include breakpoint(lg) {
           width: 80%;
-          padding: 0 0 2% 11%;
+          padding: 0 0 2% 5%;
         }
     }
     &__title {

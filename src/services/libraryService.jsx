@@ -22,7 +22,7 @@ function getApiBookStore(id) {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
-  return fetch(`${config.apiUrl}/library-apis/${id}?populate=image`, requestOptions)
+  return fetch(`${config.apiUrl}/library-apis/${id}?populate[image]=true&populate[ratings]=true`, requestOptions)
     .then(handleResponse)
     .then((library) => {
       return library;

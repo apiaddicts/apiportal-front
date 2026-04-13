@@ -34,6 +34,7 @@ Must match the slugs defined in the CMS Seed data.
 | :--- | :--- |
 | `VITE_APP_HOME_PAGE_SLUG` | `home` |
 | `VITE_APP_APIS_PAGE_SLUG` | `apis` |
+| `VITE_APP_MCPS_PAGE_SLUG` | `mcps` |
 | `VITE_APP_BLOG_PAGE_SLUG` | `blog` |
 | `VITE_APP_FAQ_PAGE_SLUG` | `faq` |
 | `VITE_APP_TERMS_PAGE_SLUG` | `terms` |

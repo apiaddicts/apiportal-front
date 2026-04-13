@@ -20,8 +20,8 @@ import { getHomeContent } from '../../../redux/actions/homeAction';
 import { getLibrary, getLibraries } from '../../../redux/actions/libraryAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
 import config from '../../../services/config';
-import codeSnipet from '../../../static/img/code-snippet.png';
 import classes from './api-detail.module.scss';
+import Ratings from '../../../components/Ratings';
 
 function ApiDetail({ setIsOpen }) {
   const { t } = useTranslation();
@@ -135,15 +135,10 @@ function ApiDetail({ setIsOpen }) {
   const apisNews = shuffledApis.slice(0, 3);
 
   const hasAnyRating =
-    !!library?.globalRating ||
-    !!library?.definitionRating ||
-    !!library?.securityRating ||
-    !!library?.qualityRating;
-
-  const getRatingClass = (rating) => {
-    if (!rating) return classes.rating__empty;
-    return classes[`rating__${rating}`] || classes.rating__empty;
-  };
+    !!library?.ratings?.globalRating ||
+    !!library?.ratings?.definitionRating ||
+    !!library?.ratings?.securityRating ||
+    !!library?.ratings?.qualityRating;
 
   const handleClickPage = (id) => {
     dispatch(getLibrary(id));
@@ -168,44 +163,17 @@ function ApiDetail({ setIsOpen }) {
           <section className={`container ${classes.section__content} pb-9`}>&nbsp;</section>
           {library && hasAnyRating && (
             <section className={`container ${classes.section__content} ${classes.section__ratings}`}>
-              <div className={classes.ratings__wrapper}>
-                <h2 className={classes.ratings__title}>
-                  {t('ApiDetail.globalGradesTitle')}
-                </h2>
-                <p className={classes.ratings__subtitle}>
-                  {t('ApiDetail.globalGradesSubtitle')}
-                </p>
-
-                <div className={classes.ratings__grid}>
-                  <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(library.globalRating)}`}>
-                      {library.globalRating || '-'}
-                    </div>
-                    <span>{t('ApiDetail.ratingGlobal')}</span>
-                  </div>
-
-                  <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(library.definitionRating)}`}>
-                      {library.definitionRating || '-'}
-                    </div>
-                    <span>{t('ApiDetail.ratingDefinition')}</span>
-                  </div>
-
-                  <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(library.securityRating)}`}>
-                      {library.securityRating || '-'}
-                    </div>
-                    <span>{t('ApiDetail.ratingSecurity')}</span>
-                  </div>
-
-                  <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(library.qualityRating)}`}>
-                      {library.qualityRating || '-'}
-                    </div>
-                    <span>{t('ApiDetail.ratingQuality')}</span>
-                  </div>
-                </div>
-              </div>
+              <Ratings
+                ratings={library.ratings}
+                title={t('ApiDetail.globalGradesTitle')}
+                subtitle={t('ApiDetail.globalGradesSubtitle')}
+                labels={{
+                  globalRating: t('ApiDetail.ratingGlobal'),
+                  definitionRating: t('ApiDetail.ratingDefinition'),
+                  securityRating: t('ApiDetail.ratingSecurity'),
+                  qualityRating: t('ApiDetail.ratingQuality'),
+                }}
+              />
             </section>
           )}
           {library?.markdown && library?.markdown.length > 0 && (

@@ -148,6 +148,38 @@
     "ratingSecurity": "Seguridad",
     "ratingQuality": "Calidad"
   },
+  "McpDetail": {
+    "tryMcp": "Probar MCP",
+    "moreInfo": "Más información",
+    "seeAll": "Ver todas",
+    "seeMore": "Ver más",
+    "howItWorks": "Cómo funciona",
+    "news": "Novedades",
+    "newsDescription": "Conoce todas las novedades sobre tecnología, MCPs y transformación digital",
+    "globalGradesTitle": "Calificaciones globales del MCP",
+    "globalGradesSubtitle": "Indicadores generales de calidad y disponibilidad",
+    "ratingGlobal": "Global",
+    "ratingDefinition": "Definición",
+    "ratingSecurity": "Seguridad",
+    "ratingQuality": "Calidad",
+    "technicalSetupTitle": "Implementación Técnica y Configuración Rápida",
+    "addToVsCode": "Agregar Directamente a Visual Studio Code",
+    "resourcesTitle": "Visor de Recursos MCP",
+    "downloadReport": "Descargar Reporte MCP",
+    "tryOut": "Probar",
+    "resourceUri": "URI",
+    "resourceMimeType": "Tipo MIME",
+    "resourceSize": "Tamaño",
+    "descriptionTitle": "Descripción del servidor MCP",
+    "noDescription": "No hay descripción disponible para este servidor MCP.",
+    "noConfigSnippet": "No hay fragmento de configuración disponible para este servidor MCP.",
+    "noResources": "No hay recursos disponibles para este servidor MCP.",
+    "commandCopied": "Comando copiado al portapapeles",
+    "openTerminalPaste": "Abre la terminal y pega el comando",
+    "copyAgain": "Copiar de nuevo",
+    "discoverTitle": "Descubre nuestros MCPs",
+    "discoverSubtitle": "Explora las posibilidades"
+  },
   "Apis": {
     "filterBy": "Filtrar por",
     "version": "Versión",
@@ -158,6 +190,16 @@
     "tags": "Etiquetas",
     "globalRating": "Calificación",
     "products": "Productos"
+  },
+  "Mcps": {
+    "filterBy": "Filtrar por",
+    "version": "Versión",
+    "clearFilters": "Eliminar filtros",
+    "searchPlaceholder": "Buscar MCPs...",
+    "noData": "Información no disponible",
+    "solution": "Solución",
+    "tags": "Etiquetas",
+    "globalRating": "Calificación"
   },
   "Blog": {
     "learnMore": "Conoce más",
@@ -284,7 +326,7 @@
     "copiedToClipboard": "Copiado al portapapeles",
     "copyError": "Error al copiar al portapapeles"
   },
-  "ApisPaginated": {
+  "LibraryPaginated": {
     "viewDocumentation": "Ver Documentación",
     "next": "Siguiente",
     "previous": "Anterior"
@@ -419,6 +461,7 @@
   },
   "Navbar": {
     "apis": "APIs",
+    "mcps": "MCPs",
     "blog": "Blog",
     "faqs": "FAQs",
     "myProfile": "Mi Perfil",
@@ -454,5 +497,35 @@
   "SwaggerUI": {
     "noInfo": "Sin información disponible",
     "back": "VOLVER"
+  },
+  "McpUI": {
+    "back": "Volver",
+    "connectTitle": "Conexión",
+    "transport": "Transporte",
+    "command": "Comando",
+    "args": "Argumentos (separados por espacio)",
+    "token": "Token (opcional)",
+    "tokenPlaceholder": "Ingresa tu token de acceso",
+    "connect": "Conectar",
+    "loading": "Conectando...",
+    "connectionError": "Error de conexión. Verifica el MCP ID e intenta de nuevo.",
+    "connectedHint": "Conectado. Selecciona un elemento de la lista para inspeccionarlo.",
+    "listTitle": "Disponibles",
+    "tools": "Herramientas",
+    "resources": "Recursos",
+    "prompts": "Prompts",
+    "noItems": "Ninguno",
+    "connectFirst": "Conéctate primero para ver herramientas, recursos y prompts disponibles.",
+    "inspectorTitle": "Inspector",
+    "selectItem": "Selecciona un elemento de la lista para inspeccionarlo.",
+    "source": "Fuente",
+    "description": "Descripción",
+    "title": "Título",
+    "inputSchema": "Esquema de entrada",
+    "outputSchema": "Esquema de salida",
+    "annotations": "Anotaciones",
+    "mimeType": "Tipo MIME",
+    "size": "Tamaño",
+    "arguments": "Argumentos"
   }
 }

@@ -39,7 +39,7 @@ const CardLibrary = ({ api }) => {
           href={`/developer/apis/${api.documentId}`}
           className={classes.card__button}
         >
-          {t('ApisPaginated.viewDocumentation')} <span>➜</span>
+          {t('LibraryPaginated.viewDocumentation')} <span>➜</span>
         </a>
       </div>
     </div>
