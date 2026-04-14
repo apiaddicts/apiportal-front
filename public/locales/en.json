@@ -498,27 +498,8 @@
     "noInfo": "No information available",
     "back": "GO BACK"
   },
-  "McpUI": {
-    "back": "Back",
-    "connectTitle": "Connection",
-    "transport": "Transport",
-    "command": "Command",
-    "args": "Arguments (space-separated)",
-    "token": "Token (optional)",
-    "tokenPlaceholder": "Enter your access token",
-    "connect": "Connect",
-    "loading": "Connecting...",
-    "connectionError": "Connection failed. Please check the MCP ID and try again.",
-    "connectedHint": "Connected. Select an item from the list to inspect it.",
-    "listTitle": "Available",
-    "tools": "Tools",
-    "resources": "Resources",
-    "prompts": "Prompts",
-    "noItems": "None",
-    "connectFirst": "Connect first to see available tools, resources and prompts.",
-    "inspectorTitle": "Inspector",
+  "Inspector": {
     "selectItem": "Select an item from the list to inspect it.",
-    "source": "Source",
     "description": "Description",
     "title": "Title",
     "inputSchema": "Input Schema",
@@ -527,5 +508,27 @@
     "mimeType": "MIME Type",
     "size": "Size",
     "arguments": "Arguments"
+  },
+  "Section": {
+    "noItems": "None"
+  },
+  "McpUI": {
+    "back": "Back",
+    "connectTitle": "Connection",
+    "transport": "Transport",
+    "command": "Command",
+    "args": "Arguments (space-separated)",
+    "noHeadersConfigured": "No headers configured",
+    "connect": "Connect",
+    "loading": "Connecting...",
+    "connectionError": "Connection failed. Please verify the MCP server configuration and try again.",
+    "connectedHint": "Connected. Select an item from the list to inspect it.",
+    "listTitle": "Available",
+    "tools": "Tools",
+    "resources": "Resources",
+    "prompts": "Prompts",
+    "connectFirst": "Connect first to see available tools, resources and prompts.",
+    "inspectorTitle": "Inspector",
+    "source": "Source"
   }
 }

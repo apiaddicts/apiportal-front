@@ -2,7 +2,7 @@ import mcpLibraryConstants from '../constants/mcpLibraryConstants';
 
 const initialState = {
   backUpMcpLibraries: [],
-  mcpLibraries: [],
+  mcpLibraries: null,
   errorMcpLibraries: {},
   loadingMcpLibraries: false,
   filters: {},

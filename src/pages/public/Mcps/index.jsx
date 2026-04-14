@@ -10,7 +10,6 @@ import CustomizedAccordions from '../../../components/common/AccordionMUI';
 import ButtonGroupMUI from '../../../components/common/ButtonGroup';
 import CheckboxLabels from '../../../components/common/CustomCheck';
 import LibraryPaginated from '../../../components/LibraryPaginated';
-import CustomIcon from '../../../components/MdIcon/CustomIcon';
 import Icon from '../../../components/MdIcon/Icon';
 import classes from './mcps.module.scss';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
@@ -34,7 +33,7 @@ function Mcps({ setIsOpen }) {
   }, [mcpPage, dispatch]);
 
   useEffect(() => {
-    if (mcpLibraries?.length === 0 && Object.keys(filters).length === 0) {
+    if (mcpLibraries === null && Object.keys(filters).length === 0) {
       dispatch(getMcpLibraries());
     }
   }, [mcpLibraries, filters, dispatch]);
@@ -349,9 +348,10 @@ function Mcps({ setIsOpen }) {
                           alignItems: 'center',
                           justifyContent: 'center',
                           margin: '2rem',
+                          color: '#939393'
                         }}
                       >
-                        <h1>{t('Mcps.noData')}</h1>
+                        <p className={`fs__20`}>{t('Mcps.noData')}</p>
                       </div>
                     </section>
                   )

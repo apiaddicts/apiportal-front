@@ -8,4 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.2] - 2026-04-13
 
 ## Added
-- Added MCP support
+
+- Support for MCP.
+- Inspector tool for MCPs.
+- MCP Service to manage connections with headers.

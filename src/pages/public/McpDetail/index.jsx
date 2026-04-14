@@ -190,10 +190,25 @@ function McpDetail({ setIsOpen }) {
                       type='button'
                       className={classes.three_cols__vscode_btn}
                       onClick={() => {
-                        const jsonStr = JSON.stringify(mcpLibrary.configSnippet);
-                        const escaped = jsonStr.replaceAll('"', String.raw`\"`);
-                        const cmd = `code --add-mcp "${escaped}"`;
-                        navigator.clipboard.writeText(cmd).then(() => setVsCodeCopied(cmd));
+                        try {
+                          const cfg = typeof mcpLibrary.configSnippet === 'string'
+                            ? JSON.parse(mcpLibrary.configSnippet)
+                            : mcpLibrary.configSnippet;
+
+                          const servers = cfg?.mcpServers || cfg?.servers || {};
+                          const [serverName, serverConfig] = Object.entries(servers)[0] || [mcpLibrary.slug, cfg];
+
+                          const payload = { name: serverName, ...serverConfig };
+                          const vsCodeUrl = `vscode:mcp/install?${encodeURIComponent(JSON.stringify(payload))}`;
+
+                          globalThis.location.href = vsCodeUrl;
+
+                        } catch {
+                          const jsonStr = JSON.stringify(mcpLibrary.configSnippet);
+                          const escaped = jsonStr.replaceAll('"', String.raw`\"`);
+                          const cmd = `code --add-mcp "${escaped}"`;
+                          navigator.clipboard.writeText(cmd).then(() => setVsCodeCopied(cmd));
+                        }
                       }}
                     >
                       <Icon id='MdCode' />
@@ -242,14 +257,16 @@ function McpDetail({ setIsOpen }) {
             </div>
 
             <div className={classes.three_cols__actions}>
-              <button
-                type='button'
-                className={classes.three_cols__action_btn}
-                onClick={() => mcpLibrary.reportUrl && window.open(mcpLibrary.reportUrl, '_blank', 'noopener,noreferrer')}
-              >
-                <Icon id='MdDownload' />
-                <span>{t('McpDetail.downloadReport')}</span>
-              </button>
+              {mcpLibrary.reportUrl && (
+                <button
+                  type='button'
+                  className={classes.three_cols__action_btn}
+                  onClick={() => window.open(mcpLibrary.reportUrl, '_blank', 'noopener,noreferrer')}
+                >
+                  <Icon id='MdDownload' />
+                  <span>{t('McpDetail.downloadReport')}</span>
+                </button>
+              )}
               <button
                 type='button'
                 className={`${classes.three_cols__action_btn} ${classes.three_cols__action_btn__primary}`}
