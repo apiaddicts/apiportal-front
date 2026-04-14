@@ -13,6 +13,10 @@ const initialState = {
   errorMcpLibraryBySlug: {},
   sort: 'asc',
   selectedMcps: [],
+  callToolResponse: null,
+  loadingCallTool: false,
+  errorCallTool: {},
+  liveSession: null,
 };
 
 // eslint-disable-next-line default-param-last
@@ -80,6 +84,26 @@ export default function mcpLibraryReducer(state = initialState, action) {
         loadingMcpLibraries: false,
         sort: action.sort,
       };
+    case mcpLibraryConstants.CALL_TOOL_REQUEST:
+      return {
+        ...state,
+        loadingCallTool: true,
+        errorCallTool: {},
+      };
+
+    case mcpLibraryConstants.CALL_TOOL_SUCCESS:
+      return {
+        ...state,
+        loadingCallTool: false,
+        callToolResponse: action.payload,
+      };
+
+    case mcpLibraryConstants.CALL_TOOL_FAILURE:
+      return {
+        ...state,
+        loadingCallTool: false,
+        errorCallTool: action.payload,
+      };
     case mcpLibraryConstants.RESET_MCP_LIBRARY:
       return {
         ...state,
@@ -91,6 +115,18 @@ export default function mcpLibraryReducer(state = initialState, action) {
       return {
         ...state,
         selectedMcps: action.payload,
+      };
+
+    case mcpLibraryConstants.SET_MCP_LIVE_SESSION:
+      return {
+        ...state,
+        liveSession: action.payload,
+      };
+
+    case mcpLibraryConstants.CLEAR_MCP_LIVE_SESSION:
+      return {
+        ...state,
+        liveSession: null,
       };
 
     default:

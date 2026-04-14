@@ -145,6 +145,27 @@ export const filterMcpCheck = (label, checked, name) => (dispatch) => {
 
 };
 
+export const callTool = (slug, options) => (dispatch) => {
+  dispatch({
+    type: mcpLibraryConstants.CALL_TOOL_REQUEST,
+  });
+
+  mcpLibraryService.callTool(slug, options).then(
+    (response) => {
+      dispatch({
+        type: mcpLibraryConstants.CALL_TOOL_SUCCESS,
+        payload: response,
+      });
+    },
+    (error) => {
+      dispatch({
+        type: mcpLibraryConstants.CALL_TOOL_FAILURE,
+        payload: error,
+      });
+    },
+  );
+};
+
 export const resetMcpLibrary = () => (dispatch) => {
   dispatch({
     type: mcpLibraryConstants.RESET_MCP_LIBRARY,
@@ -156,4 +177,15 @@ export const showSelectedMcps = (selectedMcps) => (dispatch) => {
     type: mcpLibraryConstants.SELECTED_MCPS,
     payload: selectedMcps,
   });
+};
+
+export const setMcpLiveSession = (slug, resources, headers) => (dispatch) => {
+  dispatch({
+    type: mcpLibraryConstants.SET_MCP_LIVE_SESSION,
+    payload: { slug, resources, headers },
+  });
+};
+
+export const clearMcpLiveSession = () => (dispatch) => {
+  dispatch({ type: mcpLibraryConstants.CLEAR_MCP_LIVE_SESSION });
 };

@@ -507,7 +507,11 @@
     "annotations": "Annotations",
     "mimeType": "MIME Type",
     "size": "Size",
-    "arguments": "Arguments"
+    "arguments": "Arguments",
+    "tryTool": "Try it",
+    "run": "Run",
+    "running": "Running...",
+    "result": "Result"
   },
   "Section": {
     "noItems": "None"

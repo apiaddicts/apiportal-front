@@ -20,7 +20,7 @@ function getMcpBookStore(id) {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
-  return fetch(`${config.apiUrl}/library-mcps/${id}?populate[image]=true&populate[tags]=true&populate[resources]=true&populate[ratings]=true`, requestOptions)
+  return fetch(`${config.apiUrl}/library-mcps/${id}?populate[image]=true&populate[tags]=true&populate[ratings]=true`, requestOptions)
     .then(handleResponse)
     .then((library) => {
       return library;
@@ -69,11 +69,22 @@ function connectMcp(slug, options = {}) {
     });
 }
 
+function callTool(slug, options = {}) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
+    body: JSON.stringify(options),
+  };
+  return fetch(`${config.apiUrl}/library-mcps/${slug}/call-tool`, requestOptions)
+    .then(handleResponse);
+}
+
 const libraryService = {
   getMcpBookStores,
   getMcpBookStore,
   getMcpBookStoreData,
   connectMcp,
+  callTool,
 };
 
 export default libraryService;

@@ -31,7 +31,7 @@ function McpDetail({ setIsOpen }) {
   const params = useParams();
   const navigate = useNavigate();
   const { homePage } = useSelector((state) => state.home);
-  const { mcpLibrary, mcpLibraries } = useSelector((state) => state.mcpLibrary);
+  const { mcpLibrary, mcpLibraries, liveSession } = useSelector((state) => state.mcpLibrary);
   const { blogs } = useSelector((state) => state.blog);
 
   const [bannerImg, setBannerImg] = useState('');
@@ -130,20 +130,71 @@ function McpDetail({ setIsOpen }) {
     dispatch(getMcpLibrary(id));
   };
 
-  let configJson = null;
-  if (mcpLibrary?.configSnippet) {
-    try {
-      configJson = typeof mcpLibrary.configSnippet === 'string'
-        ? JSON.stringify(JSON.parse(mcpLibrary.configSnippet), null, 2)
-        : JSON.stringify(mcpLibrary.configSnippet, null, 2);
-    } catch {
-      configJson = mcpLibrary.configSnippet;
+  const isLiveSessionActive = liveSession !== null && liveSession.slug === mcpLibrary?.slug;
+  const effectiveResources = isLiveSessionActive ? (liveSession.resources || []) : [];
+
+  const mergeHeadersIntoCfg = (cfg, hdrs) => {
+    if (cfg.mcpServers) {
+      const serverName = Object.keys(cfg.mcpServers)[0];
+      if (serverName) cfg.mcpServers[serverName].headers = { ...hdrs };
+    } else if (cfg.servers) {
+      const serverName = Object.keys(cfg.servers)[0];
+      if (serverName) cfg.servers[serverName].headers = { ...hdrs };
+    } else {
+      cfg.headers = { ...hdrs };
     }
-  }
+  };
+
+  const extractHeadersFromCfg = (cfg) => {
+    if (cfg.mcpServers) {
+      const serverName = Object.keys(cfg.mcpServers)[0];
+      return cfg.mcpServers[serverName]?.headers || null;
+    }
+    if (cfg.servers) {
+      const serverName = Object.keys(cfg.servers)[0];
+      return cfg.servers[serverName]?.headers || null;
+    }
+    return cfg.headers || null;
+  };
+
+  const effectiveConfigSnippet = (() => {
+    if (!mcpLibrary?.configSnippet) return null;
+    if (!isLiveSessionActive || !liveSession.headers || Object.keys(liveSession.headers).length === 0) {
+      return mcpLibrary.configSnippet;
+    }
+    try {
+      const cfg = typeof mcpLibrary.configSnippet === 'string'
+        ? JSON.parse(mcpLibrary.configSnippet)
+        : structuredClone(mcpLibrary.configSnippet);
+      mergeHeadersIntoCfg(cfg, liveSession.headers);
+      return cfg;
+    } catch {
+      return mcpLibrary.configSnippet;
+    }
+  })();
+
+  const maskedConfigSnippet = (() => {
+    if (!effectiveConfigSnippet) return null;
+    try {
+      const cfg = typeof effectiveConfigSnippet === 'string'
+        ? JSON.parse(effectiveConfigSnippet)
+        : structuredClone(effectiveConfigSnippet);
+      const existingHeaders = extractHeadersFromCfg(cfg);
+      if (existingHeaders && Object.keys(existingHeaders).length > 0) {
+        const masked = Object.fromEntries(
+          Object.entries(existingHeaders).map(([k, v]) => [k, '•'.repeat(String(v).length || 8)]),
+        );
+        mergeHeadersIntoCfg(cfg, masked);
+      }
+      return cfg;
+    } catch {
+      return effectiveConfigSnippet;
+    }
+  })();
 
   return (
     <div id='mcp'>
-      {Object.keys(mcpLibrary).length > 0 ? (
+      {mcpLibrary && Object.keys(mcpLibrary).length > 0 ? (
         <>
           <section>
             <BannerImage
@@ -184,16 +235,16 @@ function McpDetail({ setIsOpen }) {
 
                 {mcpLibrary?.configSnippet ? (
                   <>
-                    <pre className={classes.three_cols__code}><code className="language-json">{JSON.stringify(JSON.parse(configJson), null, 2)}</code></pre>
+                    <pre className={classes.three_cols__code}><code className="language-json">{typeof maskedConfigSnippet === 'string' ? maskedConfigSnippet : JSON.stringify(maskedConfigSnippet, null, 2)}</code></pre>
 
                     <button
                       type='button'
                       className={classes.three_cols__vscode_btn}
                       onClick={() => {
                         try {
-                          const cfg = typeof mcpLibrary.configSnippet === 'string'
-                            ? JSON.parse(mcpLibrary.configSnippet)
-                            : mcpLibrary.configSnippet;
+                          const cfg = typeof effectiveConfigSnippet === 'string'
+                            ? JSON.parse(effectiveConfigSnippet)
+                            : effectiveConfigSnippet;
 
                           const servers = cfg?.mcpServers || cfg?.servers || {};
                           const [serverName, serverConfig] = Object.entries(servers)[0] || [mcpLibrary.slug, cfg];
@@ -242,9 +293,9 @@ function McpDetail({ setIsOpen }) {
                 <h3 className={classes.three_cols__col__title}>
                   {t('McpDetail.resourcesTitle')}
                 </h3>
-                {mcpLibrary?.resources && mcpLibrary.resources.length > 0 ? (
+                {effectiveResources.length > 0 ? (
                   <div className={classes.resources__list}>
-                    {mcpLibrary.resources.map((resource, index) => (
+                    {effectiveResources.map((resource, index) => (
                       <CardResource key={resource?.id || index} resource={resource} />
                     ))}
                   </div>
