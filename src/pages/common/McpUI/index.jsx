@@ -7,7 +7,7 @@ import Icon from '../../../components/MdIcon/Icon';
 import Inspector from '../../../components/Inspector/Inspector';
 import Section from '../../../components/Section/Section';
 import mcpLibraryService from '../../../services/mcpLibraryService';
-import { getMcpLibraryBySlug } from '../../../redux/actions/mcpLibraryAction';
+import { getMcpLibraryBySlug, setMcpLiveSession } from '../../../redux/actions/mcpLibraryAction';
 import classes from './mcp-ui.module.scss';
 
 function extractConfig(snippet) {
@@ -37,7 +37,6 @@ function McpUI() {
   const [args, setArgs] = useState('');
   const [url, setUrl] = useState('');
   const [headers, setHeaders] = useState({});
-  const [visibleHeaders, setVisibleHeaders] = useState({});
   const [mcpData, setMcpData] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -101,6 +100,11 @@ function McpUI() {
         throw new Error(data?.message || t('McpUI.connectionError'));
       }
       setMcpData(data);
+      dispatch(setMcpLiveSession(
+        slug,
+        data?.resources || [],
+        transport === 'stdio' ? {} : { ...headers },
+      ));
     } catch (e) {
       setError(e?.message || t('McpUI.connectionError'));
     } finally {
@@ -188,23 +192,14 @@ function McpUI() {
                   Object.keys(headers).map((key) => (
                     <div className={classes.field} key={key}>
                       <label className={classes.label} htmlFor={`mcp-header-${key}`}>{key}</label>
-                      <div className={classes.input_wrap}>
-                        <input
-                          id={`mcp-header-${key}`}
-                          type={visibleHeaders[key] ? 'text' : 'password'}
-                          className={classes.input}
-                          value={headers[key]}
-                          onChange={(e) => setHeaders((prev) => ({ ...prev, [key]: e.target.value }))}
-                        />
-                        <button
-                          type="button"
-                          className={classes.toggle_btn}
-                          onClick={() => setVisibleHeaders((prev) => ({ ...prev, [key]: !prev[key] }))}
-                          aria-label={visibleHeaders[key] ? 'Hide' : 'Show'}
-                        >
-                          <Icon id={visibleHeaders[key] ? 'MdVisibilityOff' : 'MdVisibility'} />
-                        </button>
-                      </div>
+                      <input
+                        id={`mcp-header-${key}`}
+                        type="password"
+                        className={classes.input}
+                        value={headers[key]}
+                        onChange={(e) => setHeaders((prev) => ({ ...prev, [key]: e.target.value }))}
+                        autoComplete="off"
+                      />
                     </div>
                   ))
                 ) : (
@@ -267,7 +262,11 @@ function McpUI() {
         <div className={classes.col}>
           <h3 className={classes.col__title}>{t('McpUI.inspectorTitle')}</h3>
           {mcpData ? (
-            <Inspector item={selectedItem} />
+            <Inspector
+              item={selectedItem}
+              slug={slug}
+              connectionOptions={{ transport, url, headers, command, args: args.trim().split(/\s+/).filter(Boolean) }}
+            />
           ) : (
             <div className={classes.empty_state}>
               <Icon id="MdLockOutline" />

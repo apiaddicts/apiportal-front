@@ -5,10 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.2] - 2026-04-13
+## [1.0.2] - 2026-04-14
 
 ## Added
 
-- Support for MCP.
-- Inspector tool for MCPs.
-- MCP Service to manage connections with headers.
+- MCP Support: Implementation of basic schemas and connection logic for Model Context Protocol.
+- Inspector: New debugging tool for MCPs with support for executing and testing remote tools.
+- Dedicated MCP Service to handle provider communication using custom headers and API keys.
