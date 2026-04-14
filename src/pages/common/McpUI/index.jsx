@@ -17,6 +17,10 @@ function extractConfig(snippet) {
     const servers = Object.values(snippet.mcpServers);
     if (servers.length > 0) return servers[0];
   }
+  if (snippet.servers) {
+    const servers = Object.values(snippet.servers);
+    if (servers.length > 0) return servers[0];
+  }
   return null;
 }
 
@@ -32,7 +36,8 @@ function McpUI() {
   const [command, setCommand] = useState('');
   const [args, setArgs] = useState('');
   const [url, setUrl] = useState('');
-  const [token, setToken] = useState('');
+  const [headers, setHeaders] = useState({});
+  const [visibleHeaders, setVisibleHeaders] = useState({});
   const [mcpData, setMcpData] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -49,6 +54,7 @@ function McpUI() {
       setArgs(Array.isArray(cfg.args) ? cfg.args.join(' ') : (cfg.args || ''));
     } else {
       setUrl(cfg.url || '');
+      setHeaders(cfg.headers && typeof cfg.headers === 'object' ? cfg.headers : {});
     }
   };
 
@@ -71,6 +77,7 @@ function McpUI() {
       setArgs(Array.isArray(cfg.args) ? cfg.args.join(' ') : (cfg.args || ''));
     } else {
       setUrl(cfg.url || '');
+      setHeaders(cfg.headers && typeof cfg.headers === 'object' ? cfg.headers : {});
     }
   };
 
@@ -87,9 +94,12 @@ function McpUI() {
         if (args.trim()) options.args = args.trim().split(/\s+/).filter(Boolean);
       } else {
         if (url.trim()) options.url = url.trim();
-        if (token.trim()) options.token = token.trim();
+        if (Object.keys(headers).length) options.headers = { ...headers };
       }
       const data = await mcpLibraryService.connectMcp(slug.trim(), options);
+      if (data?.success === false) {
+        throw new Error(data?.message || t('McpUI.connectionError'));
+      }
       setMcpData(data);
     } catch (e) {
       setError(e?.message || t('McpUI.connectionError'));
@@ -172,16 +182,34 @@ function McpUI() {
                   placeholder="https://mcp-server.example.com/sse"
                 />
               </div>
-              <div className={classes.field}>
-                <label className={classes.label} htmlFor="mcp-token">{t('McpUI.token')}</label>
-                <input
-                  id="mcp-token"
-                  type="password"
-                  className={classes.input}
-                  value={token}
-                  onChange={(e) => setToken(e.target.value)}
-                  placeholder={t('McpUI.tokenPlaceholder')}
-                />
+              <div className={classes.headers_box}>
+                <span className={classes.headers_box__label}>Headers</span>
+                {Object.keys(headers).length > 0 ? (
+                  Object.keys(headers).map((key) => (
+                    <div className={classes.field} key={key}>
+                      <label className={classes.label} htmlFor={`mcp-header-${key}`}>{key}</label>
+                      <div className={classes.input_wrap}>
+                        <input
+                          id={`mcp-header-${key}`}
+                          type={visibleHeaders[key] ? 'text' : 'password'}
+                          className={classes.input}
+                          value={headers[key]}
+                          onChange={(e) => setHeaders((prev) => ({ ...prev, [key]: e.target.value }))}
+                        />
+                        <button
+                          type="button"
+                          className={classes.toggle_btn}
+                          onClick={() => setVisibleHeaders((prev) => ({ ...prev, [key]: !prev[key] }))}
+                          aria-label={visibleHeaders[key] ? 'Hide' : 'Show'}
+                        >
+                          <Icon id={visibleHeaders[key] ? 'MdVisibilityOff' : 'MdVisibility'} />
+                        </button>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <p className={classes.no_headers}>{t('McpUI.noHeadersConfigured')}</p>
+                )}
               </div>
             </>
           )}

@@ -33,12 +33,12 @@ function Apis({ setIsOpen }) {
   }, [apiPage, dispatch]);
 
   useEffect(() => {
-    if (libraries?.length === 0 && Object.keys(filters).length === 0) {
+    if ((libraries === null || libraries?.length === 0) && Object.keys(filters).length === 0) {
       dispatch(getLibraries());
     }
   }, [libraries, filters, dispatch]);
 
-  const filterApiBanner = apiPage && apiPage.contentSections && apiPage.contentSections?.length > 0 ? apiPage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
+  const filterApiBanner = apiPage?.contentSections && apiPage.contentSections?.length > 0 ? apiPage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
 
   const resetFilters = () => {
     dispatch(getLibraries());

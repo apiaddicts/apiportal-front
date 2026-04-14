@@ -46,10 +46,10 @@ function getMcpBookStoreData(slug) {
 }
 
 function connectMcp(slug, options = {}) {
-  const { transport, token, command, args, url } = options;
+  const { transport, headers, command, args, url } = options;
   const body = {};
   if (transport) body.transport = transport;
-  if (token) body.token = token;
+  if (headers && typeof headers === 'object' && Object.keys(headers).length) body.headers = headers;
   if (command) body.command = command;
   if (Array.isArray(args) && args.length) body.args = args;
   if (url) body.url = url;

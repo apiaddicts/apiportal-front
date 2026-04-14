@@ -185,7 +185,7 @@
   border-radius: 8px;
   padding: 1rem 1.2rem;
   font-size: 0.8rem;
-  line-height: 1.6;
+  line-height: 1.5;
   background: #0f172a;
   color: #e2e8f0;
   overflow-x: auto;
@@ -199,6 +199,9 @@
     border: none;
     padding: 0;
     font-size: inherit;
+    white-space: pre-wrap;
+    word-break: break-all;
+    overflow-wrap: anywhere;
   }
 }
 
@@ -217,6 +220,37 @@
   opacity: 0.85;
   align-self: flex-start;
   transition: opacity 0.2s;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+.three_cols__vscode_wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.three_cols__vscode_hint {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.15rem;
+}
+
+.three_cols__vscode_hint__link {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 0.75rem;
+  color: #94a3b8;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: 600;
 
   &:hover {
     opacity: 0.75;
