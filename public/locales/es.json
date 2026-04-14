@@ -498,14 +498,26 @@
     "noInfo": "Sin información disponible",
     "back": "VOLVER"
   },
+  "Inspector": {
+    "selectItem": "Selecciona un elemento de la lista para inspeccionarlo.",
+    "description": "Descripción",
+    "title": "Título",
+    "inputSchema": "Esquema de entrada",
+    "outputSchema": "Esquema de salida",
+    "annotations": "Anotaciones",
+    "mimeType": "Tipo MIME",
+    "size": "Tamaño",
+    "arguments": "Argumentos"
+  },
+  "Section": {
+    "noItems": "Ninguno"
+  },
   "McpUI": {
     "back": "Volver",
     "connectTitle": "Conexión",
     "transport": "Transporte",
     "command": "Comando",
     "args": "Argumentos (separados por espacio)",
-    "token": "Token (opcional)",
-    "tokenPlaceholder": "Ingresa tu token de acceso",
     "noHeadersConfigured": "Sin cabeceras configuradas",
     "connect": "Conectar",
     "loading": "Conectando...",
@@ -515,18 +527,8 @@
     "tools": "Herramientas",
     "resources": "Recursos",
     "prompts": "Prompts",
-    "noItems": "Ninguno",
     "connectFirst": "Conéctate primero para ver herramientas, recursos y prompts disponibles.",
     "inspectorTitle": "Inspector",
-    "selectItem": "Selecciona un elemento de la lista para inspeccionarlo.",
-    "source": "Fuente",
-    "description": "Descripción",
-    "title": "Título",
-    "inputSchema": "Esquema de entrada",
-    "outputSchema": "Esquema de salida",
-    "annotations": "Anotaciones",
-    "mimeType": "Tipo MIME",
-    "size": "Tamaño",
-    "arguments": "Argumentos"
+    "source": "Fuente"
   }
 }

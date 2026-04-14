@@ -498,14 +498,26 @@
     "noInfo": "No information available",
     "back": "GO BACK"
   },
+  "Inspector": {
+    "selectItem": "Select an item from the list to inspect it.",
+    "description": "Description",
+    "title": "Title",
+    "inputSchema": "Input Schema",
+    "outputSchema": "Output Schema",
+    "annotations": "Annotations",
+    "mimeType": "MIME Type",
+    "size": "Size",
+    "arguments": "Arguments"
+  },
+  "Section": {
+    "noItems": "None"
+  },
   "McpUI": {
     "back": "Back",
     "connectTitle": "Connection",
     "transport": "Transport",
     "command": "Command",
     "args": "Arguments (space-separated)",
-    "token": "Token (optional)",
-    "tokenPlaceholder": "Enter your access token",
     "noHeadersConfigured": "No headers configured",
     "connect": "Connect",
     "loading": "Connecting...",
@@ -515,18 +527,8 @@
     "tools": "Tools",
     "resources": "Resources",
     "prompts": "Prompts",
-    "noItems": "None",
     "connectFirst": "Connect first to see available tools, resources and prompts.",
     "inspectorTitle": "Inspector",
-    "selectItem": "Select an item from the list to inspect it.",
-    "source": "Source",
-    "description": "Description",
-    "title": "Title",
-    "inputSchema": "Input Schema",
-    "outputSchema": "Output Schema",
-    "annotations": "Annotations",
-    "mimeType": "MIME Type",
-    "size": "Size",
-    "arguments": "Arguments"
+    "source": "Source"
   }
 }

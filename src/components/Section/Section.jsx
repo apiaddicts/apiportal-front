@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import classes from './mcp-ui.module.scss';
+import classes from './section.module.scss';
 
 function Section({ title, items, type, selectedItem, onSelect }) {
   const { t } = useTranslation();
@@ -11,7 +11,7 @@ function Section({ title, items, type, selectedItem, onSelect }) {
     <div className={classes.section}>
       <span className={classes.section__title}>{title}</span>
       {items.length === 0 ? (
-        <span className={classes.section__empty}>{t('McpUI.noItems')}</span>
+        <span className={classes.section__empty}>{t('Section.noItems')}</span>
       ) : (
         <ul className={classes.tools_list}>
           {items.map((item, i) => {

@@ -4,10 +4,10 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import Icon from '../../../components/MdIcon/Icon';
+import Inspector from '../../../components/Inspector/Inspector';
+import Section from '../../../components/Section/Section';
 import mcpLibraryService from '../../../services/mcpLibraryService';
 import { getMcpLibraryBySlug } from '../../../redux/actions/mcpLibraryAction';
-import Inspector from './Inspector';
-import Section from './Section';
 import classes from './mcp-ui.module.scss';
 
 function extractConfig(snippet) {
