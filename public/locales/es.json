@@ -141,12 +141,57 @@
     "news": "Novedades",
     "newsDescription": "Conoce todas las novedades sobre tecnología, APIs y transformación digital",
     "seeMore": "Ver más",
+    "badgesTitle": "Certificaciones de Calidad de API",
+    "badgeSecurity": "Seguridad",
+    "badgeQuality": "Calidad",
+    "badgeDevExperience": "Experiencia de Desarrollo",
+    "badgeDora": "Cumplimiento DORA",
+    "badgeOpenFinance": "Cumplimiento Open Finance",
     "globalGradesTitle": "Calificaciones globales de la API",
     "globalGradesSubtitle": "Indicadores generales de calidad y disponibilidad",
     "ratingGlobal": "Global",
     "ratingDefinition": "Definición",
     "ratingSecurity": "Seguridad",
     "ratingQuality": "Calidad"
+  },
+  "McpDetail": {
+    "tryMcp": "Probar MCP",
+    "moreInfo": "Más información",
+    "seeAll": "Ver todas",
+    "seeMore": "Ver más",
+    "howItWorks": "Cómo funciona",
+    "news": "Novedades",
+    "newsDescription": "Conoce todas las novedades sobre tecnología, MCPs y transformación digital",
+    "globalGradesTitle": "Calificaciones globales del MCP",
+    "globalGradesSubtitle": "Indicadores generales de calidad y disponibilidad",
+    "ratingGlobal": "Global",
+    "ratingDefinition": "Definición",
+    "ratingSecurity": "Seguridad",
+    "ratingQuality": "Calidad",
+    "technicalSetupTitle": "Implementación Técnica y Configuración Rápida",
+    "addToVsCode": "Agregar Directamente a Visual Studio Code",
+    "resourcesTitle": "Visor de Recursos MCP",
+    "downloadReport": "Descargar Reporte MCP",
+    "tryOut": "Probar",
+    "resourceUri": "URI",
+    "resourceMimeType": "Tipo MIME",
+    "resourceSize": "Tamaño",
+    "descriptionTitle": "Descripción del servidor MCP",
+    "noDescription": "No hay descripción disponible para este servidor MCP.",
+    "noConfigSnippet": "No hay fragmento de configuración disponible para este servidor MCP.",
+    "noResources": "No hay recursos disponibles para este servidor MCP.",
+    "connectToSeeCapabilities": "Conéctate al servidor MCP usando el botón 'Probar' de abajo para actualizar los headers y cargar los recursos, herramientas y prompts.",
+    "noCapabilitiesFound": "Este servidor MCP no reportó ninguna capacidad.",
+    "connectToSee": "Haz clic en el botón 'Probar' de abajo para conectarte y cargar la lista de recursos, herramientas y prompts.",
+    "capabilitiesTitle": "Visor de Capacidades de MCP",
+    "toolsLabel": "Herramientas",
+    "resourcesLabel": "Recursos",
+    "promptsLabel": "Prompts",
+    "commandCopied": "Comando copiado al portapapeles",
+    "openTerminalPaste": "Abre la terminal y pega el comando",
+    "copyAgain": "Copiar de nuevo",
+    "discoverTitle": "Descubre nuestros MCPs",
+    "discoverSubtitle": "Explora las posibilidades"
   },
   "Apis": {
     "filterBy": "Filtrar por",
@@ -158,6 +203,16 @@
     "tags": "Etiquetas",
     "globalRating": "Calificación",
     "products": "Productos"
+  },
+  "Mcps": {
+    "filterBy": "Filtrar por",
+    "version": "Versión",
+    "clearFilters": "Eliminar filtros",
+    "searchPlaceholder": "Buscar MCPs...",
+    "noData": "Información no disponible",
+    "solution": "Solución",
+    "tags": "Etiquetas",
+    "globalRating": "Calificación"
   },
   "Blog": {
     "learnMore": "Conoce más",
@@ -284,7 +339,7 @@
     "copiedToClipboard": "Copiado al portapapeles",
     "copyError": "Error al copiar al portapapeles"
   },
-  "ApisPaginated": {
+  "LibraryPaginated": {
     "viewDocumentation": "Ver Documentación",
     "next": "Siguiente",
     "previous": "Anterior"
@@ -419,6 +474,7 @@
   },
   "Navbar": {
     "apis": "APIs",
+    "mcps": "MCPs",
     "blog": "Blog",
     "faqs": "FAQs",
     "myProfile": "Mi Perfil",
@@ -454,5 +510,42 @@
   "SwaggerUI": {
     "noInfo": "Sin información disponible",
     "back": "VOLVER"
+  },
+  "Inspector": {
+    "selectItem": "Selecciona un elemento de la lista para inspeccionarlo.",
+    "description": "Descripción",
+    "title": "Título",
+    "inputSchema": "Esquema de entrada",
+    "outputSchema": "Esquema de salida",
+    "annotations": "Anotaciones",
+    "mimeType": "Tipo MIME",
+    "size": "Tamaño",
+    "arguments": "Argumentos",
+    "tryTool": "Pruébalo",
+    "run": "Ejecutar",
+    "running": "Ejecutando...",
+    "result": "Resultado"
+  },
+  "Section": {
+    "noItems": "Ninguno"
+  },
+  "McpUI": {
+    "back": "Volver",
+    "connectTitle": "Conexión",
+    "transport": "Transporte",
+    "command": "Comando",
+    "args": "Argumentos (separados por espacio)",
+    "noHeadersConfigured": "Sin cabeceras configuradas",
+    "connect": "Conectar",
+    "loading": "Conectando...",
+    "connectionError": "Error de conexión. Por favor, verifica la configuración del servidor MCP e intenta de nuevo.",
+    "connectedHint": "Conectado. Selecciona un elemento de la lista para inspeccionarlo.",
+    "listTitle": "Disponibles",
+    "tools": "Herramientas",
+    "resources": "Recursos",
+    "prompts": "Prompts",
+    "connectFirst": "Conéctate primero para ver herramientas, recursos y prompts disponibles.",
+    "inspectorTitle": "Inspector",
+    "source": "Fuente"
   }
 }

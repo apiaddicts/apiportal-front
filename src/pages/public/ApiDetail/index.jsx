@@ -20,8 +20,19 @@ import { getHomeContent } from '../../../redux/actions/homeAction';
 import { getLibrary, getLibraries } from '../../../redux/actions/libraryAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
 import config from '../../../services/config';
-import codeSnipet from '../../../static/img/code-snippet.png';
 import classes from './api-detail.module.scss';
+import apiSecurity from '../../../static/img/badges/apis-security.png';
+import apiQuality from '../../../static/img/badges/apis-quality.png';
+import apiExperience from '../../../static/img/badges/apis-experience.png';
+import apiDora from '../../../static/img/badges/apis-dora.png';
+import apiOpenfinance from '../../../static/img/badges/apis-openfinance.png';
+
+import asyncSecurity from '../../../static/img/badges/asyncapi-security.png';
+import asyncQuality from '../../../static/img/badges/asyncapi-quality.png';
+import asyncExperience from '../../../static/img/badges/asyncapi-experience.png';
+import asyncDora from '../../../static/img/badges/asyncapi-dora.png';
+import asyncOpenfinance from '../../../static/img/badges/asyncapi-openfinance.png';
+import Ratings from '../../../components/Ratings';
 
 function ApiDetail({ setIsOpen }) {
   const { t } = useTranslation();
@@ -140,6 +151,42 @@ function ApiDetail({ setIsOpen }) {
     !!library?.securityRating ||
     !!library?.qualityRating;
 
+  const hasAnyBadge =
+    !!library?.devExperienceCheck ||
+    !!library?.securityCheck ||
+    !!library?.qualityCheck ||
+    !!library?.doraCheck ||
+    !!library?.openFinanceCheck;
+
+  const isAsync = library?.openDocType === 'asyncapi';
+  const badgeConfig = [
+    {
+      key: 'securityCheck',
+      label: t('ApiDetail.badgeSecurity'),
+      img: isAsync ? asyncSecurity : apiSecurity
+    },
+    {
+      key: 'qualityCheck',
+      label: t('ApiDetail.badgeQuality'),
+      img: isAsync ? asyncQuality : apiQuality
+    },
+    {
+      key: 'devExperienceCheck',
+      label: t('ApiDetail.badgeDevExperience'),
+      img: isAsync ? asyncExperience : apiExperience
+    },
+    {
+      key: 'doraCheck',
+      label: t('ApiDetail.badgeDora'),
+      img: isAsync ? asyncDora : apiDora
+    },
+    {
+      key: 'openFinanceCheck',
+      label: t('ApiDetail.badgeOpenFinance'),
+      img: isAsync ? asyncOpenfinance : apiOpenfinance
+    }
+  ];
+
   const getRatingClass = (rating) => {
     if (!rating) return classes.rating__empty;
     return classes[`rating__${rating}`] || classes.rating__empty;
@@ -166,46 +213,41 @@ function ApiDetail({ setIsOpen }) {
             />
           </section>
           <section className={`container ${classes.section__content} pb-9`}>&nbsp;</section>
-          {library && hasAnyRating && (
-            <section className={`container ${classes.section__content} ${classes.section__ratings}`}>
-              <div className={classes.ratings__wrapper}>
-                <h2 className={classes.ratings__title}>
-                  {t('ApiDetail.globalGradesTitle')}
-                </h2>
-                <p className={classes.ratings__subtitle}>
-                  {t('ApiDetail.globalGradesSubtitle')}
-                </p>
-
-                <div className={classes.ratings__grid}>
-                  <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(library.globalRating)}`}>
-                      {library.globalRating || '-'}
-                    </div>
-                    <span>{t('ApiDetail.ratingGlobal')}</span>
-                  </div>
-
-                  <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(library.definitionRating)}`}>
-                      {library.definitionRating || '-'}
-                    </div>
-                    <span>{t('ApiDetail.ratingDefinition')}</span>
-                  </div>
-
-                  <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(library.securityRating)}`}>
-                      {library.securityRating || '-'}
-                    </div>
-                    <span>{t('ApiDetail.ratingSecurity')}</span>
-                  </div>
-
-                  <div className={classes.rating__item}>
-                    <div className={`${classes.rating__circle} ${getRatingClass(library.qualityRating)}`}>
-                      {library.qualityRating || '-'}
-                    </div>
-                    <span>{t('ApiDetail.ratingQuality')}</span>
-                  </div>
+          {library && hasAnyBadge && (
+            <section className={`container ${classes.section__content} ${classes.section__badges}`}>
+              <div className={classes.badges__wrapper}>
+                <h2 className={classes.ratings__title}>{t('ApiDetail.badgesTitle')}</h2>
+                <div className={classes.badges__grid}>
+                  {badgeConfig.map((badge) => (
+                    library[badge.key] && (
+                      <div key={badge.key} className={classes.badge__item}>
+                        <img
+                          src={badge.img}
+                          alt={badge.label}
+                          title={badge.label}
+                          className={classes.badge__img}
+                        />
+                        <span className={classes.badge__label}>{badge.label}</span>
+                      </div>
+                    )
+                  ))}
                 </div>
               </div>
+            </section>
+          )}
+          {library && hasAnyRating && (
+            <section className={`container ${classes.section__content} ${classes.section__ratings}`}>
+              <Ratings
+                ratings={library.ratings}
+                title={t('ApiDetail.globalGradesTitle')}
+                subtitle={t('ApiDetail.globalGradesSubtitle')}
+                labels={{
+                  globalRating: t('ApiDetail.ratingGlobal'),
+                  definitionRating: t('ApiDetail.ratingDefinition'),
+                  securityRating: t('ApiDetail.ratingSecurity'),
+                  qualityRating: t('ApiDetail.ratingQuality'),
+                }}
+              />
             </section>
           )}
           {library?.markdown && library?.markdown.length > 0 && (

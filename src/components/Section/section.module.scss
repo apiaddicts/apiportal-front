@@ -1,0 +1,65 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.section__title {
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: #94a3b8;
+  padding: 0 2px;
+}
+
+.section__empty {
+  font-size: 0.78rem;
+  color: #cbd5e1;
+  padding: 4px 2px;
+}
+
+.tools_list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  li {
+    padding: 0;
+    margin: 0;
+  }
+}
+
+.tool_item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  cursor: pointer;
+  background: #fff;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  transition: border-color 0.15s, background 0.15s;
+
+  &:hover {
+    border-color: var(--primary-color);
+    background: rgba(var(--primary-color-rgb), 0.04);
+  }
+
+  &__active {
+    border-color: var(--primary-color);
+    background: rgba(var(--primary-color-rgb), 0.08);
+  }
+}
+
+.tool_name {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e293b;
+}
