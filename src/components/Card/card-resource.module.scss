@@ -61,7 +61,8 @@
 
 .resource__card__row {
   display: flex;
-  gap: 0.5rem;
+  flex-direction: column;
+  gap: 0.25rem;
   font-size: 0.82rem;
   align-items: flex-start;
 }
@@ -76,4 +77,18 @@
 .resource__card__value {
   color: #555;
   word-break: break-all;
+}
+
+.resource__card__pre {
+  margin: 0.25rem 0 0;
+  padding: 0.5rem 0.75rem;
+  background: #f4f7fa;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  color: #333;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-break: break-all;
+  flex: 1;
+  width: 100%;
 }

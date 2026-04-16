@@ -132,6 +132,9 @@ function McpDetail({ setIsOpen }) {
 
   const isLiveSessionActive = liveSession !== null && liveSession.slug === mcpLibrary?.slug;
   const effectiveResources = isLiveSessionActive ? (liveSession.resources || []) : [];
+  const effectiveTools     = isLiveSessionActive ? (liveSession.tools    || []) : [];
+  const effectivePrompts   = isLiveSessionActive ? (liveSession.prompts  || []) : [];
+  const hasLiveData = effectiveResources.length > 0 || effectiveTools.length > 0 || effectivePrompts.length > 0;
 
   const mergeHeadersIntoCfg = (cfg, hdrs) => {
     if (cfg.mcpServers) {
@@ -226,6 +229,12 @@ function McpDetail({ setIsOpen }) {
           )}
 
           <section className={`container ${classes.section__content} ${classes.section__three_cols}`}>
+            {!isLiveSessionActive && (
+              <div className={classes.connect__notice}>
+                <Icon id='MdInfoOutline' />
+                <span>{t('McpDetail.connectToSeeCapabilities')}</span>
+              </div>
+            )}
             <div className={classes.three_cols__grid}>
 
               <div className={classes.three_cols__col}>
@@ -291,17 +300,43 @@ function McpDetail({ setIsOpen }) {
 
               <div className={classes.three_cols__col}>
                 <h3 className={classes.three_cols__col__title}>
-                  {t('McpDetail.resourcesTitle')}
+                  {t('McpDetail.capabilitiesTitle')}
                 </h3>
-                {effectiveResources.length > 0 ? (
+                {isLiveSessionActive ? (
                   <div className={classes.resources__list}>
-                    {effectiveResources.map((resource, index) => (
-                      <CardResource key={resource?.id || index} resource={resource} />
-                    ))}
+                    {effectiveTools.length > 0 && (
+                      <>
+                        <p className={classes.capabilities__group_label}>{t('McpDetail.toolsLabel')}</p>
+                        {effectiveTools.map((tool, i) => (
+                          <CardResource key={tool?.name || i} resource={tool} type="tool" />
+                        ))}
+                      </>
+                    )}
+                    {effectiveResources.length > 0 && (
+                      <>
+                        <p className={classes.capabilities__group_label}>{t('McpDetail.resourcesLabel')}</p>
+                        {effectiveResources.map((res, i) => (
+                          <CardResource key={res?.id || i} resource={res} type="resource" />
+                        ))}
+                      </>
+                    )}
+                    {effectivePrompts.length > 0 && (
+                      <>
+                        <p className={classes.capabilities__group_label}>{t('McpDetail.promptsLabel')}</p>
+                        {effectivePrompts.map((prompt, i) => (
+                          <CardResource key={prompt?.name || i} resource={prompt} type="prompt" />
+                        ))}
+                      </>
+                    )}
+                    {!hasLiveData && (
+                      <div className={classes.three_cols__placeholder}>
+                        {t('McpDetail.noCapabilitiesFound')}
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div className={classes.three_cols__placeholder}>
-                    {t('McpDetail.noResources')}
+                    {t('McpDetail.connectToSee')}
                   </div>
                 )}
               </div>
