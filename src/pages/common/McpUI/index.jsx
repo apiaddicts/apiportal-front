@@ -103,6 +103,8 @@ function McpUI() {
       dispatch(setMcpLiveSession(
         slug,
         data?.resources || [],
+        data?.tools || [],
+        data?.prompts || [],
         transport === 'stdio' ? {} : { ...headers },
       ));
     } catch (e) {

@@ -179,10 +179,10 @@ export const showSelectedMcps = (selectedMcps) => (dispatch) => {
   });
 };
 
-export const setMcpLiveSession = (slug, resources, headers) => (dispatch) => {
+export const setMcpLiveSession = (slug, resources, tools, prompts, headers) => (dispatch) => {
   dispatch({
     type: mcpLibraryConstants.SET_MCP_LIVE_SESSION,
-    payload: { slug, resources, headers },
+    payload: { slug, resources, tools, prompts, headers },
   });
 };
 
