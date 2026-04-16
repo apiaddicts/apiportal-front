@@ -267,6 +267,7 @@
   font-family: var(--font-family);
   font-size: 14px !important;
   line-height: 1.6;
+  text-align: justify;
   color: var(--primary-color) !important;
 }
 
@@ -323,6 +324,12 @@
 
 .capabilities__empty {
   min-height: 60px;
+}
+
+.resources__list {
+  max-height: 430px;
+  overflow-y: auto;
+  padding-right: 4px;
 }
 
 .connect__notice {

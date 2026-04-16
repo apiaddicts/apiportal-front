@@ -12,4 +12,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - MCP Support: Implementation of basic schemas and connection logic for Model Context Protocol.
 - Inspector: New debugging tool for MCPs with support for executing and testing remote tools.
 - Dedicated MCP Service to handle provider communication using custom headers and API keys.
-- MCP Capabilities: Add tools and prompts on MCP Detail UI.
+- MCP Capabilities: Add tools and prompts on MCP Detail UI, handling list overflow.
