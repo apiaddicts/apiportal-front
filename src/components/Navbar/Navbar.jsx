@@ -68,6 +68,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
 
   const listOptions = [
     { icon: '', name: t('Navbar.apis'), route: '/apis' },
+    { icon: '', name: t('Navbar.mcps'), route: '/mcps' },
     { icon: '', name: t('Navbar.blog'), route: '/blog' },
     { icon: '', name: t('Navbar.faqs'), route: '/faqs' },
   ];

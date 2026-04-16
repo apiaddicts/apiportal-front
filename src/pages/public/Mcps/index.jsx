@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getApiContent } from '../../../redux/actions/apiAction';
-import { getLibraries, filterCheck, sortApiCollection  } from '../../../redux/actions/libraryAction';
+import { getMcpContent } from '../../../redux/actions/mcpAction';
+import { getMcpLibraries, filterMcpCheck, sortMcpCollection } from '../../../redux/actions/mcpLibraryAction';
 import BannerImage from '../../../components/Banner/BannerImage';
 import SearchInput from '../../../components/Input/SearchInput';
 import InputSelect from '../../../components/Input/InputSelect';
@@ -11,87 +11,79 @@ import ButtonGroupMUI from '../../../components/common/ButtonGroup';
 import CheckboxLabels from '../../../components/common/CustomCheck';
 import LibraryPaginated from '../../../components/LibraryPaginated';
 import Icon from '../../../components/MdIcon/Icon';
-import classes from './apis.module.scss';
+import classes from './mcps.module.scss';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 import config from '../../../services/config';
 import { useTranslation } from 'react-i18next';
 
-function Apis({ setIsOpen }) {
+function Mcps({ setIsOpen }) {
   const { t } = useTranslation();
-  const { libraries, filters, backUpLibreries, loadingLibraries } = useSelector((state) => state.library);
+  const { mcpLibraries, filters, backUpMcpLibraries, loadingMcpLibraries } = useSelector((state) => state.mcpLibrary);
   const [filtersSelect, setFiltersSelect] = useState([]);
-  const [searchApiInputValue, setSearchApiInputValue] = useState('');
+  const [searchInputValue, setSearchInputValue] = useState('');
   const [viewType, setViewType] = useState('grid');
   const [itemsPerPage, setItemsPerPage] = useState(9);
   const dispatch = useDispatch();
-  const { apiPage } = useSelector((state) => state.api);
+  const { mcpPage } = useSelector((state) => state.mcp);
 
   useEffect(() => {
-    if (apiPage && Object.keys(apiPage).length === 0) {
-      dispatch(getApiContent());
+    if (mcpPage && Object.keys(mcpPage).length === 0) {
+      dispatch(getMcpContent());
     }
-  }, [apiPage, dispatch]);
+  }, [mcpPage, dispatch]);
 
   useEffect(() => {
-    if ((libraries === null || libraries?.length === 0) && Object.keys(filters).length === 0) {
-      dispatch(getLibraries());
+    if (mcpLibraries === null && Object.keys(filters).length === 0) {
+      dispatch(getMcpLibraries());
     }
-  }, [libraries, filters, dispatch]);
+  }, [mcpLibraries, filters, dispatch]);
 
-  const filterApiBanner = apiPage?.contentSections && apiPage.contentSections?.length > 0 ? apiPage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
+  const filterMcpBanner = mcpPage && mcpPage.contentSections && mcpPage.contentSections?.length > 0
+    ? mcpPage.contentSections.filter((item) => item.__component === 'home.banner-section')
+    : [];
 
   const resetFilters = () => {
-    dispatch(getLibraries());
+    dispatch(getMcpLibraries());
     dispatch({
-      type: 'RESET_LIBRARY',
+      type: 'RESET_MCP_LIBRARY',
     });
-    setSearchApiInputValue('');
+    setSearchInputValue('');
     setFiltersSelect([]);
   };
 
-  const handleChangeStatus = (name, label, checked) => {
-    dispatch(filterCheck(label, checked, 'status'));
-    setFiltersSelect({ ...filtersSelect, [name]: checked });
-  };
-
   const handleChangeVersions = (name, label, checked) => {
-    dispatch(filterCheck(label, checked, 'version'));
+    dispatch(filterMcpCheck(label, checked, 'version'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
 
   const handleChangeSolutions = (name, label, checked) => {
-    dispatch(filterCheck(label, checked, 'solution'));
+    dispatch(filterMcpCheck(label, checked, 'solution'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
 
   const handleChangFilterTags = (name, label, checked) => {
-    dispatch(filterCheck(label, checked, 'tag'));
+    dispatch(filterMcpCheck(label, checked, 'tag'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
 
   const handleChangeSearchFilter = (text) => {
-    setSearchApiInputValue(text);
-    dispatch(filterCheck(text, null, 'search'));
+    setSearchInputValue(text);
+    dispatch(filterMcpCheck(text, null, 'search'));
   };
 
   const handleChangeGlobalRating = (name, label, checked) => {
-    dispatch(filterCheck(label, checked, 'globalRating'));
-    setFiltersSelect({ ...filtersSelect, [name]: checked });
-  };
-
-  const handleChangeProducts = (name, label, checked) => {
-    dispatch(filterCheck(name, checked, 'product'));
+    dispatch(filterMcpCheck(label, checked, 'globalRating'));
     setFiltersSelect({ ...filtersSelect, [name]: checked });
   };
 
   const handleSort = (sort) => {
-    dispatch(sortApiCollection(sort));
+    dispatch(sortMcpCollection(sort));
   };
-  // Filters titles array
-  const titleRepeated = backUpLibreries?.map((element) => {
+
+  const titleRepeated = backUpMcpLibraries?.map((element) => {
     return element.title;
   });
-  // count items repeated
+
   const countRepeated = titleRepeated?.reduce((acc, cur) => {
     acc[cur] = (acc[cur] || 0) + 1;
     return acc;
@@ -104,23 +96,22 @@ function Apis({ setIsOpen }) {
     };
   });
 
-  // Filters status array
-  const stateRepeated = backUpLibreries?.map((element) => {
+
+  const stateRepeated = backUpMcpLibraries?.map((element) => {
     return element.publish;
   });
   const stateArr = stateRepeated && new Set(stateRepeated);
   const state = stateArr ? [...stateArr] : [];
 
-  // Filters tags array
-  const arrayTagsRepeated = backUpLibreries?.map((element) => {
+
+  const arrayTagsRepeated = backUpMcpLibraries?.map((element) => {
     return element.tags;
   });
-  const tagsBtns = arrayTagsRepeated?.flat();
+  const tagsBtns = arrayTagsRepeated && arrayTagsRepeated.flat();
   const tagsArr = tagsBtns && new Set(tagsBtns);
   const tagsArrUnique = tagsArr ? [...tagsArr] : [];
   const labelsTags = tagsArrUnique.map((item) => { return item.label; });
 
-  // count labelsTags repeated
   const countRepeatedTags = labelsTags.reduce((acc, cur) => {
     acc[cur] = (acc[cur] || 0) + 1;
     return acc;
@@ -133,24 +124,23 @@ function Apis({ setIsOpen }) {
     };
   });
 
-  // Filters version array
-  const versionRepeated = backUpLibreries?.map((element) => {
+  const versionRepeated = backUpMcpLibraries?.map((element) => {
     return element.version;
   });
 
   const versionArr = new Set(versionRepeated);
   const versions = [...versionArr].sort();
 
-  const globalRatingRepeated = backUpLibreries?.map((element) => element.globalRating)
-    .filter(Boolean); // quita null/undefined
+  const globalRatingRepeated = backUpMcpLibraries?.map((element) => element.globalRating)
+    .filter(Boolean);
 
   const globalRatingArr = new Set(globalRatingRepeated);
   const globalRatings = [...globalRatingArr].sort();
 
   const products = useMemo(() => {
-    if (!backUpLibreries || backUpLibreries.length === 0) return [];
-    return backUpLibreries.flatMap((library) => library.products || []);
-  }, [backUpLibreries]);
+    if (!backUpMcpLibraries || backUpMcpLibraries.length === 0) return [];
+    return backUpMcpLibraries.flatMap((library) => library.products || []);
+  }, [backUpMcpLibraries]);
 
   const productsFilters = useMemo(() => {
     if (!products.length) return [];
@@ -171,26 +161,18 @@ function Apis({ setIsOpen }) {
     return Object.values(map);
   }, [products]);
 
-  const compareArrays = (array1, array2) => {
-    return array1.filter((a) => {
-      return array2.some((b) => {
-        return a.slug === b.name;
-      });
-    });
-  };
-
-  const apiImageUrl = filterApiBanner?.[0]?.background?.url
-    ? `${filterApiBanner[0].background.url}`
+  const mcpImageUrl = filterMcpBanner?.[0]?.background?.url
+    ? `${filterMcpBanner[0].background.url}`
     : config.notImage;
 
-  const fApis = libraries && libraries.length > 0 ? libraries : [];
+  const fMcps = mcpLibraries && mcpLibraries.length > 0 ? mcpLibraries : [];
 
   return (
-    <div id='apiHome'>
+    <div id='mcpHome'>
       <BannerImage
-        title={filterApiBanner?.[0]?.title}
-        img={apiImageUrl}
-        description={filterApiBanner?.[0]?.subtitle}
+        title={filterMcpBanner?.[0]?.title}
+        img={mcpImageUrl}
+        description={filterMcpBanner?.[0]?.subtitle}
         css_styles={{ 'layout_height': 'banner_custom__layout--height' }}
       />
       <div className='container'>
@@ -198,13 +180,13 @@ function Apis({ setIsOpen }) {
           <article className={classes.wrapper__left}>
             {((state && Object.keys(state).length > 0) || (versions && Object.keys(versions).length > 0) || (items && Object.keys(items).length > 0) || (tags && Object.keys(tags).length > 0)) && (
               <div className={classes.wrapper__title}>
-                {t('Apis.filterBy')}
+                {t('Mcps.filterBy')}
               </div>
             )}
             {versions && Object.keys(versions).length > 0 && (
               <div className='w-full pl-4'>
                 <div className={classes.wrapper__title}>
-                  {t('Apis.version')}
+                  {t('Mcps.version')}
                 </div>
                 <ButtonGroupMUI sx={{ marginBottom: '15px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(50px, 1fr))', gap: '2px', alignItems: 'center', justifyContent: 'center' }}>
                   {versions.map((item, index) => (
@@ -220,7 +202,7 @@ function Apis({ setIsOpen }) {
               </div>
             )}
             {items && Object.keys(items).length > 0 && (
-              <CustomizedAccordions title={t('Apis.solution')}>
+              <CustomizedAccordions title={t('Mcps.solution')}>
                 {items && items.map((item, index) => (
                   <div key={index} className={classes.wrapper__checkbox}>
                     <CheckboxWrapper
@@ -235,7 +217,7 @@ function Apis({ setIsOpen }) {
               </CustomizedAccordions>
             )}
             {tags && Object.keys(tags).length > 0 && (
-              <CustomizedAccordions title={t('Apis.tags')}>
+              <CustomizedAccordions title={t('Mcps.tags')}>
                 {tags.map((item, index) => (
                   <div className={classes.wrapper__checkbox} key={index}>
                     <CheckboxWrapper
@@ -250,7 +232,7 @@ function Apis({ setIsOpen }) {
               </CustomizedAccordions>
             )}
             {globalRatings && globalRatings.length > 0 && (
-              <CustomizedAccordions title={t('Apis.globalRating')}>
+              <CustomizedAccordions title={t('Mcps.globalRating')}>
                 {globalRatings.map((item, index) => (
                   <div key={index} className={classes.wrapper__checkbox}>
                     <CheckboxWrapper
@@ -264,13 +246,15 @@ function Apis({ setIsOpen }) {
               </CustomizedAccordions>
             )}
             {productsFilters && productsFilters.length > 0 && (
-              <CustomizedAccordions title={t('Apis.products')}>
+              <CustomizedAccordions title={t('Mcps.products')}>
                 {productsFilters.map((item, index) => (
                   <div key={index} className={classes.wrapper__checkbox}>
                     <CheckboxWrapper
                       name={item.slug}
                       label={item.title}
-                      handleChangeSelect={handleChangeProducts}
+                      handleChangeSelect={(name, label, checked) => {
+                        setFiltersSelect({ ...filtersSelect, [name]: checked });
+                      }}
                       checked={
                         filtersSelect[item.slug] !== undefined
                           ? filtersSelect[item.slug]
@@ -287,69 +271,70 @@ function Apis({ setIsOpen }) {
             {((state && Object.keys(state).length > 0) || (versions && Object.keys(versions).length > 0) || (items && Object.keys(items).length > 0) || (tags && Object.keys(tags).length > 0)) && (
               <div className={classes.wrapper__filters}>
                 <Icon id='MdDeleteOutline' />
-                <button type='button' className={classes.wrapper__reset} onClick={resetFilters}>{t('Apis.clearFilters')}</button>
+                <button type='button' className={classes.wrapper__reset} onClick={resetFilters}>{t('Mcps.clearFilters')}</button>
               </div>
             )}
           </article>
           <section className={classes.wrapper__right}>
-            {loadingLibraries === false && libraries && (
+            {loadingMcpLibraries === false && mcpLibraries && (
               <div className={classes.wrapper__right__controls_row}>
-                  <div className={classes.wrapper__right__search}>
-                    <SearchInput
-                      icon
-                      name='search'
-                      type='text'
-                      onChange={(e) => {
-                        handleChangeSearchFilter(e.target.value);
-                      }}
-                      placeholder={t('Apis.searchPlaceholder')}
-                      borderRadius='6px'
-                      value={searchApiInputValue}
-                    />
-                  </div>
-                  <div className={classes.wrapper__right__sort}>
-                    <InputSelect handleSelect={(e) => {
-                      handleSort(e);
+                <div className={classes.wrapper__right__search}>
+                  <SearchInput
+                    icon
+                    name='search'
+                    type='text'
+                    onChange={(e) => {
+                      handleChangeSearchFilter(e.target.value);
                     }}
-                    />
-                  </div>
-                  <div className={classes.wrapper__right__page_size}>
-                    <select
-                      value={itemsPerPage}
-                      onChange={(e) => setItemsPerPage(Number(e.target.value))}
-                      className={classes.wrapper__right__page_size__select}
-                    >
-                      {[9, 30, 60, 90].map((n) => (
-                        <option key={n} value={n}>{n}</option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className={classes.wrapper__right__view_switch}>
-                    <button
-                      className={viewType === 'list' ? classes.wrapper__right__view_switch__active : ''}
-                      onClick={() => setViewType('list')}
-                    >
-                      <Icon id='MdOutlineViewAgenda'></Icon>
-                    </button>
-                    <button
-                      className={viewType === 'grid' ? classes.wrapper__right__view_switch__active : ''}
-                      onClick={() => setViewType('grid')}
-                    >
-                      <Icon id='MdGridView'></Icon>
-                    </button>
-                  </div>
+                    placeholder={t('Mcps.searchPlaceholder')}
+                    borderRadius='6px'
+                    value={searchInputValue}
+                  />
+                </div>
+                <div className={classes.wrapper__right__sort}>
+                  <InputSelect handleSelect={(e) => {
+                    handleSort(e);
+                  }}
+                  />
+                </div>
+                <div className={classes.wrapper__right__page_size}>
+                  <select
+                    value={itemsPerPage}
+                    onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                    className={classes.wrapper__right__page_size__select}
+                    aria-label={t('Mcps.itemsPerPage') || 'Items per page'}
+                  >
+                    {[9, 30, 60, 90].map((n) => (
+                      <option key={n} value={n}>{n}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className={classes.wrapper__right__view_switch}>
+                  <button
+                    className={viewType === 'list' ? classes.wrapper__right__view_switch__active : ''}
+                    onClick={() => setViewType('list')}
+                  >
+                    <Icon id='MdOutlineViewAgenda'></Icon>
+                  </button>
+                  <button
+                    className={viewType === 'grid' ? classes.wrapper__right__view_switch__active : ''}
+                    onClick={() => setViewType('grid')}
+                  >
+                    <Icon id='MdGridView'></Icon>
+                  </button>
+                </div>
               </div>
             )}
             <div className='flex-sm-12 flex-md-6'>
               <div className='row'>
-                {loadingLibraries === false && libraries ? (
-                  libraries.length > 0 ? (
+                {loadingMcpLibraries === false && mcpLibraries ? (
+                  mcpLibraries.length > 0 ? (
                     <LibraryPaginated
-                      items={fApis}
+                      items={fMcps}
                       itemsPerPage={itemsPerPage}
                       viewType={viewType}
-                      basePath='/apis'
-                      anchor='api'
+                      basePath='/mcps'
+                      anchor='mcp'
                     />
                   ) : (
                     <section
@@ -363,9 +348,10 @@ function Apis({ setIsOpen }) {
                           alignItems: 'center',
                           justifyContent: 'center',
                           margin: '2rem',
+                          color: '#939393'
                         }}
                       >
-                        <h1>{t('Apis.noData')}</h1>
+                        <p className={`fs__20`}>{t('Mcps.noData')}</p>
                       </div>
                     </section>
                   )
@@ -390,4 +376,4 @@ function Apis({ setIsOpen }) {
   );
 };
 
-export default Apis;
+export default Mcps;

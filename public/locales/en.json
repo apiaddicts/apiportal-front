@@ -154,6 +154,45 @@
     "ratingSecurity": "Security",
     "ratingQuality": "Quality"
   },
+  "McpDetail": {
+    "tryMcp": "Try MCP",
+    "moreInfo": "More information",
+    "seeAll": "See all",
+    "seeMore": "See more",
+    "howItWorks": "How it works",
+    "news": "News",
+    "newsDescription": "Discover all the news about technology, MCPs, and digital transformation",
+    "globalGradesTitle": "Global grades of the MCP",
+    "globalGradesSubtitle": "Overall quality and readiness indicators",
+    "ratingGlobal": "Global",
+    "ratingDefinition": "Definition",
+    "ratingSecurity": "Security",
+    "ratingQuality": "Quality",
+    "technicalSetupTitle": "Technical Implementation & Quick Setup",
+    "addToVsCode": "Add Directly to Visual Studio Code",
+    "resourcesTitle": "MCP Resources Visor",
+    "downloadReport": "Download MCP Report",
+    "tryOut": "Try Out",
+    "resourceUri": "URI",
+    "resourceMimeType": "MIME Type",
+    "resourceSize": "Size",
+    "descriptionTitle": "MCP Server Description",
+    "noDescription": "No description available for this MCP server.",
+    "noConfigSnippet": "No configuration snippet available for this MCP server.",
+    "noResources": "No resources available for this MCP server.",
+    "connectToSeeCapabilities": "Connect to the MCP server first using the 'Try Out' button below to update headers and load resources, tools, and prompts.",
+    "noCapabilitiesFound": "No capabilities reported by this MCP server.",
+    "connectToSee": "Please click the 'Try Out' button below to connect and load the list of resources, tools, and prompts.",
+    "capabilitiesTitle": "MCP Capability Visor",
+    "toolsLabel": "Tools",
+    "resourcesLabel": "Resources",
+    "promptsLabel": "Prompts",
+    "commandCopied": "Command copied to clipboard",
+    "openTerminalPaste": "Open the terminal and paste the command",
+    "copyAgain": "Copy again",
+    "discoverTitle": "Discover our MCPs",
+    "discoverSubtitle": "Explore the possibilities"
+  },
   "Apis": {
     "filterBy": "Filter by",
     "version": "Version",
@@ -164,6 +203,16 @@
     "tags": "Tags",
     "globalRating": "Rating",
     "products": "Products"
+  },
+  "Mcps": {
+    "filterBy": "Filter by",
+    "version": "Version",
+    "clearFilters": "Clear filters",
+    "searchPlaceholder": "Search MCPs...",
+    "noData": "No data available",
+    "solution": "Solution",
+    "tags": "Tags",
+    "globalRating": "Rating"
   },
   "Blog": {
     "learnMore": "Learn more",
@@ -290,7 +339,7 @@
     "copiedToClipboard": "Copied to clipboard",
     "copyError": "Error copying to clipboard"
   },
-  "ApisPaginated": {
+  "LibraryPaginated": {
     "viewDocumentation": "View Documentation",
     "next": "Next",
     "previous": "Previous"
@@ -425,6 +474,7 @@
   },
   "Navbar": {
     "apis": "APIs",
+    "mcps": "MCPs",
     "blog": "Blog",
     "faqs": "FAQs",
     "myProfile": "My Profile",
@@ -460,5 +510,42 @@
   "SwaggerUI": {
     "noInfo": "No information available",
     "back": "GO BACK"
+  },
+  "Inspector": {
+    "selectItem": "Select an item from the list to inspect it.",
+    "description": "Description",
+    "title": "Title",
+    "inputSchema": "Input Schema",
+    "outputSchema": "Output Schema",
+    "annotations": "Annotations",
+    "mimeType": "MIME Type",
+    "size": "Size",
+    "arguments": "Arguments",
+    "tryTool": "Try it",
+    "run": "Run",
+    "running": "Running...",
+    "result": "Result"
+  },
+  "Section": {
+    "noItems": "None"
+  },
+  "McpUI": {
+    "back": "Back",
+    "connectTitle": "Connection",
+    "transport": "Transport",
+    "command": "Command",
+    "args": "Arguments (space-separated)",
+    "noHeadersConfigured": "No headers configured",
+    "connect": "Connect",
+    "loading": "Connecting...",
+    "connectionError": "Connection failed. Please verify the MCP server configuration and try again.",
+    "connectedHint": "Connected. Select an item from the list to inspect it.",
+    "listTitle": "Available",
+    "tools": "Tools",
+    "resources": "Resources",
+    "prompts": "Prompts",
+    "connectFirst": "Connect first to see available tools, resources and prompts.",
+    "inspectorTitle": "Inspector",
+    "source": "Source"
   }
 }

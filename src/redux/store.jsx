@@ -13,6 +13,7 @@ import userReducer from './reducer/userReducer';
 import productReducer from './reducer/productReducer';
 import subscriptionsReducer from './reducer/subscriptionsReducer';
 import apiReducer from './reducer/apiReducer';
+import mcpReducer from './reducer/mcpReducer';
 import emailReducer from './reducer/emailReducer';
 import termReducer from './reducer/termReducer';
 import policyReducer from './reducer/policyReducer';
@@ -23,6 +24,7 @@ import appsReducer from './reducer/appsReducer';
 import gettingStartedReducer from './reducer/gettingStartedReducer';
 import settingReducer from './reducer/settingReducer';
 import authReducer from './reducer/authReducer';
+import mcpLibraryReducer from './reducer/mcpLibraryReducer';
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 const reducers = combineReducers({
@@ -34,10 +36,12 @@ const reducers = combineReducers({
   codeSampleReducer: codeSampleReducer,
   billing: BillingReducer,
   library: libraryReducer,
+  mcpLibrary: mcpLibraryReducer,
   user: userReducer,
   products: productReducer,
   suscripcions: subscriptionsReducer,
   api: apiReducer,
+  mcp: mcpReducer,
   email: emailReducer,
   term: termReducer,
   policy: policyReducer,
