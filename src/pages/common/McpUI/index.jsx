@@ -144,7 +144,6 @@ function McpUI() {
               value={transport}
               onChange={handleTransportChange}
             >
-              <option value="stdio">STDIO</option>
               <option value="sse">SSE</option>
               <option value="http">Streamable HTTP</option>
             </select>
