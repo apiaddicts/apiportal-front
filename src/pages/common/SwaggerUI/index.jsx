@@ -76,7 +76,7 @@ function SwaggerUI() {
   return (
     <div
       style={{
-        paddingTop: '80px',
+        paddingTop: '60px',
         paddingBottom: '80px',
       }}
     >

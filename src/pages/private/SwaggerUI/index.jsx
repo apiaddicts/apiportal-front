@@ -180,7 +180,7 @@ function SwaggerUI() {
           </Container>
         </>
       ) : (
-        <div id='apiHome'>
+        <div>
           <div className={classes.banner_img}>
             <div className={`${classes.banner_img__layout}`}>
               <div className='container'>
