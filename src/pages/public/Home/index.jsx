@@ -198,7 +198,7 @@ function Home({ setOpenForm }) {
                   filterButtonSection[0]?.header.map((button, i) => (
                     <div key={i} className='mb-4'>
                       {button?.isKeywordInverted ? (
-                        <HashLink smooth to='/apis#apiHome'>
+                        <HashLink smooth to='/apis'>
                           <Button styles={button?.keyword}>
                             {button?.title}
                           </Button>
@@ -245,7 +245,7 @@ function Home({ setOpenForm }) {
                           title={card?.title}
                           description={card?.description}
                           info={t('Home.moreInfo')}
-                          url={`/apis/${card?.documentId}#api`}
+                          url={`/apis/${card?.documentId}`}
                           img={cardsImages[card.id] || config.notImage}
                         />
                       </div>
@@ -255,13 +255,13 @@ function Home({ setOpenForm }) {
                 <div className='row'>
                   <div className='flex-md-12 flex-sm-12'>
                     <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
-                      <HashLink smooth to='/apis#apiHome' className={`button link__tertiary d-xs-none ${classes.section__discover__showmore__button}`}>
+                      <HashLink smooth to='/apis' className={`button link__tertiary d-xs-none ${classes.section__discover__showmore__button}`}>
                         <span className='mr-1'>{t('Home.seeAll')}</span>
                         <div className={classes.section__discover__showmore__button__chevron}>
                           <CustomIcon name='chevron_right' />
                         </div>
                       </HashLink>
-                      <HashLink smooth to='/apis#apiHome' className={`d-sm-none ${classes.section__discover__showmore__button}`}>
+                      <HashLink smooth to='/apis' className={`d-sm-none ${classes.section__discover__showmore__button}`}>
                         {t('Home.seeAll')}
                       </HashLink>
                     </div>

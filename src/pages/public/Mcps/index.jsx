@@ -168,7 +168,7 @@ function Mcps({ setIsOpen }) {
   const fMcps = mcpLibraries && mcpLibraries.length > 0 ? mcpLibraries : [];
 
   return (
-    <div id='mcpHome'>
+    <div>
       <BannerImage
         title={filterMcpBanner?.[0]?.title}
         img={mcpImageUrl}

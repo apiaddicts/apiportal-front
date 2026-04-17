@@ -18,6 +18,12 @@
   --font-family: 'Roboto', sans-serif; // valor por defecto
   --primary-color: #0057ff;
   --secondary-color: #00c389;
+  --navbar-height: 96px;
+}
+
+.public-main {
+  margin-top: var(--navbar-height);
+  min-height: calc(100vh - var(--navbar-height));
 }
 
 body {
