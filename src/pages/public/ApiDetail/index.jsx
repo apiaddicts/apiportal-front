@@ -146,10 +146,10 @@ function ApiDetail({ setIsOpen }) {
   const apisNews = shuffledApis.slice(0, 3);
 
   const hasAnyRating =
-    !!library?.globalRating ||
-    !!library?.definitionRating ||
-    !!library?.securityRating ||
-    !!library?.qualityRating;
+    !!library?.ratings?.globalRating ||
+    !!library?.ratings?.definitionRating ||
+    !!library?.ratings?.securityRating ||
+    !!library?.ratings?.qualityRating;
 
   const hasAnyBadge =
     !!library?.devExperienceCheck ||
@@ -197,7 +197,7 @@ function ApiDetail({ setIsOpen }) {
   };
 
   return (
-    <div id='api'>
+    <div>
       { Object.keys(library).length > 0 ? (
         <>
           <section>
@@ -212,7 +212,6 @@ function ApiDetail({ setIsOpen }) {
               description={library?.description?.length > 0 && library?.description ? library?.description : ''}
             />
           </section>
-          <section className={`container ${classes.section__content} pb-9`}>&nbsp;</section>
           {library && hasAnyBadge && (
             <section className={`container ${classes.section__content} ${classes.section__badges}`}>
               <div className={classes.badges__wrapper}>
@@ -283,7 +282,7 @@ function ApiDetail({ setIsOpen }) {
                           title={card?.title}
                           description={card?.description}
                           info={t('ApiDetail.moreInfo')}
-                          url={`/apis/${card?.documentId}#api`}
+                          url={`/apis/${card?.documentId}`}
                           css_styles={{ 'override_border__chip': 'custom_border__chip' }}
                           route={() => handleClickPage(card?.documentId)}
                           img={cardsImages[card.documentId] || config.notImage}
@@ -297,7 +296,7 @@ function ApiDetail({ setIsOpen }) {
                 <div className='flex-md-12 flex-sm-12'>
                   <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
                     <div className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
-                      <HashLink smooth to='/apis#apiHome'>
+                      <HashLink smooth to='/apis'>
                         <span className='mr-1'>{t('ApiDetail.seeAll')}</span>
                       </HashLink>
                       <Icon id='MdOutlineEast' />
@@ -345,7 +344,7 @@ function ApiDetail({ setIsOpen }) {
                   filterButtonSection?.[0]?.header.map((button, i) => (
                     <div key={i} className='mb-4'>
                       {button?.isKeywordInverted ? (
-                        <HashLink smooth to='/apis#apiHome'>
+                        <HashLink smooth to='/apis'>
                           <Button styles={button?.keyword}>
                             {button?.title}
                           </Button>

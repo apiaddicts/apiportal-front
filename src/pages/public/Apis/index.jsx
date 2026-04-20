@@ -186,7 +186,7 @@ function Apis({ setIsOpen }) {
   const fApis = libraries && libraries.length > 0 ? libraries : [];
 
   return (
-    <div id='apiHome'>
+    <div>
       <BannerImage
         title={filterApiBanner?.[0]?.title}
         img={apiImageUrl}

@@ -35,7 +35,7 @@ function getMcpBookStoreData(slug) {
     headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
-  const url = `${config.apiUrl}/library-mcps?filters[slug][$eq]=${slug}`;
+  const url = `${config.apiUrl}/library-mcps?filters[slug][$eq]=${slug}&populate[image]=true&populate[tags]=true&populate[ratings]=true`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => response?.data?.[0])

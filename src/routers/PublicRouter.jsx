@@ -65,7 +65,7 @@ function PublicRoute() {
       )}
       {!hideLayout && <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} />}
 
-      <main style={{ marginTop: hideLayout ? '0' : window.innerWidth < 768 ? '120px' : '96px', minHeight: hideLayout ? '100vh' : window.innerWidth < 768 ? 'calc(100vh - 120px)' : 'calc(100vh - 96px)' }}>
+      <main className={hideLayout ? '' : 'public-main'} style={hideLayout ? { minHeight: '100vh' } : {}}>
         <Routes>
           <Route path='/' element={<Home setIsOpen={setIsOpen} setOpenForm={setOpenForm} />} />
           <Route path='/apis' element={<Apis setIsOpen={setIsOpen} />} />
