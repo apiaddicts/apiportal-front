@@ -268,6 +268,19 @@ const getApisUnsecure = () => {
 
 };
 
+function getKongApis() {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'apiKey': `${config.strapiApiKey}` },
+  };
+  return fetch(
+    `${config.apiUrl}/library-apis?filters[provider][$eq]=kong&filters[publish][$eq]=publicado&fields[0]=title&fields[1]=slug&fields[2]=providerId`,
+    requestOptions,
+  )
+    .then(handleResponse)
+    .catch(error => { console.error(error); });
+}
+
 const libraryService = {
   getApiBookStores,
   getApiBookStore,
@@ -284,6 +297,7 @@ const libraryService = {
   getApiProducts,
   getApisUnsecure,
   getOpenApiFromStrapi,
+  getKongApis,
 };
 
 export default libraryService;

@@ -25,6 +25,8 @@ import gettingStartedReducer from './reducer/gettingStartedReducer';
 import settingReducer from './reducer/settingReducer';
 import authReducer from './reducer/authReducer';
 import mcpLibraryReducer from './reducer/mcpLibraryReducer';
+import apimReducer from './reducer/apimReducer';
+import userCredentialReducer from './reducer/userCredentialReducer';
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 const reducers = combineReducers({
@@ -51,6 +53,8 @@ const reducers = combineReducers({
   apps: appsReducer,
   started: gettingStartedReducer,
   auth: authReducer,
+  apim: apimReducer,
+  userCredential: userCredentialReducer,
 });
 
 const store = createStore(

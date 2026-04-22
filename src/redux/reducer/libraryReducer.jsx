@@ -44,6 +44,10 @@ const initialState = {
   apisUnsecureRes: [],
   apisUnsecureFail: {},
 
+  kongApis: [],
+  kongApisLoading: false,
+  kongApisError: null,
+
 };
 
 // eslint-disable-next-line default-param-last
@@ -271,6 +275,13 @@ export default function libraryReducer(state = initialState, action) {
         apisUnsecureReq: false,
         apisUnsecureFail: action.payload,
       };
+
+    case libraryConstants.GET_KONG_APIS_REQUEST:
+      return { ...state, kongApisLoading: true, kongApisError: null };
+    case libraryConstants.GET_KONG_APIS_SUCCESS:
+      return { ...state, kongApisLoading: false, kongApis: action.payload };
+    case libraryConstants.GET_KONG_APIS_FAILURE:
+      return { ...state, kongApisLoading: false, kongApisError: action.payload };
 
     default:
       return state;

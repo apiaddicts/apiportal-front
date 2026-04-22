@@ -29,7 +29,7 @@ const initialState = token ? {
   chnStatusRes: {},
   emailConfirmation: null,
   loadingSendEmail: false,
-  registerData: {}
+  registerData: {},
 } : {
   user: {},
   loadingUser: false,
@@ -59,7 +59,7 @@ const initialState = token ? {
   chnStatusRes: {},
   emailConfirmation: null,
   loadingSendEmail: false,
-  registerData: ''
+  registerData: '',
 };
 
 // eslint-disable-next-line default-param-last
@@ -344,6 +344,7 @@ export default function userReducer(state = initialState, action) {
         error: action.payload,
         apimToken: false
       }
+
     default:
       return state;
   }
