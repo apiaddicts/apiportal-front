@@ -2,6 +2,7 @@
   "welcome": "Welcome to React and i18next",
   "dashboard": "Dashboard",
   "apiToken": "Token",
+  "products": "Products",
   "apisLibrary": "APIs Library",
   "codeSamples": "Code Samples",
   "billings": "Payment Gateway",
@@ -24,9 +25,6 @@
   "selectProvider": "Select provider",
   "providerNotAvailable": "Coming soon",
   "comingSoon": "Coming soon",
-  "credentialsCreated": "Credentials generated successfully. Store them in a safe place.",
-  "generateError": "Failed to generate credentials",
-  "goToMyCredentials": "Go to My Credentials",
   "services": "Services",
   "authType": "Auth type",
   "createdAt": "Created",
@@ -353,7 +351,7 @@
     "successLogin": "Exit on login",
     "passwordChangeEmail": "A confirmation email for password change has been sent. Please check your inbox."
   },
-  "ApiKeys": {
+  "Credentials": {
     "copiedToClipboard": "Copied to clipboard",
     "copyError": "Error copying to clipboard",
     "myCredentials": "My Credentials",
@@ -368,9 +366,11 @@
     "comingSoon": "Coming soon",
     "providerNotAvailable": "Coming soon",
     "selectServices": "Select services",
+    "selectProducts": "Select products",
     "generateCredentials": "Generate",
     "generateError": "Failed to generate credentials",
-    "credentialsCreated": "Credentials generated successfully. Store them in a safe place.",
+    "credential": "Credential",
+    "credentialCreated": "successfully generated. Please save it securely; it will not be displayed again.",
     "clientId": "Client ID",
     "clientSecret": "Client Secret",
     "goToMyCredentials": "Go to My Credentials"

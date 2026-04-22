@@ -23,6 +23,13 @@ const initialState = {
   subscriptionReq: false,
   subscriptionRes: [],
   subscriptionFail: {},
+
+  myProducts: [],
+  spinnerMyProducts: false,
+  errorMyProducts: {},
+
+  spinnerCreateProduct: false,
+  errorCreateProduct: {},
 };
 
 // eslint-disable-next-line default-param-last
@@ -54,7 +61,7 @@ export default function productReducer(state = initialState, action) {
         ...state,
         productsSkip: parseInt(action.skip, 10),
       };
-      // Cases to bring the product
+    // Cases to bring the product
     case productsConstants.GET_PRODUCT_REQUEST:
       return {
         ...state,
@@ -120,7 +127,7 @@ export default function productReducer(state = initialState, action) {
         ...state,
         productsApisSkip: parseInt(action.skip, 10),
       };
-      // Reset constants product:
+    // Reset constants product:
     case productsConstants.RESET_PRODUCT:
       return {
         ...state,
@@ -153,6 +160,51 @@ export default function productReducer(state = initialState, action) {
         ...state,
         subscriptionFail: action.error,
         subscriptionReq: false,
+      };
+
+    case productsConstants.GET_MY_PRODUCTS_REQUEST:
+      return {
+        ...state,
+        spinnerMyProducts: true,
+        errorMyProducts: {},
+      };
+
+    case productsConstants.GET_MY_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        spinnerMyProducts: false,
+        myProducts: action.response,
+        errorMyProducts: {},
+      };
+
+    case productsConstants.GET_MY_PRODUCTS_FAILURE:
+      return {
+        ...state,
+        spinnerMyProducts: false,
+        myProducts: [],
+        errorMyProducts: action.error,
+      };
+
+    case productsConstants.CREATE_PRODUCT_REQUEST:
+      return {
+        ...state,
+        spinnerCreateProduct: true,
+        errorCreateProduct: {},
+      };
+
+    case productsConstants.CREATE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        spinnerCreateProduct: false,
+        myProducts: [action.response, ...(state.myProducts ?? [])],
+        errorCreateProduct: {},
+      };
+
+    case productsConstants.CREATE_PRODUCT_FAILURE:
+      return {
+        ...state,
+        spinnerCreateProduct: false,
+        errorCreateProduct: action.error,
       };
 
     default:

@@ -181,3 +181,33 @@ export const getSubscriptions = () => (dispatch) => {
       });
     });
 };
+
+export const getProductsByUser = () => (dispatch) => {
+  dispatch({ type: productsConstants.GET_MY_PRODUCTS_REQUEST });
+
+  productsService.getProductsByUser().then(
+    (response) => {
+      dispatch({
+        type: productsConstants.GET_MY_PRODUCTS_SUCCESS,
+        response: response?.data ?? [],
+      });
+    },
+    (error) => {
+      dispatch({ type: productsConstants.GET_MY_PRODUCTS_FAILURE, error });
+    },
+  );
+};
+
+export const createProduct = (data, onSuccess) => (dispatch) => {
+  dispatch({ type: productsConstants.CREATE_PRODUCT_REQUEST });
+
+  productsService.createProduct(data).then(
+    (response) => {
+      dispatch({ type: productsConstants.CREATE_PRODUCT_SUCCESS, response });
+      if (onSuccess) onSuccess(response?.data);
+    },
+    (error) => {
+      dispatch({ type: productsConstants.CREATE_PRODUCT_FAILURE, error });
+    },
+  );
+};

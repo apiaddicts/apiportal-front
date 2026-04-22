@@ -7,9 +7,9 @@ import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { getApimConfigs, generateCredentials, resetGeneratedCredentials } from '../../redux/actions/apimAction';
-import { getKongApis } from '../../redux/actions/libraryAction';
+import { getProductsByUser } from '../../redux/actions/productsAction';
 import { createUserCredential } from '../../redux/actions/userCredentialAction';
-import styles from './ApiKeys.module.scss';
+import styles from './credentials.module.scss';
 
 function decodeJwtPayload(token) {
   try {
@@ -71,13 +71,13 @@ function CreateCredential({ onBack, onCreated }) {
   const dispatch = useDispatch();
 
   const apimConfigs = useSelector(state => state.apim.apimConfigs);
-  const allKongApis = useSelector(state => state.library.kongApis);
+  const myProducts = useSelector(state => state.products.myProducts);
   const generatedCredentials = useSelector(state => state.apim.generatedCredentials);
   const loading = useSelector(state => state.apim.generateCredentialsLoading);
   const error = useSelector(state => state.apim.generateCredentialsError);
 
   const [selectedApim, setSelectedApim] = useState('');
-  const [selectedServices, setSelectedServices] = useState([]);
+  const [selectedProducts, setSelectedProducts] = useState([]);
 
   const tokenData = JSON.parse(localStorage.getItem('token') || sessionStorage.getItem('token') || 'null');
   const accessToken = tokenData?.accessToken;
@@ -89,7 +89,7 @@ function CreateCredential({ onBack, onCreated }) {
 
   useEffect(() => {
     dispatch(getApimConfigs());
-    dispatch(getKongApis());
+    dispatch(getProductsByUser());
     return () => {
       dispatch(resetGeneratedCredentials());
     };
@@ -115,14 +115,13 @@ function CreateCredential({ onBack, onCreated }) {
 
   const isKong = (c) => c?.configurations?.[0]?.__component === 'config.kong';
 
-  const kongApis = allKongApis.filter(api => api.providerId === selectedApim);
+  const providerProducts = myProducts.filter(prod => prod.providerId === selectedApim);
 
   const handleGenerate = () => {
-    if (!selectedApim || selectedServices.length === 0) return;
+    if (!selectedApim || selectedProducts.length === 0) return;
     const slug = `${userPrefix}-${crypto.randomUUID().replaceAll('-', '').slice(0, 16)}`;
     setCredSlug(slug);
-    const serviceNames = selectedServices.map(s => s.replace(/^kong-/, ''));
-    dispatch(generateCredentials(selectedApim, slug, serviceNames, accessToken));
+    dispatch(generateCredentials(selectedApim, slug, selectedProducts, accessToken));
   };
 
   const handleFinish = () => {
@@ -150,7 +149,7 @@ function CreateCredential({ onBack, onCreated }) {
             label={t('CreateCredential.selectProvider')}
             onChange={e => {
               setSelectedApim(e.target.value);
-              setSelectedServices([]);
+              setSelectedProducts([]);
               dispatch(resetGeneratedCredentials());
             }}
           >
@@ -159,13 +158,6 @@ function CreateCredential({ onBack, onCreated }) {
               const item = (
                 <MenuItem key={c.documentId} value={c.documentId} disabled={!kong}>
                   {c.name}
-                  {!kong && (
-                    <Chip
-                      label={t('CreateCredential.comingSoon')}
-                      size="small"
-                      sx={{ ml: 1 }}
-                    />
-                  )}
                 </MenuItem>
               );
               if (!kong) {
@@ -185,25 +177,25 @@ function CreateCredential({ onBack, onCreated }) {
         </FormControl>
 
         <FormControl fullWidth sx={{ mb: 3 }} disabled={!selectedApim}>
-          <InputLabel>{t('CreateCredential.selectServices')}</InputLabel>
+          <InputLabel>{t('CreateCredential.selectProducts')}</InputLabel>
           <Select
             multiple
-            value={selectedServices}
-            onChange={e => setSelectedServices(e.target.value)}
-            input={<OutlinedInput label={t('CreateCredential.selectServices')} />}
+            value={selectedProducts}
+            onChange={e => setSelectedProducts(e.target.value)}
+            input={<OutlinedInput label={t('CreateCredential.selectProducts')} />}
             renderValue={selected => (
               <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
-                {selected.map(slug => {
-                  const api = kongApis.find(a => a.slug === slug);
-                  return <Chip key={slug} label={api?.title ?? slug} size="small" />;
+                {selected.map(docId => {
+                  const product = providerProducts.find(p => p.documentId === docId);
+                  return <Chip key={docId} label={product?.name ?? docId} size="small" />;
                 })}
               </Box>
             )}
           >
-            {kongApis.map(api => (
-              <MenuItem key={api.slug} value={api.slug}>
-                <Checkbox checked={selectedServices.includes(api.slug)} />
-                <ListItemText primary={api.title} />
+            {providerProducts.map(product => (
+              <MenuItem key={product.documentId} value={product.documentId}>
+                <Checkbox checked={selectedProducts.includes(product.documentId)} />
+                <ListItemText primary={product.name} />
               </MenuItem>
             ))}
           </Select>
@@ -212,7 +204,7 @@ function CreateCredential({ onBack, onCreated }) {
         <Button
           variant="contained"
           onClick={handleGenerate}
-          disabled={loading || !selectedApim || selectedServices.length === 0 || !!generatedCredentials}
+          disabled={loading || !selectedApim || selectedProducts.length === 0 || !!generatedCredentials}
           startIcon={loading ? <CircularProgress size={16} /> : null}
         >
           {t('CreateCredential.generateCredentials')}
@@ -224,7 +216,7 @@ function CreateCredential({ onBack, onCreated }) {
           <Box sx={{ mt: 3 }}>
             <Divider sx={{ mb: 2 }} />
             <Alert severity="success" sx={{ mb: 2 }}>
-              {t('CreateCredential.credentialsCreated')}
+              {t('CreateCredential.credential')} <strong>{credSlug}</strong> {t('CreateCredential.credentialCreated')}
             </Alert>
 
             {generatedCredentials.apiKey && (

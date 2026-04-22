@@ -28,7 +28,7 @@ function getApimConfigs() {
     .catch(error => { console.error(error); });
 }
 
-function generateCredentials(apimConfigDocumentId, credId, services, token) {
+function generateCredentials(apimConfigDocumentId, credId, products, token) {
   const requestOptions = {
     method: 'POST',
     headers: {
@@ -36,7 +36,7 @@ function generateCredentials(apimConfigDocumentId, credId, services, token) {
       'apiKey': `${config.strapiApiKey}`,
       'Authorization': `Bearer ${token}`,
     },
-    body: JSON.stringify({ credId, services }),
+    body: JSON.stringify({ credId, products }),
   };
   return fetch(`${config.apiUrl}/apim-configs/${apimConfigDocumentId}/credentials`, requestOptions)
     .then(response => response.json())

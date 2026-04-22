@@ -1,39 +1,69 @@
 @import "../../../styles/variables.module.scss";
 
-.table-left {
-    margin-left: 5%;
+.container {
+    padding: 35px !important;
+
+    @include breakpoint(md) {
+        padding: 48px !important;
+    }
 }
 
-.cell_title {
+.header {
     display: flex;
-    font-size: 20px;
-    color: $gray_lighten-2;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
 
-    h2 {
-        font-family: var(--font-family);
-        font-style: normal;
-        font-weight: 700;
-        font-size: 12px;
-        line-height: 20px;
-        display: flex;
-        align-items: center;
-        letter-spacing: 0.2px;
-        color: var(--primary-color);
-    }
+.btn_create {
+    border-radius: 8px !important;
+    text-transform: none !important;
+    font-weight: 600 !important;
+}
+
+.card {
+    border-radius: 20px !important;
+    margin-top: 20px;
+    padding: 35px 47px 43px 41px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.empty_state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 64px 0;
+    gap: 16px;
+}
+
+.empty_icon {
+    font-size: 64px !important;
+    color: $gray_lighten-2;
+}
+
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+.row {
+    cursor: pointer;
 }
 
 .cell_name {
     font-family: var(--font-family);
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 12px;
     line-height: 20px;
-
     display: flex;
     align-items: center;
     letter-spacing: 0.2px;
-
     color: var(--primary-color);
+    margin: 0;
 }
 
 .cell_description {
@@ -46,57 +76,37 @@
     align-items: center;
     letter-spacing: 0.2px;
     color: $gray_lighten-2;
+    margin: 0;
+    max-width: 320px;
 }
 
-.pagination {
-    cursor: pointer;
+.form_header {
     display: flex;
-    color: $blue;
-    font-size: 20px;
     align-items: center;
-
-    &__icon {
-        color: $secondary;
-    }
-
-    p {
-        font-family: $secondary_font;
-        font-style: normal;
-        font-weight: 400;
-        font-size: 14px;
-        line-height: 32px;
-    }
-
-    .next {
-        margin-left: -30px;
-
-        @media (min-width: 1440px) {
-            margin-left: -10px;
-        }
-    }
+    gap: 8px;
+    margin-bottom: 24px;
 }
 
-.wrapper_apps__wide {
-    &__display{
-      display: block;
-    }
-    @include breakpoint(xsl) {
-      &__display{
-        display: none;
-      }
-    }
-  }
+.field {
+    margin-bottom: 16px !important;
+    width: 100%;
+}
 
-  .wrapper_apps__small {
-    &__display{
-      display: none;
-    }
-    @include breakpoint(xsl) {
-      &__display{
-        display: block;
-        .border__bottom{
-            border-bottom: 1px solid #ECF0F1;
-        }
-      }
-    }
-  }
+.field_last {
+    margin-bottom: 24px !important;
+    width: 100%;
+}
+
+.chips_wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+}
+
+.chip_coming_soon {
+    margin-left: 8px;
+}
+
+.alert {
+    margin-bottom: 16px;
+}

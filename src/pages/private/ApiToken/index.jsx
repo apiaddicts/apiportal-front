@@ -3,8 +3,8 @@
 import React, { useState } from 'react';
 import { Container } from '@mui/material';
 
-import CredentialViewer from '../../../components/ApiKeys/ApiKeys';
-import CreateCredential from '../../../components/ApiKeys/CreateCredential';
+import CredentialViewer from '../../../components/Credentials/index';
+import CreateCredential from '../../../components/Credentials/CreateCredential';
 
 function ApiToken() {
   const [view, setView] = useState('list');

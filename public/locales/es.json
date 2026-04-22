@@ -2,6 +2,7 @@
   "welcome": "Bienvenido a React y i18next",
   "dashboard": "Dashboard",
   "apiToken": "Token",
+  "products": "Productos",
   "apisLibrary": "Biblioteca de APIs",
   "codeSamples": "Ejemplos de Código",
   "billings": "Pasarela de Pagos",
@@ -24,9 +25,6 @@
   "selectProvider": "Seleccionar provider",
   "providerNotAvailable": "Próximamente",
   "comingSoon": "Próximamente",
-  "credentialsCreated": "Credenciales generadas exitosamente. Guárdalas en un lugar seguro.",
-  "generateError": "Error al generar credenciales",
-  "goToMyCredentials": "Ir a Mis credenciales",
   "services": "Servicios",
   "authType": "Tipo de autenticación",
   "createdAt": "Creado",
@@ -353,7 +351,7 @@
     "successLogin": "Éxito al iniciar sesión",
     "passwordChangeEmail": "Se ha enviado un correo electrónico de confirmación de cambio de contraseña. Por favor, revisa tu bandeja de entrada."
   },
-  "ApiKeys": {
+  "Credentials": {
     "copiedToClipboard": "Copiado al portapapeles",
     "copyError": "Error al copiar al portapapeles",
     "myCredentials": "Mis credenciales",
@@ -368,9 +366,11 @@
     "comingSoon": "Próximamente",
     "providerNotAvailable": "Próximamente",
     "selectServices": "Seleccionar servicios",
+    "selectProducts": "Seleccionar productos",
     "generateCredentials": "Generar",
     "generateError": "Error al generar credenciales",
-    "credentialsCreated": "Credenciales generadas exitosamente. Guárdalas en un lugar seguro.",
+    "credential": "Credencial",
+    "credentialCreated": "generada correctamente. Por seguridad, guardela ahora; no será posible verla de nuevo.",
     "clientId": "ID del Cliente",
     "clientSecret": "Secreto del Cliente",
     "goToMyCredentials": "Ir a Mis credenciales"
