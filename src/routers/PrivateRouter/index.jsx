@@ -21,7 +21,7 @@ import SwaggerUI from '../../pages/common/SwaggerUI';
 import OAuthRedirect from '../../pages/common/OAuthRedirect';
 import Subscriptions from '../../pages/private/Subscriptions';
 import Dashboard from '../../pages/private/Dashboard';
-import ApiToken from '../../pages/private/ApiToken';
+import Token from '../../pages/private/Token';
 import FaqsPriv from '../../pages/private/Faqs';
 import BlogPriv from '../../pages/private/Blog';
 import NewsPriv from '../../pages/private/News';
@@ -94,7 +94,7 @@ function PrivateRouter({ isAppReady }) {
             <Route path='faqs' element={<FaqsPriv />} />
             <Route path='blog' element={<BlogPriv />} />
             <Route path='news' element={<NewsPriv />} />
-            <Route path='api-token' element={<ApiToken />} />
+            <Route path='tokens' element={<Token />} />
             <Route path='*' element={<Navigate to='dashboard' replace />} />
           </Routes>
         </div>

@@ -1,7 +1,7 @@
 {
   "welcome": "Welcome to React and i18next",
   "dashboard": "Dashboard",
-  "apiToken": "Token",
+  "tokens": "Tokens",
   "products": "Products",
   "apisLibrary": "APIs Library",
   "codeSamples": "Code Samples",
@@ -350,6 +350,28 @@
     "forgotPassword": "Forgot your password?",
     "successLogin": "Exit on login",
     "passwordChangeEmail": "A confirmation email for password change has been sent. Please check your inbox."
+  },
+  "Token": {
+    "title": "Tokens",
+    "newCredential": "New Credential",
+    "noCredentials": "You have no credentials yet",
+    "noCredentialsDescription": "Create your first credential to start testing APIs.",
+    "createCredential": "Create credential",
+    "errorLoading": "Error loading credentials."
+  },
+  "Products": {
+    "title": "Products",
+    "newProduct": "New Product",
+    "noProducts": "You have no products yet",
+    "noProductsDescription": "Create your first product to group APIs and configure subscriptions.",
+    "createProduct": "Create product",
+    "errorLoading": "Error loading products.",
+    "name": "Name",
+    "description": "Description",
+    "status": "Status",
+    "apis": "APIs",
+    "active": "Active",
+    "inactive": "Inactive"
   },
   "Credentials": {
     "copiedToClipboard": "Copied to clipboard",

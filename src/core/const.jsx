@@ -23,10 +23,10 @@ const getListItems = (t) => {
             primaryRole: true
         },
         {
-            key: 'apiToken',
-            route: '/developer/api-token',
-            text: t('apiToken'),
-            icon: <CustomIcon name={'apitoken'} isActive={location.pathname === '/developer/api-token'} />,
+            key: 'tokens',
+            route: '/developer/tokens',
+            text: t('tokens'),
+            icon: <CustomIcon name={'apitoken'} isActive={location.pathname === '/developer/tokens'} />,
             primaryRole: true
         },
         {

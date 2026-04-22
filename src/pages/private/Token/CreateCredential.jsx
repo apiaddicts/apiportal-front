@@ -1,25 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Box, TextField, IconButton, InputAdornment, Typography, Card, CardContent, Button, MenuItem, Select, InputLabel, FormControl, OutlinedInput, Checkbox, ListItemText, Chip, Divider, CircularProgress, Alert, Tooltip } from '@mui/material';
+import { Box, TextField, IconButton, InputAdornment, Typography, Card, CardContent, Button, MenuItem, Select, InputLabel,   FormControl, OutlinedInput, Checkbox, ListItemText, Chip, Divider, CircularProgress, Alert, Tooltip } from '@mui/material';
 import { ArrowBack, Visibility, VisibilityOff } from '@mui/icons-material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getApimConfigs, generateCredentials, resetGeneratedCredentials } from '../../redux/actions/apimAction';
-import { getProductsByUser } from '../../redux/actions/productsAction';
-import { createUserCredential } from '../../redux/actions/userCredentialAction';
+import { getApimConfigs, generateCredentials, resetGeneratedCredentials } from '../../../redux/actions/apimAction';
+import { getProductsByUser } from '../../../redux/actions/productsAction';
+import { createUserCredential } from '../../../redux/actions/userCredentialAction';
 import styles from './credentials.module.scss';
-
-function decodeJwtPayload(token) {
-  try {
-    const payload = token.split('.')[1];
-    const base64 = payload.replaceAll('-', '+').replaceAll('_', '/');
-    return JSON.parse(atob(base64));
-  } catch {
-    return null;
-  }
-}
 
 function maskValue(value, show) {
   if (!value) return '';
@@ -37,21 +27,21 @@ function SecretField({ label, value = '' }) {
   return (
     <TextField
       fullWidth
-      size="small"
+      size='small'
       label={label}
-      variant="outlined"
+      variant='outlined'
       value={maskValue(value, show)}
-      sx={{ mb: 1 }}
+      className={styles.secret_field}
       slotProps={{
         input: {
           readOnly: true,
           endAdornment: (
-            <InputAdornment position="end">
-              <IconButton size="small" onClick={() => setShow(v => !v)} edge="end">
-                {show ? <VisibilityOff fontSize="small" /> : <Visibility fontSize="small" />}
+            <InputAdornment position='end'>
+              <IconButton size='small' onClick={() => setShow(v => !v)} edge='end'>
+                {show ? <VisibilityOff fontSize='small' /> : <Visibility fontSize='small' />}
               </IconButton>
-              <IconButton size="small" onClick={handleCopy} edge="end">
-                <ContentCopyIcon fontSize="small" />
+              <IconButton size='small' onClick={handleCopy} edge='end'>
+                <ContentCopyIcon fontSize='small' />
               </IconButton>
             </InputAdornment>
           ),
@@ -83,16 +73,14 @@ function CreateCredential({ onBack, onCreated }) {
   const accessToken = tokenData?.accessToken;
   const strapiUser = JSON.parse(localStorage.getItem('user') || 'null');
   const strapiUserId = strapiUser?.id;
-  const userPrefix = (strapiUser?.username ?? 'user').slice(0, 4).toLowerCase();
+  const userPrefix = (strapiUser?.username ?? 'user').slice(0, 6).toLowerCase();
 
   const [credSlug, setCredSlug] = useState(null);
 
   useEffect(() => {
     dispatch(getApimConfigs());
     dispatch(getProductsByUser());
-    return () => {
-      dispatch(resetGeneratedCredentials());
-    };
+    return () => { dispatch(resetGeneratedCredentials()); };
   }, [dispatch]);
 
   useEffect(() => {
@@ -113,8 +101,7 @@ function CreateCredential({ onBack, onCreated }) {
     }, accessToken));
   }, [generatedCredentials]);
 
-  const isKong = (c) => c?.configurations?.[0]?.__component === 'config.kong';
-
+  const isKong = c => c?.configurations?.[0]?.__component === 'config.kong';
   const providerProducts = myProducts.filter(prod => prod.providerId === selectedApim);
 
   const handleGenerate = () => {
@@ -131,18 +118,18 @@ function CreateCredential({ onBack, onCreated }) {
   };
 
   return (
-    <Card sx={{ mt: 3 }}>
+    <Card className={styles.card}>
       <CardContent>
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 3 }}>
-          <IconButton onClick={onBack} size="small">
+        <Box className={styles.form_header}>
+          <IconButton onClick={onBack} size='small'>
             <ArrowBack />
           </IconButton>
-          <Typography variant="h6" className={styles.title} sx={{ mb: 0 }}>
+          <Typography variant='h6' className={styles.title}>
             {t('CreateCredential.createCredential')}
           </Typography>
         </Box>
 
-        <FormControl fullWidth sx={{ mb: 2 }}>
+        <FormControl fullWidth className={styles.field}>
           <InputLabel>{t('CreateCredential.selectProvider')}</InputLabel>
           <Select
             value={selectedApim}
@@ -162,11 +149,7 @@ function CreateCredential({ onBack, onCreated }) {
               );
               if (!kong) {
                 return (
-                  <Tooltip
-                    key={c.documentId}
-                    title={t('CreateCredential.providerNotAvailable')}
-                    placement="right"
-                  >
+                  <Tooltip key={c.documentId} title={t('CreateCredential.providerNotAvailable')} placement='right'>
                     <span>{item}</span>
                   </Tooltip>
                 );
@@ -176,7 +159,7 @@ function CreateCredential({ onBack, onCreated }) {
           </Select>
         </FormControl>
 
-        <FormControl fullWidth sx={{ mb: 3 }} disabled={!selectedApim}>
+        <FormControl fullWidth className={styles.field_last} disabled={!selectedApim}>
           <InputLabel>{t('CreateCredential.selectProducts')}</InputLabel>
           <Select
             multiple
@@ -184,10 +167,10 @@ function CreateCredential({ onBack, onCreated }) {
             onChange={e => setSelectedProducts(e.target.value)}
             input={<OutlinedInput label={t('CreateCredential.selectProducts')} />}
             renderValue={selected => (
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5 }}>
+              <Box className={styles.chips_wrapper}>
                 {selected.map(docId => {
                   const product = providerProducts.find(p => p.documentId === docId);
-                  return <Chip key={docId} label={product?.name ?? docId} size="small" />;
+                  return <Chip key={docId} label={product?.name ?? docId} size='small' />;
                 })}
               </Box>
             )}
@@ -202,7 +185,7 @@ function CreateCredential({ onBack, onCreated }) {
         </FormControl>
 
         <Button
-          variant="contained"
+          variant='contained'
           onClick={handleGenerate}
           disabled={loading || !selectedApim || selectedProducts.length === 0 || !!generatedCredentials}
           startIcon={loading ? <CircularProgress size={16} /> : null}
@@ -210,23 +193,27 @@ function CreateCredential({ onBack, onCreated }) {
           {t('CreateCredential.generateCredentials')}
         </Button>
 
-        {error && <Alert severity="error" sx={{ mt: 2 }}>{error}</Alert>}
+        {error && (
+          <Alert severity='error' className={styles.alert_error}>
+            {error}
+          </Alert>
+        )}
 
         {generatedCredentials && (
-          <Box sx={{ mt: 3 }}>
-            <Divider sx={{ mb: 2 }} />
-            <Alert severity="success" sx={{ mb: 2 }}>
+          <Box className={styles.credentials_result}>
+            <Divider className={styles.divider} />
+            <Alert severity='success' className={styles.alert_success}>
               {t('CreateCredential.credential')} <strong>{credSlug}</strong> {t('CreateCredential.credentialCreated')}
             </Alert>
 
             {generatedCredentials.apiKey && (
-              <SecretField label="API Key" value={generatedCredentials.apiKey} />
+              <SecretField label='API Key' value={generatedCredentials.apiKey} />
             )}
             <SecretField label={t('CreateCredential.clientId')} value={generatedCredentials.clientId} />
             <SecretField label={t('CreateCredential.clientSecret')} value={generatedCredentials.clientSecret} />
 
-            <Box sx={{ mt: 2 }}>
-              <Button variant="contained" onClick={handleFinish}>
+            <Box className={styles.finish_btn}>
+              <Button variant='contained' onClick={handleFinish}>
                 {t('CreateCredential.goToMyCredentials')}
               </Button>
             </Box>

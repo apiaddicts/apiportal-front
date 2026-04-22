@@ -11,7 +11,7 @@ import Title from '../../../components/Title';
 import Suscriptions from '../../../components/Suscriptions';
 import SuscriptionsVertical from '../../../components/SuscriptionsVertical';
 import RestorePassword from '../../../components/RestorePasswordForm';
-import CredentialViewer from '../../../components/Credentials/index';
+import Token from '../../private/Token/index'
 import { useTranslation } from 'react-i18next';
 import classes from './profile.module.scss';
 
@@ -136,7 +136,7 @@ function Profile() {
 
       <div className={classes.main__api__keys}>
         <div className={classes.wrapper_api_keys__wide__display}>
-          <CredentialViewer />
+          <Token />
         </div>
       </div>
 

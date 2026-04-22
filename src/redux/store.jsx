@@ -10,7 +10,7 @@ import codeSampleReducer from './reducer/codeSampleReducer';
 import BillingReducer from './reducer/billingReducer';
 import libraryReducer from './reducer/libraryReducer';
 import userReducer from './reducer/userReducer';
-import productReducer from './reducer/productReducer';
+import productReducer from './reducer/productsReducer';
 import subscriptionsReducer from './reducer/subscriptionsReducer';
 import apiReducer from './reducer/apiReducer';
 import mcpReducer from './reducer/mcpReducer';
