@@ -3,6 +3,7 @@ import { Box, TextField, IconButton, Typography, Card, CardContent, Button, Menu
 import { ArrowBack } from '@mui/icons-material';
 import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { getApimConfigs } from '../../../redux/actions/apimAction';
 import { getKongApis } from '../../../redux/actions/libraryAction';
@@ -10,6 +11,7 @@ import { createProduct } from '../../../redux/actions/productsAction';
 import classes from './products.module.scss';
 
 function CreateProduct({ onBack }) {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   const apimConfigs = useSelector(state => state.apim.apimConfigs);
@@ -60,23 +62,23 @@ function CreateProduct({ onBack }) {
           <IconButton onClick={onBack} size='small'>
             <ArrowBack />
           </IconButton>
-          <Typography variant='h6'>Nuevo Producto</Typography>
+          <Typography variant='h6'>{t('CreateProduct.title')}</Typography>
         </Box>
 
         <TextField
           fullWidth
-          label='Nombre'
+          label={t('CreateProduct.name')}
           value={name}
           onChange={e => setName(e.target.value)}
           className={classes.field}
           size='small'
           error={attempted && !name.trim()}
-          helperText={attempted && !name.trim() ? 'El nombre es obligatorio' : ''}
+          helperText={attempted && !name.trim() ? t('CreateProduct.nameRequired') : ''}
         />
 
         <TextField
           fullWidth
-          label='Descripción'
+          label={t('CreateProduct.description')}
           value={description}
           onChange={e => setDescription(e.target.value)}
           className={classes.field}
@@ -86,10 +88,10 @@ function CreateProduct({ onBack }) {
         />
 
         <FormControl fullWidth className={classes.field}>
-          <InputLabel>Provider</InputLabel>
+          <InputLabel>{t('CreateProduct.provider')}</InputLabel>
           <Select
             value={selectedApim}
-            label='Provider'
+            label={t('CreateProduct.provider')}
             onChange={e => {
               setSelectedApim(e.target.value);
               setSelectedApis([]);
@@ -102,7 +104,7 @@ function CreateProduct({ onBack }) {
                   {c.name}
                   {!kong && (
                     <Chip
-                      label='Próximamente'
+                      label={t('CreateProduct.comingSoon')}
                       size='small'
                       className={classes.chip_coming_soon}
                     />
@@ -111,7 +113,7 @@ function CreateProduct({ onBack }) {
               );
               if (!kong) {
                 return (
-                  <Tooltip key={c.documentId} title='Próximamente' placement='right'>
+                  <Tooltip key={c.documentId} title={t('CreateProduct.comingSoon')} placement='right'>
                     <span>{item}</span>
                   </Tooltip>
                 );
@@ -122,12 +124,12 @@ function CreateProduct({ onBack }) {
         </FormControl>
 
         <FormControl fullWidth className={classes.field_last} disabled={!selectedApim}>
-          <InputLabel>APIs</InputLabel>
+          <InputLabel>{t('CreateProduct.apis')}</InputLabel>
           <Select
             multiple
             value={selectedApis}
             onChange={e => setSelectedApis(e.target.value)}
-            input={<OutlinedInput label='APIs' />}
+            input={<OutlinedInput label={t('CreateProduct.apis')} />}
             renderValue={selected => (
               <Box className={classes.chips_wrapper}>
                 {selected.map(docId => {
@@ -154,7 +156,7 @@ function CreateProduct({ onBack }) {
 
         {attempted && errorCreateProduct && Object.keys(errorCreateProduct).length > 0 && (
           <Alert severity='error' className={classes.alert}>
-            Error al crear el producto. Por favor intenta de nuevo.
+            {t('CreateProduct.errorCreate')}
           </Alert>
         )}
 
@@ -164,7 +166,7 @@ function CreateProduct({ onBack }) {
           disabled={spinnerCreateProduct || !name.trim()}
           startIcon={spinnerCreateProduct ? <CircularProgress size={16} /> : null}
         >
-          Crear Producto
+          {t('CreateProduct.submit')}
         </Button>
       </CardContent>
     </Card>

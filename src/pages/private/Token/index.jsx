@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Container, Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Box, Typography, CircularProgress } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import { getUserCredentials } from '../../../redux/actions/userCredentialAction';
@@ -12,6 +13,7 @@ import CustomIcon from '../../../components/MdIcon/CustomIcon';
 function Token() {
   const { t } = useTranslation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [showCreate, setShowCreate] = useState(false);
 
   const tokenData = JSON.parse(localStorage.getItem('token') || sessionStorage.getItem('token') || 'null');
@@ -20,8 +22,6 @@ function Token() {
   const strapiUserId = strapiUser?.id;
 
   const { credentials, loading, error } = useSelector((state) => state.userCredential);
-
-  console.log(credentials)
 
   useEffect(() => {
     if (strapiUserId && accessToken) {
@@ -93,7 +93,7 @@ function Token() {
             <Table sx={{ minWidth: 600 }}>
               <TableHead>
                 <TableRow>
-                  <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Credentials.credentialId')}</Typography></TableCell>
+                  <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Credentials.provider')}</Typography></TableCell>
                   <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Credentials.clientId')}</Typography></TableCell>
                 </TableRow>
               </TableHead>
@@ -104,9 +104,10 @@ function Token() {
                       key={cred.id}
                       hover
                       className={classes.row}
+                      onClick={() => navigate(`/developer/tokens/${cred.documentId}`)}
                     >
                       <TableCell>
-                        <p className={classes.cell_description}>{cred.slug}</p>
+                        <p className={classes.cell_description}>{cred.providerId}</p>
                       </TableCell>
                       <TableCell>
                         <p className={classes.cell_description}>

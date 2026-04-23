@@ -98,6 +98,8 @@ function CreateCredential({ onBack, onCreated }) {
       clientId: generatedCredentials.clientId ?? null,
       clientSecret: generatedCredentials.clientSecret ?? null,
       user: strapiUserId,
+      providerId: selectedApim,
+      products: selectedProducts,
     }, accessToken));
   }, [generatedCredentials]);
 

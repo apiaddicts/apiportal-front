@@ -22,7 +22,7 @@ function Products() {
     dispatch(getProductsByUser());
   }, []);
 
-  const handleClickRow = (slug) => navigate(`/developer/products/${slug}`);
+  const handleClickRow = (product) => navigate(`/developer/products/${product.slug}`, { state: { product } });
   const handleCreate   = ()     => setShowCreate(true);
 
   if (showCreate) {
@@ -89,7 +89,6 @@ function Products() {
                 <TableRow>
                   <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Products.name')}</Typography></TableCell>
                   <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Products.description')}</Typography></TableCell>
-                  <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Products.status')}</Typography></TableCell>
                   <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Products.apis')}</Typography></TableCell>
                 </TableRow>
               </TableHead>
@@ -101,7 +100,7 @@ function Products() {
                       key={product.id}
                       hover
                       className={classes.row}
-                      onClick={() => handleClickRow(product.slug)}
+                      onClick={() => handleClickRow(product)}
                     >
                       <TableCell>
                         <p className={classes.cell_name}>{product.name}</p>
@@ -109,11 +108,6 @@ function Products() {
                       <TableCell>
                         <p className={classes.cell_description}>
                           {product.description || '—'}
-                        </p>
-                      </TableCell>
-                      <TableCell>
-                        <p className={classes.cell_description}>
-                          {product.isActive ? t('Products.active') : t('Products.inactive')}
                         </p>
                       </TableCell>
                       <TableCell>

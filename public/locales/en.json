@@ -369,9 +369,24 @@
     "name": "Name",
     "description": "Description",
     "status": "Status",
+    "apis": "APIs"
+  },
+  "CreateProduct": {
+    "title": "New Product",
+    "name": "Name",
+    "nameRequired": "Name is required",
+    "description": "Description",
+    "provider": "Provider",
+    "comingSoon": "Coming soon",
     "apis": "APIs",
-    "active": "Active",
-    "inactive": "Inactive"
+    "errorCreate": "Error creating the product. Please try again.",
+    "submit": "Create Product"
+  },
+  "ProductDetail": {
+    "description": "Description",
+    "noDescription": "No description",
+    "apis": "APIs",
+    "noApis": "No APIs associated"
   },
   "Credentials": {
     "copiedToClipboard": "Copied to clipboard",
@@ -381,6 +396,21 @@
     "noCredentials": "You have no credentials yet. Create a new one.",
     "credentialId": "Credential ID",
     "clientId": "Client ID"
+  },
+  "TokenDetail": {
+    "title": "Credential Detail",
+    "provider": "Provider",
+    "clientId": "Client ID",
+    "products": "Authorized Products",
+    "noProducts": "No products linked to this credential.",
+    "addProducts": "Add Permissions",
+    "addPermissions": "Add",
+    "noAvailableProducts": "All available products are already linked.",
+    "selectProducts": "Select products",
+    "cancel": "Cancel",
+    "save": "Save",
+    "addSuccess": "Products added successfully.",
+    "errorLoading": "Error loading credential."
   },
   "CreateCredential": {
     "createCredential": "Create Credential",

@@ -205,7 +205,7 @@ function getProductsByUser() {
     headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
-  const url = `${config.apiUrl}/products?filters[user][id][$eq]=${strapiUserId}&sort=createdAt:desc&populate[library_apis][fields][0]=id`;
+  const url = `${config.apiUrl}/products?filters[user][id][$eq]=${strapiUserId}&sort=createdAt:desc&populate[library_apis][fields][0]=id&populate[library_apis][fields][1]=title`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)

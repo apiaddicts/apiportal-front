@@ -369,9 +369,24 @@
     "name": "Nombre",
     "description": "Descripción",
     "status": "Estado",
+    "apis": "APIs"
+  },
+  "CreateProduct": {
+    "title": "Nuevo Producto",
+    "name": "Nombre",
+    "nameRequired": "El nombre es obligatorio",
+    "description": "Descripción",
+    "provider": "Provider",
+    "comingSoon": "Próximamente",
     "apis": "APIs",
-    "active": "Activo",
-    "inactive": "Inactivo"
+    "errorCreate": "Error al crear el producto. Por favor intenta de nuevo.",
+    "submit": "Crear Producto"
+  },
+  "ProductDetail": {
+    "description": "Descripción",
+    "noDescription": "Sin descripción",
+    "apis": "APIs",
+    "noApis": "Sin APIs asociadas"
   },
   "Credentials": {
     "copiedToClipboard": "Copiado al portapapeles",
@@ -381,6 +396,21 @@
     "noCredentials": "No tienes credenciales aún. Crea una nueva.",
     "credentialId": "ID de Credencial",
     "clientId": "ID del Cliente"
+  },
+  "TokenDetail": {
+    "title": "Detalle de Credencial",
+    "provider": "Proveedor",
+    "clientId": "ID del Cliente",
+    "products": "Productos Autorizados",
+    "noProducts": "No hay productos vinculados a esta credencial.",
+    "addProducts": "Agregar Permisos",
+    "addPermissions": "Agregar",
+    "noAvailableProducts": "Todos los productos disponibles ya están vinculados.",
+    "selectProducts": "Seleccionar productos",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "addSuccess": "Productos agregados correctamente.",
+    "errorLoading": "Error al cargar la credencial."
   },
   "CreateCredential": {
     "createCredential": "Crear credencial",
