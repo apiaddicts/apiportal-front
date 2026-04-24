@@ -10,7 +10,7 @@ function getUserCredentials(userId, token) {
     },
   };
   return fetch(
-    `${config.apiUrl}/user-credentials?filters[user][id][$eq]=${userId}&sort=createdAt:desc&populate=products`,
+    `${config.apiUrl}/user-credentials?filters[user][id][$eq]=${userId}&sort=createdAt:desc&populate=products&populate[apim_config][fields][0]=documentId&populate[apim_config][fields][1]=name`,
     requestOptions,
   )
     .then(handleResponse)
@@ -26,7 +26,7 @@ function getUserCredential(documentId, token) {
     },
   };
   return fetch(
-    `${config.apiUrl}/user-credentials/${documentId}?populate=products`,
+    `${config.apiUrl}/user-credentials/${documentId}?populate=products&populate[apim_config][fields][0]=documentId&populate[apim_config][fields][1]=name`,
     requestOptions,
   )
     .then(handleResponse)

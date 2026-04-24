@@ -34,7 +34,7 @@ function Token() {
   if (showCreate) {
     return (
       <Container fixed className={classes.container}>
-        <CreateCredential onBack={() => { setShowCreate(false); dispatch(getUserCredentials()); }} />
+        <CreateCredential onBack={() => { setShowCreate(false); dispatch(getUserCredentials(strapiUserId, accessToken)); }} />
       </Container>
     );
   }
@@ -94,7 +94,8 @@ function Token() {
               <TableHead>
                 <TableRow>
                   <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Credentials.provider')}</Typography></TableCell>
-                  <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Credentials.clientId')}</Typography></TableCell>
+                  <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Credentials.clientId')} / ApiKey</Typography></TableCell>
+                  <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Token.type')}</Typography></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -107,11 +108,18 @@ function Token() {
                       onClick={() => navigate(`/developer/tokens/${cred.documentId}`)}
                     >
                       <TableCell>
-                        <p className={classes.cell_description}>{cred.providerId}</p>
+                        <p className={classes.cell_description}>
+                          {cred.apim_config?.name ?? '—'}
+                        </p>
                       </TableCell>
                       <TableCell>
                         <p className={classes.cell_description}>
-                          {cred.clientId || '—'}
+                          {cred.type === 'apiKey' ? (cred.apiKey || '—') : (cred.clientId || '—')}
+                        </p>
+                      </TableCell>
+                      <TableCell>
+                        <p className={classes.cell_description}>
+                          {cred.type ?? '—'}
                         </p>
                       </TableCell>
                     </TableRow>

@@ -274,7 +274,7 @@ function getKongApis() {
     headers: { 'apiKey': `${config.strapiApiKey}` },
   };
   return fetch(
-    `${config.apiUrl}/library-apis?filters[provider][$eq]=kong&filters[publish][$eq]=publicado&fields[0]=title&fields[1]=slug&fields[2]=providerId`,
+    `${config.apiUrl}/library-apis?filters[provider][$eq]=kong&filters[publish][$eq]=publicado&fields[0]=title&fields[1]=slug&populate[apim_config][fields][0]=documentId`,
     requestOptions,
   )
     .then(handleResponse)

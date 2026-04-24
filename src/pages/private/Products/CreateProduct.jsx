@@ -31,13 +31,18 @@ function CreateProduct({ onBack }) {
 
   const isKong = c => c?.configurations?.[0]?.__component === 'config.kong';
 
+  const serviceCountFor = docId => allKongApis.filter(api => api.apim_config?.documentId === docId).length;
+
   useEffect(() => {
     if (selectedApim || apimConfigs.length === 0) return;
-    const firstKong = apimConfigs.find(isKong);
-    if (firstKong) setSelectedApim(firstKong.documentId);
-  }, [apimConfigs, selectedApim]);
+    const firstEnabled = apimConfigs.find(
+      c => c?.configurations?.[0]?.__component === 'config.kong' &&
+           allKongApis.some(api => api.apim_config?.documentId === c.documentId)
+    );
+    if (firstEnabled) setSelectedApim(firstEnabled.documentId);
+  }, [apimConfigs, selectedApim, allKongApis]);
 
-  const kongApis = allKongApis.filter(api => api.providerId === selectedApim);
+  const kongApis = allKongApis.filter(api => api.apim_config?.documentId === selectedApim);
 
   const handleSubmit = () => {
     setAttempted(true);
@@ -46,7 +51,7 @@ function CreateProduct({ onBack }) {
     const data = {
       name,
       description,
-      providerId: selectedApim,
+      apim_config: { connect: [{ documentId: selectedApim }] },
       ...(selectedApis.length > 0 && {
         library_apis: { connect: selectedApis.map(docId => ({ documentId: docId })) },
       }),
@@ -99,9 +104,11 @@ function CreateProduct({ onBack }) {
           >
             {apimConfigs.map(c => {
               const kong = isKong(c);
+              const count = serviceCountFor(c.documentId);
+              const disabled = !kong || count === 0;
               const item = (
-                <MenuItem key={c.documentId} value={c.documentId} disabled={!kong}>
-                  {c.name}
+                <MenuItem key={c.documentId} value={c.documentId} disabled={disabled}>
+                  {c.name} - {t('CreateProduct.serviceCount', { count })}
                   {!kong && (
                     <Chip
                       label={t('CreateProduct.comingSoon')}
@@ -111,9 +118,9 @@ function CreateProduct({ onBack }) {
                   )}
                 </MenuItem>
               );
-              if (!kong) {
+              if (disabled) {
                 return (
-                  <Tooltip key={c.documentId} title={t('CreateProduct.comingSoon')} placement='right'>
+                  <Tooltip key={c.documentId} title={kong ? '' : t('CreateProduct.comingSoon')} placement='right'>
                     <span>{item}</span>
                   </Tooltip>
                 );

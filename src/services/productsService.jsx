@@ -205,7 +205,7 @@ function getProductsByUser() {
     headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
-  const url = `${config.apiUrl}/products?filters[user][id][$eq]=${strapiUserId}&sort=createdAt:desc&populate[library_apis][fields][0]=id&populate[library_apis][fields][1]=title`;
+  const url = `${config.apiUrl}/products?filters[user][id][$eq]=${strapiUserId}&sort=createdAt:desc&populate[library_apis][fields][0]=id&populate[library_apis][fields][1]=title&populate[apim_config][fields][0]=documentId`;
 
   return fetch(url, requestOptions)
     .then(handleResponse)
@@ -221,6 +221,7 @@ function createProduct(data) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
     body: JSON.stringify({ data: { ...data, user: strapiUserId } }),
+    // Note: data.apim_config should be { connect: [{ documentId }] } from caller
   };
 
   return fetch(`${config.apiUrl}/products`, requestOptions)

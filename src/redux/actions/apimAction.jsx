@@ -19,9 +19,9 @@ export const getApimConfigs = () => (dispatch) => {
   );
 };
 
-export const generateCredentials = (apimConfigDocumentId, credId, products, token) => (dispatch) => {
+export const generateCredentials = (apimConfigDocumentId, credId, products, token, type) => (dispatch) => {
   dispatch({ type: apimConstants.GENERATE_CREDENTIALS_REQUEST });
-  apimService.generateCredentials(apimConfigDocumentId, credId, products, token).then(
+  apimService.generateCredentials(apimConfigDocumentId, credId, products, token, type).then(
     (response) => {
       const credData = response?.data?.data ?? response?.data;
       if (credData) {

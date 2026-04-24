@@ -357,6 +357,7 @@
     "noCredentials": "No tienes credenciales aún",
     "noCredentialsDescription": "Crea tu primera credencial para poder probar las APIs.",
     "createCredential": "Crear credencial",
+    "type": "Tipo",
     "errorLoading": "Error al cargar credenciales."
   },
   "Products": {
@@ -373,14 +374,16 @@
   },
   "CreateProduct": {
     "title": "Nuevo Producto",
-    "name": "Nombre",
+    "name": "Nombre*",
     "nameRequired": "El nombre es obligatorio",
     "description": "Descripción",
-    "provider": "Provider",
+    "provider": "Proveedor*",
     "comingSoon": "Próximamente",
-    "apis": "APIs",
+    "apis": "APIs*",
     "errorCreate": "Error al crear el producto. Por favor intenta de nuevo.",
-    "submit": "Crear Producto"
+    "submit": "Crear Producto",
+    "serviceCount_one": "{{count}} servicio",
+    "serviceCount_other": "{{count}} servicios"
   },
   "ProductDetail": {
     "description": "Descripción",
@@ -395,7 +398,8 @@
     "createCredential": "Crear credencial",
     "noCredentials": "No tienes credenciales aún. Crea una nueva.",
     "credentialId": "ID de Credencial",
-    "clientId": "ID del Cliente"
+    "clientId": "ID del Cliente",
+    "provider": "Proveedor"
   },
   "TokenDetail": {
     "title": "Detalle de Credencial",
@@ -417,15 +421,20 @@
     "selectProvider": "Seleccionar provider",
     "comingSoon": "Próximamente",
     "providerNotAvailable": "Próximamente",
+    "selectCredentialType": "Tipo de credencial",
+    "typeOauth2": "OAuth2 (Client ID y Secret)",
+    "typeApiKey": "API Key",
     "selectServices": "Seleccionar servicios",
     "selectProducts": "Seleccionar productos",
     "generateCredentials": "Generar",
     "generateError": "Error al generar credenciales",
-    "credential": "Credencial",
-    "credentialCreated": "generada correctamente. Por seguridad, guardela ahora; no será posible verla de nuevo.",
+    "credential": "Credencial generada correctamente.",
+    "credentialCreated": "Por seguridad, guardela ahora; no será posible verla de nuevo.",
     "clientId": "ID del Cliente",
     "clientSecret": "Secreto del Cliente",
-    "goToMyCredentials": "Ir a Mis credenciales"
+    "goToMyCredentials": "Ir a Mis credenciales",
+    "productCount_one": "{{count}} producto",
+    "productCount_other": "{{count}} productos"
   },
   "LibraryPaginated": {
     "viewDocumentation": "Ver Documentación",

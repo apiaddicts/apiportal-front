@@ -68,6 +68,7 @@ function CreateCredential({ onBack, onCreated }) {
 
   const [selectedApim, setSelectedApim] = useState('');
   const [selectedProducts, setSelectedProducts] = useState([]);
+  const [credentialType, setCredentialType] = useState('oauth2');
 
   const tokenData = JSON.parse(localStorage.getItem('token') || sessionStorage.getItem('token') || 'null');
   const accessToken = tokenData?.accessToken;
@@ -85,32 +86,37 @@ function CreateCredential({ onBack, onCreated }) {
 
   useEffect(() => {
     if (selectedApim || apimConfigs.length === 0) return;
-    const firstKong = apimConfigs.find(
-      c => c?.configurations?.[0]?.__component === 'config.kong'
+    const firstEnabled = apimConfigs.find(
+      c => c?.configurations?.[0]?.__component === 'config.kong' &&
+           myProducts.some(p => p.apim_config?.documentId === c.documentId)
     );
-    if (firstKong) setSelectedApim(firstKong.documentId);
-  }, [apimConfigs, selectedApim]);
+    if (firstEnabled) setSelectedApim(firstEnabled.documentId);
+  }, [apimConfigs, selectedApim, myProducts]);
 
   useEffect(() => {
     if (!generatedCredentials || !strapiUserId || !credSlug) return;
     dispatch(createUserCredential({
       slug: credSlug,
+      type: credentialType,
       clientId: generatedCredentials.clientId ?? null,
       clientSecret: generatedCredentials.clientSecret ?? null,
+      apiKey: generatedCredentials.apiKey ?? null,
       user: strapiUserId,
-      providerId: selectedApim,
+      apim_config: { connect: [{ documentId: selectedApim }] },
       products: selectedProducts,
     }, accessToken));
   }, [generatedCredentials]);
 
   const isKong = c => c?.configurations?.[0]?.__component === 'config.kong';
-  const providerProducts = myProducts.filter(prod => prod.providerId === selectedApim);
+  const providerProducts = myProducts.filter(prod => prod.apim_config?.documentId === selectedApim);
+
+  const productCountFor = docId => myProducts.filter(p => p.apim_config?.documentId === docId).length;
 
   const handleGenerate = () => {
     if (!selectedApim || selectedProducts.length === 0) return;
     const slug = `${userPrefix}-${crypto.randomUUID().replaceAll('-', '').slice(0, 16)}`;
     setCredSlug(slug);
-    dispatch(generateCredentials(selectedApim, slug, selectedProducts, accessToken));
+    dispatch(generateCredentials(selectedApim, slug, selectedProducts, accessToken, credentialType));
   };
 
   const handleFinish = () => {
@@ -144,20 +150,38 @@ function CreateCredential({ onBack, onCreated }) {
           >
             {apimConfigs.map(c => {
               const kong = isKong(c);
+              const count = productCountFor(c.documentId);
+              const disabled = !kong || count === 0;
               const item = (
-                <MenuItem key={c.documentId} value={c.documentId} disabled={!kong}>
-                  {c.name}
+                <MenuItem key={c.documentId} value={c.documentId} disabled={disabled}>
+                  {c.name} - {t('CreateCredential.productCount', { count })}
                 </MenuItem>
               );
-              if (!kong) {
+              if (disabled) {
+                const tooltip = kong ? '' : t('CreateCredential.providerNotAvailable');
                 return (
-                  <Tooltip key={c.documentId} title={t('CreateCredential.providerNotAvailable')} placement='right'>
+                  <Tooltip key={c.documentId} title={tooltip} placement='right'>
                     <span>{item}</span>
                   </Tooltip>
                 );
               }
               return item;
             })}
+          </Select>
+        </FormControl>
+
+        <FormControl fullWidth className={styles.field} disabled={!selectedApim || !!generatedCredentials}>
+          <InputLabel>{t('CreateCredential.selectCredentialType')}</InputLabel>
+          <Select
+            value={credentialType}
+            label={t('CreateCredential.selectCredentialType')}
+            onChange={e => {
+              setCredentialType(e.target.value);
+              dispatch(resetGeneratedCredentials());
+            }}
+          >
+            <MenuItem value='oauth2'>{t('CreateCredential.typeOauth2')}</MenuItem>
+            <MenuItem value='apiKey'>{t('CreateCredential.typeApiKey')}</MenuItem>
           </Select>
         </FormControl>
 
@@ -205,14 +229,17 @@ function CreateCredential({ onBack, onCreated }) {
           <Box className={styles.credentials_result}>
             <Divider className={styles.divider} />
             <Alert severity='success' className={styles.alert_success}>
-              {t('CreateCredential.credential')} <strong>{credSlug}</strong> {t('CreateCredential.credentialCreated')}
+              {t('CreateCredential.credential')} <strong>{t('CreateCredential.credentialCreated')}</strong>
             </Alert>
 
-            {generatedCredentials.apiKey && (
+            {credentialType === 'apiKey' ? (
               <SecretField label='API Key' value={generatedCredentials.apiKey} />
+            ) : (
+              <>
+                <SecretField label={t('CreateCredential.clientId')} value={generatedCredentials.clientId} />
+                <SecretField label={t('CreateCredential.clientSecret')} value={generatedCredentials.clientSecret} />
+              </>
             )}
-            <SecretField label={t('CreateCredential.clientId')} value={generatedCredentials.clientId} />
-            <SecretField label={t('CreateCredential.clientSecret')} value={generatedCredentials.clientSecret} />
 
             <Box className={styles.finish_btn}>
               <Button variant='contained' onClick={handleFinish}>

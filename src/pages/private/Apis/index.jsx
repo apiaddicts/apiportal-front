@@ -2,33 +2,25 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Container } from '@mui/material';
-import Multiselect from 'multiselect-react-dropdown';
-import Title from '../../../components/Title';
+import ReactPaginate from 'react-paginate';
 import SearchInput from '../../../components/Input/SearchInput';
 import Icon from '../../../components/MdIcon/Icon';
-import CardInformationLibrary from '../../../components/Card/CardInformationLibrary';
-import { listApis, searchApis, getListTags, filterAPIsByTags, resetLibraryApi, getLibraryApiNextSearch, getLibraryApiPreviosSearch, getLibraryApiNext, getLibraryApiPrevios, getLibraries } from '../../../redux/actions/libraryAction';
+import { resetLibraryApi, getLibraries } from '../../../redux/actions/libraryAction';
 import classes from './apis.module.scss';
-import config from '../../../services/config';
 import CardLibrary from './card';
 import { useTranslation } from 'react-i18next';
 
-const compareArrays = (array1, array2) => {
-  return array1.filter((a) => {
-    return array2.some((b) => {
-      return a.assetId === b.slug;
-    });
-  });
-};
 function Apis(props) {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
-  const topApi = 10;
   const { libraries, loading } = useSelector((state) => state.library);
-  const [skip, setSkip] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
   const [viewType, setViewType] = useState('list');
+  const [itemsPerPage, setItemsPerPage] = useState(10);
+  const [itemOffset, setItemOffset] = useState(0);
   const dispatch = useDispatch();
 
   const filteredApis = useMemo(() => {
@@ -46,56 +38,30 @@ function Apis(props) {
     );
   }, [searchTerm, libraries]);
 
-  const displayApis = useMemo(() => ({
-    apis: filteredApis.slice(skip, skip + topApi),
-    skip: skip,
-    count: filteredApis.length,
-  }), [filteredApis, skip]);
+  const pageCount = Math.ceil(filteredApis.length / itemsPerPage);
+  const currentItems = filteredApis.slice(itemOffset, itemOffset + itemsPerPage);
 
   const isLoading =
     loading &&
     (!libraries || libraries.length === 0);
 
   useEffect(() => {
-    setSkip(0);
-  }, [searchTerm]);
+    setItemOffset(0);
+  }, [searchTerm, itemsPerPage]);
+
+  const handlePageClick = (event) => {
+    const newOffset = (event.selected * itemsPerPage) % filteredApis.length;
+    setItemOffset(newOffset);
+  };
 
   const handleChangeSearchFilter = (text) => {
     const filterText = text.replace(/[/[`&\/\\#,@|!+()$~%.'":*?<>\]{}]/g, '');
     setSearchTerm(filterText);
   };
 
-  const onSelect = (selectedList) => {
-    let search = 'tags[0]=published';
-    selectedList.forEach((items, index) => {
-      const data = `&tags[${index}]=${items.name}`;
-      search = search + data;
-    });
-    dispatch(filterAPIsByTags(search));
-  };
-
-  const onRemove = (selectedList) => {
-
-    if (selectedList.length > 0) {
-      let search = '';
-      selectedList.forEach((items, index) => {
-        let data = '';
-        if (search.length === 0) {
-          data = `tags[${index}]=${items.name}`;
-        } else {
-          data = `&tags[${index}]=${items.name}`;
-        }
-        search = search + data;
-      });
-      dispatch(filterAPIsByTags(search));
-    } else {
-      dispatch(listApis());
-    }
-  };
-
   useEffect(() => {
     if (libraries && libraries.length === 0) {
-      dispatch(getLibraries())
+      dispatch(getLibraries());
     }
   }, []);
 
@@ -104,13 +70,6 @@ function Apis(props) {
       dispatch(resetLibraryApi());
     };
   }, []);
-
-  const handleNext = () => {
-    if (skip < displayApis.count) return setSkip(skip + topApi);
-  };
-  const handlePrevious = () => {
-    if (skip >= topApi) return setSkip(skip - topApi);
-  };
 
   return (
     <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: ' 0px', md: '97px !important' } }}>
@@ -126,39 +85,35 @@ function Apis(props) {
           />
         </div>
 
-        {/* <div className={classes.filters__version}>
-          <label className={classes.filters__label}>{t('filterByVersion')}</label>
-          <div className={classes.version__radios}>
-            {['1.0.0', '1.0.1', '1.2.0'].map((version) => (
-              <label key={version} className={classes.radio__item}>
-                <input
-                  type='radio'
-                  name='version'
-                  value={version}
-                  onChange={() => handleVersionChange(version)}
-                />
-                <span>{version}</span>
-              </label>
-            ))}
+        <div className={classes.controls__right}>
+          <div className={classes.page_size}>
+            <select
+              value={itemsPerPage}
+              onChange={(e) => setItemsPerPage(Number(e.target.value))}
+              className={classes.page_size__select}
+            >
+              {[10, 30, 60, 90].map((n) => (
+                <option key={n} value={n}>{n}</option>
+              ))}
+            </select>
           </div>
-        </div> */}
 
-        <div className={classes.view__switch}>
-          <button
-            className={viewType === 'list' ? classes.active : ''}
-            onClick={() => setViewType('list')}
-          >
-            📃
-          </button>
-          <button
-            className={viewType === 'grid' ? classes.active : ''}
-            onClick={() => setViewType('grid')}
-          >
-            🔲
-          </button>
+          <div className={classes.view__switch}>
+            <button
+              className={viewType === 'list' ? classes.active : ''}
+              onClick={() => setViewType('list')}
+            >
+              <Icon id='MdOutlineViewAgenda' />
+            </button>
+            <button
+              className={viewType === 'grid' ? classes.active : ''}
+              onClick={() => setViewType('grid')}
+            >
+              <Icon id='MdGridView' />
+            </button>
+          </div>
         </div>
       </div>
-
 
       {viewType === 'list' ? (
         <div className={classes.apis__table}>
@@ -170,12 +125,14 @@ function Apis(props) {
             <div>{t('type')}</div>
           </div>
           {
-            displayApis.apis && displayApis.apis.length > 0 && !isLoading ? (
-              displayApis.apis.map((api, index) => (
-                <div key={index} className={classes.table__row}>
-                  <div className={classes.api__name} onClick={() => window.location.href = `/developer/apis/${api.documentId}`}>
-                    {api.slug}
-                  </div>
+            currentItems && currentItems.length > 0 && !isLoading ? (
+              currentItems.map((api, index) => (
+                <div
+                  key={index}
+                  className={classes.table__row}
+                  onClick={() => navigate(`/developer/apis/${api.documentId}`)}
+                >
+                  <div className={classes.api__name}>{api.slug}</div>
                   <div>{api.version || '-'}</div>
                   <div>{api.context || '-'}</div>
                   <div>{api.provider || '-'}</div>
@@ -192,9 +149,9 @@ function Apis(props) {
       ) : (
         <div className={classes.apis__cards}>
           {
-            displayApis.apis && displayApis.apis.length > 0 && !isLoading ? (
+            currentItems && currentItems.length > 0 && !isLoading ? (
               <div className={classes.card__grid}>
-                {displayApis.apis.map((api, index) => (
+                {currentItems.map((api, index) => (
                   <CardLibrary key={index} api={api} />
                 ))}
               </div>
@@ -205,11 +162,25 @@ function Apis(props) {
             )
           }
         </div>
-
       )}
 
-
-
+      <ReactPaginate
+        breakLabel='...'
+        nextLabel={t('LibraryPaginated.next')}
+        onPageChange={handlePageClick}
+        pageRangeDisplayed={2}
+        marginPagesDisplayed={2}
+        pageCount={pageCount}
+        previousLabel={t('LibraryPaginated.previous')}
+        renderOnZeroPageCount={null}
+        containerClassName={classes.pagination}
+        previousClassName={classes.pagination__previous}
+        nextClassName={classes.pagination__next}
+        disabledClassName={classes.pagination__disabled}
+        pageClassName={classes.pagination__page}
+        activeClassName={classes.pagination__active}
+        breakClassName={classes.pagination__page}
+      />
     </Container>
   );
 }

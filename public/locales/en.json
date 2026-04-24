@@ -357,6 +357,7 @@
     "noCredentials": "You have no credentials yet",
     "noCredentialsDescription": "Create your first credential to start testing APIs.",
     "createCredential": "Create credential",
+    "type": "Type",
     "errorLoading": "Error loading credentials."
   },
   "Products": {
@@ -373,14 +374,16 @@
   },
   "CreateProduct": {
     "title": "New Product",
-    "name": "Name",
+    "name": "Name*",
     "nameRequired": "Name is required",
     "description": "Description",
-    "provider": "Provider",
+    "provider": "Provider*",
     "comingSoon": "Coming soon",
-    "apis": "APIs",
+    "apis": "APIs*",
     "errorCreate": "Error creating the product. Please try again.",
-    "submit": "Create Product"
+    "submit": "Create Product",
+    "serviceCount_one": "{{count}} service",
+    "serviceCount_other": "{{count}} services"
   },
   "ProductDetail": {
     "description": "Description",
@@ -395,7 +398,8 @@
     "createCredential": "Create Credential",
     "noCredentials": "You have no credentials yet. Create a new one.",
     "credentialId": "Credential ID",
-    "clientId": "Client ID"
+    "clientId": "Client ID",
+    "provider": "Provider"
   },
   "TokenDetail": {
     "title": "Credential Detail",
@@ -417,15 +421,20 @@
     "selectProvider": "Select provider",
     "comingSoon": "Coming soon",
     "providerNotAvailable": "Coming soon",
+    "selectCredentialType": "Credential type",
+    "typeOauth2": "OAuth2 (Client ID & Secret)",
+    "typeApiKey": "API Key",
     "selectServices": "Select services",
     "selectProducts": "Select products",
     "generateCredentials": "Generate",
     "generateError": "Failed to generate credentials",
-    "credential": "Credential",
-    "credentialCreated": "successfully generated. Please save it securely; it will not be displayed again.",
+    "credential": "Credential successfully generated.",
+    "credentialCreated": "Please save it securely; it will not be displayed again.",
     "clientId": "Client ID",
     "clientSecret": "Client Secret",
-    "goToMyCredentials": "Go to My Credentials"
+    "goToMyCredentials": "Go to My Credentials",
+    "productCount_one": "{{count}} product",
+    "productCount_other": "{{count}} products"
   },
   "LibraryPaginated": {
     "viewDocumentation": "View Documentation",

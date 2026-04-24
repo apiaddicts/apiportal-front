@@ -58,17 +58,17 @@ function TokenDetail() {
   }
 
   const cred = currentCredential;
-  const providerId = cred.providerId;
+  const apimConfigDocumentId = cred.apim_config?.documentId;
 
   const linkedProductIds = new Set((cred.products ?? []).map(p => p.documentId));
 
   const availableProducts = myProducts.filter(
-    p => p.providerId === providerId && !linkedProductIds.has(p.documentId),
+    p => p.apim_config?.documentId === apimConfigDocumentId && !linkedProductIds.has(p.documentId),
   );
 
   const handleAddProducts = () => {
-    if (selectedProducts.length === 0 || !providerId) return;
-    dispatch(addProductsToCredential(documentId, selectedProducts, providerId, accessToken));
+    if (selectedProducts.length === 0 || !apimConfigDocumentId) return;
+    dispatch(addProductsToCredential(documentId, selectedProducts, apimConfigDocumentId, accessToken));
   };
 
   return (
