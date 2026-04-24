@@ -221,7 +221,6 @@ function createProduct(data) {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
     body: JSON.stringify({ data: { ...data, user: strapiUserId } }),
-    // Note: data.apim_config should be { connect: [{ documentId }] } from caller
   };
 
   return fetch(`${config.apiUrl}/products`, requestOptions)

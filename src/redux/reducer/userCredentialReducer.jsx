@@ -51,7 +51,6 @@ export default function userCredentialReducer(state = initialState, action) {
         ...state,
         addProductsLoading: false,
         addProductsSuccess: true,
-        // Update the current credential in place
         currentCredential: action.payload ?? state.currentCredential,
       };
     case userCredentialConstants.ADD_PRODUCTS_FAILURE:

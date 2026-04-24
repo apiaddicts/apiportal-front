@@ -26,7 +26,7 @@ function getUserCredential(documentId, token) {
     },
   };
   return fetch(
-    `${config.apiUrl}/user-credentials/${documentId}?populate=products&populate[apim_config][fields][0]=documentId&populate[apim_config][fields][1]=name`,
+    `${config.apiUrl}/user-credentials/${documentId}?populate[products][fields][0]=name&populate[products][fields][1]=documentId&populate[apim_config][fields][0]=documentId&populate[apim_config][fields][1]=name`,
     requestOptions,
   )
     .then(handleResponse)

@@ -155,7 +155,7 @@ function CreateProduct({ onBack }) {
             {kongApis.map(api => (
               <MenuItem key={api.documentId} value={api.documentId}>
                 <Checkbox checked={selectedApis.includes(api.documentId)} />
-                <ListItemText primary={api.title} />  {/* library-api usa "title" */}
+                <ListItemText primary={api.title} />
               </MenuItem>
             ))}
           </Select>

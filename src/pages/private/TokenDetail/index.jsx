@@ -90,7 +90,17 @@ function TokenDetail() {
               <Typography variant='body2' className={classes.label}>{t('TokenDetail.credentialId')}</Typography>
               <Typography variant='body1' className={classes.value}>{cred.slug}</Typography>
             </Box>
-            {cred.clientId && (
+            <Box className={classes.info_row}>
+              <Typography variant='body2' className={classes.label}>{t('TokenDetail.type')}</Typography>
+              <Typography variant='body1' className={classes.value}>{cred.type}</Typography>
+            </Box>
+            {cred.type === 'apiKey' && cred.apiKey && (
+              <Box className={classes.info_row}>
+                <Typography variant='body2' className={classes.label}>{t('TokenDetail.apiKey')}</Typography>
+                <Typography variant='body1' className={classes.value}>{cred.apiKey}</Typography>
+              </Box>
+            )}
+            {cred.type === 'oauth2' && cred.clientId && (
               <Box className={classes.info_row}>
                 <Typography variant='body2' className={classes.label}>{t('TokenDetail.clientId')}</Typography>
                 <Typography variant='body1' className={classes.value}>{cred.clientId}</Typography>
@@ -129,7 +139,7 @@ function TokenDetail() {
                   startIcon={<AddCircleOutline />}
                   onClick={() => { setShowSelector(true); dispatch(resetAddProducts()); }}
                 >
-                  {t('TokenDetail.addPermissions')}
+                  {t('TokenDetail.add')}
                 </Button>
               )}
             </Box>
