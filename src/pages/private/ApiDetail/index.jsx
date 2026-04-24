@@ -49,7 +49,7 @@ function ApiDetail(props) {
           </div>
         </Link>
       </div>
-      <Container  >
+      <Container sx={{ pt: 0, pb: '40px', pl: '40px', pr: '40px' }}>
         {library && Object.keys(library).length > 0 ? (
           <div>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className={classes.box__title}>

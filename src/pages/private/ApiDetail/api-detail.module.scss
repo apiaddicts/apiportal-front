@@ -25,7 +25,7 @@
 }
 
 .back__btn {
-padding: 20px ;
+  padding: 40px !important;
 
   @include breakpoint(xs) {
     left: 0;

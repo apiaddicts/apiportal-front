@@ -3,6 +3,7 @@ import AppRouter from './routers/AppRouter';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSettingPage } from './redux/actions/settingPageAction';
 import config from './services/config';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const colorToRgb = (color) => {
     if (!color) return null;
@@ -123,7 +124,22 @@ const AppWrapper = () => {
         return <div style={{ width: '100vw', height: '100vh', backgroundColor: '#fff' }} />;
     }
 
-    return <AppRouter isAppReady={isAppReady} />;
+    const muiTheme = createTheme({
+        palette: {
+            primary: {
+                main: primaryColor,
+            },
+            secondary: {
+                main: secondaryColor,
+            },
+        },
+    });
+
+    return (
+        <ThemeProvider theme={muiTheme}>
+            <AppRouter isAppReady={isAppReady} />
+        </ThemeProvider>
+    );
 };
 
 export default AppWrapper;

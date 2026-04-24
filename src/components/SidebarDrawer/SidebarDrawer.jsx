@@ -306,13 +306,9 @@ function SidebarDrawer({ children, user }) {
         <List
           sx={{
             [`& .active, & .${listItemClasses.root}:hover`]: {
-              // color: '#000B39',
               fontWeight: '700',
-              background: 'rgb(0, 174, 199, 0.1)',
+              background: 'rgba(var(--primary-color-rgb), 0.1)',
               width: '100%',
-              // '& svg': {
-              //   fill: '#000B39',
-              // },
             },
           }}
           className={classes.sidebar__item}
@@ -394,12 +390,12 @@ function SidebarDrawer({ children, user }) {
         <List
           sx={{
             [`& .active, & .${listItemClasses.root}:hover`]: {
-              color: primaryColor,
+              color: 'var(--primary-color)',
               fontWeight: 'bold',
-              borderRight: '2px solid #000B39',
+              borderRight: '2px solid var(--primary-color)',
               width: '100%',
               '& svg': {
-                fill: primaryColor,
+                fill: 'var(--primary-color)',
               },
             },
             paddingTop: `${!toggleMenu ? '180px' : '8px'}`,
@@ -435,7 +431,7 @@ function SidebarDrawer({ children, user }) {
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
                   >
-                    <ListItemIcon sx={{ justifyContent: 'center', color: grayColor }}>
+                    <ListItemIcon sx={{ justifyContent: 'center', color: 'inherit' }}>
                       {React.isValidElement(item.icon) && item.icon.type === CustomIcon
                         ? React.cloneElement(item.icon, { isHovered: hoveredIndex === index })
                         : item.icon}

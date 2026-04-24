@@ -37,162 +37,162 @@ function CustomIcon({ name, isActive, label, isHovered, ...rest }) {
   const renderIcon = {
     account: {
       render: (
-        <AccountIcon style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <AccountIcon style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     logo: {
       render: (
-        <Logo style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <Logo style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     logoNeuro: {
       render: (
-        <LogoNeuro style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <LogoNeuro style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     logoNeuroBlanco: {
       render: (
-        <LogoNeuroBlanco style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <LogoNeuroBlanco style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     logowhite: {
       render: (
-        <LogoWhite style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <LogoWhite style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     fintech: {
       render: (
-        <FintechIcon style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <FintechIcon style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     fintechwhite: {
       render: (
-        <FintechWhiteIcon style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <FintechWhiteIcon style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     cog: {
       render: (
-        <SettingsIcon style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <SettingsIcon style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     code: {
       render: (
-        <CodeIcon style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <CodeIcon style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     laptopcode: {
       render: (
-        <LaptopCodeIcon style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <LaptopCodeIcon style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     settings: {
       render: (
-        <SettingsSwitchIcon style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <SettingsSwitchIcon style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     adduser: {
       render: (
-        <AddUserIcon style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <AddUserIcon style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     chevron_right: {
       render: (
-        <ChevronRightIcon style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <ChevronRightIcon style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     integration: {
       render: (
-        <SuccessWindow style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <SuccessWindow style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     billing: {
       render: (
-        <IconoBilling style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <IconoBilling style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     dashboard: {
       render: (
-        <IconoDashboard style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <IconoDashboard style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     apitoken: {
       render: (
-        <IconoApitoken style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <IconoApitoken style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     liveApi: {
       render: (
-        <IconoLiveApi style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <IconoLiveApi style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     news: {
       render: (
-        <IconoNews style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <IconoNews style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     blog: {
       render: (
-        <IconoBlog style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <IconoBlog style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     support: {
       render: (
-        <IconoSupport style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <IconoSupport style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     faqs: {
       render: (
-        <IconoFAQs style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <IconoFAQs style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     catalogo: {
       render: (
-        <Archivist style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <Archivist style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     elearning: {
       render: (
-        <Elearning style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <Elearning style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     idea: {
       render: (
-        <LightbulbOutlinedIcon sx={{ width: 60, height: 60, fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <LightbulbOutlinedIcon sx={{ width: 60, height: 60, fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     link: {
       render: (
-        <AttachmentOutlinedIcon sx={{ width: 60, height: 60, fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <AttachmentOutlinedIcon sx={{ width: 60, height: 60, fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     like: {
       render: (
-        <ThumbUpOutlinedIcon sx={{ width: 60, height: 60, fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <ThumbUpOutlinedIcon sx={{ width: 60, height: 60, fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     setting: {
       render: (
-        <SettingsInputSvideoOutlinedIcon sx={{ width: 60, height: 60, fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <SettingsInputSvideoOutlinedIcon sx={{ width: 60, height: 60, fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     add: {
       render: (
-        <LibraryAddOutlinedIcon sx={{ width: 60, height: 60, fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <LibraryAddOutlinedIcon sx={{ width: 60, height: 60, fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     world: {
       render: (
-        <LanguageOutlinedIcon sx={{ width: 60, height: 60, fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <LanguageOutlinedIcon sx={{ width: 60, height: 60, fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     organizer: {
       render: (
-        <SchemaOutlinedIcon sx={{ width: 60, height: 60, fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <SchemaOutlinedIcon sx={{ width: 60, height: 60, fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
     default: {
       render: (
-        <CodeIcon style={{ fill: isHovered || isActive ? '#0074c9' : 'black' }} />
+        <CodeIcon style={{ fill: isHovered || isActive ? 'var(--primary-color)' : 'black' }} />
       ),
     },
   };
@@ -211,7 +211,7 @@ function CustomIcon({ name, isActive, label, isHovered, ...rest }) {
         <span
           style={{
             marginLeft: '8px',
-            color: isHovered || isActive ? '#0074c9' : 'black',
+            color: isHovered || isActive ? 'var(--primary-color)' : 'black',
           }}
         >
           {label}

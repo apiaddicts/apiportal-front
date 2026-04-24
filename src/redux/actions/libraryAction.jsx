@@ -464,3 +464,18 @@ export const getApisUnsecure = () => (dispatch) => {
       });
     });
 };
+
+export const getKongApis = () => (dispatch) => {
+  dispatch({ type: libraryConstants.GET_KONG_APIS_REQUEST });
+  libraryService.getKongApis().then(
+    (response) => {
+      dispatch({
+        type: libraryConstants.GET_KONG_APIS_SUCCESS,
+        payload: response?.data ?? [],
+      });
+    },
+    (error) => {
+      dispatch({ type: libraryConstants.GET_KONG_APIS_FAILURE, payload: error });
+    },
+  );
+};

@@ -1,0 +1,105 @@
+@import "../../../styles/variables.module.scss";
+
+.container {
+  padding: 35px !important;
+
+  @include breakpoint(md) {
+    padding: 48px !important;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-weight: 600 !important;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+
+.card {
+  border-radius: 20px !important;
+  width: 100%;
+}
+
+.card_content {
+  padding: 32px !important;
+}
+
+.info_section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.info_row {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-weight: 600 !important;
+  color: var(--text-secondary, #6b7280) !important;
+  text-transform: uppercase;
+  font-size: 11px !important;
+  letter-spacing: 0.5px;
+}
+
+.value {
+  font-family: monospace !important;
+  font-size: 14px !important;
+  word-break: break-all;
+}
+
+.divider {
+  margin: 20px 0 !important;
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.section_title {
+  font-weight: 600 !important;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.selector_area {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.selector_actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.alert {
+  margin-top: 8px;
+}

@@ -10,7 +10,7 @@ import codeSampleReducer from './reducer/codeSampleReducer';
 import BillingReducer from './reducer/billingReducer';
 import libraryReducer from './reducer/libraryReducer';
 import userReducer from './reducer/userReducer';
-import productReducer from './reducer/productReducer';
+import productReducer from './reducer/productsReducer';
 import subscriptionsReducer from './reducer/subscriptionsReducer';
 import apiReducer from './reducer/apiReducer';
 import mcpReducer from './reducer/mcpReducer';
@@ -25,6 +25,8 @@ import gettingStartedReducer from './reducer/gettingStartedReducer';
 import settingReducer from './reducer/settingReducer';
 import authReducer from './reducer/authReducer';
 import mcpLibraryReducer from './reducer/mcpLibraryReducer';
+import apimReducer from './reducer/apimReducer';
+import userCredentialReducer from './reducer/userCredentialReducer';
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
 
 const reducers = combineReducers({
@@ -51,6 +53,8 @@ const reducers = combineReducers({
   apps: appsReducer,
   started: gettingStartedReducer,
   auth: authReducer,
+  apim: apimReducer,
+  userCredential: userCredentialReducer,
 });
 
 const store = createStore(

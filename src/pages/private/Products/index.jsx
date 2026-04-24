@@ -1,227 +1,130 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Container, TableHead, TableRow, TableCell, Table, TableContainer, TableBody, Card, Grid } from '@mui/material';
-import { filterProductsByDescription, filterProductsByName, listProducts, searchProducts, getProductosNext, getProductPrevious, resetProduct } from '../../../redux/actions/productsAction';
-import useSearch from '../../../hooks/useSearch';
+import { useTranslation } from 'react-i18next';
+import { Container, Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Box, Typography, CircularProgress } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import LayersIcon from '@mui/icons-material/Layers';
+import { getProductsByUser } from '../../../redux/actions/productsAction';
 import Title from '../../../components/Title';
-import Spinner from '../../../components/Spinner';
-import SearchInput from '../../../components/Input/SearchInput';
-import InputResponse from '../../../components/Input/InputUI/InputResponse';
-import Icon from '../../../components/MdIcon/Icon';
+import CreateProduct from './CreateProduct';
 import classes from './products.module.scss';
 
-function Products(props) {
-  const { products, spinner, productsSkip } = useSelector((state) => state.products);
-
-  const dispatch = useDispatch();
+function Products() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [showCreate, setShowCreate] = useState(false);
 
-  const { formik } = useSearch({
-    initialState: {
-      search: '',
-      name: '',
-      description: '',
-    },
-  });
-
-  const handleSearch = () => {
-    if (formik.values.search.trim().length >= 1) {
-      dispatch(searchProducts(formik.values.search));
-    }
-    if (formik.values.name.trim().length >= 1) {
-      dispatch(filterProductsByName(formik.values.name));
-    }
-
-    if (formik.values.description.trim().length >= 1) {
-      dispatch(filterProductsByDescription(formik.values.description));
-    }
-
-    if (formik.values.search.trim().length === 0 && formik.values.name.trim().length === 0 && formik.values.description.trim().length === 0) {
-      dispatch(listProducts());
-    }
-  };
-  useEffect(() => {
-    const timer = setTimeout(() => handleSearch(), 500);
-    return () => clearTimeout(timer);
-  }, [formik.values.search, formik.values.name, formik.values.description]);
+  const { myProducts, spinnerMyProducts, errorMyProducts } = useSelector((state) => state.products);
 
   useEffect(() => {
-    if (products && Object.keys(products).length === 0 && productsSkip === 0) {
-      dispatch(listProducts());
-    }
-  }, []);
-  useEffect(() => {
-    return () => {
-      dispatch(resetProduct());
-    };
+    dispatch(getProductsByUser());
   }, []);
 
-  const handleClickRow = (id) => {
-    navigate(`/developer/products/${id}`);
-  };
+  const handleClickRow = (product) => navigate(`/developer/products/${product.slug}`, { state: { product } });
+  const handleCreate   = ()     => setShowCreate(true);
 
-  const handleNextProduct = (url) => {
-    dispatch(getProductosNext(url));
-  };
+  if (showCreate) {
+    return (
+      <Container fixed className={classes.container}>
+        <CreateProduct onBack={() => { setShowCreate(false); dispatch(getProductsByUser()); }} />
+      </Container>
+    );
+  }
 
-  const handlePreviousProduct = () => {
-    dispatch(getProductPrevious());
-  };
+  if (spinnerMyProducts) {
+    return (
+      <Container fixed className={classes.container}>
+        <Box className={classes.loading}>
+          <CircularProgress />
+        </Box>
+      </Container>
+    );
+  }
+
+  if (errorMyProducts && Object.keys(errorMyProducts).length > 0) {
+    return (
+      <Container fixed className={classes.container}>
+        <Typography color='error'>{t('Products.errorLoading')}</Typography>
+      </Container>
+    );
+  }
 
   return (
-    <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: ' 0px', md: '97px !important' } }}>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 2fr))', alignItems: 'center' }}>
-        <div>
-          <Title text='Productos' />
-        </div>
-        <div className='margin_top'>
-          <SearchInput
-            name='search'
-            type='text'
-            placeholder='Buscar Producto'
-            icon
-            onChange={(e) => {
-              formik.handleChange(e);
-              formik.setFieldValue('description', '');
-              formik.setFieldValue('name', '');
-            }}
-            value={formik.values.search}
-          />
-        </div>
-      </div>
-      { spinner ? (
-        <Spinner styles={{ height: '500px' }} title='Cargando...' />
+    <Container fixed className={classes.container}>
+
+      <Box className={classes.header}>
+        <Title text={t('Products.title')} />
+        <Button
+          variant='contained'
+          startIcon={<AddIcon />}
+          onClick={handleCreate}
+          className={classes.btn_create}
+        >
+          {t('Products.newProduct')}
+        </Button>
+      </Box>
+
+      {myProducts.length === 0 ? (
+        <Card className={classes.card}>
+          <Box className={classes.empty_state}>
+            <LayersIcon className={classes.empty_icon} />
+            <Typography variant='h6' color='text.secondary'>
+              {t('Products.noProducts')}
+            </Typography>
+            <Typography variant='body2' color='text.disabled'>
+              {t('Products.noProductsDescription')}
+            </Typography>
+            <Button variant='outlined' startIcon={<AddIcon />} onClick={handleCreate}>
+              {t('Products.createProduct')}
+            </Button>
+          </Box>
+        </Card>
       ) : (
-        <div>
-          <Card sx={{ borderRadius: '20px', marginTop: '20px', padding: '35px 47px 43px 41px', marginBottom: '15px', width: '100%' }}>
-            <Grid item sx={{ marginBottom: '31px' }} xs={12}>
-              <div className={classes.wrapper_apps__wide__display}>
-                <TableContainer>
-                  <Table sx={{ minWidth: 650 }} aria-label='simple table'>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell style={{ width: '100px' }} size='small'>
-                          <>
-                            <div className={classes.cell_title}>
-                              <h2 className='text-uppercase'>Nombre</h2>
-                            </div>
-                            <div style={{ height: '36px', marginTop: '14px' }}>
-                              <InputResponse
-                                name='name'
-                                type='text'
-                                label='Buscar Nombre'
-                                onChange={(e) => {
-                                  formik.handleChange(e);
-                                  formik.setFieldValue('description', '');
-                                  formik.setFieldValue('search', '');
-                                }}
-                                value={formik.values.name}
-                              />
-                            </div>
-                          </>
-                        </TableCell>
-                        <TableCell>
-                          <>
-                            <div className={classes.cell_title}>
-                              <h2 className='text-uppercase'>Descripción</h2>
-                            </div>
-                            <div style={{ height: '36px', marginTop: '14px' }}>
-                              <InputResponse
-                                name='description'
-                                type='text'
-                                label='Buscar Descripción'
-                                onChange={(e) => {
-                                  formik.handleChange(e);
-                                  formik.setFieldValue('name', '');
-                                  formik.setFieldValue('search', '');
-                                }}
-                                value={formik.values.description}
-                              />
-                            </div>
-                          </>
-                        </TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {products && Object.keys(products).length > 0 ? (
-                        <>
-                          {products.value.map((row, i) => (
-                            <TableRow
-                              key={i}
-                              sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer', zIndex: 6 }}
-                              onClick={() => handleClickRow(row.name)}
-                            >
-                              <TableCell component='th' scope='row'>
-                                <p className={classes.cell_name}>{row.properties.displayName}</p>
-                              </TableCell>
-                              <TableCell>
-                                <p className={classes.cell_description}>
-                                  {row.properties.description}
-                                </p>
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                        </>
-                      ) : (null)}
-
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </div>
-              <div className={classes.wrapper_apps__small__display}>
-                {products && Object.keys(products).length > 0 ? (
-                  <>
-                    {products.value.map((row, i) => (
-                      <div className={`w-full py-3 ${classes.border__bottom}`} key={row.id}>
-                        <div
-                          className='fs__12 text__secondary ls__02 cpointer'
-                          onClick={() => handleClickRow(row.name)}
-                        >
-                          {row.properties.displayName}
-                        </div>
-                        <div className='fs__12 text__gray__gray_darken mt-2'>{row.properties.description}</div>
-                      </div>
-                    ))}
-                  </>
-                ) : (null)}
-              </div>
-            </Grid>
-            <Grid item xs={12}>
-              <Grid container direction='row' justifyContent='space-between'>
-                <Grid item xs={3}>
-                  {productsSkip > 0 ? (
-                    <div onClick={() => handlePreviousProduct()} className={classes.pagination}>
-                      <div className={classes.pagination__icon}>
-                        <Icon id='MdNavigateBefore' />
-                      </div>
-                      <p>Anterior</p>
-                    </div>
-
-                  ) : (null)}
-                </Grid>
-                <Grid item xs={1}>
-                  {products.nextLink !== undefined ? (
-                    <div onClick={() => handleNextProduct(products.nextLink)} className={classes.pagination}>
-                      <p className={classes.next}>Siguiente</p>
-                      <div className={classes.pagination__icon}>
-                        <Icon id='MdNavigateNext' />
-                      </div>
-                    </div>
-                  ) : (null)}
-                </Grid>
-              </Grid>
-            </Grid>
-
-          </Card>
-        </div>
+        <Card className={classes.card}>
+          <TableContainer>
+            <Table sx={{ minWidth: 600 }}>
+              <TableHead>
+                <TableRow>
+                  <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Products.name')}</Typography></TableCell>
+                  <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Products.description')}</Typography></TableCell>
+                  <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Products.apis')}</Typography></TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {myProducts.map((product) => {
+                  const apis = product.library_apis ?? [];
+                  return (
+                    <TableRow
+                      key={product.id}
+                      hover
+                      className={classes.row}
+                      onClick={() => handleClickRow(product)}
+                    >
+                      <TableCell>
+                        <p className={classes.cell_name}>{product.name}</p>
+                      </TableCell>
+                      <TableCell>
+                        <p className={classes.cell_description}>
+                          {product.description || '—'}
+                        </p>
+                      </TableCell>
+                      <TableCell>
+                        <p className={classes.cell_description}>
+                          {apis.length} API{apis.length === 1 ? '' : 's'}
+                        </p>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Card>
       )}
-
     </Container>
   );
 }
-
-Products.propTypes = {};
 
 export default Products;
