@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import _ from 'underscore';
 import { useTranslation } from 'react-i18next';
+import config from '../../../services/config';
 
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 import { getHomeContent } from '../../../redux/actions/homeAction';
@@ -31,6 +32,8 @@ function CatalogDetail({ initialSection }) {
   const { blogs } = useSelector((state) => state.blog);
 
   const [section, setSection] = useState(initialSection);
+  const [gaiaXData, setGaiaXData] = useState(null);
+  const [gaiaXLoading, setGaiaXLoading] = useState(false);
 
   useEffect(() => {
     dispatch(getcatalogs());
@@ -67,6 +70,21 @@ function CatalogDetail({ initialSection }) {
       dispatch(getCatalogContent());
     }
   }, [catalogPage, dispatch]);
+
+  useEffect(() => {
+    if (section !== 'participants' || !params?.id) return;
+    setGaiaXData(null);
+    setGaiaXLoading(true);
+    fetch(`${config.apiUrl}/gaia-x/validate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ slug: catalog?.slug }),
+    })
+      .then((res) => (res.ok ? res.json() : Promise.reject()))
+      .then((data) => setGaiaXData(data))
+      .catch(() => setGaiaXData({ _error: true }))
+      .finally(() => setGaiaXLoading(false));
+  }, [section, params?.id]);
 
   const handleClick = (section) => {
     setSection(section);
@@ -123,7 +141,7 @@ function CatalogDetail({ initialSection }) {
               {section === "assets" && <OverviewServiceOffering serviceOffering={JSON.parse(catalog?.assets || '{}')} />}
               {section === "policies" && <PoliciesSection policies={JSON.parse(catalog?.policies || '{}')} />}
               {section === "contracts" && <ContractsSection contract={JSON.parse(catalog?.contracstDefinition || '{}')} />}
-              {section === "participants" && <SectionParticipant participant={JSON.parse(catalog?.participants || '{}')} />}
+              {section === "participants" && <SectionParticipant participant={JSON.parse(catalog?.participants || '{}')} gaiaXData={gaiaXData} gaiaXLoading={gaiaXLoading} />}
               {section === "dataresources" && <SectionDataresource dataResource={JSON.parse(catalog?.dataSource || '{}')} />}
               {section === "softwareresource" && <SectionSoftware software={JSON.parse(catalog?.softwareResource || '{}')} />}
               {section === "infrastructureresource" && <SectionInfrastructure infrastructure={JSON.parse(catalog?.infrastructureResource || '{}')} />}

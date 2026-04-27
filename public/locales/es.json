@@ -97,6 +97,29 @@
     "save": "Guardar",
     "subscriptions": "Suscripciones"
   },
+  "GaiaX": {
+    "cardTitle": "Credencial Gaia-X",
+    "viewProofDetails": "View Proof Details",
+    "modalTitle": "Validar Credencial Gaia-X",
+    "credentialUrlLabel": "URL de la credencial",
+    "credentialUrlPlaceholder": "https://...",
+    "validate": "Validar",
+    "validCredential": "Credencial válida",
+    "expiredCredential": "Credencial expirada",
+    "notFound": "Credencial no encontrada",
+    "issuer": "Emisor",
+    "issuanceDate": "Fecha de emisión",
+    "expirationDate": "Fecha de expiración",
+    "credentialSubjects": "Sujetos de credencial",
+    "subjectType": "Tipo",
+    "subjectVersion": "Versión",
+    "subjectIntegrity": "Integridad",
+    "proof": "Prueba",
+    "proofType": "Tipo",
+    "proofCreated": "Fecha de creación",
+    "proofVerificationMethod": "Método de verificación",
+    "genericError": "Error al validar la credencial"
+  },
   "SidebarDrawer": {
     "logout": "Salir",
     "hello": "Hola,",
@@ -556,7 +579,25 @@
       "jurisdiction": "Jurisdicción",
       "pointTemplates": "Plantillas de Puntos",
       "viewMasterAgreement": "Ver Acuerdo Maestro",
-      "linkServiceOffering": "Vincular Oferta de Servicio"
+      "linkServiceOffering": "Vincular Oferta de Servicio",
+      "gaiaX": {
+        "active": "Credencial activa y válida",
+        "inactive": "Credencial inactiva o inválida",
+        "notFound": "Catálogo no encontrado",
+        "noCredential": "Este catálogo no tiene credencial Gaia-X configurada",
+        "genericError": "Error al validar la credencial",
+        "complianceLabel": "Etiqueta de cumplimiento",
+        "certifiedBy": "Certificado por",
+        "trustFramework": "Trust Framework",
+        "issuer": "Emisor",
+        "issuanceDate": "Fecha de emisión",
+        "expirationDate": "Fecha de expiración",
+        "noExpiration": "Sin expiración",
+        "checks": "Verificaciones",
+        "checkSignature": "Firma JWS válida",
+        "checkIssuer": "Emisor en trust anchors",
+        "checkExpired": "Credencial no expirada"
+      }
     },
     "dataresource": {
       "generalInfoTitle": "INFORMACIÓN GENERAL",

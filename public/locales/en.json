@@ -97,6 +97,29 @@
     "save": "Save",
     "subscriptions": "Subscriptions"
   },
+  "GaiaX": {
+    "cardTitle": "Gaia-X Credential",
+    "viewProofDetails": "View Proof Details",
+    "modalTitle": "Validate Gaia-X Credential",
+    "credentialUrlLabel": "Credential URL",
+    "credentialUrlPlaceholder": "https://...",
+    "validate": "Validate",
+    "validCredential": "Valid credential",
+    "expiredCredential": "Expired credential",
+    "notFound": "Credential not found",
+    "issuer": "Issuer",
+    "issuanceDate": "Issuance date",
+    "expirationDate": "Expiration date",
+    "credentialSubjects": "Credential subjects",
+    "subjectType": "Type",
+    "subjectVersion": "Version",
+    "subjectIntegrity": "Integrity",
+    "proof": "Proof",
+    "proofType": "Type",
+    "proofCreated": "Created",
+    "proofVerificationMethod": "Verification method",
+    "genericError": "Error validating the credential"
+  },
   "SidebarDrawer": {
     "logout": "Logout",
     "hello": "Hello,",
@@ -556,7 +579,25 @@
       "jurisdiction": "Jurisdiction",
       "pointTemplates": "Point Templates",
       "viewMasterAgreement": "View Master Agreement",
-      "linkServiceOffering": "Link Service Offering"
+      "linkServiceOffering": "Link Service Offering",
+      "gaiaX": {
+        "active": "Active and valid credential",
+        "inactive": "Inactive or invalid credential",
+        "notFound": "Catalog not found",
+        "noCredential": "This catalog has no Gaia-X credential configured",
+        "genericError": "Error validating the credential",
+        "complianceLabel": "Compliance label",
+        "certifiedBy": "Certified by",
+        "trustFramework": "Trust Framework",
+        "issuer": "Issuer",
+        "issuanceDate": "Issuance date",
+        "expirationDate": "Expiration date",
+        "noExpiration": "No expiration",
+        "checks": "Validation checks",
+        "checkSignature": "Valid JWS signature",
+        "checkIssuer": "Issuer in trust anchors",
+        "checkExpired": "Credential not expired"
+      }
     },
     "dataresource": {
       "generalInfoTitle": "GENERAL INFORMATION",
