@@ -86,6 +86,10 @@ function CatalogDetail({ initialSection }) {
       .finally(() => setGaiaXLoading(false));
   }, [section, params?.id]);
 
+  const safeParse = (str, fallback = {}) => {
+    try { return JSON.parse(str) || fallback; } catch { return fallback; }
+  };
+
   const handleClick = (section) => {
     setSection(section);
     navigate(`/catalogs/${params?.id}/${section}`);
@@ -138,14 +142,14 @@ function CatalogDetail({ initialSection }) {
             </aside>
 
             <main className={classes.catalog_content}>
-              {section === "assets" && <OverviewServiceOffering serviceOffering={JSON.parse(catalog?.assets || '{}')} />}
-              {section === "policies" && <PoliciesSection policies={JSON.parse(catalog?.policies || '{}')} />}
-              {section === "contracts" && <ContractsSection contract={JSON.parse(catalog?.contracstDefinition || '{}')} />}
-              {section === "participants" && <SectionParticipant participant={JSON.parse(catalog?.participants || '{}')} gaiaXData={gaiaXData} gaiaXLoading={gaiaXLoading} />}
-              {section === "dataresources" && <SectionDataresource dataResource={JSON.parse(catalog?.dataSource || '{}')} />}
-              {section === "softwareresource" && <SectionSoftware software={JSON.parse(catalog?.softwareResource || '{}')} />}
-              {section === "infrastructureresource" && <SectionInfrastructure infrastructure={JSON.parse(catalog?.infrastructureResource || '{}')} />}
-              {section === "contractdefinition" && <SectionContractDefinition contract={JSON.parse(catalog?.contracstDefinitionOperations || '{}')} />}
+              {section === "assets" && <OverviewServiceOffering serviceOffering={safeParse(catalog?.assets)} />}
+              {section === "policies" && <PoliciesSection policies={safeParse(catalog?.policies)} />}
+              {section === "contracts" && <ContractsSection contract={safeParse(catalog?.contracstDefinition)} />}
+              {section === "participants" && <SectionParticipant participant={safeParse(catalog?.participants)} gaiaXData={gaiaXData} gaiaXLoading={gaiaXLoading} />}
+              {section === "dataresources" && <SectionDataresource dataResource={safeParse(catalog?.dataSource)} />}
+              {section === "softwareresource" && <SectionSoftware software={safeParse(catalog?.softwareResource)} />}
+              {section === "infrastructureresource" && <SectionInfrastructure infrastructure={safeParse(catalog?.infrastructureResource)} />}
+              {section === "contractdefinition" && <SectionContractDefinition contract={safeParse(catalog?.contracstDefinitionOperations)} />}
             </main>
           </div>
           {/*<div id='contact' />*/}

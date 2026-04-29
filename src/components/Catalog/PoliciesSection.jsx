@@ -78,10 +78,10 @@ function SectionPolicies({ policies }) {
             accessPolicy['gx:rules'].map((pol, idx) => (
               <div className={classes.sub_card} key={idx}>
                 <div className={classes.icon_text}>
-                  <span>{titleIconAccessPolicies[pol['attribute']].icon}</span>
+                  <span>{titleIconAccessPolicies[pol['attribute']]?.icon}</span>
                   <div>
-                    <strong>{titleIconAccessPolicies[pol['attribute']].title}</strong>
-                    <p>{titleIconAccessPolicies[pol['attribute']].label}: {Array.isArray(pol['value']) ? pol['value'].join(' / ') : pol['value']}</p>
+                    <strong>{titleIconAccessPolicies[pol['attribute']]?.title}</strong>
+                    <p>{titleIconAccessPolicies[pol['attribute']]?.label}: {Array.isArray(pol['value']) ? pol['value'].join(' / ') : pol['value']}</p>
                   </div>
                 </div>
               </div>

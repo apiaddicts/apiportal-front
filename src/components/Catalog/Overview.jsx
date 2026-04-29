@@ -113,18 +113,18 @@ function OverviewServiceOffering({ serviceOffering }) {
         {aggregationOf && aggregationOf.length > 0 ? (
           aggregationOf.map((asset, idx) => (
             <button key={asset.id} className={classes.asset_card}
-              onClick={() => handleClick(logosIndex[asset["type"]].section)}
+              onClick={() => handleClick(logosIndex[asset["type"]]?.section)}
             >
               <div className={classes.card_top}>
                 <div className={classes.info_section}>
-                  <span className={classes.resource_type_label}>{logosIndex[asset["type"]].label}</span>
+                  <span className={classes.resource_type_label}>{logosIndex[asset["type"]]?.label}</span>
                   <div className={classes.resource_main}>
                     <div className={classes.icon_wrapper}>
-                      {logosIndex[asset["type"]].icon}
+                      {logosIndex[asset["type"]]?.icon}
                     </div>
                     <div className={classes.name_container}>
                       <h3>{asset["gx:name"]}</h3>
-                      <p>{logosIndex[asset["type"]].desc}</p>
+                      <p>{logosIndex[asset["type"]]?.desc}</p>
                     </div>
                   </div>
                 </div>
@@ -132,14 +132,14 @@ function OverviewServiceOffering({ serviceOffering }) {
               </div>
 
               <div className={classes.card_footer}>
-                <span className={classes.tag}>{logosIndex[asset["type"]].tag}</span>
+                <span className={classes.tag}>{logosIndex[asset["type"]]?.tag}</span>
               </div>
             </button>
           ))
         ) : <></>}
         </div>
       </section>
-    </div>    
+    </div>
   );
 }
 
