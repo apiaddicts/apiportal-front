@@ -42,7 +42,7 @@ function Catalogs({ currentItems }) {
         >
           <DrawerCatalogDetails
             serviceOffering={JSON.parse(selectedItem?.services || '{}')}
-            contract={JSON.parse(selectedItem?.contracstDefinition || '{}')}
+            contract={JSON.parse(selectedItem?.contractDefinition || '{}')}
             onNavigate={(section) => {
               navigate(`/catalogs/${selectedItem?.documentId}/${section}`);
               setSelectedId(null);

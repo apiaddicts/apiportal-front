@@ -30,6 +30,10 @@ import SubscriptionDetail from '../pages/public/SubscriptionDetail';
 import SubscriptionDetailContact from '../pages/public/SubscriptionDetailContact';
 import ResetPassword from '../pages/public/ResetPassword';
 import EmailConfirmed from '../pages/public/EmailConfirmed';
+import CheckoutSuccess from '../pages/public/Checkout/CheckoutSuccess';
+import CheckoutCancel from '../pages/public/Checkout/CheckoutCancel';
+import PurchasesList from '../pages/public/Purchases/PurchasesList';
+import PurchaseDetail from '../pages/public/Purchases/PurchaseDetail';
 
 function PublicRoute() {
   const location = useLocation();
@@ -92,6 +96,10 @@ function PublicRoute() {
           <Route path='/suscripciones' element={<Subscriptions setOpenForm={setOpenForm} />} />
           <Route path='/suscripciones/:id' element={<SubscriptionDetail />} />
           <Route path='/suscripciones/:id/contact' element={<SubscriptionDetailContact />} />
+          <Route path='/checkout/:purchaseId/success' element={<CheckoutSuccess />} />
+          <Route path='/checkout/:purchaseId/cancel' element={<CheckoutCancel />} />
+          <Route path='/purchases' element={<PurchasesList />} />
+          <Route path='/purchases/:id' element={<PurchaseDetail />} />
         </Routes>
       </main>
 
