@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import checkoutService from '../../services/checkoutService';
+import Button from '../ui/Button/Button';
+import FormError from '../ui/FormError/FormError';
 
 function formatPrice(amountCents, currency) {
   if (amountCents == null) return null;
@@ -8,10 +10,36 @@ function formatPrice(amountCents, currency) {
     .format(amountCents / 100);
 }
 
-function BuyButton({ catalogId, priceCents, currency, disabled }) {
+function isAuthenticated() {
+  try {
+    const token = JSON.parse(localStorage.getItem('token') || 'null');
+    return !!(token?.jwt || token?.accessToken);
+  } catch { return false; }
+}
+
+function BuyButton({ catalogId, priceCents, currency, bundleId, disabled }) {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [existingPurchase, setExistingPurchase] = useState(null);
+  const [checking, setChecking] = useState(false);
+
+  useEffect(() => {
+    if (!catalogId || !isAuthenticated()) return;
+    setChecking(true);
+    checkoutService.getMyPurchases()
+      .then((res) => {
+        const items = res.data || [];
+        const match = items.find((p) => {
+          if (p.status !== 'paid') return false;
+          if (bundleId && p.bundleId === bundleId) return true;
+          return p.library_catalog?.documentId === catalogId;
+        });
+        if (match) setExistingPurchase(match);
+      })
+      .catch(() => {})
+      .finally(() => setChecking(false));
+  }, [catalogId, bundleId]);
 
   const handleClick = async () => {
     setLoading(true);
@@ -25,12 +53,22 @@ function BuyButton({ catalogId, priceCents, currency, disabled }) {
     }
   };
 
+  if (existingPurchase) {
+    return (
+      <Button to={`/purchases/${existingPurchase.documentId}`} variant="secondary" fullWidth>
+        {t('Checkout.viewPurchase')}
+      </Button>
+    );
+  }
+
+  const price = formatPrice(priceCents, currency);
+
   return (
     <div>
-      <button onClick={handleClick} disabled={loading || disabled} type="button">
-        {loading ? t('Checkout.processing') : `${t('Checkout.buy')} ${formatPrice(priceCents, currency) || ''}`.trim()}
-      </button>
-      {error && <p role="alert">{error}</p>}
+      <Button onClick={handleClick} disabled={loading || checking || disabled} fullWidth>
+        {loading ? t('Checkout.processing') : `${t('Checkout.buy')}${price ? ` · ${price}` : ''}`}
+      </Button>
+      <FormError compact>{error}</FormError>
     </div>
   );
 }

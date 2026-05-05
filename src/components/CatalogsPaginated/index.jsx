@@ -6,6 +6,37 @@ import Drawer from '../Drawer/DrawerCatalog';
 import classes from './catalogs-paginated.module.scss';
 import './drawerDetail.scss';
 import { useNavigate } from 'react-router-dom';
+import checkoutService from '../../services/checkoutService';
+
+function isAuthenticated() {
+  try {
+    const token = JSON.parse(localStorage.getItem('token') || 'null');
+    return !!(token?.jwt || token?.accessToken);
+  } catch { return false; }
+}
+
+function useExistingPurchase(catalogDocumentId) {
+  const [purchase, setPurchase] = useState(null);
+  useEffect(() => {
+    if (!catalogDocumentId || !isAuthenticated()) {
+      setPurchase(null);
+      return;
+    }
+    let cancelled = false;
+    checkoutService.getMyPurchases()
+      .then((res) => {
+        if (cancelled) return;
+        const items = res.data || [];
+        const match = items.find((p) =>
+          p.status === 'paid' && p.library_catalog?.documentId === catalogDocumentId,
+        );
+        setPurchase(match || null);
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, [catalogDocumentId]);
+  return purchase;
+}
 
 function Catalogs({ currentItems }) {
   const { t } = useTranslation();
@@ -43,8 +74,13 @@ function Catalogs({ currentItems }) {
           <DrawerCatalogDetails
             serviceOffering={JSON.parse(selectedItem?.services || '{}')}
             contract={JSON.parse(selectedItem?.contractDefinition || '{}')}
+            catalogDocumentId={selectedItem?.documentId}
             onNavigate={(section) => {
               navigate(`/catalogs/${selectedItem?.documentId}/${section}`);
+              setSelectedId(null);
+            }}
+            onConsume={(purchaseId) => {
+              navigate(`/purchases/${purchaseId}`);
               setSelectedId(null);
             }}
           />
@@ -99,7 +135,7 @@ function CatalogsPaginated({ apis, itemsPerPage }) {
   );
 }
 
-function DrawerCatalogDetails({ serviceOffering, contract, onNavigate }) {
+function DrawerCatalogDetails({ serviceOffering, contract, catalogDocumentId, onNavigate, onConsume }) {
   const { t } = useTranslation();
   const assets = serviceOffering?.credentialSubject?.["gx:aggregationOf"] || [];
   const policy = contract?.credentialSubject?.["gx:usagePolicy"] || {};
@@ -108,6 +144,9 @@ function DrawerCatalogDetails({ serviceOffering, contract, onNavigate }) {
   const prohibitions = policy["odrl:prohibition"] || [];
 
   const terms = contract?.credentialSubject?.["gx:termsAndConditions"] || [];
+
+  const existingPurchase = useExistingPurchase(catalogDocumentId);
+  const hasActiveContract = Boolean(existingPurchase);
 
   return (
     <div className="drawer-details">
@@ -169,12 +208,20 @@ function DrawerCatalogDetails({ serviceOffering, contract, onNavigate }) {
             {t("Catalogs.viewTermAndConds")}
           </a>
         ))}
-        <button className="negotiate-btn">
-          {t("Catalogs.contractNegotiate")}
+        <button
+          className="negotiate-btn"
+          onClick={(e) => {
+            e.stopPropagation();
+            if (hasActiveContract) onConsume?.(existingPurchase.documentId);
+          }}
+        >
+          {hasActiveContract ? t("Catalogs.contractConsume") : t("Catalogs.contractNegotiate")}
         </button>
-        <p className="contract-note">
-          {t("Catalogs.requierCredential")}
-        </p>
+        {!hasActiveContract && (
+          <p className="contract-note">
+            {t("Catalogs.requierCredential")}
+          </p>
+        )}
       </div>
     </div>
   );
