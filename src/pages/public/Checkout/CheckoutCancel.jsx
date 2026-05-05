@@ -1,17 +1,23 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import Card, { CardIcon, CardTitle, CardBody, CardMuted } from '../../../components/ui/Card/Card';
+import Button from '../../../components/ui/Button/Button';
 
 function CheckoutCancel() {
   const { t } = useTranslation();
   const { purchaseId } = useParams();
+
   return (
-    <main>
-      <h1>{t('Checkout.cancel.title')}</h1>
-      <p>{t('Checkout.cancel.body')}</p>
-      <Link to="/catalogs">{t('Checkout.cancel.backToCatalogs')}</Link>
-      <p><small>purchase: {purchaseId}</small></p>
-    </main>
+    <Card>
+      <CardIcon variant="error">✕</CardIcon>
+      <CardTitle>{t('Checkout.cancel.title')}</CardTitle>
+      <CardBody>{t('Checkout.cancel.body')}</CardBody>
+      {purchaseId && <CardMuted>purchase: {purchaseId}</CardMuted>}
+      <Button to="/catalogs" variant="secondary">
+        {t('Checkout.cancel.backToCatalogs')}
+      </Button>
+    </Card>
   );
 }
 

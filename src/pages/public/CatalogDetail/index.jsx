@@ -17,7 +17,21 @@ import SectionSoftware from '../../../components/Catalog/SoftwareresourceSection
 import SectionInfrastructure from '../../../components/Catalog/InfrastructureresourceSection';
 import SectionContractDefinition from '../../../components/Catalog/ContractDefinitionSection';
 import OverviewServiceOffering from '../../../components/Catalog/Overview';
+import BuyButton from '../../../components/CatalogDetail/BuyButton';
 import classes from './catalog-view.module.scss';
+
+function extractOfferFromCatalog(catalog) {
+  if (!catalog) return { priceCents: null, currency: 'EUR', bundleId: null };
+  try {
+    const assets = typeof catalog.assets === 'string' ? JSON.parse(catalog.assets) : catalog.assets;
+    const first = Array.isArray(assets) ? assets[0] : Array.isArray(assets?.assets) ? assets.assets[0] : assets;
+    const offers = first?.['schema:offers'] || first?.properties?.['schema:offers'] || {};
+    const amount = offers['schema:price'] || offers.price;
+    const currency = offers['schema:priceCurrency'] || offers.priceCurrency || 'EUR';
+    const bundleId = offers['https://w3id.org/dataspace-billing/v0.1/ns/bundleId'] || offers.bundleId || null;
+    return { priceCents: amount ? Math.round(Number(amount) * 100) : null, currency, bundleId };
+  } catch { return { priceCents: null, currency: 'EUR', bundleId: null }; }
+}
 
 function CatalogDetail({ initialSection }) {
   const { t } = useTranslation();
@@ -104,6 +118,14 @@ function CatalogDetail({ initialSection }) {
               <h2 className={classes.sidebar_title}>
                 {t("Catalogs.detTitle")}
               </h2>
+              <div data-testid="buy-button" className={classes.buy_button_slot}>
+                <BuyButton
+                  catalogId={catalog?.documentId}
+                  priceCents={extractOfferFromCatalog(catalog).priceCents}
+                  currency={extractOfferFromCatalog(catalog).currency}
+                  bundleId={extractOfferFromCatalog(catalog).bundleId}
+                />
+              </div>
               <nav className={classes.sidebar_nav}>
                 <button
                   className={section === "assets" ? classes.sidebar_nav__selected : ""}

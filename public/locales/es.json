@@ -501,6 +501,7 @@
     "theContrat": "El Contrato",
     "viewTermAndConds": "Ver Términos y Condiciones Generales",
     "contractNegotiate": "Negociar Contrato",
+    "contractConsume": "Consumir",
     "requierCredential": "Requiere Credencial Verificable",
     "providedBy": "Proporcionado por",
     "detTitle": "Catálogo",
@@ -688,5 +689,48 @@
       "providedBy": "Proporcionado por",
       "linkedAssetsTitle": "Activos vinculados"
     }
+  },
+  "Checkout": {
+    "buy": "Comprar",
+    "processing": "Procesando…",
+    "viewPurchase": "Ver mi compra",
+    "success": {
+      "title": "Pago realizado",
+      "body": "Gracias por tu compra. Tu acceso ha quedado activado.",
+      "goToContract": "Ir a mi compra"
+    },
+    "cancel": {
+      "title": "Pago cancelado",
+      "body": "Tu pago se canceló. No se ha realizado ningún cargo.",
+      "backToCatalogs": "Volver a catálogos"
+    }
+  },
+  "Consume": {
+    "title": "Consumir asset",
+    "button": "Consumir",
+    "history": "Webhooks recientes",
+    "webhookUrl": "URL de Webhook",
+    "cancel": "Cancelar",
+    "callAsset": "Llamar al asset",
+    "calling": "Llamando…"
+  },
+  "Webhook": {
+    "idle": "Pendiente de comprobar",
+    "checking": "Comprobando…",
+    "ok": "Accesible",
+    "ko": "No accesible"
+  },
+  "Purchases": {
+    "list": {
+      "title": "Mis compras",
+      "empty": "Aún no tienes compras."
+    },
+    "detail": {
+      "title": "Detalle de compra",
+      "lastConsumption": "Último consumo"
+    }
+  },
+  "Common": {
+    "loading": "Cargando…"
   }
 }

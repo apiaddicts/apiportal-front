@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import checkoutService from '../../../services/checkoutService';
+import Card, { CardTitle, CardBody } from '../../../components/ui/Card/Card';
+import { RowList, Row, RowLabel } from '../../../components/ui/RowList/RowList';
+import StatusBadge from '../../../components/ui/StatusBadge/StatusBadge';
 
 function PurchasesList() {
   const { t } = useTranslation();
@@ -14,22 +16,22 @@ function PurchasesList() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p>{t('Common.loading')}</p>;
-  if (!items.length) return <p>{t('Purchases.empty')}</p>;
-
   return (
-    <main>
-      <h1>{t('Purchases.title')}</h1>
-      <ul>
-        {items.map((p) => (
-          <li key={p.documentId}>
-            <Link to={`/purchases/${p.documentId}`}>
-              {p.library_catalog?.title || p.bundleId} — {p.status}
-            </Link>
-          </li>
-        ))}
-      </ul>
-    </main>
+    <Card layout="wide">
+      <CardTitle>{t('Purchases.list.title')}</CardTitle>
+      {loading && <CardBody>{t('Common.loading')}</CardBody>}
+      {!loading && items.length === 0 && <CardBody>{t('Purchases.list.empty')}</CardBody>}
+      {!loading && items.length > 0 && (
+        <RowList>
+          {items.map((p) => (
+            <Row key={p.documentId} to={`/purchases/${p.documentId}`}>
+              <RowLabel>{p.library_catalog?.title || p.bundleId}</RowLabel>
+              <StatusBadge status={p.status} />
+            </Row>
+          ))}
+        </RowList>
+      )}
+    </Card>
   );
 }
 

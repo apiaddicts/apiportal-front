@@ -501,6 +501,7 @@
     "theContrat": "The Contract",
     "viewTermAndConds": "View General Terms & Conditions",
     "contractNegotiate": "Negotiate Contract",
+    "contractConsume": "Consume",
     "requierCredential": "Requires Verifiable Credential",
     "providedBy": "Provided by",
     "detTitle": "Catalog",
@@ -688,5 +689,48 @@
       "providedBy": "Provided by",
       "linkedAssetsTitle": "Linked Assets"
     }
+  },
+  "Checkout": {
+    "buy": "Buy",
+    "processing": "Processing…",
+    "viewPurchase": "View my purchase",
+    "success": {
+      "title": "Payment successful",
+      "body": "Thanks for your purchase. Your access has been activated.",
+      "goToContract": "Go to my purchase"
+    },
+    "cancel": {
+      "title": "Payment cancelled",
+      "body": "Your payment was cancelled. No charge has been made.",
+      "backToCatalogs": "Back to catalogs"
+    }
+  },
+  "Consume": {
+    "title": "Consume asset",
+    "button": "Consume",
+    "history": "Recent webhooks",
+    "webhookUrl": "Webhook URL",
+    "cancel": "Cancel",
+    "callAsset": "Call asset",
+    "calling": "Calling…"
+  },
+  "Webhook": {
+    "idle": "Pending check",
+    "checking": "Checking…",
+    "ok": "Reachable",
+    "ko": "Unreachable"
+  },
+  "Purchases": {
+    "list": {
+      "title": "My purchases",
+      "empty": "You don't have any purchases yet."
+    },
+    "detail": {
+      "title": "Purchase detail",
+      "lastConsumption": "Last consumption"
+    }
+  },
+  "Common": {
+    "loading": "Loading…"
   }
 }

@@ -1,12 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import checkoutService from '../../services/checkoutService';
+import Modal, { modalClasses } from '../ui/Modal/Modal';
+import { CardTitle, CardMuted } from '../ui/Card/Card';
+import Button from '../ui/Button/Button';
+import FormError from '../ui/FormError/FormError';
 
 const STATUS = {
-  IDLE: { color: '#9CA3AF', label: 'Webhook.idle' },
-  CHECKING: { color: '#FACC15', label: 'Webhook.checking' },
-  OK: { color: '#22C55E', label: 'Webhook.ok' },
-  KO: { color: '#EF4444', label: 'Webhook.ko' },
+  IDLE:     { dotClass: '',                    label: 'Webhook.idle' },
+  CHECKING: { dotClass: 'dotChecking',         label: 'Webhook.checking' },
+  OK:       { dotClass: 'dotOk',               label: 'Webhook.ok' },
+  KO:       { dotClass: 'dotKo',               label: 'Webhook.ko' },
 };
 
 function ConsumeModal({ purchaseId, assetId, onClose, onSuccess }) {
@@ -49,17 +53,21 @@ function ConsumeModal({ purchaseId, assetId, onClose, onSuccess }) {
     }
   };
 
-  const buttonDisabled = submitting || check !== STATUS.OK;
+  const submitDisabled = submitting || check !== STATUS.OK;
 
   return (
-    <div role="dialog" aria-modal="true">
-      <h3>{t('Consume.title')} — {assetId}</h3>
+    <Modal onClose={onClose} ariaLabel={t('Consume.title')}>
+      <CardTitle>{t('Consume.title')}</CardTitle>
+      <CardMuted>{assetId}</CardMuted>
 
       {history.length > 0 && (
-        <div>
-          <label htmlFor="webhook-history">{t('Consume.history')}</label>
+        <div className={modalClasses.formGroup}>
+          <label htmlFor="webhook-history" className={modalClasses.label}>
+            {t('Consume.history')}
+          </label>
           <select
             id="webhook-history"
+            className={modalClasses.input}
             onChange={(e) => { setUrl(e.target.value); runPreflight(e.target.value); }}
             defaultValue=""
           >
@@ -69,32 +77,34 @@ function ConsumeModal({ purchaseId, assetId, onClose, onSuccess }) {
         </div>
       )}
 
-      <div>
-        <label htmlFor="webhook-url">{t('Consume.webhookUrl')}</label>
+      <div className={modalClasses.formGroup}>
+        <label htmlFor="webhook-url" className={modalClasses.label}>
+          {t('Consume.webhookUrl')}
+        </label>
         <input
           id="webhook-url"
           type="url"
+          className={modalClasses.input}
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           onBlur={(e) => runPreflight(e.target.value)}
           placeholder="https://..."
         />
-        <span
-          aria-label={t(check.label)}
-          title={t(check.label)}
-          style={{ display: 'inline-block', width: 12, height: 12, borderRadius: '50%', background: check.color, marginLeft: 8 }}
-        />
+        <span className={modalClasses.statusRow} aria-label={t(check.label)}>
+          <span className={`${modalClasses.dot} ${modalClasses[check.dotClass] || ''}`.trim()} />
+          {t(check.label)}
+        </span>
       </div>
 
-      {error && <p role="alert">{error}</p>}
+      <FormError>{error}</FormError>
 
-      <div>
-        <button type="button" onClick={onClose}>{t('Consume.cancel')}</button>
-        <button type="button" onClick={handleConsume} disabled={buttonDisabled}>
+      <div className={modalClasses.actions}>
+        <Button variant="ghost" onClick={onClose}>{t('Consume.cancel')}</Button>
+        <Button onClick={handleConsume} disabled={submitDisabled}>
           {submitting ? t('Consume.calling') : t('Consume.callAsset')}
-        </button>
+        </Button>
       </div>
-    </div>
+    </Modal>
   );
 }
 

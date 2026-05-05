@@ -6,11 +6,12 @@ function SectionContracts({ contract }) {
   const { t } = useTranslation();
 
   const subject = contract?.credentialSubject || {};
+  const parties = subject["gx:parties"] || {};
   const generalInfo = {
     contractId: subject["gx:contractId"] || "—",
-    provider: subject["gx:parties"]["gx:provider"] || "—",
+    provider: parties["gx:provider"] || "—",
     status: subject["gx:status"] || "—",
-    consumer: subject["gx:parties"]["gx:consumer"] || "—",
+    consumer: parties["gx:consumer"] || "—",
     offeringModel: subject["gx:offeringModel"] || "—",
   };
 

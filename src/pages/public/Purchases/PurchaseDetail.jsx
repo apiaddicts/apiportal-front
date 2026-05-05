@@ -3,6 +3,10 @@ import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import checkoutService from '../../../services/checkoutService';
 import ConsumeModal from '../../../components/Purchases/ConsumeModal';
+import Card, { CardTitle, CardBody, CardMuted } from '../../../components/ui/Card/Card';
+import { RowList, Row, RowLabel } from '../../../components/ui/RowList/RowList';
+import Button from '../../../components/ui/Button/Button';
+import FormError from '../../../components/ui/FormError/FormError';
 
 function PurchaseDetail() {
   const { t } = useTranslation();
@@ -20,23 +24,32 @@ function PurchaseDetail() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  if (loading) return <p>{t('Common.loading')}</p>;
-  if (error) return <p role="alert">{error}</p>;
-
   return (
-    <main>
-      <h1>{t('Purchases.detail.title')}</h1>
+    <Card layout="wide">
+      <CardTitle>{t('Purchases.detail.title')}</CardTitle>
+
+      {loading && <CardBody>{t('Common.loading')}</CardBody>}
+      <FormError>{error}</FormError>
+
       {lastConsumption && (
-        <p>{t('Purchases.detail.lastConsumption')}: {lastConsumption.state}</p>
+        <CardMuted>
+          {t('Purchases.detail.lastConsumption')}: {lastConsumption.state}
+        </CardMuted>
       )}
-      <ul>
-        {assets.map((a) => (
-          <li key={a['@id']}>
-            <strong>{a['name'] || a['@id']}</strong>
-            <button type="button" onClick={() => setActiveAsset(a['@id'])}>{t('Consume.button')}</button>
-          </li>
-        ))}
-      </ul>
+
+      {!loading && !error && (
+        <RowList>
+          {assets.map((a) => (
+            <Row key={a['@id']} interactive={false}>
+              <RowLabel>{a['name'] || a['@id']}</RowLabel>
+              <Button size="sm" onClick={() => setActiveAsset(a['@id'])}>
+                {t('Consume.button')}
+              </Button>
+            </Row>
+          ))}
+        </RowList>
+      )}
+
       {activeAsset && (
         <ConsumeModal
           purchaseId={id}
@@ -45,7 +58,7 @@ function PurchaseDetail() {
           onSuccess={(r) => setLastConsumption(r)}
         />
       )}
-    </main>
+    </Card>
   );
 }
 
