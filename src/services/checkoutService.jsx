@@ -24,11 +24,19 @@ function getPurchaseAssets(purchaseId) {
   return fetch(`${config.apiUrl}/purchases/${purchaseId}/assets`, { method: 'GET', headers: authHeaders() }).then(handleResponse);
 }
 
-function consumeAsset(purchaseId, assetId, webhookUrl, { consumerUrl, consumerApiKey } = {}) {
+function consumeAsset(purchaseId, assetId, webhookUrl) {
   return fetch(`${config.apiUrl}/purchases/${purchaseId}/consume`, {
     method: 'POST',
     headers: authHeaders(),
-    body: JSON.stringify({ assetId, webhookUrl, consumerUrl, consumerApiKey }),
+    body: JSON.stringify({ assetId, webhookUrl }),
+  }).then(handleResponse);
+}
+
+function setPurchaseConnector(purchaseId, consumerUrl, consumerApiKey) {
+  return fetch(`${config.apiUrl}/purchases/${purchaseId}/connector`, {
+    method: 'POST',
+    headers: authHeaders(),
+    body: JSON.stringify({ consumerUrl, consumerApiKey }),
   }).then(handleResponse);
 }
 
@@ -47,6 +55,7 @@ const checkoutService = {
   getMyPurchases,
   getPurchaseAssets,
   consumeAsset,
+  setPurchaseConnector,
   getMyWebhooks,
   preflightWebhook,
 };

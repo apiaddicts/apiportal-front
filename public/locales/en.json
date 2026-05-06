@@ -742,7 +742,9 @@
     },
     "detail": {
       "title": "Purchase detail",
-      "lastConsumption": "Last consumption"
+      "lastConsumption": "Last consumption",
+      "connectorLabel": "Consumer connector",
+      "connectorMissing": "not configured"
     },
     "status": {
       "paid": "Paid",
@@ -752,5 +754,18 @@
   },
   "Common": {
     "loading": "Loading…"
+  },
+  "Connector": {
+    "title": "Set up your consumer connector",
+    "subtitle": "Once saved, every consume of this purchase will use this connector.",
+    "url": "Consumer connector URL",
+    "apiKey": "API key",
+    "apiKeyOptional": "optional",
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "setupCta": "Set up consumer connector",
+    "editCta": "Edit connector",
+    "toastSaved": "Connector saved"
   }
 }
