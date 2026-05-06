@@ -702,6 +702,8 @@
   "Checkout": {
     "buy": "Comprar",
     "processing": "Procesando…",
+    "processingPayment": "Procesando pago…",
+    "setUpConnector": "Configurar connector",
     "viewPurchase": "Ver mi compra",
     "success": {
       "title": "Pago realizado",
@@ -751,7 +753,32 @@
       "createdAt": "Creada",
       "updatedAt": "Actualizada",
       "paymentRef": "Referencia de pago",
-      "viewDetail": "Ver detalle"
+      "viewDetail": "Ver detalle",
+      "transactionDetails": "Detalles de la transacción"
+    },
+    "steps": {
+      "payment": {
+        "title": "Pago",
+        "hint": "Checkout de Stripe",
+        "titleActive": "Confirmando tu pago…",
+        "titleFailed": "Pago fallido",
+        "failedHint": "No pudimos completar el pago. Puedes volver a comprar desde el catálogo."
+      },
+      "connector": {
+        "title": "Connector consumer",
+        "hint": "Indícanos dónde recibir",
+        "titleActive": "Configura tu connector consumer",
+        "body": "Dinos a qué connector entregar los datos una vez firmado el contrato.",
+        "bullet1": "URL del management API de tu EDC consumer.",
+        "bullet2": "API key opcional si tu connector requiere autenticación."
+      },
+      "consume": {
+        "title": "Consumir",
+        "hint": "Disparar la transferencia",
+        "titleActive": "Elige un asset para consumir",
+        "body": "Selecciona un asset de esta compra para iniciar la transferencia a tu webhook.",
+        "noAssets": "Aún no hay assets disponibles para esta compra."
+      }
     },
     "status": {
       "pending": "Pendiente",

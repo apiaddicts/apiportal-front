@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import checkoutService from '../../../services/checkoutService';
 import ConsumeModal from '../../../components/Purchases/ConsumeModal';
 import ConnectorSetupModal from '../../../components/Purchases/ConnectorSetupModal';
+import PurchaseStepper from '../../../components/Purchases/PurchaseStepper';
 import Card, { CardTitle, CardBody, CardMuted } from '../../../components/ui/Card/Card';
 import { RowList, Row, RowLabel } from '../../../components/ui/RowList/RowList';
 import StatusBadge from '../../../components/ui/StatusBadge/StatusBadge';
@@ -27,6 +28,129 @@ function formatDateTime(iso, locale) {
   });
 }
 
+function activeStepKey(purchase) {
+  if (!purchase) return 'payment';
+  if (purchase.status === 'pending') return 'payment';
+  if (purchase.status === 'failed') return 'payment';
+  if (!purchase.consumerUrl) return 'connector';
+  return 'consume';
+}
+
+function buildSteps(purchase, t) {
+  const active = activeStepKey(purchase);
+  const isPaid = purchase && (purchase.status === 'paid' || purchase.status === 'consumed');
+  const hasConnector = Boolean(purchase?.consumerUrl);
+  const isConsumed = purchase?.status === 'consumed';
+  const order = ['payment', 'connector', 'consume'];
+
+  const stateFor = (key) => {
+    if (key === 'payment') return isPaid ? 'done' : (active === 'payment' ? 'active' : 'pending');
+    if (key === 'connector') return hasConnector ? 'done' : (active === 'connector' ? 'active' : 'pending');
+    return isConsumed ? 'done' : (active === 'consume' ? 'active' : 'pending');
+  };
+
+  const titles = {
+    payment: t('Purchases.steps.payment.title'),
+    connector: t('Purchases.steps.connector.title'),
+    consume: t('Purchases.steps.consume.title'),
+  };
+  const hints = {
+    payment: t('Purchases.steps.payment.hint'),
+    connector: t('Purchases.steps.connector.hint'),
+    consume: t('Purchases.steps.consume.hint'),
+  };
+
+  return order.map((key) => ({
+    key,
+    title: titles[key],
+    hint: hints[key],
+    state: stateFor(key),
+  }));
+}
+
+function PaymentPanel({ purchase, t, i18n }) {
+  return (
+    <div className={classes.panel}>
+      <h3 className={classes.panelTitle}>
+        {purchase.status === 'pending' && t('Purchases.steps.payment.titleActive')}
+        {purchase.status === 'failed' && t('Purchases.steps.payment.titleFailed')}
+      </h3>
+      {purchase.status === 'pending' && <CardMuted>{t('Purchases.detail.pendingHint')}</CardMuted>}
+      {purchase.status === 'failed' && (
+        <>
+          <CardMuted>{t('Purchases.steps.payment.failedHint')}</CardMuted>
+          {purchase.error && <FormError>{purchase.error}</FormError>}
+        </>
+      )}
+      <dl className={classes.metaGrid}>
+        <div>
+          <dt>{t('Purchases.detail.amount')}</dt>
+          <dd>{formatPrice(purchase.amount, purchase.currency)}</dd>
+        </div>
+        <div>
+          <dt>{t('Purchases.detail.createdAt')}</dt>
+          <dd>{formatDateTime(purchase.createdAt, i18n.language)}</dd>
+        </div>
+      </dl>
+    </div>
+  );
+}
+
+function ConnectorPanel({ purchase, t, onSetup }) {
+  return (
+    <div className={classes.panel}>
+      <h3 className={classes.panelTitle}>{t('Purchases.steps.connector.titleActive')}</h3>
+      <CardMuted>{t('Purchases.steps.connector.body')}</CardMuted>
+      <ul className={classes.bullets}>
+        <li>{t('Purchases.steps.connector.bullet1')}</li>
+        <li>{t('Purchases.steps.connector.bullet2')}</li>
+      </ul>
+      <div className={classes.cta}>
+        <Button onClick={onSetup}>{t('Connector.setupCta')}</Button>
+      </div>
+    </div>
+  );
+}
+
+function ConsumePanel({ purchase, assets, t, onConsume, onEditConnector, lastConsumption }) {
+  return (
+    <div className={classes.panel}>
+      <h3 className={classes.panelTitle}>{t('Purchases.steps.consume.titleActive')}</h3>
+      <CardMuted>{t('Purchases.steps.consume.body')}</CardMuted>
+
+      <div className={classes.connectorRow}>
+        <span className={classes.connectorLabel}>
+          {t('Purchases.detail.connectorLabel')}: <code>{purchase.consumerUrl}</code>
+        </span>
+        <Button variant="ghost" size="sm" onClick={onEditConnector}>
+          {t('Connector.editCta')}
+        </Button>
+      </div>
+
+      {lastConsumption && (
+        <CardMuted>
+          {t('Purchases.detail.lastConsumption')}: {lastConsumption.state}
+        </CardMuted>
+      )}
+
+      {assets.length === 0 && <CardMuted>{t('Purchases.steps.consume.noAssets')}</CardMuted>}
+
+      {assets.length > 0 && (
+        <RowList>
+          {assets.map((a) => (
+            <Row key={a['@id']} interactive={false}>
+              <RowLabel>{a['name'] || a['@id']}</RowLabel>
+              <Button size="sm" onClick={() => onConsume(a['@id'])}>
+                {t('Consume.button')}
+              </Button>
+            </Row>
+          ))}
+        </RowList>
+      )}
+    </div>
+  );
+}
+
 function PurchaseDetail() {
   const { t, i18n } = useTranslation();
   const { id } = useParams();
@@ -46,17 +170,18 @@ function PurchaseDetail() {
       return next;
     });
 
+  const loadAssets = () =>
+    checkoutService.getPurchaseAssets(id)
+      .then((res) => setAssets(res.assets || []))
+      .catch(() => {});
+
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
     refreshPurchase()
       .then((p) => {
         if (cancelled || !p) return null;
-        if (p.status === 'paid' || p.status === 'consumed') {
-          return checkoutService.getPurchaseAssets(id)
-            .then((res) => { if (!cancelled) setAssets(res.assets || []); })
-            .catch(() => {});
-        }
+        if (p.status === 'paid' || p.status === 'consumed') return loadAssets();
         return null;
       })
       .catch((err) => { if (!cancelled) setError(err.message || 'failed'); })
@@ -77,19 +202,16 @@ function PurchaseDetail() {
       }
       refreshPurchase()
         .then((next) => {
-          if (next && (next.status === 'paid' || next.status === 'consumed')) {
-            checkoutService.getPurchaseAssets(id)
-              .then((res) => setAssets(res.assets || []))
-              .catch(() => {});
-          }
+          if (next && (next.status === 'paid' || next.status === 'consumed')) loadAssets();
         })
         .catch(() => {});
     }, PENDING_POLL_MS);
     return () => clearInterval(interval);
   }, [purchase, id]);
 
+  const active = activeStepKey(purchase);
+  const steps = purchase ? buildSteps(purchase, t) : [];
   const connectorReady = Boolean(purchase?.consumerUrl);
-  const canConsume = purchase && (purchase.status === 'paid' || purchase.status === 'consumed');
 
   return (
     <Card layout="wide">
@@ -114,72 +236,52 @@ function PurchaseDetail() {
             </StatusBadge>
           </header>
 
-          {purchase.status === 'pending' && (
-            <CardMuted>{t('Purchases.detail.pendingHint')}</CardMuted>
+          <PurchaseStepper steps={steps} />
+
+          {active === 'payment' && <PaymentPanel purchase={purchase} t={t} i18n={i18n} />}
+          {active === 'connector' && (
+            <ConnectorPanel purchase={purchase} t={t} onSetup={() => setEditingConnector(true)} />
           )}
-          {purchase.status === 'failed' && purchase.error && (
-            <FormError>{purchase.error}</FormError>
+          {active === 'consume' && (
+            <ConsumePanel
+              purchase={purchase}
+              assets={assets}
+              t={t}
+              lastConsumption={lastConsumption}
+              onConsume={(aid) => setActiveAsset(aid)}
+              onEditConnector={() => setEditingConnector(true)}
+            />
           )}
 
-          <dl className={classes.metaGrid}>
-            <div>
-              <dt>{t('Purchases.detail.amount')}</dt>
-              <dd>{formatPrice(purchase.amount, purchase.currency)}</dd>
-            </div>
-            <div>
-              <dt>{t('Purchases.detail.createdAt')}</dt>
-              <dd>{formatDateTime(purchase.createdAt, i18n.language)}</dd>
-            </div>
-            <div>
-              <dt>{t('Purchases.detail.updatedAt')}</dt>
-              <dd>{formatDateTime(purchase.updatedAt, i18n.language)}</dd>
-            </div>
-            {purchase.stripePaymentIntentId && (
+          <details className={classes.details}>
+            <summary>{t('Purchases.detail.transactionDetails')}</summary>
+            <dl className={classes.metaGrid}>
               <div>
-                <dt>{t('Purchases.detail.paymentRef')}</dt>
-                <dd className={classes.mono}>{purchase.stripePaymentIntentId}</dd>
+                <dt>{t('Purchases.detail.amount')}</dt>
+                <dd>{formatPrice(purchase.amount, purchase.currency)}</dd>
               </div>
-            )}
-            <div>
-              <dt>{t('Purchases.detail.connectorLabel')}</dt>
-              <dd>{connectorReady ? purchase.consumerUrl : t('Purchases.detail.connectorMissing')}</dd>
-            </div>
-          </dl>
-
-          {canConsume && !connectorReady && (
-            <div className={classes.actions}>
-              <Button onClick={() => setEditingConnector(true)}>
-                {t('Connector.setupCta')}
-              </Button>
-            </div>
-          )}
-
-          {canConsume && connectorReady && (
-            <div className={classes.actions}>
-              <Button variant="ghost" size="sm" onClick={() => setEditingConnector(true)}>
-                {t('Connector.editCta')}
-              </Button>
-            </div>
-          )}
-
-          {lastConsumption && (
-            <CardMuted>
-              {t('Purchases.detail.lastConsumption')}: {lastConsumption.state}
-            </CardMuted>
-          )}
-
-          {canConsume && assets.length > 0 && (
-            <RowList>
-              {assets.map((a) => (
-                <Row key={a['@id']} interactive={false}>
-                  <RowLabel>{a['name'] || a['@id']}</RowLabel>
-                  <Button size="sm" onClick={() => setActiveAsset(a['@id'])} disabled={!connectorReady}>
-                    {t('Consume.button')}
-                  </Button>
-                </Row>
-              ))}
-            </RowList>
-          )}
+              <div>
+                <dt>{t('Purchases.detail.createdAt')}</dt>
+                <dd>{formatDateTime(purchase.createdAt, i18n.language)}</dd>
+              </div>
+              <div>
+                <dt>{t('Purchases.detail.updatedAt')}</dt>
+                <dd>{formatDateTime(purchase.updatedAt, i18n.language)}</dd>
+              </div>
+              {purchase.stripePaymentIntentId && (
+                <div>
+                  <dt>{t('Purchases.detail.paymentRef')}</dt>
+                  <dd className={classes.mono}>{purchase.stripePaymentIntentId}</dd>
+                </div>
+              )}
+              {connectorReady && (
+                <div>
+                  <dt>{t('Purchases.detail.connectorLabel')}</dt>
+                  <dd>{purchase.consumerUrl}</dd>
+                </div>
+              )}
+            </dl>
+          </details>
         </>
       )}
 
@@ -196,7 +298,9 @@ function PurchaseDetail() {
         <ConnectorSetupModal
           purchaseId={id}
           onClose={() => setEditingConnector(false)}
-          onSaved={() => refreshPurchase()}
+          onSaved={() => refreshPurchase().then((p) => {
+            if (p && (p.status === 'paid' || p.status === 'consumed')) loadAssets();
+          })}
         />
       )}
     </Card>

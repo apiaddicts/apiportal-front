@@ -4,6 +4,8 @@ import checkoutService from '../../services/checkoutService';
 import Button from '../ui/Button/Button';
 import FormError from '../ui/FormError/FormError';
 
+const ACTIVE_STATUSES = new Set(['pending', 'paid', 'consumed']);
+
 function formatPrice(amountCents, currency) {
   if (amountCents == null) return null;
   return new Intl.NumberFormat(undefined, { style: 'currency', currency: currency || 'EUR' })
@@ -17,7 +19,11 @@ function isAuthenticated() {
   } catch { return false; }
 }
 
-const OWNED_STATUSES = new Set(['paid', 'consumed']);
+function ctaLabelFor(purchase, t) {
+  if (purchase.status === 'pending') return t('Checkout.processingPayment');
+  if (purchase.status === 'paid' && !purchase.consumerUrl) return t('Checkout.setUpConnector');
+  return t('Checkout.viewPurchase');
+}
 
 function BuyButton({ catalogId, priceCents, currency, disabled }) {
   const { t } = useTranslation();
@@ -33,7 +39,7 @@ function BuyButton({ catalogId, priceCents, currency, disabled }) {
       .then((res) => {
         const items = res.data || [];
         const match = items.find((p) =>
-          OWNED_STATUSES.has(p.status) && p.library_catalog?.documentId === catalogId,
+          ACTIVE_STATUSES.has(p.status) && p.library_catalog?.documentId === catalogId,
         );
         if (match) setExistingPurchase(match);
       })
@@ -62,7 +68,7 @@ function BuyButton({ catalogId, priceCents, currency, disabled }) {
   if (existingPurchase) {
     return (
       <Button to={`/developer/purchases/${existingPurchase.documentId}`} variant="secondary" fullWidth>
-        {t('Checkout.viewPurchase')}
+        {ctaLabelFor(existingPurchase, t)}
       </Button>
     );
   }
