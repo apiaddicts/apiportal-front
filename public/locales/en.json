@@ -3,6 +3,8 @@
   "dashboard": "Dashboard",
   "apiToken": "Token",
   "apisLibrary": "APIs Library",
+  "catalogs": "Catalogs",
+  "purchases": "My purchases",
   "codeSamples": "Code Samples",
   "billings": "Payment Gateway",
   "news": "News",
@@ -513,6 +515,13 @@
     "detSoftwareresource": "Software Resource",
     "detInfrastructureresource": "Infrastructure Resource",
     "detContractDefinition": "Contract Definition",
+    "privateList": {
+      "title": "My Catalogs",
+      "empty": "No catalogs available.",
+      "open": "Open",
+      "viewPublic": "View in public catalog",
+      "fromPrice": "From"
+    },
     "Asset": {
       "noData": "No assets available.",
       "title": "Assets"
@@ -710,9 +719,14 @@
     "button": "Consume",
     "history": "Recent webhooks",
     "webhookUrl": "Webhook URL",
+    "consumerUrl": "Consumer connector URL (Management v3)",
+    "consumerApiKey": "Consumer API key",
+    "optional": "(optional)",
     "cancel": "Cancel",
     "callAsset": "Call asset",
-    "calling": "Calling…"
+    "calling": "Calling…",
+    "toastSuccess": "Consume completed successfully",
+    "toastEndedIn": "Transfer ended in state {{state}}"
   },
   "Webhook": {
     "idle": "Pending check",

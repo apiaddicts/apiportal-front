@@ -24,9 +24,11 @@ function getPurchaseAssets(purchaseId) {
   return fetch(`${config.apiUrl}/purchases/${purchaseId}/assets`, { method: 'GET', headers: authHeaders() }).then(handleResponse);
 }
 
-function consumeAsset(purchaseId, assetId, webhookUrl) {
+function consumeAsset(purchaseId, assetId, webhookUrl, { consumerUrl, consumerApiKey } = {}) {
   return fetch(`${config.apiUrl}/purchases/${purchaseId}/consume`, {
-    method: 'POST', headers: authHeaders(), body: JSON.stringify({ assetId, webhookUrl }),
+    method: 'POST',
+    headers: authHeaders(),
+    body: JSON.stringify({ assetId, webhookUrl, consumerUrl, consumerApiKey }),
   }).then(handleResponse);
 }
 

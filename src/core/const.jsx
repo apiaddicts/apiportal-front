@@ -10,6 +10,8 @@ const getListItems = (t) => {
         { key: 'dashboard', route: '/developer/dashboard', text: t('dashboard'), icon: <CustomIcon name={'dashboard'} isActive={location.pathname === '/developer/dashboard'} />, primaryRole: true },
         { key: 'apiToken', route: '/developer/api-token', text: t('apiToken'), icon: <CustomIcon name={'apitoken'} isActive={location.pathname === '/developer/api-token'} />, primaryRole: true },
         { key: 'apisLibrary', route: '/developer/apis', text: t('apisLibrary'), icon: <CustomIcon name={'apitoken'} isActive={location.pathname === '/developer/apis'} />, primaryRole: true },
+        { key: 'catalogs', route: '/developer/catalogs', text: t('catalogs'), icon: <CustomIcon name={'catalogo'} isActive={location.pathname.startsWith('/developer/catalogs')} />, primaryRole: true },
+        { key: 'purchases', route: '/developer/purchases', text: t('purchases'), icon: <CustomIcon name={'billing'} isActive={location.pathname.startsWith('/developer/purchases')} />, primaryRole: true },
         { key: 'codeSamples', route: '/developer/code-samples', text: t('codeSamples'), icon: <Terminal size='1.5rem' />, primaryRole: true },
         { key: 'billings', route: '/developer/billings', text: t('billings'), icon: <CustomIcon name={'billing'} isActive={location.pathname === '/developer/billings'} />, primaryRole: true },
         { key: 'news', route: '/developer/news', text: t('news'), icon: <CustomIcon name={'news'} isActive={location.pathname === '/developer/news'} />, primaryRole: true },

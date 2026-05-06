@@ -14,7 +14,7 @@ function CheckoutCancel() {
       <CardTitle>{t('Checkout.cancel.title')}</CardTitle>
       <CardBody>{t('Checkout.cancel.body')}</CardBody>
       {purchaseId && <CardMuted>purchase: {purchaseId}</CardMuted>}
-      <Button to="/catalogs" variant="secondary">
+      <Button to="/developer/catalogs" variant="secondary">
         {t('Checkout.cancel.backToCatalogs')}
       </Button>
     </Card>

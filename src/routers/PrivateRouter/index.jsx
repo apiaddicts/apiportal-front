@@ -30,6 +30,11 @@ import Billings from '../../pages/private/Billings';
 import ApiDoc from '../../pages/private/ApiDoc';
 import CodeSamples from '../../pages/private/codeSamples';
 import CodeSampleDetailss from '../../pages/private/codeSamplesDetail';
+import PrivateCatalogs from '../../pages/private/Catalogs';
+import PurchasesList from '../../pages/private/Purchases/PurchasesList';
+import PurchaseDetail from '../../pages/private/Purchases/PurchaseDetail';
+import CheckoutSuccess from '../../pages/private/Checkout/CheckoutSuccess';
+import CheckoutCancel from '../../pages/private/Checkout/CheckoutCancel';
 
 import { logout } from '../../redux/actions/authAction';
 import classes from './private-router.module.scss';
@@ -95,6 +100,11 @@ function PrivateRouter({ isAppReady }) {
             <Route path='blog' element={<BlogPriv />} />
             <Route path='news' element={<NewsPriv />} />
             <Route path='api-token' element={<ApiToken />} />
+            <Route path='catalogs' element={<PrivateCatalogs />} />
+            <Route path='purchases' element={<PurchasesList />} />
+            <Route path='purchases/:id' element={<PurchaseDetail />} />
+            <Route path='checkout/:purchaseId/success' element={<CheckoutSuccess />} />
+            <Route path='checkout/:purchaseId/cancel' element={<CheckoutCancel />} />
             <Route path='*' element={<Navigate to='dashboard' replace />} />
           </Routes>
         </div>

@@ -17,23 +17,18 @@ import SectionSoftware from '../../../components/Catalog/SoftwareresourceSection
 import SectionInfrastructure from '../../../components/Catalog/InfrastructureresourceSection';
 import SectionContractDefinition from '../../../components/Catalog/ContractDefinitionSection';
 import OverviewServiceOffering from '../../../components/Catalog/Overview';
-import BuyButton from '../../../components/CatalogDetail/BuyButton';
+import Button from '../../../components/ui/Button/Button';
 import classes from './catalog-view.module.scss';
 
-function extractOfferFromCatalog(catalog) {
-  if (!catalog) return { priceCents: null, currency: 'EUR', bundleId: null };
+function isAuthenticated() {
   try {
-    const assets = typeof catalog.assets === 'string' ? JSON.parse(catalog.assets) : catalog.assets;
-    const first = Array.isArray(assets) ? assets[0] : Array.isArray(assets?.assets) ? assets.assets[0] : assets;
-    const offers = first?.['schema:offers'] || first?.properties?.['schema:offers'] || {};
-    const amount = offers['schema:price'] || offers.price;
-    const currency = offers['schema:priceCurrency'] || offers.priceCurrency || 'EUR';
-    const bundleId = offers['https://w3id.org/dataspace-billing/v0.1/ns/bundleId'] || offers.bundleId || null;
-    return { priceCents: amount ? Math.round(Number(amount) * 100) : null, currency, bundleId };
-  } catch { return { priceCents: null, currency: 'EUR', bundleId: null }; }
+    const token = JSON.parse(localStorage.getItem('token') || 'null');
+    return !!(token?.jwt || token?.accessToken);
+  } catch { return false; }
 }
 
-function CatalogDetail({ initialSection }) {
+function CatalogDetail({ initialSection, setIsOpen }) {
+  const routeBase = '/catalogs';
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -106,7 +101,18 @@ function CatalogDetail({ initialSection }) {
 
   const handleClick = (section) => {
     setSection(section);
-    navigate(`/catalogs/${params?.id}/${section}`);
+    navigate(`${routeBase}/${params?.id}/${section}`);
+  };
+
+  const handleNegotiate = () => {
+    const target = `/developer/catalogs?highlight=${params?.id}`;
+    if (isAuthenticated()) {
+      navigate(target);
+      return;
+    }
+    try { sessionStorage.setItem('postLoginRedirect', target); } catch {}
+    if (typeof setIsOpen === 'function') setIsOpen(true);
+    else navigate('/');
   };
 
   return (
@@ -118,13 +124,10 @@ function CatalogDetail({ initialSection }) {
               <h2 className={classes.sidebar_title}>
                 {t("Catalogs.detTitle")}
               </h2>
-              <div data-testid="buy-button" className={classes.buy_button_slot}>
-                <BuyButton
-                  catalogId={catalog?.documentId}
-                  priceCents={extractOfferFromCatalog(catalog).priceCents}
-                  currency={extractOfferFromCatalog(catalog).currency}
-                  bundleId={extractOfferFromCatalog(catalog).bundleId}
-                />
+              <div data-testid="negotiate-button" className={classes.buy_button_slot}>
+                <Button onClick={handleNegotiate} fullWidth>
+                  {t('Catalogs.contractNegotiate')}
+                </Button>
               </div>
               <nav className={classes.sidebar_nav}>
                 <button

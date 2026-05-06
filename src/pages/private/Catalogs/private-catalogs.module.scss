@@ -1,0 +1,19 @@
+.entry { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+.desc { margin: 0; color: #475569; font-size: 0.9rem; }
+.actions { display: flex; align-items: center; gap: 16px; }
+.buyWrap { min-width: 220px; }
+.publicLink { color: #2563eb; font-size: 0.85rem; text-decoration: none; white-space: nowrap; }
+.publicLink:hover { text-decoration: underline; }
+
+.rowHighlighted {
+  background: #eff6ff;
+  border: 2px solid #2563eb;
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+  animation: pulseHighlight 1.6s ease-out 1;
+}
+
+@keyframes pulseHighlight {
+  0%   { box-shadow: 0 0 0 0    rgba(37, 99, 235, 0.55); }
+  60%  { box-shadow: 0 0 0 14px rgba(37, 99, 235, 0); }
+  100% { box-shadow: 0 0 0 4px  rgba(37, 99, 235, 0.15); }
+}

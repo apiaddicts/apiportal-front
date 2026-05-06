@@ -16,7 +16,7 @@ function CheckoutSuccess() {
       <CardTitle>{t('Checkout.success.title')}</CardTitle>
       <CardBody>{t('Checkout.success.body')}</CardBody>
       {sessionId && <CardMuted>session: {sessionId}</CardMuted>}
-      <Button to={`/purchases/${purchaseId}`}>
+      <Button to={`/developer/purchases/${purchaseId}`}>
         {t('Checkout.success.goToContract')}
       </Button>
     </Card>

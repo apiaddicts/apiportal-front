@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { toast } from 'react-hot-toast';
 import checkoutService from '../../services/checkoutService';
 import Modal, { modalClasses } from '../ui/Modal/Modal';
 import { CardTitle, CardMuted } from '../ui/Card/Card';
@@ -13,6 +14,8 @@ const STATUS = {
   KO:       { dotClass: 'dotKo',               label: 'Webhook.ko' },
 };
 
+const CONSUMER_STORAGE_KEY = 'consumer_creds_last';
+
 function ConsumeModal({ purchaseId, assetId, onClose, onSuccess }) {
   const { t } = useTranslation();
   const [url, setUrl] = useState('');
@@ -20,9 +23,16 @@ function ConsumeModal({ purchaseId, assetId, onClose, onSuccess }) {
   const [check, setCheck] = useState(STATUS.IDLE);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState(null);
+  const [consumerUrl, setConsumerUrl] = useState('');
+  const [consumerApiKey, setConsumerApiKey] = useState('');
 
   useEffect(() => {
     checkoutService.getMyWebhooks().then((res) => setHistory(res.data || [])).catch(() => {});
+    try {
+      const saved = JSON.parse(localStorage.getItem(CONSUMER_STORAGE_KEY) || 'null');
+      if (saved?.consumerUrl) setConsumerUrl(saved.consumerUrl);
+      if (saved?.consumerApiKey) setConsumerApiKey(saved.consumerApiKey);
+    } catch {}
   }, []);
 
   const runPreflight = async (target) => {
@@ -43,7 +53,18 @@ function ConsumeModal({ purchaseId, assetId, onClose, onSuccess }) {
     setSubmitting(true);
     setError(null);
     try {
-      const result = await checkoutService.consumeAsset(purchaseId, assetId, url);
+      const result = await checkoutService.consumeAsset(
+        purchaseId, assetId, url,
+        { consumerUrl, consumerApiKey },
+      );
+      try {
+        localStorage.setItem(CONSUMER_STORAGE_KEY, JSON.stringify({ consumerUrl, consumerApiKey }));
+      } catch {}
+      if (result?.state === 'COMPLETED') {
+        toast.success(t('Consume.toastSuccess'));
+      } else {
+        toast.error(t('Consume.toastEndedIn', { state: result?.state || 'UNKNOWN' }));
+      }
       onSuccess?.(result);
       onClose?.();
     } catch (err) {
@@ -53,7 +74,7 @@ function ConsumeModal({ purchaseId, assetId, onClose, onSuccess }) {
     }
   };
 
-  const submitDisabled = submitting || check !== STATUS.OK;
+  const submitDisabled = submitting || check !== STATUS.OK || !consumerUrl;
 
   return (
     <Modal onClose={onClose} ariaLabel={t('Consume.title')}>
@@ -94,6 +115,34 @@ function ConsumeModal({ purchaseId, assetId, onClose, onSuccess }) {
           <span className={`${modalClasses.dot} ${modalClasses[check.dotClass] || ''}`.trim()} />
           {t(check.label)}
         </span>
+      </div>
+
+      <div className={modalClasses.formGroup}>
+        <label htmlFor="consumer-url" className={modalClasses.label}>
+          {t('Consume.consumerUrl')}
+        </label>
+        <input
+          id="consumer-url"
+          type="url"
+          className={modalClasses.input}
+          value={consumerUrl}
+          onChange={(e) => setConsumerUrl(e.target.value)}
+          placeholder="consumer-conector.example/management/v3"
+        />
+      </div>
+
+      <div className={modalClasses.formGroup}>
+        <label htmlFor="consumer-api-key" className={modalClasses.label}>
+          {t('Consume.consumerApiKey')}
+        </label>
+        <input
+          id="consumer-api-key"
+          type="password"
+          className={modalClasses.input}
+          value={consumerApiKey}
+          onChange={(e) => setConsumerApiKey(e.target.value)}
+          placeholder={t('Consume.optional')}
+        />
       </div>
 
       <FormError>{error}</FormError>

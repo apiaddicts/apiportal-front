@@ -79,8 +79,13 @@ function Catalogs({ currentItems }) {
               navigate(`/catalogs/${selectedItem?.documentId}/${section}`);
               setSelectedId(null);
             }}
+            onNegotiate={() => {
+              if (isAuthenticated()) navigate(`/developer/catalogs?highlight=${selectedItem?.documentId}`);
+              else navigate(`/catalogs/${selectedItem?.documentId}`);
+              setSelectedId(null);
+            }}
             onConsume={(purchaseId) => {
-              navigate(`/purchases/${purchaseId}`);
+              navigate(`/developer/purchases/${purchaseId}`);
               setSelectedId(null);
             }}
           />
@@ -135,7 +140,7 @@ function CatalogsPaginated({ apis, itemsPerPage }) {
   );
 }
 
-function DrawerCatalogDetails({ serviceOffering, contract, catalogDocumentId, onNavigate, onConsume }) {
+function DrawerCatalogDetails({ serviceOffering, contract, catalogDocumentId, onNavigate, onNegotiate, onConsume }) {
   const { t } = useTranslation();
   const assets = serviceOffering?.credentialSubject?.["gx:aggregationOf"] || [];
   const policy = contract?.credentialSubject?.["gx:usagePolicy"] || {};
@@ -213,6 +218,7 @@ function DrawerCatalogDetails({ serviceOffering, contract, catalogDocumentId, on
           onClick={(e) => {
             e.stopPropagation();
             if (hasActiveContract) onConsume?.(existingPurchase.documentId);
+            else onNegotiate?.();
           }}
         >
           {hasActiveContract ? t("Catalogs.contractConsume") : t("Catalogs.contractNegotiate")}

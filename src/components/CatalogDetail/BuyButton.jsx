@@ -45,8 +45,14 @@ function BuyButton({ catalogId, priceCents, currency, bundleId, disabled }) {
     setLoading(true);
     setError(null);
     try {
-      const { checkoutUrl } = await checkoutService.createCheckoutSession(catalogId);
-      window.location.href = checkoutUrl;
+      const res = await checkoutService.createCheckoutSession(catalogId);
+      if (!res?.checkoutUrl) {
+        const msg = res?.error?.message || res?.message || `Checkout failed (${JSON.stringify(res).slice(0, 120)})`;
+        setError(msg);
+        setLoading(false);
+        return;
+      }
+      window.location.href = res.checkoutUrl;
     } catch (err) {
       setError(err.message || 'Checkout failed');
       setLoading(false);
@@ -55,7 +61,7 @@ function BuyButton({ catalogId, priceCents, currency, bundleId, disabled }) {
 
   if (existingPurchase) {
     return (
-      <Button to={`/purchases/${existingPurchase.documentId}`} variant="secondary" fullWidth>
+      <Button to={`/developer/purchases/${existingPurchase.documentId}`} variant="secondary" fullWidth>
         {t('Checkout.viewPurchase')}
       </Button>
     );

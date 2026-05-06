@@ -24,7 +24,7 @@ function PurchasesList() {
       {!loading && items.length > 0 && (
         <RowList>
           {items.map((p) => (
-            <Row key={p.documentId} to={`/purchases/${p.documentId}`}>
+            <Row key={p.documentId} to={`/developer/purchases/${p.documentId}`}>
               <RowLabel>{p.library_catalog?.title || p.bundleId}</RowLabel>
               <StatusBadge status={p.status} />
             </Row>

@@ -27,7 +27,15 @@ function Login({ setOpenForm, setIsOpen, setPrivateSession }) {
   useEffect(() => {
     if (token && typeof token === 'string' && token.length > 0) {
       setIsOpen(false);
-      navigate('/developer/dashboard');
+      let redirect = '/developer/dashboard';
+      try {
+        const stashed = sessionStorage.getItem('postLoginRedirect');
+        if (stashed) {
+          redirect = stashed;
+          sessionStorage.removeItem('postLoginRedirect');
+        }
+      } catch {}
+      navigate(redirect);
     }
   }, [token, navigate, setIsOpen]);
 

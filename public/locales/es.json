@@ -3,6 +3,8 @@
   "dashboard": "Dashboard",
   "apiToken": "Token",
   "apisLibrary": "Biblioteca de APIs",
+  "catalogs": "Catálogos",
+  "purchases": "Mis compras",
   "codeSamples": "Ejemplos de Código",
   "billings": "Pasarela de Pagos",
   "news": "Noticias",
@@ -513,6 +515,13 @@
     "detSoftwareresource": "Recurso de Software",
     "detInfrastructureresource": "Recurso de Infraestructura",
     "detContractDefinition": "Definición de Contrato",
+    "privateList": {
+      "title": "Mis Catálogos",
+      "empty": "No hay catálogos disponibles.",
+      "open": "Abrir",
+      "viewPublic": "Ver en catálogo público",
+      "fromPrice": "Desde"
+    },
     "Asset": {
       "noData": "No hay activos disponibles.",
       "title": "Activos"
@@ -710,9 +719,14 @@
     "button": "Consumir",
     "history": "Webhooks recientes",
     "webhookUrl": "URL de Webhook",
+    "consumerUrl": "URL del conector consumer (Management v3)",
+    "consumerApiKey": "API key del consumer",
+    "optional": "(opcional)",
     "cancel": "Cancelar",
     "callAsset": "Llamar al asset",
-    "calling": "Llamando…"
+    "calling": "Llamando…",
+    "toastSuccess": "Consumo completado correctamente",
+    "toastEndedIn": "El transfer terminó en estado {{state}}"
   },
   "Webhook": {
     "idle": "Pendiente de comprobar",

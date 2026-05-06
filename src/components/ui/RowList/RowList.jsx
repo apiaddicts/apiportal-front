@@ -6,8 +6,8 @@ export function RowList({ children }) {
   return <ul className={classes.list}>{children}</ul>;
 }
 
-export function Row({ to, children, interactive = true }) {
-  const cls = `${classes.row} ${interactive ? '' : classes.rowStatic}`.trim();
+export function Row({ to, children, interactive = true, className = '' }) {
+  const cls = `${classes.row} ${interactive ? '' : classes.rowStatic} ${className}`.trim();
   if (to) {
     return (
       <li>
