@@ -744,9 +744,17 @@
       "title": "Purchase detail",
       "lastConsumption": "Last consumption",
       "connectorLabel": "Consumer connector",
-      "connectorMissing": "not configured"
+      "connectorMissing": "not configured",
+      "notFound": "Purchase not found.",
+      "pendingHint": "Waiting for payment confirmation. This page updates automatically.",
+      "amount": "Amount",
+      "createdAt": "Created",
+      "updatedAt": "Updated",
+      "paymentRef": "Payment reference",
+      "viewDetail": "View detail"
     },
     "status": {
+      "pending": "Pending",
       "paid": "Paid",
       "failed": "Failed",
       "consumed": "Consumed"

@@ -17,7 +17,9 @@ function isAuthenticated() {
   } catch { return false; }
 }
 
-function BuyButton({ catalogId, priceCents, currency, bundleId, disabled }) {
+const OWNED_STATUSES = new Set(['paid', 'consumed']);
+
+function BuyButton({ catalogId, priceCents, currency, disabled }) {
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -30,16 +32,14 @@ function BuyButton({ catalogId, priceCents, currency, bundleId, disabled }) {
     checkoutService.getMyPurchases()
       .then((res) => {
         const items = res.data || [];
-        const match = items.find((p) => {
-          if (p.status !== 'paid') return false;
-          if (bundleId && p.bundleId === bundleId) return true;
-          return p.library_catalog?.documentId === catalogId;
-        });
+        const match = items.find((p) =>
+          OWNED_STATUSES.has(p.status) && p.library_catalog?.documentId === catalogId,
+        );
         if (match) setExistingPurchase(match);
       })
       .catch(() => {})
       .finally(() => setChecking(false));
-  }, [catalogId, bundleId]);
+  }, [catalogId]);
 
   const handleClick = async () => {
     setLoading(true);

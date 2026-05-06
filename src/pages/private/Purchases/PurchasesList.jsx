@@ -4,6 +4,7 @@ import checkoutService from '../../../services/checkoutService';
 import Card, { CardTitle, CardBody } from '../../../components/ui/Card/Card';
 import { RowList, Row, RowLabel } from '../../../components/ui/RowList/RowList';
 import StatusBadge from '../../../components/ui/StatusBadge/StatusBadge';
+import EyeIcon from '../../../components/ui/Icons/EyeIcon';
 import classes from './purchases-list.module.scss';
 
 function formatUpdatedAt(isoString, locale) {
@@ -43,7 +44,16 @@ function PurchasesList() {
                   <RowLabel>{title}</RowLabel>
                   <span className={classes.updated}>{updatedLabel}</span>
                 </span>
-                <StatusBadge status={purchase.status}>{statusLabel}</StatusBadge>
+                <span className={classes.right}>
+                  <StatusBadge status={purchase.status}>{statusLabel}</StatusBadge>
+                  <span
+                    className={classes.eye}
+                    aria-label={t('Purchases.detail.viewDetail')}
+                    title={t('Purchases.detail.viewDetail')}
+                  >
+                    <EyeIcon />
+                  </span>
+                </span>
               </Row>
             );
           })}

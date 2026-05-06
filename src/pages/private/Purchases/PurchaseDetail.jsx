@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import checkoutService from '../../../services/checkoutService';
@@ -6,11 +6,29 @@ import ConsumeModal from '../../../components/Purchases/ConsumeModal';
 import ConnectorSetupModal from '../../../components/Purchases/ConnectorSetupModal';
 import Card, { CardTitle, CardBody, CardMuted } from '../../../components/ui/Card/Card';
 import { RowList, Row, RowLabel } from '../../../components/ui/RowList/RowList';
+import StatusBadge from '../../../components/ui/StatusBadge/StatusBadge';
 import Button from '../../../components/ui/Button/Button';
 import FormError from '../../../components/ui/FormError/FormError';
+import classes from './purchase-detail.module.scss';
+
+const PENDING_POLL_MS = 3000;
+const PENDING_POLL_TIMEOUT_MS = 60000;
+
+function formatPrice(amountCents, currency) {
+  if (amountCents == null) return '';
+  return new Intl.NumberFormat(undefined, { style: 'currency', currency: currency || 'EUR' })
+    .format(amountCents / 100);
+}
+
+function formatDateTime(iso, locale) {
+  if (!iso) return '';
+  return new Date(iso).toLocaleString(locale, {
+    year: 'numeric', month: 'short', day: '2-digit', hour: '2-digit', minute: '2-digit',
+  });
+}
 
 function PurchaseDetail() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { id } = useParams();
   const [purchase, setPurchase] = useState(null);
   const [assets, setAssets] = useState([]);
@@ -19,27 +37,59 @@ function PurchaseDetail() {
   const [activeAsset, setActiveAsset] = useState(null);
   const [editingConnector, setEditingConnector] = useState(false);
   const [lastConsumption, setLastConsumption] = useState(null);
+  const pollStartRef = useRef(null);
 
   const refreshPurchase = () =>
-    checkoutService.getMyPurchases().then((res) => {
-      const found = (res.data || []).find((p) => p.documentId === id);
-      setPurchase(found || null);
+    checkoutService.getOwnPurchase(id).then((res) => {
+      const next = res?.data || null;
+      setPurchase(next);
+      return next;
     });
 
   useEffect(() => {
-    Promise.all([
-      checkoutService.getPurchaseAssets(id).then((res) => setAssets(res.assets || [])),
-      refreshPurchase(),
-    ])
-      .catch((err) => setError(err.message || 'failed'))
-      .finally(() => setLoading(false));
+    let cancelled = false;
+    setLoading(true);
+    refreshPurchase()
+      .then((p) => {
+        if (cancelled || !p) return null;
+        if (p.status === 'paid' || p.status === 'consumed') {
+          return checkoutService.getPurchaseAssets(id)
+            .then((res) => { if (!cancelled) setAssets(res.assets || []); })
+            .catch(() => {});
+        }
+        return null;
+      })
+      .catch((err) => { if (!cancelled) setError(err.message || 'failed'); })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
   }, [id]);
 
-  const connectorReady = Boolean(purchase?.consumerUrl);
+  useEffect(() => {
+    if (!purchase || purchase.status !== 'pending') {
+      pollStartRef.current = null;
+      return undefined;
+    }
+    if (pollStartRef.current == null) pollStartRef.current = Date.now();
+    const interval = setInterval(() => {
+      if (Date.now() - pollStartRef.current > PENDING_POLL_TIMEOUT_MS) {
+        clearInterval(interval);
+        return;
+      }
+      refreshPurchase()
+        .then((next) => {
+          if (next && (next.status === 'paid' || next.status === 'consumed')) {
+            checkoutService.getPurchaseAssets(id)
+              .then((res) => setAssets(res.assets || []))
+              .catch(() => {});
+          }
+        })
+        .catch(() => {});
+    }, PENDING_POLL_MS);
+    return () => clearInterval(interval);
+  }, [purchase, id]);
 
-  const handleConnectorSaved = () => {
-    refreshPurchase();
-  };
+  const connectorReady = Boolean(purchase?.consumerUrl);
+  const canConsume = purchase && (purchase.status === 'paid' || purchase.status === 'consumed');
 
   return (
     <Card layout="wide">
@@ -48,23 +98,64 @@ function PurchaseDetail() {
       {loading && <CardBody>{t('Common.loading')}</CardBody>}
       <FormError>{error}</FormError>
 
+      {!loading && !error && !purchase && <CardBody>{t('Purchases.detail.notFound')}</CardBody>}
+
       {!loading && !error && purchase && (
         <>
-          <CardMuted>
-            {purchase.library_catalog?.title} · {t('Purchases.detail.connectorLabel')}:{' '}
-            {connectorReady ? purchase.consumerUrl : t('Purchases.detail.connectorMissing')}
-          </CardMuted>
+          <header className={classes.header}>
+            <div>
+              <h2 className={classes.catalog}>{purchase.library_catalog?.title || purchase.documentId}</h2>
+              {purchase.library_catalog?.description && (
+                <CardMuted>{purchase.library_catalog.description}</CardMuted>
+              )}
+            </div>
+            <StatusBadge status={purchase.status}>
+              {t(`Purchases.status.${purchase.status}`, purchase.status)}
+            </StatusBadge>
+          </header>
 
-          {!connectorReady && (
-            <div style={{ margin: '12px 0' }}>
+          {purchase.status === 'pending' && (
+            <CardMuted>{t('Purchases.detail.pendingHint')}</CardMuted>
+          )}
+          {purchase.status === 'failed' && purchase.error && (
+            <FormError>{purchase.error}</FormError>
+          )}
+
+          <dl className={classes.metaGrid}>
+            <div>
+              <dt>{t('Purchases.detail.amount')}</dt>
+              <dd>{formatPrice(purchase.amount, purchase.currency)}</dd>
+            </div>
+            <div>
+              <dt>{t('Purchases.detail.createdAt')}</dt>
+              <dd>{formatDateTime(purchase.createdAt, i18n.language)}</dd>
+            </div>
+            <div>
+              <dt>{t('Purchases.detail.updatedAt')}</dt>
+              <dd>{formatDateTime(purchase.updatedAt, i18n.language)}</dd>
+            </div>
+            {purchase.stripePaymentIntentId && (
+              <div>
+                <dt>{t('Purchases.detail.paymentRef')}</dt>
+                <dd className={classes.mono}>{purchase.stripePaymentIntentId}</dd>
+              </div>
+            )}
+            <div>
+              <dt>{t('Purchases.detail.connectorLabel')}</dt>
+              <dd>{connectorReady ? purchase.consumerUrl : t('Purchases.detail.connectorMissing')}</dd>
+            </div>
+          </dl>
+
+          {canConsume && !connectorReady && (
+            <div className={classes.actions}>
               <Button onClick={() => setEditingConnector(true)}>
                 {t('Connector.setupCta')}
               </Button>
             </div>
           )}
 
-          {connectorReady && (
-            <div style={{ margin: '12px 0' }}>
+          {canConsume && connectorReady && (
+            <div className={classes.actions}>
               <Button variant="ghost" size="sm" onClick={() => setEditingConnector(true)}>
                 {t('Connector.editCta')}
               </Button>
@@ -77,16 +168,18 @@ function PurchaseDetail() {
             </CardMuted>
           )}
 
-          <RowList>
-            {assets.map((a) => (
-              <Row key={a['@id']} interactive={false}>
-                <RowLabel>{a['name'] || a['@id']}</RowLabel>
-                <Button size="sm" onClick={() => setActiveAsset(a['@id'])} disabled={!connectorReady}>
-                  {t('Consume.button')}
-                </Button>
-              </Row>
-            ))}
-          </RowList>
+          {canConsume && assets.length > 0 && (
+            <RowList>
+              {assets.map((a) => (
+                <Row key={a['@id']} interactive={false}>
+                  <RowLabel>{a['name'] || a['@id']}</RowLabel>
+                  <Button size="sm" onClick={() => setActiveAsset(a['@id'])} disabled={!connectorReady}>
+                    {t('Consume.button')}
+                  </Button>
+                </Row>
+              ))}
+            </RowList>
+          )}
         </>
       )}
 
@@ -103,7 +196,7 @@ function PurchaseDetail() {
         <ConnectorSetupModal
           purchaseId={id}
           onClose={() => setEditingConnector(false)}
-          onSaved={handleConnectorSaved}
+          onSaved={() => refreshPurchase()}
         />
       )}
     </Card>

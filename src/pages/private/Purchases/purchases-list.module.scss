@@ -9,3 +9,20 @@
   font-size: 0.75rem;
   color: #64748b;
 }
+
+.right {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.eye {
+  display: inline-flex;
+  align-items: center;
+  color: #64748b;
+  transition: color 140ms ease;
+
+  :global(a:hover) & {
+    color: var(--primary-color, #1a73e8);
+  }
+}

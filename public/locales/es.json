@@ -744,9 +744,17 @@
       "title": "Detalle de compra",
       "lastConsumption": "Último consumo",
       "connectorLabel": "Connector consumer",
-      "connectorMissing": "sin configurar"
+      "connectorMissing": "sin configurar",
+      "notFound": "Compra no encontrada.",
+      "pendingHint": "Esperando confirmación del pago. Esta página se actualiza automáticamente.",
+      "amount": "Importe",
+      "createdAt": "Creada",
+      "updatedAt": "Actualizada",
+      "paymentRef": "Referencia de pago",
+      "viewDetail": "Ver detalle"
     },
     "status": {
+      "pending": "Pendiente",
       "paid": "Pagado",
       "failed": "Fallido",
       "consumed": "Consumido"
