@@ -33,7 +33,7 @@ import CodeSampleDetailss from '../../pages/private/codeSamplesDetail';
 import PrivateCatalogs from '../../pages/private/Catalogs';
 import PurchasesList from '../../pages/private/Purchases/PurchasesList';
 import PurchaseDetail from '../../pages/private/Purchases/PurchaseDetail';
-import CheckoutSuccess from '../../pages/private/Checkout/CheckoutSuccess';
+import CheckoutSuccessRedirect from '../../pages/private/Checkout/CheckoutSuccessRedirect';
 import CheckoutCancel from '../../pages/private/Checkout/CheckoutCancel';
 
 import { logout } from '../../redux/actions/authAction';
@@ -103,7 +103,7 @@ function PrivateRouter({ isAppReady }) {
             <Route path='catalogs' element={<PrivateCatalogs />} />
             <Route path='purchases' element={<PurchasesList />} />
             <Route path='purchases/:id' element={<PurchaseDetail />} />
-            <Route path='checkout/:purchaseId/success' element={<CheckoutSuccess />} />
+            <Route path='checkout/:purchaseId/success' element={<CheckoutSuccessRedirect />} />
             <Route path='checkout/:purchaseId/cancel' element={<CheckoutCancel />} />
             <Route path='*' element={<Navigate to='dashboard' replace />} />
           </Routes>
