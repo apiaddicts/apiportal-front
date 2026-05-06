@@ -737,11 +737,17 @@
   "Purchases": {
     "list": {
       "title": "Mis compras",
-      "empty": "Aún no tienes compras."
+      "empty": "Aún no tienes compras.",
+      "updated": "Actualizado"
     },
     "detail": {
       "title": "Detalle de compra",
       "lastConsumption": "Último consumo"
+    },
+    "status": {
+      "paid": "Pagado",
+      "failed": "Fallido",
+      "consumed": "Consumido"
     }
   },
   "Common": {

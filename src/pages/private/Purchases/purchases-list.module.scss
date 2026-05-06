@@ -1,0 +1,11 @@
+.left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.updated {
+  font-size: 0.75rem;
+  color: #64748b;
+}
