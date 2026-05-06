@@ -35,6 +35,7 @@ function ConnectorSetupModal({ purchaseId, onClose, onSaved }) {
     <Modal onClose={onClose} ariaLabel={t('Connector.title')}>
       <CardTitle>{t('Connector.title')}</CardTitle>
       <CardMuted>{t('Connector.subtitle')}</CardMuted>
+      <CardMuted>{t('Connector.urlHint')}</CardMuted>
 
       <div className={modalClasses.formGroup}>
         <label htmlFor="consumer-url" className={modalClasses.label}>

@@ -786,6 +786,7 @@
     "title": "Set up your consumer connector",
     "subtitle": "Once saved, every consume of this purchase will use this connector.",
     "url": "Consumer connector URL",
+    "urlHint": "Use the management API root (we'll append /management/v3 if you forget it).",
     "apiKey": "API key",
     "apiKeyOptional": "optional",
     "save": "Save",
