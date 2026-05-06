@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import checkoutService from '../../../services/checkoutService';
 import ConsumeModal from '../../../components/Purchases/ConsumeModal';
 import ConnectorSetupModal from '../../../components/Purchases/ConnectorSetupModal';
-import PurchaseStepper from '../../../components/Purchases/PurchaseStepper';
 import Card, { CardTitle, CardBody, CardMuted } from '../../../components/ui/Card/Card';
 import { RowList, Row, RowLabel } from '../../../components/ui/RowList/RowList';
 import StatusBadge from '../../../components/ui/StatusBadge/StatusBadge';
@@ -30,81 +29,38 @@ function formatDateTime(iso, locale) {
 
 function activeStepKey(purchase) {
   if (!purchase) return 'payment';
-  if (purchase.status === 'pending') return 'payment';
-  if (purchase.status === 'failed') return 'payment';
+  if (purchase.status === 'pending' || purchase.status === 'failed') return 'payment';
   if (!purchase.consumerUrl) return 'connector';
   return 'consume';
 }
 
-function buildSteps(purchase, t) {
-  const active = activeStepKey(purchase);
-  const isPaid = purchase && (purchase.status === 'paid' || purchase.status === 'consumed');
-  const hasConnector = Boolean(purchase?.consumerUrl);
-  const isConsumed = purchase?.status === 'consumed';
-  const order = ['payment', 'connector', 'consume'];
-
-  const stateFor = (key) => {
-    if (key === 'payment') return isPaid ? 'done' : (active === 'payment' ? 'active' : 'pending');
-    if (key === 'connector') return hasConnector ? 'done' : (active === 'connector' ? 'active' : 'pending');
-    return isConsumed ? 'done' : (active === 'consume' ? 'active' : 'pending');
-  };
-
-  const titles = {
-    payment: t('Purchases.steps.payment.title'),
-    connector: t('Purchases.steps.connector.title'),
-    consume: t('Purchases.steps.consume.title'),
-  };
-  const hints = {
-    payment: t('Purchases.steps.payment.hint'),
-    connector: t('Purchases.steps.connector.hint'),
-    consume: t('Purchases.steps.consume.hint'),
-  };
-
-  return order.map((key) => ({
-    key,
-    title: titles[key],
-    hint: hints[key],
-    state: stateFor(key),
-  }));
-}
-
-function PaymentPanel({ purchase, t, i18n }) {
+function PendingPanel({ t }) {
   return (
     <div className={classes.panel}>
-      <h3 className={classes.panelTitle}>
-        {purchase.status === 'pending' && t('Purchases.steps.payment.titleActive')}
-        {purchase.status === 'failed' && t('Purchases.steps.payment.titleFailed')}
-      </h3>
-      {purchase.status === 'pending' && <CardMuted>{t('Purchases.detail.pendingHint')}</CardMuted>}
-      {purchase.status === 'failed' && (
-        <>
-          <CardMuted>{t('Purchases.steps.payment.failedHint')}</CardMuted>
-          {purchase.error && <FormError>{purchase.error}</FormError>}
-        </>
-      )}
-      <dl className={classes.metaGrid}>
-        <div>
-          <dt>{t('Purchases.detail.amount')}</dt>
-          <dd>{formatPrice(purchase.amount, purchase.currency)}</dd>
-        </div>
-        <div>
-          <dt>{t('Purchases.detail.createdAt')}</dt>
-          <dd>{formatDateTime(purchase.createdAt, i18n.language)}</dd>
-        </div>
-      </dl>
+      <div className={classes.panelHead}>
+        <span className={classes.spinner} aria-hidden="true" />
+        <h3 className={classes.panelTitle}>{t('Purchases.steps.payment.titleActive')}</h3>
+      </div>
+      <CardMuted>{t('Purchases.detail.pendingHint')}</CardMuted>
     </div>
   );
 }
 
-function ConnectorPanel({ purchase, t, onSetup }) {
+function FailedPanel({ purchase, t }) {
+  return (
+    <div className={classes.panel}>
+      <h3 className={classes.panelTitle}>{t('Purchases.steps.payment.titleFailed')}</h3>
+      <CardMuted>{t('Purchases.steps.payment.failedHint')}</CardMuted>
+      {purchase.error && <FormError>{purchase.error}</FormError>}
+    </div>
+  );
+}
+
+function ConnectorPanel({ t, onSetup }) {
   return (
     <div className={classes.panel}>
       <h3 className={classes.panelTitle}>{t('Purchases.steps.connector.titleActive')}</h3>
       <CardMuted>{t('Purchases.steps.connector.body')}</CardMuted>
-      <ul className={classes.bullets}>
-        <li>{t('Purchases.steps.connector.bullet1')}</li>
-        <li>{t('Purchases.steps.connector.bullet2')}</li>
-      </ul>
       <div className={classes.cta}>
         <Button onClick={onSetup}>{t('Connector.setupCta')}</Button>
       </div>
@@ -210,7 +166,6 @@ function PurchaseDetail() {
   }, [purchase, id]);
 
   const active = activeStepKey(purchase);
-  const steps = purchase ? buildSteps(purchase, t) : [];
   const connectorReady = Boolean(purchase?.consumerUrl);
 
   return (
@@ -236,11 +191,10 @@ function PurchaseDetail() {
             </StatusBadge>
           </header>
 
-          <PurchaseStepper steps={steps} />
-
-          {active === 'payment' && <PaymentPanel purchase={purchase} t={t} i18n={i18n} />}
+          {active === 'payment' && purchase.status === 'pending' && <PendingPanel t={t} />}
+          {active === 'payment' && purchase.status === 'failed' && <FailedPanel purchase={purchase} t={t} />}
           {active === 'connector' && (
-            <ConnectorPanel purchase={purchase} t={t} onSetup={() => setEditingConnector(true)} />
+            <ConnectorPanel t={t} onSetup={() => setEditingConnector(true)} />
           )}
           {active === 'consume' && (
             <ConsumePanel

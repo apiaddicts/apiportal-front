@@ -758,23 +758,15 @@
     },
     "steps": {
       "payment": {
-        "title": "Payment",
-        "hint": "Stripe checkout",
         "titleActive": "Confirming your payment…",
         "titleFailed": "Payment failed",
         "failedHint": "We could not complete the payment. You can try purchasing again from the catalog."
       },
       "connector": {
-        "title": "Consumer connector",
-        "hint": "Tell us where to deliver",
         "titleActive": "Set up your consumer connector",
-        "body": "Tell us which connector should receive the data once the contract is signed.",
-        "bullet1": "URL of your consumer EDC management API.",
-        "bullet2": "Optional API key if your connector requires authentication."
+        "body": "Tell us which EDC consumer connector should receive the data once the contract is signed."
       },
       "consume": {
-        "title": "Consume",
-        "hint": "Trigger the transfer",
         "titleActive": "Choose an asset to consume",
         "body": "Pick an asset from this purchase to start the transfer to your webhook.",
         "noAssets": "There are no assets available for this purchase yet."
