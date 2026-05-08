@@ -3,6 +3,8 @@
   "dashboard": "Dashboard",
   "apiToken": "Token",
   "apisLibrary": "APIs Library",
+  "catalogs": "Catalogs",
+  "purchases": "My purchases",
   "codeSamples": "Code Samples",
   "billings": "Payment Gateway",
   "news": "News",
@@ -501,6 +503,7 @@
     "theContrat": "The Contract",
     "viewTermAndConds": "View General Terms & Conditions",
     "contractNegotiate": "Negotiate Contract",
+    "contractConsume": "Consume",
     "requierCredential": "Requires Verifiable Credential",
     "providedBy": "Provided by",
     "detTitle": "Catalog",
@@ -512,6 +515,13 @@
     "detSoftwareresource": "Software Resource",
     "detInfrastructureresource": "Infrastructure Resource",
     "detContractDefinition": "Contract Definition",
+    "privateList": {
+      "title": "My Catalogs",
+      "empty": "No catalogs available.",
+      "open": "Open",
+      "viewPublic": "View in public catalog",
+      "fromPrice": "From"
+    },
     "Asset": {
       "noData": "No assets available.",
       "title": "Assets"
@@ -688,5 +698,102 @@
       "providedBy": "Provided by",
       "linkedAssetsTitle": "Linked Assets"
     }
+  },
+  "Checkout": {
+    "buy": "Buy",
+    "processing": "Processing…",
+    "processingPayment": "Processing payment…",
+    "setUpConnector": "Set up connector",
+    "viewPurchase": "View my purchase",
+    "success": {
+      "title": "Payment successful",
+      "body": "Thanks for your purchase. Your access has been activated.",
+      "goToContract": "Go to my purchase"
+    },
+    "cancel": {
+      "title": "Payment cancelled",
+      "body": "Your payment was cancelled. No charge has been made.",
+      "backToCatalogs": "Back to catalogs"
+    }
+  },
+  "Consume": {
+    "title": "Consume asset",
+    "button": "Consume",
+    "history": "Recent webhooks",
+    "webhookUrl": "Webhook URL",
+    "consumerUrl": "Consumer connector URL (Management v3)",
+    "consumerApiKey": "Consumer API key",
+    "optional": "(optional)",
+    "cancel": "Cancel",
+    "callAsset": "Call asset",
+    "calling": "Calling…",
+    "toastSuccess": "Consume completed successfully",
+    "toastEndedIn": "Transfer ended in state {{state}}"
+  },
+  "Webhook": {
+    "idle": "Pending check",
+    "checking": "Checking…",
+    "ok": "Reachable",
+    "ko": "Unreachable"
+  },
+  "Purchases": {
+    "list": {
+      "title": "My purchases",
+      "empty": "You don't have any purchases yet.",
+      "updated": "Updated"
+    },
+    "detail": {
+      "title": "Purchase detail",
+      "lastConsumption": "Last consumption",
+      "connectorLabel": "Consumer connector",
+      "connectorMissing": "not configured",
+      "notFound": "Purchase not found.",
+      "pendingHint": "Waiting for payment confirmation. This page updates automatically.",
+      "amount": "Amount",
+      "createdAt": "Created",
+      "updatedAt": "Updated",
+      "paymentRef": "Payment reference",
+      "viewDetail": "View detail",
+      "transactionDetails": "Transaction details"
+    },
+    "steps": {
+      "payment": {
+        "titleActive": "Confirming your payment…",
+        "titleFailed": "Payment failed",
+        "failedHint": "We could not complete the payment. You can try purchasing again from the catalog."
+      },
+      "connector": {
+        "titleActive": "Set up your consumer connector",
+        "body": "Tell us which EDC consumer connector should receive the data once the contract is signed."
+      },
+      "consume": {
+        "titleActive": "Choose an asset to consume",
+        "body": "Pick an asset from this purchase to start the transfer to your webhook.",
+        "noAssets": "There are no assets available for this purchase yet."
+      }
+    },
+    "status": {
+      "pending": "Pending",
+      "paid": "Paid",
+      "failed": "Failed",
+      "consumed": "Consumed"
+    }
+  },
+  "Common": {
+    "loading": "Loading…"
+  },
+  "Connector": {
+    "title": "Set up your consumer connector",
+    "subtitle": "Once saved, every consume of this purchase will use this connector.",
+    "url": "Consumer connector URL",
+    "urlHint": "Use the management API root (we'll append /management/v3 if you forget it).",
+    "apiKey": "API key",
+    "apiKeyOptional": "optional",
+    "save": "Save",
+    "saving": "Saving...",
+    "cancel": "Cancel",
+    "setupCta": "Set up consumer connector",
+    "editCta": "Edit connector",
+    "toastSaved": "Connector saved"
   }
 }

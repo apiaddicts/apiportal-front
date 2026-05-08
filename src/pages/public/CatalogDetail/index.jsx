@@ -17,9 +17,18 @@ import SectionSoftware from '../../../components/Catalog/SoftwareresourceSection
 import SectionInfrastructure from '../../../components/Catalog/InfrastructureresourceSection';
 import SectionContractDefinition from '../../../components/Catalog/ContractDefinitionSection';
 import OverviewServiceOffering from '../../../components/Catalog/Overview';
+import Button from '../../../components/ui/Button/Button';
 import classes from './catalog-view.module.scss';
 
-function CatalogDetail({ initialSection }) {
+function isAuthenticated() {
+  try {
+    const token = JSON.parse(localStorage.getItem('token') || 'null');
+    return !!(token?.jwt || token?.accessToken);
+  } catch { return false; }
+}
+
+function CatalogDetail({ initialSection, setIsOpen }) {
+  const routeBase = '/catalogs';
   const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -92,7 +101,18 @@ function CatalogDetail({ initialSection }) {
 
   const handleClick = (section) => {
     setSection(section);
-    navigate(`/catalogs/${params?.id}/${section}`);
+    navigate(`${routeBase}/${params?.id}/${section}`);
+  };
+
+  const handleNegotiate = () => {
+    const target = `/developer/catalogs?highlight=${params?.id}`;
+    if (isAuthenticated()) {
+      navigate(target);
+      return;
+    }
+    try { sessionStorage.setItem('postLoginRedirect', target); } catch {}
+    if (typeof setIsOpen === 'function') setIsOpen(true);
+    else navigate('/');
   };
 
   return (
@@ -104,6 +124,11 @@ function CatalogDetail({ initialSection }) {
               <h2 className={classes.sidebar_title}>
                 {t("Catalogs.detTitle")}
               </h2>
+              <div data-testid="negotiate-button" className={classes.buy_button_slot}>
+                <Button onClick={handleNegotiate} fullWidth>
+                  {t('Catalogs.contractNegotiate')}
+                </Button>
+              </div>
               <nav className={classes.sidebar_nav}>
                 <button
                   className={section === "assets" ? classes.sidebar_nav__selected : ""}
@@ -144,12 +169,12 @@ function CatalogDetail({ initialSection }) {
             <main className={classes.catalog_content}>
               {section === "assets" && <OverviewServiceOffering serviceOffering={safeParse(catalog?.assets)} />}
               {section === "policies" && <PoliciesSection policies={safeParse(catalog?.policies)} />}
-              {section === "contracts" && <ContractsSection contract={safeParse(catalog?.contracstDefinition)} />}
+              {section === "contracts" && <ContractsSection contract={safeParse(catalog?.contractDefinition)} />}
               {section === "participants" && <SectionParticipant participant={safeParse(catalog?.participants)} gaiaXData={gaiaXData} gaiaXLoading={gaiaXLoading} />}
               {section === "dataresources" && <SectionDataresource dataResource={safeParse(catalog?.dataSource)} />}
               {section === "softwareresource" && <SectionSoftware software={safeParse(catalog?.softwareResource)} />}
               {section === "infrastructureresource" && <SectionInfrastructure infrastructure={safeParse(catalog?.infrastructureResource)} />}
-              {section === "contractdefinition" && <SectionContractDefinition contract={safeParse(catalog?.contracstDefinitionOperations)} />}
+              {section === "contractdefinition" && <SectionContractDefinition contract={safeParse(catalog?.contractDefinitionOperations)} />}
             </main>
           </div>
           {/*<div id='contact' />*/}

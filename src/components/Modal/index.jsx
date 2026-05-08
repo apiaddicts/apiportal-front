@@ -15,7 +15,7 @@ function Modal({ children, setOpen, maxWidth = 'sm' }) {
 
   return (
     <Dialog
-      open={setOpen}
+      open={true}
       onClose={handleClose}
       aria-labelledby='alert-dialog-title'
       aria-describedby='alert-dialog-description'

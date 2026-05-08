@@ -59,6 +59,7 @@ function OverviewServiceOffering({ serviceOffering }) {
   };
 
   const handleClick = (section) => {
+    if (!section) return;
     navigate(`/catalogs/${params?.id}/${section}`);
   };
 
