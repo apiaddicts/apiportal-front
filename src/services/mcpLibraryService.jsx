@@ -20,7 +20,17 @@ function getMcpBookStore(id) {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
-  return fetch(`${config.apiUrl}/library-mcps/${id}?populate[image]=true&populate[tags]=true&populate[ratings]=true`, requestOptions)
+
+  const query = new URLSearchParams({
+    'populate[image]': 'true',
+    'populate[tags]': 'true',
+    'populate[ratings]': 'true',
+    'populate[tools]': 'true',
+    'populate[resources]': 'true',
+    'populate[prompts]': 'true'
+  }).toString();
+
+  return fetch(`${config.apiUrl}/library-mcps/${id}?${query}`, requestOptions)
     .then(handleResponse)
     .then((library) => {
       return library;

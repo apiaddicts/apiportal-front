@@ -271,7 +271,7 @@ const getApisUnsecure = () => {
 function getKongApis() {
   const requestOptions = {
     method: 'GET',
-    headers: { 'apiKey': `${config.strapiApiKey}` },
+    headers: { 'apikey': `${config.strapiApiKey}` },
   };
   return fetch(
     `${config.apiUrl}/library-apis?filters[provider][$eq]=kong&filters[publish][$eq]=publicado&fields[0]=title&fields[1]=slug&populate[apim_config][fields][0]=documentId`,

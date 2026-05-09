@@ -79,7 +79,7 @@ function CardInformation({ img, buttons = [], title = '', description = '', glob
                 style={blogTitleStyles}
               >
                 <span className="card__title__row">
-                  {title}
+                  <span className="card__title__text">{title}</span>
                   {globalRating && (
                     <span
                       className={`card__rating__circle rating__${globalRating}`}
