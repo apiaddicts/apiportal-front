@@ -5,7 +5,8 @@ function getUserCredentials(userId, token) {
   const requestOptions = {
     method: 'GET',
     headers: {
-      'apiKey': `${config.strapiApiKey}`,
+      'Content-Type': 'application/json',
+      'apikey': `${config.strapiApiKey}`,
       'Authorization': `Bearer ${token}`,
     },
   };
@@ -21,7 +22,8 @@ function getUserCredential(documentId, token) {
   const requestOptions = {
     method: 'GET',
     headers: {
-      'apiKey': `${config.strapiApiKey}`,
+      'Content-Type': 'application/json',
+      'apikey': `${config.strapiApiKey}`,
       'Authorization': `Bearer ${token}`,
     },
   };
@@ -38,7 +40,7 @@ function createUserCredential(credData, token) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'apiKey': `${config.strapiApiKey}`,
+      'apikey': `${config.strapiApiKey}`,
       'Authorization': `Bearer ${token}`,
     },
     body: JSON.stringify({ data: credData }),
@@ -53,7 +55,7 @@ function addProductsToCredential(documentId, products, apimConfigDocumentId, tok
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'apiKey': `${config.strapiApiKey}`,
+      'apikey': `${config.strapiApiKey}`,
       'Authorization': `Bearer ${token}`,
     },
     body: JSON.stringify({ products, apimConfigDocumentId }),

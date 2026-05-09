@@ -18,6 +18,7 @@
   "facesInStorage": "Caras en almacenamiento",
   "active": "Activo",
   "perMonth": "€ / Mes",
+  "noDescription": "Sin descripción disponible",
   "apiCredentials": "Credenciales de API",
   "myCredentials": "Mis credenciales",
   "createCredential": "Crear credencial",

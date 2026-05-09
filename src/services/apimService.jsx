@@ -21,7 +21,7 @@ function getApimConfig() {
 function getApimConfigs() {
   const requestOptions = {
     method: 'GET',
-    headers: { 'apiKey': `${config.strapiApiKey}` },
+    headers: { 'apikey': `${config.strapiApiKey}` },
   };
   return fetch(`${config.apiUrl}/apim-configs?populate=configurations`, requestOptions)
     .then(handleResponse)
@@ -33,7 +33,7 @@ function generateCredentials(apimConfigDocumentId, credId, products, token, type
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'apiKey': `${config.strapiApiKey}`,
+      'apikey': `${config.strapiApiKey}`,
       'Authorization': `Bearer ${token}`,
     },
     body: JSON.stringify({ credId, products, type }),
@@ -48,7 +48,7 @@ function addServices(apimConfigDocumentId, consumerId, services, token) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'apiKey': `${config.strapiApiKey}`,
+      'apikey': `${config.strapiApiKey}`,
       'Authorization': `Bearer ${token}`,
     },
     body: JSON.stringify({ consumerId, services }),

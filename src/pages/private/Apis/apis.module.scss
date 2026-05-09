@@ -396,19 +396,32 @@
       font-weight: bold;
       color: var(--primary-color);
       margin-bottom: 4px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      word-break: break-word;
     }
-  
+
     &__slug {
       font-size: 13px;
       color: #888;
       margin-bottom: 12px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-  
+
     &__description {
       font-size: 14px;
       color: #333;
       margin-bottom: 16px;
       line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      min-height: calc(1.4em * 3);
     }
   
     &__button {
