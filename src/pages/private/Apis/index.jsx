@@ -16,7 +16,7 @@ function Apis(props) {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
-  const { libraries, loading } = useSelector((state) => state.library);
+  const { libraries, loadingLibraries: loading } = useSelector((state) => state.library);
   const [searchTerm, setSearchTerm] = useState('');
   const [viewType, setViewType] = useState('list');
   const [itemsPerPage, setItemsPerPage] = useState(10);
