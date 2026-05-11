@@ -63,10 +63,25 @@ function McpOverview({ mcpLibrary: mcpLibraryProp, liveSession: liveSessionProp,
   if (!mcpLibrary || Object.keys(mcpLibrary).length === 0) return null;
 
   const isLiveSessionActive = liveSession !== null && liveSession?.slug === mcpLibrary?.slug;
-  const effectiveResources = isLiveSessionActive ? (liveSession.resources || []) : [];
-  const effectiveTools = isLiveSessionActive ? (liveSession.tools || []) : [];
-  const effectivePrompts = isLiveSessionActive ? (liveSession.prompts || []) : [];
-  const hasLiveData = effectiveResources.length > 0 || effectiveTools.length > 0 || effectivePrompts.length > 0;
+
+  const strapiTools = mcpLibrary?.tools || [];
+  const strapiResources = mcpLibrary?.resources || [];
+  const strapiPrompts = mcpLibrary?.prompts || [];
+  const hasStrapiData = strapiTools.length > 0 || strapiResources.length > 0 || strapiPrompts.length > 0;
+
+  const liveTools = isLiveSessionActive ? (liveSession.tools || []) : [];
+  const liveResources = isLiveSessionActive ? (liveSession.resources || []) : [];
+  const livePrompts = isLiveSessionActive ? (liveSession.prompts || []) : [];
+  const hasLiveData = liveTools.length > 0 || liveResources.length > 0 || livePrompts.length > 0;
+
+  const liveTotal = liveTools.length + liveResources.length + livePrompts.length;
+  const strapiTotal = strapiTools.length + strapiResources.length + strapiPrompts.length;
+  const useLiveData = isLiveSessionActive && hasLiveData && liveTotal >= strapiTotal;
+
+  const effectiveTools = useLiveData ? liveTools : strapiTools;
+  const effectiveResources = useLiveData ? liveResources : strapiResources;
+  const effectivePrompts = useLiveData ? livePrompts : strapiPrompts;
+  const hasCapabilities = effectiveTools.length > 0 || effectiveResources.length > 0 || effectivePrompts.length > 0;
 
   const hasAnyRating =
     !!mcpLibrary?.ratings?.globalRating ||
@@ -128,7 +143,7 @@ function McpOverview({ mcpLibrary: mcpLibraryProp, liveSession: liveSessionProp,
       )}
 
       <section className={`container ${classes.section__content} ${classes.section__three_cols}`}>
-        {!isLiveSessionActive && (
+        {!isLiveSessionActive && !hasStrapiData && (
           <div className={classes.connect__notice}>
             <Icon id='MdInfoOutline' />
             <span>{t('McpDetail.connectToSeeCapabilities')}</span>
@@ -200,7 +215,7 @@ function McpOverview({ mcpLibrary: mcpLibraryProp, liveSession: liveSessionProp,
             <h3 className={classes.three_cols__col__title}>
               {t('McpDetail.capabilitiesTitle')}
             </h3>
-            {isLiveSessionActive ? (
+            {hasCapabilities ? (
               <div className={classes.resources__list}>
                 {effectiveTools.length > 0 && (
                   <>
@@ -214,7 +229,7 @@ function McpOverview({ mcpLibrary: mcpLibraryProp, liveSession: liveSessionProp,
                   <>
                     <p className={classes.capabilities__group_label}>{t('McpDetail.resourcesLabel')}</p>
                     {effectiveResources.map((res, i) => (
-                      <CardResource key={res?.id || i} resource={res} type="resource" />
+                      <CardResource key={res?.uri || res?.id || i} resource={res} type="resource" />
                     ))}
                   </>
                 )}
@@ -226,11 +241,10 @@ function McpOverview({ mcpLibrary: mcpLibraryProp, liveSession: liveSessionProp,
                     ))}
                   </>
                 )}
-                {!hasLiveData && (
-                  <div className={classes.three_cols__placeholder}>
-                    {t('McpDetail.noCapabilitiesFound')}
-                  </div>
-                )}
+              </div>
+            ) : isLiveSessionActive ? (
+              <div className={classes.three_cols__placeholder}>
+                {t('McpDetail.noCapabilitiesFound')}
               </div>
             ) : (
               <div className={classes.three_cols__placeholder}>
