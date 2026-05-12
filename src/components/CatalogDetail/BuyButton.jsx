@@ -20,7 +20,6 @@ function isAuthenticated() {
 }
 
 function ctaLabelFor(purchase, t) {
-  if (purchase.status === 'pending') return t('Checkout.processingPayment');
   if (purchase.status === 'paid' && !purchase.consumerUrl) return t('Checkout.setUpConnector');
   return t('Checkout.viewPurchase');
 }
@@ -38,9 +37,8 @@ function BuyButton({ catalogId, priceCents, currency, disabled }) {
     checkoutService.getMyPurchases()
       .then((res) => {
         const items = res.data || [];
-        const match = items.find((p) =>
-          ACTIVE_STATUSES.has(p.status) && p.library_catalog?.documentId === catalogId,
-        );
+        const match = items.find((p) => ACTIVE_STATUSES.has(p.status) &&
+          p.library_catalog?.documentId === catalogId);
         if (match) setExistingPurchase(match);
       })
       .catch(() => {})
@@ -65,9 +63,20 @@ function BuyButton({ catalogId, priceCents, currency, disabled }) {
     }
   };
 
+  if (existingPurchase && existingPurchase.status === 'pending') {
+    return (
+      <div>
+        <Button onClick={handleClick} disabled={loading} fullWidth>
+          {loading ? t('Checkout.processing') : t('Checkout.retry')}
+        </Button>
+        <FormError compact>{error}</FormError>
+      </div>
+    );
+  }
+
   if (existingPurchase) {
     return (
-      <Button to={`/developer/purchases/${existingPurchase.documentId}`} variant="secondary" fullWidth>
+      <Button to={`/developer/purchases/${existingPurchase.documentId}`} variant='secondary' fullWidth>
         {ctaLabelFor(existingPurchase, t)}
       </Button>
     );

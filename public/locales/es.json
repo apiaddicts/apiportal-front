@@ -703,6 +703,7 @@
     "buy": "Comprar",
     "processing": "Procesando…",
     "processingPayment": "Procesando pago…",
+    "retry": "Reintentar pago",
     "setUpConnector": "Configurar connector",
     "viewPurchase": "Ver mi compra",
     "success": {
@@ -713,6 +714,8 @@
     "cancel": {
       "title": "Pago cancelado",
       "body": "Tu pago se canceló. No se ha realizado ningún cargo.",
+      "releasing": "Liberando la reserva…",
+      "released": "La reserva se liberó. Ya puedes volver a comprar.",
       "backToCatalogs": "Volver a catálogos"
     }
   },

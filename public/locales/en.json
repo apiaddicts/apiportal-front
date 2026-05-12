@@ -703,6 +703,7 @@
     "buy": "Buy",
     "processing": "Processing…",
     "processingPayment": "Processing payment…",
+    "retry": "Retry payment",
     "setUpConnector": "Set up connector",
     "viewPurchase": "View my purchase",
     "success": {
@@ -713,6 +714,8 @@
     "cancel": {
       "title": "Payment cancelled",
       "body": "Your payment was cancelled. No charge has been made.",
+      "releasing": "Releasing the hold…",
+      "released": "The hold was released. You can buy again now.",
       "backToCatalogs": "Back to catalogs"
     }
   },
