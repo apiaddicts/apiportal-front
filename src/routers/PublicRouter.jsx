@@ -70,13 +70,13 @@ function PublicRoute() {
           <Route path='/' element={<Home setIsOpen={setIsOpen} setOpenForm={setOpenForm} />} />
           <Route path='/apis' element={<Apis setIsOpen={setIsOpen} />} />
           <Route path='/mcps' element={<Mcps setIsOpen={setIsOpen} />} />
-          <Route path='/apis/:id' element={<ApiDetail setIsOpen={setOpenForm} />} />
-          <Route path='/mcps/:id' element={<McpDetail setIsOpen={setOpenForm} />} />
-          <Route path='/mcps/:id/mcp-ui' element={<McpUI />} />
+          <Route path='/apis/:slug' element={<ApiDetail setIsOpen={setOpenForm} />} />
+          <Route path='/mcps/:slug' element={<McpDetail setIsOpen={setOpenForm} />} />
+          <Route path='/mcps/:slug/mcp-ui' element={<McpUI />} />
           <Route path='/app-partners' element={<AppPartners />} />
           <Route path='/faqs' element={<Faqs />} />
-          <Route path='/apis/:id/swagger-ui' element={<SwaggerUI setIsOpen={setOpenForm} />} />
-          <Route path='/apis/:id/asyncapi-ui' element={<AsyncApiUI setIsOpen={setOpenForm} />} />
+          <Route path='/apis/:slug/swagger-ui' element={<SwaggerUI setIsOpen={setOpenForm} />} />
+          <Route path='/apis/:slug/asyncapi-ui' element={<AsyncApiUI setIsOpen={setOpenForm} />} />
           <Route path='/blog' element={<Blog setIsOpen={setIsOpen} />} />
           <Route path='/blog/:id' element={<BlogPost setIsOpen={setIsOpen} />} />
           <Route path='/documentacion' element={<Wiki />} />

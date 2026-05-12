@@ -31,6 +31,19 @@ function getApiBookStore(id) {
     });
 }
 
+function getApiBookStoreBySlug(slug) {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
+  };
+  return fetch(`${config.apiUrl}/library-apis?filters[slug][$eq]=${slug}&populate[image]=true&populate[ratings]=true`, requestOptions)
+    .then(handleResponse)
+    .then((response) => response?.data?.[0])
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 function getApis(filter) {
   const { token } = store.getState().user;
   const requestOptions = {
@@ -284,6 +297,7 @@ function getKongApis() {
 const libraryService = {
   getApiBookStores,
   getApiBookStore,
+  getApiBookStoreBySlug,
   getApis,
   getAPi,
   getApiOpenAPI,

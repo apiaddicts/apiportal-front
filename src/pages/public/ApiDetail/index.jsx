@@ -17,7 +17,7 @@ import Slick from '../../../components/SlickSlider/Slick';
 import Icon from '../../../components/MdIcon/Icon';
 import CustomMarkdown from '../../../components/CustomMarkdown';
 import { getHomeContent } from '../../../redux/actions/homeAction';
-import { getLibrary, getLibraries } from '../../../redux/actions/libraryAction';
+import { getLibraryBySlug, getLibraries } from '../../../redux/actions/libraryAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
 import config from '../../../services/config';
 import classes from './api-detail.module.scss';
@@ -70,10 +70,10 @@ function ApiDetail({ setIsOpen }) {
   }, [libraries]);
 
   useEffect(() => {
-    if (params?.id) {
-      dispatch(getLibrary(params?.id));
+    if (params?.slug) {
+      dispatch(getLibraryBySlug(params?.slug));
     }
-  }, [params?.id]);
+  }, [params?.slug]);
 
   useEffect(() => {
     if (homePage && Object.keys(homePage).length === 0) {
@@ -104,11 +104,11 @@ function ApiDetail({ setIsOpen }) {
   // Load buttons sections
   const filterButtonSection = homePage && homePage?.contentSections && homePage?.contentSections?.length > 0 ? homePage?.contentSections?.filter((item) => item.__component === 'sections.button-hero') : [];
 
-  const getDocRoute = (library, id) => {
+  const getDocRoute = (library, slug) => {
     if (library?.openDocType === 'asyncapi') {
-      return `/apis/${id}/asyncapi-ui`;
+      return `/apis/${slug}/asyncapi-ui`;
     }
-    return `/apis/${id}/swagger-ui`;
+    return `/apis/${slug}/swagger-ui`;
   };
 
   const buttonsLbls =
@@ -192,8 +192,8 @@ function ApiDetail({ setIsOpen }) {
     return classes[`rating__${rating}`] || classes.rating__empty;
   };
 
-  const handleClickPage = (id) => {
-    dispatch(getLibrary(id));
+  const handleClickPage = (slug) => {
+    dispatch(getLibraryBySlug(slug));
   };
 
   return (
@@ -282,9 +282,9 @@ function ApiDetail({ setIsOpen }) {
                           title={card?.title}
                           description={card?.description}
                           info={t('ApiDetail.moreInfo')}
-                          url={`/apis/${card?.documentId}`}
+                          url={`/apis/${card?.slug}`}
                           css_styles={{ 'override_border__chip': 'custom_border__chip' }}
-                          route={() => handleClickPage(card?.documentId)}
+                          route={() => handleClickPage(card?.slug)}
                           img={cardsImages[card.documentId] || config.notImage}
                         />
                       </div>
@@ -350,7 +350,7 @@ function ApiDetail({ setIsOpen }) {
                           </Button>
                         </HashLink>
                       ) : (
-                        <HashLink smooth to={`/apis/${params?.id}#contact`}>
+                        <HashLink smooth to={`/apis/${params?.slug}#contact`}>
                           <Button styles={button?.keyword}>
                             {button?.title}
                           </Button>

@@ -64,6 +64,23 @@ export const getLibrary = (id) => (dispatch) => {
   );
 };
 
+export const getLibraryBySlug = (slug) => (dispatch) => {
+  libraryService.getApiBookStoreBySlug(slug).then(
+    (entry) => {
+      dispatch({
+        type: libraryConstants.GET_LIBRARY_SUCCESS,
+        payload: entry,
+      });
+    },
+    (error) => {
+      dispatch({
+        type: libraryConstants.GET_LIBRARY_FAILURE,
+        payload: error,
+      });
+    },
+  );
+};
+
 export const listApis = (filter = '') => (dispatch) => {
   libraryService.getApis(filter).then(
     (res) => {

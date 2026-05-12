@@ -46,22 +46,6 @@ export const getMcpLibraries = () => (dispatch) => {
   );
 };
 
-export const getMcpLibrary = (id) => (dispatch) => {
-  mcpLibraryService.getMcpBookStore(id).then(
-    (response) => {
-      dispatch({
-        type: mcpLibraryConstants.GET_MCP_LIBRARY_SUCCESS,
-        payload: response.data,
-      });
-    },
-    (error) => {
-      dispatch({
-        type: mcpLibraryConstants.GET_MCP_LIBRARY_FAILURE,
-        payload: error,
-      });
-    },
-  );
-};
 
 export const getMcpLibraryBySlug = (slug) => (dispatch) => {
   dispatch({ type: mcpLibraryConstants.GET_MCP_LIBRARY_BY_SLUG_REQUEST });
