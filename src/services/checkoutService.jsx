@@ -20,6 +20,12 @@ function getMyPurchases() {
   return fetch(`${config.apiUrl}/me/purchases`, { method: 'GET', headers: authHeaders() }).then(handleResponse);
 }
 
+function cancelPurchase(purchaseId) {
+  return fetch(`${config.apiUrl}/purchases/${purchaseId}/cancel`, {
+    method: 'POST', headers: authHeaders(),
+  }).then(handleResponse);
+}
+
 function getPurchaseAssets(purchaseId) {
   return fetch(`${config.apiUrl}/purchases/${purchaseId}/assets`, { method: 'GET', headers: authHeaders() }).then(handleResponse);
 }
@@ -61,6 +67,7 @@ const checkoutService = {
   getPurchaseAssets,
   consumeAsset,
   setPurchaseConnector,
+  cancelPurchase,
   getMyWebhooks,
   preflightWebhook,
 };
