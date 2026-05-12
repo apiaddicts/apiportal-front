@@ -50,14 +50,14 @@ function McpOverview({ mcpLibrary: mcpLibraryProp, liveSession: liveSessionProp,
   const isStandalone = !mcpLibraryProp;
   const mcpLibrary = mcpLibraryProp ?? mcpLibraryBySlug;
   const liveSession = liveSessionProp !== undefined ? liveSessionProp : liveSessionStore;
-  const slug = params?.id || mcpLibrary?.slug || '';
+  const slug = params?.slug || mcpLibrary?.slug || '';
   const tryOutUrl = tryOutUrlProp ?? `/frame/mcps/${slug}/ui`;
 
   useEffect(() => {
-    if (isStandalone && params?.id) {
-      dispatch(getMcpLibraryBySlug(params.id));
+    if (isStandalone && params?.slug) {
+      dispatch(getMcpLibraryBySlug(params.slug));
     }
-  }, [params?.id]);
+  }, [params?.slug]);
 
   if (isStandalone && (loadingMcpLibraryBySlug || !mcpLibrary)) return <SkeletonComponent />;
   if (!mcpLibrary || Object.keys(mcpLibrary).length === 0) return null;

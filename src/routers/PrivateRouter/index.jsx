@@ -83,9 +83,9 @@ function PrivateRouter({ isAppReady }) {
             <Route path='products' element={<Products />} />
             <Route path='products/:id' element={<ProductDetail />} />
             <Route path='apis' element={<Apis />} />
-            <Route path='apis/:id' element={<ApiDetail />} />
-            <Route path='apis/:id/swagger-ui' element={<SwaggerUI />} />
-            <Route path='apis/:id/asyncapi-ui' element={<AsyncApiUI />} />
+            <Route path='apis/:slug' element={<ApiDetail />} />
+            <Route path='apis/:slug/swagger-ui' element={<SwaggerUI />} />
+            <Route path='apis/:slug/asyncapi-ui' element={<AsyncApiUI />} />
             <Route path='subscriptions' element={<Subscriptions />} />
             <Route path='subscriptions/:id' element={<SubscriptionDetail />} />
             <Route path='code-samples' element={<CodeSamples />} />

@@ -17,7 +17,7 @@ import Slick from '../../../components/SlickSlider/Slick';
 import Icon from '../../../components/MdIcon/Icon';
 import CustomMarkdown from '../../../components/CustomMarkdown';
 import { getHomeContent } from '../../../redux/actions/homeAction';
-import { getMcpLibrary, getMcpLibraries } from '../../../redux/actions/mcpLibraryAction';
+import { getMcpLibraryBySlug, getMcpLibraries } from '../../../redux/actions/mcpLibraryAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
 import config from '../../../services/config';
 import classes from './mcp-detail.module.scss';
@@ -29,7 +29,7 @@ function McpDetail({ setIsOpen }) {
   const params = useParams();
   const navigate = useNavigate();
   const { homePage } = useSelector((state) => state.home);
-  const { mcpLibrary, mcpLibraries, liveSession } = useSelector((state) => state.mcpLibrary);
+  const { mcpLibraryBySlug: mcpLibrary, mcpLibraries, liveSession } = useSelector((state) => state.mcpLibrary);
   const { blogs } = useSelector((state) => state.blog);
 
   const [bannerImg, setBannerImg] = useState('');
@@ -60,10 +60,10 @@ function McpDetail({ setIsOpen }) {
   }, [mcpLibraries]);
 
   useEffect(() => {
-    if (params?.id) {
-      dispatch(getMcpLibrary(params?.id));
+    if (params?.slug) {
+      dispatch(getMcpLibraryBySlug(params?.slug));
     }
-  }, [params?.id]);
+  }, [params?.slug]);
 
   useEffect(() => {
     if (homePage && Object.keys(homePage).length === 0) {
@@ -117,8 +117,8 @@ function McpDetail({ setIsOpen }) {
   const shuffledMcps = _.shuffle(otherMcps);
   const mcpsNews = shuffledMcps.slice(0, 3);
 
-  const handleClickPage = (id) => {
-    dispatch(getMcpLibrary(id));
+  const handleClickPage = (slug) => {
+    dispatch(getMcpLibraryBySlug(slug));
   };
 
 
@@ -170,9 +170,9 @@ function McpDetail({ setIsOpen }) {
                         title={card?.title}
                         description={card?.description}
                         info={t('McpDetail.moreInfo')}
-                        url={`/mcps/${card?.documentId}`}
+                        url={`/mcps/${card?.slug}`}
                         css_styles={{ 'override_border__chip': 'custom_border__chip' }}
-                        route={() => handleClickPage(card?.documentId)}
+                        route={() => handleClickPage(card?.slug)}
                         img={cardsImages[card.documentId] || config.notImage}
                       />
                     </div>
@@ -234,7 +234,7 @@ function McpDetail({ setIsOpen }) {
                           </Button>
                         </HashLink>
                       ) : (
-                        <HashLink smooth to={`/mcps/${params?.id}#contact`}>
+                        <HashLink smooth to={`/mcps/${params?.slug}#contact`}>
                           <Button styles={button?.keyword}>
                             {button?.title}
                           </Button>

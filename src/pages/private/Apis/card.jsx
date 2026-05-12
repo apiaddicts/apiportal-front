@@ -36,7 +36,7 @@ const CardLibrary = ({ api }) => {
           {api.description || 'Quisque rutrum. Sed augue ipsum, egestas nec, vestibulum et, malesuada adip cing dui. Vestibulum volutpat pretium libero.'}
         </p>
         <a
-          href={`/developer/apis/${api.documentId}`}
+          href={`/developer/apis/${api.slug}`}
           className={classes.card__button}
         >
           {t('LibraryPaginated.viewDocumentation')} <span>➜</span>

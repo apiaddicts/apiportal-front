@@ -42,7 +42,7 @@ function SwaggerUI() {
   });*/
 
   useEffect(() => {
-    libraryService.getApiOpenAPI(params.id).then((jsonOpenApi) => {
+    libraryService.getApiOpenAPI(params.slug).then((jsonOpenApi) => {
       setOpenApi(jsonOpenApi);
       const swaggerUi = SwaggerUi({
         dom_id: '#swaggerContainer',
@@ -56,7 +56,7 @@ function SwaggerUI() {
     });
 
     if (Object.keys(user).length > 0) {
-      libraryService.getApiProducts(params.id).then((productList) => {
+      libraryService.getApiProducts(params.slug).then((productList) => {
         const products = productList && Object.keys(productList).length > 0 ? productList.value.map((product) => {
           const prodItem = {
             ...product.properties,

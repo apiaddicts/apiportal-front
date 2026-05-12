@@ -130,7 +130,7 @@ function Apis(props) {
                 <div
                   key={index}
                   className={classes.table__row}
-                  onClick={() => navigate(`/developer/apis/${api.documentId}`)}
+                  onClick={() => navigate(`/developer/apis/${api.slug}`)}
                 >
                   <div className={classes.api__name}>{api.slug}</div>
                   <div>{api.version || '-'}</div>
