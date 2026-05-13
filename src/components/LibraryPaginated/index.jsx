@@ -22,7 +22,7 @@ function LibraryGrid({ currentItems, basePath, anchor, viewDocLabel }) {
             info={viewDocLabel}
             description={item?.description || ''}
             globalRating={item?.globalRating}
-            link={`${basePath}/${item?.documentId}#${anchor}`}
+            link={`${basePath}/${item?.slug}#${anchor}`}
             css_styles={{ 'custom_title_size': 'fs__22', 'custom_status_size': 'fs__10' }}
           />
         ))}
@@ -45,7 +45,7 @@ function LibraryList({ currentItems, basePath, anchor }) {
         <div
           key={index}
           className={classes.table__row}
-          onClick={() => navigate(`${basePath}/${item?.documentId}#${anchor}`)}
+          onClick={() => navigate(`${basePath}/${item?.slug}#${anchor}`)}
         >
           <div className={classes.api__name}>{item?.title || '-'}</div>
           <div>{item?.version || '-'}</div>
@@ -116,7 +116,7 @@ LibraryPaginated.propTypes = {
   itemsPerPage: PropTypes.number.isRequired,
   viewType: PropTypes.string,
   basePath: PropTypes.string.isRequired,
-  anchor: PropTypes.string.isRequired
+  anchor: PropTypes.string.isRequired,
 };
 
 LibraryPaginated.defaultProps = {

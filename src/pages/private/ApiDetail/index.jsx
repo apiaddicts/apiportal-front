@@ -11,7 +11,7 @@ import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonCom
 import CustomAccordion from '../../../components/common/CustomAccodion/CustomAccordion';
 import Icon from '../../../components/MdIcon/Icon';
 import classes from './api-detail.module.scss';
-import { getLibrary } from '../../../redux/actions/libraryAction';
+import { getLibraryBySlug } from '../../../redux/actions/libraryAction';
 
 function ApiDetail(props) {
   const { t } = useTranslation();
@@ -32,10 +32,10 @@ function ApiDetail(props) {
   }];
 
   useEffect(() => {
-    if (params?.id) {
-      dispatch(getLibrary(params?.id));
+    if (params?.slug) {
+      dispatch(getLibraryBySlug(params?.slug));
     }
-  }, [params?.id]);
+  }, [params?.slug]);
 
   return (
     <>

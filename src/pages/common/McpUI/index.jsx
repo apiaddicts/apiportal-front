@@ -31,7 +31,7 @@ function McpUI() {
   const dispatch = useDispatch();
   const { mcpLibraryBySlug, loadingMcpLibraryBySlug } = useSelector((state) => state.mcpLibrary);
 
-  const slug = params?.id || '';
+  const slug = params?.slug || '';
   const [transport, setTransport] = useState('stdio');
   const [command, setCommand] = useState('');
   const [args, setArgs] = useState('');
@@ -58,9 +58,9 @@ function McpUI() {
   };
 
   useEffect(() => {
-    if (!params?.id) return;
-    dispatch(getMcpLibraryBySlug(params.id));
-  }, [params?.id]);
+    if (!params?.slug) return;
+    dispatch(getMcpLibraryBySlug(params.slug));
+  }, [params?.slug]);
 
   useEffect(() => {
     if (mcpLibraryBySlug) applyEntry(mcpLibraryBySlug);

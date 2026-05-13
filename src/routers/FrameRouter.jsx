@@ -7,8 +7,8 @@ import McpOverview from '../pages/common/McpOverview';
 function FrameRouter() {
   return (
     <Routes>
-      <Route path='/mcps/:id' element={<McpOverview />} />
-      <Route path='/mcps/:id/ui' element={<McpUI />} />
+      <Route path='/mcps/:slug' element={<McpOverview />} />
+      <Route path='/mcps/:slug/ui' element={<McpUI />} />
     </Routes>
   );
 }
