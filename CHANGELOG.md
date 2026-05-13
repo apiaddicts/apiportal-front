@@ -6,15 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 
-## [1.2.0] - 2026-04-24
+## [1.2.0] - 2026-05-13
 
 ## Added
 
 - Implement frame for MCP detail view.
 - Implement frame for MCP UI with inspector functionality.
-- Added API Credentials management, allow users to add credentials for providers.
+- Added API Credentials management, allow users to add credentials for providers for Kong and AWS.
 - Added Token Details view to display token information and usage.
-- New Products Section to display available products and their details.
+- New Products Section to display available products from Kong and AWS, and their details.
 - New Product Details view to display detailed information about a specific product.
 
 
