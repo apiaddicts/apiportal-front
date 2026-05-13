@@ -479,3 +479,18 @@ export const getKongApis = () => (dispatch) => {
     },
   );
 };
+
+export const getAwsApis = () => (dispatch) => {
+  dispatch({ type: libraryConstants.GET_AWS_APIS_REQUEST });
+  libraryService.getAwsApis().then(
+    (response) => {
+      dispatch({
+        type: libraryConstants.GET_AWS_APIS_SUCCESS,
+        payload: response?.data ?? [],
+      });
+    },
+    (error) => {
+      dispatch({ type: libraryConstants.GET_AWS_APIS_FAILURE, payload: error });
+    },
+  );
+};

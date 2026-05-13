@@ -281,6 +281,19 @@ function getKongApis() {
     .catch(error => { console.error(error); });
 }
 
+function getAwsApis() {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'apikey': `${config.strapiApiKey}` },
+  };
+  return fetch(
+    `${config.apiUrl}/library-apis?filters[provider][$eq]=aws&filters[publish][$eq]=publicado&fields[0]=title&fields[1]=slug&populate[apim_config][fields][0]=documentId`,
+    requestOptions,
+  )
+    .then(handleResponse)
+    .catch(error => { console.error(error); });
+}
+
 const libraryService = {
   getApiBookStores,
   getApiBookStore,
@@ -298,6 +311,7 @@ const libraryService = {
   getApisUnsecure,
   getOpenApiFromStrapi,
   getKongApis,
+  getAwsApis,
 };
 
 export default libraryService;

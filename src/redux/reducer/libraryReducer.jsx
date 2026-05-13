@@ -48,6 +48,10 @@ const initialState = {
   kongApisLoading: false,
   kongApisError: null,
 
+  awsApis: [],
+  awsApisLoading: false,
+  awsApisError: null,
+
 };
 
 // eslint-disable-next-line default-param-last
@@ -282,6 +286,13 @@ export default function libraryReducer(state = initialState, action) {
       return { ...state, kongApisLoading: false, kongApis: action.payload };
     case libraryConstants.GET_KONG_APIS_FAILURE:
       return { ...state, kongApisLoading: false, kongApisError: action.payload };
+
+    case libraryConstants.GET_AWS_APIS_REQUEST:
+      return { ...state, awsApisLoading: true, awsApisError: null };
+    case libraryConstants.GET_AWS_APIS_SUCCESS:
+      return { ...state, awsApisLoading: false, awsApis: action.payload };
+    case libraryConstants.GET_AWS_APIS_FAILURE:
+      return { ...state, awsApisLoading: false, awsApisError: action.payload };
 
     default:
       return state;
