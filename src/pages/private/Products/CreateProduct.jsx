@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 
 import { getApimConfigs } from '../../../redux/actions/apimAction';
-import { getKongApis } from '../../../redux/actions/libraryAction';
+import { getKongApis, getAwsApis } from '../../../redux/actions/libraryAction';
 import { createProduct } from '../../../redux/actions/productsAction';
 import classes from './products.module.scss';
 
@@ -16,33 +16,46 @@ function CreateProduct({ onBack }) {
 
   const apimConfigs = useSelector(state => state.apim.apimConfigs);
   const allKongApis = useSelector(state => state.library.kongApis);
+  const allAwsApis = useSelector(state => state.library.awsApis);
   const { spinnerCreateProduct, errorCreateProduct } = useSelector(state => state.products);
 
-  const [name, setName]             = useState('');
+  const [name, setName]               = useState('');
   const [description, setDescription] = useState('');
   const [selectedApim, setSelectedApim] = useState('');
   const [selectedApis, setSelectedApis] = useState([]);
-  const [attempted, setAttempted]   = useState(false);
+  const [attempted, setAttempted]     = useState(false);
 
   useEffect(() => {
     dispatch(getApimConfigs());
     dispatch(getKongApis());
+    dispatch(getAwsApis());
   }, [dispatch]);
 
   const isKong = c => c?.configurations?.[0]?.__component === 'config.kong';
+  const isAws  = c => c?.configurations?.[0]?.__component === 'config.aws';
+  const isSupported = c => isKong(c) || isAws(c);
 
-  const serviceCountFor = docId => allKongApis.filter(api => api.apim_config?.documentId === docId).length;
+  const serviceCountFor = docId => {
+    const cfg = apimConfigs.find(c => c.documentId === docId);
+    if (isAws(cfg)) return allAwsApis.filter(api => api.apim_config?.documentId === docId).length;
+    return allKongApis.filter(api => api.apim_config?.documentId === docId).length;
+  };
 
   useEffect(() => {
     if (selectedApim || apimConfigs.length === 0) return;
     const firstEnabled = apimConfigs.find(
-      c => c?.configurations?.[0]?.__component === 'config.kong' &&
-           allKongApis.some(api => api.apim_config?.documentId === c.documentId)
+      c => (isKong(c) && allKongApis.some(api => api.apim_config?.documentId === c.documentId)) ||
+           (isAws(c)  && allAwsApis.some(api  => api.apim_config?.documentId === c.documentId))
     );
     if (firstEnabled) setSelectedApim(firstEnabled.documentId);
-  }, [apimConfigs, selectedApim, allKongApis]);
+  }, [apimConfigs, selectedApim, allKongApis, allAwsApis]);
 
-  const kongApis = allKongApis.filter(api => api.apim_config?.documentId === selectedApim);
+  const selectedConfig = apimConfigs.find(c => c.documentId === selectedApim);
+  const providerApis = (() => {
+    if (!selectedApim) return [];
+    if (isAws(selectedConfig)) return allAwsApis.filter(api => api.apim_config?.documentId === selectedApim);
+    return allKongApis.filter(api => api.apim_config?.documentId === selectedApim);
+  })();
 
   const handleSubmit = () => {
     setAttempted(true);
@@ -103,13 +116,13 @@ function CreateProduct({ onBack }) {
             }}
           >
             {apimConfigs.map(c => {
-              const kong = isKong(c);
+              const supported = isSupported(c);
               const count = serviceCountFor(c.documentId);
-              const disabled = !kong || count === 0;
+              const disabled = !supported || count === 0;
               const item = (
                 <MenuItem key={c.documentId} value={c.documentId} disabled={disabled}>
                   {c.name} - {t('CreateProduct.serviceCount', { count })}
-                  {!kong && (
+                  {!supported && (
                     <Chip
                       label={t('CreateProduct.comingSoon')}
                       size='small'
@@ -120,7 +133,7 @@ function CreateProduct({ onBack }) {
               );
               if (disabled) {
                 return (
-                  <Tooltip key={c.documentId} title={kong ? '' : t('CreateProduct.comingSoon')} placement='right'>
+                  <Tooltip key={c.documentId} title={supported ? '' : t('CreateProduct.comingSoon')} placement='right'>
                     <span>{item}</span>
                   </Tooltip>
                 );
@@ -140,7 +153,7 @@ function CreateProduct({ onBack }) {
             renderValue={selected => (
               <Box className={classes.chips_wrapper}>
                 {selected.map(docId => {
-                  const api = kongApis.find(a => a.documentId === docId);
+                  const api = providerApis.find(a => a.documentId === docId);
                   return (
                     <Chip
                       key={docId}
@@ -152,7 +165,7 @@ function CreateProduct({ onBack }) {
               </Box>
             )}
           >
-            {kongApis.map(api => (
+            {providerApis.map(api => (
               <MenuItem key={api.documentId} value={api.documentId}>
                 <Checkbox checked={selectedApis.includes(api.documentId)} />
                 <ListItemText primary={api.title} />

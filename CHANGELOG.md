@@ -12,9 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Implement frame for MCP detail view.
 - Implement frame for MCP UI with inspector functionality.
-- Added API Credentials management, allow users to add credentials for providers.
+- Added API Credentials management, allow users to add credentials for providers for Kong and AWS.
 - Added Token Details view to display token information and usage.
-- New Products Section to display available products and their details.
+- New Products Section to display available products from Kong and AWS, and their details.
 - New Product Details view to display detailed information about a specific product.
 
 ## Changed

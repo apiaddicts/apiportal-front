@@ -87,7 +87,7 @@ function CreateCredential({ onBack, onCreated }) {
   useEffect(() => {
     if (selectedApim || apimConfigs.length === 0) return;
     const firstEnabled = apimConfigs.find(
-      c => c?.configurations?.[0]?.__component === 'config.kong' &&
+      c => isSupportedProvider(c) &&
            myProducts.some(p => p.apim_config?.documentId === c.documentId)
     );
     if (firstEnabled) setSelectedApim(firstEnabled.documentId);
@@ -108,9 +108,18 @@ function CreateCredential({ onBack, onCreated }) {
   }, [generatedCredentials]);
 
   const isKong = c => c?.configurations?.[0]?.__component === 'config.kong';
+  const isAws = c => c?.configurations?.[0]?.__component === 'config.aws';
+  const isSupportedProvider = c => isKong(c) || isAws(c);
   const providerProducts = myProducts.filter(prod => prod.apim_config?.documentId === selectedApim);
+  const selectedConfig = apimConfigs.find(c => c.documentId === selectedApim);
+  const isAwsSelected = isAws(selectedConfig);
 
   const productCountFor = docId => myProducts.filter(p => p.apim_config?.documentId === docId).length;
+
+  // When provider changes to AWS, force apiKey type
+  useEffect(() => {
+    if (isAwsSelected) setCredentialType('apiKey');
+  }, [isAwsSelected]);
 
   const handleGenerate = () => {
     if (!selectedApim || selectedProducts.length === 0) return;
@@ -149,16 +158,16 @@ function CreateCredential({ onBack, onCreated }) {
             }}
           >
             {apimConfigs.map(c => {
-              const kong = isKong(c);
+              const supported = isSupportedProvider(c);
               const count = productCountFor(c.documentId);
-              const disabled = !kong || count === 0;
+              const disabled = !supported || count === 0;
               const item = (
                 <MenuItem key={c.documentId} value={c.documentId} disabled={disabled}>
                   {c.name} - {t('CreateCredential.productCount', { count })}
                 </MenuItem>
               );
               if (disabled) {
-                const tooltip = kong ? '' : t('CreateCredential.providerNotAvailable');
+                const tooltip = supported ? '' : t('CreateCredential.providerNotAvailable');
                 return (
                   <Tooltip key={c.documentId} title={tooltip} placement='right'>
                     <span>{item}</span>
@@ -180,8 +189,8 @@ function CreateCredential({ onBack, onCreated }) {
               dispatch(resetGeneratedCredentials());
             }}
           >
-            <MenuItem value='oauth2'>{t('CreateCredential.typeOauth2')}</MenuItem>
-            <MenuItem value='apiKey'>{t('CreateCredential.typeApiKey')}</MenuItem>
+            {!isAwsSelected && <MenuItem value='oauth2'>{t('CreateCredential.typeOauth2')}</MenuItem>}
+            <MenuItem value='apiKey'>{t('CreateCredential.typeApiKey')}{isAwsSelected ? ` (AWS)` : ''}</MenuItem>
           </Select>
         </FormControl>
 
