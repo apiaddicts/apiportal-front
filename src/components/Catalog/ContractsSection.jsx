@@ -6,19 +6,29 @@ function SectionContracts({ contract }) {
   const { t } = useTranslation();
 
   const subject = contract?.credentialSubject || {};
+
   const generalInfo = {
     contractId: subject["gx:contractId"] || "—",
-    provider: subject["gx:parties"]["gx:provider"] || "—",
+    contractName: subject["gx:contractName"] || "—",
+    version: subject["gx:version"] || "—",
     status: subject["gx:status"] || "—",
-    consumer: subject["gx:parties"]["gx:consumer"] || "—",
     offeringModel: subject["gx:offeringModel"] || "—",
+    description: subject["gx:description"] || "",
+    provider: subject["gx:parties"]?.["gx:provider"] || "—",
+    consumer: subject["gx:parties"]?.["gx:consumer"] || "—",
+    issuer: contract?.["issuer"] || "—",
+    issuanceDate: contract?.["issuanceDate"] || "—",
   };
 
-  const policyClauses = subject["gx:policyClauses"] || [];
-  const linkedAssets = subject["gx:linkedAssets"] || [];
+  const appliesTo = subject["gx:appliesTo"] || [];
+  const termsAndConditions = subject["gx:termsAndConditions"] || [];
+  const compliance = subject["gx:compliance"] || {};
+  const dataSovereignty = compliance["gx:dataSovereignty"] || {};
 
   return (
     <div className={classes.contract_section}>
+
+      {/* General Info */}
       <h3 className={classes.subsection_title}>{t("Catalogs.Contract.generalInfo")}</h3>
       <div className={classes.general_info_card}>
         <div className={classes.grid_item}>
@@ -26,68 +36,115 @@ function SectionContracts({ contract }) {
           <div className={classes.field_box}>{generalInfo.contractId}</div>
         </div>
         <div className={classes.grid_item}>
-          <label>{t("Catalogs.Contract.provider")}</label>
-          <div className={classes.field_box}>{generalInfo.provider}</div>
+          <label>{t("Catalogs.Contract.contractName")}</label>
+          <div className={classes.field_box}>{generalInfo.contractName}</div>
+        </div>
+        <div className={classes.grid_item}>
+          <label>{t("Catalogs.Contract.version")}</label>
+          <div className={classes.field_box}>{generalInfo.version}</div>
         </div>
         <div className={classes.grid_item}>
           <label>{t("Catalogs.Contract.status")}</label>
           <div className={classes.field_box}>{generalInfo.status}</div>
         </div>
         <div className={classes.grid_item}>
-          <label>{t("Catalogs.Contract.consumer")}</label>
-          <div className={classes.field_box}>{generalInfo.consumer}</div>
-        </div>
-        <div className={`${classes.grid_item}`}>
           <label>{t("Catalogs.Contract.offeringModel")}</label>
           <div className={classes.field_box}>{generalInfo.offeringModel}</div>
         </div>
+        <div className={classes.grid_item}>
+          <label>{t("Catalogs.Contract.provider")}</label>
+          <div className={classes.field_box}>{generalInfo.provider}</div>
+        </div>
+        <div className={classes.grid_item}>
+          <label>{t("Catalogs.Contract.consumer")}</label>
+          <div className={classes.field_box}>{generalInfo.consumer}</div>
+        </div>
+        <div className={classes.grid_item}>
+          <label>{t("Catalogs.Contract.issuer")}</label>
+          <div className={classes.field_box}>{generalInfo.issuer}</div>
+        </div>
+        <div className={classes.grid_item}>
+          <label>{t("Catalogs.Contract.issuanceDate")}</label>
+          <div className={classes.field_box}>{generalInfo.issuanceDate}</div>
+        </div>
+        {generalInfo.description && (
+          <div className={classes.grid_item} style={{ gridColumn: '1 / -1' }}>
+            <label>{t("Catalogs.Contract.description")}</label>
+            <div className={classes.field_box}>{generalInfo.description}</div>
+          </div>
+        )}
       </div>
 
-      <h3 className={classes.subsection_title}>{t("Catalogs.Contract.PolicyClauses")}</h3>
-      <table className={classes.table_wrapper}>
-        <thead>
-          <tr>
-            <th>{t("Catalogs.Contract.type")}</th>
-            <th>{t("Catalogs.Contract.clause")}</th>
-            <th>{t("Catalogs.Contract.metric")}</th>
-            <th>{t("Catalogs.Contract.value")}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {policyClauses.map((p, idx) => (
-            <tr key={p.value}>
-              <td>{p.type || "—"}</td>
-              <td>{p.clause || "—"}</td>
-              <td>{p.metric || "—"}</td>
-              <td>{p.value || "—"}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      {/* Linked Services (gx:appliesTo) */}
+      {appliesTo.length > 0 && (
+        <>
+          <h3 className={classes.subsection_title}>{t("Catalogs.Contract.linkedAssets")}</h3>
+          <div className={classes.table_wrapper}>
+            <table>
+              <thead>
+                <tr>
+                  <th>{t("Catalogs.Contract.assetsName")}</th>
+                  <th>{t("Catalogs.Contract.linkType")}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {appliesTo.map((item, idx) => (
+                  <tr key={item.id || idx}>
+                    <td>{item.id || "—"}</td>
+                    <td>{item.type || "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
 
+      {/* Terms & Conditions */}
+      {termsAndConditions.length > 0 && (
+        <>
+          <h3 className={classes.subsection_title}>{t("Catalogs.Contract.termsAndConditions")}</h3>
+          <div className={classes.table_wrapper}>
+            <table>
+              <thead>
+                <tr>
+                  <th>URL</th>
+                  <th>Hash</th>
+                </tr>
+              </thead>
+              <tbody>
+                {termsAndConditions.map((tc, idx) => (
+                  <tr key={idx}>
+                    <td>
+                      <a href={tc["gx:URL"]} target="_blank" rel="noreferrer" style={{ color: 'var(--primary-color)' }}>
+                        {tc["gx:URL"] || "—"}
+                      </a>
+                    </td>
+                    <td>{tc["gx:hash"] || "—"}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </>
+      )}
 
-      <h3 className={classes.subsection_title}>{t("Catalogs.Contract.linkedAssets")}</h3>
-      <table className={classes.table_wrapper}>
-        <thead>
-          <tr>
-            <th>{t("Catalogs.Contract.assetsName")}</th>
-            <th>{t("Catalogs.Contract.datasetName")}</th>
-            <th>{t("Catalogs.Contract.linkType")}</th>
-            <th>{t("Catalogs.Contract.linkProducer")}</th>
-          </tr>
-        </thead>
-        <tbody>
-          {linkedAssets.map((a, idx) => (
-            <tr key={idx}>
-              <td>{a.assetName || "—"}</td>
-              <td>{a.datasetName || "—"}</td>
-              <td>{a.type || "—"}</td>
-              <td>{a.producer || "—"}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
+      {/* Compliance / Data Sovereignty */}
+      {dataSovereignty["gx:dataLocation"] && (
+        <>
+          <h3 className={classes.subsection_title}>{t("Catalogs.Contract.compliance")}</h3>
+          <div className={classes.general_info_card}>
+            <div className={classes.grid_item}>
+              <label>{t("Catalogs.Contract.dataLocation")}</label>
+              <div className={classes.field_box}>{dataSovereignty["gx:dataLocation"]}</div>
+            </div>
+            <div className={classes.grid_item}>
+              <label>{t("Catalogs.Contract.isSovereign")}</label>
+              <div className={classes.field_box}>{dataSovereignty["gx:isSovereign"] ? "✓ Yes" : "✗ No"}</div>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
