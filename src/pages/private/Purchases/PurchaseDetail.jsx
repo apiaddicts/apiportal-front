@@ -96,7 +96,7 @@ function ConsumePanel({ purchase, assets, t, onConsume, onEditConnector, lastCon
           {assets.map((a) => (
             <Row key={a['@id']} interactive={false}>
               <RowLabel>{a['name'] || a['@id']}</RowLabel>
-              <Button size="sm" onClick={() => onConsume(a['@id'])}>
+              <Button size="sm" onClick={() => onConsume(a)}>
                 {t('Consume.button')}
               </Button>
             </Row>
@@ -202,7 +202,7 @@ function PurchaseDetail() {
               assets={assets}
               t={t}
               lastConsumption={lastConsumption}
-              onConsume={(aid) => setActiveAsset(aid)}
+              onConsume={(a) => setActiveAsset(a)}
               onEditConnector={() => setEditingConnector(true)}
             />
           )}
@@ -242,7 +242,7 @@ function PurchaseDetail() {
       {activeAsset && connectorReady && (
         <ConsumeModal
           purchaseId={id}
-          assetId={activeAsset}
+          asset={activeAsset}
           onClose={() => setActiveAsset(null)}
           onSuccess={(r) => setLastConsumption(r)}
         />

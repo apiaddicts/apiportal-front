@@ -34,11 +34,15 @@ function getOwnPurchase(purchaseId) {
   return fetch(`${config.apiUrl}/purchases/${purchaseId}`, { method: 'GET', headers: authHeaders() }).then(handleResponse);
 }
 
-function consumeAsset(purchaseId, assetId, webhookUrl) {
+function consumeAsset(purchaseId, assetId, webhookUrl, sourceHints) {
+  const payload = { assetId, webhookUrl };
+  if (sourceHints && typeof sourceHints === 'object' && Object.keys(sourceHints).length > 0) {
+    payload.sourceHints = sourceHints;
+  }
   return fetch(`${config.apiUrl}/purchases/${purchaseId}/consume`, {
     method: 'POST',
     headers: authHeaders(),
-    body: JSON.stringify({ assetId, webhookUrl }),
+    body: JSON.stringify(payload),
   }).then(handleResponse);
 }
 
