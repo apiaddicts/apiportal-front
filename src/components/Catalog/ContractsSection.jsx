@@ -7,6 +7,7 @@ function SectionContracts({ contract }) {
 
   const subject = contract?.credentialSubject || {};
 
+  const parties = subject["gx:parties"] || {};
   const generalInfo = {
     contractId: subject["gx:contractId"] || "—",
     contractName: subject["gx:contractName"] || "—",
@@ -14,8 +15,8 @@ function SectionContracts({ contract }) {
     status: subject["gx:status"] || "—",
     offeringModel: subject["gx:offeringModel"] || "—",
     description: subject["gx:description"] || "",
-    provider: subject["gx:parties"]?.["gx:provider"] || "—",
-    consumer: subject["gx:parties"]?.["gx:consumer"] || "—",
+    provider: parties["gx:provider"] || "—",
+    consumer: parties["gx:consumer"] || "—",
     issuer: contract?.["issuer"] || "—",
     issuanceDate: contract?.["issuanceDate"] || "—",
   };

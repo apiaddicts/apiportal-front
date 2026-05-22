@@ -1,0 +1,39 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 16px;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  background: #f8fafc;
+  text-decoration: none;
+  color: inherit;
+  transition: background 140ms ease, border-color 140ms ease;
+
+  &:hover {
+    background: #eef6f8;
+    border-color: var(--primary-color, #1a73e8);
+  }
+}
+
+.rowStatic {
+  &:hover {
+    background: #f8fafc;
+    border-color: #e2e8f0;
+  }
+}
+
+.label {
+  font-weight: 600;
+  color: #0f172a;
+}

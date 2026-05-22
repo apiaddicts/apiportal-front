@@ -3,6 +3,8 @@
   "dashboard": "Dashboard",
   "apiToken": "Token",
   "apisLibrary": "Biblioteca de APIs",
+  "catalogs": "Catálogos",
+  "purchases": "Mis compras",
   "codeSamples": "Ejemplos de Código",
   "billings": "Pasarela de Pagos",
   "news": "Noticias",
@@ -501,6 +503,7 @@
     "theContrat": "El Contrato",
     "viewTermAndConds": "Ver Términos y Condiciones Generales",
     "contractNegotiate": "Negociar Contrato",
+    "contractConsume": "Consumir",
     "requierCredential": "Requiere Credencial Verificable",
     "providedBy": "Proporcionado por",
     "detTitle": "Catálogo",
@@ -512,6 +515,13 @@
     "detSoftwareresource": "Recurso de Software",
     "detInfrastructureresource": "Recurso de Infraestructura",
     "detContractDefinition": "Definición de Contrato",
+    "privateList": {
+      "title": "Mis Catálogos",
+      "empty": "No hay catálogos disponibles.",
+      "open": "Abrir",
+      "viewPublic": "Ver en catálogo público",
+      "fromPrice": "Desde"
+    },
     "Asset": {
       "noData": "No hay activos disponibles.",
       "title": "Activos"
@@ -703,5 +713,105 @@
       "serviceOfferingTag": "Gaia-X",
       "serviceOfferingDesc": "Servicio publicado en el dataspace"
     }
+  },
+  "Checkout": {
+    "buy": "Comprar",
+    "processing": "Procesando…",
+    "processingPayment": "Procesando pago…",
+    "retry": "Reintentar pago",
+    "setUpConnector": "Configurar connector",
+    "viewPurchase": "Ver mi compra",
+    "success": {
+      "title": "Pago realizado",
+      "body": "Gracias por tu compra. Tu acceso ha quedado activado.",
+      "goToContract": "Ir a mi compra"
+    },
+    "cancel": {
+      "title": "Pago cancelado",
+      "body": "Tu pago se canceló. No se ha realizado ningún cargo.",
+      "releasing": "Liberando la reserva…",
+      "released": "La reserva se liberó. Ya puedes volver a comprar.",
+      "backToCatalogs": "Volver a catálogos"
+    }
+  },
+  "Consume": {
+    "title": "Consumir asset",
+    "button": "Consumir",
+    "history": "Webhooks recientes",
+    "webhookUrl": "URL de Webhook",
+    "consumerUrl": "URL del conector consumer (Management v3)",
+    "consumerApiKey": "API key del consumer",
+    "optional": "(opcional)",
+    "cancel": "Cancelar",
+    "callAsset": "Llamar al asset",
+    "calling": "Llamando…",
+    "toastSuccess": "Consumo completado correctamente",
+    "toastEndedIn": "El transfer terminó en estado {{state}}"
+  },
+  "Webhook": {
+    "idle": "Pendiente de comprobar",
+    "checking": "Comprobando…",
+    "ok": "Accesible",
+    "ko": "No accesible"
+  },
+  "Purchases": {
+    "list": {
+      "title": "Mis compras",
+      "empty": "Aún no tienes compras.",
+      "updated": "Actualizado"
+    },
+    "detail": {
+      "title": "Detalle de compra",
+      "lastConsumption": "Último consumo",
+      "connectorLabel": "Connector consumer",
+      "connectorMissing": "sin configurar",
+      "notFound": "Compra no encontrada.",
+      "pendingHint": "Esperando confirmación del pago. Esta página se actualiza automáticamente.",
+      "amount": "Importe",
+      "createdAt": "Creada",
+      "updatedAt": "Actualizada",
+      "paymentRef": "Referencia de pago",
+      "viewDetail": "Ver detalle",
+      "transactionDetails": "Detalles de la transacción"
+    },
+    "steps": {
+      "payment": {
+        "titleActive": "Confirmando tu pago…",
+        "titleFailed": "Pago fallido",
+        "failedHint": "No pudimos completar el pago. Puedes volver a comprar desde el catálogo."
+      },
+      "connector": {
+        "titleActive": "Configura tu connector consumer",
+        "body": "Dinos a qué connector EDC consumer entregar los datos una vez firmado el contrato."
+      },
+      "consume": {
+        "titleActive": "Elige un asset para consumir",
+        "body": "Selecciona un asset de esta compra para iniciar la transferencia a tu webhook.",
+        "noAssets": "Aún no hay assets disponibles para esta compra."
+      }
+    },
+    "status": {
+      "pending": "Pendiente",
+      "paid": "Pagado",
+      "failed": "Fallido",
+      "consumed": "Consumido"
+    }
+  },
+  "Common": {
+    "loading": "Cargando…"
+  },
+  "Connector": {
+    "title": "Configura tu connector consumer",
+    "subtitle": "Una vez guardado, cada consumo de esta compra usará este connector.",
+    "url": "URL del connector consumer",
+    "urlHint": "Usa la raíz del management API (añadimos /management/v3 si lo olvidas).",
+    "apiKey": "API key",
+    "apiKeyOptional": "opcional",
+    "save": "Guardar",
+    "saving": "Guardando...",
+    "cancel": "Cancelar",
+    "setupCta": "Configurar connector consumer",
+    "editCta": "Editar connector",
+    "toastSaved": "Connector guardado"
   }
 }
