@@ -114,7 +114,7 @@ function Token() {
                       </TableCell>
                       <TableCell>
                         <p className={classes.cell_description}>
-                          {cred.type === 'apiKey' ? (cred.apiKey || '—') : (cred.clientId || '—')}
+                        {cred.type === 'apiKey' ? maskSecret(cred.apiKey) : maskSecret(cred.clientId)}
                         </p>
                       </TableCell>
                       <TableCell>

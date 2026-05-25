@@ -97,13 +97,13 @@ function TokenDetail() {
             {cred.type === 'apiKey' && cred.apiKey && (
               <Box className={classes.info_row}>
                 <Typography variant='body2' className={classes.label}>{t('TokenDetail.apiKey')}</Typography>
-                <Typography variant='body1' className={classes.value}>{cred.apiKey}</Typography>
+                <SecretField value={cred.apiKey} />
               </Box>
             )}
             {cred.type === 'oauth2' && cred.clientId && (
               <Box className={classes.info_row}>
                 <Typography variant='body2' className={classes.label}>{t('TokenDetail.clientId')}</Typography>
-                <Typography variant='body1' className={classes.value}>{cred.clientId}</Typography>
+                <SecretField value={cred.clientId} />
               </Box>
             )}
           </Box>
