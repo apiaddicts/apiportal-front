@@ -54,7 +54,14 @@ function ApiDetail(props) {
           <div>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className={classes.box__title}>
               <Title text={library.slug ? library.slug : 'Demo API'} />
-              <Link to={`/developer/apis/${library.slug}/swagger-ui`} className={classes.wrapper__btn}>
+              <Link
+                to={`/developer/apis/${library.slug}/${
+                  library.openDocType === 'asyncapi' ? 'asyncapi-ui'
+                  : library.openDocType === 'graphql' ? 'graphql-ui'
+                  : 'swagger-ui'
+                }`}
+                className={classes.wrapper__btn}
+              >
                 <span>{t('definition')}</span>
                 <Icon id='MdChevronRight' />
               </Link>

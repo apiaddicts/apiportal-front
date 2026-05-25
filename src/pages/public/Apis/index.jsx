@@ -158,7 +158,7 @@ function Apis({ setIsOpen }) {
     const map = products.reduce((acc, product) => {
       if (!acc[product.slug]) {
         acc[product.slug] = {
-          title: product.title,
+          title: product.name,
           slug: product.slug,
           count: 1,
         };

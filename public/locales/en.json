@@ -612,6 +612,11 @@
     "noInfo": "No information available",
     "back": "GO BACK"
   },
+  "GraphqlUI": {
+    "noInfo": "No GraphQL documentation available",
+    "schemaTitle": "GraphQL Schema",
+    "back": "GO BACK"
+  },
   "Inspector": {
     "selectItem": "Select an item from the list to inspect it.",
     "description": "Description",
