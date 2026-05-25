@@ -2,10 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { Container, Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Button, Box, Typography, CircularProgress } from '@mui/material';
+import {
+  Container, Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow,
+  Button, Box, Typography, CircularProgress, IconButton, Dialog, DialogTitle,
+  DialogContent, DialogContentText, DialogActions, Menu, MenuItem, ListItemIcon, ListItemText,
+} from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
 import LayersIcon from '@mui/icons-material/Layers';
-import { getProductsByUser } from '../../../redux/actions/productsAction';
+import DeleteIcon from '@mui/icons-material/Delete';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { getProductsByUser, deleteProduct } from '../../../redux/actions/productsAction';
 import Title from '../../../components/Title';
 import CreateProduct from './CreateProduct';
 import classes from './products.module.scss';
@@ -15,8 +21,32 @@ function Products() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showCreate, setShowCreate] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(null);
+  const [menuAnchor, setMenuAnchor] = useState(null);
+  const [menuProduct, setMenuProduct] = useState(null);
 
-  const { myProducts, spinnerMyProducts, errorMyProducts } = useSelector((state) => state.products);
+  const { myProducts, spinnerMyProducts, errorMyProducts, spinnerDeleteProduct } = useSelector((state) => state.products);
+
+  const handleMenuOpen = (e, product) => {
+    e.stopPropagation();
+    setMenuAnchor(e.currentTarget);
+    setMenuProduct(product);
+  };
+
+  const handleMenuClose = () => {
+    setMenuAnchor(null);
+    setMenuProduct(null);
+  };
+
+  const handleDeleteClick = () => {
+    setConfirmDelete(menuProduct);
+    handleMenuClose();
+  };
+
+  const handleDeleteConfirm = () => {
+    if (!confirmDelete) return;
+    dispatch(deleteProduct(confirmDelete.documentId, () => setConfirmDelete(null)));
+  };
 
   useEffect(() => {
     dispatch(getProductsByUser());
@@ -88,8 +118,10 @@ function Products() {
               <TableHead>
                 <TableRow>
                   <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Products.name')}</Typography></TableCell>
+                  <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Products.provider')}</Typography></TableCell>
                   <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Products.description')}</Typography></TableCell>
                   <TableCell><Typography variant="subtitle1" sx={{ fontWeight: 'bold' }}>{t('Products.apis')}</Typography></TableCell>
+                  <TableCell />
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -107,6 +139,11 @@ function Products() {
                       </TableCell>
                       <TableCell>
                         <p className={classes.cell_description}>
+                          {product.apim_config?.name ?? '—'}
+                        </p>
+                      </TableCell>
+                      <TableCell>
+                        <p className={classes.cell_description}>
                           {product.description || '—'}
                         </p>
                       </TableCell>
@@ -114,6 +151,11 @@ function Products() {
                         <p className={classes.cell_description}>
                           {apis.length} API{apis.length === 1 ? '' : 's'}
                         </p>
+                      </TableCell>
+                      <TableCell align='right'>
+                        <IconButton size='small' onClick={(e) => handleMenuOpen(e, product)}>
+                          <MoreVertIcon fontSize='small' />
+                        </IconButton>
                       </TableCell>
                     </TableRow>
                   );
@@ -123,6 +165,38 @@ function Products() {
           </TableContainer>
         </Card>
       )}
+
+      <Menu
+        anchorEl={menuAnchor}
+        open={Boolean(menuAnchor)}
+        onClose={handleMenuClose}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <MenuItem onClick={handleDeleteClick}>
+          <ListItemIcon><DeleteIcon fontSize='small' /></ListItemIcon>
+          <ListItemText>{t('Products.delete')}</ListItemText>
+        </MenuItem>
+      </Menu>
+
+      <Dialog open={!!confirmDelete} onClose={() => setConfirmDelete(null)}>
+        <DialogTitle>{t('Products.deleteTitle')}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {t('Products.deleteConfirm', { name: confirmDelete?.name })}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setConfirmDelete(null)}>{t('Products.cancel')}</Button>
+          <Button
+            variant='contained'
+            disabled={spinnerDeleteProduct}
+            startIcon={spinnerDeleteProduct ? <CircularProgress size={14} /> : null}
+            onClick={handleDeleteConfirm}
+          >
+            {t('Products.delete')}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 }
