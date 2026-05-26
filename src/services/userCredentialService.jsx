@@ -11,7 +11,7 @@ function getUserCredentials(userId, token) {
     },
   };
   return fetch(
-    `${config.apiUrl}/user-credentials?filters[user][id][$eq]=${userId}&sort=createdAt:desc&populate=products&populate[apim_config][fields][0]=documentId&populate[apim_config][fields][1]=name`,
+    `${config.apiUrl}/user-credentials?filters[user][id][$eq]=${userId}&sort=createdAt:desc&populate[products][fields][0]=documentId&populate[products][fields][1]=name&populate[apim_config][fields][0]=documentId&populate[apim_config][fields][1]=name`,
     requestOptions,
   )
     .then(handleResponse)
@@ -65,11 +65,42 @@ function addProductsToCredential(documentId, products, apimConfigDocumentId, tok
     .catch(error => { console.error(error); });
 }
 
+function removeProductsFromCredential(documentId, products, apimConfigDocumentId, token) {
+  const requestOptions = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': `${config.strapiApiKey}`,
+      'Authorization': `Bearer ${token}`,
+    },
+    body: JSON.stringify({ products, apimConfigDocumentId }),
+  };
+  return fetch(`${config.apiUrl}/user-credentials/${documentId}/remove-products`, requestOptions)
+    .then(handleResponse)
+    .catch(error => { console.error(error); });
+}
+
+function deleteUserCredential(documentId, token) {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'apikey': `${config.strapiApiKey}`,
+      'Authorization': `Bearer ${token}`,
+    },
+  };
+  return fetch(`${config.apiUrl}/user-credentials/${documentId}`, requestOptions)
+    .then(handleResponse)
+    .catch(error => { console.error(error); });
+}
+
 const userCredentialService = {
   getUserCredentials,
   getUserCredential,
   createUserCredential,
   addProductsToCredential,
+  removeProductsFromCredential,
+  deleteUserCredential,
 };
 
 export default userCredentialService;

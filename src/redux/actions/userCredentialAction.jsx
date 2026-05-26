@@ -59,10 +59,11 @@ export const addProductsToCredential = (documentId, products, apimConfigDocument
   dispatch({ type: userCredentialConstants.ADD_PRODUCTS_REQUEST });
   userCredentialService.addProductsToCredential(documentId, products, apimConfigDocumentId, token).then(
     (response) => {
-      dispatch({
-        type: userCredentialConstants.ADD_PRODUCTS_SUCCESS,
-        payload: response?.data ?? response,
-      });
+      if (response?.error) {
+        dispatch({ type: userCredentialConstants.ADD_PRODUCTS_FAILURE, payload: response.error.message });
+      } else {
+        dispatch({ type: userCredentialConstants.ADD_PRODUCTS_SUCCESS, payload: response?.data ?? response });
+      }
     },
     (error) => {
       dispatch({ type: userCredentialConstants.ADD_PRODUCTS_FAILURE, payload: error?.message || String(error) });
@@ -72,4 +73,37 @@ export const addProductsToCredential = (documentId, products, apimConfigDocument
 
 export const resetAddProducts = () => (dispatch) => {
   dispatch({ type: userCredentialConstants.RESET_ADD_PRODUCTS });
+};
+
+export const removeProductsFromCredential = (documentId, products, apimConfigDocumentId, token) => (dispatch) => {
+  dispatch({ type: userCredentialConstants.REMOVE_PRODUCTS_REQUEST });
+  userCredentialService.removeProductsFromCredential(documentId, products, apimConfigDocumentId, token).then(
+    (response) => {
+      if (response?.error) {
+        dispatch({ type: userCredentialConstants.REMOVE_PRODUCTS_FAILURE, payload: response.error.message });
+      } else {
+        dispatch({ type: userCredentialConstants.REMOVE_PRODUCTS_SUCCESS, payload: response?.data ?? response });
+      }
+    },
+    (error) => {
+      dispatch({ type: userCredentialConstants.REMOVE_PRODUCTS_FAILURE, payload: error?.message || String(error) });
+    },
+  );
+};
+
+export const resetRemoveProducts = () => (dispatch) => {
+  dispatch({ type: userCredentialConstants.RESET_REMOVE_PRODUCTS });
+};
+
+export const deleteCredential = (documentId, token, onSuccess) => (dispatch) => {
+  dispatch({ type: userCredentialConstants.DELETE_USER_CREDENTIAL_REQUEST });
+  userCredentialService.deleteUserCredential(documentId, token).then(
+    () => {
+      dispatch({ type: userCredentialConstants.DELETE_USER_CREDENTIAL_SUCCESS, documentId });
+      if (onSuccess) onSuccess();
+    },
+    (error) => {
+      dispatch({ type: userCredentialConstants.DELETE_USER_CREDENTIAL_FAILURE, payload: error?.message || String(error) });
+    },
+  );
 };

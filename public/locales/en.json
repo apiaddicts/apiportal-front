@@ -359,7 +359,12 @@
     "noCredentialsDescription": "Create your first credential to start testing APIs.",
     "createCredential": "Create credential",
     "type": "Type",
-    "errorLoading": "Error loading credentials."
+    "products": "Products",
+    "errorLoading": "Error loading credentials.",
+    "deleteTitle": "Delete Credential",
+    "deleteConfirm": "Are you sure you want to delete this credential? This action cannot be undone.",
+    "cancel": "Cancel",
+    "delete": "Delete"
   },
   "Products": {
     "title": "Products",
@@ -369,9 +374,14 @@
     "createProduct": "Create product",
     "errorLoading": "Error loading products.",
     "name": "Name",
+    "provider": "Provider",
     "description": "Description",
     "status": "Status",
-    "apis": "APIs"
+    "apis": "APIs",
+    "deleteTitle": "Delete Product",
+    "deleteConfirm": "Are you sure you want to delete the product \"{{name}}\"? This action cannot be undone.",
+    "cancel": "Cancel",
+    "delete": "Delete"
   },
   "CreateProduct": {
     "title": "New Product",
@@ -387,10 +397,22 @@
     "serviceCount_other": "{{count}} services"
   },
   "ProductDetail": {
+    "provider": "Provider",
     "description": "Description",
     "noDescription": "No description",
     "apis": "APIs",
-    "noApis": "No APIs associated"
+    "noApis": "No APIs associated",
+    "addApis": "Add APIs",
+    "add": "Add",
+    "noAvailableApis": "All available APIs are already linked.",
+    "selectApi": "Select an API",
+    "save": "Save",
+    "cancel": "Cancel",
+    "removeError": "Error removing the API. Please try again.",
+    "addError": "Error adding the API. Please try again.",
+    "removeApiTitle": "Remove API",
+    "removeApiConfirm": "Are you sure you want to remove \"{{name}}\" from this product? This will revoke access from any linked credentials.",
+    "remove": "Remove"
   },
   "Credentials": {
     "copiedToClipboard": "Copied to clipboard",
@@ -409,6 +431,7 @@
     "type": "Type",
     "apiKey": "API Key",
     "clientId": "Client ID",
+    "clientSecret": "Client Secret",
     "products": "Authorized Products",
     "noProducts": "No products linked to this credential.",
     "addProducts": "Add Products",
@@ -418,7 +441,14 @@
     "cancel": "Cancel",
     "save": "Save",
     "addSuccess": "Products added successfully.",
-    "errorLoading": "Error loading credential."
+    "removeSuccess": "Product removed successfully.",
+    "errorLoading": "Error loading credential.",
+    "removeProductTitle": "Remove Product",
+    "removeProductConfirm": "Are you sure you want to remove \"{{name}}\" from this credential? APIs exclusive to this product will be revoked.",
+    "remove": "Remove",
+    "delete": "Delete",
+    "deleteTitle": "Delete Credential",
+    "deleteConfirm": "Are you sure you want to delete this credential? This action cannot be undone."
   },
   "CreateCredential": {
     "createCredential": "Create Credential",
