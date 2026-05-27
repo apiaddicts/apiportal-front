@@ -15,6 +15,13 @@ const initialState = {
   addProductsLoading: false,
   addProductsError: null,
   addProductsSuccess: false,
+
+  removeProductsLoading: false,
+  removeProductsError: null,
+  removeProductsSuccess: false,
+
+  deleteLoading: false,
+  deleteError: null,
 };
 
 export default function userCredentialReducer(state = initialState, action) {
@@ -57,6 +64,31 @@ export default function userCredentialReducer(state = initialState, action) {
       return { ...state, addProductsLoading: false, addProductsError: action.payload };
     case userCredentialConstants.RESET_ADD_PRODUCTS:
       return { ...state, addProductsLoading: false, addProductsError: null, addProductsSuccess: false };
+
+    case userCredentialConstants.REMOVE_PRODUCTS_REQUEST:
+      return { ...state, removeProductsLoading: true, removeProductsError: null, removeProductsSuccess: false };
+    case userCredentialConstants.REMOVE_PRODUCTS_SUCCESS:
+      return {
+        ...state,
+        removeProductsLoading: false,
+        removeProductsSuccess: true,
+        currentCredential: action.payload ?? state.currentCredential,
+      };
+    case userCredentialConstants.REMOVE_PRODUCTS_FAILURE:
+      return { ...state, removeProductsLoading: false, removeProductsError: action.payload };
+    case userCredentialConstants.RESET_REMOVE_PRODUCTS:
+      return { ...state, removeProductsLoading: false, removeProductsError: null, removeProductsSuccess: false };
+
+    case userCredentialConstants.DELETE_USER_CREDENTIAL_REQUEST:
+      return { ...state, deleteLoading: true, deleteError: null };
+    case userCredentialConstants.DELETE_USER_CREDENTIAL_SUCCESS:
+      return {
+        ...state,
+        deleteLoading: false,
+        credentials: state.credentials.filter(c => c.documentId !== action.documentId),
+      };
+    case userCredentialConstants.DELETE_USER_CREDENTIAL_FAILURE:
+      return { ...state, deleteLoading: false, deleteError: action.payload };
 
     default:
       return state;

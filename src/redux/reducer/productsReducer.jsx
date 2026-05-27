@@ -30,6 +30,21 @@ const initialState = {
 
   spinnerCreateProduct: false,
   errorCreateProduct: {},
+
+  spinnerDeleteProduct: false,
+  errorDeleteProduct: {},
+
+  spinnerUpdateProduct: false,
+  errorUpdateProduct: {},
+  updateProductSuccess: false,
+
+  removeApiLoading: false,
+  removeApiError: null,
+  removeApiSuccess: false,
+
+  addApiLoading: false,
+  addApiError: null,
+  addApiSuccess: false,
 };
 
 // eslint-disable-next-line default-param-last
@@ -206,6 +221,58 @@ export default function productReducer(state = initialState, action) {
         spinnerCreateProduct: false,
         errorCreateProduct: action.error,
       };
+
+    case productsConstants.DELETE_PRODUCT_REQUEST:
+      return { ...state, spinnerDeleteProduct: true, errorDeleteProduct: {} };
+
+    case productsConstants.DELETE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        spinnerDeleteProduct: false,
+        myProducts: state.myProducts.filter(p => p.documentId !== action.documentId),
+        errorDeleteProduct: {},
+      };
+
+    case productsConstants.DELETE_PRODUCT_FAILURE:
+      return { ...state, spinnerDeleteProduct: false, errorDeleteProduct: action.error };
+
+    case productsConstants.UPDATE_PRODUCT_REQUEST:
+      return { ...state, spinnerUpdateProduct: true, errorUpdateProduct: {}, updateProductSuccess: false };
+
+    case productsConstants.UPDATE_PRODUCT_SUCCESS:
+      return {
+        ...state,
+        spinnerUpdateProduct: false,
+        updateProductSuccess: true,
+        errorUpdateProduct: {},
+        myProducts: state.myProducts.map(p =>
+          p.documentId === action.documentId ? { ...p, ...(action.response?.data ?? {}) } : p
+        ),
+      };
+
+    case productsConstants.UPDATE_PRODUCT_FAILURE:
+      return { ...state, spinnerUpdateProduct: false, updateProductSuccess: false, errorUpdateProduct: action.error };
+
+    case productsConstants.RESET_UPDATE_PRODUCT:
+      return { ...state, spinnerUpdateProduct: false, updateProductSuccess: false, errorUpdateProduct: {} };
+
+    case productsConstants.REMOVE_API_FROM_PRODUCT_REQUEST:
+      return { ...state, removeApiLoading: true, removeApiError: null, removeApiSuccess: false };
+    case productsConstants.REMOVE_API_FROM_PRODUCT_SUCCESS:
+      return { ...state, removeApiLoading: false, removeApiSuccess: true };
+    case productsConstants.REMOVE_API_FROM_PRODUCT_FAILURE:
+      return { ...state, removeApiLoading: false, removeApiError: action.error };
+    case productsConstants.RESET_REMOVE_API_FROM_PRODUCT:
+      return { ...state, removeApiLoading: false, removeApiError: null, removeApiSuccess: false };
+
+    case productsConstants.ADD_API_TO_PRODUCT_REQUEST:
+      return { ...state, addApiLoading: true, addApiError: null, addApiSuccess: false };
+    case productsConstants.ADD_API_TO_PRODUCT_SUCCESS:
+      return { ...state, addApiLoading: false, addApiSuccess: true };
+    case productsConstants.ADD_API_TO_PRODUCT_FAILURE:
+      return { ...state, addApiLoading: false, addApiError: action.error };
+    case productsConstants.RESET_ADD_API_TO_PRODUCT:
+      return { ...state, addApiLoading: false, addApiError: null, addApiSuccess: false };
 
     default:
       return state;
