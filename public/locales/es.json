@@ -612,6 +612,11 @@
     "noInfo": "Sin información disponible",
     "back": "VOLVER"
   },
+  "GraphqlUI": {
+    "noInfo": "No hay documentación GraphQL disponible",
+    "schemaTitle": "Esquema GraphQL",
+    "back": "VOLVER"
+  },
   "Inspector": {
     "selectItem": "Selecciona un elemento de la lista para inspeccionarlo.",
     "description": "Descripción",

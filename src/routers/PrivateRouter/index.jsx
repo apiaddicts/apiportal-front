@@ -35,6 +35,7 @@ import CodeSampleDetailss from '../../pages/private/codeSamplesDetail';
 import { logout } from '../../redux/actions/authAction';
 import classes from './private-router.module.scss';
 import AsyncApiUI from '../../pages/common/AsyncApiUI';
+import GraphqlUI from '../../pages/common/GraphqlUI';
 
 function PrivateRouter({ isAppReady }) {
   const dispatch = useDispatch();
@@ -86,6 +87,7 @@ function PrivateRouter({ isAppReady }) {
             <Route path='apis/:slug' element={<ApiDetail />} />
             <Route path='apis/:slug/swagger-ui' element={<SwaggerUI />} />
             <Route path='apis/:slug/asyncapi-ui' element={<AsyncApiUI />} />
+            <Route path='apis/:slug/graphql-ui' element={<GraphqlUI />} />
             <Route path='subscriptions' element={<Subscriptions />} />
             <Route path='subscriptions/:id' element={<SubscriptionDetail />} />
             <Route path='code-samples' element={<CodeSamples />} />

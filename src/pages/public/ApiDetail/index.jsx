@@ -108,6 +108,9 @@ function ApiDetail({ setIsOpen }) {
     if (library?.openDocType === 'asyncapi') {
       return `/apis/${slug}/asyncapi-ui`;
     }
+    if (library?.openDocType === 'graphql') {
+      return `/apis/${slug}/graphql-ui`;
+    }
     return `/apis/${slug}/swagger-ui`;
   };
 

@@ -19,6 +19,7 @@ import Blog from '../pages/public/Blog';
 import BlogPost from '../pages/public/BlogPost';
 import SwaggerUI from '../pages/common/SwaggerUI';
 import AsyncApiUI from '../pages/common/AsyncApiUI';
+import GraphqlUI from '../pages/common/GraphqlUI';
 
 import Logout from '../pages/private/Logout/Logout';
 import Wiki from '../pages/public/Wiki';
@@ -77,6 +78,7 @@ function PublicRoute() {
           <Route path='/faqs' element={<Faqs />} />
           <Route path='/apis/:slug/swagger-ui' element={<SwaggerUI setIsOpen={setOpenForm} />} />
           <Route path='/apis/:slug/asyncapi-ui' element={<AsyncApiUI setIsOpen={setOpenForm} />} />
+          <Route path='/apis/:slug/graphql-ui' element={<GraphqlUI />} />
           <Route path='/blog' element={<Blog setIsOpen={setIsOpen} />} />
           <Route path='/blog/:id' element={<BlogPost setIsOpen={setIsOpen} />} />
           <Route path='/documentacion' element={<Wiki />} />
