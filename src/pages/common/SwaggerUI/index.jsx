@@ -28,7 +28,7 @@ function SwaggerUI() {
     setOpenApi(null);
 
     libraryService
-      .getOpenApiFromStrapi(params.id)
+      .getOpenApiFromStrapi(params.slug)
       .then(async (library) => {
         let openDoc = library?.openDoc;
         let openDocUrl = library?.openDocUrl;
@@ -65,7 +65,7 @@ function SwaggerUI() {
         }
       })
       .finally(() => setLoading(false));
-  }, [params.id]);
+  }, [params.slug]);
 
   const EmptyState = () => (
     <div style={{ padding: '40px', textAlign: 'center', color: '#666' }}>
@@ -76,7 +76,7 @@ function SwaggerUI() {
   return (
     <div
       style={{
-        paddingTop: '80px',
+        paddingTop: '60px',
         paddingBottom: '80px',
       }}
     >

@@ -64,6 +64,23 @@ export const getLibrary = (id) => (dispatch) => {
   );
 };
 
+export const getLibraryBySlug = (slug) => (dispatch) => {
+  libraryService.getApiBookStoreBySlug(slug).then(
+    (entry) => {
+      dispatch({
+        type: libraryConstants.GET_LIBRARY_SUCCESS,
+        payload: entry,
+      });
+    },
+    (error) => {
+      dispatch({
+        type: libraryConstants.GET_LIBRARY_FAILURE,
+        payload: error,
+      });
+    },
+  );
+};
+
 export const listApis = (filter = '') => (dispatch) => {
   libraryService.getApis(filter).then(
     (res) => {
@@ -463,4 +480,34 @@ export const getApisUnsecure = () => (dispatch) => {
         payload: error,
       });
     });
+};
+
+export const getKongApis = () => (dispatch) => {
+  dispatch({ type: libraryConstants.GET_KONG_APIS_REQUEST });
+  libraryService.getKongApis().then(
+    (response) => {
+      dispatch({
+        type: libraryConstants.GET_KONG_APIS_SUCCESS,
+        payload: response?.data ?? [],
+      });
+    },
+    (error) => {
+      dispatch({ type: libraryConstants.GET_KONG_APIS_FAILURE, payload: error });
+    },
+  );
+};
+
+export const getAwsApis = () => (dispatch) => {
+  dispatch({ type: libraryConstants.GET_AWS_APIS_REQUEST });
+  libraryService.getAwsApis().then(
+    (response) => {
+      dispatch({
+        type: libraryConstants.GET_AWS_APIS_SUCCESS,
+        payload: response?.data ?? [],
+      });
+    },
+    (error) => {
+      dispatch({ type: libraryConstants.GET_AWS_APIS_FAILURE, payload: error });
+    },
+  );
 };

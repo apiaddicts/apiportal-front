@@ -181,3 +181,105 @@ export const getSubscriptions = () => (dispatch) => {
       });
     });
 };
+
+export const getProductsByUser = () => (dispatch) => {
+  dispatch({ type: productsConstants.GET_MY_PRODUCTS_REQUEST });
+
+  productsService.getProductsByUser().then(
+    (response) => {
+      dispatch({
+        type: productsConstants.GET_MY_PRODUCTS_SUCCESS,
+        response: response?.data ?? [],
+      });
+    },
+    (error) => {
+      dispatch({ type: productsConstants.GET_MY_PRODUCTS_FAILURE, error });
+    },
+  );
+};
+
+export const createProduct = (data, onSuccess) => (dispatch) => {
+  dispatch({ type: productsConstants.CREATE_PRODUCT_REQUEST });
+
+  productsService.createProduct(data).then(
+    (response) => {
+      dispatch({ type: productsConstants.CREATE_PRODUCT_SUCCESS, response });
+      if (onSuccess) onSuccess(response?.data);
+    },
+    (error) => {
+      dispatch({ type: productsConstants.CREATE_PRODUCT_FAILURE, error });
+    },
+  );
+};
+
+export const deleteProduct = (documentId, onSuccess) => (dispatch) => {
+  dispatch({ type: productsConstants.DELETE_PRODUCT_REQUEST });
+
+  productsService.deleteProduct(documentId).then(
+    () => {
+      dispatch({ type: productsConstants.DELETE_PRODUCT_SUCCESS, documentId });
+      if (onSuccess) onSuccess();
+    },
+    (error) => {
+      dispatch({ type: productsConstants.DELETE_PRODUCT_FAILURE, error });
+    },
+  );
+};
+
+export const updateProduct = (documentId, data, onSuccess) => (dispatch) => {
+  dispatch({ type: productsConstants.UPDATE_PRODUCT_REQUEST });
+
+  productsService.updateProduct(documentId, data).then(
+    (response) => {
+      dispatch({ type: productsConstants.UPDATE_PRODUCT_SUCCESS, response, documentId });
+      if (onSuccess) onSuccess(response?.data);
+    },
+    (error) => {
+      dispatch({ type: productsConstants.UPDATE_PRODUCT_FAILURE, error });
+    },
+  );
+};
+
+export const resetUpdateProduct = () => (dispatch) => {
+  dispatch({ type: productsConstants.RESET_UPDATE_PRODUCT });
+};
+
+export const removeApiFromProduct = (documentId, apiDocumentId) => (dispatch) => {
+  dispatch({ type: productsConstants.REMOVE_API_FROM_PRODUCT_REQUEST });
+  productsService.removeApiFromProduct(documentId, apiDocumentId).then(
+    (response) => {
+      if (response?.error) {
+        dispatch({ type: productsConstants.REMOVE_API_FROM_PRODUCT_FAILURE, error: response.error.message });
+      } else {
+        dispatch({ type: productsConstants.REMOVE_API_FROM_PRODUCT_SUCCESS, apiDocumentId, response });
+      }
+    },
+    (error) => {
+      dispatch({ type: productsConstants.REMOVE_API_FROM_PRODUCT_FAILURE, error });
+    },
+  );
+};
+
+export const resetRemoveApiFromProduct = () => (dispatch) => {
+  dispatch({ type: productsConstants.RESET_REMOVE_API_FROM_PRODUCT });
+};
+
+export const addApiToProduct = (documentId, apiDocumentId) => (dispatch) => {
+  dispatch({ type: productsConstants.ADD_API_TO_PRODUCT_REQUEST });
+  productsService.addApiToProduct(documentId, apiDocumentId).then(
+    (response) => {
+      if (response?.error) {
+        dispatch({ type: productsConstants.ADD_API_TO_PRODUCT_FAILURE, error: response.error.message });
+      } else {
+        dispatch({ type: productsConstants.ADD_API_TO_PRODUCT_SUCCESS, apiDocumentId, response });
+      }
+    },
+    (error) => {
+      dispatch({ type: productsConstants.ADD_API_TO_PRODUCT_FAILURE, error });
+    },
+  );
+};
+
+export const resetAddApiToProduct = () => (dispatch) => {
+  dispatch({ type: productsConstants.RESET_ADD_API_TO_PRODUCT });
+};

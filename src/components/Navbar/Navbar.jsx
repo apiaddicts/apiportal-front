@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MdClose, MdMenu } from 'react-icons/md';
 import { Link, NavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -23,6 +23,17 @@ function Navbar({ setIsOpen, setOpenForm }) {
 
   const [menuOpen, setMenuOpen] = useState(false);
   const [size, setSize] = useState({ width: 0, height: 0 });
+  const navbarRef = useRef(null);
+
+  useEffect(() => {
+    if (!navbarRef.current) return;
+    const observer = new ResizeObserver(([entry]) => {
+      const h = entry.borderBoxSize?.[0]?.blockSize ?? entry.target.offsetHeight;
+      document.documentElement.style.setProperty('--navbar-height', `${Math.round(h)}px`);
+    });
+    observer.observe(navbarRef.current);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     if (!settingPage || Object.keys(settingPage).length === 0) {
@@ -74,7 +85,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
   ];
 
   return (
-    <div style={{ position: 'fixed', top: 0, width: '100%', zIndex: 1000 }}>
+    <div ref={navbarRef} style={{ position: 'fixed', top: 0, width: '100%', zIndex: 1000 }}>
       <header className={classes.header} >
         <div className={`container ${classes.header__content}`}>
           <NavLink to='/' className={classes.header__content__logo}>

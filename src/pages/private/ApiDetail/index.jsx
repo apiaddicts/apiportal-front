@@ -11,7 +11,7 @@ import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonCom
 import CustomAccordion from '../../../components/common/CustomAccodion/CustomAccordion';
 import Icon from '../../../components/MdIcon/Icon';
 import classes from './api-detail.module.scss';
-import { getLibrary } from '../../../redux/actions/libraryAction';
+import { getLibraryBySlug } from '../../../redux/actions/libraryAction';
 
 function ApiDetail(props) {
   const { t } = useTranslation();
@@ -32,10 +32,10 @@ function ApiDetail(props) {
   }];
 
   useEffect(() => {
-    if (params?.id) {
-      dispatch(getLibrary(params?.id));
+    if (params?.slug) {
+      dispatch(getLibraryBySlug(params?.slug));
     }
-  }, [params?.id]);
+  }, [params?.slug]);
 
   return (
     <>
@@ -49,12 +49,19 @@ function ApiDetail(props) {
           </div>
         </Link>
       </div>
-      <Container  >
+      <Container sx={{ pt: 0, pb: '40px', pl: '40px', pr: '40px' }}>
         {library && Object.keys(library).length > 0 ? (
           <div>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }} className={classes.box__title}>
               <Title text={library.slug ? library.slug : 'Demo API'} />
-              <Link to={`/developer/apis/${library.slug}/swagger-ui`} className={classes.wrapper__btn}>
+              <Link
+                to={`/developer/apis/${library.slug}/${
+                  library.openDocType === 'asyncapi' ? 'asyncapi-ui'
+                  : library.openDocType === 'graphql' ? 'graphql-ui'
+                  : 'swagger-ui'
+                }`}
+                className={classes.wrapper__btn}
+              >
                 <span>{t('definition')}</span>
                 <Icon id='MdChevronRight' />
               </Link>

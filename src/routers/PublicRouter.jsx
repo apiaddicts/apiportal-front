@@ -19,6 +19,7 @@ import Blog from '../pages/public/Blog';
 import BlogPost from '../pages/public/BlogPost';
 import SwaggerUI from '../pages/common/SwaggerUI';
 import AsyncApiUI from '../pages/common/AsyncApiUI';
+import GraphqlUI from '../pages/common/GraphqlUI';
 
 import Logout from '../pages/private/Logout/Logout';
 import Wiki from '../pages/public/Wiki';
@@ -65,18 +66,19 @@ function PublicRoute() {
       )}
       {!hideLayout && <Navbar setIsOpen={setIsOpen} setOpenForm={setOpenForm} />}
 
-      <main style={{ marginTop: hideLayout ? '0' : window.innerWidth < 768 ? '120px' : '96px', minHeight: hideLayout ? '100vh' : window.innerWidth < 768 ? 'calc(100vh - 120px)' : 'calc(100vh - 96px)' }}>
+      <main className={hideLayout ? '' : 'public-main'} style={hideLayout ? { minHeight: '100vh' } : {}}>
         <Routes>
           <Route path='/' element={<Home setIsOpen={setIsOpen} setOpenForm={setOpenForm} />} />
           <Route path='/apis' element={<Apis setIsOpen={setIsOpen} />} />
           <Route path='/mcps' element={<Mcps setIsOpen={setIsOpen} />} />
-          <Route path='/apis/:id' element={<ApiDetail setIsOpen={setOpenForm} />} />
-          <Route path='/mcps/:id' element={<McpDetail setIsOpen={setOpenForm} />} />
-          <Route path='/mcps/:id/mcp-ui' element={<McpUI />} />
+          <Route path='/apis/:slug' element={<ApiDetail setIsOpen={setOpenForm} />} />
+          <Route path='/mcps/:slug' element={<McpDetail setIsOpen={setOpenForm} />} />
+          <Route path='/mcps/:slug/mcp-ui' element={<McpUI />} />
           <Route path='/app-partners' element={<AppPartners />} />
           <Route path='/faqs' element={<Faqs />} />
-          <Route path='/apis/:id/swagger-ui' element={<SwaggerUI setIsOpen={setOpenForm} />} />
-          <Route path='/apis/:id/asyncapi-ui' element={<AsyncApiUI setIsOpen={setOpenForm} />} />
+          <Route path='/apis/:slug/swagger-ui' element={<SwaggerUI setIsOpen={setOpenForm} />} />
+          <Route path='/apis/:slug/asyncapi-ui' element={<AsyncApiUI setIsOpen={setOpenForm} />} />
+          <Route path='/apis/:slug/graphql-ui' element={<GraphqlUI />} />
           <Route path='/blog' element={<Blog setIsOpen={setIsOpen} />} />
           <Route path='/blog/:id' element={<BlogPost setIsOpen={setIsOpen} />} />
           <Route path='/documentacion' element={<Wiki />} />

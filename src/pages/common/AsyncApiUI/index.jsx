@@ -13,7 +13,7 @@ import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonCom
 import classes from './asyncapi-ui.module.scss';
 
 function AsyncApiUI() {
-  const { id } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -27,7 +27,7 @@ function AsyncApiUI() {
     setAsyncApi(null);
 
     libraryService
-      .getOpenApiFromStrapi(id)
+      .getOpenApiFromStrapi(slug)
       .then(async (library) => {
         let openDoc = library?.openDoc;
         let openDocUrl = library?.openDocUrl;
@@ -65,12 +65,12 @@ function AsyncApiUI() {
         }
       })
       .finally(() => setLoading(false));
-  }, [id]);
+  }, [slug]);
 
   return (
     <div
       style={{
-        paddingTop: '80px',
+        paddingTop: '60px',
         paddingBottom: '80px',
       }}
     >

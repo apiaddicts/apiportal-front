@@ -15,19 +15,6 @@ function getMcpBookStores() {
     });
 }
 
-function getMcpBookStore(id) {
-  const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
-  };
-  return fetch(`${config.apiUrl}/library-mcps/${id}?populate[image]=true&populate[tags]=true&populate[ratings]=true`, requestOptions)
-    .then(handleResponse)
-    .then((library) => {
-      return library;
-    }).catch((error) => {
-      console.error(error);
-    });
-}
 
 function getMcpBookStoreData(slug) {
   const requestOptions = {
@@ -35,7 +22,7 @@ function getMcpBookStoreData(slug) {
     headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
   };
 
-  const url = `${config.apiUrl}/library-mcps?filters[slug][$eq]=${slug}`;
+  const url = `${config.apiUrl}/library-mcps?filters[slug][$eq]=${slug}&populate[image]=true&populate[tags]=true&populate[ratings]=true&populate[tools]=true&populate[resources]=true&populate[prompts]=true`;
   return fetch(url, requestOptions)
     .then(handleResponse)
     .then((response) => response?.data?.[0])
@@ -81,7 +68,6 @@ function callTool(slug, options = {}) {
 
 const libraryService = {
   getMcpBookStores,
-  getMcpBookStore,
   getMcpBookStoreData,
   connectMcp,
   callTool,

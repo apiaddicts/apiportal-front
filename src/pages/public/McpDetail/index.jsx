@@ -16,14 +16,12 @@ import BannerImage from '../../../components/Banner/BannerImage';
 import Slick from '../../../components/SlickSlider/Slick';
 import Icon from '../../../components/MdIcon/Icon';
 import CustomMarkdown from '../../../components/CustomMarkdown';
-import CardResource from '../../../components/Card/CardResource';
 import { getHomeContent } from '../../../redux/actions/homeAction';
-import { getMcpLibrary, getMcpLibraries } from '../../../redux/actions/mcpLibraryAction';
+import { getMcpLibraryBySlug, getMcpLibraries } from '../../../redux/actions/mcpLibraryAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
 import config from '../../../services/config';
 import classes from './mcp-detail.module.scss';
-import CommandModal from '../../../components/Modal/CommandModal';
-import Ratings from '../../../components/Ratings';
+import McpOverview from '../../common/McpOverview';
 
 function McpDetail({ setIsOpen }) {
   const { t } = useTranslation();
@@ -31,12 +29,11 @@ function McpDetail({ setIsOpen }) {
   const params = useParams();
   const navigate = useNavigate();
   const { homePage } = useSelector((state) => state.home);
-  const { mcpLibrary, mcpLibraries, liveSession } = useSelector((state) => state.mcpLibrary);
+  const { mcpLibraryBySlug: mcpLibrary, mcpLibraries, liveSession } = useSelector((state) => state.mcpLibrary);
   const { blogs } = useSelector((state) => state.blog);
 
   const [bannerImg, setBannerImg] = useState('');
   const [cardsImages, setCardsImages] = useState({});
-  const [vsCodeCopied, setVsCodeCopied] = useState(null);
 
   useEffect(() => {
     dispatch(getMcpLibraries());
@@ -63,10 +60,10 @@ function McpDetail({ setIsOpen }) {
   }, [mcpLibraries]);
 
   useEffect(() => {
-    if (params?.id) {
-      dispatch(getMcpLibrary(params?.id));
+    if (params?.slug) {
+      dispatch(getMcpLibraryBySlug(params?.slug));
     }
-  }, [params?.id]);
+  }, [params?.slug]);
 
   useEffect(() => {
     if (homePage && Object.keys(homePage).length === 0) {
@@ -120,83 +117,14 @@ function McpDetail({ setIsOpen }) {
   const shuffledMcps = _.shuffle(otherMcps);
   const mcpsNews = shuffledMcps.slice(0, 3);
 
-  const hasAnyRating =
-    !!mcpLibrary?.ratings?.globalRating ||
-    !!mcpLibrary?.ratings?.definitionRating ||
-    !!mcpLibrary?.ratings?.securityRating ||
-    !!mcpLibrary?.ratings?.qualityRating;
-
-  const handleClickPage = (id) => {
-    dispatch(getMcpLibrary(id));
+  const handleClickPage = (slug) => {
+    dispatch(getMcpLibraryBySlug(slug));
   };
 
-  const isLiveSessionActive = liveSession !== null && liveSession.slug === mcpLibrary?.slug;
-  const effectiveResources = isLiveSessionActive ? (liveSession.resources || []) : [];
-  const effectiveTools     = isLiveSessionActive ? (liveSession.tools    || []) : [];
-  const effectivePrompts   = isLiveSessionActive ? (liveSession.prompts  || []) : [];
-  const hasLiveData = effectiveResources.length > 0 || effectiveTools.length > 0 || effectivePrompts.length > 0;
 
-  const mergeHeadersIntoCfg = (cfg, hdrs) => {
-    if (cfg.mcpServers) {
-      const serverName = Object.keys(cfg.mcpServers)[0];
-      if (serverName) cfg.mcpServers[serverName].headers = { ...hdrs };
-    } else if (cfg.servers) {
-      const serverName = Object.keys(cfg.servers)[0];
-      if (serverName) cfg.servers[serverName].headers = { ...hdrs };
-    } else {
-      cfg.headers = { ...hdrs };
-    }
-  };
-
-  const extractHeadersFromCfg = (cfg) => {
-    if (cfg.mcpServers) {
-      const serverName = Object.keys(cfg.mcpServers)[0];
-      return cfg.mcpServers[serverName]?.headers || null;
-    }
-    if (cfg.servers) {
-      const serverName = Object.keys(cfg.servers)[0];
-      return cfg.servers[serverName]?.headers || null;
-    }
-    return cfg.headers || null;
-  };
-
-  const effectiveConfigSnippet = (() => {
-    if (!mcpLibrary?.configSnippet) return null;
-    if (!isLiveSessionActive || !liveSession.headers || Object.keys(liveSession.headers).length === 0) {
-      return mcpLibrary.configSnippet;
-    }
-    try {
-      const cfg = typeof mcpLibrary.configSnippet === 'string'
-        ? JSON.parse(mcpLibrary.configSnippet)
-        : structuredClone(mcpLibrary.configSnippet);
-      mergeHeadersIntoCfg(cfg, liveSession.headers);
-      return cfg;
-    } catch {
-      return mcpLibrary.configSnippet;
-    }
-  })();
-
-  const maskedConfigSnippet = (() => {
-    if (!effectiveConfigSnippet) return null;
-    try {
-      const cfg = typeof effectiveConfigSnippet === 'string'
-        ? JSON.parse(effectiveConfigSnippet)
-        : structuredClone(effectiveConfigSnippet);
-      const existingHeaders = extractHeadersFromCfg(cfg);
-      if (existingHeaders && Object.keys(existingHeaders).length > 0) {
-        const masked = Object.fromEntries(
-          Object.entries(existingHeaders).map(([k, v]) => [k, '•'.repeat(String(v).length || 8)]),
-        );
-        mergeHeadersIntoCfg(cfg, masked);
-      }
-      return cfg;
-    } catch {
-      return effectiveConfigSnippet;
-    }
-  })();
 
   return (
-    <div id='mcp'>
+    <div>
       {mcpLibrary && Object.keys(mcpLibrary).length > 0 ? (
         <>
           <section>
@@ -211,158 +139,11 @@ function McpDetail({ setIsOpen }) {
               description={mcpLibrary?.description?.length > 0 && mcpLibrary?.description ? mcpLibrary?.description : ''}
             />
           </section>
-          <section className={`container ${classes.section__content} pb-9`}>&nbsp;</section>
-          {mcpLibrary && hasAnyRating && (
-            <section className={`container ${classes.section__content} ${classes.section__ratings}`}>
-              <Ratings
-                ratings={mcpLibrary.ratings}
-                title={t('McpDetail.globalGradesTitle')}
-                subtitle={t('McpDetail.globalGradesSubtitle')}
-                labels={{
-                  globalRating: t('McpDetail.ratingGlobal'),
-                  definitionRating: t('McpDetail.ratingDefinition'),
-                  securityRating: t('McpDetail.ratingSecurity'),
-                  qualityRating: t('McpDetail.ratingQuality'),
-                }}
-              />
-            </section>
-          )}
-
-          <section className={`container ${classes.section__content} ${classes.section__three_cols}`}>
-            {!isLiveSessionActive && (
-              <div className={classes.connect__notice}>
-                <Icon id='MdInfoOutline' />
-                <span>{t('McpDetail.connectToSeeCapabilities')}</span>
-              </div>
-            )}
-            <div className={classes.three_cols__grid}>
-
-              <div className={classes.three_cols__col}>
-                <h3 className={classes.three_cols__col__title}>
-                  {t('McpDetail.technicalSetupTitle')}
-                </h3>
-
-                {mcpLibrary?.configSnippet ? (
-                  <>
-                    <pre className={classes.three_cols__code}><code className="language-json">{typeof maskedConfigSnippet === 'string' ? maskedConfigSnippet : JSON.stringify(maskedConfigSnippet, null, 2)}</code></pre>
-
-                    <button
-                      type='button'
-                      className={classes.three_cols__vscode_btn}
-                      onClick={() => {
-                        try {
-                          const cfg = typeof effectiveConfigSnippet === 'string'
-                            ? JSON.parse(effectiveConfigSnippet)
-                            : effectiveConfigSnippet;
-
-                          const servers = cfg?.mcpServers || cfg?.servers || {};
-                          const [serverName, serverConfig] = Object.entries(servers)[0] || [mcpLibrary.slug, cfg];
-
-                          const payload = { name: serverName, ...serverConfig };
-                          const vsCodeUrl = `vscode:mcp/install?${encodeURIComponent(JSON.stringify(payload))}`;
-
-                          globalThis.location.href = vsCodeUrl;
-
-                        } catch {
-                          const jsonStr = JSON.stringify(mcpLibrary.configSnippet);
-                          const escaped = jsonStr.replaceAll('"', String.raw`\"`);
-                          const cmd = `code --add-mcp "${escaped}"`;
-                          navigator.clipboard.writeText(cmd).then(() => setVsCodeCopied(cmd));
-                        }
-                      }}
-                    >
-                      <Icon id='MdCode' />
-                      <span>{t('McpDetail.addToVsCode')}</span>
-                    </button>
-                  </>
-                ) : (
-                  <div className={classes.three_cols__placeholder}>
-                    {t('McpDetail.noConfigSnippet')}
-                  </div>
-                )}
-              </div>
-
-              <div className={classes.three_cols__col}>
-                <h3 className={classes.three_cols__col__title}>
-                  {t('McpDetail.descriptionTitle')}
-                </h3>
-
-                {mcpLibrary?.markdown && mcpLibrary.markdown.length > 0 ? (
-                  <div className={`markdown__content ${classes.three_cols__markdown}`}>
-                    <CustomMarkdown content={mcpLibrary.markdown} />
-                  </div>
-                ) : (
-                  <div className={classes.three_cols__placeholder}>
-                    {t('McpDetail.noDescription')}
-                  </div>
-                )}
-              </div>
-
-              <div className={classes.three_cols__col}>
-                <h3 className={classes.three_cols__col__title}>
-                  {t('McpDetail.capabilitiesTitle')}
-                </h3>
-                {isLiveSessionActive ? (
-                  <div className={classes.resources__list}>
-                    {effectiveTools.length > 0 && (
-                      <>
-                        <p className={classes.capabilities__group_label}>{t('McpDetail.toolsLabel')}</p>
-                        {effectiveTools.map((tool, i) => (
-                          <CardResource key={tool?.name || i} resource={tool} type="tool" />
-                        ))}
-                      </>
-                    )}
-                    {effectiveResources.length > 0 && (
-                      <>
-                        <p className={classes.capabilities__group_label}>{t('McpDetail.resourcesLabel')}</p>
-                        {effectiveResources.map((res, i) => (
-                          <CardResource key={res?.id || i} resource={res} type="resource" />
-                        ))}
-                      </>
-                    )}
-                    {effectivePrompts.length > 0 && (
-                      <>
-                        <p className={classes.capabilities__group_label}>{t('McpDetail.promptsLabel')}</p>
-                        {effectivePrompts.map((prompt, i) => (
-                          <CardResource key={prompt?.name || i} resource={prompt} type="prompt" />
-                        ))}
-                      </>
-                    )}
-                    {!hasLiveData && (
-                      <div className={classes.three_cols__placeholder}>
-                        {t('McpDetail.noCapabilitiesFound')}
-                      </div>
-                    )}
-                  </div>
-                ) : (
-                  <div className={classes.three_cols__placeholder}>
-                    {t('McpDetail.connectToSee')}
-                  </div>
-                )}
-              </div>
-            </div>
-
-            <div className={classes.three_cols__actions}>
-              {mcpLibrary.reportUrl && (
-                <button
-                  type='button'
-                  className={classes.three_cols__action_btn}
-                  onClick={() => window.open(mcpLibrary.reportUrl, '_blank', 'noopener,noreferrer')}
-                >
-                  <Icon id='MdDownload' />
-                  <span>{t('McpDetail.downloadReport')}</span>
-                </button>
-              )}
-              <button
-                type='button'
-                className={`${classes.three_cols__action_btn} ${classes.three_cols__action_btn__primary}`}
-                onClick={() => navigate(`/mcps/${mcpLibrary.slug}/mcp-ui`)}
-              >
-                <Icon id='MdPlayArrow' />
-                <span>{t('McpDetail.tryOut')}</span>
-              </button>
-            </div>
-          </section>
+          <McpOverview
+            mcpLibrary={mcpLibrary}
+            liveSession={liveSession}
+            tryOutUrl={`/mcps/${mcpLibrary?.slug}/mcp-ui`}
+          />
 
           <section className={classes.section__discover}>
             <div className='container'>
@@ -389,9 +170,9 @@ function McpDetail({ setIsOpen }) {
                         title={card?.title}
                         description={card?.description}
                         info={t('McpDetail.moreInfo')}
-                        url={`/mcps/${card?.documentId}#mcp`}
+                        url={`/mcps/${card?.slug}`}
                         css_styles={{ 'override_border__chip': 'custom_border__chip' }}
-                        route={() => handleClickPage(card?.documentId)}
+                        route={() => handleClickPage(card?.slug)}
                         img={cardsImages[card.documentId] || config.notImage}
                       />
                     </div>
@@ -402,7 +183,7 @@ function McpDetail({ setIsOpen }) {
                 <div className='flex-md-12 flex-sm-12'>
                   <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
                     <div className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
-                      <HashLink smooth to='/mcps#mcpHome'>
+                      <HashLink smooth to='/mcps'>
                         <span className='mr-1'>{t('McpDetail.seeAll')}</span>
                       </HashLink>
                       <Icon id='MdOutlineEast' />
@@ -447,13 +228,13 @@ function McpDetail({ setIsOpen }) {
                   filterButtonSection?.[0]?.header.map((button, i) => (
                     <div key={i} className='mb-4'>
                       {button?.isKeywordInverted ? (
-                        <HashLink smooth to='/mcps#mcpHome'>
+                        <HashLink smooth to='/mcps'>
                           <Button styles={button?.keyword}>
                             {button?.title}
                           </Button>
                         </HashLink>
                       ) : (
-                        <HashLink smooth to={`/mcps/${params?.id}#contact`}>
+                        <HashLink smooth to={`/mcps/${params?.slug}#contact`}>
                           <Button styles={button?.keyword}>
                             {button?.title}
                           </Button>
@@ -525,18 +306,6 @@ function McpDetail({ setIsOpen }) {
               </div>
             </div>
           </section>
-          <CommandModal isOpen={!!vsCodeCopied} onClose={() => setVsCodeCopied(null)}>
-            <p style={{ fontSize: '1.1rem', fontWeight: 700, color: '#222', margin: 0 }}>{t('McpDetail.commandCopied')}</p>
-            <p style={{ fontSize: '0.9rem', color: '#555', margin: 0 }}>{t('McpDetail.openTerminalPaste')}</p>
-            <pre style={{ background: '#0f172a', color: '#e2e8f0', borderRadius: '8px', padding: '1rem 1.2rem', fontSize: '0.78rem', lineHeight: 1.6, overflowX: 'auto', whiteSpace: 'pre-wrap', wordBreak: 'break-all', margin: 0 }}>{vsCodeCopied}</pre>
-            <button
-              type='button'
-              className={classes.three_cols__vscode_btn}
-              onClick={() => navigator.clipboard.writeText(vsCodeCopied)}
-            >
-              {t('McpDetail.copyAgain')}
-            </button>
-          </CommandModal>
           <div id='contact' />
         </>
       ) : (

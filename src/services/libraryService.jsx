@@ -31,6 +31,19 @@ function getApiBookStore(id) {
     });
 }
 
+function getApiBookStoreBySlug(slug) {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
+  };
+  return fetch(`${config.apiUrl}/library-apis?filters[slug][$eq]=${slug}&populate[image]=true&populate[ratings]=true`, requestOptions)
+    .then(handleResponse)
+    .then((response) => response?.data?.[0])
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 function getApis(filter) {
   const { token } = store.getState().user;
   const requestOptions = {
@@ -268,9 +281,36 @@ const getApisUnsecure = () => {
 
 };
 
+function getKongApis() {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'apikey': `${config.strapiApiKey}` },
+  };
+  return fetch(
+    `${config.apiUrl}/library-apis?filters[provider][$eq]=kong&filters[publish][$eq]=publicado&fields[0]=title&fields[1]=slug&populate[apim_config][fields][0]=documentId`,
+    requestOptions,
+  )
+    .then(handleResponse)
+    .catch(error => { console.error(error); });
+}
+
+function getAwsApis() {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'apikey': `${config.strapiApiKey}` },
+  };
+  return fetch(
+    `${config.apiUrl}/library-apis?filters[provider][$eq]=aws&filters[publish][$eq]=publicado&fields[0]=title&fields[1]=slug&populate[apim_config][fields][0]=documentId`,
+    requestOptions,
+  )
+    .then(handleResponse)
+    .catch(error => { console.error(error); });
+}
+
 const libraryService = {
   getApiBookStores,
   getApiBookStore,
+  getApiBookStoreBySlug,
   getApis,
   getAPi,
   getApiOpenAPI,
@@ -284,6 +324,8 @@ const libraryService = {
   getApiProducts,
   getApisUnsecure,
   getOpenApiFromStrapi,
+  getKongApis,
+  getAwsApis,
 };
 
 export default libraryService;

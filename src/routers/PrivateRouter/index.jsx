@@ -21,7 +21,8 @@ import SwaggerUI from '../../pages/common/SwaggerUI';
 import OAuthRedirect from '../../pages/common/OAuthRedirect';
 import Subscriptions from '../../pages/private/Subscriptions';
 import Dashboard from '../../pages/private/Dashboard';
-import ApiToken from '../../pages/private/ApiToken';
+import Token from '../../pages/private/Token';
+import TokenDetail from '../../pages/private/TokenDetail';
 import FaqsPriv from '../../pages/private/Faqs';
 import BlogPriv from '../../pages/private/Blog';
 import NewsPriv from '../../pages/private/News';
@@ -34,6 +35,7 @@ import CodeSampleDetailss from '../../pages/private/codeSamplesDetail';
 import { logout } from '../../redux/actions/authAction';
 import classes from './private-router.module.scss';
 import AsyncApiUI from '../../pages/common/AsyncApiUI';
+import GraphqlUI from '../../pages/common/GraphqlUI';
 
 function PrivateRouter({ isAppReady }) {
   const dispatch = useDispatch();
@@ -82,9 +84,10 @@ function PrivateRouter({ isAppReady }) {
             <Route path='products' element={<Products />} />
             <Route path='products/:id' element={<ProductDetail />} />
             <Route path='apis' element={<Apis />} />
-            <Route path='apis/:id' element={<ApiDetail />} />
-            <Route path='apis/:id/swagger-ui' element={<SwaggerUI />} />
-            <Route path='apis/:id/asyncapi-ui' element={<AsyncApiUI />} />
+            <Route path='apis/:slug' element={<ApiDetail />} />
+            <Route path='apis/:slug/swagger-ui' element={<SwaggerUI />} />
+            <Route path='apis/:slug/asyncapi-ui' element={<AsyncApiUI />} />
+            <Route path='apis/:slug/graphql-ui' element={<GraphqlUI />} />
             <Route path='subscriptions' element={<Subscriptions />} />
             <Route path='subscriptions/:id' element={<SubscriptionDetail />} />
             <Route path='code-samples' element={<CodeSamples />} />
@@ -94,7 +97,8 @@ function PrivateRouter({ isAppReady }) {
             <Route path='faqs' element={<FaqsPriv />} />
             <Route path='blog' element={<BlogPriv />} />
             <Route path='news' element={<NewsPriv />} />
-            <Route path='api-token' element={<ApiToken />} />
+            <Route path='tokens' element={<Token />} />
+            <Route path='tokens/:documentId' element={<TokenDetail />} />
             <Route path='*' element={<Navigate to='dashboard' replace />} />
           </Routes>
         </div>

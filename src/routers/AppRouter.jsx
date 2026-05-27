@@ -3,10 +3,20 @@ import { Routes, Route } from 'react-router-dom';
 import PublicRouter from './PublicRouter';
 import PrivateRouter from './PrivateRouter';
 import NoNavRouter from './NoNavRouter';
+import FrameRouter from './FrameRouter';
+import ScrollToTop from './ScrollToTop';
 
 function AppRouter({ isAppReady }) {
   return (
-    <Routes>
+    <>
+      <ScrollToTop />
+      <Routes>
+      <Route
+        path='/frame/*'
+        element={
+          <FrameRouter />
+        }
+      />
       <Route
         path='*'
         element={
@@ -27,7 +37,7 @@ function AppRouter({ isAppReady }) {
       />
 
     </Routes>
-
+    </>
   );
 };
 

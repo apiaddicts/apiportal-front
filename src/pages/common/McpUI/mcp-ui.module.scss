@@ -4,10 +4,9 @@
 .root {
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 96px);
+  height: 100vh;
   overflow: hidden;
   background: #f8fafc;
-  padding-top: 20px;
 }
 
 .topbar {

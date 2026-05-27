@@ -1,323 +1,283 @@
-
-/* eslint-disable */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable react/no-unstable-nested-components */
 import React, { useEffect, useState } from 'react';
-import moment from 'moment';
-import 'moment/locale/es';
-import { Link, useParams } from 'react-router-dom';
-import { HashLink } from 'react-router-hash-link';
-import { useSelector, useDispatch } from 'react-redux';
-import { getProductDetail, resetProduct, filterProductAPIsByName, filterProductAPIsByDescription, getProductApis, getProductApiNext, getProductApiPrevious } from '../../../redux/actions/productsAction';
-import { subscribeToAProduct } from '../../../redux/actions/subscriptionsAction';
-import { Container, Card, Grid, Box, TableHead, TableRow, TableCell, Table, TableContainer, TableBody } from '@mui/material';
-import Title from '../../../components/Title';
-import Btn from '../../../components/Buttons/Button';
-import Suscriptions from '../../../components/Suscriptions';
-import SuscriptionsVertical from '../../../components/SuscriptionsVertical';
-import Spinner from '../../../components/Spinner';
-import Icon from '../../../components/MdIcon/Icon';
-import InputResponse from '../../../components/Input/InputUI/InputResponse';
-import useSearch from '../../../hooks/useSearch';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import {
+  Container, Card, CardContent, Box, Typography, IconButton, Divider,
+  Button, CircularProgress, Alert, Chip, Menu, ListItemIcon, ListItemText,
+  FormControl, InputLabel, Select, MenuItem, OutlinedInput, Checkbox,
+  Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions,
+} from '@mui/material';
+import { ArrowBack, AddCircleOutline, Delete } from '@mui/icons-material';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 import classes from './product-detail.module.scss';
-import config from '../../../services/config';
 
-moment.locale('es');
-function ProductDetail(props) {
-  const { product, productApis, productSubscriptions, spinnerApis, productsApisSkip } = useSelector((state) => state.products);
-  const { user } = useSelector((state) => state.user);
-  const { loadingCreateSubscription } = useSelector((state) => state.suscripcions);
+import {
+  removeApiFromProduct, resetRemoveApiFromProduct,
+  addApiToProduct, resetAddApiToProduct,
+  deleteProduct,
+} from '../../../redux/actions/productsAction';
+import { getKongApis, getAwsApis } from '../../../redux/actions/libraryAction';
 
+function ProductDetail() {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const params = useParams();
+  const { state } = useLocation();
+  const product = state?.product;
 
-  const [searchSuscription, setSearchSuscription] = useState('');
+  const allKongApis = useSelector(s => s.library.kongApis);
+  const allAwsApis  = useSelector(s => s.library.awsApis);
+  const {
+    removeApiLoading, removeApiError, removeApiSuccess,
+    addApiLoading, addApiError, addApiSuccess,
+    spinnerDeleteProduct,
+  } = useSelector(s => s.products);
 
-  const { formik } = useSearch({
-    initialState: {
-      name: '',
-      description: '',
-      suscription: '',
-    },
-  });
-
-  useEffect(() => {
-    if (formik.values.name.trim().length >= 3) {
-      dispatch(filterProductAPIsByName(params.id, formik.values.name));
-    }
-
-    if (formik.values.description.trim().length >= 3) {
-      dispatch(filterProductAPIsByDescription(params.id, formik.values.description));
-    }
-
-    if (formik.values.name.trim().length === 0 && formik.values.description.trim().length === 0) {
-      dispatch(getProductApis(params.id));
-    }
-
-  }, [formik.values.name, formik.values.description]);
+  const [currentApis, setCurrentApis] = useState(product?.library_apis ?? []);
+  const [removingApiId, setRemovingApiId] = useState(null);
+  const [confirmRemoveApi, setConfirmRemoveApi] = useState(null);
+  const [showSelector, setShowSelector] = useState(false);
+  const [selectedApiId, setSelectedApiId] = useState('');
+  const [menuAnchor, setMenuAnchor] = useState(null);
+  const [confirmDeleteProduct, setConfirmDeleteProduct] = useState(false);
 
   useEffect(() => {
-    if (formik.values.suscription.trim().length > 1) {
-      setSearchSuscription(formik.values.suscription);
-    }
-
-    if (formik.values.suscription.trim().length === 0) {
-      setSearchSuscription('');
-    }
-
-  }, [formik.values.suscription]);
-
-  useEffect(() => {
-    if (params.id && product && Object.keys(product).length === 0) {
-      dispatch(getProductDetail(params.id));
-    }
-
-  }, []);
-
-  useEffect(() => {
+    dispatch(getKongApis());
+    dispatch(getAwsApis());
     return () => {
-      dispatch(resetProduct());
+      dispatch(resetRemoveApiFromProduct());
+      dispatch(resetAddApiToProduct());
     };
-  }, []);
+  }, [dispatch]);
 
-  const handleNextProductApi = (url) => {
-    dispatch(getProductApiNext(url, params.id));
-  };
-
-  const handlePreviousProductApi = () => {
-    dispatch(getProductApiPrevious(params.id));
-  };
-
-  const handleSubmitSuscription = () => {
-    if (searchSuscription.trim().length > 0 && user && Object.keys(user).length > 0) {
-      const data = {
-        properties: {
-          name: searchSuscription,
-          scope: `/products/${product.name}`,
-          appType: 'developerPortal',
-        },
-      };
-      dispatch(subscribeToAProduct(data, user.name, params.id));
+  useEffect(() => {
+    if (removeApiSuccess) {
+      setCurrentApis(prev => prev.filter(a => a.documentId !== removingApiId));
+      setRemovingApiId(null);
+      dispatch(resetRemoveApiFromProduct());
     }
+  }, [removeApiSuccess]);
+
+  useEffect(() => {
+    if (addApiSuccess) {
+      const addedApi = availableApis.find(a => a.documentId === selectedApiId);
+      if (addedApi) {
+        setCurrentApis(prev => [...prev, { documentId: addedApi.documentId, title: addedApi.title }]);
+      }
+      setSelectedApiId('');
+      setShowSelector(false);
+      dispatch(resetAddApiToProduct());
+    }
+  }, [addApiSuccess]);
+
+  if (!product) {
+    navigate('/developer/products', { replace: true });
+    return null;
+  }
+
+  const apimConfigDocumentId = product.apim_config?.documentId;
+  const currentApiIds = new Set(currentApis.map(a => a.documentId));
+
+  const allApis = [...(allKongApis ?? []), ...(allAwsApis ?? [])];
+  const availableApis = allApis.filter(
+    a => a.apim_config?.documentId === apimConfigDocumentId && !currentApiIds.has(a.documentId),
+  );
+
+  const handleMenuOpen = (e) => setMenuAnchor(e.currentTarget);
+  const handleMenuClose = () => setMenuAnchor(null);
+
+  const handleDeleteProductConfirm = () => {
+    dispatch(deleteProduct(product.documentId, () => navigate('/developer/products')));
   };
 
+  const handleRemoveApiClick = (api) => {
+    setConfirmRemoveApi(api);
+  };
 
-  const suscriptionValidate = Object.keys(productSubscriptions).length > 0 && productSubscriptions.value.length > 0 ? productSubscriptions.value.filter((item) => item.properties.state !== 'cancelled') : [];
-  const limits = product.properties && Object.keys(product.properties).length > 0 ? product.properties.subscriptionsLimit : 0;
+  const handleRemoveApiConfirm = () => {
+    if (!confirmRemoveApi) return;
+    setRemovingApiId(confirmRemoveApi.documentId);
+    setConfirmRemoveApi(null);
+    dispatch(resetRemoveApiFromProduct());
+    dispatch(removeApiFromProduct(product.documentId, confirmRemoveApi.documentId));
+  };
+
+  const handleAddApi = () => {
+    if (!selectedApiId) return;
+    dispatch(addApiToProduct(product.documentId, selectedApiId));
+  };
 
   return (
-    <div>
-      {product && Object.keys(product).length === 0 ? null : (
-        <div className={classes.back__btn}>
-          <Link to={-1}>
-            <div className={classes.return}>
-              <div>
-                <Icon id='MdKeyboardBackspace' />
-              </div>
-              <span>VOLVER</span>
-            </div>
-          </Link>
-        </div>
-      )}
-      <Container fixed sx={{ paddingLeft: { xs: '0px', md: '59px !important' }, paddingRight: { xs: '0px', md: '97px !important' } }}>
-        {product && Object.keys(product).length === 0 ? (
-          <Spinner styles={{ height: '200px' }} title='Cargando...' />
-        ) : (
+    <Container fixed className={classes.container}>
+      <Box className={classes.header}>
+        <IconButton onClick={() => navigate('/developer/products')} size='small'>
+          <ArrowBack />
+        </IconButton>
+        <Typography variant='h5' className={classes.title}>{product.name}</Typography>
+        <IconButton size='small' onClick={handleMenuOpen} sx={{ marginLeft: 'auto' }}>
+          <MoreVertIcon />
+        </IconButton>
+      </Box>
 
-          <div>
-            <Title text={product.properties.displayName} />
-            {/* Card description */}
-            <Card sx={{ borderRadius: '20px', marginTop: '1rem', paddingTop: '3px', paddingLeft: '41px', paddingRight: '45px', paddingBottom: '40px', marginBottom: '40px', boxShadow: '0px 4px 28px rgba(169, 177, 209, 0.12)' }}>
-              <Grid style={{ marginTop: '0px' }} container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid item xs={6}>
-                  <span className='subtitle-2 text__dark__primary font-weigth-semi-bold text-uppercase'>
-                    <b>Descripción</b>
-                  </span>
-                </Grid>
-              </Grid>
-              <Grid style={{ marginTop: '-25px' }} container rowSpacing={5} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid item xs={12}>
-                  <p className='body-2 text__dark__primary'>
-                    {product.properties.description}
-                  </p>
-                </Grid>
-              </Grid>
-            </Card>
-            {productSubscriptions && Object.keys(productSubscriptions).length > 0 && productSubscriptions.count > 0 ? (
-              <>
-                <div className={classes.wrapper_subscriptions__wide__display}>
-                  <Suscriptions user={user} suscriptions={productSubscriptions} title='Suscripción' productId={params.id}/>
-                </div>
-                <div className={classes.wrapper_subscriptions__small__display}>
-                  <SuscriptionsVertical user={user} suscriptions={productSubscriptions} title='Suscripción' productId={params.id}/>
-                </div>
-              </>
+      <Menu anchorEl={menuAnchor} open={Boolean(menuAnchor)} onClose={handleMenuClose}>
+        <MenuItem onClick={() => { handleMenuClose(); setConfirmDeleteProduct(true); }}>
+          <ListItemIcon><Delete fontSize='small' /></ListItemIcon>
+          <ListItemText>{t('Products.delete')}</ListItemText>
+        </MenuItem>
+      </Menu>
+
+      <Card className={classes.card}>
+        <CardContent>
+          <Typography variant='subtitle2' color='text.secondary' gutterBottom>
+            {t('ProductDetail.provider')}
+          </Typography>
+          <Typography variant='body1' className={classes.description}>
+            {product.apim_config?.name ?? '—'}
+          </Typography>
+
+          <Divider className={classes.divider} />
+
+          <Typography variant='subtitle2' color='text.secondary' gutterBottom>
+            {t('ProductDetail.description')}
+          </Typography>
+          <Typography variant='body1' className={classes.description}>
+            {product.description || t('ProductDetail.noDescription')}
+          </Typography>
+
+          <Divider className={classes.divider} />
+
+          <Box className={classes.section}>
+            <Typography variant='subtitle1' className={classes.section_title}>
+              {t('ProductDetail.apis')}
+            </Typography>
+
+            {currentApis.length === 0 ? (
+              <Typography variant='body2' color='text.secondary'>{t('ProductDetail.noApis')}</Typography>
             ) : (
-              null
-            ) }
+              <Box className={classes.chips}>
+                {currentApis.map(api => {
+                  const isRemoving = removeApiLoading && removingApiId === api.documentId;
+                  return (
+                    <Chip
+                      key={api.documentId}
+                      label={api.title}
+                      size='small'
+                      disabled={isRemoving}
+                      deleteIcon={isRemoving ? <CircularProgress size={14} /> : undefined}
+                      onDelete={() => handleRemoveApiClick(api)}
+                    />
+                  );
+                })}
+              </Box>
+            )}
 
-            {limits === null || suscriptionValidate.length < limits ? (
-                <Card sx={{ borderRadius: '20px', marginTop: '33px', padding: '35px 47px 43px 41px', marginBottom: '40px', boxShadow: '0px 4px 28px rgba(169, 177, 209, 0.12)' }}>
-                  {suscriptionValidate.length === 0 && productSubscriptions.count === 0 ? (
-                    <Title text='Suscripción' divider={false} stylesTitle={{ fontSize: '2.25rem' }} />
-                  ) : (null)} 
-                  {loadingCreateSubscription ? (
-                    <Spinner styles={{ height: '100px' }} title='Cargando...' />
-                  ) : (
-                    <div className={classes.form_suscriptione}>
-                      <div className={classes.form_suscriptione__input}>
-                        <InputResponse
-                          name='suscription'
-                          type='text'
-                          label='Nombre de la suscripción a este producto'
-                          onChange={formik.handleChange}
-                          value={formik.values.suscription}
-                        />
-                      </div>
-                      <div className={classes.form_suscriptione__btn}>
-                        <Btn size='responsive' onClick={handleSubmitSuscription} styles={searchSuscription.length > 0 ? 'primary-blue' : 'primary-blue'}>SUSCRIBIRME</Btn>
-                      </div>
-                    </div>
+            {removeApiError && (
+              <Alert severity='error' sx={{ mt: 1 }}>{t('ProductDetail.removeError')}</Alert>
+            )}
+          </Box>
 
-                  )}
-                  </Card>
-            ) : (null)}
+          <Divider className={classes.divider} />
 
-            {/* APis del producto */}
-            <Card sx={{ borderRadius: '20px', marginTop: '33px', padding: '35px 47px 43px 41px', marginBottom: '15px', boxShadow: '0px 4px 28px rgba(169, 177, 209, 0.12)' }}>
-              <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-                <Grid item xs={6}>
-                  <Title text='APIs del producto' divider={false} stylesTitle={{ fontSize: '2.25rem' }} />
-                </Grid>
-              </Grid>
-              <div className={classes.wrapper_apps__wide__display}>
-                <TableContainer>
-                  <Table sx={{ minWidth: 650, marginBottom: '20px', }} aria-label='simple table'>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>
-                          <>
-                            <div className={classes.cell_title}>
-                              <h2>Nombre</h2>
-                            </div>
-                            <div style={{ height: '36px', marginTop: '14px' }}>
-                              <InputResponse
-                                name='name'
-                                type='text'
-                                label='Buscar Nombre'
-                                onChange={(e) => {
-                                  formik.handleChange(e);
-                                  formik.setFieldValue('description', '');
-                                }}
-                                value={formik.values.name}
-                              />
-                            </div>
-                          </>
-                        </TableCell>
-                        <TableCell>
-                          <>
+          <Box className={classes.section}>
+            <Box className={classes.section_header}>
+              <Typography variant='subtitle1' className={classes.section_title}>
+                {t('ProductDetail.addApis')}
+              </Typography>
+              {!showSelector && availableApis.length > 0 && (
+                <Button
+                  size='small'
+                  startIcon={<AddCircleOutline />}
+                  onClick={() => { setShowSelector(true); dispatch(resetAddApiToProduct()); }}
+                >
+                  {t('ProductDetail.add')}
+                </Button>
+              )}
+            </Box>
 
-                            <div className={classes.cell_title}>
-                              <h2>Descripción</h2>
-                            </div>
-                            <div style={{ height: '36px', marginTop: '14px' }}>
-                              <InputResponse
-                                name='description'
-                                type='text'
-                                label='Buscar Descripción'
-                                onChange={(e) => {
-                                  formik.handleChange(e);
-                                  formik.setFieldValue('name', '');
-                                }}
-                                value={formik.values.description}
-                              />
-                            </div>
-                          </>
-                        </TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {productApis && Object.keys(productApis).length > 0 && spinnerApis !== true ? (
-                        <>
-                          {productApis.value.map((row) => (
-                            <TableRow
-                              key={row.name}
-                              sx={{ '&:last-child td, &:last-child th': { border: 0 }, cursor: 'pointer', zIndex: 6 }}
-                            >
-                              <TableCell component='th' scope='row'>
-                                <HashLink smooth to={`/developer/apis/${row.name}#detailApi`}>
-                                  <p className={classes.cell_name}>{row.name}</p>
-                                </HashLink>
-                              </TableCell>
-                              <TableCell>
-                                <HashLink smooth to={`/developer/apis/${row.name}#detailApi`}>
-                                  <p className={classes.cell_description}>
-                                    {row.properties.description}
-                                  </p>
-                                </HashLink>
-                              </TableCell>
-                            </TableRow>
-                          ))}
-                        </>
-                      ) : (
-                        <TableRow>
-                          <TableCell colSpan={2}>
-                            <Spinner styles={{ height: '200px' }} title='Cargando...' />
-                          </TableCell>
-                        </TableRow>
-                      )}
+            {availableApis.length === 0 && !showSelector && (
+              <Typography variant='body2' color='text.secondary'>
+                {t('ProductDetail.noAvailableApis')}
+              </Typography>
+            )}
 
-                    </TableBody>
-                  </Table>
-                </TableContainer>
-              </div>
-              <div className={classes.wrapper_apps__small__display}>
-                {productApis && Object.keys(productApis).length > 0 ? (
-                  <>
-                    {productApis.value.map((row, i) => (
-                      <div className={`w-full py-3 ${classes.border__bottom}`} key={row.id}>
-                        <div
-                          className='fs__12 text__secondary ls__02 cpointer'
-                          onClick={() => handleClickRow(row.name)}
-                        >
-                          {row.name}
-                        </div>
-                        <div className='fs__12 text__gray__gray_darken mt-2'>{row.properties.description}</div>
-                      </div>
+            {showSelector && (
+              <Box className={classes.selector_area}>
+                <FormControl fullWidth size='small'>
+                  <InputLabel>{t('ProductDetail.selectApi')}</InputLabel>
+                  <Select
+                    value={selectedApiId}
+                    onChange={e => setSelectedApiId(e.target.value)}
+                    input={<OutlinedInput label={t('ProductDetail.selectApi')} />}
+                  >
+                    {availableApis.map(api => (
+                      <MenuItem key={api.documentId} value={api.documentId}>
+                        <Checkbox checked={selectedApiId === api.documentId} />
+                        <ListItemText primary={api.title} />
+                      </MenuItem>
                     ))}
-                  </>
-                ) : (null)}
-              </div>
-              
-              <div className='display_flex justify_content__between mt-2'>
-                <div>
-                  {productsApisSkip > 0 ? (
-                    <div onClick={() => handlePreviousProductApi()} className={classes.pagination}>
-                      <div className={classes.pagination__icon}>
-                        <Icon id='MdNavigateBefore' />
-                      </div>
-                      <p>Anterior</p>
-                    </div>
-                  ) : (null)}
-                </div>
-                <div>
-                  {productApis.value && productApis.value.length === Number(config.topApi) ? (
-                    <div onClick={() => handleNextProductApi()} className={classes.pagination}>
-                      <p className={classes.next}>Siguiente</p>
-                      <div className={classes.pagination__icon}>
-                        <Icon id='MdNavigateNext' />
-                      </div>
-                    </div>
-                  ) : (null)}
-                </div>
-              </div>
-            </Card>
-          </div>
+                  </Select>
+                </FormControl>
 
-        )}
+                <Box className={classes.selector_actions}>
+                  <Button size='small' onClick={() => { setShowSelector(false); setSelectedApiId(''); }}>
+                    {t('ProductDetail.cancel')}
+                  </Button>
+                  <Button
+                    variant='contained'
+                    size='small'
+                    disabled={!selectedApiId || addApiLoading}
+                    startIcon={addApiLoading ? <CircularProgress size={14} /> : null}
+                    onClick={handleAddApi}
+                  >
+                    {t('ProductDetail.save')}
+                  </Button>
+                </Box>
+              </Box>
+            )}
 
-      </Container>
-    </div>
+            {addApiError && (
+              <Alert severity='error' sx={{ mt: 1 }}>{t('ProductDetail.addError')}</Alert>
+            )}
+          </Box>
+        </CardContent>
+      </Card>
+
+      <Dialog open={confirmDeleteProduct} onClose={() => setConfirmDeleteProduct(false)}>
+        <DialogTitle>{t('Products.deleteTitle')}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {t('Products.deleteConfirm', { name: product.name })}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setConfirmDeleteProduct(false)}>{t('Products.cancel')}</Button>
+          <Button
+            variant='contained'
+            disabled={spinnerDeleteProduct}
+            startIcon={spinnerDeleteProduct ? <CircularProgress size={14} /> : null}
+            onClick={handleDeleteProductConfirm}
+          >
+            {t('Products.delete')}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      <Dialog open={!!confirmRemoveApi} onClose={() => setConfirmRemoveApi(null)}>
+        <DialogTitle>{t('ProductDetail.removeApiTitle')}</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {t('ProductDetail.removeApiConfirm', { name: confirmRemoveApi?.title })}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setConfirmRemoveApi(null)}>{t('ProductDetail.cancel')}</Button>
+          <Button variant='contained' onClick={handleRemoveApiConfirm}>
+            {t('ProductDetail.remove')}
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Container>
   );
 }
 

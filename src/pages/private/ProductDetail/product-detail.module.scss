@@ -1,245 +1,68 @@
 @import "../../../styles/variables.module.scss";
 @import "../../../styles/mixins/mixin.scss";
 
+.container {
+  padding: 35px !important;
+
+  @include breakpoint(md) {
+    padding: 48px !important;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
 .title {
-  font-size: 48px;
-  font-weight: 700;
-  color: $primary;
-  margin-bottom: 0.5rem;
+  font-weight: 600 !important;
 }
 
-.cell_title {
+.card {
+  border-radius: 20px !important;
+  padding: 8px;
+}
+
+.description {
+  margin-bottom: 8px !important;
+}
+
+.divider {
+  margin: 20px 0 !important;
+}
+
+.section {
   display: flex;
-  font-size: 20px;
-  color: var(--primary-color);
-  text-transform: uppercase;
-  h2 {
-    font-family: var(--font-family);
-    font-style: normal;
-    font-weight: 700;
-    font-size: 12px;
-    line-height: 20px;
-    display: flex;
-    align-items: center;
-    letter-spacing: 0.2px;
-    color: var(--primary-color);
-  }
+  flex-direction: column;
+  gap: 12px;
 }
 
-.cell_name {
-  font-family: var(--font-family);
-  font-style: normal;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 20px;
-
+.section_header {
   display: flex;
   align-items: center;
-  letter-spacing: 0.2px;
-
-  color: $blue-lighten-3;
+  justify-content: space-between;
 }
 
-.cell_description {
-  font-family: var(--font-family);
-  font-style: normal;
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 20px;
+.section_title {
+  font-weight: 600 !important;
+}
+
+.chips {
   display: flex;
-  align-items: center;
-  letter-spacing: 0.2px;
-  color: $gray_lighten-2;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.pagination {
-  cursor: pointer;
+.selector_area {
   display: flex;
-  color: var(--primary-color);
-  font-size: 20px;
-  align-items: center;
-
-  &__icon {
-    color: var(--primary-color);
-  }
-
-  p {
-    font-family: var(--font-family);
-    font-style: normal;
-    font-weight: 400;
-    font-size: 14px;
-    line-height: 32px;
-  }
-
-  .next {
-    margin-left: -20px;
-
-    @media (min-width: 1440px) {
-      margin-left: -10px;
-    }
-  }
+  flex-direction: column;
+  gap: 12px;
 }
 
-.gridEnd {
+.selector_actions {
   display: flex;
   justify-content: flex-end;
-}
-
-.colorBtn {
-  color: $primary;
-  font-weight: bold;
-}
-
-.buttonApi {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 60px;
-  width: 80%;
-}
-
-.btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 60px;
-  margin-top: 20px;
-}
-
-.form_suscriptione {
-  display: flex;
-  // justify-content:space-between;
-  @include breakpoint(xsl) {
-    flex-direction: column;
-  }
-
-  &__input {
-    width: 600px;
-    margin-right: 28px;
-    height: 36px;
-    @include breakpoint(xsl) {
-      width: 100%;
-      margin-right: 0;
-      div {
-        min-width: 100%;
-      }
-    }
-  }
-
-  &__btn {
-    width: 167px;
-    height: 36px;
-    @include breakpoint(xsl) {
-      margin-top: 15px;
-      width: 100%;
-    }
-  }
-}
-
-.return {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  width: 64px;
-
-  div {
-    color: var(--secondary-color);
-    font-size: 20px;
-  }
-
-  span {
-    font-family: var(--font-family);
-    font-style: normal;
-    font-weight: 700;
-    font-size: 16px;
-    line-height: 19px;
-    text-align: right;
-    letter-spacing: 1.33333px;
-    text-transform: uppercase;
-    color: var(--secondary-color);
-  }
-}
-
-.input {
-  width: 100%;
-  border: none;
-  border-radius: 15px;
-  outline: none;
-  padding: 5px 10px;
-  font-size: 0.9rem;
-  color: #000;
-  margin: 0;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0px 2px 20px #ecf0f1;
-  &:focus {
-    border-color: aqua;
-  }
-}
-
-.back__btn {
-  position: absolute;
-  top: -42px;
-  left: 30px;
-
-  @include breakpoint(xs) {
-    left: 0;
-  }
-
-
-  @include breakpoint(sm) {
-    left: 0;
-  }
-
-  @include breakpoint(lg) {
-    left: 30px;
-  }
-}
-
-
-
-.wrapper_subscriptions__wide {
-  &__display{
-    display: block;
-  }
-  @include breakpoint(xsl) {
-    &__display{
-      display: none;
-    }
-  }
-}
-
-.wrapper_subscriptions__small {
-  &__display{
-    display: none;
-  }
-  @include breakpoint(xsl) {
-    &__display{
-      display: block;
-    }
-  }
-}
-
-.wrapper_apps__wide {
-  &__display{
-    display: block;
-  }
-  @include breakpoint(xsl) {
-    &__display{
-      display: none;
-    }
-  }
-}
-
-.wrapper_apps__small {
-  &__display{
-    display: none;
-  }
-  @include breakpoint(xsl) {
-    &__display{
-      display: block;
-      .border__bottom{
-          border-bottom: 1px solid #ECF0F1;
-      }
-    }
-  }
+  gap: 8px;
 }

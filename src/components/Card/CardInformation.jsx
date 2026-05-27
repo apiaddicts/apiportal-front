@@ -4,12 +4,14 @@ import React, { useEffect, useState } from 'react';
 import { HashLink } from 'react-router-hash-link';
 import { MdEast } from 'react-icons/md';
 
+import { useTranslation } from 'react-i18next';
 import Chip from '../Chip/Chip';
 import Base from './Base';
 import config from '../../services/config';
 import './cards.scss';
 
 function CardInformation({ img, buttons = [], title = '', description = '', globalRating = null, reading = null, info = null, maxWidth, version, status, theme, blog = false, modal, link, css_styles = {}, blogTitle = false, id }) {
+  const { t } = useTranslation();
   const [colorStatus, setColorStatus] = useState('');
 
   const {
@@ -79,7 +81,7 @@ function CardInformation({ img, buttons = [], title = '', description = '', glob
                 style={blogTitleStyles}
               >
                 <span className="card__title__row">
-                  {title}
+                  <span className="card__title__text">{title}</span>
                   {globalRating && (
                     <span
                       className={`card__rating__circle rating__${globalRating}`}
@@ -129,7 +131,7 @@ function CardInformation({ img, buttons = [], title = '', description = '', glob
                   reading ? 'px-8' : ''
                 } card__description body-2`}
               >
-                {description}
+                {description || <span className="card__no__description">{t('noDescription')}</span>}
               </p>
             </HashLink>
 

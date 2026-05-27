@@ -196,6 +196,86 @@ function getSubscriptionById(productId) {
     .catch((error) => error);
 };
 
+function getProductsByUser() {
+  const strapiUser = JSON.parse(localStorage.getItem('user') || 'null');
+  const strapiUserId = strapiUser?.id;
+
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
+  };
+
+  const url = `${config.apiUrl}/products?filters[user][id][$eq]=${strapiUserId}&sort=createdAt:desc&populate[library_apis][fields][0]=id&populate[library_apis][fields][1]=title&populate[apim_config][fields][0]=documentId&populate[apim_config][fields][1]=name`;
+
+  return fetch(url, requestOptions)
+    .then(handleResponse)
+    .then((response) => response)
+    .catch((error) => { console.error(error); });
+}
+
+function createProduct(data) {
+  const strapiUser = JSON.parse(localStorage.getItem('user') || 'null');
+  const strapiUserId = strapiUser?.id;
+
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
+    body: JSON.stringify({ data: { ...data, user: strapiUserId } }),
+  };
+
+  return fetch(`${config.apiUrl}/products`, requestOptions)
+    .then(handleResponse)
+    .then((response) => response)
+    .catch((error) => { console.error(error); });
+}
+
+function deleteProduct(documentId) {
+  const requestOptions = {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
+  };
+
+  return fetch(`${config.apiUrl}/products/${documentId}`, requestOptions)
+    .then(handleResponse)
+    .then((response) => response)
+    .catch((error) => { console.error(error); });
+}
+
+function updateProduct(documentId, data) {
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
+    body: JSON.stringify({ data }),
+  };
+
+  return fetch(`${config.apiUrl}/products/${documentId}`, requestOptions)
+    .then(handleResponse)
+    .then((response) => response)
+    .catch((error) => { console.error(error); });
+}
+
+function removeApiFromProduct(documentId, apiDocumentId) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
+    body: JSON.stringify({ apiDocumentId }),
+  };
+  return fetch(`${config.apiUrl}/products/${documentId}/remove-api`, requestOptions)
+    .then(handleResponse)
+    .catch((error) => { console.error(error); });
+}
+
+function addApiToProduct(documentId, apiDocumentId) {
+  const requestOptions = {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'apikey': `${config.strapiApiKey}` },
+    body: JSON.stringify({ apiDocumentId }),
+  };
+  return fetch(`${config.apiUrl}/products/${documentId}/add-api`, requestOptions)
+    .then(handleResponse)
+    .catch((error) => { console.error(error); });
+}
+
 const productsService = {
   listProducts,
   searchProducts,
@@ -208,6 +288,12 @@ const productsService = {
   getProductApis,
   getSubscriptions,
   getSubscriptionById,
+  getProductsByUser,
+  createProduct,
+  deleteProduct,
+  updateProduct,
+  removeApiFromProduct,
+  addApiToProduct,
 };
 
 export default productsService;

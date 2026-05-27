@@ -17,7 +17,7 @@ import Slick from '../../../components/SlickSlider/Slick';
 import Icon from '../../../components/MdIcon/Icon';
 import CustomMarkdown from '../../../components/CustomMarkdown';
 import { getHomeContent } from '../../../redux/actions/homeAction';
-import { getLibrary, getLibraries } from '../../../redux/actions/libraryAction';
+import { getLibraryBySlug, getLibraries } from '../../../redux/actions/libraryAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
 import config from '../../../services/config';
 import classes from './api-detail.module.scss';
@@ -70,10 +70,10 @@ function ApiDetail({ setIsOpen }) {
   }, [libraries]);
 
   useEffect(() => {
-    if (params?.id) {
-      dispatch(getLibrary(params?.id));
+    if (params?.slug) {
+      dispatch(getLibraryBySlug(params?.slug));
     }
-  }, [params?.id]);
+  }, [params?.slug]);
 
   useEffect(() => {
     if (homePage && Object.keys(homePage).length === 0) {
@@ -104,11 +104,14 @@ function ApiDetail({ setIsOpen }) {
   // Load buttons sections
   const filterButtonSection = homePage && homePage?.contentSections && homePage?.contentSections?.length > 0 ? homePage?.contentSections?.filter((item) => item.__component === 'sections.button-hero') : [];
 
-  const getDocRoute = (library, id) => {
+  const getDocRoute = (library, slug) => {
     if (library?.openDocType === 'asyncapi') {
-      return `/apis/${id}/asyncapi-ui`;
+      return `/apis/${slug}/asyncapi-ui`;
     }
-    return `/apis/${id}/swagger-ui`;
+    if (library?.openDocType === 'graphql') {
+      return `/apis/${slug}/graphql-ui`;
+    }
+    return `/apis/${slug}/swagger-ui`;
   };
 
   const buttonsLbls =
@@ -146,10 +149,10 @@ function ApiDetail({ setIsOpen }) {
   const apisNews = shuffledApis.slice(0, 3);
 
   const hasAnyRating =
-    !!library?.globalRating ||
-    !!library?.definitionRating ||
-    !!library?.securityRating ||
-    !!library?.qualityRating;
+    !!library?.ratings?.globalRating ||
+    !!library?.ratings?.definitionRating ||
+    !!library?.ratings?.securityRating ||
+    !!library?.ratings?.qualityRating;
 
   const hasAnyBadge =
     !!library?.devExperienceCheck ||
@@ -192,12 +195,12 @@ function ApiDetail({ setIsOpen }) {
     return classes[`rating__${rating}`] || classes.rating__empty;
   };
 
-  const handleClickPage = (id) => {
-    dispatch(getLibrary(id));
+  const handleClickPage = (slug) => {
+    dispatch(getLibraryBySlug(slug));
   };
 
   return (
-    <div id='api'>
+    <div>
       { Object.keys(library).length > 0 ? (
         <>
           <section>
@@ -212,7 +215,6 @@ function ApiDetail({ setIsOpen }) {
               description={library?.description?.length > 0 && library?.description ? library?.description : ''}
             />
           </section>
-          <section className={`container ${classes.section__content} pb-9`}>&nbsp;</section>
           {library && hasAnyBadge && (
             <section className={`container ${classes.section__content} ${classes.section__badges}`}>
               <div className={classes.badges__wrapper}>
@@ -283,9 +285,9 @@ function ApiDetail({ setIsOpen }) {
                           title={card?.title}
                           description={card?.description}
                           info={t('ApiDetail.moreInfo')}
-                          url={`/apis/${card?.documentId}#api`}
+                          url={`/apis/${card?.slug}`}
                           css_styles={{ 'override_border__chip': 'custom_border__chip' }}
-                          route={() => handleClickPage(card?.documentId)}
+                          route={() => handleClickPage(card?.slug)}
                           img={cardsImages[card.documentId] || config.notImage}
                         />
                       </div>
@@ -297,7 +299,7 @@ function ApiDetail({ setIsOpen }) {
                 <div className='flex-md-12 flex-sm-12'>
                   <div className={`mt-10 mr-6 ${classes.section__discover__showmore}`}>
                     <div className={`button text__primary d-xs-none ${classes.section__discover__showmore__button}`}>
-                      <HashLink smooth to='/apis#apiHome'>
+                      <HashLink smooth to='/apis'>
                         <span className='mr-1'>{t('ApiDetail.seeAll')}</span>
                       </HashLink>
                       <Icon id='MdOutlineEast' />
@@ -345,13 +347,13 @@ function ApiDetail({ setIsOpen }) {
                   filterButtonSection?.[0]?.header.map((button, i) => (
                     <div key={i} className='mb-4'>
                       {button?.isKeywordInverted ? (
-                        <HashLink smooth to='/apis#apiHome'>
+                        <HashLink smooth to='/apis'>
                           <Button styles={button?.keyword}>
                             {button?.title}
                           </Button>
                         </HashLink>
                       ) : (
-                        <HashLink smooth to={`/apis/${params?.id}#contact`}>
+                        <HashLink smooth to={`/apis/${params?.slug}#contact`}>
                           <Button styles={button?.keyword}>
                             {button?.title}
                           </Button>

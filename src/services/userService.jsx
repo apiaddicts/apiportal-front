@@ -50,7 +50,7 @@ function confirmAccount(queryParams) {
 function getUserDetails(token, headerManager) {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Authorization': `Bearer ${token}`, 'x-apimanager-id': `Manager-${headerManager}`, 'apiKey': `${config.integratorApiKey}` },
+    headers: { 'Authorization': `Bearer ${token}`, 'x-apimanager-id': `Manager-${headerManager}`, 'apikey': `${config.integratorApiKey}` },
   };
 
   const url = `${config.integratorUrl}/users/me`;
