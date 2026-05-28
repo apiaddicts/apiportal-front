@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import classes from "./section.module.scss";
 import { useTranslation } from 'react-i18next';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -9,15 +10,66 @@ import {
   Code,
   SettingsSystemDaydream,
   ChevronRight,
+  ArrowBack,
   Add,
   InsertDriveFileOutlined
 } from '@mui/icons-material';
 import Chip from '@mui/material/Chip';
 
+function AssetDetail({ asset, onBack, t, primaryColor }) {
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <button
+        onClick={onBack}
+        style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'none', border: 'none', cursor: 'pointer', color: primaryColor, fontWeight: 600, fontSize: '0.9rem', padding: 0 }}
+      >
+        <ArrowBack fontSize="small" /> {t('back')}
+      </button>
+
+      <div style={{ background: 'white', borderRadius: 12, padding: 20, border: '1px solid #e5e7eb', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+          <InsertDriveFileOutlined sx={{ color: primaryColor, fontSize: 36 }} />
+          <div>
+            <h2 style={{ margin: 0, fontSize: '1.1rem', color: '#334155' }}>{asset['gx:name'] || asset.id}</h2>
+            <span style={{ fontSize: '0.8rem', color: '#64748b' }}>{asset.type}</span>
+          </div>
+        </div>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+          <div style={{ background: '#f9fafb', borderRadius: 8, padding: '10px 14px', border: '1px solid #e5e7eb' }}>
+            <span style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase' }}>ID</span>
+            <p style={{ margin: '4px 0 0', fontSize: '0.88rem', color: '#334155', overflowWrap: 'anywhere' }}>{asset.id || '—'}</p>
+          </div>
+
+          <div style={{ background: '#f9fafb', borderRadius: 8, padding: '10px 14px', border: '1px solid #e5e7eb' }}>
+            <span style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase' }}>{t('type')}</span>
+            <p style={{ margin: '4px 0 0', fontSize: '0.88rem', color: '#334155' }}>{asset.type || '—'}</p>
+          </div>
+
+          {asset['gx:description'] && (
+            <div style={{ background: '#f9fafb', borderRadius: 8, padding: '10px 14px', border: '1px solid #e5e7eb' }}>
+              <span style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase' }}>{t('description')}</span>
+              <p style={{ margin: '4px 0 0', fontSize: '0.88rem', color: '#334155' }}>{asset['gx:description']}</p>
+            </div>
+          )}
+
+          {asset['gx:providedBy'] && (
+            <div style={{ background: '#f9fafb', borderRadius: 8, padding: '10px 14px', border: '1px solid #e5e7eb' }}>
+              <span style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase' }}>{t('Catalogs.Overview.providedBy')}</span>
+              <p style={{ margin: '4px 0 0', fontSize: '0.88rem', color: '#334155', overflowWrap: 'anywhere' }}>{asset['gx:providedBy']}</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function OverviewServiceOffering({ serviceOffering }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const params = useParams();
+  const [selectedAsset, setSelectedAsset] = useState(null);
 
   const rootStyles = getComputedStyle(document.documentElement);
   const primaryColor = rootStyles.getPropertyValue('--primary-color').trim();
@@ -30,9 +82,6 @@ function OverviewServiceOffering({ serviceOffering }) {
     providedBy: subject["gx:providedBy"] || "—"
   };
   const aggregationOf = subject["gx:aggregationOf"] || [];
-  const termsAndConditions = subject["gx:termsAndConditions"] || [];
-  const complianceLabel = subject["gx:complianceLabel"] || {};
-  const dataSovereignty = subject["gx:dataSovereignty"] || {};
 
   const logosIndex = {
     "SoftwareResource": {
@@ -55,13 +104,42 @@ function OverviewServiceOffering({ serviceOffering }) {
       tag: t("Catalogs.Overview.infrastructureTag"),
       desc: t("Catalogs.Overview.infrastructureDesc"),
       section: 'infrastructureresource'
+    },
+    "ServiceOffering": {
+      icon: <InsertDriveFileOutlined />,
+      label: t("Catalogs.Overview.serviceOfferingLabel"),
+      tag: t("Catalogs.Overview.serviceOfferingTag"),
+      desc: t("Catalogs.Overview.serviceOfferingDesc"),
+      section: null
     }
   };
 
-  const handleClick = (section) => {
-    if (!section) return;
-    navigate(`/catalogs/${params?.id}/${section}`);
+  const getEntry = (type) => logosIndex[type] ?? {
+    icon: <InsertDriveFileOutlined />,
+    label: type || '—',
+    tag: '',
+    desc: '',
+    section: null
   };
+
+  const handleClick = (asset) => {
+    const entry = getEntry(asset["type"]);
+    if (entry.section) {
+      navigate(`/catalogs/${params?.id}/${entry.section}`);
+    } else {
+      setSelectedAsset(asset);
+    }
+  };
+
+  if (selectedAsset) {
+    return (
+      <div className={classes.overview_layout}>
+        <section className={classes.column} style={{ flex: 1 }}>
+          <AssetDetail asset={selectedAsset} onBack={() => setSelectedAsset(null)} t={t} primaryColor={primaryColor} />
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className={classes.overview_layout}>
@@ -81,22 +159,6 @@ function OverviewServiceOffering({ serviceOffering }) {
               <p className={classes.provider}>{t("Catalogs.Overview.providedBy")} {generalInfo.providedBy}</p>
             </div>
           </div>
-          { false && <div className={classes.card_footer}>
-            <div className={classes.version_tag}>
-              <span>v 1.0.0</span>
-              <Chip
-                label="Beta"
-                size="small"
-                sx={{
-                  backgroundColor: '#2563eb',
-                  color: 'white',
-                  height: '18px',
-                  fontSize: '0.65rem',
-                  fontWeight: 'bold'
-                }}
-              />
-            </div>
-          </div>}
         </div>
 
         <button className={classes.overview_button}>
@@ -111,33 +173,31 @@ function OverviewServiceOffering({ serviceOffering }) {
       <section className={classes.column}>
         <h3>{t("Catalogs.Overview.linkedAssetsTitle")}</h3>
         <div className={classes.asset_grid}>
-        {aggregationOf && aggregationOf.length > 0 ? (
-          aggregationOf.map((asset, idx) => (
-            <button key={asset.id} className={classes.asset_card}
-              onClick={() => handleClick(logosIndex[asset["type"]]?.section)}
-            >
-              <div className={classes.card_top}>
-                <div className={classes.info_section}>
-                  <span className={classes.resource_type_label}>{logosIndex[asset["type"]]?.label}</span>
-                  <div className={classes.resource_main}>
-                    <div className={classes.icon_wrapper}>
-                      {logosIndex[asset["type"]]?.icon}
+          {aggregationOf.length > 0 ? (
+            aggregationOf.map((asset, idx) => {
+              const entry = getEntry(asset["type"]);
+              return (
+                <button key={asset.id || idx} className={classes.asset_card} onClick={() => handleClick(asset)}>
+                  <div className={classes.card_top}>
+                    <div className={classes.info_section}>
+                      <span className={classes.resource_type_label}>{entry.label}</span>
+                      <div className={classes.resource_main}>
+                        <div className={classes.icon_wrapper}>{entry.icon}</div>
+                        <div className={classes.name_container}>
+                          <h3>{asset["gx:name"] || asset.id}</h3>
+                          <p>{entry.desc}</p>
+                        </div>
+                      </div>
                     </div>
-                    <div className={classes.name_container}>
-                      <h3>{asset["gx:name"]}</h3>
-                      <p>{logosIndex[asset["type"]]?.desc}</p>
-                    </div>
+                    <ChevronRight className={classes.arrow_icon} />
                   </div>
-                </div>
-                <ChevronRight className={classes.arrow_icon} />
-              </div>
-
-              <div className={classes.card_footer}>
-                <span className={classes.tag}>{logosIndex[asset["type"]]?.tag}</span>
-              </div>
-            </button>
-          ))
-        ) : <></>}
+                  <div className={classes.card_footer}>
+                    <span className={classes.tag}>{entry.tag}</span>
+                  </div>
+                </button>
+              );
+            })
+          ) : <></>}
         </div>
       </section>
     </div>

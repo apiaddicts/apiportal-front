@@ -545,7 +545,10 @@
       "legalTemplate": "Legal Template",
       "terms&conditions": "Terms & Condition",
       "governingLaw": "Governing LAW",
-      "viewFullPolicy": "View Full ODRL Policy"
+      "viewFullPolicy": "View Full ODRL Policy",
+      "permissionAction": "Allowed action",
+      "prohibitions": "Prohibitions",
+      "obligations": "Obligations"
     },
     "Contract": {
       "title": "Contract Definition",
@@ -564,7 +567,16 @@
       "assetsName": "Asset Name",
       "datasetName": "Dataset Name",
       "linkType": "Type",
-      "linkProducer": "Producer"
+      "linkProducer": "Producer",
+      "contractName": "Contract Name",
+      "version": "Version",
+      "issuer": "Issuer",
+      "issuanceDate": "Issuance Date",
+      "description": "Description",
+      "termsAndConditions": "Terms & Conditions",
+      "compliance": "Compliance",
+      "dataLocation": "Data Location",
+      "isSovereign": "Data Sovereignty"
     },
     "participant": {
       "generalInfo": "General Information",
@@ -696,7 +708,10 @@
       "infrastructureDesc": "Cloud storage and compute",
       "overview": "Overview",
       "providedBy": "Provided by",
-      "linkedAssetsTitle": "Linked Assets"
+      "linkedAssetsTitle": "Linked Assets",
+      "serviceOfferingLabel": "Service Offering",
+      "serviceOfferingTag": "Gaia-X",
+      "serviceOfferingDesc": "Service published in the dataspace"
     }
   },
   "Checkout": {

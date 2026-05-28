@@ -545,7 +545,10 @@
       "legalTemplate": "Plantilla legal",
       "terms&conditions": "Términos y condiciones",
       "governingLaw": "Ley aplicable",
-      "viewFullPolicy": "Ver política ODRL completa"
+      "viewFullPolicy": "Ver política ODRL completa",
+      "permissionAction": "Acción permitida",
+      "prohibitions": "Prohibiciones",
+      "obligations": "Obligaciones"
     },
     "Contract": {
       "title": "Definición del Contrato",
@@ -564,7 +567,16 @@
       "assetsName": "Nombre del Activo",
       "datasetName": "Nombre del Conjunto de Datos",
       "linkType": "Tipo",
-      "linkProducer": "Productor"
+      "linkProducer": "Productor",
+      "contractName": "Nombre del Contrato",
+      "version": "Versión",
+      "issuer": "Emisor",
+      "issuanceDate": "Fecha de emisión",
+      "description": "Descripción",
+      "termsAndConditions": "Términos y Condiciones",
+      "compliance": "Cumplimiento",
+      "dataLocation": "Ubicación de datos",
+      "isSovereign": "Soberanía de datos"
     },
     "participant": {
       "generalInfo": "Información General",
@@ -696,7 +708,10 @@
       "infrastructureDesc": "Almacenamiento y cómputo en la nube",
       "overview": "Resumen general",
       "providedBy": "Proporcionado por",
-      "linkedAssetsTitle": "Activos vinculados"
+      "linkedAssetsTitle": "Activos vinculados",
+      "serviceOfferingLabel": "Oferta de Servicio",
+      "serviceOfferingTag": "Gaia-X",
+      "serviceOfferingDesc": "Servicio publicado en el dataspace"
     }
   },
   "Checkout": {
