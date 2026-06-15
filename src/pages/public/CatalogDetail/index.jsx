@@ -170,12 +170,12 @@ function CatalogDetail({ initialSection, setIsOpen }) {
             <main className={classes.catalog_content}>
               {section === "assets" && <OverviewServiceOffering serviceOffering={safeParse(catalog?.assets)} edcCatalog={safeParse(catalog?.services, [])} />}
               {section === "policies" && <PoliciesSection policies={safeParse(catalog?.policies)} />}
-              {section === "contracts" && <ContractsSection contract={safeParse(catalog?.contracstDefinition)} />}
+              {section === "contracts" && <ContractsSection contract={safeParse(catalog?.contractDefinition)} />}
               {section === "participants" && <SectionParticipant participant={safeParse(catalog?.participants)} gaiaXData={gaiaXData} gaiaXLoading={gaiaXLoading} />}
               {section === "dataresources" && <SectionDataresource dataResource={safeParse(catalog?.dataSource)} />}
               {section === "softwareresource" && <SectionSoftware software={safeParse(catalog?.softwareResource)} />}
               {section === "infrastructureresource" && <SectionInfrastructure infrastructure={safeParse(catalog?.infrastructureResource)} />}
-              {section === "contractdefinition" && <SectionContractDefinition contract={safeParse(catalog?.contracstDefinitionOperations)} />}
+              {section === "contractdefinition" && <SectionContractDefinition contract={safeParse(catalog?.contractDefinitionOperations)} />}
             </main>
           </div>
           {/*<div id='contact' />*/}
