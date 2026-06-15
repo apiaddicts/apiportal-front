@@ -386,7 +386,7 @@
     &__media {
         position: relative;
         height: 130px;
-        background: #f3f4f6;
+        background: linear-gradient(135deg, var(--primary-color) 0%, color-mix(in srgb, var(--primary-color) 45%, #ffffff) 100%);
         border-radius: 12px;
         display: grid;
         place-items: center;
@@ -399,20 +399,21 @@
         }
 
         .catalog-card__icon {
-            width: 72px;
-            height: 72px;
+            width: 84px;
+            height: 84px;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
 
             svg {
                 width: 100%;
                 height: 100%;
 
                 .icon-bg {
-                    fill: color-mix(in srgb, var(--primary-color) 14%, #eaf8f9);
-                    stroke: var(--primary-color);
+                    fill: rgba(255, 255, 255, 0.22);
+                    stroke: rgba(255, 255, 255, 0.7);
                     stroke-width: 1.4;
                 }
                 .icon-check {
-                    stroke: var(--primary-color);
+                    stroke: #ffffff;
                 }
             }
         }
@@ -429,8 +430,8 @@
                 height: 100%;
 
                 .badge-box {
-                    fill: #fff;
-                    stroke: var(--primary-color);
+                    fill: rgba(255, 255, 255, 0.9);
+                    stroke: rgba(255, 255, 255, 0.6);
                     stroke-width: 2;
                 }
                 .badge-check {

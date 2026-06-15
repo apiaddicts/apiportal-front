@@ -7,6 +7,17 @@ import classes from './catalogs-paginated.module.scss';
 import './drawerDetail.scss';
 import { useNavigate } from 'react-router-dom';
 import checkoutService from '../../services/checkoutService';
+import {
+  Code,
+  Storage,
+  SettingsSystemDaydream,
+  InsertDriveFileOutlined,
+  ChevronRight,
+  CheckCircleOutline,
+  BlockOutlined,
+  OpenInNew,
+  Business,
+} from '@mui/icons-material';
 
 function isAuthenticated() {
   try {
@@ -72,9 +83,12 @@ function Catalogs({ currentItems }) {
           width={480}
         >
           <DrawerCatalogDetails
-            serviceOffering={JSON.parse(selectedItem?.services || '{}')}
+            serviceOffering={JSON.parse(selectedItem?.assets || '{}')}
             contract={JSON.parse(selectedItem?.contractDefinition || '{}')}
+            policies={JSON.parse(selectedItem?.policies || '{}')}
             catalogDocumentId={selectedItem?.documentId}
+            provider={selectedItem?.organization || ''}
+            tags={selectedItem?.tags?.map(t => t.label) || []}
             onNavigate={(section) => {
               navigate(`/catalogs/${selectedItem?.documentId}/${section}`);
               setSelectedId(null);
@@ -140,14 +154,28 @@ function CatalogsPaginated({ apis, itemsPerPage }) {
   );
 }
 
-function DrawerCatalogDetails({ serviceOffering, contract, catalogDocumentId, onNavigate, onNegotiate, onConsume }) {
+const ASSET_ICONS = {
+  SoftwareResource: <Code fontSize="small" />,
+  DataResource: <Storage fontSize="small" />,
+  InfrastructureResource: <SettingsSystemDaydream fontSize="small" />,
+};
+
+function getAssetIcon(type) {
+  return ASSET_ICONS[type] ?? <InsertDriveFileOutlined fontSize="small" />;
+}
+
+function DrawerCatalogDetails({ serviceOffering, contract, policies, catalogDocumentId, provider, tags, onNavigate, onNegotiate, onConsume }) {
   const { t } = useTranslation();
-  const assets = serviceOffering?.credentialSubject?.["gx:aggregationOf"] || [];
-  const policy = contract?.credentialSubject?.["gx:usagePolicy"] || {};
 
-  const permissions = policy["odrl:permission"] || [];
-  const prohibitions = policy["odrl:prohibition"] || [];
+  const subject = serviceOffering?.credentialSubject || {};
+  const assets = subject["gx:aggregationOf"] || [];
+  const offeringName = subject["gx:name"] || '';
+  const offeringDesc = subject["gx:description"] || '';
 
+  const rules = policies?.credentialSubject?.["gx:accessPolicy"]?.["gx:rules"] || [];
+  const toArray = (v) => (Array.isArray(v) ? v : v ? [v] : []);
+  const permissionCount = rules.filter(r => toArray(r["odrl:permission"]).length > 0).length;
+  const prohibitionCount = rules.filter(r => toArray(r["odrl:prohibition"]).length > 0).length;
   const terms = contract?.credentialSubject?.["gx:termsAndConditions"] || [];
 
   const existingPurchase = useExistingPurchase(catalogDocumentId);
@@ -155,53 +183,97 @@ function DrawerCatalogDetails({ serviceOffering, contract, catalogDocumentId, on
 
   return (
     <div className="drawer-details">
-      <div
-        className="drawer-section-header clickable"
-        onClick={() => onNavigate('assets')}
-      >
-        <h3 className="drawer-title">{t("Catalogs.theAssets")}</h3>
-        <div className="asset-list">
-          {assets.map((a) => (
-            <div key={a.id} className="asset-item">
-              <div className="asset-icon">📦</div>
-              <div>
-                <div className="asset-name">{a["gx:name"]}</div>
-                <div className="asset-type">{a.type}</div>
-              </div>
+
+      {/* Info block */}
+      {(offeringName || offeringDesc || provider) && (
+        <div className="drawer-info-block">
+          {provider && (
+            <div className="drawer-provider">
+              <Business sx={{ fontSize: 14 }} />
+              <span>{provider}</span>
             </div>
-          ))}
+          )}
+          {offeringName && <p className="drawer-offering-name">{offeringName}</p>}
+          {offeringDesc && <p className="drawer-offering-desc">{offeringDesc}</p>}
+          {tags?.length > 0 && (
+            <div className="drawer-tags">
+              {tags.map((tag) => (
+                <span key={tag} className="drawer-tag">{tag}</span>
+              ))}
+            </div>
+          )}
         </div>
-      </div>
-      
-      <div
-        className="drawer-section-header clickable"
-        onClick={() => onNavigate('policies')}
-      >
-        <h3 className="drawer-title">{t("Catalogs.thePolicies")}</h3>
-        {permissions.map((p, i) => (
-          <div key={"perm" + i} className="policy-card permission">
-            <div className="policy-title">{t("Catalogs.policiesPermission")}</div>
-            <div className="policy-body">
-              {t("Catalogs.policiesAllow")}: {p["odrl:action"]?.map(a => a["odrl:type"]).join(", ")}
-            </div>
-          </div>
-        ))}
+      )}
 
-        {prohibitions.map((p, i) => (
-          <div key={"proh" + i} className="policy-card prohibition">
-            <div className="policy-title">{t("Catalogs.policiesProhibition")}</div>
-            <div className="policy-body">
-              {t("Catalogs.policiesForbiden")}: {p["odrl:action"]?.map(a => a["odrl:type"]).join(", ")}
-            </div>
+      {/* Assets */}
+      <div className="drawer-section-header clickable" onClick={() => onNavigate('assets')}>
+        <div className="drawer-section-title-row">
+          <h3 className="drawer-title">{t("Catalogs.theAssets")}</h3>
+          <div className="drawer-section-actions">
+            {assets.length > 0 && <span className="drawer-count-badge">{assets.length}</span>}
+            <ChevronRight fontSize="small" className="drawer-chevron" />
           </div>
-        ))}
+        </div>
+        {assets.length > 0 ? (
+          <div className="asset-list">
+            {assets.map((a, idx) => (
+              <div key={a.id || idx} className="asset-item">
+                <div className="asset-icon-wrapper">{getAssetIcon(a.type)}</div>
+                <div>
+                  <div className="asset-name">{a["gx:name"] || a.id}</div>
+                  <div className="asset-type">{a.type}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="drawer-empty">—</p>
+        )}
       </div>
 
-      <div
-        className="drawer-section-header clickable"
-        onClick={() => onNavigate('contracts')}
-      >
-        <h3 className="drawer-title">{t("Catalogs.theContrat")}</h3>
+      {/* Policies */}
+      <div className="drawer-section-header clickable" onClick={() => onNavigate('policies')}>
+        <div className="drawer-section-title-row">
+          <h3 className="drawer-title">{t("Catalogs.thePolicies")}</h3>
+          <div className="drawer-section-actions">
+            {rules.length > 0 && (
+              <span className="drawer-count-badge">{rules.length}</span>
+            )}
+            <ChevronRight fontSize="small" className="drawer-chevron" />
+          </div>
+        </div>
+        {rules.length === 0 ? (
+          <p className="drawer-empty">—</p>
+        ) : (
+          <div className="policy-summary-list">
+            {permissionCount > 0 && (
+              <div className="policy-summary-item permission-item">
+                <CheckCircleOutline sx={{ fontSize: 16 }} />
+                <span>{permissionCount} {t("Catalogs.policiesPermission")}</span>
+              </div>
+            )}
+            {prohibitionCount > 0 && (
+              <div className="policy-summary-item prohibition-item">
+                <BlockOutlined sx={{ fontSize: 16 }} />
+                <span>{prohibitionCount} {t("Catalogs.policiesProhibition")}</span>
+              </div>
+            )}
+            {permissionCount === 0 && prohibitionCount === 0 && (
+              <div className="policy-summary-item permission-item">
+                <CheckCircleOutline sx={{ fontSize: 16 }} />
+                <span>{rules.length} {t("Catalogs.policiesRules", "Rules")}</span>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Contract */}
+      <div className="drawer-section-header clickable" onClick={() => onNavigate('contracts')}>
+        <div className="drawer-section-title-row">
+          <h3 className="drawer-title">{t("Catalogs.theContrat")}</h3>
+          <ChevronRight fontSize="small" className="drawer-chevron" />
+        </div>
         {terms.map((te, i) => (
           <a
             key={i}
@@ -209,7 +281,9 @@ function DrawerCatalogDetails({ serviceOffering, contract, catalogDocumentId, on
             className="contract-link"
             target="_blank"
             rel="noreferrer"
+            onClick={(e) => e.stopPropagation()}
           >
+            <OpenInNew sx={{ fontSize: 14 }} />
             {t("Catalogs.viewTermAndConds")}
           </a>
         ))}
@@ -224,9 +298,7 @@ function DrawerCatalogDetails({ serviceOffering, contract, catalogDocumentId, on
           {hasActiveContract ? t("Catalogs.contractConsume") : t("Catalogs.contractNegotiate")}
         </button>
         {!hasActiveContract && (
-          <p className="contract-note">
-            {t("Catalogs.requierCredential")}
-          </p>
+          <p className="contract-note">{t("Catalogs.requierCredential")}</p>
         )}
       </div>
     </div>
