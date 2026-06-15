@@ -11,12 +11,56 @@ import {
   SettingsSystemDaydream,
   ChevronRight,
   ArrowBack,
-  Add,
-  InsertDriveFileOutlined
+  InsertDriveFileOutlined,
+  VerifiedOutlined,
 } from '@mui/icons-material';
-import Chip from '@mui/material/Chip';
 
-function AssetDetail({ asset, onBack, t, primaryColor }) {
+function formatDid(did) {
+  if (!did || did === '—') return did;
+  if (did.startsWith('did:web:')) return did.replace('did:web:', '');
+  return did;
+}
+
+function splitAssetName(name = '') {
+  const parts = name.split(' - ');
+  if (parts.length > 1) {
+    return { api: parts[0].trim(), operation: parts.slice(1).join(' - ').trim() };
+  }
+  return { api: '', operation: name };
+}
+
+function getOperationAccent(name = '') {
+  const lower = name.toLowerCase();
+  if (lower.includes('add') || lower.includes('create') || lower.includes('register')) return '#22c55e';
+  if (lower.includes('update')) return '#f59e0b';
+  if (lower.includes('delete') || lower.includes('deletes')) return '#ef4444';
+  if (lower.includes('find') || lower.includes('get') || lower.includes('all')) return '#3b82f6';
+  return '#6b7280';
+}
+
+const METHOD_COLORS = {
+  GET:    { bg: '#dcfce7', color: '#16a34a' },
+  POST:   { bg: '#dbeafe', color: '#1d4ed8' },
+  PUT:    { bg: '#fef3c7', color: '#d97706' },
+  PATCH:  { bg: '#f3e8ff', color: '#7c3aed' },
+  DELETE: { bg: '#fee2e2', color: '#dc2626' },
+};
+
+function FieldBox({ label, value, mono = false }) {
+  if (!value) return null;
+  return (
+    <div style={{ background: '#f9fafb', borderRadius: 8, padding: '10px 14px', border: '1px solid #e5e7eb' }}>
+      <span style={{ fontSize: '0.75rem', color: '#94a3b8', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.4px' }}>{label}</span>
+      <p style={{ margin: '4px 0 0', fontSize: '0.88rem', color: '#334155', overflowWrap: 'anywhere', fontFamily: mono ? 'monospace' : 'inherit' }}>{value}</p>
+    </div>
+  );
+}
+
+function AssetDetail({ asset, edcData, onBack, t, primaryColor }) {
+  const method = edcData?.httpMethod?.toUpperCase() || '';
+  const methodStyle = METHOD_COLORS[method] || { bg: '#f3f4f6', color: '#6b7280' };
+  const { operation } = splitAssetName(asset['gx:name'] || asset.id);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       <button
@@ -27,59 +71,66 @@ function AssetDetail({ asset, onBack, t, primaryColor }) {
       </button>
 
       <div style={{ background: 'white', borderRadius: 12, padding: 20, border: '1px solid #e5e7eb', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 16 }}>
-          <InsertDriveFileOutlined sx={{ color: primaryColor, fontSize: 36 }} />
-          <div>
-            <h2 style={{ margin: 0, fontSize: '1.1rem', color: '#334155' }}>{asset['gx:name'] || asset.id}</h2>
+        {/* Header */}
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 16 }}>
+          <InsertDriveFileOutlined sx={{ color: primaryColor, fontSize: 36, flexShrink: 0, marginTop: '2px' }} />
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap', marginBottom: 4 }}>
+              {method && (
+                <span style={{ background: methodStyle.bg, color: methodStyle.color, fontWeight: 700, fontSize: '0.72rem', padding: '2px 8px', borderRadius: 4, fontFamily: 'monospace' }}>
+                  {method}
+                </span>
+              )}
+              {edcData?.path && (
+                <span style={{ fontFamily: 'monospace', fontSize: '0.85rem', color: '#475569', background: '#f1f5f9', padding: '2px 8px', borderRadius: 4 }}>
+                  {edcData.path}
+                </span>
+              )}
+            </div>
+            <h2 style={{ margin: 0, fontSize: '1rem', color: '#334155', fontWeight: 700 }}>{operation || asset['gx:name'] || asset.id}</h2>
             <span style={{ fontSize: '0.8rem', color: '#64748b' }}>{asset.type}</span>
           </div>
         </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-          <div style={{ background: '#f9fafb', borderRadius: 8, padding: '10px 14px', border: '1px solid #e5e7eb' }}>
-            <span style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase' }}>ID</span>
-            <p style={{ margin: '4px 0 0', fontSize: '0.88rem', color: '#334155', overflowWrap: 'anywhere' }}>{asset.id || '—'}</p>
-          </div>
-
-          <div style={{ background: '#f9fafb', borderRadius: 8, padding: '10px 14px', border: '1px solid #e5e7eb' }}>
-            <span style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase' }}>{t('type')}</span>
-            <p style={{ margin: '4px 0 0', fontSize: '0.88rem', color: '#334155' }}>{asset.type || '—'}</p>
-          </div>
-
-          {asset['gx:description'] && (
-            <div style={{ background: '#f9fafb', borderRadius: 8, padding: '10px 14px', border: '1px solid #e5e7eb' }}>
-              <span style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase' }}>{t('description')}</span>
-              <p style={{ margin: '4px 0 0', fontSize: '0.88rem', color: '#334155' }}>{asset['gx:description']}</p>
-            </div>
-          )}
-
-          {asset['gx:providedBy'] && (
-            <div style={{ background: '#f9fafb', borderRadius: 8, padding: '10px 14px', border: '1px solid #e5e7eb' }}>
-              <span style={{ fontSize: '0.78rem', color: '#94a3b8', fontWeight: 600, textTransform: 'uppercase' }}>{t('Catalogs.Overview.providedBy')}</span>
-              <p style={{ margin: '4px 0 0', fontSize: '0.88rem', color: '#334155', overflowWrap: 'anywhere' }}>{asset['gx:providedBy']}</p>
-            </div>
-          )}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <FieldBox label="ID" value={asset.id} mono />
+          {edcData?.description && <FieldBox label={t('description')} value={edcData.description} />}
+          {edcData?.apiName && <FieldBox label="API" value={edcData.apiName} />}
+          {edcData?.operationId && <FieldBox label="Operation ID" value={edcData.operationId} mono />}
+          {edcData?.apiVersion && <FieldBox label="Version" value={edcData.apiVersion} />}
+          {edcData?.contenttype && <FieldBox label="Content Type" value={edcData.contenttype} mono />}
+          {!edcData?.description && asset['gx:description'] && <FieldBox label={t('description')} value={asset['gx:description']} />}
         </div>
       </div>
     </div>
   );
 }
 
-function OverviewServiceOffering({ serviceOffering }) {
+function OverviewServiceOffering({ serviceOffering, edcCatalog }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const params = useParams();
   const [selectedAsset, setSelectedAsset] = useState(null);
+  const [selectedEdcData, setSelectedEdcData] = useState(null);
 
   const rootStyles = getComputedStyle(document.documentElement);
   const primaryColor = rootStyles.getPropertyValue('--primary-color').trim();
+
+  const edcDatasets = Array.isArray(edcCatalog?.['dcat:dataset'])
+    ? edcCatalog['dcat:dataset']
+    : edcCatalog?.['dcat:dataset']
+      ? [edcCatalog['dcat:dataset']]
+      : [];
+  const edcById = Object.fromEntries(edcDatasets.map(d => [d['@id'] || d.id, d]));
 
   const subject = serviceOffering?.credentialSubject || {};
   const generalInfo = {
     id: subject["id"] || "—",
     name: subject["gx:name"] || "—",
-    desc: subject["gx:description"] || "—",
-    providedBy: subject["gx:providedBy"] || "—"
+    desc: subject["gx:description"] || "",
+    providedBy: formatDid(subject["gx:providedBy"] || "—"),
+    complianceLevel: subject["gx:complianceLabel"]?.["gx:level"] || "",
+    certifiedBy: formatDid(subject["gx:complianceLabel"]?.["gx:certifiedBy"] || ""),
   };
   const aggregationOf = subject["gx:aggregationOf"] || [];
 
@@ -88,28 +139,24 @@ function OverviewServiceOffering({ serviceOffering }) {
       icon: <Code />,
       label: t("Catalogs.Overview.softwareLabel"),
       tag: t("Catalogs.Overview.softwareTag"),
-      desc: t("Catalogs.Overview.softwareDesc"),
       section: 'softwareresource'
     },
     "DataResource": {
       icon: <Storage />,
       label: t("Catalogs.Overview.dataLabel"),
       tag: t("Catalogs.Overview.dataTag"),
-      desc: t("Catalogs.Overview.dataDesc"),
       section: 'dataresources'
     },
     "InfrastructureResource": {
       icon: <SettingsSystemDaydream />,
       label: t("Catalogs.Overview.infrastructureLabel"),
       tag: t("Catalogs.Overview.infrastructureTag"),
-      desc: t("Catalogs.Overview.infrastructureDesc"),
       section: 'infrastructureresource'
     },
     "ServiceOffering": {
       icon: <InsertDriveFileOutlined />,
       label: t("Catalogs.Overview.serviceOfferingLabel"),
       tag: t("Catalogs.Overview.serviceOfferingTag"),
-      desc: t("Catalogs.Overview.serviceOfferingDesc"),
       section: null
     }
   };
@@ -118,7 +165,6 @@ function OverviewServiceOffering({ serviceOffering }) {
     icon: <InsertDriveFileOutlined />,
     label: type || '—',
     tag: '',
-    desc: '',
     section: null
   };
 
@@ -128,6 +174,7 @@ function OverviewServiceOffering({ serviceOffering }) {
       navigate(`/catalogs/${params?.id}/${entry.section}`);
     } else {
       setSelectedAsset(asset);
+      setSelectedEdcData(edcById[asset.id] || null);
     }
   };
 
@@ -135,7 +182,13 @@ function OverviewServiceOffering({ serviceOffering }) {
     return (
       <div className={classes.overview_layout}>
         <section className={classes.column} style={{ flex: 1 }}>
-          <AssetDetail asset={selectedAsset} onBack={() => setSelectedAsset(null)} t={t} primaryColor={primaryColor} />
+          <AssetDetail
+            asset={selectedAsset}
+            edcData={selectedEdcData}
+            onBack={() => { setSelectedAsset(null); setSelectedEdcData(null); }}
+            t={t}
+            primaryColor={primaryColor}
+          />
         </section>
       </div>
     );
@@ -156,43 +209,64 @@ function OverviewServiceOffering({ serviceOffering }) {
             <div className={`${classes.text_content} pt-4`}>
               <h2 className={classes.main_title}>{generalInfo.name}</h2>
               <p className={classes.subtitle}>Gaia-X Compliant</p>
-              <p className={classes.provider}>{t("Catalogs.Overview.providedBy")} {generalInfo.providedBy}</p>
+              {generalInfo.providedBy && generalInfo.providedBy !== '—' && (
+                <p className={classes.provider}>{t("Catalogs.Overview.providedBy")} {generalInfo.providedBy}</p>
+              )}
             </div>
           </div>
+          {(generalInfo.desc || generalInfo.complianceLevel) && (
+            <div className={classes.card_extra}>
+              {generalInfo.desc && (
+                <p className={classes.card_desc}>{generalInfo.desc}</p>
+              )}
+              {generalInfo.complianceLevel && (
+                <div className={classes.compliance_chip}>
+                  <VerifiedOutlined sx={{ fontSize: 14 }} />
+                  <span>{generalInfo.complianceLevel}</span>
+                  {generalInfo.certifiedBy && <span className={classes.certified_by}>· {generalInfo.certifiedBy}</span>}
+                </div>
+              )}
+            </div>
+          )}
         </div>
-
-        <button className={classes.overview_button}>
-          <div className={classes.left_group}>
-            <InsertDriveFileOutlined sx={{ fontSize: 20 }} />
-            <span>{t("Catalogs.Overview.overview")}</span>
-          </div>
-          <Add sx={{ fontSize: 20 }} />
-        </button>
       </section>
 
       <section className={classes.column}>
-        <h3>{t("Catalogs.Overview.linkedAssetsTitle")}</h3>
+        <div className={classes.linked_assets_header}>
+          <h3>{t("Catalogs.Overview.linkedAssetsTitle")}</h3>
+          {aggregationOf.length > 0 && (
+            <span className={classes.assets_count_badge}>{aggregationOf.length}</span>
+          )}
+        </div>
         <div className={classes.asset_grid}>
           {aggregationOf.length > 0 ? (
             aggregationOf.map((asset, idx) => {
               const entry = getEntry(asset["type"]);
+              const { api, operation } = splitAssetName(asset["gx:name"] || asset.id);
+              const accent = getOperationAccent(asset["gx:name"] || '');
               return (
-                <button key={asset.id || idx} className={classes.asset_card} onClick={() => handleClick(asset)}>
+                <button
+                  key={asset.id || idx}
+                  className={classes.asset_card}
+                  onClick={() => handleClick(asset)}
+                  style={{ borderLeft: `4px solid ${accent}` }}
+                >
                   <div className={classes.card_top}>
                     <div className={classes.info_section}>
-                      <span className={classes.resource_type_label}>{entry.label}</span>
+                      {api && <span className={classes.resource_type_label}>{api}</span>}
                       <div className={classes.resource_main}>
-                        <div className={classes.icon_wrapper}>{entry.icon}</div>
+                        <div className={classes.icon_wrapper} style={{ color: accent }}>
+                          {entry.icon}
+                        </div>
                         <div className={classes.name_container}>
-                          <h3>{asset["gx:name"] || asset.id}</h3>
-                          <p>{entry.desc}</p>
+                          <h3>{operation || asset["gx:name"] || asset.id}</h3>
                         </div>
                       </div>
                     </div>
                     <ChevronRight className={classes.arrow_icon} />
                   </div>
                   <div className={classes.card_footer}>
-                    <span className={classes.tag}>{entry.tag}</span>
+                    <span className={classes.tag} style={{ color: accent }}>{entry.tag}</span>
                   </div>
                 </button>
               );
