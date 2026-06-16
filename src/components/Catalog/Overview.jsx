@@ -13,6 +13,7 @@ import {
   ArrowBack,
   InsertDriveFileOutlined,
   VerifiedOutlined,
+  DataObject,
 } from '@mui/icons-material';
 
 function formatDid(did) {
@@ -46,6 +47,7 @@ const METHOD_COLORS = {
   DELETE: { bg: '#fee2e2', color: '#dc2626' },
 };
 
+
 function FieldBox({ label, value, mono = false }) {
   if (!value) return null;
   return (
@@ -56,7 +58,61 @@ function FieldBox({ label, value, mono = false }) {
   );
 }
 
-function AssetDetail({ asset, edcData, onBack, t, primaryColor }) {
+function schemaToExample(schema) {
+  if (!schema) return null;
+  const type = schema.type;
+  if (type === 'object') {
+    const result = {};
+    if (schema.properties) {
+      for (const [k, v] of Object.entries(schema.properties)) {
+        result[k] = schemaToExample(v);
+      }
+    }
+    return result;
+  }
+  if (type === 'array') {
+    return schema.items ? [schemaToExample(schema.items)] : [];
+  }
+  if (type === 'string') return '';
+  if (type === 'integer' || type === 'number') return 0;
+  if (type === 'boolean') return true;
+  return null;
+}
+
+function colorizeJson(json) {
+  return json
+    .replace(/("[\w]+")\s*:/g, '<span style="color:#7dd3fc">$1</span>:')
+    .replace(/:\s*(".*?")/g, ': <span style="color:#86efac">$1</span>')
+    .replace(/:\s*(\d+)/g, ': <span style="color:#fbbf24">$1</span>')
+    .replace(/:\s*(true|false)/g, ': <span style="color:#c084fc">$1</span>')
+    .replace(/:\s*(null)/g, ': <span style="color:#94a3b8">$1</span>');
+}
+
+function ResponseSchemaSection({ schemaData, primaryColor }) {
+  const schema = schemaData?.responseSchema;
+  if (!schema) return null;
+
+  const example = schemaToExample(schema);
+  const jsonString = JSON.stringify(example, null, 2);
+
+  return (
+    <div style={{ background: 'white', borderRadius: 12, padding: 20, border: '1px solid #e5e7eb', boxShadow: '0 2px 4px rgba(0,0,0,0.05)' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 14 }}>
+        <DataObject sx={{ color: primaryColor, fontSize: 20 }} />
+        <span style={{ fontWeight: 700, fontSize: '0.95rem', color: '#1e293b' }}>Ejemplo de respuesta</span>
+        <span style={{ background: '#f1f5f9', color: '#64748b', fontSize: '0.72rem', fontWeight: 600, padding: '1px 7px', borderRadius: 4, fontFamily: 'monospace' }}>
+          {schema.type || 'object'}
+        </span>
+      </div>
+      <pre
+        style={{ margin: 0, background: '#0f172a', borderRadius: 8, padding: '16px', overflowX: 'auto', fontSize: '0.83rem', lineHeight: 1.6, color: '#e2e8f0', fontFamily: "'Fira Code', 'Cascadia Code', monospace" }}
+        dangerouslySetInnerHTML={{ __html: colorizeJson(jsonString) }}
+      />
+    </div>
+  );
+}
+
+function AssetDetail({ asset, edcData, schemaData, onBack, t, primaryColor }) {
   const method = edcData?.httpMethod?.toUpperCase() || '';
   const methodStyle = METHOD_COLORS[method] || { bg: '#f3f4f6', color: '#6b7280' };
   const { operation } = splitAssetName(asset['gx:name'] || asset.id);
@@ -102,6 +158,8 @@ function AssetDetail({ asset, edcData, onBack, t, primaryColor }) {
           {!edcData?.description && asset['gx:description'] && <FieldBox label={t('description')} value={asset['gx:description']} />}
         </div>
       </div>
+
+      <ResponseSchemaSection schemaData={schemaData} primaryColor={primaryColor} />
     </div>
   );
 }
@@ -112,6 +170,7 @@ function OverviewServiceOffering({ serviceOffering, edcCatalog }) {
   const params = useParams();
   const [selectedAsset, setSelectedAsset] = useState(null);
   const [selectedEdcData, setSelectedEdcData] = useState(null);
+  const [selectedSchemaData, setSelectedSchemaData] = useState(null);
 
   const rootStyles = getComputedStyle(document.documentElement);
   const primaryColor = rootStyles.getPropertyValue('--primary-color').trim();
@@ -122,6 +181,11 @@ function OverviewServiceOffering({ serviceOffering, edcCatalog }) {
       ? [edcCatalog['dcat:dataset']]
       : [];
   const edcById = Object.fromEntries(edcDatasets.map(d => [d['@id'] || d.id, d]));
+
+  const assetsWithSchema = Array.isArray(serviceOffering?.assetsWithSchema)
+    ? serviceOffering.assetsWithSchema
+    : [];
+  const schemaById = Object.fromEntries(assetsWithSchema.map(a => [a['@id'], a]));
 
   const subject = serviceOffering?.credentialSubject || {};
   const generalInfo = {
@@ -173,8 +237,12 @@ function OverviewServiceOffering({ serviceOffering, edcCatalog }) {
     if (entry.section) {
       navigate(`/catalogs/${params?.id}/${entry.section}`);
     } else {
+      const schemaData = schemaById[asset.id]
+        || assetsWithSchema.find(a => a.properties?.operationId === asset.id)
+        || null;
       setSelectedAsset(asset);
       setSelectedEdcData(edcById[asset.id] || null);
+      setSelectedSchemaData(schemaData);
     }
   };
 
@@ -185,7 +253,8 @@ function OverviewServiceOffering({ serviceOffering, edcCatalog }) {
           <AssetDetail
             asset={selectedAsset}
             edcData={selectedEdcData}
-            onBack={() => { setSelectedAsset(null); setSelectedEdcData(null); }}
+            schemaData={selectedSchemaData}
+            onBack={() => { setSelectedAsset(null); setSelectedEdcData(null); setSelectedSchemaData(null); }}
             t={t}
             primaryColor={primaryColor}
           />
