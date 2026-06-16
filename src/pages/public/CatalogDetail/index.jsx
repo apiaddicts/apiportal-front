@@ -158,12 +158,6 @@ function CatalogDetail({ initialSection, setIsOpen }) {
                 >
                   {t("Catalogs.detParticipant")}
                 </button>
-                <button
-                  className={section === "contractdefinition" ? classes.sidebar_nav__selected : ""}
-                  onClick={() => handleClick("contractdefinition")}
-                >
-                  {t("Catalogs.detContractDefinition")}
-                </button>
               </nav>
             </aside>
 
