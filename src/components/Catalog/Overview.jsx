@@ -232,7 +232,25 @@ function OverviewServiceOffering({ serviceOffering, edcCatalog }) {
     section: null
   };
 
+  const hasServiceOfferings = aggregationOf.some(a => a.type === 'ServiceOffering');
+  const displayAssets = hasServiceOfferings
+    ? aggregationOf
+    : assetsWithSchema.map(a => ({
+        id: a['@id'],
+        'gx:name': a.properties?.name || a['@id'],
+        type: 'ServiceOffering',
+        _isSchemaAsset: true,
+        _props: a.properties,
+        _schemaData: a,
+      }));
+
   const handleClick = (asset) => {
+    if (asset._isSchemaAsset) {
+      setSelectedAsset(asset);
+      setSelectedEdcData(asset._props);
+      setSelectedSchemaData(asset._schemaData);
+      return;
+    }
     const entry = getEntry(asset["type"]);
     if (entry.section) {
       navigate(`/catalogs/${params?.id}/${entry.section}`);
@@ -303,44 +321,49 @@ function OverviewServiceOffering({ serviceOffering, edcCatalog }) {
       <section className={classes.column}>
         <div className={classes.linked_assets_header}>
           <h3>{t("Catalogs.Overview.linkedAssetsTitle")}</h3>
-          {aggregationOf.length > 0 && (
-            <span className={classes.assets_count_badge}>{aggregationOf.length}</span>
+          {displayAssets.length > 0 && (
+            <span className={classes.assets_count_badge}>{displayAssets.length}</span>
           )}
         </div>
         <div className={classes.asset_grid}>
-          {aggregationOf.length > 0 ? (
-            aggregationOf.map((asset, idx) => {
-              const entry = getEntry(asset["type"]);
-              const { api, operation } = splitAssetName(asset["gx:name"] || asset.id);
-              const accent = getOperationAccent(asset["gx:name"] || '');
-              return (
-                <button
-                  key={asset.id || idx}
-                  className={classes.asset_card}
-                  onClick={() => handleClick(asset)}
-                  style={{ borderLeft: `4px solid ${accent}` }}
-                >
-                  <div className={classes.card_top}>
-                    <div className={classes.info_section}>
-                      {api && <span className={classes.resource_type_label}>{api}</span>}
-                      <div className={classes.resource_main}>
-                        <div className={classes.icon_wrapper} style={{ color: accent }}>
-                          {entry.icon}
-                        </div>
-                        <div className={classes.name_container}>
-                          <h3>{operation || asset["gx:name"] || asset.id}</h3>
-                        </div>
+          {displayAssets.map((asset, idx) => {
+            const entry = getEntry(asset["type"]);
+            const { api, operation } = splitAssetName(asset["gx:name"] || asset.id);
+            const accent = getOperationAccent(asset["gx:name"] || '');
+            const method = (asset._props?.httpMethod || '').toUpperCase();
+            const methodStyle = METHOD_COLORS[method] || null;
+            return (
+              <button
+                key={asset.id || idx}
+                className={classes.asset_card}
+                onClick={() => handleClick(asset)}
+                style={{ borderLeft: `4px solid ${accent}` }}
+              >
+                <div className={classes.card_top}>
+                  <div className={classes.info_section}>
+                    {api && <span className={classes.resource_type_label}>{api}</span>}
+                    <div className={classes.resource_main}>
+                      <div className={classes.icon_wrapper} style={{ color: accent }}>
+                        {entry.icon}
+                      </div>
+                      <div className={classes.name_container}>
+                        {method && methodStyle && (
+                          <span style={{ display: 'inline-block', background: methodStyle.bg, color: methodStyle.color, fontWeight: 700, fontSize: '0.68rem', padding: '1px 6px', borderRadius: 3, fontFamily: 'monospace', marginBottom: 3 }}>
+                            {method}
+                          </span>
+                        )}
+                        <h3>{operation || asset["gx:name"] || asset.id}</h3>
                       </div>
                     </div>
-                    <ChevronRight className={classes.arrow_icon} />
                   </div>
-                  <div className={classes.card_footer}>
-                    <span className={classes.tag} style={{ color: accent }}>{entry.tag}</span>
-                  </div>
-                </button>
-              );
-            })
-          ) : <></>}
+                  <ChevronRight className={classes.arrow_icon} />
+                </div>
+                <div className={classes.card_footer}>
+                  <span className={classes.tag} style={{ color: accent }}>{entry.tag}</span>
+                </div>
+              </button>
+            );
+          })}
         </div>
       </section>
     </div>

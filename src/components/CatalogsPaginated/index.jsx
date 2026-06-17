@@ -168,7 +168,16 @@ function DrawerCatalogDetails({ serviceOffering, contract, policies, catalogDocu
   const { t } = useTranslation();
 
   const subject = serviceOffering?.credentialSubject || {};
-  const assets = subject["gx:aggregationOf"] || [];
+  const aggregationOf = subject["gx:aggregationOf"] || [];
+  const hasServiceOfferings = aggregationOf.some(a => a.type === 'ServiceOffering');
+  const schemaAssets = serviceOffering?.assetsWithSchema || [];
+  const assets = hasServiceOfferings
+    ? aggregationOf
+    : schemaAssets.map(a => ({
+        id: a['@id'],
+        'gx:name': a.properties?.name || a['@id'],
+        type: a.properties?.httpMethod || a['@type'] || 'Asset',
+      }));
   const offeringName = subject["gx:name"] || '';
   const offeringDesc = subject["gx:description"] || '';
 
