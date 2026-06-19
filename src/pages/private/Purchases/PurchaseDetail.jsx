@@ -187,7 +187,9 @@ function PurchaseDetail() {
               )}
             </div>
             <StatusBadge status={purchase.status}>
-              {t(`Purchases.status.${purchase.status}`, purchase.status)}
+              {purchase.status === 'paid' && !purchase.stripePaymentIntentId
+                ? t('Purchases.status.free')
+                : t(`Purchases.status.${purchase.status}`, purchase.status)}
             </StatusBadge>
           </header>
 

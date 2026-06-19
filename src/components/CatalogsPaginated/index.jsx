@@ -19,6 +19,11 @@ import {
   Business,
 } from '@mui/icons-material';
 
+function safeParseJSON(str, fallback = {}) {
+  if (!str) return fallback;
+  try { return JSON.parse(str); } catch { return fallback; }
+}
+
 function isAuthenticated() {
   try {
     const token = JSON.parse(localStorage.getItem('token') || 'null');
@@ -83,9 +88,9 @@ function Catalogs({ currentItems }) {
           width={480}
         >
           <DrawerCatalogDetails
-            serviceOffering={JSON.parse(selectedItem?.assets || '{}')}
-            contract={JSON.parse(selectedItem?.contractDefinition || '{}')}
-            policies={JSON.parse(selectedItem?.policies || '{}')}
+            serviceOffering={safeParseJSON(selectedItem?.assets)}
+            contract={safeParseJSON(selectedItem?.contractDefinition)}
+            policies={safeParseJSON(selectedItem?.policies)}
             catalogDocumentId={selectedItem?.documentId}
             provider={selectedItem?.organization || ''}
             tags={selectedItem?.tags?.map(t => t.label) || []}
@@ -163,6 +168,7 @@ const ASSET_ICONS = {
 function getAssetIcon(type) {
   return ASSET_ICONS[type] ?? <InsertDriveFileOutlined fontSize="small" />;
 }
+
 
 function DrawerCatalogDetails({ serviceOffering, contract, policies, catalogDocumentId, provider, tags, onNavigate, onNegotiate, onConsume }) {
   const { t } = useTranslation();
@@ -306,7 +312,7 @@ function DrawerCatalogDetails({ serviceOffering, contract, policies, catalogDocu
         >
           {hasActiveContract ? t("Catalogs.contractConsume") : t("Catalogs.contractNegotiate")}
         </button>
-        {!hasActiveContract && (
+        {!hasActiveContract && !isAuthenticated() && (
           <p className="contract-note">{t("Catalogs.requierCredential")}</p>
         )}
       </div>

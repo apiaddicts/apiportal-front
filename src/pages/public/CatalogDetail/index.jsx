@@ -45,10 +45,6 @@ function CatalogDetail({ initialSection, setIsOpen }) {
   const [gaiaXLoading, setGaiaXLoading] = useState(false);
 
   useEffect(() => {
-    dispatch(getcatalogs());
-  }, []);
-
-  useEffect(() => {
     const section = location.pathname.split("/").pop();
     setSection(section);
   }, [location]);
