@@ -28,7 +28,7 @@ function Catalog() {
     if (catalogs?.length === 0 && Object.keys(filtersCatalogs || {}).length === 0) {
       dispatch(getcatalogs());
     }
-  }, [catalogs, filtersCatalogs, dispatch]);
+  }, []);
 
   const resetFilters = () => {
     dispatch(getcatalogs());

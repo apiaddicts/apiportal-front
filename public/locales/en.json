@@ -716,6 +716,7 @@
   },
   "Checkout": {
     "buy": "Buy",
+    "get": "Get",
     "processing": "Processing…",
     "processingPayment": "Processing payment…",
     "retry": "Retry payment",
@@ -793,6 +794,7 @@
     "status": {
       "pending": "Pending",
       "paid": "Paid",
+      "free": "Free",
       "failed": "Failed",
       "consumed": "Consumed"
     }

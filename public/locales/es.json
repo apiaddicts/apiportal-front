@@ -716,6 +716,7 @@
   },
   "Checkout": {
     "buy": "Comprar",
+    "get": "Obtener",
     "processing": "Procesando…",
     "processingPayment": "Procesando pago…",
     "retry": "Reintentar pago",
@@ -793,6 +794,7 @@
     "status": {
       "pending": "Pendiente",
       "paid": "Pagado",
+      "free": "Gratuito",
       "failed": "Fallido",
       "consumed": "Consumido"
     }
