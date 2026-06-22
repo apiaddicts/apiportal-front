@@ -23,8 +23,9 @@ function offerFromCatalog(c) {
   const datasets = services?.['dcat:dataset'] ?? services?.dataset;
   const list = Array.isArray(datasets) ? datasets : datasets ? [datasets] : [];
   const wanted = cdOps?.assetsSelector?.operandRight;
+  const isOwn = (d) => d?.apiName === c.slug || (d?.['@id'] || '').startsWith(c.slug + '-');
   const dataset = (Array.isArray(wanted) ? list.find(d => wanted.includes(d?.['@id'])) : null)
-    || list.find(d => d?.[`${SCHEMA_NS}offers`] || d?.['schema:offers']);
+    || list.find(d => isOwn(d) && (d?.[`${SCHEMA_NS}offers`] || d?.['schema:offers']));
   return dataset?.[`${SCHEMA_NS}offers`] || dataset?.['schema:offers'] || null;
 }
 

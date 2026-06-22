@@ -8,7 +8,7 @@ import FormError from '../ui/FormError/FormError';
 const ACTIVE_STATUSES = new Set(['pending', 'paid', 'consumed']);
 
 function formatPrice(amountCents, currency) {
-  if (amountCents == null) return null;
+  if (amountCents == null || amountCents === 0) return null;
   return new Intl.NumberFormat(undefined, { style: 'currency', currency: currency || 'EUR' })
     .format(amountCents / 100);
 }
