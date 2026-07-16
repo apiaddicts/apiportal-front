@@ -19,7 +19,7 @@ import CustomMarkdown from '../../../components/CustomMarkdown';
 import { getHomeContent } from '../../../redux/actions/homeAction';
 import { getLibraryBySlug, getLibraries } from '../../../redux/actions/libraryAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
-import config from '../../../services/config';
+import config, { getMediaUrl } from '../../../services/config';
 import classes from './api-detail.module.scss';
 import apiSecurity from '../../../static/img/badges/apis-security.png';
 import apiQuality from '../../../static/img/badges/apis-quality.png';
@@ -51,7 +51,7 @@ function ApiDetail({ setIsOpen }) {
 
   useEffect(() => {
     if (library?.image?.length > 0) {
-      setBannerImg(`${library.image[0].formats?.medium?.url || library.image[0].url}`);
+      setBannerImg(getMediaUrl(library.image[0].formats?.medium?.url || library.image[0].url));
     } else if (library && Object.keys(library).length > 0) {
       setBannerImg(config.notImage);
     }
@@ -62,7 +62,7 @@ function ApiDetail({ setIsOpen }) {
       const imgs = {};
       libraries.forEach(lib => {
         imgs[lib.documentId] = lib.image?.length > 0
-          ? `${lib.image[0].formats?.medium?.url || lib.image[0].url}`
+          ? getMediaUrl(lib.image[0].formats?.medium?.url || lib.image[0].url)
           : config.notImage;
       });
       setCardsImages(imgs);
@@ -135,7 +135,7 @@ function ApiDetail({ setIsOpen }) {
 
   const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
     const itemData = {
-      img: item?.image?.[0]?.url,
+      img: getMediaUrl(item?.image?.[0]?.url),
       title: item?.title,
       description: item?.description,
       linkText: t('ApiDetail.moreInfo'),

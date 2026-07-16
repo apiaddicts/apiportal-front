@@ -4,6 +4,7 @@ import CustomIcon from '../../../components/MdIcon/CustomIcon';
 import { useTranslation } from 'react-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSettingPage } from '../../../redux/actions/settingPageAction';
+import { getMediaUrl } from '../../../services/config';
 
 const CardLibrary = ({ api }) => {
   const { t } = useTranslation();
@@ -17,7 +18,7 @@ const CardLibrary = ({ api }) => {
   }, [dispatch, settingPage]);
 
   const logoUrl = settingPage?.Logo?.url
-    ? `${settingPage.Logo.url}`
+    ? getMediaUrl(settingPage.Logo.url)
     : null;
 
   return (

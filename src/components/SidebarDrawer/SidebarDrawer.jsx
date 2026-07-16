@@ -36,6 +36,7 @@ import PageTitle from '../../core/HeaderTitle/PageTitle';
 import getListItems from '../../core/const';
 import { useTranslation } from 'react-i18next';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
+import { getMediaUrl } from '../../services/config';
 
 function SidebarDrawer({ children, user }) {
   const { t, i18n } = useTranslation(); // Asegurarse de obtener tanto t como i18n
@@ -138,7 +139,7 @@ function SidebarDrawer({ children, user }) {
   });
 
   const logoUrl = settingPage?.Logo?.url
-    ? `${settingPage.Logo.url}`
+    ? getMediaUrl(settingPage.Logo.url)
     : null;
 
   const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(

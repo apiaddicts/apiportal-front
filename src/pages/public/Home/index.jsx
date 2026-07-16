@@ -19,7 +19,7 @@ import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonCom
 import Slick from '../../../components/SlickSlider/Slick';
 import classes from './home.module.scss';
 import CustomIcon from '../../../components/MdIcon/CustomIcon';
-import config from '../../../services/config';
+import config, { getMediaUrl } from '../../../services/config';
 import { useTranslation } from 'react-i18next';
 
 moment.locale('es');
@@ -37,7 +37,7 @@ function Home({ setOpenForm }) {
       const imgs = {};
       libraries.forEach(lib => {
         imgs[lib.id] = lib.image?.length > 0
-          ? `${lib.image[0].formats?.medium?.url || lib.image[0].url}`
+          ? getMediaUrl(lib.image[0].formats?.medium?.url || lib.image[0].url)
           : config.notImage;
       });
       setCardsImages(imgs);
@@ -60,7 +60,7 @@ function Home({ setOpenForm }) {
   const filterSlider = homePage && homePage.contentSections ? homePage.contentSections.filter((item) => item.__component === 'custom.carousel') : [];
   const slides = filterSlider.length > 0 ? filterSlider[0].sliderCarousel.map((i) => {
     const response = {
-      imgSrc: i.imgSrc ? i.imgSrc.url : '',
+      imgSrc: i.imgSrc ? getMediaUrl(i.imgSrc.url) : '',
       title: i.title,
       actionButtons: i.actionButtons ? i.actionButtons : null,
       subtitleList: i.subtitleList ? i.subtitleList : null,
@@ -70,7 +70,7 @@ function Home({ setOpenForm }) {
   // Load section
   const filterSection = homePage && homePage.contentSections ? homePage.contentSections.filter((item) => item.__component === 'home.work-section') : [];
   const titleSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].title ? filterSection[0].title : '';
-  const backgroundSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].background ? filterSection[0].background.url : '';
+  const backgroundSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].background ? getMediaUrl(filterSection[0].background.url) : '';
   const itemsSection = filterSection.length > 0 && filterSection.length === 1 && filterSection[0].Steps ? filterSection[0].Steps.map((i) => {
     const response = {
       icon: i.number,
@@ -101,7 +101,7 @@ function Home({ setOpenForm }) {
   const filterHomeBanner = homePage && homePage.contentSections && homePage.contentSections?.length > 0 ? homePage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
   const filterHomeBannerTitle = filterHomeBanner.length > 0 && filterHomeBanner[0]?.title ? filterHomeBanner[0]?.title : '';
   const filterHomeBannerSubtitle = filterHomeBanner.length > 0 && filterHomeBanner[0]?.subtitle ? filterHomeBanner[0]?.subtitle : '';
-  const filterHomeBannerImage = filterHomeBanner.length > 0 && filterHomeBanner[0]?.background ? filterHomeBanner[0]?.background?.url : '';
+  const filterHomeBannerImage = filterHomeBanner.length > 0 && filterHomeBanner[0]?.background ? getMediaUrl(filterHomeBanner[0]?.background?.url) : '';
   const filterHomeBannerNameButtom = filterHomeBanner.length > 0 && filterHomeBanner[0]?.buttons.length > 0 ? filterHomeBanner[0]?.buttons?.[0]?.name : '';
   const filterHomeBannerNameTarget = filterHomeBanner.length > 0 && filterHomeBanner[0]?.buttons.length > 0 ? filterHomeBanner[0]?.buttons?.[0]?.target : '/#data';
   const filterHomeBannerLink = filterHomeBanner.length > 0 && filterHomeBanner[0]?.buttons?.length > 0 ? filterHomeBanner[0].buttons[0].link : null;
@@ -111,7 +111,7 @@ function Home({ setOpenForm }) {
 
   const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
     const itemData = {
-      img: item?.image?.[0]?.url,
+      img: getMediaUrl(item?.image?.[0]?.url),
       title: item?.title,
       description: item?.description,
       linkText: t('Home.learnMore'),
