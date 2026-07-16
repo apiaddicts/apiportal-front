@@ -14,6 +14,7 @@ import Novedades from '../../../components/Novedades';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
 import Slick from '../../../components/SlickSlider/Slick';
 import BlogPostsPaginated from '../../../components/BlogPostsPaginated';
+import { getMediaUrl } from '../../../services/config';
 import stylesBlog from './blog.module.scss';
 import classes from './home.module.scss';
 
@@ -54,7 +55,7 @@ function Blog({ setIsOpen, isPrivate, isPrivateNews }) {
   // load slider
   const BannerFilter = blogPage && Object.keys(blogPage).length > 0 && blogPage.contentSections && blogPage.contentSections.length > 0 ? blogPage.contentSections.filter((item) => item.__component === 'home.banner-section') : [];
   const bannerTitle = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0]?.title ? BannerFilter[0]?.title : t('Blog.discoverNews');
-  const bannerImage = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0]?.background ? BannerFilter[0]?.background?.url : '';
+  const bannerImage = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0]?.background ? getMediaUrl(BannerFilter[0]?.background?.url) : '';
   const bannerSearch = BannerFilter.length > 0 && BannerFilter.length === 1 && BannerFilter[0]?.search ? BannerFilter[0]?.search : '';
   const TabsFilter = blogPage && Object.keys(blogPage).length > 0 && blogPage.contentSections && blogPage.contentSections.length > 0 ? blogPage.contentSections.filter((item) => item.__component === 'custom.tab-card') : [];
 
@@ -71,7 +72,7 @@ function Blog({ setIsOpen, isPrivate, isPrivateNews }) {
 
   const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
     const itemData = {
-      img: item?.image ? item?.image[0]?.url : null,
+      img: item?.image ? getMediaUrl(item?.image[0]?.url) : null,
       title: item?.title,
       description: item?.description,
       linkText: t('Blog.learnMore'),
@@ -118,7 +119,7 @@ function Blog({ setIsOpen, isPrivate, isPrivateNews }) {
                             <div className={`d-xs-none ${stylesBlog.section__experiences__content}`}>
                               <div className={stylesBlog.section__experiences__content__img}>
                                 <div className={stylesBlog.section__experiences__content__img__overlay}>
-                                  <img src={tab?.img?.url} alt='' />
+                                  <img src={getMediaUrl(tab?.img?.url)} alt='' />
                                 </div>
                               </div>
                               <div className={stylesBlog.section__experiences__content__card}>

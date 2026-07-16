@@ -100,4 +100,9 @@ const config = {
   SiteKeyRecaptcha: import.meta.env.VITE_SITE_KEY_RECAPTCHA,
 };
 
+export const getMediaUrl = (url) => {
+  if (!url) return '';
+  return /^https?:\/\//i.test(url) ? url : `${config.apiUrlImgs || ''}${url}`;
+};
+
 export default config;

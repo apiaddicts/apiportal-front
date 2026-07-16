@@ -12,7 +12,7 @@ import classes from './navbar.module.scss';
 import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
 import CustomIcon from '../MdIcon/CustomIcon';
-import config from '../../services/config';
+import config, { getMediaUrl } from '../../services/config';
 import LanguageSelector from '../LanguageSelector/LanguageSelector';
 
 
@@ -68,7 +68,7 @@ function Navbar({ setIsOpen, setOpenForm }) {
   const secondaryColor = rootStyles.getPropertyValue('--secondary-color').trim();
 
   const logoUrl = settingPage?.Logo?.url
-    ? `${settingPage.Logo.url}`
+    ? getMediaUrl(settingPage.Logo.url)
     : null;
 
   const showAuthButtons =

@@ -10,6 +10,7 @@ import classes from './apppartners.module.scss';
 import appBg from '../../../static/img/app-partners-bg.jpg';
 import Base from '../../../components/Banner/Base';
 import Button from '../../../components/Buttons/Button';
+import { getMediaUrl } from '../../../services/config';
 
 moment.locale('es');
 
@@ -28,7 +29,7 @@ function AppPartners({ setOpenForm }) {
 
   const listSection = (item) => {
     const section = appPartnersPage && appPartnersPage.contentSections ? appPartnersPage.contentSections.filter((item) => item.__component === 'home.work-section')[item] : [];
-    const background = section && section?.background ? section?.background?.url : '';
+    const background = section && section?.background ? getMediaUrl(section?.background?.url) : '';
     const items = section && section.Steps.length ? section.Steps.map((i) => {
       const response = {
         icon: i.number,
@@ -106,7 +107,7 @@ function AppPartners({ setOpenForm }) {
       {appPartnersPage && Object.keys(appPartnersPage).length > 0 ? (
         <div>
           <Base
-            img={bannerSection?.[0]?.background?.url ? bannerSection?.background?.url : appBg}
+            img={bannerSection?.[0]?.background?.url ? getMediaUrl(bannerSection?.background?.url) : appBg}
             style={bannerStyle}
           >
             <div className={`container display_flex ${classes.app__content}`}>
