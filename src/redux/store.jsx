@@ -25,6 +25,7 @@ import gettingStartedReducer from './reducer/gettingStartedReducer';
 import settingReducer from './reducer/settingReducer';
 import authReducer from './reducer/authReducer';
 import mcpLibraryReducer from './reducer/mcpLibraryReducer';
+import agentLibraryReducer from './reducer/agentLibraryReducer';
 import apimReducer from './reducer/apimReducer';
 import userCredentialReducer from './reducer/userCredentialReducer';
 const composeEnhancers = (typeof window !== 'undefined' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) || compose;
@@ -39,6 +40,7 @@ const reducers = combineReducers({
   billing: BillingReducer,
   library: libraryReducer,
   mcpLibrary: mcpLibraryReducer,
+  agentLibrary: agentLibraryReducer,
   user: userReducer,
   products: productReducer,
   suscripcions: subscriptionsReducer,

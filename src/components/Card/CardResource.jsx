@@ -32,6 +32,26 @@ function CardResource({ resource, type }) {
         </>
       );
     }
+    if (type === 'skill') {
+      return (
+        <>
+          {resource?.tags?.length > 0 && (
+            <div className={classes.resource__card__row}>
+              <span className={classes.resource__card__label}>{t('AgentDetail.skillTags')}</span>
+              <span className={classes.resource__card__value}>{resource.tags.join(', ')}</span>
+            </div>
+          )}
+          {resource?.examples?.length > 0 && (
+            <div className={classes.resource__card__row}>
+              <span className={classes.resource__card__label}>{t('AgentDetail.skillExamples')}</span>
+              {resource.examples.map((example) => (
+                <span key={example} className={classes.resource__card__value}>{example}</span>
+              ))}
+            </div>
+          )}
+        </>
+      );
+    }
     if (type === 'prompt') {
       return (
         <>
