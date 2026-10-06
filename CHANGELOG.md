@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-10-05
+
+## Added
+
+- **Agents Catalog:** New `/agents` page built like the Mcps catalog (`LibraryPaginated` + `CardInformation`), with filters by version, protocol (API, A2A, A2UI) and rating, search, sorting, page size and list/grid views. Cards show the protocols as colored chips.
+- **Agent Detail:** New `/agents/:slug` page built from the A2A agent card: `BannerImage` header, skills (`CardResource`), production capabilities, protocols with links to the agent docs, contact box and related agents (`CardBasic`).
+- **Agent Card Support:** `agentLibraryAction` reads A2A v0.3 and v1.0 agent cards into a single shape and filters/sorts the catalog the same way as `mcpLibraryAction`.
+- **Agent Quality:** Agent detail shows the A–E grades with the shared `Ratings` gauges and a "Download report" button when `reportUrl` is set.
+- **Agent Description:** Agent detail shows the CMS `markdown` field in an "About this agent" section when it is filled, as MCP detail does.
+
 
 ## [1.2.1] - 2026-07-16
 

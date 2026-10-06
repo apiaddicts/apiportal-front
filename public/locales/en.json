@@ -231,6 +231,90 @@
     "tags": "Tags",
     "globalRating": "Rating"
   },
+  "Agents": {
+    "title": "Agents",
+    "description": "Discover published agents, their capabilities and the protocols they speak. Filter by version, protocol and rating to find the right agent for your integration.",
+    "filterBy": "Filter by",
+    "version": "Version",
+    "protocol": "Protocol",
+    "globalRating": "Rating",
+    "clearFilters": "Clear filters",
+    "searchPlaceholder": "Search agents...",
+    "itemsPerPage": "Items per page",
+    "noData": "No agents available"
+  },
+  "AgentDetail": {
+    "notFound": "Agent not found",
+    "contact": "Contact",
+    "globalGradesTitle": "Global grades of the agent",
+    "globalGradesSubtitle": "Overall quality and readiness indicators",
+    "ratingGlobal": "Global",
+    "ratingDefinition": "Definition",
+    "ratingSecurity": "Security",
+    "ratingQuality": "Quality",
+    "downloadReport": "Download agent report",
+    "about": "About this agent",
+    "whatItDoes": "What it does",
+    "skillsReady_one": "{{count}} skill ready to use.",
+    "skillsReady_other": "{{count}} skills ready to use.",
+    "builtForProduction": "Built for production",
+    "builtForProductionSubtitle": "Capabilities declared in the agent's published card.",
+    "notSupported": "Not supported",
+    "features": {
+      "streaming": {
+        "title": "Streaming responses",
+        "description": "Results arrive token by token."
+      },
+      "pushNotifications": {
+        "title": "Push notifications",
+        "description": "Get notified when long tasks finish."
+      },
+      "taskHistory": {
+        "title": "Task history",
+        "description": "Every state change is traceable."
+      },
+      "textJsonInput": {
+        "title": "Text and JSON input",
+        "description": "Send plain prompts or structured payloads."
+      },
+      "interactiveUi": {
+        "title": "Interactive UI output",
+        "description": "Returns renderable A2UI components."
+      },
+      "versionedReleases": {
+        "title": "Versioned releases",
+        "description": "Pin version {{version}} or follow the latest."
+      }
+    },
+    "integrateYourWay": "Integrate your way",
+    "integrateYourWaySubtitle": "Connect through the protocol that fits your stack. Each one has its own reference docs.",
+    "protocols": {
+      "API": "Call the agent synchronously over REST with a JSON request and response.",
+      "A2A": "Agent-to-agent tasks with streaming and status updates from your own agents.",
+      "A2UI": "Render the agent's interactive UI components directly in your app."
+    },
+    "viewDocs": "View docs",
+    "youMayAlsoLike": "You may also like",
+    "youMayAlsoLikeSubtitle": "More agents with similar capabilities.",
+    "plan": {
+      "title": "Production",
+      "price": "Custom",
+      "period": "· per subscription",
+      "credentials": "Production credentials",
+      "analytics": "SLA and usage analytics",
+      "support": "Priority support"
+    },
+    "facts": {
+      "version": "Version",
+      "provider": "Provider",
+      "protocols": "Protocols",
+      "spec": "Agent card",
+      "docs": "Docs"
+    },
+    "moreInfo": "More info",
+    "skillTags": "Tags",
+    "skillExamples": "Examples"
+  },
   "Blog": {
     "learnMore": "Learn more",
     "noData": "No data available",
@@ -606,6 +690,7 @@
   "Navbar": {
     "apis": "APIs",
     "mcps": "MCPs",
+    "agents": "Agents",
     "blog": "Blog",
     "faqs": "FAQs",
     "myProfile": "My Profile",

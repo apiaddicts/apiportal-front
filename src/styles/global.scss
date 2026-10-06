@@ -964,6 +964,32 @@ a {
   color: $secondary_white;
 }
 
+.protocol-api,
+.protocol-a2a,
+.protocol-a2ui {
+  opacity: 1 !important;
+  border: 1px solid;
+  font-weight: 600;
+}
+
+.protocol-api {
+  background-color: #d6ecfa !important;
+  border-color: #9fcdec;
+  color: #0b4a70 !important;
+}
+
+.protocol-a2a {
+  background-color: #fde3c0 !important;
+  border-color: #f2bf7a;
+  color: #7a3f05 !important;
+}
+
+.protocol-a2ui {
+  background-color: #d3efe2 !important;
+  border-color: #92d3b4;
+  color: #175a3e !important;
+}
+
 .post {
   background-color: var(--primary-color);
   color: $secondary_white !important;
