@@ -13,13 +13,13 @@ function getAgentPageContent() {
 }
 
 function getAgents() {
-  return fetch(`${config.apiUrl}/library-agents?populate[image]=true&populate[ratings]=true&pagination[pageSize]=100`, requestOptions())
+  return fetch(`${config.apiUrl}/library-agents?populate[image]=true&populate[ratings]=true&populate[protocols]=true&pagination[pageSize]=100`, requestOptions())
     .then(handleResponse)
     .then((response) => response?.data || []);
 }
 
 function getAgentBySlug(slug) {
-  return fetch(`${config.apiUrl}/library-agents?filters[slug][$eq]=${slug}&populate[image]=true&populate[ratings]=true`, requestOptions())
+  return fetch(`${config.apiUrl}/library-agents?filters[slug][$eq]=${slug}&populate[image]=true&populate[ratings]=true&populate[protocols]=true`, requestOptions())
     .then(handleResponse)
     .then((response) => response?.data?.[0] || null);
 }
