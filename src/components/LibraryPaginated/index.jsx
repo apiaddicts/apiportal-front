@@ -26,6 +26,7 @@ function LibraryGrid({ currentItems, basePath, anchor, viewDocLabel }) {
             status={item?.status || ''}
             version={item?.version || ''}
             buttons={item?.tags || ''}
+            tags={item?.skillTags || []}
             colorStatus={item?.color_status || ''}
             info={viewDocLabel}
             description={item?.description || ''}

@@ -262,35 +262,32 @@
     "notSupported": "Not supported",
     "features": {
       "streaming": {
-        "title": "Streaming responses",
-        "description": "Results arrive token by token."
+        "title": "Streaming",
+        "description": "Supports incremental token streaming for real-time responses.",
+        "descriptionOff": "No incremental token streaming — responses are returned whole."
       },
       "pushNotifications": {
         "title": "Push notifications",
-        "description": "Get notified when long tasks finish."
+        "description": "Sends webhook callbacks when task state changes.",
+        "descriptionOff": "No webhook callbacks; the client polls for task results."
       },
       "taskHistory": {
-        "title": "Task history",
-        "description": "Every state change is traceable."
+        "title": "State transition history",
+        "description": "Task state changes are retained and queryable.",
+        "descriptionOff": "Task state changes are not retained."
       },
-      "textJsonInput": {
-        "title": "Text and JSON input",
-        "description": "Send plain prompts or structured payloads."
-      },
-      "interactiveUi": {
-        "title": "Interactive UI output",
-        "description": "Returns renderable A2UI components."
-      },
-      "versionedReleases": {
-        "title": "Versioned releases",
-        "description": "Pin version {{version}} or follow the latest."
+      "extendedAgentCard": {
+        "title": "Extended agent card",
+        "description": "Authenticated clients can get an extended agent card with more details.",
+        "descriptionOff": "No extended agent card; the public card is the only one."
       }
     },
     "integrateYourWay": "Integrate your way",
     "integrateYourWaySubtitle": "Connect through the protocol that fits your stack. Each one has its own reference docs.",
     "protocols": {
-      "API": "Call the agent synchronously over REST with a JSON request and response.",
-      "A2A": "Agent-to-agent tasks with streaming and status updates from your own agents.",
+      "JSON-RPC": "A2A over JSON-RPC 2.0: send tasks from your own agents and follow their status.",
+      "gRPC": "A2A over gRPC: high-performance calls with Protocol Buffers.",
+      "HTTP+JSON": "A2A over a REST-style HTTP API with JSON requests and responses.",
       "A2UI": "Render the agent's interactive UI components directly in your app."
     },
     "viewDocs": "View docs",
