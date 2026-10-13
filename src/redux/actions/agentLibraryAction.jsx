@@ -4,7 +4,11 @@ import agentLibraryService from '../../services/agentLibraryService';
 
 import store from '../store';
 
-const PROTOCOL_ORDER = ['API', 'A2A', 'A2UI'];
+const PROTOCOL_LABELS = { JSONRPC: 'JSON-RPC', GRPC: 'gRPC', HTTP_JSON: 'HTTP+JSON', A2UI: 'A2UI' };
+const PROTOCOL_ORDER = Object.keys(PROTOCOL_LABELS);
+const A2A_VERSIONS = { v0_3: '0.3', v1_0: '1.0' };
+
+export const getProtocolClass = (label) => `protocol-${label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 
 const asArray = (value) => (Array.isArray(value) ? value : []);
 const unique = (values) => [...new Set(values.filter(Boolean))];
@@ -51,13 +55,16 @@ const getCardInterfaces = (card) => {
   return [...main, ...additional];
 };
 
-// JSONRPC/GRPC bindings are A2A, HTTP/REST ones are API; A2UI is declared as an extension or output mode.
+const toProtocol = (binding) => {
+  const normalized = String(binding || '').toUpperCase().replace(/[^A-Z]/g, '');
+  if (normalized === 'JSONRPC') return 'JSONRPC';
+  if (normalized === 'GRPC') return 'GRPC';
+  if (['HTTPJSON', 'HTTP', 'REST'].includes(normalized)) return 'HTTP_JSON';
+  return null;
+};
+
 const getCardProtocols = (card, interfaces) => {
-  const protocols = interfaces.map(({ binding }) => {
-    if (/JSONRPC|JSON-RPC|GRPC/i.test(binding)) return 'A2A';
-    if (/HTTP|REST/i.test(binding)) return 'API';
-    return null;
-  });
+  const protocols = interfaces.map(({ binding }) => toProtocol(binding));
   const a2ui = asArray(card.capabilities?.extensions).some((ext) => /a2ui/i.test(ext?.uri || ''))
     || asArray(card.defaultOutputModes).some((mode) => /a2ui/i.test(mode));
   if (a2ui) protocols.push('A2UI');
@@ -69,7 +76,10 @@ const toAgent = (entry) => {
   if (!entry) return null;
   const card = entry.agentCard && typeof entry.agentCard === 'object' ? entry.agentCard : {};
   const interfaces = getCardInterfaces(card);
-  const protocols = getCardProtocols(card, interfaces);
+  const cmsProtocols = asArray(entry.protocols).map((protocol) => protocol?.name).filter((name) => PROTOCOL_LABELS[name]);
+  const protocolCodes = cmsProtocols.length > 0 ? cmsProtocols : getCardProtocols(card, interfaces);
+  const protocols = PROTOCOL_ORDER.filter((code) => protocolCodes.includes(code)).map((code) => PROTOCOL_LABELS[code]);
+  const specVersion = A2A_VERSIONS[entry.a2aVersion] || (asArray(card.supportedInterfaces).length > 0 ? '1.0' : '0.3');
   const capabilities = card.capabilities || {};
   const skills = asArray(card.skills).map((skill) => ({
     id: skill?.id || '',
@@ -86,7 +96,7 @@ const toAgent = (entry) => {
     description: entry.description || card.description || '',
     version: entry.version || card.version || '',
     globalRating: entry.ratings?.globalRating || '',
-    specVersion: asArray(card.supportedInterfaces).length > 0 ? '1.0' : '0.3',
+    specVersion,
     provider: card.provider?.organization || '',
     documentationUrl: card.documentationUrl || '',
     interfaces,
@@ -95,12 +105,13 @@ const toAgent = (entry) => {
       streaming: capabilities.streaming === true,
       pushNotifications: capabilities.pushNotifications === true,
       taskHistory: capabilities.stateTransitionHistory === true,
+      extendedAgentCard: capabilities.extendedAgentCard === true,
     },
     inputModes: asArray(card.defaultInputModes),
     skills,
     skillTags,
     // Chips shown by the shared library card.
-    tags: protocols.map((protocol) => ({ label: protocol, class: `protocol-${protocol.toLowerCase()}` })),
+    tags: protocols.map((protocol) => ({ label: protocol, class: getProtocolClass(protocol) })),
   };
 };
 

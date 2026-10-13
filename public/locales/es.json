@@ -262,35 +262,32 @@
     "notSupported": "No soportado",
     "features": {
       "streaming": {
-        "title": "Respuestas en streaming",
-        "description": "Los resultados llegan token a token."
+        "title": "Streaming",
+        "description": "Soporta streaming incremental de tokens para respuestas en tiempo real.",
+        "descriptionOff": "Sin streaming incremental de tokens — las respuestas se devuelven completas."
       },
       "pushNotifications": {
         "title": "Notificaciones push",
-        "description": "Recibe un aviso cuando terminan las tareas largas."
+        "description": "Envía callbacks por webhook cuando cambia el estado de una tarea.",
+        "descriptionOff": "Sin callbacks por webhook; el cliente consulta el resultado por polling."
       },
       "taskHistory": {
-        "title": "Historial de tareas",
-        "description": "Cada cambio de estado es trazable."
+        "title": "Historial de transición de estado",
+        "description": "Los cambios de estado de la tarea se conservan y son consultables.",
+        "descriptionOff": "Los cambios de estado de la tarea no se conservan."
       },
-      "textJsonInput": {
-        "title": "Entrada de texto y JSON",
-        "description": "Envía prompts en texto o payloads estructurados."
-      },
-      "interactiveUi": {
-        "title": "Salida de UI interactiva",
-        "description": "Devuelve componentes A2UI renderizables."
-      },
-      "versionedReleases": {
-        "title": "Versiones publicadas",
-        "description": "Fija la versión {{version}} o sigue la última."
+      "extendedAgentCard": {
+        "title": "Agent card extendido",
+        "description": "Los clientes autenticados pueden obtener un agent card extendido con más detalles.",
+        "descriptionOff": "Sin agent card extendido; solo existe el card público."
       }
     },
     "integrateYourWay": "Intégralo a tu manera",
     "integrateYourWaySubtitle": "Conéctate con el protocolo que mejor encaje en tu stack. Cada uno tiene su propia documentación.",
     "protocols": {
-      "API": "Llama al agente de forma síncrona por REST con petición y respuesta JSON.",
-      "A2A": "Tareas entre agentes con streaming y actualizaciones de estado desde tus propios agentes.",
+      "JSON-RPC": "A2A sobre JSON-RPC 2.0: envía tareas desde tus propios agentes y sigue su estado.",
+      "gRPC": "A2A sobre gRPC: llamadas de alto rendimiento con Protocol Buffers.",
+      "HTTP+JSON": "A2A sobre una API HTTP de estilo REST con peticiones y respuestas JSON.",
       "A2UI": "Renderiza los componentes de UI interactivos del agente directamente en tu app."
     },
     "viewDocs": "Ver docs",

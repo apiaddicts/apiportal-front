@@ -13,7 +13,7 @@ import CustomMarkdown from '../../../components/CustomMarkdown';
 import Icon from '../../../components/MdIcon/Icon';
 import Ratings from '../../../components/Ratings';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
-import { getAgentLibraryBySlug, getAgentLibraries } from '../../../redux/actions/agentLibraryAction';
+import { getAgentLibraryBySlug, getAgentLibraries, getProtocolClass } from '../../../redux/actions/agentLibraryAction';
 import config, { getMediaUrl } from '../../../services/config';
 import classes from './agent-detail.module.scss';
 
@@ -62,14 +62,10 @@ function AgentDetail() {
     .filter((other) => other.skillTags.some((tag) => agent.skillTags.includes(tag)))
     .slice(0, 3);
 
-  const features = [
-    { key: 'streaming', on: agent.capabilities.streaming },
-    { key: 'pushNotifications', on: agent.capabilities.pushNotifications },
-    { key: 'taskHistory', on: agent.capabilities.taskHistory },
-    { key: 'textJsonInput', on: agent.inputModes.length > 0, detail: agent.inputModes.join(', ') },
-    { key: 'interactiveUi', on: agent.protocols.includes('A2UI') },
-    { key: 'versionedReleases', on: true },
-  ];
+  const capabilityKeys = agent.specVersion === '1.0' ?
+    ['streaming', 'pushNotifications', 'extendedAgentCard'] :
+    ['streaming', 'pushNotifications', 'taskHistory'];
+  const features = capabilityKeys.map((key) => ({ key, on: agent.capabilities[key] }));
 
   const facts = [
     { key: 'version', value: agent.version },
@@ -156,15 +152,14 @@ function AgentDetail() {
               <div className={classes.features}>
                 {features.map((feature) => (
                   <div key={feature.key} className={`${classes.feature} ${feature.on ? '' : classes['feature--off']}`}>
-                    <Icon id='MdOutlineCheckCircle' />
+                    <Icon id={feature.on ? 'MdOutlineCheckCircle' : 'MdOutlineCancel'} />
                     <div>
                       <b>{t(`AgentDetail.features.${feature.key}.title`)}</b>
                       <span>
-                        {feature.on
-                          ? t(`AgentDetail.features.${feature.key}.description`, { version: agent.version })
-                          : t('AgentDetail.notSupported')}
+                        {feature.on ?
+                          t(`AgentDetail.features.${feature.key}.description`) :
+                          t(`AgentDetail.features.${feature.key}.descriptionOff`)}
                       </span>
-                      {feature.on && feature.detail && <code>{feature.detail}</code>}
                     </div>
                   </div>
                 ))}
@@ -178,7 +173,7 @@ function AgentDetail() {
                 <div className={classes.integrations}>
                   {agent.protocols.map((protocol) => (
                     <div key={protocol} className={classes.integration}>
-                      <Chip title={protocol} className={`protocol-${protocol.toLowerCase()}`} spanClass='fs__10 font-weight-medium' />
+                      <Chip title={protocol} className={getProtocolClass(protocol)} spanClass='fs__10 font-weight-medium' />
                       <p>{t(`AgentDetail.protocols.${protocol}`)}</p>
                       {agent.documentationUrl && (
                         <a href={agent.documentationUrl} target='_blank' rel='noopener noreferrer'>
