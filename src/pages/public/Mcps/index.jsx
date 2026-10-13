@@ -13,7 +13,7 @@ import LibraryPaginated from '../../../components/LibraryPaginated';
 import Icon from '../../../components/MdIcon/Icon';
 import classes from './mcps.module.scss';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
-import config from '../../../services/config';
+import config, { getMediaUrl } from '../../../services/config';
 import { useTranslation } from 'react-i18next';
 
 function Mcps({ setIsOpen }) {
@@ -162,7 +162,7 @@ function Mcps({ setIsOpen }) {
   }, [products]);
 
   const mcpImageUrl = filterMcpBanner?.[0]?.background?.url
-    ? `${filterMcpBanner[0].background.url}`
+    ? getMediaUrl(filterMcpBanner[0].background.url)
     : config.notImage;
 
   const fMcps = mcpLibraries && mcpLibraries.length > 0 ? mcpLibraries : [];

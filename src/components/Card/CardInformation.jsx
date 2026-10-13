@@ -10,7 +10,7 @@ import Base from './Base';
 import config from '../../services/config';
 import './cards.scss';
 
-function CardInformation({ img, buttons = [], title = '', description = '', globalRating = null, reading = null, info = null, maxWidth, version, status, theme, blog = false, modal, link, css_styles = {}, blogTitle = false, id }) {
+function CardInformation({ img, buttons = [], tags = [], title = '', description = '', globalRating = null, reading = null, info = null, maxWidth, version, status, theme, blog = false, modal, link, css_styles = {}, blogTitle = false, id }) {
   const { t } = useTranslation();
   const [colorStatus, setColorStatus] = useState('');
 
@@ -134,6 +134,14 @@ function CardInformation({ img, buttons = [], title = '', description = '', glob
                 {description || <span className="card__no__description">{t('noDescription')}</span>}
               </p>
             </HashLink>
+
+            {tags.length > 0 && (
+              <div className='card__tags'>
+                {tags.map((tag) => (
+                  <span key={tag} className='card__tag'>{tag}</span>
+                ))}
+              </div>
+            )}
 
             {info && modal ? (
               <HashLink smooth to={link}>

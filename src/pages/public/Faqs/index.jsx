@@ -5,6 +5,7 @@ import Accordion from '../../../components/Accordion/Accordion';
 import AccordionFilter from '../../../components/Accordion/AccordionFilter';
 import BannerStatic from '../../../components/Banner/BannerStatic';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
+import { getMediaUrl } from '../../../services/config';
 import classes from './faqs.module.scss';
 
 function Faqs({ isPrivate }) {
@@ -48,7 +49,7 @@ function Faqs({ isPrivate }) {
           {!isPrivate && (
             <BannerStatic
               title={dataFaq?.contentSections?.[0]?.title}
-              img={dataFaq.contentSections?.[0]?.background?.url}
+              img={getMediaUrl(dataFaq.contentSections?.[0]?.background?.url)}
             />
           )}
           <section className={`container ${classes.faq}`}>

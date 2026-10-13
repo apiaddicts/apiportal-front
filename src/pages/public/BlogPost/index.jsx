@@ -16,6 +16,7 @@ import styles from './blog-post.module.scss';
 import classes from './home.module.scss';
 import Icon from '../../../components/MdIcon/Icon';
 import CardBasic from '../../../components/Card/CardBasic';
+import { getMediaUrl } from '../../../services/config';
 
 const stylesPerso = {
   height: '345px',
@@ -56,7 +57,7 @@ function BlogDetails({ setIsOpen }) {
 
   const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item, i) => {
     const itemData = {
-      img: item?.image?.[0]?.url,
+      img: getMediaUrl(item?.image?.[0]?.url),
       title: item?.title,
       description: item?.description,
       linkText: t('Blog.learnMore'),
@@ -75,7 +76,7 @@ function BlogDetails({ setIsOpen }) {
           content={blog?.description ? blog?.description : ''}
         />
         <meta property='og:title' content={blog?.title ? blog?.title : ''} />
-        <meta property='og:image' content={blog?.image ? blog?.image?.[0]?.url : ''} />
+        <meta property='og:image' content={blog?.image ? getMediaUrl(blog?.image?.[0]?.url) : ''} />
         <meta property='og:description' content={blog?.description ? blog?.description : ''} />
         <meta property='og:url' content={`${window.location.protocol}//${window.location.hostname}/blog/${blog?.id}`} />
         <meta property='og:locale' content='es_MX' />
@@ -85,13 +86,13 @@ function BlogDetails({ setIsOpen }) {
         <meta name='twitter:site' content='Worlters Kluwer | Developer Portal' />
         <meta name='twitter:title' content={blog?.title ? blog?.title : ''} />
         <meta name='twitter:description' content={blog?.description ? blog?.description : ''} />
-        <meta name='twitter:image' content={blog?.image ? blog?.image?.[0]?.url : ''} />
+        <meta name='twitter:image' content={blog?.image ? getMediaUrl(blog?.image?.[0]?.url) : ''} />
       </Helmet>
       {blog && Object.keys(blog).length > 0 ? (
         <>
           <BannerStatic
             title={blog?.title ? blog?.title : t('Blog.discoverNews')}
-            img={blog?.image ? blog?.image?.[0]?.url : ''}
+            img={blog?.image ? getMediaUrl(blog?.image?.[0]?.url) : ''}
             styles={stylesPerso}
             stylesTitle={stylesBannerTitle}
           />

@@ -6,6 +6,13 @@ import { useNavigate } from 'react-router-dom';
 
 import CardInformation from '../Card/CardInformation';
 import classes from './library-paginated.module.scss';
+import config, { getMediaUrl } from '../../services/config';
+
+function getItemImageUrl(item) {
+  return item?.image?.length > 0
+    ? getMediaUrl(item.image[0].formats?.medium?.url || item.image[0].url)
+    : config.notImage;
+}
 
 function LibraryGrid({ currentItems, basePath, anchor, viewDocLabel }) {
   return (
@@ -14,10 +21,12 @@ function LibraryGrid({ currentItems, basePath, anchor, viewDocLabel }) {
         currentItems.map((item, index) => (
           <CardInformation
             key={index}
+            img={getItemImageUrl(item)}
             title={item?.title || ''}
             status={item?.status || ''}
             version={item?.version || ''}
             buttons={item?.tags || ''}
+            tags={item?.skillTags || []}
             colorStatus={item?.color_status || ''}
             info={viewDocLabel}
             description={item?.description || ''}

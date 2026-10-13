@@ -6,6 +6,8 @@ import Button from '../Buttons/Button';
 import Icon from '../MdIcon/Icon';
 import classes from './banner.module.scss';
 
+const LIST_PATHS = ['/apis', '/mcps', '/agents'];
+
 function BannerImage({ buttons, setIsOpen, title = '', img = '', description, css_styles, redirect = '/', apiId = '' }) {
   const { t } = useTranslation();
   const { pathname } = useLocation();
@@ -24,7 +26,7 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
           <div
             className={classes.banner_img__backTo}
           >
-            {(pathname !== '/apis' && (
+            {(!LIST_PATHS.includes(pathname) && (
               <Link to={redirect} className={classes.banner_img__backTo__btn}>
                 <div>
                   <Icon id='MdKeyboardBackspace' />

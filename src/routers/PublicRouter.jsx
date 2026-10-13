@@ -32,6 +32,8 @@ import EmailConfirmed from '../pages/public/EmailConfirmed';
 import Mcps from '../pages/public/Mcps';
 import McpDetail from '../pages/public/McpDetail';
 import McpUI from '../pages/common/McpUI';
+import Agents from '../pages/public/Agents';
+import AgentDetail from '../pages/public/AgentDetail';
 
 function PublicRoute() {
   const location = useLocation();
@@ -74,6 +76,8 @@ function PublicRoute() {
           <Route path='/apis/:slug' element={<ApiDetail setIsOpen={setOpenForm} />} />
           <Route path='/mcps/:slug' element={<McpDetail setIsOpen={setOpenForm} />} />
           <Route path='/mcps/:slug/mcp-ui' element={<McpUI />} />
+          <Route path='/agents' element={<Agents />} />
+          <Route path='/agents/:slug' element={<AgentDetail />} />
           <Route path='/app-partners' element={<AppPartners />} />
           <Route path='/faqs' element={<Faqs />} />
           <Route path='/apis/:slug/swagger-ui' element={<SwaggerUI setIsOpen={setOpenForm} />} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import classes from './customfooter.module.scss';
-import config from '../../../services/config';
+import config, { getMediaUrl } from '../../../services/config';
 import CustomIcon from '../../MdIcon/CustomIcon';
 import { useSelector } from 'react-redux';
 
@@ -12,7 +12,7 @@ function CustomFooter() {
   const { settingPage } = useSelector((state) => state.settingPage);
 
   const logoUrl = settingPage?.Logo?.url
-    ? `${settingPage.Logo.url}`
+    ? getMediaUrl(settingPage.Logo.url)
     : null;
 
   return (

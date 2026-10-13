@@ -231,6 +231,87 @@
     "tags": "Etiquetas",
     "globalRating": "Calificación"
   },
+  "Agents": {
+    "title": "Agentes",
+    "description": "Descubre los agentes publicados, sus capacidades y los protocolos que soportan. Filtra por versión, protocolo y calificación para encontrar el agente adecuado para tu integración.",
+    "filterBy": "Filtrar por",
+    "version": "Versión",
+    "protocol": "Protocolo",
+    "globalRating": "Calificación",
+    "clearFilters": "Eliminar filtros",
+    "searchPlaceholder": "Buscar agentes...",
+    "itemsPerPage": "Elementos por página",
+    "noData": "No hay agentes disponibles"
+  },
+  "AgentDetail": {
+    "notFound": "Agente no encontrado",
+    "contact": "Contactar",
+    "globalGradesTitle": "Calificaciones globales del agente",
+    "globalGradesSubtitle": "Indicadores generales de calidad y disponibilidad",
+    "ratingGlobal": "Global",
+    "ratingDefinition": "Definición",
+    "ratingSecurity": "Seguridad",
+    "ratingQuality": "Calidad",
+    "downloadReport": "Descargar reporte del agente",
+    "about": "Acerca de este agente",
+    "whatItDoes": "Qué hace",
+    "skillsReady_one": "{{count}} habilidad lista para usar.",
+    "skillsReady_other": "{{count}} habilidades listas para usar.",
+    "builtForProduction": "Preparado para producción",
+    "builtForProductionSubtitle": "Capacidades declaradas en el agent card publicado.",
+    "notSupported": "No soportado",
+    "features": {
+      "streaming": {
+        "title": "Streaming",
+        "description": "Soporta streaming incremental de tokens para respuestas en tiempo real.",
+        "descriptionOff": "Sin streaming incremental de tokens — las respuestas se devuelven completas."
+      },
+      "pushNotifications": {
+        "title": "Notificaciones push",
+        "description": "Envía callbacks por webhook cuando cambia el estado de una tarea.",
+        "descriptionOff": "Sin callbacks por webhook; el cliente consulta el resultado por polling."
+      },
+      "taskHistory": {
+        "title": "Historial de transición de estado",
+        "description": "Los cambios de estado de la tarea se conservan y son consultables.",
+        "descriptionOff": "Los cambios de estado de la tarea no se conservan."
+      },
+      "extendedAgentCard": {
+        "title": "Agent card extendido",
+        "description": "Los clientes autenticados pueden obtener un agent card extendido con más detalles.",
+        "descriptionOff": "Sin agent card extendido; solo existe el card público."
+      }
+    },
+    "integrateYourWay": "Intégralo a tu manera",
+    "integrateYourWaySubtitle": "Conéctate con el protocolo que mejor encaje en tu stack. Cada uno tiene su propia documentación.",
+    "protocols": {
+      "JSON-RPC": "A2A sobre JSON-RPC 2.0: envía tareas desde tus propios agentes y sigue su estado.",
+      "gRPC": "A2A sobre gRPC: llamadas de alto rendimiento con Protocol Buffers.",
+      "HTTP+JSON": "A2A sobre una API HTTP de estilo REST con peticiones y respuestas JSON.",
+      "A2UI": "Renderiza los componentes de UI interactivos del agente directamente en tu app."
+    },
+    "viewDocs": "Ver docs",
+    "youMayAlsoLike": "También te puede interesar",
+    "youMayAlsoLikeSubtitle": "Más agentes con capacidades similares.",
+    "plan": {
+      "title": "Producción",
+      "price": "A medida",
+      "period": "· por suscripción",
+      "credentials": "Credenciales de producción",
+      "analytics": "SLA y analítica de uso",
+      "support": "Soporte prioritario"
+    },
+    "facts": {
+      "version": "Versión",
+      "provider": "Proveedor",
+      "protocols": "Protocolos",
+      "spec": "Agent card",
+      "docs": "Docs"
+    },
+    "moreInfo": "Más información",
+    "skillTags": "Etiquetas",
+    "skillExamples": "Ejemplos"
+  },
   "Blog": {
     "learnMore": "Conoce más",
     "noData": "Información no disponible",
@@ -606,6 +687,7 @@
   "Navbar": {
     "apis": "APIs",
     "mcps": "MCPs",
+    "agents": "Agentes",
     "blog": "Blog",
     "faqs": "FAQs",
     "myProfile": "Mi Perfil",

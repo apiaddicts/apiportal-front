@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactPaginate from 'react-paginate';
 import { useTranslation } from 'react-i18next';
 import CardInformation from '../Card/CardInformation';
+import { getMediaUrl } from '../../services/config';
 import classes from './blog-posts-paginated.module.scss';
 
 function Posts({ currentItems, additionalClasses }) {
@@ -15,7 +16,7 @@ function Posts({ currentItems, additionalClasses }) {
             <CardInformation
               id={item?.documentId}
               key={index}
-              img={item?.image ? item?.image?.[0]?.url : ''}
+              img={item?.image ? getMediaUrl(item?.image?.[0]?.url) : ''}
               description={item?.description}
               title={item?.title}
               buttons={item?.tags && item?.tags?.length > 0 ? item?.tags : []}

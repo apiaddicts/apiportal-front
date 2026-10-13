@@ -13,7 +13,7 @@ import LibraryPaginated from '../../../components/LibraryPaginated';
 import Icon from '../../../components/MdIcon/Icon';
 import classes from './apis.module.scss';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
-import config from '../../../services/config';
+import config, { getMediaUrl } from '../../../services/config';
 import { useTranslation } from 'react-i18next';
 
 function Apis({ setIsOpen }) {
@@ -180,7 +180,7 @@ function Apis({ setIsOpen }) {
   };
 
   const apiImageUrl = filterApiBanner?.[0]?.background?.url
-    ? `${filterApiBanner[0].background.url}`
+    ? getMediaUrl(filterApiBanner[0].background.url)
     : config.notImage;
 
   const fApis = libraries && libraries.length > 0 ? libraries : [];

@@ -65,6 +65,7 @@ const config = {
   faqPageSlug: import.meta.env.VITE_APP_FAQ_PAGE_SLUG,
   apisPageSlug: import.meta.env.VITE_APP_APIS_PAGE_SLUG,
   mcpsPageSlug: import.meta.env.VITE_APP_MCPS_PAGE_SLUG,
+  agentsPageSlug: import.meta.env.VITE_APP_AGENTS_PAGE_SLUG,
   termsPageSlug: import.meta.env.VITE_APP_TERMS_PAGE_SLUG,
   policyPageSlug: import.meta.env.VITE_APP_POLICY_PAGE_SLUG,
   startedPageSlug: import.meta.env.VITE_APP_STARTED_PAGE_SLUG,
@@ -98,6 +99,11 @@ const config = {
   dataChart: import.meta.env.VITE_APP_DATA_CHARTS_URL,
   apiUrlImgs: import.meta.env.VITE_APP_STRAPI_URL_IMGS,
   SiteKeyRecaptcha: import.meta.env.VITE_SITE_KEY_RECAPTCHA,
+};
+
+export const getMediaUrl = (url) => {
+  if (!url) return '';
+  return /^https?:\/\//i.test(url) ? url : `${config.apiUrlImgs || ''}${url}`;
 };
 
 export default config;

@@ -19,7 +19,7 @@ import CustomMarkdown from '../../../components/CustomMarkdown';
 import { getHomeContent } from '../../../redux/actions/homeAction';
 import { getMcpLibraryBySlug, getMcpLibraries } from '../../../redux/actions/mcpLibraryAction';
 import { getBlogs } from '../../../redux/actions/blogAction';
-import config from '../../../services/config';
+import config, { getMediaUrl } from '../../../services/config';
 import classes from './mcp-detail.module.scss';
 import McpOverview from '../../common/McpOverview';
 
@@ -41,7 +41,7 @@ function McpDetail({ setIsOpen }) {
 
   useEffect(() => {
     if (mcpLibrary?.image?.length > 0) {
-      setBannerImg(`${mcpLibrary.image[0].formats?.medium?.url || mcpLibrary.image[0].url}`);
+      setBannerImg(getMediaUrl(mcpLibrary.image[0].formats?.medium?.url || mcpLibrary.image[0].url));
     } else if (mcpLibrary && Object.keys(mcpLibrary).length > 0) {
       setBannerImg(config.notImage);
     }
@@ -52,7 +52,7 @@ function McpDetail({ setIsOpen }) {
       const imgs = {};
       mcpLibraries.forEach((lib) => {
         imgs[lib.documentId] = lib.image?.length > 0
-          ? `${lib.image[0].formats?.medium?.url || lib.image[0].url}`
+          ? getMediaUrl(lib.image[0].formats?.medium?.url || lib.image[0].url)
           : config.notImage;
       });
       setCardsImages(imgs);
@@ -106,7 +106,7 @@ function McpDetail({ setIsOpen }) {
   }) : [];
 
   const slidesNew = datanews.length > 0 ? datanews.reverse().slice(0, 6).map((item) => ({
-    img: item?.image?.[0]?.url,
+    img: getMediaUrl(item?.image?.[0]?.url),
     title: item?.title,
     description: item?.description,
     linkText: t('McpDetail.moreInfo'),
