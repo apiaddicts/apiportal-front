@@ -153,6 +153,10 @@ $agent-ink: #12263f;
     color: #24415f;
   }
 
+  &__detail {
+    display: block;
+  }
+
   &--off {
     opacity: 0.45;
   }
@@ -281,6 +285,10 @@ $agent-ink: #12263f;
     text-align: right;
     word-break: break-word;
     color: $agent-ink;
+  }
+
+  &__line {
+    display: block;
   }
 
   a {

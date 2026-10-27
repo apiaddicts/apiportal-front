@@ -33,8 +33,21 @@ function CardResource({ resource, type }) {
       );
     }
     if (type === 'skill') {
+      const modes = [resource?.inputModes?.join(', '), resource?.outputModes?.join(', ')].filter(Boolean).join(' → ');
       return (
         <>
+          {resource?.id && (
+            <div className={classes.resource__card__row}>
+              <span className={classes.resource__card__label}>{t('AgentDetail.skillId')}</span>
+              <span className={classes.resource__card__value}>{resource.id}</span>
+            </div>
+          )}
+          {modes && (
+            <div className={classes.resource__card__row}>
+              <span className={classes.resource__card__label}>{t('AgentDetail.skillModes')}</span>
+              <span className={classes.resource__card__value}>{modes}</span>
+            </div>
+          )}
           {resource?.tags?.length > 0 && (
             <div className={classes.resource__card__row}>
               <span className={classes.resource__card__label}>{t('AgentDetail.skillTags')}</span>

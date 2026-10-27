@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.0] - 2026-10-27
+
+## Added
+
+- **Agent Card Page:** New `/agents/:slug/agent-card` page with the same view as the agent's A2A tab in ApiQuality: agent card fields, capabilities, authentication and skills, with a Form/JSON switch.
+
+## Changed
+
+- **Agent Docs Link:** "View docs" and the "Agent card" fact of the agent detail open the agent card page.
+- **Agent Detail:** Also shows the agent URL, input/output modes, an "Authentication" section and the id and input/output modes of each skill, taken from the agent card.
+- **Agent Card Support:** `agentLibraryAction` also reads output modes, skill input/output modes, the protocol version and the security schemes (A2A v0.3 and v1.0) of the agent card.
+
+
 ## [1.3.0] - 2026-10-05
 
 ## Added
