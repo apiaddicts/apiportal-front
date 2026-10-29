@@ -34,6 +34,7 @@ import McpDetail from '../pages/public/McpDetail';
 import McpUI from '../pages/common/McpUI';
 import Agents from '../pages/public/Agents';
 import AgentDetail from '../pages/public/AgentDetail';
+import AgentCard from '../pages/public/AgentCard';
 
 function PublicRoute() {
   const location = useLocation();
@@ -78,6 +79,7 @@ function PublicRoute() {
           <Route path='/mcps/:slug/mcp-ui' element={<McpUI />} />
           <Route path='/agents' element={<Agents />} />
           <Route path='/agents/:slug' element={<AgentDetail />} />
+          <Route path='/agents/:slug/agent-card' element={<AgentCard />} />
           <Route path='/app-partners' element={<AppPartners />} />
           <Route path='/faqs' element={<Faqs />} />
           <Route path='/apis/:slug/swagger-ui' element={<SwaggerUI setIsOpen={setOpenForm} />} />

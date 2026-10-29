@@ -7,10 +7,29 @@ import store from '../store';
 const PROTOCOL_LABELS = { JSONRPC: 'JSON-RPC', GRPC: 'gRPC', HTTP_JSON: 'HTTP+JSON', A2UI: 'A2UI' };
 const PROTOCOL_ORDER = Object.keys(PROTOCOL_LABELS);
 const A2A_VERSIONS = { v0_3: '0.3', v1_0: '1.0' };
+const SECURITY_SCHEME_TYPES = {
+  apiKeySecurityScheme: 'apiKey',
+  httpAuthSecurityScheme: 'http',
+  oauth2SecurityScheme: 'oauth2',
+  openIdConnectSecurityScheme: 'openIdConnect',
+  mtlsSecurityScheme: 'mutualTLS',
+};
 
 export const getProtocolClass = (label) => `protocol-${label.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`;
 
+export const getCapabilityKeys = (specVersion) => (specVersion === '1.0' ?
+  ['streaming', 'pushNotifications', 'extendedAgentCard'] :
+  ['streaming', 'pushNotifications', 'taskHistory']);
+
+export const getSecuritySchemeDetails = (scheme) => [
+  { label: 'schemeType', value: scheme.type },
+  { label: 'schemeSubtype', value: scheme.scheme },
+  { label: 'schemeIn', value: scheme.in },
+  { label: 'schemeName', value: scheme.paramName },
+].filter((detail) => detail.value);
+
 const asArray = (value) => (Array.isArray(value) ? value : []);
+const asObject = (value) => (value && typeof value === 'object' && !Array.isArray(value) ? value : {});
 const unique = (values) => [...new Set(values.filter(Boolean))];
 
 const sortingValues = (key, order = 'asc') => {
@@ -71,6 +90,19 @@ const getCardProtocols = (card, interfaces) => {
   return PROTOCOL_ORDER.filter((protocol) => protocols.includes(protocol));
 };
 
+const getCardSecuritySchemes = (card) => Object.entries(asObject(card.securitySchemes)).map(([name, scheme]) => {
+  const wrapper = Object.keys(SECURITY_SCHEME_TYPES).find((key) => scheme?.[key]);
+  const details = asObject(wrapper ? scheme[wrapper] : scheme);
+  return {
+    name,
+    type: wrapper ? SECURITY_SCHEME_TYPES[wrapper] : details.type || '',
+    scheme: details.scheme || '',
+    in: details.in || details.location || '',
+    paramName: details.name || '',
+    description: details.description || '',
+  };
+});
+
 // Reads the agent card of a CMS entry. Fields edited in the CMS win over the card.
 const toAgent = (entry) => {
   if (!entry) return null;
@@ -87,6 +119,8 @@ const toAgent = (entry) => {
     description: skill?.description || '',
     tags: asArray(skill?.tags),
     examples: asArray(skill?.examples),
+    inputModes: asArray(skill?.inputModes),
+    outputModes: asArray(skill?.outputModes),
   }));
   const skillTags = unique(skills.flatMap((skill) => skill.tags));
 
@@ -97,10 +131,12 @@ const toAgent = (entry) => {
     version: entry.version || card.version || '',
     globalRating: entry.ratings?.globalRating || '',
     specVersion,
+    protocolVersion: card.protocolVersion || interfaces[0]?.protocolVersion || '',
     provider: card.provider?.organization || '',
     documentationUrl: card.documentationUrl || '',
     interfaces,
     protocols,
+    securitySchemes: getCardSecuritySchemes(card),
     capabilities: {
       streaming: capabilities.streaming === true,
       pushNotifications: capabilities.pushNotifications === true,
@@ -108,6 +144,7 @@ const toAgent = (entry) => {
       extendedAgentCard: capabilities.extendedAgentCard === true,
     },
     inputModes: asArray(card.defaultInputModes),
+    outputModes: asArray(card.defaultOutputModes),
     skills,
     skillTags,
     // Chips shown by the shared library card.

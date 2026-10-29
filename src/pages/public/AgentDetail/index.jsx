@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams, useNavigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import { HashLink } from 'react-router-hash-link';
 import { useTranslation } from 'react-i18next';
 
@@ -13,7 +13,7 @@ import CustomMarkdown from '../../../components/CustomMarkdown';
 import Icon from '../../../components/MdIcon/Icon';
 import Ratings from '../../../components/Ratings';
 import SkeletonComponent from '../../../components/SkeletonComponent/SkeletonComponent';
-import { getAgentLibraryBySlug, getAgentLibraries, getProtocolClass } from '../../../redux/actions/agentLibraryAction';
+import { getAgentLibraryBySlug, getAgentLibraries, getCapabilityKeys, getProtocolClass, getSecuritySchemeDetails } from '../../../redux/actions/agentLibraryAction';
 import config, { getMediaUrl } from '../../../services/config';
 import classes from './agent-detail.module.scss';
 
@@ -62,16 +62,31 @@ function AgentDetail() {
     .filter((other) => other.skillTags.some((tag) => agent.skillTags.includes(tag)))
     .slice(0, 3);
 
-  const capabilityKeys = agent.specVersion === '1.0' ?
-    ['streaming', 'pushNotifications', 'extendedAgentCard'] :
-    ['streaming', 'pushNotifications', 'taskHistory'];
-  const features = capabilityKeys.map((key) => ({ key, on: agent.capabilities[key] }));
+  const features = getCapabilityKeys(agent.specVersion).map((key) => ({ key, on: agent.capabilities[key] }));
+
+  const agentCardUrl = `/agents/${agent.slug}/agent-card`;
+  const agentUrls = agent.interfaces.filter((item) => item.url);
 
   const facts = [
     { key: 'version', value: agent.version },
     { key: 'provider', value: agent.provider },
     { key: 'protocols', value: agent.protocols.join(' · ') },
-    { key: 'spec', value: `A2A ${agent.specVersion}` },
+    {
+      key: 'url',
+      value: agentUrls.length > 0 && agentUrls.map((item) => (
+        <span key={`${item.url}-${item.binding}`} className={classes.facts__line}>{item.url}</span>
+      )),
+    },
+    { key: 'inputModes', value: agent.inputModes.join(', ') },
+    { key: 'outputModes', value: agent.outputModes.join(', ') },
+    {
+      key: 'spec',
+      value: (
+        <Link to={agentCardUrl}>
+          {`A2A ${agent.specVersion}`}
+        </Link>
+      ),
+    },
     {
       key: 'docs',
       value: agent.documentationUrl && (
@@ -166,6 +181,29 @@ function AgentDetail() {
               </div>
             </div>
 
+            <div className={classes.section}>
+              <h2 className={classes.section__title}>{t('AgentDetail.authentication')}</h2>
+              <p className={classes.section__subtitle}>
+                {agent.securitySchemes.length > 0 ? t('AgentDetail.authenticationSubtitle') : t('AgentCard.noAuthentication')}
+              </p>
+              {agent.securitySchemes.length > 0 && (
+                <div className={classes.features}>
+                  {agent.securitySchemes.map((scheme) => (
+                    <div key={scheme.name} className={classes.feature}>
+                      <Icon id='MdLockOutline' />
+                      <div>
+                        <b>{scheme.name}</b>
+                        <span className={classes.feature__detail}>
+                          {getSecuritySchemeDetails(scheme).map(({ label, value }) => `${t(`AgentCard.${label}`)}: ${value}`).join(' · ') || '-'}
+                        </span>
+                        {scheme.description && <span className={classes.feature__detail}>{scheme.description}</span>}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
             {agent.protocols.length > 0 && (
               <div className={classes.section}>
                 <h2 className={classes.section__title}>{t('AgentDetail.integrateYourWay')}</h2>
@@ -175,12 +213,10 @@ function AgentDetail() {
                     <div key={protocol} className={classes.integration}>
                       <Chip title={protocol} className={getProtocolClass(protocol)} spanClass='fs__10 font-weight-medium' />
                       <p>{t(`AgentDetail.protocols.${protocol}`)}</p>
-                      {agent.documentationUrl && (
-                        <a href={agent.documentationUrl} target='_blank' rel='noopener noreferrer'>
-                          {t('AgentDetail.viewDocs')}
-                          <Icon id='MdEast' />
-                        </a>
-                      )}
+                      <Link to={agentCardUrl}>
+                        {t('AgentDetail.viewDocs')}
+                        <Icon id='MdEast' />
+                      </Link>
                     </div>
                   ))}
                 </div>
