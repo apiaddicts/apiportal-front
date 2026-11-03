@@ -600,7 +600,9 @@
   },
   "BannerImage": {
     "goBack": "Volver",
-    "noImage": "No hay imagen disponible"
+    "noImage": "No hay imagen disponible",
+    "readMore": "Leer más",
+    "readLess": "Leer menos"
   },
   "BannerStatic": {
     "searchPlaceholder": "Buscar"

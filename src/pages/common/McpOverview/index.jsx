@@ -83,6 +83,8 @@ function McpOverview({ mcpLibrary: mcpLibraryProp, liveSession: liveSessionProp,
   const effectivePrompts = useLiveData ? livePrompts : strapiPrompts;
   const hasCapabilities = effectiveTools.length > 0 || effectiveResources.length > 0 || effectivePrompts.length > 0;
 
+  const descriptionContent = mcpLibrary?.markdown || mcpLibrary?.description;
+
   const hasAnyRating =
     !!mcpLibrary?.ratings?.globalRating ||
     !!mcpLibrary?.ratings?.definitionRating ||
@@ -200,9 +202,9 @@ function McpOverview({ mcpLibrary: mcpLibraryProp, liveSession: liveSessionProp,
             <h3 className={classes.three_cols__col__title}>
               {t('McpDetail.descriptionTitle')}
             </h3>
-            {mcpLibrary?.markdown && mcpLibrary.markdown.length > 0 ? (
+            {descriptionContent ? (
               <div className={`markdown__content ${classes.three_cols__markdown}`}>
-                <CustomMarkdown content={mcpLibrary.markdown} />
+                <CustomMarkdown content={descriptionContent} />
               </div>
             ) : (
               <div className={classes.three_cols__placeholder}>

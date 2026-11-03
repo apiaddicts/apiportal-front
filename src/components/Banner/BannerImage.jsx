@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate, Link, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import config from '../../services/config';
@@ -13,6 +13,24 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
   const { pathname } = useLocation();
   const { layout_height, apiindividual_height, image_display, custom_line_height } = css_styles;
   const navigate = useNavigate();
+  const descriptionRef = useRef(null);
+  const [expanded, setExpanded] = useState(false);
+  const [truncated, setTruncated] = useState(false);
+
+  useEffect(() => {
+    setExpanded(false);
+  }, [description]);
+
+  useEffect(() => {
+    const element = descriptionRef.current;
+    if (!element || expanded) return undefined;
+    const checkTruncated = () => setTruncated(element.scrollHeight > element.clientHeight + 1);
+    checkTruncated();
+    const observer = new ResizeObserver(checkTruncated);
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [description, expanded]);
+
   const handleClick = (link) => {
     navigate(link);
   };
@@ -44,9 +62,22 @@ function BannerImage({ buttons, setIsOpen, title = '', img = '', description, cs
               {title !== '' ? title : ''}
             </h1>
             <div className={classes['width-text-banner']}>
-              <p className={`subtitle-1 text__white ${custom_line_height}`}>
+              <p
+                ref={descriptionRef}
+                className={`subtitle-1 text__white ${custom_line_height} ${classes.banner_img__description} ${expanded ? '' : classes['banner_img__description--clamped']}`}
+              >
                 {description}
               </p>
+              {(truncated || expanded) && (
+                <button
+                  type='button'
+                  className={classes.banner_img__description__toggle}
+                  onClick={() => setExpanded((value) => !value)}
+                  aria-expanded={expanded}
+                >
+                  {expanded ? t('BannerImage.readLess') : t('BannerImage.readMore')}
+                </button>
+              )}
             </div>
             <div className='w-full'>
               {buttons && (
